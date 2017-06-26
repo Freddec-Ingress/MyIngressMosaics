@@ -23,10 +23,11 @@ class ExtensionViewSet(viewsets.ViewSet):
     
     
 	def register(self, request):
+
+		import json
+		jsonObject = json.loads(request.data)
 		
-		ref = request.data[0]
-		
-		item = Mission(ref=ref, data=request.data)
+		item = Mission(ref=jsonObject[0], data=request.data)
 		item.save()
 		
 		return Response(None, status=status.HTTP_200_OK)
