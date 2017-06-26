@@ -29,7 +29,7 @@ class ExtensionViewSet(viewsets.ViewSet):
 			data.append(temp)
 		
 		from django.http import JsonResponse
-		return JsonResponse(data)
+		return JsonResponse(json.dumps(data))
     
     
     
