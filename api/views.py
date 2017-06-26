@@ -19,12 +19,9 @@ class ExtensionViewSet(viewsets.ViewSet):
     
 	def check(self, request):
 		
-		import json
-		obj = json.loads(request.data)
-		
 		data = []
 		
-		for item in obj[0]:
+		for item in request.data['result']:
 			temp = {'mid':item[0], 'status': 'notregistered'}
 			data.append(temp)
 		
