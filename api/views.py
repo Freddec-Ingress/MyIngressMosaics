@@ -24,7 +24,7 @@ class ExtensionViewSet(viewsets.ViewSet):
 		
 		data = []
 		
-		for item in obj.result:
+		for item in obj[0]:
 			temp = {'mid':item[0], 'status': 'notregistered'}
 			data.append(temp)
 		
