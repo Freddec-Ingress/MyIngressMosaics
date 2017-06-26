@@ -27,14 +27,18 @@ class ExtensionViewSet(viewsets.ViewSet):
 		import json
 		obj = json.loads(request.body)
 		
-		item = Mission(	ref=obj[0],
-						title=obj[0],
-						desc=obj[0],
-						creator=obj[0],
-						faction=obj[0],
-						image=obj[0],
-						data=request.body,
-			)
-		item.save()
+		mission = Mission(ref=obj[0], title=obj[1], desc=obj[2], creator=obj[3], faction=obj[4], image=obj[10],
+						  data=request.body)
+		mission.save()
+		
+		order = 0
+		
+		for item in obj[9]:
+			
+			portal = Portal(mission=mission, lat=item[5][2], lng=item[5][3], order=order, title=item[2],
+							data=''.join(item))
+			portal.save()
+			
+			order += 1
 		
 		return Response(None, status=status.HTTP_200_OK)
