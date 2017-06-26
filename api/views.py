@@ -15,10 +15,10 @@ class ExtensionViewSet(viewsets.ViewSet):
 	
 	permission_classes = AllowAny, 
     
-	def portals(self, request):
+	def check(self, request):
 		return Response(None, status=status.HTTP_200_OK)
     
     
     
-	def missions(self, request):
+	def register(self, request):
 		return Response(None, status=status.HTTP_200_OK)
