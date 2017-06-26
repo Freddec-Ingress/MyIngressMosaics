@@ -35,8 +35,7 @@ class ExtensionViewSet(viewsets.ViewSet):
 		
 		for item in obj[9]:
 			
-			portal = Portal(mission=mission, lat=item[5][2], lng=item[5][3], order=order, title=item[2],
-							data=''.join(item))
+			portal = Portal(mission=mission, lat=item[5][2], lng=item[5][3], order=order, title=item[2])
 			portal.save()
 			
 			order += 1
