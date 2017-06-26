@@ -1,7 +1,28 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+from math import *
+
 from django.db import models
+
+
+
+#---------------------------------------------------------------------------------------------------
+def getDistanceFromLatLng(lat1, lng1, lat2, lng2):
+    
+    R = 6371; 
+    
+    dLat = radians(lat2 - lat1);
+    dLng = radians(lng2 - lng1);
+    
+    a =  sin(dLat/2) * sin(dLat/2) + cos(radians(lat1)) * cos(radians(lat2)) *  sin(dLon/2) * sin(dLon/2)
+
+    c = 2 * atan2(sqrt(a), sqrt(1-a)); 
+    d = R * c;
+    
+    return d;
+
+
 
 #---------------------------------------------------------------------------------------------------
 class Mission(models.Model):
@@ -15,6 +36,31 @@ class Mission(models.Model):
     creator = models.CharField(max_length=32, default='')
     faction = models.CharField(max_length=8, default='')
 
+    _distance = models.IntegerField(default=-1)
+    
+    _startLat = models.FloatField(default=0.0)
+    _startLng = models.FloatField(default=0.0)
+
+    def __unicode__(self):
+        return self.title
+        
+    def computeInternalData(self):
+        
+        portals = self.portals.order_by('order')
+        if portals.count() > 0:
+            
+            self._startLat = portals[0].lat
+            self._startLng = portals[0].lng
+            
+            dst = 0
+            
+            for i in range(0, portals.count() - 1):
+                dst += getDistanceFromLatLng(portals[i].lat, portals[i].lng, portals[i+1].lat, portals[i+1].lng)
+       
+            self._distance = dst
+            
+            self.save()
+
 
 
 #---------------------------------------------------------------------------------------------------
@@ -26,3 +72,6 @@ class Portal(models.Model):
     lng = models.FloatField(default=0.0)
     order = models.IntegerField(default=-1)
     title = models.CharField(max_length=128, default='')
+
+    def __unicode__(self):
+        return self.mission + ' - ' + self.order + ' - ' + self.title
