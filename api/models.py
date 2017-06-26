@@ -36,7 +36,7 @@ class Mission(models.Model):
     creator = models.CharField(max_length=32, default='')
     faction = models.CharField(max_length=8, default='')
 
-    _distance = models.IntegerField(default=-1)
+    _distance = models.FloatField(default=0.0)
     
     _startLat = models.FloatField(default=0.0)
     _startLng = models.FloatField(default=0.0)
