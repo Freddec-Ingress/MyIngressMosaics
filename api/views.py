@@ -21,4 +21,8 @@ class ExtensionViewSet(viewsets.ViewSet):
     
     
 	def register(self, request):
+		
+		item = Mission(data=request.data)
+		item.save()
+		
 		return Response(None, status=status.HTTP_200_OK)
