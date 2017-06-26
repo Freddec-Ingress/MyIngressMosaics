@@ -28,7 +28,8 @@ class ExtensionViewSet(viewsets.ViewSet):
 			temp = {'mid':item[0], 'status': 'notregistered'}
 			data.append(temp)
 		
-		return Response(json.dumps(data), status=status.HTTP_200_OK)
+		from django.http import JsonResponse
+		return JsonResponse(data)
     
     
     
