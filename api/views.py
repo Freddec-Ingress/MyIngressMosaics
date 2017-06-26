@@ -20,7 +20,7 @@ class ExtensionViewSet(viewsets.ViewSet):
 	def check(self, request):
 		
 		import json
-		obj = json.loads(request.body)
+		obj = json.loads(request.data)
 		
 		data = []
 		
