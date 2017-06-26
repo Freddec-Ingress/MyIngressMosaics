@@ -18,7 +18,17 @@ class ExtensionViewSet(viewsets.ViewSet):
     
     
 	def check(self, request):
-		return Response(None, status=status.HTTP_200_OK)
+		
+		import json
+		obj = json.loads(request.body)
+		
+		data = []
+		
+		for item in obj:
+			temp = {mid:item[0], status: 'notregistered'}
+			data.append(temp)
+		
+		return Response(json.dumps(data), status=status.HTTP_200_OK)
     
     
     
