@@ -27,7 +27,14 @@ class ExtensionViewSet(viewsets.ViewSet):
 		import json
 		obj = json.loads(request.body)
 		
-		item = Mission(ref=obj[0], data=request.body)
+		item = Mission(	ref=obj[0],
+						title=obj[0],
+						desc=obj[0],
+						creator=obj[0],
+						faction=obj[0],
+						image=obj[0],
+						data=request.body,
+			)
 		item.save()
 		
 		return Response(None, status=status.HTTP_200_OK)

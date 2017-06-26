@@ -20,6 +20,8 @@ class Mission(models.Model):
 #---------------------------------------------------------------------------------------------------
 class Portal(models.Model):
 
+    mission = models.ForeignKey('Mission', on_delete=models.CASCADE, null=True, blank=True)
+
     data = models.CharField(max_length=4096)
 
     lat = models.FloatField(default=0.0)
