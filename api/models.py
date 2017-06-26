@@ -6,4 +6,6 @@ from django.db import models
 #---------------------------------------------------------------------------------------------------
 class Mission(models.Model):
 
-    data = models.CharField(max_length=2048, null=True, blank=True)
+    data = models.CharField(max_length=2048)
+
+    ref = models.CharField(max_length=128, default='')

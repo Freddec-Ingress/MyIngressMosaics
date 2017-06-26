@@ -15,6 +15,8 @@ class ExtensionViewSet(viewsets.ViewSet):
 	
 	permission_classes = AllowAny, 
     
+    
+    
 	def check(self, request):
 		return Response(None, status=status.HTTP_200_OK)
     
@@ -22,7 +24,9 @@ class ExtensionViewSet(viewsets.ViewSet):
     
 	def register(self, request):
 		
-		item = Mission(data=request.data)
+		ref = request.data[0]
+		
+		item = Mission(ref=ref, data=request.data)
 		item.save()
 		
 		return Response(None, status=status.HTTP_200_OK)
