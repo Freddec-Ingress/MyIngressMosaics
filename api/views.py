@@ -25,7 +25,7 @@ class ExtensionViewSet(viewsets.ViewSet):
 	def register(self, request):
 
 		import json
-		jsonObject = json.loads(request.data)
+		jsonObject = json.dumps(dict(request.data))
 		
 		item = Mission(ref=jsonObject[0], data=request.data)
 		item.save()
