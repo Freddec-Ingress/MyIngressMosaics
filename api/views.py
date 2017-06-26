@@ -25,7 +25,7 @@ class ExtensionViewSet(viewsets.ViewSet):
 		data = []
 		
 		for item in obj:
-			temp = {mid:item[0], status: 'notregistered'}
+			temp = {'mid':item[0], 'status': 'notregistered'}
 			data.append(temp)
 		
 		return Response(json.dumps(data), status=status.HTTP_200_OK)
