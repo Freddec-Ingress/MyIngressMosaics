@@ -2393,7 +2393,34 @@ var en_translations = {
 	home_TEXT2: '2. Register all the missions you want to include in a mosaic later ; mosaic creation will be implemented soon',
 	home_TEXT3: '3. Join our community to stay in touch with latest news ',
 	
+	error_EMAIL: 'A well formatted email address is required.',
+	error_TIMEOUT: 'Server timed out. Please try again.',
+	error_REQUIRED: 'This field is mandatory.',
+	error_NOCONNECTION: 'Could not connect. Please try again.',
+	error_USER_UNKNOWN: 'Username and/or password are not correct',
+	error_INTEGRITY_ERROR: 'A server error occured.',
+	error_PASSWORDS_NOT_EQUAL: 'Passwords are not the same.',
+	error_USERNAME_ALREADY_EXISTS: 'This username is already used.',
+	
 	login_LINK: 'Sign in',
+	login_TITLE: 'Sign in',
+	login_local_BTN: 'Sign in',
+	login_facebook_BTN: 'Sign in with Facebook',
+	login_google_BTN: 'Sign in with Google',
+	login_SUBTITLE: 'Sign in with a local account',
+	login_pwd_PLACEHOLDER: 'Password',
+	login_user_PLACEHOLDER: 'Username',
+
+	register_LINK: 'Sign up',
+	register_TITLE: 'Sign up',
+	register_user_PLACEHOLDER: 'Username',
+	register_pwd1_PLACEHOLDER: 'Password',
+	register_pwd2_PLACEHOLDER: 'Confirm password',
+	register_email_PLACEHOLDER: 'Email',
+	register_TEXT1: 'By clicking on \'Sign up\', you agree with usage conditions and privacy policy',
+	register_BTN: 'Sign up',
+	
+	logout_LINK: 'Sign out',
 };
 var fr_translations = {
     
@@ -2412,10 +2439,189 @@ var fr_translations = {
 	home_TEXT2: '2. Enregistrer toutes les missions que vous souhaitez inclure dans une fresque plutart ; la création de fresque sera bienôt implémentée',
 	home_TEXT3: '3. Rejoindre notre communauté pour rester informé ',
 	
+	error_EMAIL: 'Une adresse email bien formattée est requise.',
+	error_TIMEOUT: 'Délai d\'attente dépassé. Réessayez svp.',
+	error_REQUIRED: 'Ce champ est obligatoire.',
+	error_NOCONNECTION: 'Le serveur ne répond pas. Réessayez svp.',
+	error_USER_UNKNOWN: 'Nom d\'utilisateur et/ou mot de passe incorrects',
+	error_INTEGRITY_ERROR: 'Une erreur server est survenue.',
+	error_PASSWORDS_NOT_EQUAL: 'Les mots de passe saisis ne sont pas identiques.',
+	error_USERNAME_ALREADY_EXISTS: 'Un utilisateur avec ce nom existe déjà.',
+	
 	login_LINK: 'Se connecter',
+	login_TITLE: 'Connexion',
+	login_local_BTN: 'Se connecter',
+	login_facebook_BTN: 'Se connecter avec Facebook',
+	login_google_BTN: 'Se connecter avec Google',
+	login_SUBTITLE: 'Se connecter avec un compte local',
+	login_pwd_PLACEHOLDER: 'Mot de passe',
+	login_user_PLACEHOLDER: 'Nom d\'utilisateur',
+	
+	register_LINK: 'S\'inscrire',
+	register_TITLE: 'Inscription',
+	register_user_PLACEHOLDER: 'Nom d\'utilisateur',
+	register_pwd1_PLACEHOLDER: 'Mot de passe',
+	register_pwd2_PLACEHOLDER: 'Confirmer le mot de passe',
+	register_email_PLACEHOLDER: 'Email',
+	register_TEXT1: 'En cliquant sur \'S\'inscire\', vous déclarez être en accord avec les conditions et la politique des données privées',
+	register_BTN: 'S\'inscrire',
+
+	logout_LINK: 'Se déconnecter',
 };
 angular.module('AngularApp.services', [])
 
+angular.module('AngularApp.services').service('API', function($q, $http, $cookies, $filter, toastr) {
+	
+	var service = {
+		
+		sendRequest: function(url, method, params, data) {
+			
+			if ($cookies.token) { $http.defaults.headers.common.Authorization = 'Token ' + $cookies.token; }
+			
+			var deferred = $q.defer();
+			
+			$http({url: url, withCredentials: false, method: method, headers: {'X-CSRFToken': $cookies['csrftoken']}, params: params, data: data})
+				.then(function successCallback(response) {
+					
+					deferred.resolve(response.data, response.status);
+				}
+				, function errorCallback(response) {
+
+					if (response.status == 0) {
+						
+						if (response.data == '') response.data = 'error_TIMEOUT';
+						if (response.data == null) response.data = 'error_NOCONNECTION';
+					}
+					
+					toastr.error($filter('translate')(response.data));
+
+					deferred.reject(response.data, response.status, response.headers, response.config);
+				});
+			
+			return deferred.promise;
+		},
+	};
+	
+	return service;
+});
+
+angular.module('AngularApp.services').service('UserService', function($auth, $http, $cookies, $state, API) {
+	
+	var service = {
+
+		data: {
+
+			name: null,
+			team: null,
+			level: null,
+			
+			authenticated: false,
+		},
+
+		init: function() {
+
+			if (!$auth.isAuthenticated()) return;
+			
+			service.data.authenticated = true;
+			
+			return API.sendRequest('/api/profile/', 'GET').then(function(response) {
+				
+				service.data.name = response.name;
+				service.data.team = response.team;
+				service.data.level = response.level;
+			});
+		},
+
+		logout: function() {
+			
+			delete $http.defaults.headers.common.Authorization;
+	    	delete $cookies.token;
+			
+			$auth.removeToken();
+			
+			service.data.name = null;
+			service.data.team = null;
+			service.data.level = null;
+			
+			service.data.authenticated = false;
+			
+			return API.sendRequest('/api/logout/', 'POST').then(function(response) {
+				
+				$state.go('root.home', {location: 'replace'});
+			});
+		},
+		
+		socialLogin: function(provider) {
+			
+			return $auth.authenticate(provider).then(function(response) {
+				
+				$auth.setToken(response.data.token);
+				$cookies.token = response.data.token;
+				
+				service.init();
+				
+				$state.go('root.home', {location: 'replace'});
+			});
+		},
+		
+		localLogin: function(username, password) {
+			
+			var data = { 'username':username, 'password':password }
+			return API.sendRequest('/api/login/', 'POST', {}, data).then(function(response) {
+				
+				$auth.setToken(response.token);
+				$cookies.token = response.token;
+			
+				service.init();
+				
+				$state.go('root.home', {location: 'replace'});
+			});
+		},
+		
+		register: function(username, password1, password2, email) {
+			
+			var data = { 'username':username, 'password1':password1, 'password2':password2, 'email':email }
+			return API.sendRequest('/api/register/', 'POST', {}, data).then(function(response) {
+				
+				$auth.setToken(response.token);
+				$cookies.token = response.token;
+				
+				service.init();
+				
+				$state.go('root.home', {location: 'replace'});
+			});
+		},
+		
+		updateName: function(newvalue) {
+			
+			var data = { 'name':newvalue };
+			return API.sendRequest('/api/profile/name/', 'POST', {}, data).then(function(response) {
+				
+				service.data.name = newvalue;
+			});
+		},
+		
+		updateTeam: function(newvalue) {
+			
+			var data = { 'team':newvalue };
+			return API.sendRequest('/api/profile/team/', 'POST', {}, data).then(function(response) {
+				
+				service.data.team = newvalue;
+			});
+		},
+		
+		updateLevel: function(newvalue) {
+			
+			var data = { 'level':newvalue };
+			return API.sendRequest('/api/profile/level/', 'POST', {}, data).then(function(response) {
+				
+				service.data.level = newvalue;
+			});
+		},
+	};
+	
+	return service;
+});
 angular.module('AngularApp.directives', [])
 
 angular.module('AngularApp.directives').directive('pageTitle', function($rootScope, $filter, $timeout) {
@@ -2438,7 +2644,7 @@ angular.module('AngularApp.directives').directive('pageTitle', function($rootSco
 });
 angular.module('AngularApp.controllers', [])
 
-angular.module('AngularApp.controllers').controller('RootCtrl', function($scope, $stateParams, $translate, $window) {
+angular.module('AngularApp.controllers').controller('RootCtrl', function($scope, $stateParams, $translate, $window, UserService) {
 	
 	var supported_lang = ['en', 'fr'];
 	
@@ -2456,9 +2662,28 @@ angular.module('AngularApp.controllers').controller('RootCtrl', function($scope,
 		
     	$window.location.href = '/' + user_lang + '/home';
 	}
+	
+	$scope.user = UserService.data;
+	
+	$scope.logout = UserService.logout;
 });
 
 angular.module('AngularApp.controllers').controller('HomeCtrl', function($scope) {
+});
+
+angular.module('AngularApp.controllers').controller('LoginCtrl', function($scope, UserService) {
+	
+	$scope.loginModel = { username:null, password:null };
+	
+	$scope.localLogin = UserService.localLogin;
+	$scope.socialLogin = UserService.socialLogin;
+});
+
+angular.module('AngularApp.controllers').controller('RegisterCtrl', function($scope, UserService) {
+	
+	$scope.registerModel = { username:null, password1:null, password2:null, email:null };
+	
+	$scope.register = UserService.register;
 });
 angular.module('AngularApp', ['ui.router', 'ui.bootstrap', 'pascalprecht.translate', 'satellizer', 'ngCookies', 'toastr',
 							  'AngularApp.services', 'AngularApp.controllers', 'AngularApp.directives', ]);
@@ -2473,7 +2698,7 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 	
 	$stateProvider
 	
-		.state('root', { url: '/:codelang', controller: 'RootCtrl', templateUrl: '/static/front/pages/root.html', })
+		.state('root', { url: '/:codelang', controller: 'RootCtrl', templateUrl: '/static/front/pages/root.html', resolve: {loadUser: function(UserService) { return UserService.init(); }, }, })
 
 			.state('root.home', { url: '/home', controller: 'HomeCtrl', templateUrl: '/static/front/pages/home.html', data: { title: 'home_TITLE', }})
 
@@ -2507,7 +2732,13 @@ angular.module('AngularApp').config(function($authProvider) {
 	$authProvider.facebook({
 		
 		url: '/login/social/token_user/facebook',
-		clientId: '362521904117518'
+		clientId: '237811833398918'
+	});
+
+	$authProvider.google({
+		
+		url: '/login/social/token_user/google',
+		clientId: '949801101013'
 	});
 
 	$authProvider.authToken = 'Token';

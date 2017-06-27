@@ -1,0 +1,73 @@
+<section>
+	
+	<article>
+		
+		<a href="javascript:;" class="btn btn-block btn-google mb-2" ng-click="socialLogin('google')">
+			<i class="fa fa-google-plus-square mr-2"></i>
+			{{'login_google_BTN' | translate}}
+		</a>
+		
+		<a href="javascript:;" class="btn btn-block btn-facebook" ng-click="socialLogin('facebook')">
+			<i class="fa fa-facebook-official mr-2"></i>
+			{{'login_facebook_BTN' | translate}}
+		</a>
+		
+	</article>
+	
+</section>
+	
+<section>
+		        
+	<article>
+		
+	    <p class="text-center">
+	    	{{'login_SUBTITLE' | translate}}
+	    </p>
+	    
+	    <div id="toast-content"></div>
+	    
+		<form name="form" novalidate>
+	
+			<div class="form-group">
+				
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+					<input type="text" class="form-control" placeholder="{{'login_user_PLACEHOLDER' | translate}}" name="username" ng-model="loginModel.username" required="" />
+				</div>
+				
+				<div ng-show="form.$submitted || form.username.$touched">
+					<p class="form-error" ng-show="form.username.$error.required">{{'error_REQUIRED' | translate}}</p>
+				</div>
+				
+			</div>
+	
+			<div class="form-group">
+				
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
+					<input type="password" class="form-control" placeholder="{{'login_pwd_PLACEHOLDER' | translate}}" name="password" ng-model="loginModel.password" required="" />
+				</div>
+				
+				<div ng-show="form.$submitted || form.password.$touched">
+					<p class="form-error" ng-show="form.password.$error.required">{{'error_REQUIRED' | translate}}</p>
+				</div>
+				
+			</div>
+	
+			<div class="grid-row">
+				
+				<div class="cell pr-2">
+					<button type="submit" class="btn btn-primary" ng-click="localLogin(loginModel.username, loginModel.password);" ng-disabled="!loginModel.username || !loginModel.password">{{'login_local_BTN' | translate}}</button>
+				</div>
+				
+				<div class="cell pl-2 text-right">
+					<a class="btn btn-secondary" ui-sref="root.register">{{'register_LINK' | translate}}</a>
+				</div>
+				
+			</div>
+
+		</form>
+	    
+	</article>
+
+</section>

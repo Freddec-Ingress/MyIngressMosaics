@@ -8,5 +8,6 @@ from .models import *
 
 
 #---------------------------------------------------------------------------------------------------
+admin.site.register(Profile)
 admin.site.register(Portal)
 admin.site.register(Mission)

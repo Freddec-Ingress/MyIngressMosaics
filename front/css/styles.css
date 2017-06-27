@@ -50,6 +50,20 @@ a:hover, a:focus {
 
 
 
+/* Alignment ---------------------------------------------------------------- */
+
+.text-left {
+    text-align: left!important;
+}
+.text-right {
+    text-align: right!important;
+}
+.text-center {
+    text-align: center!important;
+}
+
+
+
 /* Color -------------------------------------------------------------------- */
 
 .text-danger {
@@ -81,6 +95,231 @@ img {
 .flag-icon {
 	top: -1px;
 	margin-right: .5rem;
+}
+
+
+
+/******************************************************************************/
+/* FORM                                                                       */
+/******************************************************************************/
+
+::-webkit-input-placeholder {
+    color: #BDBDBD;
+}
+
+form {
+    width: 100%;
+}
+
+form.inline .form-group {
+    display: flex; flex-direction: row;
+}
+form.inline .form-group > label {
+    text-align: right;
+    margin: 0; padding-right: 1rem;
+    height: 2.5rem; line-height: 2.5rem;
+    flex-grow: 0; flex-basis: 33.333333%;
+}
+form.inline .form-group > .form-control, form.inline .form-group > .select-group {
+    flex-grow: 0; flex-basis: 66.666667%;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: .25rem;
+    color: rgba(0,0,0,.75); font-size: .875rem;
+}
+.label-check {
+    margin-bottom: 0;
+    line-height: 2.5rem; height: 2.5rem;
+}
+
+.form-control {
+    padding: 0 .5rem;
+    background-color: #0b0c0d;
+    display: block; width: 100%;
+    height: 2.25rem; line-height: 2.25rem;
+    border-radius: .25rem; border: 1px solid #009688;
+    color: #ffffff; font: 400 .875rem/1.5 'Coda',sans-serif;
+}
+.form-control:focus {
+    outline: none;
+    border-color: #B2DFDB;
+}
+
+.form-error {
+	margin-top: .5rem;
+	color: #F44336; font-size: .75rem;
+}
+
+.form-radio {
+    display: flex;
+    padding: .5rem; margin-bottom: .5rem;
+    color: #212121!important; font-size: 85%; opacity: .75;
+}
+.form-radio.checked {
+    background-color: rgba(0,0,0,.125);
+}
+.form-radio > input[type="radio"] {
+    flex: 0 0 1rem;
+    margin-top: 4px;
+}
+.form-radio > span {
+    padding-left: .5rem;
+}
+
+
+
+/* Input group -------------------------------------------------------------- */
+
+.input-group {
+    position: relative;
+	display: flex; flex-direction: row;
+}
+.input-group .form-control:not(:last-child) {
+    border-bottom-right-radius: 0; border-top-right-radius: 0;
+}
+.input-group .form-control:not(:first-child) {
+	border-bottom-left-radius: 0; border-top-left-radius: 0;
+}
+
+.input-group-addon {
+	color: #FFFFFF;
+	background-color: #009688;
+    height: 2.25rem; line-height: 2.25rem; padding: 0 .75rem;
+	border: 1px solid #009688; border-radius: .25rem;
+}
+.input-group-addon:not(:last-child) {
+	border-right: 0; border-bottom-right-radius: 0; border-top-right-radius: 0;
+}
+.input-group-addon:not(:first-child) {
+    border-bottom-left-radius: 0; border-top-left-radius: 0;
+}
+
+.form-control + .input-group-addon:not(:first-child) {
+    border-left: 0;
+}
+
+.input-group-addon.button:hover {
+    color: #9C27B0;
+    cursor: pointer;
+}
+
+
+
+/* Button ------------------------------------------------------------------- */
+
+.btn {
+	padding: 0 1rem;
+	text-align: center;
+	border: 0; border-radius: .25rem;
+	display: inline-block; height: 2.25rem; line-height: 2.25rem;
+	color: #FFFFFF; font-size: inherit; font-family: inherit; text-decoration: none;
+}
+.btn.disabled, .btn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+@media (max-width: 767px) {
+    .btn {
+        width: 100%;
+    }
+}
+
+.btn-primary {
+    background-color: #009688;
+}
+.btn-secondary {
+	color: #80CBC4;
+    border: 1px solid #009688;
+    background-color: transparent;
+}
+
+.btn-block {
+    display: block;
+}
+
+.btn-facebook {
+    color: #FFFFFF; background-color: #3b5998; border-color: #335190;
+}
+.btn-facebook:hover,.btn-facebook:focus {
+    color: #FFFFFF; background-color: #294786;
+}
+
+.btn-google {
+    color: #FFFFFF; background-color: #dd4b39; border-color: #dd4b39;
+}
+.btn-google:hover,.btn-google:focus {
+    color: #FFFFFF; background-color: #cb3927;
+}
+
+
+
+/******************************************************************************/
+/* GRID                                                                     */
+/******************************************************************************/
+
+.grid-row {
+    display: flex; flex-direction: row;
+}
+.grid-col {
+    display: flex; flex-direction: column;
+}
+
+.grid-row.center {
+    justify-content: center;
+}
+.grid-row.around {
+    justify-content: space-around;
+}
+.grid-row.between {
+    justify-content: space-between;
+}
+
+.group {
+    margin-bottom: .5rem;
+}
+
+.cell {
+    flex-grow: 1; flex-basis: 0;
+}
+
+
+
+/* Margin ------------------------------------------------------------------- */
+
+.mt-2 {
+	margin-top: .5rem!important;
+}
+.ml-2 {
+	margin-left: .5rem!important;
+}
+.mr-2 {
+	margin-right: .5rem!important;
+}
+.mb-2 {
+	margin-bottom: .5rem!important;
+}
+
+
+
+/* Padding ------------------------------------------------------------------ */
+
+.pt-2 {
+	padding-top: .5rem!important;
+}
+.pl-2 {
+	padding-left: .5rem!important;
+}
+.pr-2 {
+	padding-right: .5rem!important;
+}
+.pb-2 {
+	padding-bottom: .5rem!important;
 }
 
 
@@ -324,6 +563,7 @@ header nav > a:hover, header nav > a:focus, header nav > a.active, header nav .d
 
 .content {
     flex-grow: 1;
+    margin-top: 1rem;
     display: flex; flex-direction: column;
 }
 
@@ -364,6 +604,31 @@ article {
 article > h4 {
     margin: 0 0 1rem;
     color: #E0F2F1; font-size: 1rem; font-weight: 300;
+}
+
+
+
+/* Toast -------------------------------------------------------------------- */
+
+#toast-content {
+	position: relative;
+}
+
+#toast-container {
+	position: static; width: 100%; 
+}
+
+#toast-container .toast {
+    text-align: center;
+    opacity: 1; box-shadow: none;
+	background-position: 1rem .5rem;
+    font-size: .875rem; font-weight: 400;
+    width: 100%!important; margin-bottom: 1rem;
+    min-height: 2.5rem; padding: 0 1rem 0 3.5rem;
+}
+
+#toast-container .toast > div {
+    padding: .5rem 0;
 }
 
 

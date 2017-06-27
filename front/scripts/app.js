@@ -11,7 +11,7 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 	
 	$stateProvider
 	
-		.state('root', { url: '/:codelang', controller: 'RootCtrl', templateUrl: '/static/front/pages/root.html', })
+		.state('root', { url: '/:codelang', controller: 'RootCtrl', templateUrl: '/static/front/pages/root.html', resolve: {loadUser: function(UserService) { return UserService.init(); }, }, })
 
 			.state('root.home', { url: '/home', controller: 'HomeCtrl', templateUrl: '/static/front/pages/home.html', data: { title: 'home_TITLE', }})
 
@@ -45,7 +45,13 @@ angular.module('AngularApp').config(function($authProvider) {
 	$authProvider.facebook({
 		
 		url: '/login/social/token_user/facebook',
-		clientId: '362521904117518'
+		clientId: '237811833398918'
+	});
+
+	$authProvider.google({
+		
+		url: '/login/social/token_user/google',
+		clientId: '949801101013'
 	});
 
 	$authProvider.authToken = 'Token';

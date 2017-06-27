@@ -23,7 +23,7 @@
 			</div>
 			
         </div>
-<!--         
+         
 		<a ui-sref="root.login" ng-show="!user.authenticated" >
 			<i class="fa fa-sign-in"></i>
 			{{'login_LINK' | translate}}
@@ -32,16 +32,12 @@
         <div uib-dropdown ng-show="user.authenticated">
             
 			<div uib-dropdown-toggle>
-				<i ng-if="!user.team" class="fa fa-user mr-1"></i>
+				<i ng-if="!user.team" class="fa fa-user mr-2"></i>
 				<img ng-if="user.team" ng-src="/static/front/img/team_{{user.team}}.svg" />
 				{{user.name}}
 			</div>
 			
 			<div uib-dropdown-menu class="dropdown-menu-right">
-			    
-				<a ui-sref="root.profile">
-					{{'profile_LINK' | translate}}
-				</a>
 				
 				<a href="javascript:;" ng-click="logout();">
 					{{'logout_LINK' | translate}}
@@ -50,7 +46,7 @@
 			</div>
 			
         </div>
--->       
+       
     </div>
 </div>
 

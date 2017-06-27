@@ -4,13 +4,18 @@
 from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, AllowAny
+from rest_framework.authtoken.models import Token
+
+from rest_social_auth.serializers import UserTokenSerializer
 
 from .models import *
 
 from django.http import HttpResponse
 
 from django.views.decorators.csrf import csrf_exempt
+
+from django.contrib.auth import get_user_model, authenticate, logout
 
 
 
@@ -74,3 +79,64 @@ class ExtensionViewSet(viewsets.ViewSet):
 			mission.computeInternalData()
 		
 		return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+class AccountViewSet(viewsets.ViewSet):
+	
+	permission_classes = AllowAny, 
+    
+	def login(self, request):
+		
+		user = authenticate(username=request.data['username'], password=request.data['password'])
+		if user is None:
+			return Response('error_USER_UNKNOWN', status=status.HTTP_400_BAD_REQUEST)
+		
+		return Response(UserTokenSerializer(user).data, status=status.HTTP_200_OK)
+
+
+
+	def register(self, request):
+		
+		if request.data['password1'] != request.data['password2']:
+			return Response('error_PASSWORDS_NOT_EQUAL', status=status.HTTP_400_BAD_REQUEST)
+
+		try:
+		
+			user = get_user_model().objects.create_user(request.data['username'], request.data['email'], request.data['password1'])
+			
+		except IntegrityError:
+			
+			results = get_user_model().objects.filter(username=request.data['username'])
+			if results.count() > 0:
+				return Response('error_USERNAME_ALREADY_EXISTS', status=status.HTTP_400_BAD_REQUEST)
+			
+			return Response('error_INTEGRITY_ERROR', status=status.HTTP_400_BAD_REQUEST)
+		
+		token = Token.objects.create(user=user)
+		
+		authenticate(username=request.data['username'], password=request.data['password1'])
+		
+		return Response(UserTokenSerializer(user).data, status=status.HTTP_201_CREATED)
+
+
+
+	def logout(self, request):
+		
+		logout(request)
+		
+		return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+class ProfileViewSet(viewsets.ViewSet):
+	
+	permission_classes = IsAuthenticated, 
+    
+	def view(self, request):
+		
+		data = {'team':request.user.profile.team, 'level':request.user.profile.level, 'name':request.user.username}
+		
+		return Response(data, status=status.HTTP_200_OK)
