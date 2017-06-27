@@ -10,6 +10,6 @@ from .views import *
 #---------------------------------------------------------------------------------------------------
 urlpatterns = [
 	
-	url(r'^ext_check/',		ExtensionViewSet.as_view({ 'post': 'check'		})),
+	url(r'^ext_check/',		ext_check),
 	url(r'^ext_register/',	ExtensionViewSet.as_view({ 'post': 'register'	})),
 ]

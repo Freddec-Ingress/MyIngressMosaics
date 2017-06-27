@@ -8,6 +8,32 @@ from rest_framework.permissions import AllowAny
 
 from .models import *
 
+from django.http import HttpResponse
+
+from django.views.decorators.csrf import csrf_exempt
+
+
+
+#---------------------------------------------------------------------------------------------------
+@csrf_exempt
+def ext_check(request):
+	
+	data = []
+	
+	import json
+	obj = json.loads(request.body)
+	
+	for item in obj:
+	
+		result = Mission.objects.filter(ref = item['mid'])
+		if result.count() > 0:
+			data.append({'mid':item['mid'], 'status': 'registered'})
+		else:
+			data.append({'mid':item['mid'], 'status': 'notregistered'})
+	
+	from django.http import JsonResponse
+	return JsonResponse({'data': data})
+
 
 
 #---------------------------------------------------------------------------------------------------
@@ -15,30 +41,17 @@ class ExtensionViewSet(viewsets.ViewSet):
 	
 	permission_classes = AllowAny, 
     
-    
-    
-	def check(self, request):
-		
-		data = []
-		
-		for item in request.data['result']:
-			temp = {'mid':item[0], 'status': 'notregistered'}
-			data.append(temp)
-		
-		from django.http import JsonResponse
-		return JsonResponse(json.dumps(data))
-    
-    
-    
 	def register(self, request):
 
 		import json
 		obj = json.loads(request.body)
 		
+		mission = None
+		
 		results = Mission.objects.filter(ref=obj[0])
 		if (results.count() < 1):
 			
-			mission = Mission(ref=obj[0], title=obj[1], desc=obj[2], creator=obj[3], faction=obj[4], image=obj[10],
+			mission = Mission(ref=obj[0], title=obj[1], desc=obj[2], creator=obj[3], faction=obj[4], image=obj[10], registerer=obj[11],
 							  data=request.body)
 			mission.save()
 			
@@ -46,8 +59,15 @@ class ExtensionViewSet(viewsets.ViewSet):
 			
 			for item in obj[9]:
 				
-				portal = Portal(mission=mission, lat=(item[5][2]/1000000), lng=(item[5][3]/1000000), order=order, title=item[2])
-				portal.save()
+				if item[5][0] == 'f':
+				
+					portal = Portal(mission=mission, lat=(item[5][1]/1000000.0), lng=(item[5][2]/1000000.0), order=order, title=item[2])
+					portal.save()
+					
+				else:
+				
+					portal = Portal(mission=mission, lat=(item[5][2]/1000000.0), lng=(item[5][3]/1000000.0), order=order, title=item[2])
+					portal.save()
 				
 				order += 1
 		

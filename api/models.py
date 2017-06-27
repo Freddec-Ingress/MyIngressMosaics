@@ -10,14 +10,14 @@ from django.db import models
 #---------------------------------------------------------------------------------------------------
 def getDistanceFromLatLng(lat1, lng1, lat2, lng2):
     
-    R = 6371; 
+    R = 6371.0; 
     
     dLat = radians(lat2 - lat1);
     dLng = radians(lng2 - lng1);
     
-    a =  sin(dLat/2) * sin(dLat/2) + cos(radians(lat1)) * cos(radians(lat2)) *  sin(dLng/2) * sin(dLng/2)
+    a =  sin(dLat/2.0) * sin(dLat/2.0) + cos(radians(lat1)) * cos(radians(lat2)) *  sin(dLng/2.0) * sin(dLng/2.0)
 
-    c = 2 * atan2(sqrt(a), sqrt(1-a)); 
+    c = 2.0 * atan2(sqrt(a), sqrt(1.0-a)); 
     d = R * c;
     
     return d;
@@ -35,6 +35,7 @@ class Mission(models.Model):
     image = models.CharField(max_length=256, default='')
     creator = models.CharField(max_length=32, default='')
     faction = models.CharField(max_length=8, default='')
+    registerer = models.CharField(max_length=32, default='')
 
     _distance = models.FloatField(default=0.0)
     
@@ -74,4 +75,4 @@ class Portal(models.Model):
     title = models.CharField(max_length=128, default='')
 
     def __unicode__(self):
-        return self.mission + ' - ' + self.order + ' - ' + self.title
+        return self.mission.title + ' - ' + str(self.order) + ' - ' + self.title
