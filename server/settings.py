@@ -99,6 +99,7 @@ SOCIAL_AUTH_REDIRECT_IS_HTTPS = 'True'
 SOCIAL_AUTH_FACEBOOK_KEY = '237811833398918'
 SOCIAL_AUTH_FACEBOOK_SECRET = 'ed990f9824156e64ba36e71f4fe0cf97'
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', ]
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {'fields': ','.join(['email', ]), }
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '949801101013-ss1st02gn04q6oisp1chpp35l8m4itbm.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'zUz2unukcb1f9vnaC6F4lcsZ'
@@ -113,7 +114,6 @@ REST_FRAMEWORK = {
 AUTHENTICATION_BACKENDS = (
 	'social_core.backends.facebook.FacebookOAuth2',
 	'social_core.backends.google.GoogleOAuth2',
-	'social_core.backends.twitter.TwitterOAuth',
 	'django.contrib.auth.backends.ModelBackend',
 )
 

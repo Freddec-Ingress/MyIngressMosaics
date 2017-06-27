@@ -2737,7 +2737,7 @@ angular.module('AngularApp').config(function($authProvider) {
 
 	$authProvider.google({
 		
-		url: '/login/social/token_user/google',
+		url: '/login/social/token_user/google-oauth2',
 		clientId: '949801101013-ss1st02gn04q6oisp1chpp35l8m4itbm.apps.googleusercontent.com'
 	});
 
