@@ -1,0 +1,145 @@
+<div class="topbar">
+    <div class="container">
+        
+        <div uib-dropdown>
+            
+			<div uib-dropdown-toggle>
+				<span class="flag-icon flag-icon-{{'lang_FLAG' | translate}} mr-1"></span>
+				{{'lang_LABEL' | translate}}
+			</div>
+			
+			<div uib-dropdown-menu>
+				
+				<a href="/en{{state.current.url}}">
+					<span class="flag-icon flag-icon-gb mr-1"></span>
+					English
+				</a>
+				
+				<a href="/fr{{state.current.url}}">
+					<span class="flag-icon flag-icon-fr mr-1"></span>
+					Français
+				</a>
+				
+			</div>
+			
+        </div>
+<!--         
+		<a ui-sref="root.login" ng-show="!user.authenticated" >
+			<i class="fa fa-sign-in"></i>
+			{{'login_LINK' | translate}}
+		</a>
+		
+        <div uib-dropdown ng-show="user.authenticated">
+            
+			<div uib-dropdown-toggle>
+				<i ng-if="!user.team" class="fa fa-user mr-1"></i>
+				<img ng-if="user.team" ng-src="/static/front/img/team_{{user.team}}.svg" />
+				{{user.name}}
+			</div>
+			
+			<div uib-dropdown-menu class="dropdown-menu-right">
+			    
+				<a ui-sref="root.profile">
+					{{'profile_LINK' | translate}}
+				</a>
+				
+				<a href="javascript:;" ng-click="logout();">
+					{{'logout_LINK' | translate}}
+				</a>
+				
+			</div>
+			
+        </div>
+-->       
+    </div>
+</div>
+
+<div class="menu-overlay" ng-show="menu_open" ng-click="menu_open = false;"></div>
+
+<div class="menu-pane" ng-click="menu_open = false;" ng-class="{'open': menu_open}">
+    
+    <header>
+    	
+		<a ui-sref="root.home">
+			MyIngressMosaics
+		</a>
+		
+    </header>
+    
+	<nav>
+	    
+	</nav>
+    
+</div>
+
+<header class="hidden-up">
+    
+	<div class="menu-toggler" ng-click="menu_open = true">
+		<i class="fa fa-bars"></i>
+	</div>
+    
+	<h1>
+		{{state.current.data.title | translate}}
+	</h1>
+	
+</header>
+
+<header class="hidden-down">
+    <div class="container">
+        
+		<a ui-sref="root.home">
+			MyIngressMosaics
+		</a>
+		
+		<nav>
+			
+		</nav>
+        
+    </div>
+</header>
+
+<div class="content">
+    
+	<div class="loading" ng-show="route_loading">
+		<img src="/static/front/img/loading.png" />
+		<span>{{'loading_MSG' | translate}}</span>
+	</div>
+
+    <div class="container" ui-view="" ng-show="!route_loading"></div>
+    
+</div>
+
+<footer>
+    <div class="container">
+        
+		<a href="mailto:freddec.ingress@gmail.com">
+			<i class="fa fa-envelope"></i>
+		</a>
+		
+		<a href="https://plus.google.com/u/1/communities/104595846633880114608" target="_blank">
+			<i class="fa fa-google-plus-square"></i>
+		</a>
+		
+		<span>
+			2017 © Copyright
+		</span>
+		
+		<span>
+			DECONINCK Frédéric
+		</span>
+		
+    </div>
+</footer>
+
+<script>
+    $(document).ready(function() {
+        
+        $(window).on('scroll', function() {
+            
+            var fromTop = $('body').scrollTop();
+            
+            $('.menu-pane').toggleClass('sticky', (fromTop > 33));
+            $('.wrapper > header').toggleClass('sticky', (fromTop > 33));
+        });
+    });
+</script>
