@@ -15,7 +15,7 @@ from django.contrib.auth.models import User
 #---------------------------------------------------------------------------------------------------
 class Profile(models.Model):
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
 
     team = models.CharField(max_length=32, null=True, blank=True)
     level = models.IntegerField(null=True, blank=True)
