@@ -18,7 +18,7 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 			.state('root.login', { url: '/login', controller: 'LoginCtrl', templateUrl: '/static/front/pages/login.html', data:{ title: 'login_TITLE', }})
 			.state('root.profile', { url: '/profile', controller: 'ProfileCtrl', templateUrl: '/static/front/pages/profile.html', data:{ title: 'profile_TITLE', }})
 			.state('root.register', { url: '/register', controller: 'RegisterCtrl', templateUrl: '/static/front/pages/register.html', data:{ title: 'register_TITLE', }})
-			
+
 	$locationProvider.html5Mode(true);
 });
 
@@ -52,7 +52,7 @@ angular.module('AngularApp').config(function($authProvider) {
 		
 		url: '/login/social/token_user/google-oauth2',
 		clientId: '949801101013-ss1st02gn04q6oisp1chpp35l8m4itbm.apps.googleusercontent.com'
-	});
+  });
 
 	$authProvider.authToken = 'Token';
 	$authProvider.tokenType = 'Token';

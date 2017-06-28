@@ -41,3 +41,35 @@ angular.module('AngularApp.controllers').controller('RegisterCtrl', function($sc
 	
 	$scope.register = UserService.register;
 });
+
+angular.module('AngularApp.controllers').controller('ProfileCtrl', function($scope, UserService, $timeout) {
+	
+	$scope.user = UserService.data;
+	
+	/* Name */
+	
+	$scope.editname = false;
+	$scope.newname = UserService.data.name;
+	
+	$scope.nameClick = function() {
+		
+		$scope.editname = true;
+			
+		$timeout(function() {
+			$('#input-name').focus();
+		});
+	}
+	
+	$scope.nameBlur = function(newvalue) {
+		
+		$scope.editname = false;
+		
+		if (newvalue && newvalue != UserService.data.name) {
+			
+			$scope.loadingname = true;
+			UserService.updateName(newvalue).then(function() {
+				$scope.loadingname = false;
+			});
+		}
+	}
+});

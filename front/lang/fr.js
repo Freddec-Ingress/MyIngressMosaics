@@ -9,6 +9,8 @@ var fr_translations = {
 	
 	loading_MSG: 'Chargement ...',
 	
+	restricted_TEXT: 'L\'accès à cette page est restreint. Vous devez être connecté pour y accéder.',
+	
 	home_TITLE: 'Bienvenue',
 	home_HELPTITLE: 'Ce que vous pouvez faire pour aider',
 	home_TEXT1: '1. Installer l\'extension Chrome ',
@@ -43,4 +45,8 @@ var fr_translations = {
 	register_BTN: 'S\'inscrire',
 
 	logout_LINK: 'Se déconnecter',
+	
+	profile_LINK: 'Profil',
+	profile_TITLE: 'Profil',
+	profile_NAME: 'Nom',
 };

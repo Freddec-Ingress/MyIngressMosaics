@@ -140,3 +140,12 @@ class ProfileViewSet(viewsets.ViewSet):
 		data = {'team':request.user.profile.team, 'level':request.user.profile.level, 'name':request.user.username}
 		
 		return Response(data, status=status.HTTP_200_OK)
+
+
+
+	def name(self, request):
+		
+		request.user.username = request.data['name']
+		request.user.save()
+		
+		return Response(None, status=status.HTTP_200_OK)

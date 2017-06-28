@@ -9,6 +9,8 @@ var en_translations = {
 	
 	loading_MSG: 'Loading Data ...',
 	
+	restricted_TEXT: 'Access to this page is restricted. You must be signed in before accessing it.',
+	
 	home_TITLE: 'Welcome',
 	home_HELPTITLE: 'What you can do to help',
 	home_TEXT1: '1. Install the Chrome extension ',
@@ -43,4 +45,8 @@ var en_translations = {
 	register_BTN: 'Sign up',
 	
 	logout_LINK: 'Sign out',
+
+	profile_LINK: 'Profile',
+	profile_TITLE: 'Profile',
+	profile_NAME: 'Name',
 };

@@ -1,0 +1,27 @@
+<section ng-if='!user.authenticated'>
+	
+	<div class="text-danger text-center">
+		{{'restricted_TEXT' | translate}}
+	</div>
+
+</section>
+
+<section ng-if='user.authenticated'>
+	
+	<article>
+	
+		<dl class="edit">
+	        <dt ng-show="!editname" ng-click="nameClick();">{{'profile_NAME' | translate}}</dt>
+			<dd ng-show="!editname" ng-click="nameClick();">
+				{{user.name}}
+	            <i class="fa fa-edit"></i>
+	            <div class="loading" ng-show="loadingname">
+	            	<img src="/static/front/img/loading.png" />
+	            </div>
+	        </dd>
+			<input id="input-name" type="text" class="form-control" ng-model="newname" ng-show="editname" ng-blur="nameBlur(newname);" />
+		</dl>
+
+	</article>
+
+</section>

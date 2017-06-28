@@ -17,5 +17,6 @@ urlpatterns = [
 	url(r'^logout/',	AccountViewSet.as_view({ 'post': 'logout'   })),
 	url(r'^register/',	AccountViewSet.as_view({ 'post': 'register' })),
 	
-	url(r'^profile/', ProfileViewSet.as_view({ 'get' : 'view' })),
+	url(r'^profile/name/',	ProfileViewSet.as_view({ 'post': 'name' })),
+	url(r'^profile/',		ProfileViewSet.as_view({ 'get' : 'view' })),
 ]

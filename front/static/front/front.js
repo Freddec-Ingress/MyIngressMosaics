@@ -2387,6 +2387,8 @@ var en_translations = {
 	
 	loading_MSG: 'Loading Data ...',
 	
+	restricted_TEXT: 'Access to this page is restricted. You must be signed in before accessing it.',
+	
 	home_TITLE: 'Welcome',
 	home_HELPTITLE: 'What you can do to help',
 	home_TEXT1: '1. Install the Chrome extension ',
@@ -2421,6 +2423,10 @@ var en_translations = {
 	register_BTN: 'Sign up',
 	
 	logout_LINK: 'Sign out',
+
+	profile_LINK: 'Profile',
+	profile_TITLE: 'Profile',
+	profile_NAME: 'Name',
 };
 var fr_translations = {
     
@@ -2432,6 +2438,8 @@ var fr_translations = {
 	site_UNDERCONSTRUCTION: 'Site en cours de construction',
 	
 	loading_MSG: 'Chargement ...',
+	
+	restricted_TEXT: 'L\'accès à cette page est restreint. Vous devez être connecté pour y accéder.',
 	
 	home_TITLE: 'Bienvenue',
 	home_HELPTITLE: 'Ce que vous pouvez faire pour aider',
@@ -2467,6 +2475,10 @@ var fr_translations = {
 	register_BTN: 'S\'inscrire',
 
 	logout_LINK: 'Se déconnecter',
+	
+	profile_LINK: 'Profil',
+	profile_TITLE: 'Profil',
+	profile_NAME: 'Nom',
 };
 angular.module('AngularApp.services', [])
 
@@ -2685,6 +2697,39 @@ angular.module('AngularApp.controllers').controller('RegisterCtrl', function($sc
 	
 	$scope.register = UserService.register;
 });
+
+angular.module('AngularApp.controllers').controller('ProfileCtrl', function($scope, UserService, $timeout) {
+	
+	$scope.user = UserService.data;
+	
+	/* Name */
+	
+	$scope.editname = false;
+	$scope.newname = UserService.data.name;
+	
+	$scope.nameClick = function() {
+		
+		$scope.editname = true;
+			
+		$timeout(function() {
+			$('#input-name').focus();
+		});
+	}
+	
+	$scope.nameBlur = function(newvalue) {
+		
+		$scope.editname = false;
+		
+		if (newvalue && newvalue != UserService.data.name) {
+			
+			$scope.loadingname = true;
+			UserService.updateName(newvalue).then(function() {
+				$scope.loadingname = false;
+			});
+		}
+	}
+});
+
 angular.module('AngularApp', ['ui.router', 'ui.bootstrap', 'pascalprecht.translate', 'satellizer', 'ngCookies', 'toastr',
 							  'AngularApp.services', 'AngularApp.controllers', 'AngularApp.directives', ]);
 
@@ -2705,7 +2750,7 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 			.state('root.login', { url: '/login', controller: 'LoginCtrl', templateUrl: '/static/front/pages/login.html', data:{ title: 'login_TITLE', }})
 			.state('root.profile', { url: '/profile', controller: 'ProfileCtrl', templateUrl: '/static/front/pages/profile.html', data:{ title: 'profile_TITLE', }})
 			.state('root.register', { url: '/register', controller: 'RegisterCtrl', templateUrl: '/static/front/pages/register.html', data:{ title: 'register_TITLE', }})
-			
+
 	$locationProvider.html5Mode(true);
 });
 
@@ -2739,7 +2784,7 @@ angular.module('AngularApp').config(function($authProvider) {
 		
 		url: '/login/social/token_user/google-oauth2',
 		clientId: '949801101013-ss1st02gn04q6oisp1chpp35l8m4itbm.apps.googleusercontent.com'
-	});
+  });
 
 	$authProvider.authToken = 'Token';
 	$authProvider.tokenType = 'Token';

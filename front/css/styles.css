@@ -17,7 +17,7 @@ body {
     height: 100%;
     color: #BDBDBD;
     -webkit-font-smoothing: antialiased;
-    font: 400 1rem/1.5 'Coda',sans-serif;
+    font: 400 .875rem/1.5 'Coda',sans-serif;
 }
 
 
@@ -95,6 +95,48 @@ img {
 .flag-icon {
 	top: -1px;
 	margin-right: .5rem;
+}
+
+
+
+/* Description -------------------------------------------------------------- */
+
+dl {
+	position: relative;
+    margin-top: 0; margin-bottom: 0;
+	line-height: 2.5rem; height: 2.5rem;
+	display: flex; flex-direction: row; flex-wrap: wrap;
+}
+dt {
+	flex-grow: 1;
+    font-weight: 300; font-size: .875rem;
+}
+dd {
+	flex-grow: 1;
+	color: #FFFFFF; text-align: right;
+}
+
+dl.edit:hover {
+	cursor: pointer;
+}
+
+dl.edit > dd > i {
+	color: #ebbc4a;
+	margin-left: 1rem;
+}
+dl.edit:hover > dd > i {
+	color: #ebbc4a;
+}
+
+dl.edit > dd > .loading {
+    margin: 0;
+	text-align: center;
+	background-color: rgba(0,0,0,.125);
+	position: absolute; top: 0; left: -.25rem; right: -.25rem; bottom: 0;
+}
+dl.edit > dd > .loading > img {
+	margin: auto;
+	width: 1rem; height: 1rem;
 }
 
 
