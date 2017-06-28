@@ -2496,8 +2496,8 @@ var fr_translations = {
 	missions_TITLE: 'Missions',
 	missions_SUBTITLE: 'Missions enregistrées',
 	missions_NOMISSION: 'Aucune mission',
-	missions_UPDATENAME: 'Pour voir les missions, votre nom de profil doit exactement correspondre à vote noms d\'agent Ingress ; vous pouvez mettre à jour votre nom de profil ici : ',
-	missions_HUNTINGTOOL: 'Pour voir les missions, voius devez les enregistrer depuis Ingress intel Map avec notre extension Chrome : ',
+	missions_UPDATENAME: 'Pour voir les missions, votre nom de profil doit exactement correspondre à votre nom d\'agent Ingress ; vous pouvez mettre à jour votre nom de profil ici : ',
+	missions_HUNTINGTOOL: 'Pour voir les missions, vous devez les enregistrer depuis Ingress Intel Map avec notre extension Chrome : ',
 	missions_COLNAME: 'Nom',
 	missions_COLCREATOR: 'Créateur',
 	missions_FILTER: 'Filtrer les missions ici',
@@ -2657,10 +2657,14 @@ angular.module('AngularApp.services').service('UserService', function($auth, $ht
 		
 		getMissions: function() {
 			
-			return API.sendRequest('/api/missions/', 'GET').then(function(response) {
-				
-				service.data.missions = response;
-			});
+			if (service.data.authenticated) {
+				return API.sendRequest('/api/missions/', 'GET').then(function(response) {
+					
+					service.data.missions = response;
+				});
+			}
+			
+			return;
 		},
 	};
 	
@@ -2766,6 +2770,11 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 
 	$scope.missions = UserService.data.missions;
 });
+
+angular.module('AngularApp.controllers').controller('CreateCtrl', function($scope, CreateService) {
+
+	$scope.missions = CreateService.data.missions;
+});
 angular.module('AngularApp', ['ui.router', 'ui.bootstrap', 'pascalprecht.translate', 'satellizer', 'ngCookies', 'toastr',
 							  'AngularApp.services', 'AngularApp.controllers', 'AngularApp.directives', ]);
 
@@ -2788,6 +2797,7 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 			.state('root.register', { url: '/register', controller: 'RegisterCtrl', templateUrl: '/static/front/pages/register.html', data:{ title: 'register_TITLE', }})
 
 			.state('root.missions', { url: '/missions', controller: 'MissionsCtrl', templateUrl: '/static/front/pages/missions.html', data:{ title: 'missions_TITLE', }, resolve: {loadMissions: function(UserService) { return UserService.getMissions(); }, }, })
+			.state('root.create', { url: '/create', controller: 'CreateCtrl', templateUrl: '/static/front/pages/create.html', data:{ title: 'create_TITLE', }, })
 			
 	$locationProvider.html5Mode(true);
 });

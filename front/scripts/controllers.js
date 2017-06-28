@@ -78,3 +78,8 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 
 	$scope.missions = UserService.data.missions;
 });
+
+angular.module('AngularApp.controllers').controller('CreateCtrl', function($scope, CreateService) {
+
+	$scope.missions = CreateService.data.missions;
+});

@@ -153,10 +153,14 @@ angular.module('AngularApp.services').service('UserService', function($auth, $ht
 		
 		getMissions: function() {
 			
-			return API.sendRequest('/api/missions/', 'GET').then(function(response) {
-				
-				service.data.missions = response;
-			});
+			if (service.data.authenticated) {
+				return API.sendRequest('/api/missions/', 'GET').then(function(response) {
+					
+					service.data.missions = response;
+				});
+			}
+			
+			return;
 		},
 	};
 	
