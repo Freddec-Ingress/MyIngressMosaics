@@ -7,15 +7,16 @@ var en_translations = {
 	site_DESC: 'Register and Share your Ingress Mosaics',
 	site_UNDERCONSTRUCTION: 'Site under construction',
 	
-	loading_MSG: 'Loading Data ...',
-	
 	restricted_TEXT: 'Access to this page is restricted. You must be signed in before accessing it.',
+	
+	here_LABEL: 'here',
 	
 	home_TITLE: 'Welcome',
 	home_HELPTITLE: 'What you can do to help',
-	home_TEXT1: '1. Install the Chrome extension ',
-	home_TEXT2: '2. Register all the missions you want to include in a mosaic later ; mosaic creation will be implemented soon',
-	home_TEXT3: '3. Join our community to stay in touch with latest news ',
+	home_TEXT1: '1. Install our Chrome extension ',
+	home_TEXT2: '2. Register all the missions you want to include in a mosaic with our chrome extension',
+	home_TEXT3: '3. Mosaic creation will be implemented soon but you can list your registered missions ',
+	home_TEXT4: '4. Join our community to stay in touch ',
 	
 	error_EMAIL: 'A well formatted email address is required.',
 	error_TIMEOUT: 'Server timed out. Please try again.',
@@ -49,4 +50,14 @@ var en_translations = {
 	profile_LINK: 'Profile',
 	profile_TITLE: 'Profile',
 	profile_NAME: 'Name',
+	
+	missions_LINK: 'Register a mosaic',
+	missions_TITLE: 'Missions',
+	missions_SUBTITLE: 'Registered Missions',
+	missions_NOMISSION: 'No mission',
+	missions_UPDATENAME: 'To see missions, your profile name must be exactly the same as your Ingress agent name ; you could update you profile name here: ',
+	missions_HUNTINGTOOL: 'To see missions, you have to register them from Ingress intel Map with our chrome extension: ',
+	missions_COLNAME: 'Name',
+	missions_COLCREATOR: 'Creator',
+	missions_FILTER: 'Filter missions here',
 };

@@ -149,3 +149,20 @@ class ProfileViewSet(viewsets.ViewSet):
 		request.user.save()
 		
 		return Response(None, status=status.HTTP_200_OK)
+
+
+
+	def missions(self, request):
+		
+		missions = None
+		
+		results = Mission.objects.filter(registerer=request.user.username)
+		if results.count() > 0:
+			
+			missions = []
+			for item in results:
+				
+				temp = {'name':item.title, 'creator':item.creator, 'faction':item.faction}
+				missions.append(temp)
+		
+		return Response(missions, status=status.HTTP_200_OK)

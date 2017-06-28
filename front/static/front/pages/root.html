@@ -67,6 +67,10 @@
     </header>
     
 	<nav>
+		
+	    <a ui-sref="root.missions" ui-sref-active="active">
+	    	{{'missions_LINK' | translate}}
+	    </a>
 	    
 	</nav>
     
@@ -93,6 +97,10 @@
 		
 		<nav>
 			
+		    <a ui-sref="root.missions" ui-sref-active="active">
+		    	{{'missions_LINK' | translate}}
+		    </a>
+			
 		</nav>
         
     </div>
@@ -102,7 +110,6 @@
     
 	<div class="loading" ng-show="route_loading">
 		<img src="/static/front/img/loading.png" />
-		<span>{{'loading_MSG' | translate}}</span>
 	</div>
 
     <div class="container" ui-view="" ng-show="!route_loading"></div>
@@ -113,7 +120,7 @@
     <div class="container">
         
 		<a href="mailto:freddec.ingress@gmail.com">
-			<i class="fa fa-envelope"></i>
+			<i class="fa fa-envelope" style="margin-top:-1px;"></i>
 		</a>
 		
 		<a href="https://plus.google.com/u/1/communities/104595846633880114608" target="_blank">

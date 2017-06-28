@@ -2385,15 +2385,16 @@ var en_translations = {
 	site_DESC: 'Register and Share your Ingress Mosaics',
 	site_UNDERCONSTRUCTION: 'Site under construction',
 	
-	loading_MSG: 'Loading Data ...',
-	
 	restricted_TEXT: 'Access to this page is restricted. You must be signed in before accessing it.',
+	
+	here_LABEL: 'here',
 	
 	home_TITLE: 'Welcome',
 	home_HELPTITLE: 'What you can do to help',
-	home_TEXT1: '1. Install the Chrome extension ',
-	home_TEXT2: '2. Register all the missions you want to include in a mosaic later ; mosaic creation will be implemented soon',
-	home_TEXT3: '3. Join our community to stay in touch with latest news ',
+	home_TEXT1: '1. Install our Chrome extension ',
+	home_TEXT2: '2. Register all the missions you want to include in a mosaic with our chrome extension',
+	home_TEXT3: '3. Mosaic creation will be implemented soon but you can list your registered missions ',
+	home_TEXT4: '4. Join our community to stay in touch ',
 	
 	error_EMAIL: 'A well formatted email address is required.',
 	error_TIMEOUT: 'Server timed out. Please try again.',
@@ -2427,6 +2428,16 @@ var en_translations = {
 	profile_LINK: 'Profile',
 	profile_TITLE: 'Profile',
 	profile_NAME: 'Name',
+	
+	missions_LINK: 'Register a mosaic',
+	missions_TITLE: 'Missions',
+	missions_SUBTITLE: 'Registered Missions',
+	missions_NOMISSION: 'No mission',
+	missions_UPDATENAME: 'To see missions, your profile name must be exactly the same as your Ingress agent name ; you could update you profile name here: ',
+	missions_HUNTINGTOOL: 'To see missions, you have to register them from Ingress intel Map with our chrome extension: ',
+	missions_COLNAME: 'Name',
+	missions_COLCREATOR: 'Creator',
+	missions_FILTER: 'Filter missions here',
 };
 var fr_translations = {
     
@@ -2437,15 +2448,16 @@ var fr_translations = {
 	site_DESC: 'Enregistrer et Partager vos Fresques Ingress',
 	site_UNDERCONSTRUCTION: 'Site en cours de construction',
 	
-	loading_MSG: 'Chargement ...',
-	
 	restricted_TEXT: 'L\'accès à cette page est restreint. Vous devez être connecté pour y accéder.',
+	
+	here_LABEL: 'ici',
 	
 	home_TITLE: 'Bienvenue',
 	home_HELPTITLE: 'Ce que vous pouvez faire pour aider',
-	home_TEXT1: '1. Installer l\'extension Chrome ',
-	home_TEXT2: '2. Enregistrer toutes les missions que vous souhaitez inclure dans une fresque plutart ; la création de fresque sera bienôt implémentée',
-	home_TEXT3: '3. Rejoindre notre communauté pour rester informé ',
+	home_TEXT1: '1. Installer notre extension Chrome ',
+	home_TEXT2: '2. Enregistrer toutes les missions que vous souhaitez inclure dans une fresque avec notre extension Chrome',
+	home_TEXT3: '3. La création de fresque sera bientôt implémentée mais vous pouvez lister vos missions enregistrées  ',
+	home_TEXT4: '4. Rejoindre notre communauté pour rester informé ',
 	
 	error_EMAIL: 'Une adresse email bien formattée est requise.',
 	error_TIMEOUT: 'Délai d\'attente dépassé. Réessayez svp.',
@@ -2479,6 +2491,16 @@ var fr_translations = {
 	profile_LINK: 'Profil',
 	profile_TITLE: 'Profil',
 	profile_NAME: 'Nom',
+	
+	missions_LINK: 'Enregistrer une fresque',
+	missions_TITLE: 'Missions',
+	missions_SUBTITLE: 'Missions enregistrées',
+	missions_NOMISSION: 'Aucune mission',
+	missions_UPDATENAME: 'Pour voir les missions, votre nom de profil doit exactement correspondre à vote noms d\'agent Ingress ; vous pouvez mettre à jour votre nom de profil ici : ',
+	missions_HUNTINGTOOL: 'Pour voir les missions, voius devez les enregistrer depuis Ingress intel Map avec notre extension Chrome : ',
+	missions_COLNAME: 'Nom',
+	missions_COLCREATOR: 'Créateur',
+	missions_FILTER: 'Filtrer les missions ici',
 };
 angular.module('AngularApp.services', [])
 
@@ -2528,6 +2550,8 @@ angular.module('AngularApp.services').service('UserService', function($auth, $ht
 			level: null,
 			
 			authenticated: false,
+			
+			missions: null,
 		},
 
 		init: function() {
@@ -2630,6 +2654,14 @@ angular.module('AngularApp.services').service('UserService', function($auth, $ht
 				service.data.level = newvalue;
 			});
 		},
+		
+		getMissions: function() {
+			
+			return API.sendRequest('/api/missions/', 'GET').then(function(response) {
+				
+				service.data.missions = response;
+			});
+		},
 	};
 	
 	return service;
@@ -2730,6 +2762,10 @@ angular.module('AngularApp.controllers').controller('ProfileCtrl', function($sco
 	}
 });
 
+angular.module('AngularApp.controllers').controller('MissionsCtrl', function($scope, UserService) {
+
+	$scope.missions = UserService.data.missions;
+});
 angular.module('AngularApp', ['ui.router', 'ui.bootstrap', 'pascalprecht.translate', 'satellizer', 'ngCookies', 'toastr',
 							  'AngularApp.services', 'AngularApp.controllers', 'AngularApp.directives', ]);
 
@@ -2751,6 +2787,8 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 			.state('root.profile', { url: '/profile', controller: 'ProfileCtrl', templateUrl: '/static/front/pages/profile.html', data:{ title: 'profile_TITLE', }})
 			.state('root.register', { url: '/register', controller: 'RegisterCtrl', templateUrl: '/static/front/pages/register.html', data:{ title: 'register_TITLE', }})
 
+			.state('root.missions', { url: '/missions', controller: 'MissionsCtrl', templateUrl: '/static/front/pages/missions.html', data:{ title: 'missions_TITLE', }, resolve: {loadMissions: function(UserService) { return UserService.getMissions(); }, }, })
+			
 	$locationProvider.html5Mode(true);
 });
 

@@ -1,0 +1,62 @@
+<section>
+    
+    <article>
+        
+        <h4>{{'missions_SUBTITLE' | translate}}</h4>
+        
+        <div ng-if="!missions">
+            
+            <p class="text-danger">{{'missions_NOMISSION' | translate}}</p>
+            
+            <p>
+                
+                {{'missions_UPDATENAME' | translate}}
+                
+				<a ui-sref="root.profile">
+					{{'profile_LINK' | translate}}
+				</a>
+				
+            </p>
+
+            <p>
+                
+                {{'missions_HUNTINGTOOL' | translate}}
+                
+                <a href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">
+                    MyIngressMosaics Hunting Tool
+                </a>
+                
+            </p>
+            
+        </div>
+        
+        <div ng-if="missions">
+            
+            <div class="group-row">
+                
+                <input type="text" class="form-control" placeholder="{{'missions_FILTER' | translate}}" ng-model="searchKeyword" />
+                
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>{{'missions_COLNAME' | translate}}</th>
+                        <th>{{'missions_COLCREATOR' | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in missions | filter:searchKeyword">
+                        <td></td>
+                        <td>{{item.name}}</td>
+                        <td ng-class="{'text-enligtened': item.faction == 'E', 'text-resistance': item.faction == 'R',}">{{item.creator}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+        
+    </article>
+    
+</section>

@@ -7,15 +7,16 @@ var fr_translations = {
 	site_DESC: 'Enregistrer et Partager vos Fresques Ingress',
 	site_UNDERCONSTRUCTION: 'Site en cours de construction',
 	
-	loading_MSG: 'Chargement ...',
-	
 	restricted_TEXT: 'L\'accès à cette page est restreint. Vous devez être connecté pour y accéder.',
+	
+	here_LABEL: 'ici',
 	
 	home_TITLE: 'Bienvenue',
 	home_HELPTITLE: 'Ce que vous pouvez faire pour aider',
-	home_TEXT1: '1. Installer l\'extension Chrome ',
-	home_TEXT2: '2. Enregistrer toutes les missions que vous souhaitez inclure dans une fresque plutart ; la création de fresque sera bienôt implémentée',
-	home_TEXT3: '3. Rejoindre notre communauté pour rester informé ',
+	home_TEXT1: '1. Installer notre extension Chrome ',
+	home_TEXT2: '2. Enregistrer toutes les missions que vous souhaitez inclure dans une fresque avec notre extension Chrome',
+	home_TEXT3: '3. La création de fresque sera bientôt implémentée mais vous pouvez lister vos missions enregistrées  ',
+	home_TEXT4: '4. Rejoindre notre communauté pour rester informé ',
 	
 	error_EMAIL: 'Une adresse email bien formattée est requise.',
 	error_TIMEOUT: 'Délai d\'attente dépassé. Réessayez svp.',
@@ -49,4 +50,14 @@ var fr_translations = {
 	profile_LINK: 'Profil',
 	profile_TITLE: 'Profil',
 	profile_NAME: 'Nom',
+	
+	missions_LINK: 'Enregistrer une fresque',
+	missions_TITLE: 'Missions',
+	missions_SUBTITLE: 'Missions enregistrées',
+	missions_NOMISSION: 'Aucune mission',
+	missions_UPDATENAME: 'Pour voir les missions, votre nom de profil doit exactement correspondre à vote noms d\'agent Ingress ; vous pouvez mettre à jour votre nom de profil ici : ',
+	missions_HUNTINGTOOL: 'Pour voir les missions, voius devez les enregistrer depuis Ingress intel Map avec notre extension Chrome : ',
+	missions_COLNAME: 'Nom',
+	missions_COLCREATOR: 'Créateur',
+	missions_FILTER: 'Filtrer les missions ici',
 };

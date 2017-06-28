@@ -97,6 +97,12 @@ a:hover, a:focus {
 .text-danger {
     color: #F44336!important;
 }
+.text-enligtened {
+	color:#28f428!important;
+}
+.text-resistance {
+	color:#00c2ff!important;
+}
 
 
 
@@ -201,7 +207,7 @@ form.inline .form-group > .form-control, form.inline .form-group > .select-group
 label {
     display: block;
     margin-bottom: .25rem;
-    color: rgba(0,0,0,.75); font-size: .875rem;
+    height: 2.25rem; line-height: 2.25rem;
 }
 .label-check {
     margin-bottom: 0;
@@ -351,7 +357,11 @@ label {
 }
 
 .group {
-    margin-bottom: .5rem;
+    margin-bottom: 1rem;
+}
+.group-row {
+    margin-bottom: 1rem;
+    display: flex; flex-direction: row;
 }
 
 .cell {
@@ -395,6 +405,39 @@ label {
 
 
 /******************************************************************************/
+/* TABLE                                                                      */
+/******************************************************************************/
+
+table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+table th {
+    text-align: left;
+    border-bottom: 1px solid #E0F2F1;
+    color: #E0F2F1; font-weight: 400;
+    padding-left: .25rem; padding-bottom: .5rem;
+}
+
+table tbody tr {
+    cursor: pointer;
+    border-bottom: 1px solid rgba(0,0,0,.25);
+}
+table tbody tr.selected {
+    background-color: rgba(255,255,255,.05);
+}
+
+table td {
+    max-width: 5rem;
+    padding: .5rem .25rem;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+
+
+/******************************************************************************/
 /* LAYOUT                                                                     */
 /******************************************************************************/
 
@@ -416,10 +459,6 @@ label {
 .loading > img {
     width: 3rem; height: 3rem;
 	animation: rotating 2s linear infinite;
-}
-.loading > span {
-	padding-top: .75rem;
-	color: #ebbc4a; font-size: .75rem;
 }
 
 
@@ -559,11 +598,11 @@ label {
 }
 .menu-pane nav a:hover {
     color: inherit;
-    background: rgba(0,0,0,.125);
+    background: rgba(0,0,0,.25);
 }
 .menu-pane nav a.active {
-    color: #9C27B0;
-    background:rgba(0,0,0,.125);
+    color: #FFFFFF;
+    background:rgba(0,0,0,.25);
 }
 
 .menu-pane nav span {
@@ -619,7 +658,7 @@ header nav {
 
 header nav > a, header nav .dropdown-toggle {
     padding: 0 1rem;
-    color: #FFFFFF; font-size: inherit; font-weight: 400; text-decoration: none; letter-spacing: inherit;
+    color: #FFFFFF; font-size: 1rem; font-weight: 400; text-decoration: none; letter-spacing: inherit;
 }
 header nav > a:hover, header nav > a:focus, header nav > a.active, header nav .dropdown-toggle:hover, header nav .dropdown-toggle:focus {
     background-color: rgba(0,0,0,.125);
@@ -705,20 +744,25 @@ article > h4 {
 /* Footer ------------------------------------------------------------------- */
 
 footer {
-    background-color: #004D40;
-    height: 2rem; line-height: 2rem; padding: 0 .5rem;
+    background-color: #232425;
+    height: 3rem; line-height: 3rem; padding: 0 .5rem;
     display: flex; flex-direction: row; align-items: stretch; justify-content: space-around;
 }
 footer span {
     padding: 0 .5rem;
-    color: #26A69A; font-size: .75rem;
+	line-height: 3.25rem;
+    color: #858586; font-size: .75rem;
 }
 footer a {
     padding: 0 .5rem;
-    color: #26A69A; font-size: .75rem;
+    color: #858586; font-size: .75rem;
 }
 footer a:hover, footer a:focus {
-    color: #26A69A;
+    color: #858586;
+}
+footer a i {
+	vertical-align: middle;
+	font-size: 1rem!important;
 }
 
 

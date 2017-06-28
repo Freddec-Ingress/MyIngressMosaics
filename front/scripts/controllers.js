@@ -73,3 +73,8 @@ angular.module('AngularApp.controllers').controller('ProfileCtrl', function($sco
 		}
 	}
 });
+
+angular.module('AngularApp.controllers').controller('MissionsCtrl', function($scope, UserService) {
+
+	$scope.missions = UserService.data.missions;
+});

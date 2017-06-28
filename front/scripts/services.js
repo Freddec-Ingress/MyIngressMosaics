@@ -46,6 +46,8 @@ angular.module('AngularApp.services').service('UserService', function($auth, $ht
 			level: null,
 			
 			authenticated: false,
+			
+			missions: null,
 		},
 
 		init: function() {
@@ -146,6 +148,14 @@ angular.module('AngularApp.services').service('UserService', function($auth, $ht
 			return API.sendRequest('/api/profile/level/', 'POST', {}, data).then(function(response) {
 				
 				service.data.level = newvalue;
+			});
+		},
+		
+		getMissions: function() {
+			
+			return API.sendRequest('/api/missions/', 'GET').then(function(response) {
+				
+				service.data.missions = response;
 			});
 		},
 	};
