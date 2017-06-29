@@ -19,6 +19,7 @@ urlpatterns = [
 	
 	url(r'^profile/name/',	ProfileViewSet.as_view({ 'post': 'name'     })),
 	url(r'^profile/',		ProfileViewSet.as_view({ 'get' : 'view'     })),
+	url(r'^mission/delete/',		ProfileViewSet.as_view({ 'post' : 'deleteMission' })),
 	url(r'^missions/',		ProfileViewSet.as_view({ 'get' : 'missions' })),
 	url(r'^mosaics/',		ProfileViewSet.as_view({ 'get' : 'mosaics' })),
 	url(r'^mosaic/create/',	ProfileViewSet.as_view({ 'post' : 'create' })),

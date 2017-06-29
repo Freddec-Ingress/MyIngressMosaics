@@ -140,6 +140,10 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 	$scope.nextStep = function() {
 		$state.go('root.create');
 	}
+	
+	$scope.delete = function(item) {
+		UserService.deleteMission(item);
+	}
 });
 
 angular.module('AngularApp.controllers').controller('CreateCtrl', function($scope, $state, CreateService) {

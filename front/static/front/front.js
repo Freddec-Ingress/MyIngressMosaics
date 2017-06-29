@@ -2720,8 +2720,18 @@ angular.module('AngularApp.services').service('UserService', function($auth, $ht
 					service.data.missions = response;
 				});
 			}
+		},
+		
+		deleteMission: function(item) {
 			
-			return;
+			var data = { 'ref':item.ref };
+			return API.sendRequest('/api/mission/delete/', 'POST', {}, data).then(function(response) {
+				
+				var index = service.data.missions.indexOf(item);
+				if (index > -1) {
+					service.data.missions.splice(index, 1);
+				}
+			});
 		},
 		
 		getMosaics: function() {
@@ -3034,6 +3044,10 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 	
 	$scope.nextStep = function() {
 		$state.go('root.create');
+	}
+	
+	$scope.delete = function(item) {
+		UserService.deleteMission(item);
 	}
 });
 

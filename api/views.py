@@ -217,6 +217,16 @@ class ProfileViewSet(viewsets.ViewSet):
 		
 		
 		
+	def deleteMission(self, request):
+		
+		result = Mission.objects.filter(ref=request.data['ref'])
+		if result.count() > 0:
+			result[0].delete();
+			
+		return Response(None, status=status.HTTP_200_OK)
+		
+	
+	
 #---------------------------------------------------------------------------------------------------
 class MosaicViewSet(viewsets.ViewSet):
 	

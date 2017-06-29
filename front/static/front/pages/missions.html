@@ -53,6 +53,7 @@
                         <th>{{'missions_COLNAME' | translate}}</th>
                         <th></th>
                         <th>{{'missions_COLCREATOR' | translate}}</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,12 +62,13 @@
                         <td ng-click="$event.stopPropagation(); toggle($index, $event, item);">
                             {{item.name}}
                         </td>
-                        <td>
+                        <td class="text-center">
                             <a href="https://www.ingress.com/mission/{{item.ref}}" class="ml-2" target="blank">
                                 <i class="fa fa-external-link"></i>
                             </a>
                         </td>
                         <td ng-class="{'text-enligtened': item.faction == 'E', 'text-resistance': item.faction == 'R',}" ng-click="$event.stopPropagation(); toggle($index, $event, item);">{{item.creator}}</td>
+                        <td class="text-center" ng-click="delete(item);"><i class="fa fa-trash"></i></td>
                     </tr>
                 </tbody>
             </table>
