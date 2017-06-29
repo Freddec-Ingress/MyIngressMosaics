@@ -2816,7 +2816,7 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 			var url = null;
 			
 			for (var item of service.data.missions) {
-				if (item.order == order) {
+				if ((service.data.count - item.order + 1) == order) {
 					url = item.image;
 					break;
 				}
