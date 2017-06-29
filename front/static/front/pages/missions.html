@@ -51,14 +51,22 @@
                     <tr>
                         <th></th>
                         <th>{{'missions_COLNAME' | translate}}</th>
+                        <th></th>
                         <th>{{'missions_COLCREATOR' | translate}}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in missions | filter:searchKeyword" ng-class="{'selected': isSelected(item.ref)}" ng-click="$event.stopPropagation(); toggle($index, $event, item);">
-                        <td class="text-center" style="width:2rem;"><i class="fa fa-check-circle" ng-class="{'text-muted': !isSelected(item.ref)}"></i></td>
-                        <td>{{item.name}}</td>
-                        <td ng-class="{'text-enligtened': item.faction == 'E', 'text-resistance': item.faction == 'R',}">{{item.creator}}</td>
+                    <tr ng-repeat="item in missions | filter:searchKeyword" ng-class="{'selected': isSelected(item.ref)}">
+                        <td class="text-center" style="width:2rem;" ng-click="$event.stopPropagation(); toggle($index, $event, item);"><i class="fa fa-check-circle" ng-class="{'text-muted': !isSelected(item.ref)}"></i></td>
+                        <td ng-click="$event.stopPropagation(); toggle($index, $event, item);">
+                            {{item.name}}
+                        </td>
+                        <td>
+                            <a href="https://www.ingress.com/mission/{{item.ref}}" class="ml-2" target="blank">
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                        </td>
+                        <td ng-class="{'text-enligtened': item.faction == 'E', 'text-resistance': item.faction == 'R',}" ng-click="$event.stopPropagation(); toggle($index, $event, item);">{{item.creator}}</td>
                     </tr>
                 </tbody>
             </table>
