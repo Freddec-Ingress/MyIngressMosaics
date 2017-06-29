@@ -78,7 +78,9 @@ a:hover, a:focus {
 .text-link {
 	color:#ebbc4a!important;
 }
-
+.text-muted {
+	color:#0b0c0d!important;
+}
 
 
 /* Typography --------------------------------------------------------------- */

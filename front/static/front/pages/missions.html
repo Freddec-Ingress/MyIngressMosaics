@@ -46,7 +46,7 @@
                 
             </div>
             
-            <table>
+            <table style="-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none;">
                 <thead>
                     <tr>
                         <th></th>
@@ -55,8 +55,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in missions | filter:searchKeyword" ng-class="{'selected': isSelected(item.ref)}" ng-click="toggle(item);">
-                        <td style="width:1%;"><input type="checkbox" ng-checked="isSelected(item.ref)" /></td>
+                    <tr ng-repeat="item in missions | filter:searchKeyword" ng-class="{'selected': isSelected(item.ref)}" ng-click="$event.stopPropagation(); toggle($index, $event, item);">
+                        <td class="text-center" style="width:2rem;"><i class="fa fa-check-circle" ng-class="{'text-muted': !isSelected(item.ref)}"></i></td>
                         <td>{{item.name}}</td>
                         <td ng-class="{'text-enligtened': item.faction == 'E', 'text-resistance': item.faction == 'R',}">{{item.creator}}</td>
                     </tr>

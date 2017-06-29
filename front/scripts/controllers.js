@@ -89,14 +89,43 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 		}
 	}
 	
-	$scope.toggle = function(item) {
+	$scope.toggle = function(index, event, item) {
 		
-		if ($scope.isSelected(item.ref)) {
-			CreateService.remove(item);
+		if (event.shiftKey) {
+			event.preventDefault();
+			
+			if (index > $scope.lastSelectedIndex) {
+				
+				for (var i = ($scope.lastSelectedIndex + 1); i <= index; i++) {
+					
+					var m = $scope.missions[i];
+					if (!$scope.isSelected(m.ref)) {
+						CreateService.add(m);
+					}
+				}
+			}
+			else {
+				
+				for (var i = index; i < $scope.lastSelectedIndex; i++) {
+					
+					var m = $scope.missions[i];
+					if (!$scope.isSelected(m.ref)) {
+						CreateService.add(m);
+					}
+				}
+			}
 		}
 		else {
-			CreateService.add(item);
+			
+			if ($scope.isSelected(item.ref)) {
+				CreateService.remove(item);
+			}
+			else {
+				CreateService.add(item);
+			}
 		}
+		
+		$scope.lastSelectedIndex = index;
 	}
 	
 	$scope.hasSelected = function() {
