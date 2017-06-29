@@ -74,12 +74,135 @@ angular.module('AngularApp.controllers').controller('ProfileCtrl', function($sco
 	}
 });
 
-angular.module('AngularApp.controllers').controller('MissionsCtrl', function($scope, UserService) {
+angular.module('AngularApp.controllers').controller('MissionsCtrl', function($scope, $state, UserService, CreateService) {
 
+	CreateService.init();
+	
 	$scope.missions = UserService.data.missions;
+	
+	$scope.isSelected = function(ref) {
+		
+		if (CreateService.getRefArray().indexOf(ref) != -1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	$scope.toggle = function(item) {
+		
+		if ($scope.isSelected(item.ref)) {
+			CreateService.remove(item);
+		}
+		else {
+			CreateService.add(item);
+		}
+	}
+	
+	$scope.hasSelected = function() {
+		
+		if (CreateService.data.missions.length > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	$scope.nextStep = function() {
+		$state.go('root.create');
+	}
 });
 
-angular.module('AngularApp.controllers').controller('CreateCtrl', function($scope, CreateService) {
+angular.module('AngularApp.controllers').controller('CreateCtrl', function($scope, $state, CreateService) {
 
-	$scope.missions = CreateService.data.missions;
+	if (CreateService.data.missions.length < 1) {
+		$state.go('root.missions');
+	}
+
+	CreateService.default();
+
+	$scope.data = CreateService.data;
+	$scope.create = CreateService.create;
+
+	$scope.rows = function() {
+		
+		var temp = 1;
+		if ($scope.data.count > 0 && $scope.data.cols > 0) temp = Math.ceil($scope.data.count / $scope.data.cols);
+		if (!temp) temp = 1;
+		
+		var rows = [];
+		for (var i = 0; i < temp; i++) {
+			rows.push(i);
+		}
+		
+		return rows;
+	}
+	
+	$scope.cols = function() {
+		
+		var temp = 1;
+		if ($scope.data.cols > 0) temp = $scope.data.cols;
+		if (!temp) temp = 1;
+		
+		var cols = [];
+		for (var i = 0; i < temp; i++) {
+			cols.push(i);
+		}
+		
+		return cols;
+	}
+	
+	$scope.getImage = function(i, j) {
+		
+		var order = (i * $scope.data.cols + j) + 1;
+		return CreateService.getImageByOrder(order);
+	}
+});
+
+angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scope, MosaicService) {
+	
+	$scope.mosaic = MosaicService.data.mosaic;
+
+	$scope.rows = function() {
+		
+		var temp = 1;
+		if ($scope.mosaic.count > 0 && $scope.mosaic.cols > 0) temp = Math.ceil($scope.mosaic.count / $scope.mosaic.cols);
+		if (!temp) temp = 1;
+		
+		var rows = [];
+		for (var i = 0; i < temp; i++) {
+			rows.push(i);
+		}
+		
+		return rows;
+	}
+	
+	$scope.cols = function() {
+		
+		var temp = 1;
+		if ($scope.mosaic.cols > 0) temp = $scope.mosaic.cols;
+		if (!temp) temp = 1;
+		
+		var cols = [];
+		for (var i = 0; i < temp; i++) {
+			cols.push(i);
+		}
+		
+		return cols;
+	}
+	
+	$scope.getImage = function(i, j) {
+		
+		var order = (i * $scope.mosaic.cols + j) + 1;
+		return MosaicService.getImageByOrder(order);
+	}
+});
+
+angular.module('AngularApp.controllers').controller('MyMosaicsCtrl', function($scope, $state, UserService) {
+
+	$scope.mosaics = UserService.data.mosaics;
+	
+	$scope.go = function(item) {
+		$state.go('root.mosaic', {ref: item.ref});
+	}
 });

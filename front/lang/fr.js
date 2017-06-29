@@ -60,4 +60,32 @@ var fr_translations = {
 	missions_COLNAME: 'Nom',
 	missions_COLCREATOR: 'Créateur',
 	missions_FILTER: 'Filtrer les missions ici',
+	missions_BTN: 'Continuez',
+	
+	mosaic_TITLE: 'Titre',
+	mosaic_DESC: 'Description',
+	mosaic_COUNTRY: 'Pays',
+	mosaic_CITY: 'Ville',
+	mosaic_TYPE: 'Type',
+	mosaic_COUNT: 'Missions',
+	mosaic_COLS: 'Colonnes',
+	mosaic_SEQUENCE: 'séquence',
+	mosaic_SERIE: 'série',
+	mosaic_FORMAT: 'Format',
+	mosaic_DISTANCE: 'Distance',
+	mosaic_CREATOR: 'Créateur(s)',
+	
+	nomosaic_TEXT: 'Aucune fresque',
+	
+	create_TITLE: 'Enregistrer une fresque',
+	create_SUBTITLE1: 'Renseigner les caractéristiques',
+	create_SUBTITLE2: 'Trier les missions',
+	create_SUBTITLE3: 'Valider l\'aperçu',
+	create_BTN: 'Enregister',
+	
+	mymosaics_LINK: 'Mes fresques',
+	mymosaics_TITLE: 'Mes fresques',
+	mymosaics_SUBTITLE: 'Mes fresques enregitrées',
+	mymosaics_NOMOSAIC: 'Aucune fresque',
+	mymosaics_COLNAME: 'Nom',
 };

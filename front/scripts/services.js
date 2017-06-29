@@ -47,6 +47,7 @@ angular.module('AngularApp.services').service('UserService', function($auth, $ht
 			
 			authenticated: false,
 			
+			mosaics: null,
 			missions: null,
 		},
 
@@ -161,6 +162,151 @@ angular.module('AngularApp.services').service('UserService', function($auth, $ht
 			}
 			
 			return;
+		},
+		
+		getMosaics: function() {
+			
+			if (service.data.authenticated) {
+				return API.sendRequest('/api/mosaics/', 'GET').then(function(response) {
+					
+					service.data.mosaics = response;
+				});
+			}
+			
+			return;
+		},
+	};
+	
+	return service;
+});
+
+angular.module('AngularApp.services').service('CreateService', function($state, API) {
+	
+	var service = {
+
+		data: {
+			
+			desc: null,
+			city: null,
+			type: null,
+			cols: null,
+			count: null,
+			title: null,
+			country: null,
+			
+			missions: [],
+		},
+		
+		init: function() {
+			
+			service.data.desc = null;
+			service.data.city = null;
+			service.data.type = null;
+			service.data.cols = null;
+			service.data.count = null;
+			service.data.title = null;
+			service.data.country = null;
+			
+			service.data.missions = [];
+		},
+		
+		getRefArray: function() {
+			
+			var refArray = [];
+			for (var item of service.data.missions) {
+				refArray.push(item.ref);
+			}
+			return refArray;
+		},
+		
+		remove: function(item) {
+			
+			var index = service.data.missions.indexOf(item);
+			if (index > -1) {
+				service.data.missions.splice(index, 1);
+			}
+		},
+		
+		add: function(item) {
+			service.data.missions.push(item);
+		},
+		
+		default: function() {
+			
+			service.data.missions = service.data.missions.sort(function(a, b) {
+				
+				if (a.name < b.name) { 	return -1; }
+				if (a.name > b.name) { 	return 1; }
+				return 0;
+			});
+
+			if (service.data.missions[0]) {
+				
+				service.data.title = service.data.missions[0].name;
+				service.data.desc = service.data.missions[0].desc;
+			}
+			
+			service.data.type = 'sequence';
+			service.data.count = service.data.missions.length;
+			service.data.cols = 6;
+		},
+		
+		getImageByOrder: function(order) {
+			
+			var url = null;
+			
+			for (var item of service.data.missions) {
+				if (item.order == order) {
+					url = item.image;
+					break;
+				}
+			}
+			
+			return url;
+		},
+		
+		create: function() {
+			
+			return API.sendRequest('/api/mosaic/create/', 'POST', {}, service.data).then(function(response) {
+				
+				$state.go('root.mosaic', {ref: response});
+			});
+		},
+	};
+	
+	return service;
+});
+
+angular.module('AngularApp.services').service('MosaicService', function(API) {
+	
+	var service = {
+
+		data: {
+			
+			mosaic: null,
+		},
+		
+		getMosaic: function(ref) {
+			
+			return API.sendRequest('/api/mosaic/' + ref + '/', 'GET').then(function(response) {
+				
+				console.log(response);
+				service.data.mosaic = response;
+			});
+		},
+		
+		getImageByOrder: function(order) {
+			
+			var url = null;
+			
+			for (var item of service.data.mosaic.missions) {
+				if (item.order == order) {
+					url = item.image;
+					break;
+				}
+			}
+			
+			return url;
 		},
 	};
 	

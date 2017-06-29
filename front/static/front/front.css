@@ -103,6 +103,9 @@ a:hover, a:focus {
 .text-resistance {
 	color:#00c2ff!important;
 }
+.text-link {
+	color:#ebbc4a!important;
+}
 
 
 
@@ -207,8 +210,14 @@ form.inline .form-group > .form-control, form.inline .form-group > .select-group
 label {
     display: block;
     margin-bottom: .25rem;
+}
+.group-row > label {
+	text-align: right;
+	flex: 0 0 33.666667%;
+    margin-bottom: 0; margin-right: .5rem;
     height: 2.25rem; line-height: 2.25rem;
 }
+
 .label-check {
     margin-bottom: 0;
     line-height: 2.5rem; height: 2.5rem;
@@ -372,6 +381,19 @@ label {
 
 /* Margin ------------------------------------------------------------------- */
 
+.mt-0 {
+	margin-top: 0!important;
+}
+.ml-0 {
+	margin-left: 0!important;
+}
+.mr-0 {
+	margin-right: 0!important;
+}
+.mb-0 {
+	margin-bottom: 0!important;
+}
+
 .mt-2 {
 	margin-top: .5rem!important;
 }
@@ -426,7 +448,7 @@ table tbody tr {
     border-bottom: 1px solid rgba(0,0,0,.25);
 }
 table tbody tr.selected {
-    background-color: rgba(255,255,255,.05);
+    background-color: rgba(255,255,255,.25);
 }
 
 table td {
@@ -711,7 +733,11 @@ article {
 }
 article > h4 {
     margin: 0 0 1rem;
-    color: #E0F2F1; font-size: 1rem; font-weight: 300;
+    color: #FFFFFF; font-size: 1rem; font-weight: 300;
+}
+article > h5 {
+    margin: 0 0 1rem;
+    color: #E0F2F1; font-size: .75rem; font-weight: 300;
 }
 
 

@@ -18,9 +18,11 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 			.state('root.login', { url: '/login', controller: 'LoginCtrl', templateUrl: '/static/front/pages/login.html', data:{ title: 'login_TITLE', }})
 			.state('root.profile', { url: '/profile', controller: 'ProfileCtrl', templateUrl: '/static/front/pages/profile.html', data:{ title: 'profile_TITLE', }})
 			.state('root.register', { url: '/register', controller: 'RegisterCtrl', templateUrl: '/static/front/pages/register.html', data:{ title: 'register_TITLE', }})
+			.state('root.mymosaics', { url: '/mymosaics', controller: 'MyMosaicsCtrl', templateUrl: '/static/front/pages/mymosaics.html', data:{ title: 'mymosaics_TITLE', }, resolve: {loadMosaics: function(UserService) { return UserService.getMosaics(); }, }, })
 
-			.state('root.missions', { url: '/missions', controller: 'MissionsCtrl', templateUrl: '/static/front/pages/missions.html', data:{ title: 'missions_TITLE', }, resolve: {loadMissions: function(UserService) { return UserService.getMissions(); }, }, })
 			.state('root.create', { url: '/create', controller: 'CreateCtrl', templateUrl: '/static/front/pages/create.html', data:{ title: 'create_TITLE', }, })
+			.state('root.mosaic', { url: '/mosaic/:ref', controller: 'MosaicCtrl', templateUrl: '/static/front/pages/mosaic.html', resolve: {loadMosaic: function($stateParams, MosaicService) { return MosaicService.getMosaic($stateParams.ref); }, }, })
+			.state('root.missions', { url: '/missions', controller: 'MissionsCtrl', templateUrl: '/static/front/pages/missions.html', data:{ title: 'missions_TITLE', }, resolve: {loadMissions: function(UserService) { return UserService.getMissions(); }, }, })
 			
 	$locationProvider.html5Mode(true);
 });

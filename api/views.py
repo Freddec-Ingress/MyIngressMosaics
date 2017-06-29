@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import json
+
 from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.response import Response
@@ -156,13 +158,123 @@ class ProfileViewSet(viewsets.ViewSet):
 		
 		missions = None
 		
-		results = Mission.objects.filter(registerer=request.user.username)
+		results = Mission.objects.filter(registerer=request.user.username, mosaic__isnull = True).order_by('title')
 		if results.count() > 0:
 			
 			missions = []
 			for item in results:
 				
-				temp = {'name':item.title, 'creator':item.creator, 'faction':item.faction}
+				temp = {'ref':item.ref, 'name':item.title, 'desc':item.desc, 'creator':item.creator, 'faction':item.faction, 'image':item.image, 'order':item.order}
 				missions.append(temp)
 		
 		return Response(missions, status=status.HTTP_200_OK)
+
+
+
+	def mosaics(self, request):
+		
+		mosaics = None
+		
+		results = Mosaic.objects.filter(registerer=request.user).order_by('title')
+		if results.count() > 0:
+			
+			mosaics = []
+			for item in results:
+				
+				temp = {'ref':item.ref, 'name':item.title}
+				mosaics.append(temp)
+		
+		return Response(mosaics, status=status.HTTP_200_OK)
+
+
+    
+	def create(self, request):
+		
+		mosaic = Mosaic(	registerer = request.user,
+							cols = int(request.data['cols']),
+							type = request.data['type'],
+							desc = request.data['desc'],
+							city = request.data['city'],
+							count = int(request.data['count']),
+							title = request.data['title'],
+							country = request.data['country']
+						)
+		mosaic.save()
+		
+		for m in request.data['missions']:
+			
+			result = Mission.objects.filter(ref=m['ref'])
+			if result.count() > 0:
+				
+				item = result[0]
+				item.mosaic = mosaic
+				item.order = m['order']
+				item.save()
+		
+		mosaic.computeInternalData()
+		
+		return Response(mosaic.ref, status=status.HTTP_200_OK)
+		
+		
+		
+#---------------------------------------------------------------------------------------------------
+class MosaicViewSet(viewsets.ViewSet):
+	
+	permission_classes = AllowAny, 
+    
+	def view(self, request, ref):
+		
+		data = None
+		
+		result = Mosaic.objects.filter(ref=ref)
+		if result.count() > 0:
+			mosaic = result[0]
+			
+			data = {
+			    'registerer': {
+			    	'name': mosaic.registerer.username,
+			    },
+			    
+			    'creators': [],
+			    'missions': [],
+			    
+			    'ref': mosaic.ref,
+			    'cols': mosaic.cols,
+			    'type': mosaic.type,
+			    'desc': mosaic.desc,
+			    'city': mosaic.city,
+			    'count': mosaic.count,
+			    'title': mosaic.title,
+			    'status': mosaic.status,
+			    'country': mosaic.country,
+			    
+			    'register_date': mosaic.register_date,
+			    
+			    '_distance': mosaic._distance,
+			    
+			    '_startLat': mosaic._startLat,
+			    '_startLng': mosaic._startLng,
+			}
+			
+			for item in mosaic.creators.all():
+				
+				creator_data = {
+					'name': item.name,
+					'faction': item.faction,
+				}
+				
+				data['creators'].append(creator_data)
+			
+			for item in mosaic.missions.all():
+				
+				mission_data = {
+					'title': item.title,
+					'image': item.image,
+					'order': item.order,
+				}
+				
+				data['missions'].append(mission_data)
+		
+		return Response(data, status=status.HTTP_200_OK)
+
+

@@ -20,4 +20,8 @@ urlpatterns = [
 	url(r'^profile/name/',	ProfileViewSet.as_view({ 'post': 'name'     })),
 	url(r'^profile/',		ProfileViewSet.as_view({ 'get' : 'view'     })),
 	url(r'^missions/',		ProfileViewSet.as_view({ 'get' : 'missions' })),
+	url(r'^mosaics/',		ProfileViewSet.as_view({ 'get' : 'mosaics' })),
+	url(r'^mosaic/create/',	ProfileViewSet.as_view({ 'post' : 'create' })),
+	
+	url(r'^mosaic/(?P<ref>\w+)/$',	MosaicViewSet.as_view({ 'get'  : 'view'   })),
 ]

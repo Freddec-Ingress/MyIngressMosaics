@@ -1,0 +1,111 @@
+<section ng-if='!user.authenticated'>
+	
+	<div class="text-danger text-center mr-2 ml-2">
+		{{'restricted_TEXT' | translate}}
+	</div>
+
+</section>
+
+<section ng-if='user.authenticated'>
+    
+    <article>
+        
+        <h4>{{'create_SUBTITLE1' | translate}}</h4>
+        
+        <div class="group">
+            <label>{{'mosaic_TITLE' | translate}}</label>
+            <input type="text" class="form-control" ng-model="data.title" />
+        </div>
+        
+        <div class="group">
+            <label>{{'mosaic_DESC' | translate}}</label>
+            <textarea rows="4" cols="50" class="form-control" style="height:auto; padding:.5rem;" ng-model="data.desc"></textarea>
+        </div>
+        
+        <div class="grid-row">
+            
+            <div class="cell group pr-2">
+                <label>{{'mosaic_COUNTRY' | translate}}</label>
+                <input type="text" class="form-control" ng-model="data.country" />
+            </div>
+            
+            <div class="cell group pl-2">
+                <label>{{'mosaic_CITY' | translate}}</label>
+                <input type="text" class="form-control" ng-model="data.city" />
+            </div>
+            
+        </div>
+        
+        <div class="grid-row">
+            
+            <div class="cell group pr-2">
+                <label>{{'mosaic_TYPE' | translate}}</label>
+                <select class="form-control" ng-model="data.type">
+                    <option value="sequence">{{'mosaic_SEQUENCE' | translate}}</option>
+                    <option value="serie">{{'mosaic_SERIE' | translate}}</option>
+                </select>
+            </div>
+            
+            <div class="cell group pr-2 pl-2">
+                <label>{{'mosaic_COUNT' | translate}}</label>
+                <input type="number" class="form-control" ng-model="data.count" />
+            </div>
+            
+            <div class="cell group pl-2">
+                <label>{{'mosaic_COLS' | translate}}</label>
+                <select class="form-control" ng-init="data.cols = '6'" ng-model="data.cols">
+                    <option value="6">6</option>
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                </select>
+            </div>
+            
+        </div>
+
+    </article>
+    
+    <article>
+        
+        <h4>{{'create_SUBTITLE2' | translate}}</h4>
+        
+        <table>
+            <tbody>
+                <tr ng-repeat="item in data.missions">
+                    <td style="width:3rem;"><input type="number" class="form-control text-center" style="padding:.25rem;" ng-model="item.order" ng-init="item.order = ($index + 1)" /></td>
+                    <td>{{item.name}}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </article>
+     
+    <article>
+        
+        <h4>{{'create_SUBTITLE3' | translate}}</h4>
+        
+        <div>
+            
+            <div class="grid-row" ng-repeat="i in rows()">
+                <div ng-repeat="j in cols()" style="flex:0 0 16.666667%;">
+                    
+                    <img src="/static/front/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{getImage(i, j)}});" />
+                    
+                </div>
+            </div>
+            
+        </div>
+        
+    </article>
+    
+    <article>
+        
+		<button type="submit" class="btn btn-primary" ng-click="create();" ng-disabled="!data.title || !data.desc || !data.country || !data.city || !data.type || !data.count || !data.cols">
+		    {{'create_BTN' | translate}}
+		</button>
+        
+    </article>
+   
+</section>

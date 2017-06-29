@@ -2430,14 +2430,42 @@ var en_translations = {
 	profile_NAME: 'Name',
 	
 	missions_LINK: 'Register a mosaic',
-	missions_TITLE: 'Missions',
-	missions_SUBTITLE: 'Registered Missions',
+	missions_TITLE: 'Register a mosaic',
+	missions_SUBTITLE: 'Select registered missions to include',
 	missions_NOMISSION: 'No mission',
 	missions_UPDATENAME: 'To see missions, your profile name must be exactly the same as your Ingress agent name ; you could update you profile name here: ',
 	missions_HUNTINGTOOL: 'To see missions, you have to register them from Ingress intel Map with our chrome extension: ',
 	missions_COLNAME: 'Name',
 	missions_COLCREATOR: 'Creator',
 	missions_FILTER: 'Filter missions here',
+	missions_BTN: 'Next step',
+	
+	mosaic_TITLE: 'Title',
+	mosaic_DESC: 'Description',
+	mosaic_COUNTRY: 'Country',
+	mosaic_CITY: 'City',
+	mosaic_TYPE: 'Type',
+	mosaic_COUNT: 'Count',
+	mosaic_COLS: 'Columns',
+	mosaic_SEQUENCE: 'sequence',
+	mosaic_SERIE: 'serie',
+	mosaic_FORMAT: 'Format',
+	mosaic_DISTANCE: 'Distance',
+	mosaic_CREATOR: 'Creator(s)',
+	
+	nomosaic_TEXT: 'No mosaic found',
+	
+	create_TITLE: 'Register a mosaic',
+	create_SUBTITLE1: 'Fill mosaic attributes',
+	create_SUBTITLE2: 'Order missions',
+	create_SUBTITLE3: 'Validate preview',
+	create_BTN: 'Register',
+	
+	mymosaics_LINK: 'My Mosaics',
+	mymosaics_TITLE: 'My Mosaics',
+	mymosaics_SUBTITLE: 'My registered mosaics',
+	mymosaics_NOMOSAIC: 'No mosaic',
+	mymosaics_COLNAME: 'Name',
 };
 var fr_translations = {
     
@@ -2501,6 +2529,34 @@ var fr_translations = {
 	missions_COLNAME: 'Nom',
 	missions_COLCREATOR: 'Créateur',
 	missions_FILTER: 'Filtrer les missions ici',
+	missions_BTN: 'Continuez',
+	
+	mosaic_TITLE: 'Titre',
+	mosaic_DESC: 'Description',
+	mosaic_COUNTRY: 'Pays',
+	mosaic_CITY: 'Ville',
+	mosaic_TYPE: 'Type',
+	mosaic_COUNT: 'Missions',
+	mosaic_COLS: 'Colonnes',
+	mosaic_SEQUENCE: 'séquence',
+	mosaic_SERIE: 'série',
+	mosaic_FORMAT: 'Format',
+	mosaic_DISTANCE: 'Distance',
+	mosaic_CREATOR: 'Créateur(s)',
+	
+	nomosaic_TEXT: 'Aucune fresque',
+	
+	create_TITLE: 'Enregistrer une fresque',
+	create_SUBTITLE1: 'Renseigner les caractéristiques',
+	create_SUBTITLE2: 'Trier les missions',
+	create_SUBTITLE3: 'Valider l\'aperçu',
+	create_BTN: 'Enregister',
+	
+	mymosaics_LINK: 'Mes fresques',
+	mymosaics_TITLE: 'Mes fresques',
+	mymosaics_SUBTITLE: 'Mes fresques enregitrées',
+	mymosaics_NOMOSAIC: 'Aucune fresque',
+	mymosaics_COLNAME: 'Nom',
 };
 angular.module('AngularApp.services', [])
 
@@ -2551,6 +2607,7 @@ angular.module('AngularApp.services').service('UserService', function($auth, $ht
 			
 			authenticated: false,
 			
+			mosaics: null,
 			missions: null,
 		},
 
@@ -2666,10 +2723,156 @@ angular.module('AngularApp.services').service('UserService', function($auth, $ht
 			
 			return;
 		},
+		
+		getMosaics: function() {
+			
+			if (service.data.authenticated) {
+				return API.sendRequest('/api/mosaics/', 'GET').then(function(response) {
+					
+					service.data.mosaics = response;
+				});
+			}
+			
+			return;
+		},
 	};
 	
 	return service;
 });
+
+angular.module('AngularApp.services').service('CreateService', function($state, API) {
+	
+	var service = {
+
+		data: {
+			
+			desc: null,
+			city: null,
+			type: null,
+			cols: null,
+			count: null,
+			title: null,
+			country: null,
+			
+			missions: [],
+		},
+		
+		init: function() {
+			
+			service.data.desc = null;
+			service.data.city = null;
+			service.data.type = null;
+			service.data.cols = null;
+			service.data.count = null;
+			service.data.title = null;
+			service.data.country = null;
+			
+			service.data.missions = [];
+		},
+		
+		getRefArray: function() {
+			
+			var refArray = [];
+			for (var item of service.data.missions) {
+				refArray.push(item.ref);
+			}
+			return refArray;
+		},
+		
+		remove: function(item) {
+			
+			var index = service.data.missions.indexOf(item);
+			if (index > -1) {
+				service.data.missions.splice(index, 1);
+			}
+		},
+		
+		add: function(item) {
+			service.data.missions.push(item);
+		},
+		
+		default: function() {
+			
+			service.data.missions = service.data.missions.sort(function(a, b) {
+				
+				if (a.name < b.name) { 	return -1; }
+				if (a.name > b.name) { 	return 1; }
+				return 0;
+			});
+
+			if (service.data.missions[0]) {
+				
+				service.data.title = service.data.missions[0].name;
+				service.data.desc = service.data.missions[0].desc;
+			}
+			
+			service.data.type = 'sequence';
+			service.data.count = service.data.missions.length;
+			service.data.cols = 6;
+		},
+		
+		getImageByOrder: function(order) {
+			
+			var url = null;
+			
+			for (var item of service.data.missions) {
+				if (item.order == order) {
+					url = item.image;
+					break;
+				}
+			}
+			
+			return url;
+		},
+		
+		create: function() {
+			
+			return API.sendRequest('/api/mosaic/create/', 'POST', {}, service.data).then(function(response) {
+				
+				$state.go('root.mosaic', {ref: response});
+			});
+		},
+	};
+	
+	return service;
+});
+
+angular.module('AngularApp.services').service('MosaicService', function(API) {
+	
+	var service = {
+
+		data: {
+			
+			mosaic: null,
+		},
+		
+		getMosaic: function(ref) {
+			
+			return API.sendRequest('/api/mosaic/' + ref + '/', 'GET').then(function(response) {
+				
+				console.log(response);
+				service.data.mosaic = response;
+			});
+		},
+		
+		getImageByOrder: function(order) {
+			
+			var url = null;
+			
+			for (var item of service.data.mosaic.missions) {
+				if (item.order == order) {
+					url = item.image;
+					break;
+				}
+			}
+			
+			return url;
+		},
+	};
+	
+	return service;
+});
+
 angular.module('AngularApp.directives', [])
 
 angular.module('AngularApp.directives').directive('pageTitle', function($rootScope, $filter, $timeout) {
@@ -2766,14 +2969,137 @@ angular.module('AngularApp.controllers').controller('ProfileCtrl', function($sco
 	}
 });
 
-angular.module('AngularApp.controllers').controller('MissionsCtrl', function($scope, UserService) {
+angular.module('AngularApp.controllers').controller('MissionsCtrl', function($scope, $state, UserService, CreateService) {
 
+	CreateService.init();
+	
 	$scope.missions = UserService.data.missions;
+	
+	$scope.isSelected = function(ref) {
+		
+		if (CreateService.getRefArray().indexOf(ref) != -1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	$scope.toggle = function(item) {
+		
+		if ($scope.isSelected(item.ref)) {
+			CreateService.remove(item);
+		}
+		else {
+			CreateService.add(item);
+		}
+	}
+	
+	$scope.hasSelected = function() {
+		
+		if (CreateService.data.missions.length > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	$scope.nextStep = function() {
+		$state.go('root.create');
+	}
 });
 
-angular.module('AngularApp.controllers').controller('CreateCtrl', function($scope, CreateService) {
+angular.module('AngularApp.controllers').controller('CreateCtrl', function($scope, $state, CreateService) {
 
-	$scope.missions = CreateService.data.missions;
+	if (CreateService.data.missions.length < 1) {
+		$state.go('root.missions');
+	}
+
+	CreateService.default();
+
+	$scope.data = CreateService.data;
+	$scope.create = CreateService.create;
+
+	$scope.rows = function() {
+		
+		var temp = 1;
+		if ($scope.data.count > 0 && $scope.data.cols > 0) temp = Math.ceil($scope.data.count / $scope.data.cols);
+		if (!temp) temp = 1;
+		
+		var rows = [];
+		for (var i = 0; i < temp; i++) {
+			rows.push(i);
+		}
+		
+		return rows;
+	}
+	
+	$scope.cols = function() {
+		
+		var temp = 1;
+		if ($scope.data.cols > 0) temp = $scope.data.cols;
+		if (!temp) temp = 1;
+		
+		var cols = [];
+		for (var i = 0; i < temp; i++) {
+			cols.push(i);
+		}
+		
+		return cols;
+	}
+	
+	$scope.getImage = function(i, j) {
+		
+		var order = (i * $scope.data.cols + j) + 1;
+		return CreateService.getImageByOrder(order);
+	}
+});
+
+angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scope, MosaicService) {
+	
+	$scope.mosaic = MosaicService.data.mosaic;
+
+	$scope.rows = function() {
+		
+		var temp = 1;
+		if ($scope.mosaic.count > 0 && $scope.mosaic.cols > 0) temp = Math.ceil($scope.mosaic.count / $scope.mosaic.cols);
+		if (!temp) temp = 1;
+		
+		var rows = [];
+		for (var i = 0; i < temp; i++) {
+			rows.push(i);
+		}
+		
+		return rows;
+	}
+	
+	$scope.cols = function() {
+		
+		var temp = 1;
+		if ($scope.mosaic.cols > 0) temp = $scope.mosaic.cols;
+		if (!temp) temp = 1;
+		
+		var cols = [];
+		for (var i = 0; i < temp; i++) {
+			cols.push(i);
+		}
+		
+		return cols;
+	}
+	
+	$scope.getImage = function(i, j) {
+		
+		var order = (i * $scope.mosaic.cols + j) + 1;
+		return MosaicService.getImageByOrder(order);
+	}
+});
+
+angular.module('AngularApp.controllers').controller('MyMosaicsCtrl', function($scope, $state, UserService) {
+
+	$scope.mosaics = UserService.data.mosaics;
+	
+	$scope.go = function(item) {
+		$state.go('root.mosaic', {ref: item.ref});
+	}
 });
 angular.module('AngularApp', ['ui.router', 'ui.bootstrap', 'pascalprecht.translate', 'satellizer', 'ngCookies', 'toastr',
 							  'AngularApp.services', 'AngularApp.controllers', 'AngularApp.directives', ]);
@@ -2795,9 +3121,11 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 			.state('root.login', { url: '/login', controller: 'LoginCtrl', templateUrl: '/static/front/pages/login.html', data:{ title: 'login_TITLE', }})
 			.state('root.profile', { url: '/profile', controller: 'ProfileCtrl', templateUrl: '/static/front/pages/profile.html', data:{ title: 'profile_TITLE', }})
 			.state('root.register', { url: '/register', controller: 'RegisterCtrl', templateUrl: '/static/front/pages/register.html', data:{ title: 'register_TITLE', }})
+			.state('root.mymosaics', { url: '/mymosaics', controller: 'MyMosaicsCtrl', templateUrl: '/static/front/pages/mymosaics.html', data:{ title: 'mymosaics_TITLE', }, resolve: {loadMosaics: function(UserService) { return UserService.getMosaics(); }, }, })
 
-			.state('root.missions', { url: '/missions', controller: 'MissionsCtrl', templateUrl: '/static/front/pages/missions.html', data:{ title: 'missions_TITLE', }, resolve: {loadMissions: function(UserService) { return UserService.getMissions(); }, }, })
 			.state('root.create', { url: '/create', controller: 'CreateCtrl', templateUrl: '/static/front/pages/create.html', data:{ title: 'create_TITLE', }, })
+			.state('root.mosaic', { url: '/mosaic/:ref', controller: 'MosaicCtrl', templateUrl: '/static/front/pages/mosaic.html', resolve: {loadMosaic: function($stateParams, MosaicService) { return MosaicService.getMosaic($stateParams.ref); }, }, })
+			.state('root.missions', { url: '/missions', controller: 'MissionsCtrl', templateUrl: '/static/front/pages/missions.html', data:{ title: 'missions_TITLE', }, resolve: {loadMissions: function(UserService) { return UserService.getMissions(); }, }, })
 			
 	$locationProvider.html5Mode(true);
 });

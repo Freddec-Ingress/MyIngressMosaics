@@ -1,0 +1,40 @@
+<section ng-if='!user.authenticated'>
+	
+	<div class="text-danger text-center mr-2 ml-2">
+		{{'restricted_TEXT' | translate}}
+	</div>
+
+</section>
+
+<section ng-if='user.authenticated'>
+    
+    <article>
+        
+        <h4>{{'mymosaics_SUBTITLE' | translate}}</h4>
+        
+        <div ng-if="!mosaics">
+            
+            <p class="text-danger">{{'mymosaics_NOMOSAIC' | translate}}</p>
+            
+        </div>
+    
+        <div ng-if="mosaics">
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>{{'mymosaics_COLNAME' | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in mosaics" ng-click="go(item);">
+                        <td class="text-link">{{item.name}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+    
+    </article>
+            
+</section>

@@ -1,0 +1,61 @@
+<section ng-if="!mosaic">
+	
+	<div class="text-danger text-center mr-2 ml-2">
+		{{'nomosaic_TEXT' | translate}}
+	</div>
+
+</section>
+
+<section ng-if="mosaic">
+	
+	<article>
+		
+        <div class="grid-row" ng-repeat="i in rows()">
+            <div ng-repeat="j in cols()" style="flex:0 0 16.666667%;">
+                
+                <img src="/static/front/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{getImage(i, j)}});" />
+                
+            </div>
+        </div>
+        
+	</article>
+	
+	<article>
+        
+		<h4>{{mosaic.title}}</h4>
+		<h5 class="mb-0">{{mosaic.desc}}</h5>
+        
+	</article>
+	
+	<article>
+		
+		<dl>
+			<dt>{{'mosaic_COUNTRY' | translate}}</dt>
+			<dd>{{mosaic.country}}</dd>
+		</dl>
+		
+		<dl>
+			<dt>{{'mosaic_CITY' | translate}}</dt>
+			<dd>{{mosaic.city}}</dd>
+		</dl>
+		
+		<dl>
+			<dt>{{'mosaic_FORMAT' | translate}}</dt>
+			<dd>{{mosaic.type}} &middot; {{rows().length}}x{{mosaic.cols}}</dd>
+		</dl>
+		
+		<dl>
+			<dt>{{'mosaic_DISTANCE' | translate}}</dt>
+			<dd>{{mosaic._distance | number:3}} km</dd>
+		</dl>
+		
+		<dl>
+			<dt>{{'mosaic_CREATOR' | translate}}</dt>
+			<dd>
+				<span class="ml-2" ng-repeat="creator in mosaic.creators" ng-class="{'text-enligtened': creator.faction == 'E', 'text-resistance': creator.faction == 'R',}">{{creator.name}}</span>
+			</dd>
+		</dl>
+        
+	</article>
+	
+</section>

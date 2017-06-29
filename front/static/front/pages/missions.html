@@ -55,8 +55,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in missions | filter:searchKeyword">
-                        <td></td>
+                    <tr ng-repeat="item in missions | filter:searchKeyword" ng-class="{'selected': isSelected(item.ref)}" ng-click="toggle(item);">
+                        <td style="width:1%;"><input type="checkbox" ng-checked="isSelected(item.ref)" /></td>
                         <td>{{item.name}}</td>
                         <td ng-class="{'text-enligtened': item.faction == 'E', 'text-resistance': item.faction == 'R',}">{{item.creator}}</td>
                     </tr>
@@ -64,6 +64,14 @@
             </table>
             
         </div>
+        
+    </article>
+    
+    <article>
+        
+		<button type="submit" class="btn btn-primary" ng-click="nextStep();" ng-disabled="!hasSelected();">
+		    {{'missions_BTN' | translate}}
+		</button>
         
     </article>
     
