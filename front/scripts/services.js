@@ -300,7 +300,7 @@ angular.module('AngularApp.services').service('MosaicService', function(API) {
 			var url = null;
 			
 			for (var item of service.data.mosaic.missions) {
-				if (item.order == order) {
+				if ((service.data.mosaic.count - item.order + 1) == order) {
 					url = item.image;
 					break;
 				}
