@@ -369,6 +369,7 @@ angular.module('AngularApp.controllers').controller('CitiesCtrl', function($scop
 		$state.go('root.mosaics');
 	}
 });
+
 angular.module('AngularApp.controllers').controller('MosaicsCtrl', function($scope, $state, DataService) {
 	
 	$scope.page_title = 'mosaics_TITLE';

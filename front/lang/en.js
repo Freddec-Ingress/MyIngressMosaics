@@ -102,4 +102,7 @@ var en_translations = {
 	countries_COLCOUNTRY: 'Country',
 	countries_COLCITY: 'City',
 	countries_COLMOSAIC: 'Mosaic',
+	
+	cities_TITLE: 'Cities',
+	mosaics_TITLE: 'Mosaics',
 };

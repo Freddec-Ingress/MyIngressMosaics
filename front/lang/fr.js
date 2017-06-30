@@ -102,4 +102,7 @@ var fr_translations = {
 	countries_COLCOUNTRY: 'Pays',
 	countries_COLCITY: 'Ville',
 	countries_COLMOSAIC: 'Fresque',
+	
+	cities_TITLE: 'Villes',
+	mosaics_TITLE: 'Fresques',
 };

@@ -2480,6 +2480,9 @@ var en_translations = {
 	countries_COLCOUNTRY: 'Country',
 	countries_COLCITY: 'City',
 	countries_COLMOSAIC: 'Mosaic',
+	
+	cities_TITLE: 'Cities',
+	mosaics_TITLE: 'Mosaics',
 };
 var fr_translations = {
     
@@ -2585,6 +2588,9 @@ var fr_translations = {
 	countries_COLCOUNTRY: 'Pays',
 	countries_COLCITY: 'Ville',
 	countries_COLMOSAIC: 'Fresque',
+	
+	cities_TITLE: 'Villes',
+	mosaics_TITLE: 'Fresques',
 };
 angular.module('AngularApp.services', [])
 
@@ -3396,6 +3402,7 @@ angular.module('AngularApp.controllers').controller('CitiesCtrl', function($scop
 		$state.go('root.mosaics');
 	}
 });
+
 angular.module('AngularApp.controllers').controller('MosaicsCtrl', function($scope, $state, DataService) {
 	
 	$scope.page_title = 'mosaics_TITLE';

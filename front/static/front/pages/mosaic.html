@@ -10,6 +10,10 @@
 
 <section ng-if="mosaic" ui-view="">
 	
+	<meta itemscope itemtype="http://schema.org/Article" />
+	<meta itemprop="headline" content="{{mosaic.title}}" />
+	<meta itemprop="description" content="{{mosaic.desc}}" />
+
 	<article>
 		
         <div class="grid-row" ng-repeat="i in rows()">
