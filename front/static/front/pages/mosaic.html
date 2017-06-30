@@ -1,3 +1,5 @@
+<ng-include src="'/static/front/pages/_header.html'" />
+
 <section ng-if="!mosaic">
 	
 	<div class="text-danger text-center mr-2 ml-2">
@@ -22,40 +24,59 @@
 	
 	<article>
         
-		<h4>{{mosaic.title}}</h4>
-		<h5 class="mb-0"><pre class="mt-0 mb-0" style="font: inherit; white-space: pre-line;">{{mosaic.desc}}</pre></h5>
+		<h4>
+			<div style="position:relative;" ng-show="!editname">
+				{{mosaic.title}}
+				<i class="fa fa-pencil-square-o icon-edit" ng-if="user.name == mosaic.registerer.name" ng-click="nameClick();"></i>
+	            <div class="loading loading-edit" ng-show="loadingname">
+	            	<img src="/static/front/img/loading.png" />
+	            </div>
+			</div>
+			<div ng-show="editname">
+				<input id="input-name" type="text" class="form-control" ng-model="newname" ng-blur="nameBlur(newname);" />
+			</div>
+		</h4>
+		
+        <h5>{{mosaic.country}} &middot; {{mosaic.city}}</h5>
+		<h5><pre class="mt-0 mb-0" style="font: inherit; white-space: pre-line;">{{mosaic.desc}}</pre></h5>
+        
+        <div class="group">
+        	{{'mosaic_BY' | translate}}
+        	<span class="ml-2" ng-repeat="creator in mosaic.creators" ng-class="{'text-enligtened': creator.faction == 'E', 'text-resistance': creator.faction == 'R',}">{{creator.name}}</span>
+        </div>
+        
+        <div>
+        	{{mosaic.type}} &middot; {{rows().length}}x{{mosaic.cols}} &middot; {{mosaic._distance | number:3}} km
+        </div>
         
 	</article>
 	
 	<article>
 		
-		<dl>
-			<dt>{{'mosaic_COUNTRY' | translate}}</dt>
-			<dd>{{mosaic.country}}</dd>
-		</dl>
+		<h4>{{'mosaicpage_ROADMAP' | translate}}</h4>
 		
-		<dl>
-			<dt>{{'mosaic_CITY' | translate}}</dt>
-			<dd>{{mosaic.city}}</dd>
-		</dl>
+        <table>
+            <tbody>
+                <tr ng-repeat="item in mosaic.missions">
+                	
+                    <td class="text-white" style="width:2rem;">
+                    	#{{item.order}}
+                    </td>
+                    
+                    <td>
+                        {{item.title}}
+                    </td>
+                    
+                    <td class="text-center" style="width:1rem;">
+                        <a href="https://www.ingress.com/mission/{{item.ref}}" target="blank">
+                            <i class="fa fa-external-link"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </tbody>
+        </table>
 		
-		<dl>
-			<dt>{{'mosaic_FORMAT' | translate}}</dt>
-			<dd>{{mosaic.type}} &middot; {{rows().length}}x{{mosaic.cols}}</dd>
-		</dl>
-		
-		<dl>
-			<dt>{{'mosaic_DISTANCE' | translate}}</dt>
-			<dd>{{mosaic._distance | number:3}} km</dd>
-		</dl>
-		
-		<dl>
-			<dt>{{'mosaic_CREATOR' | translate}}</dt>
-			<dd>
-				<span class="ml-2" ng-repeat="creator in mosaic.creators" ng-class="{'text-enligtened': creator.faction == 'E', 'text-resistance': creator.faction == 'R',}">{{creator.name}}</span>
-			</dd>
-		</dl>
-        
 	</article>
-	
+
 </section>

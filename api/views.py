@@ -275,7 +275,7 @@ class MosaicViewSet(viewsets.ViewSet):
 				
 				data['creators'].append(creator_data)
 			
-			for item in mosaic.missions.all():
+			for item in mosaic.missions.all().order_by('order'):
 				
 				mission_data = {
 					'title': item.title,
@@ -288,3 +288,14 @@ class MosaicViewSet(viewsets.ViewSet):
 		return Response(data, status=status.HTTP_200_OK)
 
 
+
+	def name(self, request):
+		
+		result = Mosaic.objects.filter(ref=request.data['ref'], registerer=request.user)
+		if result.count() > 0:
+			mosaic = result[0]
+			
+			mosaic.title = request.data['name']
+			mosaic.save()
+		
+		return Response(None, status=status.HTTP_200_OK)

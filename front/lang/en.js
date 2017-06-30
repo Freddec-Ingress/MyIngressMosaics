@@ -74,6 +74,7 @@ var en_translations = {
 	mosaic_FORMAT: 'Format',
 	mosaic_DISTANCE: 'Distance',
 	mosaic_CREATOR: 'Creator(s)',
+	mosaic_BY: 'By',
 	
 	nomosaic_TEXT: 'No mosaic found',
 	
@@ -82,6 +83,8 @@ var en_translations = {
 	create_SUBTITLE2: 'Order missions',
 	create_SUBTITLE3: 'Validate preview',
 	create_BTN: 'Register',
+	
+	mosaicpage_ROADMAP: 'Roadmap',
 	
 	mymosaics_LINK: 'My Mosaics',
 	mymosaics_TITLE: 'My Mosaics',

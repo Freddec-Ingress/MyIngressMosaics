@@ -2452,6 +2452,7 @@ var en_translations = {
 	mosaic_FORMAT: 'Format',
 	mosaic_DISTANCE: 'Distance',
 	mosaic_CREATOR: 'Creator(s)',
+	mosaic_BY: 'By',
 	
 	nomosaic_TEXT: 'No mosaic found',
 	
@@ -2460,6 +2461,8 @@ var en_translations = {
 	create_SUBTITLE2: 'Order missions',
 	create_SUBTITLE3: 'Validate preview',
 	create_BTN: 'Register',
+	
+	mosaicpage_ROADMAP: 'Roadmap',
 	
 	mymosaics_LINK: 'My Mosaics',
 	mymosaics_TITLE: 'My Mosaics',
@@ -2860,7 +2863,6 @@ angular.module('AngularApp.services').service('MosaicService', function(API) {
 			
 			return API.sendRequest('/api/mosaic/' + ref + '/', 'GET').then(function(response) {
 				
-				console.log(response);
 				service.data.mosaic = response;
 			});
 		},
@@ -2877,6 +2879,15 @@ angular.module('AngularApp.services').service('MosaicService', function(API) {
 			}
 			
 			return url;
+		},
+		
+		updateName: function(newvalue) {
+			
+			var data = { 'ref':service.data.mosaic.ref, 'name':newvalue };
+			return API.sendRequest('/api/mosaic/name/', 'POST', {}, data).then(function(response) {
+				
+				service.data.mosaic.title = newvalue;
+			});
 		},
 	};
 	
@@ -2905,7 +2916,7 @@ angular.module('AngularApp.directives').directive('pageTitle', function($rootSco
 });
 angular.module('AngularApp.controllers', [])
 
-angular.module('AngularApp.controllers').controller('RootCtrl', function($scope, $stateParams, $translate, $window, UserService) {
+angular.module('AngularApp.controllers').controller('RootCtrl', function($rootScope, $scope, $stateParams, $translate, $window, UserService) {
 	
 	var supported_lang = ['en', 'fr'];
 	
@@ -2927,12 +2938,26 @@ angular.module('AngularApp.controllers').controller('RootCtrl', function($scope,
 	$scope.user = UserService.data;
 	
 	$scope.logout = UserService.logout;
+	
+	$rootScope.menu_open = false;
+	
+	$scope.openMenu = function() {
+		$rootScope.menu_open = true;
+	}
+	
+	$scope.closeMenu = function() {
+		$rootScope.menu_open = false;
+	}
 });
 
 angular.module('AngularApp.controllers').controller('HomeCtrl', function($scope) {
+	
+	$scope.page_title = 'home_TITLE';
 });
 
 angular.module('AngularApp.controllers').controller('LoginCtrl', function($scope, UserService) {
+	
+	$scope.page_title = 'login_TITLE';
 	
 	$scope.loginModel = { username:null, password:null };
 	
@@ -2942,12 +2967,16 @@ angular.module('AngularApp.controllers').controller('LoginCtrl', function($scope
 
 angular.module('AngularApp.controllers').controller('RegisterCtrl', function($scope, UserService) {
 	
+	$scope.page_title = 'register_TITLE';
+	
 	$scope.registerModel = { username:null, password1:null, password2:null, email:null };
 	
 	$scope.register = UserService.register;
 });
 
 angular.module('AngularApp.controllers').controller('ProfileCtrl', function($scope, UserService, $timeout) {
+	
+	$scope.page_title = 'profile_TITLE';
 	
 	$scope.user = UserService.data;
 	
@@ -2980,6 +3009,8 @@ angular.module('AngularApp.controllers').controller('ProfileCtrl', function($sco
 });
 
 angular.module('AngularApp.controllers').controller('MissionsCtrl', function($scope, $state, UserService, CreateService) {
+	
+	$scope.page_title = 'missions_TITLE';
 
 	CreateService.init();
 	
@@ -3052,6 +3083,8 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 });
 
 angular.module('AngularApp.controllers').controller('CreateCtrl', function($scope, $state, CreateService) {
+	
+	$scope.page_title = 'create_TITLE';
 
 	if (CreateService.data.missions.length < 1) {
 		$state.go('root.missions');
@@ -3097,7 +3130,9 @@ angular.module('AngularApp.controllers').controller('CreateCtrl', function($scop
 	}
 });
 
-angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scope, MosaicService) {
+angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scope, $timeout, MosaicService) {
+	
+	$scope.page_title = MosaicService.data.mosaic.title;
 	
 	$scope.mosaic = MosaicService.data.mosaic;
 
@@ -3134,9 +3169,38 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 		var order = (i * $scope.mosaic.cols + j) + 1;
 		return MosaicService.getImageByOrder(order);
 	}
+	
+	/* Name */
+	
+	$scope.editname = false;
+	$scope.newname = MosaicService.data.mosaic.title;
+	
+	$scope.nameClick = function() {
+		
+		$scope.editname = true;
+			
+		$timeout(function() {
+			$('#input-name').focus();
+		});
+	}
+	
+	$scope.nameBlur = function(newvalue) {
+		
+		$scope.editname = false;
+		
+		if (newvalue && newvalue != MosaicService.data.mosaic.title) {
+			
+			$scope.loadingname = true;
+			MosaicService.updateName(newvalue).then(function() {
+				$scope.loadingname = false;
+			});
+		}
+	}
 });
 
 angular.module('AngularApp.controllers').controller('MyMosaicsCtrl', function($scope, $state, UserService) {
+	
+	$scope.page_title = 'mymosaics_TITLE';
 
 	$scope.mosaics = UserService.data.mosaics;
 	

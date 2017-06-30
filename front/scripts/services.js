@@ -300,7 +300,6 @@ angular.module('AngularApp.services').service('MosaicService', function(API) {
 			
 			return API.sendRequest('/api/mosaic/' + ref + '/', 'GET').then(function(response) {
 				
-				console.log(response);
 				service.data.mosaic = response;
 			});
 		},
@@ -317,6 +316,15 @@ angular.module('AngularApp.services').service('MosaicService', function(API) {
 			}
 			
 			return url;
+		},
+		
+		updateName: function(newvalue) {
+			
+			var data = { 'ref':service.data.mosaic.ref, 'name':newvalue };
+			return API.sendRequest('/api/mosaic/name/', 'POST', {}, data).then(function(response) {
+				
+				service.data.mosaic.title = newvalue;
+			});
 		},
 	};
 	

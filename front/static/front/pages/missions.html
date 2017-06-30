@@ -1,3 +1,5 @@
+<ng-include src="'/static/front/pages/_header.html'" />
+
 <section ng-if='!user.authenticated'>
 	
 	<div class="text-danger text-center mr-2 ml-2">
@@ -40,12 +42,6 @@
         
         <div ng-if="missions">
             
-            <div class="group-row">
-                
-                <input type="text" class="form-control" placeholder="{{'missions_FILTER' | translate}}" ng-model="searchKeyword" />
-                
-            </div>
-            
             <table style="-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none;">
                 <thead>
                     <tr>
@@ -57,7 +53,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in missions | filter:searchKeyword" ng-class="{'selected': isSelected(item.ref)}">
+                    <tr ng-repeat="item in missions" ng-class="{'selected': isSelected(item.ref)}">
                         <td class="text-center" style="width:2rem;" ng-click="$event.stopPropagation(); toggle($index, $event, item);"><i class="fa fa-check-circle" ng-class="{'text-muted': !isSelected(item.ref)}"></i></td>
                         <td ng-click="$event.stopPropagation(); toggle($index, $event, item);">
                             {{item.name}}

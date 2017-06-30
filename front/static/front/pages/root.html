@@ -58,9 +58,9 @@
     </div>
 </div>
 
-<div class="menu-overlay" ng-show="menu_open" ng-click="menu_open = false;"></div>
+<div class="menu-overlay" ng-show="menu_open" ng-click="closeMenu();"></div>
 
-<div class="menu-pane" ng-click="menu_open = false;" ng-class="{'open': menu_open}">
+<div class="menu-pane" ng-click="closeMenu();" ng-class="{'open': menu_open}">
     
     <header>
     	
@@ -79,18 +79,6 @@
 	</nav>
     
 </div>
-
-<header class="hidden-up">
-    
-	<div class="menu-toggler" ng-click="menu_open = true">
-		<i class="fa fa-bars"></i>
-	</div>
-    
-	<h1>
-		{{state.current.data.title | translate}}
-	</h1>
-	
-</header>
 
 <header class="hidden-down">
     <div class="container">
@@ -115,7 +103,7 @@
 	<div class="loading" ng-show="route_loading">
 		<img src="/static/front/img/loading.png" />
 	</div>
-
+	
     <div class="container" ui-view="" ng-show="!route_loading"></div>
     
 </div>
