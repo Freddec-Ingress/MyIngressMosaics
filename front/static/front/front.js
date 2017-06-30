@@ -2469,6 +2469,17 @@ var en_translations = {
 	mymosaics_SUBTITLE: 'My registered mosaics',
 	mymosaics_NOMOSAIC: 'No mosaic',
 	mymosaics_COLNAME: 'Name',
+	
+	edit_BTN: 'Save',
+	edit_BACK: 'back to mosaic',
+	edit_TITLE: 'Edit mission order',
+	
+	countries_LINK: 'All the mosaics',
+	countries_TITLE: 'All the mosaics',
+	countries_COLMOSAICS: 'Mosaics',
+	countries_COLCOUNTRY: 'Country',
+	countries_COLCITY: 'City',
+	countries_COLMOSAIC: 'Mosaic',
 };
 var fr_translations = {
     
@@ -2563,6 +2574,17 @@ var fr_translations = {
 	mymosaics_SUBTITLE: 'Mes fresques enregitrées',
 	mymosaics_NOMOSAIC: 'Aucune fresque',
 	mymosaics_COLNAME: 'Nom',
+	
+	edit_BTN: 'Enregistrer',
+	edit_BACK: 'retour à la fresque',
+	edit_TITLE: 'Modifier l\'ordre des missions',
+	
+	countries_LINK: 'Toutes les fresques',
+	countries_TITLE: 'Toutes les fresques',
+	countries_COLMOSAICS: 'Fresques',
+	countries_COLCOUNTRY: 'Pays',
+	countries_COLCITY: 'Ville',
+	countries_COLMOSAIC: 'Fresque',
 };
 angular.module('AngularApp.services', [])
 
@@ -2884,12 +2906,98 @@ angular.module('AngularApp.services').service('MosaicService', function(API) {
 			return url;
 		},
 		
+		getColsArray: function() {
+			
+			var temp = 1;
+			if (service.data.mosaic.cols > 0) temp = service.data.mosaic.cols;
+			if (!temp) temp = 1;
+			
+			var cols = [];
+			for (var i = 0; i < temp; i++) {
+				cols.push(i);
+			}
+
+			return cols;
+		},
+		
+		getRowsArray: function() {
+			
+			var temp = 1;
+			if (service.data.mosaic.count > 0 && service.data.mosaic.cols > 0) temp = Math.ceil(service.data.mosaic.count / service.data.mosaic.cols);
+			if (!temp) temp = 1;
+			
+			var rows = [];
+			for (var i = 0; i < temp; i++) {
+				rows.push(i);
+			}
+			
+			return rows;
+		},
+		
 		updateName: function(newvalue) {
 			
 			var data = { 'ref':service.data.mosaic.ref, 'name':newvalue };
 			return API.sendRequest('/api/mosaic/name/', 'POST', {}, data).then(function(response) {
 				
 				service.data.mosaic.title = newvalue;
+			});
+		},
+		
+		reorderMissions: function(neworder) {
+			
+			var data = { 'ref':service.data.mosaic.ref, 'order':neworder };
+			return API.sendRequest('/api/mosaic/reorder/', 'POST', {}, data).then(function(response) {
+				
+				if (response) {
+					service.data.mosaic.missions = response;
+				}
+			});
+		},
+	};
+	
+	return service;
+});
+
+angular.module('AngularApp.services').service('DataService', function(API) {
+	
+	var service = {
+		
+		cities: null,
+		mosaics: null,
+		countries: null,
+		
+		current_city: null,
+		current_country: null,
+		
+		getCountries: function() {
+			
+			return API.sendRequest('/api/countries/', 'POST').then(function(response) {
+				
+				if (response) {
+					service.countries = response;
+				}
+			});
+		},
+		
+		getCities: function() {
+			
+			var data = { 'country':service.current_country };
+			return API.sendRequest('/api/cities/', 'POST', {}, data).then(function(response) {
+				
+				if (response) {
+					service.cities = response;
+				}
+			});
+		},
+		
+		getMosaics: function() {
+			
+			var data = { 'city':service.current_city };
+			return API.sendRequest('/api/mosaicsbycity/', 'POST', {}, data).then(function(response) {
+				
+				if (response) {
+					service.mosaics = response;
+				}
 			});
 		},
 	};
@@ -3201,6 +3309,57 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 	}
 });
 
+angular.module('AngularApp.controllers').controller('EditCtrl', function($scope, $state, MosaicService) {
+
+	$scope.mosaic = MosaicService.data.mosaic;
+		
+	$scope.cols = MosaicService.getColsArray();
+	$scope.rows = MosaicService.getRowsArray();
+	
+	$scope.missions = [];
+	
+	for (var item of $scope.mosaic.missions) {
+		
+		var temp = {
+			ref: item.ref,
+			title: item.title,
+			order: item.order,
+			image: item.image,
+		};
+		
+		$scope.missions.push(temp);
+	}
+
+	$scope.back = function() {
+		
+		$state.go('root.mosaic', {ref: $scope.mosaic.ref});
+	}
+	
+	$scope.image = function(i, j) {
+		
+		var order = (i * $scope.mosaic.cols + j) + 1;
+		
+		var url = null;
+		
+		for (var item of $scope.missions) {
+			if (($scope.mosaic.count - item.order + 1) == order) {
+				url = item.image;
+				break;
+			}
+		}
+		
+		return url;
+	}
+	
+	$scope.save = function() {
+		
+		MosaicService.reorderMissions($scope.missions).then(function(response) {
+			
+			$state.go('root.mosaic', {ref: $scope.mosaic.ref});
+		});
+	}
+});
+
 angular.module('AngularApp.controllers').controller('MyMosaicsCtrl', function($scope, $state, UserService) {
 	
 	$scope.page_title = 'mymosaics_TITLE';
@@ -3208,6 +3367,43 @@ angular.module('AngularApp.controllers').controller('MyMosaicsCtrl', function($s
 	$scope.mosaics = UserService.data.mosaics;
 	
 	$scope.go = function(item) {
+		$state.go('root.mosaic', {ref: item.ref});
+	}
+});
+
+angular.module('AngularApp.controllers').controller('CountriesCtrl', function($scope, $state, DataService) {
+	
+	$scope.page_title = 'countries_TITLE';
+	
+	$scope.countries = DataService.countries;
+	
+	$scope.go = function(item) {
+		
+		DataService.current_country = item.name;
+		$state.go('root.cities');
+	}
+});
+
+angular.module('AngularApp.controllers').controller('CitiesCtrl', function($scope, $state, DataService) {
+	
+	$scope.page_title = 'cities_TITLE';
+	
+	$scope.cities = DataService.cities;
+	
+	$scope.go = function(item) {
+		
+		DataService.current_city = item.name;
+		$state.go('root.mosaics');
+	}
+});
+angular.module('AngularApp.controllers').controller('MosaicsCtrl', function($scope, $state, DataService) {
+	
+	$scope.page_title = 'mosaics_TITLE';
+	
+	$scope.mosaics = DataService.mosaics;
+	
+	$scope.go = function(item) {
+		
 		$state.go('root.mosaic', {ref: item.ref});
 	}
 });
@@ -3234,8 +3430,15 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 			.state('root.mymosaics', { url: '/mymosaics', controller: 'MyMosaicsCtrl', templateUrl: '/static/front/pages/mymosaics.html', data:{ title: 'mymosaics_TITLE', }, resolve: {loadMosaics: function(UserService) { return UserService.getMosaics(); }, }, })
 
 			.state('root.create', { url: '/create', controller: 'CreateCtrl', templateUrl: '/static/front/pages/create.html', data:{ title: 'create_TITLE', }, })
+			
 			.state('root.mosaic', { url: '/mosaic/:ref', controller: 'MosaicCtrl', templateUrl: '/static/front/pages/mosaic.html', resolve: {loadMosaic: function($stateParams, MosaicService) { return MosaicService.getMosaic($stateParams.ref); }, }, })
+				.state('root.mosaic.edit', { url: '/edit', controller: 'EditCtrl', templateUrl: '/static/front/pages/edit.html', })
+			
 			.state('root.missions', { url: '/missions', controller: 'MissionsCtrl', templateUrl: '/static/front/pages/missions.html', data:{ title: 'missions_TITLE', }, resolve: {loadMissions: function(UserService) { return UserService.getMissions(); }, }, })
+			
+			.state('root.countries', { url: '/countries', controller: 'CountriesCtrl', templateUrl: '/static/front/pages/countries.html', resolve: {loadCountries: function(DataService) { return DataService.getCountries(); }, }, })
+			.state('root.cities', { url: '/cities', controller: 'CitiesCtrl', templateUrl: '/static/front/pages/cities.html', resolve: {loadCities: function(DataService) { return DataService.getCities(); }, }, })
+			.state('root.mosaics', { url: '/mosaics', controller: 'MosaicsCtrl', templateUrl: '/static/front/pages/mosaics.html', resolve: {loadMosaics: function(DataService) { return DataService.getMosaics(); }, }, })
 			
 	$locationProvider.html5Mode(true);
 });

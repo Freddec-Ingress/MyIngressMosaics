@@ -278,6 +278,7 @@ class MosaicViewSet(viewsets.ViewSet):
 			for item in mosaic.missions.all().order_by('order'):
 				
 				mission_data = {
+					'ref': item.ref,
 					'title': item.title,
 					'image': item.image,
 					'order': item.order,
@@ -299,3 +300,95 @@ class MosaicViewSet(viewsets.ViewSet):
 			mosaic.save()
 		
 		return Response(None, status=status.HTTP_200_OK)
+
+
+
+	def reorder(self, request):
+		
+		data = []
+		
+		result = Mosaic.objects.filter(ref=request.data['ref'], registerer=request.user)
+		if result.count() > 0:
+			mosaic = result[0]
+			
+			for item in request.data['order']:
+				
+				result = Mission.objects.filter(ref=item['ref'])
+				if result.count() > 0:
+					mission = result[0]
+					
+					mission.order = item['order']
+					mission.save()
+		
+			for item in mosaic.missions.all().order_by('order'):
+				
+				mission_data = {
+					'ref': item.ref,
+					'title': item.title,
+					'image': item.image,
+					'order': item.order,
+				}
+				
+				data.append(mission_data)
+				
+		return Response(data, status=status.HTTP_200_OK)
+		
+	
+	
+#---------------------------------------------------------------------------------------------------
+class DataViewSet(viewsets.ViewSet):
+	
+	permission_classes = AllowAny, 
+    
+	def countries(self, request):
+		
+		data = []
+		
+		results = Mosaic.objects.values('country').distinct()
+		for item in results:
+			
+			country = {
+				'mosaics': Mosaic.objects.filter(country=item['country']).count(),
+				'name': item['country'],
+			}
+			
+			data.append(country)
+		
+		
+		return Response(data, status=status.HTTP_200_OK)
+    
+    
+    
+	def cities(self, request):
+		
+		data = []
+		
+		results = Mosaic.objects.filter(country=request.data['country']).values('city').distinct()
+		for item in results:
+			
+			city = {
+				'mosaics': Mosaic.objects.filter(city=item['city']).count(),
+				'name': item['city'],
+			}
+			
+			data.append(city)
+		
+		return Response(data, status=status.HTTP_200_OK)
+    
+    
+    
+	def mosaics(self, request):
+		
+		data = []
+		
+		results = Mosaic.objects.filter(city=request.data['city'])
+		for item in results:
+			
+			mosaic = {
+				'ref': item.ref,
+				'name': item.title,
+			}
+			
+			data.append(mosaic)
+		
+		return Response(data, status=status.HTTP_200_OK)

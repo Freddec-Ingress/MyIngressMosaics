@@ -8,7 +8,7 @@
 
 </section>
 
-<section ng-if="mosaic">
+<section ng-if="mosaic" ui-view="">
 	
 	<article>
 		
@@ -53,7 +53,12 @@
 	
 	<article>
 		
-		<h4>{{'mosaicpage_ROADMAP' | translate}}</h4>
+		<h4>
+			{{'mosaicpage_ROADMAP' | translate}}
+			<a ui-sref="root.mosaic.edit" ng-if="user.name == mosaic.registerer.name">
+				<i class="fa fa-pencil-square-o icon-edit"></i>
+			</a>
+		</h4>
 		
         <table>
             <tbody>

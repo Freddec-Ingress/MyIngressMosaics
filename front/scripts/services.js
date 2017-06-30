@@ -318,12 +318,98 @@ angular.module('AngularApp.services').service('MosaicService', function(API) {
 			return url;
 		},
 		
+		getColsArray: function() {
+			
+			var temp = 1;
+			if (service.data.mosaic.cols > 0) temp = service.data.mosaic.cols;
+			if (!temp) temp = 1;
+			
+			var cols = [];
+			for (var i = 0; i < temp; i++) {
+				cols.push(i);
+			}
+
+			return cols;
+		},
+		
+		getRowsArray: function() {
+			
+			var temp = 1;
+			if (service.data.mosaic.count > 0 && service.data.mosaic.cols > 0) temp = Math.ceil(service.data.mosaic.count / service.data.mosaic.cols);
+			if (!temp) temp = 1;
+			
+			var rows = [];
+			for (var i = 0; i < temp; i++) {
+				rows.push(i);
+			}
+			
+			return rows;
+		},
+		
 		updateName: function(newvalue) {
 			
 			var data = { 'ref':service.data.mosaic.ref, 'name':newvalue };
 			return API.sendRequest('/api/mosaic/name/', 'POST', {}, data).then(function(response) {
 				
 				service.data.mosaic.title = newvalue;
+			});
+		},
+		
+		reorderMissions: function(neworder) {
+			
+			var data = { 'ref':service.data.mosaic.ref, 'order':neworder };
+			return API.sendRequest('/api/mosaic/reorder/', 'POST', {}, data).then(function(response) {
+				
+				if (response) {
+					service.data.mosaic.missions = response;
+				}
+			});
+		},
+	};
+	
+	return service;
+});
+
+angular.module('AngularApp.services').service('DataService', function(API) {
+	
+	var service = {
+		
+		cities: null,
+		mosaics: null,
+		countries: null,
+		
+		current_city: null,
+		current_country: null,
+		
+		getCountries: function() {
+			
+			return API.sendRequest('/api/countries/', 'POST').then(function(response) {
+				
+				if (response) {
+					service.countries = response;
+				}
+			});
+		},
+		
+		getCities: function() {
+			
+			var data = { 'country':service.current_country };
+			return API.sendRequest('/api/cities/', 'POST', {}, data).then(function(response) {
+				
+				if (response) {
+					service.cities = response;
+				}
+			});
+		},
+		
+		getMosaics: function() {
+			
+			var data = { 'city':service.current_city };
+			return API.sendRequest('/api/mosaicsbycity/', 'POST', {}, data).then(function(response) {
+				
+				if (response) {
+					service.mosaics = response;
+				}
 			});
 		},
 	};

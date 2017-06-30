@@ -91,4 +91,15 @@ var en_translations = {
 	mymosaics_SUBTITLE: 'My registered mosaics',
 	mymosaics_NOMOSAIC: 'No mosaic',
 	mymosaics_COLNAME: 'Name',
+	
+	edit_BTN: 'Save',
+	edit_BACK: 'back to mosaic',
+	edit_TITLE: 'Edit mission order',
+	
+	countries_LINK: 'All the mosaics',
+	countries_TITLE: 'All the mosaics',
+	countries_COLMOSAICS: 'Mosaics',
+	countries_COLCOUNTRY: 'Country',
+	countries_COLCITY: 'City',
+	countries_COLMOSAIC: 'Mosaic',
 };

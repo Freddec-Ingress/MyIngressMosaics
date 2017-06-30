@@ -1,0 +1,38 @@
+<ng-include src="'/static/front/pages/_header.html'" />
+
+<section>
+    
+    <article>
+    	
+        <table>
+        	
+            <thead>
+                <tr>
+                    <th>{{'countries_COLMOSAICS' | translate}}</th>
+                    <th>{{'countries_COLCOUNTRY' | translate}}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <tr ng-repeat="item in countries" ng-click="go(item);">
+                	
+                    <td class="text-right" width="1%">
+                    	{{item.mosaics}}
+                    </td>
+                    
+                    <td class="text-white">
+                        {{item.name}}
+                    </td>
+                    
+                    <td class="text-right" width="1%">
+                    	<i class="fa fa-arrow-circle-right link"></i>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    	
+    </article>
+
+</section>

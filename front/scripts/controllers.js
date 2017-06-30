@@ -282,6 +282,57 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 	}
 });
 
+angular.module('AngularApp.controllers').controller('EditCtrl', function($scope, $state, MosaicService) {
+
+	$scope.mosaic = MosaicService.data.mosaic;
+		
+	$scope.cols = MosaicService.getColsArray();
+	$scope.rows = MosaicService.getRowsArray();
+	
+	$scope.missions = [];
+	
+	for (var item of $scope.mosaic.missions) {
+		
+		var temp = {
+			ref: item.ref,
+			title: item.title,
+			order: item.order,
+			image: item.image,
+		};
+		
+		$scope.missions.push(temp);
+	}
+
+	$scope.back = function() {
+		
+		$state.go('root.mosaic', {ref: $scope.mosaic.ref});
+	}
+	
+	$scope.image = function(i, j) {
+		
+		var order = (i * $scope.mosaic.cols + j) + 1;
+		
+		var url = null;
+		
+		for (var item of $scope.missions) {
+			if (($scope.mosaic.count - item.order + 1) == order) {
+				url = item.image;
+				break;
+			}
+		}
+		
+		return url;
+	}
+	
+	$scope.save = function() {
+		
+		MosaicService.reorderMissions($scope.missions).then(function(response) {
+			
+			$state.go('root.mosaic', {ref: $scope.mosaic.ref});
+		});
+	}
+});
+
 angular.module('AngularApp.controllers').controller('MyMosaicsCtrl', function($scope, $state, UserService) {
 	
 	$scope.page_title = 'mymosaics_TITLE';
@@ -289,6 +340,43 @@ angular.module('AngularApp.controllers').controller('MyMosaicsCtrl', function($s
 	$scope.mosaics = UserService.data.mosaics;
 	
 	$scope.go = function(item) {
+		$state.go('root.mosaic', {ref: item.ref});
+	}
+});
+
+angular.module('AngularApp.controllers').controller('CountriesCtrl', function($scope, $state, DataService) {
+	
+	$scope.page_title = 'countries_TITLE';
+	
+	$scope.countries = DataService.countries;
+	
+	$scope.go = function(item) {
+		
+		DataService.current_country = item.name;
+		$state.go('root.cities');
+	}
+});
+
+angular.module('AngularApp.controllers').controller('CitiesCtrl', function($scope, $state, DataService) {
+	
+	$scope.page_title = 'cities_TITLE';
+	
+	$scope.cities = DataService.cities;
+	
+	$scope.go = function(item) {
+		
+		DataService.current_city = item.name;
+		$state.go('root.mosaics');
+	}
+});
+angular.module('AngularApp.controllers').controller('MosaicsCtrl', function($scope, $state, DataService) {
+	
+	$scope.page_title = 'mosaics_TITLE';
+	
+	$scope.mosaics = DataService.mosaics;
+	
+	$scope.go = function(item) {
+		
 		$state.go('root.mosaic', {ref: item.ref});
 	}
 });

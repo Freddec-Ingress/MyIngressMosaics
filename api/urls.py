@@ -25,5 +25,10 @@ urlpatterns = [
 	url(r'^mosaic/create/',	ProfileViewSet.as_view({ 'post' : 'create' })),
 	
 	url(r'^mosaic/name/',			MosaicViewSet.as_view({ 'post'  : 'name'   })),
+	url(r'^mosaic/reorder/',			MosaicViewSet.as_view({ 'post'  : 'reorder'   })),
 	url(r'^mosaic/(?P<ref>\w+)/$',	MosaicViewSet.as_view({ 'get'  : 'view'   })),
+
+	url(r'^countries/',		DataViewSet.as_view({ 'post' : 'countries' })),
+	url(r'^cities/',		DataViewSet.as_view({ 'post' : 'cities' })),
+	url(r'^mosaicsbycity/',		DataViewSet.as_view({ 'post' : 'mosaics' })),
 ]

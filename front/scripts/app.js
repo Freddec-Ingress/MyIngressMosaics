@@ -21,8 +21,15 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 			.state('root.mymosaics', { url: '/mymosaics', controller: 'MyMosaicsCtrl', templateUrl: '/static/front/pages/mymosaics.html', data:{ title: 'mymosaics_TITLE', }, resolve: {loadMosaics: function(UserService) { return UserService.getMosaics(); }, }, })
 
 			.state('root.create', { url: '/create', controller: 'CreateCtrl', templateUrl: '/static/front/pages/create.html', data:{ title: 'create_TITLE', }, })
+			
 			.state('root.mosaic', { url: '/mosaic/:ref', controller: 'MosaicCtrl', templateUrl: '/static/front/pages/mosaic.html', resolve: {loadMosaic: function($stateParams, MosaicService) { return MosaicService.getMosaic($stateParams.ref); }, }, })
+				.state('root.mosaic.edit', { url: '/edit', controller: 'EditCtrl', templateUrl: '/static/front/pages/edit.html', })
+			
 			.state('root.missions', { url: '/missions', controller: 'MissionsCtrl', templateUrl: '/static/front/pages/missions.html', data:{ title: 'missions_TITLE', }, resolve: {loadMissions: function(UserService) { return UserService.getMissions(); }, }, })
+			
+			.state('root.countries', { url: '/countries', controller: 'CountriesCtrl', templateUrl: '/static/front/pages/countries.html', resolve: {loadCountries: function(DataService) { return DataService.getCountries(); }, }, })
+			.state('root.cities', { url: '/cities', controller: 'CitiesCtrl', templateUrl: '/static/front/pages/cities.html', resolve: {loadCities: function(DataService) { return DataService.getCities(); }, }, })
+			.state('root.mosaics', { url: '/mosaics', controller: 'MosaicsCtrl', templateUrl: '/static/front/pages/mosaics.html', resolve: {loadMosaics: function(DataService) { return DataService.getMosaics(); }, }, })
 			
 	$locationProvider.html5Mode(true);
 });

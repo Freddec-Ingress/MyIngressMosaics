@@ -91,4 +91,15 @@ var fr_translations = {
 	mymosaics_SUBTITLE: 'Mes fresques enregitrées',
 	mymosaics_NOMOSAIC: 'Aucune fresque',
 	mymosaics_COLNAME: 'Nom',
+	
+	edit_BTN: 'Enregistrer',
+	edit_BACK: 'retour à la fresque',
+	edit_TITLE: 'Modifier l\'ordre des missions',
+	
+	countries_LINK: 'Toutes les fresques',
+	countries_TITLE: 'Toutes les fresques',
+	countries_COLMOSAICS: 'Fresques',
+	countries_COLCOUNTRY: 'Pays',
+	countries_COLCITY: 'Ville',
+	countries_COLMOSAIC: 'Fresque',
 };

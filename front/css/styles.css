@@ -24,12 +24,13 @@ body {
 
 /* Link --------------------------------------------------------------------- */
 
-a {
+a, .link {
     color: #ebbc4a;
     text-decoration: none;
 }
-a:hover, a:focus {
+a:hover, a:focus, .link:hover, .link:focus {
     color: #ebbc4a;
+	cursor: pointer;
 }
 
 
