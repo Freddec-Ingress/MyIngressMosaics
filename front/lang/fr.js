@@ -74,6 +74,7 @@ var fr_translations = {
 	mosaic_FORMAT: 'Format',
 	mosaic_DISTANCE: 'Distance',
 	mosaic_CREATOR: 'Créateur(s)',
+	mosaic_BY: 'Par',
 	
 	nomosaic_TEXT: 'Aucune fresque',
 	
@@ -82,6 +83,8 @@ var fr_translations = {
 	create_SUBTITLE2: 'Trier les missions',
 	create_SUBTITLE3: 'Valider l\'aperçu',
 	create_BTN: 'Enregister',
+	
+	mosaicpage_ROADMAP: 'Itinéraire',
 	
 	mymosaics_LINK: 'Mes fresques',
 	mymosaics_TITLE: 'Mes fresques',
