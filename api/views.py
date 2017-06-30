@@ -282,6 +282,8 @@ class MosaicViewSet(viewsets.ViewSet):
 					'title': item.title,
 					'image': item.image,
 					'order': item.order,
+					'lat': item._startLat,
+					'lng': item._startLng,
 				}
 				
 				data['missions'].append(mission_data)

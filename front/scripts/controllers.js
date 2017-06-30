@@ -214,7 +214,7 @@ angular.module('AngularApp.controllers').controller('CreateCtrl', function($scop
 	}
 });
 
-angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scope, $timeout, MosaicService) {
+angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scope, $timeout, $window, MosaicService) {
 	
 	$scope.page_title = MosaicService.data.mosaic.title;
 	
@@ -279,6 +279,61 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 				$scope.loadingname = false;
 			});
 		}
+	}
+	
+	$scope.initMap = function() {
+		
+		var style = [{featureType:"all",elementType:"all",stylers:[{visibility:"on"},{hue:"#131c1c"},{saturation:"-50"},{invert_lightness:!0}]},{featureType:"water",elementType:"all",stylers:[{visibility:"on"},{hue:"#005eff"},{invert_lightness:!0}]},{featureType:"poi",stylers:[{visibility:"off"}]},{featureType:"transit",elementType:"all",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels.icon",stylers:[{invert_lightness:!0}]}];
+		
+		var map = new google.maps.Map(document.getElementById('map'), {
+			
+			zoom: 8,
+			styles : style,
+			zoomControl: true,
+			disableDefaultUI: true,
+			center: {lat: $scope.mosaic.missions[0].lat, lng: $scope.mosaic.missions[0].lng},
+		});
+		
+		var latlngbounds = new google.maps.LatLngBounds();
+		
+		var roadmapCoordinates= [];
+		
+		var image = {
+			size: new google.maps.Size(50, 50),
+			origin: new google.maps.Point(0, 0),
+			anchor: new google.maps.Point(25, 25),
+			labelOrigin: new google.maps.Point(25, 27),
+			url: 'https://www.myingressmosaics.com/static/front/img/neutral.png',
+		};
+		
+		for (var m of $scope.mosaic.missions) {
+		
+	        var marker = new google.maps.Marker({
+	        	
+				map: map,
+				icon: image,
+				label: { text:String(m.order), color:'#FFFFFF', fontFamily:'Coda', fontSize:'.75rem', fontWeight:'400', },
+				position: {lat: m.lat, lng: m.lng},
+	        });
+	        
+	        var latLng = new google.maps.LatLng(m.lat,m.lng);
+	        latlngbounds.extend(latLng);
+	        
+	        roadmapCoordinates.push(latLng);
+		}
+		
+		var roadmap = new google.maps.Polyline({
+			path: roadmapCoordinates,
+			geodesic: true,
+			strokeColor: '#ebbc4a',
+			strokeOpacity: 0.95,
+			strokeWeight: 4,
+        });
+
+        roadmap.setMap(map);
+        
+		map.setCenter(latlngbounds.getCenter());
+		map.fitBounds(latlngbounds); 
 	}
 });
 

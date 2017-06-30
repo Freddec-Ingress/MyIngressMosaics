@@ -804,3 +804,11 @@ footer a i {
 .content > .container, footer > .container, .footbar > .container {
     display: inherit; flex-direction: inherit; align-items: inherit; justify-content: inherit;
 }
+
+
+
+/* Container ---------------------------------------------------------------- */
+
+#map {
+	height: 20rem;
+}
