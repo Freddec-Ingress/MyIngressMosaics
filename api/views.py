@@ -164,7 +164,10 @@ class ProfileViewSet(viewsets.ViewSet):
 			missions = []
 			for item in results:
 				
-				temp = {'ref':item.ref, 'name':item.title, 'desc':item.desc, 'creator':item.creator, 'faction':item.faction, 'image':item.image, 'order':item.order}
+				temp = {'ref':item.ref, 'name':item.title, 'desc':item.desc, 'creator':item.creator, 'faction':item.faction, 'image':item.image, 'order':item.order,
+					'lat':item._startLat, 'lng':item._startLng,
+				}
+				
 				missions.append(temp)
 		
 		return Response(missions, status=status.HTTP_200_OK)

@@ -169,10 +169,35 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 angular.module('AngularApp.controllers').controller('CreateCtrl', function($scope, $state, CreateService) {
 	
 	$scope.page_title = 'create_TITLE';
+	
+	$scope.data = null;
 
 	if (CreateService.data.missions.length < 1) {
 		$state.go('root.missions');
 	}
+			
+	var geocoder = new google.maps.Geocoder;
+	
+	var latlng = {
+		lat: parseFloat(CreateService.data.missions[0].lat),
+		lng: parseFloat(CreateService.data.missions[0].lng),
+	};
+
+	geocoder.geocode({'location': latlng}, function(results, status) {
+		
+		if (status === 'OK') {
+			if (results[1]) {
+				
+				for (var item of results[1].address_components) {
+					
+					if (item.types[0] == 'country') CreateService.data.country = item.long_name;
+					if (item.types[0] == 'locality') CreateService.data.city = item.long_name;
+				}
+		
+				$scope.$apply();
+			}
+		}
+	});
 
 	CreateService.default();
 

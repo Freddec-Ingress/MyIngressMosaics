@@ -199,6 +199,11 @@ dl.edit > dd > .loading > img, .loading-edit > img {
     color: #BDBDBD;
 }
 
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { 
+	margin: 0; 
+	-webkit-appearance: none; 
+}
+
 form {
     width: 100%;
 }
