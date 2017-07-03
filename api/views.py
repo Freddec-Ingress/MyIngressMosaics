@@ -280,6 +280,8 @@ class MosaicViewSet(viewsets.ViewSet):
 			
 			for item in mosaic.missions.all().order_by('order'):
 				
+				item.checkPortal()
+				
 				mission_data = {
 					'ref': item.ref,
 					'title': item.title,
