@@ -23,6 +23,7 @@ urlpatterns = [
 	url(r'^mosaic/add/',			MosaicViewSet.as_view({ 'post'  : 'add'   })),
 	url(r'^mosaic/delete/',			MosaicViewSet.as_view({ 'post'  : 'delete'   })),
 	url(r'^mosaic/potential/',			MosaicViewSet.as_view({ 'post'  : 'potential'   })),
+	url(r'^mosaic/create/',	ProfileViewSet.as_view({ 'post' : 'create' })),
 	url(r'^mosaic/(?P<ref>\w+)/$',	MosaicViewSet.as_view({ 'get'  : 'view'   })),
 	
 	url(r'^profile/name/',	ProfileViewSet.as_view({ 'post': 'name'     })),
@@ -30,7 +31,6 @@ urlpatterns = [
 	url(r'^mission/delete/',		ProfileViewSet.as_view({ 'post' : 'deleteMission' })),
 	url(r'^missions/',		ProfileViewSet.as_view({ 'get' : 'missions' })),
 	url(r'^mosaics/',		ProfileViewSet.as_view({ 'get' : 'mosaics' })),
-	url(r'^mosaic/create/',	ProfileViewSet.as_view({ 'post' : 'create' })),
 
 	url(r'^countries/',		DataViewSet.as_view({ 'post' : 'countries' })),
 	url(r'^cities/',		DataViewSet.as_view({ 'post' : 'cities' })),
