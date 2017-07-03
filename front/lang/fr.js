@@ -85,6 +85,7 @@ var fr_translations = {
 	create_BTN: 'Enregister',
 	
 	mosaicpage_ROADMAP: 'Itinéraire',
+	mosaicpage_DELETE: 'Supprimer',
 
 	mymosaics_LINK: 'Mes fresques',
 	mymosaics_TITLE: 'Mes fresques',

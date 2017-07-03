@@ -85,6 +85,7 @@ var en_translations = {
 	create_BTN: 'Register',
 	
 	mosaicpage_ROADMAP: 'Roadmap',
+	mosaicpage_DELETE: 'Delete',
 	
 	mymosaics_LINK: 'My Mosaics',
 	mymosaics_TITLE: 'My Mosaics',

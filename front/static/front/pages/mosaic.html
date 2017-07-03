@@ -93,5 +93,19 @@
         </table>
 
 	</article>
+	
+	<article ng-if="user.name == mosaic.registerer.name">
+		
+		<div class="grid-row">
+			
+			<div class="cell pr-2">
+				<button type="submit" class="btn btn-secondary btn-block" ng-click="delete();">
+					{{'mosaicpage_DELETE' | translate}}
+				</button>
+			</div>
+			
+		</div>
+		
+	</article>
 
 </section>

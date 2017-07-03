@@ -354,6 +354,18 @@ class MosaicViewSet(viewsets.ViewSet):
 				data.append(mission_data)
 				
 		return Response(data, status=status.HTTP_200_OK)
+
+
+
+	def delete(self, request):
+		
+		result = Mosaic.objects.filter(ref=request.data['ref'], registerer=request.user)
+		if result.count() > 0:
+			
+			mosaic = result[0]
+			mosaic.delete()
+		
+		return Response(None, status=status.HTTP_200_OK)
 		
 	
 	

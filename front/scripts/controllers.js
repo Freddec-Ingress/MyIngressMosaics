@@ -244,6 +244,8 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 	$scope.page_title = MosaicService.data.mosaic.title;
 	
 	$scope.mosaic = MosaicService.data.mosaic;
+	
+	$scope.delete = MosaicService.delete;
 
 	$scope.rows = function() {
 		

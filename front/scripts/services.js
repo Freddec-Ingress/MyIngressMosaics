@@ -287,7 +287,7 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 	return service;
 });
 
-angular.module('AngularApp.services').service('MosaicService', function(API) {
+angular.module('AngularApp.services').service('MosaicService', function($state, API, DataService) {
 	
 	var service = {
 
@@ -308,10 +308,12 @@ angular.module('AngularApp.services').service('MosaicService', function(API) {
 			
 			var url = null;
 			
-			for (var item of service.data.mosaic.missions) {
-				if ((service.data.mosaic.count - item.order + 1) == order) {
-					url = item.image;
-					break;
+			if (service.data.mosaic) {
+				for (var item of service.data.mosaic.missions) {
+					if ((service.data.mosaic.count - item.order + 1) == order) {
+						url = item.image;
+						break;
+					}
 				}
 			}
 			
@@ -363,6 +365,18 @@ angular.module('AngularApp.services').service('MosaicService', function(API) {
 				if (response) {
 					service.data.mosaic.missions = response;
 				}
+			});
+		},
+		
+		delete: function(neworder) {
+			
+			var data = { 'ref':service.data.mosaic.ref, };
+			return API.sendRequest('/api/mosaic/delete/', 'POST', {}, data).then(function(response) {
+					
+				DataService.current_city = service.data.mosaic.city;
+				$state.go('root.mosaics');
+				
+				service.data.mosaic = null;
 			});
 		},
 	};
