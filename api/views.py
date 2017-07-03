@@ -62,23 +62,38 @@ class ExtensionViewSet(viewsets.ViewSet):
 							  data=request.body)
 			mission.save()
 			
-			order = 1
+		else:
 			
-			for item in obj[9]:
-				
-				if item[5][0] == 'f':
-				
-					portal = Portal(mission=mission, lat=(item[5][1]/1000000.0), lng=(item[5][2]/1000000.0), order=order, title=item[2])
-					portal.save()
-					
-				else:
-				
-					portal = Portal(mission=mission, lat=(item[5][2]/1000000.0), lng=(item[5][3]/1000000.0), order=order, title=item[2])
-					portal.save()
-				
-				order += 1
+			mission = results[0]
+			
+			mission.ref = obj[0]
+			mission.title = obj[1]
+			mission.desc = obj[2]
+			mission.creator = obj[3]
+			mission.faction = obj[4]
+			mission.image = obj[10]
+			mission.register = obj[11]
+			mission.data = request.body
+			
+			mission.save()
+			
+		order = 1
 		
-			mission.computeInternalData()
+		for item in obj[9]:
+			
+			if item[5][0] == 'f':
+			
+				portal = Portal(mission=mission, lat=(item[5][1]/1000000.0), lng=(item[5][2]/1000000.0), order=order, title=item[2])
+				portal.save()
+				
+			else:
+			
+				portal = Portal(mission=mission, lat=(item[5][2]/1000000.0), lng=(item[5][3]/1000000.0), order=order, title=item[2])
+				portal.save()
+			
+			order += 1
+	
+		mission.computeInternalData()
 		
 		return Response(None, status=status.HTTP_200_OK)
 

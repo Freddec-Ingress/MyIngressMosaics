@@ -85,7 +85,6 @@ var fr_translations = {
 	create_BTN: 'Enregister',
 	
 	mosaicpage_ROADMAP: 'Itinéraire',
-	mosaicpage_UNAVAILABLE: '= certains portails sont déactivés',
 
 	mymosaics_LINK: 'Mes fresques',
 	mymosaics_TITLE: 'Mes fresques',

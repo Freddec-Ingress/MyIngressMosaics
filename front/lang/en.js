@@ -85,7 +85,6 @@ var en_translations = {
 	create_BTN: 'Register',
 	
 	mosaicpage_ROADMAP: 'Roadmap',
-	mosaicpage_UNAVAILABLE: '= some portals are unavailable',
 	
 	mymosaics_LINK: 'My Mosaics',
 	mymosaics_TITLE: 'My Mosaics',

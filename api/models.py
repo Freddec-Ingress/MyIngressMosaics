@@ -143,8 +143,6 @@ class Mission(models.Model):
     faction = models.CharField(max_length=8, default='')
     registerer = models.CharField(max_length=32, default='')
 
-    unavailable = models.BooleanField(default=False);
-
     _distance = models.FloatField(default=0.0)
     
     _startLat = models.FloatField(default=0.0)
@@ -158,11 +156,7 @@ class Mission(models.Model):
         portals = self.portals.order_by('order')
         if portals.count() > 0:
             
-            index = -1;
-            
             for p in portals:
-                
-                index = index + 1
                 
                 if p.lat != 0.0 and p.lng != 0.0:
                     
@@ -170,9 +164,6 @@ class Mission(models.Model):
                     self._startLng = p.lng
                     
                     break;
-            
-            if index > 0:
-                self.unavailable = True
             
             dst = 0
             
@@ -188,11 +179,7 @@ class Mission(models.Model):
         portals = self.portals.order_by('order')
         if portals.count() > 0:
             
-            index = -1;
-            
             for p in portals:
-                
-                index = index + 1
                 
                 if p.lat != 0.0 and p.lng != 0.0:
                     
@@ -202,11 +189,6 @@ class Mission(models.Model):
                     self.save()
                     
                     break;
-            
-            if index > 0:
-                
-                self.unavailable = True
-                self.save()
                     
 
 
