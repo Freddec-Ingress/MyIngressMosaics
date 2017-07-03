@@ -70,7 +70,7 @@
 	
 	<article>
 
-        <table>
+        <table class="mb-2">
             <tbody>
                 <tr ng-repeat="item in mosaic.missions">
                 	
@@ -79,6 +79,7 @@
                     </td>
                     
                     <td>
+                        <i class="fa fa-exclamation-triangle text-danger mr-2" ng-if="item.unavailable"></i>
                         {{item.title}}
                     </td>
                     
@@ -91,6 +92,11 @@
                 </tr>
             </tbody>
         </table>
+        
+        <div class="mt-2 small">
+        	<i class="fa fa-exclamation-triangle text-danger"></i>
+        	{{'mosaicpage_UNAVAILABLE' | translate}}
+		</div>
 		
 	</article>
 

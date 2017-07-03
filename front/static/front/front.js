@@ -2463,6 +2463,7 @@ var en_translations = {
 	create_BTN: 'Register',
 	
 	mosaicpage_ROADMAP: 'Roadmap',
+	mosaicpage_UNAVAILABLE: '= some portals are unavailable',
 	
 	mymosaics_LINK: 'My Mosaics',
 	mymosaics_TITLE: 'My Mosaics',
@@ -2571,7 +2572,8 @@ var fr_translations = {
 	create_BTN: 'Enregister',
 	
 	mosaicpage_ROADMAP: 'Itinéraire',
-	
+	mosaicpage_UNAVAILABLE: '= certains portails sont déactivés',
+
 	mymosaics_LINK: 'Mes fresques',
 	mymosaics_TITLE: 'Mes fresques',
 	mymosaics_SUBTITLE: 'Mes fresques enregitrées',
