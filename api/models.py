@@ -83,7 +83,63 @@ class Mosaic(models.Model):
     
     def __str__(self):
         return self.title
+    
+    def serialize(self):
         
+		data = {
+		    'registerer': {
+		    	'name': self.registerer.username,
+		    },
+		    
+		    'creators': [],
+		    'missions': [],
+		    
+		    'ref': self.ref,
+		    'cols': self.cols,
+		    'type': self.type,
+		    'desc': self.desc,
+		    'city': self.city,
+		    'count': self.count,
+		    'title': self.title,
+		    'status': self.status,
+		    'country': self.country,
+		    
+		    'register_date': self.register_date,
+		    
+		    '_distance': self._distance,
+		    
+		    '_startLat': self._startLat,
+		    '_startLng': self._startLng,
+		}
+		
+		for item in self.creators.all():
+			
+			creator_data = {
+				'name': item.name,
+				'faction': item.faction,
+			}
+			
+			data['creators'].append(creator_data)
+		
+		for item in self.missions.all().order_by('order'):
+			
+			item.checkPortal()
+			
+			mission_data = {
+				'ref': item.ref,
+				'title': item.title,
+				'image': item.image,
+				'order': item.order,
+				'lat': item._startLat,
+				'lng': item._startLng,
+			}
+			
+			data['missions'].append(mission_data)
+			
+		return data
+		
+    
+    
     def computeInternalData(self):
         
         missions = self.missions.order_by('order')
@@ -117,15 +173,15 @@ def getDistanceFromLatLng(lat1, lng1, lat2, lng2):
     
     R = 6371.0; 
     
-    dLat = radians(lat2 - lat1);
-    dLng = radians(lng2 - lng1);
+    dLat = radians(lat2 - lat1)
+    dLng = radians(lng2 - lng1)
     
     a =  sin(dLat/2.0) * sin(dLat/2.0) + cos(radians(lat1)) * cos(radians(lat2)) *  sin(dLng/2.0) * sin(dLng/2.0)
 
-    c = 2.0 * atan2(sqrt(a), sqrt(1.0-a)); 
-    d = R * c;
+    c = 2.0 * atan2(sqrt(a), sqrt(1.0-a)) 
+    d = R * c
     
-    return d;
+    return d
 
 @python_2_unicode_compatible
 class Mission(models.Model):
@@ -188,7 +244,7 @@ class Mission(models.Model):
                     
                     self.save()
                     
-                    break;
+                    break
                     
 
 

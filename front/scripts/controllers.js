@@ -246,6 +246,7 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 	$scope.mosaic = MosaicService.data.mosaic;
 	
 	$scope.delete = MosaicService.delete;
+	$scope.remove = MosaicService.remove;
 
 	$scope.rows = function() {
 		
@@ -412,6 +413,30 @@ angular.module('AngularApp.controllers').controller('EditCtrl', function($scope,
 			
 			$state.go('root.mosaic', {ref: $scope.mosaic.ref});
 		});
+	}
+});
+
+angular.module('AngularApp.controllers').controller('AddCtrl', function($scope, $state, MosaicService, DataService) {
+
+	$scope.mosaic = MosaicService.data.mosaic;
+	
+	DataService.getMissions($scope.mosaic).then(function(response) {
+		$scope.missions = DataService.missions;
+	});
+	
+	$scope.add = function(item) {
+		
+		var index = $scope.missions.indexOf(item);
+		if (index > -1) {
+		    $scope.missions.splice(index, 1);
+		}
+		
+		MosaicService.add(item.ref);
+	}
+
+	$scope.back = function() {
+		
+		$state.go('root.mosaic', {ref: $scope.mosaic.ref}, {reload:true});
 	}
 });
 

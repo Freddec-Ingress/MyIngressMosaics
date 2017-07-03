@@ -86,6 +86,7 @@ var fr_translations = {
 	
 	mosaicpage_ROADMAP: 'Itinéraire',
 	mosaicpage_DELETE: 'Supprimer',
+	mosaicpage_ADD: 'Ajouter',
 
 	mymosaics_LINK: 'Mes fresques',
 	mymosaics_TITLE: 'Mes fresques',
@@ -96,6 +97,11 @@ var fr_translations = {
 	edit_BTN: 'Enregistrer',
 	edit_BACK: 'retour à la fresque',
 	edit_TITLE: 'Modifier l\'ordre des missions',
+	
+	add_BTN: 'Ajouter',
+	add_BACK: 'retour à la fresque',
+	add_TITLE: 'Ajouter des missions à la fresque',
+	add_NOMISSION: 'Aucune mission à ajouter',
 	
 	countries_LINK: 'Toutes les fresques',
 	countries_TITLE: 'Toutes les fresques',

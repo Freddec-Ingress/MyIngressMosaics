@@ -15,6 +15,8 @@ from .models import *
 
 from django.http import HttpResponse
 
+from django.db.models import Q
+
 from django.views.decorators.csrf import csrf_exempt
 
 from django.contrib.auth import get_user_model, authenticate, logout
@@ -256,57 +258,9 @@ class MosaicViewSet(viewsets.ViewSet):
 		
 		result = Mosaic.objects.filter(ref=ref)
 		if result.count() > 0:
+			
 			mosaic = result[0]
-			
-			data = {
-			    'registerer': {
-			    	'name': mosaic.registerer.username,
-			    },
-			    
-			    'creators': [],
-			    'missions': [],
-			    
-			    'ref': mosaic.ref,
-			    'cols': mosaic.cols,
-			    'type': mosaic.type,
-			    'desc': mosaic.desc,
-			    'city': mosaic.city,
-			    'count': mosaic.count,
-			    'title': mosaic.title,
-			    'status': mosaic.status,
-			    'country': mosaic.country,
-			    
-			    'register_date': mosaic.register_date,
-			    
-			    '_distance': mosaic._distance,
-			    
-			    '_startLat': mosaic._startLat,
-			    '_startLng': mosaic._startLng,
-			}
-			
-			for item in mosaic.creators.all():
-				
-				creator_data = {
-					'name': item.name,
-					'faction': item.faction,
-				}
-				
-				data['creators'].append(creator_data)
-			
-			for item in mosaic.missions.all().order_by('order'):
-				
-				item.checkPortal()
-				
-				mission_data = {
-					'ref': item.ref,
-					'title': item.title,
-					'image': item.image,
-					'order': item.order,
-					'lat': item._startLat,
-					'lng': item._startLng,
-				}
-				
-				data['missions'].append(mission_data)
+			data = mosaic.serialize()
 		
 		return Response(data, status=status.HTTP_200_OK)
 
@@ -366,6 +320,83 @@ class MosaicViewSet(viewsets.ViewSet):
 			mosaic.delete()
 		
 		return Response(None, status=status.HTTP_200_OK)
+
+
+
+	def remove(self, request):
+		
+		result = Mosaic.objects.filter(ref=request.data['ref'], registerer=request.user)
+		if result.count() > 0:
+			
+			mosaic = result[0]
+			
+			result = Mission.objects.filter(ref=request.data['mission'], mosaic=mosaic)
+			if result.count() > 0:
+				
+				mission = result[0]
+				
+				mission.mosaic = None
+				mission.save()
+				
+				mosaic.computeInternalData()
+				mosaic.save()
+				
+				data = mosaic.serialize()
+				return Response(data, status=status.HTTP_200_OK)
+		
+		return Response(None, status=status.HTTP_404_NOT_FOUND)
+
+
+
+	def add(self, request):
+		
+		result = Mosaic.objects.filter(ref=request.data['ref'], registerer=request.user)
+		if result.count() > 0:
+			
+			mosaic = result[0]
+			
+			result = Mission.objects.filter(ref=request.data['mission'], mosaic__isnull=True)
+			if result.count() > 0:
+				
+				mission = result[0]
+				
+				mission.mosaic = mosaic
+				mission.save()
+				
+				mosaic.computeInternalData()
+				mosaic.save()
+				
+				data = mosaic.serialize()
+				return Response(data, status=status.HTTP_200_OK)
+		
+		return Response(None, status=status.HTTP_404_NOT_FOUND)
+
+
+
+	def potential(self, request):
+		
+		result = Mosaic.objects.filter(ref=request.data['ref'], registerer=request.user)
+		if result.count() > 0:
+			
+			mosaic = result[0]
+			
+			creators = mosaic.creators.all().values_list('name', flat=True)
+			
+			results = Mission.objects.filter(mosaic__isnull=True).filter(Q(title__contains=mosaic.title) | Q(creator__in=creators))
+			if results.count() > 0:
+				
+				missions = []
+				for item in results:
+					
+					temp = {'ref':item.ref, 'name':item.title, 'desc':item.desc, 'creator':item.creator, 'faction':item.faction, 'image':item.image, 'order':item.order,
+						'lat':item._startLat, 'lng':item._startLng,
+					}
+					
+					missions.append(temp)
+			
+				return Response(missions, status=status.HTTP_200_OK)
+			
+		return Response(None, status=status.HTTP_404_NOT_FOUND)
 		
 	
 	

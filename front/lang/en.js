@@ -86,6 +86,7 @@ var en_translations = {
 	
 	mosaicpage_ROADMAP: 'Roadmap',
 	mosaicpage_DELETE: 'Delete',
+	mosaicpage_ADD: 'Add',
 	
 	mymosaics_LINK: 'My Mosaics',
 	mymosaics_TITLE: 'My Mosaics',
@@ -96,6 +97,11 @@ var en_translations = {
 	edit_BTN: 'Save',
 	edit_BACK: 'back to mosaic',
 	edit_TITLE: 'Edit mission order',
+	
+	add_BTN: 'Add',
+	add_BACK: 'back to mosaic',
+	add_TITLE: 'Add mission to mosaic',
+	add_NOMISSION: 'No mission to add',
 	
 	countries_LINK: 'All the mosaics',
 	countries_TITLE: 'All the mosaics',

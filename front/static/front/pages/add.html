@@ -1,0 +1,38 @@
+<div class="group" style="margin:0 .5rem 1rem .5rem;">
+	<a class="link" ng-click="back();">
+		<i class="fa fa-long-arrow-left mr-2"></i>
+		{{'add_BACK' | translate}}
+	</a>
+</div>
+
+<article>
+	
+    <h4>{{'add_TITLE' | translate}}</h4>
+    
+    <div class="text-center text-danger" ng-if="!missions">
+    	{{'add_NOMISSION' | translate}}
+    </div>
+    
+    <table ng-if="missions">
+        <tbody>
+            <tr ng-repeat="item in missions">
+            	
+                <td style="width:3rem;">
+                	<input type="number" class="form-control text-center" style="padding:.25rem;" ng-model="item.order" />
+                </td>
+                
+                <td>
+                	{{item.name}}
+                </td>
+            	
+                <td style="width:3rem;">
+                	<button class="btn btn-primary" ng-click="add(item);">
+                		{{'add_BTN' | translate}}
+                	</button>
+                </td>
+                
+            </tr>
+        </tbody>
+    </table>
+	
+</article>

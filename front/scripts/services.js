@@ -379,6 +379,29 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 				service.data.mosaic = null;
 			});
 		},
+		
+		remove: function(mission) {
+			
+			var data = { 'ref':service.data.mosaic.ref, 'mission':mission };
+			return API.sendRequest('/api/mosaic/remove/', 'POST', {}, data).then(function(response) {
+					
+				if (response) {
+					service.data.mosaic = response;
+					$state.reload();
+				}
+			});
+		},
+		
+		add: function(mission) {
+			
+			var data = { 'ref':service.data.mosaic.ref, 'mission':mission };
+			return API.sendRequest('/api/mosaic/add/', 'POST', {}, data).then(function(response) {
+					
+				if (response) {
+					service.data.mosaic = response;
+				}
+			});
+		},
 	};
 	
 	return service;
@@ -390,6 +413,7 @@ angular.module('AngularApp.services').service('DataService', function(API) {
 		
 		cities: null,
 		mosaics: null,
+		missions: null,
 		countries: null,
 		
 		current_city: null,
@@ -423,6 +447,17 @@ angular.module('AngularApp.services').service('DataService', function(API) {
 				
 				if (response) {
 					service.mosaics = response;
+				}
+			});
+		},
+		
+		getMissions: function(mosaic) {
+			
+			var data = { 'ref':mosaic.ref };
+			return API.sendRequest('/api/mosaic/potential/', 'POST', {}, data).then(function(response) {
+				
+				if (response) {
+					service.missions = response;
 				}
 			});
 		},

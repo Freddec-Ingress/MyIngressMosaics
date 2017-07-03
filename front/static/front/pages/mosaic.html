@@ -74,6 +74,10 @@
             <tbody>
                 <tr ng-repeat="item in mosaic.missions">
                 	
+                    <td class="text-white text-center" style="width:1rem;" ng-if="user.name == mosaic.registerer.name">
+                    	<i class="fa fa-trash link" ng-click="remove(item.ref);"></i>
+                    </td>
+                    
                     <td class="text-white" style="width:2rem;">
                     	#{{item.order}}
                     </td>
@@ -102,6 +106,12 @@
 				<button type="submit" class="btn btn-secondary btn-block" ng-click="delete();">
 					{{'mosaicpage_DELETE' | translate}}
 				</button>
+			</div>
+			
+			<div class="cell pr-2">
+				<a ui-sref="root.mosaic.add" class="btn btn-secondary btn-block">
+					{{'mosaicpage_ADD' | translate}}
+				</a>
 			</div>
 			
 		</div>

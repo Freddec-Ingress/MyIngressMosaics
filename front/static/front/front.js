@@ -2464,6 +2464,7 @@ var en_translations = {
 	
 	mosaicpage_ROADMAP: 'Roadmap',
 	mosaicpage_DELETE: 'Delete',
+	mosaicpage_ADD: 'Add',
 	
 	mymosaics_LINK: 'My Mosaics',
 	mymosaics_TITLE: 'My Mosaics',
@@ -2474,6 +2475,11 @@ var en_translations = {
 	edit_BTN: 'Save',
 	edit_BACK: 'back to mosaic',
 	edit_TITLE: 'Edit mission order',
+	
+	add_BTN: 'Add',
+	add_BACK: 'back to mosaic',
+	add_TITLE: 'Add mission to mosaic',
+	add_NOMISSION: 'No mission to add',
 	
 	countries_LINK: 'All the mosaics',
 	countries_TITLE: 'All the mosaics',
@@ -2573,6 +2579,7 @@ var fr_translations = {
 	
 	mosaicpage_ROADMAP: 'Itinéraire',
 	mosaicpage_DELETE: 'Supprimer',
+	mosaicpage_ADD: 'Ajouter',
 
 	mymosaics_LINK: 'Mes fresques',
 	mymosaics_TITLE: 'Mes fresques',
@@ -2583,6 +2590,11 @@ var fr_translations = {
 	edit_BTN: 'Enregistrer',
 	edit_BACK: 'retour à la fresque',
 	edit_TITLE: 'Modifier l\'ordre des missions',
+	
+	add_BTN: 'Ajouter',
+	add_BACK: 'retour à la fresque',
+	add_TITLE: 'Ajouter des missions à la fresque',
+	add_NOMISSION: 'Aucune mission à ajouter',
 	
 	countries_LINK: 'Toutes les fresques',
 	countries_TITLE: 'Toutes les fresques',
@@ -2975,6 +2987,29 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 				service.data.mosaic = null;
 			});
 		},
+		
+		remove: function(mission) {
+			
+			var data = { 'ref':service.data.mosaic.ref, 'mission':mission };
+			return API.sendRequest('/api/mosaic/remove/', 'POST', {}, data).then(function(response) {
+					
+				if (response) {
+					service.data.mosaic = response;
+					$state.reload();
+				}
+			});
+		},
+		
+		add: function(mission) {
+			
+			var data = { 'ref':service.data.mosaic.ref, 'mission':mission };
+			return API.sendRequest('/api/mosaic/add/', 'POST', {}, data).then(function(response) {
+					
+				if (response) {
+					service.data.mosaic = response;
+				}
+			});
+		},
 	};
 	
 	return service;
@@ -2986,6 +3021,7 @@ angular.module('AngularApp.services').service('DataService', function(API) {
 		
 		cities: null,
 		mosaics: null,
+		missions: null,
 		countries: null,
 		
 		current_city: null,
@@ -3019,6 +3055,17 @@ angular.module('AngularApp.services').service('DataService', function(API) {
 				
 				if (response) {
 					service.mosaics = response;
+				}
+			});
+		},
+		
+		getMissions: function(mosaic) {
+			
+			var data = { 'ref':mosaic.ref };
+			return API.sendRequest('/api/mosaic/potential/', 'POST', {}, data).then(function(response) {
+				
+				if (response) {
+					service.missions = response;
 				}
 			});
 		},
@@ -3295,6 +3342,7 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 	$scope.mosaic = MosaicService.data.mosaic;
 	
 	$scope.delete = MosaicService.delete;
+	$scope.remove = MosaicService.remove;
 
 	$scope.rows = function() {
 		
@@ -3464,6 +3512,30 @@ angular.module('AngularApp.controllers').controller('EditCtrl', function($scope,
 	}
 });
 
+angular.module('AngularApp.controllers').controller('AddCtrl', function($scope, $state, MosaicService, DataService) {
+
+	$scope.mosaic = MosaicService.data.mosaic;
+	
+	DataService.getMissions($scope.mosaic).then(function(response) {
+		$scope.missions = DataService.missions;
+	});
+	
+	$scope.add = function(item) {
+		
+		var index = $scope.missions.indexOf(item);
+		if (index > -1) {
+		    $scope.missions.splice(index, 1);
+		}
+		
+		MosaicService.add(item.ref);
+	}
+
+	$scope.back = function() {
+		
+		$state.go('root.mosaic', {ref: $scope.mosaic.ref}, {reload:true});
+	}
+});
+
 angular.module('AngularApp.controllers').controller('MyMosaicsCtrl', function($scope, $state, UserService) {
 	
 	$scope.page_title = 'mymosaics_TITLE';
@@ -3538,6 +3610,7 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 			
 			.state('root.mosaic', { url: '/mosaic/:ref', controller: 'MosaicCtrl', templateUrl: '/static/front/pages/mosaic.html', resolve: {loadMosaic: function($stateParams, MosaicService) { return MosaicService.getMosaic($stateParams.ref); }, }, })
 				.state('root.mosaic.edit', { url: '/edit', controller: 'EditCtrl', templateUrl: '/static/front/pages/edit.html', })
+				.state('root.mosaic.add', { url: '/add', controller: 'AddCtrl', templateUrl: '/static/front/pages/add.html', })
 			
 			.state('root.missions', { url: '/missions', controller: 'MissionsCtrl', templateUrl: '/static/front/pages/missions.html', data:{ title: 'missions_TITLE', }, resolve: {loadMissions: function(UserService) { return UserService.getMissions(); }, }, })
 			

@@ -17,17 +17,20 @@ urlpatterns = [
 	url(r'^logout/',	AccountViewSet.as_view({ 'post': 'logout'   })),
 	url(r'^register/',	AccountViewSet.as_view({ 'post': 'register' })),
 	
+	url(r'^mosaic/name/',			MosaicViewSet.as_view({ 'post'  : 'name'   })),
+	url(r'^mosaic/reorder/',			MosaicViewSet.as_view({ 'post'  : 'reorder'   })),
+	url(r'^mosaic/remove/',			MosaicViewSet.as_view({ 'post'  : 'remove'   })),
+	url(r'^mosaic/add/',			MosaicViewSet.as_view({ 'post'  : 'add'   })),
+	url(r'^mosaic/delete/',			MosaicViewSet.as_view({ 'post'  : 'delete'   })),
+	url(r'^mosaic/potential/',			MosaicViewSet.as_view({ 'post'  : 'potential'   })),
+	url(r'^mosaic/(?P<ref>\w+)/$',	MosaicViewSet.as_view({ 'get'  : 'view'   })),
+	
 	url(r'^profile/name/',	ProfileViewSet.as_view({ 'post': 'name'     })),
 	url(r'^profile/',		ProfileViewSet.as_view({ 'get' : 'view'     })),
 	url(r'^mission/delete/',		ProfileViewSet.as_view({ 'post' : 'deleteMission' })),
 	url(r'^missions/',		ProfileViewSet.as_view({ 'get' : 'missions' })),
 	url(r'^mosaics/',		ProfileViewSet.as_view({ 'get' : 'mosaics' })),
 	url(r'^mosaic/create/',	ProfileViewSet.as_view({ 'post' : 'create' })),
-	
-	url(r'^mosaic/name/',			MosaicViewSet.as_view({ 'post'  : 'name'   })),
-	url(r'^mosaic/reorder/',			MosaicViewSet.as_view({ 'post'  : 'reorder'   })),
-	url(r'^mosaic/delete/',			MosaicViewSet.as_view({ 'post'  : 'delete'   })),
-	url(r'^mosaic/(?P<ref>\w+)/$',	MosaicViewSet.as_view({ 'get'  : 'view'   })),
 
 	url(r'^countries/',		DataViewSet.as_view({ 'post' : 'countries' })),
 	url(r'^cities/',		DataViewSet.as_view({ 'post' : 'cities' })),
