@@ -388,17 +388,18 @@ class MosaicViewSet(viewsets.ViewSet):
 
 	def potential(self, request):
 		
-		result = Mosaic.objects.filter(ref=request.data['ref'], registerer=request.user)
+		result = Mosaic.objects.filter(ref=request.data['ref'])
 		if result.count() > 0:
 			
 			mosaic = result[0]
 			
 			creators = mosaic.creators.all().values_list('name', flat=True)
 			
+			missions = []
+				
 			results = Mission.objects.filter(mosaic__isnull=True).filter(Q(title__contains=mosaic.title) | Q(creator__in=creators))
 			if results.count() > 0:
 				
-				missions = []
 				for item in results:
 					
 					temp = {'ref':item.ref, 'name':item.title, 'desc':item.desc, 'creator':item.creator, 'faction':item.faction, 'image':item.image, 'order':item.order,
@@ -407,7 +408,7 @@ class MosaicViewSet(viewsets.ViewSet):
 					
 					missions.append(temp)
 			
-				return Response(missions, status=status.HTTP_200_OK)
+			return Response(missions, status=status.HTTP_200_OK)
 			
 		return Response(None, status=status.HTTP_404_NOT_FOUND)
 		
