@@ -301,19 +301,19 @@ a:hover, a:focus {
 }
 
 .card-block.first {
-    border-top-left-radius: .25rem;
-    border-top-right-radius: .25rem;
+    border-top-left-radius: .125rem;
+    border-top-right-radius: .125rem;
 }
 
 .card-block.last {
-    border-bottom-left-radius: .25rem;
-    border-bottom-right-radius: .25rem;
+    border-bottom-left-radius: .125rem;
+    border-bottom-right-radius: .125rem;
 }
 
 .card-block-bordered {
     padding: 0;
     position: relative;
-    border-radius: .25rem;
+    border-radius: .125rem;
     border: 1px solid #004D40;
 }
 
@@ -360,7 +360,7 @@ label {
     background-color: #0B0C0D;
     display: block; width: 100%;
     height: 2rem; line-height: 2rem;
-    border-radius: .25rem; border: 1px solid #009688;
+    border-radius: .125rem; border: 1px solid #009688;
     color: #ffffff; font: 400 .75rem/1.5 'Coda',sans-serif;
 }
 .form-control:focus {
@@ -429,7 +429,7 @@ label {
 	padding: 0 .5rem;
 	min-height: 2rem;
 	background-color: transparent;
-	border: 0; border-radius: .25rem;
+	border: 0; border-radius: .125rem;
 	display: flex; flex-direction: row; align-items: center; justify-content: center; flex-wrap: nowrap;
 	color: #EBBC4A; font-size: .75rem; font-family: inherit; text-decoration: none; text-transform: uppercase;
 }
@@ -443,9 +443,11 @@ label {
 
 .btn-primary {
     color: #FFFFFF;
+    border: 1px solid #009688;
     background-color: #009688;
 }
 .btn-primary:hover, .btn-primary:focus {
+    border: 1px solid #FFFFFF;
     background-color: #009688;
 }
 
@@ -517,6 +519,7 @@ table tbody tr.selected {
 }
 
 table td {
+    height: 3rem;
     max-width: 5rem;
     padding: .5rem .25rem;
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
