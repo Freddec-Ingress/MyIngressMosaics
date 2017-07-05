@@ -11,6 +11,9 @@ var fr_translations = {
 	
 	here_LABEL: 'ici',
 	
+	ok_LABEL: 'Ok',
+	cancel_LABEL: 'Annuler',
+	
 	home_TITLE: 'Bienvenue',
 	home_HELPTITLE: 'Ce que vous pouvez faire pour aider',
 	home_TEXT1: '1. Installer notre extension Chrome ',
@@ -91,9 +94,15 @@ var fr_translations = {
 	create_SUBTITLE3: 'Valider l\'aperçu',
 	create_BTN: 'Enregister',
 	
+	mosaicpage_TITLE: 'Fresque',
 	mosaicpage_ROADMAP: 'Itinéraire',
 	mosaicpage_DELETE: 'Supprimer',
 	mosaicpage_ADD: 'Ajouter',
+	mosaicpage_DETAILS: 'Détails',
+	mosaicpage_IMAGE: 'Image',
+	mosaicpage_MISSIONS: 'Missions',
+	mosaicpage_REORDER: 'Réordonner',
+	mosaicpage_DELETETITLE: 'Tapez le nom de la fresque pour la détruire',
 
 	mymosaics_LINK: 'Mes fresques',
 	mymosaics_TITLE: 'Mes fresques',

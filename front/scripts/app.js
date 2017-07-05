@@ -22,7 +22,7 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 
 			.state('root.create', { url: '/create', controller: 'CreateCtrl', templateUrl: '/static/front/pages/create.html', data:{ title: 'create_TITLE', }, })
 			
-			.state('root.mosaic', { url: '/mosaic/:ref', controller: 'MosaicCtrl', templateUrl: '/static/front/pages/mosaic.html', resolve: {loadMosaic: function($stateParams, MosaicService) { return MosaicService.getMosaic($stateParams.ref); }, }, })
+			.state('root.mosaic', { url: '/mosaic/:ref', controller: 'MosaicCtrl', templateUrl: '/static/front/pages/mosaic.html', data:{ title: 'mosaicpage_TITLE', }, resolve: {loadMosaic: function($stateParams, MosaicService) { return MosaicService.getMosaic($stateParams.ref); }, }, })
 				.state('root.mosaic.edit', { url: '/edit', controller: 'EditCtrl', templateUrl: '/static/front/pages/edit.html', })
 				.state('root.mosaic.add', { url: '/add', controller: 'AddCtrl', templateUrl: '/static/front/pages/add.html', })
 			

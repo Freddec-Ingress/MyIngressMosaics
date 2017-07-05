@@ -2389,6 +2389,9 @@ var en_translations = {
 	
 	here_LABEL: 'here',
 	
+	ok_LABEL: 'Ok',
+	cancel_LABEL: 'Cancel',
+	
 	home_TITLE: 'Welcome',
 	home_HELPTITLE: 'What you can do to help',
 	home_TEXT1: '1. Install our Chrome extension ',
@@ -2469,9 +2472,15 @@ var en_translations = {
 	create_SUBTITLE3: 'Validate preview',
 	create_BTN: 'Register',
 	
+	mosaicpage_TITLE: 'Mosaic',
 	mosaicpage_ROADMAP: 'Roadmap',
 	mosaicpage_DELETE: 'Delete',
 	mosaicpage_ADD: 'Add',
+	mosaicpage_DETAILS: 'Details',
+	mosaicpage_IMAGE: 'Image',
+	mosaicpage_MISSIONS: 'Missions',
+	mosaicpage_REORDER: 'Reorder',
+	mosaicpage_DELETETITLE: 'Type mosaic name to delete this mosaic',
 	
 	mymosaics_LINK: 'My Mosaics',
 	mymosaics_TITLE: 'My Mosaics',
@@ -2510,6 +2519,9 @@ var fr_translations = {
 	restricted_TEXT: 'L\'accès à cette page est restreint. Vous devez être connecté pour y accéder.',
 	
 	here_LABEL: 'ici',
+	
+	ok_LABEL: 'Ok',
+	cancel_LABEL: 'Annuler',
 	
 	home_TITLE: 'Bienvenue',
 	home_HELPTITLE: 'Ce que vous pouvez faire pour aider',
@@ -2591,9 +2603,15 @@ var fr_translations = {
 	create_SUBTITLE3: 'Valider l\'aperçu',
 	create_BTN: 'Enregister',
 	
+	mosaicpage_TITLE: 'Fresque',
 	mosaicpage_ROADMAP: 'Itinéraire',
 	mosaicpage_DELETE: 'Supprimer',
 	mosaicpage_ADD: 'Ajouter',
+	mosaicpage_DETAILS: 'Détails',
+	mosaicpage_IMAGE: 'Image',
+	mosaicpage_MISSIONS: 'Missions',
+	mosaicpage_REORDER: 'Réordonner',
+	mosaicpage_DELETETITLE: 'Tapez le nom de la fresque pour la détruire',
 
 	mymosaics_LINK: 'Mes fresques',
 	mymosaics_TITLE: 'Mes fresques',
@@ -3622,7 +3640,7 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 
 			.state('root.create', { url: '/create', controller: 'CreateCtrl', templateUrl: '/static/front/pages/create.html', data:{ title: 'create_TITLE', }, })
 			
-			.state('root.mosaic', { url: '/mosaic/:ref', controller: 'MosaicCtrl', templateUrl: '/static/front/pages/mosaic.html', resolve: {loadMosaic: function($stateParams, MosaicService) { return MosaicService.getMosaic($stateParams.ref); }, }, })
+			.state('root.mosaic', { url: '/mosaic/:ref', controller: 'MosaicCtrl', templateUrl: '/static/front/pages/mosaic.html', data:{ title: 'mosaicpage_TITLE', }, resolve: {loadMosaic: function($stateParams, MosaicService) { return MosaicService.getMosaic($stateParams.ref); }, }, })
 				.state('root.mosaic.edit', { url: '/edit', controller: 'EditCtrl', templateUrl: '/static/front/pages/edit.html', })
 				.state('root.mosaic.add', { url: '/add', controller: 'AddCtrl', templateUrl: '/static/front/pages/add.html', })
 			

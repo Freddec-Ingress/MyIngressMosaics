@@ -1,82 +1,95 @@
-<section ng-if="!mosaic">
+<div class="text-danger text-center mt-4 mr-2 ml-2" ng-if="!mosaic">
+	{{'nomosaic_TEXT' | translate}}
+</div>
+
+<div ng-if="mosaic" ui-view="">
+
+	<div class="card">
+		
+		<div class="card-header f-row">
+			
+			<span class="mr-auto">{{'mosaicpage_DETAILS' | translate}}</span>
 	
-	<div class="text-danger text-center mr-2 ml-2">
-		{{'nomosaic_TEXT' | translate}}
+			<a ng-if="user.name == mosaic.registerer.name">
+				<i class="fa fa-pencil-square-o btn-icon"></i>
+			</a>
+
+		</div>
+		
+		<div class="card-block f-col">
+			
+			<div class="text-white text-big">{{mosaic.title}}</div>
+			
+		    <div>{{mosaic.country}} &middot; {{mosaic.city}}</div>
+		    
+			<pre class="text-highlight">{{mosaic.desc}}</pre>
+			
+	        <div class="mb-2">
+	        	{{'mosaic_BY' | translate}}
+	        	<span class="ml-2" ng-repeat="creator in mosaic.creators" ng-class="{'text-enligtened': creator.faction == 'E', 'text-resistance': creator.faction == 'R',}">{{creator.name}}</span>
+	        </div>
+
+		</div>
+		
 	</div>
 
-</section>
-
-<section ng-if="mosaic" ui-view="">
-	
-	<meta itemscope itemtype="http://schema.org/Article" />
-	<meta itemprop="headline" content="{{mosaic.title}}" />
-	<meta itemprop="description" content="{{mosaic.desc}}" />
-
-	<article>
+	<div class="card">
 		
-        <div class="grid-row" ng-repeat="i in rows()">
-            <div ng-repeat="j in cols()" style="flex:0 0 16.666667%;">
-                
-                <img src="/static/front/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{getImage(i, j)}}=s100); background-size: 85% 85%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-                
-            </div>
-        </div>
-        
-	</article>
-	
-	<article>
-        
-		<h4>
-			<div style="position:relative;" ng-show="!editname">
-				{{mosaic.title}}
-				<i class="fa fa-pencil-square-o icon-edit" ng-if="user.name == mosaic.registerer.name" ng-click="nameClick();"></i>
-	            <div class="loading loading-edit" ng-show="loadingname">
-	            	<img src="/static/front/img/loading.png" />
+		<div class="card-header f-row">
+			
+			<span class="mr-auto">{{'mosaicpage_IMAGE' | translate}}</span>
+			<span>{{rows().length}}x{{mosaic.cols}}</span>
+			
+		</div>
+		
+		<div class="card-block">
+			
+	        <div class="grid-row" ng-repeat="i in rows()">
+	            <div ng-repeat="j in cols()" style="flex:0 0 16.666667%;">
+	                <img src="/static/front/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{getImage(i, j)}}=s100); background-size: 85% 85%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
 	            </div>
-			</div>
-			<div ng-show="editname">
-				<input id="input-name" type="text" class="form-control" ng-model="newname" ng-blur="nameBlur(newname);" />
-			</div>
-		</h4>
+	        </div>
+		</div>
 		
-        <h5>{{mosaic.country}} &middot; {{mosaic.city}}</h5>
-		<h5><pre class="mt-0 mb-0" style="font: inherit; white-space: pre-line;">{{mosaic.desc}}</pre></h5>
-        
-        <div class="group">
-        	{{'mosaic_BY' | translate}}
-        	<span class="ml-2" ng-repeat="creator in mosaic.creators" ng-class="{'text-enligtened': creator.faction == 'E', 'text-resistance': creator.faction == 'R',}">{{creator.name}}</span>
-        </div>
-        
-        <div>
-        	{{mosaic.type}} &middot; {{rows().length}}x{{mosaic.cols}} &middot; {{mosaic._distance | number:3}} km
-        </div>
-        
-	</article>
-	
-	<article>
-		
-		<h4>
-			{{'mosaicpage_ROADMAP' | translate}}
-			<a ui-sref="root.mosaic.edit" ng-if="user.name == mosaic.registerer.name">
-				<i class="fa fa-pencil-square-o icon-edit"></i>
-			</a>
-		</h4>
-		
-	    <div id="map" ng-init="initMap();"></div>
-        
-	</article>
-	
-	<article>
+	</div>
 
-        <table class="mb-2">
+	<div class="card">
+		
+		<div class="card-header f-row">
+			
+			<span class="mr-auto">{{'mosaicpage_ROADMAP' | translate}}</span>
+			<span>{{mosaic._distance | number:3}} km</span>
+			
+		</div>
+		
+		<div class="card-block">
+			
+	    	<div id="map" ng-init="initMap();"></div>
+	    	
+		</div>
+		
+	</div>
+	
+	<div class="card">
+		
+		<div class="card-header f-row">
+			
+			<span class="mr-auto">{{'mosaicpage_MISSIONS' | translate}}</span>
+			<span>{{mosaic.missions.length}} &middot; {{mosaic.type}}</span>
+			
+		</div>
+		
+        <table class="card-table">
             <tbody>
                 <tr ng-repeat="item in mosaic.missions">
                 	
-                    <td class="text-white text-center" style="width:1rem;" ng-if="user.name == mosaic.registerer.name">
-                    	<i class="fa fa-trash link" ng-click="remove(item.ref);"></i>
+                    <td class="text-white text-center" style="width:2rem;" ng-if="user.name == mosaic.registerer.name">
+                    	<a ng-click="remove(item.ref);">
+                    		<i class="fa fa-trash"></i>
+                    	</a>
                     </td>
                     
-                    <td class="text-white" style="width:2rem;">
+                    <td class="text-white text-center" style="width:2rem;">
                     	#{{item.order}}
                     </td>
                     
@@ -84,7 +97,7 @@
                         {{item.title}}
                     </td>
                     
-                    <td class="text-center" style="width:1rem;">
+                    <td class="text-center" style="width:2rem;">
                         <a href="https://www.ingress.com/mission/{{item.ref}}" target="blank">
                             <i class="fa fa-external-link"></i>
                         </a>
@@ -93,27 +106,37 @@
                 </tr>
             </tbody>
         </table>
-
-	</article>
-	
-	<article ng-if="user.name == mosaic.registerer.name">
 		
-		<div class="grid-row">
+		<div class="card-block f-row" ng-if="user.name == mosaic.registerer.name">
 			
-			<div class="cell pr-2">
-				<button type="submit" class="btn btn-secondary btn-block" ng-click="delete();">
-					{{'mosaicpage_DELETE' | translate}}
-				</button>
-			</div>
+			<a class="btn btn-secondary btn-fixed mr-2" ui-sref="root.mosaic.add">
+				{{'mosaicpage_ADD' | translate}}
+			</a>
 			
-			<div class="cell pr-2">
-				<a ui-sref="root.mosaic.add" class="btn btn-secondary btn-block">
-					{{'mosaicpage_ADD' | translate}}
-				</a>
-			</div>
-			
+			<a class="btn btn-secondary btn-fixed ml-2" ui-sref="root.mosaic.edit">
+				{{'mosaicpage_REORDER' | translate}}
+			</a>
+
 		</div>
 		
-	</article>
+	</div>
+	
+	<div class="card" ng-if="user.name == mosaic.registerer.name">
+		
+		<div class="card-header">
+			{{'mosaicpage_DELETETITLE' | translate}}
+		</div>
 
-</section>
+		<div class="card-block f-row">
+			
+			<input type="text" class="form-control mr-2" />
+			
+			<button type="submit" class="btn btn-primary ml-2" ng-click="delete();">
+				{{'mosaicpage_DELETE' | translate}}
+			</button>
+
+		</div>
+		
+	</div>
+
+</div>

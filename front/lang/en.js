@@ -11,6 +11,9 @@ var en_translations = {
 	
 	here_LABEL: 'here',
 	
+	ok_LABEL: 'Ok',
+	cancel_LABEL: 'Cancel',
+	
 	home_TITLE: 'Welcome',
 	home_HELPTITLE: 'What you can do to help',
 	home_TEXT1: '1. Install our Chrome extension ',
@@ -91,9 +94,15 @@ var en_translations = {
 	create_SUBTITLE3: 'Validate preview',
 	create_BTN: 'Register',
 	
+	mosaicpage_TITLE: 'Mosaic',
 	mosaicpage_ROADMAP: 'Roadmap',
 	mosaicpage_DELETE: 'Delete',
 	mosaicpage_ADD: 'Add',
+	mosaicpage_DETAILS: 'Details',
+	mosaicpage_IMAGE: 'Image',
+	mosaicpage_MISSIONS: 'Missions',
+	mosaicpage_REORDER: 'Reorder',
+	mosaicpage_DELETETITLE: 'Type mosaic name to delete this mosaic',
 	
 	mymosaics_LINK: 'My Mosaics',
 	mymosaics_TITLE: 'My Mosaics',
