@@ -27,6 +27,13 @@ var en_translations = {
 	error_PASSWORDS_NOT_EQUAL: 'Passwords are not the same.',
 	error_USERNAME_ALREADY_EXISTS: 'This username is already used.',
 	
+	menu_title_USER: 'User',
+	menu_title_LANG: 'Language',
+	menu_title_CONTACT: 'Contact',
+	
+	menu_contact_EMAIL: 'Message',
+	menu_contact_COMMUNITY: 'G+ Community',
+	
 	login_LINK: 'Sign in',
 	login_TITLE: 'Sign in',
 	login_local_BTN: 'Sign in',
@@ -103,8 +110,8 @@ var en_translations = {
 	add_TITLE: 'Add mission to mosaic',
 	add_NOMISSION: 'No mission to add',
 	
-	countries_LINK: 'All the mosaics',
-	countries_TITLE: 'All the mosaics',
+	countries_LINK: 'Mosaic Countries',
+	countries_TITLE: 'Mosaic Countries',
 	countries_COLMOSAICS: 'Mosaics',
 	countries_COLCOUNTRY: 'Country',
 	countries_COLCITY: 'City',

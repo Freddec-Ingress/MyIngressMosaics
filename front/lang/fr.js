@@ -27,6 +27,13 @@ var fr_translations = {
 	error_PASSWORDS_NOT_EQUAL: 'Les mots de passe saisis ne sont pas identiques.',
 	error_USERNAME_ALREADY_EXISTS: 'Un utilisateur avec ce nom existe déjà.',
 	
+	menu_title_USER: 'Utilisateur',
+	menu_title_LANG: 'Langue',
+	menu_title_CONTACT: 'Contact',
+	
+	menu_contact_EMAIL: 'Message',
+	menu_contact_COMMUNITY: 'Communauté G+',
+	
 	login_LINK: 'Se connecter',
 	login_TITLE: 'Connexion',
 	login_local_BTN: 'Se connecter',
@@ -103,8 +110,8 @@ var fr_translations = {
 	add_TITLE: 'Ajouter des missions à la fresque',
 	add_NOMISSION: 'Aucune mission à ajouter',
 	
-	countries_LINK: 'Toutes les fresques',
-	countries_TITLE: 'Toutes les fresques',
+	countries_LINK: 'Les Pays',
+	countries_TITLE: 'Les Pays',
 	countries_COLMOSAICS: 'Fresques',
 	countries_COLCOUNTRY: 'Pays',
 	countries_COLCITY: 'Ville',

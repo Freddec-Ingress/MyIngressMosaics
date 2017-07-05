@@ -2405,6 +2405,13 @@ var en_translations = {
 	error_PASSWORDS_NOT_EQUAL: 'Passwords are not the same.',
 	error_USERNAME_ALREADY_EXISTS: 'This username is already used.',
 	
+	menu_title_USER: 'User',
+	menu_title_LANG: 'Language',
+	menu_title_CONTACT: 'Contact',
+	
+	menu_contact_EMAIL: 'Message',
+	menu_contact_COMMUNITY: 'G+ Community',
+	
 	login_LINK: 'Sign in',
 	login_TITLE: 'Sign in',
 	login_local_BTN: 'Sign in',
@@ -2481,8 +2488,8 @@ var en_translations = {
 	add_TITLE: 'Add mission to mosaic',
 	add_NOMISSION: 'No mission to add',
 	
-	countries_LINK: 'All the mosaics',
-	countries_TITLE: 'All the mosaics',
+	countries_LINK: 'Mosaic Countries',
+	countries_TITLE: 'Mosaic Countries',
 	countries_COLMOSAICS: 'Mosaics',
 	countries_COLCOUNTRY: 'Country',
 	countries_COLCITY: 'City',
@@ -2519,6 +2526,13 @@ var fr_translations = {
 	error_INTEGRITY_ERROR: 'Une erreur server est survenue.',
 	error_PASSWORDS_NOT_EQUAL: 'Les mots de passe saisis ne sont pas identiques.',
 	error_USERNAME_ALREADY_EXISTS: 'Un utilisateur avec ce nom existe déjà.',
+	
+	menu_title_USER: 'Utilisateur',
+	menu_title_LANG: 'Langue',
+	menu_title_CONTACT: 'Contact',
+	
+	menu_contact_EMAIL: 'Message',
+	menu_contact_COMMUNITY: 'Communauté G+',
 	
 	login_LINK: 'Se connecter',
 	login_TITLE: 'Connexion',
@@ -2596,8 +2610,8 @@ var fr_translations = {
 	add_TITLE: 'Ajouter des missions à la fresque',
 	add_NOMISSION: 'Aucune mission à ajouter',
 	
-	countries_LINK: 'Toutes les fresques',
-	countries_TITLE: 'Toutes les fresques',
+	countries_LINK: 'Les Pays',
+	countries_TITLE: 'Les Pays',
 	countries_COLMOSAICS: 'Fresques',
 	countries_COLCOUNTRY: 'Pays',
 	countries_COLCITY: 'Ville',

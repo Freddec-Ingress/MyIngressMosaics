@@ -1,152 +1,137 @@
-<div class="topbar">
-    <div class="container">
-        
-        <div uib-dropdown>
-            
-			<div uib-dropdown-toggle>
-				<span class="flag-icon flag-icon-{{'lang_FLAG' | translate}} mr-1"></span>
-				{{'lang_LABEL' | translate}}
-			</div>
-			
-			<div uib-dropdown-menu>
-				
-				<a href="/en{{state.current.url}}">
-					<span class="flag-icon flag-icon-gb mr-1"></span>
-					English
-				</a>
-				
-				<a href="/fr{{state.current.url}}">
-					<span class="flag-icon flag-icon-fr mr-1"></span>
-					Français
-				</a>
-				
-			</div>
-			
-        </div>
-         
-		<a ui-sref="root.login" ng-show="!user.authenticated" >
-			<i class="fa fa-sign-in"></i>
-			{{'login_LINK' | translate}}
-		</a>
-		
-        <div uib-dropdown ng-show="user.authenticated">
-            
-			<div uib-dropdown-toggle>
-				<i ng-if="!user.team" class="fa fa-user mr-2"></i>
-				<img ng-if="user.team" ng-src="/static/front/img/team_{{user.team}}.svg" />
-				{{user.name}}
-			</div>
-			
-			<div uib-dropdown-menu class="dropdown-menu-right">
-				
-				<a ui-sref="root.profile">
-					{{'profile_LINK' | translate}}
-				</a>
-				
-				<a ui-sref="root.mymosaics">
-					{{'mymosaics_LINK' | translate}}
-				</a>
-				
-				<a href="javascript:;" ng-click="logout();">
-					{{'logout_LINK' | translate}}
-				</a>
-				
-			</div>
-			
-        </div>
-       
-    </div>
-</div>
-
-<div class="menu-overlay" ng-show="menu_open" ng-click="closeMenu();"></div>
+<div class="menu-overlay" ng-click="closeMenu();" ng-class="{'open': menu_open}"></div>
 
 <div class="menu-pane" ng-click="closeMenu();" ng-class="{'open': menu_open}">
     
-    <header>
-    	
-		<a ui-sref="root.home">
-			MyIngressMosaics
-		</a>
-		
-    </header>
+	<a class="menu-header" ui-sref="root.home">
+		<img src="/static/front/img/logo.jpg" class="menu-header-logo" />
+		MyIngressMosaics
+	</a>
     
-	<nav>
+	<div class="menu-content">
 		
-	    <a ui-sref="root.countries" ui-sref-active="active">
-	    	{{'countries_LINK' | translate}}
-	    </a>
-		
-	    <a ui-sref="root.missions" ui-sref-active="active">
-	    	{{'missions_LINK' | translate}}
-	    </a>
-	    
-	</nav>
-    
-</div>
-
-<header class="hidden-down">
-    <div class="container">
-        
-		<a ui-sref="root.home">
-			MyIngressMosaics
-		</a>
-		
-		<nav>
+		<nav class="menu-nav">
 			
-		    <a ui-sref="root.countries" ui-sref-active="active">
+		    <a class="menu-nav-item" ui-sref="root.countries" ui-sref-active="active">
+				<i class="fa fa-globe menu-nav-icon"></i>
 		    	{{'countries_LINK' | translate}}
 		    </a>
 			
-		    <a ui-sref="root.missions" ui-sref-active="active">
+		    <a class="menu-nav-item" ui-sref="root.missions" ui-sref-active="active">
+				<i class="fa fa-plus-square menu-nav-icon"></i>
 		    	{{'missions_LINK' | translate}}
 		    </a>
+		    
+		</nav>
+		
+		<nav class="menu-nav">
+			
+			<div class="menu-nav-title">
+				{{'menu_title_USER' | translate}}
+			</div>
+			
+			<a class="menu-nav-item" ui-sref="root.login" ng-show="!user.authenticated">
+				<i class="fa fa-sign-in menu-nav-icon"></i>
+				{{'login_LINK' | translate}}
+			</a>
+			
+			<a class="menu-nav-item" ui-sref="root.register" ng-show="!user.authenticated">
+				<i class="fa fa-hand-o-right menu-nav-icon"></i>
+				{{'register_LINK' | translate}}
+			</a>
+			
+			<a class="menu-nav-item" ui-sref="root.profile" ng-show="user.authenticated">
+				<i class="fa fa-user menu-nav-icon"></i>
+				{{'profile_LINK' | translate}}
+			</a>
+			
+			<a class="menu-nav-item" ui-sref="root.mymosaics" ng-show="user.authenticated">
+				<i class="fa fa-th menu-nav-icon"></i>
+				{{'mymosaics_LINK' | translate}}
+			</a>
+			
+			<a class="menu-nav-item" href="javascript:;"  ng-show="user.authenticated" ng-click="logout();">
+				<i class="fa fa-sign-out menu-nav-icon"></i>
+				{{'logout_LINK' | translate}}
+			</a>
+		    
+		</nav>
+		
+		<nav class="menu-nav">
+			
+			<div class="menu-nav-title">
+				{{'menu_title_LANG' | translate}}
+			</div>
+			
+			<a class="menu-nav-item" href="/en{{state.current.url}}">
+				<span class="flag-icon flag-icon-gb menu-nav-icon"></span>
+				English
+			</a>
+			
+			<a class="menu-nav-item" href="/fr{{state.current.url}}">
+				<span class="flag-icon flag-icon-fr menu-nav-icon"></span>
+				Français
+			</a>
 			
 		</nav>
-        
-    </div>
-</header>
-
-<div class="content">
-    
-	<div class="loading" ng-show="route_loading">
-		<img src="/static/front/img/loading.png" />
+		
+		<nav class="menu-nav">
+			
+			<div class="menu-nav-title">
+				{{'menu_title_CONTACT' | translate}}
+			</div>
+			
+			<a class="menu-nav-item" href="mailto:freddec.ingress@gmail.com">
+				<i class="fa fa-envelope menu-nav-icon"></i>
+				{{'menu_contact_EMAIL' | translate}}
+			</a>
+			
+			<a class="menu-nav-item" href="https://plus.google.com/u/1/communities/104595846633880114608" target="_blank">
+				<i class="fa fa-google-plus-square menu-nav-icon"></i>
+				{{'menu_contact_COMMUNITY' | translate}}
+			</a>
+			
+		</nav>
+		
+		<nav class="menu-nav">
+			
+			<div class="menu-nav-title">
+				2017 © Copyright
+			</div>
+			
+			<div class="menu-nav-title">
+				DECONINCK Frédéric
+			</div>
+			
+		</nav>
+		
 	</div>
-	
-    <div class="container" ui-view="" ng-show="!route_loading"></div>
     
 </div>
 
-<footer>
-    <div class="container">
-        
-		<a href="mailto:freddec.ingress@gmail.com">
-			<i class="fa fa-envelope" style="margin-top:-1px;"></i>
-		</a>
+<div class="page-pane">
+	
+	<header class="page-header">
+	    
+	    <div class="page-header-brand">
+	    	
+			<div class="menu-toggler" ng-click="openMenu();">
+				<i class="fa fa-bars"></i>
+			</div>
+		    
+			<h1 class="page-header-title">
+				{{state.current.data.title | translate}}
+			</h1>
+			
+		</div>
 		
-		<a href="https://plus.google.com/u/1/communities/104595846633880114608" target="_blank">
-			<i class="fa fa-google-plus-square"></i>
-		</a>
-		
-		<span>
-			2017 © Copyright
-		</span>
-		
-		<span>
-			DECONINCK Frédéric
-		</span>
-		
-    </div>
-</footer>
+	</header>
+	
+	<div class="page-content" ui-view="">
+	    
+		<div class="loading">
+			<img src="/static/front/img/loading.png" />
+		</div>
 
-<script>
-    $(document).ready(function() {
-        
-        $(window).on('scroll', function() {
-            
-            var fromTop = $('body').scrollTop();
-            
-            $('.menu-pane').toggleClass('sticky', (fromTop > 33));
-            $('.wrapper > header').toggleClass('sticky', (fromTop > 33));
-        });
-    });
-</script>
+	</div>
+
+</div>
