@@ -303,14 +303,12 @@ class MosaicViewSet(viewsets.ViewSet):
 
 
 	def reorder(self, request):
-		
-		data = []
-		
+
 		result = Mosaic.objects.filter(ref=request.data['ref'], registerer=request.user)
 		if result.count() > 0:
 			mosaic = result[0]
 			
-			for item in request.data['order']:
+			for item in request.data['missions']:
 				
 				result = Mission.objects.filter(ref=item['ref'])
 				if result.count() > 0:
@@ -319,18 +317,10 @@ class MosaicViewSet(viewsets.ViewSet):
 					mission.order = item['order']
 					mission.save()
 		
-			for item in mosaic.missions.all().order_by('order'):
-				
-				mission_data = {
-					'ref': item.ref,
-					'title': item.title,
-					'image': item.image,
-					'order': item.order,
-				}
-				
-				data.append(mission_data)
-				
-		return Response(data, status=status.HTTP_200_OK)
+			data = mosaic.serialize()
+			return Response(data, status=status.HTTP_200_OK)
+
+		return Response(None, status=status.HTTP_404_NOT_FOUND)
 
 
 

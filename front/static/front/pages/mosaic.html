@@ -145,6 +145,10 @@
 	
 	<div class="card">
 		
+		<div class="loading" ng-show="reorderLoading">
+			<img src="/static/front/img/loading.png" />
+		</div>
+		
 		<div class="card-header f-row">
 			
 			<span class="mr-auto">{{'mosaicpage_MISSIONS' | translate}}</span>
@@ -152,7 +156,7 @@
 			
 		</div>
 		
-        <table class="card-table">
+        <table class="card-table" ng-show="!reorderMode && !addMode">
             <tbody>
                 <tr ng-repeat="item in mosaic.missions">
                 	
@@ -180,15 +184,85 @@
             </tbody>
         </table>
 		
-		<div class="card-block f-row" ng-if="user.name == mosaic.registerer.name">
+        <table class="card-table" ng-show="reorderMode">
+            <tbody>
+                <tr ng-repeat="item in reorderModel.missions">
+                	
+	                <td style="width:3rem;">
+	                	<input type="number" class="form-control text-center" style="padding:.25rem;" ng-model="item.order" />
+	                </td>
+	                
+	                <td>
+	                	{{item.title}}
+	                </td>
+                    
+                </tr>
+            </tbody>
+        </table>
+		
+		<div class="card-block" ng-if="user.name == mosaic.registerer.name"  ng-show="reorderMode">
 			
-			<a class="btn btn-secondary btn-fixed mr-2" ui-sref="root.mosaic.add">
-				{{'mosaicpage_ADD' | translate}}
-			</a>
+			<div class="form-button-bar">
+				
+				<a class="btn btn-primary" ng-click="reorder();">
+					{{'ok_LABEL' | translate}}
+				</a>
+				
+				<a class="btn btn-secondary" ng-click="closeReorder();">
+					{{'cancel_LABEL' | translate}}
+				</a>
 			
-			<a class="btn btn-secondary btn-fixed ml-2" ui-sref="root.mosaic.edit">
-				{{'mosaicpage_REORDER' | translate}}
-			</a>
+			</div>
+
+		</div>
+		
+        <table class="card-table" ng-show="addMode">
+            <tbody>
+                <tr ng-repeat="item in potentials">
+                	
+	                <td style="width:3rem;">
+	                	<input type="number" class="form-control text-center" style="padding:.25rem;" ng-model="item.order" />
+	                </td>
+	                
+	                <td>
+	                	{{item.name}}
+	                </td>
+	            	
+	                <td style="width:3rem;">
+	                	<button class="btn btn-primary" ng-click="add(item);">
+	                		{{'add_BTN' | translate}}
+	                	</button>
+	                </td>
+                    
+                </tr>
+            </tbody>
+        </table>
+		
+		<div class="card-block" ng-if="user.name == mosaic.registerer.name"  ng-show="addMode">
+			
+			<div class="form-button-bar">
+				
+				<a class="btn btn-primary" ng-click="closeAdd();">
+					{{'close_LABEL' | translate}}
+				</a>
+
+			</div>
+
+		</div>
+		
+		<div class="card-block" ng-if="user.name == mosaic.registerer.name"  ng-show="!reorderMode && !addMode">
+			
+			<div class="form-button-bar">
+				
+				<a class="btn btn-secondary" ng-click="openReorder();">
+					{{'mosaicpage_REORDER' | translate}}
+				</a>
+				
+				<a class="btn btn-secondary" ng-click="openAdd();">
+					{{'mosaicpage_ADD' | translate}}
+				</a>
+			
+			</div>
 
 		</div>
 		
@@ -204,7 +278,7 @@
 			
 			<input type="text" class="form-control mr-2" />
 			
-			<button type="submit" class="btn btn-primary ml-2" ng-click="delete();">
+			<button type="submit" class="btn btn-primary ml-2" ng-model="deleteModel.name" ng-click="delete();">
 				{{'mosaicpage_DELETE' | translate}}
 			</button>
 

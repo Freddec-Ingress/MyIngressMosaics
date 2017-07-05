@@ -294,9 +294,18 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 		data: {
 			
 			mosaic: null,
+			potentials: null,
 		},
 		
 		getMosaic: function(ref) {
+			
+			var data = { 'ref':ref };
+			API.sendRequest('/api/mosaic/potential/', 'POST', {}, data).then(function(response) {
+				
+				if (response) {
+					service.data.potentials = response;
+				}
+			});
 			
 			return API.sendRequest('/api/mosaic/' + ref + '/', 'GET').then(function(response) {
 				
@@ -361,24 +370,12 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 				service.data.mosaic.country = response.country;
 			});
 		},
-		
-		updateName: function(newvalue) {
+
+		reorder: function(data) {
 			
-			var data = { 'ref':service.data.mosaic.ref, 'name':newvalue };
-			return API.sendRequest('/api/mosaic/name/', 'POST', {}, data).then(function(response) {
-				
-				service.data.mosaic.title = newvalue;
-			});
-		},
-		
-		reorderMissions: function(neworder) {
-			
-			var data = { 'ref':service.data.mosaic.ref, 'order':neworder };
 			return API.sendRequest('/api/mosaic/reorder/', 'POST', {}, data).then(function(response) {
 				
-				if (response) {
-					service.data.mosaic.missions = response;
-				}
+				service.data.mosaic.missions = response.missions;
 			});
 		},
 		
@@ -399,10 +396,7 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 			var data = { 'ref':service.data.mosaic.ref, 'mission':mission };
 			return API.sendRequest('/api/mosaic/remove/', 'POST', {}, data).then(function(response) {
 					
-				if (response) {
-					service.data.mosaic = response;
-					$state.reload();
-				}
+				service.data.mosaic.missions = response.missions;
 			});
 		},
 		
@@ -411,9 +405,7 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 			var data = { 'ref':service.data.mosaic.ref, 'mission':mission };
 			return API.sendRequest('/api/mosaic/add/', 'POST', {}, data).then(function(response) {
 					
-				if (response) {
-					service.data.mosaic = response;
-				}
+				service.data.mosaic.missions = response.missions;
 			});
 		},
 	};

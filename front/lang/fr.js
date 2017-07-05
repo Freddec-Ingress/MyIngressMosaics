@@ -12,6 +12,7 @@ var fr_translations = {
 	here_LABEL: 'ici',
 	
 	ok_LABEL: 'Ok',
+	close_LABEL: 'Fermer',
 	cancel_LABEL: 'Annuler',
 	
 	home_TITLE: 'Bienvenue',

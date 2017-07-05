@@ -242,8 +242,8 @@ angular.module('AngularApp.controllers').controller('CreateCtrl', function($scop
 angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scope, $timeout, $window, $filter, toastr, MosaicService) {
 
 	$scope.mosaic = MosaicService.data.mosaic;
+	$scope.potentials = MosaicService.data.potentials;
 	
-	$scope.delete = MosaicService.delete;
 	$scope.remove = MosaicService.remove;
 	
 	$scope.rows = function() {
@@ -324,33 +324,82 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 		});
 	}
 	
-	/* Name */
+	/* Reorder */
 	
-	$scope.editname = false;
-	$scope.newname = MosaicService.data.mosaic.title;
+	$scope.reorderMode = false;
+	$scope.reorderLoading = false;
 	
-	$scope.nameClick = function() {
+	$scope.reorderModel = {ref:null, missions:null};
+	
+	$scope.openReorder = function() {
 		
-		$scope.editname = true;
+		$scope.reorderModel.ref = $scope.mosaic.ref;
+		$scope.reorderModel.missions = $scope.mosaic.missions;
+
+		$scope.reorderMode = true;
+	}
+	
+	$scope.closeReorder = function() {
+		
+		$scope.reorderMode = false;
+	}
+	
+	$scope.reorder = function() {
+		
+		$scope.reorderLoading = true;
 			
-		$timeout(function() {
-			$('#input-name').focus();
+		MosaicService.reorder($scope.reorderModel).then(function(response) {
+			
+			toastr.success($filter('translate')('success_REORDER'));
+
+			$scope.reorderMode = false;
+			$scope.reorderLoading = false;
+			
+		}, function(response) {
+			
+			$scope.reorderMode = false;
+			$scope.reorderLoading = false;
 		});
 	}
 	
-	$scope.nameBlur = function(newvalue) {
+	/* Add */
+	
+	$scope.addMode = false;
+	
+	$scope.openAdd = function() {
 		
-		$scope.editname = false;
+		$scope.addMode = true;
+	}
+	
+	$scope.closeAdd = function() {
 		
-		if (newvalue && newvalue != MosaicService.data.mosaic.title) {
+		$scope.addMode = false;
+	}
+	
+	$scope.add = function(item) {
+		
+		var index = $scope.potentials.indexOf(item);
+		if (index > -1) {
+		    $scope.potentials.splice(index, 1);
+		}
+		
+		MosaicService.add(item.ref);
+	}
+	
+	/* Delete */
+	
+	$scope.deleteModel = {name:null};
+	
+	$scope.delete = function() {
+		
+		if ($scope.deleteModel.name == $scope.mosaic.title) {
 			
-			$scope.loadingname = true;
-			MosaicService.updateName(newvalue).then(function() {
-				$scope.loadingname = false;
-			});
+			MosaicService.delete();
 		}
 	}
 	
+	/* Map */
+
 	$scope.initMap = function() {
 		
 		var style = [{featureType:"all",elementType:"all",stylers:[{visibility:"on"},{hue:"#131c1c"},{saturation:"-50"},{invert_lightness:!0}]},{featureType:"water",elementType:"all",stylers:[{visibility:"on"},{hue:"#005eff"},{invert_lightness:!0}]},{featureType:"poi",stylers:[{visibility:"off"}]},{featureType:"transit",elementType:"all",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels.icon",stylers:[{invert_lightness:!0}]}];
@@ -404,81 +453,6 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
         
 		map.setCenter(latlngbounds.getCenter());
 		map.fitBounds(latlngbounds); 
-	}
-});
-
-angular.module('AngularApp.controllers').controller('EditCtrl', function($scope, $state, MosaicService) {
-
-	$scope.mosaic = MosaicService.data.mosaic;
-		
-	$scope.cols = MosaicService.getColsArray();
-	$scope.rows = MosaicService.getRowsArray();
-	
-	$scope.missions = [];
-	
-	for (var item of $scope.mosaic.missions) {
-		
-		var temp = {
-			ref: item.ref,
-			title: item.title,
-			order: item.order,
-			image: item.image,
-		};
-		
-		$scope.missions.push(temp);
-	}
-
-	$scope.back = function() {
-		
-		$state.go('root.mosaic', {ref: $scope.mosaic.ref});
-	}
-	
-	$scope.image = function(i, j) {
-		
-		var order = (i * $scope.mosaic.cols + j) + 1;
-		
-		var url = null;
-		
-		for (var item of $scope.missions) {
-			if (($scope.mosaic.count - item.order + 1) == order) {
-				url = item.image;
-				break;
-			}
-		}
-		
-		return url;
-	}
-	
-	$scope.save = function() {
-		
-		MosaicService.reorderMissions($scope.missions).then(function(response) {
-			
-			$state.go('root.mosaic', {ref: $scope.mosaic.ref});
-		});
-	}
-});
-
-angular.module('AngularApp.controllers').controller('AddCtrl', function($scope, $state, MosaicService, DataService) {
-
-	$scope.mosaic = MosaicService.data.mosaic;
-	
-	DataService.getMissions($scope.mosaic).then(function(response) {
-		$scope.missions = DataService.missions;
-	});
-	
-	$scope.add = function(item) {
-		
-		var index = $scope.missions.indexOf(item);
-		if (index > -1) {
-		    $scope.missions.splice(index, 1);
-		}
-		
-		MosaicService.add(item.ref);
-	}
-
-	$scope.back = function() {
-		
-		$state.go('root.mosaic', {ref: $scope.mosaic.ref}, {reload:true});
 	}
 });
 
