@@ -129,10 +129,10 @@ a:hover, a:focus {
 /* Header ------------------------------------------------------------------- */
 
 .menu-header {
-    min-height: 3.5rem;
+    min-height: 3rem;
     background-color: #009688;
     color: #FFFFFF; font-size: 1rem;
-    margin: 0; padding: 0 0 0 1.5rem;
+    margin: 0; padding: 0 0 0 1rem;
     box-shadow: 0 .25rem .5rem rgba(0,0,0,.25);
     display: flex; flex-direction: row; align-items: center;
 }
@@ -146,7 +146,7 @@ a:hover, a:focus {
     font-size: 125%;
     text-align: center;
     width: 1.28571429em;
-    margin: 0 1.5rem 0 0;
+    margin: 0 1rem 0 0;
 }
 
 /* Content ------------------------------------------------------------------ */
@@ -170,8 +170,8 @@ a:hover, a:focus {
 
 .menu-nav-title {
     min-height: 1.5rem;
-    margin: 0; padding: 0 0 0 1.5rem;
-    color: #0B0C0D; text-transform: uppercase;
+    margin: 0; padding: 0 0 0 1rem;
+    color: rgba(0,0,0,.5); text-transform: uppercase;
     display: flex; flex-direction: row; align-items: center;
 }
 
@@ -179,7 +179,7 @@ a:hover, a:focus {
 
 .menu-nav-item {
     min-height: 2.5rem;
-    margin: 0; padding: 0 0 0 1.5rem;
+    margin: 0; padding: 0 0 0 1rem;
     color: inherit; font-size: .875rem;
     display: flex; flex-direction: row; align-items: center;
 }
@@ -199,7 +199,7 @@ a:hover, a:focus {
     font-size: 125%;
     text-align: center;
     width: 1.28571429em;
-    margin: 0 1.5rem 0 0;
+    margin: 0 1rem 0 0;
 }
 
 
@@ -225,7 +225,7 @@ a:hover, a:focus {
 
 .page-header {
     padding: 0 .5rem;
-    min-height: 3.5rem;
+    min-height: 3rem;
     background-color: #009688;
     box-shadow: 0 .25rem .5rem rgba(0,0,0,.25);
     display: flex; flex-direction: row; align-items: center;
@@ -234,7 +234,6 @@ a:hover, a:focus {
 /* Header brand ------------------------------------------------------------- */
 
 .page-header-brand {
-    padding: 0 .5rem;
     display: flex; flex-direction: row; align-items: center;
 }
 
@@ -242,7 +241,7 @@ a:hover, a:focus {
 
 .page-header-title {
     margin: 0; padding: 0 .5rem;
-    color: #FFFFFF; font-size: 1.25rem; font-weight: 400;
+    color: #FFFFFF; font-size: 1rem; font-weight: 400;
 }
 
 /* Content ------------------------------------------------------------------ */
@@ -290,16 +289,32 @@ a:hover, a:focus {
 /* Header ------------------------------------------------------------------- */
 
 .card-header {
-    margin: 0; padding: 1.25rem 0 .5rem;
+    margin: 0; padding: 1rem 0 .5rem;
 }
 
 /* Block -------------------------------------------------------------------- */
 
 .card-block {
+    padding: .5rem;
     position: relative;
-    padding: .75rem .5rem;
     background-color: #004D40;
-    border: 1px solid rgba(0,0,0,.25);
+}
+
+.card-block.first {
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+}
+
+.card-block.last {
+    border-bottom-left-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+}
+
+.card-block-bordered {
+    padding: 0;
+    position: relative;
+    border-radius: .25rem;
+    border: 1px solid #004D40;
 }
 
 /* Table -------------------------------------------------------------------- */
@@ -344,7 +359,7 @@ label {
     padding: 0 .5rem;
     background-color: #0B0C0D;
     display: block; width: 100%;
-    height: 2.25rem; line-height: 2.25rem;
+    height: 2rem; line-height: 2rem;
     border-radius: .25rem; border: 1px solid #009688;
     color: #ffffff; font: 400 .75rem/1.5 'Coda',sans-serif;
 }
@@ -363,7 +378,6 @@ label {
 /* Button bar --------------------------------------------------------------- */
 
 .form-button-bar {
-    margin: 1rem 0 0;
     display: flex; align-items: center; justify-content: center;
 }
 
@@ -391,7 +405,7 @@ label {
 .input-group-addon {
 	color: #FFFFFF;
 	background-color: #009688;
-    height: 2.25rem; line-height: 2.25rem; padding: 0 .75rem;
+    height: 2rem; line-height: 2rem; padding: 0 .75rem;
 	border: 1px solid #009688; border-radius: .25rem;
 }
 .input-group-addon:not(:last-child) {
@@ -413,7 +427,7 @@ label {
 
 .btn {
 	padding: 0 .5rem;
-	min-height: 2.25rem;
+	min-height: 2rem;
 	background-color: transparent;
 	border: 0; border-radius: .25rem;
 	display: flex; flex-direction: row; align-items: center; justify-content: center; flex-wrap: nowrap;
@@ -552,6 +566,7 @@ dd {
 /* Formatted ---------------------------------------------------------------- */
 
 pre {
+    margin: 0;
     font: inherit; white-space: pre-line;
 }
 
@@ -659,8 +674,12 @@ pre {
 
 /* Size --------------------------------------------------------------------- */
 
+.text-medium {
+    font-size: .875rem!important;
+}
+
 .text-big {
-    font-size:1rem!important;
+    font-size: 1rem!important;
 }
 
 

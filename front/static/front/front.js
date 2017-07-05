@@ -2390,6 +2390,7 @@ var en_translations = {
 	here_LABEL: 'here',
 	
 	ok_LABEL: 'Ok',
+	edit_LABEL: 'Edit',
 	close_LABEL: 'Close',
 	cancel_LABEL: 'Cancel',
 	
@@ -2524,6 +2525,7 @@ var fr_translations = {
 	here_LABEL: 'ici',
 	
 	ok_LABEL: 'Ok',
+	edit_LABEL: 'Modifier',
 	close_LABEL: 'Fermer',
 	cancel_LABEL: 'Annuler',
 	

@@ -8,30 +8,28 @@
 		
 		<div class="card-header f-row">
 			
-			<span class="mr-auto">{{'mosaicpage_DETAILS' | translate}}</span>
+			<span class="mr-auto text-medium">{{'mosaicpage_DETAILS' | translate}}</span>
 	
 			<a ng-if="user.name == mosaic.registerer.name" ng-show="!editMode" ng-click="openEdit();">
-				<i class="fa fa-pencil-square-o btn-icon"></i>
+				{{'edit_LABEL' | translate}}
 			</a>
 
 		</div>
 		
-		<div class="card-block f-col" ng-show="!editMode">
+		<div class="card-block first last f-col" ng-show="!editMode">
 			
-			<div class="text-white text-big">{{mosaic.title}}</div>
+			<div class="group text-white text-big">{{mosaic.title}}</div>
 			
-		    <div>{{mosaic.country}} &middot; {{mosaic.city}}</div>
+		    <div class="group">{{mosaic.country}} &middot; {{mosaic.city}}</div>
 		    
-			<pre class="text-highlight">{{mosaic.desc}}</pre>
+			<pre class="group text-highlight">{{mosaic.desc}}</pre>
 			
-	        <div class="mb-2">
-	        	{{'mosaic_BY' | translate}}
-	        	<span class="ml-2" ng-repeat="creator in mosaic.creators" ng-class="{'text-enligtened': creator.faction == 'E', 'text-resistance': creator.faction == 'R',}">{{creator.name}}</span>
-	        </div>
+        	{{'mosaic_BY' | translate}}
+        	<span class="ml-2" ng-repeat="creator in mosaic.creators" ng-class="{'text-enligtened': creator.faction == 'E', 'text-resistance': creator.faction == 'R',}">{{creator.name}}</span>
 
 		</div>
 		
-		<div class="card-block f-col" ng-if="user.name == mosaic.registerer.name" ng-show="editMode">
+		<div class="card-block first last f-col" ng-if="user.name == mosaic.registerer.name" ng-show="editMode">
 			
 			<div class="loading" ng-show="editLoading">
 				<img src="/static/front/img/loading.png" />
@@ -110,12 +108,12 @@
 		
 		<div class="card-header f-row">
 			
-			<span class="mr-auto">{{'mosaicpage_IMAGE' | translate}}</span>
+			<span class="mr-auto text-medium">{{'mosaicpage_IMAGE' | translate}}</span>
 			<span>{{rows().length}}x{{mosaic.cols}}</span>
 			
 		</div>
 		
-		<div class="card-block">
+		<div class="card-block-bordered">
 			
 	        <div class="f-row" ng-repeat="i in rows()">
 	            <div ng-repeat="j in cols()" style="flex:0 0 16.666667%;">
@@ -130,12 +128,12 @@
 		
 		<div class="card-header f-row">
 			
-			<span class="mr-auto">{{'mosaicpage_ROADMAP' | translate}}</span>
+			<span class="mr-auto text-medium">{{'mosaicpage_ROADMAP' | translate}}</span>
 			<span>{{mosaic._distance | number:3}} km</span>
 			
 		</div>
 		
-		<div class="card-block">
+		<div class="card-block-bordered">
 			
 	    	<div id="map" ng-init="initMap();"></div>
 	    	
@@ -151,7 +149,7 @@
 		
 		<div class="card-header f-row">
 			
-			<span class="mr-auto">{{'mosaicpage_MISSIONS' | translate}}</span>
+			<span class="mr-auto text-medium">{{'mosaicpage_MISSIONS' | translate}}</span>
 			<span>{{mosaic.missions.length}} &middot; {{mosaic.type}}</span>
 			
 		</div>
@@ -200,7 +198,7 @@
             </tbody>
         </table>
 		
-		<div class="card-block" ng-if="user.name == mosaic.registerer.name"  ng-show="reorderMode">
+		<div class="card-block last" ng-if="user.name == mosaic.registerer.name"  ng-show="reorderMode">
 			
 			<div class="form-button-bar">
 				
@@ -238,7 +236,7 @@
             </tbody>
         </table>
 		
-		<div class="card-block" ng-if="user.name == mosaic.registerer.name"  ng-show="addMode">
+		<div class="card-block last" ng-if="user.name == mosaic.registerer.name"  ng-show="addMode">
 			
 			<div class="form-button-bar">
 				
@@ -250,7 +248,7 @@
 
 		</div>
 		
-		<div class="card-block" ng-if="user.name == mosaic.registerer.name"  ng-show="!reorderMode && !addMode">
+		<div class="card-block last" ng-if="user.name == mosaic.registerer.name"  ng-show="!reorderMode && !addMode">
 			
 			<div class="form-button-bar">
 				
@@ -274,7 +272,7 @@
 			{{'mosaicpage_DELETETITLE' | translate}}
 		</div>
 
-		<div class="card-block f-row">
+		<div class="card-block text-medium f-row">
 			
 			<input type="text" class="form-control mr-2" />
 			
