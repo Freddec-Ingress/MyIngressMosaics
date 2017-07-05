@@ -23,7 +23,7 @@ angular.module('AngularApp.services').service('API', function($q, $http, $cookie
 						if (response.data == null) response.data = 'error_NOCONNECTION';
 					}
 					
-					toastr.error($filter('translate')(response.data));
+					toastr.error($filter('translate')(response.data.detail));
 
 					deferred.reject(response.data, response.status, response.headers, response.config);
 				});
@@ -346,6 +346,20 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 			}
 			
 			return rows;
+		},
+		
+		edit: function(data) {
+			
+			return API.sendRequest('/api/mosaic/edit/', 'POST', {}, data).then(function(response) {
+				
+				service.data.mosaic.city = response.city;
+				service.data.mosaic.desc = response.desc;
+				service.data.mosaic.type = response.type;
+				service.data.mosaic.cols = response.cols;
+				service.data.mosaic.count = response.count;
+				service.data.mosaic.title = response.title;
+				service.data.mosaic.country = response.country;
+			});
 		},
 		
 		updateName: function(newvalue) {

@@ -3,20 +3,20 @@
 </div>
 
 <div ng-if="mosaic" ui-view="">
-
+	
 	<div class="card">
 		
 		<div class="card-header f-row">
 			
 			<span class="mr-auto">{{'mosaicpage_DETAILS' | translate}}</span>
 	
-			<a ng-if="user.name == mosaic.registerer.name">
+			<a ng-if="user.name == mosaic.registerer.name" ng-show="!editMode" ng-click="openEdit();">
 				<i class="fa fa-pencil-square-o btn-icon"></i>
 			</a>
 
 		</div>
 		
-		<div class="card-block f-col">
+		<div class="card-block f-col" ng-show="!editMode">
 			
 			<div class="text-white text-big">{{mosaic.title}}</div>
 			
@@ -29,6 +29,79 @@
 	        	<span class="ml-2" ng-repeat="creator in mosaic.creators" ng-class="{'text-enligtened': creator.faction == 'E', 'text-resistance': creator.faction == 'R',}">{{creator.name}}</span>
 	        </div>
 
+		</div>
+		
+		<div class="card-block f-col" ng-if="user.name == mosaic.registerer.name" ng-show="editMode">
+			
+			<div class="loading" ng-show="editLoading">
+				<img src="/static/front/img/loading.png" />
+			</div>
+			
+	        <div class="group">
+	            <label>{{'mosaic_TITLE' | translate}}</label>
+	            <input type="text" class="form-control" ng-model="editModel.title" />
+	        </div>
+	        
+	        <div class="f-row">
+	            
+	            <div class="group fitem-grow pr-2">
+	                <label>{{'mosaic_COUNTRY' | translate}}</label>
+	                <input type="text" class="form-control" ng-model="editModel.country" />
+	            </div>
+	            
+	            <div class="group fitem-grow pl-2">
+	                <label>{{'mosaic_CITY' | translate}}</label>
+	                <input type="text" class="form-control" ng-model="editModel.city" />
+	            </div>
+	            
+	        </div>
+	        
+	        <div class="group">
+	            <label>{{'mosaic_DESC' | translate}}</label>
+	            <textarea rows="4" cols="50" class="form-control" style="height:auto; padding:.5rem;" ng-model="editModel.desc"></textarea>
+	        </div>
+	        
+	        <div class="f-row">
+	            
+	            <div class="group fitem-grow pr-2">
+	                <label>{{'mosaic_TYPE' | translate}}</label>
+	                <select class="form-control" ng-model="editModel.type">
+	                    <option value="sequence">{{'mosaic_SEQUENCE' | translate}}</option>
+	                    <option value="serie">{{'mosaic_SERIE' | translate}}</option>
+	                </select>
+	            </div>
+	            
+	            <div class="group fitem-grow pr-2 pl-2">
+	                <label>{{'mosaic_COUNT' | translate}}</label>
+	                <input type="number" class="form-control" ng-model="editModel.count" />
+	            </div>
+	            
+	            <div class="group fitem-grow pl-2">
+	                <label>{{'mosaic_COLS' | translate}}</label>
+	                <select class="form-control" ng-model="editModel.cols" convert-to-number>
+	                    <option value="6">6</option>
+	                    <option value="5">5</option>
+	                    <option value="4">4</option>
+	                    <option value="3">3</option>
+	                    <option value="2">2</option>
+	                    <option value="1">1</option>
+	                </select>
+	            </div>
+	            
+	        </div>
+
+	        <div class="form-button-bar">
+	        	
+				<button type="submit" class="btn btn-primary" ng-click="edit();" ng-disabled="!editModel.title || !editModel.desc || !editModel.country || !editModel.city || !editModel.type || !editModel.count || !editModel.cols">
+				    {{'ok_LABEL' | translate}}
+				</button>
+	        	
+				<button type="submit" class="btn btn-secondary" ng-click="closeEdit();">
+				    {{'cancel_LABEL' | translate}}
+				</button>
+				
+	        </div>
+			
 		</div>
 		
 	</div>
@@ -44,7 +117,7 @@
 		
 		<div class="card-block">
 			
-	        <div class="grid-row" ng-repeat="i in rows()">
+	        <div class="f-row" ng-repeat="i in rows()">
 	            <div ng-repeat="j in cols()" style="flex:0 0 16.666667%;">
 	                <img src="/static/front/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{getImage(i, j)}}=s100); background-size: 85% 85%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
 	            </div>

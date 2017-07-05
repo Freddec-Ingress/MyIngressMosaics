@@ -266,6 +266,29 @@ class MosaicViewSet(viewsets.ViewSet):
 
 
 
+	def edit(self, request):
+		
+		result = Mosaic.objects.filter(ref=request.data['ref'], registerer=request.user)
+		if result.count() > 0:
+			mosaic = result[0]
+			
+			mosaic.city = request.data['city']
+			mosaic.desc = request.data['desc']
+			mosaic.type = request.data['type']
+			mosaic.cols = request.data['cols']
+			mosaic.count = request.data['count']
+			mosaic.title = request.data['title']
+			mosaic.country = request.data['country']
+			
+			mosaic.save()
+		
+			data = mosaic.serialize()
+			return Response(data, status=status.HTTP_200_OK)
+			
+		return Response(None, status=status.HTTP_404_NOT_FOUND)
+
+
+
 	def name(self, request):
 		
 		result = Mosaic.objects.filter(ref=request.data['ref'], registerer=request.user)

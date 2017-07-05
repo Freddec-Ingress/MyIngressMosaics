@@ -2399,6 +2399,8 @@ var en_translations = {
 	home_TEXT3: '3. Mosaic creation will be implemented soon but you can list your registered missions ',
 	home_TEXT4: '4. Join our community to stay in touch ',
 	
+	success_EDIT: 'Mosaic edited successfully',
+	
 	error_EMAIL: 'A well formatted email address is required.',
 	error_TIMEOUT: 'Server timed out. Please try again.',
 	error_REQUIRED: 'This field is mandatory.',
@@ -2529,6 +2531,8 @@ var fr_translations = {
 	home_TEXT2: '2. Enregistrer toutes les missions que vous souhaitez inclure dans une fresque avec notre extension Chrome',
 	home_TEXT3: '3. La création de fresque sera bientôt implémentée mais vous pouvez lister vos missions enregistrées  ',
 	home_TEXT4: '4. Rejoindre notre communauté pour rester informé ',
+	
+	success_EDIT: 'Fresque mise à jour avec succés',
 	
 	error_EMAIL: 'Une adresse email bien formattée est requise.',
 	error_TIMEOUT: 'Délai d\'attente dépassé. Réessayez svp.',
@@ -2663,7 +2667,7 @@ angular.module('AngularApp.services').service('API', function($q, $http, $cookie
 						if (response.data == null) response.data = 'error_NOCONNECTION';
 					}
 					
-					toastr.error($filter('translate')(response.data));
+					toastr.error($filter('translate')(response.data.detail));
 
 					deferred.reject(response.data, response.status, response.headers, response.config);
 				});
@@ -2988,6 +2992,20 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 			return rows;
 		},
 		
+		edit: function(data) {
+			
+			return API.sendRequest('/api/mosaic/edit/', 'POST', {}, data).then(function(response) {
+				
+				service.data.mosaic.city = response.city;
+				service.data.mosaic.desc = response.desc;
+				service.data.mosaic.type = response.type;
+				service.data.mosaic.cols = response.cols;
+				service.data.mosaic.count = response.count;
+				service.data.mosaic.title = response.title;
+				service.data.mosaic.country = response.country;
+			});
+		},
+		
 		updateName: function(newvalue) {
 			
 			var data = { 'ref':service.data.mosaic.ref, 'name':newvalue };
@@ -3123,6 +3141,25 @@ angular.module('AngularApp.directives').directive('pageTitle', function($rootSco
 			};
 			
 			$rootScope.$on('$stateChangeSuccess', listener);
+		}
+	};
+});
+
+angular.module('AngularApp.directives').directive('convertToNumber', function() {
+	
+	return {
+		
+		require: 'ngModel',
+		
+		link: function(scope, element, attrs, ngModel) {
+			
+			ngModel.$parsers.push(function(val) {
+				return val != null ? parseInt(val, 10) : null;
+			});
+			
+			ngModel.$formatters.push(function(val) {
+				return val != null ? '' + val : null;
+			});
 		}
 	};
 });
@@ -3367,15 +3404,13 @@ angular.module('AngularApp.controllers').controller('CreateCtrl', function($scop
 	}
 });
 
-angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scope, $timeout, $window, MosaicService) {
-	
-	$scope.page_title = MosaicService.data.mosaic.title;
-	
+angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scope, $timeout, $window, $filter, toastr, MosaicService) {
+
 	$scope.mosaic = MosaicService.data.mosaic;
 	
 	$scope.delete = MosaicService.delete;
 	$scope.remove = MosaicService.remove;
-
+	
 	$scope.rows = function() {
 		
 		var temp = 1;
@@ -3408,6 +3443,50 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 		
 		var order = (i * $scope.mosaic.cols + j) + 1;
 		return MosaicService.getImageByOrder(order);
+	}
+	
+	/* Edit */
+	
+	$scope.editMode = false;
+	$scope.editLoading = false;
+	
+	$scope.editModel = {ref:null, city:null, desc:null, type:null, cols:null, count:null, title:null, country:null};
+	
+	$scope.openEdit = function() {
+		
+		$scope.editModel.ref = $scope.mosaic.ref;
+		$scope.editModel.city = $scope.mosaic.city;
+		$scope.editModel.desc = $scope.mosaic.desc;
+		$scope.editModel.type = $scope.mosaic.type;
+		$scope.editModel.cols = $scope.mosaic.cols;
+		$scope.editModel.count = $scope.mosaic.count;
+		$scope.editModel.title = $scope.mosaic.title;
+		$scope.editModel.country = $scope.mosaic.country;
+		
+		$scope.editMode = true;
+	}
+	
+	$scope.closeEdit = function() {
+		
+		$scope.editMode = false;
+	}
+	
+	$scope.edit = function() {
+		
+		$scope.editLoading = true;
+			
+		MosaicService.edit($scope.editModel).then(function(response) {
+			
+			toastr.success($filter('translate')('success_EDIT'));
+
+			$scope.editMode = false;
+			$scope.editLoading = false;
+			
+		}, function(response) {
+			
+			$scope.editMode = false;
+			$scope.editLoading = false;
+		});
 	}
 	
 	/* Name */

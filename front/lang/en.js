@@ -21,6 +21,8 @@ var en_translations = {
 	home_TEXT3: '3. Mosaic creation will be implemented soon but you can list your registered missions ',
 	home_TEXT4: '4. Join our community to stay in touch ',
 	
+	success_EDIT: 'Mosaic edited successfully',
+	
 	error_EMAIL: 'A well formatted email address is required.',
 	error_TIMEOUT: 'Server timed out. Please try again.',
 	error_REQUIRED: 'This field is mandatory.',

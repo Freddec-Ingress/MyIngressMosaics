@@ -21,6 +21,8 @@ var fr_translations = {
 	home_TEXT3: '3. La création de fresque sera bientôt implémentée mais vous pouvez lister vos missions enregistrées  ',
 	home_TEXT4: '4. Rejoindre notre communauté pour rester informé ',
 	
+	success_EDIT: 'Fresque mise à jour avec succés',
+	
 	error_EMAIL: 'Une adresse email bien formattée est requise.',
 	error_TIMEOUT: 'Délai d\'attente dépassé. Réessayez svp.',
 	error_REQUIRED: 'Ce champ est obligatoire.',

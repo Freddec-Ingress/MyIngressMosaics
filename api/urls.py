@@ -17,6 +17,7 @@ urlpatterns = [
 	url(r'^logout/',	AccountViewSet.as_view({ 'post': 'logout'   })),
 	url(r'^register/',	AccountViewSet.as_view({ 'post': 'register' })),
 	
+	url(r'^mosaic/edit/',			MosaicViewSet.as_view({ 'post'  : 'edit'   })),
 	url(r'^mosaic/name/',			MosaicViewSet.as_view({ 'post'  : 'name'   })),
 	url(r'^mosaic/reorder/',			MosaicViewSet.as_view({ 'post'  : 'reorder'   })),
 	url(r'^mosaic/remove/',			MosaicViewSet.as_view({ 'post'  : 'remove'   })),

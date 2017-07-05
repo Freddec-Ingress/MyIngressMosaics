@@ -44,24 +44,30 @@ a:hover, a:focus {
 }
 
 .loading {
-    margin: 3rem auto;
-    display: flex; flex-direction: column; align-items: center;
+	text-align: center;
+	background-color: rgba(0,0,0,.25);
+	position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+	display: flex; align-items: center; justify-content: center;
 }
 
 .loading > img {
-    width: 3rem; height: 3rem;
+	margin: 0 0 5rem 0;
+    width: 2rem; height: 2rem;
 	animation: rotating 2s linear infinite;
 }
 
 /* Wrapper ------------------------------------------------------------------ */
 
 .wrapper {
+    display: block;
     min-height: 100%;
     position: relative;
 }
 
-.wrapper > .loading {
-    padding-top: 6rem;
+/* Group -------------------------------------------------------------------- */
+
+.group {
+    margin-bottom: 1rem;
 }
 
 
@@ -312,51 +318,97 @@ a:hover, a:focus {
 
 
 /******************************************************************************/
-/* FLEXBOX                                                                    */
+/* FORM                                                                       */
 /******************************************************************************/
 
-/* Container ---------------------------------------------------------------- */
-
-.f-row {
-    display: flex; flex-direction: row; align-items: center;
+::-webkit-input-placeholder {
+    color: #BDBDBD;
 }
 
-/* Item --------------------------------------------------------------------- */
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { 
+	margin: 0; 
+	-webkit-appearance: none; 
+}
 
-.fitem-grow {
-    flex: 1;
+/* Label -------------------------------------------------------------------- */
+
+label {
+    display: block;
+    margin-bottom: .25rem;
+}
+
+/* Control ------------------------------------------------------------------ */
+
+.form-control {
+    padding: 0 .5rem;
+    background-color: #0B0C0D;
+    display: block; width: 100%;
+    height: 2.25rem; line-height: 2.25rem;
+    border-radius: .25rem; border: 1px solid #009688;
+    color: #ffffff; font: 400 .75rem/1.5 'Coda',sans-serif;
+}
+.form-control:focus {
+    outline: none;
+    border-color: #B2DFDB;
+}
+
+/* Error -------------------------------------------------------------------- */
+
+.form-error {
+	margin-top: .5rem;
+	color: #F44336; font-size: .75rem;
+}
+
+/* Button bar --------------------------------------------------------------- */
+
+.form-button-bar {
+    margin: 1rem 0 0;
+    display: flex; align-items: center; justify-content: center;
+}
+
+.form-button-bar > .btn {
+    width: 7rem;
+    margin: 0 .5rem;
+}
+
+/* Input group -------------------------------------------------------------- */
+
+.input-group {
+    position: relative;
+	display: flex; flex-direction: row;
+}
+
+.input-group .form-control:not(:last-child) {
+    border-bottom-right-radius: 0; border-top-right-radius: 0;
+}
+.input-group .form-control:not(:first-child) {
+	border-bottom-left-radius: 0; border-top-left-radius: 0;
+}
+
+/* Input group addon -------------------------------------------------------- */
+
+.input-group-addon {
+	color: #FFFFFF;
+	background-color: #009688;
+    height: 2.25rem; line-height: 2.25rem; padding: 0 .75rem;
+	border: 1px solid #009688; border-radius: .25rem;
+}
+.input-group-addon:not(:last-child) {
+	border-right: 0; border-bottom-right-radius: 0; border-top-right-radius: 0;
+}
+.input-group-addon:not(:first-child) {
+    border-bottom-left-radius: 0; border-top-left-radius: 0;
+}
+
+.form-control + .input-group-addon:not(:first-child) {
+    border-left: 0;
 }
 
 
 
 /******************************************************************************/
-/* TYPOGRAPHY                                                                 */
+/* BUTTONS                                                                    */
 /******************************************************************************/
-
-/* Description -------------------------------------------------------------- */
-
-dl {
-    margin: 0;
-	position: relative;
-	display: flex; flex-direction: column;
-}
-
-dt {
-    margin: 0 0 .25rem 0;
-}
-
-dd {
-    margin: 0;
-	color: #FFFFFF; font-size: .875rem;
-}
-
-/* Formatted ---------------------------------------------------------------- */
-
-pre {
-    font: inherit; white-space: pre-line;
-}
-
-/* Button ------------------------------------------------------------------- */
 
 .btn {
 	padding: 0 .5rem;
@@ -403,6 +455,103 @@ pre {
 
 .btn-fixed {
     min-width: 4.5rem;
+}
+
+/* Disabled ----------------------------------------------------------------- */
+
+.btn.disabled, .btn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+/* Facebook ----------------------------------------------------------------- */
+
+.btn-facebook {
+    color: #FFFFFF; background-color: #3b5998; border-color: #335190;
+}
+.btn-facebook:hover,.btn-facebook:focus {
+    color: #FFFFFF; background-color: #294786;
+}
+
+
+
+/******************************************************************************/
+/* TABLE                                                                      */
+/******************************************************************************/
+
+table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+table th {
+    text-align: left;
+    border-bottom: 1px solid #E0F2F1;
+    color: #E0F2F1; font-weight: 400;
+    padding-left: .25rem; padding-bottom: .5rem;
+}
+
+table tbody tr {
+    cursor: pointer;
+    border-bottom: 1px solid rgba(0,0,0,.25);
+}
+
+table tbody tr.selected {
+    background-color: rgba(255,255,255,.25);
+}
+
+table td {
+    max-width: 5rem;
+    padding: .5rem .25rem;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+
+
+/******************************************************************************/
+/* FLEXBOX                                                                    */
+/******************************************************************************/
+
+/* Container ---------------------------------------------------------------- */
+
+.f-row {
+    display: flex; flex-direction: row; align-items: center;
+}
+
+/* Item --------------------------------------------------------------------- */
+
+.fitem-grow {
+    flex: 1;
+}
+
+
+
+/******************************************************************************/
+/* TYPOGRAPHY                                                                 */
+/******************************************************************************/
+
+/* Description -------------------------------------------------------------- */
+
+dl {
+    margin: 0;
+	position: relative;
+	display: flex; flex-direction: column;
+}
+
+dt {
+    margin: 0 0 .25rem 0;
+}
+
+dd {
+    margin: 0;
+	color: #FFFFFF; font-size: .875rem;
+}
+
+/* Formatted ---------------------------------------------------------------- */
+
+pre {
+    font: inherit; white-space: pre-line;
 }
 
 
@@ -515,270 +664,47 @@ pre {
 
 
 
-
-
-
-
-
-
-
-
-/* Typography --------------------------------------------------------------- */
-
-p {
-    display: block;
-    margin-top: 0; margin-bottom: 1rem;
-    
-}
-
-small, .small {
-	font-size: 85%;
-}
-
-
-
-/* Image -------------------------------------------------------------------- */
-
-img {
-    vertical-align: text-bottom;
-}
-
-.img-icon {
-    width: 1rem; height: 1rem;
-}
-
-.icon-edit {
-	color: #ebbc4a;
-	margin-left: 1rem;
-	font-size: .75rem;
-}
-
-
-
-
-
-dl.edit:hover {
-	cursor: pointer;
-}
-
-dl.edit > dd > i {
-	color: #ebbc4a;
-	margin-left: 1rem;
-}
-dl.edit:hover > dd > i {
-	color: #ebbc4a;
-}
-
-dl.edit > dd > .loading, .loading-edit {
-    margin: 0;
-	text-align: center;
-	background-color: rgba(0,0,0,.125);
-	position: absolute; top: 0; left: -.25rem; right: -.25rem; bottom: 0;
-}
-dl.edit > dd > .loading > img, .loading-edit > img {
-	margin: auto;
-	width: 1rem; height: 1rem;
-}
-
-
-
 /******************************************************************************/
-/* FORM                                                                       */
+/* CUSTOMIZATION                                                              */
 /******************************************************************************/
 
-::-webkit-input-placeholder {
-    color: #BDBDBD;
+/* Toast -------------------------------------------------------------------- */
+
+#toast-content {
+    margin: 0 .5rem 0;
+	position: relative;
 }
 
-input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { 
-	margin: 0; 
-	-webkit-appearance: none; 
+#toast-container {
+	position: static; width: 100%; 
 }
 
-form {
-    width: 100%;
+#toast-container .toast {
+    text-align: center;
+    width: 100%!important;
+    opacity: 1; box-shadow: none;
+    border-radius: 0 0 .5rem .5rem;
+	background-position: 1rem .5rem;
+    font-size: .75rem; font-weight: 400;
+    min-height: 2.5rem; margin: 0; padding: 0 1rem;
 }
 
-form.inline .form-group {
-    display: flex; flex-direction: row;
-}
-form.inline .form-group > label {
-    text-align: right;
-    margin: 0; padding-right: 1rem;
-    height: 2.5rem; line-height: 2.5rem;
-    flex-grow: 0; flex-basis: 33.333333%;
-}
-form.inline .form-group > .form-control, form.inline .form-group > .select-group {
-    flex-grow: 0; flex-basis: 66.666667%;
+#toast-container .toast.toast-error {
+    background-image: none!important;
 }
 
-.form-group {
-    margin-bottom: 1rem;
+#toast-container .toast.toast-success {
+    background-image: none!important;
 }
 
-label {
-    display: block;
-    margin-bottom: .25rem;
-}
-.group-row > label {
-	text-align: right;
-	flex: 0 0 33.666667%;
-    margin-bottom: 0; margin-right: .5rem;
-    height: 2.25rem; line-height: 2.25rem;
+#toast-container .toast > div {
+    padding: .5rem 0;
 }
 
-.label-check {
-    margin-bottom: 0;
-    line-height: 2.5rem; height: 2.5rem;
-}
+/* Container ---------------------------------------------------------------- */
 
-.form-control {
-    padding: 0 .5rem;
-    background-color: #0b0c0d;
-    display: block; width: 100%;
-    height: 2.25rem; line-height: 2.25rem;
-    border-radius: .25rem; border: 1px solid #009688;
-    color: #ffffff; font: 400 .75rem/1.5 'Coda',sans-serif;
-}
-.form-control:focus {
-    outline: none;
-    border-color: #B2DFDB;
-}
-
-.form-error {
-	margin-top: .5rem;
-	color: #F44336; font-size: .75rem;
-}
-
-.form-radio {
-    display: flex;
-    padding: .5rem; margin-bottom: .5rem;
-    color: #212121!important; font-size: 85%; opacity: .75;
-}
-.form-radio.checked {
-    background-color: rgba(0,0,0,.125);
-}
-.form-radio > input[type="radio"] {
-    flex: 0 0 1rem;
-    margin-top: 4px;
-}
-.form-radio > span {
-    padding-left: .5rem;
-}
-
-
-.loading-edit {
-    margin: 0;
-	text-align: center;
-	background-color: rgba(0,0,0,.25);
-	position: absolute; top: 0; left: -.25rem; right: -.25rem; bottom: 0;
-}
-.loading-edit > img {
-	margin: auto;
-	width: 1rem; height: 1rem;
-}
-
-
-/* Input group -------------------------------------------------------------- */
-
-.input-group {
-    position: relative;
-	display: flex; flex-direction: row;
-}
-.input-group .form-control:not(:last-child) {
-    border-bottom-right-radius: 0; border-top-right-radius: 0;
-}
-.input-group .form-control:not(:first-child) {
-	border-bottom-left-radius: 0; border-top-left-radius: 0;
-}
-
-.input-group-addon {
-	color: #FFFFFF;
-	background-color: #009688;
-    height: 2.25rem; line-height: 2.25rem; padding: 0 .75rem;
-	border: 1px solid #009688; border-radius: .25rem;
-}
-.input-group-addon:not(:last-child) {
-	border-right: 0; border-bottom-right-radius: 0; border-top-right-radius: 0;
-}
-.input-group-addon:not(:first-child) {
-    border-bottom-left-radius: 0; border-top-left-radius: 0;
-}
-
-.form-control + .input-group-addon:not(:first-child) {
-    border-left: 0;
-}
-
-.input-group-addon.button:hover {
-    color: #9C27B0;
-    cursor: pointer;
-}
-
-
-
-
-.btn.disabled, .btn:disabled {
-    opacity: .5;
-    cursor: not-allowed;
-}
-
-.btn-secondary {
-	color: #80CBC4;
-    border: 1px solid #009688;
-    background-color: transparent;
-}
-
-.btn-block {
-    display: block;
-}
-
-.btn-facebook {
-    color: #FFFFFF; background-color: #3b5998; border-color: #335190;
-}
-.btn-facebook:hover,.btn-facebook:focus {
-    color: #FFFFFF; background-color: #294786;
-}
-
-.btn-google {
-    color: #FFFFFF; background-color: #dd4b39; border-color: #dd4b39;
-}
-.btn-google:hover,.btn-google:focus {
-    color: #FFFFFF; background-color: #cb3927;
-}
-
-
-
-/******************************************************************************/
-/* GRID                                                                     */
-/******************************************************************************/
-
-.grid-row {
-    display: flex; flex-direction: row;
-}
-.grid-col {
-    display: flex; flex-direction: column;
-}
-
-.grid-row.center {
-    justify-content: center;
-}
-.grid-row.around {
-    justify-content: space-around;
-}
-.grid-row.between {
-    justify-content: space-between;
-}
-
-.group {
-    margin-bottom: 1rem;
-}
-.group-row {
-    margin-bottom: 1rem;
-    display: flex; flex-direction: row;
-}
-
-.cell {
-    flex-grow: 1; flex-basis: 0;
+#map {
+	height: 20rem;
 }
 
 
@@ -787,36 +713,23 @@ label {
 
 
 
-/******************************************************************************/
-/* TABLE                                                                      */
-/******************************************************************************/
 
-table {
-    width: 100%;
-    border-spacing: 0;
-    border-collapse: collapse;
-}
 
-table th {
-    text-align: left;
-    border-bottom: 1px solid #E0F2F1;
-    color: #E0F2F1; font-weight: 400;
-    padding-left: .25rem; padding-bottom: .5rem;
-}
 
-table tbody tr {
-    cursor: pointer;
-    border-bottom: 1px solid rgba(0,0,0,.25);
-}
-table tbody tr.selected {
-    background-color: rgba(255,255,255,.25);
-}
 
-table td {
-    max-width: 5rem;
-    padding: .5rem .25rem;
-    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -870,47 +783,3 @@ article > h5 {
 
 
 
-/* Toast -------------------------------------------------------------------- */
-
-#toast-content {
-	position: relative;
-}
-
-#toast-container {
-	position: static; width: 100%; 
-}
-
-#toast-container .toast {
-    text-align: center;
-    opacity: 1; box-shadow: none;
-	background-position: 1rem .5rem;
-    font-size: .875rem; font-weight: 400;
-    width: 100%!important; margin-bottom: 1rem;
-    min-height: 2.5rem; padding: 0 1rem 0 3.5rem;
-}
-
-#toast-container .toast > div {
-    padding: .5rem 0;
-}
-
-
-
-/* Container ---------------------------------------------------------------- */
-
-.container { margin: 0; width: 100%; }
-@media (min-width:  768px) { .container { margin: 0 auto; width: 720px; } }
-@media (min-width:  992px) { .container { margin: 0 auto; width: 720px; } }
-@media (min-width: 1200px) { .container { margin: 0 auto; width: 720px; } }
-
-.topbar > .container, header > .container, .headbar > .container,
-.content > .container, footer > .container, .footbar > .container {
-    display: inherit; flex-direction: inherit; align-items: inherit; justify-content: inherit;
-}
-
-
-
-/* Container ---------------------------------------------------------------- */
-
-#map {
-	height: 20rem;
-}

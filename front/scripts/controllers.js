@@ -239,15 +239,13 @@ angular.module('AngularApp.controllers').controller('CreateCtrl', function($scop
 	}
 });
 
-angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scope, $timeout, $window, MosaicService) {
-	
-	$scope.page_title = MosaicService.data.mosaic.title;
-	
+angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scope, $timeout, $window, $filter, toastr, MosaicService) {
+
 	$scope.mosaic = MosaicService.data.mosaic;
 	
 	$scope.delete = MosaicService.delete;
 	$scope.remove = MosaicService.remove;
-
+	
 	$scope.rows = function() {
 		
 		var temp = 1;
@@ -280,6 +278,50 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 		
 		var order = (i * $scope.mosaic.cols + j) + 1;
 		return MosaicService.getImageByOrder(order);
+	}
+	
+	/* Edit */
+	
+	$scope.editMode = false;
+	$scope.editLoading = false;
+	
+	$scope.editModel = {ref:null, city:null, desc:null, type:null, cols:null, count:null, title:null, country:null};
+	
+	$scope.openEdit = function() {
+		
+		$scope.editModel.ref = $scope.mosaic.ref;
+		$scope.editModel.city = $scope.mosaic.city;
+		$scope.editModel.desc = $scope.mosaic.desc;
+		$scope.editModel.type = $scope.mosaic.type;
+		$scope.editModel.cols = $scope.mosaic.cols;
+		$scope.editModel.count = $scope.mosaic.count;
+		$scope.editModel.title = $scope.mosaic.title;
+		$scope.editModel.country = $scope.mosaic.country;
+		
+		$scope.editMode = true;
+	}
+	
+	$scope.closeEdit = function() {
+		
+		$scope.editMode = false;
+	}
+	
+	$scope.edit = function() {
+		
+		$scope.editLoading = true;
+			
+		MosaicService.edit($scope.editModel).then(function(response) {
+			
+			toastr.success($filter('translate')('success_EDIT'));
+
+			$scope.editMode = false;
+			$scope.editLoading = false;
+			
+		}, function(response) {
+			
+			$scope.editMode = false;
+			$scope.editLoading = false;
+		});
 	}
 	
 	/* Name */
