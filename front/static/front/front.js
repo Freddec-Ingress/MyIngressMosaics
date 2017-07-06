@@ -4131,3 +4131,14 @@ angular.module('AngularApp').run(function($rootScope, $state, $stateParams) {
 		$rootScope.route_loading = false;
 	});
 });
+
+
+
+/* Filter */
+
+angular.module('AngularApp').filter('reverse', function() {
+	
+	return function(items) {
+		return items.slice().reverse();
+	};
+});

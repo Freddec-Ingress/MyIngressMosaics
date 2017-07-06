@@ -561,6 +561,10 @@ table td {
     align-items: baseline!important;
 }
 
+.f-wrap {
+    flex-wrap: wrap!important;
+}
+
 /* Item --------------------------------------------------------------------- */
 
 .fitem-grow {
