@@ -528,6 +528,80 @@ angular.module('AngularApp.services').service('DataService', function(API) {
 				}
 			});
 		},
+
+		sortCountriesByMosaics: function(sort) {
+			
+			function compareMosaicsAsc(a, b) {
+				
+				var a_mosaics = a.mosaics.toLowerCase();
+				var b_mosaics = b.mosaics.toLowerCase();
+				
+				if (a_mosaics < b_mosaics)
+					return -1;
+					
+				if (a_mosaics > b_mosaics)
+					return 1;
+
+				return 0;
+			}
+			
+			function compareMosaicsDesc(a, b) {
+				
+				var a_mosaics = a.mosaics.toLowerCase();
+				var b_mosaics = b.mosaics.toLowerCase();
+				
+				if (a_mosaics > b_mosaics)
+					return -1;
+					
+				if (a_mosaics < b_mosaics)
+					return 1;
+				
+				return 0;
+			}
+			
+			if (service.countries) {
+				
+				if (sort == 'asc') service.countries.sort(compareMosaicsAsc);
+				if (sort == 'desc') service.countries.sort(compareMosaicsDesc);
+			}
+		},
+
+		sortCountriesByName: function(sort) {
+			
+			function compareNameAsc(a, b) {
+				
+				var a_name = a.name.toLowerCase();
+				var b_name = b.name.toLowerCase();
+				
+				if (a_name < b_name)
+					return -1;
+					
+				if (a_name > b_name)
+					return 1;
+
+				return 0;
+			}
+			
+			function compareNameDesc(a, b) {
+				
+				var a_name = a.name.toLowerCase();
+				var b_name = b.name.toLowerCase();
+				
+				if (a_name > b_name)
+					return -1;
+					
+				if (a_name < b_name)
+					return 1;
+
+				return 0;
+			}
+			
+			if (service.countries) {
+				
+				if (sort == 'asc') service.countries.sort(compareNameAsc);
+				if (sort == 'desc') service.countries.sort(compareNameDesc);
+			}
+		},
 	};
 	
 	return service;

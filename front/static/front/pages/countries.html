@@ -1,36 +1,50 @@
-<section>
+<div class="card">
     
-    <article>
-    	
-        <table>
-        	
-            <thead>
-                <tr>
-                    <th>{{'countries_COLMOSAICS' | translate}}</th>
-                    <th>{{'countries_COLCOUNTRY' | translate}}</th>
-                    <th></th>
-                </tr>
-            </thead>
-            
-            <tbody>
-                <tr ng-repeat="item in countries" ng-click="go(item);">
-                	
-                    <td class="text-right" width="1%">
-                    	{{item.mosaics}}
-                    </td>
-                    
-                    <td class="text-white">
-                        {{item.name}}
-                    </td>
-                    
-                    <td class="text-right" width="1%">
-                    	<i class="fa fa-arrow-circle-right link"></i>
-                    </td>
+    <div class="card-header">
+        <span class="text-medium">{{'countries_SUBTITLE' | translate}}</span>
+    </div>
 
-                </tr>
-            </tbody>
-        </table>
+    <table class="card-table">
     	
-    </article>
+        <thead>
+            <tr>
+                <th class="text-center" style="cursor:pointer;" ng-click="sortCountriesByMosaics();">
+                    <i class="fa mr-2" ng-class="{'fa-caret-up':sortMosaics == 'asc', 'fa-caret-down':sortMosaics == 'desc', 'fa-sort text-muted':sortMosaics == ''}"></i>
+                	{{'countries_COLMOSAICS' | translate}}
+                </th>
+                <th style="cursor:pointer;" ng-click="sortCountriesByName();">
+                    <i class="fa mr-2" ng-class="{'fa-caret-up':sortName == 'asc', 'fa-caret-down':sortName == 'desc', 'fa-sort text-muted':sortName == ''}"></i>
+                	{{'countries_COLCOUNTRY' | translate}}
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr ng-repeat="item in countries" ng-click="go(item);">
+            	
+                <td class="text-right text-center" width="80px">
+                	{{item.mosaics}}
+                </td>
+                
+                <td class="text-white">
+                	<span class="flag-icon mr-2" style="position:relative; top:-2px;" ng-class="{
+                		'flag-icon-fr': item.name == 'France',
+                		'flag-icon-gb': item.name == 'United Kingdom',
+                		'flag-icon-my': item.name == 'Malaysia',
+                		'flag-icon-sg': item.name == 'Singapore',
+                		'flag-icon-us': item.name == 'United States',
+                		'flag-icon-mx': item.name == 'México',
+                	}"></span>
+                    {{item.name}}
+                </td>
+                
+                <td class="text-right" width="1%">
+                	<i class="fa fa-arrow-circle-right text-link"></i>
+                </td>
 
-</section>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

@@ -513,15 +513,57 @@ angular.module('AngularApp.controllers').controller('MyMosaicsCtrl', function($s
 
 angular.module('AngularApp.controllers').controller('CountriesCtrl', function($scope, $state, DataService) {
 	
-	$scope.page_title = 'countries_TITLE';
-	
-	$scope.countries = DataService.countries;
-	
 	$scope.go = function(item) {
 		
 		DataService.current_country = item.name;
 		$state.go('root.cities');
 	}
+
+	/* Sort mosaics */
+	
+	DataService.sortCountriesByMosaics('desc');
+	
+	$scope.sortMosaics = 'desc';
+	
+	$scope.sortCountriesByMosaics = function() {
+		
+		$scope.sortName = '';
+		
+		if ($scope.sortMosaics == '' || $scope.sortMosaics == 'asc') {
+			
+			DataService.sortCountriesByMosaics('desc');
+			$scope.sortMosaics = 'desc';
+		}
+		
+		else if ($scope.sortMosaics == 'desc') {
+			
+			DataService.sortCountriesByMosaics('asc');
+			$scope.sortMosaics = 'asc';
+		}
+	}
+	
+	/* Sort name */
+	
+	$scope.sortName = '';
+	
+	$scope.sortCountriesByName = function() {
+		
+		$scope.sortMosaics = '';
+		
+		if ($scope.sortName == '' || $scope.sortName == 'asc') {
+			
+			DataService.sortCountriesByName('desc');
+			$scope.sortName = 'desc';
+		}
+		
+		else if ($scope.sortName == 'desc') {
+			
+			DataService.sortCountriesByName('asc');
+			$scope.sortName = 'asc';
+		}
+	}
+
+	$scope.countries = DataService.countries;
 });
 
 angular.module('AngularApp.controllers').controller('CitiesCtrl', function($scope, $state, DataService) {

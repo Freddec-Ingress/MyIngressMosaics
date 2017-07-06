@@ -2513,6 +2513,7 @@ var en_translations = {
 	countries_COLCOUNTRY: 'Country',
 	countries_COLCITY: 'City',
 	countries_COLMOSAIC: 'Mosaic',
+	countries_SUBTITLE: 'List of countries with mosaics',
 	
 	cities_TITLE: 'Cities',
 	mosaics_TITLE: 'Mosaics',
@@ -2596,6 +2597,10 @@ var fr_translations = {
 	missions_BTN: 'Continuez',
 	missions_selected: 'missions sélectionnées',
 	missions_HUNTERTITLE: 'Devenir un Chasseur de Fresque',
+	missions_HELP1: 'Installez notre extension Chrome ',
+	missions_HELP2: 'Enregistrer les missions Ingress grâce à l\'extension',
+	missions_HELP3: 'Se logger sur le site MyIngressMosaics',
+	missions_HELP4: 'Enregistrer des fresques',
 	
 	mosaic_TITLE: 'Titre',
 	mosaic_DESC: 'Description',
@@ -2650,6 +2655,7 @@ var fr_translations = {
 	countries_COLCOUNTRY: 'Pays',
 	countries_COLCITY: 'Ville',
 	countries_COLMOSAIC: 'Fresque',
+	countries_SUBTITLE: 'Liste des pays avec des fresques',
 	
 	cities_TITLE: 'Villes',
 	mosaics_TITLE: 'Fresques',
@@ -3183,6 +3189,80 @@ angular.module('AngularApp.services').service('DataService', function(API) {
 					service.mosaics = response;
 				}
 			});
+		},
+
+		sortCountriesByMosaics: function(sort) {
+			
+			function compareMosaicsAsc(a, b) {
+				
+				var a_mosaics = a.mosaics.toLowerCase();
+				var b_mosaics = b.mosaics.toLowerCase();
+				
+				if (a_mosaics < b_mosaics)
+					return -1;
+					
+				if (a_mosaics > b_mosaics)
+					return 1;
+
+				return 0;
+			}
+			
+			function compareMosaicsDesc(a, b) {
+				
+				var a_mosaics = a.mosaics.toLowerCase();
+				var b_mosaics = b.mosaics.toLowerCase();
+				
+				if (a_mosaics > b_mosaics)
+					return -1;
+					
+				if (a_mosaics < b_mosaics)
+					return 1;
+				
+				return 0;
+			}
+			
+			if (service.countries) {
+				
+				if (sort == 'asc') service.countries.sort(compareMosaicsAsc);
+				if (sort == 'desc') service.countries.sort(compareMosaicsDesc);
+			}
+		},
+
+		sortCountriesByName: function(sort) {
+			
+			function compareNameAsc(a, b) {
+				
+				var a_name = a.name.toLowerCase();
+				var b_name = b.name.toLowerCase();
+				
+				if (a_name < b_name)
+					return -1;
+					
+				if (a_name > b_name)
+					return 1;
+
+				return 0;
+			}
+			
+			function compareNameDesc(a, b) {
+				
+				var a_name = a.name.toLowerCase();
+				var b_name = b.name.toLowerCase();
+				
+				if (a_name > b_name)
+					return -1;
+					
+				if (a_name < b_name)
+					return 1;
+
+				return 0;
+			}
+			
+			if (service.countries) {
+				
+				if (sort == 'asc') service.countries.sort(compareNameAsc);
+				if (sort == 'desc') service.countries.sort(compareNameDesc);
+			}
 		},
 	};
 	
@@ -3743,15 +3823,57 @@ angular.module('AngularApp.controllers').controller('MyMosaicsCtrl', function($s
 
 angular.module('AngularApp.controllers').controller('CountriesCtrl', function($scope, $state, DataService) {
 	
-	$scope.page_title = 'countries_TITLE';
-	
-	$scope.countries = DataService.countries;
-	
 	$scope.go = function(item) {
 		
 		DataService.current_country = item.name;
 		$state.go('root.cities');
 	}
+
+	/* Sort mosaics */
+	
+	DataService.sortCountriesByMosaics('desc');
+	
+	$scope.sortMosaics = 'desc';
+	
+	$scope.sortCountriesByMosaics = function() {
+		
+		$scope.sortName = '';
+		
+		if ($scope.sortMosaics == '' || $scope.sortMosaics == 'asc') {
+			
+			DataService.sortCountriesByMosaics('desc');
+			$scope.sortMosaics = 'desc';
+		}
+		
+		else if ($scope.sortMosaics == 'desc') {
+			
+			DataService.sortCountriesByMosaics('asc');
+			$scope.sortMosaics = 'asc';
+		}
+	}
+	
+	/* Sort name */
+	
+	$scope.sortName = '';
+	
+	$scope.sortCountriesByName = function() {
+		
+		$scope.sortMosaics = '';
+		
+		if ($scope.sortName == '' || $scope.sortName == 'asc') {
+			
+			DataService.sortCountriesByName('desc');
+			$scope.sortName = 'desc';
+		}
+		
+		else if ($scope.sortName == 'desc') {
+			
+			DataService.sortCountriesByName('asc');
+			$scope.sortName = 'asc';
+		}
+	}
+
+	$scope.countries = DataService.countries;
 });
 
 angular.module('AngularApp.controllers').controller('CitiesCtrl', function($scope, $state, DataService) {
@@ -3806,9 +3928,9 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 
 			.state('root.missions', { url: '/missions', controller: 'MissionsCtrl', templateUrl: '/static/front/pages/missions.html', data:{ title: 'missions_TITLE', }, resolve: {loadMissions: function(UserService) { return UserService.getMissions(); }, }, })
 			
-			.state('root.countries', { url: '/countries', controller: 'CountriesCtrl', templateUrl: '/static/front/pages/countries.html', resolve: {loadCountries: function(DataService) { return DataService.getCountries(); }, }, })
-			.state('root.cities', { url: '/cities', controller: 'CitiesCtrl', templateUrl: '/static/front/pages/cities.html', resolve: {loadCities: function(DataService) { return DataService.getCities(); }, }, })
-			.state('root.mosaics', { url: '/mosaics', controller: 'MosaicsCtrl', templateUrl: '/static/front/pages/mosaics.html', resolve: {loadMosaics: function(DataService) { return DataService.getMosaics(); }, }, })
+			.state('root.countries', { url: '/countries', controller: 'CountriesCtrl', templateUrl: '/static/front/pages/countries.html', data:{ title: 'countries_TITLE', }, resolve: {loadCountries: function(DataService) { return DataService.getCountries(); }, }, })
+			.state('root.cities', { url: '/cities', controller: 'CitiesCtrl', templateUrl: '/static/front/pages/cities.html', data:{ title: 'cities_TITLE', }, resolve: {loadCities: function(DataService) { return DataService.getCities(); }, }, })
+			.state('root.mosaics', { url: '/mosaics', controller: 'MosaicsCtrl', templateUrl: '/static/front/pages/mosaics.html', data:{ title: 'mosaics_TITLE', }, resolve: {loadMosaics: function(DataService) { return DataService.getMosaics(); }, }, })
 			
 	$locationProvider.html5Mode(true);
 });

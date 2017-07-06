@@ -77,6 +77,10 @@ var fr_translations = {
 	missions_BTN: 'Continuez',
 	missions_selected: 'missions sélectionnées',
 	missions_HUNTERTITLE: 'Devenir un Chasseur de Fresque',
+	missions_HELP1: 'Installez notre extension Chrome ',
+	missions_HELP2: 'Enregistrer les missions Ingress grâce à l\'extension',
+	missions_HELP3: 'Se logger sur le site MyIngressMosaics',
+	missions_HELP4: 'Enregistrer des fresques',
 	
 	mosaic_TITLE: 'Titre',
 	mosaic_DESC: 'Description',
@@ -131,6 +135,7 @@ var fr_translations = {
 	countries_COLCOUNTRY: 'Pays',
 	countries_COLCITY: 'Ville',
 	countries_COLMOSAIC: 'Fresque',
+	countries_SUBTITLE: 'Liste des pays avec des fresques',
 	
 	cities_TITLE: 'Villes',
 	mosaics_TITLE: 'Fresques',
