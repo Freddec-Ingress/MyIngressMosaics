@@ -2382,7 +2382,7 @@ var en_translations = {
 	lang_FLAG: 'gb',
 	lang_LABEL: 'English',
 	
-	site_DESC: 'Register and Share your Ingress Mosaics',
+	site_DESC: 'Search, Register and Share all Ingress Mosaics',
 	site_UNDERCONSTRUCTION: 'Site under construction',
 	
 	restricted_TEXT: 'Access to this page is restricted. You must be signed in before accessing it.',
@@ -2454,7 +2454,12 @@ var en_translations = {
 	missions_FILTER: 'Filter missions here',
 	missions_BTN: 'Next step',
 	missions_selected: 'missions selected',
-	
+	missions_HUNTERTITLE: 'Become a Mosaic Hunter',
+	missions_HELP1: 'Install our Chrome extension ',
+	missions_HELP2: 'Register Ingress missions thanks to Chrome extension',
+	missions_HELP3: 'Sign in on MyIngressMosaics site',
+	missions_HELP4: 'Register mosaics',
+		
 	mosaic_TITLE: 'Title',
 	mosaic_DESC: 'Description',
 	mosaic_COUNTRY: 'Country',
@@ -2518,7 +2523,7 @@ var fr_translations = {
 	lang_FLAG: 'fr',
 	lang_LABEL: 'Français',
 	
-	site_DESC: 'Enregistrer et Partager vos Fresques Ingress',
+	site_DESC: 'Rechercher, Enregistrer et Partager toutes les Fresques Ingress',
 	site_UNDERCONSTRUCTION: 'Site en cours de construction',
 	
 	restricted_TEXT: 'L\'accès à cette page est restreint. Vous devez être connecté pour y accéder.',
@@ -2590,6 +2595,7 @@ var fr_translations = {
 	missions_FILTER: 'Filtrer les missions ici',
 	missions_BTN: 'Continuez',
 	missions_selected: 'missions sélectionnées',
+	missions_HUNTERTITLE: 'Devenir un Chasseur de Fresque',
 	
 	mosaic_TITLE: 'Titre',
 	mosaic_DESC: 'Description',

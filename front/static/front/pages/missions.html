@@ -1,5 +1,35 @@
-<div class="text-danger text-center mt-4 mr-2 ml-2" ng-if='!user.authenticated'>
-	{{'restricted_TEXT' | translate}}
+<div ng-if="!user.authenticated">
+    
+    <div class="text-danger text-center mt-4 mr-2 ml-2">
+	    {{'restricted_TEXT' | translate}}
+    </div>
+
+    <h2>{{'missions_HUNTERTITLE' | translate}}</h2>
+
+    <div class="card">
+        
+        <div class="card-block first last">
+            
+            <ol>
+                <li>
+                    {{'missions_HELP1' | translate}}
+                    <a href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">MyIngressMosaics Hunting Tool</a>
+                </li>
+                <li>
+                    {{'missions_HELP2' | translate}}
+                </li>
+                <li>
+                    {{'missions_HELP3' | translate}}
+                </li>
+                <li>
+                    {{'missions_HELP4' | translate}}
+                </li>
+            </ol>
+            
+        </div>
+        
+    </div>
+
 </div>
 
 <div ng-if="user.authenticated">

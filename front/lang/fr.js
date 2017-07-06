@@ -4,7 +4,7 @@ var fr_translations = {
 	lang_FLAG: 'fr',
 	lang_LABEL: 'Français',
 	
-	site_DESC: 'Enregistrer et Partager vos Fresques Ingress',
+	site_DESC: 'Rechercher, Enregistrer et Partager toutes les Fresques Ingress',
 	site_UNDERCONSTRUCTION: 'Site en cours de construction',
 	
 	restricted_TEXT: 'L\'accès à cette page est restreint. Vous devez être connecté pour y accéder.',
@@ -76,6 +76,7 @@ var fr_translations = {
 	missions_FILTER: 'Filtrer les missions ici',
 	missions_BTN: 'Continuez',
 	missions_selected: 'missions sélectionnées',
+	missions_HUNTERTITLE: 'Devenir un Chasseur de Fresque',
 	
 	mosaic_TITLE: 'Titre',
 	mosaic_DESC: 'Description',

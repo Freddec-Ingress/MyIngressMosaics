@@ -4,7 +4,7 @@ var en_translations = {
 	lang_FLAG: 'gb',
 	lang_LABEL: 'English',
 	
-	site_DESC: 'Register and Share your Ingress Mosaics',
+	site_DESC: 'Search, Register and Share all Ingress Mosaics',
 	site_UNDERCONSTRUCTION: 'Site under construction',
 	
 	restricted_TEXT: 'Access to this page is restricted. You must be signed in before accessing it.',
@@ -76,7 +76,12 @@ var en_translations = {
 	missions_FILTER: 'Filter missions here',
 	missions_BTN: 'Next step',
 	missions_selected: 'missions selected',
-	
+	missions_HUNTERTITLE: 'Become a Mosaic Hunter',
+	missions_HELP1: 'Install our Chrome extension ',
+	missions_HELP2: 'Register Ingress missions thanks to Chrome extension',
+	missions_HELP3: 'Sign in on MyIngressMosaics site',
+	missions_HELP4: 'Register mosaics',
+		
 	mosaic_TITLE: 'Title',
 	mosaic_DESC: 'Description',
 	mosaic_COUNTRY: 'Country',
