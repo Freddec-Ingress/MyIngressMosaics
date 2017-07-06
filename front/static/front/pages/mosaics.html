@@ -1,31 +1,38 @@
-<section>
+<div class="card">
     
-    <article>
-    	
-        <table>
-        	
-            <thead>
-                <tr>
-                    <th>{{'countries_COLMOSAIC' | translate}}</th>
-                    <th></th>
-                </tr>
-            </thead>
-            
-            <tbody>
-                <tr ng-repeat="item in mosaics" ng-click="go(item);">
-                	
-                    <td class="text-white">
-                        {{item.name}}
-                    </td>
-                    
-                    <td class="text-right" width="1%">
-                    	<i class="fa fa-arrow-circle-right link"></i>
-                    </td>
+    <div class="card-header">
+        <span>{{'mosaics_SUBTITLE' | translate}}</span>
+        <span class="text-medium text-white">{{city}}</span>
+        (<a ui-sref="root.cities">{{'back_LABEL' | translate}}</a>)
+    </div>
+    
+    <table class="card-table">
 
-                </tr>
-            </tbody>
-        </table>
-    	
-    </article>
+        <tbody>
+            <tr ng-repeat="item in mosaics" ng-click="go(item);">
+            	
+            	<td width="96px">
+            		
+            		<div class="f-row">
+			            <div ng-repeat="m in item.missions" style="flex:0 0 16.666667%;">
+			                <img src="/static/front/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s10); background-size: 85% 85%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+			            </div>
+		            </div>
+            		
+            	</td>
+            	
+                <td>
+                	<div class="text-white">{{item.title}}</div>
+                	<div class="">{{item.count}} &middot; {{item.distance}} &middot; {{item.type}}</div>
+                </td>
+                
+                <td class="text-center" style="width:2rem;">
+                	<i class="fa fa-arrow-circle-right text-link"></i>
+                </td>
 
-</section>
+            </tr>
+        </tbody>
+        
+    </table>
+
+</div>

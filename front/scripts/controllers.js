@@ -572,7 +572,7 @@ angular.module('AngularApp.controllers').controller('CitiesCtrl', function($scop
 
 	$scope.go = function(item) {
 		
-		DataService.current_city = item.name;
+		DataService.setCity(item.name);
 		$state.go('root.mosaics');
 	}
 
@@ -624,8 +624,8 @@ angular.module('AngularApp.controllers').controller('CitiesCtrl', function($scop
 });
 
 angular.module('AngularApp.controllers').controller('MosaicsCtrl', function($scope, $state, DataService) {
-	
-	$scope.page_title = 'mosaics_TITLE';
+
+	$scope.city = DataService.current_city;
 	
 	$scope.mosaics = DataService.mosaics;
 	

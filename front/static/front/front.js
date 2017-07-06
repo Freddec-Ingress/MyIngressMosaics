@@ -2512,6 +2512,7 @@ var en_translations = {
 	cities_SUBTITLE: 'List of cities with mosaics from ',
 	
 	mosaics_TITLE: 'Mosaics',
+	mosaics_SUBTITLE: 'List of mosaics from ',
 };
 var fr_translations = {
     
@@ -2649,6 +2650,7 @@ var fr_translations = {
 	cities_SUBTITLE: 'Liste des villes avec fresques de ',
 	
 	mosaics_TITLE: 'Fresques',
+	mosaics_SUBTITLE: 'Liste des fresques de ',
 };
 angular.module('AngularApp.services', [])
 
@@ -3155,6 +3157,12 @@ angular.module('AngularApp.services').service('DataService', function($cookies, 
 			$cookies.put('current_country', country);
 		},
 		
+		setCity: function(city) {
+			
+			service.current_city = city;
+			$cookies.put('current_city', city);
+		},
+		
 		getCountries: function() {
 			
 			return API.sendRequest('/api/countries/', 'POST').then(function(response) {
@@ -3181,6 +3189,10 @@ angular.module('AngularApp.services').service('DataService', function($cookies, 
 		},
 		
 		getMosaics: function() {
+
+			if (!service.current_city) {
+				service.current_city = $cookies.get('current_city');
+			}
 			
 			var data = { 'city':service.current_city };
 			return API.sendRequest('/api/mosaicsbycity/', 'POST', {}, data).then(function(response) {
@@ -3956,7 +3968,7 @@ angular.module('AngularApp.controllers').controller('CitiesCtrl', function($scop
 
 	$scope.go = function(item) {
 		
-		DataService.current_city = item.name;
+		DataService.setCity(item.name);
 		$state.go('root.mosaics');
 	}
 
@@ -4008,8 +4020,8 @@ angular.module('AngularApp.controllers').controller('CitiesCtrl', function($scop
 });
 
 angular.module('AngularApp.controllers').controller('MosaicsCtrl', function($scope, $state, DataService) {
-	
-	$scope.page_title = 'mosaics_TITLE';
+
+	$scope.city = DataService.current_city;
 	
 	$scope.mosaics = DataService.mosaics;
 	

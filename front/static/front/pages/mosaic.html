@@ -24,9 +24,11 @@
 		    
 			<pre class="group text-highlight">{{mosaic.desc}}</pre>
 			
-        	{{'mosaic_BY' | translate}}
-        	<span class="ml-2" ng-repeat="creator in mosaic.creators" ng-class="{'text-enligtened': creator.faction == 'E', 'text-resistance': creator.faction == 'R',}">{{creator.name}}</span>
-
+			<div class="f-row">
+	        	{{'mosaic_BY' | translate}}
+	        	<span class="ml-2" ng-repeat="creator in mosaic.creators" ng-class="{'text-enligtened': creator.faction == 'E', 'text-resistance': creator.faction == 'R',}">{{creator.name}}</span>
+			</div>
+			
 		</div>
 		
 		<div class="card-block first last f-col" ng-if="user.name == mosaic.registerer.name" ng-show="editMode">
@@ -120,6 +122,7 @@
 	                <img src="/static/front/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{getImage(i, j)}}=s100); background-size: 85% 85%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
 	            </div>
 	        </div>
+	        
 		</div>
 		
 	</div>

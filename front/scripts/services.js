@@ -503,6 +503,12 @@ angular.module('AngularApp.services').service('DataService', function($cookies, 
 			$cookies.put('current_country', country);
 		},
 		
+		setCity: function(city) {
+			
+			service.current_city = city;
+			$cookies.put('current_city', city);
+		},
+		
 		getCountries: function() {
 			
 			return API.sendRequest('/api/countries/', 'POST').then(function(response) {
@@ -529,6 +535,10 @@ angular.module('AngularApp.services').service('DataService', function($cookies, 
 		},
 		
 		getMosaics: function() {
+
+			if (!service.current_city) {
+				service.current_city = $cookies.get('current_city');
+			}
 			
 			var data = { 'city':service.current_city };
 			return API.sendRequest('/api/mosaicsbycity/', 'POST', {}, data).then(function(response) {

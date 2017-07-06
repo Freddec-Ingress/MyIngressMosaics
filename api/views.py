@@ -463,11 +463,7 @@ class DataViewSet(viewsets.ViewSet):
 		results = Mosaic.objects.filter(city=request.data['city'])
 		for item in results:
 			
-			mosaic = {
-				'ref': item.ref,
-				'name': item.title,
-			}
-			
+			mosaic = item.serialize()
 			data.append(mosaic)
 		
 		return Response(data, status=status.HTTP_200_OK)

@@ -134,4 +134,5 @@ var fr_translations = {
 	cities_SUBTITLE: 'Liste des villes avec fresques de ',
 	
 	mosaics_TITLE: 'Fresques',
+	mosaics_SUBTITLE: 'Liste des fresques de ',
 };

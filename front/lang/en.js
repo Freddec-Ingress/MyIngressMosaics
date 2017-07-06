@@ -134,4 +134,5 @@ var en_translations = {
 	cities_SUBTITLE: 'List of cities with mosaics from ',
 	
 	mosaics_TITLE: 'Mosaics',
+	mosaics_SUBTITLE: 'List of mosaics from ',
 };
