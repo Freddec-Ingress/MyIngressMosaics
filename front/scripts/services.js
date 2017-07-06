@@ -533,8 +533,8 @@ angular.module('AngularApp.services').service('DataService', function(API) {
 			
 			function compareMosaicsAsc(a, b) {
 				
-				var a_mosaics = a.mosaics.toLowerCase();
-				var b_mosaics = b.mosaics.toLowerCase();
+				var a_mosaics = a.mosaics;
+				var b_mosaics = b.mosaics;
 				
 				if (a_mosaics < b_mosaics)
 					return -1;
