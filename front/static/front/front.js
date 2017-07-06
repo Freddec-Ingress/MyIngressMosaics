@@ -2390,8 +2390,10 @@ var en_translations = {
 	here_LABEL: 'here',
 	
 	ok_LABEL: 'Ok',
+	back_LABEL: 'Back',
 	edit_LABEL: 'Edit',
 	close_LABEL: 'Close',
+	filter_LABEL: 'Filter',
 	cancel_LABEL: 'Cancel',
 	
 	home_TITLE: 'Welcome',
@@ -2497,16 +2499,7 @@ var en_translations = {
 	mymosaics_SUBTITLE: 'My registered mosaics',
 	mymosaics_NOMOSAIC: 'No mosaic',
 	mymosaics_COLNAME: 'Name',
-	
-	edit_BTN: 'Save',
-	edit_BACK: 'back to mosaic',
-	edit_TITLE: 'Edit mission order',
-	
-	add_BTN: 'Add',
-	add_BACK: 'back to mosaic',
-	add_TITLE: 'Add mission to mosaic',
-	add_NOMISSION: 'No mission to add',
-	
+
 	countries_LINK: 'Mosaic Countries',
 	countries_TITLE: 'Mosaic Countries',
 	countries_COLMOSAICS: 'Mosaics',
@@ -2516,6 +2509,8 @@ var en_translations = {
 	countries_SUBTITLE: 'List of countries with mosaics',
 	
 	cities_TITLE: 'Cities',
+	cities_SUBTITLE: 'List of cities with mosaics from ',
+	
 	mosaics_TITLE: 'Mosaics',
 };
 var fr_translations = {
@@ -2532,8 +2527,10 @@ var fr_translations = {
 	here_LABEL: 'ici',
 	
 	ok_LABEL: 'Ok',
+	back_LABEL: 'Retour',
 	edit_LABEL: 'Modifier',
 	close_LABEL: 'Fermer',
+	filter_LABEL: 'Filtre',
 	cancel_LABEL: 'Annuler',
 	
 	home_TITLE: 'Bienvenue',
@@ -2639,16 +2636,7 @@ var fr_translations = {
 	mymosaics_SUBTITLE: 'Mes fresques enregitrées',
 	mymosaics_NOMOSAIC: 'Aucune fresque',
 	mymosaics_COLNAME: 'Nom',
-	
-	edit_BTN: 'Enregistrer',
-	edit_BACK: 'retour à la fresque',
-	edit_TITLE: 'Modifier l\'ordre des missions',
-	
-	add_BTN: 'Ajouter',
-	add_BACK: 'retour à la fresque',
-	add_TITLE: 'Ajouter des missions à la fresque',
-	add_NOMISSION: 'Aucune mission à ajouter',
-	
+
 	countries_LINK: 'Les Pays',
 	countries_TITLE: 'Les Pays',
 	countries_COLMOSAICS: 'Fresques',
@@ -2658,6 +2646,8 @@ var fr_translations = {
 	countries_SUBTITLE: 'Liste des pays avec des fresques',
 	
 	cities_TITLE: 'Villes',
+	cities_SUBTITLE: 'Liste des villes avec fresques de ',
+	
 	mosaics_TITLE: 'Fresques',
 };
 angular.module('AngularApp.services', [])
@@ -3147,7 +3137,7 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 	return service;
 });
 
-angular.module('AngularApp.services').service('DataService', function(API) {
+angular.module('AngularApp.services').service('DataService', function($cookies, API) {
 	
 	var service = {
 		
@@ -3158,6 +3148,12 @@ angular.module('AngularApp.services').service('DataService', function(API) {
 		
 		current_city: null,
 		current_country: null,
+		
+		setCountry: function(country) {
+			
+			service.current_country = country;
+			$cookies.put('current_country', country);
+		},
 		
 		getCountries: function() {
 			
@@ -3170,6 +3166,10 @@ angular.module('AngularApp.services').service('DataService', function(API) {
 		},
 		
 		getCities: function() {
+
+			if (!service.current_country) {
+				service.current_country = $cookies.get('current_country');
+			}
 			
 			var data = { 'country':service.current_country };
 			return API.sendRequest('/api/cities/', 'POST', {}, data).then(function(response) {
@@ -3262,6 +3262,80 @@ angular.module('AngularApp.services').service('DataService', function(API) {
 				
 				if (sort == 'asc') service.countries.sort(compareNameAsc);
 				if (sort == 'desc') service.countries.sort(compareNameDesc);
+			}
+		},
+
+		sortCitiesByMosaics: function(sort) {
+			
+			function compareMosaicsAsc(a, b) {
+				
+				var a_mosaics = a.mosaics;
+				var b_mosaics = b.mosaics;
+				
+				if (a_mosaics < b_mosaics)
+					return -1;
+					
+				if (a_mosaics > b_mosaics)
+					return 1;
+
+				return 0;
+			}
+			
+			function compareMosaicsDesc(a, b) {
+				
+				var a_mosaics = a.mosaics;
+				var b_mosaics = b.mosaics;
+				
+				if (a_mosaics > b_mosaics)
+					return -1;
+					
+				if (a_mosaics < b_mosaics)
+					return 1;
+				
+				return 0;
+			}
+			
+			if (service.cities) {
+				
+				if (sort == 'asc') service.cities.sort(compareMosaicsAsc);
+				if (sort == 'desc') service.cities.sort(compareMosaicsDesc);
+			}
+		},
+
+		sortCitiesByName: function(sort) {
+			
+			function compareNameAsc(a, b) {
+				
+				var a_name = a.name.toLowerCase();
+				var b_name = b.name.toLowerCase();
+				
+				if (a_name < b_name)
+					return -1;
+					
+				if (a_name > b_name)
+					return 1;
+
+				return 0;
+			}
+			
+			function compareNameDesc(a, b) {
+				
+				var a_name = a.name.toLowerCase();
+				var b_name = b.name.toLowerCase();
+				
+				if (a_name > b_name)
+					return -1;
+					
+				if (a_name < b_name)
+					return 1;
+
+				return 0;
+			}
+			
+			if (service.cities) {
+				
+				if (sort == 'asc') service.cities.sort(compareNameAsc);
+				if (sort == 'desc') service.cities.sort(compareNameDesc);
 			}
 		},
 	};
@@ -3825,7 +3899,7 @@ angular.module('AngularApp.controllers').controller('CountriesCtrl', function($s
 	
 	$scope.go = function(item) {
 		
-		DataService.current_country = item.name;
+		DataService.setCountry(item.name);
 		$state.go('root.cities');
 	}
 
@@ -3877,16 +3951,60 @@ angular.module('AngularApp.controllers').controller('CountriesCtrl', function($s
 });
 
 angular.module('AngularApp.controllers').controller('CitiesCtrl', function($scope, $state, DataService) {
-	
-	$scope.page_title = 'cities_TITLE';
-	
-	$scope.cities = DataService.cities;
-	
+
+	$scope.country = DataService.current_country;
+
 	$scope.go = function(item) {
 		
 		DataService.current_city = item.name;
 		$state.go('root.mosaics');
 	}
+
+	/* Sort mosaics */
+	
+	DataService.sortCitiesByMosaics('desc');
+	
+	$scope.sortMosaics = 'desc';
+	
+	$scope.sortCitiesByMosaics = function() {
+		
+		$scope.sortName = '';
+		
+		if ($scope.sortMosaics == '' || $scope.sortMosaics == 'asc') {
+			
+			DataService.sortCountriesByMosaics('desc');
+			$scope.sortMosaics = 'desc';
+		}
+		
+		else if ($scope.sortMosaics == 'desc') {
+			
+			DataService.sortCitiesByMosaics('asc');
+			$scope.sortMosaics = 'asc';
+		}
+	}
+	
+	/* Sort name */
+	
+	$scope.sortName = '';
+	
+	$scope.sortCitiesByName = function() {
+		
+		$scope.sortMosaics = '';
+		
+		if ($scope.sortName == '' || $scope.sortName == 'asc') {
+			
+			DataService.sortCitiesByName('desc');
+			$scope.sortName = 'desc';
+		}
+		
+		else if ($scope.sortName == 'desc') {
+			
+			DataService.sortCitiesByName('asc');
+			$scope.sortName = 'asc';
+		}
+	}
+	
+	$scope.cities = DataService.cities;
 });
 
 angular.module('AngularApp.controllers').controller('MosaicsCtrl', function($scope, $state, DataService) {

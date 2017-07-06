@@ -12,8 +12,10 @@ var en_translations = {
 	here_LABEL: 'here',
 	
 	ok_LABEL: 'Ok',
+	back_LABEL: 'Back',
 	edit_LABEL: 'Edit',
 	close_LABEL: 'Close',
+	filter_LABEL: 'Filter',
 	cancel_LABEL: 'Cancel',
 	
 	home_TITLE: 'Welcome',
@@ -119,16 +121,7 @@ var en_translations = {
 	mymosaics_SUBTITLE: 'My registered mosaics',
 	mymosaics_NOMOSAIC: 'No mosaic',
 	mymosaics_COLNAME: 'Name',
-	
-	edit_BTN: 'Save',
-	edit_BACK: 'back to mosaic',
-	edit_TITLE: 'Edit mission order',
-	
-	add_BTN: 'Add',
-	add_BACK: 'back to mosaic',
-	add_TITLE: 'Add mission to mosaic',
-	add_NOMISSION: 'No mission to add',
-	
+
 	countries_LINK: 'Mosaic Countries',
 	countries_TITLE: 'Mosaic Countries',
 	countries_COLMOSAICS: 'Mosaics',
@@ -138,5 +131,7 @@ var en_translations = {
 	countries_SUBTITLE: 'List of countries with mosaics',
 	
 	cities_TITLE: 'Cities',
+	cities_SUBTITLE: 'List of cities with mosaics from ',
+	
 	mosaics_TITLE: 'Mosaics',
 };

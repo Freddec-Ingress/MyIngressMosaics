@@ -12,8 +12,10 @@ var fr_translations = {
 	here_LABEL: 'ici',
 	
 	ok_LABEL: 'Ok',
+	back_LABEL: 'Retour',
 	edit_LABEL: 'Modifier',
 	close_LABEL: 'Fermer',
+	filter_LABEL: 'Filtre',
 	cancel_LABEL: 'Annuler',
 	
 	home_TITLE: 'Bienvenue',
@@ -119,16 +121,7 @@ var fr_translations = {
 	mymosaics_SUBTITLE: 'Mes fresques enregitrées',
 	mymosaics_NOMOSAIC: 'Aucune fresque',
 	mymosaics_COLNAME: 'Nom',
-	
-	edit_BTN: 'Enregistrer',
-	edit_BACK: 'retour à la fresque',
-	edit_TITLE: 'Modifier l\'ordre des missions',
-	
-	add_BTN: 'Ajouter',
-	add_BACK: 'retour à la fresque',
-	add_TITLE: 'Ajouter des missions à la fresque',
-	add_NOMISSION: 'Aucune mission à ajouter',
-	
+
 	countries_LINK: 'Les Pays',
 	countries_TITLE: 'Les Pays',
 	countries_COLMOSAICS: 'Fresques',
@@ -138,5 +131,7 @@ var fr_translations = {
 	countries_SUBTITLE: 'Liste des pays avec des fresques',
 	
 	cities_TITLE: 'Villes',
+	cities_SUBTITLE: 'Liste des villes avec fresques de ',
+	
 	mosaics_TITLE: 'Fresques',
 };

@@ -485,7 +485,7 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 	return service;
 });
 
-angular.module('AngularApp.services').service('DataService', function(API) {
+angular.module('AngularApp.services').service('DataService', function($cookies, API) {
 	
 	var service = {
 		
@@ -496,6 +496,12 @@ angular.module('AngularApp.services').service('DataService', function(API) {
 		
 		current_city: null,
 		current_country: null,
+		
+		setCountry: function(country) {
+			
+			service.current_country = country;
+			$cookies.put('current_country', country);
+		},
 		
 		getCountries: function() {
 			
@@ -508,6 +514,10 @@ angular.module('AngularApp.services').service('DataService', function(API) {
 		},
 		
 		getCities: function() {
+
+			if (!service.current_country) {
+				service.current_country = $cookies.get('current_country');
+			}
 			
 			var data = { 'country':service.current_country };
 			return API.sendRequest('/api/cities/', 'POST', {}, data).then(function(response) {
@@ -600,6 +610,80 @@ angular.module('AngularApp.services').service('DataService', function(API) {
 				
 				if (sort == 'asc') service.countries.sort(compareNameAsc);
 				if (sort == 'desc') service.countries.sort(compareNameDesc);
+			}
+		},
+
+		sortCitiesByMosaics: function(sort) {
+			
+			function compareMosaicsAsc(a, b) {
+				
+				var a_mosaics = a.mosaics;
+				var b_mosaics = b.mosaics;
+				
+				if (a_mosaics < b_mosaics)
+					return -1;
+					
+				if (a_mosaics > b_mosaics)
+					return 1;
+
+				return 0;
+			}
+			
+			function compareMosaicsDesc(a, b) {
+				
+				var a_mosaics = a.mosaics;
+				var b_mosaics = b.mosaics;
+				
+				if (a_mosaics > b_mosaics)
+					return -1;
+					
+				if (a_mosaics < b_mosaics)
+					return 1;
+				
+				return 0;
+			}
+			
+			if (service.cities) {
+				
+				if (sort == 'asc') service.cities.sort(compareMosaicsAsc);
+				if (sort == 'desc') service.cities.sort(compareMosaicsDesc);
+			}
+		},
+
+		sortCitiesByName: function(sort) {
+			
+			function compareNameAsc(a, b) {
+				
+				var a_name = a.name.toLowerCase();
+				var b_name = b.name.toLowerCase();
+				
+				if (a_name < b_name)
+					return -1;
+					
+				if (a_name > b_name)
+					return 1;
+
+				return 0;
+			}
+			
+			function compareNameDesc(a, b) {
+				
+				var a_name = a.name.toLowerCase();
+				var b_name = b.name.toLowerCase();
+				
+				if (a_name > b_name)
+					return -1;
+					
+				if (a_name < b_name)
+					return 1;
+
+				return 0;
+			}
+			
+			if (service.cities) {
+				
+				if (sort == 'asc') service.cities.sort(compareNameAsc);
+				if (sort == 'desc') service.cities.sort(compareNameDesc);
 			}
 		},
 	};

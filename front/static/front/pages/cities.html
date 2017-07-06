@@ -1,36 +1,52 @@
-<section>
+<div class="card">
     
-    <article>
+    <div class="card-header">
+        <span>{{'cities_SUBTITLE' | translate}}</span>
+        <span class="text-medium text-white">{{country}}</span>
+        (<a ui-sref="root.countries">{{'back_LABEL' | translate}}</a>)
+    </div>
+    
+    <div class="card-header f-row">
     	
-        <table>
+    	<label class="mb-0 mr-2">{{'filter_LABEL' | translate}}</label>
+    	<input type="text" class="form-control" ng-model="keywords" />
+    	
+    </div>
+    
+    <table class="card-table">
         	
-            <thead>
-                <tr>
-                    <th>{{'countries_COLMOSAICS' | translate}}</th>
-                    <th>{{'countries_COLCITY' | translate}}</th>
-                    <th></th>
-                </tr>
-            </thead>
-            
-            <tbody>
-                <tr ng-repeat="item in cities" ng-click="go(item);">
-                	
-                    <td class="text-right" width="1%">
-                    	{{item.mosaics}}
-                    </td>
-                    
-                    <td class="text-white">
-                        {{item.name}}
-                    </td>
-                    
-                    <td class="text-right" width="1%">
-                    	<i class="fa fa-arrow-circle-right link"></i>
-                    </td>
+        <thead>
+            <tr>
+                <th class="text-center" width="80px" style="cursor:pointer;" ng-click="sortCitiesByMosaics();">
+                    <i class="fa mr-2" ng-class="{'fa-caret-up':sortMosaics == 'asc', 'fa-caret-down':sortMosaics == 'desc', 'fa-sort text-muted':sortMosaics == ''}"></i>
+                	{{'countries_COLMOSAICS' | translate}}
+                </th>
+                <th style="cursor:pointer;" ng-click="sortCitiesByName();">
+                    <i class="fa mr-2" ng-class="{'fa-caret-up':sortName == 'asc', 'fa-caret-down':sortName == 'desc', 'fa-sort text-muted':sortName == ''}"></i>
+                	{{'countries_COLCITY' | translate}}
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr ng-repeat="item in cities | filter:keywords" ng-click="go(item);">
+            	
+                <td class="text-right text-center" width="80px">
+                	{{item.mosaics}}
+                </td>
+                
+                <td class="text-white">
+                    {{item.name}}
+                </td>
+                
+                <td class="text-center" style="width:2rem;">
+                	<i class="fa fa-arrow-circle-right text-link"></i>
+                </td>
 
-                </tr>
-            </tbody>
-        </table>
-    	
-    </article>
+            </tr>
+        </tbody>
+        
+    </table>
 
-</section>
+</div>
