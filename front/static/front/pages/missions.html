@@ -1,52 +1,60 @@
-<section ng-if='!user.authenticated'>
-	
-	<div class="text-danger text-center mr-2 ml-2">
-		{{'restricted_TEXT' | translate}}
-	</div>
+<div class="text-danger text-center mt-4 mr-2 ml-2" ng-if='!user.authenticated'>
+	{{'restricted_TEXT' | translate}}
+</div>
 
-</section>
+<div ng-if="user.authenticated">
 
-<section ng-if='user.authenticated'>
-    
-    <article>
+    <div class="card">
         
-        <h4>{{'missions_SUBTITLE' | translate}}</h4>
+        <div class="card-header">
+            <span class="text-medium">{{'missions_SUBTITLE' | translate}}</span>
+        </div>
         
         <div ng-if="!missions">
             
-            <p class="text-danger">{{'missions_NOMISSION' | translate}}</p>
-            
-            <p>
+            <div class="card-block first last">
                 
-                {{'missions_UPDATENAME' | translate}}
+                <p class="text-danger">{{'missions_NOMISSION' | translate}}</p>
                 
-				<a ui-sref="root.profile">
-					{{'profile_LINK' | translate}}
-				</a>
-				
-            </p>
+                <p>
+                    
+                    {{'missions_UPDATENAME' | translate}}
+                    
+    				<a ui-sref="root.profile">
+    					{{'profile_LINK' | translate}}
+    				</a>
+    				
+                </p>
+    
+                <p>
+                    
+                    {{'missions_HUNTINGTOOL' | translate}}
 
-            <p>
+                    <a href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">
+                        MyIngressMosaics Hunting Tool
+                    </a>
+                    
+                </p>
                 
-                {{'missions_HUNTINGTOOL' | translate}}
-                
-                <a href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">
-                    MyIngressMosaics Hunting Tool
-                </a>
-                
-            </p>
+            </div>
             
         </div>
         
         <div ng-if="missions">
             
-            <table style="-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none;">
+            <table class="card-table no-user-select">
                 <thead>
                     <tr>
                         <th></th>
-                        <th>{{'missions_COLNAME' | translate}}</th>
+                        <th style="cursor:pointer;" ng-click="sortMissionsByName();">
+                            <i class="fa mr-2" ng-class="{'fa-caret-up':sortName == 'asc', 'fa-caret-down':sortName == 'desc', 'fa-sort text-muted':sortName == ''}"></i>
+                            {{'missions_COLNAME' | translate}}
+                        </th>
                         <th></th>
-                        <th>{{'missions_COLCREATOR' | translate}}</th>
+                        <th style="cursor:pointer;" ng-click="sortMissionsByCreator();">
+                            <i class="fa mr-2" ng-class="{'fa-caret-up':sortCreator == 'asc', 'fa-caret-down':sortCreator == 'desc', 'fa-sort text-muted':sortCreator == ''}"></i>
+                            {{'missions_COLCREATOR' | translate}}
+                        </th>
                         <th></th>
                     </tr>
                 </thead>
@@ -67,16 +75,26 @@
                 </tbody>
             </table>
             
-        </div>
+            <div class="card-block last">
+                
+                <div class="form-button-bar f-justify-around">
+                    
+                    <div class="">
+                        {{selected_missions.length}}
+                        {{'missions_selected' | translate}}
+                    </div>
+                    
+            		<button class="btn btn-secondary f-align-baseline" ng-click="nextStep();" ng-disabled="!hasSelected();">
+            		    {{'missions_BTN' | translate}}
+            		    <i class="fa fa-fw fa-angle-double-right btn-icon ml-2"></i>
+            		</button>
+            		
+        		</div>
+                
+            </div>
+            
+         </div>
         
-    </article>
-    
-    <article>
-        
-		<button type="submit" class="btn btn-primary" ng-click="nextStep();" ng-disabled="!hasSelected();">
-		    {{'missions_BTN' | translate}}
-		</button>
-        
-    </article>
-    
-</section>
+    </div>
+   
+</div>

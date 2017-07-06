@@ -75,6 +75,7 @@ var fr_translations = {
 	missions_COLCREATOR: 'Créateur',
 	missions_FILTER: 'Filtrer les missions ici',
 	missions_BTN: 'Continuez',
+	missions_selected: 'missions sélectionnées',
 	
 	mosaic_TITLE: 'Titre',
 	mosaic_DESC: 'Description',

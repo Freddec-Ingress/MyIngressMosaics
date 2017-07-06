@@ -2453,6 +2453,7 @@ var en_translations = {
 	missions_COLCREATOR: 'Creator',
 	missions_FILTER: 'Filter missions here',
 	missions_BTN: 'Next step',
+	missions_selected: 'missions selected',
 	
 	mosaic_TITLE: 'Title',
 	mosaic_DESC: 'Description',
@@ -2588,6 +2589,7 @@ var fr_translations = {
 	missions_COLCREATOR: 'Créateur',
 	missions_FILTER: 'Filtrer les missions ici',
 	missions_BTN: 'Continuez',
+	missions_selected: 'missions sélectionnées',
 	
 	mosaic_TITLE: 'Titre',
 	mosaic_DESC: 'Description',
@@ -2830,8 +2832,80 @@ angular.module('AngularApp.services').service('UserService', function($auth, $ht
 					service.data.mosaics = response;
 				});
 			}
+		},
+
+		sortMissionsByName: function(sort) {
 			
-			return;
+			function compareNameAsc(a, b) {
+				
+				var a_name = a.name.toLowerCase();
+				var b_name = b.name.toLowerCase();
+				
+				if (a_name < b_name)
+					return -1;
+					
+				if (a_name > b_name)
+					return 1;
+
+				return 0;
+			}
+			
+			function compareNameDesc(a, b) {
+				
+				var a_name = a.name.toLowerCase();
+				var b_name = b.name.toLowerCase();
+				
+				if (a_name > b_name)
+					return -1;
+					
+				if (a_name < b_name)
+					return 1;
+
+				return 0;
+			}
+			
+			if (service.data.missions) {
+				
+				if (sort == 'asc') service.data.missions.sort(compareNameAsc);
+				if (sort == 'desc') service.data.missions.sort(compareNameDesc);
+			}
+		},
+
+		sortMissionsByCreator: function(sort) {
+			
+			function compareCreatorAsc(a, b) {
+				
+				var a_creator = a.creator.toLowerCase();
+				var b_creator = b.creator.toLowerCase();
+				
+				if (a_creator < b_creator)
+					return -1;
+					
+				if (a_creator > b_creator)
+					return 1;
+
+				return 0;
+			}
+			
+			function compareCreatorDesc(a, b) {
+				
+				var a_creator = a.creator.toLowerCase();
+				var b_creator = b.creator.toLowerCase();
+				
+				if (a_creator > b_creator)
+					return -1;
+					
+				if (a_creator < b_creator)
+					return 1;
+				
+				return 0;
+			}
+			
+			if (service.data.missions) {
+				
+				if (sort == 'asc') service.data.missions.sort(compareCreatorAsc);
+				if (sort == 'desc') service.data.missions.sort(compareCreatorDesc);
+			}
 		},
 	};
 	
@@ -3104,17 +3178,6 @@ angular.module('AngularApp.services').service('DataService', function(API) {
 				}
 			});
 		},
-		
-		getMissions: function(mosaic) {
-			
-			var data = { 'ref':mosaic.ref };
-			return API.sendRequest('/api/mosaic/potential/', 'POST', {}, data).then(function(response) {
-				
-				if (response) {
-					service.missions = response;
-				}
-			});
-		},
 	};
 	
 	return service;
@@ -3254,12 +3317,10 @@ angular.module('AngularApp.controllers').controller('ProfileCtrl', function($sco
 });
 
 angular.module('AngularApp.controllers').controller('MissionsCtrl', function($scope, $state, UserService, CreateService) {
-	
-	$scope.page_title = 'missions_TITLE';
 
 	CreateService.init();
 	
-	$scope.missions = UserService.data.missions;
+	$scope.selected_missions = CreateService.data.missions;
 	
 	$scope.isSelected = function(ref) {
 		
@@ -3325,6 +3386,52 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 	$scope.delete = function(item) {
 		UserService.deleteMission(item);
 	}
+	
+	/* Sort name */
+	
+	UserService.sortMissionsByName('asc');
+	
+	$scope.sortName = 'asc';
+	
+	$scope.sortMissionsByName = function() {
+		
+		$scope.sortCreator = '';
+		
+		if ($scope.sortName == '' || $scope.sortName == 'asc') {
+			
+			UserService.sortMissionsByName('desc');
+			$scope.sortName = 'desc';
+		}
+		
+		else if ($scope.sortName == 'desc') {
+			
+			UserService.sortMissionsByName('asc');
+			$scope.sortName = 'asc';
+		}
+	}
+	
+	/* Sort creator */
+	
+	$scope.sortCreator = '';
+	
+	$scope.sortMissionsByCreator = function() {
+		
+		$scope.sortName = '';
+		
+		if ($scope.sortCreator == '' || $scope.sortCreator == 'asc') {
+			
+			UserService.sortMissionsByCreator('desc');
+			$scope.sortCreator = 'desc';
+		}
+		
+		else if ($scope.sortCreator == 'desc') {
+			
+			UserService.sortMissionsByCreator('asc');
+			$scope.sortCreator = 'asc';
+		}
+	}
+	
+	$scope.missions = UserService.data.missions;
 });
 
 angular.module('AngularApp.controllers').controller('CreateCtrl', function($scope, $state, CreateService) {

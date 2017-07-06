@@ -182,8 +182,80 @@ angular.module('AngularApp.services').service('UserService', function($auth, $ht
 					service.data.mosaics = response;
 				});
 			}
+		},
+
+		sortMissionsByName: function(sort) {
 			
-			return;
+			function compareNameAsc(a, b) {
+				
+				var a_name = a.name.toLowerCase();
+				var b_name = b.name.toLowerCase();
+				
+				if (a_name < b_name)
+					return -1;
+					
+				if (a_name > b_name)
+					return 1;
+
+				return 0;
+			}
+			
+			function compareNameDesc(a, b) {
+				
+				var a_name = a.name.toLowerCase();
+				var b_name = b.name.toLowerCase();
+				
+				if (a_name > b_name)
+					return -1;
+					
+				if (a_name < b_name)
+					return 1;
+
+				return 0;
+			}
+			
+			if (service.data.missions) {
+				
+				if (sort == 'asc') service.data.missions.sort(compareNameAsc);
+				if (sort == 'desc') service.data.missions.sort(compareNameDesc);
+			}
+		},
+
+		sortMissionsByCreator: function(sort) {
+			
+			function compareCreatorAsc(a, b) {
+				
+				var a_creator = a.creator.toLowerCase();
+				var b_creator = b.creator.toLowerCase();
+				
+				if (a_creator < b_creator)
+					return -1;
+					
+				if (a_creator > b_creator)
+					return 1;
+
+				return 0;
+			}
+			
+			function compareCreatorDesc(a, b) {
+				
+				var a_creator = a.creator.toLowerCase();
+				var b_creator = b.creator.toLowerCase();
+				
+				if (a_creator > b_creator)
+					return -1;
+					
+				if (a_creator < b_creator)
+					return 1;
+				
+				return 0;
+			}
+			
+			if (service.data.missions) {
+				
+				if (sort == 'asc') service.data.missions.sort(compareCreatorAsc);
+				if (sort == 'desc') service.data.missions.sort(compareCreatorDesc);
+			}
 		},
 	};
 	
@@ -453,17 +525,6 @@ angular.module('AngularApp.services').service('DataService', function(API) {
 				
 				if (response) {
 					service.mosaics = response;
-				}
-			});
-		},
-		
-		getMissions: function(mosaic) {
-			
-			var data = { 'ref':mosaic.ref };
-			return API.sendRequest('/api/mosaic/potential/', 'POST', {}, data).then(function(response) {
-				
-				if (response) {
-					service.missions = response;
 				}
 			});
 		},

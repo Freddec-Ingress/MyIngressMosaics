@@ -93,12 +93,10 @@ angular.module('AngularApp.controllers').controller('ProfileCtrl', function($sco
 });
 
 angular.module('AngularApp.controllers').controller('MissionsCtrl', function($scope, $state, UserService, CreateService) {
-	
-	$scope.page_title = 'missions_TITLE';
 
 	CreateService.init();
 	
-	$scope.missions = UserService.data.missions;
+	$scope.selected_missions = CreateService.data.missions;
 	
 	$scope.isSelected = function(ref) {
 		
@@ -164,6 +162,52 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 	$scope.delete = function(item) {
 		UserService.deleteMission(item);
 	}
+	
+	/* Sort name */
+	
+	UserService.sortMissionsByName('asc');
+	
+	$scope.sortName = 'asc';
+	
+	$scope.sortMissionsByName = function() {
+		
+		$scope.sortCreator = '';
+		
+		if ($scope.sortName == '' || $scope.sortName == 'asc') {
+			
+			UserService.sortMissionsByName('desc');
+			$scope.sortName = 'desc';
+		}
+		
+		else if ($scope.sortName == 'desc') {
+			
+			UserService.sortMissionsByName('asc');
+			$scope.sortName = 'asc';
+		}
+	}
+	
+	/* Sort creator */
+	
+	$scope.sortCreator = '';
+	
+	$scope.sortMissionsByCreator = function() {
+		
+		$scope.sortName = '';
+		
+		if ($scope.sortCreator == '' || $scope.sortCreator == 'asc') {
+			
+			UserService.sortMissionsByCreator('desc');
+			$scope.sortCreator = 'desc';
+		}
+		
+		else if ($scope.sortCreator == 'desc') {
+			
+			UserService.sortMissionsByCreator('asc');
+			$scope.sortCreator = 'asc';
+		}
+	}
+	
+	$scope.missions = UserService.data.missions;
 });
 
 angular.module('AngularApp.controllers').controller('CreateCtrl', function($scope, $state, CreateService) {

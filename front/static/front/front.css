@@ -530,11 +530,20 @@ table {
     border-collapse: collapse;
 }
 
+table.no-user-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
 table th {
+    height: 3rem;
     text-align: left;
-    border-bottom: 1px solid #E0F2F1;
-    color: #E0F2F1; font-weight: 400;
-    padding-left: .25rem; padding-bottom: .5rem;
+    padding: .5rem .25rem;
+    border-bottom: 1px solid #B2DFDB;
+    color: #B2DFDB; font-weight: 400;
 }
 
 table tbody tr {
@@ -565,6 +574,14 @@ table td {
     display: flex; flex-direction: row; align-items: center;
 }
 
+.f-justify-around {
+    justify-content: space-around!important;
+}
+
+.f-align-baseline {
+    align-items: baseline!important;
+}
+
 /* Item --------------------------------------------------------------------- */
 
 .fitem-grow {
@@ -577,23 +594,6 @@ table td {
 /* TYPOGRAPHY                                                                 */
 /******************************************************************************/
 
-/* Description -------------------------------------------------------------- */
-
-dl {
-    margin: 0;
-	position: relative;
-	display: flex; flex-direction: column;
-}
-
-dt {
-    margin: 0 0 .25rem 0;
-}
-
-dd {
-    margin: 0;
-	color: #FFFFFF; font-size: .875rem;
-}
-
 /* Formatted ---------------------------------------------------------------- */
 
 pre {
@@ -601,6 +601,14 @@ pre {
     font: inherit; white-space: pre-line;
 }
 
+/* Paragraph ---------------------------------------------------------------- */
+
+p {
+    margin: 0 0 1rem 0;
+}
+p:last-child {
+    margin: 0;
+}
 
 
 /******************************************************************************/
