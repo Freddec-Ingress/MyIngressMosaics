@@ -696,6 +696,43 @@ angular.module('AngularApp.services').service('DataService', function($cookies, 
 				if (sort == 'desc') service.cities.sort(compareNameDesc);
 			}
 		},
+
+		sortMosaicsByMissions: function(sort) {
+			
+			function compareMissionsAsc(a, b) {
+				
+				var a_missions = a.count;
+				var b_missions = b.count;
+				
+				if (a_missions < b_missions)
+					return -1;
+					
+				if (a_missions > b_missions)
+					return 1;
+
+				return 0;
+			}
+			
+			function compareMissionsDesc(a, b) {
+				
+				var a_missions = a.count;
+				var b_missions = b.count;
+				
+				if (a_missions > b_missions)
+					return -1;
+					
+				if (a_missions < b_missions)
+					return 1;
+				
+				return 0;
+			}
+			
+			if (service.mosaics) {
+				
+				if (sort == 'asc') service.mosaics.sort(compareMissionsAsc);
+				if (sort == 'desc') service.mosaics.sort(compareMissionsDesc);
+			}
+		},
 	};
 	
 	return service;

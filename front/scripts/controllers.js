@@ -627,10 +627,31 @@ angular.module('AngularApp.controllers').controller('MosaicsCtrl', function($sco
 
 	$scope.city = DataService.current_city;
 	
-	$scope.mosaics = DataService.mosaics;
-	
 	$scope.go = function(item) {
 		
 		$state.go('root.mosaic', {ref: item.ref});
 	}
+	
+	/* Sort missions */
+	
+	DataService.sortMosaicsByMissions('desc');
+	
+	$scope.sortMissions = '';
+	
+	$scope.sortMosaicsByMissions = function() {
+		
+		if ($scope.sortMissions == '' || $scope.sortMissions == 'asc') {
+			
+			DataService.sortMosaicsByMissions('desc');
+			$scope.sortMissions = 'desc';
+		}
+		
+		else if ($scope.sortMissions == 'desc') {
+			
+			DataService.sortMosaicsByMissions('asc');
+			$scope.sortMissions = 'asc';
+		}
+	}
+	
+	$scope.mosaics = DataService.mosaics;
 });

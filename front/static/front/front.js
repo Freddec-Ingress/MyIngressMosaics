@@ -3350,6 +3350,43 @@ angular.module('AngularApp.services').service('DataService', function($cookies, 
 				if (sort == 'desc') service.cities.sort(compareNameDesc);
 			}
 		},
+
+		sortMosaicsByMissions: function(sort) {
+			
+			function compareMissionsAsc(a, b) {
+				
+				var a_missions = a.count;
+				var b_missions = b.count;
+				
+				if (a_missions < b_missions)
+					return -1;
+					
+				if (a_missions > b_missions)
+					return 1;
+
+				return 0;
+			}
+			
+			function compareMissionsDesc(a, b) {
+				
+				var a_missions = a.count;
+				var b_missions = b.count;
+				
+				if (a_missions > b_missions)
+					return -1;
+					
+				if (a_missions < b_missions)
+					return 1;
+				
+				return 0;
+			}
+			
+			if (service.mosaics) {
+				
+				if (sort == 'asc') service.mosaics.sort(compareMissionsAsc);
+				if (sort == 'desc') service.mosaics.sort(compareMissionsDesc);
+			}
+		},
 	};
 	
 	return service;
@@ -4023,12 +4060,33 @@ angular.module('AngularApp.controllers').controller('MosaicsCtrl', function($sco
 
 	$scope.city = DataService.current_city;
 	
-	$scope.mosaics = DataService.mosaics;
-	
 	$scope.go = function(item) {
 		
 		$state.go('root.mosaic', {ref: item.ref});
 	}
+	
+	/* Sort missions */
+	
+	DataService.sortMosaicsByMissions('desc');
+	
+	$scope.sortMissions = '';
+	
+	$scope.sortMosaicsByMissions = function() {
+		
+		if ($scope.sortMissions == '' || $scope.sortMissions == 'asc') {
+			
+			DataService.sortMosaicsByMissions('desc');
+			$scope.sortMissions = 'desc';
+		}
+		
+		else if ($scope.sortMissions == 'desc') {
+			
+			DataService.sortMosaicsByMissions('asc');
+			$scope.sortMissions = 'asc';
+		}
+	}
+	
+	$scope.mosaics = DataService.mosaics;
 });
 angular.module('AngularApp', ['ui.router', 'ui.bootstrap', 'pascalprecht.translate', 'satellizer', 'ngCookies', 'toastr',
 							  'AngularApp.services', 'AngularApp.controllers', 'AngularApp.directives', ]);
