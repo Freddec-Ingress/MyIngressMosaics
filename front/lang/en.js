@@ -66,6 +66,7 @@ var en_translations = {
 	profile_LINK: 'Profile',
 	profile_TITLE: 'Profile',
 	profile_NAME: 'Name',
+	profile_SUBTITLE: 'Ingress Agent Profile',
 	
 	missions_LINK: 'Register a mosaic',
 	missions_TITLE: 'Register a mosaic',

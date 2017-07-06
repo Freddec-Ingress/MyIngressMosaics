@@ -2444,6 +2444,7 @@ var en_translations = {
 	profile_LINK: 'Profile',
 	profile_TITLE: 'Profile',
 	profile_NAME: 'Name',
+	profile_SUBTITLE: 'Ingress Agent Profile',
 	
 	missions_LINK: 'Register a mosaic',
 	missions_TITLE: 'Register a mosaic',
@@ -2582,6 +2583,7 @@ var fr_translations = {
 	profile_LINK: 'Profil',
 	profile_TITLE: 'Profil',
 	profile_NAME: 'Nom',
+	profile_SUBTITLE: 'Profil d\'agent Ingress',
 	
 	missions_LINK: 'Enregistrer une fresque',
 	missions_TITLE: 'Missions',
@@ -3491,37 +3493,45 @@ angular.module('AngularApp.controllers').controller('RegisterCtrl', function($sc
 	$scope.register = UserService.register;
 });
 
-angular.module('AngularApp.controllers').controller('ProfileCtrl', function($scope, UserService, $timeout) {
-	
-	$scope.page_title = 'profile_TITLE';
-	
+angular.module('AngularApp.controllers').controller('ProfileCtrl', function($scope, UserService, toastr, $filter) {
+
 	$scope.user = UserService.data;
 	
-	/* Name */
+	/* Edit */
 	
-	$scope.editname = false;
-	$scope.newname = UserService.data.name;
+	$scope.editMode = false;
+	$scope.editLoading = false;
 	
-	$scope.nameClick = function() {
+	$scope.editModel = {name:null};
+	
+	$scope.openEdit = function() {
 		
-		$scope.editname = true;
-			
-		$timeout(function() {
-			$('#input-name').focus();
-		});
+		$scope.editModel.name = $scope.user.name;
+		
+		$scope.editMode = true;
 	}
 	
-	$scope.nameBlur = function(newvalue) {
+	$scope.closeEdit = function() {
 		
-		$scope.editname = false;
+		$scope.editMode = false;
+	}
+	
+	$scope.edit = function() {
 		
-		if (newvalue && newvalue != UserService.data.name) {
+		$scope.editLoading = true;
 			
-			$scope.loadingname = true;
-			UserService.updateName(newvalue).then(function() {
-				$scope.loadingname = false;
-			});
-		}
+		UserService.updateName($scope.editModel.name).then(function(response) {
+			
+			toastr.success($filter('translate')('success_EDIT'));
+
+			$scope.editMode = false;
+			$scope.editLoading = false;
+			
+		}, function(response) {
+			
+			$scope.editMode = false;
+			$scope.editLoading = false;
+		});
 	}
 });
 

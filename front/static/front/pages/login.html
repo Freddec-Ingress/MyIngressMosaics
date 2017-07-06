@@ -1,29 +1,27 @@
-<section>
+<div class="card mt-4">
 	
-	<article>
+	<div class="card-block first last">
 
 		<a href="javascript:;" class="btn btn-block btn-facebook" ng-click="socialLogin('facebook')">
 			<i class="fa fa-facebook-official mr-2"></i>
 			{{'login_facebook_BTN' | translate}}
 		</a>
 		
-	</article>
+	</div>
 	
-</section>
+</div>
 	
-<section>
-		        
-	<article>
-		
-	    <p class="text-center">
-	    	{{'login_SUBTITLE' | translate}}
-	    </p>
-	    
-	    <div id="toast-content"></div>
-	    
+<div class="card">
+	
+    <div class="card-header">
+    	<span class="text-medium">{{'login_SUBTITLE' | translate}}</span>
+    </div>
+	
+	<div class="card-block first last">
+
 		<form name="form" novalidate>
 	
-			<div class="form-group">
+			<div class="group">
 				
 				<div class="input-group">
 					<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
@@ -36,7 +34,7 @@
 				
 			</div>
 	
-			<div class="form-group">
+			<div class="group">
 				
 				<div class="input-group">
 					<span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
@@ -49,20 +47,20 @@
 				
 			</div>
 	
-			<div class="grid-row">
+			<div class="form-button-bar">
 				
-				<div class="cell pr-2">
-					<button type="submit" class="btn btn-primary" ng-click="localLogin(loginModel.username, loginModel.password);" ng-disabled="!loginModel.username || !loginModel.password">{{'login_local_BTN' | translate}}</button>
+				<div class="pr-2">
+					<button class="btn btn-primary btn-fixed" ng-click="localLogin(loginModel.username, loginModel.password);" ng-disabled="!loginModel.username || !loginModel.password">{{'login_local_BTN' | translate}}</button>
 				</div>
 				
-				<div class="cell pl-2 text-right">
-					<a class="btn btn-secondary" ui-sref="root.register">{{'register_LINK' | translate}}</a>
+				<div class="pl-2 text-right">
+					<a class="btn btn-secondary btn-fixed" ui-sref="root.register">{{'register_LINK' | translate}}</a>
 				</div>
 				
 			</div>
 
 		</form>
 	    
-	</article>
+	</div>
 
-</section>
+</div>

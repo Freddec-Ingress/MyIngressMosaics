@@ -1,12 +1,10 @@
-<section>
+<div class="card mt-4">
 	
-	<article>
-	
-		<div id="toast-content"></div>
+	<div class="card-block first last">
 		
 		<form name="form" novalidate>
 	
-			<div class="form-group">
+			<div class="group">
 				
 				<div class="input-group">
 					<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
@@ -19,7 +17,7 @@
 				
 			</div>
 	
-			<div class="form-group">
+			<div class="group">
 				<div class="input-group">
 					<span class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></span>
 					<input type="email" class="form-control" placeholder="{{'register_email_PLACEHOLDER' | translate}}" name="email" ng-model="registerModel.email" required="" />
@@ -30,7 +28,7 @@
 				</div>
 			</div>
 	
-			<div class="form-group">
+			<div class="group">
 				<div class="input-group">
 					<span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
 					<input type="password" class="form-control" placeholder="{{'register_pwd1_PLACEHOLDER' | translate}}" name="password1" ng-model="registerModel.password1" required="" />
@@ -40,7 +38,7 @@
 				</div>
 			</div>
 	
-			<div class="form-group">
+			<div class="group">
 				<div class="input-group">
 					<span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
 					<input type="password" class="form-control" placeholder="{{'register_pwd2_PLACEHOLDER' | translate}}" name="password2" ng-model="registerModel.password2" required="" />
@@ -54,17 +52,17 @@
 				{{'register_TEXT1' | translate}}
 			</p>
 			
-			<div class="grid-row">
-				<div class="cell pr-2">
-					<button type="submit" class="btn btn-primary btn-block" ng-click="register(registerModel.username, registerModel.password1, registerModel.password2, registerModel.email);" ng-disabled="!registerModel.username || !registerModel.email || !registerModel.password1 || !registerModel.password2">{{'register_BTN' | translate}}</button>
+			<div class="form-button-bar">
+				<div class="pr-2">
+					<button type="submit" class="btn btn-primary btn-fixed" ng-click="register(registerModel.username, registerModel.password1, registerModel.password2, registerModel.email);" ng-disabled="!registerModel.username || !registerModel.email || !registerModel.password1 || !registerModel.password2">{{'register_BTN' | translate}}</button>
 				</div>
-				<div class="cell pl-2 text-right">
-					<a class="btn btn-secondary" ui-sref="root.login">{{'login_LINK' | translate}}</a>
+				<div class="pl-2 text-right">
+					<a class="btn btn-secondary btn-fixed" ui-sref="root.login">{{'login_LINK' | translate}}</a>
 				</div>
 			</div>
 			
 		</form>
 	    
-	</article>
+	</div>
 
-</section>
+</div>

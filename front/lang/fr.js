@@ -66,6 +66,7 @@ var fr_translations = {
 	profile_LINK: 'Profil',
 	profile_TITLE: 'Profil',
 	profile_NAME: 'Nom',
+	profile_SUBTITLE: 'Profil d\'agent Ingress',
 	
 	missions_LINK: 'Enregistrer une fresque',
 	missions_TITLE: 'Missions',
