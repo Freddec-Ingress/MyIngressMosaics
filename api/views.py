@@ -83,7 +83,12 @@ class ExtensionViewSet(viewsets.ViewSet):
 		
 		for item in obj[9]:
 			
-			if item[5][0] == 'f':
+			if not item[5][0]:
+			
+				portal = Portal(mission=mission, lat=0.0, lng=0.0, order=order, title='Unavailable')
+				portal.save()
+				
+			elif item[5][0] == 'f':
 			
 				portal = Portal(mission=mission, lat=(item[5][1]/1000000.0), lng=(item[5][2]/1000000.0), order=order, title=item[2])
 				portal.save()
