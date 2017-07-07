@@ -139,4 +139,6 @@ var fr_translations = {
 	city_TITLE: 'Ville',
 	
 	region_TITLE: 'Région',
+	
+	creator_TITLE: 'Créateur',
 };

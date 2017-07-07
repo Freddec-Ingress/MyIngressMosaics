@@ -294,7 +294,7 @@ angular.module('AngularApp.controllers').controller('CreateCtrl', function($scop
 	}
 });
 
-angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scope, $timeout, $window, $filter, toastr, MosaicService) {
+angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scope, $state, $timeout, $window, $filter, toastr, MosaicService) {
 
 	$scope.mosaic = MosaicService.data.mosaic;
 	$scope.potentials = MosaicService.data.potentials;
@@ -509,6 +509,13 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
         
 		map.setCenter(latlngbounds.getCenter());
 		map.fitBounds(latlngbounds); 
+	}
+	
+	/* Go to a creator page */
+	
+	$scope.goToCreator = function(creator) {
+		
+		$state.go('root.creator', {'creator':creator});
 	}
 });
 
@@ -778,4 +785,8 @@ angular.module('AngularApp.controllers').controller('CityCtrl', function($scope,
 			$scope.sortMissions = 'asc';
 		}
 	}
+});
+
+angular.module('AngularApp.controllers').controller('CreatorCtrl', function($scope, $state, $stateParams, DataService) {
+	
 });

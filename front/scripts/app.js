@@ -31,6 +31,8 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 			.state('root.region', { url: '/country/:country/region/:region', controller: 'RegionCtrl', templateUrl: '/static/front/pages/region.html', data:{ title: 'region_TITLE', }, })
 			.state('root.country', { url: '/country/:country', controller: 'CountryCtrl', templateUrl: '/static/front/pages/country.html', data:{ title: 'country_TITLE', }, })
 			
+			.state('root.creator', { url: '/creator/:creator', controller: 'CreatorCtrl', templateUrl: '/static/front/pages/creator.html', data:{ title: 'creator_TITLE', }, })
+			
 	$locationProvider.html5Mode(true);
 });
 

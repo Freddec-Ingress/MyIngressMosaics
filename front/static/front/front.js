@@ -2516,6 +2516,8 @@ var en_translations = {
 	city_TITLE: 'City',
 	
 	region_TITLE: 'State/Province',
+	
+	creator_TITLE: 'Creator',
 };
 var fr_translations = {
     
@@ -2658,6 +2660,8 @@ var fr_translations = {
 	city_TITLE: 'Ville',
 	
 	region_TITLE: 'Région',
+	
+	creator_TITLE: 'Créateur',
 };
 angular.module('AngularApp.services', [])
 
@@ -3595,7 +3599,7 @@ angular.module('AngularApp.controllers').controller('CreateCtrl', function($scop
 	}
 });
 
-angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scope, $timeout, $window, $filter, toastr, MosaicService) {
+angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scope, $state, $timeout, $window, $filter, toastr, MosaicService) {
 
 	$scope.mosaic = MosaicService.data.mosaic;
 	$scope.potentials = MosaicService.data.potentials;
@@ -3810,6 +3814,13 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
         
 		map.setCenter(latlngbounds.getCenter());
 		map.fitBounds(latlngbounds); 
+	}
+	
+	/* Go to a creator page */
+	
+	$scope.goToCreator = function(creator) {
+		
+		$state.go('root.creator', {'creator':creator});
 	}
 });
 
@@ -4080,6 +4091,10 @@ angular.module('AngularApp.controllers').controller('CityCtrl', function($scope,
 		}
 	}
 });
+
+angular.module('AngularApp.controllers').controller('CreatorCtrl', function($scope, $state, $stateParams, DataService) {
+	
+});
 angular.module('AngularApp', ['ui.router', 'ui.bootstrap', 'pascalprecht.translate', 'satellizer', 'ngCookies', 'toastr',
 							  'AngularApp.services', 'AngularApp.controllers', 'AngularApp.directives', ]);
 
@@ -4112,6 +4127,8 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 			.state('root.city', { url: '/country/:country/region/:region/city/:city', controller: 'CityCtrl', templateUrl: '/static/front/pages/city.html', data:{ title: 'city_TITLE', }, })
 			.state('root.region', { url: '/country/:country/region/:region', controller: 'RegionCtrl', templateUrl: '/static/front/pages/region.html', data:{ title: 'region_TITLE', }, })
 			.state('root.country', { url: '/country/:country', controller: 'CountryCtrl', templateUrl: '/static/front/pages/country.html', data:{ title: 'country_TITLE', }, })
+			
+			.state('root.creator', { url: '/creator/:creator', controller: 'CreatorCtrl', templateUrl: '/static/front/pages/creator.html', data:{ title: 'creator_TITLE', }, })
 			
 	$locationProvider.html5Mode(true);
 });

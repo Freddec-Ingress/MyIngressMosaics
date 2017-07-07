@@ -26,7 +26,7 @@
 			
 			<div class="f-row">
 	        	{{'mosaic_BY' | translate}}
-	        	<span class="ml-2" ng-repeat="creator in mosaic.creators" ng-class="{'text-enligtened': creator.faction == 'E', 'text-resistance': creator.faction == 'R',}">{{creator.name}}</span>
+	        	<a class="ml-2" ng-repeat="creator in mosaic.creators" ng-class="{'text-enligtened': creator.faction == 'E', 'text-resistance': creator.faction == 'R',}" ng-click="goToCreator(creator.name);">{{creator.name}}</a>
 			</div>
 			
 		</div>

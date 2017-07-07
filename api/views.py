@@ -462,18 +462,14 @@ class DataViewSet(viewsets.ViewSet):
 			for item in results:
 				
 				region = {
-					'mosaics': Mosaic.objects.filter(region=item['region']).count(),
+					'mosaics': Mosaic.objects.filter(country=request.data['country'], region=item['region']).count(),
 					'name': item['region'],
 				}
-			
+				
+				if region['name'] == '':
+					region['name'] = 'Not specified'
+				
 				data.append(region)
-			
-			region = {
-				'mosaics': Mosaic.objects.filter(region='').count(),
-				'name': 'Not specified',
-			}
-			
-			data.append(region)
 
 		return Response(data, status=status.HTTP_200_OK)
     
@@ -494,7 +490,7 @@ class DataViewSet(viewsets.ViewSet):
 			for item in results:
 				
 				city = {
-					'mosaics': Mosaic.objects.filter(city=item['city']).count(),
+					'mosaics': Mosaic.objects.filter(country=request.data['country'], region=request.data['region'], city=item['city']).count(),
 					'name': item['city'],
 				}
 			
