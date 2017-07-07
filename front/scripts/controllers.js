@@ -846,3 +846,52 @@ angular.module('AngularApp.controllers').controller('CreatorCtrl', function($sco
 		}
 	}
 });
+
+angular.module('AngularApp.controllers').controller('SearchCtrl', function($scope, toastr, $filter, DataService) {
+	
+	/* Search */
+	
+	$scope.search_loading = false;
+	
+	$scope.searchModel = {text:null};
+	
+	$scope.search = function() {
+		
+		$scope.search_loading = true;
+		
+		$scope.cities = null;
+		$scope.regions = null;
+		$scope.mosaics = null;
+		$scope.creators = null;
+		$scope.countries = null;
+		
+		if ($scope.searchModel.text) {
+			
+			if ($scope.searchModel.text.length > 3) {
+				
+				DataService.search($scope.searchModel.text).then(function(response) {
+					
+					$scope.cities = response.cities;
+					$scope.regions = response.regions;
+					$scope.mosaics = response.mosaics;
+					$scope.creators = response.creators;
+					$scope.countries = response.countries;
+					
+					$scope.search_loading = false;
+				});
+			}
+			else {
+					
+				$scope.search_loading = false;
+				
+				toastr.error($filter('translate')('error_ATLEAST3CHAR'));
+			}
+		}
+		else {
+				
+			$scope.search_loading = false;
+			
+			toastr.error($filter('translate')('error_ATLEAST3CHAR'));
+		}
+	}
+});

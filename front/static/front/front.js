@@ -2397,6 +2397,11 @@ var en_translations = {
 	cancel_LABEL: 'Cancel',
 	mosaics_LABEL: 'Mosaics',
 	cities_LABEL: 'Cities',
+	search_LABEL: 'Search',
+	country_LABEL: 'Country',
+	region_LABEL: 'State/Province',
+	city_LABEL: 'City',
+	creator_LABEL: 'Creator',
 	
 	home_TITLE: 'Welcome',
 	home_HELPTITLE: 'What you can do to help',
@@ -2415,6 +2420,7 @@ var en_translations = {
 	error_INTEGRITY_ERROR: 'A server error occured.',
 	error_PASSWORDS_NOT_EQUAL: 'Passwords are not the same.',
 	error_USERNAME_ALREADY_EXISTS: 'This username is already used.',
+	error_ATLEAST3CHAR: 'At least 3 characters',
 	
 	menu_title_USER: 'User',
 	menu_title_LANG: 'Language',
@@ -2521,6 +2527,8 @@ var en_translations = {
 	
 	creator_TITLE: 'Creator',
 	creator_SUBTITLE: 'List of mosaics created by ',
+	
+	search_TITLE: 'Search',
 };
 var fr_translations = {
     
@@ -2543,6 +2551,11 @@ var fr_translations = {
 	cancel_LABEL: 'Annuler',
 	mosaics_LABEL: 'Fresques',
 	cities_LABEL: 'Villes',
+	search_LABEL: 'Rechercher',
+	country_LABEL: 'Pays',
+	region_LABEL: 'Région',
+	city_LABEL: 'Ville',
+	creator_LABEL: 'Créateur',
 	
 	home_TITLE: 'Bienvenue',
 	home_HELPTITLE: 'Ce que vous pouvez faire pour aider',
@@ -2561,6 +2574,7 @@ var fr_translations = {
 	error_INTEGRITY_ERROR: 'Une erreur server est survenue.',
 	error_PASSWORDS_NOT_EQUAL: 'Les mots de passe saisis ne sont pas identiques.',
 	error_USERNAME_ALREADY_EXISTS: 'Un utilisateur avec ce nom existe déjà.',
+	error_ATLEAST3CHAR: '3 caractères au minimum',
 	
 	menu_title_USER: 'Utilisateur',
 	menu_title_LANG: 'Langue',
@@ -2668,6 +2682,8 @@ var fr_translations = {
 	
 	creator_TITLE: 'Créateur',
 	creator_SUBTITLE: 'Liste des fresques créées par ',
+	
+	search_TITLE: 'Recherche',
 };
 angular.module('AngularApp.services', [])
 
@@ -3270,6 +3286,12 @@ angular.module('AngularApp.services').service('DataService', function($cookies, 
 				if (sort == 'asc') list.sort(compareMissionsAsc);
 				if (sort == 'desc') list.sort(compareMissionsDesc);
 			}
+		},
+		
+		search: function(text) {
+			
+			var data = {'text':text};
+			return API.sendRequest('/api/search/', 'POST', {}, data);
 		},
 	};
 	
@@ -4163,6 +4185,55 @@ angular.module('AngularApp.controllers').controller('CreatorCtrl', function($sco
 		}
 	}
 });
+
+angular.module('AngularApp.controllers').controller('SearchCtrl', function($scope, toastr, $filter, DataService) {
+	
+	/* Search */
+	
+	$scope.search_loading = false;
+	
+	$scope.searchModel = {text:null};
+	
+	$scope.search = function() {
+		
+		$scope.search_loading = true;
+		
+		$scope.cities = null;
+		$scope.regions = null;
+		$scope.mosaics = null;
+		$scope.creators = null;
+		$scope.countries = null;
+		
+		if ($scope.searchModel.text) {
+			
+			if ($scope.searchModel.text.length > 3) {
+				
+				DataService.search($scope.searchModel.text).then(function(response) {
+					
+					$scope.cities = response.cities;
+					$scope.regions = response.regions;
+					$scope.mosaics = response.mosaics;
+					$scope.creators = response.creators;
+					$scope.countries = response.countries;
+					
+					$scope.search_loading = false;
+				});
+			}
+			else {
+					
+				$scope.search_loading = false;
+				
+				toastr.error($filter('translate')('error_ATLEAST3CHAR'));
+			}
+		}
+		else {
+				
+			$scope.search_loading = false;
+			
+			toastr.error($filter('translate')('error_ATLEAST3CHAR'));
+		}
+	}
+});
 angular.module('AngularApp', ['ui.router', 'ui.bootstrap', 'pascalprecht.translate', 'satellizer', 'ngCookies', 'toastr',
 							  'AngularApp.services', 'AngularApp.controllers', 'AngularApp.directives', ]);
 
@@ -4197,6 +4268,8 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 			.state('root.country', { url: '/country/:country', controller: 'CountryCtrl', templateUrl: '/static/front/pages/country.html', data:{ title: 'country_TITLE', }, })
 			
 			.state('root.creator', { url: '/creator/:creator', controller: 'CreatorCtrl', templateUrl: '/static/front/pages/creator.html', data:{ title: 'creator_TITLE', }, })
+			
+			.state('root.search', { url: '/search', controller: 'SearchCtrl', templateUrl: '/static/front/pages/search.html', data:{ title: 'search_TITLE', }, })
 			
 	$locationProvider.html5Mode(true);
 });

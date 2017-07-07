@@ -541,3 +541,31 @@ class DataViewSet(viewsets.ViewSet):
 				data['mosaics'].append(mosaic)
 		
 		return Response(data, status=status.HTTP_200_OK)
+    
+    
+    
+	def search(self, request):
+		
+		data ={
+			'countries': None,
+			'regions': None,
+			'cities': None,
+			'creators': None,
+			'mosaics': None,
+		}
+		
+		results = Mosaic.objects.filter(country__contains=request.data['text']).values('country').distinct()
+		if (results.count() > 0):
+			
+			data['countries'] = []
+			
+			for item in results:
+				
+				country = {
+					'mosaics': Mosaic.objects.filter(country=item['country']).count(),
+					'name': item['country'],
+				}
+				
+				data['countries'].append(country)
+		
+		return Response(data, status=status.HTTP_200_OK)

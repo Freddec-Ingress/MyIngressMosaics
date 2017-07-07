@@ -33,6 +33,8 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 			
 			.state('root.creator', { url: '/creator/:creator', controller: 'CreatorCtrl', templateUrl: '/static/front/pages/creator.html', data:{ title: 'creator_TITLE', }, })
 			
+			.state('root.search', { url: '/search', controller: 'SearchCtrl', templateUrl: '/static/front/pages/search.html', data:{ title: 'search_TITLE', }, })
+			
 	$locationProvider.html5Mode(true);
 });
 

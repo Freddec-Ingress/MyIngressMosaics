@@ -19,6 +19,11 @@ var en_translations = {
 	cancel_LABEL: 'Cancel',
 	mosaics_LABEL: 'Mosaics',
 	cities_LABEL: 'Cities',
+	search_LABEL: 'Search',
+	country_LABEL: 'Country',
+	region_LABEL: 'State/Province',
+	city_LABEL: 'City',
+	creator_LABEL: 'Creator',
 	
 	home_TITLE: 'Welcome',
 	home_HELPTITLE: 'What you can do to help',
@@ -37,6 +42,7 @@ var en_translations = {
 	error_INTEGRITY_ERROR: 'A server error occured.',
 	error_PASSWORDS_NOT_EQUAL: 'Passwords are not the same.',
 	error_USERNAME_ALREADY_EXISTS: 'This username is already used.',
+	error_ATLEAST3CHAR: 'At least 3 characters',
 	
 	menu_title_USER: 'User',
 	menu_title_LANG: 'Language',
@@ -143,4 +149,6 @@ var en_translations = {
 	
 	creator_TITLE: 'Creator',
 	creator_SUBTITLE: 'List of mosaics created by ',
+	
+	search_TITLE: 'Search',
 };

@@ -19,6 +19,11 @@ var fr_translations = {
 	cancel_LABEL: 'Annuler',
 	mosaics_LABEL: 'Fresques',
 	cities_LABEL: 'Villes',
+	search_LABEL: 'Rechercher',
+	country_LABEL: 'Pays',
+	region_LABEL: 'Région',
+	city_LABEL: 'Ville',
+	creator_LABEL: 'Créateur',
 	
 	home_TITLE: 'Bienvenue',
 	home_HELPTITLE: 'Ce que vous pouvez faire pour aider',
@@ -37,6 +42,7 @@ var fr_translations = {
 	error_INTEGRITY_ERROR: 'Une erreur server est survenue.',
 	error_PASSWORDS_NOT_EQUAL: 'Les mots de passe saisis ne sont pas identiques.',
 	error_USERNAME_ALREADY_EXISTS: 'Un utilisateur avec ce nom existe déjà.',
+	error_ATLEAST3CHAR: '3 caractères au minimum',
 	
 	menu_title_USER: 'Utilisateur',
 	menu_title_LANG: 'Langue',
@@ -144,4 +150,6 @@ var fr_translations = {
 	
 	creator_TITLE: 'Créateur',
 	creator_SUBTITLE: 'Liste des fresques créées par ',
+	
+	search_TITLE: 'Recherche',
 };

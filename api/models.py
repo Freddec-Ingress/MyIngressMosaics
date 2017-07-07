@@ -89,7 +89,7 @@ class Mosaic(models.Model):
 		
 		data = {
 			'registerer': {
-				'name': self.registerer.username,
+				'name': self.registerer.username if self.registerer else '',
 			},
 			
 			'creators': [],

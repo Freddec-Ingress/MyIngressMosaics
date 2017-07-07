@@ -600,6 +600,12 @@ angular.module('AngularApp.services').service('DataService', function($cookies, 
 				if (sort == 'desc') list.sort(compareMissionsDesc);
 			}
 		},
+		
+		search: function(text) {
+			
+			var data = {'text':text};
+			return API.sendRequest('/api/search/', 'POST', {}, data);
+		},
 	};
 	
 	return service;
