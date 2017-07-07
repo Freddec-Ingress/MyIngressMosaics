@@ -2930,6 +2930,7 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 			cols: null,
 			count: null,
 			title: null,
+			region: null,
 			country: null,
 			
 			missions: [],
@@ -2943,6 +2944,7 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 			service.data.cols = null;
 			service.data.count = null;
 			service.data.title = null;
+			service.data.region = null;
 			service.data.country = null;
 			
 			service.data.missions = [];
@@ -3679,6 +3681,7 @@ angular.module('AngularApp.controllers').controller('CreateCtrl', function($scop
 					
 					if (item.types[0] == 'country') CreateService.data.country = item.long_name;
 					if (item.types[0] == 'locality') CreateService.data.city = item.long_name;
+					if (item.types[0] == 'administrative_area_level_1') CreateService.data.region = item.long_name;
 				}
 		
 				$scope.$apply();

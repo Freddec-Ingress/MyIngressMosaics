@@ -274,6 +274,7 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 			cols: null,
 			count: null,
 			title: null,
+			region: null,
 			country: null,
 			
 			missions: [],
@@ -287,6 +288,7 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 			service.data.cols = null;
 			service.data.count = null;
 			service.data.title = null;
+			service.data.region = null;
 			service.data.country = null;
 			
 			service.data.missions = [];

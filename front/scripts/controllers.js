@@ -244,6 +244,7 @@ angular.module('AngularApp.controllers').controller('CreateCtrl', function($scop
 					
 					if (item.types[0] == 'country') CreateService.data.country = item.long_name;
 					if (item.types[0] == 'locality') CreateService.data.city = item.long_name;
+					if (item.types[0] == 'administrative_area_level_1') CreateService.data.region = item.long_name;
 				}
 		
 				$scope.$apply();

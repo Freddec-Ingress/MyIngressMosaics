@@ -222,6 +222,7 @@ class ProfileViewSet(viewsets.ViewSet):
 							city = request.data['city'],
 							count = int(request.data['count']),
 							title = request.data['title'],
+							region = request.data['region'],
 							country = request.data['country']
 						)
 		mosaic.save()

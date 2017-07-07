@@ -72,6 +72,7 @@ class Mosaic(models.Model):
 	count = models.IntegerField(default=0)
 	title = models.CharField(max_length=128, default='')
 	status = models.CharField(max_length=64, default='active')
+	region = models.CharField(max_length=64, default='')
 	country = models.CharField(max_length=64, default='')
 	
 	register_date = models.DateField(default=datetime.now)
