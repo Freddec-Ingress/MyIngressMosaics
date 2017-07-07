@@ -517,6 +517,23 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 		
 		$state.go('root.creator', {'creator':creator});
 	}
+	
+	/* Go to a location page */
+	
+	$scope.goToCountry = function() {
+		
+		$state.go('root.country', {'country':$scope.mosaic.country});
+	}
+	
+	$scope.goToRegion = function() {
+		
+		$state.go('root.region', {'country':$scope.mosaic.country, 'region':$scope.mosaic.region});
+	}
+	
+	$scope.goToCity = function() {
+		
+		$state.go('root.city', {'country':$scope.mosaic.country, 'region':$scope.mosaic.region, 'city':$scope.mosaic.city});
+	}
 });
 
 angular.module('AngularApp.controllers').controller('MyMosaicsCtrl', function($scope, $state, UserService) {

@@ -20,7 +20,11 @@
 			
 			<div class="group text-white text-big">{{mosaic.title}}</div>
 			
-		    <div class="group">{{mosaic.country}} &middot; {{mosaic.region}} &middot; {{mosaic.city}}</div>
+		    <div class="group">
+		    	<a ng-click="goToCountry();">{{mosaic.country}}</a>
+		    	&middot; <a ng-click="goToRegion();">{{mosaic.region}}</a>
+		    	&middot; <a ng-click="goToCity();">{{mosaic.city}}</a>
+		    </div>
 		    
 			<pre class="group text-highlight">{{mosaic.desc}}</pre>
 			
