@@ -351,6 +351,7 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 		$scope.editModel.cols = $scope.mosaic.cols;
 		$scope.editModel.count = $scope.mosaic.count;
 		$scope.editModel.title = $scope.mosaic.title;
+		$scope.editModel.region = $scope.mosaic.region;
 		$scope.editModel.country = $scope.mosaic.country;
 		
 		$scope.editMode = true;
@@ -522,132 +523,246 @@ angular.module('AngularApp.controllers').controller('MyMosaicsCtrl', function($s
 	}
 });
 
-angular.module('AngularApp.controllers').controller('CountriesCtrl', function($scope, $state, DataService) {
+angular.module('AngularApp.controllers').controller('WorldCtrl', function($scope, $state, DataService) {
+	
+	$scope.world_loading = true;
+	
+	DataService.loadCountriesFromWorld().then(function(response) {
+		
+		$scope.world_loading = false;
+		
+		$scope.countries = response;
+		
+		DataService.sortByMosaics('desc', $scope.countries);
+	});
+
+	/* Go to a country page */
 	
 	$scope.go = function(item) {
 		
-		DataService.setCountry(item.name);
-		$state.go('root.cities');
+		$state.go('root.country', {'country':item.name});
 	}
 
-	/* Sort mosaics */
-	
-	DataService.sortCountriesByMosaics('desc');
+	/* Sort countries by mosaics */
 	
 	$scope.sortMosaics = 'desc';
 	
-	$scope.sortCountriesByMosaics = function() {
+	$scope.sortByMosaics = function() {
 		
 		$scope.sortName = '';
 		
 		if ($scope.sortMosaics == '' || $scope.sortMosaics == 'asc') {
 			
-			DataService.sortCountriesByMosaics('desc');
+			DataService.sortByMosaics('desc', $scope.countries);
 			$scope.sortMosaics = 'desc';
 		}
 		
 		else if ($scope.sortMosaics == 'desc') {
 			
-			DataService.sortCountriesByMosaics('asc');
+			DataService.sortByMosaics('asc', $scope.countries);
 			$scope.sortMosaics = 'asc';
 		}
 	}
 	
-	/* Sort name */
+	/* Sort countries by name */
 	
 	$scope.sortName = '';
 	
-	$scope.sortCountriesByName = function() {
+	$scope.sortByName = function() {
 		
 		$scope.sortMosaics = '';
 		
 		if ($scope.sortName == '' || $scope.sortName == 'asc') {
 			
-			DataService.sortCountriesByName('desc');
+			DataService.sortByName('desc', $scope.countries);
 			$scope.sortName = 'desc';
 		}
 		
 		else if ($scope.sortName == 'desc') {
 			
-			DataService.sortCountriesByName('asc');
+			DataService.sortByName('asc', $scope.countries);
 			$scope.sortName = 'asc';
 		}
 	}
-
-	$scope.countries = DataService.countries;
 });
 
-angular.module('AngularApp.controllers').controller('CitiesCtrl', function($scope, $state, DataService) {
+angular.module('AngularApp.controllers').controller('CountryCtrl', function($scope, $state, $stateParams, DataService) {
+	
+	$scope.country_loading = true;
+	
+	$scope.country_name = $stateParams.country;
+	
+	DataService.loadRegionsFromCountry($scope.country_name).then(function(response) {
+		
+		$scope.country_loading = false;
+		
+		$scope.regions = response;
+		
+		DataService.sortByMosaics('desc', $scope.regions);
+	});
 
-	$scope.country = DataService.current_country;
+	/* Go to a region page */
 
 	$scope.go = function(item) {
 		
-		DataService.setCity(item.name);
-		$state.go('root.mosaics');
+		$state.go('root.region', {'country':$scope.country_name, 'region':item.name});
 	}
 
-	/* Sort mosaics */
-	
-	DataService.sortCitiesByMosaics('desc');
+	/* Sort regions by mosaics */
 	
 	$scope.sortMosaics = 'desc';
 	
-	$scope.sortCitiesByMosaics = function() {
+	$scope.sortByMosaics = function() {
 		
 		$scope.sortName = '';
 		
 		if ($scope.sortMosaics == '' || $scope.sortMosaics == 'asc') {
 			
-			DataService.sortCountriesByMosaics('desc');
+			DataService.sortByMosaics('desc', $scope.regions);
 			$scope.sortMosaics = 'desc';
 		}
 		
 		else if ($scope.sortMosaics == 'desc') {
 			
-			DataService.sortCitiesByMosaics('asc');
+			DataService.sortByMosaics('asc', $scope.regions);
 			$scope.sortMosaics = 'asc';
 		}
 	}
 	
-	/* Sort name */
+	/* Sort regions by name */
 	
 	$scope.sortName = '';
 	
-	$scope.sortCitiesByName = function() {
+	$scope.sortByName = function() {
 		
 		$scope.sortMosaics = '';
 		
 		if ($scope.sortName == '' || $scope.sortName == 'asc') {
 			
-			DataService.sortCitiesByName('desc');
+			DataService.sortByName('desc', $scope.regions);
 			$scope.sortName = 'desc';
 		}
 		
-		else if ($scope.sortName == 'desc') {
+		else if ($scope.sortName == 'desc', $scope.regions) {
 			
-			DataService.sortCitiesByName('asc');
+			DataService.sortByName('asc');
 			$scope.sortName = 'asc';
 		}
 	}
-	
-	$scope.cities = DataService.cities;
 });
 
-angular.module('AngularApp.controllers').controller('MosaicsCtrl', function($scope, $state, DataService) {
+angular.module('AngularApp.controllers').controller('RegionCtrl', function($scope, $state, $stateParams, DataService) {
+	
+	$scope.region_loading = true;
+	
+	$scope.country_name = $stateParams.country;
+	$scope.region_name = $stateParams.region;
+	
+	DataService.loadCitiesFromRegion($scope.country_name, $scope.region_name).then(function(response) {
+		
+		$scope.region_loading = false;
+		
+		$scope.cities = response;
+		
+		DataService.sortByMosaics('desc', $scope.cities);
+	});
 
-	$scope.city = DataService.current_city;
+	/* Breadcrumb */
+
+	$scope.goToCountry = function() {
+		
+		$state.go('root.country', {'country':$scope.country_name});
+	}
+
+	/* Go to a city page */
+
+	$scope.go = function(item) {
+		
+		$state.go('root.city', {'country':$scope.country_name, 'region':$scope.region_name, 'city':item.name});
+	}
+
+	/* Sort cities by mosaics */
+	
+	$scope.sortMosaics = 'desc';
+	
+	$scope.sortByMosaics = function() {
+		
+		$scope.sortName = '';
+		
+		if ($scope.sortMosaics == '' || $scope.sortMosaics == 'asc') {
+			
+			DataService.sortByMosaics('desc', $scope.cities);
+			$scope.sortMosaics = 'desc';
+		}
+		
+		else if ($scope.sortMosaics == 'desc') {
+			
+			DataService.sortByMosaics('asc', $scope.cities);
+			$scope.sortMosaics = 'asc';
+		}
+	}
+	
+	/* Sort cities by name */
+	
+	$scope.sortName = '';
+	
+	$scope.sortByName = function() {
+		
+		$scope.sortMosaics = '';
+		
+		if ($scope.sortName == '' || $scope.sortName == 'asc') {
+			
+			DataService.sortByName('desc', $scope.cities);
+			$scope.sortName = 'desc';
+		}
+		
+		else if ($scope.sortName == 'desc', $scope.cities) {
+			
+			DataService.sortByName('asc');
+			$scope.sortName = 'asc';
+		}
+	}
+});
+
+angular.module('AngularApp.controllers').controller('CityCtrl', function($scope, $state, $stateParams, DataService) {
+	
+	$scope.city_loading = true;
+	
+	$scope.country_name = $stateParams.country;
+	$scope.region_name = $stateParams.region;
+	$scope.city_name = $stateParams.city;
+	
+	DataService.loadMosaicsFromCity($scope.country_name, $scope.region_name, $scope.city_name).then(function(response) {
+		
+		$scope.city_loading = false;
+		
+		$scope.mosaics = response;
+		
+		DataService.sortByMissions('desc', $scope.mosaics);
+	});
+
+	/* Breadcrumb */
+
+	$scope.goToCountry = function() {
+		
+		$state.go('root.country', {'country':$scope.country_name});
+	}
+	
+	$scope.goToRegion = function() {
+		
+		$state.go('root.region', {'country':$scope.country_name, 'region':$scope.region_name});
+	}
+
+	/* Go to a mosaic page */
 	
 	$scope.go = function(item) {
 		
-		$state.go('root.mosaic', {ref: item.ref});
+		$state.go('root.mosaic', {'ref':item.ref});
 	}
 	
-	/* Sort missions */
+	/* Sort mosaics by missions */
 	
-	DataService.sortMosaicsByMissions('desc');
-	
-	$scope.sortMissions = '';
+	$scope.sortMissions = 'desc';
 	
 	$scope.sortMosaicsByMissions = function() {
 		
@@ -663,6 +778,4 @@ angular.module('AngularApp.controllers').controller('MosaicsCtrl', function($sco
 			$scope.sortMissions = 'asc';
 		}
 	}
-	
-	$scope.mosaics = DataService.mosaics;
 });

@@ -17,6 +17,8 @@ var en_translations = {
 	close_LABEL: 'Close',
 	filter_LABEL: 'Filter',
 	cancel_LABEL: 'Cancel',
+	mosaics_LABEL: 'Mosaics',
+	cities_LABEL: 'Cities',
 	
 	home_TITLE: 'Welcome',
 	home_HELPTITLE: 'What you can do to help',
@@ -124,17 +126,16 @@ var en_translations = {
 	mymosaics_NOMOSAIC: 'No mosaic',
 	mymosaics_COLNAME: 'Name',
 
-	countries_LINK: 'Mosaic Countries',
-	countries_TITLE: 'Mosaic Countries',
-	countries_COLMOSAICS: 'Mosaics',
-	countries_COLCOUNTRY: 'Country',
-	countries_COLCITY: 'City',
-	countries_COLMOSAIC: 'Mosaic',
-	countries_SUBTITLE: 'List of countries with mosaics',
+	world_LINK: 'Mosaic Countries',
+	world_TITLE: 'Mosaic Countries',
+	world_COLMOSAICS: 'Mosaics',
+	world_COLCOUNTRY: 'Country',
+	world_COLCITY: 'City',
+	world_COLMOSAIC: 'Mosaic',
+
+	country_TITLE: 'Country',
+
+	city_TITLE: 'City',
 	
-	cities_TITLE: 'Cities',
-	cities_SUBTITLE: 'List of cities with mosaics from ',
-	
-	mosaics_TITLE: 'Mosaics',
-	mosaics_SUBTITLE: 'List of mosaics from ',
+	region_TITLE: 'State/Province',
 };

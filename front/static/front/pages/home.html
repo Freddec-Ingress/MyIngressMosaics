@@ -3,6 +3,18 @@
 <div class="f-row group">
     
     <div class="fitem-grow text-center">
+		
+		<div id="fb-root"></div>
+		
+		<script>
+			(function(d, s, id) {
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) return;
+				js = d.createElement(s); js.id = id;
+				js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.9&appId=237811833398918";
+				fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+		</script>
         
         <div class="fb-share-button" data-href="https://www.myingressmosaics.com" data-layout="button_count" data-size="small" data-mobile-iframe="true">
             <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.myingressmosaics.com%2F&amp;src=sdkpreparse">
@@ -26,9 +38,9 @@
 
 <div class="f-row f-justify-center">
     
-    <a class="btn btn-primary f-col mx-2" style="width:175px;" ui-sref="root.countries">
+    <a class="btn btn-primary f-col mx-2" style="width:175px;" ui-sref="root.world">
         <i class="fa fa-globe p-2" style="font-size:2rem;"></i>
-        {{'countries_LINK' | translate}}
+        {{'world_LINK' | translate}}
     </a>
     
     <a class="btn btn-primary f-col mx-2" style="width:175px;" ui-sref="root.missions">

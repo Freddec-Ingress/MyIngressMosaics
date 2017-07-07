@@ -26,9 +26,10 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 
 			.state('root.missions', { url: '/missions', controller: 'MissionsCtrl', templateUrl: '/static/front/pages/missions.html', data:{ title: 'missions_TITLE', }, resolve: {loadMissions: function(UserService) { return UserService.getMissions(); }, }, })
 			
-			.state('root.countries', { url: '/countries', controller: 'CountriesCtrl', templateUrl: '/static/front/pages/countries.html', data:{ title: 'countries_TITLE', }, resolve: {loadCountries: function(DataService) { return DataService.getCountries(); }, }, })
-			.state('root.cities', { url: '/cities', controller: 'CitiesCtrl', templateUrl: '/static/front/pages/cities.html', data:{ title: 'cities_TITLE', }, resolve: {loadCities: function(DataService) { return DataService.getCities(); }, }, })
-			.state('root.mosaics', { url: '/mosaics', controller: 'MosaicsCtrl', templateUrl: '/static/front/pages/mosaics.html', data:{ title: 'mosaics_TITLE', }, resolve: {loadMosaics: function(DataService) { return DataService.getMosaics(); }, }, })
+			.state('root.world', { url: '/world', controller: 'WorldCtrl', templateUrl: '/static/front/pages/world.html', data:{ title: 'world_TITLE', }, })
+			.state('root.city', { url: '/country/:country/region/:region/city/:city', controller: 'CityCtrl', templateUrl: '/static/front/pages/city.html', data:{ title: 'city_TITLE', }, })
+			.state('root.region', { url: '/country/:country/region/:region', controller: 'RegionCtrl', templateUrl: '/static/front/pages/region.html', data:{ title: 'region_TITLE', }, })
+			.state('root.country', { url: '/country/:country', controller: 'CountryCtrl', templateUrl: '/static/front/pages/country.html', data:{ title: 'country_TITLE', }, })
 			
 	$locationProvider.html5Mode(true);
 });

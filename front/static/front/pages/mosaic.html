@@ -282,9 +282,9 @@
 
 		<div class="card-block first last f-row">
 			
-			<input type="text" class="form-control mr-2" />
+			<input type="text" class="form-control mr-2" ng-model="deleteModel.name" />
 			
-			<button type="submit" class="btn btn-primary ml-2" ng-model="deleteModel.name" ng-click="delete();">
+			<button type="submit" class="btn btn-primary ml-2" ng-click="delete();">
 				{{'mosaicpage_DELETE' | translate}}
 			</button>
 

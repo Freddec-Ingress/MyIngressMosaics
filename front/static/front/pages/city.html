@@ -1,10 +1,14 @@
-<div class="card">
-    
-    <div class="card-header">
-        <span>{{'mosaics_SUBTITLE' | translate}}</span>
-        <span class="text-medium text-white">{{city}}</span>
-        (<a ui-sref="root.cities">{{'back_LABEL' | translate}}</a>)
-    </div>
+<div class="loading" ng-if="city_loading">
+	<img src="/static/front/img/loading.png" />
+</div>
+
+<ol class="breadcrumb" ng-if="!city_loading">
+    <li class="breadcrumb-item"><a ng-click="goToCountry();">{{country_name}}</a></li>
+    <li class="breadcrumb-item"><a ng-click="goToRegion();">{{region_name}}</a></li>
+    <li class="breadcrumb-item active">{{city_name}}</li>
+</ol>
+
+<div class="card" ng-if="!city_loading">
     
     <table class="card-table">
 

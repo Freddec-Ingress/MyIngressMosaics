@@ -1,0 +1,62 @@
+<div class="loading" ng-if="country_loading">
+	<img src="/static/front/img/loading.png" />
+</div>
+
+<ol class="breadcrumb" ng-if="!country_loading">
+    <li class="breadcrumb-item active">{{country_name}}</li>
+</ol>
+
+<div class="card" ng-if="!country_loading">
+    
+    <div class="card-header" ng-if="!regions">
+    	<span class="text-danger">{{'noregion_LABEL' | translate}}</span>
+    </div>
+    
+    <div ng-if="regions">
+    
+        <div class="card-header f-row">
+        	
+        	<label class="mb-0 mr-2">{{'filter_LABEL' | translate}}</label>
+        	<input type="text" class="form-control" ng-model="keywords" />
+        	
+        </div>
+        
+        <table class="card-table">
+            	
+            <thead>
+                <tr>
+                    <th class="text-center" width="80px" style="cursor:pointer;" ng-click="sortByMosaics();">
+                        <i class="fa mr-2" ng-class="{'fa-caret-up':sortMosaics == 'asc', 'fa-caret-down':sortMosaics == 'desc', 'fa-sort text-muted':sortMosaics == ''}"></i>
+                    	{{'world_COLMOSAICS' | translate}}
+                    </th>
+                    <th style="cursor:pointer;" ng-click="sortByName();">
+                        <i class="fa mr-2" ng-class="{'fa-caret-up':sortName == 'asc', 'fa-caret-down':sortName == 'desc', 'fa-sort text-muted':sortName == ''}"></i>
+                    	{{'world_COLCITY' | translate}}
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <tr ng-repeat="item in regions | filter:keywords" ng-click="go(item);" ng-show="item.mosaics > 0">
+                	
+                    <td class="text-right text-center" width="80px">
+                    	{{item.mosaics}}
+                    </td>
+                    
+                    <td ng-class="{'text-danger': item.name == 'Not specified', 'text-white': item.name != 'Not specified'}">
+                        {{item.name}}
+                    </td>
+                    
+                    <td class="text-center" style="width:2rem;">
+                    	<i class="fa fa-arrow-circle-right text-link"></i>
+                    </td>
+    
+                </tr>
+            </tbody>
+            
+        </table>
+        
+    </div>
+
+</div>

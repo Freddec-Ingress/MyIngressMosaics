@@ -1,42 +1,45 @@
-<div class="card">
+<div class="loading" ng-if="world_loading">
+	<img src="/static/front/img/loading.png" />
+</div>
+
+<div class="card" ng-if="!world_loading">
     
     <div class="card-header">
-        <span>{{'cities_SUBTITLE' | translate}}</span>
-        <span class="text-medium text-white">{{country}}</span>
-        (<a ui-sref="root.countries">{{'back_LABEL' | translate}}</a>)
+        <span class="text-medium">{{'world_SUBTITLE' | translate}}</span>
     </div>
-    
-    <div class="card-header f-row">
-    	
-    	<label class="mb-0 mr-2">{{'filter_LABEL' | translate}}</label>
-    	<input type="text" class="form-control" ng-model="keywords" />
-    	
-    </div>
-    
+
     <table class="card-table">
-        	
+    	
         <thead>
             <tr>
-                <th class="text-center" width="80px" style="cursor:pointer;" ng-click="sortCitiesByMosaics();">
+                <th class="text-center" style="cursor:pointer;" ng-click="sortByMosaics();">
                     <i class="fa mr-2" ng-class="{'fa-caret-up':sortMosaics == 'asc', 'fa-caret-down':sortMosaics == 'desc', 'fa-sort text-muted':sortMosaics == ''}"></i>
-                	{{'countries_COLMOSAICS' | translate}}
+                	{{'world_COLMOSAICS' | translate}}
                 </th>
-                <th style="cursor:pointer;" ng-click="sortCitiesByName();">
+                <th style="cursor:pointer;" ng-click="sortByName();">
                     <i class="fa mr-2" ng-class="{'fa-caret-up':sortName == 'asc', 'fa-caret-down':sortName == 'desc', 'fa-sort text-muted':sortName == ''}"></i>
-                	{{'countries_COLCITY' | translate}}
+                	{{'world_COLCOUNTRY' | translate}}
                 </th>
                 <th></th>
             </tr>
         </thead>
         
         <tbody>
-            <tr ng-repeat="item in cities | filter:keywords" ng-click="go(item);">
+            <tr ng-repeat="item in countries" ng-click="go(item);">
             	
                 <td class="text-right text-center" width="80px">
                 	{{item.mosaics}}
                 </td>
                 
                 <td class="text-white">
+                	<span class="flag-icon mr-2" style="position:relative; top:-2px;" ng-class="{
+                		'flag-icon-fr': item.name == 'France',
+                		'flag-icon-gb': item.name == 'United Kingdom',
+                		'flag-icon-my': item.name == 'Malaysia',
+                		'flag-icon-sg': item.name == 'Singapore',
+                		'flag-icon-us': item.name == 'United States',
+                		'flag-icon-mx': item.name == 'México',
+                	}"></span>
                     {{item.name}}
                 </td>
                 
@@ -46,7 +49,6 @@
 
             </tr>
         </tbody>
-        
     </table>
 
 </div>

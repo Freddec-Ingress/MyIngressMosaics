@@ -277,6 +277,41 @@ a:hover, a:focus {
 
 
 /******************************************************************************/
+/* BREADCRUMB                                                                 */
+/******************************************************************************/
+
+.breadcrumb {
+    list-style: none;
+    border-radius: .125rem;
+    background-color: #212121;
+    margin: 1rem .5rem; padding: .5rem;
+    display: flex; flex-direction: row; align-items: center;
+}
+.breadcrumb::after {
+    clear: both;
+    content: '';
+    display: block;
+}
+
+.breadcrumb-item {
+    float: left;
+    margin: 0; padding: 0;
+}
+
+.breadcrumb-item.active {
+    color: #FFFFFF; font-size: .875rem;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: '>';
+    color: #636c72;
+    display: inline-block;
+    padding-right: .5rem; padding-left: .5rem;
+}
+
+
+
+/******************************************************************************/
 /* CARD                                                                       */
 /******************************************************************************/
 

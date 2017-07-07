@@ -284,6 +284,7 @@ class MosaicViewSet(viewsets.ViewSet):
 			mosaic.cols = request.data['cols']
 			mosaic.count = request.data['count']
 			mosaic.title = request.data['title']
+			mosaic.region = request.data['region']
 			mosaic.country = request.data['country']
 			
 			mosaic.save()
@@ -425,51 +426,99 @@ class DataViewSet(viewsets.ViewSet):
 	
 	permission_classes = AllowAny, 
     
-	def countries(self, request):
+    
+    
+	def world(self, request):
 		
-		data = []
+		data = None
 		
 		results = Mosaic.objects.values('country').distinct()
-		for item in results:
+		if (results.count() > 0):
 			
-			country = {
-				'mosaics': Mosaic.objects.filter(country=item['country']).count(),
-				'name': item['country'],
-			}
+			data = []
 			
-			data.append(country)
-		
+			for item in results:
+				
+				country = {
+					'mosaics': Mosaic.objects.filter(country=item['country']).count(),
+					'name': item['country'],
+				}
+				
+				data.append(country)
 		
 		return Response(data, status=status.HTTP_200_OK)
     
     
     
-	def cities(self, request):
+	def country(self, request):
 		
-		data = []
+		data = None
 		
-		results = Mosaic.objects.filter(country=request.data['country']).values('city').distinct()
-		for item in results:
+		results = Mosaic.objects.filter(country=request.data['country']).values('region').distinct()
+		if (results.count() > 0):
 			
-			city = {
-				'mosaics': Mosaic.objects.filter(city=item['city']).count(),
-				'name': item['city'],
+			data = []
+			
+			for item in results:
+				
+				region = {
+					'mosaics': Mosaic.objects.filter(region=item['region']).count(),
+					'name': item['region'],
+				}
+			
+				data.append(region)
+			
+			region = {
+				'mosaics': Mosaic.objects.filter(region='').count(),
+				'name': 'Not specified',
 			}
 			
-			data.append(city)
-		
+			data.append(region)
+
 		return Response(data, status=status.HTTP_200_OK)
     
     
     
-	def mosaics(self, request):
+	def region(self, request):
 		
-		data = []
+		data = None
 		
-		results = Mosaic.objects.filter(city=request.data['city'])
-		for item in results:
+		if request.data['region'] == 'Not specified':
+			request.data['region'] = ''
+		
+		results = Mosaic.objects.filter(country=request.data['country'], region=request.data['region']).values('city').distinct()
+		if (results.count() > 0):
 			
-			mosaic = item.serialize()
-			data.append(mosaic)
+			data = []
+			
+			for item in results:
+				
+				city = {
+					'mosaics': Mosaic.objects.filter(city=item['city']).count(),
+					'name': item['city'],
+				}
+			
+				data.append(city)
+			
+		return Response(data, status=status.HTTP_200_OK)
+    
+    
+    
+	def city(self, request):
+		
+		data = None
+		
+		if request.data['region'] == 'Not specified':
+			request.data['region'] = ''
+		
+		results = Mosaic.objects.filter(country=request.data['country'], region=request.data['region'], city=request.data['city'])
+		if (results.count() > 0):
+			
+			data = []
+			
+			for item in results:
+				
+				mosaic = item.serialize()
+				data.append(mosaic)
 		
 		return Response(data, status=status.HTTP_200_OK)

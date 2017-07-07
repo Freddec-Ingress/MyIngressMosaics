@@ -441,6 +441,7 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 				service.data.mosaic.cols = response.cols;
 				service.data.mosaic.count = response.count;
 				service.data.mosaic.title = response.title;
+				service.data.mosaic.region = response.region;
 				service.data.mosaic.country = response.country;
 			});
 		},
@@ -490,116 +491,63 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 angular.module('AngularApp.services').service('DataService', function($cookies, API) {
 	
 	var service = {
-		
-		cities: null,
-		mosaics: null,
-		missions: null,
-		countries: null,
-		
-		current_city: null,
-		current_country: null,
-		
-		setCountry: function(country) {
-			
-			service.current_country = country;
-			$cookies.put('current_country', country);
-		},
-		
-		setCity: function(city) {
-			
-			service.current_city = city;
-			$cookies.put('current_city', city);
-		},
-		
-		getCountries: function() {
-			
-			return API.sendRequest('/api/countries/', 'POST').then(function(response) {
-				
-				if (response) {
-					service.countries = response;
-				}
-			});
-		},
-		
-		getCities: function() {
 
-			if (!service.current_country) {
-				service.current_country = $cookies.get('current_country');
-			}
-			
-			var data = { 'country':service.current_country };
-			return API.sendRequest('/api/cities/', 'POST', {}, data).then(function(response) {
-				
-				if (response) {
-					service.cities = response;
-				}
-			});
+		loadCountriesFromWorld: function() {
+			return API.sendRequest('/api/world/', 'POST');
 		},
 		
-		getMosaics: function() {
-
-			if (!service.current_city) {
-				service.current_city = $cookies.get('current_city');
-			}
+		loadRegionsFromCountry: function(country) {
 			
-			var data = { 'city':service.current_city };
-			return API.sendRequest('/api/mosaicsbycity/', 'POST', {}, data).then(function(response) {
-				
-				if (response) {
-					service.mosaics = response;
-				}
-			});
+			var data = {'country':country};
+			return API.sendRequest('/api/country/', 'POST', {}, data);
+		},
+		
+		loadCitiesFromRegion: function(country, region) {
+			
+			var data = {'country':country, 'region':region};
+			return API.sendRequest('/api/region/', 'POST', {}, data);
+		},
+		
+		loadMosaicsFromCity: function(country, region, city) {
+			
+			var data = {'country':country, 'region':region, 'city':city};
+			return API.sendRequest('/api/city/', 'POST', {}, data);
 		},
 
-		sortCountriesByMosaics: function(sort) {
+		sortByMosaics: function(sort, list) {
 			
 			function compareMosaicsAsc(a, b) {
 				
-				var a_mosaics = a.mosaics;
-				var b_mosaics = b.mosaics;
-				
-				if (a_mosaics < b_mosaics)
-					return -1;
-					
-				if (a_mosaics > b_mosaics)
-					return 1;
+				if (a.mosaics < b.mosaics) return -1;
+				if (a.mosaics > b.mosaics) return 1;
 
 				return 0;
 			}
 			
 			function compareMosaicsDesc(a, b) {
 				
-				var a_mosaics = a.mosaics;
-				var b_mosaics = b.mosaics;
-				
-				if (a_mosaics > b_mosaics)
-					return -1;
-					
-				if (a_mosaics < b_mosaics)
-					return 1;
-				
+				if (a.mosaics > b.mosaics) return -1;
+				if (a.mosaics < b.mosaics) return 1;
+
 				return 0;
 			}
 			
-			if (service.countries) {
+			if (list) {
 				
-				if (sort == 'asc') service.countries.sort(compareMosaicsAsc);
-				if (sort == 'desc') service.countries.sort(compareMosaicsDesc);
+				if (sort == 'asc') list.sort(compareMosaicsAsc);
+				if (sort == 'desc') list.sort(compareMosaicsDesc);
 			}
 		},
 
-		sortCountriesByName: function(sort) {
+		sortByName: function(sort, list) {
 			
 			function compareNameAsc(a, b) {
 				
 				var a_name = a.name.toLowerCase();
 				var b_name = b.name.toLowerCase();
 				
-				if (a_name < b_name)
-					return -1;
-					
-				if (a_name > b_name)
-					return 1;
+				if (a_name < b_name) return -1;
+				if (a_name > b_name) return 1;
 
 				return 0;
 			}
@@ -609,130 +557,41 @@ angular.module('AngularApp.services').service('DataService', function($cookies, 
 				var a_name = a.name.toLowerCase();
 				var b_name = b.name.toLowerCase();
 				
-				if (a_name > b_name)
-					return -1;
-					
-				if (a_name < b_name)
-					return 1;
+				if (a_name > b_name) return -1;
+				if (a_name < b_name) return 1;
 
 				return 0;
 			}
-			
-			if (service.countries) {
 				
-				if (sort == 'asc') service.countries.sort(compareNameAsc);
-				if (sort == 'desc') service.countries.sort(compareNameDesc);
+			if (list) {
+				
+				if (sort == 'asc') list.sort(compareNameAsc);
+				if (sort == 'desc') list.sort(compareNameDesc);
 			}
 		},
 
-		sortCitiesByMosaics: function(sort) {
-			
-			function compareMosaicsAsc(a, b) {
-				
-				var a_mosaics = a.mosaics;
-				var b_mosaics = b.mosaics;
-				
-				if (a_mosaics < b_mosaics)
-					return -1;
-					
-				if (a_mosaics > b_mosaics)
-					return 1;
-
-				return 0;
-			}
-			
-			function compareMosaicsDesc(a, b) {
-				
-				var a_mosaics = a.mosaics;
-				var b_mosaics = b.mosaics;
-				
-				if (a_mosaics > b_mosaics)
-					return -1;
-					
-				if (a_mosaics < b_mosaics)
-					return 1;
-				
-				return 0;
-			}
-			
-			if (service.cities) {
-				
-				if (sort == 'asc') service.cities.sort(compareMosaicsAsc);
-				if (sort == 'desc') service.cities.sort(compareMosaicsDesc);
-			}
-		},
-
-		sortCitiesByName: function(sort) {
-			
-			function compareNameAsc(a, b) {
-				
-				var a_name = a.name.toLowerCase();
-				var b_name = b.name.toLowerCase();
-				
-				if (a_name < b_name)
-					return -1;
-					
-				if (a_name > b_name)
-					return 1;
-
-				return 0;
-			}
-			
-			function compareNameDesc(a, b) {
-				
-				var a_name = a.name.toLowerCase();
-				var b_name = b.name.toLowerCase();
-				
-				if (a_name > b_name)
-					return -1;
-					
-				if (a_name < b_name)
-					return 1;
-
-				return 0;
-			}
-			
-			if (service.cities) {
-				
-				if (sort == 'asc') service.cities.sort(compareNameAsc);
-				if (sort == 'desc') service.cities.sort(compareNameDesc);
-			}
-		},
-
-		sortMosaicsByMissions: function(sort) {
+		sortByMissions: function(sort, list) {
 			
 			function compareMissionsAsc(a, b) {
 				
-				var a_missions = a.count;
-				var b_missions = b.count;
-				
-				if (a_missions < b_missions)
-					return -1;
-					
-				if (a_missions > b_missions)
-					return 1;
+				if (a.count < b.count) return -1;
+				if (a.count > b.count) return 1;
 
 				return 0;
 			}
 			
 			function compareMissionsDesc(a, b) {
 				
-				var a_missions = a.count;
-				var b_missions = b.count;
-				
-				if (a_missions > b_missions)
-					return -1;
-					
-				if (a_missions < b_missions)
-					return 1;
-				
+				if (a.count > b.count) return -1;
+				if (a.count < b.count) return 1;
+
 				return 0;
 			}
-			
-			if (service.mosaics) {
 				
-				if (sort == 'asc') service.mosaics.sort(compareMissionsAsc);
-				if (sort == 'desc') service.mosaics.sort(compareMissionsDesc);
+			if (list) {
+				
+				if (sort == 'asc') list.sort(compareMissionsAsc);
+				if (sort == 'desc') list.sort(compareMissionsDesc);
 			}
 		},
 	};
