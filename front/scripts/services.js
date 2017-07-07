@@ -513,6 +513,12 @@ angular.module('AngularApp.services').service('DataService', function($cookies, 
 			var data = {'country':country, 'region':region, 'city':city};
 			return API.sendRequest('/api/city/', 'POST', {}, data);
 		},
+		
+		loadMosaicsFromCreator: function(creator) {
+			
+			var data = {'creator':creator};
+			return API.sendRequest('/api/creator/', 'POST', {}, data);
+		},
 
 		sortByMosaics: function(sort, list) {
 			

@@ -2422,6 +2422,7 @@ var en_translations = {
 	
 	menu_contact_EMAIL: 'Message',
 	menu_contact_COMMUNITY: 'G+ Community',
+	menu_contact_FACEBOOK: 'Facebook Page',
 	
 	login_LINK: 'Sign in',
 	login_TITLE: 'Sign in',
@@ -2518,6 +2519,7 @@ var en_translations = {
 	region_TITLE: 'State/Province',
 	
 	creator_TITLE: 'Creator',
+	creator_SUBTITLE: 'List of mosaics created by ',
 };
 var fr_translations = {
     
@@ -2565,6 +2567,7 @@ var fr_translations = {
 	
 	menu_contact_EMAIL: 'Message',
 	menu_contact_COMMUNITY: 'Communauté G+',
+	menu_contact_FACEBOOK: 'Page Facebook',
 	
 	login_LINK: 'Se connecter',
 	login_TITLE: 'Connexion',
@@ -2662,6 +2665,7 @@ var fr_translations = {
 	region_TITLE: 'Région',
 	
 	creator_TITLE: 'Créateur',
+	creator_SUBTITLE: 'Liste des fresques créées par ',
 };
 angular.module('AngularApp.services', [])
 
@@ -3177,6 +3181,12 @@ angular.module('AngularApp.services').service('DataService', function($cookies, 
 			
 			var data = {'country':country, 'region':region, 'city':city};
 			return API.sendRequest('/api/city/', 'POST', {}, data);
+		},
+		
+		loadMosaicsFromCreator: function(creator) {
+			
+			var data = {'creator':creator};
+			return API.sendRequest('/api/creator/', 'POST', {}, data);
 		},
 
 		sortByMosaics: function(sort, list) {
@@ -4094,6 +4104,45 @@ angular.module('AngularApp.controllers').controller('CityCtrl', function($scope,
 
 angular.module('AngularApp.controllers').controller('CreatorCtrl', function($scope, $state, $stateParams, DataService) {
 	
+	$scope.creator_loading = true;
+
+	$scope.creator_name = $stateParams.creator;
+	
+	DataService.loadMosaicsFromCreator($scope.creator_name).then(function(response) {
+		
+		$scope.creator_loading = false;
+		
+		$scope.faction = response.faction;
+		$scope.mosaics = response.mosaics;
+		
+		DataService.sortByMissions('desc', $scope.mosaics);
+	});
+
+	/* Go to a mosaic page */
+	
+	$scope.go = function(item) {
+		
+		$state.go('root.mosaic', {'ref':item.ref});
+	}
+	
+	/* Sort mosaics by missions */
+	
+	$scope.sortMissions = 'desc';
+	
+	$scope.sortMosaicsByMissions = function() {
+		
+		if ($scope.sortMissions == '' || $scope.sortMissions == 'asc') {
+			
+			DataService.sortMosaicsByMissions('desc');
+			$scope.sortMissions = 'desc';
+		}
+		
+		else if ($scope.sortMissions == 'desc') {
+			
+			DataService.sortMosaicsByMissions('asc');
+			$scope.sortMissions = 'asc';
+		}
+	}
 });
 angular.module('AngularApp', ['ui.router', 'ui.bootstrap', 'pascalprecht.translate', 'satellizer', 'ngCookies', 'toastr',
 							  'AngularApp.services', 'AngularApp.controllers', 'AngularApp.directives', ]);

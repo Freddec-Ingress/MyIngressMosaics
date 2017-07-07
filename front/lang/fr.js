@@ -44,6 +44,7 @@ var fr_translations = {
 	
 	menu_contact_EMAIL: 'Message',
 	menu_contact_COMMUNITY: 'Communauté G+',
+	menu_contact_FACEBOOK: 'Page Facebook',
 	
 	login_LINK: 'Se connecter',
 	login_TITLE: 'Connexion',
@@ -141,4 +142,5 @@ var fr_translations = {
 	region_TITLE: 'Région',
 	
 	creator_TITLE: 'Créateur',
+	creator_SUBTITLE: 'Liste des fresques créées par ',
 };

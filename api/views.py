@@ -518,3 +518,26 @@ class DataViewSet(viewsets.ViewSet):
 				data.append(mosaic)
 		
 		return Response(data, status=status.HTTP_200_OK)
+    
+    
+    
+	def creator(self, request):
+		
+		data = None
+		
+		results = Creator.objects.filter(name=request.data['creator'])
+		if (results.count() > 0):
+			
+			creator = results[0]
+			
+			data = {
+				'faction': creator.faction,
+				'mosaics': [],
+			}
+			
+			for item in creator.mosaic_set.all():
+				
+				mosaic = item.serialize()
+				data['mosaics'].append(mosaic)
+		
+		return Response(data, status=status.HTTP_200_OK)

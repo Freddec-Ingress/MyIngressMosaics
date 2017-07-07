@@ -44,6 +44,7 @@ var en_translations = {
 	
 	menu_contact_EMAIL: 'Message',
 	menu_contact_COMMUNITY: 'G+ Community',
+	menu_contact_FACEBOOK: 'Facebook Page',
 	
 	login_LINK: 'Sign in',
 	login_TITLE: 'Sign in',
@@ -140,4 +141,5 @@ var en_translations = {
 	region_TITLE: 'State/Province',
 	
 	creator_TITLE: 'Creator',
+	creator_SUBTITLE: 'List of mosaics created by ',
 };
