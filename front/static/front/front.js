@@ -3677,6 +3677,8 @@ angular.module('AngularApp.controllers').controller('CreateCtrl', function($scop
 		if (status === 'OK') {
 			if (results[1]) {
 				
+				console.log(results[1].address_components);
+				
 				for (var item of results[1].address_components) {
 					
 					if (item.types[0] == 'country') CreateService.data.country = item.long_name;
