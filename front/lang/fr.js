@@ -134,6 +134,7 @@ var fr_translations = {
 	world_COLCITY: 'Ville',
 	world_COLMOSAIC: 'Fresque',
 	world_SUBTITLE: 'Liste des pays avec des fresques',
+	world_COLREGION: 'Region',
 	
 	country_TITLE: 'Pays',
 

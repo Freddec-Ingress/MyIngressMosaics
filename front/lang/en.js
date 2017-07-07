@@ -133,6 +133,7 @@ var en_translations = {
 	world_COLCOUNTRY: 'Country',
 	world_COLCITY: 'City',
 	world_COLMOSAIC: 'Mosaic',
+	world_COLREGION: 'State/Province',
 
 	country_TITLE: 'Country',
 
