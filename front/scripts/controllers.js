@@ -340,7 +340,7 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 	$scope.editMode = false;
 	$scope.editLoading = false;
 	
-	$scope.editModel = {ref:null, city:null, desc:null, type:null, cols:null, count:null, title:null, country:null};
+	$scope.editModel = {ref:null, city:null, region:null, desc:null, type:null, cols:null, count:null, title:null, country:null};
 	
 	$scope.openEdit = function() {
 		
