@@ -98,6 +98,7 @@ var fr_translations = {
 	mosaic_DISTANCE: 'Distance',
 	mosaic_CREATOR: 'Créateur(s)',
 	mosaic_BY: 'Par',
+	mosaic_REGION: 'Région',
 	
 	nomosaic_TEXT: 'Aucune fresque',
 	

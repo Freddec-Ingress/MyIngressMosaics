@@ -20,7 +20,7 @@
 			
 			<div class="group text-white text-big">{{mosaic.title}}</div>
 			
-		    <div class="group">{{mosaic.country}} &middot; {{mosaic.city}}</div>
+		    <div class="group">{{mosaic.country}} &middot; {{mosaic.region}} &middot; {{mosaic.city}}</div>
 		    
 			<pre class="group text-highlight">{{mosaic.desc}}</pre>
 			
@@ -47,6 +47,11 @@
 	            <div class="group fitem-grow pr-2">
 	                <label>{{'mosaic_COUNTRY' | translate}}</label>
 	                <input type="text" class="form-control" ng-model="editModel.country" />
+	            </div>
+	            
+	            <div class="group fitem-grow pl-2">
+	                <label>{{'mosaic_REGION' | translate}}</label>
+	                <input type="text" class="form-control" ng-model="editModel.region" />
 	            </div>
 	            
 	            <div class="group fitem-grow pl-2">

@@ -98,6 +98,7 @@ var en_translations = {
 	mosaic_DISTANCE: 'Distance',
 	mosaic_CREATOR: 'Creator(s)',
 	mosaic_BY: 'By',
+	mosaic_REGION: 'State/Province',
 	
 	nomosaic_TEXT: 'No mosaic found',
 	

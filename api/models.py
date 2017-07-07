@@ -60,7 +60,7 @@ def _createRef():
 @python_2_unicode_compatible
 class Mosaic(models.Model):
 
-	registerer = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='mosaics')
+	registerer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='mosaics')
 	
 	creators = models.ManyToManyField('Creator')
 	
@@ -103,6 +103,7 @@ class Mosaic(models.Model):
 			'count': self.count,
 			'title': self.title,
 			'status': self.status,
+			'region': self.region,
 			'country': self.country,
 			
 			'register_date': self.register_date,
