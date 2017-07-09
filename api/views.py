@@ -533,6 +533,9 @@ class DataViewSet(viewsets.ViewSet):
     
     
 	def setRegion(self, request):
+		
+		if not request.user.is_superuser:
+			return Response(data, status=status.HTTP_403_FORBIDDEN)
 
 		results = Mosaic.objects.filter(city=request.data['city'])
 		if (results.count() > 0):
@@ -540,6 +543,23 @@ class DataViewSet(viewsets.ViewSet):
 			for item in results:
 				
 				item.region = request.data['region']
+				item.save()
+
+		return Response(None, status=status.HTTP_200_OK)
+    
+    
+    
+	def renameCity(self, request):
+		
+		if not request.user.is_superuser:
+			return Response(data, status=status.HTTP_403_FORBIDDEN)
+		
+		results = Mosaic.objects.filter(city=request.data['oldValue'])
+		if (results.count() > 0):
+			
+			for item in results:
+				
+				item.city = request.data['newValue']
 				item.save()
 
 		return Response(None, status=status.HTTP_200_OK)

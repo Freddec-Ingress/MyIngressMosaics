@@ -644,6 +644,12 @@ angular.module('AngularApp.services').service('DataService', function($cookies, 
 			var data = {'city':city, 'region':region};
 			return API.sendRequest('/api/city/setRegion/', 'POST', {}, data);
 		},
+		
+		renameCity: function(oldValue, newValue) {
+			
+			var data = {'oldValue':oldValue, 'newValue':newValue};
+			return API.sendRequest('/api/city/rename/', 'POST', {}, data);
+		},
 	};
 	
 	return service;

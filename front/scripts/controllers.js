@@ -770,6 +770,18 @@ angular.module('AngularApp.controllers').controller('RegionCtrl', function($scop
 			$state.reload();
 		});
 	}
+	
+	/* Rename country */
+	
+	$scope.renameCityModel = {oldValue:null, newValue:null};
+	
+	$scope.renameCity = function() {
+		
+		DataService.renameCity($scope.renameCityModel.oldValue, $scope.renameCityModel.newValue).then(function(response) {
+			
+			$state.reload();
+		});
+	}
 });
 
 angular.module('AngularApp.controllers').controller('CityCtrl', function($scope, $state, $stateParams, DataService) {
