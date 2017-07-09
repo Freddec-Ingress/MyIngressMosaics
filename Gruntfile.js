@@ -23,6 +23,7 @@ module.exports = function(grunt) {
 					'front/vendor/jquery/js/jquery.min.js',
 					'front/vendor/angular/js/angular.min.js',
 					'front/vendor/satellizer/js/satellizer.min.js',
+					'front/vendor/jquery/js/jquery.slimscroll.min.js',
 					'front/vendor/angular-uibootstrap/js/ui-bootstrap.js',
 					'front/vendor/angular-cookies/js/angular-cookies.min.js',
 					'front/vendor/angular-toastr/js/angular-toastr.tpls.min.js',

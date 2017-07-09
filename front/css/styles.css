@@ -152,7 +152,6 @@ a:hover, a:focus {
 /* Content ------------------------------------------------------------------ */
 
 .menu-content {
-    overflow: auto;
     display: flex; flex-direction: column; flex: 1;
 }
 
@@ -248,7 +247,11 @@ a:hover, a:focus {
 
 .page-content {
     flex: 1;
-    overflow: auto;
+}
+
+.slimScrollBar {
+    opacity: 0.25!important;
+    background: #009688!important;
 }
 
 /* Container ---------------------------------------------------------------- */
