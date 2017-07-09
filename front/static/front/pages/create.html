@@ -80,10 +80,10 @@
             <span class="text-medium">{{'create_SUBTITLE2' | translate}}</span>
         </div>
         
-        <table class="card-table">
+        <table class="card-table card-table-compressed">
             <tbody>
                 <tr ng-repeat="item in data.missions">
-                    <td style="width:3rem;"><input type="number" class="form-control text-center" style="padding:.25rem;" ng-model="item.order" ng-init="item.order = ($index + 1)" /></td>
+                    <td style="width:3rem;"><input type="number" class="form-control text-center" style="padding:.25rem;" ng-model="item.order" ng-init="item.order = initOrder(item);" /></td>
                     <td>{{item.name}}</td>
                 </tr>
             </tbody>

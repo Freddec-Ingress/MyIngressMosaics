@@ -370,7 +370,13 @@ a:hover, a:focus {
     padding-right: .5rem;
 }
 
+.card-table-compressed td {
+    height: 2.25rem;
+}
 
+.card-table-compressed .form-control {
+    height: 1.75rem;
+}
 
 /******************************************************************************/
 /* FORM                                                                       */

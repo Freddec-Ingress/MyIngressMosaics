@@ -461,7 +461,7 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 			return API.sendRequest('/api/mosaic/delete/', 'POST', {}, data).then(function(response) {
 					
 				DataService.current_city = service.data.mosaic.city;
-				$state.go('root.mosaics');
+				$state.go('root.city', {'country':service.data.mosaic.country, 'region':service.data.mosaic.region, 'city':service.data.mosaic.city});
 				
 				service.data.mosaic = null;
 			});

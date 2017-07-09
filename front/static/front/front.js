@@ -3160,7 +3160,7 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 			return API.sendRequest('/api/mosaic/delete/', 'POST', {}, data).then(function(response) {
 					
 				DataService.current_city = service.data.mosaic.city;
-				$state.go('root.mosaics');
+				$state.go('root.city', {'country':service.data.mosaic.country, 'region':service.data.mosaic.region, 'city':service.data.mosaic.city});
 				
 				service.data.mosaic = null;
 			});
@@ -3583,7 +3583,7 @@ angular.module('AngularApp.controllers').controller('CreateCtrl', function($scop
 	if (CreateService.data.missions.length < 1) {
 		$state.go('root.missions');
 	}
-			
+	
 	var geocoder = new google.maps.Geocoder;
 	
 	var latlng = {
@@ -3595,8 +3595,6 @@ angular.module('AngularApp.controllers').controller('CreateCtrl', function($scop
 		
 		if (status === 'OK') {
 			if (results[1]) {
-				
-				console.log(results[1].address_components);
 				
 				for (var item of results[1].address_components) {
 					
@@ -3647,6 +3645,21 @@ angular.module('AngularApp.controllers').controller('CreateCtrl', function($scop
 		
 		var order = (i * $scope.data.cols + j) + 1;
 		return CreateService.getImageByOrder(order);
+	}
+	
+	/* Init order */
+	
+	$scope.initOrder = function(mission) {
+		
+		var order = 0;
+		
+		var found = mission.name.match(/[0-9]+/);
+		if (found) {
+			
+			order = parseInt(found[0]);
+		}
+		
+		return order;
 	}
 });
 
