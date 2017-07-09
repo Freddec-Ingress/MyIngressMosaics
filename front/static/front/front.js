@@ -2759,6 +2759,7 @@ angular.module('AngularApp.services').service('UserService', function($auth, $ht
 			name: null,
 			team: null,
 			level: null,
+			superuser: null,
 			
 			authenticated: false,
 			
@@ -2777,6 +2778,7 @@ angular.module('AngularApp.services').service('UserService', function($auth, $ht
 				service.data.name = response.name;
 				service.data.team = response.team;
 				service.data.level = response.level;
+				service.data.superuser = response.superuser;
 			});
 		},
 
