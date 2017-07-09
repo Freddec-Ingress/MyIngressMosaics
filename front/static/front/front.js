@@ -3033,19 +3033,29 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 		},
 		
 		default: function() {
-			
-			service.data.missions = service.data.missions.sort(function(a, b) {
-				
-				if (a.name < b.name) { 	return -1; }
-				if (a.name > b.name) { 	return 1; }
-				return 0;
-			});
 
 			if (service.data.missions[0]) {
 				
 				service.data.title = service.data.missions[0].name;
 				service.data.desc = service.data.missions[0].desc;
 			}
+			
+			for (var m of service.data.missions) {
+				
+				var order = 0;
+				
+				var found = m.name.match(/[0-9]+/);
+				if (found) order = parseInt(found[0]);
+				
+				m.order = order;
+			}
+			
+			service.data.missions = service.data.missions.sort(function(a, b) {
+				
+				if (a.order < b.order) { 	return -1; }
+				if (a.order > b.order) { 	return 1; }
+				return 0;
+			});
 			
 			service.data.type = 'sequence';
 			service.data.count = service.data.missions.length;
@@ -3663,21 +3673,6 @@ angular.module('AngularApp.controllers').controller('CreateCtrl', function($scop
 		
 		var order = (i * $scope.data.cols + j) + 1;
 		return CreateService.getImageByOrder(order);
-	}
-	
-	/* Init order */
-	
-	$scope.initOrder = function(mission) {
-		
-		var order = 0;
-		
-		var found = mission.name.match(/[0-9]+/);
-		if (found) {
-			
-			order = parseInt(found[0]);
-		}
-		
-		return order;
 	}
 });
 

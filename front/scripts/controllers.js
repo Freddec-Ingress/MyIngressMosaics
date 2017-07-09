@@ -290,21 +290,6 @@ angular.module('AngularApp.controllers').controller('CreateCtrl', function($scop
 		var order = (i * $scope.data.cols + j) + 1;
 		return CreateService.getImageByOrder(order);
 	}
-	
-	/* Init order */
-	
-	$scope.initOrder = function(mission) {
-		
-		var order = 0;
-		
-		var found = mission.name.match(/[0-9]+/);
-		if (found) {
-			
-			order = parseInt(found[0]);
-		}
-		
-		return order;
-	}
 });
 
 angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scope, $state, $timeout, $window, $filter, toastr, MosaicService) {
