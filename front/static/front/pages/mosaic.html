@@ -10,7 +10,7 @@
 			
 			<span class="mr-auto text-medium">{{'mosaicpage_DETAILS' | translate}}</span>
 	
-			<a ng-if="user.name == mosaic.registerer.name || user.is_superuser" ng-show="!editMode" ng-click="openEdit();">
+			<a ng-if="user.name == mosaic.registerer.name || user.superuser" ng-show="!editMode" ng-click="openEdit();">
 				{{'edit_LABEL' | translate}}
 			</a>
 
@@ -35,7 +35,7 @@
 			
 		</div>
 		
-		<div class="card-block first last f-col" ng-if="user.name == mosaic.registerer.name" ng-show="editMode">
+		<div class="card-block first last f-col" ng-if="user.name == mosaic.registerer.name || user.superuser" ng-show="editMode">
 			
 			<div class="loading" ng-show="editLoading">
 				<img src="/static/front/img/loading.png" />
@@ -170,7 +170,7 @@
             <tbody>
                 <tr ng-repeat="item in mosaic.missions">
                 	
-                    <td class="text-white text-center" style="width:2rem;" ng-if="user.name == mosaic.registerer.name">
+                    <td class="text-white text-center" style="width:2rem;" ng-if="user.name == mosaic.registerer.name || user.superuser">
                     	<a ng-click="remove(item.ref);">
                     		<i class="fa fa-trash"></i>
                     	</a>
@@ -210,7 +210,7 @@
             </tbody>
         </table>
 		
-		<div class="card-block last" ng-if="user.name == mosaic.registerer.name"  ng-show="reorderMode">
+		<div class="card-block last" ng-if="user.name == mosaic.registerer.name || user.superuser"  ng-show="reorderMode">
 			
 			<div class="form-button-bar">
 				
@@ -256,7 +256,7 @@
             </tbody>
         </table>
 		
-		<div class="card-block last" ng-if="user.name == mosaic.registerer.name"  ng-show="addMode">
+		<div class="card-block last" ng-if="user.name == mosaic.registerer.name || user.superuser"  ng-show="addMode">
 			
 			<div class="form-button-bar">
 				
@@ -268,7 +268,7 @@
 
 		</div>
 		
-		<div class="card-block last" ng-if="user.name == mosaic.registerer.name"  ng-show="!reorderMode && !addMode">
+		<div class="card-block last" ng-if="user.name == mosaic.registerer.name || user.superuser"  ng-show="!reorderMode && !addMode">
 			
 			<div class="form-button-bar">
 				
@@ -286,7 +286,7 @@
 		
 	</div>
 	
-	<div class="card" ng-if="user.name == mosaic.registerer.name">
+	<div class="card" ng-if="user.name == mosaic.registerer.name || user.superuser">
 		
 		<div class="card-header text-medium">
 			{{'mosaicpage_DELETETITLE' | translate}}
