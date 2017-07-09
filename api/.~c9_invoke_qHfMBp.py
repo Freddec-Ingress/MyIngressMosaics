@@ -532,20 +532,6 @@ class DataViewSet(viewsets.ViewSet):
     
     
     
-	def setRegion(self, request):
-
-		results = Mosaic.objects.filter(city=request.data['city'])
-		if (results.count() > 0):
-			
-			for item in results:
-				
-				item.region = request.data['region']
-				item.save()
-
-		return Response(None, status=status.HTTP_200_OK)
-    
-    
-    
 	def city(self, request):
 		
 		data = None

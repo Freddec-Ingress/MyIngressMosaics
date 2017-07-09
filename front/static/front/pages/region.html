@@ -61,3 +61,22 @@
 	</div>
 	
 </div>
+
+<div class="card" ng-if="!region_loading && user && user.superuser">
+
+	<div class="card-header text-medium">
+		Set region to city
+	</div>
+
+	<div class="card-block first last f-row">
+		
+		<input type="text" class="form-control mr-2" placeholder="City" ng-model="setRegionyModel.city" />
+		<input type="text" class="form-control mr-2" placeholder="Region" ng-model="setRegionyModel.region" />
+		
+		<button type="submit" class="btn btn-primary ml-2" ng-click="setRegion();">
+			Set
+		</button>
+
+	</div>
+
+</div>

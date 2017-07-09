@@ -758,6 +758,18 @@ angular.module('AngularApp.controllers').controller('RegionCtrl', function($scop
 			$scope.sortName = 'asc';
 		}
 	}
+	
+	/* Set region */
+	
+	$scope.setRegionyModel = {city:null, region:null};
+	
+	$scope.setRegion = function() {
+		
+		DataService.setRegion($scope.setRegionyModel.city, $scope.setRegionyModel.region).then(function(response) {
+			
+			$state.reload();
+		});
+	}
 });
 
 angular.module('AngularApp.controllers').controller('CityCtrl', function($scope, $state, $stateParams, DataService) {

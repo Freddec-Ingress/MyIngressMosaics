@@ -3353,6 +3353,12 @@ angular.module('AngularApp.services').service('DataService', function($cookies, 
 			var data = {'oldValue':oldValue, 'newValue':newValue};
 			return API.sendRequest('/api/country/rename/', 'POST', {}, data);
 		},
+		
+		setRegion: function(city, region) {
+			
+			var data = {'city':city, 'region':region};
+			return API.sendRequest('/api/city/setRegion/', 'POST', {}, data);
+		},
 	};
 	
 	return service;
@@ -4156,6 +4162,18 @@ angular.module('AngularApp.controllers').controller('RegionCtrl', function($scop
 			DataService.sortByName('asc');
 			$scope.sortName = 'asc';
 		}
+	}
+	
+	/* Set region */
+	
+	$scope.setRegionyModel = {city:null, region:null};
+	
+	$scope.setRegion = function() {
+		
+		DataService.setRegion($scope.setRegionyModel.city, $scope.setRegionyModel.region).then(function(response) {
+			
+			$state.reload();
+		});
 	}
 });
 

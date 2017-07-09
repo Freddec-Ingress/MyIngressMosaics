@@ -638,6 +638,12 @@ angular.module('AngularApp.services').service('DataService', function($cookies, 
 			var data = {'oldValue':oldValue, 'newValue':newValue};
 			return API.sendRequest('/api/country/rename/', 'POST', {}, data);
 		},
+		
+		setRegion: function(city, region) {
+			
+			var data = {'city':city, 'region':region};
+			return API.sendRequest('/api/city/setRegion/', 'POST', {}, data);
+		},
 	};
 	
 	return service;

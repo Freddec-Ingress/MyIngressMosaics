@@ -32,6 +32,7 @@ urlpatterns = [
 	url(r'^missions/',		ProfileViewSet.as_view({ 'get' : 'missions' })),
 	url(r'^mosaics/',		ProfileViewSet.as_view({ 'get' : 'mosaics' })),
 
+	url(r'^city/setRegion/',		DataViewSet.as_view({ 'post' : 'setRegion'		})),
 	url(r'^city/',		DataViewSet.as_view({ 'post' : 'city'		})),
 	url(r'^world/',		DataViewSet.as_view({ 'post' : 'world'		})),
 	url(r'^region/',	DataViewSet.as_view({ 'post' : 'region' 	})),
