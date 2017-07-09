@@ -24,6 +24,9 @@ var fr_translations = {
 	region_LABEL: 'Région',
 	city_LABEL: 'Ville',
 	creator_LABEL: 'Créateur',
+	add_LABEL: 'Ajouter',
+	explore_LABEL: 'Explorer',
+	register_LABEL: 'Enregistrer',
 	
 	home_TITLE: 'Bienvenue',
 	home_HELPTITLE: 'Ce que vous pouvez faire pour aider',
@@ -126,6 +129,9 @@ var fr_translations = {
 	mosaicpage_MISSIONS: 'Missions',
 	mosaicpage_REORDER: 'Réordonner',
 	mosaicpage_DELETETITLE: 'Tapez le nom de la fresque pour la détruire',
+	
+	add_TEXT: 'Les missions ci-dessous peuvent être ajoutées à la fresque: ce sont des missions avec un titre presque similaire ou des missions venant de l\'un des créateurs de la fresque. Il suffit de spécifier l\'ordre et de cliquer sur le bouton ajouter.',
+	add_NOMISSION: 'Aucune mission à ajouter',
 
 	mymosaics_LINK: 'Mes fresques',
 	mymosaics_TITLE: 'Mes fresques',

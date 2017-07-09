@@ -2402,6 +2402,9 @@ var en_translations = {
 	region_LABEL: 'State/Province',
 	city_LABEL: 'City',
 	creator_LABEL: 'Creator',
+	add_LABEL: 'Add',
+	explore_LABEL: 'Explore',
+	register_LABEL: 'Register',
 	
 	home_TITLE: 'Welcome',
 	home_HELPTITLE: 'What you can do to help',
@@ -2505,6 +2508,9 @@ var en_translations = {
 	mosaicpage_REORDER: 'Reorder',
 	mosaicpage_DELETETITLE: 'Type mosaic name to delete this mosaic',
 	
+	add_TEXT: 'Here are missions that could be added to this mosaic: means missions with pretty same title and missions from one of mosaic creators. Just specify order and click on add button.',
+	add_NOMISSION: 'No mission to add',
+	
 	mymosaics_LINK: 'My Mosaics',
 	mymosaics_TITLE: 'My Mosaics',
 	mymosaics_SUBTITLE: 'My registered mosaics',
@@ -2556,6 +2562,9 @@ var fr_translations = {
 	region_LABEL: 'Région',
 	city_LABEL: 'Ville',
 	creator_LABEL: 'Créateur',
+	add_LABEL: 'Ajouter',
+	explore_LABEL: 'Explorer',
+	register_LABEL: 'Enregistrer',
 	
 	home_TITLE: 'Bienvenue',
 	home_HELPTITLE: 'Ce que vous pouvez faire pour aider',
@@ -2658,6 +2667,9 @@ var fr_translations = {
 	mosaicpage_MISSIONS: 'Missions',
 	mosaicpage_REORDER: 'Réordonner',
 	mosaicpage_DELETETITLE: 'Tapez le nom de la fresque pour la détruire',
+	
+	add_TEXT: 'Les missions ci-dessous peuvent être ajoutées à la fresque: ce sont des missions avec un titre presque similaire ou des missions venant de l\'un des créateurs de la fresque. Il suffit de spécifier l\'ordre et de cliquer sur le bouton ajouter.',
+	add_NOMISSION: 'Aucune mission à ajouter',
 
 	mymosaics_LINK: 'Mes fresques',
 	mymosaics_TITLE: 'Mes fresques',
@@ -3137,6 +3149,7 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 			
 			return API.sendRequest('/api/mosaic/reorder/', 'POST', {}, data).then(function(response) {
 				
+				service.data.mosaic._distance = response._distance;
 				service.data.mosaic.missions = response.missions;
 			});
 		},
@@ -3158,6 +3171,8 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 			var data = { 'ref':service.data.mosaic.ref, 'mission':mission };
 			return API.sendRequest('/api/mosaic/remove/', 'POST', {}, data).then(function(response) {
 					
+				service.data.mosaic.creators = response.creators;
+				service.data.mosaic._distance = response._distance;
 				service.data.mosaic.missions = response.missions;
 			});
 		},
@@ -3167,6 +3182,8 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 			var data = { 'ref':service.data.mosaic.ref, 'mission':mission };
 			return API.sendRequest('/api/mosaic/add/', 'POST', {}, data).then(function(response) {
 					
+				service.data.mosaic.creators = response.creators;
+				service.data.mosaic._distance = response._distance;
 				service.data.mosaic.missions = response.missions;
 			});
 		},
@@ -3771,12 +3788,14 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 		$scope.addMode = false;
 	}
 	
-	$scope.add = function(item) {
+	$scope.add = function(item, order) {
 		
 		var index = $scope.potentials.indexOf(item);
 		if (index > -1) {
 		    $scope.potentials.splice(index, 1);
 		}
+		
+		item.order = order
 		
 		MosaicService.add(item.ref);
 	}

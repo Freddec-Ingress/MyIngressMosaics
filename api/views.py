@@ -324,6 +324,9 @@ class MosaicViewSet(viewsets.ViewSet):
 					mission.order = item['order']
 					mission.save()
 		
+			mosaic.computeInternalData()
+			mosaic.save()
+				
 			data = mosaic.serialize()
 			return Response(data, status=status.HTTP_200_OK)
 

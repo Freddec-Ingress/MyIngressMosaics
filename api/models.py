@@ -152,6 +152,8 @@ class Mosaic(models.Model):
 			
 			dst = 0
 			
+			self.creators.clear()
+			
 			for i in range(0, missions.count() - 1):
 				dst += missions[i]._distance
 				

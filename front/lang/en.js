@@ -24,6 +24,9 @@ var en_translations = {
 	region_LABEL: 'State/Province',
 	city_LABEL: 'City',
 	creator_LABEL: 'Creator',
+	add_LABEL: 'Add',
+	explore_LABEL: 'Explore',
+	register_LABEL: 'Register',
 	
 	home_TITLE: 'Welcome',
 	home_HELPTITLE: 'What you can do to help',
@@ -126,6 +129,9 @@ var en_translations = {
 	mosaicpage_MISSIONS: 'Missions',
 	mosaicpage_REORDER: 'Reorder',
 	mosaicpage_DELETETITLE: 'Type mosaic name to delete this mosaic',
+	
+	add_TEXT: 'Here are missions that could be added to this mosaic: means missions with pretty same title and missions from one of mosaic creators. Just specify order and click on add button.',
+	add_NOMISSION: 'No mission to add',
 	
 	mymosaics_LINK: 'My Mosaics',
 	mymosaics_TITLE: 'My Mosaics',

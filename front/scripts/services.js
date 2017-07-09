@@ -450,6 +450,7 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 			
 			return API.sendRequest('/api/mosaic/reorder/', 'POST', {}, data).then(function(response) {
 				
+				service.data.mosaic._distance = response._distance;
 				service.data.mosaic.missions = response.missions;
 			});
 		},
@@ -471,6 +472,8 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 			var data = { 'ref':service.data.mosaic.ref, 'mission':mission };
 			return API.sendRequest('/api/mosaic/remove/', 'POST', {}, data).then(function(response) {
 					
+				service.data.mosaic.creators = response.creators;
+				service.data.mosaic._distance = response._distance;
 				service.data.mosaic.missions = response.missions;
 			});
 		},
@@ -480,6 +483,8 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 			var data = { 'ref':service.data.mosaic.ref, 'mission':mission };
 			return API.sendRequest('/api/mosaic/add/', 'POST', {}, data).then(function(response) {
 					
+				service.data.mosaic.creators = response.creators;
+				service.data.mosaic._distance = response._distance;
 				service.data.mosaic.missions = response.missions;
 			});
 		},

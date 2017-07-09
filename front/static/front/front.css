@@ -380,6 +380,10 @@ a:hover, a:focus {
     border: 1px solid #004D40;
 }
 
+.card-block > p:last-child {
+    margin-bottom: 0;
+}
+
 /* Table -------------------------------------------------------------------- */
 
 .card-table {
@@ -584,6 +588,12 @@ table th {
 table tbody tr {
     cursor: pointer;
     border-bottom: 1px solid rgba(0,0,0,.25);
+}
+table tbody tr:first-child {
+    border-top: 1px solid rgba(0,0,0,.5);
+}
+table tbody tr:last-child {
+    border-bottom: 1px solid rgba(0,0,0,.5);
 }
 
 table tbody tr.selected {

@@ -226,6 +226,14 @@
 
 		</div>
 		
+		<div class="card-block first" ng-show="addMode">
+			
+			<p>{{'add_TEXT' | translate}}</p>
+
+			<p class="text-danger" ng-if="!potentials">{{'add_NOMISSION' | translate}}</p>
+			
+		</div>
+		
         <table class="card-table" ng-show="addMode">
             <tbody>
                 <tr ng-repeat="item in potentials">
@@ -239,8 +247,8 @@
 	                </td>
 	            	
 	                <td style="width:3rem;">
-	                	<button class="btn btn-primary" ng-click="add(item);">
-	                		{{'add_BTN' | translate}}
+	                	<button class="btn btn-primary" ng-click="add(item, item.order);">
+	                		{{'add_LABEL' | translate}}
 	                	</button>
 	                </td>
                     
@@ -252,7 +260,7 @@
 			
 			<div class="form-button-bar">
 				
-				<a class="btn btn-primary" ng-click="closeAdd();">
+				<a class="btn btn-secondary" ng-click="closeAdd();">
 					{{'close_LABEL' | translate}}
 				</a>
 

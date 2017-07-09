@@ -432,12 +432,14 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 		$scope.addMode = false;
 	}
 	
-	$scope.add = function(item) {
+	$scope.add = function(item, order) {
 		
 		var index = $scope.potentials.indexOf(item);
 		if (index > -1) {
 		    $scope.potentials.splice(index, 1);
 		}
+		
+		item.order = order
 		
 		MosaicService.add(item.ref);
 	}
