@@ -490,6 +490,23 @@ class DataViewSet(viewsets.ViewSet):
     
     
     
+	def renameCountry(self, request):
+		
+		if not request.user.is_superuser:
+			return Response(data, status=status.HTTP_403_FORBIDDEN)
+		
+		results = Mosaic.objects.filter(country=request.data['oldValue'])
+		if (results.count() > 0):
+			
+			for item in results:
+				
+				item.country = request.data['newValue']
+				item.save()
+
+		return Response(None, status=status.HTTP_200_OK)
+		
+	
+	
 	def region(self, request):
 		
 		data = None

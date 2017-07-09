@@ -608,6 +608,18 @@ angular.module('AngularApp.controllers').controller('WorldCtrl', function($scope
 			$scope.sortName = 'asc';
 		}
 	}
+	
+	/* Rename country */
+	
+	$scope.renameCountryModel = {oldValue:null, newValue:null};
+	
+	$scope.renameCountry = function() {
+		
+		DataService.renameCountry($scope.renameCountryModel.oldValue, $scope.renameCountryModel.newValue).then(function(response) {
+			
+			$state.reload();
+		});
+	}
 });
 
 angular.module('AngularApp.controllers').controller('CountryCtrl', function($scope, $state, $stateParams, DataService) {

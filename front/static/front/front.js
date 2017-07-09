@@ -3347,6 +3347,12 @@ angular.module('AngularApp.services').service('DataService', function($cookies, 
 			var data = {'text':text};
 			return API.sendRequest('/api/search/', 'POST', {}, data);
 		},
+		
+		renameCountry: function(oldValue, newValue) {
+			
+			var data = {'oldValue':oldValue, 'newValue':newValue};
+			return API.sendRequest('/api/country/rename/', 'POST', {}, data);
+		},
 	};
 	
 	return service;
@@ -4000,6 +4006,18 @@ angular.module('AngularApp.controllers').controller('WorldCtrl', function($scope
 			DataService.sortByName('asc', $scope.countries);
 			$scope.sortName = 'asc';
 		}
+	}
+	
+	/* Rename country */
+	
+	$scope.renameCountryModel = {oldValue:null, newValue:null};
+	
+	$scope.renameCountry = function() {
+		
+		DataService.renameCountry($scope.renameCountryModel.oldValue, $scope.renameCountryModel.newValue).then(function(response) {
+			
+			$state.reload();
+		});
 	}
 });
 
