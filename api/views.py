@@ -279,7 +279,11 @@ class MosaicViewSet(viewsets.ViewSet):
 
 	def edit(self, request):
 		
-		result = Mosaic.objects.filter(ref=request.data['ref'], registerer=request.user)
+		if request.user.is_superuser:
+			result = Mosaic.objects.filter(ref=request.data['ref'])
+		else:
+			result = Mosaic.objects.filter(ref=request.data['ref'], registerer=request.user)
+		
 		if result.count() > 0:
 			mosaic = result[0]
 			
@@ -301,22 +305,13 @@ class MosaicViewSet(viewsets.ViewSet):
 
 
 
-	def name(self, request):
-		
-		result = Mosaic.objects.filter(ref=request.data['ref'], registerer=request.user)
-		if result.count() > 0:
-			mosaic = result[0]
-			
-			mosaic.title = request.data['name']
-			mosaic.save()
-		
-		return Response(None, status=status.HTTP_200_OK)
-
-
-
 	def reorder(self, request):
 
-		result = Mosaic.objects.filter(ref=request.data['ref'], registerer=request.user)
+		if request.user.is_superuser:
+			result = Mosaic.objects.filter(ref=request.data['ref'])
+		else:
+			result = Mosaic.objects.filter(ref=request.data['ref'], registerer=request.user)
+		
 		if result.count() > 0:
 			mosaic = result[0]
 			
@@ -341,7 +336,11 @@ class MosaicViewSet(viewsets.ViewSet):
 
 	def delete(self, request):
 		
-		result = Mosaic.objects.filter(ref=request.data['ref'], registerer=request.user)
+		if request.user.is_superuser:
+			result = Mosaic.objects.filter(ref=request.data['ref'])
+		else:
+			result = Mosaic.objects.filter(ref=request.data['ref'], registerer=request.user)
+		
 		if result.count() > 0:
 			
 			mosaic = result[0]
@@ -353,7 +352,11 @@ class MosaicViewSet(viewsets.ViewSet):
 
 	def remove(self, request):
 		
-		result = Mosaic.objects.filter(ref=request.data['ref'], registerer=request.user)
+		if request.user.is_superuser:
+			result = Mosaic.objects.filter(ref=request.data['ref'])
+		else:
+			result = Mosaic.objects.filter(ref=request.data['ref'], registerer=request.user)
+		
 		if result.count() > 0:
 			
 			mosaic = result[0]
@@ -378,7 +381,11 @@ class MosaicViewSet(viewsets.ViewSet):
 
 	def add(self, request):
 		
-		result = Mosaic.objects.filter(ref=request.data['ref'], registerer=request.user)
+		if request.user.is_superuser:
+			result = Mosaic.objects.filter(ref=request.data['ref'])
+		else:
+			result = Mosaic.objects.filter(ref=request.data['ref'], registerer=request.user)
+		
 		if result.count() > 0:
 			
 			mosaic = result[0]
@@ -562,7 +569,7 @@ class DataViewSet(viewsets.ViewSet):
 			'mosaics': None,
 		}
 		
-		results = Mosaic.objects.filter(country__contains=request.data['text']).values('country').distinct()
+		results = Mosaic.objects.filter(country__icontains=request.data['text']).values('country').distinct()
 		if (results.count() > 0):
 			
 			data['countries'] = []
@@ -575,5 +582,58 @@ class DataViewSet(viewsets.ViewSet):
 				}
 				
 				data['countries'].append(country)
+		
+		results = Mosaic.objects.filter(region__icontains=request.data['text']).values('region').distinct()
+		if (results.count() > 0):
+			
+			data['regions'] = []
+			
+			for item in results:
+				
+				country = {
+					'mosaics': Mosaic.objects.filter(region=item['region']).count(),
+					'name': item['region'],
+				}
+				
+				data['regions'].append(country)
+		
+		results = Mosaic.objects.filter(city__icontains=request.data['text']).values('city').distinct()
+		if (results.count() > 0):
+			
+			data['cities'] = []
+			
+			for item in results:
+				
+				country = {
+					'mosaics': Mosaic.objects.filter(city=item['city']).count(),
+					'name': item['city'],
+				}
+				
+				data['cities'].append(country)
+		
+		results = Creator.objects.filter(name__icontains=request.data['text'])
+		if (results.count() > 0):
+			
+			data['creators'] = []
+			
+			for item in results:
+				
+				country = {
+					'mosaics': item.mosaic_set.all().count(),
+					'name': item.name,
+					'faction': item.faction,
+				}
+				
+				data['creators'].append(country)
+		
+		results = Mosaic.objects.filter(title__icontains=request.data['text'])
+		if (results.count() > 0):
+			
+			data['mosaics'] = []
+			
+			for item in results:
+				
+				mosaic = item.serialize()
+				data['mosaics'].append(mosaic)
 		
 		return Response(data, status=status.HTTP_200_OK)

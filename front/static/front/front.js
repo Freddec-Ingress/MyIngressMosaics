@@ -4236,7 +4236,7 @@ angular.module('AngularApp.controllers').controller('CreatorCtrl', function($sco
 	}
 });
 
-angular.module('AngularApp.controllers').controller('SearchCtrl', function($scope, toastr, $filter, DataService) {
+angular.module('AngularApp.controllers').controller('SearchCtrl', function($scope, $state, toastr, $filter, DataService) {
 	
 	/* Search */
 	
@@ -4256,7 +4256,7 @@ angular.module('AngularApp.controllers').controller('SearchCtrl', function($scop
 		
 		if ($scope.searchModel.text) {
 			
-			if ($scope.searchModel.text.length > 3) {
+			if ($scope.searchModel.text.length > 2) {
 				
 				DataService.search($scope.searchModel.text).then(function(response) {
 					
@@ -4282,6 +4282,30 @@ angular.module('AngularApp.controllers').controller('SearchCtrl', function($scop
 			
 			toastr.error($filter('translate')('error_ATLEAST3CHAR'));
 		}
+	}
+	
+	/* Go to a creator page */
+	
+	$scope.goToCreator = function(creator) {
+		
+		$state.go('root.creator', {'creator':creator});
+	}
+	
+	/* Go to a location page */
+	
+	$scope.goToCountry = function() {
+		
+		$state.go('root.country', {'country':$scope.mosaic.country});
+	}
+	
+	$scope.goToRegion = function() {
+		
+		$state.go('root.region', {'country':$scope.mosaic.country, 'region':$scope.mosaic.region});
+	}
+	
+	$scope.goToCity = function() {
+		
+		$state.go('root.city', {'country':$scope.mosaic.country, 'region':$scope.mosaic.region, 'city':$scope.mosaic.city});
 	}
 });
 angular.module('AngularApp', ['ui.router', 'ui.bootstrap', 'pascalprecht.translate', 'satellizer', 'ngCookies', 'toastr',
