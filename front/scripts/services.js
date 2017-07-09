@@ -509,6 +509,12 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 				service.data.mosaic.missions = response.missions;
 			});
 		},
+		
+		repair: function() {
+			
+			var data = {'ref':service.data.mosaic.ref};
+			return API.sendRequest('/api/mosaic/repair/', 'POST', {}, data);
+		},
 	};
 	
 	return service;

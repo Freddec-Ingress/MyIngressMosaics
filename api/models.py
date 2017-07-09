@@ -228,7 +228,8 @@ class Mission(models.Model):
 			dst = 0
 			
 			for i in range(0, portals.count() - 1):
-				dst += getDistanceFromLatLng(portals[i].lat, portals[i].lng, portals[i+1].lat, portals[i+1].lng)
+				if portals[i].lat != 0.0 and portals[i].lng != 0.0 and portals[i+1].lat != 0.0 and portals[i+1].lng != 0.0:
+					dst += getDistanceFromLatLng(portals[i].lat, portals[i].lng, portals[i+1].lat, portals[i+1].lng)
 	   
 			self._distance = dst
 			

@@ -433,7 +433,24 @@ class MosaicViewSet(viewsets.ViewSet):
 			return Response(missions, status=status.HTTP_200_OK)
 			
 		return Response(None, status=status.HTTP_404_NOT_FOUND)
+
+
+
+	def repair(self, request):
 		
+		if not request.user.is_superuser:
+			return Response(data, status=status.HTTP_403_FORBIDDEN)
+			
+		result = Mosaic.objects.filter(ref=request.data['ref'])
+		if result.count() > 0:
+			
+			mosaic = result[0]
+			
+			for m in mosaic.missions.all():
+				m.computeInternalData();
+			
+		return Response(None, status=status.HTTP_200_OK)
+	
 	
 	
 #---------------------------------------------------------------------------------------------------

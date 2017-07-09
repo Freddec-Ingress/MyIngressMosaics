@@ -303,5 +303,21 @@
 		</div>
 		
 	</div>
+	
+	<div class="card" ng-if="user.superuser">
+		
+		<div class="card-header text-medium">
+			Repair
+		</div>
+
+		<div class="card-block first last f-row">
+			
+			<button type="submit" class="btn btn-primary btn-fixed" ng-click="repair();">
+				Repair
+			</button>
+
+		</div>
+		
+	</div>
 
 </div>

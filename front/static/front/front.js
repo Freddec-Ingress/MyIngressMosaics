@@ -3224,6 +3224,12 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 				service.data.mosaic.missions = response.missions;
 			});
 		},
+		
+		repair: function() {
+			
+			var data = {'ref':service.data.mosaic.ref};
+			return API.sendRequest('/api/mosaic/repair/', 'POST', {}, data);
+		},
 	};
 	
 	return service;
@@ -3863,6 +3869,16 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 			
 			MosaicService.delete();
 		}
+	}
+	
+	/* Repair */
+	
+	$scope.repair = function() {
+		
+		MosaicService.repair().then(function(response) {
+			
+			$state.reload();
+		});
 	}
 	
 	/* Map */

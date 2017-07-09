@@ -454,6 +454,16 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 		}
 	}
 	
+	/* Repair */
+	
+	$scope.repair = function() {
+		
+		MosaicService.repair().then(function(response) {
+			
+			$state.reload();
+		});
+	}
+	
 	/* Map */
 
 	$scope.initMap = function() {
