@@ -326,7 +326,7 @@ class MosaicViewSet(viewsets.ViewSet):
 		
 			mosaic.computeInternalData()
 			mosaic.save()
-				
+			
 			data = mosaic.serialize()
 			return Response(data, status=status.HTTP_200_OK)
 
