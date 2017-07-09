@@ -10,7 +10,7 @@
 			
 			<span class="mr-auto text-medium">{{'mosaicpage_DETAILS' | translate}}</span>
 	
-			<a ng-if="user.name == mosaic.registerer.name" ng-show="!editMode" ng-click="openEdit();">
+			<a ng-if="user.name == mosaic.registerer.name || user.is_superuser" ng-show="!editMode" ng-click="openEdit();">
 				{{'edit_LABEL' | translate}}
 			</a>
 
