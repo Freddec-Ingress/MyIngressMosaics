@@ -325,12 +325,16 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 				service.data.desc = service.data.missions[0].desc;
 			}
 			
+			var max_order = 0;
+			
 			for (var m of service.data.missions) {
 				
 				var order = 0;
 				
 				var found = m.name.match(/[0-9]+/);
 				if (found) order = parseInt(found[0]);
+				
+				if (order > max_order) max_order = order;
 				
 				m.order = order;
 			}
@@ -345,6 +349,11 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 			service.data.type = 'sequence';
 			service.data.count = service.data.missions.length;
 			service.data.cols = 6;
+			
+			if (max_order > service.data.count) service.data.count = max_order;
+			
+			var temp = Math.ceil(service.data.count / 6);
+			service.data.count = 6 * temp;
 		},
 		
 		getImageByOrder: function(order) {
