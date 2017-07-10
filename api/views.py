@@ -711,7 +711,7 @@ class DataViewSet(viewsets.ViewSet):
 		
 		data = None
 		
-		results = Mosaic.objects.filter(Q(_startLat__gte=request.data['sLat']) & Q(_startLat__lte=request.data['nLat']) & Q( _startLng__gte=request.data['sLng']) & Q(_startLng__lte=request.data['nLng']))
+		results = Mosaic.objects.filter(_startLat__gte=request.data['sLat'], _startLng__gte=request.data['sLng']).filter(_startLat__lte=request.data['nLat'], _startLng__lte=request.data['nLng'])
 		if (results.count() > 0):
 			
 			data = []
