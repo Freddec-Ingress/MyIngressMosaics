@@ -243,6 +243,22 @@ a:hover, a:focus {
     color: #FFFFFF; font-size: 1rem; font-weight: 400;
 }
 
+/* Header link -------------------------------------------------------------- */
+
+.page-header-link {
+    color: #FFFFFF;
+    margin: 0; padding: .5rem;
+}
+.page-header-link:hover, .page-header-link:focus {
+    color: #FFFFFF;
+}
+
+/* Header icon -------------------------------------------------------------- */
+
+.page-header-icon {
+    font-size: 1rem; font-weight: 400;
+}
+
 /* Content ------------------------------------------------------------------ */
 
 .page-content {
@@ -386,7 +402,7 @@ a:hover, a:focus {
 /******************************************************************************/
 
 ::-webkit-input-placeholder {
-    color: #BDBDBD;
+    color: #757575;
 }
 
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { 
@@ -794,12 +810,12 @@ ol > li:last-child {
 /* Toast -------------------------------------------------------------------- */
 
 #toast-content {
-    margin: 0 .5rem 0;
+    margin: 0 auto 0;
 	position: relative;
 }
 
 #toast-container {
-	position: static; width: 100%; 
+	position: static; 
 }
 
 #toast-container .toast {
@@ -809,7 +825,10 @@ ol > li:last-child {
     border-radius: 0 0 .5rem .5rem;
 	background-position: 1rem .5rem;
     font-size: .75rem; font-weight: 400;
-    min-height: 2.5rem; margin: 0; padding: 0 1rem;
+    line-height: 1rem; margin: 0; padding: 0 2rem;
+}
+#toast-container .toast:hover {
+    box-shadow: none;
 }
 
 #toast-container .toast.toast-error {
@@ -818,6 +837,7 @@ ol > li:last-child {
 
 #toast-container .toast.toast-success {
     background-image: none!important;
+    background-color: #2196F3!important;
 }
 
 #toast-container .toast > div {

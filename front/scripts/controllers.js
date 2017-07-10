@@ -893,36 +893,50 @@ angular.module('AngularApp.controllers').controller('CreatorCtrl', function($sco
 	}
 });
 
-angular.module('AngularApp.controllers').controller('SearchCtrl', function($scope, $state, toastr, $filter, DataService) {
+angular.module('AngularApp.controllers').controller('SearchCtrl', function($scope, $state, toastr, $filter, SearchService) {
 	
 	/* Search */
 	
 	$scope.search_loading = false;
 	
-	$scope.searchModel = {text:null};
+	$scope.searchModel = {text:SearchService.data.search_text};
+
+	$scope.no_result = SearchService.data.no_result;
+	
+	$scope.cities = SearchService.data.cities;
+	$scope.regions = SearchService.data.regions;
+	$scope.mosaics = SearchService.data.mosaics;
+	$scope.creators = SearchService.data.creators;
+	$scope.countries = SearchService.data.countries;
 	
 	$scope.search = function() {
 		
 		$scope.search_loading = true;
+		
+		$scope.no_result = false;
 		
 		$scope.cities = null;
 		$scope.regions = null;
 		$scope.mosaics = null;
 		$scope.creators = null;
 		$scope.countries = null;
+	
+		SearchService.reset();
 		
 		if ($scope.searchModel.text) {
 			
 			if ($scope.searchModel.text.length > 2) {
-				
-				DataService.search($scope.searchModel.text).then(function(response) {
+		
+				SearchService.search($scope.searchModel.text).then(function(response) {
 					
-					$scope.cities = response.cities;
-					$scope.regions = response.regions;
-					$scope.mosaics = response.mosaics;
-					$scope.creators = response.creators;
-					$scope.countries = response.countries;
+					$scope.no_result = SearchService.data.no_result;
 					
+					$scope.cities = SearchService.data.cities;
+					$scope.regions = SearchService.data.regions;
+					$scope.mosaics = SearchService.data.mosaics;
+					$scope.creators = SearchService.data.creators;
+					$scope.countries = SearchService.data.countries;
+	
 					$scope.search_loading = false;
 				});
 			}
@@ -941,27 +955,25 @@ angular.module('AngularApp.controllers').controller('SearchCtrl', function($scop
 		}
 	}
 	
-	/* Go to a creator page */
+	/* Go to ... */
 	
 	$scope.goToCreator = function(creator) {
 		
-		$state.go('root.creator', {'creator':creator});
+		$state.go('root.creator', {'creator':creator.name});
+	}
+
+	$scope.goToCountry = function(country) {
+		
+		$state.go('root.country', {'country':country.name});
 	}
 	
-	/* Go to a location page */
-	
-	$scope.goToCountry = function() {
+	$scope.goToRegion = function(region) {
 		
-		$state.go('root.country', {'country':$scope.mosaic.country});
+		$state.go('root.region', {'country':region.country, 'region':region.name});
 	}
 	
-	$scope.goToRegion = function() {
+	$scope.goToCity = function(city) {
 		
-		$state.go('root.region', {'country':$scope.mosaic.country, 'region':$scope.mosaic.region});
-	}
-	
-	$scope.goToCity = function() {
-		
-		$state.go('root.city', {'country':$scope.mosaic.country, 'region':$scope.mosaic.region, 'city':$scope.mosaic.city});
+		$state.go('root.city', {'country':city.country, 'region':city.region, 'city':city.name});
 	}
 });

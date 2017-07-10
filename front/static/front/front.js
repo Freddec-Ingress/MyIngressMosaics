@@ -2421,6 +2421,7 @@ var en_translations = {
 	add_LABEL: 'Add',
 	explore_LABEL: 'Explore',
 	register_LABEL: 'Register',
+	noresult_LABEL: 'No result',
 	
 	home_TITLE: 'Welcome',
 	home_HELPTITLE: 'What you can do to help',
@@ -2551,6 +2552,7 @@ var en_translations = {
 	creator_SUBTITLE: 'List of mosaics created by ',
 	
 	search_TITLE: 'Search',
+	search_PLACEHOLDER: 'Mosaic name, city, region, country, creator ...',
 };
 var fr_translations = {
     
@@ -2581,6 +2583,7 @@ var fr_translations = {
 	add_LABEL: 'Ajouter',
 	explore_LABEL: 'Explorer',
 	register_LABEL: 'Enregistrer',
+	noresult_LABEL: 'Aucun résultat',
 	
 	home_TITLE: 'Bienvenue',
 	home_HELPTITLE: 'Ce que vous pouvez faire pour aider',
@@ -2712,6 +2715,7 @@ var fr_translations = {
 	creator_SUBTITLE: 'Liste des fresques créées par ',
 	
 	search_TITLE: 'Recherche',
+	search_PLACEHOLDER: 'Fresque, ville, région, pays, créateur ...',
 };
 angular.module('AngularApp.services', [])
 
@@ -3348,12 +3352,6 @@ angular.module('AngularApp.services').service('DataService', function($cookies, 
 			}
 		},
 		
-		search: function(text) {
-			
-			var data = {'text':text};
-			return API.sendRequest('/api/search/', 'POST', {}, data);
-		},
-		
 		renameCountry: function(oldValue, newValue) {
 			
 			var data = {'oldValue':oldValue, 'newValue':newValue};
@@ -3370,6 +3368,55 @@ angular.module('AngularApp.services').service('DataService', function($cookies, 
 			
 			var data = {'oldValue':oldValue, 'newValue':newValue};
 			return API.sendRequest('/api/city/rename/', 'POST', {}, data);
+		},
+	};
+	
+	return service;
+});
+
+angular.module('AngularApp.services').service('SearchService', function(API) {
+	
+	var service = {
+		
+		data: {
+			
+			search_text: null,
+			
+			no_result: false,
+	
+			cities: null,
+			regions: null,
+			mosaics: null,
+			creators: null,
+			countries: null,
+		},
+		
+		reset: function() {
+			
+			service.data.no_result = false;
+			
+			service.data.cities = null;
+			service.data.regions = null;
+			service.data.mosaics = null;
+			service.data.creators = null;
+			service.data.countries = null;
+		},
+		
+		search: function(text) {
+			
+			service.data.search_text = text;
+			
+			var data = {'text':text};
+			return API.sendRequest('/api/search/', 'POST', {}, data).then(function(response) {
+				
+				service.data.cities = response.cities;
+				service.data.regions = response.regions;
+				service.data.mosaics = response.mosaics;
+				service.data.creators = response.creators;
+				service.data.countries = response.countries;
+				
+				if (!service.data.cities && !service.data.regions && !service.data.mosaics && !service.data.creators && !service.data.countries) service.data.no_result = true;
+			});
 		},
 	};
 	
@@ -4310,36 +4357,50 @@ angular.module('AngularApp.controllers').controller('CreatorCtrl', function($sco
 	}
 });
 
-angular.module('AngularApp.controllers').controller('SearchCtrl', function($scope, $state, toastr, $filter, DataService) {
+angular.module('AngularApp.controllers').controller('SearchCtrl', function($scope, $state, toastr, $filter, SearchService) {
 	
 	/* Search */
 	
 	$scope.search_loading = false;
 	
-	$scope.searchModel = {text:null};
+	$scope.searchModel = {text:SearchService.data.search_text};
+
+	$scope.no_result = SearchService.data.no_result;
+	
+	$scope.cities = SearchService.data.cities;
+	$scope.regions = SearchService.data.regions;
+	$scope.mosaics = SearchService.data.mosaics;
+	$scope.creators = SearchService.data.creators;
+	$scope.countries = SearchService.data.countries;
 	
 	$scope.search = function() {
 		
 		$scope.search_loading = true;
+		
+		$scope.no_result = false;
 		
 		$scope.cities = null;
 		$scope.regions = null;
 		$scope.mosaics = null;
 		$scope.creators = null;
 		$scope.countries = null;
+	
+		SearchService.reset();
 		
 		if ($scope.searchModel.text) {
 			
 			if ($scope.searchModel.text.length > 2) {
-				
-				DataService.search($scope.searchModel.text).then(function(response) {
+		
+				SearchService.search($scope.searchModel.text).then(function(response) {
 					
-					$scope.cities = response.cities;
-					$scope.regions = response.regions;
-					$scope.mosaics = response.mosaics;
-					$scope.creators = response.creators;
-					$scope.countries = response.countries;
+					$scope.no_result = SearchService.data.no_result;
 					
+					$scope.cities = SearchService.data.cities;
+					$scope.regions = SearchService.data.regions;
+					$scope.mosaics = SearchService.data.mosaics;
+					$scope.creators = SearchService.data.creators;
+					$scope.countries = SearchService.data.countries;
+	
 					$scope.search_loading = false;
 				});
 			}
@@ -4358,28 +4419,26 @@ angular.module('AngularApp.controllers').controller('SearchCtrl', function($scop
 		}
 	}
 	
-	/* Go to a creator page */
+	/* Go to ... */
 	
 	$scope.goToCreator = function(creator) {
 		
-		$state.go('root.creator', {'creator':creator});
+		$state.go('root.creator', {'creator':creator.name});
+	}
+
+	$scope.goToCountry = function(country) {
+		
+		$state.go('root.country', {'country':country.name});
 	}
 	
-	/* Go to a location page */
-	
-	$scope.goToCountry = function() {
+	$scope.goToRegion = function(region) {
 		
-		$state.go('root.country', {'country':$scope.mosaic.country});
+		$state.go('root.region', {'country':region.country, 'region':region.name});
 	}
 	
-	$scope.goToRegion = function() {
+	$scope.goToCity = function(city) {
 		
-		$state.go('root.region', {'country':$scope.mosaic.country, 'region':$scope.mosaic.region});
-	}
-	
-	$scope.goToCity = function() {
-		
-		$state.go('root.city', {'country':$scope.mosaic.country, 'region':$scope.mosaic.region, 'city':$scope.mosaic.city});
+		$state.go('root.city', {'country':city.country, 'region':city.region, 'city':city.name});
 	}
 });
 angular.module('AngularApp', ['ui.router', 'ui.bootstrap', 'pascalprecht.translate', 'satellizer', 'ngCookies', 'toastr',
@@ -4467,7 +4526,9 @@ angular.module('AngularApp').config(function(toastrConfig) {
 	angular.extend(toastrConfig, {
 		
 		target: '#toast-content',
-		timeOut: 50000,
+		timeOut: 10000,
+		preventDuplicates: true,
+    	preventOpenDuplicates: true,
 	});
 });
 
@@ -4485,7 +4546,13 @@ angular.module('AngularApp').run(function($rootScope, $state, $stateParams) {
 	});
 	
 	$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+		
 		$rootScope.route_loading = false;
+		
+		$('.page-content').slimScroll({
+			height: '100%',
+			alwaysVisible: true,
+		});
 	});
 });
 

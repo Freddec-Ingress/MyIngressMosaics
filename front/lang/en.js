@@ -27,6 +27,7 @@ var en_translations = {
 	add_LABEL: 'Add',
 	explore_LABEL: 'Explore',
 	register_LABEL: 'Register',
+	noresult_LABEL: 'No result',
 	
 	home_TITLE: 'Welcome',
 	home_HELPTITLE: 'What you can do to help',
@@ -157,4 +158,5 @@ var en_translations = {
 	creator_SUBTITLE: 'List of mosaics created by ',
 	
 	search_TITLE: 'Search',
+	search_PLACEHOLDER: 'Mosaic name, city, region, country, creator ...',
 };

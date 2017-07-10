@@ -27,6 +27,7 @@ var fr_translations = {
 	add_LABEL: 'Ajouter',
 	explore_LABEL: 'Explorer',
 	register_LABEL: 'Enregistrer',
+	noresult_LABEL: 'Aucun résultat',
 	
 	home_TITLE: 'Bienvenue',
 	home_HELPTITLE: 'Ce que vous pouvez faire pour aider',
@@ -158,4 +159,5 @@ var fr_translations = {
 	creator_SUBTITLE: 'Liste des fresques créées par ',
 	
 	search_TITLE: 'Recherche',
+	search_PLACEHOLDER: 'Fresque, ville, région, pays, créateur ...',
 };

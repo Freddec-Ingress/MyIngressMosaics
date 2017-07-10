@@ -2,7 +2,7 @@
 
 	<div class="card-block first last f-row">
 		
-		<input type="text" class="form-control mr-2" ng-model="searchModel.text" />
+		<input type="text" class="form-control mr-2" placeholder="{{'search_PLACEHOLDER' | translate}}" ng-model="searchModel.text" />
 		
 		<button type="submit" class="btn btn-primary ml-2" ng-click="search();">
 			{{'search_LABEL' | translate}}
@@ -16,7 +16,15 @@
 	<img src="/static/front/img/loading.png" />
 </div>
 
-<div class="card">
+<div class="card" ng-if="no_result">
+
+	<div class="card-header">
+		<span class="text-danger">{{'noresult_LABEL' | translate}}</span>
+	</div>
+	
+</div>
+
+<div class="card" ng-if="countries">
 
 	<div class="card-header">
 		<span class="text-medium">{{'country_LABEL' | translate}}</span>
@@ -25,12 +33,8 @@
     <table class="card-table">
 
         <tbody>
-            <tr ng-repeat="item in countries" ng-click="goToCountry(item.name);">
-            	
-                <td class="text-right text-center" width="80px">
-                	{{item.mosaics}}
-                </td>
-                
+            <tr ng-repeat="item in countries" ng-click="goToCountry(item);">
+
                 <td class="text-white">
                 	<span class="flag-icon mr-2" style="position:relative; top:-2px;" ng-class="{
                 		'flag-icon-fr': item.name == 'France',
@@ -38,7 +42,10 @@
                 		'flag-icon-my': item.name == 'Malaysia',
                 		'flag-icon-sg': item.name == 'Singapore',
                 		'flag-icon-us': item.name == 'United States',
-                		'flag-icon-mx': item.name == 'México',
+                		'flag-icon-mx': item.name == 'Mexico',
+                		'flag-icon-nz': item.name == 'New Zealand',
+                		'flag-icon-mv': item.name == 'Maldives',
+                		'flag-icon-do': item.name == 'Dominican Republic',
                 	}"></span>
                     {{item.name}}
                 </td>
@@ -53,7 +60,7 @@
 
 </div>
 
-<div class="card">
+<div class="card" ng-if="regions">
 
 	<div class="card-header">
 		<span class="text-medium">{{'region_LABEL' | translate}}</span>
@@ -62,14 +69,14 @@
     <table class="card-table">
         	
         <tbody>
-            <tr ng-repeat="item in regions | filter:keywords" ng-click="goToRegion(item.name);" ng-show="item.mosaics > 0">
+            <tr ng-repeat="item in regions" ng-click="goToRegion(item);">
             	
-                <td class="text-right text-center" width="80px">
-                	{{item.mosaics}}
-                </td>
-                
-                <td ng-class="{'text-danger': item.name == 'Not specified', 'text-white': item.name != 'Not specified'}">
-                    {{item.name}}
+                <td class="">
+                	
+                	{{item.country}} <span class="mx-2">></span>
+
+                	<span class="text-white">{{item.name}}</span>
+                	
                 </td>
                 
                 <td class="text-center" style="width:2rem;">
@@ -83,7 +90,7 @@
 
 </div>
 
-<div class="card">
+<div class="card" ng-if="cities">
 
 	<div class="card-header">
 		<span class="text-medium">{{'city_LABEL' | translate}}</span>
@@ -92,14 +99,15 @@
     <table class="card-table">
         
         <tbody>
-            <tr ng-repeat="item in cities | filter:keywords" ng-click="goToCity(item.name);">
-            	
-                <td class="text-right text-center" width="80px">
-                	{{item.mosaics}}
-                </td>
-                
-                <td class="text-white">
-                    {{item.name}}
+            <tr ng-repeat="item in cities" ng-click="goToCity(item);">
+             	
+                <td class="">
+                	
+                	{{item.country}} <span class="mx-2">></span>
+                	{{item.region}} <span class="mx-2">></span>
+
+                	<span class="text-white">{{item.name}}</span>
+                	
                 </td>
                 
                 <td class="text-center" style="width:2rem;">
@@ -113,7 +121,7 @@
 
 </div>
 
-<div class="card">
+<div class="card" ng-if="creators">
 
 	<div class="card-header">
 		<span class="text-medium">{{'creator_LABEL' | translate}}</span>
@@ -122,13 +130,9 @@
     <table class="card-table">
         
         <tbody>
-            <tr ng-repeat="item in creators | filter:keywords" ng-click="goToCreator(item.name);">
-            	
-                <td class="text-right text-center" width="80px">
-                	{{item.mosaics}}
-                </td>
-                
-                <td class="text-white">
+            <tr ng-repeat="item in creators" ng-click="goToCreator(item);">
+
+                <td ng-class="{'text-enligtened': item.faction == 'E', 'text-resistance': item.faction == 'R',}">
                     {{item.name}}
                 </td>
                 
@@ -143,7 +147,7 @@
 
 </div>
 
-<div class="card">
+<div class="card" ng-if="mosaics">
 
 	<div class="card-header">
 		<span class="text-medium">{{'mosaics_LABEL' | translate}}</span>

@@ -629,7 +629,7 @@ class DataViewSet(viewsets.ViewSet):
     
 	def search(self, request):
 		
-		data ={
+		data = {
 			'countries': None,
 			'regions': None,
 			'cities': None,
@@ -645,39 +645,39 @@ class DataViewSet(viewsets.ViewSet):
 			for item in results:
 				
 				country = {
-					'mosaics': Mosaic.objects.filter(country=item['country']).count(),
 					'name': item['country'],
 				}
 				
 				data['countries'].append(country)
 		
-		results = Mosaic.objects.filter(region__icontains=request.data['text']).values('region').distinct()
+		results = Mosaic.objects.filter(region__icontains=request.data['text']).values('country', 'region').distinct()
 		if (results.count() > 0):
 			
 			data['regions'] = []
 			
 			for item in results:
 				
-				country = {
-					'mosaics': Mosaic.objects.filter(region=item['region']).count(),
+				region = {
+					'country': item['country'],
 					'name': item['region'],
 				}
 				
-				data['regions'].append(country)
+				data['regions'].append(region)
 		
-		results = Mosaic.objects.filter(city__icontains=request.data['text']).values('city').distinct()
+		results = Mosaic.objects.filter(city__icontains=request.data['text']).values('country', 'region', 'city').distinct()
 		if (results.count() > 0):
 			
 			data['cities'] = []
 			
 			for item in results:
 				
-				country = {
-					'mosaics': Mosaic.objects.filter(city=item['city']).count(),
+				city = {
+					'country': item['country'],
+					'region': item['region'],
 					'name': item['city'],
 				}
 				
-				data['cities'].append(country)
+				data['cities'].append(city)
 		
 		results = Creator.objects.filter(name__icontains=request.data['text'])
 		if (results.count() > 0):
@@ -686,13 +686,12 @@ class DataViewSet(viewsets.ViewSet):
 			
 			for item in results:
 				
-				country = {
-					'mosaics': item.mosaic_set.all().count(),
+				creator = {
 					'name': item.name,
 					'faction': item.faction,
 				}
 				
-				data['creators'].append(country)
+				data['creators'].append(creator)
 		
 		results = Mosaic.objects.filter(title__icontains=request.data['text'])
 		if (results.count() > 0):

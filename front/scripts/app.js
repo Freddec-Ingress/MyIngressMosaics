@@ -83,7 +83,9 @@ angular.module('AngularApp').config(function(toastrConfig) {
 	angular.extend(toastrConfig, {
 		
 		target: '#toast-content',
-		timeOut: 50000,
+		timeOut: 10000,
+		preventDuplicates: true,
+    	preventOpenDuplicates: true,
 	});
 });
 
@@ -101,7 +103,13 @@ angular.module('AngularApp').run(function($rootScope, $state, $stateParams) {
 	});
 	
 	$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+		
 		$rootScope.route_loading = false;
+		
+		$('.page-content').slimScroll({
+			height: '100%',
+			alwaysVisible: true,
+		});
 	});
 });
 
