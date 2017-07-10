@@ -28,6 +28,8 @@ var fr_translations = {
 	explore_LABEL: 'Explorer',
 	register_LABEL: 'Enregistrer',
 	noresult_LABEL: 'Aucun résultat',
+	map_LABEL: 'Carte',
+	geolocalize_LABEL: 'Géolocaliser',
 	
 	home_TITLE: 'Bienvenue',
 	home_HELPTITLE: 'Ce que vous pouvez faire pour aider',

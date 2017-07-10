@@ -38,17 +38,22 @@
 
 <div class="f-row f-wrap f-justify-center">
      
-    <a class="btn btn-primary fitem-grow f-col mx-2" ui-sref="root.search">
+    <a class="btn btn-primary fitem-grow f-col mx-2 my-2" style="max-width:100px; min-width: 100px;" ui-sref="root.map">
+        <i class="fa fa-map p-2" style="font-size:2rem;"></i>
+        {{'geolocalize_LABEL' | translate}}
+    </a>
+     
+    <a class="btn btn-primary fitem-grow f-col mx-2 my-2" style="max-width:100px; min-width: 100px;" ui-sref="root.search">
         <i class="fa fa-search p-2" style="font-size:2rem;"></i>
         {{'search_LABEL' | translate}}
     </a>
    
-    <a class="btn btn-primary fitem-grow f-col mx-2" ui-sref="root.world">
+    <a class="btn btn-primary fitem-grow f-col mx-2 my-2" style="max-width:100px; min-width: 100px;" ui-sref="root.world">
         <i class="fa fa-globe p-2" style="font-size:2rem;"></i>
         {{'explore_LABEL' | translate}}
     </a>
     
-    <a class="btn btn-primary fitem-grow f-col mx-2" ui-sref="root.missions">
+    <a class="btn btn-primary fitem-grow f-col mx-2 my-2" style="max-width:100px; min-width: 100px;" ui-sref="root.missions">
         <i class="fa fa-plus-square p-2" style="font-size:2rem;"></i>
         {{'register_LABEL' | translate}}
     </a>

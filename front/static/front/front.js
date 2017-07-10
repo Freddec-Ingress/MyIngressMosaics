@@ -2422,6 +2422,8 @@ var en_translations = {
 	explore_LABEL: 'Explore',
 	register_LABEL: 'Register',
 	noresult_LABEL: 'No result',
+	map_LABEL: 'Map',
+	geolocalize_LABEL: 'Geolocalize',
 	
 	home_TITLE: 'Welcome',
 	home_HELPTITLE: 'What you can do to help',
@@ -2589,6 +2591,8 @@ var fr_translations = {
 	explore_LABEL: 'Explorer',
 	register_LABEL: 'Enregistrer',
 	noresult_LABEL: 'Aucun résultat',
+	map_LABEL: 'Carte',
+	geolocalize_LABEL: 'Géolocaliser',
 	
 	home_TITLE: 'Bienvenue',
 	home_HELPTITLE: 'Ce que vous pouvez faire pour aider',
@@ -4471,7 +4475,7 @@ angular.module('AngularApp.controllers').controller('SearchCtrl', function($scop
 	}
 });
 
-angular.module('AngularApp.controllers').controller('MapCtrl', function($scope, $rootScope, toastr, $filter, $compile, MapService) {
+angular.module('AngularApp.controllers').controller('MapCtrl', function($scope, $rootScope, $cookies, toastr, $filter, $compile, MapService) {
 	
 	/* Map */
 	
@@ -4480,19 +4484,70 @@ angular.module('AngularApp.controllers').controller('MapCtrl', function($scope, 
 	$rootScope.infowindow = new google.maps.InfoWindow({
 		content: ''
 	});
-							
+
 	$scope.initMap = function() {
 		
 		var style = [{featureType:"all",elementType:"all",stylers:[{visibility:"on"},{hue:"#131c1c"},{saturation:"-50"},{invert_lightness:!0}]},{featureType:"water",elementType:"all",stylers:[{visibility:"on"},{hue:"#005eff"},{invert_lightness:!0}]},{featureType:"poi",stylers:[{visibility:"off"}]},{featureType:"transit",elementType:"all",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels.icon",stylers:[{invert_lightness:!0}]}];
 		
+		var startLat = parseFloat($cookies.get('startLat'));
+		var startLng = parseFloat($cookies.get('startLng'));
+		
+		if (!startLat) startLat = 0.0;
+		if (!startLng) startLng = 0.0;
+		
+		var startZoom = parseInt($cookies.get('startZoom'));
+		
+		if (!startZoom) startZoom = 15;
+		
 		var map = new google.maps.Map(document.getElementById('map'), {
 			
-			zoom: 15,
+			zoom: startZoom,
 			styles : style,
 			zoomControl: true,
 			disableDefaultUI: true,
-			center: {lat: 0.0, lng: 0.0},
+			center: {lat: startLat, lng: startLng},
 		});
+		
+		function GeolocationControl(controlDiv, map) {
+		
+		    var controlUI = document.createElement('div');
+		    controlUI.style.backgroundColor = '#FFFFFF';
+		    controlUI.style.borderStyle = 'solid';
+		    controlUI.style.borderWidth = '1px';
+		    controlUI.style.borderColor = 'white';
+		    controlUI.style.cursor = 'pointer';
+		    controlUI.style.textAlign = 'center';
+		    controlUI.style.marginRight = '.65rem';
+		    controlUI.style.padding = '.375rem';
+		    controlUI.style.borderRadius = '.125rem';
+		    controlDiv.appendChild(controlUI);
+		
+		    var controlText = document.createElement('div');
+		    controlText.style.fontFamily = 'Arial,sans-serif';
+		    controlText.style.fontSize = '1rem';
+		    controlText.style.color = '#000000';
+		    controlText.innerHTML = '<i class="fa fa-crosshairs"></i>';
+		    controlUI.appendChild(controlText);
+		
+		    google.maps.event.addDomListener(controlUI, 'click', geolocate);
+		}
+		
+		function geolocate() {
+		
+		    if (navigator.geolocation) {
+		
+		        navigator.geolocation.getCurrentPosition(function (position) {
+		
+		            var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+		            map.setCenter(pos);
+		        });
+		    }
+		}
+	
+		var geolocationDiv = document.createElement('div');
+		var geolocationControl = new GeolocationControl(geolocationDiv, map);
+		
+		map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(geolocationDiv);
 		
 		var image = {
 			size: new google.maps.Size(50, 50),
@@ -4503,6 +4558,13 @@ angular.module('AngularApp.controllers').controller('MapCtrl', function($scope, 
 		};
 		
 		map.addListener('idle', function(e) {
+			
+			var center = map.getCenter();
+			
+			$cookies.put('startLat', center.lat());
+			$cookies.put('startLng', center.lng());
+			
+			$cookies.put('startZoom', map.getZoom());
 			
 			var bds = map.getBounds();
 			
@@ -4536,7 +4598,7 @@ angular.module('AngularApp.controllers').controller('MapCtrl', function($scope, 
 									'<div class="image">' + contentImage + '</div>' +
 									'<div class="detail">' +
 										'<div class="title">' + item.title + '</div>' +
-										'<div class="info">' + item.count + ' missions &middot; ' + item._distance.toFixed(2) + ' km &middot; ' + item.type + '</div>' +
+										'<div class="info">' + item.count + ' missions <br> ' + item._distance.toFixed(2) + ' km &middot; ' + item.type + '</div>' +
 									'</div>' +
 								'</a>'
 							;
@@ -4566,25 +4628,28 @@ angular.module('AngularApp.controllers').controller('MapCtrl', function($scope, 
 			});
 		});
 		
-		if (navigator.geolocation) {
+		if (startLat == 0.0 && startLng == 0.0) {
 			
-			navigator.geolocation.getCurrentPosition(function(position) {
+			if (navigator.geolocation) {
 				
-				var pos = {
-					lat: position.coords.latitude,
-					lng: position.coords.longitude
-				};
-			
-				map.setCenter(pos);
-
-			}, function() {
+				navigator.geolocation.getCurrentPosition(function(position) {
+					
+					var pos = {
+						lat: position.coords.latitude,
+						lng: position.coords.longitude
+					};
 				
-				toastr.error($filter('translate')('error_GEOLOCFAILED'));
-			});
-			
-		} else {
-			
-			toastr.error($filter('translate')('error_GEOLOCSUPPORT'));
+					map.setCenter(pos);
+	
+				}, function() {
+					
+					toastr.error($filter('translate')('error_GEOLOCFAILED'));
+				});
+				
+			} else {
+				
+				toastr.error($filter('translate')('error_GEOLOCSUPPORT'));
+			}
 		}
 	}
 });

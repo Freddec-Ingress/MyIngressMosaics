@@ -739,6 +739,10 @@ ol > li:last-child {
 	margin-left: .5rem!important;
 	margin-right: .5rem!important;
 }
+.my-2 {
+	margin-top: .5rem!important;
+	margin-bottom: .5rem!important;
+}
 .mt-2 {
 	margin-top: .5rem!important;
 }
@@ -893,7 +897,8 @@ ol > li:last-child {
 }
 
 .infoBlock .detail .title {
-    margin-bottom: .5rem;
+    white-space: nowrap;
+    margin-bottom: .25rem;
     color: #000000; font-size:1rem; font-family: 'Coda',sans-serif;
 }
 
