@@ -704,3 +704,21 @@ class DataViewSet(viewsets.ViewSet):
 				data['mosaics'].append(mosaic)
 		
 		return Response(data, status=status.HTTP_200_OK)
+    
+    
+    
+	def map(self, request):
+		
+		data = None
+		
+		results = Mosaic.objects.filter(Q(_startLat__gte=request.data['sLat']) & Q(_startLat__lte=request.data['nLat']) & Q( _startLng__gte=request.data['sLng']) & Q(_startLng__lte=request.data['nLng']))
+		if (results.count() > 0):
+			
+			data = []
+			
+			for item in results:
+				
+				mosaic = item.serialize()
+				data.append(mosaic)
+
+		return Response(data, status=status.HTTP_200_OK)

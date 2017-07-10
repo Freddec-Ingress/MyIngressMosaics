@@ -160,4 +160,9 @@ var fr_translations = {
 	
 	search_TITLE: 'Recherche',
 	search_PLACEHOLDER: 'Fresque, ville, région, pays, créateur ...',
+	
+	map_TITLE: 'Carte',
+	
+	error_GEOLOCFAILED: 'La géolocalisation a échoué.',
+	error_GEOLOCSUPPORT: 'Votre navigateur ne supporte pas la géolocalisation.',
 };

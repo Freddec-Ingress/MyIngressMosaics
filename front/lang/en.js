@@ -159,4 +159,9 @@ var en_translations = {
 	
 	search_TITLE: 'Search',
 	search_PLACEHOLDER: 'Mosaic name, city, region, country, creator ...',
+	
+	map_TITLE: 'Map',
+	
+	error_GEOLOCFAILED: 'The Geolocation service failed.',
+	error_GEOLOCSUPPORT: 'Your browser doesn\'t support geolocation.',
 };

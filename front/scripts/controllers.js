@@ -976,4 +976,127 @@ angular.module('AngularApp.controllers').controller('SearchCtrl', function($scop
 		
 		$state.go('root.city', {'country':city.country, 'region':city.region, 'city':city.name});
 	}
+	
+	$scope.goToMosaic = function(mosaic) {
+		
+		$state.go('root.mosaic', {'ref':mosaic.ref});
+	}
+});
+
+angular.module('AngularApp.controllers').controller('MapCtrl', function($scope, $rootScope, toastr, $filter, $compile, MapService) {
+	
+	/* Map */
+	
+	var refArray = [];
+
+	$rootScope.infowindow = new google.maps.InfoWindow({
+		content: ''
+	});
+							
+	$scope.initMap = function() {
+		
+		var style = [{featureType:"all",elementType:"all",stylers:[{visibility:"on"},{hue:"#131c1c"},{saturation:"-50"},{invert_lightness:!0}]},{featureType:"water",elementType:"all",stylers:[{visibility:"on"},{hue:"#005eff"},{invert_lightness:!0}]},{featureType:"poi",stylers:[{visibility:"off"}]},{featureType:"transit",elementType:"all",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels.icon",stylers:[{invert_lightness:!0}]}];
+		
+		var map = new google.maps.Map(document.getElementById('map'), {
+			
+			zoom: 15,
+			styles : style,
+			zoomControl: true,
+			disableDefaultUI: true,
+			center: {lat: 0.0, lng: 0.0},
+		});
+		
+		var image = {
+			size: new google.maps.Size(50, 50),
+			origin: new google.maps.Point(0, 0),
+			anchor: new google.maps.Point(25, 25),
+			labelOrigin: new google.maps.Point(25, 27),
+			url: 'https://www.myingressmosaics.com/static/front/img/marker.png',
+		};
+		
+		map.addListener('idle', function(e) {
+			
+			var bds = map.getBounds();
+			
+			var South_Lat = bds.getSouthWest().lat();
+			var South_Lng = bds.getSouthWest().lng();
+			var North_Lat = bds.getNorthEast().lat();
+			var North_Lng = bds.getNorthEast().lng();
+			
+			MapService.getMosaics(South_Lat, South_Lng, North_Lat, North_Lng).then(function(response) {
+				
+				if (response) {
+					
+					for (var item of response) {
+					
+						if (refArray.indexOf(item.ref) == -1) {
+							
+							refArray.push(item.ref);
+							
+							var contentImage = '';
+							for (var m of item.missions.reverse()) {
+								
+								contentImage +=	
+									'<div style="flex:0 0 16.666667%;">' +
+									    '<img src="/static/front/img/mask.png" style="width:100%; background-color:#000000; background-image:url(' + m.image + '=s10); background-size: 85% 85%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />' +
+									'</div>'
+								;
+							}
+							
+							var contentString =
+								'<a class="infoBlock" ui-sref="root.mosaic({ref: \'' + item.ref + '\'})">' +
+									'<div class="image">' + contentImage + '</div>' +
+									'<div class="detail">' +
+										'<div class="title">' + item.title + '</div>' +
+										'<div class="info">' + item.count + ' missions &middot; ' + item._distance.toFixed(2) + ' km &middot; ' + item.type + '</div>' +
+									'</div>' +
+								'</a>'
+							;
+            
+							var latLng = new google.maps.LatLng(item._startLat, item._startLng);
+							var marker = new google.maps.Marker({
+								position: latLng,
+								map: map,
+								icon: image,
+							});
+							
+							google.maps.event.addListener(marker, 'click', (function (marker, content, infowindow) {
+								return function () {
+									
+									var contentDiv = angular.element('<div/>');
+									contentDiv.append(content);
+									
+									var compiledContent = $compile(contentDiv)($scope);
+									
+									infowindow.setContent(compiledContent[0]);
+									infowindow.open($scope.map, marker);
+								};
+							})(marker, contentString, $rootScope.infowindow));
+						}
+					}
+				}
+			});
+		});
+		
+		if (navigator.geolocation) {
+			
+			navigator.geolocation.getCurrentPosition(function(position) {
+				
+				var pos = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude
+				};
+			
+				map.setCenter(pos);
+
+			}, function() {
+				
+				toastr.error($filter('translate')('error_GEOLOCFAILED'));
+			});
+			
+		} else {
+			
+			toastr.error($filter('translate')('error_GEOLOCSUPPORT'));
+		}
+	}
 });

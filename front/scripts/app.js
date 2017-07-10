@@ -35,6 +35,8 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 			
 			.state('root.search', { url: '/search', controller: 'SearchCtrl', templateUrl: '/static/front/pages/search.html', data:{ title: 'search_TITLE', }, })
 			
+			.state('root.map', { url: '/map', controller: 'MapCtrl', templateUrl: '/static/front/pages/map.html', data:{ title: 'map_TITLE', }, })
+			
 	$locationProvider.html5Mode(true);
 });
 

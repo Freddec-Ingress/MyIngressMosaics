@@ -42,4 +42,5 @@ urlpatterns = [
 	url(r'^country/',	DataViewSet.as_view({ 'post' : 'country'	})),
 	url(r'^creator/',	DataViewSet.as_view({ 'post' : 'creator'	})),
 	url(r'^search/',	DataViewSet.as_view({ 'post' : 'search'		})),
+	url(r'^map/',	DataViewSet.as_view({ 'post' : 'map'		})),
 ]

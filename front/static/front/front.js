@@ -2553,6 +2553,11 @@ var en_translations = {
 	
 	search_TITLE: 'Search',
 	search_PLACEHOLDER: 'Mosaic name, city, region, country, creator ...',
+	
+	map_TITLE: 'Map',
+	
+	error_GEOLOCFAILED: 'The Geolocation service failed.',
+	error_GEOLOCSUPPORT: 'Your browser doesn\'t support geolocation.',
 };
 var fr_translations = {
     
@@ -2716,6 +2721,11 @@ var fr_translations = {
 	
 	search_TITLE: 'Recherche',
 	search_PLACEHOLDER: 'Fresque, ville, région, pays, créateur ...',
+	
+	map_TITLE: 'Carte',
+	
+	error_GEOLOCFAILED: 'La géolocalisation a échoué.',
+	error_GEOLOCSUPPORT: 'Votre navigateur ne supporte pas la géolocalisation.',
 };
 angular.module('AngularApp.services', [])
 
@@ -3417,6 +3427,20 @@ angular.module('AngularApp.services').service('SearchService', function(API) {
 				
 				if (!service.data.cities && !service.data.regions && !service.data.mosaics && !service.data.creators && !service.data.countries) service.data.no_result = true;
 			});
+		},
+	};
+	
+	return service;
+});
+
+angular.module('AngularApp.services').service('MapService', function(API) {
+	
+	var service = {
+		
+		getMosaics: function(South_Lat, South_Lng, North_Lat, North_Lng) {
+			
+			var data = {'sLat':South_Lat, 'sLng':South_Lng, 'nLat':North_Lat, 'nLng':North_Lng};
+			return API.sendRequest('/api/map/', 'POST', {}, data);
 		},
 	};
 	
@@ -4440,6 +4464,129 @@ angular.module('AngularApp.controllers').controller('SearchCtrl', function($scop
 		
 		$state.go('root.city', {'country':city.country, 'region':city.region, 'city':city.name});
 	}
+	
+	$scope.goToMosaic = function(mosaic) {
+		
+		$state.go('root.mosaic', {'ref':mosaic.ref});
+	}
+});
+
+angular.module('AngularApp.controllers').controller('MapCtrl', function($scope, $rootScope, toastr, $filter, $compile, MapService) {
+	
+	/* Map */
+	
+	var refArray = [];
+
+	$rootScope.infowindow = new google.maps.InfoWindow({
+		content: ''
+	});
+							
+	$scope.initMap = function() {
+		
+		var style = [{featureType:"all",elementType:"all",stylers:[{visibility:"on"},{hue:"#131c1c"},{saturation:"-50"},{invert_lightness:!0}]},{featureType:"water",elementType:"all",stylers:[{visibility:"on"},{hue:"#005eff"},{invert_lightness:!0}]},{featureType:"poi",stylers:[{visibility:"off"}]},{featureType:"transit",elementType:"all",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels.icon",stylers:[{invert_lightness:!0}]}];
+		
+		var map = new google.maps.Map(document.getElementById('map'), {
+			
+			zoom: 15,
+			styles : style,
+			zoomControl: true,
+			disableDefaultUI: true,
+			center: {lat: 0.0, lng: 0.0},
+		});
+		
+		var image = {
+			size: new google.maps.Size(50, 50),
+			origin: new google.maps.Point(0, 0),
+			anchor: new google.maps.Point(25, 25),
+			labelOrigin: new google.maps.Point(25, 27),
+			url: 'https://www.myingressmosaics.com/static/front/img/marker.png',
+		};
+		
+		map.addListener('idle', function(e) {
+			
+			var bds = map.getBounds();
+			
+			var South_Lat = bds.getSouthWest().lat();
+			var South_Lng = bds.getSouthWest().lng();
+			var North_Lat = bds.getNorthEast().lat();
+			var North_Lng = bds.getNorthEast().lng();
+			
+			MapService.getMosaics(South_Lat, South_Lng, North_Lat, North_Lng).then(function(response) {
+				
+				if (response) {
+					
+					for (var item of response) {
+					
+						if (refArray.indexOf(item.ref) == -1) {
+							
+							refArray.push(item.ref);
+							
+							var contentImage = '';
+							for (var m of item.missions.reverse()) {
+								
+								contentImage +=	
+									'<div style="flex:0 0 16.666667%;">' +
+									    '<img src="/static/front/img/mask.png" style="width:100%; background-color:#000000; background-image:url(' + m.image + '=s10); background-size: 85% 85%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />' +
+									'</div>'
+								;
+							}
+							
+							var contentString =
+								'<a class="infoBlock" ui-sref="root.mosaic({ref: \'' + item.ref + '\'})">' +
+									'<div class="image">' + contentImage + '</div>' +
+									'<div class="detail">' +
+										'<div class="title">' + item.title + '</div>' +
+										'<div class="info">' + item.count + ' missions &middot; ' + item._distance.toFixed(2) + ' km &middot; ' + item.type + '</div>' +
+									'</div>' +
+								'</a>'
+							;
+            
+							var latLng = new google.maps.LatLng(item._startLat, item._startLng);
+							var marker = new google.maps.Marker({
+								position: latLng,
+								map: map,
+								icon: image,
+							});
+							
+							google.maps.event.addListener(marker, 'click', (function (marker, content, infowindow) {
+								return function () {
+									
+									var contentDiv = angular.element('<div/>');
+									contentDiv.append(content);
+									
+									var compiledContent = $compile(contentDiv)($scope);
+									
+									infowindow.setContent(compiledContent[0]);
+									infowindow.open($scope.map, marker);
+								};
+							})(marker, contentString, $rootScope.infowindow));
+						}
+					}
+				}
+			});
+		});
+		
+		if (navigator.geolocation) {
+			
+			navigator.geolocation.getCurrentPosition(function(position) {
+				
+				var pos = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude
+				};
+			
+				map.setCenter(pos);
+
+			}, function() {
+				
+				toastr.error($filter('translate')('error_GEOLOCFAILED'));
+			});
+			
+		} else {
+			
+			toastr.error($filter('translate')('error_GEOLOCSUPPORT'));
+		}
+	}
 });
 angular.module('AngularApp', ['ui.router', 'ui.bootstrap', 'pascalprecht.translate', 'satellizer', 'ngCookies', 'toastr',
 							  'AngularApp.services', 'AngularApp.controllers', 'AngularApp.directives', ]);
@@ -4477,6 +4624,8 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 			.state('root.creator', { url: '/creator/:creator', controller: 'CreatorCtrl', templateUrl: '/static/front/pages/creator.html', data:{ title: 'creator_TITLE', }, })
 			
 			.state('root.search', { url: '/search', controller: 'SearchCtrl', templateUrl: '/static/front/pages/search.html', data:{ title: 'search_TITLE', }, })
+			
+			.state('root.map', { url: '/map', controller: 'MapCtrl', templateUrl: '/static/front/pages/map.html', data:{ title: 'map_TITLE', }, })
 			
 	$locationProvider.html5Mode(true);
 });
