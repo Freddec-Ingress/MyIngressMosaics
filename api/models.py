@@ -109,6 +109,25 @@ class Mosaic(models.Model):
 			
 		return data
 		
+	def mapSerialize(self):
+		
+		data = {
+			'ref': self.ref,
+			'cols': self.cols,
+			'type': self.type,
+			'count': self.count,
+			'title': self.title,
+			
+			'_distance': self._distance,
+			
+			'_startLat': self._startLat,
+			'_startLng': self._startLng,
+			
+			'missions': self.missions.all().order_by('order').values('image'),
+		}
+			
+		return data
+		
 	def serialize(self):
 		
 		data = {

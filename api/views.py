@@ -718,7 +718,7 @@ class DataViewSet(viewsets.ViewSet):
 			
 			for item in results:
 				
-				mosaic = item.serialize()
+				mosaic = item.mapSerialize()
 				data.append(mosaic)
 
 		return Response(data, status=status.HTTP_200_OK)
