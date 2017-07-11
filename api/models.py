@@ -85,6 +85,30 @@ class Mosaic(models.Model):
 	def __str__(self):
 		return self.title
 	
+	def minSerialize(self):
+		
+		data = {
+			'ref': self.ref,
+			'cols': self.cols,
+			'type': self.type,
+			'count': self.count,
+			'title': self.title,
+			
+			'_distance': self._distance,
+			
+			'missions': [],
+		}
+			
+		for item in self.missions.all().order_by('order'):
+			
+			mission_data = {
+				'image': item.image,
+			}
+			
+			data['missions'].append(mission_data)
+			
+		return data
+		
 	def serialize(self):
 		
 		data = {
