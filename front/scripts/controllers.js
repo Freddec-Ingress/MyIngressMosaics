@@ -227,13 +227,13 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 
 angular.module('AngularApp.controllers').controller('CreateCtrl', function($scope, $state, CreateService) {
 	
-	$scope.page_title = 'create_TITLE';
-	
 	$scope.data = null;
 
 	if (CreateService.data.missions.length < 1) {
 		$state.go('root.missions');
 	}
+	
+	CreateService.default();
 	
 	var geocoder = new google.maps.Geocoder;
 	
@@ -247,19 +247,25 @@ angular.module('AngularApp.controllers').controller('CreateCtrl', function($scop
 		if (status === 'OK') {
 			if (results[1]) {
 				
+				var admin2 = null;
+				var admin3 = null;
+				
 				for (var item of results[1].address_components) {
 					
 					if (item.types[0] == 'country') CreateService.data.country = item.long_name;
 					if (item.types[0] == 'locality') CreateService.data.city = item.long_name;
 					if (item.types[0] == 'administrative_area_level_1') CreateService.data.region = item.long_name;
+					if (item.types[0] == 'administrative_area_level_2') admin2 = item.long_name;
+					if (item.types[0] == 'administrative_area_level_3') admin3 = item.long_name;
 				}
-		
+				
+				if (!CreateService.data.city && admin2) CreateService.data.city = item.admin2;
+				if (!CreateService.data.city && admin3) CreateService.data.city = item.admin3;
+				
 				$scope.$apply();
 			}
 		}
 	});
-
-	CreateService.default();
 
 	$scope.data = CreateService.data;
 	$scope.create = CreateService.create;

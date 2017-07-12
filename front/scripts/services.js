@@ -319,12 +319,6 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 		
 		default: function() {
 
-			if (service.data.missions[0]) {
-				
-				service.data.title = service.data.missions[0].name;
-				service.data.desc = service.data.missions[0].desc;
-			}
-			
 			var max_order = 0;
 			
 			for (var m of service.data.missions) {
@@ -345,6 +339,12 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 				if (a.order > b.order) { 	return 1; }
 				return 0;
 			});
+			
+			if (service.data.missions[0]) {
+				
+				service.data.title = service.data.missions[0].name;
+				service.data.desc = service.data.missions[0].desc;
+			}
 			
 			service.data.type = 'sequence';
 			service.data.count = service.data.missions.length;
