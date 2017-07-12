@@ -5,7 +5,14 @@ SECRET_KEY = 'kax0(s#e6r)q$ut!&uwmtbps3zf0-ijg^l@vkhi+ji(in-b_qs'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.myingressmosaics.com', 'myingressmosaics.com', 'myingressmosaics-freddec.c9users.io', 'www.ingress.com', 'https://www.ingress.com']
+ALLOWED_HOSTS = ['www.myingressmosaics.com', 'myingressmosaics.com', 'myingressmosaics-freddec.c9users.io', 'www.ingress.com']
+
+CORS_ORIGIN_WHITELIST = (
+    'www.myingressmosaics.com',
+    'myingressmosaics.com',
+    'myingressmosaics-freddec.c9users.io',
+    'www.ingress.com',
+)
 
 SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -17,6 +24,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'corsheaders',
     
 	'rest_framework',
 	'rest_framework.authtoken',
@@ -31,6 +40,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
