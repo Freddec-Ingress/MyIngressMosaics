@@ -30,6 +30,7 @@ var en_translations = {
 	noresult_LABEL: 'No result',
 	map_LABEL: 'Map',
 	geolocalize_LABEL: 'Geolocalize',
+	deleteall_LABEL: 'Delete all',
 	
 	home_TITLE: 'Welcome',
 	home_HELPTITLE: 'What you can do to help',

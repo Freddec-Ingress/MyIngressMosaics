@@ -171,6 +171,13 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 		UserService.deleteMission(item);
 	}
 	
+	$scope.deleteAll = function() {
+		
+		for (var item of $scope.missions) {
+			UserService.deleteMission(item);
+		}
+	}
+	
 	/* Sort name */
 	
 	UserService.sortMissionsByName('asc');

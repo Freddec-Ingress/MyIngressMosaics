@@ -2424,6 +2424,7 @@ var en_translations = {
 	noresult_LABEL: 'No result',
 	map_LABEL: 'Map',
 	geolocalize_LABEL: 'Geolocalize',
+	deleteall_LABEL: 'Delete all',
 	
 	home_TITLE: 'Welcome',
 	home_HELPTITLE: 'What you can do to help',
@@ -2593,6 +2594,7 @@ var fr_translations = {
 	noresult_LABEL: 'Aucun résultat',
 	map_LABEL: 'Carte',
 	geolocalize_LABEL: 'Géolocaliser',
+	deleteall_LABEL: 'Tout supprimer',
 	
 	home_TITLE: 'Bienvenue',
 	home_HELPTITLE: 'Ce que vous pouvez faire pour aider',
@@ -3661,6 +3663,13 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 	
 	$scope.delete = function(item) {
 		UserService.deleteMission(item);
+	}
+	
+	$scope.deleteAll = function() {
+		
+		for (var item of $scope.missions) {
+			UserService.deleteMission(item);
+		}
 	}
 	
 	/* Sort name */

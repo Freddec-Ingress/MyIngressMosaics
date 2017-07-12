@@ -36,8 +36,11 @@
 
     <div class="card">
         
-        <div class="card-header">
-            <span class="text-medium">{{'missions_SUBTITLE' | translate}}</span>
+        <div class="card-header f-row">
+            
+            <span class="text-medium mr-auto">{{'missions_SUBTITLE' | translate}}</span>
+            <a href="" ng-click="deleteAll();">{{'deleteall_LABEL' | translate}}</a>
+            
         </div>
         
         <div ng-if="!missions">
@@ -110,7 +113,7 @@
                 <div class="form-button-bar f-justify-around">
                     
                     <div class="">
-                        {{selected_missions.length}}
+                        {{selected_missions.length}} / {{missions.length}}
                         {{'missions_selected' | translate}}
                     </div>
                     
