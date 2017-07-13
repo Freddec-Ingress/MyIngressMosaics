@@ -452,7 +452,7 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 		
 		item.order = order
 		
-		MosaicService.add(item.ref);
+		MosaicService.add(item.ref, order);
 	}
 	
 	/* Delete */

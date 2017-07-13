@@ -396,6 +396,7 @@ class MosaicViewSet(viewsets.ViewSet):
 				mission = result[0]
 				
 				mission.mosaic = mosaic
+				mission.order = request.data['order']
 				mission.save()
 				
 				mosaic.computeInternalData()

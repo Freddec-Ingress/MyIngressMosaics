@@ -3133,6 +3133,17 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 			API.sendRequest('/api/mosaic/potential/', 'POST', {}, data).then(function(response) {
 				
 				if (response) {
+					
+					for (var m of response) {
+						
+						var order = 0;
+						
+						var found = m.name.match(/[0-9]+/);
+						if (found) order = parseInt(found[0]);
+
+						m.order = order;
+					}
+					
 					service.data.potentials = response;
 				}
 			});
@@ -3234,9 +3245,9 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 			});
 		},
 		
-		add: function(mission) {
+		add: function(mission, order) {
 			
-			var data = { 'ref':service.data.mosaic.ref, 'mission':mission };
+			var data = { 'ref':service.data.mosaic.ref, 'mission':mission, 'order':order };
 			return API.sendRequest('/api/mosaic/add/', 'POST', {}, data).then(function(response) {
 					
 				service.data.mosaic.creators = response.creators;
@@ -3946,7 +3957,7 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 		
 		item.order = order
 		
-		MosaicService.add(item.ref);
+		MosaicService.add(item.ref, order);
 	}
 	
 	/* Delete */
