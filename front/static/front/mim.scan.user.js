@@ -145,7 +145,6 @@ function callMIMAPI(action, data) {
 //--------------------------------------------------------------------------------------------------
 // Functions to process tile request and tile data
 
-var tilesProcessed = [];
 var tilesToBeProcessed = [];
 
 function processTileData(data) {
@@ -155,27 +154,8 @@ function processTileData(data) {
 
             var portal_id = item[0];
 
-            if (portalsProcessed.indexOf(portal_id) == -1 && portalsToBeProcessed.indexOf(portal_id) == -1) {
+            if (portalsToBeProcessed.indexOf(portal_id) == -1) {
                 portalsToBeProcessed.push(portal_id);
-            }
-        }
-    }
-}
-
-function handleTileResponse(data, textStatus, jqXHR) {
-
-    if (data && data.result) {
-        for (var tile_id in data.result.map) {
-
-            var val = data.result.map[tile_id];
-            if ('error' in val) {
-            }
-            else {
-
-                processTileData(val.gameEntities);
-
-                tilesProcessed.push(tile_id);
-                tilesToBeProcessed.splice(tilesToBeProcessed.indexOf(tile_id), 1);
             }
         }
     }
@@ -185,15 +165,41 @@ function processTileRequest() {
 
     if (tilesToBeProcessed.length > 0) {
 
-        var data = { tileKeys: tilesToBeProcessed.slice(0, 12) };
-        callIngressAPI('getEntities', data, handleTileResponse);
+        var title_id = tilesToBeProcessed.slice(0, 1);
+        console.log('Processing tile: ', title_id);
+
+        var data = { tileKeys: title_id };
+        callIngressAPI('getEntities', data, function(data, textStatus, jqXHR) {
+
+            if (data && data.result) {
+
+                for (var tile_id in data.result.map) {
+
+                    var val = data.result.map[tile_id];
+                    if ('error' in val) {
+                    }
+                    else {
+
+                        tilesToBeProcessed.splice(tilesToBeProcessed.indexOf(tile_id), 1);
+
+                        processTileData(val.gameEntities);
+
+                        if (portalsToBeProcessed.length < 1) console.log('\tno portal');
+                        processPortalRequest();
+                    }
+                }
+            }
+        });
+    }
+    else {
+
+        console.log('***END');
     }
 }
 
 //--------------------------------------------------------------------------------------------------
 // Functions to process portal request and portal data
 
-var portalsProcessed = [];
 var portalsToBeProcessed = [];
 
 function processPortalRequest() {
@@ -201,6 +207,7 @@ function processPortalRequest() {
     if (portalsToBeProcessed.length > 0) {
 
         var portal_id = portalsToBeProcessed[0];
+        console.log('\tProcessing portal: ', portal_id);
 
         portalsToBeProcessed.splice(portalsToBeProcessed.indexOf(portal_id), 1);
 
@@ -209,8 +216,6 @@ function processPortalRequest() {
 
             if (data && data.result) {
 
-                portalsProcessed.push(portal_id);
-
                 for (var item of data.result) {
 
                     var mission_name = item[1];
@@ -218,26 +223,31 @@ function processPortalRequest() {
                     var found = mission_name.match(/[0-9]+/);
                     if (found) {
 
-                        console.log('Mission found: %s', mission_name);
+                        console.log('\t\tFound mission: ', mission_name);
 
                         var mission_id = item[0];
 
-                        if (missionsProcessed.indexOf(mission_id) == -1 && missionsToBeProcessed.indexOf(mission_id) == -1) {
+                        if (missionsToBeProcessed.indexOf(mission_id) == -1) {
                             missionsToBeProcessed.push(mission_id);
                         }
                     }
                 }
+
+                if (missionsToBeProcessed.length < 1) console.log('\t\tno mission');
+                processMissionRequest();
             }
 
-            processPortalRequest();
         });
+    }
+    else {
+
+        processTileRequest();
     }
 }
 
 //--------------------------------------------------------------------------------------------------
 // Functions to process mission request and mission data
 
-var missionsProcessed = [];
 var missionsToBeProcessed = [];
 
 function processMissionRequest() {
@@ -253,13 +263,14 @@ function processMissionRequest() {
 
             if (data && data.result) {
 
-                missionsProcessed.push(mission_id);
-
                 callMIMAPI('ext_register', data.result);
+                processMissionRequest();
             }
-
-            processMissionRequest();
         });
+    }
+    else {
+
+        processPortalRequest();
     }
 }
 
@@ -276,10 +287,6 @@ function ourScript() {
         disableDefaultUI: true,
         center: {lat: MAP_PARAMS.lat, lng: MAP_PARAMS.lng},
     });
-
-    setInterval(processTileRequest, 2500);
-    setInterval(processPortalRequest, 2500);
-    setInterval(processMissionRequest, 2500);
 
     // Add tile to be processed when map moves
     map.addListener('idle', function(e) {
@@ -309,6 +316,9 @@ function ourScript() {
                 tilesToBeProcessed.push(tile_id);
            }
         }
+
+        console.log('***START');
+        processTileRequest();
     });
 }
 
