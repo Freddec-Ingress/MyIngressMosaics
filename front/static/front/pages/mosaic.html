@@ -141,7 +141,7 @@
 		<div class="card-header f-row">
 			
 			<span class="mr-auto text-medium">{{'mosaicpage_ROADMAP' | translate}}</span>
-			<span>{{mosaic._distance | number:2}} km</span>
+			<span ng-show="mosaic.type ==  'sequence'">{{mosaic._distance | number:2}} km</span>
 			
 		</div>
 		

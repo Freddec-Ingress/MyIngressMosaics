@@ -528,8 +528,10 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 			strokeWeight: 4,
         });
 
-        roadmap.setMap(map);
-        
+		if ($scope.mosaic.type == 'sequence') {
+        	roadmap.setMap(map);
+		}
+		
 		map.setCenter(latlngbounds.getCenter());
 		map.fitBounds(latlngbounds); 
 	}
