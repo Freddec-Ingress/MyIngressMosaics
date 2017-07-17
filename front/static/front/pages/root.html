@@ -173,12 +173,16 @@
 	
 		$(function() {
 
-			$('.page-content').slimScroll({
-				height: '100%',
-				alwaysVisible: true,
-				wheelStep: 100,
-				
-			});
+			var winWidth = $(window).width(); 
+
+			if (winWidth > 768) {
+				$('.page-content').slimScroll({
+					height: '100%',
+					alwaysVisible: true,
+					wheelStep: 50,
+					
+				});
+			}
 		});
 		
 	</script>
