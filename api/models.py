@@ -193,13 +193,10 @@ class Mosaic(models.Model):
 			self._startLat = missions[0]._startLat
 			self._startLng = missions[0]._startLng
 			
-			dst = 0
-			
 			self.creators.clear()
 			
 			for i in range(0, missions.count() - 1):
-				dst += missions[i]._distance
-				
+
 				result = Creator.objects.filter(name=missions[i].creator)
 				if result.count() > 0:
 					self.creators.add(result[0])
@@ -209,10 +206,7 @@ class Mosaic(models.Model):
 					
 					self.creators.add(creator)
 	   
-			self._distance = dst
-			
-			self.save()
-		
+			self.computeDistance()	
 	
 	
 	def computeDistance(self):
