@@ -37,6 +37,8 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 			
 			.state('root.map', { url: '/map', controller: 'MapCtrl', templateUrl: '/static/front/pages/map.html', data:{ title: 'map_TITLE', }, })
 			
+			.state('root.plugin', { url: '/plugin', controller: 'PluginCtrl', templateUrl: '/static/front/pages/plugin.html', data:{ title: 'plugin_TITLE', }, })
+			
 	$locationProvider.html5Mode(true);
 });
 

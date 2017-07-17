@@ -2425,6 +2425,7 @@ var en_translations = {
 	map_LABEL: 'Map',
 	geolocalize_LABEL: 'Geolocalize',
 	deleteall_LABEL: 'Delete all',
+	download_LABEL: 'Download',
 	
 	home_TITLE: 'Welcome',
 	home_HELPTITLE: 'What you can do to help',
@@ -2494,7 +2495,8 @@ var en_translations = {
 	missions_HELP2: 'Register Ingress missions thanks to Chrome extension',
 	missions_HELP3: 'Sign in on MyIngressMosaics site',
 	missions_HELP4: 'Register mosaics',
-		
+	missions_PLUGIN: 'You could use our scanning script to register missions easily, ',
+	
 	mosaic_TITLE: 'Title',
 	mosaic_DESC: 'Description',
 	mosaic_COUNTRY: 'Country',
@@ -2561,6 +2563,13 @@ var en_translations = {
 	
 	error_GEOLOCFAILED: 'The Geolocation service failed.',
 	error_GEOLOCSUPPORT: 'Your browser doesn\'t support geolocation.',
+	
+	plugin_TITLE: 'Scanning plugin',
+	plugin_LINK: 'Scanning plugin',
+	plugin_SUBTITLE: 'Scanning plugin',
+	plugin_TEXT1: 'Our scanning plugin is a browser add-on that modifies the Ingress intel map. It allows you to register missions automatically to MyIngressMosaics site. It doesn\'t create mosaic for you: you still have to do it by hand. It registers missions with number inside name only. It is available for Chrome only.',
+	plugin_SUBTITLE2: 'Install',
+	plugin_TEXT2: 'Although it is possible to install userscripts directly as extensions, the recommended method is to use Tampermonkey. Once Tampermonkey is installed, click on the "Download" button below and follow the instructions.',
 };
 var fr_translations = {
     
@@ -2595,6 +2604,7 @@ var fr_translations = {
 	map_LABEL: 'Carte',
 	geolocalize_LABEL: 'Géolocaliser',
 	deleteall_LABEL: 'Tout supprimer',
+	download_LABEL: 'Télécharger',
 	
 	home_TITLE: 'Bienvenue',
 	home_HELPTITLE: 'Ce que vous pouvez faire pour aider',
@@ -2664,6 +2674,7 @@ var fr_translations = {
 	missions_HELP2: 'Enregistrer les missions Ingress grâce à l\'extension',
 	missions_HELP3: 'Se logger sur le site MyIngressMosaics',
 	missions_HELP4: 'Enregistrer des fresques',
+	missions_PLUGIN: 'Vous pouvez utiliser notre script pour enregistrer les missions plus facilement, ',
 	
 	mosaic_TITLE: 'Titre',
 	mosaic_DESC: 'Description',
@@ -2732,6 +2743,13 @@ var fr_translations = {
 	
 	error_GEOLOCFAILED: 'La géolocalisation a échoué.',
 	error_GEOLOCSUPPORT: 'Votre navigateur ne supporte pas la géolocalisation.',
+	
+	plugin_TITLE: 'Scanning plugin',
+	plugin_LINK: 'Scanning plugin',
+	plugin_SUBTITLE: 'Scanning plugin',
+	plugin_TEXT1: 'Our scanning plugin is a browser add-on that modifies the Ingress intel map. It allows you to register missions automatically to MyIngressMosaics site. It doesn\'t create mosaic for you: you still have to do it by hand. It registers missions with number inside name only. It is available for Chrome only.',
+	plugin_SUBTITLE2: 'Installation',
+	plugin_TEXT2: 'Although it is possible to install userscripts directly as extensions, the recommended method is to use Tampermonkey. Once Tampermonkey is installed, click on the "Download" button below and follow the instructions.',
 };
 angular.module('AngularApp.services', [])
 
@@ -4679,6 +4697,9 @@ angular.module('AngularApp.controllers').controller('MapCtrl', function($scope, 
 		}
 	}
 });
+
+angular.module('AngularApp.controllers').controller('PluginCtrl', function() {
+});
 angular.module('AngularApp', ['ui.router', 'ui.bootstrap', 'pascalprecht.translate', 'satellizer', 'ngCookies', 'toastr',
 							  'AngularApp.services', 'AngularApp.controllers', 'AngularApp.directives', ]);
 
@@ -4717,6 +4738,8 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 			.state('root.search', { url: '/search', controller: 'SearchCtrl', templateUrl: '/static/front/pages/search.html', data:{ title: 'search_TITLE', }, })
 			
 			.state('root.map', { url: '/map', controller: 'MapCtrl', templateUrl: '/static/front/pages/map.html', data:{ title: 'map_TITLE', }, })
+			
+			.state('root.plugin', { url: '/plugin', controller: 'PluginCtrl', templateUrl: '/static/front/pages/plugin.html', data:{ title: 'plugin_TITLE', }, })
 			
 	$locationProvider.html5Mode(true);
 });

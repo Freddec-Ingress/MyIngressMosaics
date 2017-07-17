@@ -1174,3 +1174,6 @@ angular.module('AngularApp.controllers').controller('MapCtrl', function($scope, 
 		}
 	}
 });
+
+angular.module('AngularApp.controllers').controller('PluginCtrl', function() {
+});

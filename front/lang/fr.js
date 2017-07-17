@@ -31,6 +31,7 @@ var fr_translations = {
 	map_LABEL: 'Carte',
 	geolocalize_LABEL: 'Géolocaliser',
 	deleteall_LABEL: 'Tout supprimer',
+	download_LABEL: 'Télécharger',
 	
 	home_TITLE: 'Bienvenue',
 	home_HELPTITLE: 'Ce que vous pouvez faire pour aider',
@@ -100,6 +101,7 @@ var fr_translations = {
 	missions_HELP2: 'Enregistrer les missions Ingress grâce à l\'extension',
 	missions_HELP3: 'Se logger sur le site MyIngressMosaics',
 	missions_HELP4: 'Enregistrer des fresques',
+	missions_PLUGIN: 'Vous pouvez utiliser notre script pour enregistrer les missions plus facilement, ',
 	
 	mosaic_TITLE: 'Titre',
 	mosaic_DESC: 'Description',
@@ -168,4 +170,11 @@ var fr_translations = {
 	
 	error_GEOLOCFAILED: 'La géolocalisation a échoué.',
 	error_GEOLOCSUPPORT: 'Votre navigateur ne supporte pas la géolocalisation.',
+	
+	plugin_TITLE: 'Scanning plugin',
+	plugin_LINK: 'Scanning plugin',
+	plugin_SUBTITLE: 'Scanning plugin',
+	plugin_TEXT1: 'Our scanning plugin is a browser add-on that modifies the Ingress intel map. It allows you to register missions automatically to MyIngressMosaics site. It doesn\'t create mosaic for you: you still have to do it by hand. It registers missions with number inside name only. It is available for Chrome only.',
+	plugin_SUBTITLE2: 'Installation',
+	plugin_TEXT2: 'Although it is possible to install userscripts directly as extensions, the recommended method is to use Tampermonkey. Once Tampermonkey is installed, click on the "Download" button below and follow the instructions.',
 };
