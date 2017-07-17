@@ -2952,6 +2952,15 @@ angular.module('AngularApp.services').service('UserService', function($auth, $ht
 				if (a_name > b_name)
 					return 1;
 
+				var a_creator = a.creator.toLowerCase();
+				var b_creator = b.creator.toLowerCase();
+				
+				if (a_creator < b_creator)
+					return -1;
+					
+				if (a_creator > b_creator)
+					return 1;
+
 				return 0;
 			}
 			
@@ -2966,6 +2975,15 @@ angular.module('AngularApp.services').service('UserService', function($auth, $ht
 				if (a_name < b_name)
 					return 1;
 
+				var a_creator = a.creator.toLowerCase();
+				var b_creator = b.creator.toLowerCase();
+				
+				if (a_creator > b_creator)
+					return -1;
+					
+				if (a_creator < b_creator)
+					return 1;
+				
 				return 0;
 			}
 			
@@ -2989,6 +3007,15 @@ angular.module('AngularApp.services').service('UserService', function($auth, $ht
 				if (a_creator > b_creator)
 					return 1;
 
+				var a_name = a.name.toLowerCase();
+				var b_name = b.name.toLowerCase();
+				
+				if (a_name < b_name)
+					return -1;
+					
+				if (a_name > b_name)
+					return 1;
+					
 				return 0;
 			}
 			
@@ -3003,6 +3030,15 @@ angular.module('AngularApp.services').service('UserService', function($auth, $ht
 				if (a_creator < b_creator)
 					return 1;
 				
+				var a_name = a.name.toLowerCase();
+				var b_name = b.name.toLowerCase();
+				
+				if (a_name > b_name)
+					return -1;
+					
+				if (a_name < b_name)
+					return 1;
+					
 				return 0;
 			}
 			
