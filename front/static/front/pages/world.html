@@ -1,0 +1,76 @@
+<div class="loading" ng-if="world_loading">
+	<img src="/static/front/img/loading.png" />
+</div>
+
+<div class="card mt-4" ng-if="!world_loading">
+
+    <table class="card-table">
+    	
+        <thead>
+            <tr>
+                <th class="text-center" style="cursor:pointer;" ng-click="sortByMosaics();">
+                    <i class="fa mr-2" ng-class="{'fa-caret-up':sortMosaics == 'asc', 'fa-caret-down':sortMosaics == 'desc', 'fa-sort text-muted':sortMosaics == ''}"></i>
+                	{{'world_COLMOSAICS' | translate}}
+                </th>
+                <th style="cursor:pointer;" ng-click="sortByName();">
+                    <i class="fa mr-2" ng-class="{'fa-caret-up':sortName == 'asc', 'fa-caret-down':sortName == 'desc', 'fa-sort text-muted':sortName == ''}"></i>
+                	{{'world_COLCOUNTRY' | translate}}
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr ng-repeat="item in countries" ng-click="go(item);">
+            	
+                <td class="text-right text-center" width="80px">
+                	{{item.mosaics}}
+                </td>
+                
+                <td class="text-white">
+                	<span class="flag-icon mr-2" style="position:relative; top:-2px;" ng-class="{
+                		'flag-icon-fr': item.name == 'France',
+                		'flag-icon-gb': item.name == 'United Kingdom',
+                		'flag-icon-my': item.name == 'Malaysia',
+                		'flag-icon-sg': item.name == 'Singapore',
+                		'flag-icon-us': item.name == 'United States',
+                		'flag-icon-mx': item.name == 'Mexico',
+                		'flag-icon-nz': item.name == 'New Zealand',
+                		'flag-icon-mv': item.name == 'Maldives',
+                		'flag-icon-do': item.name == 'Dominican Republic',
+                		'flag-icon-au': item.name == 'Australia',
+                		'flag-icon-hu': item.name == 'Hungary',
+                		'flag-icon-lk': item.name == 'Sri Lanka',
+                		'flag-icon-id': item.name == 'Indonesia',
+                	}"></span>
+                    {{item.name}}
+                </td>
+                
+                <td class="text-center" style="width:2rem;">
+                	<i class="fa fa-arrow-circle-right text-link"></i>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div class="card" ng-if="!world_loading && user && user.superuser">
+
+	<div class="card-header text-medium">
+		Rename country
+	</div>
+
+	<div class="card-block first last f-row">
+		
+		<input type="text" class="form-control mr-2" ng-model="renameCountryModel.oldValue" />
+		<input type="text" class="form-control mr-2" ng-model="renameCountryModel.newValue" />
+		
+		<button type="submit" class="btn btn-primary ml-2" ng-click="renameCountry();">
+			Rename
+		</button>
+
+	</div>
+
+</div>
