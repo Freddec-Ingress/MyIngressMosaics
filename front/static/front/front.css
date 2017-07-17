@@ -291,6 +291,7 @@ a:hover, a:focus {
 
 .page-content {
     flex: 1;
+    overflow-y: scroll;
 }
 
 .slimScrollBar {
