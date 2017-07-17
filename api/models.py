@@ -212,6 +212,28 @@ class Mosaic(models.Model):
 			self._distance = dst
 			
 			self.save()
+		
+	
+	
+	def computeDistance(self):
+		
+		dst = 0
+		
+		for i in range(0, missions.count() - 1):
+			
+			missions[i].computeInternalData()
+			dst += missions[i]._distance
+			
+			if i < missions.count() - 2:
+				
+				portal1 = missions[i].portals.order_by('-order')[0]
+				portal2 = missions[i+1].portals.order_by('order')[0]
+				
+				if portal1.lat != 0.0 and portal1.lng != 0.0 and portal2.lat != 0.0 and portal2.lng != 0.0:
+					dst += getDistanceFromLatLng(portal1.lat, portal1.lng, portal2.lat, portal2.lng)
+			
+		self._distance = dst
+		self.save()
 
 
 

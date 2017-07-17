@@ -448,7 +448,9 @@ class MosaicViewSet(viewsets.ViewSet):
 			mosaic = result[0]
 			
 			for m in mosaic.missions.all():
-				m.computeInternalData();
+				m.computeInternalData()
+			
+			mosaic.computeDistance()
 			
 		return Response(None, status=status.HTTP_200_OK)
 	
