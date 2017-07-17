@@ -1,7 +1,7 @@
 // ==UserScript==
 // @id             myingressmosaics@freddec
 // @name           MyIngressMosaics Scanning plugin
-// @version        1.0.0
+// @version        1.0.1
 // @include        https://*.ingress.com/intel*
 // @include        http://*.ingress.com/intel*
 // @match          https://*.ingress.com/intel*
@@ -20,16 +20,25 @@ var head = document.getElementsByTagName('head')[0] || document.documentElement;
 // Styles
 
 head.innerHTML += '<style>' +
+    '@-webkit-keyframes rotating {' +
+    '	from { transform: rotate(0deg); }' +
+    '   to { transform: rotate(360deg); }' +
+    '}' +
+    '@keyframes rotating {' +
+    '	from { transform: rotate(0deg); }' +
+    '	to { transform: rotate(360deg); }' +
+    '}' +
     '#header {display:none;}' +
-    '#geotools {display:none;}' +
+    '#geotools {right: -2px;}' +
     '#tm_button {display:none;}' +
     '#portal_filter_header {display:none;}' +
-    '#loading_data_circle {display:none;}' +
+    '#game_stats {display:none;}' +
+    '#loading_data_circle {display:none; animation: rotating 2s linear infinite;}' +
     '#loading_msg_text {display:none;}' +
     '#loading_msg {display:block!important;}' +
-    '#dashboard_container {top:20px!important;}' +
-    '#tm_start {padding: 0 5px; position: absolute; bottom: -45px; right: 50px;}' +
-    '#tm_stop {padding: 0 5px; position: absolute; bottom: -45px; right: 150px;}' +
+    '#dashboard_container {top:50px!important;}' +
+    '#tm_start {padding: 0 5px; position: absolute; bottom: -45px; right: 0px;}' +
+    '#tm_stop {padding: 0 5px; position: absolute; bottom: -45px; right: 110px;}' +
 '</style>';
 
 //--------------------------------------------------------------------------------------------------
@@ -186,8 +195,11 @@ function processTileRequest() {
 
     if (tilesToBeProcessed.length > 0) {
 
+        var text = '' + tilesProcessed.length + '/' + (tilesToBeProcessed.length + tilesProcessed.length);
+        document.getElementById('loading_msg_text').innerHTML = 'Scanning Data... ' + text;
+
         var tile = tilesToBeProcessed.slice(0, 1)[0];
-        console.log('Processing tile: ', tile.id);
+        console.log(text + ' - Processing tile: ', tile.id);
 
         var rectangle = new google.maps.Rectangle({
             strokeColor: '#FF0000',
@@ -195,7 +207,7 @@ function processTileRequest() {
             strokeWeight: 1,
             fillColor: '#FF0000',
             fillOpacity: 0.25,
-            map: map,
+            map: M,
             bounds: {
                 north: tile.north,
                 south: tile.south,
@@ -244,6 +256,9 @@ function processTileRequest() {
     else {
 
         console.log('***END');
+
+        $('#loading_msg_text').hide();
+        $('#loading_data_circle').hide();
     }
 }
 
@@ -281,7 +296,7 @@ function processPortalRequest() {
                             strokeWeight: 1,
                             fillColor: '#00FF00',
                             fillOpacity: 1,
-                            map: map,
+                            map: M,
                             center: {lat: portal.lat, lng: portal.lng},
                             radius: 100,
                         });
@@ -366,7 +381,7 @@ function init() {
 	var style = [{featureType:"all",elementType:"all",stylers:[{visibility:"on"},{hue:"#131c1c"},{saturation:"-50"},{invert_lightness:!0}]},{featureType:"water",elementType:"all",stylers:[{visibility:"on"},{hue:"#005eff"},{invert_lightness:!0}]},{featureType:"poi",stylers:[{visibility:"off"}]},{featureType:"transit",elementType:"all",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels.icon",stylers:[{invert_lightness:!0}]}];
 
     // Build map
-    map = new google.maps.Map(document.getElementById('map_canvas'), {
+    M = new google.maps.Map(document.getElementById('map_canvas'), {
 
         zoom: MAP_PARAMS.zoom,
         styles : style,
@@ -375,14 +390,16 @@ function init() {
         center: {lat: MAP_PARAMS.lat, lng: MAP_PARAMS.lng},
     });
 
-    // Add tile to be processed when map moves
-    map.addListener('idle', function(e) {
+    // Scanning functions
+    window.startScanning = function() {
+
+        if (scanning === true) return;
 
         tilesToBeProcessed = [];
         portalsToBeProcessed = [];
         missionsToBeProcessed = [];
 
-        var bds = map.getBounds();
+        var bds = M.getBounds();
 
         var west = bds.getSouthWest().lng();
         var east = bds.getNorthEast().lng();
@@ -423,16 +440,13 @@ function init() {
                 }
            }
         }
-    });
-
-    // Scanning functions
-    window.startScanning = function() {
 
         console.log('***START');
 
         scanning = true;
 
         $('#loading_msg_text').show();
+        $('#loading_data_circle').show();
 
         processTileRequest();
     };
@@ -444,6 +458,7 @@ function init() {
         scanning = false;
 
         $('#loading_msg_text').hide();
+        $('#loading_data_circle').hide();
     };
 }
 
