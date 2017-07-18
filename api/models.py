@@ -60,22 +60,28 @@ def _createRef():
 @python_2_unicode_compatible
 class Mosaic(models.Model):
 
-	registerer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='mosaics')
+	ref = models.CharField(max_length=32, default=_createRef, unique=True)
+
+	title = models.CharField(max_length=128, default='')
+	desc = models.CharField(max_length=1024, default='')
+	
 	
 	creators = models.ManyToManyField('Creator')
 	
-	ref = models.CharField(max_length=32, default=_createRef, unique=True)
-	cols = models.IntegerField(default=0)
+	registerer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='mosaics')
+	
+	register_date = models.DateField(default=datetime.now)
+	
 	type = models.CharField(max_length=64, default='')
-	desc = models.CharField(max_length=1024, default='')
+
+	cols = models.IntegerField(default=0)
+	rows = models.IntegerField(default=0)
+
 	city = models.CharField(max_length=64, default='')
-	count = models.IntegerField(default=0)
-	title = models.CharField(max_length=128, default='')
-	status = models.CharField(max_length=64, default='active')
 	region = models.CharField(max_length=64, default='')
 	country = models.CharField(max_length=64, default='')
 	
-	register_date = models.DateField(default=datetime.now)
+	status = models.CharField(max_length=64, default='active')
 	
 	_distance = models.FloatField(default=0.0)
 	
