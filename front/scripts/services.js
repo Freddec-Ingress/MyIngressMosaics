@@ -349,6 +349,11 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 			}
 		},
 		
+		removeAll: function() {
+			
+			service.data.missions = [];
+		},
+		
 		add: function(item) {
 			service.data.missions.push(item);
 		},

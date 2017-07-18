@@ -32,6 +32,7 @@ var fr_translations = {
 	geolocalize_LABEL: 'Géolocaliser',
 	deleteall_LABEL: 'Tout supprimer',
 	download_LABEL: 'Télécharger',
+	unselectall_LABEL: 'Tout désélectionner',
 	
 	home_TITLE: 'Bienvenue',
 	home_HELPTITLE: 'Ce que vous pouvez faire pour aider',

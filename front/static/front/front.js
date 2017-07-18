@@ -2426,6 +2426,7 @@ var en_translations = {
 	geolocalize_LABEL: 'Geolocalize',
 	deleteall_LABEL: 'Delete all',
 	download_LABEL: 'Download',
+	unselectall_LABEL: 'Unselect All',
 	
 	home_TITLE: 'Welcome',
 	home_HELPTITLE: 'What you can do to help',
@@ -2607,6 +2608,7 @@ var fr_translations = {
 	geolocalize_LABEL: 'Géolocaliser',
 	deleteall_LABEL: 'Tout supprimer',
 	download_LABEL: 'Télécharger',
+	unselectall_LABEL: 'Tout désélectionner',
 	
 	home_TITLE: 'Bienvenue',
 	home_HELPTITLE: 'Ce que vous pouvez faire pour aider',
@@ -3104,6 +3106,11 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 			if (index > -1) {
 				service.data.missions.splice(index, 1);
 			}
+		},
+		
+		removeAll: function() {
+			
+			service.data.missions = [];
 		},
 		
 		add: function(item) {
@@ -3710,6 +3717,11 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 		}
 		
 		$scope.lastSelectedIndex = index;
+	}
+	
+	$scope.unselectAll = function() {
+		
+		CreateService.removeAll();
 	}
 	
 	$scope.hasSelected = function() {

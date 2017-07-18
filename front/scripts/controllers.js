@@ -154,6 +154,11 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 		$scope.lastSelectedIndex = index;
 	}
 	
+	$scope.unselectAll = function() {
+		
+		CreateService.removeAll();
+	}
+	
 	$scope.hasSelected = function() {
 		
 		if (CreateService.data.missions.length > 0) {

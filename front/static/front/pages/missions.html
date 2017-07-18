@@ -139,6 +139,7 @@
                     <div class="">
                         {{selected_missions.length}} / {{missions.length}}
                         {{'missions_selected' | translate}}
+                        <br><a ng-click="unselectAll();">{{'unselectall_LABEL' | translate}}</a>
                     </div>
                     
             		<button class="btn btn-secondary f-align-baseline" ng-click="nextStep();" ng-disabled="!hasSelected();">
