@@ -4,13 +4,7 @@
 
 <div ng-if="mosaic">
 	
-	<div class="card">
-		
-		<div class="card-header f-row" ng-show="!editMode">
-			
-			<span class="mr-auto text-white text-big">{{mosaic.title}}</span>
-
-		</div>
+	<div class="card mt-4">
 		
 		<div class="card-block-bordered first" ng-show="!editMode">
 			
@@ -43,7 +37,7 @@
 			
 			<div class="group f-row">
 	        	{{'mosaic_BY' | translate}}
-	        	<a class="ml-2" ng-repeat="creator in mosaic.creators" ng-class="{'text-enligtened': creator.faction == 'E', 'text-resistance': creator.faction == 'R',}" ng-click="goToCreator(creator.name);">{{creator.name}}</a>
+	        	<a class="mr-2" ng-repeat="creator in mosaic.creators" ng-class="{'text-enligtened': creator.faction == 'E', 'text-resistance': creator.faction == 'R',}" ng-click="goToCreator(creator.name);">{{creator.name}}</a>
 			</div>
 			
 			<div class="f-row">

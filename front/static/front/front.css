@@ -644,7 +644,7 @@ table td {
 /* Container ---------------------------------------------------------------- */
 
 .f-row {
-    display: flex; flex-direction: row; align-items: center;
+    display: flex; flex-direction: row; align-items: center; flex-wrap: wrap;
 }
 
 .f-col {
