@@ -190,8 +190,8 @@ angular.module('AngularApp.services').service('UserService', function($auth, $ht
 			
 			function compareNameAsc(a, b) {
 				
-				var a_name = a.name.toLowerCase();
-				var b_name = b.name.toLowerCase();
+				var a_name = a.name.toLowerCase().replace(/0|1|2|3|4|5|6|7|8|9/g, '');
+				var b_name = b.name.toLowerCase().replace(/0|1|2|3|4|5|6|7|8|9/g, '');
 				
 				if (a_name < b_name)
 					return -1;
@@ -213,8 +213,8 @@ angular.module('AngularApp.services').service('UserService', function($auth, $ht
 			
 			function compareNameDesc(a, b) {
 				
-				var a_name = a.name.toLowerCase();
-				var b_name = b.name.toLowerCase();
+				var a_name = a.name.toLowerCase().replace(/0|1|2|3|4|5|6|7|8|9/g, '');
+				var b_name = b.name.toLowerCase().replace(/0|1|2|3|4|5|6|7|8|9/g, '');
 				
 				if (a_name > b_name)
 					return -1;
