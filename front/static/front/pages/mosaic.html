@@ -36,12 +36,12 @@
 			<pre class="group text-highlight">{{mosaic.desc}}</pre>
 			
 			<div class="group f-row">
-	        	<span class="mr-2">{{'mosaic_BY' | translate}}</span>
+	        	<span class="mr-1">{{'mosaic_BY' | translate}}</span>
 	        	<a class="mr-2" ng-repeat="creator in mosaic.creators" ng-class="{'text-enligtened': creator.faction == 'E', 'text-resistance': creator.faction == 'R',}" ng-click="goToCreator(creator.name);">{{creator.name}}</a>
 			</div>
 			
 			<div class="f-row">
-	        	{{'mosaic_REGBY' | translate}}
+	        	<span class="mr-1">{{'mosaic_REGBY' | translate}}</span>
 	        	<span class="text-highlight">{{mosaic.registerer.name}}</span>
 			</div>
 			
@@ -145,8 +145,9 @@
 		
 		<div class="card-header f-row">
 			
-			<span class="mr-auto text-medium">{{'mosaicpage_ROADMAP' | translate}}</span>
-			<span ng-show="mosaic.type ==  'sequence'">{{mosaic._distance | number:2}} km</span>
+			<span>{{mosaic.missions.length}} missions</span>
+			<span>&nbsp;&middot; {{mosaic.portals}} portal</span>
+			<span ng-show="mosaic.type ==  'sequence'">&nbsp;&middot; {{mosaic._distance | number:2}} km</span>
 			
 		</div>
 		
@@ -160,15 +161,20 @@
 	
 	<div class="card">
 		
+		<div class="group form-button-bar">
+			
+			<a class="btn btn-secondary" ng-click="openReorder();">
+				{{'mosaicpage_REORDER' | translate}}
+			</a>
+			
+			<a class="btn btn-secondary" ng-click="openAdd();">
+				{{'mosaicpage_ADD' | translate}}
+			</a>
+		
+		</div>
+			
 		<div class="loading" ng-show="reorderLoading">
 			<img src="/static/front/img/loading.png" />
-		</div>
-		
-		<div class="card-header f-row">
-			
-			<span class="mr-auto text-medium">{{'mosaicpage_MISSIONS' | translate}}</span>
-			<span>{{mosaic.missions.length}}</span>
-			
 		</div>
 		
         <table class="card-table" ng-show="!reorderMode && !addMode">
@@ -269,22 +275,6 @@
 					{{'close_LABEL' | translate}}
 				</a>
 
-			</div>
-
-		</div>
-		
-		<div class="card-block last" ng-if="user.name == mosaic.registerer.name || user.superuser"  ng-show="!reorderMode && !addMode">
-			
-			<div class="form-button-bar">
-				
-				<a class="btn btn-secondary" ng-click="openReorder();">
-					{{'mosaicpage_REORDER' | translate}}
-				</a>
-				
-				<a class="btn btn-secondary" ng-click="openAdd();">
-					{{'mosaicpage_ADD' | translate}}
-				</a>
-			
 			</div>
 
 		</div>

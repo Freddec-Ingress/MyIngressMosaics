@@ -145,6 +145,7 @@ class Mosaic(models.Model):
 			
 			'creators': [],
 			'missions': [],
+			'portals': 0,
 			
 			'ref': self.ref,
 			'cols': self.cols,
@@ -189,6 +190,8 @@ class Mosaic(models.Model):
 			}
 			
 			data['missions'].append(mission_data)
+			
+			data['portals'] += item.portals.all().count()
 			
 		return data
 		
