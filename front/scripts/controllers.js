@@ -6,19 +6,11 @@ angular.module('AngularApp.controllers').controller('RootCtrl', function($rootSc
 	
 	var user_lang = 'en';
 	
-	if ($stateParams.codelang) {
-		
-		if (supported_lang.indexOf($stateParams.codelang) != -1) user_lang = $stateParams.codelang;
-      	$translate.use(user_lang);
-	}
-	else {
-		
-		var lang = $window.navigator.language || $window.navigator.userLanguage;
-		if (supported_lang.indexOf(lang) != -1) user_lang = lang;
-		
-    	$window.location.href = '/' + user_lang + '/home';
-	}
+	var lang = $window.navigator.language || $window.navigator.userLanguage;
+	if (supported_lang.indexOf(lang) != -1) user_lang = lang;
 	
+  	$translate.use(user_lang);
+
 	$scope.user = UserService.data;
 	
 	$scope.logout = UserService.logout;

@@ -2958,6 +2958,15 @@ angular.module('AngularApp.services').service('UserService', function($auth, $ht
 				if (a_name > b_name)
 					return 1;
 
+				var a_name = a.name;
+				var b_name = b.name;
+				
+				if (a_name < b_name)
+					return -1;
+					
+				if (a_name > b_name)
+					return 1;
+					
 				var a_creator = a.creator.toLowerCase();
 				var b_creator = b.creator.toLowerCase();
 				
@@ -2981,6 +2990,15 @@ angular.module('AngularApp.services').service('UserService', function($auth, $ht
 				if (a_name < b_name)
 					return 1;
 
+				var a_name = a.name;
+				var b_name = b.name;
+				
+				if (a_name > b_name)
+					return -1;
+					
+				if (a_name < b_name)
+					return 1;
+					
 				var a_creator = a.creator.toLowerCase();
 				var b_creator = b.creator.toLowerCase();
 				
@@ -3571,19 +3589,11 @@ angular.module('AngularApp.controllers').controller('RootCtrl', function($rootSc
 	
 	var user_lang = 'en';
 	
-	if ($stateParams.codelang) {
-		
-		if (supported_lang.indexOf($stateParams.codelang) != -1) user_lang = $stateParams.codelang;
-      	$translate.use(user_lang);
-	}
-	else {
-		
-		var lang = $window.navigator.language || $window.navigator.userLanguage;
-		if (supported_lang.indexOf(lang) != -1) user_lang = lang;
-		
-    	$window.location.href = '/' + user_lang + '/home';
-	}
+	var lang = $window.navigator.language || $window.navigator.userLanguage;
+	if (supported_lang.indexOf(lang) != -1) user_lang = lang;
 	
+  	$translate.use(user_lang);
+
 	$scope.user = UserService.data;
 	
 	$scope.logout = UserService.logout;
@@ -4758,9 +4768,9 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 	
 	$stateProvider
 	
-		.state('root', { url: '/:codelang', controller: 'RootCtrl', templateUrl: '/static/front/pages/root.html', resolve: {loadUser: function(UserService) { return UserService.init(); }, }, })
+		.state('root', { controller: 'RootCtrl', templateUrl: '/static/front/pages/root.html', resolve: {loadUser: function(UserService) { return UserService.init(); }, }, })
 
-			.state('root.home', { url: '/home', controller: 'HomeCtrl', templateUrl: '/static/front/pages/home.html', data: { title: 'home_TITLE', }})
+			.state('root.home', { url: '/', controller: 'HomeCtrl', templateUrl: '/static/front/pages/home.html', data: { title: 'home_TITLE', }})
 
 			.state('root.login', { url: '/login', controller: 'LoginCtrl', templateUrl: '/static/front/pages/login.html', data:{ title: 'login_TITLE', }})
 			.state('root.profile', { url: '/profile', controller: 'ProfileCtrl', templateUrl: '/static/front/pages/profile.html', data:{ title: 'profile_TITLE', }})

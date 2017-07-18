@@ -294,6 +294,7 @@ a:hover, a:focus {
     flex-basis: 0;
     max-width: 100%;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .slimScrollBar {
