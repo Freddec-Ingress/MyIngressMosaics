@@ -370,7 +370,6 @@ a:hover, a:focus {
 .card-block-bordered {
     padding: 0;
     position: relative;
-    border-radius: .125rem;
     border: 1px solid #004D40;
 }
 
@@ -747,6 +746,26 @@ ol > li:last-child {
 }
 
 /* Padding ------------------------------------------------------------------ */
+
+.pt-0 {
+	padding-top: 0!important;
+}
+
+.p-1 {
+	padding: .25rem!important;
+}
+.pt-1 {
+	padding-top: .25rem!important;
+}
+.pl-1 {
+	padding-left: .25rem!important;
+}
+.pr-1 {
+	padding-right: .25rem!important;
+}
+.pb-1 {
+	padding-bottom: .25rem!important;
+}
 
 .p-2 {
 	padding: .5rem!important;

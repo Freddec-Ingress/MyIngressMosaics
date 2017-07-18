@@ -225,7 +225,7 @@ class ProfileViewSet(viewsets.ViewSet):
 							type = request.data['type'],
 							desc = request.data['desc'],
 							city = request.data['city'],
-							count = int(request.data['count']),
+							rows = int(request.data['rows']),
 							title = request.data['title'],
 							region = request.data['region'],
 							country = request.data['country']
@@ -292,7 +292,7 @@ class MosaicViewSet(viewsets.ViewSet):
 			mosaic.desc = request.data['desc']
 			mosaic.type = request.data['type']
 			mosaic.cols = request.data['cols']
-			mosaic.count = request.data['count']
+			mosaic.rows = request.data['rows']
 			mosaic.title = request.data['title']
 			mosaic.region = request.data['region']
 			mosaic.country = request.data['country']

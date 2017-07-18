@@ -52,8 +52,8 @@
                 </div>
                 
                 <div class="fitem-grow pr-2 pl-2">
-                    <label>{{'mosaic_COUNT' | translate}}</label>
-                    <input type="number" class="form-control" ng-model="data.count" />
+                    <label>{{'mosaic_ROWS' | translate}}</label>
+                    <input type="number" class="form-control" ng-model="data.rows" />
                 </div>
                 
                 <div class="fitem-grow pl-2">
@@ -109,7 +109,7 @@
         
         <div class="card-block last">
             <div class="form-button-bar">
-        		<button class="btn btn-primary" ng-click="btn_disabled = true; create();" ng-disabled="btn_disabled || !data.title || !data.region || !data.desc || !data.country || !data.city || !data.type || !data.count || !data.cols">
+        		<button class="btn btn-primary" ng-click="btn_disabled = true; create();" ng-disabled="btn_disabled || !data.title || !data.region || !data.desc || !data.country || !data.city || !data.type || !data.rows || !data.cols">
         		    {{'create_BTN' | translate}}
         		</button>
             </div>

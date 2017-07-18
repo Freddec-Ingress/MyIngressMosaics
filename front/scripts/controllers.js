@@ -351,7 +351,7 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 	$scope.editMode = false;
 	$scope.editLoading = false;
 	
-	$scope.editModel = {ref:null, city:null, region:null, desc:null, type:null, cols:null, count:null, title:null, country:null};
+	$scope.editModel = {ref:null, city:null, region:null, desc:null, type:null, cols:null, rows:null, title:null, country:null};
 	
 	$scope.openEdit = function() {
 		
@@ -360,7 +360,7 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 		$scope.editModel.desc = $scope.mosaic.desc;
 		$scope.editModel.type = $scope.mosaic.type;
 		$scope.editModel.cols = $scope.mosaic.cols;
-		$scope.editModel.count = $scope.mosaic.count;
+		$scope.editModel.rows = $scope.mosaic.rows;
 		$scope.editModel.title = $scope.mosaic.title;
 		$scope.editModel.region = $scope.mosaic.region;
 		$scope.editModel.country = $scope.mosaic.country;

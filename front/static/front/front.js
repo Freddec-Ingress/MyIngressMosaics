@@ -2503,13 +2503,15 @@ var en_translations = {
 	mosaic_CITY: 'City',
 	mosaic_TYPE: 'Type',
 	mosaic_COUNT: 'Count',
+	mosaic_ROWS: 'Rows',
 	mosaic_COLS: 'Columns',
 	mosaic_SEQUENCE: 'sequence',
 	mosaic_SERIE: 'serie',
 	mosaic_FORMAT: 'Format',
 	mosaic_DISTANCE: 'Distance',
 	mosaic_CREATOR: 'Creator(s)',
-	mosaic_BY: 'By',
+	mosaic_BY: 'Created by',
+	mosaic_REGBY: 'Registered by',
 	mosaic_REGION: 'State/Province',
 	
 	nomosaic_TEXT: 'No mosaic found',
@@ -2682,13 +2684,15 @@ var fr_translations = {
 	mosaic_CITY: 'Ville',
 	mosaic_TYPE: 'Type',
 	mosaic_COUNT: 'Missions',
+	mosaic_ROWS: 'Lignes',
 	mosaic_COLS: 'Colonnes',
 	mosaic_SEQUENCE: 'séquence',
 	mosaic_SERIE: 'série',
 	mosaic_FORMAT: 'Format',
 	mosaic_DISTANCE: 'Distance',
 	mosaic_CREATOR: 'Créateur(s)',
-	mosaic_BY: 'Par',
+	mosaic_BY: 'Créée par',
+	mosaic_REGBY: 'Enregistrée par',
 	mosaic_REGION: 'Région',
 	
 	nomosaic_TEXT: 'Aucune fresque',
@@ -3063,7 +3067,7 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 			city: null,
 			type: null,
 			cols: null,
-			count: null,
+			rows: null,
 			title: null,
 			region: null,
 			country: null,
@@ -3077,7 +3081,7 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 			service.data.city = null;
 			service.data.type = null;
 			service.data.cols = null;
-			service.data.count = null;
+			service.data.rows = null;
 			service.data.title = null;
 			service.data.region = null;
 			service.data.country = null;
@@ -3136,13 +3140,8 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 			}
 			
 			service.data.type = 'sequence';
-			service.data.count = service.data.missions.length;
 			service.data.cols = 6;
-			
-			if (max_order > service.data.count) service.data.count = max_order;
-			
-			var temp = Math.ceil(service.data.count / 6);
-			service.data.count = 6 * temp;
+			service.data.rows = Math.ceil(service.data.missions.length / 6);
 		},
 		
 		getImageByOrder: function(order) {
@@ -3150,7 +3149,7 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 			var url = null;
 			
 			for (var item of service.data.missions) {
-				if ((service.data.count - item.order + 1) == order) {
+				if ((service.data.missions.length - item.order + 1) == order) {
 					url = item.image;
 					break;
 				}
@@ -3260,7 +3259,7 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 				service.data.mosaic.desc = response.desc;
 				service.data.mosaic.type = response.type;
 				service.data.mosaic.cols = response.cols;
-				service.data.mosaic.count = response.count;
+				service.data.mosaic.rows = response.rows;
 				service.data.mosaic.title = response.title;
 				service.data.mosaic.region = response.region;
 				service.data.mosaic.country = response.country;
@@ -3910,7 +3909,7 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 	$scope.editMode = false;
 	$scope.editLoading = false;
 	
-	$scope.editModel = {ref:null, city:null, region:null, desc:null, type:null, cols:null, count:null, title:null, country:null};
+	$scope.editModel = {ref:null, city:null, region:null, desc:null, type:null, cols:null, rows:null, title:null, country:null};
 	
 	$scope.openEdit = function() {
 		
@@ -3919,7 +3918,7 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 		$scope.editModel.desc = $scope.mosaic.desc;
 		$scope.editModel.type = $scope.mosaic.type;
 		$scope.editModel.cols = $scope.mosaic.cols;
-		$scope.editModel.count = $scope.mosaic.count;
+		$scope.editModel.rows = $scope.mosaic.rows;
 		$scope.editModel.title = $scope.mosaic.title;
 		$scope.editModel.region = $scope.mosaic.region;
 		$scope.editModel.country = $scope.mosaic.country;

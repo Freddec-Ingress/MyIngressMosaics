@@ -310,7 +310,7 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 			city: null,
 			type: null,
 			cols: null,
-			count: null,
+			rows: null,
 			title: null,
 			region: null,
 			country: null,
@@ -324,7 +324,7 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 			service.data.city = null;
 			service.data.type = null;
 			service.data.cols = null;
-			service.data.count = null;
+			service.data.rows = null;
 			service.data.title = null;
 			service.data.region = null;
 			service.data.country = null;
@@ -383,13 +383,8 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 			}
 			
 			service.data.type = 'sequence';
-			service.data.count = service.data.missions.length;
 			service.data.cols = 6;
-			
-			if (max_order > service.data.count) service.data.count = max_order;
-			
-			var temp = Math.ceil(service.data.count / 6);
-			service.data.count = 6 * temp;
+			service.data.rows = Math.ceil(service.data.missions.length / 6);
 		},
 		
 		getImageByOrder: function(order) {
@@ -397,7 +392,7 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 			var url = null;
 			
 			for (var item of service.data.missions) {
-				if ((service.data.count - item.order + 1) == order) {
+				if ((service.data.missions.length - item.order + 1) == order) {
 					url = item.image;
 					break;
 				}
@@ -507,7 +502,7 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 				service.data.mosaic.desc = response.desc;
 				service.data.mosaic.type = response.type;
 				service.data.mosaic.cols = response.cols;
-				service.data.mosaic.count = response.count;
+				service.data.mosaic.rows = response.rows;
 				service.data.mosaic.title = response.title;
 				service.data.mosaic.region = response.region;
 				service.data.mosaic.country = response.country;

@@ -6,36 +6,48 @@
 	
 	<div class="card">
 		
-		<div class="card-header f-row">
+		<div class="card-header f-row" ng-show="!editMode">
 			
 			<span class="mr-auto text-white text-big">{{mosaic.title}}</span>
-	
-			<a ng-if="user.name == mosaic.registerer.name || user.superuser" ng-show="!editMode" ng-click="openEdit();">
-				{{'edit_LABEL' | translate}}
-			</a>
 
 		</div>
 		
-		<div class="card-block first last f-col" ng-show="!editMode">
+		<div class="card-block-bordered first" ng-show="!editMode">
 			
-			<div class="group text-white text-big">{{mosaic.title}}</div>
+	        <div class="f-row" ng-repeat="i in rows()">
+	            <div ng-repeat="j in cols()" style="flex:0 0 16.666667%;">
+	                <img src="/static/front/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{getImage(i, j)}}=s100); background-size: 85% 85%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+	            </div>
+	        </div>
+	        
+		</div>
+		
+		<div class="card-block last f-col" ng-show="!editMode">
 			
-		    <div class="group">
-		    	<a ng-click="goToCountry();">{{mosaic.country}}</a>
-		    	&middot; <a ng-click="goToRegion();">{{mosaic.region}}</a>
-		    	&middot; <a ng-click="goToCity();">{{mosaic.city}}</a>
-		    </div>
-		    
+			<div class="group f-row">
+				
+				<span>
+					{{mosaic.rows}}x{{mosaic.cols}}
+					&middot; {{mosaic.type}}
+				</span>
+				
+			</div>
+		
 			<pre class="group text-highlight">{{mosaic.desc}}</pre>
 			
-			<div class="f-row">
+			<div class="group f-row">
 	        	{{'mosaic_BY' | translate}}
 	        	<a class="ml-2" ng-repeat="creator in mosaic.creators" ng-class="{'text-enligtened': creator.faction == 'E', 'text-resistance': creator.faction == 'R',}" ng-click="goToCreator(creator.name);">{{creator.name}}</a>
 			</div>
 			
+			<div class="f-row">
+	        	{{'mosaic_REGBY' | translate}}
+	        	{{mosaic.registerer.name}}
+			</div>
+			
 		</div>
 		
-		<div class="card-block first last f-col" ng-if="user.name == mosaic.registerer.name || user.superuser" ng-show="editMode">
+		<div class="card-block first last f-col mt-2" ng-if="user.name == mosaic.registerer.name || user.superuser" ng-show="editMode">
 			
 			<div class="loading" ng-show="editLoading">
 				<img src="/static/front/img/loading.png" />
@@ -48,44 +60,12 @@
 	        
 	        <div class="f-row">
 	            
-	            <div class="group fitem-grow pr-2">
-	                <label>{{'mosaic_COUNTRY' | translate}}</label>
-	                <input type="text" class="form-control" ng-model="editModel.country" />
+	            <div class="group fitem-grow pr-1">
+	                <label>{{'mosaic_ROWS' | translate}}</label>
+	                <input type="number" class="form-control" ng-model="editModel.rows" />
 	            </div>
 	            
-	            <div class="group fitem-grow pl-2">
-	                <label>{{'mosaic_REGION' | translate}}</label>
-	                <input type="text" class="form-control" ng-model="editModel.region" />
-	            </div>
-	            
-	            <div class="group fitem-grow pl-2">
-	                <label>{{'mosaic_CITY' | translate}}</label>
-	                <input type="text" class="form-control" ng-model="editModel.city" />
-	            </div>
-	            
-	        </div>
-	        
-	        <div class="group">
-	            <label>{{'mosaic_DESC' | translate}}</label>
-	            <textarea rows="4" cols="50" class="form-control" style="height:auto; padding:.5rem;" ng-model="editModel.desc"></textarea>
-	        </div>
-	        
-	        <div class="f-row">
-	            
-	            <div class="group fitem-grow pr-2">
-	                <label>{{'mosaic_TYPE' | translate}}</label>
-	                <select class="form-control" ng-model="editModel.type">
-	                    <option value="sequence">{{'mosaic_SEQUENCE' | translate}}</option>
-	                    <option value="serie">{{'mosaic_SERIE' | translate}}</option>
-	                </select>
-	            </div>
-	            
-	            <div class="group fitem-grow pr-2 pl-2">
-	                <label>{{'mosaic_COUNT' | translate}}</label>
-	                <input type="number" class="form-control" ng-model="editModel.count" />
-	            </div>
-	            
-	            <div class="group fitem-grow pl-2">
+	            <div class="group fitem-grow pr-1 pl-1">
 	                <label>{{'mosaic_COLS' | translate}}</label>
 	                <select class="form-control" ng-model="editModel.cols" convert-to-number>
 	                    <option value="6">6</option>
@@ -97,11 +77,43 @@
 	                </select>
 	            </div>
 	            
+	            <div class="group fitem-grow pl-1">
+	                <label>{{'mosaic_TYPE' | translate}}</label>
+	                <select class="form-control" ng-model="editModel.type">
+	                    <option value="sequence">{{'mosaic_SEQUENCE' | translate}}</option>
+	                    <option value="serie">{{'mosaic_SERIE' | translate}}</option>
+	                </select>
+	            </div>
+	            
 	        </div>
-
+	        
+	        <div class="group">
+	            <label>{{'mosaic_DESC' | translate}}</label>
+	            <textarea rows="4" cols="50" class="form-control" style="height:auto; padding:.5rem;" ng-model="editModel.desc"></textarea>
+	        </div>
+	        
+	        <div class="f-row">
+	            
+	            <div class="group fitem-grow pr-1">
+	                <label>{{'mosaic_COUNTRY' | translate}}</label>
+	                <input type="text" class="form-control" ng-model="editModel.country" />
+	            </div>
+	            
+	            <div class="group fitem-grow pr-1 pl-1">
+	                <label>{{'mosaic_REGION' | translate}}</label>
+	                <input type="text" class="form-control" ng-model="editModel.region" />
+	            </div>
+	            
+	            <div class="group fitem-grow pl-1">
+	                <label>{{'mosaic_CITY' | translate}}</label>
+	                <input type="text" class="form-control" ng-model="editModel.city" />
+	            </div>
+	            
+	        </div>
+	        
 	        <div class="form-button-bar">
 	        	
-				<button type="submit" class="btn btn-primary" ng-click="edit();" ng-disabled="!editModel.title || !editModel.desc || !editModel.region|| !editModel.country || !editModel.city || !editModel.type || !editModel.count || !editModel.cols">
+				<button type="submit" class="btn btn-primary" ng-click="edit();" ng-disabled="!editModel.title || !editModel.desc || !editModel.region|| !editModel.country || !editModel.city || !editModel.type || !editModel.rows || !editModel.cols">
 				    {{'ok_LABEL' | translate}}
 				</button>
 	        	
@@ -114,28 +126,21 @@
 		</div>
 		
 	</div>
+	
+	<ol class="breadcrumb" ng-show="!editMode">
+	    <li class="breadcrumb-item"><a ng-click="goToCountry();">{{mosaic.country}}</a></li>
+	    <li class="breadcrumb-item"><a ng-click="goToRegion();">{{mosaic.region}}</a></li>
+	    <li class="breadcrumb-item"><a ng-click="goToCity();">{{mosaic.city}}</a></li>
+	</ol>
 
-	<div class="card">
+	<div class="f-row mx-2 form-button-bar" ng-if="user.name == mosaic.registerer.name || user.superuser">
 		
-		<div class="card-header f-row">
-			
-			<span class="mr-auto text-medium">{{'mosaicpage_IMAGE' | translate}}</span>
-			<span>{{rows().length}}x{{mosaic.cols}}</span>
-			
-		</div>
-		
-		<div class="card-block-bordered">
-			
-	        <div class="f-row" ng-repeat="i in rows()">
-	            <div ng-repeat="j in cols()" style="flex:0 0 16.666667%;">
-	                <img src="/static/front/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{getImage(i, j)}}=s100); background-size: 85% 85%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-	            </div>
-	        </div>
-	        
-		</div>
+		<a class="btn btn-secondary" ng-show="!editMode" ng-click="openEdit();">
+			{{'edit_LABEL' | translate}}
+		</a>
 		
 	</div>
-
+	
 	<div class="card">
 		
 		<div class="card-header f-row">
@@ -162,7 +167,7 @@
 		<div class="card-header f-row">
 			
 			<span class="mr-auto text-medium">{{'mosaicpage_MISSIONS' | translate}}</span>
-			<span>{{mosaic.missions.length}} &middot; {{mosaic.type}}</span>
+			<span>{{mosaic.missions.length}}</span>
 			
 		</div>
 		
