@@ -36,7 +36,7 @@
 			<pre class="group text-highlight">{{mosaic.desc}}</pre>
 			
 			<div class="group f-row">
-	        	<span class="ml-2">{{'mosaic_BY' | translate}}</span>
+	        	<span class="mr-2">{{'mosaic_BY' | translate}}</span>
 	        	<a class="mr-2" ng-repeat="creator in mosaic.creators" ng-class="{'text-enligtened': creator.faction == 'E', 'text-resistance': creator.faction == 'R',}" ng-click="goToCreator(creator.name);">{{creator.name}}</a>
 			</div>
 			
