@@ -290,7 +290,9 @@ a:hover, a:focus {
 /* Content ------------------------------------------------------------------ */
 
 .page-content {
-    flex: 1;
+    flex-grow: 1;
+    flex-basis: 0;
+    max-width: 100%;
     overflow-y: scroll;
 }
 
@@ -667,7 +669,9 @@ table td {
 /* Item --------------------------------------------------------------------- */
 
 .fitem-grow {
-    flex: 1;
+    flex-grow: 1;
+    flex-basis: 0;
+    max-width: 100%;
 }
 
 

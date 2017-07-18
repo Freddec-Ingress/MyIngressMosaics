@@ -101,7 +101,7 @@
             
             <div class="f-row" ng-repeat="i in rows()">
                 <div ng-repeat="j in cols()" style="flex:0 0 16.666667%;">
-                    <img src="/static/front/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{getImage(i, j)}}); background-size: 100% 100%; float:left;" />
+	                <img src="/static/front/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{getImage(i, j)}}=s100); background-size: 85% 85%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
                 </div>
             </div>
             
@@ -109,7 +109,7 @@
         
         <div class="card-block last">
             <div class="form-button-bar">
-        		<button class="btn btn-primary" ng-click="create();" ng-disabled="!data.title || !data.region || !data.desc || !data.country || !data.city || !data.type || !data.count || !data.cols">
+        		<button class="btn btn-primary" ng-click="btn_disabled = true; create();" ng-disabled="btn_disabled || !data.title || !data.region || !data.desc || !data.country || !data.city || !data.type || !data.count || !data.cols">
         		    {{'create_BTN' | translate}}
         		</button>
             </div>
