@@ -8,7 +8,7 @@
 		
 		<div class="card-header f-row">
 			
-			<span class="mr-auto text-medium">{{'mosaicpage_DETAILS' | translate}}</span>
+			<span class="mr-auto text-white text-big">{{mosaic.title}}</span>
 	
 			<a ng-if="user.name == mosaic.registerer.name || user.superuser" ng-show="!editMode" ng-click="openEdit();">
 				{{'edit_LABEL' | translate}}

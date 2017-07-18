@@ -97,7 +97,7 @@ class Mosaic(models.Model):
 			'ref': self.ref,
 			'cols': self.cols,
 			'type': self.type,
-			'count': self.count,
+			'count': self.missions.all().count(),
 			'title': self.title,
 			
 			'_distance': self._distance,
@@ -121,7 +121,7 @@ class Mosaic(models.Model):
 			'ref': self.ref,
 			'cols': self.cols,
 			'type': self.type,
-			'count': self.count,
+			'count': self.missions.all().count(),
 			'title': self.title,
 			
 			'_distance': self._distance,
@@ -149,7 +149,7 @@ class Mosaic(models.Model):
 			'type': self.type,
 			'desc': self.desc,
 			'city': self.city,
-			'count': self.count,
+			'count': self.missions.all().count(),
 			'title': self.title,
 			'status': self.status,
 			'region': self.region,
