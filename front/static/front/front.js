@@ -3830,12 +3830,8 @@ angular.module('AngularApp.controllers').controller('CreateCtrl', function($scop
 
 	$scope.rows = function() {
 		
-		var temp = 1;
-		if ($scope.data.count > 0 && $scope.data.cols > 0) temp = Math.ceil($scope.data.count / $scope.data.cols);
-		if (!temp) temp = 1;
-		
 		var rows = [];
-		for (var i = 0; i < temp; i++) {
+		for (var i = 0; i < $scope.data.rows; i++) {
 			rows.push(i);
 		}
 		
