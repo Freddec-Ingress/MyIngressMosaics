@@ -4674,7 +4674,8 @@ angular.module('AngularApp.controllers').controller('MapCtrl', function($scope, 
 	var refArray = [];
 
 	$rootScope.infowindow = new google.maps.InfoWindow({
-		content: ''
+		content: '',
+		pixelOffset: new google.maps.Size(5, 25)
 	});
 
 	$scope.initMap = function() {
