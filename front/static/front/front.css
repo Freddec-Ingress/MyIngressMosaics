@@ -661,6 +661,9 @@ table td {
 .f-align-baseline {
     align-items: baseline!important;
 }
+.f-align-start {
+    align-items: flex-start!important;
+}
 
 .f-wrap {
     flex-wrap: wrap!important;
