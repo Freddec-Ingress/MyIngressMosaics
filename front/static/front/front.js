@@ -4031,6 +4031,7 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 			styles : style,
 			zoomControl: true,
 			disableDefaultUI: true,
+			fullscreenControl: true,
 			center: {lat: $scope.mosaic.missions[0].lat, lng: $scope.mosaic.missions[0].lng},
 		});
 		
@@ -4106,8 +4107,6 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 			for (var p of m.portals) {
 				
 		        var platLng = new google.maps.LatLng(p.lat, p.lng);
-		        latlngbounds.extend(platLng);
-		        
 		        roadmapCoordinates.push(platLng);
 		        
 		        previouslatLng = platLng;
