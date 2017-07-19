@@ -1,8 +1,8 @@
 <div class="card mt-4">
 
-	<div class="card-block first last f-row">
+	<div class="card-block first last f-row f-nowrap">
 		
-		<input type="text" class="form-control mr-2" placeholder="{{'search_PLACEHOLDER' | translate}}" ng-model="searchModel.text" />
+		<input type="text" class="form-control" placeholder="{{'search_PLACEHOLDER' | translate}}" ng-model="searchModel.text" />
 		
 		<button type="submit" class="btn btn-primary ml-2" ng-click="search();">
 			{{'search_LABEL' | translate}}
@@ -27,7 +27,7 @@
 <div class="card" ng-if="countries">
 
 	<div class="card-header">
-		<span class="text-medium">{{'country_LABEL' | translate}}</span>
+		<span class="">{{'country_LABEL' | translate}}</span>
 	</div>
 		
     <table class="card-table">
@@ -68,7 +68,7 @@
 <div class="card" ng-if="regions">
 
 	<div class="card-header">
-		<span class="text-medium">{{'region_LABEL' | translate}}</span>
+		<span class="">{{'region_LABEL' | translate}}</span>
 	</div>
 	
     <table class="card-table">
@@ -98,7 +98,7 @@
 <div class="card" ng-if="cities">
 
 	<div class="card-header">
-		<span class="text-medium">{{'city_LABEL' | translate}}</span>
+		<span class="">{{'city_LABEL' | translate}}</span>
 	</div>
 
     <table class="card-table">
@@ -129,7 +129,7 @@
 <div class="card" ng-if="creators">
 
 	<div class="card-header">
-		<span class="text-medium">{{'creator_LABEL' | translate}}</span>
+		<span class="">{{'creator_LABEL' | translate}}</span>
 	</div>
 
     <table class="card-table">
@@ -155,7 +155,7 @@
 <div class="card" ng-if="mosaics">
 
 	<div class="card-header">
-		<span class="text-medium">{{'mosaics_LABEL' | translate}}</span>
+		<span class="">{{'mosaics_LABEL' | translate}}</span>
 	</div>
 	
     <table class="card-table">
