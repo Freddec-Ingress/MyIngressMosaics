@@ -64,7 +64,7 @@
 			
 			<div class="card-block-bordered f-row f-justify-center" style="height:100px; overflow-y:auto;">
 				
-				<div class="f-row f-wrap f-justify-center">
+				<div class="f-row f-wrap f-justify-center" ng-class="{'f-align-start': mosaic.missions.length > 24}">
 		            <div ng-repeat="m in mosaic.missions | reverse" style="flex:0 0 16.666667%;">
 		                <img src="/static/front/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 85% 85%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
 		            </div>
