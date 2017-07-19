@@ -4106,10 +4106,13 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 		
 			for (var p of m.portals) {
 				
-		        var platLng = new google.maps.LatLng(p.lat, p.lng);
-		        roadmapCoordinates.push(platLng);
-		        
-		        previouslatLng = platLng;
+				if (p.lat != 0.0 && p.lng != 0.0) {
+					
+			        var platLng = new google.maps.LatLng(p.lat, p.lng);
+			        roadmapCoordinates.push(platLng);
+			        
+			        previouslatLng = platLng;
+				}
 			}
 	        
 			var roadmap = new google.maps.Polyline({
