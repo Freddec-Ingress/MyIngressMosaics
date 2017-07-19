@@ -19,7 +19,7 @@
 
 </div>
 
-<div class="f-row f-justify-center mb-4 pt-4" style="height:20px;">
+<div class="f-row f-justify-center mb-4" style="height:20px;">
 	
 	<div class="pr-2 text-right" style="width:50%;">
 		
@@ -47,6 +47,37 @@
 		
 		<script src="https://apis.google.com/js/platform.js" async defer></script>
 		<div class="g-plus" data-action="share" data-annotation="bubble" data-href="https://www.myingressmosaics.com"></div>			
+		
+	</div>
+	
+</div>
+
+<div ng-if="!latest_loading">
+	
+	<div class="f-row mb-4">
+		<span class="text-big">Latest mosaics</span>
+	</div>
+	
+	<div class="f-row f-wrap f-justify-center">
+		
+		<a class="f-col m-1" style="width:150px;" ui-sref="root.mosaic({ref:mosaic.ref})" ng-repeat="mosaic in mosaics">
+			
+			<div class="card-block-bordered f-row f-wrap f-justify-center" style="height:50px;">
+				
+	            <div ng-repeat="m in mosaic.missions | reverse" style="flex:0 0 16.666667%;">
+	                <img src="/static/front/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 85% 85%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+	            </div>
+				
+			</div>
+			
+			<div class="card-block f-col">
+				
+            	<div class="text-white">{{mosaic.title}}</div>
+            	<div class="">{{mosaic.missions.length}} &middot; {{item._distance | number:2}} km &middot; {{item.type}}</div>
+            	
+			</div>
+			
+		</a>
 		
 	</div>
 	

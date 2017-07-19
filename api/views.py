@@ -454,9 +454,27 @@ class MosaicViewSet(viewsets.ViewSet):
 			mosaic.computeDistance()
 			
 		return Response(None, status=status.HTTP_200_OK)
-	
-	
-	
+
+
+
+	def latest(self, request):
+			
+		results = Mosaic.objects.order_by('-pk')[:10]
+		if results.count() > 0:
+			
+			data = []
+			
+			for item in results:
+				
+				mosaic = item.minSerialize()
+				data.append(mosaic)
+			
+			return Response(data, status=status.HTTP_200_OK)
+			
+		return Response(None, status=status.HTTP_404_NOT_FOUND)
+
+
+
 #---------------------------------------------------------------------------------------------------
 class DataViewSet(viewsets.ViewSet):
 	

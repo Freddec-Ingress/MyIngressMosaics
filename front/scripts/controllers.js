@@ -26,9 +26,16 @@ angular.module('AngularApp.controllers').controller('RootCtrl', function($rootSc
 	}
 });
 
-angular.module('AngularApp.controllers').controller('HomeCtrl', function($scope) {
+angular.module('AngularApp.controllers').controller('HomeCtrl', function($scope, DataService) {
 	
-	$scope.page_title = 'home_TITLE';
+	$scope.latest_loading = true;
+	
+	DataService.loadLatest().then(function(response) {
+		
+		$scope.latest_loading = false;
+		
+		$scope.mosaics = response;
+	});
 });
 
 angular.module('AngularApp.controllers').controller('LoginCtrl', function($scope, UserService) {

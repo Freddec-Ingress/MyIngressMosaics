@@ -663,6 +663,11 @@ angular.module('AngularApp.services').service('DataService', function($cookies, 
 	
 	var service = {
 
+		loadLatest: function() {
+			
+			return API.sendRequest('/api/mosaic/latest/', 'GET');
+		},
+		
 		loadCountriesFromWorld: function() {
 			return API.sendRequest('/api/world/', 'POST');
 		},

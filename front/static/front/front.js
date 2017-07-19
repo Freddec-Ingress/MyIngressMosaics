@@ -3422,6 +3422,11 @@ angular.module('AngularApp.services').service('DataService', function($cookies, 
 	
 	var service = {
 
+		loadLatest: function() {
+			
+			return API.sendRequest('/api/mosaic/latest/', 'GET');
+		},
+		
 		loadCountriesFromWorld: function() {
 			return API.sendRequest('/api/world/', 'POST');
 		},
@@ -3683,9 +3688,16 @@ angular.module('AngularApp.controllers').controller('RootCtrl', function($rootSc
 	}
 });
 
-angular.module('AngularApp.controllers').controller('HomeCtrl', function($scope) {
+angular.module('AngularApp.controllers').controller('HomeCtrl', function($scope, DataService) {
 	
-	$scope.page_title = 'home_TITLE';
+	$scope.latest_loading = true;
+	
+	DataService.loadLatest().then(function(response) {
+		
+		$scope.latest_loading = false;
+		
+		$scope.mosaics = response;
+	});
 });
 
 angular.module('AngularApp.controllers').controller('LoginCtrl', function($scope, UserService) {
@@ -4867,7 +4879,14 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 	
 		.state('root', { controller: 'RootCtrl', templateUrl: '/static/front/pages/root.html', resolve: {loadUser: function(UserService) { return UserService.init(); }, }, })
 
-			.state('root.home', { url: '/', controller: 'HomeCtrl', templateUrl: '/static/front/pages/home.html', data: { title: 'home_TITLE', }})
+			.state('root.home', {
+				url: '/',
+				controller: 'HomeCtrl',
+				templateUrl: '/static/front/pages/home.html',
+				data: {
+					title: 'home_TITLE',
+				},
+			})
 
 			.state('root.login', { url: '/login', controller: 'LoginCtrl', templateUrl: '/static/front/pages/login.html', data:{ title: 'login_TITLE', }})
 			.state('root.profile', { url: '/profile', controller: 'ProfileCtrl', templateUrl: '/static/front/pages/profile.html', data:{ title: 'profile_TITLE', }})
