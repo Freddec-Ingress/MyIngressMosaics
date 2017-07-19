@@ -52,9 +52,9 @@
 	
 </div>
 
-<div ng-if="!latest_loading">
+<div class="mt-4" ng-if="!latest_loading">
 	
-	<div class="f-row mb-4 text-center">
+	<div class="f-row f-justify-center mb-4 pt-4">
 		<span class="text-big">Latest mosaics</span>
 	</div>
 	
@@ -75,7 +75,7 @@
 			<div class="card-block f-col">
 				
             	<div class="text-white" style="white-space:nowrap;">{{mosaic.title}}</div>
-            	<div class="">{{mosaic.missions.length}} &middot; {{item._distance | number:2}} km &middot; {{item.type}}</div>
+            	<div class="text-normal">{{mosaic.missions.length}} missions &middot; {{item._distance | number:2}} km</div>
             	
 			</div>
 			

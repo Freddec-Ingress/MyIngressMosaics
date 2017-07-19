@@ -856,6 +856,9 @@ ol > li:last-child {
 .text-highlight {
 	color:#B2DFDB!important;
 }
+.text-normal {
+	color:#BDBDBD!important;
+}
 
 /* Size --------------------------------------------------------------------- */
 
