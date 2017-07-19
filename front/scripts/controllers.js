@@ -1029,7 +1029,7 @@ angular.module('AngularApp.controllers').controller('MapCtrl', function($scope, 
 
 	$rootScope.infowindow = new google.maps.InfoWindow({
 		content: '',
-		pixelOffset: new google.maps.Size(5, 25)
+		pixelOffset: new google.maps.Size(5, 5)
 	});
 
 	$scope.initMap = function() {
@@ -1097,10 +1097,10 @@ angular.module('AngularApp.controllers').controller('MapCtrl', function($scope, 
 		map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(geolocationDiv);
 		
 		var image = {
-			size: new google.maps.Size(50, 50),
+			size: new google.maps.Size(30, 30),
 			origin: new google.maps.Point(0, 0),
-			anchor: new google.maps.Point(25, 25),
-			labelOrigin: new google.maps.Point(25, 27),
+			anchor: new google.maps.Point(15, 15),
+			labelOrigin: new google.maps.Point(15, 17),
 			url: 'https://www.myingressmosaics.com/static/front/img/marker.png',
 		};
 		
