@@ -466,7 +466,7 @@ class MosaicViewSet(viewsets.ViewSet):
 			
 			for item in results:
 				
-				mosaic = item.minSerialize()
+				mosaic = item.homeSerialize()
 				data.append(mosaic)
 			
 			return Response(data, status=status.HTTP_200_OK)
