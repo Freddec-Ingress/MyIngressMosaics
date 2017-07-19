@@ -17,6 +17,7 @@ body {
     margin: 0; 
     height: 100%;
     color: #BDBDBD;
+    overflow: hidden;
     -webkit-font-smoothing: antialiased;
     font: 400 .75rem/1.5 'Coda',sans-serif;
 }
@@ -601,7 +602,6 @@ table tbody tr.selected {
 }
 
 table td {
-    height: 3rem;
     max-width: 5rem;
     padding: .5rem .25rem;
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
@@ -636,6 +636,9 @@ table td {
 
 .f-wrap {
     flex-wrap: wrap!important;
+}
+.f-nowrap {
+    flex-wrap: nowrap!important;
 }
 
 /* Item --------------------------------------------------------------------- */
@@ -796,6 +799,24 @@ ol > li:last-child {
 .pb-2 {
 	padding-bottom: .5rem!important;
 }
+
+.p-4 {
+	padding: 1rem!important;
+}
+.pt-4 {
+	padding-top: 1rem!important;
+}
+.pl-4 {
+	padding-left: 1rem!important;
+}
+.pr-4 {
+	padding-right: 1rem!important;
+}
+.pb-4 {
+	padding-bottom: 1rem!important;
+}
+
+
 
 /* Alignment ---------------------------------------------------------------- */
 

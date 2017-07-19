@@ -446,6 +446,79 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 			potentials: null,
 		},
 		
+		sortMPotentialsByName: function(sort) {
+			
+			function compareNameAsc(a, b) {
+				
+				var a_name = a.name.toLowerCase().replace(/0|1|2|3|4|5|6|7|8|9/g, '');
+				var b_name = b.name.toLowerCase().replace(/0|1|2|3|4|5|6|7|8|9/g, '');
+				
+				if (a_name < b_name)
+					return -1;
+					
+				if (a_name > b_name)
+					return 1;
+
+				var a_name = a.name;
+				var b_name = b.name;
+				
+				if (a_name < b_name)
+					return -1;
+					
+				if (a_name > b_name)
+					return 1;
+					
+				var a_creator = a.creator.toLowerCase();
+				var b_creator = b.creator.toLowerCase();
+				
+				if (a_creator < b_creator)
+					return -1;
+					
+				if (a_creator > b_creator)
+					return 1;
+
+				return 0;
+			}
+			
+			function compareNameDesc(a, b) {
+				
+				var a_name = a.name.toLowerCase().replace(/0|1|2|3|4|5|6|7|8|9/g, '');
+				var b_name = b.name.toLowerCase().replace(/0|1|2|3|4|5|6|7|8|9/g, '');
+				
+				if (a_name > b_name)
+					return -1;
+					
+				if (a_name < b_name)
+					return 1;
+
+				var a_name = a.name;
+				var b_name = b.name;
+				
+				if (a_name > b_name)
+					return -1;
+					
+				if (a_name < b_name)
+					return 1;
+					
+				var a_creator = a.creator.toLowerCase();
+				var b_creator = b.creator.toLowerCase();
+				
+				if (a_creator > b_creator)
+					return -1;
+					
+				if (a_creator < b_creator)
+					return 1;
+				
+				return 0;
+			}
+			
+			if (service.data.potentials) {
+				
+				if (sort == 'asc') service.data.potentials.sort(compareNameAsc);
+				if (sort == 'desc') service.data.potentials.sort(compareNameDesc);
+			}
+		},
+
 		getMosaic: function(ref) {
 			
 			var data = { 'ref':ref };
@@ -464,6 +537,7 @@ angular.module('AngularApp.services').service('MosaicService', function($state, 
 					}
 					
 					service.data.potentials = response;
+					service.sortMPotentialsByName();
 				}
 			});
 			
