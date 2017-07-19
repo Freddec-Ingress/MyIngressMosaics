@@ -20,12 +20,7 @@
 				<i class="fa fa-search menu-nav-icon"></i>
 		    	{{'search_LABEL' | translate}}
 		    </a>
-			
-		    <a class="menu-nav-item" ui-sref="root.world" ui-sref-active="active">
-				<i class="fa fa-globe menu-nav-icon"></i>
-		    	{{'world_LINK' | translate}}
-		    </a>
-			
+
 		    <a class="menu-nav-item" ui-sref="root.missions" ui-sref-active="active">
 				<i class="fa fa-plus-square menu-nav-icon"></i>
 		    	{{'missions_LINK' | translate}}
@@ -53,12 +48,7 @@
 				<i class="fa fa-user menu-nav-icon"></i>
 				{{'profile_LINK' | translate}}
 			</a>
-			
-			<a class="menu-nav-item" ui-sref="root.mymosaics" ng-show="user.authenticated">
-				<i class="fa fa-th menu-nav-icon"></i>
-				{{'mymosaics_LINK' | translate}}
-			</a>
-			
+
 			<a class="menu-nav-item" href="javascript:;"  ng-show="user.authenticated" ng-click="logout();">
 				<i class="fa fa-sign-out menu-nav-icon"></i>
 				{{'logout_LINK' | translate}}

@@ -1,6 +1,6 @@
 <h2>{{'site_DESC' | translate}}</h1>
 
-<div class="f-row f-wrap f-justify-center">
+<div class="f-row f-wrap f-justify-center mb-4">
      
     <a class="btn btn-primary fitem-grow f-col mx-2 my-2" style="max-width:100px; min-width: 100px;" ui-sref="root.map">
         <i class="fa fa-map p-2" style="font-size:2rem;"></i>
@@ -11,15 +11,43 @@
         <i class="fa fa-search p-2" style="font-size:2rem;"></i>
         {{'search_LABEL' | translate}}
     </a>
-   
-    <a class="btn btn-primary fitem-grow f-col mx-2 my-2" style="max-width:100px; min-width: 100px;" ui-sref="root.world">
-        <i class="fa fa-globe p-2" style="font-size:2rem;"></i>
-        {{'explore_LABEL' | translate}}
-    </a>
-    
+
     <a class="btn btn-primary fitem-grow f-col mx-2 my-2" style="max-width:100px; min-width: 100px;" ui-sref="root.missions">
         <i class="fa fa-plus-square p-2" style="font-size:2rem;"></i>
         {{'register_LABEL' | translate}}
     </a>
 
+</div>
+
+<div class="f-row f-justify-center mb-4 pt-4" style="height:20px;">
+	
+	<div class="pr-2 text-right" style="width:50%;">
+		
+		<div id="fb-root"></div>
+		
+		<script>
+			(function(d, s, id) {
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) return;
+				js = d.createElement(s); js.id = id;
+				js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10";
+				fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+		</script>
+		
+		<div class="fb-share-button" data-href="https://www.myingressmosaics.com" data-layout="button_count" data-size="small" data-mobile-iframe="true">
+			<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">
+				Share
+			</a>
+		</div>
+	
+	</div>
+	
+	<div class="pl-2" style="width:50%; display:flex;">
+		
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+		<div class="g-plus" data-action="share" data-annotation="bubble" data-href="https://www.myingressmosaics.com"></div>			
+		
+	</div>
+	
 </div>
