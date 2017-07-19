@@ -131,11 +131,44 @@
 	    <li class="breadcrumb-item"><a ng-click="goToCity();">{{mosaic.city}}</a></li>
 	</ol>
 
-	<div class="f-row mx-2 form-button-bar" ng-if="user.name == mosaic.registerer.name || user.superuser">
+	<div class="f-row mx-2 mb-4 form-button-bar" ng-if="user.name == mosaic.registerer.name || user.superuser">
 		
 		<a class="btn btn-secondary" ng-show="!editMode" ng-click="openEdit();">
 			{{'edit_LABEL' | translate}}
 		</a>
+		
+	</div>
+
+	<div class="f-row f-justify-center mb-4" style="height:20px;">
+		
+		<div class="pr-2 text-right" style="width:50%;">
+			
+			<div id="fb-root"></div>
+			
+			<script>
+				(function(d, s, id) {
+					var js, fjs = d.getElementsByTagName(s)[0];
+					if (d.getElementById(id)) return;
+					js = d.createElement(s); js.id = id;
+					js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10";
+					fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk'));
+			</script>
+			
+			<div class="fb-share-button" data-href="https://www.myingressmosaics.com/mosaic/{{mosaic.ref}}" data-layout="button_count" data-size="small" data-mobile-iframe="true">
+				<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">
+					Share
+				</a>
+			</div>
+		
+		</div>
+		
+		<div class="pl-2" style="width:50%; display:flex;">
+			
+			<script src="https://apis.google.com/js/platform.js" async defer></script>
+			<div class="g-plus" data-action="share" data-annotation="bubble" data-href="https://www.myingressmosaics.com/mosaic/{{mosaic.ref}}"></div>			
+			
+		</div>
 		
 	</div>
 	
