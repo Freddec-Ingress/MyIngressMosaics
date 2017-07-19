@@ -404,7 +404,10 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 				service.data.title = service.data.missions[0].name;
 				service.data.desc = service.data.missions[0].desc;
 				
-				service.data.title = service.data.title.replace(/0|1|2|3|4|5|6|7|8|9|\/|#|(|)|./g, '');
+				service.data.title = service.data.title.replace(/0|1|2|3|4|5|6|7|8|9|\/|#|\(|\)|./g, '');
+				service.data.title = service.data.title.trim();
+				service.data.title = service.data.title.replace('of ', '');
+				service.data.title = service.data.title.replace(' of', '');
 				service.data.title = service.data.title.trim();
 			}
 			
