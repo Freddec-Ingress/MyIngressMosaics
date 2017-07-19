@@ -1,6 +1,6 @@
-<div id="floating-panel">
-	<input id="address" type="textbox" value="" />
-	<input id="submit" type="button" value="Search" />
+<div id="floating-panel" class="card-block f-row f-nowrap m-2" style="z-index:1000;">
+	<input id="address" class="form-control" type="textbox" placeholder="Enter location" value="" />
+	<input id="submit" class="btn btn-primary ml-2" type="button" value="Search" />
 </div>
 
 <div id="map" ng-init="initMap();" style="height:calc(100% - 48px); position:absolute; top:48px; left:0px; right:0px;"></div>

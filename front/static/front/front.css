@@ -762,6 +762,9 @@ ol > li:last-child {
 	margin-bottom: .25rem!important;
 }
 
+.m-2 {
+	margin: .5rem!important;
+}
 .mx-2 {
 	margin-left: .5rem!important;
 	margin-right: .5rem!important;

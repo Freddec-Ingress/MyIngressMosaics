@@ -1198,6 +1198,28 @@ angular.module('AngularApp.controllers').controller('MapCtrl', function($scope, 
 				toastr.error($filter('translate')('error_GEOLOCSUPPORT'));
 			}
 		}
+		
+		var geocoder = new google.maps.Geocoder();
+		
+		function geocodeAddress(geocoder, resultsMap) {
+			
+			var address = document.getElementById('address').value;
+			geocoder.geocode({'address': address}, function(results, status) {
+				
+				if (status === 'OK') {
+					
+					resultsMap.setCenter(results[0].geometry.location);
+					
+				} else {
+					
+					toastr.error('Geocode was not successful for the following reason: ' + status);
+				}
+			});
+		}
+
+    	document.getElementById('submit').addEventListener('click', function() {
+        	geocodeAddress(geocoder, map);
+        });
 	}
 });
 
