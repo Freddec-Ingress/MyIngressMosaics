@@ -743,6 +743,9 @@ ol > li:last-child {
 	margin-bottom: 0!important;
 }
 
+.m-1 {
+	margin: .25rem!important;
+}
 .mt-1 {
 	margin-top: .25rem!important;
 }

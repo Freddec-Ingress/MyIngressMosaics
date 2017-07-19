@@ -459,7 +459,7 @@ class MosaicViewSet(viewsets.ViewSet):
 
 	def latest(self, request):
 			
-		results = Mosaic.objects.order_by('-pk')[:10]
+		results = Mosaic.objects.order_by('-pk')[:12]
 		if results.count() > 0:
 			
 			data = []
