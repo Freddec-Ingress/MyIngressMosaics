@@ -6,14 +6,12 @@
 	
 	<div class="card mt-4">
 		
-		<div class="card-block-bordered first" ng-show="!editMode">
+		<div class="card-block-bordered first f-row f-wrap f-justify-center">
 			
-	        <div class="f-row" ng-repeat="i in rows()">
-	            <div ng-repeat="j in cols()" style="flex:0 0 16.666667%;">
-	                <img src="/static/front/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{getImage(i, j)}}=s100); background-size: 85% 85%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-	            </div>
-	        </div>
-	        
+            <div ng-repeat="m in mosaic.missions | reverse" style="flex:0 0 16.666667%;">
+                <img src="/static/front/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 85% 85%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+            </div>
+
 		</div>
 		
 		<div class="card-block last f-col" ng-show="!editMode">
@@ -47,7 +45,7 @@
 			
 		</div>
 		
-		<div class="card-block first last f-col mt-2" ng-if="user.name == mosaic.registerer.name || user.superuser" ng-show="editMode">
+		<div class="card-block first last f-col" ng-if="user.name == mosaic.registerer.name || user.superuser" ng-show="editMode">
 			
 			<div class="loading" ng-show="editLoading">
 				<img src="/static/front/img/loading.png" />
@@ -161,7 +159,7 @@
 	
 	<div class="card">
 		
-		<div class="group form-button-bar">
+		<div class="group form-button-bar" ng-show="!reorderMode && !addMode">
 			
 			<a class="btn btn-secondary" ng-click="openReorder();">
 				{{'mosaicpage_REORDER' | translate}}

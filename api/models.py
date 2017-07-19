@@ -178,16 +178,32 @@ class Mosaic(models.Model):
 		
 		for item in self.missions.all().order_by('order'):
 			
-			item.checkPortal()
-			
 			mission_data = {
 				'ref': item.ref,
 				'title': item.title,
 				'image': item.image,
 				'order': item.order,
-				'lat': item._startLat,
-				'lng': item._startLng,
+				'lat': 0.0,
+				'lng': 0.0,
+				'portals': [],
 			}
+			
+			portals = item.portals.order_by('order')
+			if portals.count() > 0:
+				
+				for p in portals:
+					
+					if p.lat != 0.0 and p.lng != 0.0 and mission_data['lat'] == 0.0 and mission_data['lng'] == 0.0:
+						
+						mission_data['lat'] = p.lat
+						mission_data['lng'] = p.lng
+
+					portal_data = {
+						'lat': p.lat,
+						'lng': p.lng,
+					}
+					
+					mission_data['portals'].append(portal_data)
 			
 			data['missions'].append(mission_data)
 			

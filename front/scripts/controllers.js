@@ -305,40 +305,6 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 	
 	$scope.remove = MosaicService.remove;
 	
-	$scope.rows = function() {
-		
-		var temp = 1;
-		if ($scope.mosaic.count > 0 && $scope.mosaic.cols > 0) temp = Math.ceil($scope.mosaic.count / $scope.mosaic.cols);
-		if (!temp) temp = 1;
-		
-		var rows = [];
-		for (var i = 0; i < temp; i++) {
-			rows.push(i);
-		}
-		
-		return rows;
-	}
-	
-	$scope.cols = function() {
-		
-		var temp = 1;
-		if ($scope.mosaic.cols > 0) temp = $scope.mosaic.cols;
-		if (!temp) temp = 1;
-		
-		var cols = [];
-		for (var i = 0; i < temp; i++) {
-			cols.push(i);
-		}
-		
-		return cols;
-	}
-	
-	$scope.getImage = function(i, j) {
-		
-		var order = (i * $scope.mosaic.cols + j) + 1;
-		return MosaicService.getImageByOrder(order);
-	}
-	
 	/* Edit */
 	
 	$scope.editMode = false;
@@ -487,8 +453,6 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 		
 		var latlngbounds = new google.maps.LatLngBounds();
 		
-		var roadmapCoordinates= [];
-		
 		var image = {
 			size: new google.maps.Size(50, 50),
 			origin: new google.maps.Point(0, 0),
@@ -497,8 +461,23 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 			url: 'https://www.myingressmosaics.com/static/front/img/neutral.png',
 		};
 		
+		var lineSymbol = {
+			path: 'M 0,0 0,-5',
+			strokeOpacity: 1,
+			scale: 2
+		};
+		
+		var arrowSymbol = {
+			path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+		};
+		
+		var nextlatLng = null;
+		var previouslatLng = null;
+		
 		for (var m of $scope.mosaic.missions) {
 		
+			/* Mission marker */
+			
 	        var marker = new google.maps.Marker({
 	        	
 				map: map,
@@ -507,22 +486,64 @@ angular.module('AngularApp.controllers').controller('MosaicCtrl', function($scop
 				position: {lat: m.lat, lng: m.lng},
 	        });
 	        
-	        var latLng = new google.maps.LatLng(m.lat,m.lng);
-	        latlngbounds.extend(latLng);
+	        var mlatLng = new google.maps.LatLng(m.lat, m.lng);
+	        latlngbounds.extend(mlatLng);
 	        
-	        roadmapCoordinates.push(latLng);
-		}
-		
-		var roadmap = new google.maps.Polyline({
-			path: roadmapCoordinates,
-			geodesic: true,
-			strokeColor: '#ebbc4a',
-			strokeOpacity: 0.95,
-			strokeWeight: 4,
-        });
+	        /* Mission transit */
+	        
+	        nextlatLng = mlatLng;
+	        
+	        if (nextlatLng && previouslatLng) {
+	        	
+				var transitRoadmapCoordinates= [];
+				
+		        transitRoadmapCoordinates.push(previouslatLng);
+		        transitRoadmapCoordinates.push(nextlatLng);
+		        
+				var transitRoadmap = new google.maps.Polyline({
+					path: transitRoadmapCoordinates,
+					geodesic: true,
+					strokeColor: '#ebbc4a',
+					strokeOpacity: 0,
+					strokeWeight: 2,
+					icons: [{
+						icon: lineSymbol,
+						offset: '0',
+						repeat: '20px'
+					},],
+		        });
+		        
+		        transitRoadmap.setMap(map);
+	        }
 
-		if ($scope.mosaic.type == 'sequence') {
-        	roadmap.setMap(map);
+			/* Mission roadmap */
+			
+			var roadmapCoordinates= [];
+		
+			for (var p of m.portals) {
+				
+		        var platLng = new google.maps.LatLng(p.lat, p.lng);
+		        latlngbounds.extend(platLng);
+		        
+		        roadmapCoordinates.push(platLng);
+		        
+		        previouslatLng = platLng;
+			}
+	        
+			var roadmap = new google.maps.Polyline({
+				path: roadmapCoordinates,
+				geodesic: true,
+				strokeColor: '#ebbc4a',
+				strokeOpacity: 0.95,
+				strokeWeight: 2,
+				icons: [{
+					icon: arrowSymbol,
+					offset: '100%',
+				},],
+			});
+	        
+	        roadmap.setMap(map);
+	        
 		}
 		
 		map.setCenter(latlngbounds.getCenter());
