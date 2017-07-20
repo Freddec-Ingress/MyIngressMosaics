@@ -71,8 +71,13 @@ a:hover, a:focus {
 	background-color: transparent;
 }
 .scrollbar::-webkit-scrollbar-thumb {
+    opacity: .75;
 	border-radius: 3px;
 	background-color: #004D40;
+}
+
+.scrollbar-mini::-webkit-scrollbar {
+	width: 4px;
 }
 
 /* Loading ------------------------------------------------------------------ */
@@ -195,7 +200,8 @@ a:hover, a:focus {
 /* Content ------------------------------------------------------------------ */
 
 .menu-content {
-    display: flex; flex-direction: column; flex: 1;
+    overflow-y: scroll; overflow-x: hidden;
+    display: flex; flex-direction: column;  flex-grow: 1; flex-basis: 0;
 }
 
 /* Nav ---------------------------------------------------------------------- */
@@ -307,7 +313,6 @@ a:hover, a:focus {
 .page-content {
     flex-grow: 1;
     flex-basis: 0;
-    max-width: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
 }
