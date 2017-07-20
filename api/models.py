@@ -122,6 +122,7 @@ class Mosaic(models.Model):
 			'ref': self.ref,
 			'title': self.title,
 			'city': self.city,
+			'cols': self.cols,
 			'country': self.country,
 			
 			'_distance': self._distance,
