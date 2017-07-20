@@ -33,6 +33,20 @@ a:hover, a:focus {
 	cursor: pointer;
 }
 
+/* Scrollbar ---------------------------------------------------------------- */
+
+.scrollbar::-webkit-scrollbar {
+	width: 8px;
+	background-color: transparent;
+}
+.scrollbar::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+	border-radius: 3px;
+	background-color: #004D40;
+}
+
 /* Loading ------------------------------------------------------------------ */
 
 @-webkit-keyframes rotating {
