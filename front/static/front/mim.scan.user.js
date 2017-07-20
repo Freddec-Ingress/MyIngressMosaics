@@ -1,7 +1,7 @@
 // ==UserScript==
 // @id             myingressmosaics@freddec
 // @name           MyIngressMosaics Scanning plugin
-// @version        1.0.1
+// @version        1.0.2
 // @include        https://*.ingress.com/intel*
 // @include        http://*.ingress.com/intel*
 // @match          https://*.ingress.com/intel*
@@ -191,15 +191,19 @@ function callMIMAPI(action, data) {
 var tilesProcessed = [];
 var tilesToBeProcessed = [];
 
+var currentProcessed_count = 0;
+var currentToBeProcessed_count = 0;
+
 function processTileRequest() {
 
     if (tilesToBeProcessed.length > 0) {
 
-        var text = '' + tilesProcessed.length + '/' + (tilesToBeProcessed.length + tilesProcessed.length);
+        currentProcessed_count += 1;
+
+        var text = '' + currentProcessed_count + '/' + currentToBeProcessed_count;
         document.getElementById('loading_msg_text').innerHTML = 'Scanning Data... ' + text;
 
         var tile = tilesToBeProcessed.slice(0, 1)[0];
-        console.log(text + ' - Processing tile: ', tile.id);
 
         var rectangle = new google.maps.Rectangle({
             strokeColor: '#FF0000',
@@ -246,7 +250,6 @@ function processTileRequest() {
                             }
                         }
 
-                        if (portalsToBeProcessed.length < 1) console.log('\tno portal');
                         processPortalRequest();
                     }
                 }
@@ -255,7 +258,10 @@ function processTileRequest() {
     }
     else {
 
-        console.log('***END');
+        currentProcessed_count = 0;
+        currentToBeProcessed_count = 0;
+
+        scanning = false;
 
         $('#loading_msg_text').hide();
         $('#loading_data_circle').hide();
@@ -267,12 +273,16 @@ function processTileRequest() {
 
 var portalsToBeProcessed = [];
 
+var mImage = {
+    url: 'https://commondatastorage.googleapis.com/ingress.com/img/map_icons/marker_images/enl_lev8.png',
+    scaledSize: new google.maps.Size(25, 25),
+};
+
 function processPortalRequest() {
 
     if (portalsToBeProcessed.length > 0) {
 
         var portal = portalsToBeProcessed[0];
-        console.log('\tProcessing portal: ', portal.id);
 
         portalsToBeProcessed.splice(portalsToBeProcessed.indexOf(portal), 1);
 
@@ -288,17 +298,12 @@ function processPortalRequest() {
                     var found = mission_name.match(/[0-9]+/);
                     if (found) {
 
-                        console.log('\t\tFound mission: ', mission_name);
+                        console.log(mission_name);
 
-                        var circle = new google.maps.Circle({
-                            strokeColor: '#00FF00',
-                            strokeOpacity: 1,
-                            strokeWeight: 1,
-                            fillColor: '#00FF00',
-                            fillOpacity: 1,
+                        var marker = new google.maps.Marker({
+                            position: {lat: portal.lat, lng: portal.lng},
                             map: M,
-                            center: {lat: portal.lat, lng: portal.lng},
-                            radius: 100,
+                            icon: mImage,
                         });
 
                         var mission_id = item[0];
@@ -309,7 +314,6 @@ function processPortalRequest() {
                     }
                 }
 
-                if (missionsToBeProcessed.length < 1) console.log('\t\tno mission');
                 processMissionRequest();
             }
 
@@ -406,7 +410,7 @@ function init() {
         var north = bds.getNorthEast().lat();
         var south = bds.getSouthWest().lat();
 
-        var zoom = 15;
+        var zoom = 17;
         var minLevel = 0;
         var tilesPerEdge = 32000;
 
@@ -415,6 +419,9 @@ function init() {
 
         var yStart = Math.floor((1 - Math.log(Math.tan(north * Math.PI / 180) + 1 / Math.cos(north * Math.PI / 180)) / Math.PI) / 2 * tilesPerEdge);
         var yEnd = Math.floor((1 - Math.log(Math.tan(south * Math.PI / 180) + 1 / Math.cos(south * Math.PI / 180)) / Math.PI) / 2 * tilesPerEdge);
+
+        currentProcessed_count = 0;
+        currentToBeProcessed_count = 0;
 
         // Tiles
         for (var x = xStart; x <= xEnd; x++) {
@@ -436,12 +443,13 @@ function init() {
                 tile.id = zoom + "_" + x + "_" + y + "_" + minLevel + "_8_100";
 
                 if (tilesProcessed.findIndex(testTile, tile) == -1) {
+
+                    currentToBeProcessed_count += 1;
+
                     tilesToBeProcessed.push(tile);
                 }
            }
         }
-
-        console.log('***START');
 
         scanning = true;
 
@@ -452,8 +460,6 @@ function init() {
     };
 
     window.stopScanning = function() {
-
-        console.log('***STOP');
 
         scanning = false;
 
