@@ -62,12 +62,12 @@
 				{{'menu_title_LANG' | translate}}
 			</div>
 			
-			<a class="menu-nav-item" href="/en{{state.current.url}}">
+			<a class="menu-nav-item" ng-click="changeLang('en');">
 				<span class="flag-icon flag-icon-gb menu-nav-icon"></span>
 				English
 			</a>
 			
-			<a class="menu-nav-item" href="/fr{{state.current.url}}">
+			<a class="menu-nav-item" ng-click="changeLang('fr');">
 				<span class="flag-icon flag-icon-fr menu-nav-icon"></span>
 				Français
 			</a>

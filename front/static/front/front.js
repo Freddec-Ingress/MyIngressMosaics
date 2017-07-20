@@ -3677,6 +3677,10 @@ angular.module('AngularApp.controllers').controller('RootCtrl', function($rootSc
 	$scope.closeMenu = function() {
 		$rootScope.menu_open = false;
 	}
+	
+	$scope.changeLang = function(lang) {
+		$translate.use(lang);
+	}
 });
 
 angular.module('AngularApp.controllers').controller('HomeCtrl', function($scope, DataService) {
