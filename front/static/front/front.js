@@ -3153,6 +3153,8 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 				service.data.title = service.data.title.replace(')', '');
 				service.data.title = service.data.title.replace('/', '');
 				service.data.title = service.data.title.trim();
+				service.data.title = service.data.title.replace('of  ', '');
+				service.data.title = service.data.title.replace('  of', '');
 			}
 			
 			service.data.type = 'sequence';
