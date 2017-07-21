@@ -1,7 +1,7 @@
 // ==UserScript==
 // @id             myingressmosaics@freddec
 // @name           MyIngressMosaics Scanning plugin
-// @version        1.0.2
+// @version        1.0.3
 // @include        https://*.ingress.com/intel*
 // @include        http://*.ingress.com/intel*
 // @match          https://*.ingress.com/intel*
@@ -198,29 +198,18 @@ function processTileRequest() {
 
     if (tilesToBeProcessed.length > 0) {
 
-        currentProcessed_count += 1;
-
         var text = '' + currentProcessed_count + '/' + currentToBeProcessed_count;
         document.getElementById('loading_msg_text').innerHTML = 'Scanning Data... ' + text;
 
-        var tile = tilesToBeProcessed.slice(0, 1)[0];
+        var tiles = tilesToBeProcessed.slice(0, 12);
 
-        var rectangle = new google.maps.Rectangle({
-            strokeColor: '#FF0000',
-            strokeOpacity: 0.5,
-            strokeWeight: 1,
-            fillColor: '#FF0000',
-            fillOpacity: 0.25,
-            map: M,
-            bounds: {
-                north: tile.north,
-                south: tile.south,
-                east: tile.east,
-                west: tile.west
-            }
-        });
+        var data = { tileKeys: [] };
 
-        var data = { tileKeys: [tile.id] };
+        for (var tile of tiles) {
+
+            data.tileKeys.push(tile.id);
+        }
+
         callIngressAPI('getEntities', data, function(data, textStatus, jqXHR) {
 
             if (data && data.result) {
@@ -231,6 +220,30 @@ function processTileRequest() {
                     if ('error' in val) {
                     }
                     else {
+
+                        var tile = null;
+                        for (var t of tiles) {
+                            if (t.id == tile_id) {
+                                tile = t;
+                            }
+                        }
+
+                        var rectangle = new google.maps.Rectangle({
+                            strokeColor: '#FF0000',
+                            strokeOpacity: 0.5,
+                            strokeWeight: 1,
+                            fillColor: '#FF0000',
+                            fillOpacity: 0.25,
+                            map: M,
+                            bounds: {
+                                north: tile.north,
+                                south: tile.south,
+                                east: tile.east,
+                                west: tile.west
+                            }
+                        });
+
+                        currentProcessed_count += 1;
 
                         tilesToBeProcessed.splice(tilesToBeProcessed.indexOf(tile), 1);
                         tilesProcessed.push(tile);
@@ -253,6 +266,8 @@ function processTileRequest() {
                         processPortalRequest();
                     }
                 }
+
+                if (scanning) { processTileRequest(); }
             }
         });
     }
@@ -318,10 +333,6 @@ function processPortalRequest() {
             }
 
         });
-    }
-    else {
-
-        if (scanning) { processTileRequest(); }
     }
 }
 
