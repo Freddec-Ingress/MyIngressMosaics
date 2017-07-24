@@ -1,7 +1,7 @@
 // ==UserScript==
 // @id             myingressmosaics@freddec
 // @name           MyIngressMosaics Scanning plugin
-// @version        1.0.3
+// @version        1.0.4
 // @include        https://*.ingress.com/intel*
 // @include        http://*.ingress.com/intel*
 // @match          https://*.ingress.com/intel*
@@ -269,6 +269,9 @@ function processTileRequest() {
 
                 if (scanning) { processTileRequest(); }
             }
+        }, function(jqXHR, textStatus, errorThrown) {
+
+            if (scanning) { processTileRequest(); }
         });
     }
     else {
@@ -332,6 +335,9 @@ function processPortalRequest() {
                 processMissionRequest();
             }
 
+        }, function(jqXHR, textStatus, errorThrown) {
+
+            processPortalRequest();
         });
     }
 }
@@ -357,6 +363,10 @@ function processMissionRequest() {
                 callMIMAPI('ext_register', data.result);
                 processMissionRequest();
             }
+
+        }, function(jqXHR, textStatus, errorThrown) {
+
+            processMissionRequest();
         });
     }
     else {
