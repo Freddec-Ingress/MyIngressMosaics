@@ -107,7 +107,7 @@
                         <td style="width:50%;">{{item.name}}</td>
                         <td style="width:25%;" ng-class="{'text-enligtened': item.faction == 'E', 'text-resistance': item.faction == 'R',}" ng-click="$event.stopPropagation(); toggle($index, $event, item);">{{item.creator}}</td>
                         <td class="text-right">
-                            <a href="https://www.ingress.com/mission/{{item.ref}}&z=16" class="ml-2" target="blank">
+                            <a href="https://www.ingress.com/mission/{{item.ref}}" class="ml-2" target="blank">
                                 <i class="fa fa-external-link"></i>
                             </a>
                         </td>
@@ -154,7 +154,7 @@
                             {{item.name}}
                         </td>
                         <td class="text-center">
-                            <a href="https://www.ingress.com/mission/{{item.ref}}&z=16" class="ml-2" target="blank">
+                            <a href="https://www.ingress.com/mission/{{item.ref}}" class="ml-2" target="blank">
                                 <i class="fa fa-external-link"></i>
                             </a>
                         </td>
