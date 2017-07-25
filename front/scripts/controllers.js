@@ -124,6 +124,7 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 		mosaic_name = mosaic_name.replace('[] ', '');
 		mosaic_name = mosaic_name.replace('of : ', '');
 		mosaic_name = mosaic_name.replace('[ of ] ', '');
+		mosaic_name = mosaic_name.replace('  ', ' ');
 		
 		/* Find existing mosaic */
 		var existing_mosaic = null;
@@ -181,7 +182,8 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 	
 	/* Standalone missions */
 	$scope.missions = [];
-	for (var mosaic of $scope.mosaics) {
+	var mosaic_array = $scope.mosaics;
+	for (var mosaic of mosaic_array) {
 		if (mosaic.missions.length < 3) {
 			for (var mission of mosaic.missions) {
 				$scope.missions.push(mission);
