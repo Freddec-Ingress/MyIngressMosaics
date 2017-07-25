@@ -123,6 +123,7 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 		mosaic_name = mosaic_name.replace('[ - ] ', '');
 		mosaic_name = mosaic_name.replace('[] ', '');
 		mosaic_name = mosaic_name.replace('of : ', '');
+		mosaic_name = mosaic_name.replace('[ of ] ', '');
 		
 		/* Find existing mosaic */
 		var existing_mosaic = null;
