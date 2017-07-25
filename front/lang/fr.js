@@ -33,6 +33,7 @@ var fr_translations = {
 	deleteall_LABEL: 'Tout supprimer',
 	download_LABEL: 'Télécharger',
 	unselectall_LABEL: 'Tout désélectionner',
+	delete_LABEL: 'Supprimer',
 	
 	home_TITLE: 'Bienvenue',
 	home_HELPTITLE: 'Ce que vous pouvez faire pour aider',

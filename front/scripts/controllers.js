@@ -189,6 +189,16 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 		}
 	}
 	
+	/* Delete mosaic */
+	$scope.deleteMosaic = function(mosaic) {
+		
+		for (var item of mosaic.missions) {
+			UserService.deleteMission(item);
+		}
+		
+		$scope.mosaics.splice($scope.mosaics.indexOf(mosaic), 1);
+	}
+	
 	$scope.mosaics = mosaics;
 	$scope.missions = missions;
 	

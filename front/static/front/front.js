@@ -2411,6 +2411,7 @@ var en_translations = {
 	deleteall_LABEL: 'Delete all',
 	download_LABEL: 'Download',
 	unselectall_LABEL: 'Unselect All',
+	delete_LABEL: 'Delete',
 	
 	home_TITLE: 'Welcome',
 	home_HELPTITLE: 'What you can do to help',
@@ -2593,6 +2594,7 @@ var fr_translations = {
 	deleteall_LABEL: 'Tout supprimer',
 	download_LABEL: 'Télécharger',
 	unselectall_LABEL: 'Tout désélectionner',
+	delete_LABEL: 'Supprimer',
 	
 	home_TITLE: 'Bienvenue',
 	home_HELPTITLE: 'Ce que vous pouvez faire pour aider',
@@ -3893,6 +3895,16 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 			missions = missions.concat(mosaic.missions);
 			mosaics.splice(mosaics.indexOf(mosaic), 1);
 		}
+	}
+	
+	/* Delete mosaic */
+	$scope.deleteMosaic = function(mosaic) {
+		
+		for (var item of mosaic.missions) {
+			UserService.deleteMission(item);
+		}
+		
+		$scope.mosaics.splice($scope.mosaics.indexOf(mosaic), 1);
 	}
 	
 	$scope.mosaics = mosaics;

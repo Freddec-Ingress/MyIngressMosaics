@@ -33,6 +33,7 @@ var en_translations = {
 	deleteall_LABEL: 'Delete all',
 	download_LABEL: 'Download',
 	unselectall_LABEL: 'Unselect All',
+	delete_LABEL: 'Delete',
 	
 	home_TITLE: 'Welcome',
 	home_HELPTITLE: 'What you can do to help',
