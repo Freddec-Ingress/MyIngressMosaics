@@ -48,14 +48,7 @@
 
     <div class="card">
         
-        <div class="card-header f-row">
-            
-            <span class="text-medium mr-auto">{{'missions_SUBTITLE' | translate}}</span>
-            <a href="" ng-click="deleteAll();">{{'deleteall_LABEL' | translate}}</a>
-            
-        </div>
-        
-        <div class="card-block first last mb-4">
+        <div class="card-block first last my-4">
             <p>
                 
                 {{'missions_PLUGIN' | translate}}
@@ -67,7 +60,7 @@
             </p>
         </div>
                 
-        <div ng-if="!missions">
+        <div ng-if="!missions && !mosaics">
             
             <div class="card-block first last">
                 
@@ -97,18 +90,57 @@
             
         </div>
         
-        <div ng-if="missions">
+    	<div class="my-4" ng-repeat="mosaic in mosaics">
+    		
+    		<div class="f-row">
+    			<span class="text-normal">{{mosaic.missions.length}} missions</span>
+    		</div>
+    		
+    		<div class="f-row">
+    			<input type="text" class="form-control" ng-model="mosaic.name" />
+    		</div>
+    		
+            <table class="card-table card-table-compressed">
+                <tbody>
+                    <tr ng-repeat="item in mosaic.missions">
+                        <td style="width:3rem;"><input type="number" class="form-control text-center" style="padding:.25rem;" ng-model="item.order" /></td>
+                        <td style="width:50%;">{{item.name}}</td>
+                        <td style="width:25%;" ng-class="{'text-enligtened': item.faction == 'E', 'text-resistance': item.faction == 'R',}" ng-click="$event.stopPropagation(); toggle($index, $event, item);">{{item.creator}}</td>
+                        <td class="text-right">
+                            <a href="https://www.ingress.com/intel?ll={{item.lat}},{{item.lng}}&z=15" class="ml-2" target="blank">
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             
+            <div class="card-block last form-button-bar">
+        		<button class="btn btn-primary" ng-click="btn_disabled = true; createMosaic(mosaic);" ng-disabled="btn_disabled">
+        		    {{'create_BTN' | translate}}
+        		</button>
+            </div>
+            
+    	</div>
+	
+        <div ng-if="missions.length > 0">
+            
+            <div class="card-header f-row">
+                
+                <a href="" ng-click="deleteAll();">{{'deleteall_LABEL' | translate}}</a>
+                
+            </div>
+        
             <table class="card-table no-user-select">
                 <thead>
                     <tr>
                         <th></th>
-                        <th style="cursor:pointer;" ng-click="sortMissionsByName();">
+                        <th style="cursor:pointer;">
                             <i class="fa mr-2" ng-class="{'fa-caret-up':sortName == 'asc', 'fa-caret-down':sortName == 'desc', 'fa-sort text-muted':sortName == ''}"></i>
                             {{'missions_COLNAME' | translate}}
                         </th>
                         <th></th>
-                        <th style="cursor:pointer;" ng-click="sortMissionsByCreator();">
+                        <th style="cursor:pointer;">
                             <i class="fa mr-2" ng-class="{'fa-caret-up':sortCreator == 'asc', 'fa-caret-down':sortCreator == 'desc', 'fa-sort text-muted':sortCreator == ''}"></i>
                             {{'missions_COLCREATOR' | translate}}
                         </th>

@@ -460,7 +460,7 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 				lng: parseFloat(service.data.missions[0].lng),
 			};
 		
-			return geocoder.geocode({'location': latlng}, function(results, status) {
+			geocoder.geocode({'location': latlng}, function(results, status) {
 				
 				if (status === 'OK') {
 					if (results[1]) {
@@ -480,14 +480,14 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 						if (!service.data.city && admin2) service.data.city = item.admin2;
 						if (!service.data.city && admin3) service.data.city = item.admin3;
 
-						API.sendRequest('/api/mosaic/create/', 'POST', {}, service.data).then(function(response) {
+						return API.sendRequest('/api/mosaic/create/', 'POST', {}, service.data).then(function(response) {
 							
-							$state.go('root.mosaic', {ref: response});
+							var url = $state.href('root.mosaic', {ref: response});
+							window.open(url, '_blank');
 						});
 					}
 				}
 			});
-			
 		},
 	};
 	

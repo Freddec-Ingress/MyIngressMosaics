@@ -105,6 +105,84 @@ angular.module('AngularApp.controllers').controller('ProfileCtrl', function($sco
 
 angular.module('AngularApp.controllers').controller('MissionsCtrl', function($scope, $state, UserService, CreateService) {
 
+	$scope.mosaics = [];
+	
+	var missions = UserService.data.missions;
+	for (var mission of missions) {
+		
+		/* Mosaic name */
+		var mosaic_name = mission.name;
+		mosaic_name = mosaic_name.replace(/0|1|2|3|4|5|6|7|8|9|#/g, '');
+		mosaic_name = mosaic_name.replace('.', '');
+		mosaic_name = mosaic_name.replace('(', '');
+		mosaic_name = mosaic_name.replace(')', '');
+		mosaic_name = mosaic_name.replace('/', '');
+		mosaic_name = mosaic_name.trim();
+		mosaic_name = mosaic_name.replace('of  ', '');
+		mosaic_name = mosaic_name.replace('  of', '');
+		mosaic_name = mosaic_name.replace('[ - ] ', '');
+		mosaic_name = mosaic_name.replace('[] ', '');
+		mosaic_name = mosaic_name.replace('of : ', '');
+		
+		/* Find existing mosaic */
+		var existing_mosaic = null;
+		for (var mosaic of $scope.mosaics) {
+			if (mosaic.name == mosaic_name) {
+				existing_mosaic = mosaic;
+				break;
+			}
+		}
+		
+		/* If not existing mosaic then create new mosaic */
+		var futur_mosaic = null;
+		if (existing_mosaic) futur_mosaic = existing_mosaic;
+		else {
+			futur_mosaic = {
+				'name': mosaic_name,
+				'missions': [],
+			}
+			$scope.mosaics.push(futur_mosaic);
+		}
+		
+		/* Mission order */
+		var order = 0;
+		var found = mission.name.match(/[0-9]+/);
+		if (found) order = parseInt(found[0]);
+		mission.order = order;
+
+		/* Add mission to future mosaic */
+		futur_mosaic.missions.push(mission);
+	}
+	
+	/* Sort mosaic missions by order */
+	for (var mosaic of $scope.mosaics) {
+		
+		mosaic.missions = mosaic.missions.sort(function(a, b) {
+			
+			if (a.order < b.order) { return -1; }
+			if (a.order > b.order) { return  1; }
+			return 0;
+		});
+	}
+	
+	/* Create mosaic */
+	$scope.createMosaic = function(mosaic) {
+		
+		CreateService.createWithMosaic(mosaic);
+		$scope.mosaics.splice($scope.mosaics.indexOf(mosaic), 1);
+	}
+	
+	/* Standalone missions */
+	$scope.missions = [];
+	for (var mosaic of $scope.mosaics) {
+		if (mosaic.missions.length < 3) {
+			for (var mission of mosaic.missions) {
+				$scope.missions.push(mission);
+			}
+			$scope.mosaics.splice($scope.mosaics.indexOf(mosaic), 1);
+		}
+	}
+	
 	CreateService.init();
 	
 	$scope.selected_missions = CreateService.data.missions;
@@ -229,8 +307,6 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 			$scope.sortCreator = 'asc';
 		}
 	}
-	
-	$scope.missions = UserService.data.missions;
 });
 
 angular.module('AngularApp.controllers').controller('CreateCtrl', function($scope, $state, CreateService) {
@@ -1228,70 +1304,4 @@ angular.module('AngularApp.controllers').controller('MapCtrl', function($scope, 
 });
 
 angular.module('AngularApp.controllers').controller('PluginCtrl', function() {
-});
-
-angular.module('AngularApp.controllers').controller('ExpertCtrl', function($scope, UserService, CreateService) {
-	
-	$scope.mosaics = [];
-	
-	var missions = UserService.data.missions;
-	for (var mission of missions) {
-		
-		/* Mosaic name */
-		var mosaic_name = mission.name;
-		mosaic_name = mosaic_name.replace(/0|1|2|3|4|5|6|7|8|9|#/g, '');
-		mosaic_name = mosaic_name.replace('.', '');
-		mosaic_name = mosaic_name.replace('(', '');
-		mosaic_name = mosaic_name.replace(')', '');
-		mosaic_name = mosaic_name.replace('/', '');
-		mosaic_name = mosaic_name.trim();
-		mosaic_name = mosaic_name.replace('of  ', '');
-		mosaic_name = mosaic_name.replace('  of', '');
-		
-		/* Find existing mosaic */
-		var existing_mosaic = null;
-		for (var mosaic of $scope.mosaics) {
-			if (mosaic.name == mosaic_name) {
-				existing_mosaic = mosaic;
-				break;
-			}
-		}
-		
-		/* If not existing mosaic then create new mosaic */
-		var futur_mosaic = null;
-		if (existing_mosaic) futur_mosaic = existing_mosaic;
-		else {
-			futur_mosaic = {
-				'name': mosaic_name,
-				'missions': [],
-			}
-			$scope.mosaics.push(futur_mosaic);
-		}
-		
-		/* Mission order */
-		var order = 0;
-		var found = mission.name.match(/[0-9]+/);
-		if (found) order = parseInt(found[0]);
-		mission.order = order;
-
-		/* Add mission to future mosaic */
-		futur_mosaic.missions.push(mission);
-	}
-	
-	/* Sort mosaic missions by order */
-	for (var mosaic of $scope.mosaics) {
-		
-		mosaic.missions = mosaic.missions.sort(function(a, b) {
-			
-			if (a.order < b.order) { return -1; }
-			if (a.order > b.order) { return  1; }
-			return 0;
-		});
-	}
-	
-	/* Create mosaic */
-	$scope.createMosaic = function(mosaic) {
-		
-		CreateService.createWithMosaic(mosaic);
-	}
 });
