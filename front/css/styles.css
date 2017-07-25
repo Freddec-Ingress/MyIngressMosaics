@@ -777,6 +777,10 @@ ol > li:last-child {
 	margin-bottom: .5rem!important;
 }
 
+.my-4 {
+	margin-top: 1rem!important;
+	margin-bottom: 1rem!important;
+}
 .mt-4 {
 	margin-top: 1rem!important;
 }

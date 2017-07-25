@@ -440,6 +440,55 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 				$state.go('root.mosaic', {ref: response});
 			});
 		},
+		
+		createWithMosaic: function(mosaic) {
+			
+			service.init();
+			
+			service.data.title = mosaic.name;
+			service.data.missions = mosaic.missions;
+			
+			service.data.desc = service.data.missions[0].desc;
+			service.data.type = 'sequence';
+			service.data.cols = 6;
+			service.data.rows = Math.ceil(service.data.missions.length / 6);
+			
+			var geocoder = new google.maps.Geocoder;
+			
+			var latlng = {
+				lat: parseFloat(service.data.missions[0].lat),
+				lng: parseFloat(service.data.missions[0].lng),
+			};
+		
+			return geocoder.geocode({'location': latlng}, function(results, status) {
+				
+				if (status === 'OK') {
+					if (results[1]) {
+						
+						var admin2 = null;
+						var admin3 = null;
+						
+						for (var item of results[1].address_components) {
+							
+							if (item.types[0] == 'country') service.data.country = item.long_name;
+							if (item.types[0] == 'locality') service.data.city = item.long_name;
+							if (item.types[0] == 'administrative_area_level_1') service.data.region = item.long_name;
+							if (item.types[0] == 'administrative_area_level_2') admin2 = item.long_name;
+							if (item.types[0] == 'administrative_area_level_3') admin3 = item.long_name;
+						}
+						
+						if (!service.data.city && admin2) service.data.city = item.admin2;
+						if (!service.data.city && admin3) service.data.city = item.admin3;
+
+						API.sendRequest('/api/mosaic/create/', 'POST', {}, service.data).then(function(response) {
+							
+							$state.go('root.mosaic', {ref: response});
+						});
+					}
+				}
+			});
+			
+		},
 	};
 	
 	return service;

@@ -32,6 +32,7 @@ angular.module('AngularApp').config(function($urlRouterProvider, $stateProvider,
 			.state('root.mosaic', { url: '/mosaic/:ref', controller: 'MosaicCtrl', templateUrl: '/static/front/pages/mosaic.html', data:{ title: 'mosaicpage_TITLE', }, resolve: {loadMosaic: function($stateParams, MosaicService) { return MosaicService.getMosaic($stateParams.ref); }, }, })
 
 			.state('root.missions', { url: '/missions', controller: 'MissionsCtrl', templateUrl: '/static/front/pages/missions.html', data:{ title: 'missions_TITLE', }, resolve: {loadMissions: function(UserService) { return UserService.getMissions(); }, }, })
+			.state('root.expert', { url: '/expert', controller: 'ExpertCtrl', templateUrl: '/static/front/pages/expert.html', data:{ title: 'expert_TITLE', }, resolve: {loadMissions: function(UserService) { return UserService.getMissions(); }, }, })
 			
 			.state('root.world', { url: '/world', controller: 'WorldCtrl', templateUrl: '/static/front/pages/world.html', data:{ title: 'world_TITLE', }, })
 			.state('root.city', { url: '/country/:country/region/:region/city/:city', controller: 'CityCtrl', templateUrl: '/static/front/pages/city.html', data:{ title: 'city_TITLE', }, })
