@@ -441,7 +441,7 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 			});
 		},
 		
-		createWithMosaic: function(mosaic) {
+		createWithMosaic: function(mosaic, callback) {
 			
 			service.init();
 			
@@ -480,10 +480,12 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 						if (!service.data.city && admin2) service.data.city = item.admin2;
 						if (!service.data.city && admin3) service.data.city = item.admin3;
 
-						return API.sendRequest('/api/mosaic/create/', 'POST', {}, service.data).then(function(response) {
+						API.sendRequest('/api/mosaic/create/', 'POST', {}, service.data).then(function(response) {
+							
+							callback(mosaic);
 							
 							var url = $state.href('root.mosaic', {ref: response});
-							window.open(url, '_blank');
+							window.open(url, 'blank');
 						});
 					}
 				}

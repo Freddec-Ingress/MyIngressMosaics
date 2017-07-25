@@ -141,6 +141,7 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 			futur_mosaic = {
 				'name': mosaic_name,
 				'missions': [],
+				'creating': false,
 			}
 			$scope.mosaics.push(futur_mosaic);
 		}
@@ -169,7 +170,12 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 	/* Create mosaic */
 	$scope.createMosaic = function(mosaic) {
 		
-		CreateService.createWithMosaic(mosaic);
+		mosaic.creating = true;
+		CreateService.createWithMosaic(mosaic, $scope.createMosaicCallback);
+	}
+	$scope.createMosaicCallback = function(mosaic) {
+		
+		mosaic.creating = false;
 		$scope.mosaics.splice($scope.mosaics.indexOf(mosaic), 1);
 	}
 	

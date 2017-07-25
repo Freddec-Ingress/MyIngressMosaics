@@ -3184,7 +3184,7 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 			});
 		},
 		
-		createWithMosaic: function(mosaic) {
+		createWithMosaic: function(mosaic, callback) {
 			
 			service.init();
 			
@@ -3223,10 +3223,12 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 						if (!service.data.city && admin2) service.data.city = item.admin2;
 						if (!service.data.city && admin3) service.data.city = item.admin3;
 
-						return API.sendRequest('/api/mosaic/create/', 'POST', {}, service.data).then(function(response) {
+						API.sendRequest('/api/mosaic/create/', 'POST', {}, service.data).then(function(response) {
+							
+							callback(mosaic);
 							
 							var url = $state.href('root.mosaic', {ref: response});
-							window.open(url, '_blank');
+							window.open(url, 'blank');
 						});
 					}
 				}
@@ -3845,6 +3847,7 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 			futur_mosaic = {
 				'name': mosaic_name,
 				'missions': [],
+				'creating': false,
 			}
 			$scope.mosaics.push(futur_mosaic);
 		}
@@ -3873,7 +3876,12 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 	/* Create mosaic */
 	$scope.createMosaic = function(mosaic) {
 		
-		CreateService.createWithMosaic(mosaic);
+		mosaic.creating = true;
+		CreateService.createWithMosaic(mosaic, $scope.createMosaicCallback);
+	}
+	$scope.createMosaicCallback = function(mosaic) {
+		
+		mosaic.creating = false;
 		$scope.mosaics.splice($scope.mosaics.indexOf(mosaic), 1);
 	}
 	

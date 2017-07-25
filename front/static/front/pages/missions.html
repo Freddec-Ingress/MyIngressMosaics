@@ -92,6 +92,10 @@
         
     	<div class="my-4" ng-repeat="mosaic in mosaics">
     		
+			<div class="loading" ng-show="mosaic.creating">
+				<img src="/static/front/img/loading.png" />
+			</div>
+    		
     		<div class="f-row">
     			<span class="text-normal">{{mosaic.missions.length}} missions</span>
     		</div>
