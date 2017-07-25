@@ -3814,8 +3814,8 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 	var mosaics = [];
 	var missions = [];
 	
-	var missions = UserService.data.missions;
-	for (var mission of missions) {
+	var mis = UserService.data.missions;
+	for (var mission of mis) {
 		
 		/* Mosaic name */
 		var mosaic_name = mission.name;
@@ -3888,12 +3888,9 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 	}
 	
 	/* Standalone missions */
-	var mosaic_array = mosaics;
-	for (var mosaic of mosaic_array) {
+	for (var mosaic of mosaics) {
 		if (mosaic.missions.length < 3) {
-			for (var mission of mosaic.missions) {
-				missions.push(mission);
-			}
+			missions = missions.concat(mosaic.missions);
 			mosaics.splice(mosaics.indexOf(mosaic), 1);
 		}
 	}
