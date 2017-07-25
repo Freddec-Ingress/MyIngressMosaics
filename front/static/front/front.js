@@ -3811,7 +3811,8 @@ angular.module('AngularApp.controllers').controller('ProfileCtrl', function($sco
 
 angular.module('AngularApp.controllers').controller('MissionsCtrl', function($scope, $state, UserService, CreateService) {
 
-	$scope.mosaics = [];
+	var mosaics = [];
+	var missions = [];
 	
 	var missions = UserService.data.missions;
 	for (var mission of missions) {
@@ -3834,7 +3835,7 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 		
 		/* Find existing mosaic */
 		var existing_mosaic = null;
-		for (var mosaic of $scope.mosaics) {
+		for (var mosaic of mosaics) {
 			if (mosaic.name == mosaic_name) {
 				existing_mosaic = mosaic;
 				break;
@@ -3850,7 +3851,7 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 				'missions': [],
 				'creating': false,
 			}
-			$scope.mosaics.push(futur_mosaic);
+			mosaics.push(futur_mosaic);
 		}
 		
 		/* Mission order */
@@ -3864,7 +3865,7 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 	}
 	
 	/* Sort mosaic missions by order */
-	for (var mosaic of $scope.mosaics) {
+	for (var mosaic of mosaics) {
 		
 		mosaic.missions = mosaic.missions.sort(function(a, b) {
 			
@@ -3887,16 +3888,18 @@ angular.module('AngularApp.controllers').controller('MissionsCtrl', function($sc
 	}
 	
 	/* Standalone missions */
-	$scope.missions = [];
-	var mosaic_array = $scope.mosaics;
+	var mosaic_array = mosaics;
 	for (var mosaic of mosaic_array) {
 		if (mosaic.missions.length < 3) {
 			for (var mission of mosaic.missions) {
-				$scope.missions.push(mission);
+				missions.push(mission);
 			}
-			$scope.mosaics.splice($scope.mosaics.indexOf(mosaic), 1);
+			mosaics.splice(mosaics.indexOf(mosaic), 1);
 		}
 	}
+	
+	$scope.mosaics = mosaics;
+	$scope.missions = missions;
 	
 	CreateService.init();
 	
