@@ -3231,8 +3231,7 @@ angular.module('AngularApp.services').service('CreateService', function($state, 
 							
 							callback(mosaic);
 							
-							var url = $state.href('root.mosaic', {ref: response});
-							window.open(url, 'blank');
+							$state.go('root.mosaic', {ref: response});
 						});
 					}
 				}
