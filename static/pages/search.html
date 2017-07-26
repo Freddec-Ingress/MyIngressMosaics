@@ -1,0 +1,190 @@
+<div class="card mt-4">
+
+	<div class="card-block first last f-row f-nowrap">
+		
+		<input type="text" class="form-control" placeholder="{{'search_PLACEHOLDER' | translate}}" ng-model="searchModel.text" />
+		
+		<button type="submit" class="btn btn-primary ml-2" ng-click="search();">
+			{{'search_LABEL' | translate}}
+		</button>
+
+	</div>
+	
+</div>
+
+<div class="loading" ng-if="search_loading">
+	<img src="/static/img/loading.png" />
+</div>
+
+<div class="card" ng-if="no_result">
+
+	<div class="card-header">
+		<span class="text-danger">{{'noresult_LABEL' | translate}}</span>
+	</div>
+	
+</div>
+
+<div class="card" ng-if="countries">
+
+	<div class="card-header">
+		<span class="">{{'country_LABEL' | translate}}</span>
+	</div>
+		
+    <table class="card-table">
+
+        <tbody>
+            <tr ng-repeat="item in countries" ng-click="goToCountry(item);">
+
+                <td class="text-white">
+                	<span class="flag-icon mr-2" style="position:relative; top:-2px;" ng-class="{
+                		'flag-icon-fr': item.name == 'France',
+                		'flag-icon-gb': item.name == 'United Kingdom',
+                		'flag-icon-my': item.name == 'Malaysia',
+                		'flag-icon-sg': item.name == 'Singapore',
+                		'flag-icon-us': item.name == 'United States',
+                		'flag-icon-mx': item.name == 'Mexico',
+                		'flag-icon-nz': item.name == 'New Zealand',
+                		'flag-icon-mv': item.name == 'Maldives',
+                		'flag-icon-do': item.name == 'Dominican Republic',
+                		'flag-icon-au': item.name == 'Australia',
+                		'flag-icon-hu': item.name == 'Hungary',
+                		'flag-icon-lk': item.name == 'Sri Lanka',
+                		'flag-icon-id': item.name == 'Indonesia',
+                		'flag-icon-de': item.name == 'Germany',
+                	}"></span>
+                    {{item.name}}
+                </td>
+                
+                <td class="text-center" style="width:2rem;">
+                	<i class="fa fa-arrow-circle-right text-link"></i>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div class="card" ng-if="regions">
+
+	<div class="card-header">
+		<span class="">{{'region_LABEL' | translate}}</span>
+	</div>
+	
+    <table class="card-table">
+        	
+        <tbody>
+            <tr ng-repeat="item in regions" ng-click="goToRegion(item);">
+            	
+                <td class="">
+                	
+                	{{item.country}} <span class="mx-2">></span>
+
+                	<span class="text-white">{{item.name}}</span>
+                	
+                </td>
+                
+                <td class="text-center" style="width:2rem;">
+                	<i class="fa fa-arrow-circle-right text-link"></i>
+                </td>
+
+            </tr>
+        </tbody>
+        
+    </table>
+
+</div>
+
+<div class="card" ng-if="cities">
+
+	<div class="card-header">
+		<span class="">{{'city_LABEL' | translate}}</span>
+	</div>
+
+    <table class="card-table">
+        
+        <tbody>
+            <tr ng-repeat="item in cities" ng-click="goToCity(item);">
+             	
+                <td class="">
+                	
+                	{{item.country}} <span class="mx-2">></span>
+                	{{item.region}} <span class="mx-2">></span>
+
+                	<span class="text-white">{{item.name}}</span>
+                	
+                </td>
+                
+                <td class="text-center" style="width:2rem;">
+                	<i class="fa fa-arrow-circle-right text-link"></i>
+                </td>
+
+            </tr>
+        </tbody>
+
+	</table>
+
+</div>
+
+<div class="card" ng-if="creators">
+
+	<div class="card-header">
+		<span class="">{{'creator_LABEL' | translate}}</span>
+	</div>
+
+    <table class="card-table">
+        
+        <tbody>
+            <tr ng-repeat="item in creators" ng-click="goToCreator(item);">
+
+                <td ng-class="{'text-enligtened': item.faction == 'E', 'text-resistance': item.faction == 'R',}">
+                    {{item.name}}
+                </td>
+                
+                <td class="text-center" style="width:2rem;">
+                	<i class="fa fa-arrow-circle-right text-link"></i>
+                </td>
+
+            </tr>
+        </tbody>
+
+	</table>
+
+</div>
+
+<div class="card" ng-if="mosaics">
+
+	<div class="card-header">
+		<span class="">{{'mosaics_LABEL' | translate}}</span>
+	</div>
+	
+    <table class="card-table">
+
+        <tbody>
+            <tr ng-repeat="item in mosaics" ng-click="goToMosaic(item);">
+            	
+            	<td width="96px">
+            		
+            		<div class="f-row f-wrap f-justify-center pr-2">
+			            <div ng-repeat="m in item.missions | reverse" style="flex:0 0 16.666667%;">
+			                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s10); background-size: 85% 85%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+			            </div>
+		            </div>
+            		
+            	</td>
+            	
+                <td>
+                	<div class="text-white">{{item.title}}</div>
+                	<div class="">{{item.count}} &middot; {{item._distance | number:3}} km &middot; {{item.type}}</div>
+                </td>
+                
+                <td class="text-center" style="width:2rem;">
+                	<i class="fa fa-arrow-circle-right text-link"></i>
+                </td>
+
+            </tr>
+        </tbody>
+        
+    </table>
+
+</div>

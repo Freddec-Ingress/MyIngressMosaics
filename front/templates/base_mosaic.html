@@ -1,0 +1,33 @@
+{% extends 'base_front.html' %}
+
+{% block extra-head %}
+
+	<title>MIM - Ingress Mosaic, Banner, Serie</title>
+
+	<meta property="og:url" content="https://www.myingressmosaics.com">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="MyIngressMosaics">
+	<meta property="og:image" content="https://www.myingressmosaics.com/static/front/img/image.png">
+	<meta property="og:description" content="Search, Register and Share all Ingress Mosaics">
+	
+{% endblock %}
+
+{% block content %}
+
+	<div class="wrapper" ui-view="" ng-app="MosaicApp">
+		
+		<div class="loading">
+			<img src="/static/img/loading.png" />
+		</div>
+
+	</div>
+	
+{% endblock %}
+
+{% block extra-script %}
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMZDjsn8xM6EihEb9kpMbsdTCek7R-0jw&amp;language=en"></script>
+
+	<script src="/static/mosaic.js"></script>
+	
+{% endblock %}

@@ -1,0 +1,2 @@
+angular.module('MapApp.directives', [])
+

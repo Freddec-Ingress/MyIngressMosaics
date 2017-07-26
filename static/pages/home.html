@@ -1,0 +1,106 @@
+<h2>{{'site_DESC' | translate}}</h1>
+
+<div class="f-row f-wrap f-justify-center mb-4">
+     
+    <a class="btn btn-primary fitem-grow f-col mx-2 my-2" style="max-width:100px; min-width: 100px;" href="/map">
+        <i class="fa fa-map p-2" style="font-size:2rem;"></i>
+        {{'geolocalize_LABEL' | translate}}
+    </a>
+     
+    <a class="btn btn-primary fitem-grow f-col mx-2 my-2" style="max-width:100px; min-width: 100px;" href="/search">
+        <i class="fa fa-search p-2" style="font-size:2rem;"></i>
+        {{'search_LABEL' | translate}}
+    </a>
+
+    <a class="btn btn-primary fitem-grow f-col mx-2 my-2" style="max-width:100px; min-width: 100px;" href="/registration">
+        <i class="fa fa-plus-square p-2" style="font-size:2rem;"></i>
+        {{'register_LABEL' | translate}}
+    </a>
+
+</div>
+
+<div class="f-row f-justify-center mb-4" style="height:20px;">
+	
+	<div class="pr-2 text-right" style="width:50%;">
+		
+		<div id="fb-root"></div>
+		
+		<script>
+			(function(d, s, id) {
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) return;
+				js = d.createElement(s); js.id = id;
+				js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10";
+				fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+		</script>
+		
+		<div class="fb-share-button" data-href="https://www.myingressmosaics.com" data-layout="button_count" data-size="small" data-mobile-iframe="true">
+			<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">
+				Share
+			</a>
+		</div>
+	
+	</div>
+	
+	<div class="pl-2" style="width:50%; display:flex;">
+		
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+		<div class="g-plus" data-action="share" data-annotation="bubble" data-href="https://www.myingressmosaics.com"></div>			
+		
+	</div>
+	
+</div>
+
+<div class="mt-4 mb-4" ng-if="!latest_loading">
+	
+	<div class="f-row f-justify-center mb-4 pt-4">
+		<span class="text-big">Latest mosaics</span>
+	</div>
+	
+	<div class="f-row f-wrap f-justify-center">
+		
+		<a class="f-col m-1" style="width:150px;" href="/mosaic/{{mosaic.ref}}" ng-repeat="mosaic in mosaics">
+			
+			<div class="card-block-bordered f-row f-justify-center" style="height:100px; overflow-y:auto;" ng-class="{'f-align-start scrollbar scrollbar-mini': mosaic.missions.length > 24}">
+				
+				<div class="f-row f-wrap f-justify-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%); width:100%;">
+		            <div ng-repeat="m in mosaic.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+		                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 85% 85%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+		            </div>
+				</div>
+				
+			</div>
+			
+			<div class="card-block f-col">
+				
+            	<div class="text-white mb-1" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">{{mosaic.title}}</div>
+            	<div class="text-normal">
+                	<span class="flag-icon mr-1 text-highlight" style="position:relative; top:-2px;" ng-class="{
+                		'flag-icon-fr': mosaic.country == 'France',
+                		'flag-icon-gb': mosaic.country == 'United Kingdom',
+                		'flag-icon-my': mosaic.country == 'Malaysia',
+                		'flag-icon-sg': mosaic.country == 'Singapore',
+                		'flag-icon-us': mosaic.country == 'United States',
+                		'flag-icon-mx': mosaic.country == 'Mexico',
+                		'flag-icon-nz': mosaic.country == 'New Zealand',
+                		'flag-icon-mv': mosaic.country == 'Maldives',
+                		'flag-icon-do': mosaic.country == 'Dominican Republic',
+                		'flag-icon-au': mosaic.country == 'Australia',
+                		'flag-icon-hu': mosaic.country == 'Hungary',
+                		'flag-icon-lk': mosaic.country == 'Sri Lanka',
+                		'flag-icon-id': mosaic.country == 'Indonesia',
+                		'flag-icon-de': mosaic.country == 'Germany',
+                		'flag-icon-pl': mosaic.country == 'Poland',
+                	}"></span>
+            		{{mosaic.city}}
+            	</div>
+            	<div class="text-normal">{{mosaic.missions.length}} missions &middot; {{mosaic._distance | number:2}} km</div>
+            	
+			</div>
+			
+		</a>
+		
+	</div>
+	
+</div>

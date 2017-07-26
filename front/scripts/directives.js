@@ -1,6 +1,6 @@
-angular.module('AngularApp.directives', [])
+angular.module('FrontModule.directives', [])
 
-angular.module('AngularApp.directives').directive('pageTitle', function($rootScope, $filter, $timeout) {
+angular.module('FrontModule.directives').directive('pageTitle', function($rootScope, $filter, $timeout) {
 	
 	return {
 		
@@ -19,7 +19,7 @@ angular.module('AngularApp.directives').directive('pageTitle', function($rootSco
 	};
 });
 
-angular.module('AngularApp.directives').directive('convertToNumber', function() {
+angular.module('FrontModule.directives').directive('convertToNumber', function() {
 	
 	return {
 		
