@@ -26,7 +26,7 @@ class Profile(models.Model):
 	level = models.IntegerField(null=True, blank=True)
 	
 	def __str__(self):
-		return 'Profil: ' + self.user.username + ' - ' + self.user.mosaics.count()
+		return 'Profil: ' + self.user.username + ' - ' + str(self.user.mosaics.count())
 	   
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
@@ -89,7 +89,7 @@ class Mosaic(models.Model):
 	_startLng = models.FloatField(default=0.0)
 	
 	def __str__(self):
-		return self.title + ' - ' + self.missions.count() + ' - ' + (self.cols * self.rows)
+		return self.title + ' - ' + str(self.missions.count()) + ' - ' + str(self.cols * self.rows)
 	
 	def minSerialize(self):
 		
