@@ -194,7 +194,7 @@
 	
 	<div class="card">
 		
-		<div class="group form-button-bar" ng-show="!reorderMode && !addMode">
+		<div class="group form-button-bar" ng-if="user.name == mosaic.registerer.name || user.superuser" ng-show="!reorderMode && !addMode">
 			
 			<a class="btn btn-secondary" ng-click="openReorder();">
 				{{'mosaicpage_REORDER' | translate}}

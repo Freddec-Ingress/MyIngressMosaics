@@ -387,7 +387,7 @@ angular.module('MosaicApp.controllers').controller('MosaicCtrl', function($scope
 			origin: new google.maps.Point(0, 0),
 			anchor: new google.maps.Point(25, 25),
 			labelOrigin: new google.maps.Point(25, 27),
-			url: 'https://www.myingressmosaics.com/static/front/img/neutral.png',
+			url: 'https://www.myingressmosaics.com/static/img/neutral.png',
 		};
 		
 		var lineSymbol = {
