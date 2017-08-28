@@ -1,7 +1,7 @@
 // ==UserScript==
 // @id             myingressmosaics@freddec
 // @name           MyIngressMosaics Scanning plugin
-// @version        1.0.6
+// @version        1.0.7
 // @include        https://*.ingress.com/intel*
 // @include        http://*.ingress.com/intel*
 // @match          https://*.ingress.com/intel*
@@ -292,6 +292,8 @@ function processNextTiles() {
 
                 callIngressAPI('getTopMissionsInBounds', dataBounds, function(data, textStatus, jqXHR) {
 
+                    if (!data.result) return;
+
                     for (var item of data.result) {
 
                         var mission_id = item[0];
@@ -447,11 +449,14 @@ function processNextMission() {
 
         console.log(data.result[1]);
 
-        var marker = new google.maps.Marker({
-            position: {lat: data.result[9][0][5][2]/1000000.0, lng: data.result[9][0][5][3]/1000000.0},
-            map: M,
-            icon: mImage,
-        });
+        if (data.result[9][0][5]) {
+
+            var marker = new google.maps.Marker({
+                position: {lat: data.result[9][0][5][2]/1000000.0, lng: data.result[9][0][5][3]/1000000.0},
+                map: M,
+                icon: mImage,
+            });
+        }
 
         callMIMAPI('ext_register', data.result);
 
