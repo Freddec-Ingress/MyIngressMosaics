@@ -1,7 +1,7 @@
 // ==UserScript==
 // @id             myingressmosaics@freddec
 // @name           MyIngressMosaics Scanning plugin
-// @version        1.0.5
+// @version        1.0.7
 // @include        https://*.ingress.com/intel*
 // @include        http://*.ingress.com/intel*
 // @match          https://*.ingress.com/intel*
@@ -37,12 +37,12 @@ head.innerHTML += '<style>' +
     '#loading_data_circle {display:none; animation: rotating 2s linear infinite;}' +
     '#loading_msg_text {display:none;}' +
     '#loading_msg {display:block!important;}' +
-    '#dashboard_container {top:50px!important; margin-left:320px;}' +
+    '#dashboard_container {top:50px!important;}' +
     '#tm_start {padding: 0 5px; position: absolute; bottom: -45px; right: 0px;}' +
     '#tm_stop {padding: 0 5px; position: absolute; bottom: -45px; right: 0px; display:none;}' +
-    '#tm_view_container {left:-325px; right:auto; top:-1px; bottom:0;}' +
-    '#tm_header {display:block!important; width:310px;}' +
-    '#tm_main {display:block!important; width:310px; height:calc(100% - 37px);}' +
+    '#tm_view_container {display:none!important;}' +
+    '#tm_header {display:none!important; width:310px;}' +
+    '#tm_main {display:none!important; width:310px; height:calc(100% - 37px);}' +
     '.tm_list_element + .tm_list_element {border-top: 0; padding:5px 10px;}' +
     '.tm_mission_title {font-size:13px; width: 275px;}' +
     '.bottom_right_tab_button {width:160px;}' +
@@ -63,17 +63,6 @@ document.getElementById('dashboard_container').innerHTML +=
     '</div>';
 
 document.getElementById('loading_msg_text').innerHTML = 'Scanning Data...';
-
-document.getElementById('tm_header').innerHTML +=
-    '<div id="tm_header_title_container" class="tm_header_background_blue tm_header_cursor_default">' +
-    '    <div id="tm_header_title">' +
-    '        <span class="tm_header_text">0 missions found</span>' +
-    '    </div>' +
-    '</div>';
-
-document.getElementById('tm_main').innerHTML +=
-    '<div id="tm_list">' +
-    '</div>';
 
 //--------------------------------------------------------------------------------------------------
 // Load jQuerys
@@ -213,7 +202,10 @@ var tilesToBeProcessed = [];
 var currentProcessed_count = 0;
 var currentToBeProcessed_count = 0;
 
-function processTileRequest() {
+var portalsToBeProcessed = [];
+var missionsToBeProcessed = [];
+
+function processNextTiles() {
 
     if (!scanning || tilesToBeProcessed.length < 1) {
 
@@ -233,7 +225,7 @@ function processTileRequest() {
 
     var data = { tileKeys: [] };
 
-    var tiles = tilesToBeProcessed.slice(0, 12);
+    var tiles = tilesToBeProcessed.slice(0, 1);
     for (var tile of tiles) {
 
         data.tileKeys.push(tile.id);
@@ -278,6 +270,8 @@ function processTileRequest() {
                 var text = '' + currentProcessed_count + '/' + currentToBeProcessed_count;
                 document.getElementById('loading_msg_text').innerHTML = 'Scanning Data... ' + text;
 
+                var has_portal = false;
+
                 for (var item of val.gameEntities) {
                     if (item[2][0] == 'p' && item[2][10] === true) {
 
@@ -287,40 +281,86 @@ function processTileRequest() {
                             'lng': item[2][3] / 1000000.0,
                         };
 
-                        processPortalRequest(portal);
+                        portalsToBeProcessed.push(portal);
+
+                        has_portal = true;
                     }
+                }
+
+                if (has_portal) {
+
+                    var dataBounds = {
+                        eastE6: Math.trunc(tile.east * 1000000),
+                        northE6: Math.trunc(tile.north * 1000000),
+                        southE6: Math.trunc(tile.south * 1000000),
+                        westE6: Math.trunc(tile.west * 1000000),
+                    };
+
+                    callIngressAPI('getTopMissionsInBounds', dataBounds, function(data, textStatus, jqXHR) {
+
+                        if (!data.result) return;
+
+                        for (var item of data.result) {
+
+                            var mission_id = item[0];
+                            var mission_name = item[1];
+
+                            var found = mission_name.match(/[0-9]+/);
+                            if (found && missionsToBeProcessed.indexOf(mission_id) == -1) {
+                                missionsToBeProcessed.push(mission_id);
+                            }
+                        }
+
+                    }, function(jqXHR, textStatus, errorThrown) {
+                    });
                 }
             }
         }
 
-        processTileRequest();
+        processNextPortal();
 
     }, function(jqXHR, textStatus, errorThrown) {
 
-        processTileRequest();
+        processNextTiles();
     });
 }
 
 //--------------------------------------------------------------------------------------------------
 // Functions to process portal request and portal data
 
-function processPortalRequest(portal) {
+function processNextPortal() {
+
+    if (portalsToBeProcessed.length < 1) {
+
+        processNextTiles();
+        return;
+    }
+
+    var portal = portalsToBeProcessed[0];
 
     var data = { guid: portal.id };
     callIngressAPI('getTopMissionsForPortal', data, function(data, textStatus, jqXHR) {
 
-        for (var item of data.result) {
+        if (data && data.result) {
+            for (var item of data.result) {
 
-            var mission_id = item[0];
-            var mission_name = item[1];
+                var mission_id = item[0];
+                var mission_name = item[1];
 
-            var found = mission_name.match(/[0-9]+/);
-            if (found) processMissionRequest(mission_id);
+                var found = mission_name.match(/[0-9]+/);
+                if (found && missionsToBeProcessed.indexOf(mission_id) == -1) {
+                    missionsToBeProcessed.push(mission_id);
+                }
+            }
         }
+
+        portalsToBeProcessed.splice(0, 1);
+
+        processNextMission();
 
     }, function(jqXHR, textStatus, errorThrown) {
 
-        processPortalRequest(portal);
+        processNextPortal();
     });
 }
 
@@ -401,7 +441,15 @@ function addMissionToContainer(mission_name, mission_lat, mission_lng) {
     }
 }
 
-function processMissionRequest(mission_id) {
+function processNextMission() {
+
+    if (missionsToBeProcessed.length < 1) {
+
+        processNextPortal();
+        return;
+    }
+
+    var mission_id = missionsToBeProcessed[0];
 
     var data = { guid: mission_id };
     callIngressAPI('getMissionDetails', data, function(data, textStatus, jqXHR) {
@@ -410,20 +458,24 @@ function processMissionRequest(mission_id) {
 
         console.log(data.result[1]);
 
-        var marker = new google.maps.Marker({
-            position: {lat: data.result[9][0][5][2]/1000000.0, lng: data.result[9][0][5][3]/1000000.0},
-            map: M,
-            icon: mImage,
-        });
+        if (data.result[9][0][5]) {
 
-        $('.tm_header_text').html('' + missionsProcessed++ + ' missions found ');
-        addMissionToContainer(data.result[1], data.result[9][0][5][2]/1000000.0, data.result[9][0][5][3]/1000000.0);
+            var marker = new google.maps.Marker({
+                position: {lat: data.result[9][0][5][2]/1000000.0, lng: data.result[9][0][5][3]/1000000.0},
+                map: M,
+                icon: mImage,
+            });
+        }
 
         callMIMAPI('ext_register', data.result);
 
+        missionsToBeProcessed.splice(0, 1);
+
+        processNextMission();
+
     }, function(jqXHR, textStatus, errorThrown) {
 
-        processMissionRequest(mission_id);
+        processNextMission();
     });
 }
 
@@ -557,7 +609,7 @@ function init() {
         $('#loading_msg_text').show();
         $('#loading_data_circle').show();
 
-        processTileRequest();
+        processNextTiles();
     };
 
     window.stopScanning = function() {

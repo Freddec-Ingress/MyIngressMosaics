@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 				],
 				dest: 'static/front.css'
 			},
-			frontmodulejs: {
+		    js: {
 				src: [
 					'vendor/tether/js/tether.min.js',
 					'vendor/jquery/js/jquery.min.js',
@@ -38,70 +38,7 @@ module.exports = function(grunt) {
 					'front/scripts/module.js',
 				],
 				dest: 'static/front.js'
-			},
-			accountappjs: {
-				src: [
-					'front/apps/account/scripts/services.js',
-					'front/apps/account/scripts/directives.js',
-					'front/apps/account/scripts/controllers.js',
-					'front/apps/account/scripts/app.js',
-				],
-				dest: 'static/account.js'
-			},
-			creatorappjs: {
-				src: [
-					'front/apps/creator/scripts/services.js',
-					'front/apps/creator/scripts/directives.js',
-					'front/apps/creator/scripts/controllers.js',
-					'front/apps/creator/scripts/app.js',
-				],
-				dest: 'static/creator.js'
-			},
-			homeappjs: {
-				src: [
-					'front/apps/home/scripts/services.js',
-					'front/apps/home/scripts/directives.js',
-					'front/apps/home/scripts/controllers.js',
-					'front/apps/home/scripts/app.js',
-				],
-				dest: 'static/home.js'
-			},
-			mapappjs: {
-				src: [
-					'front/apps/map/scripts/services.js',
-					'front/apps/map/scripts/directives.js',
-					'front/apps/map/scripts/controllers.js',
-					'front/apps/map/scripts/app.js',
-				],
-				dest: 'static/map.js'
-			},
-			mosaicappjs: {
-				src: [
-					'front/apps/mosaic/scripts/services.js',
-					'front/apps/mosaic/scripts/directives.js',
-					'front/apps/mosaic/scripts/controllers.js',
-					'front/apps/mosaic/scripts/app.js',
-				],
-				dest: 'static/mosaic.js'
-			},
-			registrationappjs: {
-				src: [
-					'front/apps/registration/scripts/services.js',
-					'front/apps/registration/scripts/directives.js',
-					'front/apps/registration/scripts/controllers.js',
-					'front/apps/registration/scripts/app.js',
-				],
-				dest: 'static/registration.js'
-			},
-			searchappjs: {
-				src: [
-					'front/apps/search/scripts/services.js',
-					'front/apps/search/scripts/directives.js',
-					'front/apps/search/scripts/controllers.js',
-					'front/apps/search/scripts/app.js',
-				],
-				dest: 'static/search.js'
-			},
+            },
 		},
 	});
 	

@@ -102,7 +102,7 @@ class ExtensionViewSet(viewsets.ViewSet):
 	
 		mission.computeInternalData()
 		
-		return Response(None, status=status.HTTP_200_OK)
+		return Response('Registered', status=status.HTTP_200_OK)
 
 
 
@@ -157,16 +157,21 @@ class AccountViewSet(viewsets.ViewSet):
 #---------------------------------------------------------------------------------------------------
 class ProfileViewSet(viewsets.ViewSet):
 	
-	permission_classes = IsAuthenticated, 
+	permission_classes = AllowAny, 
     
 	def view(self, request):
 		
-		data = {
-			'team': request.user.profile.team,
-			'level': request.user.profile.level,
-			'name': request.user.username,
-			'superuser': request.user.is_superuser,
-		}
+		if (request.user.is_authenticated):
+		
+			data = {
+				'team': request.user.profile.team,
+				'level': request.user.profile.level,
+				'name': request.user.username,
+				'superuser': request.user.is_superuser,
+			}
+		
+		else:
+			data = None
 		
 		return Response(data, status=status.HTTP_200_OK)
 

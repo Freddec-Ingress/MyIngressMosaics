@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block extra-head %}
+
+	<title>MIM - Ingress Mosaics, Banners, Series</title>
+
+	<meta property="og:url" content="https://www.myingressmosaics.com">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="MyIngressMosaics">
+	<meta property="og:image" content="https://www.myingressmosaics.com/static/front/img/image.png">
+	<meta property="og:description" content="Search, Register and Share all Ingress Mosaics">
+	
+{% endblock %}
+
+{% block header %}
+
+	{% trans 'Sign in' %}
+	
+{% endblock %}
+
+{% block content %}
+{% verbatim %}
+
+<div id="page-container" ng-controller="LoginCtrl">
+
+<div class="card mt-4">
+	
+	<div class="card-block first last">
+
+		<a href="javascript:;" class="btn btn-block btn-facebook" ng-click="socialLogin('facebook')">
+			<i class="fa fa-facebook-official mr-2"></i>
+			{{'login_facebook_BTN' | translate}}
+		</a>
+		
+	</div>
+	
+</div>
+	
+<div class="card">
+	
+    <div class="card-header">
+    	<span class="text-medium">{{'login_SUBTITLE' | translate}}</span>
+    </div>
+	
+	<div class="card-block first last">
+
+		<form name="form" novalidate>
+	
+			<div class="group">
+				
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+					<input type="text" class="form-control" placeholder="{{'login_user_PLACEHOLDER' | translate}}" name="username" ng-model="loginModel.username" required="" />
+				</div>
+				
+				<div ng-show="form.$submitted || form.username.$touched">
+					<p class="form-error" ng-show="form.username.$error.required">{{'error_REQUIRED' | translate}}</p>
+				</div>
+				
+			</div>
+	
+			<div class="group">
+				
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
+					<input type="password" class="form-control" placeholder="{{'login_pwd_PLACEHOLDER' | translate}}" name="password" ng-model="loginModel.password" required="" />
+				</div>
+				
+				<div ng-show="form.$submitted || form.password.$touched">
+					<p class="form-error" ng-show="form.password.$error.required">{{'error_REQUIRED' | translate}}</p>
+				</div>
+				
+			</div>
+	
+			<div class="form-button-bar">
+				
+				<div class="pr-2">
+					<button class="btn btn-primary btn-fixed" ng-click="localLogin(loginModel.username, loginModel.password);" ng-disabled="!loginModel.username || !loginModel.password">{{'login_local_BTN' | translate}}</button>
+				</div>
+				
+				<div class="pl-2 text-right">
+					<a class="btn btn-secondary btn-fixed" ui-sref="root.register">{{'register_LINK' | translate}}</a>
+				</div>
+				
+			</div>
+
+		</form>
+	    
+	</div>
+
+</div>
+
+</div>
+
+{% endverbatim %}
+{% endblock %}

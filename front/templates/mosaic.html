@@ -1,0 +1,375 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block extra-head %}
+
+	<title>MIM - Ingress Mosaics, Banners, Series</title>
+
+	<meta property="og:url" content="https://www.myingressmosaics.com">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="MyIngressMosaics">
+	<meta property="og:image" content="https://www.myingressmosaics.com/static/front/img/image.png">
+	<meta property="og:description" content="Search, Register and Share all Ingress Mosaics">
+	
+{% endblock %}
+
+{% block header %}
+
+	{% trans 'Mosaic' %}
+	
+{% endblock %}
+
+{% block content %}
+
+<div id="page-container" ng-controller="MosaicCtrl" ng-init="loadMosaic('{{ref}}');">
+{% verbatim %}
+	
+	<div class="f-row f-wrap f-justify-around">
+			
+		<div class="loading" ng-hide="!mosaic_loading">
+			<img src="/static/img/loading.png" />
+		</div>
+		
+	</div>
+	
+	<div id="nomosaic_block" class="text-danger text-center mt-4 mr-2 ml-2 hidden">
+		{{'nomosaic_TEXT' | translate}}
+	</div>
+	
+	<div id="mosaic_block" class="hidden">
+		
+		<div class="card mt-4">
+			
+			<div class="card-block-bordered first f-row f-wrap f-justify-center">
+				
+				<div class="f-row f-wrap f-justify-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%); width:100%;">
+		            <div ng-repeat="m in mosaic.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+		                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 85% 85%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+		            </div>
+	            </div>
+	
+			</div>
+			
+			<div class="card-block last f-col" ng-show="!editMode">
+				
+				<div class="group f-row">
+					
+					<span class="mr-auto text-white text-big">{{mosaic.title}}</span>
+		
+				</div>
+				
+				<div class="group f-row">
+					
+					<span>
+						{{mosaic.rows}}x{{mosaic.cols}}
+						&middot; {{mosaic.type}}
+					</span>
+					
+				</div>
+			
+				<pre class="group text-highlight">{{mosaic.desc}}</pre>
+				
+				<div class="group f-row">
+		        	<span class="mr-1">{{'mosaic_BY' | translate}}</span>
+		        	<a class="mr-2" ng-repeat="creator in mosaic.creators" ng-class="{'text-enligtened': creator.faction == 'E', 'text-resistance': creator.faction == 'R',}" ng-click="goToCreator(creator.name);">{{creator.name}}</a>
+				</div>
+				
+				<div class="f-row">
+		        	<span class="mr-1">{{'mosaic_REGBY' | translate}}</span>
+		        	<span class="text-highlight">{{mosaic.registerer.name}}</span>
+				</div>
+				
+			</div>
+			
+			<div class="card-block first last f-col" ng-if="user.name == mosaic.registerer.name || user.superuser" ng-show="editMode">
+				
+				<div class="loading" ng-show="editLoading">
+					<img src="/static/img/loading.png" />
+				</div>
+				
+		        <div class="group">
+		            <label>{{'mosaic_TITLE' | translate}}</label>
+		            <input type="text" class="form-control" ng-model="editModel.title" />
+		        </div>
+		        
+		        <div class="f-row">
+		            
+		            <div class="group fitem-grow pr-1">
+		                <label>{{'mosaic_ROWS' | translate}}</label>
+		                <input type="number" class="form-control" ng-model="editModel.rows" />
+		            </div>
+		            
+		            <div class="group fitem-grow pr-1 pl-1">
+		                <label>{{'mosaic_COLS' | translate}}</label>
+		                <select class="form-control" ng-model="editModel.cols" convert-to-number>
+		                    <option value="6">6</option>
+		                    <option value="5">5</option>
+		                    <option value="4">4</option>
+		                    <option value="3">3</option>
+		                    <option value="2">2</option>
+		                    <option value="1">1</option>
+		                </select>
+		            </div>
+		            
+		            <div class="group fitem-grow pl-1">
+		                <label>{{'mosaic_TYPE' | translate}}</label>
+		                <select class="form-control" ng-model="editModel.type">
+		                    <option value="sequence">{{'mosaic_SEQUENCE' | translate}}</option>
+		                    <option value="serie">{{'mosaic_SERIE' | translate}}</option>
+		                </select>
+		            </div>
+		            
+		        </div>
+		        
+		        <div class="group">
+		            <label>{{'mosaic_DESC' | translate}}</label>
+		            <textarea rows="4" cols="50" class="form-control" style="height:auto; padding:.5rem;" ng-model="editModel.desc"></textarea>
+		        </div>
+		        
+		        <div class="f-row">
+		            
+		            <div class="group fitem-grow pr-1">
+		                <label>{{'mosaic_COUNTRY' | translate}}</label>
+		                <input type="text" class="form-control" ng-model="editModel.country" />
+		            </div>
+		            
+		            <div class="group fitem-grow pr-1 pl-1">
+		                <label>{{'mosaic_REGION' | translate}}</label>
+		                <input type="text" class="form-control" ng-model="editModel.region" />
+		            </div>
+		            
+		            <div class="group fitem-grow pl-1">
+		                <label>{{'mosaic_CITY' | translate}}</label>
+		                <input type="text" class="form-control" ng-model="editModel.city" />
+		            </div>
+		            
+		        </div>
+		        
+		        <div class="form-button-bar">
+		        	
+					<button type="submit" class="btn btn-primary" ng-click="edit();" ng-disabled="!editModel.title || !editModel.desc || !editModel.region|| !editModel.country || !editModel.city || !editModel.type || !editModel.rows || !editModel.cols">
+					    {{'ok_LABEL' | translate}}
+					</button>
+		        	
+					<button type="submit" class="btn btn-secondary" ng-click="closeEdit();">
+					    {{'cancel_LABEL' | translate}}
+					</button>
+					
+		        </div>
+				
+			</div>
+			
+		</div>
+		
+		<ol class="breadcrumb" ng-show="!editMode">
+		    <li class="breadcrumb-item"><a ng-click="goToCountry();">{{mosaic.country}}</a></li>
+		    <li class="breadcrumb-item"><a ng-click="goToRegion();">{{mosaic.region}}</a></li>
+		    <li class="breadcrumb-item"><a ng-click="goToCity();">{{mosaic.city}}</a></li>
+		</ol>
+	
+		<div class="f-row mx-2 mb-4 form-button-bar" ng-if="user.name == mosaic.registerer.name || user.superuser">
+			
+			<a class="btn btn-secondary" ng-show="!editMode" ng-click="openEdit();">
+				{{'edit_LABEL' | translate}}
+			</a>
+			
+		</div>
+	
+		<div class="f-row f-justify-center mb-4" style="height:20px;">
+			
+			<div class="pr-2 text-right" style="width:50%;">
+				
+				<div id="fb-root"></div>
+				
+				<script>
+					(function(d, s, id) {
+						var js, fjs = d.getElementsByTagName(s)[0];
+						if (d.getElementById(id)) return;
+						js = d.createElement(s); js.id = id;
+						js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10";
+						fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk'));
+				</script>
+				
+				<div class="fb-share-button" data-href="https://www.myingressmosaics.com/mosaic/{{mosaic.ref}}" data-layout="button_count" data-size="small" data-mobile-iframe="true">
+					<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">
+						Share
+					</a>
+				</div>
+			
+			</div>
+			
+			<div class="pl-2" style="width:50%; display:flex;">
+				
+				<script src="https://apis.google.com/js/platform.js" async defer></script>
+				<div class="g-plus" data-action="share" data-annotation="bubble" data-href="https://www.myingressmosaics.com/mosaic/{{mosaic.ref}}"></div>			
+				
+			</div>
+			
+		</div>
+		
+		<div class="card">
+			
+			<div class="card-header f-row">
+				
+				<span>{{mosaic.missions.length}} missions</span>
+				<span>&nbsp;&middot; {{mosaic.portals}} portals</span>
+				<span ng-show="mosaic.type ==  'sequence'">&nbsp;&middot; {{mosaic._distance | number:2}} km</span>
+				
+			</div>
+			
+			<div class="card-block-bordered">
+				
+		    	<div id="map"></div>
+		    	
+			</div>
+			
+		</div>
+		
+		<div class="card">
+			
+			<div class="group form-button-bar" ng-if="user.name == mosaic.registerer.name || user.superuser" ng-show="!reorderMode && !addMode">
+				
+				<a class="btn btn-secondary" ng-click="openReorder();">
+					{{'mosaicpage_REORDER' | translate}}
+				</a>
+				
+				<a class="btn btn-secondary" ng-click="openAdd();">
+					{{'mosaicpage_ADD' | translate}}
+				</a>
+			
+			</div>
+				
+			<div class="loading" ng-show="reorderLoading">
+				<img src="/static/img/loading.png" />
+			</div>
+			
+	        <table class="card-table" ng-show="!reorderMode && !addMode">
+	            <tbody>
+	                <tr ng-repeat="item in mosaic.missions">
+	                	
+	                    <td class="text-white text-center" style="width:2rem;" ng-if="user.name == mosaic.registerer.name || user.superuser">
+	                    	<a ng-click="remove(item.ref);">
+	                    		<i class="fa fa-trash"></i>
+	                    	</a>
+	                    </td>
+	                    
+	                    <td class="text-white text-center" style="width:2rem;">
+	                    	#{{item.order}}
+	                    </td>
+	                    
+	                    <td>
+	                        {{item.title}}
+	                    </td>
+	                    
+	                    <td class="text-center" style="width:2rem;">
+	                        <a href="https://www.ingress.com/intel?ll={{item.lat}},{{item.lng}}&z=15" target="blank">
+	                            <i class="fa fa-external-link"></i>
+	                        </a>
+	                    </td>
+	                    
+	                </tr>
+	            </tbody>
+	        </table>
+			
+	        <table class="card-table" ng-show="reorderMode">
+	            <tbody>
+	                <tr ng-repeat="item in reorderModel.missions">
+	                	
+		                <td style="width:3rem;">
+		                	<input type="number" class="form-control text-center" style="padding:.25rem;" ng-model="item.order" />
+		                </td>
+		                
+		                <td>
+		                	{{item.title}}
+		                </td>
+	                    
+	                </tr>
+	            </tbody>
+	        </table>
+			
+			<div class="card-block last" ng-if="user.name == mosaic.registerer.name || user.superuser"  ng-show="reorderMode">
+				
+				<div class="form-button-bar">
+					
+					<a class="btn btn-primary" ng-click="reorder();">
+						{{'ok_LABEL' | translate}}
+					</a>
+					
+					<a class="btn btn-secondary" ng-click="closeReorder();">
+						{{'cancel_LABEL' | translate}}
+					</a>
+				
+				</div>
+	
+			</div>
+			
+			<div class="card-block first" ng-show="addMode">
+				
+				<p>{{'add_TEXT' | translate}}</p>
+	
+				<p class="text-danger" ng-if="potentials.length < 1">{{'add_NOMISSION' | translate}}</p>
+				
+			</div>
+			
+	        <table class="card-table" ng-show="addMode">
+	            <tbody>
+	                <tr ng-repeat="item in potentials">
+	                	
+		                <td style="width:3rem;">
+		                	<input type="number" class="form-control text-center" style="padding:.25rem;" ng-model="item.order" />
+		                </td>
+		                
+		                <td>
+		                	{{item.name}}
+		                </td>
+		            	
+		                <td style="width:3rem;">
+		                	<button class="btn btn-primary" ng-click="add(item, item.order);">
+		                		{{'add_LABEL' | translate}}
+		                	</button>
+		                </td>
+	                    
+	                </tr>
+	            </tbody>
+	        </table>
+			
+			<div class="card-block last" ng-if="user.name == mosaic.registerer.name || user.superuser"  ng-show="addMode">
+				
+				<div class="form-button-bar">
+					
+					<a class="btn btn-secondary" ng-click="closeAdd();">
+						{{'close_LABEL' | translate}}
+					</a>
+	
+				</div>
+	
+			</div>
+			
+		</div>
+		
+		<div class="card pt-4" ng-if="user.name == mosaic.registerer.name || user.superuser">
+			
+			<div class="card-block first last f-row f-nowrap">
+				
+				<input type="text" class="form-control mr-1" plaveholder="{{'mosaicpage_DELETETITLE' | translate}}" ng-model="deleteModel.name" />
+				
+				<button type="submit" class="btn btn-primary ml-1" ng-click="delete();">
+					{{'mosaicpage_DELETE' | translate}}
+				</button>
+	
+			</div>
+			
+		</div>
+		
+	</div>
+		
+</div>
+
+{% endverbatim %}
+{% endblock %}
+
+{% block extra-script %}
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMZDjsn8xM6EihEb9kpMbsdTCek7R-0jw&amp;language=en"></script>
+{% endblock %}

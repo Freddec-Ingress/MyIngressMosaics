@@ -3,20 +3,6 @@ angular.module('FrontModule', ['ui.router', 'ui.bootstrap', 'pascalprecht.transl
 
 
 
-/* Routing config */
-
-angular.module('FrontModule').config(function($urlRouterProvider, $stateProvider, $locationProvider) {
-	
-	$stateProvider
-	
-		.state('root', { templateUrl: '/static/pages/root.html', controller: 'RootCtrl', resolve: {loadUser: function(UserService) { return UserService.init(); }, }, })
-
-		
-	$locationProvider.html5Mode(true);
-});
-
-
-
 /* Translations config */
 
 angular.module('FrontModule').config(function($translateProvider) {

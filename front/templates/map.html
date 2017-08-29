@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block extra-head %}
+
+	<title>MIM - Ingress Mosaics, Banners, Series</title>
+
+	<meta property="og:url" content="https://www.myingressmosaics.com">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="MyIngressMosaics">
+	<meta property="og:image" content="https://www.myingressmosaics.com/static/front/img/image.png">
+	<meta property="og:description" content="Search, Register and Share all Ingress Mosaics">
+	
+{% endblock %}
+
+{% block header %}
+
+	{% trans 'Map' %}
+	
+{% endblock %}
+
+{% block content %}
+{% verbatim %}
+
+<div id="floating-panel" class="card-block f-row f-nowrap m-2" style="z-index:5;">
+	<input id="address" class="form-control" type="textbox" placeholder="Enter location" value="" />
+	<input id="submit" class="btn btn-primary ml-2" type="button" value="Search" />
+</div>
+
+<div id="map" ng-controller="MapCtrl" ng-init="initMap();" style="height:100%; position:absolute; top:0px; left:0px; right:0px;"></div>
+
+{% endverbatim %}
+{% endblock %}
+
+{% block extra-script %}
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMZDjsn8xM6EihEb9kpMbsdTCek7R-0jw&amp;language=en"></script>
+{% endblock %}

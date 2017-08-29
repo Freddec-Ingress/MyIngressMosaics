@@ -36,14 +36,6 @@ INSTALLED_APPS = [
     
     'api',
     'front',
-    
-    'front.apps.account',
-    'front.apps.creator',
-    'front.apps.home',
-    'front.apps.map',
-    'front.apps.mosaic',
-    'front.apps.registration',
-    'front.apps.search',
 ]
 
 MIDDLEWARE = [
