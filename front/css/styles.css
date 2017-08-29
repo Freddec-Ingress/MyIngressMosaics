@@ -581,7 +581,7 @@ table td {
 .f-col {display: flex; flex-direction: column;}
 
 .f-align-end {}
-.f-align-start {}
+.f-align-start {justify-content: flex-start!important;}
 .f-align-center {}
 .f-align-around {}
 .f-align-between {}

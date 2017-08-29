@@ -3826,6 +3826,17 @@ angular.module('FrontModule.controllers').controller('HomeCtrl', function($scope
 		
 		$('#latest_block').removeClass('hidden');
 	});
+
+	$scope.countries_loading = true;
+	
+	DataService.loadCountriesFromWorld().then(function(response) {
+		
+		$scope.countries = response;
+		
+		$scope.countries_loading = false;
+		
+		$('#countries_block').removeClass('hidden');
+	});
 });
 
 angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, $state, toastr, $filter, $window, SearchService) {

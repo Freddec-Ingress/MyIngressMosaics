@@ -4,7 +4,7 @@ from front import views
 
 urlpatterns = [
 	
-	url(r'^map/(?P<location>"\w+")',           views.map),
+	url(r'^map/(?P<location>[\w ]+)',           views.map),
 	url(r'^map',           views.map),
 	
 	url(r'^mosaic/(?P<ref>\w+)',        views.mosaic),

@@ -87,7 +87,63 @@
 	</div>
 	
 	<div class="f-row pt-4 mt-4 mx-4 text-uppercase bordered-b">
-		Latest mosaics
+		{% trans 'Countries' %}
+	</div>
+	
+	<div class="f-row f-wrap f-justify-around">
+			
+		<div class="loading" ng-hide="!countries_loading">
+			<img src="/static/img/loading.png" />
+		</div>
+		
+	</div>
+	
+	<div id="countries_block" class="hidden f-row f-wrap f-justify-around m-2">
+		
+{% verbatim %}
+		<div class="width-6 width-xl-3" ng-repeat="country in countries">
+			
+			<a href="/map/{{country.name}}'" class="btn btn-primary m-2 p-2 f-align-start">
+				
+				<div class="text-white mr-auto" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
+					
+					<span class="flag-icon mr-1 text-highlight" style="position:relative; top:-2px;" ng-class="{
+			            'flag-icon-fr': country.name == 'France',
+			            'flag-icon-gb': country.name == 'United Kingdom',
+			            'flag-icon-my': country.name == 'Malaysia',
+			            'flag-icon-sg': country.name == 'Singapore',
+			            'flag-icon-us': country.name == 'United States',
+			            'flag-icon-mx': country.name == 'Mexico',
+			            'flag-icon-nz': country.name == 'New Zealand',
+			            'flag-icon-mv': country.name == 'Maldives',
+			            'flag-icon-do': country.name == 'Dominican Republic',
+			            'flag-icon-au': country.name == 'Australia',
+			            'flag-icon-hu': country.name == 'Hungary',
+			            'flag-icon-lk': country.name == 'Sri Lanka',
+			            'flag-icon-id': country.name == 'Indonesia',
+			            'flag-icon-de': country.name == 'Germany',
+			            'flag-icon-pl': country.name == 'Poland',
+				        'flag-icon-ru': country.name == 'Russia',
+				        'flag-icon-hk': country.name == 'Hong Kong',
+				        'flag-icon-mu': country.name == 'Mauritius',
+				        'flag-icon-th': country.name == 'Thailand',
+				        'flag-icon-cz': country.name == 'Czechia',
+			        }"></span>
+			        
+		        	{{country.name}}
+		        	
+		        </div>
+		        
+		        <div class="text-normal">{{country.mosaics}}</div>
+	        </a>
+	        
+		</div>
+{% endverbatim %}
+
+	</div>
+	
+	<div class="f-row pt-4 mt-4 mx-4 text-uppercase bordered-b">
+		{% trans 'Latest mosaics' %}
 	</div>
 	
 	<div class="f-row f-wrap f-justify-around">
@@ -100,9 +156,10 @@
 	
 	<div id="latest_block" class="hidden f-row f-wrap f-justify-around m-2">
 		
-		<div class="width-6 width-xl-4" ng-repeat="mosaic in mosaics">
+		<div class="width-6 width-xl-3" ng-repeat="mosaic in mosaics">
 			<mosaic-vignet mosaic="mosaic"></mosaic-vignet>
 		</div>
+		
 	</div>
 
 </div>

@@ -23,7 +23,7 @@ def login(request):
 	
 def map(request, location = ''):
 	
-	context = {'location': location.replace('"', '')}
+	context = {'location': location}
 	return render(request, 'map.html', context)
 	
 	
