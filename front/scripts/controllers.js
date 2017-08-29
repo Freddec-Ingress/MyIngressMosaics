@@ -210,17 +210,13 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 			});
 		}
 		
-	
-		/* Standalone missions */
-		for (var mosaic of mosaics) {
-			if (mosaic.missions.length < 3) {
-				missions = missions.concat(mosaic.missions);
-				mosaics.splice(mosaics.indexOf(mosaic), 1);
-			}
-		}
+		/* Sort mosaics by missions count */
+		mosaics.sort(function(a, b) {
+			return b.missions.length - a.missions.length;
+		});
 	
 		$scope.mosaics = mosaics;
-		$scope.missions = missions;
+		$scope.missions = null;
 		
 		CreateService.init();
 		
