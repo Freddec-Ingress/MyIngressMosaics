@@ -2903,12 +2903,10 @@ angular.module('FrontModule.services').service('UserService', function($auth, $h
 		
 		getMissions: function() {
 			
-			if (service.data.authenticated) {
-				return API.sendRequest('/api/missions/', 'GET').then(function(response) {
-					
-					service.data.missions = response;
-				});
-			}
+			return API.sendRequest('/api/missions/', 'GET').then(function(response) {
+				
+				service.data.missions = response;
+			});
 		},
 		
 		deleteMission: function(item) {
