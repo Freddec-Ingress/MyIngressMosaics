@@ -3614,6 +3614,12 @@ angular.module('FrontModule.services').service('MapService', function(API) {
 			var data = {'sLat':South_Lat, 'sLng':South_Lng, 'nLat':North_Lat, 'nLng':North_Lng};
 			return API.sendRequest('/api/map/', 'POST', {}, data);
 		},
+		
+		getMosaicDetails: function(ref) {
+			
+			var data = {'ref':ref};
+			return API.sendRequest('/api/map/details/', 'POST', {}, data);
+		}
 	};
 	
 	return service;
@@ -4618,32 +4624,18 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 				
 				if (response) {
 					
+					var contentLoading =
+							'<div class="loading">' +
+								'<img src="/static/img/loading.png" />' +
+							'</div>'
+					;
+					
 					for (var item of response) {
 					
 						if (refArray.indexOf(item.ref) == -1) {
 							
 							refArray.push(item.ref);
-							
-							var contentImage = '';
-							for (var m of item.missions.reverse()) {
-								
-								contentImage +=	
-									'<div style="flex:0 0 16.666667%;">' +
-									    '<img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url(' + m.image + '=s10); background-size: 85% 85%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />' +
-									'</div>'
-								;
-							}
-							
-							var contentString =
-								'<a class="infoBlock" href="/mosaic/' + item.ref + '})">' +
-									'<div class="image">' + contentImage + '</div>' +
-									'<div class="detail">' +
-										'<div class="title">' + item.title + '</div>' +
-										'<div class="info">' + item.count + ' missions <br> ' + item._distance.toFixed(2) + ' km &middot; ' + item.type + '</div>' +
-									'</div>' +
-								'</a>'
-							;
-            
+
 							var latLng = new google.maps.LatLng(item._startLat, item._startLng);
 							var marker = new google.maps.Marker({
 								position: latLng,
@@ -4651,18 +4643,55 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 								icon: image,
 							});
 							
-							google.maps.event.addListener(marker, 'click', (function (marker, content, infowindow) {
+							google.maps.event.addListener(marker, 'click', (function (marker, ref, infowindow) {
+								
 								return function () {
 									
 									var contentDiv = angular.element('<div/>');
-									contentDiv.append(content);
+									contentDiv.append(contentLoading);
 									
 									var compiledContent = $compile(contentDiv)($scope);
 									
 									infowindow.setContent(compiledContent[0]);
 									infowindow.open($scope.map, marker);
+									
+									MapService.getMosaicDetails(ref).then(function(response) {
+										
+										if (response) {
+											
+											var details = response[0];
+										
+											var contentImage = '';
+											for (var m of details.missions.reverse()) {
+												
+												contentImage +=	
+													'<div style="flex:0 0 16.666667%;">' +
+													    '<img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url(' + m.image + '=s10); background-size: 85% 85%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />' +
+													'</div>'
+												;
+											}
+											
+											var contentString =
+												'<a class="infoBlock" href="/mosaic/' + details.ref + '})">' +
+													'<div class="image">' + contentImage + '</div>' +
+													'<div class="detail">' +
+														'<div class="title">' + details.title + '</div>' +
+														'<div class="info">' + details.count + ' missions <br> ' + details._distance.toFixed(2) + ' km &middot; ' + details.type + '</div>' +
+													'</div>' +
+												'</a>'
+											;
+
+											contentDiv = angular.element('<div/>');
+											contentDiv.append(contentString);
+											
+											var compiledContent = $compile(contentDiv)($scope);
+											
+											infowindow.setContent(compiledContent[0]);
+										}			
+									});
 								};
-							})(marker, contentString, $rootScope.infowindow));
+								
+							})(marker, item.ref, $rootScope.infowindow));
 						}
 					}
 				}

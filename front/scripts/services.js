@@ -869,6 +869,12 @@ angular.module('FrontModule.services').service('MapService', function(API) {
 			var data = {'sLat':South_Lat, 'sLng':South_Lng, 'nLat':North_Lat, 'nLng':North_Lng};
 			return API.sendRequest('/api/map/', 'POST', {}, data);
 		},
+		
+		getMosaicDetails: function(ref) {
+			
+			var data = {'ref':ref};
+			return API.sendRequest('/api/map/details/', 'POST', {}, data);
+		}
 	};
 	
 	return service;

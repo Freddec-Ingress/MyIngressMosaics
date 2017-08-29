@@ -749,3 +749,21 @@ class DataViewSet(viewsets.ViewSet):
 				data.append(mosaic)
 
 		return Response(data, status=status.HTTP_200_OK)
+    
+    
+    
+	def details(self, request):
+		
+		data = None
+		
+		results = Mosaic.objects.filter(ref=request.data['ref'])
+		if (results.count() > 0):
+			
+			data = []
+			
+			item = results[0]
+			
+			mosaic = item.serialize()
+			data.append(mosaic)
+
+		return Response(data, status=status.HTTP_200_OK)

@@ -144,18 +144,8 @@ class Mosaic(models.Model):
 		
 		data = {
 			'ref': self.ref,
-			'cols': self.cols,
-			'rows': self.rows,
-			'type': self.type,
-			'count': self.missions.all().count(),
-			'title': self.title,
-			
-			'_distance': self._distance,
-			
 			'_startLat': self._startLat,
 			'_startLng': self._startLng,
-			
-			'missions': self.missions.all().order_by('order').values('image'),
 		}
 			
 		return data
