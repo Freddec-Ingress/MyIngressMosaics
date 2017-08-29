@@ -56,6 +56,10 @@ angular.module('FrontModule.controllers').controller('HomeCtrl', function($scope
 	$scope.countries_loading = true;
 	
 	DataService.loadCountriesFromWorld().then(function(response) {
+
+		response.sort(function(a, b) {
+			return b.mosaics - a.mosaics;
+		});
 		
 		$scope.countries = response;
 		
