@@ -759,7 +759,7 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 		pixelOffset: new google.maps.Size(5, 5)
 	});
 
-	$scope.initMap = function() {
+	$scope.initMap = function(location) {
 		
 		var style = [{featureType:"all",elementType:"all",stylers:[{visibility:"on"},{hue:"#131c1c"},{saturation:"-50"},{invert_lightness:!0}]},{featureType:"water",elementType:"all",stylers:[{visibility:"on"},{hue:"#005eff"},{invert_lightness:!0}]},{featureType:"poi",stylers:[{visibility:"off"}]},{featureType:"transit",elementType:"all",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels.icon",stylers:[{invert_lightness:!0}]}];
 		
@@ -781,6 +781,25 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 			disableDefaultUI: true,
 			center: {lat: startLat, lng: startLng},
 		});
+		
+		var geocoder = new google.maps.Geocoder();
+        
+        if (location) {
+        	
+        	document.getElementById('address').value = location;
+			geocoder.geocode({'address': location}, function(results, status) {
+				
+				if (status === 'OK') {
+					
+					map.setCenter(results[0].geometry.location);
+					map.fitBounds(results[0].geometry.bounds);
+					
+				} else {
+					
+					toastr.error('Geocode was not successful for the following reason: ' + status);
+				}
+			});
+        }
 		
 		function GeolocationControl(controlDiv, map) {
 		
@@ -814,6 +833,7 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 		
 		            var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 		            map.setCenter(pos);
+		            map.setZoom(15);
 		        });
 		    }
 		}
@@ -824,11 +844,10 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 		map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(geolocationDiv);
 		
 		var image = {
-			size: new google.maps.Size(30, 30),
+		    scaledSize: new google.maps.Size(25, 25),
 			origin: new google.maps.Point(0, 0),
-			anchor: new google.maps.Point(15, 15),
-			labelOrigin: new google.maps.Point(15, 17),
-			url: 'https://www.myingressmosaics.com/static/img/marker.png',
+			anchor: new google.maps.Point(12, 13),
+			url: 'https://commondatastorage.googleapis.com/ingress.com/img/map_icons/marker_images/enl_lev8.png',
 		};
 		
 		map.addListener('idle', function(e) {
@@ -925,7 +944,7 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 			});
 		});
 		
-		if (startLat == 0.0 && startLng == 0.0) {
+		if (startLat == 0.0 && startLng == 0.0 && !location) {
 			
 			if (navigator.geolocation) {
 				
@@ -949,8 +968,6 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 			}
 		}
 		
-		var geocoder = new google.maps.Geocoder();
-		
 		function geocodeAddress(geocoder, resultsMap) {
 			
 			var address = document.getElementById('address').value;
@@ -959,6 +976,7 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 				if (status === 'OK') {
 					
 					resultsMap.setCenter(results[0].geometry.location);
+					resultsMap.fitBounds(results[0].geometry.bounds);
 					
 				} else {
 					

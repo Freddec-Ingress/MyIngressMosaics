@@ -21,9 +21,9 @@ def login(request):
 	
 	
 	
-def map(request):
+def map(request, location = ''):
 	
-	context = {}
+	context = {'location': location.replace('"', '')}
 	return render(request, 'map.html', context)
 	
 	
