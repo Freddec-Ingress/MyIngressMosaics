@@ -203,6 +203,8 @@ var currentProcessed_count = 0;
 var currentToBeProcessed_count = 0;
 
 var portalsToBeProcessed = [];
+
+var missionsProcessedArray = [];
 var missionsToBeProcessed = [];
 
 function processNextTiles() {
@@ -225,7 +227,7 @@ function processNextTiles() {
 
     var data = { tileKeys: [] };
 
-    var tiles = tilesToBeProcessed.slice(0, 1);
+    var tiles = tilesToBeProcessed.slice(0, 12);
     for (var tile of tiles) {
 
         data.tileKeys.push(tile.id);
@@ -306,7 +308,7 @@ function processNextTiles() {
                             var mission_name = item[1];
 
                             var found = mission_name.match(/[0-9]+/);
-                            if (found && missionsToBeProcessed.indexOf(mission_id) == -1) {
+                            if (found && missionsToBeProcessed.indexOf(mission_id) == -1 && missionsProcessedArray.indexOf(mission_id) == -1) {
                                 missionsToBeProcessed.push(mission_id);
                             }
                         }
@@ -348,7 +350,7 @@ function processNextPortal() {
                 var mission_name = item[1];
 
                 var found = mission_name.match(/[0-9]+/);
-                if (found && missionsToBeProcessed.indexOf(mission_id) == -1) {
+                if (found && missionsToBeProcessed.indexOf(mission_id) == -1 && missionsProcessedArray.indexOf(mission_id) == -1) {
                     missionsToBeProcessed.push(mission_id);
                 }
             }
@@ -366,8 +368,6 @@ function processNextPortal() {
 
 //--------------------------------------------------------------------------------------------------
 // Functions to process mission request and mission data
-
-var missionsProcessed = 1;
 
 var mImage = {
     url: 'https://commondatastorage.googleapis.com/ingress.com/img/map_icons/marker_images/enl_lev8.png',
@@ -469,6 +469,7 @@ function processNextMission() {
 
         callMIMAPI('ext_register', data.result);
 
+        missionsProcessedArray.push(mission_id);
         missionsToBeProcessed.splice(0, 1);
 
         processNextMission();
