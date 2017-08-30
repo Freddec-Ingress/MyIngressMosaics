@@ -3726,7 +3726,7 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 		template: '' +
 			'<a class="f-col m-2" href="/mosaic/{{mosaic.ref}}">' +
 				
-			'	<div class="card-block-bordered f-row f-justify-center" style="height:100px; overflow-y:auto;" ng-class="{\'f-align-start scrollbar scrollbar-mini\': mosaic.missions.length > 24, \'f-align-center\': mosaic.missions.length <= 24}">' +
+			'	<div class="card-block-bordered f-row f-justify-center scrollbar" style="height:105px; overflow-y:auto;" ng-class="{\'f-align-start scrollbar scrollbar-mini\': mosaic.missions.length > 24, \'f-align-center\': mosaic.missions.length <= 24}">' +
 					
 			'		<div class="f-row f-wrap f-justify-center f-align-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%); width:100%;">' +
 			'            <div ng-repeat="m in mosaic.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.cols}});">' +

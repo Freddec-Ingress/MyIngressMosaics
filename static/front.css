@@ -80,9 +80,8 @@ hr {
 	background-color: transparent;
 }
 .scrollbar::-webkit-scrollbar-thumb {
-    opacity: .05;
 	border-radius: 3px;
-	background-color: #000;
+	background-color: #004D40;
 }
 
 .scrollbar-mini::-webkit-scrollbar {
