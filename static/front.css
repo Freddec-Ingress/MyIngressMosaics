@@ -82,10 +82,11 @@ hr {
 .scrollbar::-webkit-scrollbar-thumb {
 	border-radius: 3px;
 	background-color: #004D40;
+	border: 2px solid #000000;
 }
 
 .scrollbar-mini::-webkit-scrollbar {
-	width: 4px;
+	width: 8px;
 }
 
 /* Loading ------------------------------------------------------------------ */
