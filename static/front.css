@@ -610,7 +610,7 @@ table td {
 
 .f-align-end {}
 .f-align-start {justify-content: flex-start!important;}
-.f-align-center {}
+.f-align-center {justify-content: center!important;}
 .f-align-around {}
 .f-align-between {}
 
