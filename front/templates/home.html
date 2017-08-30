@@ -24,7 +24,7 @@
 
 <div id="page-container" ng-controller="HomeCtrl">
 
-	<h2 class="m-4 fs-5 c-highlight text-center">
+	<h2 class="p-4 fs-5 c-highlight text-center">
 		{% trans 'Search, Register and Share all Ingress Mosaics' %}
 	</h2>
 	
@@ -98,12 +98,12 @@
 		
 	</div>
 	
-	<div id="countries_block" class="hidden f-row f-wrap f-justify-around m-2">
+	<div id="countries_block" class="hidden f-row f-wrap f-justify-around px-2 py-1">
 		
 {% verbatim %}
-		<div class="width-6 width-xl-3" ng-repeat="country in countries">
+		<div class="width-12 width-xl-3 px-2 py-1" ng-repeat="country in countries">
 			
-			<a href="/map/{{country.name}}'" class="btn btn-primary m-2 p-2 f-align-start">
+			<a href="/map/{{country.name}}" class="btn btn-primary p-2 f-align-start">
 				
 				<div class="text-white mr-auto" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
 					
