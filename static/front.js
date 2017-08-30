@@ -3724,7 +3724,7 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 		scope: { mosaic: '=' },
 		
 		template: '' +
-			'<a class="btn btn-primary text-transform-normal f-col m-2 p-2" style="align-items:initial!important;" href="/mosaic/{{mosaic.ref}}">' +
+			'<a class="btn btn-primary text-transform-normal f-col p-2" style="align-items:initial!important;" href="/mosaic/{{mosaic.ref}}">' +
 				
 			'	<div class="bg-black f-row f-justify-center" style="height:105px; overflow-y:auto; padding-top:4px; padding-bottom:4px; padding-left:4px;" ng-class="{\'f-align-start scrollbar scrollbar-mini\': mosaic.missions.length > 24, \'f-align-center pr-1\': mosaic.missions.length <= 24}">' +
 					
