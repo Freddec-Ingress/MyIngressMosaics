@@ -934,9 +934,9 @@ ol > li:last-child {
 	color:#B2DFDB!important;
 }
 .text-normal {
-	color:#BDBDBD!important;
+	color:rgba(255,255,255,.75)!important;
 }
-.c-normal {color:#BDBDBD!important;}
+.c-normal {color:rgba(255,255,255,.75)!important;}
 .c-darker {color:rgba(0,0,0,.5)!important;}
 
 /* Size --------------------------------------------------------------------- */

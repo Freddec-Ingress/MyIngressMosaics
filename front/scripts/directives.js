@@ -88,7 +88,7 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 	        '        	}"></span>' +
 	        '    		{{mosaic.city}}' +
 	        '    	</div>' +
-	        '    	<div class="text-normal">{{mosaic.missions.length}} missions &middot; {{mosaic._distance | number:2}} km</div>' +
+	        '    	<div class="text-normal">{{mosaic.missions.length}} <i class="fa fa-th mr-1"></i> <span class="mr-1">&middot;</span> {{mosaic._distance | number:2}} km</div>' +
 	            	
 			'	</div>' +
 				
