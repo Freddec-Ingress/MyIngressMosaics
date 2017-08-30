@@ -716,6 +716,10 @@ ol > li:last-child {
 .m-1 {
 	margin: .25rem!important;
 }
+.my-1 {
+	margin-top: .25rem!important;
+	margin-bottom: .25rem!important;
+}
 .mt-1 {
 	margin-top: .25rem!important;
 }
@@ -919,8 +923,10 @@ ol > li:last-child {
 .fs-4 {font-size:1rem!important;}
 .fs-5 {font-size:1.25rem!important;}
 
-.bg-500 { background-color: #009688;}
+.bg-black { background-color: #000000; }
+.bg-500 { background-color: #009688; }
 
+.text-transform-normal { text-transform: none!important; }
 .text-uppercase { text-transform: uppercase!important; }
 
 .text-center { text-align: center!important; }

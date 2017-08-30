@@ -3724,9 +3724,9 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 		scope: { mosaic: '=' },
 		
 		template: '' +
-			'<a class="f-col m-2" href="/mosaic/{{mosaic.ref}}">' +
+			'<a class="btn btn-primary text-transform-normal f-col m-2 p-2" href="/mosaic/{{mosaic.ref}}">' +
 				
-			'	<div class="card-block-bordered f-row f-justify-center scrollbar" style="height:105px; overflow-y:auto;" ng-class="{\'f-align-start scrollbar scrollbar-mini\': mosaic.missions.length > 24, \'f-align-center\': mosaic.missions.length <= 24}">' +
+			'	<div class="bg-black f-row f-justify-center" style="height:105px; overflow-y:auto;" ng-class="{\'f-align-start scrollbar scrollbar-mini\': mosaic.missions.length > 24, \'f-align-center\': mosaic.missions.length <= 24}">' +
 					
 			'		<div class="f-row f-wrap f-justify-center f-align-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%); width:100%;">' +
 			'            <div ng-repeat="m in mosaic.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.cols}});">' +
@@ -3736,9 +3736,9 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 					
 			'	</div>' +
 				
-			'	<div class="card-block text-center f-col">' +
+			'	<div class="text-center f-col">' +
 					
-	        '    	<div class="text-white mb-1" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">{{mosaic.title}}</div>' +
+	        '    	<div class="text-white my-2" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">{{mosaic.title}}</div>' +
 	        '   	<div class="text-normal">' +
 	        '        	<span class="flag-icon mr-1 text-highlight" style="position:relative; top:-2px;" ng-class="{' +
 	        '       		\'flag-icon-fr\': mosaic.country == \'France\',' +
