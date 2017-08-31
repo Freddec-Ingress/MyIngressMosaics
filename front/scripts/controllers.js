@@ -607,29 +607,38 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 		
 		var cols = $scope.mosaic.missions.length / $scope.mosaic.rows;
 		
+		console.log('rows: ' + $scope.mosaic.rows);
+		console.log('cols: ' + cols);
+		
 		for (var m of $scope.mosaic.missions) {
 			
-			var indexy = Math.floor(m.order / cols);
-			var indexx = m.order - (indexy * cols) - 1;
+			var indexy = Math.floor((m.order - 1) / cols);
+			var indexx = m.order - (indexy * cols);
 			
-			console.log('indexy: ' + indexy);
+			console.log('order: ' + m.order);
+			
 			console.log('indexx: ' + indexx);
+			console.log('indexy: ' + indexy);
 			
-			var offsetx = 500 - (indexx * 100);
-			var offsety = $scope.canvas_height - (indexy * 100);
+			var offsetx = 600 - (indexx * 100);
+			var offsety = ($scope.canvas_height -100) - (indexy * 100);
 			
 			console.log('offsetx: ' + offsetx);
 			console.log('offsety: ' + offsety);
 			
 			var img = new Image;
-			img.onload = function(){
-			  ctx.drawImage(img, offsetx, offsetx);
+			img.setAtX = offsetx;
+			img.setAtY = offsety;
+			img.onload = function() {
+			  ctx.drawImage(this, this.setAtX, this.setAtY);
 			};
 			img.src = m.image + '=s100';
 			
 			var mask = new Image;
-			mask.onload = function(){
-			  ctx.drawImage(mask, offsetx, offsety);
+			mask.setAtX = offsetx;
+			mask.setAtY = offsety;
+			mask.onload = function() {
+			  ctx.drawImage(this, this.setAtX, this.setAtY);
 			};
 			mask.src = 'https://www.myingressmosaics.com/static/img/mask.png';
 		}
