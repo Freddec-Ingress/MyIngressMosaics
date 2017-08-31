@@ -4,5 +4,8 @@
   "devDependencies": {
     "grunt": "~1.0.0",
     "grunt-contrib-concat": "^1.0.1"
+  },
+  "dependencies": {
+    "cloudinary-core": "^2.3.0"
   }
 }

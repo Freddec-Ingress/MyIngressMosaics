@@ -25,7 +25,23 @@ def map(request, location = ''):
 	
 	context = {'location': location}
 	return render(request, 'map.html', context)
+
+
+
+from django.http import HttpResponse
+from PIL import Image
+
+import random
+INK = "red", "blue", "green", "yellow"
+
+def preview(request, ref):
 	
+	image = Image.new("RGB", (800, 600), random.choice(INK))
+	
+	# serialize to HTTP response
+	response = HttpResponse(content_type="image/png")
+	image.save(response, "PNG")
+	return response	
 	
 	
 def mosaic(request, ref):

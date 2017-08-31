@@ -657,24 +657,9 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 		
 		var imgData = c.toDataURL('image/png');
 		
-		var binaryData = atob(imgData.split(',')[1]);
-		
-		var array = [];
-	    for (var i = 0; i < binaryData.length; i++) {
-	        array.push(binaryData.charCodeAt(i));
-	    }
-	    
-	    var blobData = new Blob([new Uint8Array(array)], {type: 'image/png'});
-	    
-	    var myCredentials = new AWS.CognitoIdentityCredentials({IdentityPoolId:'IDENTITY_POOL_ID'});
-		var myConfig = new AWS.Config({credentials: myCredentials, region: 'us-west-2'});
-
-        var params = {Key: $scope.mosaic.ref + '.png', ContentType: 'PNG', Body: blobData};
-        bucket.upload(params, function (err, data) {
-        	
-            console.log(data);
-            console.log(err ? 'ERROR!' : 'UPLOADED.');
-        });
+		var finalImg = new Image;
+		finalImg.src = imgData;
+		document.body.appendChild(finalImg);
 	}
 	
 	/* Delete */

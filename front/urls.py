@@ -7,7 +7,9 @@ urlpatterns = [
 	url(r'^map/(?P<location>[\w ]+)',           views.map),
 	url(r'^map',           views.map),
 	
+	url(r'^mosaic/(?P<ref>\w+)/preview',        views.preview),
 	url(r'^mosaic/(?P<ref>\w+)',        views.mosaic),
+	
 	url(r'^search',        views.search),
 	url(r'^login',         views.login),
 	url(r'^creator',       views.creator),
