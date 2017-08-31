@@ -42,9 +42,9 @@
 			
 			<div class="card-block-bordered first f-row f-wrap f-justify-center">
 				
-				<div class="f-row f-wrap f-justify-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%); width:100%;">
+				<div id="mosaic_image" class="f-row f-wrap f-justify-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%); width:100%;">
 		            <div ng-repeat="m in mosaic.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-		                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 85% 85%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+		                <img id="img_{{$index}}" src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 85% 85%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
 		            </div>
 	            </div>
 	
@@ -348,6 +348,19 @@
 			
 		</div>
 		
+		<div class="card pt-4" ng-if="user.superuser">
+			
+			<div class="card-block first last f-row f-nowrap">
+				<button type="submit" class="btn btn-primary ml-1" ng-click="validate();">
+					{{'mosaicpage_VALIDATE' | translate}}
+				</button>
+			</div>
+			
+		</div>
+		
+		<canvas id="myCanvas" width="600" height="{{canvas_height}}" style="border:1px solid #fff;" ng-if="user.superuser">
+		</canvas>
+
 		<div class="card pt-4" ng-if="user.name == mosaic.registerer.name || user.superuser">
 			
 			<div class="card-block first last f-row f-nowrap">

@@ -482,6 +482,8 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 			if (!$scope.mosaic) $('#nomosaic_block').removeClass('hidden');
 			
 			$scope.initMap();
+			
+			$scope.canvas_height = 100 * $scope.mosaic.rows;
 		});
 	}
 		
@@ -594,6 +596,43 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 		item.order = order
 		
 		MosaicService.add(item.ref, order);
+	}
+	
+	/* Validate */
+	
+	$scope.validate = function() {
+		
+		var c = document.getElementById('myCanvas');
+		var ctx = c.getContext('2d');
+		
+		var cols = $scope.mosaic.missions.length / $scope.mosaic.rows;
+		
+		for (var m of $scope.mosaic.missions) {
+			
+			var indexy = Math.floor(m.order / cols);
+			var indexx = m.order - (indexy * cols) - 1;
+			
+			console.log('indexy: ' + indexy);
+			console.log('indexx: ' + indexx);
+			
+			var offsetx = 500 - (indexx * 100);
+			var offsety = $scope.canvas_height - (indexy * 100);
+			
+			console.log('offsetx: ' + offsetx);
+			console.log('offsety: ' + offsety);
+			
+			var img = new Image;
+			img.onload = function(){
+			  ctx.drawImage(img, offsetx, offsetx);
+			};
+			img.src = m.image + '=s100';
+			
+			var mask = new Image;
+			mask.onload = function(){
+			  ctx.drawImage(mask, offsetx, offsety);
+			};
+			mask.src = 'https://www.myingressmosaics.com/static/img/mask.png';
+		}
 	}
 	
 	/* Delete */

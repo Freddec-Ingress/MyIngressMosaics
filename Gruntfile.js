@@ -28,6 +28,7 @@ module.exports = function(grunt) {
 					'vendor/angular-toastr/js/angular-toastr.tpls.min.js',
 					'vendor/angular-translate/js/angular-translate.min.js',
 					'vendor/angular-ui-router/js/angular-ui-router.min.js',
+					'vendor/html2canvas/js/html2canvas.min.js',
 					
 					'front/lang/en.js',
 					'front/lang/fr.js',
