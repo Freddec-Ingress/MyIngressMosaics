@@ -85,6 +85,10 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 		    '       		\'flag-icon-mu\': mosaic.country == \'Mauritius\',' +
 		    '       		\'flag-icon-th\': mosaic.country == \'Thailand\',' +
 		    '       		\'flag-icon-cz\': mosaic.country == \'Czechia\',' +
+		    '       		\'flag-icon-cn\': mosaic.country == \'China\',' +
+		    '       		\'flag-icon-es\': mosaic.country == \'Spain\',' +
+		    '       		\'flag-icon-ch\': mosaic.country == \'Switzerland\',' +
+		    '       		\'flag-icon-ca\': mosaic.country == \'Canada\',' +
 	        '        	}"></span>' +
 	        '    		{{mosaic.city}}' +
 	        '    	</div>' +
