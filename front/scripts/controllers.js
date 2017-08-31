@@ -610,6 +610,12 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 		console.log('rows: ' + $scope.mosaic.rows);
 		console.log('cols: ' + cols);
 		
+		var baseOffsetX = (600 - (cols * 100)) / 2;
+		var baseOffsetY = 0;
+		
+		console.log('baseOffsetX: ' + baseOffsetX);
+		console.log('baseOffsetY: ' + baseOffsetY);
+		
 		for (var m of $scope.mosaic.missions) {
 			
 			var indexy = Math.floor((m.order - 1) / cols);
@@ -627,16 +633,16 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 			console.log('offsety: ' + offsety);
 			
 			var img = new Image;
-			img.setAtX = offsetx;
-			img.setAtY = offsety;
+			img.setAtX = offsetx - baseOffsetX;
+			img.setAtY = offsety - baseOffsetY;
 			img.onload = function() {
 			  ctx.drawImage(this, this.setAtX, this.setAtY);
 			};
 			img.src = m.image + '=s100';
 			
 			var mask = new Image;
-			mask.setAtX = offsetx;
-			mask.setAtY = offsety;
+			mask.setAtX = offsetx - baseOffsetX;
+			mask.setAtY = offsety - baseOffsetY;
 			mask.onload = function() {
 			  ctx.drawImage(this, this.setAtX, this.setAtY);
 			};
