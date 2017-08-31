@@ -605,13 +605,19 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 		var c = document.getElementById('myCanvas');
 		var ctx = c.getContext('2d');
 		
+		ctx.fillRect(4, 4, 600, $scope.mosaic.rows * 100);
+		
+		ctx.font = '13px Coda';
+		ctx.fillStyle = '#BDBDBD';
+		ctx.fillText('MIM - MyIngressMosaics.com', 4, 4 + $scope.mosaic.rows * 100 + 18);
+		
 		var cols = $scope.mosaic.missions.length / $scope.mosaic.rows;
 		
 		console.log('rows: ' + $scope.mosaic.rows);
 		console.log('cols: ' + cols);
 		
-		var baseOffsetX = (600 - (cols * 100)) / 2;
-		var baseOffsetY = 0;
+		var baseOffsetX = (608 - (cols * 100)) / 2;
+		var baseOffsetY = 8 / 2;
 		
 		console.log('baseOffsetX: ' + baseOffsetX);
 		console.log('baseOffsetY: ' + baseOffsetY);
@@ -634,7 +640,7 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 			
 			var img = new Image;
 			img.setAtX = offsetx - baseOffsetX;
-			img.setAtY = offsety - baseOffsetY;
+			img.setAtY = offsety + baseOffsetY;
 			img.onload = function() {
 			  ctx.drawImage(this, this.setAtX, this.setAtY);
 			};
@@ -642,12 +648,33 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 			
 			var mask = new Image;
 			mask.setAtX = offsetx - baseOffsetX;
-			mask.setAtY = offsety - baseOffsetY;
+			mask.setAtY = offsety + baseOffsetY;
 			mask.onload = function() {
 			  ctx.drawImage(this, this.setAtX, this.setAtY);
 			};
 			mask.src = 'https://www.myingressmosaics.com/static/img/mask.png';
 		}
+		
+		var imgData = c.toDataURL('image/png');
+		
+		var binaryData = atob(imgData.split(',')[1]);
+		
+		var array = [];
+	    for (var i = 0; i < binaryData.length; i++) {
+	        array.push(binaryData.charCodeAt(i));
+	    }
+	    
+	    var blobData = new Blob([new Uint8Array(array)], {type: 'image/png'});
+	    
+	    var myCredentials = new AWS.CognitoIdentityCredentials({IdentityPoolId:'IDENTITY_POOL_ID'});
+		var myConfig = new AWS.Config({credentials: myCredentials, region: 'us-west-2'});
+
+        var params = {Key: $scope.mosaic.ref + '.png', ContentType: 'PNG', Body: blobData};
+        bucket.upload(params, function (err, data) {
+        	
+            console.log(data);
+            console.log(err ? 'ERROR!' : 'UPLOADED.');
+        });
 	}
 	
 	/* Delete */

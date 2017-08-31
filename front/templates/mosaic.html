@@ -358,7 +358,7 @@
 			
 		</div>
 		
-		<canvas id="myCanvas" width="600" height="{{canvas_height}}" style="border:1px solid #fff;" ng-if="user.superuser">
+		<canvas id="myCanvas" width="608" height="{{canvas_height + 8 + 25}}" style="background: #004D40;" ng-if="user.superuser">
 		</canvas>
 
 		<div class="card pt-4" ng-if="user.name == mosaic.registerer.name || user.superuser">
@@ -383,5 +383,6 @@
 {% endblock %}
 
 {% block extra-script %}
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMZDjsn8xM6EihEb9kpMbsdTCek7R-0jw&amp;language=en"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuXb2ncs76tO-2SN8hvkE5Zt4VwtPoNcM&amp;language=en"></script>
+	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.100.0.min.js"></script>
 {% endblock %}
