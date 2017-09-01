@@ -7,7 +7,9 @@ from PIL import Image, ImageDraw
 from django.http import HttpResponse
 
 import math
+import urllib, cStringIO
 
+from operator import itemgetter, attrgetter, methodcaller
 
 def creator(request):
 	
@@ -51,6 +53,29 @@ def preview(request, ref):
 
 	draw = ImageDraw.Draw(image)
 	draw.rectangle(((8, 8), (624, img_height - 52 + 16)), fill = 'black')
+	
+	realcol = mosaic.cols
+	if (mosaic.missions.count() < 6) :
+		realcol = mosaic.missions.count()
+
+	realx = realcol * 100
+	realy = mosaic_rows * 100
+	
+	paddingX = (600 - realx) / 2
+	paddingY = ((img_height - 52) - realy) / 2
+
+	for m in mosaic.missions.all():
+
+		file = cStringIO.StringIO(urllib.urlopen(m.image + '=s100').read())
+		mimg = Image.open(file)
+		
+		y = int(m.order / realcol)
+		x = m.order - (y * realcol)
+		
+		xoffset = paddingX + (x * 100)
+		yoffset = paddingY + (y * 100)
+		
+		image.paste(mimg, (xoffset, yoffset));
 
 	response = HttpResponse(content_type = 'image/png')
 	image.save(response, 'PNG')
