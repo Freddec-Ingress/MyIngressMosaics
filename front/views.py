@@ -54,9 +54,11 @@ def preview(request, ref):
 	draw = ImageDraw.Draw(image)
 	draw.rectangle(((8, 8), (624, img_height - 52 + 16)), fill = 'black')
 	
+	mcount = mosaic.missions.count()
+	
 	realcol = mosaic.cols
-	if (mosaic.missions.count() < 6) :
-		realcol = mosaic.missions.count()
+	if (mcount < 6) :
+		realcol = mcount
 
 	realx = realcol * 100
 	realy = mosaic_rows * 100
@@ -66,13 +68,13 @@ def preview(request, ref):
 
 	for m in mosaic.missions.all():
 
-		file = io.BytesIO(urllib.request.urlopen(m.image + '=s100').read())
+		file = io.BytesIO(urllib.urlopen(m.image + '=s100').read())
 		mimg = Image.open(file)
 		
-		y = int((m.order - 1) / realcol)
-		x = m.order - (y * realcol)
+		y = 0
+		x = m.order
 		
-		xoffset = (((paddingX * 2) + realx) - 100) - (x * 100)
+		xoffset = paddingX + (x * 100)
 		yoffset = paddingY + (y * 100)
 		
 		image.paste(mimg, (int(xoffset), int(yoffset)));
