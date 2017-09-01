@@ -66,13 +66,13 @@ def preview(request, ref):
 
 	for m in mosaic.missions.all():
 
-		file = io.BytesIO(urllib.request.urlopen(m.image + '=s100').read())
+		file = io.BytesIO(urllib.urlopen(m.image + '=s100').read())
 		mimg = Image.open(file)
 		
-		y = int(m.order / realcol)
+		y = int((m.order - 1) / realcol)
 		x = m.order - (y * realcol)
 		
-		xoffset = paddingX + (x * 100)
+		xoffset = (((paddingX * 2) + realx) - 100) - (x * 100)
 		yoffset = paddingY + (y * 100)
 		
 		image.paste(mimg, (int(xoffset), int(yoffset)));
