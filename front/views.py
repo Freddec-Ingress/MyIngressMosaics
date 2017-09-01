@@ -63,7 +63,7 @@ def preview(request, ref):
 	paddingY = 16
 
 	maskfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/img/mask.png').read())
-	maskimg = Image.open(file)
+	maskimg = Image.open(maskfile)
 		
 	for m in mosaic.missions.all():
 
