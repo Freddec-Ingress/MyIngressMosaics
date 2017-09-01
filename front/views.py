@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from api.models import *
 
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 
 from django.http import HttpResponse
 
