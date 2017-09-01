@@ -53,6 +53,7 @@ def preview(request, ref):
 
 	draw = ImageDraw.Draw(image)
 	draw.rectangle(((8, 8), (624, img_height - 52 + 24)), fill = 'black')
+	draw.text((16, img_height - 25), 'MIM - MyIngressMosaics.com', fill=(255, 255, 255))
 	
 	mcount = mosaic.missions.count()
 
