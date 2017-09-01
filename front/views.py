@@ -62,6 +62,9 @@ def preview(request, ref):
 	paddingX = 16 + (600 - realx) / 2
 	paddingY = 16
 
+	maskfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/img/mask.png').read())
+	maskimg = Image.open(file)
+		
 	for m in mosaic.missions.all():
 
 		file = io.BytesIO(urllib.request.urlopen(m.image + '=s100').read())
@@ -75,7 +78,8 @@ def preview(request, ref):
 		xoffset = paddingX + (x * 100)
 		yoffset = paddingY + (y * 100)
 		
-		image.paste(mimg, (int(xoffset), int(yoffset)));
+		image.paste(mimg, (int(xoffset), int(yoffset)), mimg);
+		image.paste(maskimg, (int(xoffset), int(yoffset)), maskimg);
 
 	response = HttpResponse(content_type = 'image/png')
 	image.save(response, 'PNG')
