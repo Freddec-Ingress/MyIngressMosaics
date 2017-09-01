@@ -70,7 +70,7 @@ def preview(request, ref):
 		order = m.order - 1
 		
 		y = int(order / mosaic.cols)
-		x = y + (order - (y * mosaic.cols)) - (y - 1)
+		x = y + (order - (y * mosaic.cols)) - (y - 2)
 		
 		xoffset = paddingX + (x * 100)
 		yoffset = paddingY + (y * 100)
