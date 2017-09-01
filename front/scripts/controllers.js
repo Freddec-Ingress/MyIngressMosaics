@@ -11,16 +11,16 @@ angular.module('FrontModule.controllers').controller('RootCtrl', function($rootS
 	
   	$translate.use(user_lang);
 
-	$scope.user_loading = true;
+	$rootScope.user_loading = true;
 	
 	UserService.init().then(function(response) {
 		
-		$scope.user = UserService.data;
+		$rootScope.user = UserService.data;
 		
 		$scope.logout = UserService.logout;
 		
-		if ($scope.user.authenticated) $('#authenticated_block').removeClass('hidden');
-		if (!$scope.user.authenticated) $('#anonymous_block').removeClass('hidden');
+		if ($rootScope.user.authenticated) $('#authenticated_block').removeClass('hidden');
+		if (!$rootScope.user.authenticated) $('#anonymous_block').removeClass('hidden');
 		
 		$scope.user_loading = false;
 	});
@@ -465,25 +465,32 @@ angular.module('FrontModule.controllers').controller('CreateCtrl', function($sco
 angular.module('FrontModule.controllers').controller('PluginCtrl', function() {
 });
 
-angular.module('FrontModule.controllers').controller('MosaicCtrl', function($scope, $state, $timeout, $window, $filter, toastr, MosaicService) {
+angular.module('FrontModule.controllers').controller('MosaicCtrl', function($rootScope, $scope, $state, $timeout, $window, $filter, toastr, MosaicService) {
 
-	$scope.mosaic_loading = true;
-	
 	$scope.loadMosaic = function(ref) {
 		
 		MosaicService.getMosaic(ref).then(function(response) {
 			
+			$('#block-loading').addClass('hidden');
+			
 			$scope.mosaic = MosaicService.data.mosaic;
 			$scope.potentials = MosaicService.data.potentials;
-			
-			$scope.mosaic_loading = false;
-			
-			if ($scope.mosaic) $('#mosaic_block').removeClass('hidden');
-			if (!$scope.mosaic) $('#nomosaic_block').removeClass('hidden');
+
+			if ($scope.mosaic) {
+				
+				$('#block-mosaic').removeClass('hidden');
+				
+				if ($rootScope.user && $rootScope.user.authenticated && ($rootScope.user.name == $scope.mosaic.registerer.name || $rootScope.user.superuser)) {
+					
+					$('#block-edit').removeClass('hidden');
+				}
+			}
+			else {
+				
+				$('#block-nomosaic').removeClass('hidden');
+			}
 			
 			$scope.initMap();
-			
-			$scope.canvas_height = 100 * $scope.mosaic.rows;
 		});
 	}
 		
@@ -509,6 +516,9 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 		$scope.editModel.country = $scope.mosaic.country;
 		
 		$scope.editMode = true;
+		$scope.reorderMode = false;
+		$scope.addMode = false;
+		$scope.deleteMode = false;
 	}
 	
 	$scope.closeEdit = function() {
@@ -546,7 +556,10 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 		$scope.reorderModel.ref = $scope.mosaic.ref;
 		$scope.reorderModel.missions = $scope.mosaic.missions;
 
+		$scope.editMode = false;
 		$scope.reorderMode = true;
+		$scope.addMode = false;
+		$scope.deleteMode = false;
 	}
 	
 	$scope.closeReorder = function() {
@@ -578,7 +591,10 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 	
 	$scope.openAdd = function() {
 		
+		$scope.editMode = false;
+		$scope.reorderMode = false;
 		$scope.addMode = true;
+		$scope.deleteMode = false;
 	}
 	
 	$scope.closeAdd = function() {
@@ -664,7 +680,22 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 	
 	/* Delete */
 	
+	$scope.deleteMode = false;
+	
 	$scope.deleteModel = {name:null};
+	
+	$scope.openDelete = function() {
+		
+		$scope.editMode = false;
+		$scope.reorderMode = false;
+		$scope.addMode = false;
+		$scope.deleteMode = true;
+	}
+	
+	$scope.closeDelete = function() {
+		
+		$scope.deleteMode = false;
+	}
 	
 	$scope.delete = function() {
 		

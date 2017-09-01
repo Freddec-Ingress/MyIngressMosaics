@@ -22,8 +22,6 @@ angular.module('FrontModule.services').service('API', function($q, $http, $cooki
 						if (response.data == '') response.data = 'error_TIMEOUT';
 						if (response.data == null) response.data = 'error_NOCONNECTION';
 					}
-					
-					toastr.error($filter('translate')(response.data.detail));
 
 					deferred.reject(response.data, response.status, response.headers, response.config);
 				});

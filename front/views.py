@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from api.models import *
+
 def creator(request):
 	
 	context = {}
@@ -30,7 +32,18 @@ def map(request, location = ''):
 
 def mosaic(request, ref):
 	
-	context = { 'ref': ref }
+	mosaic = None
+	
+	results = Mosaic.objects.filter(ref=ref)
+	if (results.count() > 0):
+		mosaic = results[0]
+	
+	if (mosaic):
+		context = { 'ref': ref, 'name': mosaic.title, 'desc': mosaic.country }
+		
+	else:
+		context = { 'ref': ref }
+		
 	return render(request, 'mosaic.html', context)
 	
 	

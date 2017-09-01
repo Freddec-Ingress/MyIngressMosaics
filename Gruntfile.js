@@ -14,6 +14,7 @@ module.exports = function(grunt) {
 					'vendor/angular-toastr/css/angular-toastr.min.css',
 					
 					'front/css/styles.css',
+					'front/css/new-styles.css',
 				],
 				dest: 'static/front.css'
 			},
@@ -28,9 +29,6 @@ module.exports = function(grunt) {
 					'vendor/angular-toastr/js/angular-toastr.tpls.min.js',
 					'vendor/angular-translate/js/angular-translate.min.js',
 					'vendor/angular-ui-router/js/angular-ui-router.min.js',
-					'vendor/html2canvas/js/html2canvas.min.js',
-					'vendor/cloudinary/js/lodash.min.js',
-					'vendor/cloudinary/js/cloudinary-core.min.js',
 					
 					'front/lang/en.js',
 					'front/lang/fr.js',

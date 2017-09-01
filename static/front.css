@@ -114,6 +114,8 @@ hr {
 	animation: rotating 2s linear infinite;
 }
 
+
+
 /* Wrapper ------------------------------------------------------------------ */
 
 .wrapper {
@@ -580,11 +582,8 @@ table tbody tr {
     cursor: pointer;
     border-bottom: 1px solid rgba(0,0,0,.25);
 }
-table tbody tr:first-child {
-    border-top: 1px solid rgba(0,0,0,.5);
-}
 table tbody tr:last-child {
-    border-bottom: 1px solid rgba(0,0,0,.5);
+    border-bottom: 0;
 }
 
 table tbody tr.selected {
@@ -744,6 +743,10 @@ ol > li:last-child {
 
 .m-1 {
 	margin: .25rem!important;
+}
+.mx-1 {
+	margin-left: .25rem!important;
+	margin-right: .25rem!important;
 }
 .my-1 {
 	margin-top: .25rem!important;
@@ -1030,4 +1033,100 @@ ol > li:last-child {
 
 .infoBlock .detail .info {
     color: #9E9E9E; font-size:.75rem; font-family: 'Coda',sans-serif;
+}
+/* Container ---------------------------------------------------------------- */
+
+.container {
+    margin: 0;
+    width: 100%; min-height: 100%;
+}
+
+@media (min-width:  768px) { .container { margin: 0 auto; width: 720px; } }
+@media (min-width:  992px) { .container { margin: 0 auto; width: 720px; } }
+@media (min-width: 1200px) { .container { margin: 0 auto; width: 720px; } }
+
+
+
+/* Loading ------------------------------------------------------------------ */
+
+@-webkit-keyframes rotating {
+	from { transform: rotate(  0deg); }
+	to   { transform: rotate(360deg); }
+}
+
+@keyframes rotating {
+	from { transform: rotate(  0deg); }
+	to   { transform: rotate(360deg); }
+}
+
+.loading-line {
+    font-size: .875rem;
+    display: flex; justify-content: center; align-items: center;
+}
+
+.loading-line > img {
+    margin: -2px .5rem 0 0;
+    width: .875rem; height: .875rem;
+	animation: rotating 2s linear infinite;
+}
+
+
+
+/* Error -------------------------------------------------------------------- */
+
+.error-line {
+    color: #F44336; font-size: .875rem;
+    display: flex; justify-content: center; align-items: center;
+}
+
+
+
+/* Panel -------------------------------------------------------------------- */
+
+.panel {
+    padding: .25rem .5rem;
+    background: #004D40;
+}
+
+
+
+/* Background colors -------------------------------------------------------- */
+
+.bg-block { background-color: #000000!important; }
+
+
+
+/* Mosaic image ------------------------------------------------------------- */
+
+.mosaic-img {
+    padding: .5rem;
+    background-color: #000000;
+    display: flex; justify-content: center; align-items: center;
+}
+
+.mosaic-img .content-6, .mosaic-img .content-5, .mosaic-img .content-4, .mosaic-img .content-3, .mosaic-img .content-2, .mosaic-img .content-1 {
+    width: 100%;
+    display: flex; justify-content: center; align-items: center; flex-wrap: wrap;
+}
+
+.mosaic-img .content-6 { padding: 0 calc((6 - 6) / 2 * 16.666667%); }
+.mosaic-img .content-5 { padding: 0 calc((6 - 5) / 2 * 16.666667%); }
+.mosaic-img .content-4 { padding: 0 calc((6 - 4) / 2 * 16.666667%); }
+.mosaic-img .content-3 { padding: 0 calc((6 - 3) / 2 * 16.666667%); }
+.mosaic-img .content-2 { padding: 0 calc((6 - 2) / 2 * 16.666667%); }
+.mosaic-img .content-1 { padding: 0 calc((6 - 1) / 2 * 16.666667%); }
+
+.mosaic-img .item { max-width: 100px; }
+
+.mosaic-img .content-6 .item { flex: 0 0 calc(100% / 6); }
+.mosaic-img .content-5 .item { flex: 0 0 calc(100% / 5); }
+.mosaic-img .content-4 .item { flex: 0 0 calc(100% / 4); }
+.mosaic-img .content-3 .item { flex: 0 0 calc(100% / 3); }
+.mosaic-img .content-2 .item { flex: 0 0 calc(100% / 2); }
+.mosaic-img .content-1 .item { flex: 0 0 calc(100% / 1); }
+
+.mosaic-img .item > img {
+    width: 100%;
+    float: left;
+    background-color: #000000; background-position: 50% 50%; background-repeat: no-repeat;
 }

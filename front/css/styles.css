@@ -86,6 +86,8 @@ hr {
 	animation: rotating 2s linear infinite;
 }
 
+
+
 /* Wrapper ------------------------------------------------------------------ */
 
 .wrapper {
@@ -552,11 +554,8 @@ table tbody tr {
     cursor: pointer;
     border-bottom: 1px solid rgba(0,0,0,.25);
 }
-table tbody tr:first-child {
-    border-top: 1px solid rgba(0,0,0,.5);
-}
 table tbody tr:last-child {
-    border-bottom: 1px solid rgba(0,0,0,.5);
+    border-bottom: 0;
 }
 
 table tbody tr.selected {
@@ -716,6 +715,10 @@ ol > li:last-child {
 
 .m-1 {
 	margin: .25rem!important;
+}
+.mx-1 {
+	margin-left: .25rem!important;
+	margin-right: .25rem!important;
 }
 .my-1 {
 	margin-top: .25rem!important;
