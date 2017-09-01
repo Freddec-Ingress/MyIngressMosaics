@@ -68,7 +68,7 @@ def preview(request, ref):
 
 	for m in mosaic.missions.all():
 
-		file = io.BytesIO(urllib.urlopen(m.image + '=s100').read())
+		file = io.BytesIO(urllib.request.urlopen(m.image + '=s100').read())
 		mimg = Image.open(file)
 		
 		y = 0
