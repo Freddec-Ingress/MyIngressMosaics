@@ -61,7 +61,12 @@ def preview(request, ref):
 	
 	mcount = mosaic.missions.count()
 
-	realx = mosaic.cols * 100
+	realx = 0
+	if mcount < mosaic.cols:
+		realx = mosaic.cols * 100
+	else:
+		realx = mcount * 100
+	
 	realy = mosaic_rows * 100
 	
 	paddingX = 16 + (600 - realx) / 2
