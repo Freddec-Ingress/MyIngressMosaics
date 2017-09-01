@@ -54,7 +54,7 @@ def preview(request, ref):
 	draw = ImageDraw.Draw(image)
 	draw.rectangle(((8, 8), (624, img_height - 52 + 24)), fill = 'black')
 	
-	font = ImageFont.truetype('../static/fonts/coda-regular.ttf', 15)
+	font = ImageFont.truetype(os.path.realpath(os.path.dirname(__file__)) + '/static/fonts/coda-regular.ttf', 15)
 	draw.text((16, img_height - 25), 'MIM - MyIngressMosaics.com', fill=(255, 255, 255), font=font)
 	
 	mcount = mosaic.missions.count()
