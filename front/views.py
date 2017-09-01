@@ -7,7 +7,7 @@ from PIL import Image, ImageDraw
 from django.http import HttpResponse
 
 import math
-import urllib, cStringIO
+import urllib, StringIO
 
 from operator import itemgetter, attrgetter, methodcaller
 
@@ -66,7 +66,7 @@ def preview(request, ref):
 
 	for m in mosaic.missions.all():
 
-		file = cStringIO.StringIO(urllib.urlopen(m.image + '=s100').read())
+		file = StringIO.StringIO(urllib.urlopen(m.image + '=s100').read())
 		mimg = Image.open(file)
 		
 		y = int(m.order / realcol)
