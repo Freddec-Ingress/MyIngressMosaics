@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw
 
 from django.http import HttpResponse
 
-import math
+import math, os
 import urllib, io
 
 from operator import itemgetter, attrgetter, methodcaller
@@ -53,7 +53,9 @@ def preview(request, ref):
 
 	draw = ImageDraw.Draw(image)
 	draw.rectangle(((8, 8), (624, img_height - 52 + 24)), fill = 'black')
-	draw.text((16, img_height - 25), 'MIM - MyIngressMosaics.com', fill=(255, 255, 255))
+	
+	font = ImageFont.truetype('../static/fonts/coda-regular.ttf', 15)
+	draw.text((16, img_height - 25), 'MIM - MyIngressMosaics.com', fill=(255, 255, 255), font=font)
 	
 	mcount = mosaic.missions.count()
 
