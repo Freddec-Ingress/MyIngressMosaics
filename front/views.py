@@ -70,7 +70,11 @@ def preview(request, ref):
 	realy = mosaic_rows * 100
 	
 	paddingX = 16 + (600 - realx) / 2
-	paddingY = 16 + (300 - realy) / 2
+	
+	if mosaic_rows < 4:
+		paddingY = 16 + (300 - realy) / 2
+	else:
+		paddingY = 16
 
 	maskfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/img/mask.png').read())
 	maskimg = Image.open(maskfile)
