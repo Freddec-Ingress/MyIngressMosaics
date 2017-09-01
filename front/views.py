@@ -101,7 +101,17 @@ def mosaic(request, ref):
 		mosaic = results[0]
 	
 	if (mosaic):
-		context = { 'ref': ref, 'name': mosaic.title, 'desc': mosaic.country }
+		
+		portals = 0
+		for m in mosaic.missions.all():
+			portals += m.portals.all().count()
+		
+		desc = mosaic.country + ' > ' + mosaic.region + ' > ' + mosaic.city + ' - ' + str(len(mosaic.missions.all())) + ' missions' + ' - ' + mosaic.type + ' - ' + str(portals) + ' portals'
+
+		if (mosaic.type ==  'sequence'):
+			desc += ' - ' + str(mosaic._distance) + ' km'
+					
+		context = { 'ref': ref, 'name': mosaic.title, 'desc': desc }
 		
 	else:
 		context = { 'ref': ref }
