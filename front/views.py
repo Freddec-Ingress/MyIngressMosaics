@@ -83,7 +83,7 @@ def preview(request, ref):
 		xoffset = paddingX + (x * 100)
 		yoffset = paddingY + (y * 100)
 		
-		image.paste(mimg, (int(xoffset), int(yoffset)), mimg);
+		image.paste(mimg, (int(xoffset), int(yoffset)));
 		image.paste(maskimg, (int(xoffset), int(yoffset)), maskimg);
 
 	response = HttpResponse(content_type = 'image/png')
