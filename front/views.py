@@ -2,6 +2,13 @@ from django.shortcuts import render
 
 from api.models import *
 
+from PIL import Image, ImageDraw
+
+from django.http import HttpResponse
+
+import math
+
+
 def creator(request):
 	
 	context = {}
@@ -30,15 +37,23 @@ def map(request, location = ''):
 
 
 
-from PIL import Image
-from django.http import HttpResponse
-
 def preview(request, ref):
 
-	image = Image.new('RGB', (800, 600), 'red')
+	mosaic = Mosaic.objects.get(ref=ref)
+	
+	mosaic_rows = int(math.ceil(mosaic.missions.count() / mosaic.cols)) + 1
+	
+	img_height = 32 + 20 + (100 * mosaic_rows)
+	if (img_height < 253):
+		img_height = 253
+	
+	image = Image.new('RGBA', (632, img_height), (0, 77, 64))
+
+	draw = ImageDraw.Draw(image)
+	draw.rectangle(((8, 8), (624, img_height - 52 + 16)), fill = 'black')
 
 	response = HttpResponse(content_type = 'image/png')
-	image.save(response, "PNG")
+	image.save(response, 'PNG')
 	return response
 
 
