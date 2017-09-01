@@ -52,7 +52,7 @@ def preview(request, ref):
 	image = Image.new('RGBA', (632, img_height), (0, 77, 64))
 
 	draw = ImageDraw.Draw(image)
-	draw.rectangle(((8, 8), (624, img_height - 52 + 16)), fill = 'black')
+	draw.rectangle(((8, 8), (624, img_height - 52 + 24)), fill = 'black')
 	
 	mcount = mosaic.missions.count()
 
@@ -67,7 +67,7 @@ def preview(request, ref):
 		file = io.BytesIO(urllib.request.urlopen(m.image + '=s100').read())
 		mimg = Image.open(file)
 		
-		order = mcount - (m.order - 1)
+		order = mcount - (m.order - 2)
 		
 		y = int(order / mosaic.cols)
 		x = int(order - (y * mosaic.cols))
