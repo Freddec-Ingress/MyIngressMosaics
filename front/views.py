@@ -67,7 +67,7 @@ def preview(request, ref):
 		file = io.BytesIO(urllib.request.urlopen(m.image + '=s100').read())
 		mimg = Image.open(file)
 		
-		order = mcount - (m.order - 2)
+		order = mcount - m.order
 		
 		y = int(order / mosaic.cols)
 		x = int(order - (y * mosaic.cols))
