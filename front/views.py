@@ -109,7 +109,7 @@ def mosaic(request, ref):
 		desc = mosaic.country + ' > ' + mosaic.region + ' > ' + mosaic.city + ' \r\n ' + str(len(mosaic.missions.all())) + ' missions' + ' - ' + mosaic.type + ' - ' + str(portals) + ' portals'
 
 		if (mosaic.type ==  'sequence'):
-			desc += ' - ' + str(math.round(mosaic._distance, 2)) + ' km'
+			desc += ' - ' + str(round(mosaic._distance, 2)) + ' km'
 					
 		context = { 'ref': ref, 'name': mosaic.title, 'desc': desc }
 		
