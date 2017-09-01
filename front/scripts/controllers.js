@@ -1026,7 +1026,7 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 											}
 											
 											var contentString =
-												'<a class="infoBlock" href="/mosaic/' + details.ref + '})">' +
+												'<a class="infoBlock" href="/mosaic/' + details.ref + '">' +
 													'<div class="image">' + contentImage + '</div>' +
 													'<div class="detail">' +
 														'<div class="title">' + details.title + '</div>' +
