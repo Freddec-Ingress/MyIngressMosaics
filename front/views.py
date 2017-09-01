@@ -46,8 +46,8 @@ def preview(request, ref):
 	mosaic_rows = int(math.ceil(mosaic.missions.count() / mosaic.cols))
 	
 	img_height = 32 + 20 + (100 * mosaic_rows)
-	if (img_height < 253):
-		img_height = 253
+	if (img_height < 352):
+		img_height = 352
 	
 	image = Image.new('RGBA', (632, img_height), (0, 77, 64))
 
@@ -65,7 +65,7 @@ def preview(request, ref):
 	realy = mosaic_rows * 100
 	
 	paddingX = 16 + (600 - realx) / 2
-	paddingY = 16
+	paddingY = 16 + (300 - realy) / 2
 
 	maskfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/img/mask.png').read())
 	maskimg = Image.open(maskfile)
