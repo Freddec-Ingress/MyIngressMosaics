@@ -43,7 +43,7 @@ def preview(request, ref):
 
 	mosaic = Mosaic.objects.get(ref=ref)
 	
-	mosaic_rows = int(math.ceil(mosaic.missions.count() / mosaic.cols)) + 1
+	mosaic_rows = int(math.ceil(mosaic.missions.count() / mosaic.cols))
 	
 	img_height = 32 + 20 + (100 * mosaic_rows)
 	if (img_height < 253):
@@ -67,7 +67,7 @@ def preview(request, ref):
 		file = io.BytesIO(urllib.request.urlopen(m.image + '=s100').read())
 		mimg = Image.open(file)
 		
-		order = m.order - 1
+		order = mcount - (m.order - 1)
 		
 		y = int(order / mosaic.cols)
 		x = int(order - (y * mosaic.cols))
