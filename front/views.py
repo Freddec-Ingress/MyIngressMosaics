@@ -55,16 +55,12 @@ def preview(request, ref):
 	draw.rectangle(((8, 8), (624, img_height - 52 + 16)), fill = 'black')
 	
 	mcount = mosaic.missions.count()
-	
-	realcol = mosaic.cols
-	if (mcount < 6) :
-		realcol = mcount
 
-	realx = realcol * 100
+	realx = mosaic.cols * 100
 	realy = mosaic_rows * 100
 	
-	paddingX = (600 - realx) / 2
-	paddingY = ((img_height - 52) - realy) / 2
+	paddingX = 16 + (600 - realx) / 2
+	paddingY = 16
 
 	for m in mosaic.missions.all():
 
