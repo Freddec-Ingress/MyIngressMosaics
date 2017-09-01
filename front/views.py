@@ -106,10 +106,10 @@ def mosaic(request, ref):
 		for m in mosaic.missions.all():
 			portals += m.portals.all().count()
 		
-		desc = mosaic.country + ' > ' + mosaic.region + ' > ' + mosaic.city + ' - ' + str(len(mosaic.missions.all())) + ' missions' + ' - ' + mosaic.type + ' - ' + str(portals) + ' portals'
+		desc = mosaic.country + ' > ' + mosaic.region + ' > ' + mosaic.city + ' \r\n ' + str(len(mosaic.missions.all())) + ' missions' + ' - ' + mosaic.type + ' - ' + str(portals) + ' portals'
 
 		if (mosaic.type ==  'sequence'):
-			desc += ' - ' + str(mosaic._distance) + ' km'
+			desc += ' - ' + str(math.round(mosaic._distance, 2)) + ' km'
 					
 		context = { 'ref': ref, 'name': mosaic.title, 'desc': desc }
 		
