@@ -67,8 +67,10 @@ def preview(request, ref):
 		file = io.BytesIO(urllib.request.urlopen(m.image + '=s100').read())
 		mimg = Image.open(file)
 		
-		y = 0
-		x = m.order
+		order = m.order - 1
+		
+		y = int(order / mosaic.cols)
+		x = order
 		
 		xoffset = paddingX + (x * 100)
 		yoffset = paddingY + (y * 100)
