@@ -7,12 +7,12 @@
 	<title>MIM - {{name}}</title>
 	
 	<meta name="abstract" content="{{desc}}" />
-	<meta name="description" content="{{desc}}s" />
+	<meta name="description" content="{{desc}}" />
 
 	<meta property="og:url" content="https://www.myingressmosaics.com/mosaic/{{ref}}">
 	<meta property="og:type" content="website">
 	<meta property="og:title" content="MIM - {{name}}">
-	<meta property="og:image" content="https://www.myingressmosaics.com/static/front/img/image.png">
+	<meta property="og:image" content="https://www.myingressmosaics.com/mosaic/{{ref}}/preview">
 	<meta property="og:description" content="{{desc}}">
 
 {% endblock %}
@@ -48,14 +48,13 @@
 			
 		</div>
 		
-{% verbatim %}
-		
 		<!-- Mosaic block -->
 		
 		<div id="block-mosaic" class="mt-2 px-2 py-1 hidden">
 			
 			<div class="panel">
 				
+{% verbatim %}
 				<div class="my-2 text-white text-big">
 					{{mosaic.title}}
 				</div>
@@ -96,6 +95,7 @@
 		        	{{'mosaic_REGBY' | translate}}
 		        	{{mosaic.registerer.name}}
 				</div>
+{% endverbatim %}
 		
 				<div class="f-row my-4" style="height:20px;">
 					
@@ -113,7 +113,7 @@
 							}(document, 'script', 'facebook-jssdk'));
 						</script>
 						
-						<div class="fb-share-button" data-href="https://www.myingressmosaics.com/mosaic/{{mosaic.ref}}" data-layout="button_count" data-size="small" data-mobile-iframe="true">
+						<div class="fb-share-button" data-href="https://www.myingressmosaics.com/mosaic/{{ref}}" data-layout="button_count" data-size="small" data-mobile-iframe="true">
 							<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"></a>
 						</div>
 					
@@ -122,11 +122,13 @@
 					<div class="pl-2" style="width:50%;">
 						
 						<script src="https://apis.google.com/js/platform.js" async defer></script>
-						<div class="g-plus" data-action="share" data-annotation="bubble" data-href="https://www.myingressmosaics.com/mosaic/{{mosaic.ref}}"></div>			
+						<div class="g-plus" data-action="share" data-annotation="bubble" data-href="https://www.myingressmosaics.com/mosaic/{{ref}}"></div>			
 						
 					</div>
 					
 				</div>
+				
+{% verbatim %}
 				
 			    <div id="map"></div>
 

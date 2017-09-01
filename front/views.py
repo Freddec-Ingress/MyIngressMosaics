@@ -30,6 +30,19 @@ def map(request, location = ''):
 
 
 
+from PIL import Image
+from django.http import HttpResponse
+
+def preview(request, ref):
+
+	image = Image.new('RGB', (800, 600), 'red')
+
+	response = HttpResponse(content_type = 'image/png')
+	image.save(response, "PNG")
+	return response
+
+
+
 def mosaic(request, ref):
 	
 	mosaic = None
