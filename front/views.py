@@ -63,9 +63,9 @@ def preview(request, ref):
 
 	realx = 0
 	if mcount < mosaic.cols:
-		realx = mosaic.cols * 100
-	else:
 		realx = mcount * 100
+	else:
+		realx = mosaic.cols * 100
 	
 	realy = mosaic_rows * 100
 	
