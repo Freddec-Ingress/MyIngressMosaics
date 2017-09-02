@@ -721,7 +721,7 @@ angular.module('FrontModule.services').service('MosaicService', function($state,
 		getMosaic: function(ref) {
 			
 			var data = { 'ref':ref };
-			API.sendRequest('/api/mosaic/potential/', 'POST', {}, data).then(function(response) {
+			return API.sendRequest('/api/mosaic/potential/', 'POST', {}, data).then(function(response) {
 				
 				if (response) {
 					
@@ -738,11 +738,6 @@ angular.module('FrontModule.services').service('MosaicService', function($state,
 					service.data.potentials = response;
 					service.sortMPotentialsByName();
 				}
-			});
-			
-			return API.sendRequest('/api/mosaic/' + ref + '/', 'GET').then(function(response) {
-				
-				service.data.mosaic = response;
 			});
 		},
 		

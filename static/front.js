@@ -3466,7 +3466,7 @@ angular.module('FrontModule.services').service('MosaicService', function($state,
 		getMosaic: function(ref) {
 			
 			var data = { 'ref':ref };
-			API.sendRequest('/api/mosaic/potential/', 'POST', {}, data).then(function(response) {
+			return API.sendRequest('/api/mosaic/potential/', 'POST', {}, data).then(function(response) {
 				
 				if (response) {
 					
@@ -3483,11 +3483,6 @@ angular.module('FrontModule.services').service('MosaicService', function($state,
 					service.data.potentials = response;
 					service.sortMPotentialsByName();
 				}
-			});
-			
-			return API.sendRequest('/api/mosaic/' + ref + '/', 'GET').then(function(response) {
-				
-				service.data.mosaic = response;
 			});
 		},
 		
@@ -4244,32 +4239,37 @@ angular.module('FrontModule.controllers').controller('CreateCtrl', function($sco
 angular.module('FrontModule.controllers').controller('PluginCtrl', function() {
 });
 
-angular.module('FrontModule.controllers').controller('MosaicCtrl', function($rootScope, $scope, $state, $timeout, $window, $filter, toastr, MosaicService) {
+angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API, $rootScope, $scope, $state, $timeout, $window, $filter, toastr, MosaicService) {
 
 	$scope.loadMosaic = function(ref) {
 		
 		MosaicService.getMosaic(ref).then(function(response) {
 			
-			$('#block-loading').addClass('hidden');
+			API.sendRequest('/api/mosaic/' + ref + '/', 'GET').then(function(response) {
 			
-			$scope.mosaic = MosaicService.data.mosaic;
-			$scope.potentials = MosaicService.data.potentials;
-
-			if ($scope.mosaic) {
+				MosaicService.data.mosaic = response;
 				
-				$('#block-mosaic').removeClass('hidden');
+				$scope.mosaic = MosaicService.data.mosaic;
+				$scope.potentials = MosaicService.data.potentials;
 				
-				if ($rootScope.user && $rootScope.user.authenticated && ($rootScope.user.name == $scope.mosaic.registerer.name || $rootScope.user.superuser)) {
+				$scope.initMap();
+	
+				$('#block-loading').addClass('hidden');
+				
+				if ($scope.mosaic) {
 					
-					$('#block-edit').removeClass('hidden');
+					$('#block-mosaic').removeClass('hidden');
+					
+					if ($rootScope.user && $rootScope.user.authenticated && ($rootScope.user.name == $scope.mosaic.registerer.name || $rootScope.user.superuser)) {
+						
+						$('#block-edit').removeClass('hidden');
+					}
 				}
-			}
-			else {
-				
-				$('#block-nomosaic').removeClass('hidden');
-			}
-			
-			$scope.initMap();
+				else {
+					
+					$('#block-nomosaic').removeClass('hidden');
+				}
+			});
 		});
 	}
 		
