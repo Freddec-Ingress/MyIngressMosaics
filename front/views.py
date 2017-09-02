@@ -43,7 +43,9 @@ def preview(request, ref):
 
 	mosaic = Mosaic.objects.get(ref=ref)
 	
-	mosaic_rows = int(math.ceil(mosaic.missions.count() / mosaic.cols))
+	mcount = mosaic.missions.count()
+	
+	mosaic_rows = int(math.ceil(mcount / mosaic.cols))
 	
 	img_height = 32 + 20 + (100 * mosaic_rows)
 	if (img_height < 352):
@@ -58,8 +60,6 @@ def preview(request, ref):
 	
 	font = ImageFont.truetype(fontfile, 15)
 	draw.text((16, img_height - 25), 'MIM - MyIngressMosaics.com', fill=(255, 255, 255), font=font)
-	
-	mcount = mosaic.missions.count()
 
 	realx = 0
 	if mcount < mosaic.cols:
