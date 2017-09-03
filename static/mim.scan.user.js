@@ -361,7 +361,7 @@ function processNextPortal() {
 
     });
 
-    setTimeout(function() { processNextPortal(); }, 2000);
+    setTimeout(function() { processNextPortal(); }, 500);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -420,7 +420,7 @@ function processNextMission() {
         missionsToBeProcessed.splice(0, 1);
     });
 
-    setTimeout(function() { processNextMission(); }, 2000);
+    setTimeout(function() { processNextMission(); }, 500);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -489,7 +489,7 @@ function init() {
         var north = bds.getNorthEast().lat();
         var south = bds.getSouthWest().lat();
 
-        var zoom = 19;
+        var zoom = 15;
         var minLevel = 0;
         var tilesPerEdge = 32000;
 
