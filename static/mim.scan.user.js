@@ -489,7 +489,7 @@ function init() {
         var north = bds.getNorthEast().lat();
         var south = bds.getSouthWest().lat();
 
-        var zoom = 15;
+        var zoom = 19;
         var minLevel = 0;
         var tilesPerEdge = 32000;
 
