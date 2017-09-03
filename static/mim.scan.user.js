@@ -303,8 +303,9 @@ function processNextTiles() {
                             var mission_id = item[0];
                             var mission_name = item[1];
 
-                            var found = mission_name.match(/[0-9]+/);
-                            if (found && missionsToBeProcessed.indexOf(mission_id) == -1 && missionsProcessed.indexOf(mission_id) == -1 && missionsInProcess.indexOf(mission_id) == -1) {
+                            var found1 = mission_name.match(/[0-9]+/);
+                            var found2 = mission_name.match('MD:');
+                            if ((found1 || found2) && missionsToBeProcessed.indexOf(mission_id) == -1 && missionsProcessed.indexOf(mission_id) == -1 && missionsInProcess.indexOf(mission_id) == -1) {
                                 missionsToBeProcessed.push(mission_id);
                             }
                         }
@@ -347,9 +348,9 @@ function processNextPortal() {
                 var mission_id = item[0];
                 var mission_name = item[1];
 
-                var found = mission_name.match(/[0-9]+/);
-                found = mission_name.match('MD:');
-                if (found && missionsToBeProcessed.indexOf(mission_id) == -1 && missionsProcessed.indexOf(mission_id) == -1 && missionsInProcess.indexOf(mission_id) == -1) {
+                var found1 = mission_name.match(/[0-9]+/);
+                var found2 = mission_name.match('MD:');
+                if ((found1 || found2) && missionsToBeProcessed.indexOf(mission_id) == -1 && missionsProcessed.indexOf(mission_id) == -1 && missionsInProcess.indexOf(mission_id) == -1) {
                     missionsToBeProcessed.push(mission_id);
                 }
             }
@@ -358,10 +359,7 @@ function processNextPortal() {
         portalsToBeProcessed.splice(0, 1);
 
         processNextMission();
-
     });
-
-    setTimeout(function() { processNextPortal(); }, 500);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -377,6 +375,7 @@ var mImage = {
 function processNextMission() {
 
     if (missionsToBeProcessed.length < 1) {
+        processNextPortal();
         return;
     }
 
@@ -385,6 +384,7 @@ function processNextMission() {
     if (missionsInProcess.indexOf(mission_id) != -1) {
 
         missionsToBeProcessed.splice(0, 1);
+        processNextMission();
         return;
     }
 
@@ -400,6 +400,7 @@ function processNextMission() {
         if (missionsProcessed.indexOf(mission_id) != -1) {
 
             missionsToBeProcessed.splice(0, 1);
+            processNextMission();
             return;
         }
 
@@ -418,9 +419,9 @@ function processNextMission() {
 
         missionsProcessed.push(mission_id);
         missionsToBeProcessed.splice(0, 1);
-    });
 
-    setTimeout(function() { processNextMission(); }, 500);
+        processNextMission();
+    });
 }
 
 //--------------------------------------------------------------------------------------------------
