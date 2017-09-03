@@ -54,7 +54,7 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 					
 			'		<div class="f-row f-wrap f-justify-center f-align-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%); width:100%;">' +
 			'            <div ng-repeat="m in mosaic.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.cols}});">' +
-			'                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 85% 85%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />' +
+			'                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 100% 100%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />' +
 			'           </div>' +
 			'		</div>' +
 					
@@ -95,7 +95,7 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 	        '        	}"></span>' +
 	        '    		{{mosaic.city}}' +
 	        '    	</div>' +
-	        '    	<div class="text-normal">{{mosaic.missions.length}} <i class="fa fa-th mr-1"></i> <span class="mr-1">&middot;</span> {{mosaic._distance | number:2}} km</div>' +
+	        '    	<div class="text-normal">{{mosaic.missions.length}} <i class="fa fa-th mr-2"></i> <span class="mr-1">&middot;</span> {{mosaic._distance | number:2}} km</div>' +
 	            	
 			'	</div>' +
 				
