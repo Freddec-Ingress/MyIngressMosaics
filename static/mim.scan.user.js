@@ -1,7 +1,7 @@
 // ==UserScript==
 // @id             myingressmosaics@freddec
 // @name           MyIngressMosaics Scanning plugin
-// @version        1.0.7
+// @version        1.0.8
 // @include        https://*.ingress.com/intel*
 // @include        http://*.ingress.com/intel*
 // @match          https://*.ingress.com/intel*
@@ -141,14 +141,7 @@ function callIngressAPI(action, data, successCallback, errorCallback) {
 
     var onSuccess = function(data, textStatus, jqXHR) {
 
-        if (data && data.error && data.error == 'out of date') {
-
-            if (errorCallback) {
-                errorCallback(jqXHR, textStatus, "data.error == 'out of date'");
-            }
-
-        } else {
-
+        if (successCallback) {
             successCallback(data, textStatus, jqXHR);
         }
     };
@@ -204,7 +197,8 @@ var currentToBeProcessed_count = 0;
 
 var portalsToBeProcessed = [];
 
-var missionsProcessedArray = [];
+var missionsProcessed = [];
+var missionsInProcess = [];
 var missionsToBeProcessed = [];
 
 function processNextTiles() {
@@ -237,6 +231,8 @@ function processNextTiles() {
             fillColor: '#550000',
         });
     }
+
+    console.log('check tiles...');
 
     callIngressAPI('getEntities', data, function(data, textStatus, jqXHR) {
 
@@ -308,7 +304,7 @@ function processNextTiles() {
                             var mission_name = item[1];
 
                             var found = mission_name.match(/[0-9]+/);
-                            if (found && missionsToBeProcessed.indexOf(mission_id) == -1 && missionsProcessedArray.indexOf(mission_id) == -1) {
+                            if (found && missionsToBeProcessed.indexOf(mission_id) == -1 && missionsProcessed.indexOf(mission_id) == -1 && missionsInProcess.indexOf(mission_id) == -1) {
                                 missionsToBeProcessed.push(mission_id);
                             }
                         }
@@ -340,6 +336,8 @@ function processNextPortal() {
 
     var portal = portalsToBeProcessed[0];
 
+    console.log('check portal...');
+
     var data = { guid: portal.id };
     callIngressAPI('getTopMissionsForPortal', data, function(data, textStatus, jqXHR) {
 
@@ -350,7 +348,8 @@ function processNextPortal() {
                 var mission_name = item[1];
 
                 var found = mission_name.match(/[0-9]+/);
-                if (found && missionsToBeProcessed.indexOf(mission_id) == -1 && missionsProcessedArray.indexOf(mission_id) == -1) {
+                found = mission_name.match('MD:');
+                if (found && missionsToBeProcessed.indexOf(mission_id) == -1 && missionsProcessed.indexOf(mission_id) == -1 && missionsInProcess.indexOf(mission_id) == -1) {
                     missionsToBeProcessed.push(mission_id);
                 }
             }
@@ -360,10 +359,9 @@ function processNextPortal() {
 
         processNextMission();
 
-    }, function(jqXHR, textStatus, errorThrown) {
-
-        processNextPortal();
     });
+
+    setTimeout(function() { processNextPortal(); }, 2000);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -376,87 +374,36 @@ var mImage = {
     anchor: new google.maps.Point(12, 13),
 };
 
-var missionsInContainer = [];
-
-window.missionMarkerImage = {
-    url: 'https://commondatastorage.googleapis.com/ingress.com/img/map_icons/marker_images/hum_lev8.png',
-    scaledSize: new google.maps.Size(50, 50),
-    origin: new google.maps.Point(0, 0),
-    anchor: new google.maps.Point(25, 25),
-};
-
-window.missionMarker = new google.maps.Marker({
-    icon: missionMarkerImage,
-});
-
-window.markMission = function(mission_lat, mission_lng) {
-
-    var latlng = new google.maps.LatLng(mission_lat, mission_lng);
-    window.missionMarker.setPosition(latlng);
-
-    window.Map.setCenter(latlng);
-};
-
-function addMissionToContainer(mission_name, mission_lat, mission_lng) {
-
-    var mission = {
-        name: mission_name,
-        lat: mission_lat,
-        lng: mission_lng,
-    };
-
-    missionsInContainer.push(mission);
-
-    function compareNameDesc(a, b) {
-
-        var a_name = a.name.toLowerCase().replace(/0|1|2|3|4|5|6|7|8|9/g, '');
-        var b_name = b.name.toLowerCase().replace(/0|1|2|3|4|5|6|7|8|9/g, '');
-
-        if (a_name < b_name)
-            return -1;
-
-        if (a_name > b_name)
-            return 1;
-
-        if (a.name < b.name)
-            return -1;
-
-        if (a.name > b.name)
-            return 1;
-
-        return 0;
-    }
-
-    missionsInContainer.sort(compareNameDesc);
-
-    document.getElementById('tm_list').innerHTML = '';
-    for (var m of missionsInContainer) {
-
-        document.getElementById('tm_list').innerHTML +=
-            '<div class="tm_list_element" onclick="markMission(' + m.lat + ', ' + m.lng +');">' +
-            '      <span class="tm_mission_summary">' +
-            '            <div class="tm_mission_title">' + m.name + '</div>' +
-            '      </span>' +
-            '</div>';
-    }
-}
-
 function processNextMission() {
 
     if (missionsToBeProcessed.length < 1) {
-
-        processNextPortal();
         return;
     }
 
     var mission_id = missionsToBeProcessed[0];
+
+    if (missionsInProcess.indexOf(mission_id) != -1) {
+
+        missionsToBeProcessed.splice(0, 1);
+        return;
+    }
+
+    missionsInProcess.push(mission_id);
+
+    console.log('check mission...');
 
     var data = { guid: mission_id };
     callIngressAPI('getMissionDetails', data, function(data, textStatus, jqXHR) {
 
         if (!data.result) return;
 
-        console.log(data.result[1]);
+        if (missionsProcessed.indexOf(mission_id) != -1) {
+
+            missionsToBeProcessed.splice(0, 1);
+            return;
+        }
+
+        console.log('\t' + data.result[1]);
 
         if (data.result[9][0][5]) {
 
@@ -469,15 +416,11 @@ function processNextMission() {
 
         callMIMAPI('ext_register', data.result);
 
-        missionsProcessedArray.push(mission_id);
+        missionsProcessed.push(mission_id);
         missionsToBeProcessed.splice(0, 1);
-
-        processNextMission();
-
-    }, function(jqXHR, textStatus, errorThrown) {
-
-        processNextMission();
     });
+
+    setTimeout(function() { processNextMission(); }, 2000);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -522,7 +465,6 @@ function init() {
     });
 
     window.Map = M;
-    window.missionMarker.setMap(M);
 
     document.getElementById('tm_zoom').innerHTML = 'Zoom: ' + MAP_PARAMS.zoom;
 
@@ -536,6 +478,8 @@ function init() {
 
         if (scanning === true) return;
 
+        console.clear();
+
         tilesToBeProcessed = [];
 
         var bds = M.getBounds();
@@ -545,7 +489,7 @@ function init() {
         var north = bds.getNorthEast().lat();
         var south = bds.getSouthWest().lat();
 
-        var zoom = 17;
+        var zoom = 19;
         var minLevel = 0;
         var tilesPerEdge = 32000;
 
