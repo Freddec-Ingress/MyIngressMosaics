@@ -178,6 +178,8 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 			mosaic_name = mosaic_name.replace(']', '');
 			mosaic_name = mosaic_name.replace('-', '');
 			mosaic_name = mosaic_name.replace(':', '');
+			mosaic_name = mosaic_name.replace('of ', '');
+			mosaic_name = mosaic_name.replace(' of', '');
 			mosaic_name = mosaic_name.replace('  ', ' ');
 			mosaic_name = mosaic_name.trim();
 			
