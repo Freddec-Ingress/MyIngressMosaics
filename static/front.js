@@ -3961,7 +3961,7 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 			/* Find existing mosaic */
 			var existing_mosaic = null;
 			for (var mosaic of mosaics) {
-				if (mosaic.name == mosaic_name) {
+				if (mosaic.name.toLowerCase() == mosaic_name.toLowerCase()) {
 					existing_mosaic = mosaic;
 					break;
 				}
