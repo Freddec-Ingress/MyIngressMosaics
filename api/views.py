@@ -426,7 +426,7 @@ class MosaicViewSet(viewsets.ViewSet):
 			
 			missions = []
 				
-			results = Mission.objects.filter(mosaic__isnull=True).filter(Q(title__contains=mosaic.title) | Q(creator__in=creators))
+			results = Mission.objects.filter(mosaic__isnull=True).filter(Q(title__icontains=mosaic.title) | Q(creator__in=creators))
 			if results.count() > 0:
 				
 				for item in results:
