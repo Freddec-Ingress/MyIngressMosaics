@@ -1,7 +1,7 @@
 // ==UserScript==
 // @id             myingressmosaics@freddec
 // @name           MyIngressMosaics Scanning plugin
-// @version        1.0.8
+// @version        1.0.9
 // @include        https://*.ingress.com/intel*
 // @include        http://*.ingress.com/intel*
 // @match          https://*.ingress.com/intel*
@@ -170,15 +170,31 @@ function callIngressAPI(action, data, successCallback, errorCallback) {
 
 var username = window.PLAYER.nickname;
 
-function callMIMAPI(action, data) {
+function callMIMAPI(action, data, successCallback, errorCallback) {
 
     var post_data = data;
-    post_data.push(username);
 
-    var result = $.ajax("https://www.myingressmosaics.com/api/ext_register/", {
+    var onError = function(jqXHR, textStatus, errorThrown) {
+
+        if (errorCallback) {
+            errorCallback(jqXHR, textStatus, errorThrown);
+        }
+    };
+
+    var onSuccess = function(data, textStatus, jqXHR) {
+
+        if (successCallback) {
+            successCallback(data, textStatus, jqXHR);
+        }
+    };
+
+    var result = $.ajax("https://www.myingressmosaics.com/api/" + action + "/", {
         type: 'POST',
         data: JSON.stringify(post_data),
         dataType: 'json',
+        success: [onSuccess],
+        error: [onError],
+        contentType: 'application/json; charset=utf-8',
     });
 
     result.action = action;
@@ -415,6 +431,7 @@ function processNextMission() {
             });
         }
 
+        data.result.push(username);
         callMIMAPI('ext_register', data.result);
 
         missionsProcessed.push(mission_id);
@@ -451,6 +468,13 @@ function findTileFunc(element, index, array) {
     return false;
 }
 
+var resImage = {
+    url: 'https://commondatastorage.googleapis.com/ingress.com/img/map_icons/marker_images/hum_lev8.png',
+    scaledSize: new google.maps.Size(25, 25),
+    origin: new google.maps.Point(0, 0),
+    anchor: new google.maps.Point(12, 13),
+};
+
 function init() {
 
 	var style = [{featureType:"all",elementType:"all",stylers:[{visibility:"on"},{hue:"#131c1c"},{saturation:"-50"},{invert_lightness:!0}]},{featureType:"water",elementType:"all",stylers:[{visibility:"on"},{hue:"#005eff"},{invert_lightness:!0}]},{featureType:"poi",stylers:[{visibility:"off"}]},{featureType:"transit",elementType:"all",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels.icon",stylers:[{invert_lightness:!0}]}];
@@ -472,6 +496,40 @@ function init() {
     M.addListener('zoom_changed', function(event) {
 
         document.getElementById('tm_zoom').innerHTML = 'Zoom: ' + M.getZoom();
+    });
+
+    M.addListener('idle', function(e) {
+
+        var center = M.getCenter();
+
+        var bds = M.getBounds();
+
+        var South_Lat = bds.getSouthWest().lat();
+        var South_Lng = bds.getSouthWest().lng();
+        var North_Lat = bds.getNorthEast().lat();
+        var North_Lng = bds.getNorthEast().lng();
+
+         var data = { sLat: South_Lat, sLng: South_Lng, nLat: North_Lat, nLng: North_Lng };
+        callMIMAPI('ext_missions', data, function(data, textStatus, jqXHR) {
+
+            if (data) {
+
+                for (var item of data) {
+
+                    if (missionsProcessed.indexOf(item.ref) == -1) {
+
+                        missionsProcessed.push(item.ref);
+
+                        var latLng = new google.maps.LatLng(item._startLat, item._startLng);
+                        var marker = new google.maps.Marker({
+                            position: latLng,
+                            map: M,
+                            icon: resImage,
+                        });
+                    }
+                }
+            }
+        });
     });
 
     // Scanning functions
