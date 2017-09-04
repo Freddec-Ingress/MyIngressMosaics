@@ -298,7 +298,7 @@ class Mission(models.Model):
 	
 	data = models.TextField()
 
-	ref = models.CharField(max_length=64, default='')
+	ref = models.CharField(max_length=64, default='', unique=True)
 	desc = models.TextField(default='')
 	title = models.CharField(max_length=128, default='')
 	image = models.CharField(max_length=256, default='')
