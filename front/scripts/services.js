@@ -736,7 +736,7 @@ angular.module('FrontModule.services').service('MosaicService', function($state,
 					}
 					
 					service.data.potentials = response;
-					service.sortMPotentialsByName();
+					service.sortMPotentialsByName('asc');
 				}
 			});
 		},
