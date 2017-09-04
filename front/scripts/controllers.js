@@ -337,7 +337,8 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 		$state.go('root.create');
 	}
 	
-	$scope.delete = function(item) {
+	$scope.delete = function(mosaic, item, index) {
+		mosaic.missions.splice(index, 1);
 		UserService.deleteMission(item);
 	}
 	

@@ -135,6 +135,11 @@
             <table class="card-table card-table-compressed">
                 <tbody>
                     <tr ng-repeat="item in mosaic.missions">
+	                    <td class="text-white text-center" style="width:2rem;">
+	                    	<a ng-click="delete(mosaic, item, {{$index}});">
+	                    		<i class="fa fa-trash"></i>
+	                    	</a>
+	                    </td>
                         <td style="width:3rem;"><input type="number" class="form-control text-center" style="padding:.25rem;" ng-model="item.order" /></td>
                         <td style="width:50%;">{{item.name}}</td>
                         <td style="width:25%;" ng-class="{'text-enligtened': item.faction == 'E', 'text-resistance': item.faction == 'R',}" ng-click="$event.stopPropagation(); toggle($index, $event, item);">{{item.creator}}</td>
