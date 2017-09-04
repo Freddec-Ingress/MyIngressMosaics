@@ -27,15 +27,12 @@
 
 <div class="card mt-4">
 
-	<div class="card-block first last f-row f-nowrap">
+	<form class="card-block first last f-row f-nowrap">
 		
 		<input type="text" class="form-control" placeholder="{{'search_PLACEHOLDER' | translate}}" ng-model="searchModel.text" />
-		
-		<button type="submit" class="btn btn-primary ml-2" ng-click="search();">
-			{{'search_LABEL' | translate}}
-		</button>
+		<input type="submit" class="btn btn-primary ml-2" ng-click="search();" value="Search" />
 
-	</div>
+	</form>
 	
 </div>
 
