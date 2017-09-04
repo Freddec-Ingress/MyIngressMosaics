@@ -103,6 +103,22 @@ class ExtensionViewSet(viewsets.ViewSet):
 		mission.computeInternalData()
 		
 		return Response('Registered', status=status.HTTP_200_OK)
+    
+	def missions(self, request):
+		
+		data = None
+		
+		results = Mission.objects.filter(_startLat__gte=request.data['sLat'], _startLng__gte=request.data['sLng']).filter(_startLat__lte=request.data['nLat'], _startLng__lte=request.data['nLng'])
+		if (results.count() > 0):
+			
+			data = []
+			
+			for item in results:
+				
+				mission = item.mapSerialize()
+				data.append(mission)
+
+		return Response(data, status=status.HTTP_200_OK)
 
 
 

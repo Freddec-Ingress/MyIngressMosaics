@@ -12,6 +12,7 @@ urlpatterns = [
 	
 	url(r'^ext_check/',		ext_check),
 	url(r'^ext_register/',	ExtensionViewSet.as_view({ 'post': 'register'	})),
+	url(r'^ext_missions/',	ExtensionViewSet.as_view({ 'post': 'missions'	})),
 	
 	url(r'^login/',		AccountViewSet.as_view({ 'post': 'login'    })),
 	url(r'^logout/',	AccountViewSet.as_view({ 'post': 'logout'   })),

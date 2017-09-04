@@ -354,6 +354,18 @@ class Mission(models.Model):
 					self.save()
 					
 					break
+		
+		
+		
+	def mapSerialize(self):
+		
+		data = {
+			'ref': self.ref,
+			'_startLat': self._startLat,
+			'_startLng': self._startLng,
+		}
+			
+		return data
 					
 
 
