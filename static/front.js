@@ -4394,71 +4394,7 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 		
 		MosaicService.add(item.ref, order);
 	}
-	
-	/* Validate */
-	
-	$scope.validate = function() {
-		
-		var c = document.getElementById('myCanvas');
-		var ctx = c.getContext('2d');
-		
-		ctx.fillRect(4, 4, 600, $scope.mosaic.rows * 100);
-		
-		ctx.font = '13px Coda';
-		ctx.fillStyle = '#BDBDBD';
-		ctx.fillText('MIM - MyIngressMosaics.com', 4, 4 + $scope.mosaic.rows * 100 + 18);
-		
-		var cols = $scope.mosaic.missions.length / $scope.mosaic.rows;
-		
-		console.log('rows: ' + $scope.mosaic.rows);
-		console.log('cols: ' + cols);
-		
-		var baseOffsetX = (608 - (cols * 100)) / 2;
-		var baseOffsetY = 8 / 2;
-		
-		console.log('baseOffsetX: ' + baseOffsetX);
-		console.log('baseOffsetY: ' + baseOffsetY);
-		
-		for (var m of $scope.mosaic.missions) {
-			
-			var indexy = Math.floor((m.order - 1) / cols);
-			var indexx = m.order - (indexy * cols);
-			
-			console.log('order: ' + m.order);
-			
-			console.log('indexx: ' + indexx);
-			console.log('indexy: ' + indexy);
-			
-			var offsetx = 600 - (indexx * 100);
-			var offsety = ($scope.canvas_height -100) - (indexy * 100);
-			
-			console.log('offsetx: ' + offsetx);
-			console.log('offsety: ' + offsety);
-			
-			var img = new Image;
-			img.setAtX = offsetx - baseOffsetX;
-			img.setAtY = offsety + baseOffsetY;
-			img.onload = function() {
-			  ctx.drawImage(this, this.setAtX, this.setAtY);
-			};
-			img.src = m.image + '=s100';
-			
-			var mask = new Image;
-			mask.setAtX = offsetx - baseOffsetX;
-			mask.setAtY = offsety + baseOffsetY;
-			mask.onload = function() {
-			  ctx.drawImage(this, this.setAtX, this.setAtY);
-			};
-			mask.src = 'https://www.myingressmosaics.com/static/img/mask.png';
-		}
-		
-		var imgData = c.toDataURL('image/png');
-		
-		var finalImg = new Image;
-		finalImg.src = imgData;
-		document.body.appendChild(finalImg);
-	}
-	
+
 	/* Delete */
 	
 	$scope.deleteMode = false;
@@ -4515,10 +4451,10 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 		var latlngbounds = new google.maps.LatLngBounds();
 		
 		var image = {
-			size: new google.maps.Size(50, 50),
+			scaledSize: new google.maps.Size(30, 30),
 			origin: new google.maps.Point(0, 0),
-			anchor: new google.maps.Point(25, 25),
-			labelOrigin: new google.maps.Point(25, 27),
+			anchor: new google.maps.Point(15, 15),
+			labelOrigin: new google.maps.Point(15, 17),
 			url: 'https://www.myingressmosaics.com/static/img/neutral.png',
 		};
 		
@@ -4543,7 +4479,7 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 	        	
 				map: map,
 				icon: image,
-				label: { text:String(m.order), color:'#FFFFFF', fontFamily:'Coda', fontSize:'.75rem', fontWeight:'400', },
+				label: { text:String(m.order), color:'#FFFFFF', fontFamily:'Coda', fontSize:'.5rem', fontWeight:'400', },
 				position: {lat: m.lat, lng: m.lng},
 	        });
 	        
