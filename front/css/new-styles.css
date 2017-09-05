@@ -92,5 +92,5 @@
 .mosaic-img .item > img {
     width: 100%;
     float: left;
-    background-color: #000000; background-position: 50% 50%; background-repeat: no-repeat;
+    background-color: #000000; background-position: 50% 50%; background-repeat: no-repeat; background-size: 95% 95%;
 }
