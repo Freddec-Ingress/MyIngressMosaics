@@ -3729,10 +3729,10 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 					
 			'	</div>' +
 				
-			'	<div class="text-center f-col">' +
+			'	<div class="f-col">' +
 					
-	        '    	<div class="text-white my-2" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">{{mosaic.title}}</div>' +
-	        '   	<div class="text-normal">' +
+	        '    	<div class="text-white mt-2 mb-1" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">{{mosaic.title}}</div>' +
+	        '   	<div class="text-normal mb-1">' +
 	        '        	<span class="flag-icon mr-1 text-highlight" style="position:relative; top:-2px;" ng-class="{' +
 	        '       		\'flag-icon-fr\': mosaic.country == \'France\',' +
 	        '       		\'flag-icon-gb\': mosaic.country == \'United Kingdom\',' +
