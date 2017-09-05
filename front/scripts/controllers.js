@@ -680,7 +680,7 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 			scaledSize: new google.maps.Size(35, 35),
 			origin: new google.maps.Point(0, 0),
 			anchor: new google.maps.Point(17, 18),
-			labelOrigin: new google.maps.Point(17, 19),
+			labelOrigin: new google.maps.Point(18, 19),
 			url: 'https://www.myingressmosaics.com/static/img/neutral.png',
 		};
 		
