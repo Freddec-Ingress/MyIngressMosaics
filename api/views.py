@@ -675,78 +675,34 @@ class DataViewSet(viewsets.ViewSet):
 	def search(self, request):
 		
 		data = {
-			'countries': None,
-			'regions': None,
-			'cities': None,
-			'creators': None,
 			'mosaics': None,
 		}
-		
-		results = Mosaic.objects.filter(country__icontains=request.data['text']).values('country').distinct()
-		if (results.count() > 0):
-			
-			data['countries'] = []
-			
-			for item in results:
-				
-				country = {
-					'name': item['country'],
-				}
-				
-				data['countries'].append(country)
-		
-		results = Mosaic.objects.filter(region__icontains=request.data['text']).values('country', 'region').distinct()
-		if (results.count() > 0):
-			
-			data['regions'] = []
-			
-			for item in results:
-				
-				region = {
-					'country': item['country'],
-					'name': item['region'],
-				}
-				
-				data['regions'].append(region)
-		
-		results = Mosaic.objects.filter(city__icontains=request.data['text']).values('country', 'region', 'city').distinct()
-		if (results.count() > 0):
-			
-			data['cities'] = []
-			
-			for item in results:
-				
-				city = {
-					'country': item['country'],
-					'region': item['region'],
-					'name': item['city'],
-				}
-				
-				data['cities'].append(city)
 		
 		results = Creator.objects.filter(name__icontains=request.data['text'])
 		if (results.count() > 0):
 			
-			data['creators'] = []
+			if (data['mosaics'] == None):
+				data['mosaics'] = []
 			
 			for item in results:
-				
-				creator = {
-					'name': item.name,
-					'faction': item.faction,
-				}
-				
-				data['creators'].append(creator)
-		
-		results = Mosaic.objects.filter(title__icontains=request.data['text'])
+				for mosaic in item.mosaic_set.all():
+					
+					temp = mosaic.serialize()
+					data['mosaics'].append(temp)
+			
+		results = Mosaic.objects.filter(Q(title__icontains=request.data['text']) | Q(country__icontains=request.data['text']) | Q(region__icontains=request.data['text']) | Q(city__icontains=request.data['text']))
 		if (results.count() > 0):
 			
-			data['mosaics'] = []
+			if (data['mosaics'] == None):
+				data['mosaics'] = []
 			
 			for item in results:
 				
 				mosaic = item.serialize()
 				data['mosaics'].append(mosaic)
+		
+		result = SearchResult(search_text=request.data['text'], count=len(data['mosaics']))
+		result.save()
 		
 		return Response(data, status=status.HTTP_200_OK)
     

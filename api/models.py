@@ -65,7 +65,6 @@ class Mosaic(models.Model):
 	title = models.CharField(max_length=128, default='')
 	desc = models.CharField(max_length=1024, default='')
 	
-	
 	creators = models.ManyToManyField('Creator')
 	
 	registerer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='mosaics')
@@ -382,3 +381,16 @@ class Portal(models.Model):
 
 	def __str__(self):
 		return self.mission.title + ' - ' + str(self.order) + ' - ' + self.title
+					
+
+
+#---------------------------------------------------------------------------------------------------
+@python_2_unicode_compatible
+class SearchResult(models.Model):
+	
+	search_date = models.DateField(default=datetime.now)
+	search_text = models.CharField(max_length=128, default='')
+	count = models.IntegerField(default=-1)
+
+	def __str__(self):
+		return self.search_text + ' - ' + str(self.count)
