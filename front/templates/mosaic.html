@@ -69,27 +69,18 @@
 				</div>
 				
 				<div class="mb-2">
-				    <a href="/map/{{mosaic.country}}">{{mosaic.country}}</a>
-				    <span class="mx-2">></span>
-				    <a href="/map/{{mosaic.region}},{{mosaic.country}}">{{mosaic.region}}</a>
-				    <span class="mx-2">></span>
-				    <a href="/map/{{mosaic.city}},{{mosaic.region}},{{mosaic.country}}">{{mosaic.city}}</a>
+				    <a href="/map/{{mosaic.country}}">{{mosaic.country}}</a><span class="mx-1">></span><a href="/map/{{mosaic.region}},{{mosaic.country}}">{{mosaic.region}}</a><span class="mx-1">></span><a href="/map/{{mosaic.city}},{{mosaic.region}},{{mosaic.country}}">{{mosaic.city}}</a>
 				</div>
 				
-				<div class="mb-4">
-					{{mosaic.missions.length}} missions
-					&middot; {{mosaic.type}}
-					&nbsp;&middot; {{mosaic.portals}} portals
-					<span ng-show="mosaic.type ==  'sequence'">&nbsp;&middot; {{mosaic._distance | number:2}} km</span>
+				<div class="mb-2">
+					{{mosaic.missions.length}} missions<span class="mx-1">&middot;</span>{{mosaic.type}}<span class="mx-1">&middot;</span>{{mosaic.portals}} portals<span ng-show="mosaic.type ==  'sequence'"><span class="mx-1">&middot;</span>{{mosaic._distance | number:2}} km</span>
 				</div>
 				
-				<div class="mb-4">
+				<div class="mb-2">
 		        	<span class="mr-1">{{'mosaic_BY' | translate}}</span>
-		        	<a class="mx-2" ng-repeat="creator in mosaic.creators" ng-class="{'text-enligtened': creator.faction == 'E', 'text-resistance': creator.faction == 'R',}" ng-click="goToCreator(creator.name);">{{creator.name}}</a>
+		        	<a class="mx-1" ng-repeat="creator in mosaic.creators" ng-class="{'text-enligtened': creator.faction == 'E', 'text-resistance': creator.faction == 'R',}" ng-click="goToCreator(creator.name);">{{creator.name}}</a>
 				</div>
-			
-				<pre class="mb-4 text-highlight">{{mosaic.desc}}</pre>
-				
+
 				<div class="">
 		        	{{'mosaic_REGBY' | translate}}
 		        	{{mosaic.registerer.name}}
@@ -129,7 +120,7 @@
 				
 {% verbatim %}
 				
-			    <div id="map"></div>
+			    <div id="map" class="mb-2"></div>
 
 		        <table class="card-table">
 		            <tbody>
