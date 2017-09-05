@@ -677,17 +677,17 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 		var latlngbounds = new google.maps.LatLngBounds();
 		
 		var image = {
-			scaledSize: new google.maps.Size(30, 30),
+			scaledSize: new google.maps.Size(35, 35),
 			origin: new google.maps.Point(0, 0),
-			anchor: new google.maps.Point(15, 15),
-			labelOrigin: new google.maps.Point(15, 17),
+			anchor: new google.maps.Point(17, 18),
+			labelOrigin: new google.maps.Point(17, 19),
 			url: 'https://www.myingressmosaics.com/static/img/neutral.png',
 		};
 		
 		var lineSymbol = {
 			path: 'M 0,0 0,-5',
 			strokeOpacity: 1,
-			scale: 2
+			scale: 3
 		};
 		
 		var arrowSymbol = {
