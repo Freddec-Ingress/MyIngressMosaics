@@ -32,43 +32,47 @@
     	
     </div>
     
-	<div class="mt-4 px-2 py-1" ng-if="search_loading">
+    <div id="result_block" class="hidden">
+    	
+		<div class="mt-4 px-2 py-1" ng-if="search_loading">
+				
+			<div class="loading-line px-2 py-1">
+				<img src="/static/img/loading.png" />
+				{% trans 'Searching mosaics...' %}
+			</div>
 			
-		<div class="loading-line px-2 py-1">
-			<img src="/static/img/loading.png" />
-			{% trans 'Searching mosaics...' %}
 		</div>
 		
-	</div>
-	
-{% verbatim %}
-    
-    <div class="mt-4 px-2 py-1" ng-if="no_result">
-    
-    	<div class="error-line px-2 py-1">
-    		{{'noresult_LABEL' | translate}}
-    	</div>
-    	
-    </div>
-    
-    <div ng-if="mosaics">
-    
-        <div class="mt-4 px-2 py-1">
-            
-        	<div class="py-1 text-uppercase bordered-b">
-        		{{mosaics.length}}
-        		{{'mosaics_LABEL' | translate}}
-        	</div>
-        	
-        </div>
-    	
-    	<div class="f-row f-wrap py-1">
-    		
-    		<div class="width-6 width-xl-3 px-2 py-1" ng-repeat="mosaic in mosaics">
-    			<mosaic-vignet mosaic="mosaic"></mosaic-vignet>
-    		</div>
-    		
-    	</div>
+	{% verbatim %}
+	    
+	    <div class="mt-4 px-2 py-1" ng-if="no_result">
+	    
+	    	<div class="error-line px-2 py-1">
+	    		{{'noresult_LABEL' | translate}}
+	    	</div>
+	    	
+	    </div>
+	    
+	    <div class="hidden" ng-if="mosaics">
+	    
+	        <div class="mt-4 px-2 py-1">
+	            
+	        	<div class="py-1 text-uppercase bordered-b">
+	        		{{mosaics.length}}
+	        		{{'mosaics_LABEL' | translate}}
+	        	</div>
+	        	
+	        </div>
+	    	
+	    	<div class="f-row f-wrap py-1">
+	    		
+	    		<div class="width-6 width-xl-3 px-2 py-1" ng-repeat="mosaic in mosaics">
+	    			<mosaic-vignet mosaic="mosaic"></mosaic-vignet>
+	    		</div>
+	    		
+	    	</div>
+	    
+	    </div>
     
     </div>
 

@@ -3855,6 +3855,8 @@ angular.module('FrontModule.controllers').controller('SearchCtrl', function($sco
 	
 	$scope.mosaics = SearchService.data.mosaics;
 
+	$('#result_block').removeClass('hidden');
+
 	$scope.search = function() {
 		
 		$scope.search_loading = true;
@@ -3899,33 +3901,6 @@ angular.module('FrontModule.controllers').controller('SearchCtrl', function($sco
 			
 			toastr.error($filter('translate')('error_ATLEAST3CHAR'));
 		}
-	}
-	
-	/* Go to ... */
-	
-	$scope.goToCreator = function(creator) {
-		
-		$state.go('root.creator', {'creator':creator.name});
-	}
-
-	$scope.goToCountry = function(country) {
-		
-		$state.go('root.country', {'country':country.name});
-	}
-	
-	$scope.goToRegion = function(region) {
-		
-		$state.go('root.region', {'country':region.country, 'region':region.name});
-	}
-	
-	$scope.goToCity = function(city) {
-		
-		$state.go('root.city', {'country':city.country, 'region':city.region, 'city':city.name});
-	}
-	
-	$scope.goToMosaic = function(mosaic) {
-		
-		$window.location.href = '/mosaic/' + mosaic.ref;
 	}
 });
 
