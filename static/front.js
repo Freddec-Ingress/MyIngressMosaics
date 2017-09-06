@@ -3996,6 +3996,9 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 		$scope.sortCreator = '';
 		
 		$('#missions_block').removeClass('hidden');
+		
+		$('#block-loading').addClass('hidden');
+		$('#block-data').removeClass('hidden');
 	});
 	
 	/* Create mosaic */
