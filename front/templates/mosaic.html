@@ -261,7 +261,7 @@
 		                <tr ng-repeat="item in reorderModel.missions">
 		                	
 		                    <td class="text-white text-center" style="width:2rem;" ng-if="user.name == mosaic.registerer.name || user.superuser">
-		                    	<a ng-click="remove(item.ref);">
+		                    	<a ng-click="remove(item.ref, $index);">
 		                    		<i class="fa fa-trash"></i>
 		                    	</a>
 		                    </td>

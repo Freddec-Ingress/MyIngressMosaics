@@ -4253,8 +4253,6 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 		});
 	}
 		
-	$scope.remove = MosaicService.remove;
-	
 	/* Edit */
 	
 	$scope.editMode = false;
@@ -4324,6 +4322,12 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 	$scope.closeReorder = function() {
 		
 		$scope.reorderMode = false;
+	}
+	
+	$scope.remove = function(mission_ref, index) {
+
+		$scope.reorderModel.missions.splice(index, 1);
+		MosaicService.remove(mission_ref);
 	}
 	
 	$scope.reorder = function() {
@@ -4397,6 +4401,7 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 		if ($scope.deleteModel.name == $scope.mosaic.title) {
 			
 			MosaicService.delete();
+			$window.location.href = '/';
 		}
 	}
 	
