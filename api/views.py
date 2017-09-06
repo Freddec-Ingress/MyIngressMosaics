@@ -714,7 +714,12 @@ class DataViewSet(viewsets.ViewSet):
 				array.append(mosaic)
 					
 		if (len(array) > 0):
-			data = { 'mosaics': list(set(array)), }
+			
+			temp = list(set(array))
+			
+			data = { 'mosaics': [], }
+			for item in temp:
+				data['mosaics'].append(item.serialize())
 		
 		else:
 			data = { 'mosaics': None, }
