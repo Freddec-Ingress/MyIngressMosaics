@@ -671,35 +671,55 @@ class DataViewSet(viewsets.ViewSet):
 		return Response(data, status=status.HTTP_200_OK)
     
     
-    
+#-------------------------------------------------------------------------------
+
 	def search(self, request):
 		
-		data = {
-			'mosaics': None,
-		}
+		array = []
+		
+		# Creator search
 		
 		results = Creator.objects.filter(name__icontains=request.data['text'])
 		if (results.count() > 0):
-			
-			if (data['mosaics'] == None):
-				data['mosaics'] = []
-			
 			for item in results:
 				for mosaic in item.mosaic_set.all():
-					
-					temp = mosaic.serialize()
-					data['mosaics'].append(temp)
+					array.append(mosaic)
 			
-		results = Mosaic.objects.filter(Q(title__icontains=request.data['text']) | Q(country__icontains=request.data['text']) | Q(region__icontains=request.data['text']) | Q(city__icontains=request.data['text']))
+		# Title search
+		
+		results = Mosaic.objects.filter(title__icontains=request.data['text'])
 		if (results.count() > 0):
+			for mosaic in results:
+				array.append(mosaic)
 			
-			if (data['mosaics'] == None):
-				data['mosaics'] = []
+		# Country search
+		
+		results = Mosaic.objects.filter(country__icontains=request.data['text'])
+		if (results.count() > 0):
+			for mosaic in results:
+				array.append(mosaic)
 			
-			for item in results:
-				
-				mosaic = item.serialize()
-				data['mosaics'].append(mosaic)
+		# Region search
+		
+		results = Mosaic.objects.filter(region__icontains=request.data['text'])
+		if (results.count() > 0):
+			for mosaic in results:
+				array.append(mosaic)
+			
+		# City search
+		
+		results = Mosaic.objects.filter(city__icontains=request.data['text'])
+		if (results.count() > 0):
+			for mosaic in results:
+				array.append(mosaic)
+					
+		if (len(array) > 0):
+			data = { 'mosaics': list(set(array)), }
+		
+		else:
+			data = { 'mosaics': None, }
+		
+		# Save search results for stats
 		
 		result = SearchResult(search_text=request.data['text'], count=len(data['mosaics']))
 		result.save()
