@@ -69,7 +69,7 @@ angular.module('FrontModule.controllers').controller('HomeCtrl', function($scope
 	});
 });
 
-angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, toastr, $filter, $window, SearchService) {
+angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, toastr, $filter, SearchService) {
 	
 	/* Search */
 	
@@ -248,204 +248,12 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 		
 		$scope.mosaics.splice($scope.mosaics.indexOf(mosaic), 1);
 	}
-	
-	$scope.isSelected = function(ref) {
-		
-		if (CreateService.getRefArray().indexOf(ref) != -1) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	$scope.toggle = function(index, event, item) {
-		
-		if (event.shiftKey) {
-			event.preventDefault();
-			
-			if (index > $scope.lastSelectedIndex) {
-				
-				for (var i = ($scope.lastSelectedIndex + 1); i <= index; i++) {
-					
-					var m = $scope.missions[i];
-					if (!$scope.isSelected(m.ref)) {
-						CreateService.add(m);
-					}
-				}
-			}
-			else {
-				
-				for (var i = index; i < $scope.lastSelectedIndex; i++) {
-					
-					var m = $scope.missions[i];
-					if (!$scope.isSelected(m.ref)) {
-						CreateService.add(m);
-					}
-				}
-			}
-		}
-		else {
-			
-			if ($scope.isSelected(item.ref)) {
-				CreateService.remove(item);
-			}
-			else {
-				CreateService.add(item);
-			}
-		}
-		
-		$scope.lastSelectedIndex = index;
-	}
-	
-	$scope.unselectAll = function() {
-		
-		CreateService.removeAll();
-	}
-	
-	$scope.hasSelected = function() {
-		
-		if (CreateService.data.missions.length > 0) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	$scope.nextStep = function() {
-		$state.go('root.create');
-	}
-	
-	$scope.delete = function(mosaic, item, index) {
-		mosaic.missions.splice(index, 1);
-		UserService.deleteMission(item);
-	}
-	
-	$scope.deleteAll = function() {
-		
-		for (var item of $scope.missions) {
-			UserService.deleteMission(item);
-		}
-	}
-	
-	/* Sort name */
-	
-	$scope.sortMissionsByName = function() {
-		
-		$scope.sortCreator = '';
-		
-		if ($scope.sortName == '' || $scope.sortName == 'asc') {
-			
-			UserService.sortMissionsByName('desc');
-			$scope.sortName = 'desc';
-		}
-		
-		else if ($scope.sortName == 'desc') {
-			
-			UserService.sortMissionsByName('asc');
-			$scope.sortName = 'asc';
-		}
-	}
-	
-	/* Sort creator */
-	
-	$scope.sortMissionsByCreator = function() {
-		
-		$scope.sortName = '';
-		
-		if ($scope.sortCreator == '' || $scope.sortCreator == 'asc') {
-			
-			UserService.sortMissionsByCreator('desc');
-			$scope.sortCreator = 'desc';
-		}
-		
-		else if ($scope.sortCreator == 'desc') {
-			
-			UserService.sortMissionsByCreator('asc');
-			$scope.sortCreator = 'asc';
-		}
-	}
-});
-
-angular.module('FrontModule.controllers').controller('CreateCtrl', function($scope, CreateService) {
-	
-	$scope.data = null;
-
-	if (CreateService.data.missions.length < 1) {
-		$state.go('root.missions');
-	}
-	
-	CreateService.default();
-	
-	var geocoder = new google.maps.Geocoder;
-	
-	var latlng = {
-		lat: parseFloat(CreateService.data.missions[0].lat),
-		lng: parseFloat(CreateService.data.missions[0].lng),
-	};
-
-	geocoder.geocode({'location': latlng}, function(results, status) {
-		
-		if (status === 'OK') {
-			if (results[1]) {
-				
-				var admin2 = null;
-				var admin3 = null;
-				
-				for (var item of results[1].address_components) {
-					
-					if (item.types[0] == 'country') CreateService.data.country = item.long_name;
-					if (item.types[0] == 'locality') CreateService.data.city = item.long_name;
-					if (item.types[0] == 'administrative_area_level_1') CreateService.data.region = item.long_name;
-					if (item.types[0] == 'administrative_area_level_2') admin2 = item.long_name;
-					if (item.types[0] == 'administrative_area_level_3') admin3 = item.long_name;
-				}
-				
-				if (!CreateService.data.city && admin2) CreateService.data.city = item.admin2;
-				if (!CreateService.data.city && admin3) CreateService.data.city = item.admin3;
-				
-				$scope.$apply();
-			}
-		}
-	});
-
-	$scope.data = CreateService.data;
-	$scope.create = CreateService.create;
-
-	$scope.rows = function() {
-		
-		var rows = [];
-		for (var i = 0; i < $scope.data.rows; i++) {
-			rows.push(i);
-		}
-		
-		return rows;
-	}
-	
-	$scope.cols = function() {
-		
-		var temp = 1;
-		if ($scope.data.cols > 0) temp = $scope.data.cols;
-		if (!temp) temp = 1;
-		
-		var cols = [];
-		for (var i = 0; i < temp; i++) {
-			cols.push(i);
-		}
-		
-		return cols;
-	}
-	
-	$scope.getImage = function(i, j) {
-		
-		var order = (i * $scope.data.cols + j) + 1;
-		return CreateService.getImageByOrder(order);
-	}
 });
 
 angular.module('FrontModule.controllers').controller('PluginCtrl', function() {
 });
 
-angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API, $rootScope, $scope, $timeout, $window, $filter, toastr, MosaicService) {
+angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API, $rootScope, $scope, $window, $filter, toastr, MosaicService) {
 
 	$scope.loadMosaic = function(ref) {
 		
@@ -631,16 +439,6 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 		}
 	}
 	
-	/* Repair */
-	
-	$scope.repair = function() {
-		
-		MosaicService.repair().then(function(response) {
-			
-			$state.reload();
-		});
-	}
-	
 	/* Map */
 
 	$scope.initMap = function() {
@@ -755,30 +553,6 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 		
 		map.setCenter(latlngbounds.getCenter());
 		map.fitBounds(latlngbounds); 
-	}
-	
-	/* Go to a creator page */
-	
-	$scope.goToCreator = function(creator) {
-		
-		$state.go('root.creator', {'creator':creator});
-	}
-	
-	/* Go to a location page */
-	
-	$scope.goToCountry = function() {
-		
-		$state.go('root.country', {'country':$scope.mosaic.country});
-	}
-	
-	$scope.goToRegion = function() {
-		
-		$state.go('root.region', {'country':$scope.mosaic.country, 'region':$scope.mosaic.region});
-	}
-	
-	$scope.goToCity = function() {
-		
-		$state.go('root.city', {'country':$scope.mosaic.country, 'region':$scope.mosaic.region, 'city':$scope.mosaic.city});
 	}
 });
 
@@ -1025,52 +799,7 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 	}
 });
 
-angular.module('FrontModule.controllers').controller('CreatorCtrl', function($scope, DataService) {
-	
-	$scope.creator_loading = true;
-
-	$scope.creator_name = $stateParams.creator;
-	
-	DataService.loadMosaicsFromCreator($scope.creator_name).then(function(response) {
-		
-		$scope.creator_loading = false;
-		
-		$scope.faction = response.faction;
-		$scope.mosaics = response.mosaics;
-		
-		DataService.sortByMissions('desc', $scope.mosaics);
-	});
-
-	/* Go to a mosaic page */
-	
-	$scope.go = function(item) {
-		
-		$state.go('root.mosaic', {'ref':item.ref});
-	}
-	
-	/* Sort mosaics by missions */
-	
-	$scope.sortMissions = 'desc';
-	
-	$scope.sortMosaicsByMissions = function() {
-		
-		if ($scope.sortMissions == '' || $scope.sortMissions == 'asc') {
-			
-			DataService.sortMosaicsByMissions('desc');
-			$scope.sortMissions = 'desc';
-		}
-		
-		else if ($scope.sortMissions == 'desc') {
-			
-			DataService.sortMosaicsByMissions('asc');
-			$scope.sortMissions = 'asc';
-		}
-	}
-});
-
 angular.module('FrontModule.controllers').controller('LoginCtrl', function($scope, UserService) {
-	
-	$scope.page_title = 'login_TITLE';
 	
 	$scope.loginModel = { username:null, password:null };
 	
@@ -1079,8 +808,6 @@ angular.module('FrontModule.controllers').controller('LoginCtrl', function($scop
 });
 
 angular.module('FrontModule.controllers').controller('RegisterCtrl', function($scope, UserService) {
-	
-	$scope.page_title = 'register_TITLE';
 	
 	$scope.registerModel = { username:null, password1:null, password2:null, email:null };
 	
@@ -1132,6 +859,8 @@ angular.module('FrontModule.controllers').controller('ProfileCtrl', function($sc
 angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, toastr, $filter, $window, SearchService) {
 	
 	/* Search */
+	
+	$('#result_block').removeClass('hidden');
 	
 	$scope.search_loading = false;
 	
@@ -1185,32 +914,5 @@ angular.module('FrontModule.controllers').controller('SearchCtrl', function($sco
 			
 			toastr.error($filter('translate')('error_ATLEAST3CHAR'));
 		}
-	}
-	
-	/* Go to ... */
-	
-	$scope.goToCreator = function(creator) {
-		
-		$state.go('root.creator', {'creator':creator.name});
-	}
-
-	$scope.goToCountry = function(country) {
-		
-		$state.go('root.country', {'country':country.name});
-	}
-	
-	$scope.goToRegion = function(region) {
-		
-		$state.go('root.region', {'country':region.country, 'region':region.name});
-	}
-	
-	$scope.goToCity = function(city) {
-		
-		$state.go('root.city', {'country':city.country, 'region':city.region, 'city':city.name});
-	}
-	
-	$scope.goToMosaic = function(mosaic) {
-		
-		$window.location.href = '/mosaic/' + mosaic.ref;
 	}
 });

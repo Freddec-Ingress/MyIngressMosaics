@@ -726,7 +726,7 @@ var fr_translations = {
 };
 angular.module('FrontModule.services', [])
 
-angular.module('FrontModule.services').service('API', function($q, $http, $cookies, $filter, toastr) {
+angular.module('FrontModule.services').service('API', function($q, $http, $cookies) {
 	
 	var service = {
 		
@@ -862,24 +862,6 @@ angular.module('FrontModule.services').service('UserService', function($auth, $h
 			});
 		},
 		
-		updateTeam: function(newvalue) {
-			
-			var data = { 'team':newvalue };
-			return API.sendRequest('/api/profile/team/', 'POST', {}, data).then(function(response) {
-				
-				service.data.team = newvalue;
-			});
-		},
-		
-		updateLevel: function(newvalue) {
-			
-			var data = { 'level':newvalue };
-			return API.sendRequest('/api/profile/level/', 'POST', {}, data).then(function(response) {
-				
-				service.data.level = newvalue;
-			});
-		},
-		
 		getMissions: function() {
 			
 			return API.sendRequest('/api/missions/', 'GET').then(function(response) {
@@ -898,16 +880,6 @@ angular.module('FrontModule.services').service('UserService', function($auth, $h
 					service.data.missions.splice(index, 1);
 				}
 			});
-		},
-		
-		getMosaics: function() {
-			
-			if (service.data.authenticated) {
-				return API.sendRequest('/api/mosaics/', 'GET').then(function(response) {
-					
-					service.data.mosaics = response;
-				});
-			}
 		},
 
 		sortMissionsByName: function(sort) {
@@ -1042,7 +1014,7 @@ angular.module('FrontModule.services').service('UserService', function($auth, $h
 	return service;
 });
 
-angular.module('FrontModule.services').service('DataService', function($cookies, API) {
+angular.module('FrontModule.services').service('DataService', function(API) {
 	
 	var service = {
 
@@ -1053,129 +1025,6 @@ angular.module('FrontModule.services').service('DataService', function($cookies,
 		
 		loadCountriesFromWorld: function() {
 			return API.sendRequest('/api/world/', 'POST');
-		},
-		
-		loadRegionsFromCountry: function(country) {
-			
-			var data = {'country':country};
-			return API.sendRequest('/api/country/', 'POST', {}, data);
-		},
-		
-		loadCitiesFromRegion: function(country, region) {
-			
-			var data = {'country':country, 'region':region};
-			return API.sendRequest('/api/region/', 'POST', {}, data);
-		},
-		
-		loadMosaicsFromCity: function(country, region, city) {
-			
-			var data = {'country':country, 'region':region, 'city':city};
-			return API.sendRequest('/api/city/', 'POST', {}, data);
-		},
-		
-		loadMosaicsFromCreator: function(creator) {
-			
-			var data = {'creator':creator};
-			return API.sendRequest('/api/creator/', 'POST', {}, data);
-		},
-
-		sortByMosaics: function(sort, list) {
-			
-			function compareMosaicsAsc(a, b) {
-				
-				if (a.mosaics < b.mosaics) return -1;
-				if (a.mosaics > b.mosaics) return 1;
-
-				return 0;
-			}
-			
-			function compareMosaicsDesc(a, b) {
-				
-				if (a.mosaics > b.mosaics) return -1;
-				if (a.mosaics < b.mosaics) return 1;
-
-				return 0;
-			}
-			
-			if (list) {
-				
-				if (sort == 'asc') list.sort(compareMosaicsAsc);
-				if (sort == 'desc') list.sort(compareMosaicsDesc);
-			}
-		},
-
-		sortByName: function(sort, list) {
-			
-			function compareNameAsc(a, b) {
-				
-				var a_name = a.name.toLowerCase();
-				var b_name = b.name.toLowerCase();
-				
-				if (a_name < b_name) return -1;
-				if (a_name > b_name) return 1;
-
-				return 0;
-			}
-			
-			function compareNameDesc(a, b) {
-				
-				var a_name = a.name.toLowerCase();
-				var b_name = b.name.toLowerCase();
-				
-				if (a_name > b_name) return -1;
-				if (a_name < b_name) return 1;
-
-				return 0;
-			}
-				
-			if (list) {
-				
-				if (sort == 'asc') list.sort(compareNameAsc);
-				if (sort == 'desc') list.sort(compareNameDesc);
-			}
-		},
-
-		sortByMissions: function(sort, list) {
-			
-			function compareMissionsAsc(a, b) {
-				
-				if (a.count < b.count) return -1;
-				if (a.count > b.count) return 1;
-
-				return 0;
-			}
-			
-			function compareMissionsDesc(a, b) {
-				
-				if (a.count > b.count) return -1;
-				if (a.count < b.count) return 1;
-
-				return 0;
-			}
-				
-			if (list) {
-				
-				if (sort == 'asc') list.sort(compareMissionsAsc);
-				if (sort == 'desc') list.sort(compareMissionsDesc);
-			}
-		},
-		
-		renameCountry: function(oldValue, newValue) {
-			
-			var data = {'oldValue':oldValue, 'newValue':newValue};
-			return API.sendRequest('/api/country/rename/', 'POST', {}, data);
-		},
-		
-		setRegion: function(city, region) {
-			
-			var data = {'city':city, 'region':region};
-			return API.sendRequest('/api/city/setRegion/', 'POST', {}, data);
-		},
-		
-		renameCity: function(oldValue, newValue) {
-			
-			var data = {'oldValue':oldValue, 'newValue':newValue};
-			return API.sendRequest('/api/city/rename/', 'POST', {}, data);
 		},
 	};
 	
@@ -1214,97 +1063,8 @@ angular.module('FrontModule.services').service('CreateService', function($window
 			service.data.missions = [];
 		},
 		
-		getRefArray: function() {
-			
-			var refArray = [];
-			for (var item of service.data.missions) {
-				refArray.push(item.ref);
-			}
-			return refArray;
-		},
-		
-		remove: function(item) {
-			
-			var index = service.data.missions.indexOf(item);
-			if (index > -1) {
-				service.data.missions.splice(index, 1);
-			}
-		},
-		
-		removeAll: function() {
-			
-			service.data.missions = [];
-		},
-		
 		add: function(item) {
 			service.data.missions.push(item);
-		},
-		
-		default: function() {
-
-			var max_order = 0;
-			
-			for (var m of service.data.missions) {
-				
-				var order = 0;
-				
-				var found = m.name.match(/[0-9]+/);
-				if (found) order = parseInt(found[0]);
-				
-				if (order > max_order) max_order = order;
-				
-				m.order = order;
-			}
-			
-			service.data.missions = service.data.missions.sort(function(a, b) {
-				
-				if (a.order < b.order) { 	return -1; }
-				if (a.order > b.order) { 	return 1; }
-				return 0;
-			});
-			
-			if (service.data.missions[0]) {
-				
-				service.data.title = service.data.missions[0].name;
-				service.data.desc = service.data.missions[0].desc;
-				
-				service.data.title = service.data.title.replace(/0|1|2|3|4|5|6|7|8|9|#/g, '');
-				service.data.title = service.data.title.replace('.', '');
-				service.data.title = service.data.title.replace('(', '');
-				service.data.title = service.data.title.replace(')', '');
-				service.data.title = service.data.title.replace('/', '');
-				service.data.title = service.data.title.trim();
-				service.data.title = service.data.title.replace('of  ', '');
-				service.data.title = service.data.title.replace('  of', '');
-			}
-			
-			service.data.type = 'sequence';
-			service.data.cols = 6;
-			service.data.rows = Math.ceil(service.data.missions.length / 6);
-		},
-		
-		getImageByOrder: function(order) {
-			
-			var url = null;
-			
-			for (var item of service.data.missions) {
-				if ((service.data.missions.length - item.order + 1) == order) {
-					url = item.image;
-					break;
-				}
-			}
-			
-			return url;
-		},
-		
-		create: function() {
-			
-			if (service.data.missions.length < service.data.cols) service.data.cols = service.data.missions.length;
-			
-			return API.sendRequest('/api/mosaic/create/', 'POST', {}, service.data).then(function(response) {
-				
-				$window.location.href = '/mosaic/' + response;
-			});
 		},
 		
 		createWithMosaic: function(mosaic, callback) {
@@ -1373,79 +1133,6 @@ angular.module('FrontModule.services').service('MosaicService', function(API, Da
 			potentials: null,
 		},
 		
-		sortMPotentialsByName: function(sort) {
-			
-			function compareNameAsc(a, b) {
-				
-				var a_name = a.name.toLowerCase().replace(/0|1|2|3|4|5|6|7|8|9/g, '');
-				var b_name = b.name.toLowerCase().replace(/0|1|2|3|4|5|6|7|8|9/g, '');
-				
-				if (a_name < b_name)
-					return -1;
-					
-				if (a_name > b_name)
-					return 1;
-
-				var a_name = a.name;
-				var b_name = b.name;
-				
-				if (a_name < b_name)
-					return -1;
-					
-				if (a_name > b_name)
-					return 1;
-					
-				var a_creator = a.creator.toLowerCase();
-				var b_creator = b.creator.toLowerCase();
-				
-				if (a_creator < b_creator)
-					return -1;
-					
-				if (a_creator > b_creator)
-					return 1;
-
-				return 0;
-			}
-			
-			function compareNameDesc(a, b) {
-				
-				var a_name = a.name.toLowerCase().replace(/0|1|2|3|4|5|6|7|8|9/g, '');
-				var b_name = b.name.toLowerCase().replace(/0|1|2|3|4|5|6|7|8|9/g, '');
-				
-				if (a_name > b_name)
-					return -1;
-					
-				if (a_name < b_name)
-					return 1;
-
-				var a_name = a.name;
-				var b_name = b.name;
-				
-				if (a_name > b_name)
-					return -1;
-					
-				if (a_name < b_name)
-					return 1;
-					
-				var a_creator = a.creator.toLowerCase();
-				var b_creator = b.creator.toLowerCase();
-				
-				if (a_creator > b_creator)
-					return -1;
-					
-				if (a_creator < b_creator)
-					return 1;
-				
-				return 0;
-			}
-			
-			if (service.data.potentials) {
-				
-				if (sort == 'asc') service.data.potentials.sort(compareNameAsc);
-				if (sort == 'desc') service.data.potentials.sort(compareNameDesc);
-			}
-		},
-
 		getMosaic: function(ref) {
 			
 			var data = { 'ref':ref };
@@ -1464,55 +1151,10 @@ angular.module('FrontModule.services').service('MosaicService', function(API, Da
 					}
 					
 					service.data.potentials = response;
-					service.sortMPotentialsByName('asc');
 				}
 			});
 		},
-		
-		getImageByOrder: function(order) {
-			
-			var url = null;
-			
-			if (service.data.mosaic) {
-				for (var item of service.data.mosaic.missions) {
-					if ((service.data.mosaic.count - item.order + 1) == order) {
-						url = item.image;
-						break;
-					}
-				}
-			}
-			
-			return url;
-		},
-		
-		getColsArray: function() {
-			
-			var temp = 1;
-			if (service.data.mosaic.cols > 0) temp = service.data.mosaic.cols;
-			if (!temp) temp = 1;
-			
-			var cols = [];
-			for (var i = 0; i < temp; i++) {
-				cols.push(i);
-			}
 
-			return cols;
-		},
-		
-		getRowsArray: function() {
-			
-			var temp = 1;
-			if (service.data.mosaic.count > 0 && service.data.mosaic.cols > 0) temp = Math.ceil(service.data.mosaic.count / service.data.mosaic.cols);
-			if (!temp) temp = 1;
-			
-			var rows = [];
-			for (var i = 0; i < temp; i++) {
-				rows.push(i);
-			}
-			
-			return rows;
-		},
-		
 		edit: function(data) {
 			
 			return API.sendRequest('/api/mosaic/edit/', 'POST', {}, data).then(function(response) {
@@ -1542,9 +1184,6 @@ angular.module('FrontModule.services').service('MosaicService', function(API, Da
 			var data = { 'ref':service.data.mosaic.ref, };
 			return API.sendRequest('/api/mosaic/delete/', 'POST', {}, data).then(function(response) {
 					
-				DataService.current_city = service.data.mosaic.city;
-				$state.go('root.city', {'country':service.data.mosaic.country, 'region':service.data.mosaic.region, 'city':service.data.mosaic.city});
-				
 				service.data.mosaic = null;
 			});
 		},
@@ -1569,12 +1208,6 @@ angular.module('FrontModule.services').service('MosaicService', function(API, Da
 				service.data.mosaic._distance = response._distance;
 				service.data.mosaic.missions = response.missions;
 			});
-		},
-		
-		repair: function() {
-			
-			var data = {'ref':service.data.mosaic.ref};
-			return API.sendRequest('/api/mosaic/repair/', 'POST', {}, data);
 		},
 	};
 	
@@ -1826,7 +1459,7 @@ angular.module('FrontModule.controllers').controller('HomeCtrl', function($scope
 	});
 });
 
-angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, toastr, $filter, $window, SearchService) {
+angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, toastr, $filter, SearchService) {
 	
 	/* Search */
 	
@@ -2005,204 +1638,12 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 		
 		$scope.mosaics.splice($scope.mosaics.indexOf(mosaic), 1);
 	}
-	
-	$scope.isSelected = function(ref) {
-		
-		if (CreateService.getRefArray().indexOf(ref) != -1) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	$scope.toggle = function(index, event, item) {
-		
-		if (event.shiftKey) {
-			event.preventDefault();
-			
-			if (index > $scope.lastSelectedIndex) {
-				
-				for (var i = ($scope.lastSelectedIndex + 1); i <= index; i++) {
-					
-					var m = $scope.missions[i];
-					if (!$scope.isSelected(m.ref)) {
-						CreateService.add(m);
-					}
-				}
-			}
-			else {
-				
-				for (var i = index; i < $scope.lastSelectedIndex; i++) {
-					
-					var m = $scope.missions[i];
-					if (!$scope.isSelected(m.ref)) {
-						CreateService.add(m);
-					}
-				}
-			}
-		}
-		else {
-			
-			if ($scope.isSelected(item.ref)) {
-				CreateService.remove(item);
-			}
-			else {
-				CreateService.add(item);
-			}
-		}
-		
-		$scope.lastSelectedIndex = index;
-	}
-	
-	$scope.unselectAll = function() {
-		
-		CreateService.removeAll();
-	}
-	
-	$scope.hasSelected = function() {
-		
-		if (CreateService.data.missions.length > 0) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	$scope.nextStep = function() {
-		$state.go('root.create');
-	}
-	
-	$scope.delete = function(mosaic, item, index) {
-		mosaic.missions.splice(index, 1);
-		UserService.deleteMission(item);
-	}
-	
-	$scope.deleteAll = function() {
-		
-		for (var item of $scope.missions) {
-			UserService.deleteMission(item);
-		}
-	}
-	
-	/* Sort name */
-	
-	$scope.sortMissionsByName = function() {
-		
-		$scope.sortCreator = '';
-		
-		if ($scope.sortName == '' || $scope.sortName == 'asc') {
-			
-			UserService.sortMissionsByName('desc');
-			$scope.sortName = 'desc';
-		}
-		
-		else if ($scope.sortName == 'desc') {
-			
-			UserService.sortMissionsByName('asc');
-			$scope.sortName = 'asc';
-		}
-	}
-	
-	/* Sort creator */
-	
-	$scope.sortMissionsByCreator = function() {
-		
-		$scope.sortName = '';
-		
-		if ($scope.sortCreator == '' || $scope.sortCreator == 'asc') {
-			
-			UserService.sortMissionsByCreator('desc');
-			$scope.sortCreator = 'desc';
-		}
-		
-		else if ($scope.sortCreator == 'desc') {
-			
-			UserService.sortMissionsByCreator('asc');
-			$scope.sortCreator = 'asc';
-		}
-	}
-});
-
-angular.module('FrontModule.controllers').controller('CreateCtrl', function($scope, CreateService) {
-	
-	$scope.data = null;
-
-	if (CreateService.data.missions.length < 1) {
-		$state.go('root.missions');
-	}
-	
-	CreateService.default();
-	
-	var geocoder = new google.maps.Geocoder;
-	
-	var latlng = {
-		lat: parseFloat(CreateService.data.missions[0].lat),
-		lng: parseFloat(CreateService.data.missions[0].lng),
-	};
-
-	geocoder.geocode({'location': latlng}, function(results, status) {
-		
-		if (status === 'OK') {
-			if (results[1]) {
-				
-				var admin2 = null;
-				var admin3 = null;
-				
-				for (var item of results[1].address_components) {
-					
-					if (item.types[0] == 'country') CreateService.data.country = item.long_name;
-					if (item.types[0] == 'locality') CreateService.data.city = item.long_name;
-					if (item.types[0] == 'administrative_area_level_1') CreateService.data.region = item.long_name;
-					if (item.types[0] == 'administrative_area_level_2') admin2 = item.long_name;
-					if (item.types[0] == 'administrative_area_level_3') admin3 = item.long_name;
-				}
-				
-				if (!CreateService.data.city && admin2) CreateService.data.city = item.admin2;
-				if (!CreateService.data.city && admin3) CreateService.data.city = item.admin3;
-				
-				$scope.$apply();
-			}
-		}
-	});
-
-	$scope.data = CreateService.data;
-	$scope.create = CreateService.create;
-
-	$scope.rows = function() {
-		
-		var rows = [];
-		for (var i = 0; i < $scope.data.rows; i++) {
-			rows.push(i);
-		}
-		
-		return rows;
-	}
-	
-	$scope.cols = function() {
-		
-		var temp = 1;
-		if ($scope.data.cols > 0) temp = $scope.data.cols;
-		if (!temp) temp = 1;
-		
-		var cols = [];
-		for (var i = 0; i < temp; i++) {
-			cols.push(i);
-		}
-		
-		return cols;
-	}
-	
-	$scope.getImage = function(i, j) {
-		
-		var order = (i * $scope.data.cols + j) + 1;
-		return CreateService.getImageByOrder(order);
-	}
 });
 
 angular.module('FrontModule.controllers').controller('PluginCtrl', function() {
 });
 
-angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API, $rootScope, $scope, $timeout, $window, $filter, toastr, MosaicService) {
+angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API, $rootScope, $scope, $window, $filter, toastr, MosaicService) {
 
 	$scope.loadMosaic = function(ref) {
 		
@@ -2388,16 +1829,6 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 		}
 	}
 	
-	/* Repair */
-	
-	$scope.repair = function() {
-		
-		MosaicService.repair().then(function(response) {
-			
-			$state.reload();
-		});
-	}
-	
 	/* Map */
 
 	$scope.initMap = function() {
@@ -2512,30 +1943,6 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 		
 		map.setCenter(latlngbounds.getCenter());
 		map.fitBounds(latlngbounds); 
-	}
-	
-	/* Go to a creator page */
-	
-	$scope.goToCreator = function(creator) {
-		
-		$state.go('root.creator', {'creator':creator});
-	}
-	
-	/* Go to a location page */
-	
-	$scope.goToCountry = function() {
-		
-		$state.go('root.country', {'country':$scope.mosaic.country});
-	}
-	
-	$scope.goToRegion = function() {
-		
-		$state.go('root.region', {'country':$scope.mosaic.country, 'region':$scope.mosaic.region});
-	}
-	
-	$scope.goToCity = function() {
-		
-		$state.go('root.city', {'country':$scope.mosaic.country, 'region':$scope.mosaic.region, 'city':$scope.mosaic.city});
 	}
 });
 
@@ -2782,52 +2189,7 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 	}
 });
 
-angular.module('FrontModule.controllers').controller('CreatorCtrl', function($scope, DataService) {
-	
-	$scope.creator_loading = true;
-
-	$scope.creator_name = $stateParams.creator;
-	
-	DataService.loadMosaicsFromCreator($scope.creator_name).then(function(response) {
-		
-		$scope.creator_loading = false;
-		
-		$scope.faction = response.faction;
-		$scope.mosaics = response.mosaics;
-		
-		DataService.sortByMissions('desc', $scope.mosaics);
-	});
-
-	/* Go to a mosaic page */
-	
-	$scope.go = function(item) {
-		
-		$state.go('root.mosaic', {'ref':item.ref});
-	}
-	
-	/* Sort mosaics by missions */
-	
-	$scope.sortMissions = 'desc';
-	
-	$scope.sortMosaicsByMissions = function() {
-		
-		if ($scope.sortMissions == '' || $scope.sortMissions == 'asc') {
-			
-			DataService.sortMosaicsByMissions('desc');
-			$scope.sortMissions = 'desc';
-		}
-		
-		else if ($scope.sortMissions == 'desc') {
-			
-			DataService.sortMosaicsByMissions('asc');
-			$scope.sortMissions = 'asc';
-		}
-	}
-});
-
 angular.module('FrontModule.controllers').controller('LoginCtrl', function($scope, UserService) {
-	
-	$scope.page_title = 'login_TITLE';
 	
 	$scope.loginModel = { username:null, password:null };
 	
@@ -2836,8 +2198,6 @@ angular.module('FrontModule.controllers').controller('LoginCtrl', function($scop
 });
 
 angular.module('FrontModule.controllers').controller('RegisterCtrl', function($scope, UserService) {
-	
-	$scope.page_title = 'register_TITLE';
 	
 	$scope.registerModel = { username:null, password1:null, password2:null, email:null };
 	
@@ -2889,6 +2249,8 @@ angular.module('FrontModule.controllers').controller('ProfileCtrl', function($sc
 angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, toastr, $filter, $window, SearchService) {
 	
 	/* Search */
+	
+	$('#result_block').removeClass('hidden');
 	
 	$scope.search_loading = false;
 	
@@ -2942,33 +2304,6 @@ angular.module('FrontModule.controllers').controller('SearchCtrl', function($sco
 			
 			toastr.error($filter('translate')('error_ATLEAST3CHAR'));
 		}
-	}
-	
-	/* Go to ... */
-	
-	$scope.goToCreator = function(creator) {
-		
-		$state.go('root.creator', {'creator':creator.name});
-	}
-
-	$scope.goToCountry = function(country) {
-		
-		$state.go('root.country', {'country':country.name});
-	}
-	
-	$scope.goToRegion = function(region) {
-		
-		$state.go('root.region', {'country':region.country, 'region':region.name});
-	}
-	
-	$scope.goToCity = function(city) {
-		
-		$state.go('root.city', {'country':city.country, 'region':city.region, 'city':city.name});
-	}
-	
-	$scope.goToMosaic = function(mosaic) {
-		
-		$window.location.href = '/mosaic/' + mosaic.ref;
 	}
 });
 
