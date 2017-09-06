@@ -1,4 +1,4 @@
-angular.module('FrontModule', ['ui.router', 'ui.bootstrap', 'pascalprecht.translate', 'satellizer', 'ngCookies', 'toastr',
+angular.module('FrontModule', ['pascalprecht.translate', 'satellizer', 'ngCookies', 'toastr',
 							   'FrontModule.services', 'FrontModule.controllers', 'FrontModule.directives', ]);
 
 
@@ -54,30 +54,12 @@ angular.module('FrontModule').config(function(toastrConfig) {
 
 
 
-/* Running */
-
-angular.module('FrontModule').run(function($rootScope, $state, $stateParams) {
-	
-	$rootScope.state = $state;
-	$rootScope.stateParams = $stateParams;
-	
-	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-		$rootScope.route_loading = true;
-	});
-	
-	$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-		
-		$rootScope.route_loading = false;
-	});
-});
-
-
-
 /* Filter */
 
 angular.module('FrontModule').filter('reverse', function() {
 	
 	return function(items) {
+		if (!items) return;
 		return items.slice().reverse();
 	};
 });

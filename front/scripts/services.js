@@ -33,7 +33,7 @@ angular.module('FrontModule.services').service('API', function($q, $http, $cooki
 	return service;
 });
 
-angular.module('FrontModule.services').service('UserService', function($auth, $http, $cookies, $state, $window, API) {
+angular.module('FrontModule.services').service('UserService', function($auth, $http, $cookies, $window, API) {
 	
 	var service = {
 
@@ -456,7 +456,7 @@ angular.module('FrontModule.services').service('DataService', function($cookies,
 	return service;
 });
 
-angular.module('FrontModule.services').service('CreateService', function($state, $window, API) {
+angular.module('FrontModule.services').service('CreateService', function($window, API) {
 	
 	var service = {
 
@@ -637,7 +637,7 @@ angular.module('FrontModule.services').service('CreateService', function($state,
 	return service;
 });
 
-angular.module('FrontModule.services').service('MosaicService', function($state, API, DataService) {
+angular.module('FrontModule.services').service('MosaicService', function(API, DataService) {
 	
 	var service = {
 

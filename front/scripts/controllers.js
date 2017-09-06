@@ -1,6 +1,6 @@
 angular.module('FrontModule.controllers', [])
 
-angular.module('FrontModule.controllers').controller('RootCtrl', function($rootScope, $scope, $stateParams, $translate, $window, UserService) {
+angular.module('FrontModule.controllers').controller('RootCtrl', function($rootScope, $scope, $translate, $window, UserService) {
 	
 	var supported_lang = ['en', 'fr'];
 	
@@ -69,7 +69,7 @@ angular.module('FrontModule.controllers').controller('HomeCtrl', function($scope
 	});
 });
 
-angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, $state, toastr, $filter, $window, SearchService) {
+angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, toastr, $filter, $window, SearchService) {
 	
 	/* Search */
 	
@@ -130,7 +130,7 @@ angular.module('FrontModule.controllers').controller('SearchCtrl', function($sco
 	}
 });
 
-angular.module('FrontModule.controllers').controller('MissionsCtrl', function($scope, $state, UserService, CreateService) {
+angular.module('FrontModule.controllers').controller('MissionsCtrl', function($scope, UserService, CreateService) {
 
 	var mosaics = [];
 	var missions = [];
@@ -366,7 +366,7 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 	}
 });
 
-angular.module('FrontModule.controllers').controller('CreateCtrl', function($scope, $state, CreateService) {
+angular.module('FrontModule.controllers').controller('CreateCtrl', function($scope, CreateService) {
 	
 	$scope.data = null;
 
@@ -445,7 +445,7 @@ angular.module('FrontModule.controllers').controller('CreateCtrl', function($sco
 angular.module('FrontModule.controllers').controller('PluginCtrl', function() {
 });
 
-angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API, $rootScope, $scope, $state, $timeout, $window, $filter, toastr, MosaicService) {
+angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API, $rootScope, $scope, $timeout, $window, $filter, toastr, MosaicService) {
 
 	$scope.loadMosaic = function(ref) {
 		
@@ -1025,7 +1025,7 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 	}
 });
 
-angular.module('FrontModule.controllers').controller('CreatorCtrl', function($scope, $state, $stateParams, DataService) {
+angular.module('FrontModule.controllers').controller('CreatorCtrl', function($scope, DataService) {
 	
 	$scope.creator_loading = true;
 
@@ -1129,7 +1129,7 @@ angular.module('FrontModule.controllers').controller('ProfileCtrl', function($sc
 	}
 });
 
-angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, $state, toastr, $filter, $window, SearchService) {
+angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, toastr, $filter, $window, SearchService) {
 	
 	/* Search */
 	

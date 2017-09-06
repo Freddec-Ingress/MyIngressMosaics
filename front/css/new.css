@@ -122,6 +122,19 @@ a:hover, a:focus { color: inherit; cursor: pointer; text-decoration: inherit; }
 
 
 
+/* Flexbox ----------------------------------------------------------------- */
+
+.f-row { display: flex; flex-direction: row; }
+.f-col { display: flex; flex-direction: column; }
+
+.f-justify-end { justify-content: flex-end!important; }
+.f-justify-start { justify-content: flex-start!important; }
+.f-justify-center { justify-content: center!important; }
+.f-justify-around { justify-content: space-around!important; }
+.f-justify-between { justify-content: space-between!important; }
+
+
+
 /* Width -------------------------------------------------------------------- */
 
 .width-1  { width:   8.333333%!important; }
@@ -420,6 +433,30 @@ input[type=number]::-webkit-outer-spin-button {  margin: 0;  -webkit-appearance:
 /* Disabled ----------------------------------------------------------------- */
 
 .btn.disabled, .btn:disabled { opacity: .5; cursor: not-allowed; }
+
+
+
+/******************************************************************************/
+/* TABLE                                                                      */
+/******************************************************************************/
+
+table { width: 100%; border-spacing: 0; border-collapse: collapse; }
+
+
+
+/* Row ---------------------------------------------------------------------- */
+
+table tr { border-bottom: 1px solid rgba(0, 0, 0, .25); }
+table tr:last-child { border-bottom: 0; }
+
+
+
+/* Cell --------------------------------------------------------------------- */
+
+table td {
+    padding: .25rem;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
 
 
 
