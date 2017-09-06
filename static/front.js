@@ -3318,6 +3318,8 @@ angular.module('FrontModule.services').service('CreateService', function($state,
 		
 		create: function() {
 			
+			if (service.data.missions.length < service.data.cols) service.data.cols = service.data.missions.length;
+			
 			return API.sendRequest('/api/mosaic/create/', 'POST', {}, service.data).then(function(response) {
 				
 				$window.location.href = '/mosaic/' + response;

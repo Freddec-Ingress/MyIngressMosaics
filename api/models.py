@@ -236,7 +236,7 @@ class Mosaic(models.Model):
 			
 			self.creators.clear()
 			
-			for i in range(0, missions.count() - 1):
+			for i in range(0, missions.count()):
 
 				result = Creator.objects.filter(name=missions[i].creator)
 				if result.count() > 0:
