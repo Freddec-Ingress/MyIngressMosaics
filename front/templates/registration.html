@@ -43,41 +43,24 @@
 	
         <div ng-if="!user.authenticated">
             
-            <div class="text-danger text-center mt-4 mr-2 ml-2">
-        	    {{'restricted_TEXT' | translate}}
-            </div>
-        
-            <h2>{{'missions_HUNTERTITLE' | translate}}</h2>
-        
-            <div class="card">
-                
-                <div class="card-block first last mb-4">
-                    <p>
-                        
-                        {{'missions_PLUGIN' | translate}}
-                        
-        				<a href="/plugin">
-        					{{'plugin_LINK' | translate}}
-        				</a>
-        				
-                    </p>
-                </div>
+        	<div class="f-row pt-4 mt-4 mb-2 mx-4 text-uppercase bordered-b">
+        		{{'missions_HUNTERTITLE' | translate}}
+        	</div>
+
+            <div class="card px-2">
                 
                 <div class="card-block first last">
                     
                     <ol>
                         <li>
-                            {{'missions_HELP1' | translate}}
-                            <a href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">MyIngressMosaics Hunting Tool</a>
+                            Use our <a href="/plugin">MIM Scanning Plugin</a> to register missions from Ingress Intel Map. Unfortunetly some missions cannot be registered like that so you have to register them manually with our extension 
+                            <a href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">MIM Hunting Tool</a>
                         </li>
                         <li>
-                            {{'missions_HELP2' | translate}}
+                            <a href="/login">Sign in</a> to MIM site
                         </li>
                         <li>
-                            {{'missions_HELP3' | translate}}
-                        </li>
-                        <li>
-                            {{'missions_HELP4' | translate}}
+                            Got to <a href="/registration">Registration</a> page to see registered missions and create mosaics
                         </li>
                     </ol>
                     
