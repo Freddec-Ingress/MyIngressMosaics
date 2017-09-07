@@ -77,16 +77,25 @@
                 <div class="card-block first last my-4">
                     <p>
                         
-                        {{'missions_PLUGIN' | translate}}
+                        To scan missions from Ingress Intel Map:
                         
         				<a href="/plugin">
-        					{{'plugin_LINK' | translate}}
+        					MIM Scanning Plugin
         				</a>
         				
                     </p>
+                        <p>
+                            
+                            To register manually missions that couldn't be scanned:
+        
+                            <a href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">
+                                MIM Hunting Tool
+                            </a>
+                            
+                        </p>
                 </div>
                         
-                <div ng-if="!missions && !mosaics">
+                <div ng-if="!mosaics.length">
                     
                     <div class="card-block first last">
                         
@@ -102,15 +111,6 @@
             				
                         </p>
             
-                        <p>
-                            
-                            {{'missions_HUNTINGTOOL' | translate}}
-        
-                            <a href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">
-                                MyIngressMosaics Hunting Tool
-                            </a>
-                            
-                        </p>
                         
                     </div>
                     
