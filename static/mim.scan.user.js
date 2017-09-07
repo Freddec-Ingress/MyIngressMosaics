@@ -1,7 +1,7 @@
 // ==UserScript==
 // @id             myingressmosaics@freddec
 // @name           MyIngressMosaics Scanning plugin
-// @version        1.0.9
+// @version        1.0.10
 // @include        https://*.ingress.com/intel*
 // @include        http://*.ingress.com/intel*
 // @match          https://*.ingress.com/intel*
@@ -53,7 +53,7 @@ head.innerHTML += '<style>' +
 
 document.getElementById('dashboard_container').innerHTML +=
     '<div id="tm_zoom"></div>' +
-    '<div id="tm_start" class="unselectable bottom_right_tab_button" onclick="startScanning();">' +
+    '<div id="tm_start" class="unselectable bottom_right_tab_button" onclick="expertScanning();">' +
     '       Start scanning' +
     '</div>';
 
@@ -203,6 +203,37 @@ function callMIMAPI(action, data, successCallback, errorCallback) {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Functions to process location
+
+var currentLocation = '';
+var locationsToBeProcessed = [];
+
+var geocoder = new google.maps.Geocoder();
+
+function processNextLocation() {
+
+    if (locationsToBeProcessed.length < 1) {
+        return;
+    }
+
+    var location = locationsToBeProcessed.slice(0, 1);
+
+    currentLocation = String(location);
+    geocoder.geocode({'address': currentLocation}, function(results, status) {
+
+        if (status === 'OK') {
+
+            M.setCenter(results[0].geometry.location);
+            M.setZoom(13);
+
+            window.startScanning();
+        }
+
+        locationsToBeProcessed.splice(0, 1);
+    });
+}
+
+//--------------------------------------------------------------------------------------------------
 // Functions to process tile request and tile data
 
 var tilesProcessed = [];
@@ -231,6 +262,8 @@ function processNextTiles() {
 
         $('#loading_msg_text').hide();
         $('#loading_data_circle').hide();
+
+        processNextLocation();
 
         return;
     }
@@ -336,7 +369,7 @@ function processNextTiles() {
 
     }, function(jqXHR, textStatus, errorThrown) {
 
-        processNextTiles();
+        setTimeout(processNextTiles, 1000);
     });
 }
 
@@ -375,6 +408,10 @@ function processNextPortal() {
         portalsToBeProcessed.splice(0, 1);
 
         processNextMission();
+
+    }, function(jqXHR, textStatus, errorThrown) {
+
+        setTimeout(processNextPortal, 1000);
     });
 }
 
@@ -438,6 +475,10 @@ function processNextMission() {
         missionsToBeProcessed.splice(0, 1);
 
         processNextMission();
+
+    }, function(jqXHR, textStatus, errorThrown) {
+
+        setTimeout(processNextMission, 1000);
     });
 }
 
@@ -539,6 +580,8 @@ function init() {
 
         console.clear();
 
+        console.log('Location: ' + currentLocation);
+
         tilesToBeProcessed = [];
 
         var bds = M.getBounds();
@@ -625,6 +668,16 @@ function init() {
 
         $('#loading_msg_text').hide();
         $('#loading_data_circle').hide();
+    };
+
+    window.expertScanning = function() {
+
+        if (locationsToBeProcessed.length > 0) {
+            processNextLocation();
+            return;
+        }
+
+        window.startScanning();
     };
 }
 
