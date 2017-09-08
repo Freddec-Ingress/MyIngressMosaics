@@ -1,9 +1,13 @@
 from django.conf.urls import url
 
+from django.http import HttpResponse
+
 from front import views
 
 urlpatterns = [
 	
+	url(r'^robots.txt$', lambda r: HttpResponse('User-agent: *\nDisallow: /admin/\nDisallow: /api/', mimetype='text/plain')),
+
 	url(r'^map/(?P<location>[\w \-,]+)',           views.map),
 	url(r'^map',           views.map),
 	
