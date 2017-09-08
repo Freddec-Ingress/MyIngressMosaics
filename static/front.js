@@ -1647,6 +1647,13 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 		
 		$scope.mosaics.splice($scope.mosaics.indexOf(mosaic), 1);
 	}
+	
+	/* Delete mission */
+	$scope.delete = function(mosaic, item, index) {
+		
+		UserService.deleteMission(item);
+		mosaic.missions.splice(index, 1);
+	}
 });
 
 angular.module('FrontModule.controllers').controller('PluginCtrl', function() {
