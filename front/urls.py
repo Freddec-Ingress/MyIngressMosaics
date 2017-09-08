@@ -30,5 +30,5 @@ urlpatterns = [
 	url(r'^profile', views.profile),
 	url(r'^plugin', views.plugin),
 	
-	url(r'^.*', views.home),
+	url(r'^.*', views.home, name='home'),
 ]

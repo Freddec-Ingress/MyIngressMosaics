@@ -1,11 +1,13 @@
+from django.urls import reverse
+
 from django.contrib.sitemaps import Sitemap
 
 def ViewSitemap(Sitemap):
-	changefreq = "never"
+	changefreq = 'weekly'
 	priority = 0.5
 
 	def items(self):
-		return ['main', 'about', 'license']
+		return ['home']
 	
 	def location(self, item):
 		return reverse(item)
