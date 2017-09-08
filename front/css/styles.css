@@ -86,6 +86,8 @@ hr {
 	animation: rotating 2s linear infinite;
 }
 
+.rotating { animation: rotating 2s linear infinite; }
+
 
 
 /* Wrapper ------------------------------------------------------------------ */

@@ -118,10 +118,6 @@
                 
             	<div class="my-4" style="position:relative;" ng-repeat="mosaic in mosaics">
             		
-        			<div class="loading" ng-show="mosaic.creating">
-        				<img src="/static/img/loading.png" />
-        			</div>
-            		
             		<div class="f-row">
             			<span class="text-normal mr-auto">{{mosaic.missions.length}} missions</span>
             			<a href="" ng-click="deleteMosaic(mosaic);">{{'delete_LABEL' | translate}}</a>
@@ -153,7 +149,10 @@
                     
                     <div class="card-block last form-button-bar">
                 		<button class="btn btn-primary" ng-click="btn_disabled = true; createMosaic(mosaic);" ng-disabled="btn_disabled">
-                		    {{'create_BTN' | translate}}
+                		    <div ng-show="!btn_disabled">{{'create_BTN' | translate}}</div>
+                		    <div ng-show="btn_disabled">
+                		       	<img src="/static/img/loading.png" class="rotating" width="14px" height="14px" style="margin-top:2px;" />
+                		    </div>
                 		</button>
                     </div>
                     
