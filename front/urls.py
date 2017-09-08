@@ -6,10 +6,15 @@ from django.contrib.sitemaps.views import sitemap
 
 from front import views
 
+sitemaps = {
+    'static': views.StaticViewSitemap,
+    'mosaics': views.MosaicsViewSitemap,
+}
+
 urlpatterns = [
 	
 	url(r'^robots.txt$', lambda r: HttpResponse('User-agent: *\nDisallow: /admin/\nDisallow: /api/', content_type='text/plain')),
-	url(r'^sitemap\.xml$', sitemap, {'sitemaps': views.SitemapView}, name='django.contrib.sitemaps.views.sitemap'),
+	url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     
 	url(r'^map/(?P<location>[\w \-,]+)',           views.map),
 	url(r'^map',           views.map),

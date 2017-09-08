@@ -13,7 +13,12 @@ from operator import itemgetter, attrgetter, methodcaller
 
 from django.contrib.sitemaps import Sitemap
 
-def SitemapView(Sitemap):
+def StaticViewSitemap(Sitemap):
+	changefreq = "never"
+	
+	
+	
+def MosaicsViewSitemap(Sitemap):
 	changefreq = "never"
 
 
