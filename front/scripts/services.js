@@ -353,6 +353,8 @@ angular.module('FrontModule.services').service('CreateService', function($window
 			service.data.cols = 6;
 			service.data.rows = Math.ceil(service.data.missions.length / 6);
 			
+			if (service.data.missions.length < 6) service.data.cols = service.data.missions.length;
+			
 			var geocoder = new google.maps.Geocoder;
 			
 			var latlng = {
