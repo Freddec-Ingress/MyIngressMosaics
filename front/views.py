@@ -11,6 +11,13 @@ import urllib, io
 
 from operator import itemgetter, attrgetter, methodcaller
 
+from django.contrib.sitemaps import Sitemap
+
+def SitemapView(Sitemap):
+	changefreq = "never"
+
+
+
 def creator(request):
 	
 	context = {}
