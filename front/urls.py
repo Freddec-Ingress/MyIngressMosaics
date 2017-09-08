@@ -5,9 +5,10 @@ from django.http import HttpResponse
 from django.contrib.sitemaps.views import sitemap
 
 from front import views
+from front import sitemaps
 
 sitemaps = {
-    'urls': views.ViewSitemap,
+    'urls': sitemaps.ViewSitemap,
 }
 
 urlpatterns = [
