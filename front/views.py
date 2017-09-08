@@ -13,13 +13,15 @@ from operator import itemgetter, attrgetter, methodcaller
 
 from django.contrib.sitemaps import Sitemap
 
-def StaticViewSitemap(Sitemap):
+def ViewSitemap(Sitemap):
 	changefreq = "never"
+	priority = 0.5
+
+	def items(self):
+		return ['main', 'about', 'license']
 	
-	
-	
-def MosaicsViewSitemap(Sitemap):
-	changefreq = "never"
+	def location(self, item):
+		return reverse(item)
 
 
 

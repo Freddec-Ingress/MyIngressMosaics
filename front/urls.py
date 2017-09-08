@@ -7,8 +7,7 @@ from django.contrib.sitemaps.views import sitemap
 from front import views
 
 sitemaps = {
-    'static': views.StaticViewSitemap,
-    'mosaics': views.MosaicsViewSitemap,
+    'urls': views.ViewSitemap,
 }
 
 urlpatterns = [
