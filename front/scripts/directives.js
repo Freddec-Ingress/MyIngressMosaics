@@ -94,6 +94,7 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 		    '       		\'flag-icon-za\': mosaic.country == \'South Africa\',' +
 		    '       		\'flag-icon-ad\': mosaic.country == \'Andorra\',' +
 		    '       		\'flag-icon-it\': mosaic.country == \'Italy\',' +
+		    '       		\'flag-icon-il\': mosaic.country == \'Israel\',' +
 	        '        	}"></span>' +
 	        '    		{{mosaic.city}}' +
 	        '    	</div>' +

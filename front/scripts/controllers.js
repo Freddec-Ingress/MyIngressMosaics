@@ -235,7 +235,6 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 	/* Create mosaic */
 	$scope.createMosaic = function(mosaic) {
 		
-		mosaic.creating = true;
 		CreateService.createWithMosaic(mosaic, $scope.createMosaicCallback);
 	}
 	$scope.createMosaicCallback = function(mosaic) {
