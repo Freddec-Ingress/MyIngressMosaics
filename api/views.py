@@ -742,8 +742,12 @@ class DataViewSet(viewsets.ViewSet):
 		
 		# Save search results for stats
 		
-		result = SearchResult(search_text=request.data['text'], count=len(data['mosaics']))
-		result.save()
+		if not data['mosaics']:
+			result = SearchResult(search_text=request.data['text'], count=0)
+			result.save()
+		else:
+			result = SearchResult(search_text=request.data['text'], count=len(data['mosaics']))
+			result.save()
 		
 		return Response(data, status=status.HTTP_200_OK)
     
