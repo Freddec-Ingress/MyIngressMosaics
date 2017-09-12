@@ -1875,7 +1875,7 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 		var lineSymbol = {
 			path: 'M 0,0 0,-5',
 			strokeOpacity: 1,
-			scale: 3
+			scale: 1
 		};
 		
 		var circleSymbol = {
@@ -1925,7 +1925,7 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 					icons: [{
 						icon: lineSymbol,
 						offset: '0',
-						repeat: '5px'
+						repeat: '10px'
 					},],
 		        });
 		        
