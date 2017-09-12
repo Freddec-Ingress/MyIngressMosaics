@@ -222,8 +222,8 @@ class Mosaic(models.Model):
 			
 			data['missions'].append(mission_data)
 			
-			data['portals'] += item.portals.all().count()
-			
+		data['portals'] = Portal.objects.filter(mission__mosaic=self).count()
+		
 		return data
 		
 	
