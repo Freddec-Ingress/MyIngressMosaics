@@ -218,6 +218,7 @@ hr {
 /* Pane --------------------------------------------------------------------- */
 
 #page-pane {
+    display: flex; flex-direction: column;
     min-height: 100%;
 }
 
@@ -238,8 +239,8 @@ hr {
 /* Content ------------------------------------------------------------------ */
 
 #page-content {
-    position: relative;
     min-height: 100%;
+    flex: 1;
 }
 
 .slimScrollBar {
