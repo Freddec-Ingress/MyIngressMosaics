@@ -1350,7 +1350,7 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 			'	<div class="f-col">' +
 					
 	        '    	<div class="text-white mt-2 mb-1" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">{{mosaic.title}}</div>' +
-	        '   	<div class="text-normal mb-1">' +
+	        '   	<div class="text-normal mb-1" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">' +
 	        '        	<span class="flag-icon mr-1 text-highlight" style="position:relative; top:-2px;" ng-class="{' +
 	        '       		\'flag-icon-fr\': mosaic.country == \'France\',' +
 	        '       		\'flag-icon-gb\': mosaic.country == \'United Kingdom\',' +
@@ -1868,7 +1868,7 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 			scaledSize: new google.maps.Size(35, 35),
 			origin: new google.maps.Point(0, 0),
 			anchor: new google.maps.Point(17, 18),
-			labelOrigin: new google.maps.Point(18, 19),
+			labelOrigin: new google.maps.Point(17, 19),
 			url: 'https://www.myingressmosaics.com/static/img/neutral.png',
 		};
 		

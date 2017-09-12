@@ -172,6 +172,7 @@ class Mosaic(models.Model):
 			'status': self.status,
 			'region': self.region,
 			'country': self.country,
+			'uniques': self.computeUniques(),
 			
 			'register_date': self.register_date,
 			
@@ -249,6 +250,18 @@ class Mosaic(models.Model):
 					self.creators.add(creator)
 	   
 			self.computeDistance()	
+	
+	
+	
+	def computeUniques(self):
+	
+		uniques = 0
+		
+		result = Portal.objects.filter(mission__mosaic=self).distinct()
+		uniques = result.count()
+		
+		return uniques
+	
 	
 	
 	def computeDistance(self):
