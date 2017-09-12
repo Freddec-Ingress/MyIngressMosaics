@@ -123,6 +123,7 @@ class Mosaic(models.Model):
 			'city': self.city,
 			'cols': self.cols,
 			'country': self.country,
+			'type': self.type,
 			
 			'_distance': self._distance,
 			
