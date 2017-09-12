@@ -482,8 +482,8 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 			scale: 3
 		};
 		
-		var arrowSymbol = {
-			path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+		var circleSymbol = {
+			path: google.maps.SymbolPath.CIRCLE
 		};
 		
 		var nextlatLng = null;
@@ -525,11 +525,11 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 					geodesic: true,
 					strokeColor: '#ebbc4a',
 					strokeOpacity: 0,
-					strokeWeight: 2,
+					strokeWeight: 1,
 					icons: [{
 						icon: lineSymbol,
 						offset: '0',
-						repeat: '20px'
+						repeat: '5px'
 					},],
 		        });
 		        
@@ -558,7 +558,7 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 				strokeOpacity: 0.95,
 				strokeWeight: 2,
 				icons: [{
-					icon: arrowSymbol,
+					icon: circleSymbol,
 					offset: '100%',
 				},],
 			});
