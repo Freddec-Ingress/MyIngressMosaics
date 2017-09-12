@@ -1889,11 +1889,16 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 		
 			/* Mission marker */
 			
+			var label = {};
+			if ($scope.mosaic.type == 'sequence') {
+				label = { text:String(m.order), color:'#FFFFFF', fontFamily:'Coda', fontSize:'.5rem', fontWeight:'400', }
+			}
+			
 	        var marker = new google.maps.Marker({
 	        	
 				map: map,
 				icon: image,
-				label: { text:String(m.order), color:'#FFFFFF', fontFamily:'Coda', fontSize:'.5rem', fontWeight:'400', },
+				label: label,
 				position: {lat: m.lat, lng: m.lng},
 	        });
 	        
@@ -1904,7 +1909,7 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 	        
 	        nextlatLng = mlatLng;
 	        
-	        if (nextlatLng && previouslatLng) {
+	        if (nextlatLng && previouslatLng && $scope.mosaic.type == 'sequence') {
 	        	
 				var transitRoadmapCoordinates= [];
 				
