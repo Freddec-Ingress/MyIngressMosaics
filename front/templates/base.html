@@ -52,37 +52,10 @@
 			    
 			    <hr class="ml-2" />
 
-				<div class="loading" ng-hide="!user_loading">
-					<img src="/static/img/loading.png" />
-				</div>
-		
-				<div id="anonymous_block" class="hidden">
-				
-					<a class="f-row ml-3 px-2 fs-3 c-normal" href="/login">
-						<i class="fa fa-sign-in py-3 mr-4"></i>
-				    	<span class="pl-1 py-2">{% trans 'Sign in' %}</span>
-					</a>
-				
-					<a class="f-row ml-3 px-2 fs-3 c-normal" href="/register">
-						<i class="fa fa-hand-o-right py-3 mr-4"></i>
-				    	<span class="pl-1 py-2">{% trans 'Sign up' %}</span>
-					</a>
-					
-				</div>
-				
-				<div id="authenticated_block" class="hidden">
-				
-					<a class="f-row ml-3 px-2 fs-3 c-normal" href="/profile">
-						<i class="fa fa-user py-3 mr-4"></i>
-				    	<span class="pl-1 py-2">{% trans 'Profile' %}</span>
-					</a>
-		
-					<a class="f-row ml-3 px-2 fs-3 c-normal" href="javascript:;" ng-click="logout();">
-						<i class="fa fa-sign-out py-3 mr-4"></i>
-				    	<span class="pl-1 py-2">{% trans 'Sign out' %}</span>
-					</a>
-					
-				</div>
+				<a class="f-row ml-3 px-2 fs-3 c-normal" href="/profile">
+					<i class="fa fa-user py-3 mr-4"></i>
+			    	<span class="pl-1 py-2">{% trans 'Profile' %}</span>
+				</a>
 
 			    <hr class="ml-2" />
 			    

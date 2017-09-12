@@ -31,6 +31,18 @@
 	    {{'restricted_TEXT' | translate}}
     </div>
 
+	<div class="f-row mx-2 my-4 form-button-bar">
+	
+		<a class="btn btn-secondary" href="/login">
+			{{'login_LINK' | translate}}
+		</a>
+	
+		<a class="btn btn-secondary" href="/register">
+			{{'register_LINK' | translate}}
+		</a>
+
+	</div>
+			
 </div>
 
 <div ng-if="user.authenticated">
@@ -82,6 +94,14 @@
 	        </div>
 			
 		</div>
+
+	</div>
+
+	<div class="f-row mx-2 my-4 form-button-bar">
+	
+		<a class="btn btn-primary" ng-click="logout();" style="width:auto;">
+			{{'logout_LINK' | translate}}
+		</a>
 
 	</div>
 
