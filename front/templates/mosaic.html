@@ -126,7 +126,7 @@
 		            <tbody>
 		                <tr ng-repeat="item in mosaic.missions">
 		                	
-		                    <td class="text-white text-center" style="width:2rem;">
+		                    <td ng-if="mosaic.type == 'sequence'" class="text-white text-center" style="width:2rem;">
 		                    	#{{item.order}}
 		                    </td>
 		                    
@@ -266,7 +266,7 @@
 		                    	</a>
 		                    </td>
 		                    
-			                <td style="width:3rem;">
+			                <td ng-show="mosaic.type == 'sequence'" style="width:3rem;">
 			                	<input type="number" class="form-control text-center" style="padding:.25rem;" ng-model="item.order" />
 			                </td>
 			                
@@ -306,7 +306,7 @@
 		            <tbody>
 		                <tr ng-repeat="item in potentials">
 		                	
-			                <td style="width:3rem;">
+			                <td ng-show="mosaic.type == 'sequence'" style="width:3rem;">
 			                	<input type="number" class="form-control text-center" style="padding:.25rem;" ng-model="item.order" />
 			                </td>
 			                
