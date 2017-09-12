@@ -1417,6 +1417,8 @@ angular.module('FrontModule.controllers').controller('RootCtrl', function($rootS
 		if (!$rootScope.user.authenticated) $('#anonymous_block').removeClass('hidden');
 		
 		$scope.user_loading = false;
+		
+		$('#page-content').removeClass('hidden');
 	});
 	
 	$rootScope.menu_open = false;

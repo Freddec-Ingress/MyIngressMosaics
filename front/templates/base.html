@@ -135,8 +135,10 @@
 			
 			<div id="toast-content"></div>
 			
-			{% block content %}{% endblock %}
-
+			<div id="page-content" class="hidden">
+				{% block content %}{% endblock %}
+			</div>
+			
 		</div>
 		
 		<script>
