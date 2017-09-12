@@ -257,7 +257,7 @@ class Mosaic(models.Model):
 	
 		uniques = 0
 		
-		result = Portal.objects.filter(mission__mosaic=self).distinct()
+		result = Portal.objects.filter(mission__mosaic=self).values('lat', 'lng').distinct()
 		uniques = result.count()
 		
 		return uniques
