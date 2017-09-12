@@ -63,7 +63,7 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 			'	<div class="f-col">' +
 					
 	        '    	<div class="text-white mt-2 mb-1" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">{{mosaic.title}}</div>' +
-	        '   	<div class="text-normal mb-1">' +
+	        '   	<div class="text-normal mb-1" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">' +
 	        '        	<span class="flag-icon mr-1 text-highlight" style="position:relative; top:-2px;" ng-class="{' +
 	        '       		\'flag-icon-fr\': mosaic.country == \'France\',' +
 	        '       		\'flag-icon-gb\': mosaic.country == \'United Kingdom\',' +
