@@ -25,6 +25,8 @@ angular.module('FrontModule.controllers').controller('RootCtrl', function($rootS
 		$scope.user_loading = false;
 		
 		$('#page-content').removeClass('hidden');
+		
+		$rootScope.$broadcast('user-loaded');
 	});
 	
 	$rootScope.menu_open = false;
@@ -585,7 +587,11 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 		pixelOffset: new google.maps.Size(5, 5)
 	});
 
+	$scope.initLocation = null;
+
 	$scope.initMap = function(location) {
+		
+		$scope.initLocation = location;
 		
 		var style = [{featureType:"all",elementType:"all",stylers:[{visibility:"on"},{hue:"#131c1c"},{saturation:"-50"},{invert_lightness:!0}]},{featureType:"water",elementType:"all",stylers:[{visibility:"on"},{hue:"#005eff"},{invert_lightness:!0}]},{featureType:"poi",stylers:[{visibility:"off"}]},{featureType:"transit",elementType:"all",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels.icon",stylers:[{invert_lightness:!0}]}];
 		
@@ -815,6 +821,10 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
         	geocodeAddress(geocoder, map);
         });
 	}
+
+	$scope.$on('user-loaded', function(event, args) {
+		$scope.initMap($scope.initLocation);
+	});
 });
 
 angular.module('FrontModule.controllers').controller('LoginCtrl', function($scope, UserService) {
