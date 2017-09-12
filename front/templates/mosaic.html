@@ -73,11 +73,12 @@
 				</div>
 				
 				<div class="mb-2">
-					{{mosaic.missions.length}} missions<span class="mx-1">&middot;</span>{{mosaic.type}}
+					{{mosaic.missions.length}} <i class="fa fa-th mx-1"></i><span class="mx-1">&middot;</span>{{mosaic.type}}
 				</div>
 				
 				<div class="mb-2">
-					{{mosaic.portals}} portals/viewpoints<span class="mx-1">&middot;</span>{{mosaic.uniques}} uniques<span ng-show="mosaic.type ==  'sequence'"><span class="mx-1">&middot;</span>{{mosaic._distance | number:2}} km</span>
+					{{mosaic.portals}} portals/viewpoints<span class="mx-1">&middot;</span>{{mosaic.uniques}} uniques<span ng-show="mosaic.type ==  'sequence'"><span class="mx-1">&middot;</span>{{mosaic._distance | number:2}} km
+					<span ng-show="mosaic._distance > 10.0" class="mx-1">&middot;</span><i ng-show="mosaic._distance > 10.0 && mosaic._distance < 30.0" class="fa fa-bicycle mx-1"></i><i ng-show="mosaic._distance > 30.0" class="fa fa-car mx-1"></i>
 				</div>
 				
 				<div class="mb-2">
