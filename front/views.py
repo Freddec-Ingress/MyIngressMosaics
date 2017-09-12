@@ -52,8 +52,22 @@ def sitemap(request):
     
     # Static URLs
     
-	text += '<url><loc>https://www.myingressmosaics.com/</loc><changefreq>monthly</changefreq></url>'
+	text += '<url><loc>https://www.myingressmosaics.com</loc><changefreq>daily</changefreq></url>'
+	text += '<url><loc>https://www.myingressmosaics.com/map</loc><changefreq>daily</changefreq></url>'
+	text += '<url><loc>https://www.myingressmosaics.com/search</loc><changefreq>daily</changefreq></url>'
     
+    # Mosaic URLs
+    
+	mosaics = Mosaic.objects.all()
+	for mosaic in mosaics:
+		text += '<url><loc>https://www.myingressmosaics.com/mosaic/' + mosaic.ref + '</loc><changefreq>monthly</changefreq></url>'
+     
+	# Country URLs
+	
+	countries = Mosaic.objects.values('country').distinct()
+	for country in countries:
+		text += '<url><loc>https://www.myingressmosaics.com/map/' + country['country'] + '</loc><changefreq>daily</changefreq></url>'
+
 	text += '</urlset>'
     
 	response = HttpResponse(text, content_type = 'text/plain')
