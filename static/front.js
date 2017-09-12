@@ -1078,9 +1078,7 @@ angular.module('FrontModule.services').service('CreateService', function($window
 			service.data.type = 'sequence';
 			service.data.cols = 6;
 			service.data.rows = Math.ceil(service.data.missions.length / 6);
-			
-			if (service.data.missions.length < 6) service.data.cols = service.data.missions.length;
-			
+
 			var geocoder = new google.maps.Geocoder;
 			
 			var latlng = {
@@ -1386,7 +1384,7 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 	        '        	}"></span>' +
 	        '    		{{mosaic.city}}' +
 	        '    	</div>' +
-	        '    	<div class="text-normal">{{mosaic.missions.length}} <i class="fa fa-th mx-1"></i> <span class="mr-1">&middot;</span> <span ng-if="mosaic.type == \'sequence\'">{{mosaic._distance | number:2}} km</span><span ng-if="mosaic.type == \'serie\'">serie</span></div>' +
+	        '    	<div class="text-normal">{{mosaic.missions.length}} <i class="fa fa-th mx-1"></i> <span class="mr-1">&middot;</span> <span ng-if="mosaic.type == \'sequence\'">{{mosaic._distance | number:2}} km</span><span ng-if="mosaic.type == \'serie\'">serie</span><span ng-show="mosaic.type != \'serie\' && mosaic._distance > 10.0" class="mx-1">&middot;</span><i ng-show="mosaic.type != \'serie\' && mosaic._distance > 10.0 && mosaic._distance < 30.0" class="fa fa-bicycle mx-1"></i><i ng-show="mosaic.type != \'serie\' && mosaic._distance > 30.0" class="fa fa-car mx-1"></i></div>' +
 	            	
 			'	</div>' +
 				
