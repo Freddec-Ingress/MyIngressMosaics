@@ -41,6 +41,26 @@ def map(request, location = ''):
 
 
 
+def sitemap(request):
+
+	text = ''
+	text += '<?xml version="1.0" encoding="UTF-8"?>'
+	text += '<urlset'
+	text += '	xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"'
+	text += '	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"'
+	text += '	xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">'
+    
+    # Static URLs
+    
+	text += '<url><loc>https://www.myingressmosaics.com/</loc><changefreq>monthly</changefreq></url>'
+    
+	text += '</urlset>'
+    
+	response = HttpResponse(text, content_type = 'text/plain')
+	return response
+
+
+
 def preview(request, ref):
 
 	mosaic = Mosaic.objects.get(ref=ref)

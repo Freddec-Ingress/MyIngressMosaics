@@ -5,16 +5,11 @@ from django.http import HttpResponse
 from django.contrib.sitemaps.views import sitemap
 
 from front import views
-from front import sitemaps
-
-sitemaps = {
-    'urls': sitemaps.ViewSitemap,
-}
 
 urlpatterns = [
 	
 	url(r'^robots.txt$', lambda r: HttpResponse('User-agent: *\nDisallow: /admin/\nDisallow: /api/', content_type='text/plain')),
-	url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+	url(r'^sitemap.xml$', views.sitemap),
     
 	url(r'^map/(?P<location>[\w \-,]+)',           views.map),
 	url(r'^map',           views.map),
