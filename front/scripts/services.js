@@ -363,12 +363,17 @@ angular.module('FrontModule.services').service('CreateService', function($window
 			geocoder.geocode({'location': latlng}, function(results, status) {
 				
 				if (status === 'OK') {
-					if (results[1]) {
+					
+					var components = null;
+					if (results[0]) components = results[0].address_components;
+					if (results[1]) components = results[1].address_components;
+					
+					if (components) {
 						
 						var admin2 = null;
 						var admin3 = null;
 						
-						for (var item of results[1].address_components) {
+						for (var item of components) {
 							
 							if (item.types[0] == 'country') service.data.country = item.long_name;
 							if (item.types[0] == 'locality') service.data.city = item.long_name;
