@@ -149,6 +149,8 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 			/* Mosaic name */
 			var mosaic_name = mission.name;
 			mosaic_name = mosaic_name.replace(/0|1|2|3|4|5|6|7|8|9|#/g, '');
+			mosaic_name = mosaic_name.replace(/０|１|２|３|４|５|６|７|８|９/g, '');
+			mosaic_name = mosaic_name.replace(/①|②|③|④|⑤|⑥/g, '');
 			mosaic_name = mosaic_name.replace('.', '');
 			mosaic_name = mosaic_name.replace('(', '');
 			mosaic_name = mosaic_name.replace(')', '');
@@ -166,6 +168,7 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 			mosaic_name = mosaic_name.replace(' Part', '');
 			mosaic_name = mosaic_name.replace('  ', ' ');
 			mosaic_name = mosaic_name.replace('  ', ' ');
+			mosaic_name = mosaic_name.replace('　', ' ');
 			mosaic_name = mosaic_name.trim();
 			
 			/* Find existing mosaic */
