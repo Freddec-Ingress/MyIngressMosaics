@@ -236,6 +236,54 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 			futur_mosaic.missions.push(mission);
 		}
 		
+		/* Remove mosaics with 1 mission only */
+		
+		var orphelinMissions = [];
+		
+		for (var mosaic of mosaics) {
+			
+			if (mosaic.missions.length < 2) {
+				
+				orphelinMissions = orphelinMissions.concat(mosaic.missions);
+				mosaics.splice(mosaics.indexOf(mosaic), 1);
+			}
+		}
+		
+		/* Create mosaics by creator with orphelin missions */
+		
+		for (var mission of orphelinMissions) {
+			
+			/* Creator name */
+			
+			var mosaic_name = mission.creator;
+			
+			/* Find existing mosaic */
+			
+			var existing_mosaic = null;
+			for (var mosaic of mosaics) {
+				if (mosaic.name.toLowerCase() == mosaic_name.toLowerCase()) {
+					existing_mosaic = mosaic;
+					break;
+				}
+			}
+			
+			/* If not existing mosaic then create new mosaic */
+			
+			var futur_mosaic = null;
+			if (existing_mosaic) futur_mosaic = existing_mosaic;
+			else {
+				futur_mosaic = {
+					'name': mosaic_name,
+					'missions': [],
+					'creating': false,
+				}
+				mosaics.push(futur_mosaic);
+			}
+			
+			/* Add mission to future mosaic */
+			futur_mosaic.missions.push(mission);
+		}
+		
 		/* Sort mosaic missions by order */
 		for (var mosaic of mosaics) {
 			
