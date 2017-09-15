@@ -385,8 +385,6 @@ angular.module('FrontModule.services').service('CreateService', function($window
 						if (!service.data.city && admin2) service.data.city = item.admin2;
 						if (!service.data.city && admin3) service.data.city = item.admin3;
 
-						if (!service.data.city) service.data.city = service.data.region;
-
 						API.sendRequest('/api/mosaic/create/', 'POST', {}, service.data).then(function(response) {
 							
 							callback(mosaic);

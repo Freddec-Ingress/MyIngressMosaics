@@ -76,9 +76,9 @@ class Mosaic(models.Model):
 	cols = models.IntegerField(default=0)
 	rows = models.IntegerField(default=0)
 
-	city = models.CharField(max_length=64, default='')
-	region = models.CharField(max_length=64, default='')
-	country = models.CharField(max_length=64, default='')
+	city = models.CharField(max_length=64, null=True, blank=True)
+	region = models.CharField(max_length=64, null=True, blank=True)
+	country = models.CharField(max_length=64, null=True, blank=True)
 	
 	status = models.CharField(max_length=64, default='active')
 	
