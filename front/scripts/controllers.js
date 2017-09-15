@@ -236,18 +236,21 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 			futur_mosaic.missions.push(mission);
 		}
 		
+		/* Sort mosaics by missions count */
+		mosaics.sort(function(a, b) {
+			return b.missions.length - a.missions.length;
+		});
+		
 		/* Remove mosaics with 1 mission only */
 		
 		var orphelinMissions = [];
 		
 		for (var mosaic of mosaics) {
 			
-			console.log(mosaic.name + ': ' + mosaic.missions.length.toString());
 			if (mosaic.missions.length < 2) {
 				
 				orphelinMissions = orphelinMissions.concat(mosaic.missions);
 				mosaics.splice(mosaics.indexOf(mosaic), 1);
-				console.log('removed')
 			}
 		}
 		
@@ -296,11 +299,6 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 				return 0;
 			});
 		}
-		
-		/* Sort mosaics by missions count */
-		mosaics.sort(function(a, b) {
-			return b.missions.length - a.missions.length;
-		});
 	
 		$scope.mosaics = mosaics;
 		$scope.missions = null;
