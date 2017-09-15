@@ -1605,15 +1605,23 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 		
 		/* Sort mosaics by missions count and Remove mosaics with 1 mission only */
 		
-		var orphelinMissions = [];
+		var mosaicToDelete = [];
 		
 		mosaics.sort(function(a, b) {
 			
-			if (a.missions.length < 2) { orphelinMissions = orphelinMissions.concat(a.missions); mosaics.splice(mosaics.indexOf(a), 1); return 0; }
-			if (b.missions.length < 2) { orphelinMissions = orphelinMissions.concat(b.missions); mosaics.splice(mosaics.indexOf(b), 1); return 0; }
+			if (a.missions.length < 2) mosaicToDelete.push(a);
+			if (b.missions.length < 2) mosaicToDelete.push(b);
 			
 			return b.missions.length - a.missions.length;
 		});
+		
+		var orphelinMissions = [];
+		
+		for (mosaic of mosaicToDelete) {
+		
+			orphelinMissions = orphelinMissions.concat(mosaic.missions);
+			mosaics.splice(mosaics.indexOf(mosaic), 1);
+		}
 		
 		/* Create mosaics by creator with orphelin missions */
 		
