@@ -240,11 +240,6 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 		
 		var mosaicToDelete = [];
 		
-		mosaics.sort(function(a, b) {
-
-			return b.missions.length - a.missions.length;
-		});
-		
 		for (mosaic of mosaics) {
 			
 			if (mosaic.missions.length < 2) mosaicToDelete.push(mosaic);
@@ -303,6 +298,11 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 				return 0;
 			});
 		}
+		
+		mosaics.sort(function(a, b) {
+
+			return b.missions.length - a.missions.length;
+		});
 	
 		$scope.mosaics = mosaics;
 		$scope.missions = null;
