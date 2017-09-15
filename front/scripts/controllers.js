@@ -194,8 +194,28 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 			
 			/* Mission order */
 			var order = 0;
+			
 			var found = mission.name.match(/[0-9]+/);
-			if (found) order = parseInt(found[0]);
+			if (found) { order = parseInt(found[0]); }
+			else {
+			
+				found = mission.name.match(/(０|１|２|３|４|５|６|７|８|９)+/);
+				if (found) {
+					
+					var arrayCharracter = ['１９','１８','１７','１６','１５','１４','１３','１２','１１','１０','９','８','７','６','５','４','３','２','１','０']
+					var arrayInteger = [19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0]
+					for (var i in arrayCharracter) {
+						
+						found = mission.name.match(arrayCharracter[i]);
+						if (found) {
+							order = arrayInteger[i];
+							break;
+						}
+					}
+				}
+				
+			}
+			
 			mission.order = order;
 	
 			/* Add mission to future mosaic */
