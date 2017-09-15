@@ -1290,44 +1290,6 @@ angular.module('FrontModule.services').service('SearchService', function(API) {
 
 angular.module('FrontModule.directives', [])
 
-angular.module('FrontModule.directives').directive('pageTitle', function($rootScope, $filter, $timeout) {
-	
-	return {
-		
-		link: function(scope, element) {
-		
-			var listener = function(event, toState) {
-			
-				var title = 'MyIngressMosaics';
-				if (toState.data && toState.data.title) title = 'MyIngressMosaics - ' + $filter('translate')(toState.data.title);
-				
-				$timeout(function() { element.text(title); }, 0, false);
-			};
-			
-			$rootScope.$on('$stateChangeSuccess', listener);
-		}
-	};
-});
-
-angular.module('FrontModule.directives').directive('convertToNumber', function() {
-	
-	return {
-		
-		require: 'ngModel',
-		
-		link: function(scope, element, attrs, ngModel) {
-			
-			ngModel.$parsers.push(function(val) {
-				return val != null ? parseInt(val, 10) : null;
-			});
-			
-			ngModel.$formatters.push(function(val) {
-				return val != null ? '' + val : null;
-			});
-		}
-	};
-});
-
 angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 	
 	return {
@@ -1390,6 +1352,7 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 		    '       		\'flag-icon-gr\': mosaic.country == \'Greece\',' +
 		    '       		\'flag-icon-tr\': mosaic.country == \'Turkey\',' +
 		    '       		\'flag-icon-jp\': mosaic.country == \'Japan\',' +
+		    '       		\'flag-icon-dk\': mosaic.country == \'Denmark\',' +
 	        '        	}"></span>' +
 	        '    		{{mosaic.city}}' +
 	        '    	</div>' +
