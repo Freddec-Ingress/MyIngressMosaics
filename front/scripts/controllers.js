@@ -242,6 +242,7 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 		
 		for (var mosaic of mosaics) {
 			
+			console.log(mosaic.name + ': ' + mosaic.missions.length.toString());
 			if (mosaic.missions.length < 2) {
 				
 				orphelinMissions = orphelinMissions.concat(mosaic.missions);
