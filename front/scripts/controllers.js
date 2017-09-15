@@ -247,6 +247,7 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 				
 				orphelinMissions = orphelinMissions.concat(mosaic.missions);
 				mosaics.splice(mosaics.indexOf(mosaic), 1);
+				console.log('removed')
 			}
 		}
 		
