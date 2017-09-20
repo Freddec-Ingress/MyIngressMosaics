@@ -115,7 +115,29 @@ class Mosaic(models.Model):
 			
 		return data
 		
+	def checkRegionCityNames(self):
+		
+		if self.country == 'Japan' and self.region[-3:] == '-to':
+			self.region = self.region.replace('-to', '')
+			self.save()
+		
+		if self.country == 'Japan' and self.city[-3:] == '-ku':
+			self.city = self.city.replace('-ku', '')
+			self.save()
+			
+		if self.country == 'Japan' and self.city[-4:] == '-shi':
+			self.city = self.city.replace('-shi', '')
+			self.save()
+			
+		if self.country == 'Japan' and ('ō' in self.region or 'ō' in self.city):
+			self.region = self.region.replace('ō', 'o')
+			self.city = self.city.replace('ō', 'o')
+			self.save()
+			
+		
 	def homeSerialize(self):
+		
+		self.checkRegionCityNames()
 		
 		data = {
 			'ref': self.ref,
@@ -152,23 +174,8 @@ class Mosaic(models.Model):
 		
 	def serialize(self):
 		
-		if self.country == 'Japan' and self.region[-3:] == '-to':
-			self.region = self.region.replace('-to', '')
-			self.save()
+		self.checkRegionCityNames()
 		
-		if self.country == 'Japan' and self.city[-3:] == '-ku':
-			self.city = self.city.replace('-ku', '')
-			self.save()
-			
-		if self.country == 'Japan' and self.city[-4:] == '-shi':
-			self.city = self.city.replace('-shi', '')
-			self.save()
-			
-		if self.country == 'Japan' and ('ō' in self.region or 'ō' in self.city):
-			self.region = self.region.replace('ō', 'o')
-			self.city = self.city.replace('ō', 'o')
-			self.save()
-			
 		data = {
 			'registerer': {
 				'name': self.registerer.username if self.registerer else '',
