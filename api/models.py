@@ -165,8 +165,8 @@ class Mosaic(models.Model):
 			self.save()
 			
 		if self.country == 'Japan' and ('ō' in self.region or 'ō' in self.city):
-			self.region = self.region.replace('ō', '')
-			self.city = self.city.replace('ō', '')
+			self.region = self.region.replace('ō', 'o')
+			self.city = self.city.replace('ō', 'o')
 			self.save()
 			
 		data = {
