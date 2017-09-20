@@ -77,6 +77,9 @@ def sitemap(request):
 
 def preview(request, ref):
 
+	response = HttpResponse(content_type = 'image/png')
+	return response
+	
 	mosaic = Mosaic.objects.get(ref=ref)
 	
 	mcount = mosaic.missions.count()
