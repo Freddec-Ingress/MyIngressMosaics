@@ -117,22 +117,24 @@ class Mosaic(models.Model):
 		
 	def checkRegionCityNames(self):
 		
-		if self.country == 'Japan' and self.region[-3:] == '-to':
-			self.region = self.region.replace('-to', '')
-			self.save()
+		if self.country == 'Japan':
+			
+			if self.region[-3:] == '-to':
+				self.region = self.region.replace('-to', '')
+				self.save()
 		
-		if self.country == 'Japan' and self.city[-3:] == '-ku':
-			self.city = self.city.replace('-ku', '')
-			self.save()
-			
-		if self.country == 'Japan' and self.city[-4:] == '-shi':
-			self.city = self.city.replace('-shi', '')
-			self.save()
-			
-		if self.country == 'Japan' and ('ō' in self.region or 'ō' in self.city):
-			self.region = self.region.replace('ō', 'o')
-			self.city = self.city.replace('ō', 'o')
-			self.save()
+			if self.city[-3:] == '-ku':
+				self.city = self.city.replace('-ku', '')
+				self.save()
+				
+			if self.city[-4:] == '-shi':
+				self.city = self.city.replace('-shi', '')
+				self.save()
+				
+			if 'ō' in self.region or 'ō' in self.city:
+				self.region = self.region.replace('ō', 'o')
+				self.city = self.city.replace('ō', 'o')
+				self.save()
 			
 		
 	def homeSerialize(self):
