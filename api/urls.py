@@ -47,4 +47,6 @@ urlpatterns = [
 	
 	url(r'^map/details/',	DataViewSet.as_view({ 'post' : 'details'		})),
 	url(r'^map/',	DataViewSet.as_view({ 'post' : 'map'		})),
+	
+	url(r'^maintenance/',	MaintenanceViewSet.as_view({ 'get' : 'do'		})),
 ]

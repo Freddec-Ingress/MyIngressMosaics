@@ -786,3 +786,20 @@ class DataViewSet(viewsets.ViewSet):
 			data.append(mosaic)
 
 		return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+class MaintenanceViewSet(viewsets.ViewSet):
+	
+	permission_classes = AllowAny, 
+    
+    
+    
+	def do(self, request):
+
+		for row in Portal.objects.all():
+			if Portal.objects.filter(mission=row.mission, lat=row.lat, lng=row.lng, order=row.order).count() > 1:
+				row.delete()
+
+		return Response(data, status=status.HTTP_200_OK)
