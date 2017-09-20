@@ -156,12 +156,17 @@ class Mosaic(models.Model):
 			self.region = self.region.replace('-to', '')
 			self.save()
 		
-		if self.country == 'Japan' and self.region == 'Tōkyō':
-			self.region = 'Tokyo'
-			self.save()
-			
 		if self.country == 'Japan' and self.city[-3:] == '-ku':
 			self.city = self.city.replace('-ku', '')
+			self.save()
+			
+		if self.country == 'Japan' and self.city[-4:] == '-shi':
+			self.city = self.city.replace('-shi', '')
+			self.save()
+			
+		if self.country == 'Japan' and ('ō' in self.region or 'ō' in self.city):
+			self.region = self.region.replace('ō', '')
+			self.city = self.city.replace('ō', '')
 			self.save()
 			
 		data = {
