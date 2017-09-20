@@ -203,6 +203,10 @@ class Mosaic(models.Model):
 				'portals': [],
 			}
 			
+			for row in item.portals.iterator():
+				if Portal.objects.filter(mission=row.mission, lat=row.lat, lng=row.lng, order=row.order).count() > 1:
+					row.delete()
+				
 			portals = item.portals.order_by('order')
 			if portals.count() > 0:
 				
