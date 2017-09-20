@@ -153,7 +153,7 @@ class Mosaic(models.Model):
 	def serialize(self):
 		
 		if self.country == 'Japan' and self.region[-3:] == '-to':
-			self.region.replace('-to', '')
+			self.region = self.region.replace('-to', '')
 			self.save()
 		
 		data = {
