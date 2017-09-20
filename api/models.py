@@ -241,8 +241,8 @@ class Mosaic(models.Model):
 				
 				if not item[5]:
 					
-					lat = (float(item[5][2])/1000000.0)
-					lng = (float(item[5][3])/1000000.0)
+					lat = 0.0
+					lng = 0.0
 				
 				elif item[5][0] == 'f':
 					
