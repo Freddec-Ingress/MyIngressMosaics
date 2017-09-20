@@ -66,6 +66,27 @@ class ExtensionViewSet(viewsets.ViewSet):
 							  data=request.body)
 			mission.save()
 			
+			order = 1
+			
+			for item in obj[9]:
+				
+				if not item[5]:
+				
+					portal = Portal(mission=mission, lat=0.0, lng=0.0, order=order, title='Unavailable')
+					portal.save()
+					
+				elif item[5][0] == 'f':
+				
+					portal = Portal(mission=mission, lat=(item[5][1]/1000000.0), lng=(item[5][2]/1000000.0), order=order, title=item[2])
+					portal.save()
+					
+				else:
+				
+					portal = Portal(mission=mission, lat=(item[5][2]/1000000.0), lng=(item[5][3]/1000000.0), order=order, title=item[2])
+					portal.save()
+				
+				order += 1
+		
 		else:
 			
 			mission = results[0]
@@ -81,27 +102,6 @@ class ExtensionViewSet(viewsets.ViewSet):
 			
 			mission.save()
 			
-		order = 1
-		
-		for item in obj[9]:
-			
-			if not item[5]:
-			
-				portal = Portal(mission=mission, lat=0.0, lng=0.0, order=order, title='Unavailable')
-				portal.save()
-				
-			elif item[5][0] == 'f':
-			
-				portal = Portal(mission=mission, lat=(item[5][1]/1000000.0), lng=(item[5][2]/1000000.0), order=order, title=item[2])
-				portal.save()
-				
-			else:
-			
-				portal = Portal(mission=mission, lat=(item[5][2]/1000000.0), lng=(item[5][3]/1000000.0), order=order, title=item[2])
-				portal.save()
-			
-			order += 1
-	
 		mission.computeInternalData()
 		
 		return Response('Registered', status=status.HTTP_200_OK)
