@@ -227,6 +227,7 @@ class Mosaic(models.Model):
 				'lat': 0.0,
 				'lng': 0.0,
 				'portals': [],
+				'desc': item.desc,
 			}
 			
 			for row in item.portals.iterator():

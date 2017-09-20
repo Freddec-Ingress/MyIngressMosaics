@@ -390,7 +390,15 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 			});
 		});
 	}
+	
+	/* Displaying */
+	
+	$scope.toggleMission = function(item) {
 		
+		if (!item.expanded) item.expanded = true;
+		else item.expanded = false;
+	}
+	
 	/* Edit */
 	
 	$scope.editMode = false;
