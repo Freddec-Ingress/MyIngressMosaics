@@ -31,7 +31,7 @@ a {
     color: #EBBC4A;
     text-decoration: none;
 }
-a:hover, a:focus {
+a:hover, a:focus, .hover:hover {
     color: inherit;
 	cursor: pointer;
 	text-decoration: inherit;
@@ -41,6 +41,7 @@ hr {
     margin: .5rem 0;
     border: 0; border-bottom: 1px solid rgba(0, 0, 0, .25);
 }
+
 
 /* Scrollbar ---------------------------------------------------------------- */
 

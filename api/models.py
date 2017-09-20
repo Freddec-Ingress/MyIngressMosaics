@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import json
+
 from math import *
 
 from datetime import datetime
@@ -233,25 +235,43 @@ class Mosaic(models.Model):
 			for row in item.portals.iterator():
 				if Portal.objects.filter(mission=row.mission, lat=row.lat, lng=row.lng, order=row.order).count() > 1:
 					row.delete()
+			
+			jsondata = json.loads(item.data)
+			for item in jsondata[9]:
 				
-			portals = item.portals.order_by('order')
-			if portals.count() > 0:
-				
-				for p in portals:
+				if not item[5]:
 					
-					if p.lat != 0.0 and p.lng != 0.0 and mission_data['lat'] == 0.0 and mission_data['lng'] == 0.0:
-						
-						mission_data['lat'] = p.lat
-						mission_data['lng'] = p.lng
+					lat = (float(item[5][2])/1000000.0)
+					lng = (float(item[5][3])/1000000.0)
+				
+				elif item[5][0] == 'f':
+					
+					lat = (float(item[5][1])/1000000.0)
+					lng = (float(item[5][2])/1000000.0)
+				
+				else:
+					
+					lat = (float(item[5][2])/1000000.0)
+					lng = (float(item[5][3])/1000000.0)
+					
+				if lat != 0.0 and lng != 0.0 and mission_data['lat'] == 0.0 and mission_data['lng'] == 0.0:
+					
+					mission_data['lat'] = lat
+					mission_data['lng'] = lng
 
-					portal_data = {
-						'lat': p.lat,
-						'lng': p.lng,
-					}
-					
-					mission_data['portals'].append(portal_data)
-					
-					data['portals'] += 1
+				portal_data = {
+					'lat': lat,
+					'lng': lng,
+					'action': item[4],
+					'unavailable': False,
+				}
+				
+				if lat == 0.0 and lng == 0.0:
+					portal_data['unavailable'] = True
+				
+				mission_data['portals'].append(portal_data)
+				
+				data['portals'] += 1
 			
 			data['missions'].append(mission_data)
 

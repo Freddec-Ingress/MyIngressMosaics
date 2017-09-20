@@ -129,11 +129,11 @@
 		                <tr ng-repeat="item in mosaic.missions">
 		                	<td class="px-1">
 		                		
-		                		<div class="f-row" ng-click="toggleMission(item);">
+		                		<div class="f-row hover" ng-click="toggleMission(item);">
 		                			
 				                    <div class="text-white">
-				                    	<i ng-hide="item.expanded" class="mr-2 fa fa-fw fa-caret-right"></i>
-				                    	<i ng-show="item.expanded" class="mr-2 fa fa-fw fa-caret-down"></i>
+				                    	<i ng-hide="item.expanded" class="mr-2 fa fa-caret-right"></i>
+				                    	<i ng-show="item.expanded" class="mr-2 fa fa-caret-down"></i>
 				                    </div>
 				                    
 				                    <div class="c-normal mr-auto">
@@ -148,7 +148,22 @@
 				                    
 			                    </div>
 			                    
-		                		<div ng-show="item.expanded" class="f-row mt-2">
+		                		<div ng-show="item.expanded" class="mt-2">
+		                			
+		                			<div class="mb-2">
+		                				{{item.portals.length}} waypoints
+		                				<i class="mx-1 fa fa-long-arrow-right"></i>
+		                				<span class="" ng-repeat="portal in item.portals">
+		                					<span ng-if="$index > 0" class="mx-1">&middot;</span>
+		                					<span ng-class="{'c-normal':!portal.unavailable, 'c-danger':portal.unavailable}">
+		                						<span ng-if="portal.action == 0">Objectives</span>
+		                						<span ng-if="portal.action == 1">Hack</span>
+		                						<span ng-if="portal.action == 2">Capture or Upgrade</span>
+		                						<span ng-if="portal.action == 7">View</span>
+		                						<span ng-if="portal.action == 8">Passphrase</span>
+		                					</span>
+		                				</span>
+		                			</div>
 		                			
 		                			<div class="" style="white-space:normal;">
 				                        {{item.desc}}
