@@ -219,11 +219,11 @@ class Mosaic(models.Model):
 					}
 					
 					mission_data['portals'].append(portal_data)
+					
+					data['portals'] += 1
 			
 			data['missions'].append(mission_data)
-			
-		data['portals'] = Portal.objects.filter(mission__mosaic=self).count()
-		
+
 		return data
 		
 	
