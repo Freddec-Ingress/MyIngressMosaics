@@ -228,6 +228,10 @@
     	        
     	        <div class="form-button-bar mt-4">
     	        	
+    	        	<div class="text-danger">
+    	        	    No update allowed after creation. Please create mosaic only when it is complete.
+    	        	</div>
+    	        	
     				<button class="btn btn-primary" ng-click="createMosaic();" ng-disabled="!mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || (mosaicModel.missions.length < 1)">
     				    Create
     				</button>

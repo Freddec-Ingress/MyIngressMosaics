@@ -151,7 +151,7 @@
 		                				<i class="mx-1 fa fa-long-arrow-right"></i>
 		                				<span class="" ng-repeat="portal in item.portals">
 		                					<span ng-if="$index > 0" class="mx-1">&middot;</span>
-		                					<span ng-class="{'c-normal':!portal.unavailable, 'c-danger':portal.unavailable}">
+		                					<span ng-class="{'c-normal':!portal.unavailable, 'text-danger':portal.unavailable}">
 		                						<span ng-if="portal.action == 0">Objectives</span>
 		                						<span ng-if="portal.action == 1">Hack</span>
 		                						<span ng-if="portal.action == 2">Capture or Upgrade</span>
