@@ -1539,9 +1539,9 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 	
 	$scope.removeMission = function(item) {
 		
-		$scope.searchModel.missions.push(item);
+		$scope.searchModel.results.push(item);
 		
-		$scope.mosaicModel.results.splice($scope.mosaicModel.results.indexOf(item), 1);
+		$scope.mosaicModel.missions.splice($scope.mosaicModel.missions.indexOf(item), 1);
 	}
 	
 	$scope.addMission = function(item) {
