@@ -139,7 +139,8 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 	var mosaics = [];
 	var missions = [];
 	
-	$scope.missions_loading = false;
+	$('#block-loading').addClass('hidden');
+	$('#block-data').removeClass('hidden');
 /*	
 	UserService.getMissions().then(function(response) {
 		
