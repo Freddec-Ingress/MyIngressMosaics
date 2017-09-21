@@ -95,7 +95,7 @@
                 		<input type="submit" class="btn btn-primary ml-2" ng-click="search();" value="Search" />
                 	</form>
                     
-                    <div class="mt-2 bg-black pl-1 scrollbar" style="border-top:4px solid black; border-bottom:4px solid black; flex:1; overflow:auto; height:200px;">
+                    <div class="mt-2 bg-black px-1 scrollbar" style="border-top:4px solid black; border-bottom:4px solid black; flex:1; overflow:auto; height:200px;">
                         
                         <div ng-if="searchModel.results.length < 1" class="p-2 c-danger">No mission found</div>
                         
@@ -110,6 +110,10 @@
         			                            <i class="fa fa-plus-square mx-2"></i>
         				                        {{item.title}}
         				                    </div>
+        				                    
+                                            <span class="ml-2" ng-class="{'text-enligtened': item.faction == 'E', 'text-resistance': item.faction == 'R',}">
+                                                {{item.creator}}
+                                            </span>
         			                        
         			                     </div>
         			                    
@@ -191,7 +195,7 @@
                     
                     <div class="width-6 pl-1">
                         <label class="m-0">Missions</label>
-                        <div class="bg-black pl-1 scrollbar" style="border-top:4px solid black; border-bottom:4px solid black; flex:1; overflow:auto; height:200px;">
+                        <div class="bg-black px-1 scrollbar" style="border-top:4px solid black; border-bottom:4px solid black; flex:1; overflow:auto; height:210px;">
         		        <table class="card-table">
         		            <tbody>
         		                <tr ng-repeat="item in mosaicModel.missions">
