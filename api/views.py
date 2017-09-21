@@ -478,19 +478,11 @@ def data_getMosaicsByCountry(request):
 @permission_classes((AllowAny, ))
 def data_searchForMissions(request):
 	
-	array = []
-	
 	results = Mission.objects.filter(mosaic__isnull=True).filter(Q(title__icontains=request.data['text']) | Q(creator__icontains=request.data['text'])).order_by('creator', 'title')
 	if (results.count() > 0):
-		for item in results:
-			array.append(item)
-	
-	if (len(array) > 0):
-		
-		temp = list(set(array))
-		
+
 		data = { 'missions': [], }
-		for item in temp:
+		for item in results:
 			data['missions'].append(item.overviewSerialize())
 	
 	else:
