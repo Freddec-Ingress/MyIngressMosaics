@@ -527,40 +527,6 @@ function init() {
         document.getElementById('tm_zoom').innerHTML = 'Zoom: ' + M.getZoom();
     });
 
-    M.addListener('idle', function(e) {
-
-        var center = M.getCenter();
-
-        var bds = M.getBounds();
-
-        var South_Lat = bds.getSouthWest().lat();
-        var South_Lng = bds.getSouthWest().lng();
-        var North_Lat = bds.getNorthEast().lat();
-        var North_Lng = bds.getNorthEast().lng();
-
-         var data = { sLat: South_Lat, sLng: South_Lng, nLat: North_Lat, nLng: North_Lng };
-        callMIMAPI('ext_missions', data, function(data, textStatus, jqXHR) {
-
-            if (data) {
-
-                for (var item of data) {
-
-                    if (missionsProcessed.indexOf(item.ref) == -1) {
-
-                        missionsProcessed.push(item.ref);
-
-                        var latLng = new google.maps.LatLng(item._startLat, item._startLng);
-                        var marker = new google.maps.Marker({
-                            position: latLng,
-                            map: M,
-                            icon: resImage,
-                        });
-                    }
-                }
-            }
-        });
-    });
-
     // Scanning functions
     window.startScanning = function() {
 

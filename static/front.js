@@ -1513,16 +1513,16 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 	
 	function compareCreatorTitleAsc(a, b) {
 		
-		if (a.creator > b.creator)
+		if (a.creator < b.creator)
 			return -1;
 			
-		if (a.creator < b.creator)
+		if (a.creator > b.creator)
 			return 1;
 		
-		if (a.title > b.title)
+		if (a.title < b.title)
 			return -1;
 			
-		if (a.title < b.title)
+		if (a.title > b.title)
 			return 1;
 		
 		return 0;
