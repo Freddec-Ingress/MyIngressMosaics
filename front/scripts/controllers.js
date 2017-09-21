@@ -165,10 +165,10 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 	
 	function compareOrderAsc(a, b) {
 		
-		if (a.order > b.order)
+		if (a.order < b.order)
 			return -1;
 			
-		if (a.order < b.order)
+		if (a.order > b.order)
 			return 1;
 		
 		return 0;
@@ -337,7 +337,7 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 	
 	$scope.createMosaic = function() {
 		
-		CreateService.createWithMosaic(mosaic, $scope.createMosaicCallback);
+		CreateService.createWithMosaic($scope.mosaicModel);
 	}
 });
 
