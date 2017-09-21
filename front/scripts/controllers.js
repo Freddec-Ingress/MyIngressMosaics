@@ -222,7 +222,6 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 	$scope.addMission = function(item) {
 		
 		$scope.mosaicModel.missions.push(item);
-		$scope.mosaicModel.missions.sort(compareOrderAsc);
 		
 		$scope.searchModel.results.splice($scope.searchModel.results.indexOf(item), 1);
 		
@@ -333,6 +332,8 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 		}
 		
 		item.order = order;
+		
+		$scope.mosaicModel.missions.sort(compareOrderAsc);
 	}
 	
 	$scope.createMosaic = function() {
