@@ -223,6 +223,14 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 		$scope.mosaicModel.missions.sort(compareOrderAsc);
 	}
 	
+	$scope.addAll = function() {
+		
+		var missions = $scope.searchModel.results;
+		for (var m of missions) {
+			$scope.addMission(m);
+		}
+	}
+	
 	$scope.addMission = function(item) {
 		
 		$scope.mosaicModel.missions.push(item);
