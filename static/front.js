@@ -1617,6 +1617,39 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 				}
 			});
 		}
+		
+		var order = 0;
+		
+		var found = item.title.match(/[0-9]+/);
+		if (found) { order = parseInt(found[0]); }
+		else {
+		
+			found = item.title.match(/(０|１|２|３|４|５|６|７|８|９)+/);
+			if (found) {
+				
+				var arrayCharracter = ['３９','３８','３７','３６','３５','３４','３３','３２','３１','３０',
+									   '２９','２８','２７','２６','２５','２４','２３','２２','２１','２０',
+									   '１９','１８','１７','１６','１５','１４','１３','１２','１１','１０',
+										 '９',  '８',  '７',  '６',  '５',  '４',  '３',  '２',  '１',  '０']
+										 
+				var arrayInteger = [39,38,37,36,35,34,33,32,31,30,
+									29,28,27,26,25,24,23,22,21,20,
+									19,18,17,16,15,14,13,12,11,10,
+				                     9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+				
+				for (var i in arrayCharracter) {
+					
+					found = item.title.match(arrayCharracter[i]);
+					if (found) {
+						order = arrayInteger[i];
+						break;
+					}
+				}
+			}
+			
+		}
+		
+		item.order = order;
 	}
 /*	
 	UserService.getMissions().then(function(response) {
