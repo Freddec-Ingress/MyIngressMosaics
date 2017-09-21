@@ -242,6 +242,7 @@ hr {
 #page-content {
     min-height: 100%;
     flex: 1;
+    display: flex; flex-direction: column;
 }
 
 .slimScrollBar {
@@ -252,6 +253,7 @@ hr {
 /* Container ---------------------------------------------------------------- */
 
 #page-container {
+    flex: 1;
     min-height: 100%;
     margin: 0; width: 100%; height: 100%;
 }
