@@ -1531,7 +1531,7 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 		'type': 'sequence',
 		'title': null,
 		'region': null,
-		'columns': 6,
+		'columns': '6',
 		'country': null,
 		
 		'missions': [],
