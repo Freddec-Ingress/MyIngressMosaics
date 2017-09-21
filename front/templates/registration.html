@@ -129,7 +129,7 @@
                 
             </div>
             
-            <div id="createBlock" class="p-2">
+            <div id="createBlock" class="p-2 mb-2">
 
                 <div class="card-block">
 
@@ -226,11 +226,11 @@
                     
     	        </div>
     	        
-    	        <div class="form-button-bar mt-4">
-    	        	
-    	        	<div class="text-danger">
+    	        	<div class="text-center text-danger">
     	        	    No update allowed after creation. Please create mosaic only when it is complete.
     	        	</div>
+    	        	
+    	        <div class="form-button-bar mt-4">
     	        	
     				<button class="btn btn-primary" ng-click="createMosaic();" ng-disabled="!mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || (mosaicModel.missions.length < 1)">
     				    Create
