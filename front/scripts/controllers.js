@@ -139,10 +139,14 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 	$scope.searchModel = {
 		
 		'text': null,
-		'results': null,
+		'results': [],
 	}
 	
 	$scope.search = function() {
+		
+		if (!$scope.searchModel.text) {
+			return;
+		}
 		
 		var data = {'text': $scope.searchModel.text}
 		API.sendRequest('/api/missions/', 'POST', {}, data).then(function(response) {
