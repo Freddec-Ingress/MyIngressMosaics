@@ -163,6 +163,13 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 		'missions': [],
 	}
 	
+	$scope.removeMission = function(item) {
+		
+		$scope.searchModel.missions.push(item);
+		
+		$scope.mosaicModel.results.splice($scope.mosaicModel.results.indexOf(item), 1);
+	}
+	
 	$scope.addMission = function(item) {
 		
 		$scope.mosaicModel.missions.push(item);

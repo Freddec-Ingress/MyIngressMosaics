@@ -104,10 +104,10 @@
         		                <tr ng-repeat="item in searchModel.results">
         		                	<td class="px-1">
         			                    
-        			                    <div class="f-row hover" ng-click="addMission(item);">
+        			                    <div class="f-row">
         			                        
         			                        <div class="c-normal mr-auto">
-        			                            <i class="fa fa-plus-square mx-2"></i>
+        			                            <a ng-click="addMission(item);"><i class="fa fa-plus-square mx-2"></i></a>
         				                        {{item.title}}
         				                    </div>
         				                    
@@ -201,7 +201,7 @@
         		                <tr ng-repeat="item in mosaicModel.missions">
         		                	<td class="px-1">
         			                    
-        			                    <div class="f-row f-align-center hover" ng-click="removeMission(item);">
+        			                    <div class="f-row f-align-center">
         			                        
         			                        <div class="mr-2" style="width:3rem;">
         			                            <input type="text" class="form-control text-center" ng-model="item.order" style="height:1.5rem;" />
@@ -211,9 +211,9 @@
         				                        {{item.title}}
         				                    </div>
         			                        
-        			                        <div>
+        			                        <a ng-click="removeMission(item);">
         			                            <i class="fa fa-minus-square mx-2"></i>
-        			                        </div>
+        			                        </a>
         			                        
         			                     </div>
         			                    
