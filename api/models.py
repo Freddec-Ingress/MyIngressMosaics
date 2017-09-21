@@ -65,8 +65,7 @@ class Mosaic(models.Model):
 	ref = models.CharField(max_length=32, default=_createRef, unique=True)
 
 	title = models.CharField(max_length=128, default='')
-	desc = models.CharField(max_length=1024, default='')
-	
+
 	creators = models.ManyToManyField('Creator')
 	
 	registerer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='mosaics')
@@ -76,7 +75,6 @@ class Mosaic(models.Model):
 	type = models.CharField(max_length=64, default='')
 
 	cols = models.IntegerField(default=0)
-	rows = models.IntegerField(default=0)
 
 	city = models.CharField(max_length=64, null=True, blank=True)
 	region = models.CharField(max_length=64, null=True, blank=True)
@@ -90,7 +88,7 @@ class Mosaic(models.Model):
 	_startLng = models.FloatField(default=0.0)
 	
 	def __str__(self):
-		return self.title + ' - ' + str(self.missions.count()) + ' - ' + str(self.cols * self.rows)
+		return self.title + ' - ' + str(self.missions.count())
 	
 	def minSerialize(self):
 		
