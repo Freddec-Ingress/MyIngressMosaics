@@ -1528,10 +1528,10 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 	$scope.mosaicModel = {
 		
 		'city': null,
-		'type': null,
+		'type': 'sequence',
 		'title': null,
 		'region': null,
-		'columns': null,
+		'columns': 6,
 		'country': null,
 		
 		'missions': [],
@@ -1576,17 +1576,6 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 			mosaic_name = mosaic_name.trim();
 			
 			$scope.mosaicModel.title = mosaic_name;
-		}
-		
-		if (!$scope.mosaicModel.type) {
-			
-			$scope.mosaicModel.type = 'sequence';
-		}
-		
-		if (!$scope.mosaicModel.columns) {
-			
-			$scope.mosaicModel.columns = 6;
-			console.log($scope.mosaicModel.columns);
 		}
 		
 		if (!$scope.mosaicModel.country && !$scope.mosaicModel.region && !$scope.mosaicModel.city)  {
