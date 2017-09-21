@@ -203,9 +203,9 @@
         			                    
         			                    <div class="f-row f-align-center hover" ng-click="removeMission(item);">
         			                        
-        			                        <div class="mr-2" style="width:2rem;">
+        			                        <div class="mr-2" style="width:3rem;">
         			                            <input type="text" class="form-control text-center" ng-model="item.order" style="height:1.5rem;" />
-        			                        </div>>
+        			                        </div>
         			                        
         			                        <div class="c-normal mr-auto">
         				                        {{item.title}}
@@ -228,7 +228,7 @@
     	        
     	        <div class="form-button-bar mt-4">
     	        	
-    				<button class="btn btn-primary" ng-click="edit();" ng-disabled="!editModel.name">
+    				<button class="btn btn-primary" ng-click="createMosaic();" ng-disabled="!mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || (mosaicModel.missions.length < 1)">
     				    Create
     				</button>
 
