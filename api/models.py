@@ -95,7 +95,6 @@ class Mosaic(models.Model):
 		data = {
 			'ref': self.ref,
 			'cols': self.cols,
-			'rows': self.rows,
 			'type': self.type,
 			'count': self.missions.all().count(),
 			'title': self.title,
@@ -190,8 +189,6 @@ class Mosaic(models.Model):
 			'ref': self.ref,
 			'cols': self.cols,
 			'type': self.type,
-			'rows': self.rows,
-			'desc': self.desc,
 			'city': self.city,
 			'count': self.missions.all().count(),
 			'title': self.title,
