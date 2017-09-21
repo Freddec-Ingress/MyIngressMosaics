@@ -39,7 +39,7 @@
 
 	<!-- Data block -->
 	
-	<div id="block-data" class="hidden">
+	<div id="block-data" class="f-col hidden">
 	
         <div ng-if="!user.authenticated">
             
@@ -70,7 +70,7 @@
         
         </div>
         
-        <div ng-if="user.authenticated">
+        <div ng-if="user.authenticated" class="f-col" style="flex:1;">
         
             <div class="card">
                 
@@ -96,15 +96,11 @@
                 </div>
                 
             </div>
+
+            <div id="searchBlock" class="">
+            </div>
             
-            <div class="f-col">
-                
-                <div id="searchBlock" class="">
-                </div>
-                
-                <div id="createBlock" class="">
-                </div>
-                
+            <div id="createBlock" class="">
             </div>
 <!--                
             	<div class="my-4" style="position:relative;" ng-repeat="mosaic in mosaics">
