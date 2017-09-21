@@ -95,7 +95,9 @@
                 		<input type="submit" class="btn btn-primary ml-2" ng-click="search();" value="Search" />
                 	</form>
                     
-                    <div class="mt-2 bg-black p-1 scrollbar" style="flex:1; overflow:auto; height:200px;">
+                    <div class="mt-2 bg-black py-1 pl-1 scrollbar" style="flex:1; overflow:auto; height:200px;">
+                        
+                        <div ng-if="searchModel.results.length < 1" class="p-2 c-danger">No mission found</div>
                         
         		        <table class="card-table">
         		            <tbody>
@@ -180,8 +182,8 @@
                         <label class="m-0">Preview</label>
         				<div class="bg-black f-row f-justify-center" style="height:210px; overflow-y:auto; padding-top:4px; padding-bottom:4px; padding-left:4px;" ng-class="{'f-align-start scrollbar scrollbar-mini': mosaic.missions.length > 24, 'f-align-center pr-1': mosaic.missions.length <= 24}">
         					
-        					<div class="f-row f-wrap f-justify-center f-align-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%); width:100%;">
-        			            <div ng-repeat="m in mosaicModel.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+        					<div class="f-row f-wrap f-justify-center f-align-center" style="padding:0 calc((6 - {{mosaicModel.columns}}) / 2 * 16.666667%); width:100%;">
+        			            <div ng-repeat="m in mosaicModel.missions | reverse" style="flex:0 0 calc(100% / {{mosaicModel.columns}});">
         			                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
         			           </div>
         					</div>

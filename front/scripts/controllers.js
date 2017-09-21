@@ -209,9 +209,9 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 			$scope.mosaicModel.type = 'sequence';
 		}
 		
-		if (!$scope.mosaicModel.columns || ($scope.mosaicModel.columns && $scope.mosaicModel.missions.length < 6 &&  $scope.mosaicModel.missions.length > $scope.mosaicModel.columns)) {
+		if (!$scope.mosaicModel.columns) {
 			
-			$scope.mosaicModel.columns = $scope.mosaicModel.missions.length.toString();
+			$scope.mosaicModel.columns = 6;
 			console.log($scope.mosaicModel.columns);
 		}
 		
