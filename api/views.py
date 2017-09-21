@@ -482,14 +482,14 @@ def data_searchForMissions(request):
 	
 	# Creator search
 	
-	results = Mission.objects.filter(creator__icontains=request.data['text'])
+	results = Mission.objects.filter(mosaic__isnull=True, creator__icontains=request.data['text'])
 	if (results.count() > 0):
 		for item in results:
 			array.append(item)
 		
 	# Title search
 	
-	results = Mission.objects.filter(title__icontains=request.data['text'])
+	results = Mission.objects.filter(mosaic__isnull=True, title__icontains=request.data['text'])
 	if (results.count() > 0):
 		for item in results:
 			array.append(item)

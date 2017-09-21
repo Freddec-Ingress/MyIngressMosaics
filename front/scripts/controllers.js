@@ -211,7 +211,8 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 		
 		if (!$scope.mosaicModel.columns || ($scope.mosaicModel.columns && $scope.mosaicModel.missions.length < 6 &&  $scope.mosaicModel.missions.length > $scope.mosaicModel.columns)) {
 			
-			$scope.mosaicModel.columns = $scope.mosaicModel.missions.length;
+			$scope.mosaicModel.columns = $scope.mosaicModel.missions.length.toString();
+			console.log($scope.mosaicModel.columns);
 		}
 		
 		if (!$scope.mosaicModel.country && !$scope.mosaicModel.region && !$scope.mosaicModel.city)  {
