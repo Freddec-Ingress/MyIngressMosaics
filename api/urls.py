@@ -14,7 +14,6 @@ urlpatterns = [
 	url(r'^ext_check/',				ext_isMissionRegistered),
 	
 	url(r'^user/edit/name/',		user_editName),
-	url(r'^user/missions/',			user_getRegisteredMissions),
 	url(r'^user/register/',			user_register),
 	url(r'^user/logout/',			user_logout),
 	url(r'^user/login/',			user_login),
@@ -31,9 +30,10 @@ urlpatterns = [
 	
 	url(r'^mission/delete/',		mission_delete),
 
+	url(r'^missions/',				data_searchForMissions),
 	url(r'^latest/',				data_getLastestMosaics),
-	url(r'^world/',					data_getMosaicsByCountry),
 	url(r'^search/',				data_searchForMosaics),
+	url(r'^world/',					data_getMosaicsByCountry),
 	
 	url(r'^map/mosaic/',			map_getMosaicOverview),
 	url(r'^map/',					map_getMosaics),

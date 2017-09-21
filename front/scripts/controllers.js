@@ -134,13 +134,125 @@ angular.module('FrontModule.controllers').controller('SearchCtrl', function($sco
 	}
 });
 
-angular.module('FrontModule.controllers').controller('MissionsCtrl', function($scope, UserService, CreateService) {
+angular.module('FrontModule.controllers').controller('MissionsCtrl', function($scope, UserService, CreateService, API) {
 
-	var mosaics = [];
-	var missions = [];
+	$scope.searchModel = {
+		
+		'text': null,
+		'results': null,
+	}
 	
-	$('#block-loading').addClass('hidden');
-	$('#block-data').removeClass('hidden');
+	$scope.search = function() {
+		
+		var data = {'text': $scope.searchModel.text}
+		API.sendRequest('/api/missions/', 'POST', {}, data).then(function(response) {
+			
+			$scope.searchModel.results = response.missions;
+		});
+	}
+	
+	$scope.mosaicModel = {
+		
+		'city': null,
+		'type': null,
+		'title': null,
+		'region': null,
+		'columns': null,
+		'country': null,
+		
+		'missions': [],
+	}
+	
+	$scope.addMission = function(item) {
+		
+		$scope.mosaicModel.missions.push(item);
+		
+		$scope.searchModel.results.splice($scope.searchModel.results.indexOf(item), 1);
+		
+		if (!$scope.mosaicModel.title) {
+			
+			var mosaic_name = item.title;
+			mosaic_name = mosaic_name.replace(/0|1|2|3|4|5|6|7|8|9|#/g, '');
+			mosaic_name = mosaic_name.replace(/０|１|２|３|４|５|６|７|８|９/g, '');
+			mosaic_name = mosaic_name.replace(/①|②|③|④|⑤|⑥/g, '');
+			mosaic_name = mosaic_name.replace('.', '');
+			mosaic_name = mosaic_name.replace('(', '');
+			mosaic_name = mosaic_name.replace(')', '');
+			mosaic_name = mosaic_name.replace('（', '');
+			mosaic_name = mosaic_name.replace('）', '');
+			mosaic_name = mosaic_name.replace('/', '');
+			mosaic_name = mosaic_name.replace('[', '');
+			mosaic_name = mosaic_name.replace(']', '');
+			mosaic_name = mosaic_name.replace('【', '');
+			mosaic_name = mosaic_name.replace('】', '');
+			mosaic_name = mosaic_name.replace('-', '');
+			mosaic_name = mosaic_name.replace('-', '');
+			mosaic_name = mosaic_name.replace('－', '');
+			mosaic_name = mosaic_name.replace('_', '');
+			mosaic_name = mosaic_name.replace(':', '');
+			mosaic_name = mosaic_name.replace('of ', '');
+			mosaic_name = mosaic_name.replace(' of', '');
+			mosaic_name = mosaic_name.replace('part ', '');
+			mosaic_name = mosaic_name.replace(' part', '');
+			mosaic_name = mosaic_name.replace('Part ', '');
+			mosaic_name = mosaic_name.replace(' Part', '');
+			mosaic_name = mosaic_name.replace('  ', ' ');
+			mosaic_name = mosaic_name.replace('  ', ' ');
+			mosaic_name = mosaic_name.replace('　', ' ');
+			mosaic_name = mosaic_name.trim();
+			
+			$scope.mosaicModel.title = mosaic_name;
+		}
+		
+		if (!$scope.mosaicModel.type) {
+			
+			$scope.mosaicModel.type = 'sequence';
+		}
+		
+		if (!$scope.mosaicModel.columns || ($scope.mosaicModel.columns && $scope.mosaicModel.missions.length < 6 &&  $scope.mosaicModel.missions.length > $scope.mosaicModel.columns)) {
+			
+			$scope.mosaicModel.columns = $scope.mosaicModel.missions.length;
+		}
+		
+		if (!$scope.mosaicModel.country && !$scope.mosaicModel.region && !$scope.mosaicModel.city)  {
+			
+			var geocoder = new google.maps.Geocoder;
+			
+			var latlng = {
+				lat: parseFloat($scope.mosaicModel.missions[0].startLat),
+				lng: parseFloat($scope.mosaicModel.missions[0].startLng),
+			};
+			
+			console.log(latlng);
+			geocoder.geocode({'location': latlng}, function(results, status) {
+				
+				if (status === 'OK') {
+					
+					var components = null;
+					if (results[0]) components = results[0].address_components;
+					if (results[1]) components = results[1].address_components;
+					
+					if (components) {
+						
+						var admin2 = null;
+						var admin3 = null;
+						
+						for (var item of components) {
+							
+							if (item.types[0] == 'country') $scope.mosaicModel.country = item.long_name;
+							if (item.types[0] == 'locality') $scope.mosaicModel.city = item.long_name;
+							if (item.types[0] == 'administrative_area_level_1') $scope.mosaicModel.region = item.long_name;
+							if (item.types[0] == 'administrative_area_level_2') admin2 = item.long_name;
+							if (item.types[0] == 'administrative_area_level_3') admin3 = item.long_name;
+						}
+						
+						if (!$scope.mosaicModel.city && admin2) $scope.mosaicModel.city = item.admin2;
+						if (!$scope.mosaicModel.city && admin3) $scope.mosaicModel.city = item.admin3;
+					}
+				}
+			});
+		}
+	}
 /*	
 	UserService.getMissions().then(function(response) {
 		

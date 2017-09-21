@@ -476,6 +476,42 @@ def data_getMosaicsByCountry(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((AllowAny, ))
+def data_searchForMissions(request):
+	
+	array = []
+	
+	# Creator search
+	
+	results = Mission.objects.filter(creator__icontains=request.data['text'])
+	if (results.count() > 0):
+		for item in results:
+			array.append(item)
+		
+	# Title search
+	
+	results = Mission.objects.filter(title__icontains=request.data['text'])
+	if (results.count() > 0):
+		for item in results:
+			array.append(item)
+	
+	if (len(array) > 0):
+		
+		temp = list(set(array))
+		
+		data = { 'missions': [], }
+		for item in temp:
+			data['missions'].append(item.overviewSerialize())
+	
+	else:
+		data = { 'missions': None, }
+	
+	return Response(data, status=status.HTTP_200_OK)
+    
+    
+    
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((AllowAny, ))
 def data_searchForMosaics(request):
 	
 	array = []
