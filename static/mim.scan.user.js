@@ -1,7 +1,7 @@
 // ==UserScript==
 // @id             myingressmosaics@freddec
 // @name           MyIngressMosaics Scanning plugin
-// @version        1.0.10
+// @version        1.0.11
 // @include        https://*.ingress.com/intel*
 // @include        http://*.ingress.com/intel*
 // @match          https://*.ingress.com/intel*
@@ -350,13 +350,7 @@ function processNextTiles() {
                         for (var item of data.result) {
 
                             var mission_id = item[0];
-                            var mission_name = item[1];
-
-                            var found1 = mission_name.match(/[0-9]+/);
-                            var found2 = mission_name.match('MD:');
-                            if ((found1 || found2) && missionsToBeProcessed.indexOf(mission_id) == -1 && missionsProcessed.indexOf(mission_id) == -1 && missionsInProcess.indexOf(mission_id) == -1) {
-                                missionsToBeProcessed.push(mission_id);
-                            }
+                            missionsToBeProcessed.push(mission_id);
                         }
 
                     }, function(jqXHR, textStatus, errorThrown) {
@@ -395,13 +389,7 @@ function processNextPortal() {
             for (var item of data.result) {
 
                 var mission_id = item[0];
-                var mission_name = item[1];
-
-                var found1 = mission_name.match(/[0-9]+/);
-                var found2 = mission_name.match('MD:');
-                if ((found1 || found2) && missionsToBeProcessed.indexOf(mission_id) == -1 && missionsProcessed.indexOf(mission_id) == -1 && missionsInProcess.indexOf(mission_id) == -1) {
-                    missionsToBeProcessed.push(mission_id);
-                }
+                missionsToBeProcessed.push(mission_id);
             }
         }
 
