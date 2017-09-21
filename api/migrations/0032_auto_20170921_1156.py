@@ -4,20 +4,6 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 
-from api.models import *
-
-
-
-def rebuild(apps, schema_editor):
-    
-    missions = Mission.objects.all()
-    for m in missions:
-        m.computeInternalData();
-    
-    mosaics = Mosaic.objects.all()
-    for m in mosaics:
-        m.computeInternalData();
-
 
 
 class Migration(migrations.Migration):
@@ -102,6 +88,4 @@ class Migration(migrations.Migration):
             name='title',
             field=models.CharField(blank=True, max_length=128, null=True),
         ),
-        
-        migrations.RunPython(rebuild),
     ]
