@@ -163,16 +163,61 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 		'missions': [],
 	}
 	
+	function compareOrderAsc(a, b) {
+		
+		if (a.order > b.order)
+			return -1;
+			
+		if (a.order < b.order)
+			return 1;
+		
+		return 0;
+	}
+	
+	function compareCreatorTitleAsc(a, b) {
+		
+		if (a.creator > b.creator)
+			return -1;
+			
+		if (a.creator < b.creator)
+			return 1;
+		
+		if (a.title > b.title)
+			return -1;
+			
+		if (a.title < b.title)
+			return 1;
+		
+		return 0;
+	}
+			
 	$scope.removeMission = function(item) {
 		
 		$scope.searchModel.results.push(item);
 		
 		$scope.mosaicModel.missions.splice($scope.mosaicModel.missions.indexOf(item), 1);
+		
+		if ($scope.mosaicModel.missions.length < 1) {
+			
+			$scope.mosaicModel.city = null;
+			$scope.mosaicModel.type = 'sequence';
+			$scope.mosaicModel.title = null;
+			$scope.mosaicModel.region = null;
+			$scope.mosaicModel.columns = '6';
+			$scope.mosaicModel.country = null;
+		}
+		else {
+		
+			$scope.mosaicModel.missions.sort(compareOrderAsc);
+		}
+		
+		$scope.searchModel.results.sort(compareCreatorTitleAsc);
 	}
 	
 	$scope.addMission = function(item) {
 		
 		$scope.mosaicModel.missions.push(item);
+		$scope.mosaicModel.missions.sort(compareOrderAsc);
 		
 		$scope.searchModel.results.splice($scope.searchModel.results.indexOf(item), 1);
 		
