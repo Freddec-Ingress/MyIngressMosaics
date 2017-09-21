@@ -72,6 +72,7 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 		    '       		\'flag-icon-sk\': mosaic.country == \'Slovakia\',' +
 		    '       		\'flag-icon-hr\': mosaic.country == \'Croatia\',' +
 		    '       		\'flag-icon-ar\': mosaic.country == \'Argentina\',' +
+		    '       		\'flag-icon-uy\': mosaic.country == \'Uruguay\',' +
 	        '        	}"></span>' +
 	        '    		{{mosaic.location}}' +
 	        '    	</div>' +
