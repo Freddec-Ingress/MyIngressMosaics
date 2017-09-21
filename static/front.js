@@ -1531,6 +1531,14 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 		
 		return 0;
 	}
+	
+	$scope.clearAll = function() {
+		
+		var missions = $scope.mosaicModel.missions.slice();
+		for (var m of missions) {
+			$scope.removeMission(m);
+		}
+	}
 			
 	$scope.removeMission = function(item) {
 		
@@ -1562,7 +1570,7 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 	
 	$scope.addAll = function() {
 		
-		var missions = $scope.searchModel.results;
+		var missions = $scope.searchModel.results.slice();
 		for (var m of missions) {
 			$scope.addMission(m);
 		}
