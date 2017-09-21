@@ -150,20 +150,13 @@ def mosaic(request, ref):
 	
 	if (mosaic):
 		
-		portals = 0
-		for m in mosaic.missions.all():
-			portals += m.portals.all().count()
-		
 		desc = mosaic.country
 		if mosaic.region:
 			desc += ' > ' + mosaic.region
 		if mosaic.city:
 			desc += ' > ' + mosaic.city
-		desc += ' \r\n ' + str(len(mosaic.missions.all())) + ' missions' + ' - ' + mosaic.type + ' - ' + str(portals) + ' portals'
+		desc += ' - ' + str(len(mosaic.missions.all())) + ' missions' + ' - ' + mosaic.type
 
-		if (mosaic.type ==  'sequence'):
-			desc += ' - ' + str(round(mosaic._distance, 2)) + ' km'
-					
 		context = { 'ref': ref, 'name': mosaic.title, 'desc': desc }
 		
 	else:

@@ -24,8 +24,7 @@ class Profile(models.Model):
 
 	user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
 
-	team = models.CharField(max_length=32, null=True, blank=True)
-	level = models.IntegerField(null=True, blank=True)
+	# Admin displaying
 	
 	def __str__(self):
 		return 'Profil: ' + self.user.username + ' - ' + str(self.user.mosaics.count())
@@ -42,18 +41,6 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 #---------------------------------------------------------------------------------------------------
-@python_2_unicode_compatible
-class Creator(models.Model):
-
-	name = models.CharField(max_length=32, default='')
-	faction = models.CharField(max_length=8, default='')
-	
-	def __str__(self):
-		return self.name
-
-
-
-#---------------------------------------------------------------------------------------------------
 from django.utils.crypto import get_random_string
 
 def _createRef():
@@ -63,275 +50,154 @@ def _createRef():
 class Mosaic(models.Model):
 
 	ref = models.CharField(max_length=32, default=_createRef, unique=True)
-
+	cols = models.IntegerField(default=6)
+	type = models.CharField(max_length=64, default='sequence')
+	city = models.CharField(max_length=64, null=True, blank=True)
 	title = models.CharField(max_length=128, default='')
-
-	creators = models.ManyToManyField('Creator')
-	
+	status = models.CharField(max_length=64, default='active')
+	region = models.CharField(max_length=64, null=True, blank=True)
+	country = models.CharField(max_length=64)
+	portals = models.IntegerField(null=True, blank=True)
+	uniques = models.IntegerField(null=True, blank=True)
+	startLat = models.FloatField(null=True, blank=True)
+	startLng = models.FloatField(null=True, blank=True)
+	distance = models.FloatField(null=True, blank=True)
 	registerer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='mosaics')
-	
 	register_date = models.DateField(default=datetime.now)
 	
-	type = models.CharField(max_length=64, default='')
-
-	cols = models.IntegerField(default=0)
-
-	city = models.CharField(max_length=64, null=True, blank=True)
-	region = models.CharField(max_length=64, null=True, blank=True)
-	country = models.CharField(max_length=64, null=True, blank=True)
-	
-	status = models.CharField(max_length=64, default='active')
-	
-	_distance = models.FloatField(default=0.0)
-	
-	_startLat = models.FloatField(default=0.0)
-	_startLng = models.FloatField(default=0.0)
+	# Admin displaying
 	
 	def __str__(self):
 		return self.title + ' - ' + str(self.missions.count())
+		
+	# Internal data computing
+
+	def computeInternalData(self):
 	
-	def minSerialize(self):
+		self.portals = 0
+		self.uniques = 0
+		self.startLat = 0.0
+		self.startLng = 0.0
+		self.distance = 0.0
+	
+		portals = []
+		missions = []
 		
-		data = {
-			'ref': self.ref,
-			'cols': self.cols,
-			'type': self.type,
-			'count': self.missions.all().count(),
-			'title': self.title,
-			
-			'_distance': self._distance,
-			
-			'missions': [],
-		}
-			
 		for item in self.missions.all().order_by('order'):
 			
-			mission_data = {
-				'image': item.image,
-			}
+			mData = item.detailsSerialize()
 			
-			data['missions'].append(mission_data)
+			missions.append(mData)
+
+			self.portals += len(mData['portals'])
 			
-		return data
+			portals += mData['portals']
+
+		self.uniques = len([dict(t) for t in set([tuple(d.items()) for d in portals])])
 		
-	def checkRegionCityNames(self):
-		
-		if self.country == 'Japan':
+		for i in range(0, len(missions) - 1):
 			
-			if self.region and self.region[-3:] == '-to':
-				self.region = self.region.replace('-to', '')
-				self.save()
-		
-			if self.city and self.city[-3:] == '-ku':
-				self.city = self.city.replace('-ku', '')
-				self.save()
+			mData1 = missions[i]
+			mData2 = missions[i+1]
+			
+			if mData1['startLat'] != 0.0 and mData1['startLng'] != 0.0 and self.startLat == 0.0 and self.startLng == 0.0:
+				self.startLat = mData1['startLat']
+				self.startLng = mData1['startLng']
 				
-			if self.city and self.city[-4:] == '-shi':
-				self.city = self.city.replace('-shi', '')
-				self.save()
+			self.distance += mData1['distance']
+			
+			if i < len(missions) - 2:
 				
-			if (self.region and 'ō' in self.region) or (self.city and 'ō' in self.city):
-				self.region = self.region.replace('ō', 'o')
-				self.city = self.city.replace('ō', 'o')
-				self.save()
-			
-		
-	def homeSerialize(self):
-		
-		self.checkRegionCityNames()
-		
-		data = {
-			'ref': self.ref,
-			'title': self.title,
-			'city': self.city,
-			'cols': self.cols,
-			'country': self.country,
-			'type': self.type,
-			
-			'_distance': self._distance,
-			
-			'missions': [],
-		}
-			
-		for item in self.missions.all().order_by('order'):
-			
-			mission_data = {
-				'image': item.image,
-			}
-			
-			data['missions'].append(mission_data)
-			
-		return data
-		
+				pData1 = mData1['portals'][len(mData1['portals']) - 1]
+				pData2 = mData2['portals'][0]
+				
+				if pData1['lat'] != 0.0 and pData1['lng'] != 0.0 and pData2['lat'] != 0.0 and pData2['lng'] != 0.0:
+					self.distance += getDistanceFromLatLng(pData1['lat'], pData1['lng'], pData2['lat'], pData2['lng'])
+					
+		self.save()
+	
+	# Map serialization
+	
 	def mapSerialize(self):
 		
 		data = {
+			
 			'ref': self.ref,
-			'_startLat': self._startLat,
-			'_startLng': self._startLng,
+			'startLat': self.lat,
+			'startLng': self.lng,
 		}
 			
 		return data
+	
+	# Overview serialization
+	
+	def overviewSerialize(self):
 		
-	def serialize(self):
-		
-		self.checkRegionCityNames()
+		location = self.city
+		if not location: location = self.region
+		if not location: location = self.country
 		
 		data = {
-			'registerer': {
-				'name': self.registerer.username if self.registerer else '',
-			},
 			
-			'creators': [],
+			'ref': self.ref,
+			'cols': self.cols,
+			'type': self.type,
+			'title': self.title,
+			'country': self.country,
+			'distance': self.distance,
+			
+			'location': location,
+
 			'missions': [],
-			'portals': 0,
+		}
+		
+		for item in self.missions.all().order_by('order'):
+			
+			mission_data = item.imgSerialize()
+			data['missions'].append(mission_data)
+			
+		return data
+	
+	# Details serialization
+		
+	def detailsSerialize(self):
+
+		data = {
 			
 			'ref': self.ref,
 			'cols': self.cols,
 			'type': self.type,
 			'city': self.city,
-			'count': self.missions.all().count(),
 			'title': self.title,
-			'status': self.status,
 			'region': self.region,
 			'country': self.country,
-			'uniques': self.computeUniques(),
+			'portals': self.portals,
+			'uniques': self.uniques,
+			'distance': self.distance,
+			'startLat': self.startLat,
+			'startLng': self.startLng,
 			
-			'register_date': self.register_date,
-			
-			'_distance': self._distance,
-			
-			'_startLat': self._startLat,
-			'_startLng': self._startLng,
+			'creators': [],
+			'missions': [],
 		}
 		
-		for item in self.creators.all():
-			
-			creator_data = {
-				'name': item.name,
-				'faction': item.faction,
-			}
-			
-			data['creators'].append(creator_data)
-		
+		creators = []
+
 		for item in self.missions.all().order_by('order'):
 			
-			mission_data = {
-				'ref': item.ref,
-				'title': item.title,
-				'image': item.image,
-				'order': item.order,
-				'lat': 0.0,
-				'lng': 0.0,
-				'portals': [],
-				'desc': item.desc,
+			mData = item.detailsSerialize()
+			data['missions'].append(mData)
+			
+			cData = {
+				'name': mData['creator'],
+				'faction': mData['faction'],
 			}
 			
-			for row in item.portals.iterator():
-				if Portal.objects.filter(mission=row.mission, lat=row.lat, lng=row.lng, order=row.order).count() > 1:
-					row.delete()
-			
-			jsondata = json.loads(item.data)
-			for item in jsondata[9]:
-				
-				if not item[5]:
-					
-					lat = 0.0
-					lng = 0.0
-				
-				elif item[5][0] == 'f':
-					
-					lat = (float(item[5][1])/1000000.0)
-					lng = (float(item[5][2])/1000000.0)
-				
-				else:
-					
-					lat = (float(item[5][2])/1000000.0)
-					lng = (float(item[5][3])/1000000.0)
-					
-				if lat != 0.0 and lng != 0.0 and mission_data['lat'] == 0.0 and mission_data['lng'] == 0.0:
-					
-					mission_data['lat'] = lat
-					mission_data['lng'] = lng
+			creators.append(cData)
 
-				portal_data = {
-					'lat': lat,
-					'lng': lng,
-					'action': item[4],
-					'unavailable': False,
-				}
-				
-				if lat == 0.0 and lng == 0.0:
-					portal_data['unavailable'] = True
-				
-				mission_data['portals'].append(portal_data)
-				
-				data['portals'] += 1
-			
-			data['missions'].append(mission_data)
+		data['creators'] = [dict(t) for t in set([tuple(d.items()) for d in creators])]
 
 		return data
-		
-	
-	
-	def computeInternalData(self):
-		
-		missions = self.missions.order_by('order')
-		if missions.count() > 0:
-			
-			self._startLat = missions[0]._startLat
-			self._startLng = missions[0]._startLng
-			
-			self.creators.clear()
-			
-			for i in range(0, missions.count()):
-
-				result = Creator.objects.filter(name=missions[i].creator)
-				if result.count() > 0:
-					self.creators.add(result[0])
-				else:
-					creator = Creator(name=missions[i].creator, faction=missions[i].faction)
-					creator.save()
-					
-					self.creators.add(creator)
-	   
-			self.computeDistance()	
-	
-	
-	
-	def computeUniques(self):
-	
-		uniques = 0
-		
-		result = Portal.objects.filter(mission__mosaic=self).values('lat', 'lng').distinct()
-		uniques = result.count()
-		
-		return uniques
-	
-	
-	
-	def computeDistance(self):
-		
-		missions = self.missions.order_by('order')
-		if missions.count() > 0:
-			
-			dst = 0
-			
-			for i in range(0, missions.count() - 1):
-				
-				missions[i].computeInternalData()
-				dst += missions[i]._distance
-				
-				if i < missions.count() - 2:
-					
-					portal1 = missions[i].portals.order_by('-order')[0]
-					portal2 = missions[i+1].portals.order_by('order')[0]
-					
-					if portal1.lat != 0.0 and portal1.lng != 0.0 and portal2.lat != 0.0 and portal2.lng != 0.0:
-						dst += getDistanceFromLatLng(portal1.lat, portal1.lng, portal2.lat, portal2.lng)
-				
-			self._distance = dst
-			self.save()
 
 
 
@@ -353,104 +219,154 @@ def getDistanceFromLatLng(lat1, lng1, lat2, lng2):
 @python_2_unicode_compatible
 class Mission(models.Model):
 
-	mosaic = models.ForeignKey('Mosaic', on_delete=models.SET_NULL, null=True, blank=True, related_name='missions')
-	
 	data = models.TextField()
 
-	ref = models.CharField(max_length=64, default='', unique=True)
-	desc = models.TextField(default='')
-	title = models.CharField(max_length=128, default='')
-	image = models.CharField(max_length=256, default='')
-	order = models.IntegerField(default=0)
-	creator = models.CharField(max_length=32, default='')
-	faction = models.CharField(max_length=8, default='')
-	registerer = models.CharField(max_length=32, default='')
-
-	_distance = models.FloatField(default=0.0)
+	ref = models.CharField(max_length=64, null=True, blank=True, unique=True)
+	desc =  models.TextField(null=True, blank=True)
+	order = models.IntegerField(null=True, blank=True)
+	title = models.CharField(max_length=128, null=True, blank=True)
+	image = models.CharField(max_length=128, null=True, blank=True)
+	creator = models.CharField(max_length=32, null=True, blank=True)
+	faction = models.CharField(max_length=32, null=True, blank=True)
+	startLat = models.FloatField(null=True, blank=True)
+	startLng = models.FloatField(null=True, blank=True)
+	distance = models.FloatField(null=True, blank=True)
+			
+	mosaic = models.ForeignKey('Mosaic', on_delete=models.SET_NULL, null=True, blank=True, related_name='missions')
 	
-	_startLat = models.FloatField(default=0.0)
-	_startLng = models.FloatField(default=0.0)
-
+	# Admin displaying
+	
 	def __str__(self):
 		return self.title
 
-	def computeInternalData(self):
+	# Portals data
+	
+	def getPortalsData(self):
 		
-		portals = self.portals.order_by('order')
-		if portals.count() > 0:
+		data = []
+		
+		jsondata = json.loads(self.data)
+		
+		for portal in jsondata[9]:
 			
-			for p in portals:
+			lat = 0.0
+			lng = 0.0
+			
+			if portal[5]:
 				
-				if p.lat != 0.0 and p.lng != 0.0:
-					
-					self._startLat = p.lat
-					self._startLng = p.lng
-					
-					break;
+				if portal[5][0] == 'f':
+					lat = portal[5][1] / 1000000.0
+					lng = portal[5][2] / 1000000.0
+				
+				if portal[5][0] == 'p':
+					lat = portal[5][2] / 1000000.0
+					lng = portal[5][3] / 1000000.0
+				
+			pData = {
+				'lat': lat,
+				'lng': lng,
+				'title': portal[2],
+				'action': portal[4],
+			}
 			
-			dst = 0
+			data.append(pData)
 			
-			for i in range(0, portals.count() - 1):
-				if portals[i].lat != 0.0 and portals[i].lng != 0.0 and portals[i+1].lat != 0.0 and portals[i+1].lng != 0.0:
-					dst += getDistanceFromLatLng(portals[i].lat, portals[i].lng, portals[i+1].lat, portals[i+1].lng)
-	   
-			self._distance = dst
-			
-			self.save()
+		return data
 
-	def checkPortal(self):
+	# Internal data computing
+
+	def computeInternalData(self):
+	
+		jsondata = json.loads(self.data)
 		
-		portals = self.portals.order_by('order')
-		if portals.count() > 0:
+		self.ref = jsondata[0]
+		self.desc = jsondata[2]
+		self.title = jsondata[1]
+		self.image = jsondata[10]
+		self.creator = jsondata[3]
+		self.faction = jsondata[4]
+		
+		portals = self.getPortalsData()
+
+		self.startLat = 0.0
+		self.startLng = 0.0
+		self.distance = 0.0
+		
+		for i in range(0, len(portals) - 1):
+		
+			pData1 = portals[i]
+			pData2 = portals[i+1]
 			
-			for p in portals:
+			if pData1['lat'] != 0.0 and pData1['lng'] != 0.0 and self.startLat == 0.0 and self.startLng == 0.0:
+				self.startLat = pData1['lat']
+				self.startLng = pData1['lng']
 				
-				if p.lat != 0.0 and p.lng != 0.0:
-					
-					self._startLat = p.lat
-					self._startLng = p.lng
-					
-					self.save()
-					
-					break
+			if pData1['lat'] != 0.0 and pData1['lng'] != 0.0 and pData2['lat'] != 0.0 and pData2['lng'] != 0.0:
+				self.distance += getDistanceFromLatLng(pData1['lat'], pData1['lng'], pData2['lat'], pData2['lng'])
+				
+		self.save()
 		
+	# Image serialization
+
+	def imgSerialize(self):
 		
+		data = {
+			
+			'image': self.image,
+		}
 		
+		return data
+
+	# Map serialization
+
 	def mapSerialize(self):
 		
 		data = {
-			'ref': self.ref,
-			'_startLat': self._startLat,
-			'_startLng': self._startLng,
-		}
 			
+			'ref': self.ref,
+			'startLat': self.startLat,
+			'startLng': self.startLng,
+		}
+		
 		return data
-					
 
+	# Overview serialization
 
-#---------------------------------------------------------------------------------------------------
-@python_2_unicode_compatible
-class Portal(models.Model):
+	def overviewSerialize(self):
+		
+		data = {
+			
+			'ref': self.ref,
+			'order': self.order,
+			'title': self.title,
+			'creator': self.creator,
+			'faction': self.faction,
+			'startLat': self.startLat,
+			'startLng': self.startLng,
+		}
+		
+		return data
 
-	mission = models.ForeignKey('Mission', on_delete=models.CASCADE, null=True, blank=True, related_name='portals')
+	# Details serialization
 
-	lat = models.FloatField(default=0.0)
-	lng = models.FloatField(default=0.0)
-	order = models.IntegerField(default=-1)
-	title = models.CharField(max_length=128, default='')
-
-	def __str__(self):
-		return self.mission.title + ' - ' + str(self.order) + ' - ' + self.title
-					
-
-
-#---------------------------------------------------------------------------------------------------
-@python_2_unicode_compatible
-class SearchResult(models.Model):
-	
-	search_date = models.DateField(default=datetime.now)
-	search_text = models.CharField(max_length=128, default='')
-	count = models.IntegerField(default=-1)
-
-	def __str__(self):
-		return self.search_text + ' - ' + str(self.count)
+	def detailsSerialize(self):
+		
+		data = {
+			
+			'ref': self.ref,
+			'desc': self.desc,
+			'image': self.image,
+			'order': self.order,
+			'title': self.title,
+			'creator': self.creator,
+			'faction': self.faction,
+			'startLat': self.startLat,
+			'startLng': self.startLng,
+			'distance': self.distance,
+			
+			'portals': [],
+		}
+		
+		data['portals'] = self.getPortalsData()
+		
+		return data

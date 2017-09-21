@@ -294,11 +294,11 @@ angular.module('FrontModule.services').service('DataService', function(API) {
 
 		loadLatest: function() {
 			
-			return API.sendRequest('/api/mosaic/latest/', 'GET');
+			return API.sendRequest('/api/latest/', 'GET');
 		},
 		
 		loadCountriesFromWorld: function() {
-			return API.sendRequest('/api/world/', 'POST');
+			return API.sendRequest('/api/world/', 'GET');
 		},
 	};
 	

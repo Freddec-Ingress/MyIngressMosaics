@@ -11,5 +11,3 @@ import hashlib
 def auto_logout(*args, **kwargs):
 	
 	return {'user': None}
-
-

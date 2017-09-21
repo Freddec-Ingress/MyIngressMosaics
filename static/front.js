@@ -1020,11 +1020,11 @@ angular.module('FrontModule.services').service('DataService', function(API) {
 
 		loadLatest: function() {
 			
-			return API.sendRequest('/api/mosaic/latest/', 'GET');
+			return API.sendRequest('/api/latest/', 'GET');
 		},
 		
 		loadCountriesFromWorld: function() {
-			return API.sendRequest('/api/world/', 'POST');
+			return API.sendRequest('/api/world/', 'GET');
 		},
 	};
 	
@@ -1361,9 +1361,9 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 		    '       		\'flag-icon-hr\': mosaic.country == \'Croatia\',' +
 		    '       		\'flag-icon-ar\': mosaic.country == \'Argentina\',' +
 	        '        	}"></span>' +
-	        '    		{{mosaic.city}}' +
+	        '    		{{mosaic.location}}' +
 	        '    	</div>' +
-	        '    	<div class="text-normal">{{mosaic.missions.length}} <i class="fa fa-th mx-1"></i> <span class="mr-1">&middot;</span> <span ng-if="mosaic.type == \'sequence\'">{{mosaic._distance | number:2}} km</span><span ng-if="mosaic.type == \'serie\'">serie</span><span ng-show="mosaic.type != \'serie\' && mosaic._distance > 10.0" class="mx-1">&middot;</span><i ng-show="mosaic.type != \'serie\' && mosaic._distance > 10.0 && mosaic._distance < 30.0" class="fa fa-bicycle mx-1"></i><i ng-show="mosaic.type != \'serie\' && mosaic._distance > 30.0" class="fa fa-car mx-1"></i></div>' +
+	        '    	<div class="text-normal">{{mosaic.missions.length}} <i class="fa fa-th mx-1"></i> <span class="mr-1">&middot;</span> <span ng-if="mosaic.type == \'sequence\'">{{mosaic.distance | number:2}} km</span><span ng-if="mosaic.type == \'serie\'">serie</span><span ng-show="mosaic.type != \'serie\' && mosaic.distance > 10.0" class="mx-1">&middot;</span><i ng-show="mosaic.type != \'serie\' && mosaic.distance > 10.0 && mosaic.distance < 30.0" class="fa fa-bicycle mx-1"></i><i ng-show="mosaic.type != \'serie\' && mosaic.distance > 30.0" class="fa fa-car mx-1"></i></div>' +
 	            	
 			'	</div>' +
 				
@@ -1734,33 +1734,30 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 
 	$scope.loadMosaic = function(ref) {
 		
-		MosaicService.getMosaic(ref).then(function(response) {
+		API.sendRequest('/api/mosaic/' + ref + '/', 'GET').then(function(response) {
+		
+			MosaicService.data.mosaic = response;
 			
-			API.sendRequest('/api/mosaic/' + ref + '/', 'GET').then(function(response) {
+			$scope.mosaic = MosaicService.data.mosaic;
+			$scope.potentials = MosaicService.data.potentials;
 			
-				MosaicService.data.mosaic = response;
+			$scope.initMap();
+
+			$('#block-loading').addClass('hidden');
+			
+			if ($scope.mosaic) {
 				
-				$scope.mosaic = MosaicService.data.mosaic;
-				$scope.potentials = MosaicService.data.potentials;
+				$('#block-mosaic').removeClass('hidden');
 				
-				$scope.initMap();
-	
-				$('#block-loading').addClass('hidden');
-				
-				if ($scope.mosaic) {
+				if ($rootScope.user && $rootScope.user.authenticated && ($rootScope.user.name == $scope.mosaic.registerer.name || $rootScope.user.superuser)) {
 					
-					$('#block-mosaic').removeClass('hidden');
-					
-					if ($rootScope.user && $rootScope.user.authenticated && ($rootScope.user.name == $scope.mosaic.registerer.name || $rootScope.user.superuser)) {
-						
-						$('#block-edit').removeClass('hidden');
-					}
+					$('#block-edit').removeClass('hidden');
 				}
-				else {
-					
-					$('#block-nomosaic').removeClass('hidden');
-				}
-			});
+			}
+			else {
+				
+				$('#block-nomosaic').removeClass('hidden');
+			}
 		});
 	}
 	
@@ -1937,7 +1934,7 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 			zoomControl: true,
 			disableDefaultUI: true,
 			fullscreenControl: true,
-			center: {lat: $scope.mosaic.missions[0].lat, lng: $scope.mosaic.missions[0].lng},
+			center: {lat: $scope.mosaic.missions[0].startLat, lng: $scope.mosaic.missions[0].startLng},
 		});
 		
 		var latlngbounds = new google.maps.LatLngBounds();
@@ -1977,10 +1974,10 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 				map: map,
 				icon: image,
 				label: label,
-				position: {lat: m.lat, lng: m.lng},
+				position: {lat: m.startLat, lng: m.startLng},
 	        });
 	        
-	        var mlatLng = new google.maps.LatLng(m.lat, m.lng);
+	        var mlatLng = new google.maps.LatLng(m.startLat, m.startLng);
 	        latlngbounds.extend(mlatLng);
 	        
 	        /* Mission transit */

@@ -74,15 +74,11 @@
 				
 				<div class="mb-2">
 					{{mosaic.missions.length}} <i class="fa fa-th mx-1"></i><span class="mx-1">&middot;</span>{{mosaic.type}}
-				</div>
-				
-				<div class="mb-2">
-					{{mosaic.portals}} waypoints<span class="mx-1">&middot;</span>{{mosaic.uniques}} uniques<span ng-show="mosaic.type ==  'sequence'"><span class="mx-1">&middot;</span>{{mosaic._distance | number:2}} km
+					<span class="mx-1">&middot;</span>{{mosaic.portals}} waypoints<span class="mx-1">&middot;</span>{{mosaic.uniques}} uniques<span ng-show="mosaic.type ==  'sequence'"><span class="mx-1">&middot;</span>{{mosaic.distance | number:2}} km
 					<span ng-show="mosaic._distance > 10.0" class="mx-1">&middot;</span><i ng-show="mosaic._distance > 10.0 && mosaic._distance < 30.0" class="fa fa-bicycle mx-1"></i><i ng-show="mosaic._distance > 30.0" class="fa fa-car mx-1"></i>
 				</div>
 				
 				<div class="mb-2">
-		        	<span class="mr-1">{{'mosaic_BY' | translate}}</span>
 		        	<a class="mr-2" ng-repeat="creator in mosaic.creators" ng-class="{'text-enligtened': creator.faction == 'E', 'text-resistance': creator.faction == 'R',}" ng-click="goToCreator(creator.name);">
 		        		{{creator.name}}
 		        	</a>

@@ -361,33 +361,30 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 
 	$scope.loadMosaic = function(ref) {
 		
-		MosaicService.getMosaic(ref).then(function(response) {
+		API.sendRequest('/api/mosaic/' + ref + '/', 'GET').then(function(response) {
+		
+			MosaicService.data.mosaic = response;
 			
-			API.sendRequest('/api/mosaic/' + ref + '/', 'GET').then(function(response) {
+			$scope.mosaic = MosaicService.data.mosaic;
+			$scope.potentials = MosaicService.data.potentials;
 			
-				MosaicService.data.mosaic = response;
+			$scope.initMap();
+
+			$('#block-loading').addClass('hidden');
+			
+			if ($scope.mosaic) {
 				
-				$scope.mosaic = MosaicService.data.mosaic;
-				$scope.potentials = MosaicService.data.potentials;
+				$('#block-mosaic').removeClass('hidden');
 				
-				$scope.initMap();
-	
-				$('#block-loading').addClass('hidden');
-				
-				if ($scope.mosaic) {
+				if ($rootScope.user && $rootScope.user.authenticated && ($rootScope.user.name == $scope.mosaic.registerer.name || $rootScope.user.superuser)) {
 					
-					$('#block-mosaic').removeClass('hidden');
-					
-					if ($rootScope.user && $rootScope.user.authenticated && ($rootScope.user.name == $scope.mosaic.registerer.name || $rootScope.user.superuser)) {
-						
-						$('#block-edit').removeClass('hidden');
-					}
+					$('#block-edit').removeClass('hidden');
 				}
-				else {
-					
-					$('#block-nomosaic').removeClass('hidden');
-				}
-			});
+			}
+			else {
+				
+				$('#block-nomosaic').removeClass('hidden');
+			}
 		});
 	}
 	
@@ -564,7 +561,7 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 			zoomControl: true,
 			disableDefaultUI: true,
 			fullscreenControl: true,
-			center: {lat: $scope.mosaic.missions[0].lat, lng: $scope.mosaic.missions[0].lng},
+			center: {lat: $scope.mosaic.missions[0].startLat, lng: $scope.mosaic.missions[0].startLng},
 		});
 		
 		var latlngbounds = new google.maps.LatLngBounds();
@@ -604,10 +601,10 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 				map: map,
 				icon: image,
 				label: label,
-				position: {lat: m.lat, lng: m.lng},
+				position: {lat: m.startLat, lng: m.startLng},
 	        });
 	        
-	        var mlatLng = new google.maps.LatLng(m.lat, m.lng);
+	        var mlatLng = new google.maps.LatLng(m.startLat, m.startLng);
 	        latlngbounds.extend(mlatLng);
 	        
 	        /* Mission transit */
