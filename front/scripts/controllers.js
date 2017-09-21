@@ -139,14 +139,13 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 	var mosaics = [];
 	var missions = [];
 	
-	$scope.missions_loading = true;
-	
+	$scope.missions_loading = false;
+/*	
 	UserService.getMissions().then(function(response) {
 		
 		var mis = UserService.data.missions;
 		for (var mission of mis) {
 			
-			/* Mosaic name */
 			var mosaic_name = mission.name;
 			mosaic_name = mosaic_name.replace(/0|1|2|3|4|5|6|7|8|9|#/g, '');
 			mosaic_name = mosaic_name.replace(/０|１|２|３|４|５|６|７|８|９/g, '');
@@ -177,7 +176,6 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 			mosaic_name = mosaic_name.replace('　', ' ');
 			mosaic_name = mosaic_name.trim();
 			
-			/* Find existing mosaic */
 			var existing_mosaic = null;
 			for (var mosaic of mosaics) {
 				if (mosaic.name.toLowerCase() == mosaic_name.toLowerCase()) {
@@ -186,7 +184,6 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 				}
 			}
 			
-			/* If not existing mosaic then create new mosaic */
 			var futur_mosaic = null;
 			if (existing_mosaic) futur_mosaic = existing_mosaic;
 			else {
@@ -198,7 +195,6 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 				mosaics.push(futur_mosaic);
 			}
 			
-			/* Mission order */
 			var order = 0;
 			
 			var found = mission.name.match(/[0-9]+/);
@@ -232,11 +228,8 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 			
 			mission.order = order;
 	
-			/* Add mission to future mosaic */
 			futur_mosaic.missions.push(mission);
 		}
-		
-		/* Sort mosaics by missions count and Remove mosaics with 1 mission only */
 		
 		var mosaicToDelete = [];
 		
@@ -253,15 +246,9 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 			mosaics.splice(mosaics.indexOf(mosaic), 1);
 		}
 		
-		/* Create mosaics by creator with orphelin missions */
-		
 		for (var mission of orphelinMissions) {
 			
-			/* Creator name */
-			
 			var mosaic_name = mission.creator;
-			
-			/* Find existing mosaic */
 			
 			var existing_mosaic = null;
 			for (var mosaic of mosaics) {
@@ -270,8 +257,6 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 					break;
 				}
 			}
-			
-			/* If not existing mosaic then create new mosaic */
 			
 			var futur_mosaic = null;
 			if (existing_mosaic) futur_mosaic = existing_mosaic;
@@ -283,12 +268,10 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 				}
 				mosaics.push(futur_mosaic);
 			}
-			
-			/* Add mission to future mosaic */
+
 			futur_mosaic.missions.push(mission);
 		}
 		
-		/* Sort mosaic missions by order */
 		for (var mosaic of mosaics) {
 			
 			mosaic.missions = mosaic.missions.sort(function(a, b) {
@@ -325,7 +308,6 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 		$('#block-data').removeClass('hidden');
 	});
 	
-	/* Create mosaic */
 	$scope.createMosaic = function(mosaic) {
 		
 		CreateService.createWithMosaic(mosaic, $scope.createMosaicCallback);
@@ -335,23 +317,7 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 		mosaic.creating = false;
 		$scope.mosaics.splice($scope.mosaics.indexOf(mosaic), 1);
 	}
-	
-	/* Delete mosaic */
-	$scope.deleteMosaic = function(mosaic) {
-		
-		for (var item of mosaic.missions) {
-			UserService.deleteMission(item);
-		}
-		
-		$scope.mosaics.splice($scope.mosaics.indexOf(mosaic), 1);
-	}
-	
-	/* Delete mission */
-	$scope.delete = function(mosaic, item, index) {
-		
-		UserService.deleteMission(item);
-		mosaic.missions.splice(index, 1);
-	}
+*/
 });
 
 angular.module('FrontModule.controllers').controller('PluginCtrl', function() {
