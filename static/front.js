@@ -1622,6 +1622,8 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 						
 						if (!$scope.mosaicModel.city && admin2) $scope.mosaicModel.city = item.admin2;
 						if (!$scope.mosaicModel.city && admin3) $scope.mosaicModel.city = item.admin3;
+						
+						console.log($scope.mosaicModel.country);
 					}
 				}
 			});
