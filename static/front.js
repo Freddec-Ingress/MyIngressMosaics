@@ -1696,7 +1696,18 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 	$scope.createMosaic = function() {
 		
 		CreateService.createWithMosaic($scope.mosaicModel);
-		$scope.clearAll();
+
+		var missions = $scope.mosaicModel.missions.slice();
+		for (var m of missions) {
+			$scope.mosaicModel.missions.splice($scope.mosaicModel.missions.indexOf(m), 1);
+		}
+		
+		$scope.mosaicModel.city = null;
+		$scope.mosaicModel.type = 'sequence';
+		$scope.mosaicModel.title = null;
+		$scope.mosaicModel.region = null;
+		$scope.mosaicModel.columns = '6';
+		$scope.mosaicModel.country = null;
 	}
 });
 
