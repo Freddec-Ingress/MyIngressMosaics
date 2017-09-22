@@ -2204,9 +2204,7 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 													
 												'	<div class="bg-black f-row f-justify-center ' + contentClass + '" style="height:105px; overflow-y:auto; padding-top:4px; padding-bottom:4px; padding-left:4px;">' +
 														
-												'		<div class="f-row f-wrap f-justify-center f-align-center" style="padding:0 calc((6 - ' + details.cols + ') / 2 * 16.666667%); width:100%;">' +
-															+ contentImage + 
-												'		</div>' +
+												'		<div class="f-row f-wrap f-justify-center f-align-center" style="padding:0 calc((6 - ' + details.cols + ') / 2 * 16.666667%); width:100%;">' + contentImage + '</div>' +
 														
 												'	</div>' +
 													
