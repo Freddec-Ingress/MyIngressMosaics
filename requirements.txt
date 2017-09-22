@@ -2,6 +2,7 @@ Django==1.10.7
 dj-database-url==0.4.2
 django-cors-headers==2.1.0
 djangorestframework==3.6.3
+django-storages==1.6.5
 gunicorn==19.7.1
 psycopg2==2.7.1
 rest-social-auth==1.1.0
@@ -9,4 +10,3 @@ social-auth-app-django==1.2.0
 social-auth-core==1.3.0
 whitenoise==3.3.0
 Pillow==2.3.0
-boto3==1.4.7

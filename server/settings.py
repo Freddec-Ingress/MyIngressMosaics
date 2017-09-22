@@ -19,6 +19,12 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 SITE_ID = 1
 
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_ACCESS_KEY_ID = 'AKIAJQNCISPEES7BOO6Q'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'MyIngressMosaics'
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -29,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
+    'storages',
     'corsheaders',
     
 	'rest_framework',

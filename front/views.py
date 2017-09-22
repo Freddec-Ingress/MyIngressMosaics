@@ -138,10 +138,11 @@ def preview(request, ref):
 	image.save(imgByteArr, format='PNG')
 	imgByteArr = imgByteArr.getvalue()
 
-	import boto3
-	s3 = boto3.resource('s3')
-	s3.Bucket('myingressmosaics').put_object(Key=''+ref+'.png', Body=imgByteArr, ACL='public-read')
-	
+	from django.core.files.storage import default_storage
+	file = default_storage.open(''+ref+'.png', 'w')
+	file.write(imgByteArr)
+	file.close()
+
 	return response
 
 
