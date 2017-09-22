@@ -185,7 +185,7 @@ def user_getRegisteredMissions(request):
 def mosaic_create(request):
 	
 	mosaic = Mosaic(	registerer = request.user,
-						cols = int(request.data['cols']),
+						cols = int(request.data['columns']),
 						type = request.data['type'],
 						city = request.data['city'],
 						title = request.data['title'],
