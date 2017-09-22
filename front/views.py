@@ -92,6 +92,11 @@ def preview(request, ref):
 	draw = ImageDraw.Draw(image)
 	draw.rectangle(((8, 8), (624, img_height - 52 + 24)), fill = 'black')
 	
+	fontfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/fonts/coda-regular.ttf').read())
+	
+	font = ImageFont.truetype(fontfile, 15)
+	draw.text((16, img_height - 25), 'MIM - MyIngressMosaics.com', fill=(255, 255, 255), font=font)
+	
 	realx = 0
 	if mcount < mosaic.cols:
 		realx = mcount * 100
