@@ -134,7 +134,7 @@ angular.module('FrontModule.controllers').controller('SearchCtrl', function($sco
 	}
 });
 
-angular.module('FrontModule.controllers').controller('MissionsCtrl', function($scope, UserService, CreateService, API) {
+angular.module('FrontModule.controllers').controller('MissionsCtrl', function($scope, $window, UserService, CreateService, API) {
 
 	$scope.searchModel = {
 		
@@ -357,20 +357,23 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 	}
 	
 	$scope.createMosaic = function() {
-		
-		CreateService.createWithMosaic($scope.mosaicModel);
 
-		var missions = $scope.mosaicModel.missions.slice();
-		for (var m of missions) {
-			$scope.mosaicModel.missions.splice($scope.mosaicModel.missions.indexOf(m), 1);
-		}
+		API.sendRequest('/api/mosaic/create/', 'POST', {}, $scope.mosaicModel).then(function(response) {
+
+			var missions = $scope.mosaicModel.missions.slice();
+			for (var m of missions) {
+				$scope.mosaicModel.missions.splice($scope.mosaicModel.missions.indexOf(m), 1);
+			}
+			
+			$scope.mosaicModel.city = null;
+			$scope.mosaicModel.type = 'sequence';
+			$scope.mosaicModel.title = null;
+			$scope.mosaicModel.region = null;
+			$scope.mosaicModel.columns = '6';
+			$scope.mosaicModel.country = null;
 		
-		$scope.mosaicModel.city = null;
-		$scope.mosaicModel.type = 'sequence';
-		$scope.mosaicModel.title = null;
-		$scope.mosaicModel.region = null;
-		$scope.mosaicModel.columns = '6';
-		$scope.mosaicModel.country = null;
+			$window.open('https://www.myingressmosaics.com/mosaic/' + response);
+		});
 	}
 });
 
