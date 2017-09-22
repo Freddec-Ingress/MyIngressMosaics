@@ -129,9 +129,14 @@ def preview(request, ref):
 	response = HttpResponse(content_type = 'image/png')
 	image.save(response, 'PNG')
 	
+	import io
+	imgByteArr = io.BytesIO()
+	image.save(imgByteArr, format='PNG')
+	imgByteArr = imgByteArr.getvalue()
+
 	import boto3
 	s3 = boto3.resource('s3')
-	s3.Bucket('myingressmosaics').put_object(Key='test.jpg', Body=image)
+	s3.Bucket('myingressmosaics').put_object(Key='test.png', Body=imgByteArr)
 	
 	return response
 
