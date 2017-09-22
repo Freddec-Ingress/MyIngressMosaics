@@ -128,6 +128,10 @@ def preview(request, ref):
 
 	response = HttpResponse(content_type = 'image/png')
 	image.save(response, 'PNG')
+	
+	import boto3
+	s3 = boto3.resource('s3')
+	
 	return response
 
 
