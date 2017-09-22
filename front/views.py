@@ -143,10 +143,6 @@ def preview(request, ref):
 	file = default_storage.open(name, 'w')
 	file.write(imgByteArr)
 	file.close()
-	url = default_storage.url(name)
-	
-	mosaic.preview = url
-	mosaic.save()
 
 	return response
 
@@ -169,7 +165,7 @@ def mosaic(request, ref):
 			desc += ' > ' + mosaic.city
 		desc += ' - ' + str(len(mosaic.missions.all())) + ' missions' + ' - ' + mosaic.type
 
-		context = { 'ref': ref, 'name': mosaic.title, 'desc': desc, 'image': mosaic.preview }
+		context = { 'ref': ref, 'name': mosaic.title, 'desc': desc }
 		
 	else:
 		context = { 'ref': ref }
