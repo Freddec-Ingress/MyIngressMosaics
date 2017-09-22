@@ -1651,6 +1651,12 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 						if (!$scope.mosaicModel.city && admin2) $scope.mosaicModel.city = item.admin2;
 						if (!$scope.mosaicModel.city && admin3) $scope.mosaicModel.city = item.admin3;
 						
+						if ($scope.mosaicModel.country == 'Japan') {
+							
+							console.log($scope.mosaicModel.region.substring($scope.mosaicModel.region.length-4, $scope.mosaicModel.region.length));
+							if ($scope.mosaicModel.region.substring($scope.mosaicModel.region.length-4, $scope.mosaicModel.region.length) == '-ken') $scope.mosaicModel.region = $scope.mosaicModel.region.substring(0, $scope.mosaicModel.region.length-4) 
+						}
+						
 						$scope.$applyAsync();
 					}
 				}
