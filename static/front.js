@@ -2183,18 +2183,28 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 											for (var m of details.missions.reverse()) {
 												
 												contentImage +=	
-												'<div style="flex:0 0 calc(100% / ' + details.columns + ');">' +
+												'<div style="flex:0 0 calc(100% / ' + details.cols + ');">' +
 												'	<img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url(' + m.image + '=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />' +
 												'</div>'
 												;
 											}
+											
+											var contentClass = '';
+											if (details.missions.length > 24) contentClass = 'f-align-start scrollbar scrollbar-mini';
+											if (details.missions.length <= 24) contentClass = 'f-align-center pr-1';
+
+											var contentDistance = '';
+											if (details.type == 'sequence') contentDistance = details.distance.toFixed(2).toString() + ' km';
+											if (details.type == 'serie') contentDistance = 'serie';
+											if (details.type == 'sequence' && details.distance > 10.0 && details.distance < 30.0) contentDistance += '<span class="mx-1">&middot;</span><i class="fa fa-bicycle mx-1"></i>';
+											if (details.type == 'sequence' && details.distance > 30.0) contentDistance += '<span class="mx-1">&middot;</span><i class="fa fa-car mx-1"></i>';
 
 											var contentString =
-												'<a class="btn btn-primary text-transform-normal f-col p-2" style="align-items:initial!important;" href="/mosaic/' + details.ref + '">' +
+												'<a class="btn btn-primary text-transform-normal f-col p-2" style="width:175px; align-items:initial!important;" href="/mosaic/' + details.ref + '">' +
 													
-												'	<div class="bg-black f-row f-justify-center" style="height:105px; overflow-y:auto; padding-top:4px; padding-bottom:4px; padding-left:4px;" ng-class="{\'f-align-start scrollbar scrollbar-mini\': mosaic.missions.length > 24, \'f-align-center pr-1\': mosaic.missions.length <= 24}">' +
+												'	<div class="bg-black f-row f-justify-center ' + contentClass + '" style="height:105px; overflow-y:auto; padding-top:4px; padding-bottom:4px; padding-left:4px;">' +
 														
-												'		<div class="f-row f-wrap f-justify-center f-align-center" style="padding:0 calc((6 - ' + details.columns + ') / 2 * 16.666667%); width:100%;">' +
+												'		<div class="f-row f-wrap f-justify-center f-align-center" style="padding:0 calc((6 - ' + details.cols + ') / 2 * 16.666667%); width:100%;">' +
 															+ contentImage + 
 												'		</div>' +
 														
@@ -2203,7 +2213,7 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 												'	<div class="f-col">' +
 														
 										        '    	<div class="text-white mt-2 mb-1" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">' + details.title + '</div>' +
-										        '    	<div class="text-normal">' + details.missions.length + ' <i class="fa fa-th mx-1"></i> <span class="mr-1">&middot;</span> <span ng-if="mosaic.type == \'sequence\'">{{mosaic.distance | number:2}} km</span><span ng-if="mosaic.type == \'serie\'">serie</span><span ng-show="mosaic.type != \'serie\' && mosaic.distance > 10.0" class="mx-1">&middot;</span><i ng-show="mosaic.type != \'serie\' && mosaic.distance > 10.0 && mosaic.distance < 30.0" class="fa fa-bicycle mx-1"></i><i ng-show="mosaic.type != \'serie\' && mosaic.distance > 30.0" class="fa fa-car mx-1"></i></div>' +
+										        '    	<div class="text-normal">' + details.missions.length + ' <i class="fa fa-th mx-1"></i> <span class="mr-1">&middot;</span>' + contentDistance + '</div>' +
 										            	
 												'	</div>' +
 													
