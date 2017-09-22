@@ -23,7 +23,7 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 AWS_ACCESS_KEY_ID = 'AKIAJU7S7ZBNV5YKSYGQ'
 AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'arn:aws:s3:::myingressmosaics'
+AWS_STORAGE_BUCKET_NAME = 'myingressmosaics'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
