@@ -129,7 +129,6 @@ def preview(request, ref):
 	response = HttpResponse(content_type = 'image/png')
 	image.save(response, 'PNG')
 	
-	import io
 	imgByteArr = io.BytesIO()
 	image.save(imgByteArr, format='PNG')
 	imgByteArr = imgByteArr.getvalue()
