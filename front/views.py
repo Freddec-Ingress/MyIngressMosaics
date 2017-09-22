@@ -169,7 +169,7 @@ def mosaic(request, ref):
 			desc += ' > ' + mosaic.city
 		desc += ' - ' + str(len(mosaic.missions.all())) + ' missions' + ' - ' + mosaic.type
 
-		context = { 'ref': ref, 'name': mosaic.title, 'desc': desc }
+		context = { 'ref': ref, 'name': mosaic.title, 'desc': desc, 'image': mosaic.preview }
 		
 	else:
 		context = { 'ref': ref }
