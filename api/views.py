@@ -503,9 +503,8 @@ def data_searchForMosaics(request):
 	
 	results = Mosaic.objects.filter(creators__icontains=request.data['text'])
 	if (results.count() > 0):
-		for item in results:
-			for mosaic in item.mosaic_set.all():
-				array.append(mosaic)
+		for mosaic in results:
+			array.append(mosaic)
 		
 	# Title search
 	
