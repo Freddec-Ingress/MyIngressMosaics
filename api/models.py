@@ -123,8 +123,8 @@ class Mosaic(models.Model):
 		data = {
 			
 			'ref': self.ref,
-			'startLat': self.lat,
-			'startLng': self.lng,
+			'startLat': self.startLat,
+			'startLng': self.startLng,
 		}
 			
 		return data
