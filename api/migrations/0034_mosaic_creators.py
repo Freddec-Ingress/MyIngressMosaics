@@ -17,8 +17,8 @@ def update(apps, schema_editor):
         
         for item in m.missions.all().order_by('order'):
             
-			if item.creator not in m.creators:
-				m.creators += '|' + item.creator + '|'
+            if item.creator not in m.creators:
+                m.creators += '|' + item.creator + '|'
 
         m.save()
 
