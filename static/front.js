@@ -1696,6 +1696,7 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 	$scope.createMosaic = function() {
 		
 		CreateService.createWithMosaic($scope.mosaicModel);
+		$scope.clearAll();
 	}
 });
 
