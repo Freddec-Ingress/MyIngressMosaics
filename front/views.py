@@ -131,7 +131,7 @@ def preview(request, ref):
 	
 	import boto3
 	s3 = boto3.resource('s3')
-	s3.Bucket('myingressmosaics').put_object(Key='test.jpg', Body=response)
+	s3.Bucket('myingressmosaics').put_object(Key='test.jpg', Body=image)
 	
 	return response
 
