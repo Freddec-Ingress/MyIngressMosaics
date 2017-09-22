@@ -857,7 +857,7 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 													'<div class="image">' + contentImage + '</div>' +
 													'<div class="detail">' +
 														'<div class="title">' + details.title + '</div>' +
-														'<div class="info">' + details.count + ' missions <br> ' + details._distance.toFixed(2) + ' km &middot; ' + details.type + '</div>' +
+														'<div class="info">' + details.missions.length + ' missions <br> ' + details.distance.toFixed(2) + ' km &middot; ' + details.type + '</div>' +
 													'</div>' +
 												'</a>'
 											;
