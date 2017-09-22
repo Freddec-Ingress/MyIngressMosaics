@@ -501,7 +501,7 @@ def data_searchForMosaics(request):
 	
 	# Creator search
 	
-	results = Creator.objects.filter(name__icontains=request.data['text'])
+	results = Mosaic.objects.filter(creators__icontains=request.data['text'])
 	if (results.count() > 0):
 		for item in results:
 			for mosaic in item.mosaic_set.all():
@@ -541,19 +541,10 @@ def data_searchForMosaics(request):
 		
 		data = { 'mosaics': [], }
 		for item in temp:
-			data['mosaics'].append(item.serialize())
+			data['mosaics'].append(item.overviewSerialize())
 	
 	else:
 		data = { 'mosaics': None, }
-	
-	# Save search results for stats
-	
-	if not data['mosaics']:
-		result = SearchResult(search_text=request.data['text'], count=0)
-		result.save()
-	else:
-		result = SearchResult(search_text=request.data['text'], count=len(data['mosaics']))
-		result.save()
 	
 	return Response(data, status=status.HTTP_200_OK)
 

@@ -62,6 +62,7 @@ class Mosaic(models.Model):
 	startLat = models.FloatField(null=True, blank=True)
 	startLng = models.FloatField(null=True, blank=True)
 	distance = models.FloatField(null=True, blank=True)
+	creators = models.CharField(max_length=512, null=True, blank=True)
 	registerer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='mosaics')
 	register_date = models.DateField(default=datetime.now)
 	
@@ -79,7 +80,8 @@ class Mosaic(models.Model):
 		self.startLat = 0.0
 		self.startLng = 0.0
 		self.distance = 0.0
-	
+		self.creators = ''
+		
 		portals = []
 		missions = []
 		
@@ -92,6 +94,9 @@ class Mosaic(models.Model):
 			self.portals += len(mData['portals'])
 			
 			portals += mData['portals']
+			
+			if mData['creator'] not in self.creators:
+				self.creators += '|' + mData['creator'] + '|'
 
 		self.uniques = len([dict(t) for t in set([tuple(d.items()) for d in portals])])
 		
