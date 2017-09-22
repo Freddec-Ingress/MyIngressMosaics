@@ -467,7 +467,7 @@ angular.module('FrontModule.services').service('MapService', function(API) {
 		getMosaicDetails: function(ref) {
 			
 			var data = {'ref':ref};
-			return API.sendRequest('/api/map/details/', 'POST', {}, data);
+			return API.sendRequest('/api/map/mosaic/', 'POST', {}, data);
 		}
 	};
 	

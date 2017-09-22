@@ -1193,7 +1193,7 @@ angular.module('FrontModule.services').service('MapService', function(API) {
 		getMosaicDetails: function(ref) {
 			
 			var data = {'ref':ref};
-			return API.sendRequest('/api/map/details/', 'POST', {}, data);
+			return API.sendRequest('/api/map/mosaic/', 'POST', {}, data);
 		}
 	};
 	
@@ -2023,7 +2023,7 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 
 	$rootScope.infowindow = new google.maps.InfoWindow({
 		content: '',
-		pixelOffset: new google.maps.Size(5, 5)
+		pixelOffset: new google.maps.Size(0, 0)
 	});
 
 	$scope.initLocation = null;
@@ -2142,9 +2142,10 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 				if (response) {
 					
 					var contentLoading =
-							'<div class="loading">' +
-								'<img src="/static/img/loading.png" />' +
-							'</div>'
+						'<div class="loading-line px-2 py-1">' +
+						'	<img src="/static/img/loading.png" />' +
+						'	Loading data...' +
+						'</div>'
 					;
 					
 					for (var item of response) {
