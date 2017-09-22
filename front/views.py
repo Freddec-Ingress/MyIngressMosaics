@@ -164,8 +164,16 @@ def mosaic(request, ref):
 		if mosaic.city:
 			desc += ' > ' + mosaic.city
 		desc += ' - ' + str(len(mosaic.missions.all())) + ' missions' + ' - ' + mosaic.type
-
-		context = { 'ref': ref, 'name': mosaic.title, 'desc': desc }
+	
+		mcount = mosaic.missions.count()
+		
+		mosaic_rows = int(math.ceil(mcount / mosaic.cols))
+		
+		img_height = 32 + 20 + (100 * mosaic_rows)
+		if (img_height < 352):
+			img_height = 352
+		
+		context = { 'ref': ref, 'name': mosaic.title, 'desc': desc, 'img_height': img_height }
 		
 	else:
 		context = { 'ref': ref }
