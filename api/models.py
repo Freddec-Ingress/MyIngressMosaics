@@ -16,6 +16,13 @@ from django.contrib.auth.models import User
 
 from django.utils.encoding import python_2_unicode_compatible
 
+import os
+import urllib, io
+
+from operator import itemgetter, attrgetter, methodcaller
+
+from PIL import Image, ImageDraw, ImageFont
+
 
 
 #---------------------------------------------------------------------------------------------------
@@ -72,6 +79,74 @@ class Mosaic(models.Model):
 	def __str__(self):
 		return self.title + ' - ' + str(self.missions.count())
 		
+	# Generate preview
+	
+	def generatePreview(self):
+		
+		mosaic = self
+		
+		mcount = mosaic.missions.count()
+		
+		mosaic_rows = int(math.ceil(mcount / mosaic.cols))
+		
+		img_height = 32 + 20 + (100 * mosaic_rows)
+		if (img_height < 352):
+			img_height = 352
+		
+		image = Image.new('RGBA', (632, img_height), (0, 77, 64))
+	
+		draw = ImageDraw.Draw(image)
+		draw.rectangle(((8, 8), (624, img_height - 52 + 24)), fill = 'black')
+		
+		fontfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/fonts/coda-regular.ttf').read())
+		
+		font = ImageFont.truetype(fontfile, 15)
+		draw.text((16, img_height - 25), 'MIM - MyIngressMosaics.com', fill=(255, 255, 255), font=font)
+		
+		realx = 0
+		if mcount < mosaic.cols:
+			realx = mcount * 100
+		else:
+			realx = mosaic.cols * 100
+		
+		realy = mosaic_rows * 100
+		
+		paddingX = 16 + (600 - realx) / 2
+		
+		if mosaic_rows < 4:
+			paddingY = 16 + (300 - realy) / 2
+		else:
+			paddingY = 16
+	
+		maskfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/img/mask.png').read())
+		maskimg = Image.open(maskfile)
+			
+		for m in mosaic.missions.all():
+	
+			file = io.BytesIO(urllib.request.urlopen(m.image + '=s100').read())
+			mimg = Image.open(file)
+			
+			order = mcount - m.order
+			
+			y = int(order / mosaic.cols)
+			x = int(order - (y * mosaic.cols))
+			
+			xoffset = paddingX + (x * 100)
+			yoffset = paddingY + (y * 100)
+			
+			image.paste(mimg, (int(xoffset), int(yoffset)));
+			image.paste(maskimg, (int(xoffset), int(yoffset)), maskimg);
+	
+		imgByteArr = io.BytesIO()
+		image.save(imgByteArr, format='PNG')
+		imgByteArr = imgByteArr.getvalue()
+	
+		from django.core.files.storage import default_storage
+		name = ''+ref+'.png'
+		file = default_storage.open(name, 'w')
+		file.write(imgByteArr)
+		file.close()
+	
 	# Internal data computing
 
 	def computeInternalData(self):
@@ -121,6 +196,7 @@ class Mosaic(models.Model):
 					self.distance += getDistanceFromLatLng(pData1['lat'], pData1['lng'], pData2['lat'], pData2['lng'])
 					
 		self.save()
+		self.generatePreview()
 	
 	# Map serialization
 	
