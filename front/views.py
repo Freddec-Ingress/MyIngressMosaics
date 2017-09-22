@@ -139,9 +139,14 @@ def preview(request, ref):
 	imgByteArr = imgByteArr.getvalue()
 
 	from django.core.files.storage import default_storage
-	file = default_storage.open(''+ref+'.png', 'w')
+	name = ''+ref+'.png'
+	file = default_storage.open(name, 'w')
 	file.write(imgByteArr)
 	file.close()
+	url = default_storage.url(name)
+	
+	mosaic.preview = url
+	mosaic.save()
 
 	return response
 

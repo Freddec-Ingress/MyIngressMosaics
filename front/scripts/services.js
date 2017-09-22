@@ -355,7 +355,7 @@ angular.module('FrontModule.services').service('CreateService', function($window
 
 			API.sendRequest('/api/mosaic/create/', 'POST', {}, service.data).then(function(response) {
 
-				$window.location.href = '/mosaic/' + response;
+				$window.open('https://www.myingressmosaics.com/mosaic/' + response);
 			});
 		},
 	};

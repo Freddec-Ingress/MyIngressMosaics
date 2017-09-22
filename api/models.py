@@ -57,6 +57,7 @@ class Mosaic(models.Model):
 	status = models.CharField(max_length=64, default='active')
 	region = models.CharField(max_length=64, null=True, blank=True)
 	country = models.CharField(max_length=64)
+	preview = models.CharField(max_length=1024, null=True, blank=True)
 	portals = models.IntegerField(null=True, blank=True)
 	uniques = models.IntegerField(null=True, blank=True)
 	startLat = models.FloatField(null=True, blank=True)
