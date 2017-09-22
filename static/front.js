@@ -1512,6 +1512,12 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 		if (a.order > b.order)
 			return 1;
 		
+		if (a.title < b.title)
+			return -1;
+			
+		if (a.title > b.title)
+			return 1;
+			
 		return 0;
 	}
 	
