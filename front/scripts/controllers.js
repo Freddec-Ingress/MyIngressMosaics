@@ -316,8 +316,8 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 						
 						if ($scope.mosaicModel.country == 'Japan') {
 							
-							console.log($scope.mosaicModel.region.substring($scope.mosaicModel.region.length-4, $scope.mosaicModel.region.length));
-							if ($scope.mosaicModel.region.substring($scope.mosaicModel.region.length-4, $scope.mosaicModel.region.length) == '-ken') $scope.mosaicModel.region = $scope.mosaicModel.region.substring(0, $scope.mosaicModel.region.length-4) 
+							if ($scope.mosaicModel.region.substring($scope.mosaicModel.region.length-4, $scope.mosaicModel.region.length) == '-ken') $scope.mosaicModel.region = $scope.mosaicModel.region.substring(0, $scope.mosaicModel.region.length-4);
+							if ($scope.mosaicModel.city.substring($scope.mosaicModel.city.length-4, $scope.mosaicModel.city.length) == '-shi') $scope.mosaicModel.city = $scope.mosaicModel.city.substring(0, $scope.mosaicModel.city.length-4);
 						}
 						
 						$scope.$applyAsync();
