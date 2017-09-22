@@ -816,7 +816,7 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 							
 							refArray.push(item.ref);
 
-							var latLng = new google.maps.LatLng(item._startLat, item._startLng);
+							var latLng = new google.maps.LatLng(item.startLat, item.startLng);
 							var marker = new google.maps.Marker({
 								position: latLng,
 								map: map,
