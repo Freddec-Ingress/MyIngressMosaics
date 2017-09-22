@@ -379,6 +379,22 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 			$scope.mosaicModel.country = null;
 		
 			$window.open('https://www.myingressmosaics.com/mosaic/' + response);
+			
+		}, function(response) {
+			
+			var missions = $scope.mosaicModel.missions.slice();
+			for (var m of missions) {
+				$scope.mosaicModel.missions.splice($scope.mosaicModel.missions.indexOf(m), 1);
+			}
+			
+			$scope.mosaicModel.city = null;
+			$scope.mosaicModel.type = 'sequence';
+			$scope.mosaicModel.title = null;
+			$scope.mosaicModel.region = null;
+			$scope.mosaicModel.columns = '6';
+			$scope.mosaicModel.country = null;
+		
+			$window.open('https://www.myingressmosaics.com/mosaic/' + response);
 		});
 	}
 });
