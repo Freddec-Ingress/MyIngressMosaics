@@ -146,6 +146,8 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 	
 	$scope.search = function() {
 		
+		$scope.searchModel.results = [];
+		
 		$('#searchButton').val('');
 		$scope.searching = true;
 		
