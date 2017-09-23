@@ -1517,10 +1517,10 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 	
 	function compareOrderAsc(a, b) {
 		
-		if (a.order.parseInt() < b.order.parseInt())
+		if (parseInt(a.order) < parseInt(b.order))
 			return -1;
 			
-		if (a.order.parseInt() > b.order.parseInt())
+		if (parseInt(a.order) > parseInt(b.order))
 			return 1;
 		
 		if (a.title < b.title)
