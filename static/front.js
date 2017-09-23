@@ -1479,9 +1479,16 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 		'results': [],
 	}
 	
+	$scope.searching = false;
+	
 	$scope.search = function() {
 		
+		$('#searchButton').val('');
+		$scope.searching = true;
+		
 		if (!$scope.searchModel.text) {
+			$('#searchButton').val('Search');
+			$scope.searching = false;
 			return;
 		}
 		
@@ -1489,6 +1496,8 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 		API.sendRequest('/api/missions/', 'POST', {}, data).then(function(response) {
 			
 			$scope.searchModel.results = response.missions;
+			$('#searchButton').val('Search');
+			$scope.searching = false;
 		});
 	}
 	

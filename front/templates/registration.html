@@ -92,8 +92,8 @@
                     
                 	<form class="f-row f-nowrap">
                 		<input type="text" class="form-control" placeholder="mosaic name, creator name" ng-model="searchModel.text" />
-                		<input type="submit" class="btn btn-primary ml-2" ng-click="search();" value="Search">
-                			<div class="loading-line px-2 py-1">
+                		<input id="searchButton" type="submit" class="btn btn-primary ml-2" ng-click="search();" value="Search" ng-disabled="searching">
+                			<div ng-show="searching" class="loading-line px-2 py-1" style="position: absolute; right: 8px; top: 6px;">
                 				<img src="/static/img/loading.png" />
                 			</div>
                 		</input>
