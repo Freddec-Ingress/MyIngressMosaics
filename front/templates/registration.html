@@ -251,9 +251,9 @@
     	        	
     	        <div class="form-button-bar mt-4">
     	        	
-    				<button class="btn btn-primary" ng-click="createMosaic();" ng-disabled="!mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || (mosaicModel.missions.length < 1)">
-    				    Create
-            			<div class="loading-line px-2 py-1" style="position: absolute; right: 8px; top: 6px;">
+    				<button class="btn btn-primary" ng-click="createMosaic();" ng-disabled="creating || !mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || (mosaicModel.missions.length < 1)">
+    				    <span id="createButton">Create</span>
+            			<div ng-show="creating" class="loading-line px-2 py-1">
             				<img src="/static/img/loading.png" />
             			</div>
     				</button>

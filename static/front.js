@@ -1517,10 +1517,10 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 	
 	function compareOrderAsc(a, b) {
 		
-		if (a.order < b.order)
+		if (a.order.parseInt() < b.order.parseInt())
 			return -1;
 			
-		if (a.order > b.order)
+		if (a.order.parseInt() > b.order.parseInt())
 			return 1;
 		
 		if (a.title < b.title)
@@ -1716,12 +1716,17 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 			
 		}
 		
-		item.order = order;
+		item.order = order.toString();
 		
 		$scope.mosaicModel.missions.sort(compareOrderAsc);
 	}
 	
+	$scope.creating = false;
+	
 	$scope.createMosaic = function() {
+
+		$('#createButton').text('');
+		$scope.creating = true;
 
 		API.sendRequest('/api/mosaic/create/', 'POST', {}, $scope.mosaicModel).then(function(response) {
 
@@ -1739,6 +1744,9 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 		
 			$window.open('https://www.myingressmosaics.com/mosaic/' + response);
 			
+			$('#createButton').text('Create');
+			$scope.creating = false;
+		
 		}, function(response) {
 			
 			var missions = $scope.mosaicModel.missions.slice();
@@ -1754,6 +1762,9 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 			$scope.mosaicModel.country = null;
 		
 			$window.open('https://www.myingressmosaics.com/mosaic/' + response);
+			
+			$('#createButton').text('Create');
+			$scope.creating = false;
 		});
 	}
 });
