@@ -406,7 +406,7 @@ function processNextPortal() {
 //--------------------------------------------------------------------------------------------------
 // Functions to process mission request and mission data
 
-var mImage = {
+var mImageEnl = {
     url: 'https://commondatastorage.googleapis.com/ingress.com/img/map_icons/marker_images/enl_lev8.png',
     scaledSize: new google.maps.Size(25, 25),
     origin: new google.maps.Point(0, 0),
@@ -445,19 +445,29 @@ function processNextMission() {
             return;
         }
 
-        console.log('\t' + data.result[1]);
-
-        if (data.result[9][0][5]) {
-
-            var marker = new google.maps.Marker({
-                position: {lat: data.result[9][0][5][2]/1000000.0, lng: data.result[9][0][5][3]/1000000.0},
-                map: M,
-                icon: mImage,
-            });
-        }
-
         data.result.push(username);
-        callMIMAPI('ext_register', data.result);
+        var requestData = data.result;
+        callMIMAPI('ext_register', data.result, function(data, textStatus, jqXHR) {
+
+            console.log('\t' + requestData[1]);
+
+            if (requestData[9][0][5] && data == 'Registered') {
+
+                var marker = new google.maps.Marker({
+                    position: {lat: requestData[9][0][5][2]/1000000.0, lng: requestData[9][0][5][3]/1000000.0},
+                    map: M,
+                    icon: mImageEnl,
+                });
+            }
+            if (requestData[9][0][5] && data == 'Updated') {
+
+                var marker = new google.maps.Marker({
+                    position: {lat: requestData[9][0][5][2]/1000000.0, lng: requestData[9][0][5][3]/1000000.0},
+                    map: M,
+                    icon: mImageRes,
+                });
+            }
+        });
 
         missionsProcessed.push(mission_id);
         missionsToBeProcessed.splice(0, 1);
@@ -497,7 +507,7 @@ function findTileFunc(element, index, array) {
     return false;
 }
 
-var resImage = {
+var mImageRes = {
     url: 'https://commondatastorage.googleapis.com/ingress.com/img/map_icons/marker_images/hum_lev8.png',
     scaledSize: new google.maps.Size(25, 25),
     origin: new google.maps.Point(0, 0),
@@ -532,6 +542,8 @@ function init() {
 
         if (scanning === true) return;
 
+        window.checkBounds();
+        
         console.clear();
 
         console.log('Location: ' + currentLocation);
@@ -632,6 +644,40 @@ function init() {
         }
 
         window.startScanning();
+    };
+
+    window.checkBounds = function() {
+
+        var center = M.getCenter();
+
+        var bds = M.getBounds();
+
+        var South_Lat = bds.getSouthWest().lat();
+        var South_Lng = bds.getSouthWest().lng();
+        var North_Lat = bds.getNorthEast().lat();
+        var North_Lng = bds.getNorthEast().lng();
+
+        var data = { sLat: South_Lat, sLng: South_Lng, nLat: North_Lat, nLng: North_Lng };
+        callMIMAPI('ext_bounds', data, function(data, textStatus, jqXHR) {
+
+            if (data) {
+
+                for (var item of data) {
+
+                    if (missionsProcessed.indexOf(item.ref) == -1) {
+
+                        missionsProcessed.push(item.ref);
+
+                        var latLng = new google.maps.LatLng(item.startLat, item.startLng);
+                        var marker = new google.maps.Marker({
+                            position: latLng,
+                            map: M,
+                            icon: mImageRes,
+                        });
+                    }
+                }
+            }
+        });
     };
 }
 
