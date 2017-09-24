@@ -252,6 +252,18 @@ function processNextTiles() {
 
     if (!scanning || tilesToBeProcessed.length < 1) {
 
+        tilesProcessed = [];
+        tilesToBeProcessed = [];
+
+        currentProcessed_count = 0;
+        currentToBeProcessed_count = 0;
+
+        portalsToBeProcessed = [];
+
+        missionsProcessed = [];
+        missionsInProcess = [];
+        missionsToBeProcessed = [];
+
         currentProcessed_count = 0;
         currentToBeProcessed_count = 0;
 
@@ -262,8 +274,6 @@ function processNextTiles() {
 
         $('#loading_msg_text').hide();
         $('#loading_data_circle').hide();
-
-        processNextLocation();
 
         return;
     }
@@ -543,7 +553,7 @@ function init() {
         if (scanning === true) return;
 
         window.checkBounds();
-        
+
         console.clear();
 
         console.log('Location: ' + currentLocation);
@@ -626,6 +636,22 @@ function init() {
     };
 
     window.stopScanning = function() {
+
+        for (var tile of tilesToBeProcessed) {
+            tile.rect.setMap(null);
+        }
+
+        tilesProcessed = [];
+        tilesToBeProcessed = [];
+
+        currentProcessed_count = 0;
+        currentToBeProcessed_count = 0;
+
+        portalsToBeProcessed = [];
+
+        missionsProcessed = [];
+        missionsInProcess = [];
+        missionsToBeProcessed = [];
 
         scanning = false;
 
