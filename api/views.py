@@ -84,6 +84,27 @@ def ext_registerMission(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((AllowAny, ))
+def ext_checkBounds(request):
+
+	data = None
+	
+	results = Mission.objects.filter(startLat__gte=request.data['sLat'], startLng__gte=request.data['sLng']).filter(startLat__lte=request.data['nLat'], startLng__lte=request.data['nLng'])
+	if (results.count() > 0):
+		
+		data = []
+		
+		for item in results:
+			
+			mission = item.mapSerialize()
+			data.append(mission)
+
+	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((AllowAny, ))
 def user_login(request):
 	
 	user = authenticate(username=request.data['username'], password=request.data['password'])
