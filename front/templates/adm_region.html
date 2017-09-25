@@ -42,6 +42,7 @@
 	    <div class="mt-4 px-2 py-1">
 	    
 	    	<form class="card-block f-row f-nowrap p-2">
+	    		<span ng-repeat="country in countries">{{country.name}}</span>
 	    		<select class="form-control" ng-model="selected_country">
 	    			<option ng-repeat="country in countries" value="{{country.name}}">{{country.name}}</option>
 	    		</select>

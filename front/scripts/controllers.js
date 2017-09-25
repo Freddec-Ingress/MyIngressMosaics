@@ -1147,8 +1147,7 @@ angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($
 	API.sendRequest('/api/adm/countries', 'POST').then(function(response) {
 		
 		$scope.countries = response;
-		console.log($scope.countries);
-		
+
 		$scope.loading_page = false;
 	});
 	
