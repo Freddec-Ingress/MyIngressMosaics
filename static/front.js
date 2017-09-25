@@ -2487,13 +2487,13 @@ angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($
 	
 	$scope.loading_regions = false;
 	
-	$scope.regions = []
+	$scope.regions = null;
 
 	$scope.refresh = function() {
 		
 		$scope.loading_regions = true;
 		
-		$scope.regions = []
+		$scope.regions = null;
 		
 		if (!$scope.selected_country) {
 			
@@ -2501,8 +2501,10 @@ angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($
 			return;
 		}
 		
-		var data = {'country': country};
+		var data = {'country': $scope.selected_country};
 		API.sendRequest('/api/adm/regions', 'POST', {}, data).then(function(response) {
+			
+			$scope.regions = [];
 			
 			for (var item of response) {
 			

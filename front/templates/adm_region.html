@@ -62,10 +62,10 @@
 	     
 	    <!-- Regions -->
 	    
-	    <div ng-show="!loading_regions">
+	    <div ng-show="!loading_regions && regions">
 	    	
 			<div class="f-row pt-4 mt-4 mx-4 text-uppercase bordered-b">
-				{% trans 'Regions' %} - {{regions.length}}
+				{% trans 'Regions' %} - {{regions|length}}
 			</div>
 	
 	        <table class="card-table">
