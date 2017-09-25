@@ -235,10 +235,10 @@
         		            </tbody>
         		       </table>
         		      </div>
-        		                           <div class="mt-2" ng-if="mosaicModel.missions.length > 0">
+        		      <div class="mt-2">
                         {{mosaicModel.missions.length}} missions
-                        <span class="mx-1">&middot;</span>
-                        <a ng-click="clearAll();">Clear all</a>
+                        <span ng-if="mosaicModel.missions.length > 0" class="mx-1">&middot;</span>
+                        <a ng-if="mosaicModel.missions.length > 0" ng-click="clearAll();">Clear all</a>
                     </div>
         		      
                     </div>
