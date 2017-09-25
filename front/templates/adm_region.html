@@ -62,14 +62,26 @@
 	     
 	    <!-- Regions -->
 	    
-	    <div class="mt-2 px-2 py-1" ng-repeat="region in regions">
+	    <div ng-show="!loading_regions">
 	    	
-	    	<form class="card-block f-row f-nowrap p-2">
-	    		{{region.name}}
-	    		<input type="text" class="form-control" placeholder="" ng-model="region.newname" />
-	    		<input type="submit" class="btn btn-primary ml-2" ng-click="rename(region);" value="Rename" />
-	    	</form>
-			
+			<div class="f-row pt-4 mt-4 mx-4 text-uppercase bordered-b">
+				{% trans 'Regions' %} - {{regions.length}}
+			</div>
+	
+	        <table class="card-table">
+	            <tbody>
+	                <tr ng-repeat="region in regions">
+	                	<td class="px-1">
+	                		
+	                		{{region.name}}
+				    		<input type="text" class="form-control" placeholder="" ng-model="region.newname" />
+				    		<input type="submit" class="btn btn-primary ml-2" ng-click="rename(region);" value="Rename" />
+			                		
+	                    </td>
+	                </tr>
+	            </tbody>
+	       </table>
+
 		</div>
 		
 	</div>

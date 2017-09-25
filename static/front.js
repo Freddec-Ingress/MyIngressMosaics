@@ -2493,6 +2493,8 @@ angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($
 		
 		$scope.regions = []
 		
+		if (!country) return;
+		
 		var data = {'country': country};
 		API.sendRequest('/api/adm/regions', 'POST', {}, data).then(function(response) {
 			
@@ -2506,6 +2508,7 @@ angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($
 				$scope.regions.push(obj);
 			}
 			
+			console.log($scope.regions);
 			$scope.loading_regions = false;
 		});
 	}
