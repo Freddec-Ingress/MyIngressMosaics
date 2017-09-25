@@ -619,7 +619,7 @@ def adm_getCountries(request):
 	
 	data = None
 	
-	results = Mosaic.objects.values('country').distinct()
+	results = Mosaic.objects.values('country').order_by('country').distinct()
 	if (results.count() > 0):
 		
 		data = []
@@ -643,7 +643,7 @@ def adm_getRegions(request):
 	
 	data = None
 	
-	results = Mosaic.objects.filter(country=request.data['country']).values('region').distinct()
+	results = Mosaic.objects.filter(country=request.data['country']).values('region').order_by('region').distinct()
 	if (results.count() > 0):
 		
 		data = []
