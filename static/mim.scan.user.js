@@ -62,6 +62,11 @@ document.getElementById('dashboard_container').innerHTML +=
     '       Stop scanning' +
     '</div>';
 
+document.getElementById('dashboard_container').innerHTML +=
+    '<div id="tm_check" class="unselectable bottom_right_tab_button" onclick="checkBounds();">' +
+    '       Check missions' +
+    '</div>';
+
 document.getElementById('loading_msg_text').innerHTML = 'Scanning Data...';
 
 //--------------------------------------------------------------------------------------------------
