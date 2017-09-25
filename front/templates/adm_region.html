@@ -43,10 +43,8 @@
 	    
 	    	<form class="card-block f-row f-nowrap p-2">
 	    		<span ng-repeat="country in countries">{{country}}</span>
-	    		<select class="form-control" ng-model="selected_country">
-	    			<option ng-repeat="country in countries" value="{{country.name}}">{{country.name}}</option>
-	    		</select>
-	    		<input type="submit" class="btn btn-primary ml-2" ng-click="refresh();" value="Refresh" />
+	    		<input type="text" class="form-control" placeholder="country name" ng-model="country">
+	    		<input type="submit" class="btn btn-primary ml-2" ng-click="refresh(country);" value="Refresh" />
 	    	</form>
 	    	
 	    </div>
