@@ -21,8 +21,6 @@ SITE_ID = 1
 
 DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 
-GS_CREDENTIALS = '00b4903a97a7c863cb363d5614d6f21a6ef098756d98aacfab6fae63c326b702'
-GS_PROJECT_ID = '404579985700'
 GS_BUCKET_NAME = 'myingressmosaics-previews'
 GS_AUTO_CREATE_ACL = 'publicRead'
 
