@@ -609,3 +609,70 @@ def map_getMosaicOverview(request):
 		data.append(mosaic)
 
 	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def adm_getCountries(request):
+	
+	data = None
+	
+	results = Mosaic.objects.values('country').distinct()
+	if (results.count() > 0):
+		
+		data = []
+		
+		for item in results:
+			
+			country = {
+				'name': item['country'],
+			}
+			
+			data.append(country)
+	
+	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def adm_getRegions(request):
+	
+	data = None
+	
+	results = Mosaic.objects.filter(country=request.data['country']).values('region').distinct()
+	if (results.count() > 0):
+		
+		data = []
+		
+		for item in results:
+			
+			region = {
+				'name': item['region'],
+			}
+			
+			data.append(region)
+	
+	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def adm_renameRegion(request):
+	
+	data = None
+	
+	results = Mosaic.objects.filter(country=request.data['country'], region=request.data['region'])
+	if (results.count() > 0):
+		
+		for item in results:
+			
+			item.region = request.data['new_region']
+			item.save()
+	
+	return Response(data, status=status.HTTP_200_OK)

@@ -1137,5 +1137,52 @@ angular.module('FrontModule.controllers').controller('SearchCtrl', function($sco
 	}
 });
 
-angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($scope) {
+angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($scope, API) {
+	
+	$scope.loading_page = true;
+	
+	$scope.countries = []
+	$scope.selected_country = null;
+	
+	API.sendRequest('/api/adm/countries', 'POST').then(function(response) {
+		
+		$scope.countries = response;
+		
+		$scope.loading_page = false;
+	});
+	
+	$scope.loading_regions = false;
+	
+	$scope.regions = []
+	
+	$scope.refresh = function() {
+		
+		$scope.loading_regions = true;
+		
+		$scope.regions = []
+		
+		var data = {'country': $scope.selected_country};
+		API.sendRequest('/api/adm/regions', 'POST', {}, data).then(function(response) {
+			
+			for (var item of response) {
+			
+				var obj = {
+					'name': item,
+					'newname': item,
+				};
+				
+				$scope.regions.push(obj);
+			}
+			
+			$scope.loading_regions = false;
+		});
+	}
+	
+	$scope.rename = function(region) {
+		
+		var data = {'country': $scope.selected_country, 'region':region.name, 'new_region':region.newname};
+		API.sendRequest('/api/adm/region/rename', 'POST', {}, data);
+		
+		region.name = region.newname
+	}
 });

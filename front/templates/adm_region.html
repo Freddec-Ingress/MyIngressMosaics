@@ -26,25 +26,54 @@
     
 	<!-- Loading page line -->
 	
-	<div id="block-loading" class="mt-4 px-2 py-1">
+	<div ng-show="loading_page" class="mt-4 px-2 py-1">
 			
 		<div class="loading-line px-2 py-1">
 			<img src="/static/img/loading.png" />
-			{% trans 'Loading data...' %}
+			{% trans 'Loading page...' %}
 		</div>
 		
 	</div>
     
-    <!-- Country selection -->
+    <div ng-show="!loading_page">
     
-    <div class="mt-4 px-2 py-1">
-    
-    	<form class="card-block f-row f-nowrap p-2">
-    		<input type="text" class="form-control" placeholder="" ng-model="searchModel.text" />
-    		<input type="submit" class="btn btn-primary ml-2" ng-click="search();" value="Search" />
-    	</form>
-    	
-    </div>
+	    <!-- Country selection -->
+	    
+	    <div class="mt-4 px-2 py-1">
+	    
+	    	<form class="card-block f-row f-nowrap p-2">
+	    		<select class="form-control" ng-model="selected_country">
+	    			<option ng-repeat="country in countries" value="{{country.name}}">{{country.name}}</option>
+	    		</select>
+	    		<input type="submit" class="btn btn-primary ml-2" ng-click="refresh();" value="Refresh" />
+	    	</form>
+	    	
+	    </div>
+	    
+		<!-- Loading regions line -->
+		
+		<div ng-show="loading_regions" class="mt-4 px-2 py-1">
+				
+			<div class="loading-line px-2 py-1">
+				<img src="/static/img/loading.png" />
+				{% trans 'Loading regions...' %}
+			</div>
+			
+		</div>
+	     
+	    <!-- Regions -->
+	    
+	    <div class="mt-2 px-2 py-1" ng-repeat="region in regions">
+	    	
+	    	<form class="card-block f-row f-nowrap p-2">
+	    		{{region.name}}
+	    		<input type="text" class="form-control" placeholder="" ng-model="region.newname" />
+	    		<input type="submit" class="btn btn-primary ml-2" ng-click="rename(region);" value="Rename" />
+	    	</form>
+			
+		</div>
+		
+	</div>
     
 </div>
 
