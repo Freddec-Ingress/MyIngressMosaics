@@ -19,11 +19,12 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 SITE_ID = 1
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 
-AWS_ACCESS_KEY_ID = 'AKIAIHOSTTENC5NI73LA'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'myingressmosaics'
+GS_CREDENTIALS = '00b4903a97a7c863cb363d5614d6f21a6ef098756d98aacfab6fae63c326b702'
+GS_PROJECT_ID = '404579985700'
+GS_BUCKET_NAME = 'myingressmosaics-previews'
+GS_AUTO_CREATE_ACL = 'publicRead'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
