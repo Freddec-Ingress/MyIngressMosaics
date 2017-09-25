@@ -72,13 +72,13 @@
 	            <tbody>
 	                <tr ng-repeat="region in regions">
 	                	<td class="px-1">
-	                		
+	                		{{region.name}}
+	                    </td>
+	                	<td class="px-1">
 	                		<div class="f-row">
-		                		{{region.name}}
 					    		<input type="text" class="form-control" placeholder="" ng-model="region.newname" />
 					    		<input type="submit" class="btn btn-primary ml-2" ng-click="rename(region);" value="Rename" />
 				    		</div>
-			                
 	                    </td>
 	                </tr>
 	            </tbody>
