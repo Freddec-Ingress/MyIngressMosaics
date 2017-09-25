@@ -216,3 +216,10 @@ def search(request):
 	return render(request, 'search.html', context)
 	
 	
+	
+def adm_region(request):
+	
+	context = {}
+	return render(request, 'adm_region.html', context)
+	
+	

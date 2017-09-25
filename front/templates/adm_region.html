@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block extra-head %}
+
+	<title>MIM - Admin</title>
+
+	<meta property="og:url" content="https://www.myingressmosaics.com">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="MyIngressMosaics">
+	<meta property="og:image" content="https://www.myingressmosaics.com/static/front/img/image.png">
+	<meta property="og:description" content="Search, Register and Share all Ingress Mosaics">
+	
+{% endblock %}
+
+{% block header %}
+
+	{% trans 'Admin - Regions' %}
+	
+{% endblock %}
+
+{% block content %}
+
+<div id="page-container" ng-controller="AdmRegionCtrl">
+    
+	<!-- Loading page line -->
+	
+	<div id="block-loading" class="mt-4 px-2 py-1">
+			
+		<div class="loading-line px-2 py-1">
+			<img src="/static/img/loading.png" />
+			{% trans 'Loading data...' %}
+		</div>
+		
+	</div>
+    
+    <!-- Country selection -->
+    
+    <div class="mt-4 px-2 py-1">
+    
+    	<form class="card-block f-row f-nowrap p-2">
+    		<input type="text" class="form-control" placeholder="" ng-model="searchModel.text" />
+    		<input type="submit" class="btn btn-primary ml-2" ng-click="search();" value="Search" />
+    	</form>
+    	
+    </div>
+    
+</div>
+
+{% endblock %}

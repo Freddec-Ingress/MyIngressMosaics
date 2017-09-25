@@ -1136,3 +1136,6 @@ angular.module('FrontModule.controllers').controller('SearchCtrl', function($sco
 		}
 	}
 });
+
+angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($scope) {
+});

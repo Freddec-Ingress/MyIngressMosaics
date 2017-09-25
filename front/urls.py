@@ -25,5 +25,7 @@ urlpatterns = [
 	url(r'^profile', views.profile),
 	url(r'^plugin', views.plugin),
 	
+	url(r'^adm_region', views.adm_region),
+	
 	url(r'^.*', views.home, name='home'),
 ]
