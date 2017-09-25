@@ -1164,8 +1164,8 @@ angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($
 			for (var item of response) {
 			
 				var obj = {
-					'name': item,
-					'newname': item,
+					'name': item.name,
+					'newname': item.name,
 				};
 				
 				$scope.regions.push(obj);
