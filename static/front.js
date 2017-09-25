@@ -2478,6 +2478,8 @@ angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($
 	
 	$scope.loading_page = true;
 	
+	$scope.selected_country = '';
+	
 	API.sendRequest('/api/adm/countries', 'POST').then(function(response) {
 		
 		$scope.loading_page = false;
@@ -2486,14 +2488,18 @@ angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($
 	$scope.loading_regions = false;
 	
 	$scope.regions = []
-	
-	$scope.refresh = function(country) {
+
+	$scope.refresh = function() {
 		
 		$scope.loading_regions = true;
 		
 		$scope.regions = []
 		
-		if (!country) return;
+		if (!$scope.selected_country) {
+			
+			$scope.loading_regions = false;
+			return;
+		}
 		
 		var data = {'country': country};
 		API.sendRequest('/api/adm/regions', 'POST', {}, data).then(function(response) {
