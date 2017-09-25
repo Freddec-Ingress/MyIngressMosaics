@@ -228,24 +228,7 @@ def mosaic_create(request):
 	mosaic.computeInternalData()
 	
 	return Response(mosaic.ref, status=status.HTTP_200_OK)
-		
-	
-	
-#---------------------------------------------------------------------------------------------------
-@api_view(['GET'])
-@permission_classes((AllowAny, ))
-def mosaic_preview(request, ref):
-	
-	data = None
-	
-	result = Mosaic.objects.filter(ref=ref)
-	if result.count() > 0:
-		
-		mosaic = result[0]
-		mosaic.generatePreview()
-	
-	return Response(data, status=status.HTTP_200_OK)
-		
+
 	
 	
 #---------------------------------------------------------------------------------------------------

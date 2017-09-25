@@ -252,7 +252,6 @@ function processNextTiles() {
 
     if (!scanning || tilesToBeProcessed.length < 1) {
 
-        tilesProcessed = [];
         tilesToBeProcessed = [];
 
         currentProcessed_count = 0;
@@ -641,7 +640,6 @@ function init() {
             tile.rect.setMap(null);
         }
 
-        tilesProcessed = [];
         tilesToBeProcessed = [];
 
         currentProcessed_count = 0;
