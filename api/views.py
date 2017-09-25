@@ -681,7 +681,7 @@ def adm_renameRegion(request):
 
 #---------------------------------------------------------------------------------------------------
 @api_view(['GET'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((AllowAny, ))
 def adm_getCreators(request):
 	
 	data = None
