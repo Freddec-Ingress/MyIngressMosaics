@@ -10,8 +10,8 @@ from api.models import *
 
 def update(apps, schema_editor):
     
-    missions = Mission.objects.filter(mosaic__isnull=True, name__isnull=True)
-    for m in missions:
+	missions = Mission.objects.filter(mosaic__isnull=True, name__isnull=True)
+	for m in missions:
         
 		m.name = m.title
 		m.name = m.name.replace('0', '')
