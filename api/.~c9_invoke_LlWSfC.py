@@ -73,10 +73,7 @@ def ext_registerMission(request):
 			mission.save()
 			
 			mission.computeInternalData()
-			
-			if mission.mosaic:
-				mission.mosaic.computeInternalData()
-	
+
 	return Response('Updated', status=status.HTTP_200_OK)
 
 
