@@ -2478,12 +2478,13 @@ angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($
 	
 	$scope.loading_page = true;
 	
-	$scope.countries = []
+	$scope.countries = null;
 	$scope.selected_country = null;
 	
 	API.sendRequest('/api/adm/countries', 'POST').then(function(response) {
 		
 		$scope.countries = response;
+		console.log($scope.countries);
 		
 		$scope.loading_page = false;
 	});
