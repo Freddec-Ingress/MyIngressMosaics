@@ -688,14 +688,14 @@ def adm_getCreators(request):
 	
 	from django.db.models import Count
 	
-	fieldname = 'creator'
+	fieldname = 'name'
 	results = Mission.objects.filter(mosaic__isnull=True).values(fieldname).order_by(fieldname).annotate(count=Count(fieldname))
 	if (results.count() > 0):
 		
-		data = { 'creators': [], }
+		data = { 'name': [], }
 		
 		for item in results:
-			if item['count'] >= 100:
-				data['creators'].append(item[fieldname])
+			if item['count'] >= 6:
+				data['name'].append(item[fieldname])
 	
 	return Response(data, status=status.HTTP_200_OK)
