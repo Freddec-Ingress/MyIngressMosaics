@@ -622,7 +622,7 @@ def adm_getCountries(request):
 	results = Mosaic.objects.values('country').order_by('country').distinct()
 	if (results.count() > 0):
 		
-		data = []
+		data = { 'countries': [], }
 		
 		for item in results:
 			
@@ -630,7 +630,7 @@ def adm_getCountries(request):
 				'name': item['country'],
 			}
 			
-			data.append(country)
+			data['countries'].append(country)
 	
 	return Response(data, status=status.HTTP_200_OK)
 
@@ -646,7 +646,7 @@ def adm_getRegions(request):
 	results = Mosaic.objects.filter(country=request.data['country']).values('region').order_by('region').distinct()
 	if (results.count() > 0):
 		
-		data = []
+		data = { 'regions': [], }
 		
 		for item in results:
 			
@@ -654,7 +654,7 @@ def adm_getRegions(request):
 				'name': item['region'],
 			}
 			
-			data.append(region)
+			data['regions'].append(region)
 	
 	return Response(data, status=status.HTTP_200_OK)
 

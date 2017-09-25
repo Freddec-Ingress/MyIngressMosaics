@@ -1169,7 +1169,7 @@ angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($
 			
 			$scope.regions = [];
 			
-			for (var item of response) {
+			for (var item of response.regions) {
 			
 				var obj = {
 					'name': item.name,
