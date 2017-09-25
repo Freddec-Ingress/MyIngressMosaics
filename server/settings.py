@@ -23,6 +23,7 @@ DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 
 GS_BUCKET_NAME = 'myingressmosaics-previews'
 GS_AUTO_CREATE_ACL = 'publicRead'
+GS_CREDENTIALS = 'MyIngressMosaics-31aa0035c150.json'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
