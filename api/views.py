@@ -676,3 +676,26 @@ def adm_renameRegion(request):
 			item.save()
 	
 	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['GET'])
+@permission_classes((IsAuthenticated, ))
+def adm_getCreators(request):
+	
+	data = None
+	
+	from django.db.models import Count
+	
+	fieldname = 'creator'
+	results = Mission.objects.filter(mosaic__isnull=True).values(fieldname).order_by(fieldname).annotate(count=Count(fieldname))
+	if (results.count() > 0):
+		
+		data = { 'creators': [], }
+		
+		for item in results:
+			if item['count'] >= 100:
+				data['creators'].append(item[fieldname])
+	
+	return Response(data, status=status.HTTP_200_OK)
