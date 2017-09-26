@@ -1201,8 +1201,20 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 	
 	API.sendRequest('/api/adm/registration/mosaics/', 'POST').then(function(response) {
 		
-		$scope.mosaics = response;
+		$scope.mosaics =  [];
 		
+		for (var item in response) {
+			
+			var obj = {
+				'name': item.name,
+				'count': item.count,
+				
+				'expanded': false,
+			}
+			
+			$scope.mosaics.push(obj);
+		}
+
 		$scope.loading_page = false;
 
 		$scope.$applyAsync();

@@ -39,16 +39,21 @@
         
         <div class="panel mb-4" ng-repeat="mosaic in mosaics">
             
-            <div class="f-row" ng-click="toggle(mosaic);">
+            <div class="f-row">
+
+                <div class="">
+                    <a ng-click="toggle(mosaic);">
+                    	<i ng-hide="mosaic.expanded" class="mr-2 fa fa-caret-right"></i>
+                    	<i ng-show="mosaic.expanded" class="mr-2 fa fa-caret-down"></i>
+                    </a>
+                </div>
 
                 <div class="mr-auto">
-                    {{mosaic}}
-                    {{mosaic.name}}
-                    <input type="text" class="form-control" ng-model="mosaic.name" />
+                    <input readonly type="text" class="form-control" ng-model="mosaic.name" />
                 </div>
                 
                 <div class="">
-                    <input type="text" class="form-control" ng-model="mosaic.count" />
+                    <input readonly type="text" class="form-control" ng-model="mosaic.count" />
                 </div>
                 
             </div>
