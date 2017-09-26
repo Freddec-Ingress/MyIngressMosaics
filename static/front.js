@@ -2542,7 +2542,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 		
 		$scope.data.mosaics = [];
 		
-		for (var item of response.data.mosaics) {
+		for (var item of response.mosaics) {
 			
 			var obj = {
 				'name': item.name,
