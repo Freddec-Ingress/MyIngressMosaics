@@ -453,11 +453,6 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 			if ($scope.mosaic) {
 				
 				$('#block-mosaic').removeClass('hidden');
-				
-				if ($rootScope.user && $rootScope.user.authenticated && ($rootScope.user.name == $scope.mosaic.registerer.name || $rootScope.user.superuser)) {
-					
-					$('#block-edit').removeClass('hidden');
-				}
 			}
 			else {
 				
