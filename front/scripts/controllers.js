@@ -1235,7 +1235,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 		
 		mosaic.expanded = !mosaic.expanded;
 		
-		if (mosaic.missions.length < 1) {
+		if (!mosaic.missions || mosaic.missions.length < 1) {
 			
 			mosaic.loading = true;
 			
@@ -1244,7 +1244,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 				
 				mosaic.missions = response.missions;
 				
-				if (mosaic.missions.length < 1) {
+				if (!mosaic.missions || mosaic.missions.length < 1) {
 					
 					mosaic.loading = false;
 					return;
