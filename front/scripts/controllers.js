@@ -1335,7 +1335,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 							
 							if (mosaic.country == 'Japan') {
 								
-								mosaic.region = mosaic.region.replace(' Prefecture', '');
+								if (mosaic.region) mosaic.region = mosaic.region.replace(' Prefecture', '');
 							
 								if (mosaic.region.substring(mosaic.region.length-4, mosaic.region.length) == '-ken') mosaic.region = mosaic.region.substring(0, mosaic.region.length-4);
 								if (mosaic.city.substring(mosaic.city.length-4, mosaic.city.length) == '-shi') mosaic.city = mosaic.city.substring(0, mosaic.city.length-4);
