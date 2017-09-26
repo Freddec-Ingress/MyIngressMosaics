@@ -689,7 +689,7 @@ def adm_getMosaics(request):
 	results = Mission.objects.filter(mosaic__isnull=True).values(fieldname).order_by(fieldname).annotate(count=Count(fieldname)).order_by('-count')
 	if (results.count() > 0):
 		
-		data = { 'mosaics': [], }
+		data = []
 		
 		for item in results:
 			if item['count'] >= 6:
@@ -699,6 +699,6 @@ def adm_getMosaics(request):
 					'count': item['count'],
 				}
 				
-				data['mosaics'].append(obj)
+				data.append(obj)
 	
 	return Response(data, status=status.HTTP_200_OK)

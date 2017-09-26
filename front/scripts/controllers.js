@@ -1203,17 +1203,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 	
 	API.sendRequest('/api/adm/registration/mosaics', 'GET').then(function(response) {
 		
-		$scope.data.mosaics = [];
-		
-		for (var item of response.mosaics) {
-			
-			var obj = {
-				'name': item.name,
-				'count': item.count,
-			}
-			
-			$scope.data.mosaics.push(obj);
-		}
+		$scope.data.mosaics = response;
 		
 		console.log($scope.data.mosaics);
 		$scope.loading_page = false;
