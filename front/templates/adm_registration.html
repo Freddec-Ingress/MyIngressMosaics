@@ -33,12 +33,20 @@
 		
 	</div>
     
-    <div ng-show="!loading_page">
+    <div ng-show="!loading_page" class="mt-4">
         
-        <div class="panel" ng-repeat="mosaic in mosaics">
+        <div class="panel mb-4" ng-repeat="mosaic in mosaics">
             
-            <div class="">
-                {{mosaic.name}}
+            <div class="f-row" ng-click="toggle(mosaic);">
+
+                <div class="mr-auto">
+                    {{mosaic.name}}
+                </div>
+                
+                <div class="">
+                    {{mosaic.count}}
+                </div>
+                
             </div>
             
         </div>

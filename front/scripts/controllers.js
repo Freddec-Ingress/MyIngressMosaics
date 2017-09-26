@@ -1216,4 +1216,8 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 		$scope.loading_page = false;
 	});
 	
+	$scope.toggle = function(mosaic) {
+		
+	}
+	
 });

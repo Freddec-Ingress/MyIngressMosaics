@@ -2553,6 +2553,10 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 		$scope.loading_page = false;
 	});
 	
+	$scope.toggle = function(mosaic) {
+		
+	}
+	
 });
 angular.module('FrontModule', ['pascalprecht.translate', 'satellizer', 'ngCookies', 'toastr',
 							   'FrontModule.services', 'FrontModule.controllers', 'FrontModule.directives', ]);
