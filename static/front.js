@@ -2550,6 +2550,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 			$scope.mosaics.push(obj);
 		}
 		
+		console.log($scope.mosaics);
 		$scope.loading_page = false;
 	});
 	
