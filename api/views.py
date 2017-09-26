@@ -677,7 +677,7 @@ def adm_renameRegion(request):
 
 
 #---------------------------------------------------------------------------------------------------
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes((AllowAny, ))
 def adm_getMosaics(request):
 	

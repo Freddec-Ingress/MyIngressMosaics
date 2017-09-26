@@ -2534,15 +2534,12 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 
 	$scope.loading_page = true;
 	
-	$scope.data = {
-		'mosaics': null,
-	};
+	$scope.mosaics =  null;
 	
-	API.sendRequest('/api/adm/registration/mosaics', 'GET').then(function(response) {
+	API.sendRequest('/api/adm/registration/mosaics/', 'POST').then(function(response) {
 		
-		$scope.data.mosaics = response;
+		$scope.mosaics = response;
 		
-		console.log($scope.data.mosaics);
 		$scope.loading_page = false;
 	});
 	

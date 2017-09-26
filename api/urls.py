@@ -43,5 +43,5 @@ urlpatterns = [
 	
 	url(r'^adm/regions',			adm_getRegions),
 	url(r'^adm/region/rename',		adm_renameRegion),
-	url(r'^adm/registration/mosaics',		adm_getMosaics),
+	url(r'^adm/registration/mosaics/',		adm_getMosaics),
 ]
