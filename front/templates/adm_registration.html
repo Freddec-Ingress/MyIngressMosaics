@@ -49,6 +49,12 @@
                     {{mosaic.count}}
                 </div>
                 
+                <div class="" style="line-height: 2rem;">
+                    <a ng-click="removeMosaic(mosaic);">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </div>
+               
             </div>
             
             <div ng-show="mosaic.loading || mosaic.missions.length > 0" class="pt-4" style="border-top:1px solid black;">
@@ -141,10 +147,10 @@
                 				                        {{item.title}}
                 				                    </div>
                 			                        
-                			                        <a ng-click="removeMission(item);">
-                			                            <i class="fa fa-minus-square mx-2"></i>
-                			                        </a>
-                			                        
+                                                    <a href="https://www.ingress.com/mission/{{item.ref}}" target="blank">
+                                                        <i class="fa fa-external-link mx-2"></i>
+                                                    </a>
+                    			                        
                 			                     </div>
                 			                    
                 		                    </td>

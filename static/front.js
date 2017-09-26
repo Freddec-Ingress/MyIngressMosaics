@@ -2694,6 +2694,11 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 		});
 	}
 
+	$scope.removeMosaic = function(mosaic) {
+		
+		$rootScope.mosaics.splice($rootScope.mosaics.indexOf(mosaic), 1);
+	}
+	
 	$scope.createMosaic = function(mosaic) {
 
 		mosaic.creating = true;
