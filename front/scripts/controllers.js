@@ -1199,7 +1199,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 	
 	$scope.mosaics = [];
 	
-	API.sendRequest('adm/registration/mosaics', 'POST').then(function(response) {
+	API.sendRequest('adm/registration/mosaics', 'GET').then(function(response) {
 		
 		$scope.mosaics = response.mosaics;
 	});
