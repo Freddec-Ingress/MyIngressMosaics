@@ -2570,12 +2570,118 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 		
 		mosaic.expanded = !mosaic.expanded;
 		
-		if (!mosaic.missions) {
+		if (mosaic.missions.length < 1) {
 			
 			var data = {'text': mosaic.name}
 			API.sendRequest('/api/missions/', 'POST', {}, data).then(function(response) {
 				
 				mosaic.missions = response.missions;
+				
+				for (var item of mosaic.missions) {
+					
+					var order = 0;
+					
+					var found = item.title.match(/[0-9]+/);
+					if (found) { order = parseInt(found[0]); }
+					else {
+					
+						found = item.title.match(/(０|１|２|３|４|５|６|７|８|９)+/);
+						if (found) {
+							
+							var arrayCharracter = ['３９','３８','３７','３６','３５','３４','３３','３２','３１','３０',
+												   '２９','２８','２７','２６','２５','２４','２３','２２','２１','２０',
+												   '１９','１８','１７','１６','１５','１４','１３','１２','１１','１０',
+													 '９',  '８',  '７',  '６',  '５',  '４',  '３',  '２',  '１',  '０']
+													 
+							var arrayInteger = [39,38,37,36,35,34,33,32,31,30,
+												29,28,27,26,25,24,23,22,21,20,
+												19,18,17,16,15,14,13,12,11,10,
+							                     9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+							
+							for (var i in arrayCharracter) {
+								
+								found = item.title.match(arrayCharracter[i]);
+								if (found) {
+									order = arrayInteger[i];
+									break;
+								}
+							}
+						}
+						
+					}
+					
+					item.order = order.toString();
+				}
+			});
+		}
+		
+		function compareOrderAsc(a, b) {
+			
+			if (parseInt(a.order) < parseInt(b.order))
+				return -1;
+				
+			if (parseInt(a.order) > parseInt(b.order))
+				return 1;
+			
+			if (a.title < b.title)
+				return -1;
+				
+			if (a.title > b.title)
+				return 1;
+				
+			return 0;
+		}
+		
+		mosaic.missions.sort(compareOrderAsc);
+		
+		if (!mosaic.country && !mosaic.region && !mosaic.city)  {
+			
+			var geocoder = new google.maps.Geocoder;
+			
+			var latlng = {
+				lat: parseFloat(mosaic.missions[0].startLat),
+				lng: parseFloat(mosaic.missions[0].startLng),
+			};
+			
+			geocoder.geocode({'location': latlng}, function(results, status) {
+				
+				if (status === 'OK') {
+					
+					var components = null;
+					if (results[0]) components = results[0].address_components;
+					if (results[1]) components = results[1].address_components;
+					
+					if (components) {
+						
+						var admin2 = null;
+						var admin3 = null;
+						
+						for (var item of components) {
+							
+							if (item.types[0] == 'country') mosaic.country = item.long_name;
+							if (item.types[0] == 'locality') mosaic.city = item.long_name;
+							if (item.types[0] == 'administrative_area_level_1') mosaic.region = item.long_name;
+							if (item.types[0] == 'administrative_area_level_2') admin2 = item.long_name;
+							if (item.types[0] == 'administrative_area_level_3') admin3 = item.long_name;
+						}
+						
+						if (!mosaic.city && admin2) mosaic.city = item.admin2;
+						if (!mosaic.city && admin3) mosaic.city = item.admin3;
+						
+						mosaic.city = mosaic.city.replace(/ō/g, 'o');
+						
+						if (mosaic.country == 'Japan') {
+							
+							mosaic.region = mosaic.region.replace(' Prefecture', '');
+						
+							if (mosaic.region.substring(mosaic.region.length-4, mosaic.region.length) == '-ken') mosaic.region = mosaic.region.substring(0, mosaic.region.length-4);
+							if (mosaic.city.substring(mosaic.city.length-4, mosaic.city.length) == '-shi') mosaic.city = mosaic.city.substring(0, mosaic.city.length-4);
+							if (mosaic.city.substring(mosaic.city.length-4, mosaic.city.length) == '-cho') mosaic.city = mosaic.city.substring(0, mosaic.city.length-4);
+						}
+						
+						$scope.$applyAsync();
+					}
+				}
 			});
 		}
 	}

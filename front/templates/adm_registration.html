@@ -59,7 +59,7 @@
                 
             </div>
             
-            <div ng-show="mosaic.expanded" class="pt-2" style="border-top:1px solid black;">
+            <div ng-show="mosaic.expanded" class="pt-4" style="border-top:1px solid black;">
                 
                 <div class="f-row">
                 
@@ -125,9 +125,8 @@
                     </div>
                     
                     <div class="width-6 pl-1">
-                        <label class="m-0">Missions</label>
+                        <label class="m-0">{{mosaic.missions.length}} Missions</label>
                         <div class="bg-black px-1 scrollbar" style="border-top:4px solid black; border-bottom:4px solid black; flex:1; overflow:auto; height:230px;">
-            		        <div ng-if="mosaic.missions < 1" class="p-2">No mission</div>
             		        <table class="card-table">
             		            <tbody>
             		                <tr ng-repeat="item in mosaic.missions">
@@ -154,14 +153,11 @@
             		            </tbody>
         		           </table>
                         </div>
-                        <div class="mt-2">
-                            {{mosaic.missions.length}} missions
-                        </div>
                     </div>
                     
     	        </div>
     	        
-    	        <div class="form-button-bar mt-4">
+    	        <div class="form-button-bar my-2">
     	        	
     				<button class="btn btn-primary" ng-click="createMosaic(mosaic);" ng-disabled="mosaic.creating || !mosaic.title || !mosaic.type || !mosaic.columns || !mosaic.country || (mosaic.missions.length < 1)">
     				    <span id="createButton">Create</span>
