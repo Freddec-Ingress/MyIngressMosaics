@@ -21,6 +21,7 @@
 {% endblock %}
 
 {% block content %}
+{% verbatim %}
 
 <div id="page-container" ng-controller="AdmRegistrationCtrl">
     
@@ -28,7 +29,7 @@
 			
 		<div class="loading-line px-2 py-1">
 			<img src="/static/img/loading.png" />
-			{% trans 'Loading page...' %}
+			Loading page...
 		</div>
 		
 	</div>
@@ -63,7 +64,7 @@
                 
         		<div ng-show="mosaic.loading" class="loading-line px-2 py-1">
         			<img src="/static/img/loading.png" />
-        			{% trans 'Loading data...' %}
+        			Loading data...
         		</div>
         		
                 <div ng-show="!mosaic.loading">
@@ -185,6 +186,7 @@
     
 </div>
 
+{% endverbatim %}
 {% endblock %}
 
 {% block extra-script %}
