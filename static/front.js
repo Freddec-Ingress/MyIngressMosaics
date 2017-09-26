@@ -2534,7 +2534,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 
 	$scope.loading_page = true;
 	
-	$scope.mosaics =  null;
+	$scope.mosaics =  [];
 	
 	API.sendRequest('/api/adm/registration/mosaics/', 'POST').then(function(response) {
 		
