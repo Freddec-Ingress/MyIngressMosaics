@@ -2536,9 +2536,11 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 	
 	$scope.mosaics = [];
 	
-	API.sendRequest('adm/registration/mosaics', 'GET').then(function(response) {
+	API.sendRequest('/api/adm/registration/mosaics', 'GET').then(function(response) {
 		
 		$scope.mosaics = response.mosaics;
+		
+		$scope.loading_page = false;
 	});
 	
 });
