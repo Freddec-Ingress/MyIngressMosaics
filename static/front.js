@@ -2581,6 +2581,12 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 				
 				mosaic.missions = response.missions;
 				
+				if (mosaic.missions.length < 1) {
+					
+					mosaic.loading = false;
+					return;
+				}
+				
 				for (var item of mosaic.missions) {
 					
 					var order = 0;
