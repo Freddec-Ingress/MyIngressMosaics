@@ -2691,6 +2691,10 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 					mosaic.loading = false;
 				});
 			}
+			else {
+				
+				mosaic.loading = false;
+			}
 		});
 	}
 
