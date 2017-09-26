@@ -1192,3 +1192,16 @@ angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($
 		region.name = region.newname
 	}
 });
+
+angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', function($scope, API) {
+
+	$scope.loading_page = true;
+	
+	$scope.mosaics = [];
+	
+	API.sendRequest('adm/registration/mosaics', 'POST').then(function(response) {
+		
+		$scope.mosaics = response.mosaics;
+	});
+	
+});

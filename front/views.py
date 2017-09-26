@@ -223,3 +223,8 @@ def adm_region(request):
 	return render(request, 'adm_region.html', context)
 	
 	
+	
+def adm_registration(request):
+	
+	context = {}
+	return render(request, 'adm_registration.html', context)

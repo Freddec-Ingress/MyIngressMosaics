@@ -679,7 +679,7 @@ def adm_renameRegion(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes((AllowAny, ))
-def adm_getCreators(request):
+def adm_getMosaics(request):
 	
 	data = None
 	
@@ -689,10 +689,10 @@ def adm_getCreators(request):
 	results = Mission.objects.filter(mosaic__isnull=True).values(fieldname).order_by(fieldname).annotate(count=Count(fieldname)).order_by('-count')
 	if (results.count() > 0):
 		
-		data = { 'name': [], }
+		data = { 'mosaics': [], }
 		
 		for item in results:
 			if item['count'] >= 6:
-				data['name'].append({item[fieldname], item['count']})
+				data['mosaics'].append({item[fieldname], item['count']})
 	
 	return Response(data, status=status.HTTP_200_OK)

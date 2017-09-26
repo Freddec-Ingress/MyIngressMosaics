@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block extra-head %}
+
+	<title>MIM - Admin</title>
+
+	<meta property="og:url" content="https://www.myingressmosaics.com">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="MyIngressMosaics">
+	<meta property="og:image" content="https://www.myingressmosaics.com/static/front/img/image.png">
+	<meta property="og:description" content="Search, Register and Share all Ingress Mosaics">
+	
+{% endblock %}
+
+{% block header %}
+
+	{% trans 'Admin - Regions' %}
+	
+{% endblock %}
+
+{% block content %}
+
+<div id="page-container" ng-controller="AdmRegistrationCtrl">
+    
+	<div ng-show="loading_page" class="mt-4 px-2 py-1">
+			
+		<div class="loading-line px-2 py-1">
+			<img src="/static/img/loading.png" />
+			{% trans 'Loading page...' %}
+		</div>
+		
+	</div>
+    
+    <div ng-show="!loading_page">
+        
+        <div class="panel" ng-repeat="mosaic in mosaics">
+            
+            <div class="">
+                {{mosaic.name}}
+            </div>
+            
+        </div>
+		
+	</div>
+    
+</div>
+
+{% endblock %}
