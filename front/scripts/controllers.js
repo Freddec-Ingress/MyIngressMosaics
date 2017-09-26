@@ -1299,7 +1299,8 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 			
 			if (!mosaic.country && !mosaic.region && !mosaic.city)  {
 				
-				var geocoder = new google.maps.Geocoder.setLanguage('en');
+				var geocoder = new google.maps.Geocoder;
+				geocoder.setLanguage('en');
 				
 				var latlng = {
 					lat: parseFloat(mosaic.missions[0].startLat),
