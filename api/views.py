@@ -693,6 +693,12 @@ def adm_getMosaics(request):
 		
 		for item in results:
 			if item['count'] >= 6:
-				data['mosaics'].append({item[fieldname], item['count']})
+				
+				obj = {
+					'name': item[fieldname],
+					'count': item['count'],
+				}
+				
+				data['mosaics'].append(obj)
 	
 	return Response(data, status=status.HTTP_200_OK)
