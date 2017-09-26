@@ -35,14 +35,15 @@
     
     <div ng-show="!loading_page" class="mt-4">
         
-        {{mosaics}}
+        {{$mosaics}}
         
         <div class="panel mb-4" ng-repeat="mosaic in mosaics">
             
             <div class="f-row" ng-click="toggle(mosaic);">
 
                 <div class="mr-auto">
-                    {{mosaic.name}}
+                    {{mosaic}}
+                    {{$mosaic.name}}
                     <input type="text" class="form-control" ng-model="mosaic.name" />
                 </div>
                 
