@@ -407,6 +407,13 @@ label {
     border-color: #B2DFDB;
 }
 
+.form-control[readonly] {
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    height: auto; line-height: inherit;
+}
+
 /* Error -------------------------------------------------------------------- */
 
 .form-error {
