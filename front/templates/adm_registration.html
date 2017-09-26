@@ -140,14 +140,14 @@
                 			                    <div class="f-row f-align-center">
                 			                        
                 			                        <div class="mr-2" style="width:3rem;">
-                			                            <input type="text" tabindex="0" class="form-control text-center" ng-blur="reorderMosaic(mosaic);" ng-model="item.order" style="height:1.75rem;" />
+                			                            <input type="text" class="form-control text-center" ng-blur="reorderMosaic(mosaic);" ng-model="item.order" style="height:1.75rem;" />
                 			                        </div>
                 			                        
                 			                        <div class="c-normal mr-auto" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;" title="{{item.title}}">
                 				                        {{item.title}}
                 				                    </div>
                 			                        
-                                                    <a href="https://www.ingress.com/mission/{{item.ref}}" target="blank">
+                                                    <a tabindex="0" href="https://www.ingress.com/mission/{{item.ref}}" target="blank">
                                                         <i class="fa fa-external-link mx-2"></i>
                                                     </a>
                     			                        
