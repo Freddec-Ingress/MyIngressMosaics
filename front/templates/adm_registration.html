@@ -36,38 +36,29 @@
     
     <div ng-show="!loading_page" class="mt-4">
         
-        {{mosaics.length}}
-        
         <div class="panel mb-4" ng-repeat="mosaic in mosaics">
             
-            <div class="f-row py-1">
-
-                <div class="">
-                    <a ng-click="toggle(mosaic);">
-                    	<i ng-hide="mosaic.expanded" class="mr-2 fa fa-caret-right"></i>
-                    	<i ng-show="mosaic.expanded" class="mr-2 fa fa-caret-down"></i>
-                    </a>
-                </div>
+            <div class="f-row pt-1 pb-2">
 
                 <div class="mr-auto">
-                    {{mosaic.name}}
                     <input type="text" class="form-control" style="width:25rem;" ng-model="mosaic.name" />
+                    <input id="searchButton" type="submit" style="width:67px;" class="btn btn-primary ml-2" ng-click="refrech(mosaic);" value="Refresh" ng-disabled="mosaic.loading">
                 </div>
                 
-                <div class="">
-                    <input readonly type="text" class="form-control text-right" ng-model="mosaic.count" />
+                <div class="" style="line-height: 2rem;">
+                    {{mosaic.count}}
                 </div>
                 
             </div>
             
-            <div ng-show="mosaic.expanded" class="pt-4" style="border-top:1px solid black;">
+            <div ng-show="mosaic.loading || mosaic.missions.length > 0" class="pt-4" style="border-top:1px solid black;">
                 
         		<div ng-show="mosaic.loading" class="loading-line px-2 py-1">
         			<img src="/static/img/loading.png" />
         			Loading data...
         		</div>
         		
-                <div ng-show="!mosaic.loading">
+                <div ng-show="!mosaic.loading && mosaic.missions.length > 0">
                     
                     <div class="f-row">
                     
@@ -142,11 +133,11 @@
                 			                    
                 			                    <div class="f-row f-align-center">
                 			                        
-                			                        <div class="mr-2" style="width:2.5rem;">
+                			                        <div class="mr-2" style="width:3rem;">
                 			                            <input type="text" class="form-control text-center" ng-blur="reorder();" ng-model="item.order" style="height:1.75rem;" />
                 			                        </div>
                 			                        
-                			                        <div class="c-normal mr-auto" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
+                			                        <div class="c-normal mr-auto" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;" title="{{item.title}}">
                 				                        {{item.title}}
                 				                    </div>
                 			                        
@@ -165,7 +156,7 @@
                         
         	        </div>
         	        
-        	        <div class="form-button-bar my-2">
+        	        <div class="form-button-bar mt-3 mb-2">
         	        	
         				<button class="btn btn-primary" ng-click="createMosaic(mosaic);" ng-disabled="mosaic.creating || !mosaic.title || !mosaic.type || !mosaic.columns || !mosaic.country || (mosaic.missions.length < 1)">
         				    <span id="createButton">Create</span>
