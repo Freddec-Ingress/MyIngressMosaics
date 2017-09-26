@@ -1225,6 +1225,23 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 		$rootScope.loading_page = false;
 	});
 	
+	function compareOrderAsc(a, b) {
+		
+		if (parseInt(a.order) < parseInt(b.order))
+			return -1;
+			
+		if (parseInt(a.order) > parseInt(b.order))
+			return 1;
+		
+		if (a.title < b.title)
+			return -1;
+			
+		if (a.title > b.title)
+			return 1;
+			
+		return 0;
+	}
+	
 	$scope.refrech = function(mosaic) {
 		
 		mosaic.missions = [];
@@ -1276,23 +1293,6 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 				}
 				
 				item.order = order.toString();
-			}
-	
-			function compareOrderAsc(a, b) {
-				
-				if (parseInt(a.order) < parseInt(b.order))
-					return -1;
-					
-				if (parseInt(a.order) > parseInt(b.order))
-					return 1;
-				
-				if (a.title < b.title)
-					return -1;
-					
-				if (a.title > b.title)
-					return 1;
-					
-				return 0;
 			}
 			
 			mosaic.missions.sort(compareOrderAsc);
@@ -1356,6 +1356,11 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 		});
 	}
 
+	$scope.reorderMosaic = function(mosaic) {
+		
+		mosaic.missions.sort(compareOrderAsc);
+	}
+	
 	$scope.removeMosaic = function(mosaic) {
 		
 		$rootScope.mosaics.splice($rootScope.mosaics.indexOf(mosaic), 1);
