@@ -2534,11 +2534,13 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 
 	$scope.loading_page = true;
 	
-	$scope.mosaics = [];
+	$scope.data = {
+		'mosaics': null,
+	};
 	
 	API.sendRequest('/api/adm/registration/mosaics', 'GET').then(function(response) {
 		
-		$scope.mosaics = [];
+		$scope.data.mosaics = [];
 		
 		for (var item of response.mosaics) {
 			
@@ -2547,10 +2549,10 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 				'count': item.count,
 			}
 			
-			$scope.mosaics.push(obj);
+			$scope.data.mosaics.push(obj);
 		}
 		
-		console.log($scope.mosaics);
+		console.log($scope.data.mosaics);
 		$scope.loading_page = false;
 	});
 	
