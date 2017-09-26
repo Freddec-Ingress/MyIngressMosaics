@@ -1193,15 +1193,15 @@ angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($
 	}
 });
 
-angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', function($scope, API) {
+angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', function($scope, $rootScope, API) {
 
-	$scope.loading_page = true;
+	$rootScope.loading_page = true;
 	
-	$scope.mosaics =  [];
+	$rootScope.mosaics = [];
 	
 	API.sendRequest('/api/adm/registration/mosaics/', 'POST').then(function(response) {
 		
-		$scope.mosaics =  [];
+		$rootScope.mosaics = [];
 		
 		for (var item of response) {
 			
@@ -1225,10 +1225,10 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 				'missions': [],
 			}
 			
-			$scope.mosaics.push(obj);
+			$rootScope.mosaics.push(obj);
 		}
 
-		$scope.loading_page = false;
+		$rootScope.loading_page = false;
 	});
 	
 	$scope.toggle = function(mosaic) {
