@@ -2543,6 +2543,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 		for (var item of response) {
 			
 			var obj = {
+				
 				'name': item.name,
 				'count': item.count,
 				
@@ -2550,22 +2551,34 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 				
 				'type': 'sequence',
 				'title': item.name,
-				'columns': 6,
+				'columns': '6',
+				
+				'city': null,
+				'region': null,
+				'country': null,
+				
+				'missions': [],
 			}
 			
 			$scope.mosaics.push(obj);
 		}
 
 		$scope.loading_page = false;
-
-		$scope.$applyAsync();
 	});
 	
 	$scope.toggle = function(mosaic) {
 		
 		mosaic.expanded = !mosaic.expanded;
+		
+		if (!mosaic.missions) {
+			
+			var data = {'text': mosaic.name}
+			API.sendRequest('/api/missions/', 'POST', {}, data).then(function(response) {
+				
+				mosaic.missions = response.missions;
+			});
+		}
 	}
-	
 });
 angular.module('FrontModule', ['pascalprecht.translate', 'satellizer', 'ngCookies', 'toastr',
 							   'FrontModule.services', 'FrontModule.controllers', 'FrontModule.directives', ]);

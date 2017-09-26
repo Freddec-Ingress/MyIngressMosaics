@@ -39,7 +39,7 @@
         
         <div class="panel mb-4" ng-repeat="mosaic in mosaics">
             
-            <div class="f-row">
+            <div class="f-row py-1">
 
                 <div class="">
                     <a ng-click="toggle(mosaic);">
@@ -59,7 +59,7 @@
                 
             </div>
             
-            <div ng-show="mosaic.expanded" class="">
+            <div ng-show="mosaic.expanded" class="pt-2" style="border-top:1px solid black;">
                 
                 <div class="f-row">
                 
@@ -90,6 +90,87 @@
         	        
                 </div>
                 
+                <div class="f-row">
+                    
+        	        <div class="group width-4 pr-1">
+        	            <label class="m-0">Country</label>
+        	            <input type="text" class="form-control" ng-model="mosaic.country" />
+        	        </div>
+    
+        	        <div class="group width-4 px-1">
+        	            <label class="m-0">Region</label>
+        	            <input type="text" class="form-control" ng-model="mosaic.region" />
+        	        </div>
+    
+        	        <div class="group width-4 pl-1">
+        	            <label class="m-0">City</label>
+        	            <input type="text" class="form-control" ng-model="mosaic.city" />
+        	        </div>
+        	        
+    	        </div>
+                
+                <div class="f-row">
+                    
+                    <div class="width-6 pr-1">
+                        <label class="m-0">Preview</label>
+        				<div class="bg-black f-row f-justify-center" style="height:230px; overflow-y:auto; padding-top:4px; padding-bottom:4px; padding-left:4px;" ng-class="{'f-align-start scrollbar scrollbar-mini': mosaic.missions.length > 24, 'f-align-center pr-1': mosaic.missions.length <= 24}">
+        					
+        					<div class="f-row f-wrap f-justify-center f-align-center" style="padding:0 calc((6 - {{mosaic.columns}}) / 2 * 16.666667%); width:100%;">
+        			            <div ng-repeat="m in mosaic.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.columns}});">
+        			                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+        			           </div>
+        					</div>
+        					
+        				</div>
+                    </div>
+                    
+                    <div class="width-6 pl-1">
+                        <label class="m-0">Missions</label>
+                        <div class="bg-black px-1 scrollbar" style="border-top:4px solid black; border-bottom:4px solid black; flex:1; overflow:auto; height:230px;">
+            		        <div ng-if="mosaic.missions < 1" class="p-2">No mission</div>
+            		        <table class="card-table">
+            		            <tbody>
+            		                <tr ng-repeat="item in mosaic.missions">
+            		                	<td class="px-1">
+            			                    
+            			                    <div class="f-row f-align-center">
+            			                        
+            			                        <div class="mr-2" style="width:2.5rem;">
+            			                            <input type="text" class="form-control text-center" ng-blur="reorder();" ng-model="item.order" style="height:1.75rem;" />
+            			                        </div>
+            			                        
+            			                        <div class="c-normal mr-auto" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
+            				                        {{item.title}}
+            				                    </div>
+            			                        
+            			                        <a ng-click="removeMission(item);">
+            			                            <i class="fa fa-minus-square mx-2"></i>
+            			                        </a>
+            			                        
+            			                     </div>
+            			                    
+            		                    </td>
+            		                </tr>
+            		            </tbody>
+        		           </table>
+                        </div>
+                        <div class="mt-2">
+                            {{mosaic.missions.length}} missions
+                        </div>
+                    </div>
+                    
+    	        </div>
+    	        
+    	        <div class="form-button-bar mt-4">
+    	        	
+    				<button class="btn btn-primary" ng-click="createMosaic(mosaic);" ng-disabled="mosaic.creating || !mosaic.title || !mosaic.type || !mosaic.columns || !mosaic.country || (mosaic.missions.length < 1)">
+    				    <span id="createButton">Create</span>
+            			<div ng-show="mosaic.creating" class="loading-line py-1">
+            				<img src="/static/img/loading.png" />
+            			</div>
+    				</button>
+
+    	        </div>
                 
             </div>
             
