@@ -1357,4 +1357,17 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 			});
 		}
 	}
+
+	$scope.createMosaic = function(mosaic) {
+
+		mosaic.creating = true;
+
+		API.sendRequest('/api/mosaic/create/', 'POST', {}, mosaic).then(function(response) {
+
+			$rootScope.mosaics.splice($rootScope.mosaics.indexOf(mosaic), 1);
+
+			mosaic.creating = false;
+		});
+	}
+
 });

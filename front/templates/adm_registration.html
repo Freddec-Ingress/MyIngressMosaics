@@ -40,7 +40,7 @@
             
             <div class="f-row pt-1 pb-2">
 
-                <div class="mr-auto">
+                <div class="mr-auto f-row f-nowrap">
                     <input type="text" class="form-control" style="width:25rem;" ng-model="mosaic.name" />
                     <input id="searchButton" type="submit" style="width:67px;" class="btn btn-primary ml-2" ng-click="refrech(mosaic);" value="Refresh" ng-disabled="mosaic.loading">
                 </div>
@@ -159,7 +159,7 @@
         	        <div class="form-button-bar mt-3 mb-2">
         	        	
         				<button class="btn btn-primary" ng-click="createMosaic(mosaic);" ng-disabled="mosaic.creating || !mosaic.title || !mosaic.type || !mosaic.columns || !mosaic.country || (mosaic.missions.length < 1)">
-        				    <span id="createButton">Create</span>
+        				    <span>Create</span>
                 			<div ng-show="mosaic.creating" class="loading-line py-1">
                 				<img src="/static/img/loading.png" />
                 			</div>
