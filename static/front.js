@@ -2547,6 +2547,10 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 				'count': item.count,
 				
 				'expanded': false,
+				
+				'type': 'sequence',
+				'title': item.name,
+				'columns': 6,
 			}
 			
 			$scope.mosaics.push(obj);
@@ -2559,6 +2563,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 	
 	$scope.toggle = function(mosaic) {
 		
+		mosaic.expanded = !mosaic.expanded;
 	}
 	
 });
