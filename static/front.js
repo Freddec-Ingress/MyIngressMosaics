@@ -2541,6 +2541,8 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 		$scope.mosaics = response;
 		
 		$scope.loading_page = false;
+
+		$scope.$applyAsync();
 	});
 	
 	$scope.toggle = function(mosaic) {
