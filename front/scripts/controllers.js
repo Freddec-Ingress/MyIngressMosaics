@@ -1300,14 +1300,13 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 			if (!mosaic.country && !mosaic.region && !mosaic.city)  {
 				
 				var geocoder = new google.maps.Geocoder;
-				geocoder.setLanguage('en');
 				
 				var latlng = {
 					lat: parseFloat(mosaic.missions[0].startLat),
 					lng: parseFloat(mosaic.missions[0].startLng),
 				};
 				
-				geocoder.geocode({'location': latlng}, function(results, status) {
+				geocoder.geocode({'location': latlng, 'language': 'en'}, function(results, status) {
 					
 					if (status === 'OK') {
 						
