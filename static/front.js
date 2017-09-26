@@ -2543,8 +2543,8 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 		for (var item in response) {
 			
 			var obj = {
-				'name': item.name,
-				'count': item.count,
+				'name': item['name'],
+				'count': item['count'],
 				
 				'expanded': false,
 			}
