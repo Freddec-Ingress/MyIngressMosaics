@@ -1331,7 +1331,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 							if (!mosaic.city && admin2) mosaic.city = item.admin2;
 							if (!mosaic.city && admin3) mosaic.city = item.admin3;
 							
-							mosaic.city = mosaic.city.replace(/ō/g, 'o');
+							if (mosaic.city) mosaic.city = mosaic.city.replace(/ō/g, 'o');
 							
 							if (mosaic.country == 'Japan') {
 								
