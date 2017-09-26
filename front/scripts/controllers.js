@@ -1205,7 +1205,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 		
 		$scope.data.mosaics = [];
 		
-		for (var item of response.mosaics) {
+		for (var item of response.data.mosaics) {
 			
 			var obj = {
 				'name': item.name,
