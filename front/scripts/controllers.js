@@ -1289,6 +1289,31 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 							}
 						}
 					}
+					else {
+						
+						found = item.title.match(/(①|②|③|④|⑤|⑥|⑦|⑧|⑨|⑩|⑪|⑫|⑬|⑭|⑮|⑯|⑰|⑱)+/);
+						if (found) {
+							
+							if (found[0] == '①') order = 1;
+							if (found[0] == '②') order = 2;
+							if (found[0] == '③') order = 3;
+							if (found[0] == '④') order = 4;
+ 							if (found[0] == '⑤') order = 5;
+							if (found[0] == '⑥') order = 6;
+							if (found[0] == '⑦') order = 7;
+							if (found[0] == '⑧') order = 8;
+							if (found[0] == '⑨') order = 9;
+							if (found[0] == '⑩') order = 10;
+							if (found[0] == '⑪') order = 11;
+							if (found[0] == '⑫') order = 12;
+							if (found[0] == '⑬') order = 13;
+							if (found[0] == '⑭') order = 14;
+							if (found[0] == '⑮') order = 15;
+							if (found[0] == '⑯') order = 16;
+							if (found[0] == '⑰') order = 17;
+							if (found[0] == '⑱') order = 18;
+						}
+					}
 					
 				}
 				
