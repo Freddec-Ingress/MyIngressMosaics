@@ -1291,7 +1291,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 					}
 					else {
 						
-						found = item.title.match(/(①|②|③|④|⑤|⑥|⑦|⑧|⑨|⑩|⑪|⑫|⑬|⑭|⑮|⑯|⑰|⑱)+/);
+						found = item.title.match(/(①|②|③|④|⑤|⑥|⑦|⑧|⑨|⑩|⑪|⑫|⑬|⑭|⑮|⑯|⑰|⑱|⑲|⑳|㉑|㉒|㉓|㉔)+/);
 						if (found) {
 							
 							if (found[0] == '①') order = 1;
@@ -1312,9 +1312,14 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 							if (found[0] == '⑯') order = 16;
 							if (found[0] == '⑰') order = 17;
 							if (found[0] == '⑱') order = 18;
+							if (found[0] == '⑲') order = 19;
+							if (found[0] == '⑳') order = 20;
+							if (found[0] == '㉑') order = 21;
+							if (found[0] == '㉒') order = 22;
+							if (found[0] == '㉓') order = 23;
+							if (found[0] == '㉔') order = 24;
 						}
 					}
-					
 				}
 				
 				item.order = order.toString();
