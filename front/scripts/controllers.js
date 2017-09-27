@@ -1331,15 +1331,20 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 							if (!mosaic.city && admin2) mosaic.city = item.admin2;
 							if (!mosaic.city && admin3) mosaic.city = item.admin3;
 							
-							if (mosaic.city) mosaic.city = mosaic.city.replace(/ō/g, 'o');
 							
 							if (mosaic.country == 'Japan') {
 								
+								if (mosaic.region) mosaic.region = mosaic.region.replace(/ō/g, 'o');
+								if (mosaic.region) mosaic.region = mosaic.region.replace(/Ō/g, 'O');
 								if (mosaic.region) mosaic.region = mosaic.region.replace(' Prefecture', '');
-							
+								if (mosaic.region && mosaic.region.substring(mosaic.region.length-3, mosaic.region.length) == '-fu') mosaic.region = mosaic.region.substring(0, mosaic.region.length-3);
 								if (mosaic.region && mosaic.region.substring(mosaic.region.length-4, mosaic.region.length) == '-ken') mosaic.region = mosaic.region.substring(0, mosaic.region.length-4);
+								
+								if (mosaic.city) mosaic.city = mosaic.city.replace(/ō/g, 'o');
+								if (mosaic.city) mosaic.city = mosaic.city.replace(/Ō/g, 'O');
 								if (mosaic.city && mosaic.city.substring(mosaic.city.length-4, mosaic.city.length) == '-shi') mosaic.city = mosaic.city.substring(0, mosaic.city.length-4);
 								if (mosaic.city && mosaic.city.substring(mosaic.city.length-4, mosaic.city.length) == '-cho') mosaic.city = mosaic.city.substring(0, mosaic.city.length-4);
+								if (mosaic.city && mosaic.city.substring(mosaic.city.length-6, mosaic.city.length) == '-machi') mosaic.city = mosaic.city.substring(0, mosaic.city.length-6);
 							}
 							
 							$scope.$applyAsync();
