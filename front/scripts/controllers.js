@@ -1257,6 +1257,8 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 				return;
 			}
 			
+			mosaic.title = mosaic.name;
+			
 			mosaic.missions = response.missions;
 			
 			for (var item of mosaic.missions) {
@@ -1327,70 +1329,63 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 			
 			mosaic.missions.sort(compareOrderAsc);
 			
-			if (!mosaic.country && !mosaic.region && !mosaic.city)  {
+			var geocoder = new google.maps.Geocoder;
+			
+			var latlng = {
+				lat: parseFloat(mosaic.missions[0].startLat),
+				lng: parseFloat(mosaic.missions[0].startLng),
+			};
+			
+			geocoder.geocode({'location': latlng, 'language': 'en'}, function(results, status) {
 				
-				var geocoder = new google.maps.Geocoder;
-				
-				var latlng = {
-					lat: parseFloat(mosaic.missions[0].startLat),
-					lng: parseFloat(mosaic.missions[0].startLng),
-				};
-				
-				geocoder.geocode({'location': latlng, 'language': 'en'}, function(results, status) {
+				if (status === 'OK') {
 					
-					if (status === 'OK') {
+					var components = null;
+					if (results[0]) components = results[0].address_components;
+					if (results[1]) components = results[1].address_components;
+					
+					if (components) {
 						
-						var components = null;
-						if (results[0]) components = results[0].address_components;
-						if (results[1]) components = results[1].address_components;
+						var admin2 = null;
+						var admin3 = null;
 						
-						if (components) {
+						for (var item of components) {
 							
-							var admin2 = null;
-							var admin3 = null;
-							
-							for (var item of components) {
-								
-								if (item.types[0] == 'country') mosaic.country = item.long_name;
-								if (item.types[0] == 'locality') mosaic.city = item.long_name;
-								if (item.types[0] == 'administrative_area_level_1') mosaic.region = item.long_name;
-								if (item.types[0] == 'administrative_area_level_2') admin2 = item.long_name;
-								if (item.types[0] == 'administrative_area_level_3') admin3 = item.long_name;
-							}
-							
-							if (!mosaic.city && admin2) mosaic.city = item.admin2;
-							if (!mosaic.city && admin3) mosaic.city = item.admin3;
-							
-							
-							if (mosaic.country == 'Japan') {
-								
-								if (mosaic.region) mosaic.region = mosaic.region.replace(/ō/g, 'o');
-								if (mosaic.region) mosaic.region = mosaic.region.replace(/Ō/g, 'O');
-								if (mosaic.region) mosaic.region = mosaic.region.replace(' Prefecture', '');
-								if (mosaic.region && mosaic.region.substring(mosaic.region.length-3, mosaic.region.length) == '-to') mosaic.region = mosaic.region.substring(0, mosaic.region.length-3);
-								if (mosaic.region && mosaic.region.substring(mosaic.region.length-3, mosaic.region.length) == '-fu') mosaic.region = mosaic.region.substring(0, mosaic.region.length-3);
-								if (mosaic.region && mosaic.region.substring(mosaic.region.length-4, mosaic.region.length) == '-ken') mosaic.region = mosaic.region.substring(0, mosaic.region.length-4);
-								
-								if (mosaic.city) mosaic.city = mosaic.city.replace(/ō/g, 'o');
-								if (mosaic.city) mosaic.city = mosaic.city.replace(/Ō/g, 'O');
-								if (mosaic.city && mosaic.city.substring(mosaic.city.length-4, mosaic.city.length) == '-son') mosaic.city = mosaic.city.substring(0, mosaic.city.length-4);
-								if (mosaic.city && mosaic.city.substring(mosaic.city.length-4, mosaic.city.length) == '-shi') mosaic.city = mosaic.city.substring(0, mosaic.city.length-4);
-								if (mosaic.city && mosaic.city.substring(mosaic.city.length-4, mosaic.city.length) == '-cho') mosaic.city = mosaic.city.substring(0, mosaic.city.length-4);
-								if (mosaic.city && mosaic.city.substring(mosaic.city.length-5, mosaic.city.length) == '-mura') mosaic.city = mosaic.city.substring(0, mosaic.city.length-5);
-								if (mosaic.city && mosaic.city.substring(mosaic.city.length-6, mosaic.city.length) == '-machi') mosaic.city = mosaic.city.substring(0, mosaic.city.length-6);
-							}
-							
-							$scope.$applyAsync();
+							if (item.types[0] == 'country') mosaic.country = item.long_name;
+							if (item.types[0] == 'locality') mosaic.city = item.long_name;
+							if (item.types[0] == 'administrative_area_level_1') mosaic.region = item.long_name;
+							if (item.types[0] == 'administrative_area_level_2') admin2 = item.long_name;
+							if (item.types[0] == 'administrative_area_level_3') admin3 = item.long_name;
 						}
+						
+						if (!mosaic.city && admin2) mosaic.city = item.admin2;
+						if (!mosaic.city && admin3) mosaic.city = item.admin3;
+						
+						
+						if (mosaic.country == 'Japan') {
+							
+							if (mosaic.region) mosaic.region = mosaic.region.replace(/ō/g, 'o');
+							if (mosaic.region) mosaic.region = mosaic.region.replace(/Ō/g, 'O');
+							if (mosaic.region) mosaic.region = mosaic.region.replace(' Prefecture', '');
+							if (mosaic.region && mosaic.region.substring(mosaic.region.length-3, mosaic.region.length) == '-to') mosaic.region = mosaic.region.substring(0, mosaic.region.length-3);
+							if (mosaic.region && mosaic.region.substring(mosaic.region.length-3, mosaic.region.length) == '-fu') mosaic.region = mosaic.region.substring(0, mosaic.region.length-3);
+							if (mosaic.region && mosaic.region.substring(mosaic.region.length-4, mosaic.region.length) == '-ken') mosaic.region = mosaic.region.substring(0, mosaic.region.length-4);
+							
+							if (mosaic.city) mosaic.city = mosaic.city.replace(/ō/g, 'o');
+							if (mosaic.city) mosaic.city = mosaic.city.replace(/Ō/g, 'O');
+							if (mosaic.city && mosaic.city.substring(mosaic.city.length-4, mosaic.city.length) == '-son') mosaic.city = mosaic.city.substring(0, mosaic.city.length-4);
+							if (mosaic.city && mosaic.city.substring(mosaic.city.length-4, mosaic.city.length) == '-shi') mosaic.city = mosaic.city.substring(0, mosaic.city.length-4);
+							if (mosaic.city && mosaic.city.substring(mosaic.city.length-4, mosaic.city.length) == '-cho') mosaic.city = mosaic.city.substring(0, mosaic.city.length-4);
+							if (mosaic.city && mosaic.city.substring(mosaic.city.length-5, mosaic.city.length) == '-mura') mosaic.city = mosaic.city.substring(0, mosaic.city.length-5);
+							if (mosaic.city && mosaic.city.substring(mosaic.city.length-6, mosaic.city.length) == '-machi') mosaic.city = mosaic.city.substring(0, mosaic.city.length-6);
+						}
+						
+						$scope.$applyAsync();
 					}
-					
-					mosaic.loading = false;
-				});
-			}
-			else {
+				}
 				
 				mosaic.loading = false;
-			}
+			});
 		});
 	}
 
