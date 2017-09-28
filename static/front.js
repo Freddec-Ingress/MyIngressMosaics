@@ -2751,6 +2751,17 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 		});
 	}
 
+	$scope.deleteMosaic = function(mosaic) {
+		
+		for (var m of mosaic.missions) {
+			
+			var data = { 'ref': m.ref };
+			API.sendRequest('/api/mission/delete/', 'POST', {}, data);
+		}
+		
+		$rootScope.mosaics.splice($rootScope.mosaics.indexOf(mosaic), 1);
+	}
+
 });
 angular.module('FrontModule', ['pascalprecht.translate', 'satellizer', 'ngCookies', 'toastr',
 							   'FrontModule.services', 'FrontModule.controllers', 'FrontModule.directives', ]);
