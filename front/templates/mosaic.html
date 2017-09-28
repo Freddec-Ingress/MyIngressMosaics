@@ -187,7 +187,7 @@
 			
 			<div class="f-row mb-2">
 				
-				<button class="btn btn-secondary" ng-click="openMissions();">
+				<button class="btn btn-secondary mr-2" ng-click="openMissions();">
 					Missions
 				</button>
 				
@@ -197,14 +197,24 @@
 				
 			</div>
 			
-			<div ng-show="MissionsMode" class="panel mb-4">
+			<div ng-show="missionsMode" class="panel mb-4">
     			
 		        <table class="card-table">
 		            <tbody>
 		                <tr ng-repeat="item in mosaic.missions">
 		                	<td class="px-1">
     							
-    							
+    							<div class="">
+    								<input class="form-control" ng-model="item.order" />
+    							</div>
+
+    							<div class="">
+    								{{item.title}}
+    							</div>
+
+    							<div class="">
+    								<a ng-click="remove(item.ref, $index);"><i class="fa fa-trash"></i></a>
+    							</div>
     							
 		                    </td>
 		                </tr>
