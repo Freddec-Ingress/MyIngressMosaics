@@ -187,7 +187,7 @@
 			
 			<div class="f-row">
 				
-				<button class="btn btn-secondary" ng-click="deleteMode = true;">
+				<button class="btn btn-secondary" ng-click="openDelete();">
 					Delete
 				</button>
 				
@@ -196,7 +196,7 @@
 			<div ng-show="deleteMode" class="panel">
 				
 				<div class="f-row">
-					<input type="text" class="form-control" placeholder="" ng-model="deleteModel.text" />
+					<input type="text" class="form-control" placeholder="" ng-model="deleteModel.name" />
 	    			<button class="btn btn-secondary" ng-click="delete();">
 	    				Delete
 	    			</button>
