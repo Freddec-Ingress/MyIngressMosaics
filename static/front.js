@@ -1791,6 +1791,7 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 			if ($scope.mosaic) {
 				
 				$('#block-mosaic').removeClass('hidden');
+				$('#block-admin').removeClass('hidden');
 			}
 			else {
 				
