@@ -1373,6 +1373,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 							
 							if (mosaic.city) mosaic.city = mosaic.city.replace(/ō/g, 'o');
 							if (mosaic.city) mosaic.city = mosaic.city.replace(/Ō/g, 'O');
+							if (mosaic.city && mosaic.city.substring(mosaic.city.length-3, mosaic.city.length) == '-ku') mosaic.city = mosaic.city.substring(0, mosaic.city.length-3);
 							if (mosaic.city && mosaic.city.substring(mosaic.city.length-4, mosaic.city.length) == '-son') mosaic.city = mosaic.city.substring(0, mosaic.city.length-4);
 							if (mosaic.city && mosaic.city.substring(mosaic.city.length-4, mosaic.city.length) == '-shi') mosaic.city = mosaic.city.substring(0, mosaic.city.length-4);
 							if (mosaic.city && mosaic.city.substring(mosaic.city.length-4, mosaic.city.length) == '-cho') mosaic.city = mosaic.city.substring(0, mosaic.city.length-4);

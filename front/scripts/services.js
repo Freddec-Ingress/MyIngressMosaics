@@ -52,7 +52,7 @@ angular.module('FrontModule.services').service('UserService', function($auth, $h
 
 		init: function() {
 
-			return API.sendRequest('/api/profile/', 'GET').then(function(response) {
+			return API.sendRequest('/api/user/', 'GET').then(function(response) {
 				
 				if (response) {
 					service.data.authenticated = true;
@@ -80,7 +80,7 @@ angular.module('FrontModule.services').service('UserService', function($auth, $h
 			
 			service.data.authenticated = false;
 			
-			return API.sendRequest('/api/logout/', 'POST').then(function(response) {
+			return API.sendRequest('/api/user/logout/', 'POST').then(function(response) {
 				
 				$window.location.href = '/';
 			});
@@ -102,7 +102,7 @@ angular.module('FrontModule.services').service('UserService', function($auth, $h
 		localLogin: function(username, password) {
 			
 			var data = { 'username':username, 'password':password }
-			return API.sendRequest('/api/login/', 'POST', {}, data).then(function(response) {
+			return API.sendRequest('/api/user/login/', 'POST', {}, data).then(function(response) {
 				
 				$auth.setToken(response.token);
 				$cookies.token = response.token;
@@ -116,7 +116,7 @@ angular.module('FrontModule.services').service('UserService', function($auth, $h
 		register: function(username, password1, password2, email) {
 			
 			var data = { 'username':username, 'password1':password1, 'password2':password2, 'email':email }
-			return API.sendRequest('/api/register/', 'POST', {}, data).then(function(response) {
+			return API.sendRequest('/api/user/register/', 'POST', {}, data).then(function(response) {
 				
 				$auth.setToken(response.token);
 				$cookies.token = response.token;
@@ -130,7 +130,7 @@ angular.module('FrontModule.services').service('UserService', function($auth, $h
 		updateName: function(newvalue) {
 			
 			var data = { 'name':newvalue };
-			return API.sendRequest('/api/profile/name/', 'POST', {}, data).then(function(response) {
+			return API.sendRequest('/api/user/edit/name/', 'POST', {}, data).then(function(response) {
 				
 				service.data.name = newvalue;
 			});

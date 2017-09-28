@@ -80,7 +80,7 @@
 				<div class="mb-2">
 					{{mosaic.missions.length}} <i class="fa fa-th mx-1"></i><span class="mx-1">&middot;</span>{{mosaic.type}}
 					<span class="mx-1">&middot;</span>{{mosaic.portals}} waypoints<span class="mx-1">&middot;</span>{{mosaic.uniques}} uniques<span ng-show="mosaic.type ==  'sequence'"><span class="mx-1">&middot;</span>{{mosaic.distance | number:2}} km
-					<span ng-show="mosaic.distance > 10.0" class="mx-1">&middot;</span><i ng-show="mosaic.distance > 10.0 && mosaic.distance < 30.0" class="fa fa-bicycle mx-1"></i><i ng-show="mosaic.distance > 30.0" class="fa fa-car mx-1"></i>
+					<span ng-show="mosaic.distance > 10.0" class="mx-1">&middot;</span><i ng-show="mosaic.distance > 10.0 && mosaic.distance < 30.0" class="fa fa-bicycle mx-1"></i><i ng-show="mosaic.distance > 30.0" class="fa fa-car mx-1"></i></span>
 				</div>
 				
 				<div class="mb-2">
@@ -181,6 +181,23 @@
 			
 		</div>
 
+		<!-- Admin block -->
+
+		<div ng-if="user.superuser" id="block-admin" class="mt-2 px-2 py-1 hidden">
+			
+			<div class="f-row">
+				
+				<button class="btn btn-secondary" ng-click="">
+					Delete
+				</button>
+				
+			</div>
+			
+			<div class="panel">
+			</div>
+			
+		</div>
+		
 	</div>
 
 {% endverbatim %}
