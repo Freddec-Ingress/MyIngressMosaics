@@ -520,25 +520,25 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 	
 	/* Reorder */
 	
-	$scope.reorderMode = false;
+	$scope.missionsMode = false;
 	$scope.reorderLoading = false;
 	
 	$scope.reorderModel = {ref:null, missions:null};
 	
-	$scope.openReorder = function() {
+	$scope.openMissions = function() {
 		
 		$scope.reorderModel.ref = $scope.mosaic.ref;
 		$scope.reorderModel.missions = $scope.mosaic.missions;
 
 		$scope.editMode = false;
-		$scope.reorderMode = true;
+		$scope.missionsMode = true;
 		$scope.addMode = false;
 		$scope.deleteMode = false;
 	}
 	
-	$scope.closeReorder = function() {
+	$scope.closeissions = function() {
 		
-		$scope.reorderMode = false;
+		$scope.missionsMode = false;
 	}
 	
 	$scope.remove = function(mission_ref, index) {
