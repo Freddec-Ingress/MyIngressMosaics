@@ -185,7 +185,7 @@
 
 		<div ng-if="user.superuser" id="block-admin" class="mt-2 px-2 py-1 hidden">
 			
-			<div class="f-row">
+			<div class="f-row mb-2">
 				
 				<button class="btn btn-secondary" ng-click="openDelete();">
 					Delete
@@ -193,11 +193,11 @@
 				
 			</div>
 			
-			<div ng-show="deleteMode" class="panel">
+			<div ng-show="deleteMode" class="panel mb-4">
 				
 				<div class="f-row">
-					<input type="text" class="form-control" placeholder="" ng-model="deleteModel.name" />
-	    			<button class="btn btn-secondary" ng-click="delete();">
+					<input type="text" class="form-control mr-2" placeholder="" ng-model="deleteModel.name" />
+	    			<button class="btn btn-primary" ng-click="delete();">
 	    				Delete
 	    			</button>
 	    		</div>
