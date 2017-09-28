@@ -592,12 +592,6 @@ table td {
 .f-row {display: flex; flex-direction: row;}
 .f-col {display: flex; flex-direction: column;}
 
-.f-align-end {}
-.f-align-start {justify-content: flex-start!important;}
-.f-align-center {justify-content: center!important;}
-.f-align-around {}
-.f-align-between {}
-
 .f-justify-center {
     justify-content: center!important;
 }
@@ -605,14 +599,14 @@ table td {
     justify-content: space-around!important;
 }
 
-.f-xalign-end {}
-.f-xalign-start {}
-.f-xalign-center {}
-.f-xalign-stretch {}
-.f-xalign-baseline {}
-
 .f-align-baseline {
     align-items: baseline!important;
+}
+.f-align-start {
+    align-items: flex-start!important;
+}
+.f-align-center {
+    align-items: center!important;
 }
 
 .f-wrap {flex-wrap: wrap!important;}
