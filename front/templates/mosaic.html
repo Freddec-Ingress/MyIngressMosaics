@@ -199,27 +199,35 @@
 			
 			<div ng-show="missionsMode" class="panel mb-4">
     			
-		        <table class="card-table">
+		        <table class="mb-4">
 		            <tbody>
 		                <tr ng-repeat="item in mosaic.missions">
 		                	<td class="px-1">
+    							<div class="f-row">
+    								
+	    							<div class="">
+	    								<input class="form-control" ng-model="item.order" />
+	    							</div>
+	
+	    							<div class="mr-auto">
+	    								{{item.title}}
+	    							</div>
+	
+	    							<div class="">
+	    								<a ng-click="remove(item.ref, $index);"><i class="fa fa-trash"></i></a>
+	    							</div>
     							
-    							<div class="">
-    								<input class="form-control" ng-model="item.order" />
     							</div>
-
-    							<div class="">
-    								{{item.title}}
-    							</div>
-
-    							<div class="">
-    								<a ng-click="remove(item.ref, $index);"><i class="fa fa-trash"></i></a>
-    							</div>
-    							
 		                    </td>
 		                </tr>
 		            </tbody>
 		       </table>
+		       
+		       <div class="f-row justify-center">
+					<button class="btn btn-primary" ng-click="reorder();">
+						Reorder
+					</button>
+		       </div>
     			
 			</div>
 			
