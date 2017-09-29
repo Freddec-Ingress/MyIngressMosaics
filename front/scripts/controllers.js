@@ -546,25 +546,7 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 		$scope.reorderModel.missions.splice(index, 1);
 		MosaicService.remove(mission_ref);
 	}
-	
-	$scope.reorder = function() {
-		
-		$scope.reorderLoading = true;
-			
-		MosaicService.reorder($scope.reorderModel).then(function(response) {
-			
-			toastr.success($filter('translate')('success_REORDER'));
 
-			$scope.reorderMode = false;
-			$scope.reorderLoading = false;
-			
-		}, function(response) {
-			
-			$scope.reorderMode = false;
-			$scope.reorderLoading = false;
-		});
-	}
-	
 	function compareOrderAsc(a, b) {
 		
 		if (parseInt(a.order) < parseInt(b.order))
