@@ -26,74 +26,79 @@
     
 {% verbatim %}
 	
-	<div id="block-data" style="flex:1;">
-	
-        <div ng-if="!user.authenticated" class="section">
-            
-            <div class="item c-danger ta-center">
-        	    Restricted area
-            </div>
+    <div ng-if="!user.authenticated" class="section">
         
-        	<div class="item f-row">
-        	
-        		<div class="item width-6 ta-right">
-        			<a class="btn btn-secondary" href="/login">
-        				Sign in
-        			</a>
-        		</div>
-        	
-        		<div class="item width-6">
-        			<a class="btn btn-secondary" href="/register">
-        				Sign up
-        			</a>
-        		</div>
-        
-        	</div>
-        			
+        <div class="item c-danger ta-center">
+    	    Restricted area
         </div>
-        
-        <div ng-if="user.authenticated" class="f-col" style="flex:1;">
-        
-            <div class="p-2">
-                <p>To scan missions from Ingress Intel Map: <a href="/plugin">MIM Scanning Plugin</a></p>
-                <p>To register manually missions that couldn't be scanned:<a href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">MIM Hunting Tool</a></p>
-            </div>
+    
+    	<div class="item f-row">
+    	
+    		<div class="item width-6 ta-right">
+    			<a class="btn btn-secondary" href="/login">
+    				Sign in
+    			</a>
+    		</div>
+    	
+    		<div class="item width-6">
+    			<a class="btn btn-secondary" href="/register">
+    				Sign up
+    			</a>
+    		</div>
+    
+    	</div>
+    			
+    </div>
+    
+    <div ng-if="user.authenticated">
+    
+        <div class="section">
+            <p class="item">To scan missions from Ingress Intel Map: <a href="/plugin">MIM Scanning Plugin</a></p>
+            <p class="item">To register manually missions that couldn't be scanned:<a href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">MIM Hunting Tool</a></p>
+        </div>
 
-            <div id="searchBlock" class="p-2" style="flex:1;">
+        <div id="searchBlock" class="section">
+            
+            <div class="panel">
                 
-                <div class="panel p-2" style="flex:1;">
+            	<form class="item f-row f-nowrap">
+            		<input type="text" class="form-control" placeholder="mosaic name, creator name" ng-model="searchModel.text" />
+            		<input id="searchButton" type="submit" style="width:67px;" class="btn btn-primary ml-2" ng-click="search();" value="Search" ng-disabled="searching">
+            			<div ng-show="searching" class="loading-line px-2 py-1" style="position: absolute; right: 8px; top: 6px;">
+            				<img src="/static/img/loading.png" />
+            			</div>
+            		</input>
+            	</form>
+                
+                <div class="item">
+                    <div class="item bg-black scrollbar" style="overflow:auto; height:200px;">
                     
-                	<form class="f-row f-nowrap">
-                		<input type="text" class="form-control" placeholder="mosaic name, creator name" ng-model="searchModel.text" />
-                		<input id="searchButton" type="submit" style="width:67px;" class="btn btn-primary ml-2" ng-click="search();" value="Search" ng-disabled="searching">
-                			<div ng-show="searching" class="loading-line px-2 py-1" style="position: absolute; right: 8px; top: 6px;">
-                				<img src="/static/img/loading.png" />
-                			</div>
-                		</input>
-                	</form>
-                    
-                    <div class="mt-2 bg-black px-1 scrollbar" style="border-top:4px solid black; border-bottom:4px solid black; flex:1; overflow:auto; height:200px;">
+                        <div ng-if="searchModel.results.length < 1" class="item">No mission</div>
                         
-                        <div ng-if="searchModel.results.length < 1" class="p-2">No mission</div>
-                        
-        		        <table class="card-table">
+        		        <table class="bg-dark">
         		            <tbody>
         		                <tr ng-repeat="item in searchModel.results">
-        		                	<td class="px-1">
+        		                	<td>
         			                    
         			                    <div class="f-row">
         			                        
-        			                        <div class="c-normal mr-auto" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
-        			                            <a ng-click="addMission(item);"><i class="fa fa-plus-square mx-2"></i></a>
+        			                         <div class="item">
+        			                             <a ng-click="addMission(item);"><i class="fa fa-plus-square"></i></a>
+        			                         </div>
+        			                         
+        			                        <div class="item c-normaL ellipsis mr-auto">
         				                        {{item.title}}
         				                    </div>
         				                    
-                                            <span class="ml-2" ng-class="{'text-enligtened': item.faction == 'E', 'text-resistance': item.faction == 'R',}">
+                                            <div class="item" ng-class="{'c-enligtened': item.faction == 'E', 'c-resistance': item.faction == 'R',}">
                                                 {{item.creator}}
+                                            </div>
+                                            
+                                            <div class="item">
                                                 <a href="https://www.ingress.com/mission/{{item.ref}}" target="blank">
-                                                    <i class="fa fa-external-link mx-2"></i>
+                                                    <i class="fa fa-external-link"></i>
                                                 </a>
-                                            </span>
+                                            </div>
         			                        
         			                     </div>
         			                    
@@ -103,138 +108,137 @@
         		       </table>
                         
                     </div>
-                    
-                    <div class="mt-2">
-                        {{searchModel.results.length}} missions
-                        <span ng-if="searchModel.results.length > 0" class="mx-1">&middot;</span>
-                        <a ng-if="searchModel.results.length > 0" ng-click="addAll();">Add all</a>
-                    </div>
-                    
+                </div>
+                
+                <div class="item">
+                    {{searchModel.results.length}} missions
+                    <span ng-if="searchModel.results.length > 0" class="mx-1">&middot;</span>
+                    <a ng-if="searchModel.results.length > 0" ng-click="addAll();">Add all</a>
                 </div>
                 
             </div>
             
-            <div id="createBlock" class="p-2">
+        </div>
+        
+        <div id="createBlock" class="section">
 
-                <div class="panel p-2">
+            <div class="panel p-2">
 
-                <div class="f-row">
-                
-        	        <div class="group width-4 pr-1">
-        	            <label class="m-0">Title</label>
-        	            <input type="text" class="form-control" ng-model="mosaicModel.title" />
-        	        </div>
-        	        
-        	        <div class="group width-4 px-1">
-        	            <label class="m-0">Type</label>
-        	            <select class="form-control" ng-model="mosaicModel.type">
-        	                <option value="sequence">sequence</option>
-        	                <option value="serie">serie</option>
-        	            </select>
-        	        </div>
-    
-        	        <div class="group width-4 pl-1">
-        	            <label class="m-0">Columns</label>
-        	            <select class="form-control" ng-model="mosaicModel.columns" />
-            	                <option value="6">6</option>
-            	                <option value="5">5</option>
-            	                <option value="4">4</option>
-            	                <option value="3">3</option>
-            	                <option value="2">2</option>
-            	                <option value="1">1</option>
-           	            </select>
-        	        </div>
-                </div>
-
-                <div class="f-row">
-        	        <div class="group width-4 pr-1">
-        	            <label class="m-0">Country</label>
-        	            <input type="text" class="form-control" ng-model="mosaicModel.country" />
-        	        </div>
-    
-        	        <div class="group width-4 px-1">
-        	            <label class="m-0">Region</label>
-        	            <input type="text" class="form-control" ng-model="mosaicModel.region" />
-        	        </div>
-    
-        	        <div class="group width-4 pl-1">
-        	            <label class="m-0">City</label>
-        	            <input type="text" class="form-control" ng-model="mosaicModel.city" />
-        	        </div>
-    	        </div>
-                
-                <div class="f-row">
-                    
-                    <div class="width-6 pr-1">
-                        <label class="m-0">Preview</label>
-        				<div class="bg-black f-row f-justify-center" style="height:230px; overflow-y:auto; padding-top:4px; padding-bottom:4px; padding-left:4px;" ng-class="{'f-align-start scrollbar scrollbar-mini': mosaicModel.missions.length > 24, 'f-align-center pr-1': mosaicModel.missions.length <= 24}">
-        					
-        					<div class="f-row f-wrap f-justify-center f-align-center" style="padding:0 calc((6 - {{mosaicModel.columns}}) / 2 * 16.666667%); width:100%;">
-        			            <div ng-repeat="m in mosaicModel.missions | reverse" style="flex:0 0 calc(100% / {{mosaicModel.columns}});">
-        			                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-        			           </div>
-        					</div>
-        					
-        				</div>
-                    </div>
-                    
-                    <div class="width-6 pl-1">
-                        <label class="m-0">Missions</label>
-                        <div class="bg-black px-1 scrollbar" style="border-top:4px solid black; border-bottom:4px solid black; flex:1; overflow:auto; height:230px;">
-        		        <div ng-if="mosaicModel.missions < 1" class="p-2">No mission</div>
-        		        <table class="card-table">
-        		            <tbody>
-        		                <tr ng-repeat="item in mosaicModel.missions">
-        		                	<td class="px-1">
-        			                    
-        			                    <div class="f-row f-align-center">
-        			                        
-        			                        <div class="mr-2" style="width:2.5rem;">
-        			                            <input type="text" class="form-control text-center" ng-blur="reorder();" ng-model="item.order" style="height:1.75rem;" />
-        			                        </div>
-        			                        
-        			                        <div class="c-normal mr-auto" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
-        				                        {{item.title}}
-        				                    </div>
-        			                        
-        			                        <a ng-click="removeMission(item);">
-        			                            <i class="fa fa-minus-square mx-2"></i>
-        			                        </a>
-        			                        
-        			                     </div>
-        			                    
-        		                    </td>
-        		                </tr>
-        		            </tbody>
-        		       </table>
-        		      </div>
-        		      <div class="mt-2">
-                        {{mosaicModel.missions.length}} missions
-                        <span ng-if="mosaicModel.missions.length > 0" class="mx-1">&middot;</span>
-                        <a ng-if="mosaicModel.missions.length > 0" ng-click="clearAll();">Clear all</a>
-                    </div>
-        		      
-                    </div>
-                    
+            <div class="f-row">
+            
+    	        <div class="group width-4 pr-1">
+    	            <label class="m-0">Title</label>
+    	            <input type="text" class="form-control" ng-model="mosaicModel.title" />
     	        </div>
     	        
-    	        	<div class="text-center text-danger mt-4">
-    	        	    No update allowed after creation. Please create mosaic only when it is complete.
-    	        	</div>
-    	        	
-    	        <div class="form-button-bar mt-4">
-    	        	
-    				<button class="btn btn-primary" ng-click="createMosaic();" ng-disabled="creating || !mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || (mosaicModel.missions.length < 1)">
-    				    <span id="createButton">Create</span>
-            			<div ng-show="creating" class="loading-line py-1">
-            				<img src="/static/img/loading.png" />
-            			</div>
-    				</button>
-
+    	        <div class="group width-4 px-1">
+    	            <label class="m-0">Type</label>
+    	            <select class="form-control" ng-model="mosaicModel.type">
+    	                <option value="sequence">sequence</option>
+    	                <option value="serie">serie</option>
+    	            </select>
     	        </div>
+
+    	        <div class="group width-4 pl-1">
+    	            <label class="m-0">Columns</label>
+    	            <select class="form-control" ng-model="mosaicModel.columns" />
+        	                <option value="6">6</option>
+        	                <option value="5">5</option>
+        	                <option value="4">4</option>
+        	                <option value="3">3</option>
+        	                <option value="2">2</option>
+        	                <option value="1">1</option>
+       	            </select>
     	        </div>
             </div>
-   
+
+            <div class="f-row">
+    	        <div class="group width-4 pr-1">
+    	            <label class="m-0">Country</label>
+    	            <input type="text" class="form-control" ng-model="mosaicModel.country" />
+    	        </div>
+
+    	        <div class="group width-4 px-1">
+    	            <label class="m-0">Region</label>
+    	            <input type="text" class="form-control" ng-model="mosaicModel.region" />
+    	        </div>
+
+    	        <div class="group width-4 pl-1">
+    	            <label class="m-0">City</label>
+    	            <input type="text" class="form-control" ng-model="mosaicModel.city" />
+    	        </div>
+	        </div>
+            
+            <div class="f-row">
+                
+                <div class="width-6 pr-1">
+                    <label class="m-0">Preview</label>
+    				<div class="bg-black f-row f-justify-center" style="height:230px; overflow-y:auto; padding-top:4px; padding-bottom:4px; padding-left:4px;" ng-class="{'f-align-start scrollbar scrollbar-mini': mosaicModel.missions.length > 24, 'f-align-center pr-1': mosaicModel.missions.length <= 24}">
+    					
+    					<div class="f-row f-wrap f-justify-center f-align-center" style="padding:0 calc((6 - {{mosaicModel.columns}}) / 2 * 16.666667%); width:100%;">
+    			            <div ng-repeat="m in mosaicModel.missions | reverse" style="flex:0 0 calc(100% / {{mosaicModel.columns}});">
+    			                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+    			           </div>
+    					</div>
+    					
+    				</div>
+                </div>
+                
+                <div class="width-6 pl-1">
+                    <label class="m-0">Missions</label>
+                    <div class="bg-black px-1 scrollbar" style="border-top:4px solid black; border-bottom:4px solid black; flex:1; overflow:auto; height:230px;">
+    		        <div ng-if="mosaicModel.missions < 1" class="p-2">No mission</div>
+    		        <table class="card-table">
+    		            <tbody>
+    		                <tr ng-repeat="item in mosaicModel.missions">
+    		                	<td class="px-1">
+    			                    
+    			                    <div class="f-row f-align-center">
+    			                        
+    			                        <div class="mr-2" style="width:2.5rem;">
+    			                            <input type="text" class="form-control text-center" ng-blur="reorder();" ng-model="item.order" style="height:1.75rem;" />
+    			                        </div>
+    			                        
+    			                        <div class="c-normal mr-auto" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
+    				                        {{item.title}}
+    				                    </div>
+    			                        
+    			                        <a ng-click="removeMission(item);">
+    			                            <i class="fa fa-minus-square mx-2"></i>
+    			                        </a>
+    			                        
+    			                     </div>
+    			                    
+    		                    </td>
+    		                </tr>
+    		            </tbody>
+    		       </table>
+    		      </div>
+    		      <div class="mt-2">
+                    {{mosaicModel.missions.length}} missions
+                    <span ng-if="mosaicModel.missions.length > 0" class="mx-1">&middot;</span>
+                    <a ng-if="mosaicModel.missions.length > 0" ng-click="clearAll();">Clear all</a>
+                </div>
+    		      
+                </div>
+                
+	        </div>
+	        
+	        	<div class="text-center text-danger mt-4">
+	        	    No update allowed after creation. Please create mosaic only when it is complete.
+	        	</div>
+	        	
+	        <div class="form-button-bar mt-4">
+	        	
+				<button class="btn btn-primary" ng-click="createMosaic();" ng-disabled="creating || !mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || (mosaicModel.missions.length < 1)">
+				    <span id="createButton">Create</span>
+        			<div ng-show="creating" class="loading-line py-1">
+        				<img src="/static/img/loading.png" />
+        			</div>
+				</button>
+
+	        </div>
+	        </div>
         </div>
 
     </div>
