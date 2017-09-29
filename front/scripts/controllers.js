@@ -565,6 +565,32 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 		});
 	}
 	
+	function compareOrderAsc(a, b) {
+		
+		if (parseInt(a.order) < parseInt(b.order))
+			return -1;
+			
+		if (parseInt(a.order) > parseInt(b.order))
+			return 1;
+		
+		if (a.title < b.title)
+			return -1;
+			
+		if (a.title > b.title)
+			return 1;
+			
+		return 0;
+	}
+	
+	$scope.reorderMission = function(index, ref, newOrder) {
+		
+		var data = { 'ref':ref, 'order':newOrder };
+		API.sendRequest('/api/mission/order/', 'POST', {}, data);
+		
+		$scope.mosaic.missions[index].order = newOrder;
+		$scope.mosaic.missions.sort(compareOrderAsc);
+	}
+	
 	/* Add */
 	
 	$scope.addMode = false;

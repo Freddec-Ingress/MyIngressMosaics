@@ -442,6 +442,23 @@ def mission_delete(request):
 		result[0].delete();
 		
 	return Response(None, status=status.HTTP_200_OK)
+	
+	
+	
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def mission_order(request):
+	
+	result = Mission.objects.filter(ref=request.data['ref'])
+	if result.count() > 0:
+		
+		mission = result[0]
+		
+		mission.order = request.data['order']
+		mission.save()
+	
+	return Response(None, status=status.HTTP_200_OK)
 
 
 
