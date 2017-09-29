@@ -21,76 +21,85 @@
 {% endblock %}
 
 {% block content %}
-{% verbatim %}
 
 <div id="page-container" ng-controller="LoginCtrl">
 
-<div class="card mt-4">
-	
-	<div class="card-block first last">
+{% verbatim %}
 
-		<a href="javascript:;" class="btn btn-block btn-facebook" ng-click="socialLogin('facebook')">
-			<i class="fa fa-facebook-official mr-2"></i>
-			Sign in with Facebook
-		</a>
+	<div class="section">
+		
+		<div class="item">
+	
+			<a href="javascript:;" class="btn btn-block btn-facebook ta-center" ng-click="socialLogin('facebook')">
+				<div class="item">
+					<i class="fa fa-facebook-official mr-2"></i>
+					Sign in with Facebook
+				</div>
+			</a>
+			
+		</div>
 		
 	</div>
-	
-</div>
-	
-<div class="card">
-	
-    <div class="card-header">
-    	<span class="text-medium">Sign in with local account</span>
-    </div>
-	
-	<div class="card-block first last">
+		
+	<div class="section">
+		
+		<div class="item">
+			<div class="ttrans-uppercase bordered-b">
+				Sign in with local account
+			</div>
+		</div>
 
-		<form name="form" novalidate>
+		<div class="item">
 	
-			<div class="group">
-				
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-					<input type="text" class="form-control" placeholder="username" name="username" ng-model="loginModel.username" required="" />
+			<form class="panel" name="form" novalidate>
+		
+				<div class="item">
+					
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+						<input type="text" class="form-control" placeholder="username" name="username" ng-model="loginModel.username" required="" />
+					</div>
+					
+					<div ng-show="form.$submitted || form.username.$touched">
+						<p class="item c-danger" ng-show="form.username.$error.required">Field required</p>
+					</div>
+					
 				</div>
-				
-				<div ng-show="form.$submitted || form.username.$touched">
-					<p class="form-error" ng-show="form.username.$error.required">Field required</p>
+		
+				<div class="item">
+					
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
+						<input type="password" class="form-control" placeholder="password" name="password" ng-model="loginModel.password" required="" />
+					</div>
+					
+					<div ng-show="form.$submitted || form.password.$touched">
+						<p class="item c-danger" ng-show="form.password.$error.required">Field required</p>
+					</div>
+					
 				</div>
-				
-			</div>
+		
+				<div class="item f-row">
+					
+					<div class="item width-6 ta-right">
+						<button class="btn btn-primary" ng-click="localLogin(loginModel.username, loginModel.password);" ng-disabled="!loginModel.username || !loginModel.password">
+							<span class="mx-4">Sign in</span>
+						</button>
+					</div>
+					
+					<div class="item width-6">
+						<a class="btn" ui-sref="root.register">
+							<span class="mx-4">Sign up</span>
+						</a>
+					</div>
+					
+				</div>
 	
-			<div class="group">
-				
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
-					<input type="password" class="form-control" placeholder="password" name="password" ng-model="loginModel.password" required="" />
-				</div>
-				
-				<div ng-show="form.$submitted || form.password.$touched">
-					<p class="form-error" ng-show="form.password.$error.required">Field required</p>
-				</div>
-				
-			</div>
+			</form>
+		    
+		</div>
 	
-			<div class="form-button-bar">
-				
-				<div class="pr-2">
-					<button class="btn btn-primary btn-fixed" ng-click="localLogin(loginModel.username, loginModel.password);" ng-disabled="!loginModel.username || !loginModel.password">Sign in</button>
-				</div>
-				
-				<div class="pl-2 text-right">
-					<a class="btn btn-secondary btn-fixed" ui-sref="root.register">Sign up</a>
-				</div>
-				
-			</div>
-
-		</form>
-	    
 	</div>
-
-</div>
 
 </div>
 

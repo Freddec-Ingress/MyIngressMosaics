@@ -524,7 +524,7 @@ input[type=number]::-webkit-outer-spin-button {  margin: 0;  -webkit-appearance:
 	background-color: transparent;
 	border: 0; border-radius: .125rem;
 	min-height: 1.25rem; line-height: 1.25rem;
-	color: #ebbc4a; font-size: .75rem; font-family: inherit; text-decoration: none; text-transform: uppercase;
+	color: #ebbc4a; font-size: .75rem; font-family: inherit; text-decoration: none;
 }
 
 .btn:hover, .btn:focus {
@@ -539,10 +539,10 @@ input[type=number]::-webkit-outer-spin-button {  margin: 0;  -webkit-appearance:
 
 /* Colors ------------------------------------------------------------------- */
 
-.btn-primary { color: #ffffff; border: 1px solid #009688; background-color: #009688; }
+.btn-primary { color: #ffffff; border: 1px solid #009688; background-color: #009688; text-transform: uppercase; }
 .btn-primary:hover, .btn-primary:focus { border: 1px solid #ffffff; background-color: #009688; }
 
-.btn-secondary { color: #80CBC4; border: 1px solid #009688; background-color: transparent; }
+.btn-secondary { color: #80CBC4; border: 1px solid #009688; background-color: transparent; text-transform: uppercase; }
 .btn-secondary:hover, .btn-secondary:focus { border: 1px solid #ffffff; background-color: transparent; }
 
 .btn-facebook { color: #ffffff; background-color: #3b5998; border-color: #335190; }
