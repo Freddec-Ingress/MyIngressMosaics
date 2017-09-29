@@ -263,8 +263,8 @@ a:hover, a:focus, .hover:hover { color: inherit; cursor: pointer; text-decoratio
 /* Panel -------------------------------------------------------------------- */
 
 .panel {
+    padding: .25rem;
     background: #004D40;
-    padding: .25rem .5rem;
 }
 
 
@@ -568,7 +568,7 @@ table tr:last-child { border-bottom: 0; }
 /* Cell --------------------------------------------------------------------- */
 
 table td {
-    padding: .25rem;
+    padding: .25rem 0;
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 
@@ -637,13 +637,14 @@ table td {
 /* Mosaic image ------------------------------------------------------------- */
 
 .mosaic-img {
-    padding: .5rem;
+    padding: .25rem;
     background-color: #000000;
     display: flex; justify-content: center; align-items: center;
 }
 
 .mosaic-img .content-6, .mosaic-img .content-5, .mosaic-img .content-4, .mosaic-img .content-3, .mosaic-img .content-2, .mosaic-img .content-1 {
     width: 100%;
+    padding: .25rem;
     display: flex; justify-content: center; align-items: center; flex-wrap: wrap;
 }
 
@@ -654,7 +655,7 @@ table td {
 .mosaic-img .content-2 { padding: 0 calc((6 - 2) / 2 * 16.666667%); }
 .mosaic-img .content-1 { padding: 0 calc((6 - 1) / 2 * 16.666667%); }
 
-.mosaic-img .item { max-width: 100px; }
+.mosaic-img .item { padding: 0!important; max-width: 100px; }
 
 .mosaic-img .content-6 .item { flex: 0 0 calc(100% / 6); }
 .mosaic-img .content-5 .item { flex: 0 0 calc(100% / 5); }
