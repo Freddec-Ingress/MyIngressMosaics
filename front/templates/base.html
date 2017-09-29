@@ -28,59 +28,59 @@
 
 		<div id="menu-pane" ng-click="closeMenu();" ng-class="{'open': menu_open}">
 		    
-			<a class="f-row px-2 py-1 bg-500" href="/">
-				<img src="/static/img/logo.jpg" class="p-2" width="40px" height="40px" />
-				<span class="p-2 fs-4 c-white">MyIngressMosaics</span>
+			<a id="menu-header" href="/">
+				<img src="/static/img/logo.jpg" width="40px" height="40px" />
+				MyIngressMosaics
 			</a>
 		    
-			<div id="menu-content" class="mt-2">
+			<div id="menu-content">
 				
-			    <a class="f-row ml-3 px-2 fs-3 c-normal" href="/map">
-					<i class="fa fa-fw fa-map py-3 mr-4"></i>
-			    	<span class="pl-1 py-2">{% trans 'Map' %}</span>
+			    <a class="menu-item" href="/map">
+					<i class="fa fa-map"></i>
+			    	Map
 			    </a>
 			    
-			    <a class="f-row ml-3 px-2 fs-3 c-normal" href="/search">
-					<i class="fa fa-fw fa-search py-3 mr-4"></i>
-			    	<span class="pl-1 py-2">{% trans 'Search' %}</span>
+			    <a class="menu-item" href="/search">
+					<i class="fa fa-search"></i>
+			    	Search
 			    </a>
 	
-			    <a class="f-row ml-3 px-2 fs-3 c-normal" href="/registration">
-					<i class="fa fa-fw fa-plus-square py-3 mr-4"></i>
-			    	<span class="pl-1 py-2">{% trans 'Registration' %}</span>
+			    <a class="menu-item" href="/registration">
+					<i class="fa fa-plus-square"></i>
+			    	Registration
 			    </a>
 			    
-			    <hr class="ml-2" />
+			    <hr class="menu-separator" />
 
-				<a class="f-row ml-3 px-2 fs-3 c-normal" href="/profile">
-					<i class="fa fa-fw fa-user py-3 mr-4"></i>
-			    	<span class="pl-1 py-2">{% trans 'Profile' %}</span>
+				<a class="menu-item" href="/profile">
+					<i class="fa fa-user"></i>
+			    	Profile
 				</a>
 
-			    <hr class="ml-2" />
+			    <hr class="menu-separator" />
 			    
-				<a class="f-row ml-3 px-2 fs-3 c-normal" href="mailto:freddec.ingress@gmail.com">
-					<i class="fa fa-fw fa-envelope py-3 mr-4"></i>
-			    	<span class="pl-1 py-2">{% trans 'Email' %}</span>
+				<a class="menu-item" href="mailto:freddec.ingress@gmail.com">
+					<i class="fa fa-envelope"></i>
+			    	Email
 				</a>
 				
-				<a class="f-row ml-3 px-2 fs-3 c-normal" href="https://www.facebook.com/Myingressmosaics-184650338560393/" target="_blank">
-					<i class="fa fa-fw fa-facebook-official py-3 mr-4"></i>
-			    	<span class="pl-1 py-2">{% trans 'Facebook' %}</span>
+				<a class="menu-item" href="https://www.facebook.com/Myingressmosaics-184650338560393/" target="_blank">
+					<i class="fa fa-facebook-official"></i>
+			    	Facebook
 				</a>
 				
-				<a class="f-row ml-3 px-2 fs-3 c-normal" href="https://plus.google.com/u/1/communities/104595846633880114608" target="_blank">
-					<i class="fa fa-fw fa-google-plus-square py-3 mr-4"></i>
-			    	<span class="pl-1 py-2">{% trans 'Google+' %}</span>
+				<a class="menu-item" href="https://plus.google.com/u/1/communities/104595846633880114608" target="_blank">
+					<i class="fa fa-google-plus-square"></i>
+			    	Google+
 				</a>
 				
-			    <hr class="ml-2" />
+			    <hr class="menu-separator" />
 			    
-				<div class="ml-3 p-1 c-darker text-uppercase">
+				<div class="menu-text ttrans-uppercase">
 					2017 © Copyright
 				</div>
 				
-				<div class="ml-3 p-1 c-darker text-uppercase">
+				<div class="menu-text ttrans-uppercase">
 					DECONINCK Frédéric
 				</div>
 
@@ -90,23 +90,21 @@
 		
 		<div id="page-pane">
 			
-			<header id="page-header" class="f-row px-2 py-1 bg-500">
+			<header id="page-header">
 			    	
-				<div class="p-2 hidden-xl" ng-click="openMenu();">
-				    <i class="c-white fa fa-bars" style="margin-top:2px; font-size:1.15rem;"></i>
+				<div class="page-header-item hidden-xl" ng-click="openMenu();">
+				    <i class="fa fa-bars"></i>
 			    </div>
 				    
-				<h1 class="mr-auto p-2">
-				    <span class="fs-4 c-white">{% block header %}{% endblock %}</span>
+				<h1 class="page-header-item mr-auto">
+				    {% block header %}{% endblock %}
 				</h1>
 				
-			    <a class="fitem-align-end p-2" href="/search">
-					<i class="c-white fa fa-search" style="margin-top:2px; font-size:1.15rem;"></i>
+			    <a class="page-header-item" href="/search">
+					<i class="fa fa-search"></i>
 			    </a>
 				    
 			</header>
-			
-			<div id="toast-content"></div>
 			
 			<div id="page-content" class="hidden">
 				{% block content %}{% endblock %}

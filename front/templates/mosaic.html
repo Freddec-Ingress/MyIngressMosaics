@@ -29,216 +29,198 @@
 
 {% block content %}
 
-	<div id="page-mosaic" class="container" ng-controller="MosaicCtrl" ng-init="loadMosaic('{{ref}}');">
+<div id="page-container" ng-controller="MosaicCtrl" ng-init="loadMosaic('{{ref}}');">
 
-		<!-- Loading block -->
-		
-		<div id="block-loading" class="mt-4 px-2 py-1">
-				
-			<div class="loading-line px-2 py-1">
-				<img src="/static/img/loading.png" />
-				{% trans 'Loading data...' %}
-			</div>
-			
-		</div>
-		
-		<!-- No mosaic block -->
-		
-		<div id="block-nomosaic" class="mt-4 px-2 py-1 hidden">
-			
-			<div class="error-line px-2 py-1">
-				{% trans 'No mosaic found' %}
-			</div>
-			
-		</div>
-		
-		<!-- Mosaic block -->
-		
-		<div id="block-mosaic" class="mt-2 px-2 py-1 hidden">
-			
-			<div class="panel">
-				
 {% verbatim %}
-				<div class="my-2 text-white text-big">
-					{{mosaic.title}}
-				</div>
+
+	<div id="block-loading" class="p-2 ta-center">
+		<i class="fa fa-spinner rotating mr-1"></i>
+		Loading data...
+	</div>
+
+	<div id="block-nomosaic" class="p-2 ta-center c-danger hidden">
+		No mosaic found
+	</div>
+
+	<div id="block-mosaic" class="p-2 hidden">
+		
+		<div class="panel">
+			
+			<div class="my-2 c-white fs-head1">
+				{{mosaic.title}}
+			</div>
+			
+			<div class="mosaic-img mb-4">
 				
-				<div class="mosaic-img mb-4">
-					
-					<div class="content-{{mosaic.cols}}">
-			            <div class="item" ng-repeat="m in mosaic.missions | reverse">
-			                <img src="/static/img/mask.png" style="background-image:url({{m.image}}=s100);" />
-			            </div>
+				<div class="content-{{mosaic.cols}}">
+		            <div class="item" ng-repeat="m in mosaic.missions | reverse">
+		                <img src="/static/img/mask.png" style="background-image:url({{m.image}}=s100);" />
 		            </div>
-		
-				</div>
+	            </div>
+	
+			</div>
+			
+			<div class="mb-2">
+			    <a href="/map/{{mosaic.country}}">{{mosaic.country}}</a><span class="mx-1">></span><a href="/map/{{mosaic.region}},{{mosaic.country}}">{{mosaic.region}}</a><span class="mx-1">></span><a href="/map/{{mosaic.city}},{{mosaic.region}},{{mosaic.country}}">{{mosaic.city}}</a>
+			</div>
+			
+			<div class="mb-2">
+				{{mosaic.missions.length}} <i class="fa fa-th mx-1"></i><span class="mx-1">&middot;</span>{{mosaic.type}}
+				<span class="mx-1">&middot;</span>{{mosaic.portals}} waypoints<span class="mx-1">&middot;</span>{{mosaic.uniques}} uniques<span ng-show="mosaic.type ==  'sequence'"><span class="mx-1">&middot;</span>{{mosaic.distance | number:2}} km
+				<span ng-show="mosaic.distance > 10.0" class="mx-1">&middot;</span><i ng-show="mosaic.distance > 10.0 && mosaic.distance < 30.0" class="fa fa-bicycle mx-1"></i><i ng-show="mosaic.distance > 30.0" class="fa fa-car mx-1"></i></span>
+			</div>
+			
+			<div class="">
+	        	<span class="mr-2" ng-repeat="creator in mosaic.creators" ng-class="{'c-enligtened': creator.faction == 'E', 'c-resistance': creator.faction == 'R',}">
+	        		{{creator.name}}
+	        	</span>
+			</div>
+	
+			<div class="f-row p-2" style="height:52px;">
 				
-				<div class="mb-2">
-				    <a href="/map/{{mosaic.country}}">{{mosaic.country}}</a><span class="mx-1">></span><a href="/map/{{mosaic.region}},{{mosaic.country}}">{{mosaic.region}}</a><span class="mx-1">></span><a href="/map/{{mosaic.city}},{{mosaic.region}},{{mosaic.country}}">{{mosaic.city}}</a>
-				</div>
-				
-				<div class="mb-2">
-					{{mosaic.missions.length}} <i class="fa fa-th mx-1"></i><span class="mx-1">&middot;</span>{{mosaic.type}}
-					<span class="mx-1">&middot;</span>{{mosaic.portals}} waypoints<span class="mx-1">&middot;</span>{{mosaic.uniques}} uniques<span ng-show="mosaic.type ==  'sequence'"><span class="mx-1">&middot;</span>{{mosaic.distance | number:2}} km
-					<span ng-show="mosaic.distance > 10.0" class="mx-1">&middot;</span><i ng-show="mosaic.distance > 10.0 && mosaic.distance < 30.0" class="fa fa-bicycle mx-1"></i><i ng-show="mosaic.distance > 30.0" class="fa fa-car mx-1"></i></span>
-				</div>
-				
-				<div class="mb-2">
-		        	<a class="mr-2" ng-repeat="creator in mosaic.creators" ng-class="{'text-enligtened': creator.faction == 'E', 'text-resistance': creator.faction == 'R',}" ng-click="goToCreator(creator.name);">
-		        		{{creator.name}}
-		        	</a>
-				</div>
-{% endverbatim %}
-		
-				<div class="f-row my-4" style="height:20px;">
+				<div class="width-6 p-2 ta-right">
 					
-					<div class="pr-2 text-right" style="width:50%;">
-						
-						<div id="fb-root"></div>
-						
-						<script>
-							(function(d, s, id) {
-								var js, fjs = d.getElementsByTagName(s)[0];
-								if (d.getElementById(id)) return;
-								js = d.createElement(s); js.id = id;
-								js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10";
-								fjs.parentNode.insertBefore(js, fjs);
-							}(document, 'script', 'facebook-jssdk'));
-						</script>
-						
-						<div class="fb-share-button" data-href="https://www.myingressmosaics.com/mosaic/{{ref}}" data-layout="button_count" data-size="small" data-mobile-iframe="true">
-							<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"></a>
-						</div>
+					<div id="fb-root"></div>
 					
+					<script>
+						(function(d, s, id) {
+							var js, fjs = d.getElementsByTagName(s)[0];
+							if (d.getElementById(id)) return;
+							js = d.createElement(s); js.id = id;
+							js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10";
+							fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+					</script>
+					
+					<div class="fb-share-button" data-href="https://www.myingressmosaics.com/mosaic/{{ref}}" data-layout="button_count" data-size="small" data-mobile-iframe="true">
+						<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"></a>
 					</div>
+				
+				</div>
+				
+				<div class="width-6 p-2">
 					
-					<div class="pl-2" style="width:50%;">
-						
-						<script src="https://apis.google.com/js/platform.js" async defer></script>
-						<div class="g-plus" data-action="share" data-annotation="bubble" data-href="https://www.myingressmosaics.com/mosaic/{{ref}}"></div>			
-						
-					</div>
+					<script src="https://apis.google.com/js/platform.js" async defer></script>
+					<div class="g-plus" data-action="share" data-annotation="bubble" data-href="https://www.myingressmosaics.com/mosaic/{{ref}}"></div>			
 					
 				</div>
 				
-{% verbatim %}
-				
-			    <div id="map" class="mb-2"></div>
+			</div>
+			
+		    <div id="map" class="mb-2"></div>
 
-		        <table class="card-table">
-		            <tbody>
-		                <tr ng-repeat="item in mosaic.missions">
-		                	<td class="px-1">
-		                		
-		                		<div class="f-row hover" ng-click="toggleMission(item);">
-		                			
-				                    <div class="text-white">
-				                    	<i ng-hide="item.expanded" class="mr-2 fa fa-caret-right"></i>
-				                    	<i ng-show="item.expanded" class="mr-2 fa fa-caret-down"></i>
-				                    </div>
-				                    
-				                    <div class="c-normal mr-auto">
-				                        {{item.title}}
-				                    </div>
-				                    
-				                    <div class="text-right" style="width:2rem;">
-				                        <a href="https://www.ingress.com/mission/{{item.ref}}" target="blank">
-				                            <i class="fa fa-external-link"></i>
-				                        </a>
-				                    </div>
-				                    
+	        <table>
+	            <tbody>
+	                <tr ng-repeat="item in mosaic.missions">
+	                	<td class="py-2 px-0">
+	                		
+	                		<div class="f-row hover" ng-click="toggleMission(item);">
+	                			
+			                    <div class="c-white">
+			                    	<i ng-hide="item.expanded" class="mr-2 fa fa-caret-right"></i>
+			                    	<i ng-show="item.expanded" class="mr-2 fa fa-caret-down"></i>
 			                    </div>
 			                    
-		                		<div ng-show="item.expanded" class="mt-2">
-		                			
-		                			<div class="mb-2">
-		                				{{item.portals.length}} waypoints
-		                				<i class="mx-1 fa fa-long-arrow-right"></i>
-		                				<span class="" ng-repeat="portal in item.portals">
-		                					<span ng-if="$index > 0" class="mx-1">&middot;</span>
-		                					<span ng-class="{'c-normal':!portal.unavailable, 'text-danger':portal.unavailable}">
-		                						<span ng-if="portal.action == 0">Objectives</span>
-		                						<span ng-if="portal.action == 1">Hack</span>
-		                						<span ng-if="portal.action == 2">Capture or Upgrade</span>
-		                						<span ng-if="portal.action == 7">View</span>
-		                						<span ng-if="portal.action == 8">Passphrase</span>
-		                					</span>
-		                				</span>
-		                			</div>
-		                			
-		                			<div class="" style="white-space:normal;">
-				                        {{item.desc}}
-				                    </div>
-		                			
+			                    <div class="c-white mr-auto">
+			                        {{item.title}}
 			                    </div>
 			                    
-		                    </td>
-		                </tr>
-		            </tbody>
-		       </table>
-				
-			</div>
-			
-		</div>
-
-		<!-- Admin block -->
-
-		<div ng-if="user.superuser" id="block-admin" class="mt-2 px-2 py-1">
-			
-			<div class="f-row mb-2">
-				
-				<button class="btn btn-secondary mr-2" ng-click="openMissions();">
-					Missions
-				</button>
-				
-				<button class="btn btn-secondary" ng-click="openDelete();">
-					Delete
-				</button>
-				
-			</div>
-			
-			<div ng-show="missionsMode" class="panel mb-4">
-    			
-		        <table class="mb-4">
-		            <tbody>
-		                <tr ng-repeat="item in mosaic.missions">
-		                	<td class="px-1">
-    							<div class="f-row f-align-center">
-    								
-	    							<div class="mr-2" style="width:2.5rem;">
-	    								<input class="form-control text-center" ng-model="item.order" ng-blur="reorderMission($index, item.ref, item.order);" />
-	    							</div>
-	
-	    							<div class="mr-auto">
-	    								{{item.title}}
-	    							</div>
-	
-	    							<div class="ml-4">
-	    								<a ng-click="remove(item.ref, $index);"><i class="fa fa-trash"></i></a>
-	    							</div>
-    							
-    							</div>
-		                    </td>
-		                </tr>
-		            </tbody>
-		       </table>
-   			
-			</div>
-			
-			<div ng-show="deleteMode" class="panel mb-4">
-				
-				<div class="f-row">
-					<input type="text" class="form-control mr-2" placeholder="" ng-model="deleteModel.name" />
-	    			<button class="btn btn-primary" ng-click="delete();">
-	    				Delete
-	    			</button>
-	    		</div>
-    			
-			</div>
+			                    <div class="ta-right" style="width:2rem;">
+			                        <a href="https://www.ingress.com/mission/{{item.ref}}" target="blank">
+			                            <i class="fa fa-external-link"></i>
+			                        </a>
+			                    </div>
+			                    
+		                    </div>
+		                    
+	                		<div ng-show="item.expanded" class="mt-2">
+	                			
+	                			<div class="mb-2">
+	                				{{item.portals.length}} waypoints
+	                				<i class="mx-1 fa fa-long-arrow-right"></i>
+	                				<span class="" ng-repeat="portal in item.portals">
+	                					<span ng-if="$index > 0" class="mx-1">&middot;</span>
+	                					<span ng-class="{'c-lighter':!portal.unavailable, 'c-danger':portal.unavailable}">
+	                						<span ng-if="portal.action == 0">Objectives</span>
+	                						<span ng-if="portal.action == 1">Hack</span>
+	                						<span ng-if="portal.action == 2">Capture or Upgrade</span>
+	                						<span ng-if="portal.action == 7">View</span>
+	                						<span ng-if="portal.action == 8">Passphrase</span>
+	                					</span>
+	                				</span>
+	                			</div>
+	                			
+	                			<div class="" style="white-space:normal;">
+			                        {{item.desc}}
+			                    </div>
+	                			
+		                    </div>
+		                    
+	                    </td>
+	                </tr>
+	            </tbody>
+	       </table>
 			
 		</div>
 		
 	</div>
+
+	<div ng-if="user.superuser" id="block-admin" class="p-2">
+		
+		<div class="f-row mb-2">
+			
+			<button class="btn btn-secondary mr-2" ng-click="openMissions();">
+				Missions
+			</button>
+			
+			<button class="btn btn-secondary" ng-click="openDelete();">
+				Delete
+			</button>
+			
+		</div>
+		
+		<div ng-show="missionsMode" class="panel mb-4">
+			
+	        <table class="mb-4">
+	            <tbody>
+	                <tr ng-repeat="item in mosaic.missions">
+	                	<td class="px-1">
+							<div class="f-row f-align-center">
+								
+    							<div class="mr-2" style="width:2.5rem;">
+    								<input class="form-control text-center" ng-model="item.order" ng-blur="reorderMission($index, item.ref, item.order);" />
+    							</div>
+
+    							<div class="mr-auto">
+    								{{item.title}}
+    							</div>
+
+    							<div class="ml-4">
+    								<a ng-click="remove(item.ref, $index);"><i class="fa fa-trash"></i></a>
+    							</div>
+							
+							</div>
+	                    </td>
+	                </tr>
+	            </tbody>
+	       </table>
+   		
+		</div>
+		
+		<div ng-show="deleteMode" class="panel mb-4">
+			
+			<div class="f-row">
+				<input type="text" class="form-control mr-2" placeholder="" ng-model="deleteModel.name" />
+    			<button class="btn btn-primary" ng-click="delete();">
+    				Delete
+    			</button>
+    		</div>
+			
+		</div>
+		
+	</div>
+	
+</div>
 
 {% endverbatim %}
 {% endblock %}

@@ -24,38 +24,46 @@
 
 <div id="page-container" ng-controller="HomeCtrl">
 
-	<h2 class="p-4 fs-5 c-highlight text-center" style="padding-bottom: 0px!important;">
-		{% trans 'Search, Register and Share all Ingress Mosaics' %}
+{% verbatim %}
+	
+	<h2 class="p-4 fs-head2 c-highlight ta-center">
+		Search, Register and Share all Ingress Mosaics
 	</h2>
 	
-	<div class="f-row f-wrap f-justify-center p-2">
+	<div class="f-row p-2">
 	     
-		<div style="width:33%">
-	    <a class="btn btn-primary fitem-grow f-col mx-2 my-2" href="/map">
-	        <i class="fa fa-map p-2" style="font-size:2rem;"></i>
-	        {% trans 'Map' %}
-	    </a>
+		<div class="width-4 p-2">
+		    <a class="btn btn-primary btn-block px-0 ta-center" href="/map">
+		        <div class="p-2">
+		        	<i class="fa fa-map" style="font-size:2rem;"></i>
+		        </div>
+		        Map
+		    </a>
 	    </div>
 	     
-		<div style="width:33%">
-	    <a class="btn btn-primary fitem-grow f-col mx-2 my-2" href="/search">
-	        <i class="fa fa-search p-2" style="font-size:2rem;"></i>
-	        {% trans 'Search' %}
-	    </a>
+		<div class="width-4 p-2">
+		    <a class="btn btn-primary btn-block px-0 ta-center" href="/search">
+		        <div class="p-2">
+			        <i class="fa fa-search" style="font-size:2rem;"></i>
+		        </div>
+		        Search
+		    </a>
 	    </div>
 	
-		<div style="width:33%">
-	    <a class="btn btn-primary fitem-grow f-col mx-2 my-2" href="/registration">
-	        <i class="fa fa-plus-square p-2" style="font-size:2rem;"></i>
-	        {% trans 'Registration' %}
-	    </a>
+		<div class="width-4 p-2">
+		    <a class="btn btn-primary btn-block px-0 ta-center" href="/registration">
+		        <div class="p-2">
+			        <i class="fa fa-plus-square" style="font-size:2rem;"></i>
+		        </div>
+		        Registration
+		    </a>
 	    </div>
 	
 	</div>
 	
-	<div class="f-row f-justify-around m-4" style="height:20px;">
+	<div class="f-row p-2" style="height:52px;">
 		
-		<div class="pr-2 text-right" style="width:50%;">
+		<div class="width-6 p-2 ta-right">
 			
 			<div id="fb-root"></div>
 			
@@ -71,13 +79,12 @@
 			
 			<div class="fb-share-button" data-href="https://www.myingressmosaics.com" data-layout="button_count" data-size="small" data-mobile-iframe="true">
 				<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">
-					Share
 				</a>
 			</div>
 		
 		</div>
 		
-		<div class="pl-2" style="width:50%;">
+		<div class="width-6 p-2">
 			
 			<script src="https://apis.google.com/js/platform.js" async defer></script>
 			<div class="g-plus" data-action="share" data-annotation="bubble" data-href="https://www.myingressmosaics.com"></div>			
@@ -86,111 +93,117 @@
 		
 	</div>
 	
-	<div class="f-row pt-4 mt-4 mx-4 text-uppercase bordered-b">
-		{% trans 'Countries' %}
-	</div>
-	
-	<div class="f-row f-wrap f-justify-around">
-			
-		<div class="loading" ng-hide="!countries_loading">
-			<img src="/static/img/loading.png" />
+	<div class="p-2">
+		
+		<div class="pt-2 mx-2 ttrans-uppercase bordered-b">
+			Countries
 		</div>
 		
-	</div>
+		<div class="p-2" ng-hide="!countries_loading">
+			<i class="fa fa-spinner rotating mr-1"></i>
+			Loading data...
+		</div>
 	
-	<div id="countries_block" class="hidden f-row f-wrap px-3 py-1">
-		
-{% verbatim %}
-		<div class="width-12 width-xl-3 p-1" ng-repeat="country in countries">
+		<div id="countries_block" class="hidden f-row f-wrap">
 			
-			<a href="/map/{{country.name}}" class="btn btn-primary p-2 f-align-start">
+			<div class="width-12 width-xl-3 p-2" ng-repeat="country in countries">
 				
-				<div class="text-white mr-auto" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
+				<a href="/map/{{country.name}}" class="btn btn-primary btn-block p-2">
 					
-					<span class="flag-icon mr-1 text-highlight" style="position:relative; top:-2px;" ng-class="{
-			            'flag-icon-fr': country.name == 'France',
-			            'flag-icon-gb': country.name == 'United Kingdom',
-			            'flag-icon-my': country.name == 'Malaysia',
-			            'flag-icon-sg': country.name == 'Singapore',
-			            'flag-icon-us': country.name == 'United States',
-			            'flag-icon-mx': country.name == 'Mexico',
-			            'flag-icon-nz': country.name == 'New Zealand',
-			            'flag-icon-mv': country.name == 'Maldives',
-			            'flag-icon-do': country.name == 'Dominican Republic',
-			            'flag-icon-au': country.name == 'Australia',
-			            'flag-icon-hu': country.name == 'Hungary',
-			            'flag-icon-lk': country.name == 'Sri Lanka',
-			            'flag-icon-id': country.name == 'Indonesia',
-			            'flag-icon-de': country.name == 'Germany',
-			            'flag-icon-pl': country.name == 'Poland',
-				        'flag-icon-ru': country.name == 'Russia',
-				        'flag-icon-hk': country.name == 'Hong Kong',
-				        'flag-icon-mu': country.name == 'Mauritius',
-				        'flag-icon-th': country.name == 'Thailand',
-				        'flag-icon-cz': country.name == 'Czechia',
-				        'flag-icon-cn': country.name == 'China',
-				        'flag-icon-es': country.name == 'Spain',
-				        'flag-icon-ch': country.name == 'Switzerland',
-				        'flag-icon-ca': country.name == 'Canada',
-				        'flag-icon-at': country.name == 'Austria',
-				        'flag-icon-is': country.name == 'Iceland',
-				        'flag-icon-za': country.name == 'South Africa',
-				        'flag-icon-ad': country.name == 'Andorra',
-				        'flag-icon-it': country.name == 'Italy',
-				        'flag-icon-il': country.name == 'Israel',
-				        'flag-icon-pt': country.name == 'Portugal',
-				        'flag-icon-ie': country.name == 'Ireland',
-				        'flag-icon-gr': country.name == 'Greece',
-				        'flag-icon-tr': country.name == 'Turkey',
-				        'flag-icon-jp': country.name == 'Japan',
-				        'flag-icon-dk': country.name == 'Denmark',
-				        'flag-icon-se': country.name == 'Sweden',
-				        'flag-icon-no': country.name == 'Norway',
-				        'flag-icon-fi': country.name == 'Finland',
-				        'flag-icon-lv': country.name == 'Latvia',
-				        'flag-icon-ee': country.name == 'Estonia',
-				        'flag-icon-lt': country.name == 'Lithuania',
-				        'flag-icon-sk': country.name == 'Slovakia',
-				        'flag-icon-hr': country.name == 'Croatia',
-				        'flag-icon-ar': country.name == 'Argentina',
-				        'flag-icon-uy': country.name == 'Uruguay',
-				        'flag-icon-tw': country.name == 'Taiwan',
-				        'flag-icon-in': country.name == 'India',
-				        'flag-icon-nl': country.name == 'Netherlands',
-			        }"></span>
-			        
-		        	{{country.name}}
-		        	
-		        </div>
+					<div class="f-row">
+						
+						<div class="text-white mr-auto" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
+							
+							<span class="flag-icon mr-1 text-highlight" style="position:relative; top:-2px;" ng-class="{
+					            'flag-icon-fr': country.name == 'France',
+					            'flag-icon-gb': country.name == 'United Kingdom',
+					            'flag-icon-my': country.name == 'Malaysia',
+					            'flag-icon-sg': country.name == 'Singapore',
+					            'flag-icon-us': country.name == 'United States',
+					            'flag-icon-mx': country.name == 'Mexico',
+					            'flag-icon-nz': country.name == 'New Zealand',
+					            'flag-icon-mv': country.name == 'Maldives',
+					            'flag-icon-do': country.name == 'Dominican Republic',
+					            'flag-icon-au': country.name == 'Australia',
+					            'flag-icon-hu': country.name == 'Hungary',
+					            'flag-icon-lk': country.name == 'Sri Lanka',
+					            'flag-icon-id': country.name == 'Indonesia',
+					            'flag-icon-de': country.name == 'Germany',
+					            'flag-icon-pl': country.name == 'Poland',
+						        'flag-icon-ru': country.name == 'Russia',
+						        'flag-icon-hk': country.name == 'Hong Kong',
+						        'flag-icon-mu': country.name == 'Mauritius',
+						        'flag-icon-th': country.name == 'Thailand',
+						        'flag-icon-cz': country.name == 'Czechia',
+						        'flag-icon-cn': country.name == 'China',
+						        'flag-icon-es': country.name == 'Spain',
+						        'flag-icon-ch': country.name == 'Switzerland',
+						        'flag-icon-ca': country.name == 'Canada',
+						        'flag-icon-at': country.name == 'Austria',
+						        'flag-icon-is': country.name == 'Iceland',
+						        'flag-icon-za': country.name == 'South Africa',
+						        'flag-icon-ad': country.name == 'Andorra',
+						        'flag-icon-it': country.name == 'Italy',
+						        'flag-icon-il': country.name == 'Israel',
+						        'flag-icon-pt': country.name == 'Portugal',
+						        'flag-icon-ie': country.name == 'Ireland',
+						        'flag-icon-gr': country.name == 'Greece',
+						        'flag-icon-tr': country.name == 'Turkey',
+						        'flag-icon-jp': country.name == 'Japan',
+						        'flag-icon-dk': country.name == 'Denmark',
+						        'flag-icon-se': country.name == 'Sweden',
+						        'flag-icon-no': country.name == 'Norway',
+						        'flag-icon-fi': country.name == 'Finland',
+						        'flag-icon-lv': country.name == 'Latvia',
+						        'flag-icon-ee': country.name == 'Estonia',
+						        'flag-icon-lt': country.name == 'Lithuania',
+						        'flag-icon-sk': country.name == 'Slovakia',
+						        'flag-icon-hr': country.name == 'Croatia',
+						        'flag-icon-ar': country.name == 'Argentina',
+						        'flag-icon-uy': country.name == 'Uruguay',
+						        'flag-icon-tw': country.name == 'Taiwan',
+						        'flag-icon-in': country.name == 'India',
+						        'flag-icon-nl': country.name == 'Netherlands',
+					        }"></span>
+					        
+				        	{{country.name}}
+				        	
+				        </div>
+				        
+				        <div class="text-normal ml-2">{{country.mosaics}}</div>
+				        
+					</div>
+					
+				</a>
 		        
-		        <div class="text-normal ml-2">{{country.mosaics}}</div>
-	        </a>
-	        
-		</div>
-{% endverbatim %}
-
-	</div>
-	
-	<div class="f-row pt-4 mt-4 mx-4 text-uppercase bordered-b">
-		{% trans 'Latest mosaics' %}
-	</div>
-	
-	<div class="f-row f-wrap f-justify-around">
+			</div>
 			
-		<div class="loading" ng-hide="!latest_loading">
-			<img src="/static/img/loading.png" />
 		</div>
 		
 	</div>
 	
-	<div id="latest_block" class="hidden f-row f-wrap f-justify-around px-3 py-1 mb-4">
+	<div class="p-2">
+	
+		<div class="pt-2 mx-2 ttrans-uppercase bordered-b">
+			Latest mosaics
+		</div>
 		
-		<div class="width-6 width-xl-3 p-1" ng-repeat="mosaic in mosaics">
-			<mosaic-vignet mosaic="mosaic"></mosaic-vignet>
+		<div class="p-2" ng-hide="!latest_loading">
+			<i class="fa fa-spinner rotating mr-1"></i>
+			Loading data...
+		</div>
+
+		<div id="latest_block" class="hidden f-row f-wrap">
+			
+			<div class="width-6 width-xl-3 p-2" ng-repeat="mosaic in mosaics">
+				<mosaic-vignet mosaic="mosaic"></mosaic-vignet>
+			</div>
+			
 		</div>
 		
 	</div>
 
 </div>
 
+{% endverbatim %}
 {% endblock %}

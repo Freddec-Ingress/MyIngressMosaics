@@ -1,19 +1,5 @@
-angular.module('FrontModule', ['pascalprecht.translate', 'satellizer', 'ngCookies', 'toastr',
+angular.module('FrontModule', ['satellizer', 'ngCookies',
 							   'FrontModule.services', 'FrontModule.controllers', 'FrontModule.directives', ]);
-
-
-
-/* Translations config */
-
-angular.module('FrontModule').config(function($translateProvider) {
-	
-	$translateProvider.useSanitizeValueStrategy(null);
-	
-	$translateProvider.preferredLanguage('en');
-	
-	$translateProvider.translations('en', en_translations);
-	$translateProvider.translations('fr', fr_translations);
-});
 
 
 
@@ -37,20 +23,6 @@ angular.module('FrontModule').config(function($authProvider) {
 	$authProvider.tokenType = 'Token';
 });
 
-
-
-/* Toastr config */
-
-angular.module('FrontModule').config(function(toastrConfig) {
-	
-	angular.extend(toastrConfig, {
-		
-		target: '#toast-content',
-		timeOut: 10000,
-		preventDuplicates: true,
-    	preventOpenDuplicates: true,
-	});
-});
 
 
 

@@ -1,6 +1,6 @@
 angular.module('FrontModule.controllers', [])
 
-angular.module('FrontModule.controllers').controller('RootCtrl', function($rootScope, $scope, $translate, $window, UserService) {
+angular.module('FrontModule.controllers').controller('RootCtrl', function($rootScope, $scope, $window, UserService) {
 	
 	var supported_lang = ['en', 'fr'];
 	
@@ -8,8 +8,6 @@ angular.module('FrontModule.controllers').controller('RootCtrl', function($rootS
 	
 	var lang = $window.navigator.language || $window.navigator.userLanguage;
 	if (supported_lang.indexOf(lang) != -1) user_lang = lang;
-	
-  	$translate.use(user_lang);
 
 	$rootScope.user_loading = true;
 	
@@ -37,10 +35,6 @@ angular.module('FrontModule.controllers').controller('RootCtrl', function($rootS
 	
 	$scope.closeMenu = function() {
 		$rootScope.menu_open = false;
-	}
-	
-	$scope.changeLang = function(lang) {
-		$translate.use(lang);
 	}
 });
 
@@ -73,7 +67,7 @@ angular.module('FrontModule.controllers').controller('HomeCtrl', function($scope
 	});
 });
 
-angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, toastr, $filter, SearchService) {
+angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, SearchService) {
 	
 	/* Search */
 	
@@ -121,15 +115,11 @@ angular.module('FrontModule.controllers').controller('SearchCtrl', function($sco
 			else {
 					
 				$scope.search_loading = false;
-				
-				toastr.error($filter('translate')('error_ATLEAST3CHAR'));
 			}
 		}
 		else {
 				
 			$scope.search_loading = false;
-			
-			toastr.error($filter('translate')('error_ATLEAST3CHAR'));
 		}
 	}
 });
@@ -435,7 +425,7 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 angular.module('FrontModule.controllers').controller('PluginCtrl', function() {
 });
 
-angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API, $rootScope, $scope, $window, $filter, toastr, MosaicService) {
+angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API, $rootScope, $scope, $window, MosaicService) {
 
 	$scope.loadMosaic = function(ref) {
 		
@@ -505,8 +495,6 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 		$scope.editLoading = true;
 			
 		MosaicService.edit($scope.editModel).then(function(response) {
-			
-			toastr.success($filter('translate')('success_EDIT'));
 
 			$scope.editMode = false;
 			$scope.editLoading = false;
@@ -752,7 +740,7 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 	}
 });
 
-angular.module('FrontModule.controllers').controller('MapCtrl', function($scope, $rootScope, $cookies, toastr, $filter, $compile, MapService) {
+angular.module('FrontModule.controllers').controller('MapCtrl', function($scope, $rootScope, $cookies, $compile, MapService) {
 	
 	/* Map */
 	
@@ -803,8 +791,6 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 					map.fitBounds(results[0].geometry.bounds);
 					
 				} else {
-					
-					toastr.error('Geocode was not successful for the following reason: ' + status);
 				}
 			});
         }
@@ -986,13 +972,9 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 					map.setCenter(pos);
 	
 				}, function() {
-					
-					toastr.error($filter('translate')('error_GEOLOCFAILED'));
 				});
 				
 			} else {
-				
-				toastr.error($filter('translate')('error_GEOLOCSUPPORT'));
 			}
 		}
 		
@@ -1007,8 +989,6 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 					resultsMap.fitBounds(results[0].geometry.bounds);
 					
 				} else {
-					
-					toastr.error('Geocode was not successful for the following reason: ' + status);
 				}
 			});
 		}
@@ -1038,7 +1018,7 @@ angular.module('FrontModule.controllers').controller('RegisterCtrl', function($s
 	$scope.register = UserService.register;
 });
 
-angular.module('FrontModule.controllers').controller('ProfileCtrl', function($scope, UserService, toastr, $filter) {
+angular.module('FrontModule.controllers').controller('ProfileCtrl', function($scope, UserService) {
 
 	$scope.user = UserService.data;
 	
@@ -1066,8 +1046,6 @@ angular.module('FrontModule.controllers').controller('ProfileCtrl', function($sc
 		$scope.editLoading = true;
 			
 		UserService.updateName($scope.editModel.name).then(function(response) {
-			
-			toastr.success($filter('translate')('success_EDIT'));
 
 			$scope.editMode = false;
 			$scope.editLoading = false;
@@ -1080,7 +1058,7 @@ angular.module('FrontModule.controllers').controller('ProfileCtrl', function($sc
 	}
 });
 
-angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, toastr, $filter, $window, SearchService) {
+angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, $window, SearchService) {
 	
 	/* Search */
 	
@@ -1128,15 +1106,11 @@ angular.module('FrontModule.controllers').controller('SearchCtrl', function($sco
 			else {
 					
 				$scope.search_loading = false;
-				
-				toastr.error($filter('translate')('error_ATLEAST3CHAR'));
 			}
 		}
 		else {
 				
 			$scope.search_loading = false;
-			
-			toastr.error($filter('translate')('error_ATLEAST3CHAR'));
 		}
 	}
 });
