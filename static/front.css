@@ -125,7 +125,7 @@ a:hover, a:focus, .hover:hover { color: inherit; cursor: pointer; text-decoratio
 .menu-separator {
     height: 0px;
     margin-top: .5rem; margin-bottom: .5rem;
-    border: 0; border-bottom: 1px solid rgba(0,0,0,.75);
+    border: 0; border-bottom: 1px solid #0B0C0D;
 }
 
 
@@ -134,7 +134,7 @@ a:hover, a:focus, .hover:hover { color: inherit; cursor: pointer; text-decoratio
 
 .menu-text {
     padding: .25rem;
-    color: rgba(0,0,0,.75);
+    color: #0B0C0D;
 }
 
 
@@ -409,7 +409,7 @@ a:hover, a:focus, .hover:hover { color: inherit; cursor: pointer; text-decoratio
 .c-resistance { color: #00c2ff!important; }
 
 .c-white { color: #ffffff!important; }
-.c-black { color: #000000!important; }
+.c-black { color: #0B0C0D!important; }
 
 .c-darker { color: rgba(0,0,0,.75)!important; }
 .c-lighter { color: rgba(255,255,255,.75)!important; }
@@ -424,7 +424,7 @@ a:hover, a:focus, .hover:hover { color: inherit; cursor: pointer; text-decoratio
 .bg-light { background-color: #009688!important; }
 
 .bg-white { background-color: #ffffff!important; }
-.bg-black { background-color: #000000!important; }
+.bg-black { background-color: #0B0C0D!important; }
 
 
 
@@ -566,7 +566,7 @@ table { width: 100%; border-spacing: 0; border-collapse: collapse; }
 
 /* Row ---------------------------------------------------------------------- */
 
-table tr { border-bottom: 1px solid rgba(0, 0, 0, .25); }
+table tr { border-bottom: 1px solid #0B0C0D; }
 table tr:last-child { border-bottom: 0; }
 
 
@@ -574,7 +574,7 @@ table tr:last-child { border-bottom: 0; }
 /* Cell --------------------------------------------------------------------- */
 
 table td {
-    padding: .25rem 0;
+    padding: .25rem;
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 
