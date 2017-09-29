@@ -25,10 +25,8 @@
 <div id="page-container" ng-controller="MissionsCtrl">
     
 {% verbatim %}
-
-	<!-- Data block -->
 	
-	<div id="block-data" class="f-col" style="flex:1;">
+	<div id="block-data" style="flex:1;">
 	
         <div ng-if="!user.authenticated">
             
@@ -61,34 +59,14 @@
         
         <div ng-if="user.authenticated" class="f-col" style="flex:1;">
         
-            <div class="card mb-0">
-                
-                <div class="card-block first last mt-4 mb-2">
-                    <p>
-                        
-                        To scan missions from Ingress Intel Map:
-                        
-        				<a href="/plugin">
-        					MIM Scanning Plugin
-        				</a>
-        				
-                    </p>
-                        <p>
-                            
-                            To register manually missions that couldn't be scanned:
-        
-                            <a href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">
-                                MIM Hunting Tool
-                            </a>
-                            
-                        </p>
-                </div>
-                
+            <div class="p-2">
+                <p>To scan missions from Ingress Intel Map: <a href="/plugin">MIM Scanning Plugin</a></p>
+                <p>To register manually missions that couldn't be scanned:<a href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">MIM Hunting Tool</a></p>
             </div>
 
-            <div id="searchBlock" class="f-col p-2" style="flex:1;">
+            <div id="searchBlock" class="p-2" style="flex:1;">
                 
-                <div class="card-block f-col" style="flex:1;">
+                <div class="panel p-2" style="flex:1;">
                     
                 	<form class="f-row f-nowrap">
                 		<input type="text" class="form-control" placeholder="mosaic name, creator name" ng-model="searchModel.text" />
@@ -141,9 +119,9 @@
                 
             </div>
             
-            <div id="createBlock" class="p-2 mb-2">
+            <div id="createBlock" class="p-2">
 
-                <div class="card-block">
+                <div class="panel p-2">
 
                 <div class="f-row">
                 
@@ -264,7 +242,7 @@
    
     </div>
 
-</div>
+    </div>
 
 </div>
 
