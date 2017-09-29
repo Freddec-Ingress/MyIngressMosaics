@@ -55,7 +55,7 @@ angular.module('FrontModule.services').service('UserService', function($auth, $h
 			return API.sendRequest('/api/user/', 'GET').then(function(response) {
 				
 				if (response) {
-					service.data.authenticated = true;
+					service.data.authenticated = $auth.isAuthenticated();
 					service.data.name = response.name;
 					service.data.team = response.team;
 					service.data.level = response.level;
