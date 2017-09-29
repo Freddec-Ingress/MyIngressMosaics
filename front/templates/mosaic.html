@@ -206,7 +206,7 @@
     							<div class="f-row f-align-center">
     								
 	    							<div class="mr-2" style="width:2.5rem;">
-	    								<input class="form-control text-center" ng-model="item.order" />
+	    								<input class="form-control text-center" ng-model="item.order" ng-blur="reorderMission($index, item.ref, item.order);" />
 	    							</div>
 	
 	    							<div class="mr-auto">
