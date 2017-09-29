@@ -26,25 +26,29 @@
 
 {% verbatim %}
 
-	<div ng-if="!user.authenticated">
-	    
-	    <div class="c-danger ta-center mt-4 mr-2 ml-2">
-		    Restricted area
-	    </div>
+<div ng-if="!user.authenticated" class="section">
+    
+    <div class="item c-danger ta-center">
+	    Restricted area
+    </div>
+
+	<div class="item f-row">
 	
-		<div class="f-row mx-2 my-4 form-button-bar">
-		
+		<div class="item width-6 ta-right">
 			<a class="btn btn-secondary" href="/login">
 				Sign in
 			</a>
-		
+		</div>
+	
+		<div class="item width-6">
 			<a class="btn btn-secondary" href="/register">
 				Sign up
 			</a>
-	
 		</div>
-				
+
 	</div>
+			
+</div>
 
 <div ng-if="user.authenticated">
 	
