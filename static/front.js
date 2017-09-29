@@ -1325,6 +1325,7 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 		    '       		\'flag-icon-ar\': mosaic.country == \'Argentina\',' +
 		    '       		\'flag-icon-uy\': mosaic.country == \'Uruguay\',' +
 		    '       		\'flag-icon-tw\': mosaic.country == \'Taiwan\',' +
+		    '       		\'flag-icon-in\': mosaic.country == \'India\',' +
 	        '        	}"></span>' +
 	        '    		{{mosaic.location}}' +
 	        '    	</div>' +
