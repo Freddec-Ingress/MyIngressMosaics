@@ -10,9 +10,9 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 		scope: { mosaic: '=' },
 		
 		template: '' +
-			'<a class="btn btn-primary ttrans-normal btn-block p-2" href="/mosaic/{{mosaic.ref}}">' +
+			'<a class="btn btn-primary ttrans-normal btn-block" href="/mosaic/{{mosaic.ref}}">' +
 				
-			'	<div class="bg-black f-row f-justify-center" style="height:105px; overflow-y:auto; padding-top:4px; padding-bottom:4px; padding-left:4px;" ng-class="{\'f-align-start scrollbar scrollbar-mini\': mosaic.missions.length > 24, \'f-align-center pr-1\': mosaic.missions.length <= 24}">' +
+			'	<div class="item bg-black f-row f-justify-center" style="height:105px; overflow-y:auto; padding-top:4px; padding-bottom:4px; padding-left:4px;" ng-class="{\'f-align-start scrollbar scrollbar-mini\': mosaic.missions.length > 24, \'f-align-center pr-1\': mosaic.missions.length <= 24}">' +
 					
 			'		<div class="f-row f-wrap f-justify-center f-align-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%); width:100%;">' +
 			'            <div ng-repeat="m in mosaic.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.cols}});">' +
@@ -22,8 +22,8 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 					
 			'	</div>' +
 				
-        '    	<div class="mt-2 mb-1" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">{{mosaic.title}}</div>' +
-        '   	<div class="c-lighter mb-1" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">' +
+        '    	<div class="item" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">{{mosaic.title}}</div>' +
+        '   	<div class="item py-0 c-lighter" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">' +
         '        	<span class="flag-icon mr-1 text-highlight" style="position:relative; top:-2px;" ng-class="{' +
         '       		\'flag-icon-fr\': mosaic.country == \'France\',' +
         '       		\'flag-icon-gb\': mosaic.country == \'United Kingdom\',' +
@@ -77,7 +77,7 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
         '        	}"></span>' +
         '    		{{mosaic.location}}' +
         '    	</div>' +
-        '    	<div class="c-lighter">{{mosaic.missions.length}} <i class="fa fa-th mx-1"></i> <span class="mr-1">&middot;</span> <span ng-if="mosaic.type == \'sequence\'">{{mosaic.distance | number:2}} km</span><span ng-if="mosaic.type == \'serie\'">serie</span><span ng-show="mosaic.type != \'serie\' && mosaic.distance > 10.0" class="mx-1">&middot;</span><i ng-show="mosaic.type != \'serie\' && mosaic.distance > 10.0 && mosaic.distance < 30.0" class="fa fa-bicycle mx-1"></i><i ng-show="mosaic.type != \'serie\' && mosaic.distance > 30.0" class="fa fa-car mx-1"></i></div>' +
+        '    	<div class="item pt-0 c-lighter">{{mosaic.missions.length}} <i class="fa fa-th mx-1"></i> <span class="mr-1">&middot;</span> <span ng-if="mosaic.type == \'sequence\'">{{mosaic.distance | number:2}} km</span><span ng-if="mosaic.type == \'serie\'">serie</span><span ng-show="mosaic.type != \'serie\' && mosaic.distance > 10.0" class="mx-1">&middot;</span><i ng-show="mosaic.type != \'serie\' && mosaic.distance > 10.0 && mosaic.distance < 30.0" class="fa fa-bicycle mx-1"></i><i ng-show="mosaic.type != \'serie\' && mosaic.distance > 30.0" class="fa fa-car mx-1"></i></div>' +
 				
 			'</a>' +
 		'',

@@ -203,6 +203,15 @@ a:hover, a:focus, .hover:hover { color: inherit; cursor: pointer; text-decoratio
 /* LAYOUT                                                                     */
 /******************************************************************************/
 
+.section {
+    padding: .25rem;
+    margin-bottom: 1rem;
+}
+
+.item { padding: .25rem; }
+
+
+
 /* Flexbox ----------------------------------------------------------------- */
 
 .f-row { display: flex!important; flex-direction: row; }
@@ -510,7 +519,7 @@ input[type=number]::-webkit-outer-spin-button {  margin: 0;  -webkit-appearance:
 /******************************************************************************/
 
 .btn {
-	padding: .25rem .5rem;
+	padding: .25rem;
 	display: inline-block;
 	background-color: transparent;
 	border: 0; border-radius: .125rem;
@@ -574,6 +583,14 @@ table td {
 /******************************************************************************/
 /* UTILITIES                                                                  */
 /******************************************************************************/
+
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
 
 /* Rotating ----------------------------------------------------------------- */
 

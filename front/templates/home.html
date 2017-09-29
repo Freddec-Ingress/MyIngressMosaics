@@ -26,44 +26,52 @@
 
 {% verbatim %}
 	
-	<h2 class="p-4 fs-head2 c-highlight ta-center">
-		Search, Register and Share all Ingress Mosaics
-	</h2>
+	<div class="section">
+		<h2 class="item fs-head2 c-highlight ta-center">
+			Search, Register and Share all Ingress Mosaics
+		</h2>
+	</div>
 	
-	<div class="f-row p-2">
+	<div class="section f-row">
 	     
-		<div class="width-4 p-2">
-		    <a class="btn btn-primary btn-block px-0 ta-center" href="/map">
-		        <div class="p-2">
+		<div class="item width-4">
+		    <a class="btn btn-primary btn-block ta-center" href="/map">
+		        <div class="item">
 		        	<i class="fa fa-map" style="font-size:2rem;"></i>
 		        </div>
-		        Map
+		        <div class="item">
+		        	Map
+		        </div>
 		    </a>
 	    </div>
 	     
-		<div class="width-4 p-2">
-		    <a class="btn btn-primary btn-block px-0 ta-center" href="/search">
-		        <div class="p-2">
+		<div class="item width-4">
+		    <a class="btn btn-primary btn-block ta-center" href="/search">
+		        <div class="item">
 			        <i class="fa fa-search" style="font-size:2rem;"></i>
 		        </div>
-		        Search
+		        <div class="item">
+		        	Search
+		        </div>
 		    </a>
 	    </div>
 	
-		<div class="width-4 p-2">
-		    <a class="btn btn-primary btn-block px-0 ta-center" href="/registration">
-		        <div class="p-2">
+		<div class="item width-4">
+		    <a class="btn btn-primary btn-block ta-center" href="/registration">
+		        <div class="item">
 			        <i class="fa fa-plus-square" style="font-size:2rem;"></i>
 		        </div>
-		        Registration
+		        <div class="item">
+		        	Registration
+		        </div>
 		    </a>
 	    </div>
 	
 	</div>
 	
-	<div class="f-row p-2" style="height:52px;">
+	<div class="section f-row" style="height:37px;">
 		
-		<div class="width-6 p-2 ta-right">
+		<div class="item width-6 ta-right">
 			
 			<div id="fb-root"></div>
 			
@@ -84,7 +92,7 @@
 		
 		</div>
 		
-		<div class="width-6 p-2">
+		<div class="item width-6">
 			
 			<script src="https://apis.google.com/js/platform.js" async defer></script>
 			<div class="g-plus" data-action="share" data-annotation="bubble" data-href="https://www.myingressmosaics.com"></div>			
@@ -93,28 +101,29 @@
 		
 	</div>
 	
-	<div class="p-2">
+	<div class="section">
 		
-		<div class="pt-2 mx-2 ttrans-uppercase bordered-b">
-			Countries
+		<div class="item">
+			<div class="ttrans-uppercase bordered-b">
+				Countries
+			</div>
 		</div>
 		
-		<div class="p-2" ng-hide="!countries_loading">
+		<div class="item" ng-hide="!countries_loading">
 			<i class="fa fa-spinner rotating mr-1"></i>
 			Loading data...
 		</div>
 	
 		<div id="countries_block" class="hidden f-row f-wrap">
 			
-			<div class="width-12 width-xl-3 p-2" ng-repeat="country in countries">
+			<div class="item width-12 width-xl-3" ng-repeat="country in countries">
 				
-				<a href="/map/{{country.name}}" class="btn btn-primary btn-block p-2">
+				<a href="/map/{{country.name}}" class="btn btn-primary btn-block">
 					
-					<div class="f-row">
+					<div class="f-row f-align-center">
 						
-						<div class="text-white mr-auto" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
-							
-							<span class="flag-icon mr-1 text-highlight" style="position:relative; top:-2px;" ng-class="{
+						<div class="item">
+							<span class="flag-icon" style="position: relative; top: -1px;" ng-class="{
 					            'flag-icon-fr': country.name == 'France',
 					            'flag-icon-gb': country.name == 'United Kingdom',
 					            'flag-icon-my': country.name == 'Malaysia',
@@ -165,12 +174,15 @@
 						        'flag-icon-in': country.name == 'India',
 						        'flag-icon-nl': country.name == 'Netherlands',
 					        }"></span>
-					        
+					    </div>
+					    
+						<div class="item mr-auto ellipsis">
 				        	{{country.name}}
-				        	
 				        </div>
 				        
-				        <div class="text-normal ml-2">{{country.mosaics}}</div>
+				        <div class="item c-lighter">
+				        	{{country.mosaics}}
+				        </div>
 				        
 					</div>
 					
@@ -182,20 +194,22 @@
 		
 	</div>
 	
-	<div class="p-2">
+	<div class="section">
 	
-		<div class="pt-2 mx-2 ttrans-uppercase bordered-b">
-			Latest mosaics
+		<div class="item">
+			<div class="ttrans-uppercase bordered-b">
+				Latest mosaics
+			</div>
 		</div>
 		
-		<div class="p-2" ng-hide="!latest_loading">
+		<div class="item" ng-hide="!latest_loading">
 			<i class="fa fa-spinner rotating mr-1"></i>
 			Loading data...
 		</div>
 
 		<div id="latest_block" class="hidden f-row f-wrap">
 			
-			<div class="width-6 width-xl-3 p-2" ng-repeat="mosaic in mosaics">
+			<div class="item width-6 width-xl-3" ng-repeat="mosaic in mosaics">
 				<mosaic-vignet mosaic="mosaic"></mosaic-vignet>
 			</div>
 			

@@ -153,7 +153,7 @@ def user_logout(request):
 
 #---------------------------------------------------------------------------------------------------
 @api_view(['GET'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((AllowAny, ))
 def user_getProfile(request):
 	
 	data = {
