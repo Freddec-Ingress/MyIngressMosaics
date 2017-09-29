@@ -28,33 +28,28 @@
 	
 	<div id="block-data" style="flex:1;">
 	
-        <div ng-if="!user.authenticated">
+        <div ng-if="!user.authenticated" class="section">
             
-        	<div class="f-row pt-4 mt-4 mb-2 mx-4 text-uppercase bordered-b">
-        		{{'missions_HUNTERTITLE' | translate}}
-        	</div>
-
-            <div class="card px-2">
-                
-                <div class="card-block first last">
-                    
-                    <ol>
-                        <li>
-                            Use our <a href="/plugin">MIM Scanning Plugin</a> to register missions from Ingress Intel Map. Unfortunetly some missions cannot be registered like that so you have to register them manually with our extension 
-                            <a href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">MIM Hunting Tool</a>
-                        </li>
-                        <li>
-                            <a href="/login">Sign in</a> to MIM site
-                        </li>
-                        <li>
-                            Got to <a href="/registration">Registration</a> page to see registered missions and create mosaics
-                        </li>
-                    </ol>
-                    
-                </div>
-                
+            <div class="item c-danger ta-center">
+        	    Restricted area
             </div>
         
+        	<div class="item f-row">
+        	
+        		<div class="item width-6 ta-right">
+        			<a class="btn btn-secondary" href="/login">
+        				Sign in
+        			</a>
+        		</div>
+        	
+        		<div class="item width-6">
+        			<a class="btn btn-secondary" href="/register">
+        				Sign up
+        			</a>
+        		</div>
+        
+        	</div>
+        			
         </div>
         
         <div ng-if="user.authenticated" class="f-col" style="flex:1;">
@@ -240,7 +235,7 @@
     	        </div>
             </div>
    
-    </div>
+        </div>
 
     </div>
 
