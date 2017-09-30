@@ -1003,12 +1003,37 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 	});
 });
 
-angular.module('FrontModule.controllers').controller('LoginCtrl', function($scope, UserService) {
+angular.module('FrontModule.controllers').controller('LoginCtrl', function($scope, API, $auth, $cookies, $window, UserService) {
 	
 	$scope.loginModel = { username:null, password:null };
 	
-	$scope.localLogin = UserService.localLogin;
+	$scope.unknown = false;
+	$scope.signingin = false;
+	
 	$scope.socialLogin = UserService.socialLogin;
+	
+	$scope.localLogin = function(username, password) {
+		
+		$scope.unknown = false;
+		$scope.signingin = true;
+		
+		var data = { 'username':username, 'password':password }
+		return API.sendRequest('/api/user/login/', 'POST', {}, data).then(function(response) {
+			
+			$auth.setToken(response.token);
+			$cookies.token = response.token;
+		
+			UserService.init();
+			
+			$window.location.href = '/';
+			
+		}, function(response) {
+			
+			if (response == 'error_USER_UNKNOWN') $scope.unknown = true;
+			
+			$scope.signingin = false;
+		});
+	}
 });
 
 angular.module('FrontModule.controllers').controller('RegisterCtrl', function($scope, UserService) {

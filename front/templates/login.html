@@ -54,6 +54,10 @@
 			<form class="panel" name="form" novalidate>
 		
 				<div class="item">
+					<span ng-if="unknown" class="c-danger">Username or password incorrect</span>
+				</div>
+				
+				<div class="item">
 					
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
@@ -82,7 +86,7 @@
 				<div class="item f-row">
 					
 					<div class="item width-6 ta-right">
-						<button class="btn btn-primary" ng-click="localLogin(loginModel.username, loginModel.password);" ng-disabled="!loginModel.username || !loginModel.password">
+						<button class="btn btn-primary" ng-click="localLogin(loginModel.username, loginModel.password);" ng-disabled="signingin || !loginModel.username || !loginModel.password">
 							<span class="mx-4">Sign in</span>
 						</button>
 					</div>
