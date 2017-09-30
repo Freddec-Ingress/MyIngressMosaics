@@ -114,54 +114,52 @@
 			    	<div id="map"></div>
 				</div>
 
-		        <div class="item">
-		            <div ng-repeat="item in mosaic.missions">
-		
-	            		<div class="item f-row hover" ng-click="toggleMission(item);">
-	            			
-		                    <div class="c-white">
-		                    	<i ng-hide="item.expanded" class="mr-2 fa fa-caret-right"></i>
-		                    	<i ng-show="item.expanded" class="mr-2 fa fa-caret-down"></i>
-		                    </div>
-		                    
-		                    <div class="c-white mr-auto">
-		                        {{item.title}}
-		                    </div>
-		                    
-		                    <div class="ta-right" style="width:2rem;">
-		                        <a href="https://www.ingress.com/mission/{{item.ref}}" target="blank">
-		                            <i class="fa fa-external-link"></i>
-		                        </a>
-		                    </div>
-		                    
+	            <div class="border-dark-b" ng-repeat="item in mosaic.missions">
+	
+            		<div class="item f-row hover" ng-click="toggleMission(item);">
+            			
+	                    <div class="c-white">
+	                    	<i ng-hide="item.expanded" class="mr-2 fa fa-caret-right"></i>
+	                    	<i ng-show="item.expanded" class="mr-2 fa fa-caret-down"></i>
 	                    </div>
 	                    
-	            		<div ng-show="item.expanded">
-	            			
-	            			<div class="item">
-	            				{{item.portals.length}} waypoints
-	            				<i class="mx-1 fa fa-long-arrow-right"></i>
-	            				<span class="" ng-repeat="portal in item.portals">
-	            					<span ng-if="$index > 0" class="mx-1">&middot;</span>
-	            					<span ng-class="{'c-lighter':!portal.unavailable, 'c-danger':portal.unavailable}">
-	            						<span ng-if="portal.action == 0">Objectives</span>
-	            						<span ng-if="portal.action == 1">Hack</span>
-	            						<span ng-if="portal.action == 2">Capture or Upgrade</span>
-	            						<span ng-if="portal.action == 7">View</span>
-	            						<span ng-if="portal.action == 8">Passphrase</span>
-	            					</span>
-	            				</span>
-	            			</div>
-	            			
-	            			<div class="item" style="white-space:normal;">
-		                        {{item.desc}}
-		                    </div>
-	            			
+	                    <div class="c-white mr-auto">
+	                        {{item.title}}
 	                    </div>
-		                    
-		            </div>
-				</div>
-				
+	                    
+	                    <div class="ta-right" style="width:2rem;">
+	                        <a href="https://www.ingress.com/mission/{{item.ref}}" target="blank">
+	                            <i class="fa fa-external-link"></i>
+	                        </a>
+	                    </div>
+	                    
+                    </div>
+                    
+            		<div ng-show="item.expanded">
+            			
+            			<div class="item">
+            				{{item.portals.length}} waypoints
+            				<i class="mx-1 fa fa-long-arrow-right"></i>
+            				<span class="" ng-repeat="portal in item.portals">
+            					<span ng-if="$index > 0" class="mx-1">&middot;</span>
+            					<span ng-class="{'c-lighter':!portal.unavailable, 'c-danger':portal.unavailable}">
+            						<span ng-if="portal.action == 0">Objectives</span>
+            						<span ng-if="portal.action == 1">Hack</span>
+            						<span ng-if="portal.action == 2">Capture or Upgrade</span>
+            						<span ng-if="portal.action == 7">View</span>
+            						<span ng-if="portal.action == 8">Passphrase</span>
+            					</span>
+            				</span>
+            			</div>
+            			
+            			<div class="item" style="white-space:normal;">
+	                        {{item.desc}}
+	                    </div>
+            			
+                    </div>
+	                    
+	            </div>
+
 			</div>
 		</div>
 		
