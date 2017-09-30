@@ -23,7 +23,6 @@ urlpatterns = [
 	url(r'^registration',  views.registration),
 	url(r'^register', views.register),
 	url(r'^profile', views.profile),
-	url(r'^plugin', views.plugin),
 	
 	url(r'^adm_region', views.adm_region),
 	url(r'^adm_registration', views.adm_registration),

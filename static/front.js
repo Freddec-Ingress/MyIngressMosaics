@@ -1384,9 +1384,6 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 	}
 });
 
-angular.module('FrontModule.controllers').controller('PluginCtrl', function() {
-});
-
 angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API, $rootScope, $scope, $window, MosaicService) {
 
 	$scope.loadMosaic = function(ref) {
@@ -1998,11 +1995,38 @@ angular.module('FrontModule.controllers').controller('LoginCtrl', function($scop
 	}
 });
 
-angular.module('FrontModule.controllers').controller('RegisterCtrl', function($scope, UserService) {
+angular.module('FrontModule.controllers').controller('RegisterCtrl', function($scope, API, $auth, $cookies, $window, UserService) {
 	
 	$scope.registerModel = { username:null, password1:null, password2:null, email:null };
 	
-	$scope.register = UserService.register;
+	$scope.already = false;
+	$scope.passwords = false;
+	$scope.registering = false;
+	
+	$scope.register = function(username, password1, password2, email) {
+		
+		$scope.already = false;
+		$scope.passwords = false;
+		$scope.registering = true;
+		
+		var data = { 'username':username, 'password1':password1, 'password2':password2, 'email':email }
+		return API.sendRequest('/api/user/register/', 'POST', {}, data).then(function(response) {
+			
+			$auth.setToken(response.token);
+			$cookies.token = response.token;
+			
+			UserService.init();
+			
+			$window.location.href = '/';
+			
+		}, function(response) {
+			
+			if (response == 'error_USERNAME_ALREADY_EXISTS') $scope.already = true;
+			if (response == 'error_PASSWORDS_NOT_EQUAL') $scope.passwords = true;
+			
+			$scope.registering = false;
+		});
+	}
 });
 
 angular.module('FrontModule.controllers').controller('ProfileCtrl', function($scope, UserService) {
