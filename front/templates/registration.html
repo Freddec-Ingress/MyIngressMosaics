@@ -176,7 +176,7 @@
                 <div class="f-row">
                     
                     <div class="item width-6">
-                        <label class="m-0">Preview</label>
+                        <label>Preview</label>
         				<div class="bg-black f-row f-justify-center" style="height:230px; overflow-y:auto; padding-top:4px; padding-bottom:4px; padding-left:4px;" ng-class="{'f-align-start scrollbar scrollbar-mini': mosaicModel.missions.length > 24, 'f-align-center pr-1': mosaicModel.missions.length <= 24}">
         					
         					<div class="f-row f-wrap f-justify-center f-align-center" style="padding:0 calc((6 - {{mosaicModel.columns}}) / 2 * 16.666667%); width:100%;">
@@ -189,15 +189,15 @@
                     </div>
                     
                     <div class="item width-6">
-                        <label class="m-0">Missions</label>
+                        <label>Missions</label>
                         <div class="bg-black px-1 scrollbar" style="border-top:4px solid black; border-bottom:4px solid black; flex:1; overflow:auto; height:230px;">
         		        <div ng-if="mosaicModel.missions < 1" class="p-2">No mission</div>
-        		        <table class="card-table">
+        		        <table class="bg-dark">
         		            <tbody>
         		                <tr ng-repeat="item in mosaicModel.missions">
-        		                	<td class="px-1">
+        		                	<td>
         			                    
-        			                    <div class="f-row f-align-center">
+        			                    <div class="f-row">
         			                        
         			                        <div class="mr-2" style="width:2.5rem;">
         			                            <input type="text" class="form-control text-center" ng-blur="reorder();" ng-model="item.order" style="height:1.75rem;" />
@@ -234,11 +234,11 @@
 	        	
     	        <div class="item ta-center">
     	        	
-    				<button class="btn btn-primary" ng-click="createMosaic();" ng-disabled="creating || !mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || (mosaicModel.missions.length < 1)">
-    				    <span id="createButton">Create</span>
-            			<div ng-show="creating" class="loading-line py-1">
-            				<img src="/static/img/loading.png" />
-            			</div>
+    				<button class="btn btn-primary ta-center" style="width:100px;" ng-click="createMosaic();" ng-disabled="creating || !mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || (mosaicModel.missions.length < 1)">
+            			<span ng-show="creating">
+            				<i class="fa fa-spinner rotating mr-1"></i>
+            			</span>
+    				    Create
     				</button>
     
     	        </div>
