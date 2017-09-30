@@ -76,37 +76,27 @@
                     
                         <div ng-if="searchModel.results.length < 1" class="item">No mission</div>
                         
-        		        <table class="bg-dark">
-        		            <tbody>
-        		                <tr ng-repeat="item in searchModel.results">
-        		                	<td>
-        			                    
-        			                    <div class="f-row">
-        			                        
-        			                         <div class="item">
-        			                             <a ng-click="addMission(item);"><i class="fa fa-plus-square"></i></a>
-        			                         </div>
-        			                         
-        			                        <div class="item c-normaL ellipsis mr-auto">
-        				                        {{item.title}}
-        				                    </div>
-        				                    
-                                            <div class="item" ng-class="{'c-enligtened': item.faction == 'E', 'c-resistance': item.faction == 'R',}">
-                                                {{item.creator}}
-                                            </div>
-                                            
-                                            <div class="item">
-                                                <a href="https://www.ingress.com/mission/{{item.ref}}" target="blank">
-                                                    <i class="fa fa-external-link"></i>
-                                                </a>
-                                            </div>
-        			                        
-        			                     </div>
-        			                    
-        		                    </td>
-        		                </tr>
-        		            </tbody>
-        		       </table>
+	                    <div class="item f-row bg-dark border-dark-b" ng-repeat="item in searchModel.results">
+	                        
+	                         <div class="item">
+	                             <a ng-click="addMission(item);"><i class="fa fa-plus-square"></i></a>
+	                         </div>
+	                         
+	                        <div class="item c-normaL ellipsis mr-auto">
+		                        {{item.title}}
+		                    </div>
+		                    
+                            <div class="item" ng-class="{'c-enligtened': item.faction == 'E', 'c-resistance': item.faction == 'R',}">
+                                {{item.creator}}
+                            </div>
+                            
+                            <div class="item">
+                                <a href="https://www.ingress.com/mission/{{item.ref}}" target="blank">
+                                    <i class="fa fa-external-link"></i>
+                                </a>
+                            </div>
+	                        
+	                     </div>
                         
                     </div>
                 </div>
