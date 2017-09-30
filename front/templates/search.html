@@ -22,41 +22,41 @@
 {% block content %}
 
 <div id="page-container" ng-controller="SearchCtrl">
-		
-{% verbatim %}
 
-    <div class="py-2 px-4">
+{% verbatim %}
+	
+    <div class="section p-2">
+     	<div class="item bg-dark">
+			<form class="item f-row">
+				<input type="text" class="form-control" placeholder="" ng-model="searchModel.text" />
+				<input type="submit" class="btn btn-primary ml-2" ng-click="search();" value="Search" />
+			</form>
+		</div>
+	</div>
     
-    	<form class="f-row f-nowrap bg-dark p-2">
-    		<input type="text" class="form-control" placeholder="" ng-model="searchModel.text" />
-    		<input type="submit" class="btn btn-primary ml-2" ng-click="search();" value="Search" />
-    	</form>
+    <div id="result_block" class="section hidden">
     	
-    </div>
-    
-    <div id="result_block" class="hidden">
-    	
-		<div ng-if="search_loading" class="p-2 ta-center">
+		<div ng-if="search_loading" class="item ta-center">
 			<i class="fa fa-spinner rotating mr-1"></i>
 			Searching for mosaics...
 		</div>
 
-		<div ng-if="no_result" class="p-2 ta-center c-danger hidden">
+		<div ng-if="no_result" class="item ta-center c-danger">
 			No mosaic found
 		</div>
 	    
-	    <div class="p-2" ng-if="mosaics">
+	    <div class="" ng-if="mosaics">
 	    
-			<div class="pt-2 mx-2 ttrans-uppercase bordered-b">
-				{{mosaics.length}} mosaics found
+			<div class="item">
+				<div class="ttrans-uppercase bordered-b">
+					{{mosaics.length}} mosaics found
+				</div>
 			</div>
 	    	
 	    	<div class="f-row f-wrap">
-	    		
-	    		<div class="width-6 width-xl-3 p-2" ng-repeat="mosaic in mosaics">
+	    		<div class="item width-6 width-xl-3" ng-repeat="mosaic in mosaics">
 	    			<mosaic-vignet mosaic="mosaic"></mosaic-vignet>
 	    		</div>
-	    		
 	    	</div>
 	    
 	    </div>
