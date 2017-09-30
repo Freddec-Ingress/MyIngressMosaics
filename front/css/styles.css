@@ -609,6 +609,10 @@ table td {
 
 /* Scrollbar ---------------------------------------------------------------- */
 
+.scrollbar {
+    overflow-y: auto!important;
+}
+
 .scrollbar::-webkit-scrollbar {
 	width: 8px;
 	background-color: transparent;
