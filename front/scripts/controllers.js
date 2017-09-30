@@ -1153,9 +1153,11 @@ angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($
 	
 	$scope.loading_page = true;
 	
-	$scope.selected_country = '';
-	
+	$scope.countries = [];
+
 	API.sendRequest('/api/adm/countries', 'POST').then(function(response) {
+		
+		$scope.countries = response.countries;
 		
 		$scope.loading_page = false;
 	});
@@ -1164,19 +1166,19 @@ angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($
 	
 	$scope.regions = null;
 
-	$scope.refresh = function() {
+	$scope.refresh = function(countryName) {
 		
 		$scope.loading_regions = true;
 		
 		$scope.regions = null;
 		
-		if (!$scope.selected_country) {
+		if (!countryName) {
 			
 			$scope.loading_regions = false;
 			return;
 		}
 		
-		var data = {'country': $scope.selected_country};
+		var data = {'country': countryName};
 		API.sendRequest('/api/adm/regions', 'POST', {}, data).then(function(response) {
 			
 			$scope.regions = [];
@@ -1191,7 +1193,6 @@ angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($
 				$scope.regions.push(obj);
 			}
 			
-			console.log($scope.regions);
 			$scope.loading_regions = false;
 		});
 	}
