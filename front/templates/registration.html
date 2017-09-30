@@ -63,15 +63,15 @@
                 
             	<form class="item f-row f-nowrap">
             		<input type="text" class="form-control" placeholder="mosaic name, creator name" ng-model="searchModel.text" />
-            		<input id="searchButton" type="submit" style="width:67px;" class="btn btn-primary ml-2" ng-click="search();" value="Search" ng-disabled="searching">
-            			<div ng-show="searching" class="loading-line px-2 py-1" style="position: absolute; right: 8px; top: 6px;">
-            				<img src="/static/img/loading.png" />
+            		<input id="searchButton" type="submit" style="width:67px;" class="btn btn-primary ml-2 ta-center" ng-click="search();" value="Search" ng-disabled="searching">
+            			<div ng-show="searching">
+            				<i class="fa fa-spinner rotating"></i>
             			</div>
             		</input>
             	</form>
                 
                 <div class="item">
-                    <div class="item bg-black scrollbar" style="overflow:auto; height:200px;">
+                    <div class="item bg-black scrollbar" style="overflow:auto; height:200px; border-top:4px solid #0B0C0D;">
                     
                         <div ng-if="searchModel.results.length < 1" class="item">No mission</div>
                         
