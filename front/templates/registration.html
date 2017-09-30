@@ -190,24 +190,24 @@
                     
                     <div class="item width-6">
                         <label>Missions</label>
-                        <div class="bg-black px-1 scrollbar" style="border-top:4px solid black; border-bottom:4px solid black; flex:1; overflow:auto; height:230px;">
+                        <div class="bg-black px-1 scrollbar" style="border-top:4px solid black; border-bottom:4px solid black; overflow-y:auto; height:230px;">
         		        <div ng-if="mosaicModel.missions < 1" class="p-2">No mission</div>
         		        <table class="bg-dark">
         		            <tbody>
         		                <tr ng-repeat="item in mosaicModel.missions">
         		                	<td>
         			                    
-        			                    <div class="f-row">
+        			                    <div class="f-row f-align-center">
         			                        
-        			                        <div class="mr-2" style="width:2.5rem;">
-        			                            <input type="text" class="form-control text-center" ng-blur="reorder();" ng-model="item.order" style="height:1.75rem;" />
+        			                        <div class="item" style="min-width:2.5rem; width:2.5rem;">
+        			                            <input type="text" class="form-control ta-center" ng-blur="reorder();" ng-model="item.order" style="height:1.75rem;" />
         			                        </div>
         			                        
-        			                        <div class="c-normal mr-auto" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
+        			                        <div class="item c-normal mr-auto ellipsis">
         				                        {{item.title}}
         				                    </div>
         			                        
-        			                        <a ng-click="removeMission(item);">
+        			                        <a class="item" ng-click="removeMission(item);">
         			                            <i class="fa fa-minus-square mx-2"></i>
         			                        </a>
         			                        
