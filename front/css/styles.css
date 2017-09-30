@@ -464,7 +464,7 @@ input[type=number]::-webkit-outer-spin-button {  margin: 0;  -webkit-appearance:
     padding: 0 .5rem;
     background-color: #0b0c0d;
     display: block; width: 100%;
-    min-height: 1.25rem; line-height: 1.25rem;
+    min-height: 2rem; line-height: 2rem;
     border-radius: .125rem; border: 1px solid #009688;
     color: #ffffff; font: 400 .75rem/1.5 'Coda',sans-serif;
 }
