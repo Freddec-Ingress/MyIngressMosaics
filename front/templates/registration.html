@@ -190,18 +190,18 @@
             		        
             		        <div ng-if="mosaicModel.missions < 1" class="item">No mission</div>
             		        
-    		                <div class="f-row item bg-dark" ng-repeat="item in mosaicModel.missions">
-            		                	<div style="min-width:2.5rem; width:2.5rem;">
-            			                    <input type="text" class="form-control ta-center" ng-blur="reorder();" ng-model="item.order" style="height:1.75rem;" />
-            		                	</div>
-            		                	<div class="ellipsis mr-auto">
-            			                     {{item.title}}
-            		                	</div>
-            		                	<div>
-        			                        <a ng-click="removeMission(item);">
-        			                            <i class="fa fa-minus-square mx-2"></i>
-        			                        </a>
-            		                    </div>
+    		                <div class="item f-row f-align-center bg-dark border-dark-b" ng-repeat="item in mosaicModel.missions">
+    		                	<div class="item" style="min-width:2.5rem; width:2.5rem;">
+    			                    <input type="text" class="form-control ta-center" ng-blur="reorder();" ng-model="item.order" style="min-height:1.75rem;" />
+    		                	</div>
+    		                	<div class="item ellipsis mr-auto">
+    			                     {{item.title}}
+    		                	</div>
+    		                	<div class="item">
+			                        <a ng-click="removeMission(item);">
+			                            <i class="fa fa-minus-square mx-2"></i>
+			                        </a>
+    		                    </div>
     		                </div>
     		                
                         </div>
