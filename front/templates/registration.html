@@ -133,12 +133,12 @@
         	        </div>
     	        
         	        <div class="item width-4">
-    	            <label>Type</label>
-    	            <select class="form-control" ng-model="mosaicModel.type">
-    	                <option value="sequence">sequence</option>
-    	                <option value="serie">serie</option>
-    	            </select>
-    	        </div>
+        	            <label>Type</label>
+        	            <select class="form-control" ng-model="mosaicModel.type">
+        	                <option value="sequence">sequence</option>
+        	                <option value="serie">serie</option>
+        	            </select>
+        	        </div>
 
         	        <div class="item width-4">
         	            <label>Columns</label>
@@ -151,95 +151,100 @@
             	                <option value="1">1</option>
            	            </select>
         	        </div>
-            </div>
-
-            <div class="f-row">
-    	        <div class="group width-4 pr-1">
-    	            <label class="m-0">Country</label>
-    	            <input type="text" class="form-control" ng-model="mosaicModel.country" />
+        	        
+                </div>
+    
+                <div class="f-row">
+                    
+        	        <div class="item width-4">
+        	            <label>Country</label>
+        	            <input type="text" class="form-control" ng-model="mosaicModel.country" />
+        	        </div>
+    
+        	        <div class="item width-4">
+        	            <label>Region</label>
+        	            <input type="text" class="form-control" ng-model="mosaicModel.region" />
+        	        </div>
+    
+        	        <div class="item width-4">
+        	            <label>City</label>
+        	            <input type="text" class="form-control" ng-model="mosaicModel.city" />
+        	        </div>
+        	        
     	        </div>
-
-    	        <div class="group width-4 px-1">
-    	            <label class="m-0">Region</label>
-    	            <input type="text" class="form-control" ng-model="mosaicModel.region" />
-    	        </div>
-
-    	        <div class="group width-4 pl-1">
-    	            <label class="m-0">City</label>
-    	            <input type="text" class="form-control" ng-model="mosaicModel.city" />
-    	        </div>
-	        </div>
             
-            <div class="f-row">
-                
-                <div class="width-6 pr-1">
-                    <label class="m-0">Preview</label>
-    				<div class="bg-black f-row f-justify-center" style="height:230px; overflow-y:auto; padding-top:4px; padding-bottom:4px; padding-left:4px;" ng-class="{'f-align-start scrollbar scrollbar-mini': mosaicModel.missions.length > 24, 'f-align-center pr-1': mosaicModel.missions.length <= 24}">
-    					
-    					<div class="f-row f-wrap f-justify-center f-align-center" style="padding:0 calc((6 - {{mosaicModel.columns}}) / 2 * 16.666667%); width:100%;">
-    			            <div ng-repeat="m in mosaicModel.missions | reverse" style="flex:0 0 calc(100% / {{mosaicModel.columns}});">
-    			                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-    			           </div>
-    					</div>
-    					
-    				</div>
-                </div>
-                
-                <div class="width-6 pl-1">
-                    <label class="m-0">Missions</label>
-                    <div class="bg-black px-1 scrollbar" style="border-top:4px solid black; border-bottom:4px solid black; flex:1; overflow:auto; height:230px;">
-    		        <div ng-if="mosaicModel.missions < 1" class="p-2">No mission</div>
-    		        <table class="card-table">
-    		            <tbody>
-    		                <tr ng-repeat="item in mosaicModel.missions">
-    		                	<td class="px-1">
-    			                    
-    			                    <div class="f-row f-align-center">
-    			                        
-    			                        <div class="mr-2" style="width:2.5rem;">
-    			                            <input type="text" class="form-control text-center" ng-blur="reorder();" ng-model="item.order" style="height:1.75rem;" />
-    			                        </div>
-    			                        
-    			                        <div class="c-normal mr-auto" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
-    				                        {{item.title}}
-    				                    </div>
-    			                        
-    			                        <a ng-click="removeMission(item);">
-    			                            <i class="fa fa-minus-square mx-2"></i>
-    			                        </a>
-    			                        
-    			                     </div>
-    			                    
-    		                    </td>
-    		                </tr>
-    		            </tbody>
-    		       </table>
-    		      </div>
-    		      <div class="mt-2">
-                    {{mosaicModel.missions.length}} missions
-                    <span ng-if="mosaicModel.missions.length > 0" class="mx-1">&middot;</span>
-                    <a ng-if="mosaicModel.missions.length > 0" ng-click="clearAll();">Clear all</a>
-                </div>
-    		      
-                </div>
-                
-	        </div>
+                <div class="f-row">
+                    
+                    <div class="item width-6">
+                        <label class="m-0">Preview</label>
+        				<div class="bg-black f-row f-justify-center" style="height:230px; overflow-y:auto; padding-top:4px; padding-bottom:4px; padding-left:4px;" ng-class="{'f-align-start scrollbar scrollbar-mini': mosaicModel.missions.length > 24, 'f-align-center pr-1': mosaicModel.missions.length <= 24}">
+        					
+        					<div class="f-row f-wrap f-justify-center f-align-center" style="padding:0 calc((6 - {{mosaicModel.columns}}) / 2 * 16.666667%); width:100%;">
+        			            <div ng-repeat="m in mosaicModel.missions | reverse" style="flex:0 0 calc(100% / {{mosaicModel.columns}});">
+        			                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+        			           </div>
+        					</div>
+        					
+        				</div>
+                    </div>
+                    
+                    <div class="item width-6">
+                        <label class="m-0">Missions</label>
+                        <div class="bg-black px-1 scrollbar" style="border-top:4px solid black; border-bottom:4px solid black; flex:1; overflow:auto; height:230px;">
+        		        <div ng-if="mosaicModel.missions < 1" class="p-2">No mission</div>
+        		        <table class="card-table">
+        		            <tbody>
+        		                <tr ng-repeat="item in mosaicModel.missions">
+        		                	<td class="px-1">
+        			                    
+        			                    <div class="f-row f-align-center">
+        			                        
+        			                        <div class="mr-2" style="width:2.5rem;">
+        			                            <input type="text" class="form-control text-center" ng-blur="reorder();" ng-model="item.order" style="height:1.75rem;" />
+        			                        </div>
+        			                        
+        			                        <div class="c-normal mr-auto" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
+        				                        {{item.title}}
+        				                    </div>
+        			                        
+        			                        <a ng-click="removeMission(item);">
+        			                            <i class="fa fa-minus-square mx-2"></i>
+        			                        </a>
+        			                        
+        			                     </div>
+        			                    
+        		                    </td>
+        		                </tr>
+        		            </tbody>
+        		       </table>
+        		      </div>
+        		      <div class="mt-2">
+                        {{mosaicModel.missions.length}} missions
+                        <span ng-if="mosaicModel.missions.length > 0" class="mx-1">&middot;</span>
+                        <a ng-if="mosaicModel.missions.length > 0" ng-click="clearAll();">Clear all</a>
+                    </div>
+        		      
+                    </div>
+                    
+    	        </div>
 	        
-	        	<div class="text-center text-danger mt-4">
+	        	<div class="item ta-center c-danger">
 	        	    No update allowed after creation. Please create mosaic only when it is complete.
 	        	</div>
 	        	
-	        <div class="form-button-bar mt-4">
-	        	
-				<button class="btn btn-primary" ng-click="createMosaic();" ng-disabled="creating || !mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || (mosaicModel.missions.length < 1)">
-				    <span id="createButton">Create</span>
-        			<div ng-show="creating" class="loading-line py-1">
-        				<img src="/static/img/loading.png" />
-        			</div>
-				</button>
-
+    	        <div class="item ta-center">
+    	        	
+    				<button class="btn btn-primary" ng-click="createMosaic();" ng-disabled="creating || !mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || (mosaicModel.missions.length < 1)">
+    				    <span id="createButton">Create</span>
+            			<div ng-show="creating" class="loading-line py-1">
+            				<img src="/static/img/loading.png" />
+            			</div>
+    				</button>
+    
+    	        </div>
+    	        
 	        </div>
-	        </div>
+	        
         </div>
 
     </div>
