@@ -195,20 +195,16 @@
             		        <table class="bg-dark">
             		            <tbody>
             		                <tr ng-repeat="item in mosaicModel.missions">
-            		                	<td>
+            		                	<td style="min-width:2.5rem; width:2.5rem;">
             			                    
-            			                        <div class="item" style="min-width:2.5rem; width:2.5rem;">
             			                            <input type="text" class="form-control ta-center" ng-blur="reorder();" ng-model="item.order" style="height:1.75rem;" />
-            			                        </div>
             		                	</td>
-            		                	<td>
+            		                	<td class="item c-normal mr-auto ellipsis">
             			                        
-            			                        <div class="item c-normal mr-auto ellipsis">
             				                        {{item.title}}
-            				                    </div>
             		                	</td>
             		                	<td>
-            			                        <a class="item" ng-click="removeMission(item);">
+            			                        <a ng-click="removeMission(item);">
             			                            <i class="fa fa-minus-square mx-2"></i>
             			                        </a>
 
