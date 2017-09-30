@@ -1073,35 +1073,20 @@ angular.module('FrontModule.controllers').controller('ProfileCtrl', function($sc
 	
 	/* Edit */
 	
-	$scope.editMode = false;
 	$scope.editLoading = false;
 	
-	$scope.editModel = {name:null};
+	$scope.editModel = {name:$scope.user.name};
 	
-	$scope.openEdit = function() {
-		
-		$scope.editModel.name = $scope.user.name;
-		
-		$scope.editMode = true;
-	}
-	
-	$scope.closeEdit = function() {
-		
-		$scope.editMode = false;
-	}
-	
-	$scope.edit = function() {
+	$scope.editName = function(newName) {
 		
 		$scope.editLoading = true;
 			
-		UserService.updateName($scope.editModel.name).then(function(response) {
+		UserService.updateName(newName).then(function(response) {
 
-			$scope.editMode = false;
 			$scope.editLoading = false;
 			
 		}, function(response) {
 			
-			$scope.editMode = false;
 			$scope.editLoading = false;
 		});
 	}

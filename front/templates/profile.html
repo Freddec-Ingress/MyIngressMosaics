@@ -52,61 +52,42 @@
 
 <div ng-if="user.authenticated">
 	
-	<div class="card">
+	<div class="section">
 	
-		<div class="card-header f-row">
+		<div class="item">
 			
-			<span class="mr-auto text-medium">Profile</span>
-	
-			<a ng-show="!editMode" ng-click="openEdit();">
-				Edit
-			</a>
-
-		</div>
-		
-		<div class="card-block first last" ng-show="!editMode">
-			
-			<div class="f-row">
-				
-				<span class="mr-auto">Username</span>
-				<span class="text-white text-medium">{{user.name}}</span>
-				
-			</div>
-			
-		</div>
-		
-		<div class="card-block first last" ng-show="editMode">
-			
-            <div class="loading" ng-show="loadingname">
-            	<img src="/static/img/loading.png" />
-            </div>
-            
-	        <div class="group">
-	            <label>Username</label>
-	            <input type="text" class="form-control" ng-model="editModel.name" />
-	        </div>
-	            
-	        <div class="form-button-bar">
+	        <div class="panel">
 	        	
-				<button class="btn btn-primary" ng-click="edit();" ng-disabled="!editModel.name">
-				    Ok
-				</button>
-	        	
-				<button class="btn btn-secondary" ng-click="closeEdit();">
-				    Cancel
-				</button>
-				
+	        	<div class="f-row">
+	        		
+		            <div class="item" style="flex:1;">
+		            	<input type="text" class="form-control" ng-model="user.name" />
+					</div>
+					
+					<div class="item">
+						<button class="btn btn-primary ta-center" style="width:100px;" ng-click="editName(user.name);" ng-disabled="editLoading || !user.name">
+	            			<span ng-show="editLoading">
+	            				<i class="fa fa-spinner rotating mr-1"></i>
+	            			</span>
+						    Save
+						</button>
+					</div>
+					
+		        </div>
+					
 	        </div>
 			
 		</div>
 
 	</div>
 
-	<div class="f-row mx-2 my-4 form-button-bar">
+	<div class="section">
 	
-		<a class="btn btn-primary" ng-click="logout();" style="width:auto;">
-			Sign out
-		</a>
+		<div class="item">
+			<a class="btn btn-primary" ng-click="logout();">
+				<span class="mx-4">Sign out</span>
+			</a>
+		</div>
 
 	</div>
 
