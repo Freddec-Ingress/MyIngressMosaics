@@ -127,12 +127,12 @@
 
                 <div class="f-row">
             
-        	        <div class="item width-4">
+        	        <div class="item width-6 width-xl-4">
         	            <label>Title</label>
         	            <input type="text" class="form-control" ng-model="mosaicModel.title" />
         	        </div>
     	        
-        	        <div class="item width-4">
+        	        <div class="item width-6 width-xl-4">
         	            <label>Type</label>
         	            <select class="form-control" ng-model="mosaicModel.type">
         	                <option value="sequence">sequence</option>
@@ -140,7 +140,7 @@
         	            </select>
         	        </div>
 
-        	        <div class="item width-4">
+        	        <div class="item width-6 width-xl-4">
         	            <label>Columns</label>
         	            <select class="form-control" ng-model="mosaicModel.columns" />
             	                <option value="6">6</option>
@@ -151,22 +151,18 @@
             	                <option value="1">1</option>
            	            </select>
         	        </div>
-        	        
-                </div>
-    
-                <div class="f-row">
-                    
-        	        <div class="item width-4">
+
+        	        <div class="item width-6 width-xl-4">
         	            <label>Country</label>
         	            <input type="text" class="form-control" ng-model="mosaicModel.country" />
         	        </div>
     
-        	        <div class="item width-4">
+        	        <div class="item width-6 width-xl-4">
         	            <label>Region</label>
         	            <input type="text" class="form-control" ng-model="mosaicModel.region" />
         	        </div>
     
-        	        <div class="item width-4">
+        	        <div class="item width-6 width-xl-4">
         	            <label>City</label>
         	            <input type="text" class="form-control" ng-model="mosaicModel.city" />
         	        </div>
@@ -175,7 +171,7 @@
             
                 <div class="f-row">
                     
-                    <div class="item width-6">
+                    <div class="item width-12 width-xl-6">
                         <label>Preview</label>
         				<div class="bg-black f-row f-justify-center" style="height:230px; overflow-y:auto; padding-top:4px; padding-bottom:4px; padding-left:4px;" ng-class="{'f-align-start scrollbar scrollbar-mini': mosaicModel.missions.length > 24, 'f-align-center pr-1': mosaicModel.missions.length <= 24}">
         					
@@ -188,7 +184,7 @@
         				</div>
                     </div>
                     
-                    <div class="item width-6">
+                    <div class="item width-12 width-xl-6">
                         <label>Missions</label>
                         <div class="bg-black px-1 scrollbar" style="border-top:4px solid black; border-bottom:4px solid black; overflow-y:auto; height:230px;">
             		        <div ng-if="mosaicModel.missions < 1" class="p-2">No mission</div>
@@ -199,7 +195,7 @@
             			                    
             			                            <input type="text" class="form-control ta-center" ng-blur="reorder();" ng-model="item.order" style="height:1.75rem;" />
             		                	</td>
-            		                	<td class="item c-normal mr-auto ellipsis">
+            		                	<td>
             			                        
             				                        {{item.title}}
             		                	</td>
