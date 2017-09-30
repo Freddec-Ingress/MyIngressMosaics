@@ -197,22 +197,21 @@
             		                <tr ng-repeat="item in mosaicModel.missions">
             		                	<td>
             			                    
-            			                    <div class="f-row f-align-center">
-            			                        
             			                        <div class="item" style="min-width:2.5rem; width:2.5rem;">
             			                            <input type="text" class="form-control ta-center" ng-blur="reorder();" ng-model="item.order" style="height:1.75rem;" />
             			                        </div>
+            		                	</td>
+            		                	<td>
             			                        
             			                        <div class="item c-normal mr-auto ellipsis">
             				                        {{item.title}}
             				                    </div>
-            			                        
+            		                	</td>
+            		                	<td>
             			                        <a class="item" ng-click="removeMission(item);">
             			                            <i class="fa fa-minus-square mx-2"></i>
             			                        </a>
-            			                        
-            			                     </div>
-            			                    
+
             		                    </td>
             		                </tr>
             		            </tbody>
