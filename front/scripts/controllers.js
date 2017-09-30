@@ -426,6 +426,8 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 
 	$scope.loadMosaic = function(ref) {
 		
+		$scope.ref = ref;
+		
 		API.sendRequest('/api/mosaic/' + ref + '/', 'GET').then(function(response) {
 		
 			MosaicService.data.mosaic = response;
