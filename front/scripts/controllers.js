@@ -506,8 +506,8 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 											}
 											
 											var contentClass = '';
-											if (details.missions.length > 24) contentClass = 'f-align-start scrollbar scrollbar-mini';
-											if (details.missions.length <= 24) contentClass = 'f-align-center pr-1';
+											if (details.missions.length > 24) contentClass = 'scrollbar';
+											if (details.missions.length <= 24) contentClass = '';
 
 											var contentDistance = '';
 											if (details.type == 'sequence') contentDistance = details.distance.toFixed(2).toString() + ' km';
@@ -516,18 +516,18 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 											if (details.type == 'sequence' && details.distance > 30.0) contentDistance += '<span class="mx-1">&middot;</span><i class="fa fa-car mx-1"></i>';
 
 											var contentString =
-												'<a class="btn btn-primary text-transform-normal f-col p-2" style="width:175px; align-items:initial!important;" href="/mosaic/' + details.ref + '">' +
+												'<a class="btn-primary btn-block ta-left ttrans-normal" href="/mosaic/' + details.ref + '">' +
 													
-												'	<div class="bg-black f-row f-justify-center ' + contentClass + '" style="height:105px; overflow-y:auto; padding-top:4px; padding-bottom:4px; padding-left:4px;">' +
+												'	<div class="item' + contentClass + '" style="margin-bottom:.25rem; display:flex; align-items:center; justify-content:center; background:#0b0c0d; height:105px; overflow-y:hidden; padding:.25rem;">' +
 														
-												'		<div class="f-row f-wrap f-justify-center f-align-center" style="padding:0 calc((6 - ' + details.cols + ') / 2 * 16.666667%); width:100%!important;">' + contentImage + '</div>' +
+												'		<div class="row" style="align-items:center; justify-content:center; padding:0 calc((6 - ' + details.cols + ') / 2 * 16.666667%); width:100%;">' + contentImage + '</div>' +
 														
 												'	</div>' +
 													
 												'	<div class="f-col">' +
 														
 										        '    	<div class="text-white mt-2 mb-1" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">' + details.title + '</div>' +
-										        '    	<div class="text-normal">' + details.missions.length + ' <i class="fa fa-th mx-1"></i> <span class="mr-1">&middot;</span>' + contentDistance + '</div>' +
+										        '    	<div class="text-normal">' + details.missions.length + ' <i class="fa fa-th"></i> <span class="text-separator">&middot;</span>' + contentDistance + '</div>' +
 										            	
 												'	</div>' +
 													
