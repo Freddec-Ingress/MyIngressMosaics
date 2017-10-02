@@ -43,96 +43,92 @@
 			
 			<div class="panel">
 				
-				<div class="col">
-					
-					<div class="item c-white ts-big">
-						{{mosaic.title}}
-					</div>
-					
-					<div class="item">
-						<div style="display:flex; align-items:center; justify-content:center; background:#0b0c0d; padding:.25rem;">
-						
-							<div class="row" style="align-items:center; justify-content:center; padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%); width:100%;">
-					            <div ng-repeat="m in mosaic.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-					                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-					            </div>
-				            </div>
+				<div class="item-12 c-white ts-big">
+					{{mosaic.title}}
+				</div>
 				
-						</div>
-					</div>
+				<div class="item-12">
+					<div style="display:flex; align-items:center; justify-content:center; background:#0b0c0d; padding:.25rem;">
 					
-					<div class="item">
-					    <a href="/map/{{mosaic.country}}">{{mosaic.country}}</a>
-					    <span class="text-separator">></span>
-					    <a href="/map/{{mosaic.region}},{{mosaic.country}}">{{mosaic.region}}</a>
-					    <span class="text-separator">></span>
-					    <a href="/map/{{mosaic.city}},{{mosaic.region}},{{mosaic.country}}">{{mosaic.city}}</a>
+						<div class="row" style="align-items:center; justify-content:center; padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%); width:100%;">
+				            <div ng-repeat="m in mosaic.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+				                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+				            </div>
+			            </div>
+			
 					</div>
-					
-					<div class="item">
-						{{mosaic.missions.length}} <i class="fa fa-th mx-1"></i>
+				</div>
+				
+				<div class="item-12">
+				    <a href="/map/{{mosaic.country}}">{{mosaic.country}}</a>
+				    <span class="text-separator">></span>
+				    <a href="/map/{{mosaic.region}},{{mosaic.country}}">{{mosaic.region}}</a>
+				    <span class="text-separator">></span>
+				    <a href="/map/{{mosaic.city}},{{mosaic.region}},{{mosaic.country}}">{{mosaic.city}}</a>
+				</div>
+				
+				<div class="item-12">
+					{{mosaic.missions.length}} <i class="fa fa-th mx-1"></i>
+					<span class="text-separator">&middot;</span>
+					{{mosaic.type}}
+					<span class="text-separator">&middot;</span>
+					{{mosaic.portals}} waypoints
+					<span class="text-separator">&middot;</span>
+					{{mosaic.uniques}} uniques
+					<span ng-show="mosaic.type ==  'sequence'">
 						<span class="text-separator">&middot;</span>
-						{{mosaic.type}}
-						<span class="text-separator">&middot;</span>
-						{{mosaic.portals}} waypoints
-						<span class="text-separator">&middot;</span>
-						{{mosaic.uniques}} uniques
-						<span ng-show="mosaic.type ==  'sequence'">
-							<span class="text-separator">&middot;</span>
-							{{mosaic.distance | number:2}} km
-							<span ng-show="mosaic.distance > 10.0" class="text-separator">&middot;</span>
-							<i ng-show="mosaic.distance > 10.0 && mosaic.distance < 30.0" class="fa fa-bicycle"></i>
-							<i ng-show="mosaic.distance > 30.0" class="fa fa-car"></i>
-						</span>
-					</div>
+						{{mosaic.distance | number:2}} km
+						<span ng-show="mosaic.distance > 10.0" class="text-separator">&middot;</span>
+						<i ng-show="mosaic.distance > 10.0 && mosaic.distance < 30.0" class="fa fa-bicycle"></i>
+						<i ng-show="mosaic.distance > 30.0" class="fa fa-car"></i>
+					</span>
+				</div>
+				
+				<div class="item-12 row">
+		        	<div class="item" ng-repeat="creator in mosaic.creators" ng-class="{'c-enligtened': creator.faction == 'E', 'c-resistance': creator.faction == 'R',}">
+		        		{{creator.name}}
+		        	</div>
+				</div>
+				
+				<div class="item-12 row" style="height:37px;">
 					
-					<div class="row">
-			        	<div class="item" ng-repeat="creator in mosaic.creators" ng-class="{'c-enligtened': creator.faction == 'E', 'c-resistance': creator.faction == 'R',}">
-			        		{{creator.name}}
-			        	</div>
-					</div>
-					
-					<div class="row" style="height:37px;">
+					<div class="item-6 ta-right">
 						
-						<div class="item-6 ta-right">
-							
-							<div id="fb-root"></div>
-							
-							<script>
-								(function(d, s, id) {
-									var js, fjs = d.getElementsByTagName(s)[0];
-									if (d.getElementById(id)) return;
-									js = d.createElement(s); js.id = id;
-									js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10";
-									fjs.parentNode.insertBefore(js, fjs);
-								}(document, 'script', 'facebook-jssdk'));
-							</script>
-							
-							{% endverbatim %}
-							<div class="fb-share-button" data-href="https://www.myingressmosaics.com/mosaic/{{ref}}" data-layout="button_count" data-size="small" data-mobile-iframe="true">
-								<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"></a>
-							</div>
-							{% verbatim %}
+						<div id="fb-root"></div>
 						
+						<script>
+							(function(d, s, id) {
+								var js, fjs = d.getElementsByTagName(s)[0];
+								if (d.getElementById(id)) return;
+								js = d.createElement(s); js.id = id;
+								js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10";
+								fjs.parentNode.insertBefore(js, fjs);
+							}(document, 'script', 'facebook-jssdk'));
+						</script>
+						
+						{% endverbatim %}
+						<div class="fb-share-button" data-href="https://www.myingressmosaics.com/mosaic/{{ref}}" data-layout="button_count" data-size="small" data-mobile-iframe="true">
+							<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"></a>
 						</div>
-						
-						<div class="item-6">
-							
-							{% endverbatim %}
-							<script src="https://apis.google.com/js/platform.js" async defer></script>
-							<div class="g-plus" data-action="share" data-annotation="bubble" data-href="https://www.myingressmosaics.com/mosaic/{{ref}}"></div>			
-							{% verbatim %}
-							
-						</div>
-						
+						{% verbatim %}
+					
 					</div>
 					
-					<div class="item">
-						<div id="map"></div>
+					<div class="item-6">
+						
+						{% endverbatim %}
+						<script src="https://apis.google.com/js/platform.js" async defer></script>
+						<div class="g-plus" data-action="share" data-annotation="bubble" data-href="https://www.myingressmosaics.com/mosaic/{{ref}}"></div>			
+						{% verbatim %}
+						
 					</div>
 					
 				</div>
 				
+				<div class="item-12">
+					<div id="map"></div>
+				</div>
+
 			</div>
 			
 		</div>
@@ -141,7 +137,7 @@
 			
 			<div class="panel" ng-repeat="item in mosaic.missions">
 				
-				<div class="row hover" ng-click="toggleMission(item);">
+				<div class="item-12 row hover" ng-click="toggleMission(item);">
 					
                     <div class="item c-white">
                     	<i ng-hide="item.expanded" class="mr-2 fa fa-caret-right"></i>
@@ -160,9 +156,9 @@
                     
                 </div>
                 
-                <div ng-show="item.expanded" class="col">
+                <div ng-show="item.expanded">
 					
-					<div class="item">
+					<div class="item-12">
 						{{item.portals.length}} waypoints
 						<i class="text-separator fa fa-long-arrow-right"></i>
         				<span class="" ng-repeat="portal in item.portals">
@@ -177,7 +173,7 @@
         				</span>
         			</div>
 					
-					<div class="item">
+					<div class="item-12">
                         {{item.desc}}
                     </div>
 					

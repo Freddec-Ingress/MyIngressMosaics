@@ -231,9 +231,10 @@ a:hover, a:focus, .hover:hover { color: inherit; cursor: pointer; text-decoratio
 }
 
 .panel {
-    padding: .5rem;
+    padding: .25rem;
     background: #004D40;
     border-bottom: 1px solid rgba(0,0,0,.75);
+    display: flex!important; flex-direction: row; flex-wrap: wrap;
 }
 
 
@@ -247,14 +248,9 @@ a:hover, a:focus, .hover:hover { color: inherit; cursor: pointer; text-decoratio
 
 .row.valign-center { align-items: baseline; }
 
-.col {
-    margin: -.25rem;
-    display: flex!important; flex-direction: column;
-}
+.item { padding: .25rem; }
 
 .grow { flex: 1; }
-
-.item { padding: .25rem; }
 
 .item-1  { padding: .25rem; width:   8.333333%!important; }
 .item-2  { padding: .25rem; width:  16.666667%!important; }
@@ -451,6 +447,12 @@ input[type=number]::-webkit-outer-spin-button { margin: 0; -webkit-appearance: n
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+
+
+/* Icon --------------------------------------------------------------------- */
+
+.fa-facebook-official { margin-right:.25rem; }
 
 
 

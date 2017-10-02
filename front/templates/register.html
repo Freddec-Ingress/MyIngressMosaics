@@ -30,77 +30,73 @@
 		
 		<div class="panel">
 			
-			<form class="row" name="form" novalidate>
-		
-				<div ng-if="passwords" class="item-12">
-					<span class="c-danger">The 2 passwords are not consistent</span>
-				</div>
-		
-				<div ng-if="already" class="item-12">
-					<span class="c-danger">Username already exists</span>
+			<div ng-if="passwords" class="item-12">
+				<span class="c-danger">The 2 passwords are not consistent</span>
+			</div>
+	
+			<div ng-if="already" class="item-12">
+				<span class="c-danger">Username already exists</span>
+			</div>
+			
+			<div class="item-12">
+				
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+					<input type="text" class="form-control" placeholder="username" name="username" ng-model="registerModel.username" required="" />
 				</div>
 				
-				<div class="item-12">
-					
-					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-						<input type="text" class="form-control" placeholder="username" name="username" ng-model="registerModel.username" required="" />
-					</div>
-					
-					<div ng-show="form.$submitted || form.username.$touched">
-						<p class="item c-danger" ng-show="form.username.$error.required">Field required</p>
-					</div>
-					
-				</div>
-		
-				<div class="item-12">
-					
-					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></span>
-						<input type="email" class="form-control" placeholder="email address" name="email" ng-model="registerModel.email" required="" />
-					</div>
-					
-					<div ng-show="form.$submitted || form.email.$touched">
-						<p class="item c-danger" ng-show="form.email.$error.required">Field required</p>
-						<p class="item c-danger" ng-show="form.email.$error.email">A valid email address is required</p>
-					</div>
-					
-				</div>
-		
-				<div class="item-12">
-					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
-						<input type="password" class="form-control" placeholder="password" name="password1" ng-model="registerModel.password1" required="" />
-					</div>
-					<div ng-show="form.$submitted || form.password1.$touched">
-						<p class="item c-danger" ng-show="form.password1.$error.required">Field required</p>
-					</div>
-				</div>
-		
-				<div class="item-12">
-					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
-						<input type="password" class="form-control" placeholder="confirm password" name="password2" ng-model="registerModel.password2" required="" />
-					</div>
-					<div ng-show="form.$submitted || form.password2.$touched">
-						<p class="item c-danger" ng-show="form.password2.$error.required">Field required</p>
-					</div>
-				</div>
-
-				<div class="item-6 ta-right">
-					<button type="submit" class="btn-primary" style="width:100px;" ng-click="register(registerModel.username, registerModel.password1, registerModel.password2, registerModel.email);" ng-disabled="registering || !registerModel.username || !registerModel.email || !registerModel.password1 || !registerModel.password2">
-						Sign up
-					</button>
+				<div ng-show="form.$submitted || form.username.$touched">
+					<p class="item c-danger" ng-show="form.username.$error.required">Field required</p>
 				</div>
 				
-				<div class="item-6">
-					<a class="btn" style="width:100px;" href="/login">
-						Sign in
-					</a>
+			</div>
+	
+			<div class="item-12">
+				
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></span>
+					<input type="email" class="form-control" placeholder="email address" name="email" ng-model="registerModel.email" required="" />
 				</div>
+				
+				<div ng-show="form.$submitted || form.email.$touched">
+					<p class="item c-danger" ng-show="form.email.$error.required">Field required</p>
+					<p class="item c-danger" ng-show="form.email.$error.email">A valid email address is required</p>
+				</div>
+				
+			</div>
+	
+			<div class="item-12">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
+					<input type="password" class="form-control" placeholder="password" name="password1" ng-model="registerModel.password1" required="" />
+				</div>
+				<div ng-show="form.$submitted || form.password1.$touched">
+					<p class="item c-danger" ng-show="form.password1.$error.required">Field required</p>
+				</div>
+			</div>
+	
+			<div class="item-12">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
+					<input type="password" class="form-control" placeholder="confirm password" name="password2" ng-model="registerModel.password2" required="" />
+				</div>
+				<div ng-show="form.$submitted || form.password2.$touched">
+					<p class="item c-danger" ng-show="form.password2.$error.required">Field required</p>
+				</div>
+			</div>
 
-			</form>
-		    
+			<div class="item-6 ta-right">
+				<button type="submit" class="btn-primary" style="width:100px;" ng-click="register(registerModel.username, registerModel.password1, registerModel.password2, registerModel.email);" ng-disabled="registering || !registerModel.username || !registerModel.email || !registerModel.password1 || !registerModel.password2">
+					Sign up
+				</button>
+			</div>
+			
+			<div class="item-6">
+				<a class="btn" style="width:100px;" href="/login">
+					Sign in
+				</a>
+			</div>
+
 		</div>
 	
 	</div>

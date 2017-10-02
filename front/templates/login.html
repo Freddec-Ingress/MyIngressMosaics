@@ -28,8 +28,8 @@
 
 	<div class="block">
 		
-		<a href="javascript:;" class="btn btn-block btn-facebook ta-center" ng-click="socialLogin('facebook')">
-			<i class="fa fa-facebook-official mr-2"></i>
+		<a href="javascript:;" class="btn-block btn-facebook ta-center" ng-click="socialLogin('facebook')">
+			<i class="fa fa-facebook-official"></i>
 			Sign in with Facebook
 		</a>
 
@@ -42,51 +42,47 @@
 	<div class="block">
 		
 		<form class="panel" name="form" novalidate>
-	
-			<div class="row">
-		
-				<div ng-if="unknown" class="item-12">
-					<span class="c-danger">Username or password incorrect</span>
-				</div>
-				
-				<div class="item-12">
-					
-					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-						<input type="text" class="form-control" placeholder="username" name="username" ng-model="loginModel.username" required="" />
-					</div>
-					
-					<div ng-show="form.$submitted || form.username.$touched">
-						<p class="item c-danger" ng-show="form.username.$error.required">Field required</p>
-					</div>
-					
-				</div>
-		
-				<div class="item-12">
-					
-					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
-						<input type="password" class="form-control" placeholder="password" name="password" ng-model="loginModel.password" required="" />
-					</div>
-					
-					<div ng-show="form.$submitted || form.password.$touched">
-						<p class="item c-danger" ng-show="form.password.$error.required">Field required</p>
-					</div>
-					
-				</div>
-		
-				<div class="item-6 ta-right">
-					<button class="btn-primary" style="width:100px;" ng-click="localLogin(loginModel.username, loginModel.password);" ng-disabled="signingin || !loginModel.username || !loginModel.password">
-						Sign in
-					</button>
-				</div>
-				
-				<div class="item-6">
-					<a class="btn" style="width:100px;" href="/register">
-						Sign up
-					</a>
-				</div>
 
+			<div ng-if="unknown" class="item-12">
+				<span class="c-danger">Username or password incorrect</span>
+			</div>
+			
+			<div class="item-12">
+				
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+					<input type="text" class="form-control" placeholder="username" name="username" ng-model="loginModel.username" required="" />
+				</div>
+				
+				<div ng-show="form.$submitted || form.username.$touched">
+					<p class="item c-danger" ng-show="form.username.$error.required">Field required</p>
+				</div>
+				
+			</div>
+	
+			<div class="item-12">
+				
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
+					<input type="password" class="form-control" placeholder="password" name="password" ng-model="loginModel.password" required="" />
+				</div>
+				
+				<div ng-show="form.$submitted || form.password.$touched">
+					<p class="item c-danger" ng-show="form.password.$error.required">Field required</p>
+				</div>
+				
+			</div>
+	
+			<div class="item-6 ta-right">
+				<button class="btn-primary" style="width:100px;" ng-click="localLogin(loginModel.username, loginModel.password);" ng-disabled="signingin || !loginModel.username || !loginModel.password">
+					Sign in
+				</button>
+			</div>
+			
+			<div class="item-6">
+				<a class="btn" style="width:100px;" href="/register">
+					Sign up
+				</a>
 			</div>
 
 		</form>

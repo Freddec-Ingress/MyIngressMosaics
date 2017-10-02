@@ -27,20 +27,18 @@
 	
     <div class="block">
      	<div class="panel">
-			<div class="row">
-				<div class="item grow">
-					<input type="text" class="form-control" placeholder="mosaic name, cretor, location" ng-model="searchModel.text" />
-				</div>
-				<div class="item">
-					<button type="submit" class="btn-primary" ng-click="search();">
-						Search
-					</button>
-				</div>
+			<div class="item grow">
+				<input type="text" class="form-control" placeholder="mosaic name, cretor, location" ng-model="searchModel.text" />
+			</div>
+			<div class="item">
+				<button type="submit" class="btn-primary" ng-click="search();">
+					Search
+				</button>
 			</div>
 		</div>
 	</div>
     
-    <div id="result_block" class="section hidden">
+    <div id="result_block" class="hidden">
     	
 		<div ng-if="search_loading" class="block ta-center">
 			<i class="fa fa-spinner"></i>
