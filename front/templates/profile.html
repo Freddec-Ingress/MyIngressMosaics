@@ -76,12 +76,76 @@
 	        </div>
 
 		</div>
-	
+		
+		<div class="title d-flex">
+			
+			<div class="grow">
+				{{loved.length}} mosaic loved
+			</div>
+			
+			<div ng-show="!show_loved && loved.length > 0">
+				<a ng-click="show_loved = true;">
+					Show all
+				</a>
+			</div>
+				
+			<div ng-show="show_loved && loved.length > 0">
+				<a ng-click="show_loved = false;">
+					Hide all
+				</a>
+			</div>
+			
+		</div>
+		
+		<div class="block">
+			
+			<div class="row">
+					
+				<div ng-show="show_loved" class="item-6 item-xl-3" ng-repeat="mosaic in loved">
+					<mosaic-vignet mosaic="mosaic"></mosaic-vignet>
+				</div>
+			
+			</div>
+			
+		</div>
+		
+		<div class="title d-flex">
+			
+			<div class="grow">
+				{{completed.length}} mosaic completed
+			</div>
+			
+			<div ng-show="!show_completed && completed.length > 0">
+				<a ng-click="show_completed = true;">
+					Show all
+				</a>
+			</div>
+				
+			<div ng-show="show_completed && completed.length > 0">
+				<a ng-click="show_completed = false;">
+					Hide all
+				</a>
+			</div>
+			
+		</div>
+		
+		<div class="block">
+			
+			<div class="row">
+					
+				<div ng-show="show_completed" class="item-6 item-xl-3" ng-repeat="mosaic in completed">
+					<mosaic-vignet mosaic="mosaic"></mosaic-vignet>
+				</div>
+			
+			</div>
+			
+		</div>
+		
 		<div class="block">
 		
-			<a class="btn-primary" style="width:100px;" ng-click="logout();">
+			<button class="btn-primary" style="width:100px;" ng-click="logout();">
 				Sign out
-			</a>
+			</button>
 
 		</div>
 	

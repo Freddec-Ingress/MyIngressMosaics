@@ -722,6 +722,46 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 		map.setCenter(latlngbounds.getCenter());
 		map.fitBounds(latlngbounds); 
 	}
+	
+	$scope.love = function() {
+	    
+	    if (!$scope.mosaic.is_loved) {
+	        
+    		var data = { 'ref':$scope.mosaic.ref };
+    		API.sendRequest('/api/mosaic/love/', 'POST', {}, data);
+    	    
+    	    $scope.mosaic.lovers += 1;
+    	    $scope.mosaic.is_loved = true;
+	    }
+	    else if ($scope.mosaic.is_loved) {
+	        
+    		var data = { 'ref':$scope.mosaic.ref };
+    		API.sendRequest('/api/mosaic/unlove/', 'POST', {}, data);
+    	    
+    	    $scope.mosaic.lovers -= 1;
+    	    $scope.mosaic.is_loved = false;
+	    }
+	}
+	
+	$scope.complete = function() {
+	    
+	    if (!$scope.mosaic.is_completed) {
+	        
+    		var data = { 'ref':$scope.mosaic.ref };
+    		API.sendRequest('/api/mosaic/complete/', 'POST', {}, data);
+    	    
+    	    $scope.mosaic.completers += 1;
+    	    $scope.mosaic.is_completed = true;
+	    }
+	    else if ($scope.mosaic.is_completed) {
+	        
+    		var data = { 'ref':$scope.mosaic.ref };
+    		API.sendRequest('/api/mosaic/uncomplete/', 'POST', {}, data);
+    	    
+    	    $scope.mosaic.completers -= 1;
+    	    $scope.mosaic.is_completed = false;
+	    }
+	}
 });
 
 angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, API) {
@@ -1406,7 +1446,13 @@ angular.module('FrontModule.controllers').controller('RegisterCtrl', function($s
 	}
 });
 
-angular.module('FrontModule.controllers').controller('ProfileCtrl', function($scope, API) {
+angular.module('FrontModule.controllers').controller('ProfileCtrl', function($scope, $auth, $http, $cookies, $window, API) {
+	
+	API.sendRequest('/api/user/details/', 'POST').then(function(response) {
+	
+	    $scope.loved = response.loved;
+	    $scope.completed = response.completed;
+	});
 	
 	$scope.$on('user-loaded', function(event, args) {
 		
@@ -1428,6 +1474,19 @@ angular.module('FrontModule.controllers').controller('ProfileCtrl', function($sc
 		}, function(response) {
 			
 			$scope.editLoading = false;
+		});
+	}
+	
+	$scope.logout = function() {
+	    
+		delete $http.defaults.headers.common.Authorization;
+    	delete $cookies.token;
+		
+		$auth.removeToken();
+
+		API.sendRequest('/api/user/logout/', 'POST').then(function(response) {
+			
+			$window.location.href = '/';
 		});
 	}
 });

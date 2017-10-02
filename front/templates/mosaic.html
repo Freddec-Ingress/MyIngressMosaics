@@ -59,6 +59,20 @@
 					</div>
 				</div>
 				
+				<div class="item-6 ta-right">
+					<button class="btn-primary btn-mini" ng-click="love();" ng-disabled="!user.authenticated">
+						{{mosaic.lovers}}
+						<i class="fa fa-heart" ng-class="{'c-red':mosaic.is_loved}"></i>
+					</button>
+				</div>
+				
+				<div class="item-6">
+					<button class="btn-primary btn-mini" ng-click="complete();" ng-disabled="!user.authenticated">
+						{{mosaic.completers}}
+						<i class="fa fa-check-square" ng-class="{'c-green':mosaic.is_completed}"></i>
+					</button>
+				</div>
+				
 				<div class="item-12">
 				    <a href="/map/{{mosaic.country}}">{{mosaic.country}}</a>
 				    <span class="text-separator">></span>

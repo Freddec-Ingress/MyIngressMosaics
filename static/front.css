@@ -328,7 +328,9 @@ input[type=number]::-webkit-outer-spin-button { margin: 0; -webkit-appearance: n
 
 .btn-block { display: block; }
 
-.btn.disabled, .btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn.disabled, .btn:disabled, .btn-primary.disabled, .btn-primary:disabled, .btn-secondary.disabled, .btn-secondary:disabled { opacity: .5; cursor: not-allowed; }
+
+.btn-mini { min-height: .75rem; line-height: .75rem; min-width: 75px; }
 
 
 
@@ -400,6 +402,8 @@ input[type=number]::-webkit-outer-spin-button { margin: 0; -webkit-appearance: n
 
 /* Color -------------------------------------------------------------------- */
 
+.c-red { color: #ff0000; }
+.c-green { color: #00ff00; }
 .c-white { color: #ffffff; }
 .c-danger { color: #f44336; }
 .c-lighter { color: rgba(255,255,255,.75); }
@@ -430,6 +434,12 @@ input[type=number]::-webkit-outer-spin-button { margin: 0; -webkit-appearance: n
 
 
 
+/* Display --------------------------------------------------------------------- */
+
+.d-flex { display: flex!important; }
+
+
+
 /* Flag --------------------------------------------------------------------- */
 
 .flag-icon {
@@ -452,6 +462,8 @@ input[type=number]::-webkit-outer-spin-button { margin: 0; -webkit-appearance: n
 
 /* Icon --------------------------------------------------------------------- */
 
+.fa-heart { margin-left:.25rem; }
+.fa-check-square { margin-left:.25rem; }
 .fa-facebook-official { margin-right:.25rem; }
 
 

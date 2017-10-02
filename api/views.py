@@ -152,6 +152,34 @@ def user_logout(request):
 
 
 #---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def user_getDetails(request):
+	
+	data = {
+		'loved': [],
+		'completed': [],
+	}
+	
+	results = request.user.mosaics_loved.all()
+	if results.count() > 0:
+		for item in results:
+			
+			mosaic = item.overviewSerialize()
+			data['loved'].append(mosaic)
+	
+	results = request.user.mosaics_completed.all()
+	if results.count() > 0:
+		for item in results:
+			
+			mosaic = item.overviewSerialize()
+			data['completed'].append(mosaic)
+	
+	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes((AllowAny, ))
 def user_getProfile(request):
@@ -240,7 +268,13 @@ def mosaic_view(request, ref):
 		
 		mosaic = result[0]
 		data = mosaic.detailsSerialize()
-	
+		
+		if mosaic.lovers.filter(username=request.user.username).count() > 0:
+			data['is_loved'] = True
+		
+		if mosaic.completers.filter(username=request.user.username).count() > 0:
+			data['is_completed'] = True
+			
 	return Response(data, status=status.HTTP_200_OK)
 
 
@@ -390,45 +424,72 @@ def mosaic_addMission(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
-def mosaic_getPotentials(request):
+def mosaic_love(request):
 	
 	result = Mosaic.objects.filter(ref=request.data['ref'])
 	if result.count() > 0:
 		
 		mosaic = result[0]
-		
-		array = []
+		result = mosaic.lovers.filter(username=request.user.username)
+		if result.count() < 1:
 			
-		for creator in mosaic.creators.all():
-			results = Mission.objects.filter(mosaic__isnull=True, creator=creator.name)
-			if results.count() > 0:
-				for item in results:
-					array.append(item)
-				
-		results = Mission.objects.filter(mosaic__isnull=True, title__icontains=mosaic.title)
-		if results.count() > 0:
-			for item in results:
-				array.append(item)
+			mosaic.lovers.add(request.user)
+	
+	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def mosaic_unlove(request):
+	
+	result = Mosaic.objects.filter(ref=request.data['ref'])
+	if result.count() > 0:
 		
-		if (len(array) > 0):
+		mosaic = result[0]
+		result = mosaic.lovers.filter(username=request.user.username)
+		if result.count() > 0:
 			
-			temp = list(set(array))
-			temp = sorted(temp, key=attrgetter('title'))
+			mosaic.lovers.remove(request.user)
+	
+	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def mosaic_complete(request):
+	
+	result = Mosaic.objects.filter(ref=request.data['ref'])
+	if result.count() > 0:
+		
+		mosaic = result[0]
+		result = mosaic.completers.filter(username=request.user.username)
+		if result.count() < 1:
 			
-			missions = []
-			for item in temp:
-				
-				data = {'ref':item.ref, 'name':item.title, 'desc':item.desc, 'creator':item.creator, 'faction':item.faction, 'image':item.image, 'order':item.order,
-					    'lat':item._startLat, 'lng':item._startLng, }
-				
-				missions.append(data)
+			mosaic.completers.add(request.user)
+			
+	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def mosaic_uncomplete(request):
+	
+	result = Mosaic.objects.filter(ref=request.data['ref'])
+	if result.count() > 0:
 		
-		else:
-			missions = None
-		
-		return Response(missions, status=status.HTTP_200_OK)
-		
-	return Response(None, status=status.HTTP_404_NOT_FOUND)
+		mosaic = result[0]
+		result = mosaic.completers.filter(username=request.user.username)
+		if result.count() > 0:
+			
+			mosaic.completers.remove(request.user)
+			
+	return Response(None, status=status.HTTP_200_OK)
 	
 	
 	

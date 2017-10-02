@@ -254,6 +254,7 @@ class Mosaic(models.Model):
 			'type': self.type,
 			'city': self.city,
 			'title': self.title,
+			'lovers': self.lovers.all().count(),
 			'region': self.region,
 			'country': self.country,
 			'portals': self.portals,
@@ -261,6 +262,10 @@ class Mosaic(models.Model):
 			'distance': self.distance,
 			'startLat': self.startLat,
 			'startLng': self.startLng,
+			'completers': self.completers.all().count(),
+			
+			'is_loved': False,
+			'is_completed': False,
 			
 			'creators': [],
 			'missions': [],
