@@ -28,28 +28,28 @@
     <div class="block">
      	<div class="panel">
 			<div class="item grow">
-				<input type="text" class="form-control" placeholder="mosaic name, cretor, location" ng-model="searchModel.text" />
+				<input type="text" class="form-control" placeholder="mosaic name, cretor, location" ng-model="searchtext" />
 			</div>
 			<div class="item">
-				<button type="submit" class="btn-primary" ng-click="search();">
+				<button type="submit" class="btn-primary" ng-click="search(searchtext);">
 					Search
 				</button>
 			</div>
 		</div>
 	</div>
     
-    <div id="result_block" class="hidden">
+    <div id="result_block">
     	
 		<div ng-if="search_loading" class="block ta-center">
 			<i class="fa fa-spinner"></i>
 			Searching for mosaics...
 		</div>
 
-		<div ng-if="no_result" class="block ta-center c-danger">
+		<div ng-if="mosaics && mosaics.length < 1" class="block ta-center c-danger">
 			No mosaic found
 		</div>
 	    
-	    <div ng-if="mosaics">
+	    <div ng-if="mosaics && mosaics.length > 0">
 	    
 			<div class="title">
 				{{mosaics.length}} mosaics found

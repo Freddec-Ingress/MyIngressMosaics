@@ -578,7 +578,7 @@ def data_searchForMosaics(request):
 			data['mosaics'].append(item.overviewSerialize())
 	
 	else:
-		data = { 'mosaics': None, }
+		data = { 'mosaics': [], }
 	
 	return Response(data, status=status.HTTP_200_OK)
 

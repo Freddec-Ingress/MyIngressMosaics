@@ -35,25 +35,15 @@ angular.module('FrontModule.controllers').controller('RootCtrl', function($rootS
 	}
 });
 
-angular.module('FrontModule.controllers').controller('HomeCtrl', function($scope, DataService) {
+angular.module('FrontModule.controllers').controller('HomeCtrl', function($scope, API) {
+	
+	$scope.latest_loading = true;
+	$scope.countries_loading = true;
 	
 	$('#page-loading').addClass('hidden');
 	$('#page-content').removeClass('hidden');
 	
-	$scope.latest_loading = true;
-	
-	DataService.loadLatest().then(function(response) {
-		
-		$scope.mosaics = response;
-		
-		$scope.latest_loading = false;
-		
-		$('#latest_block').removeClass('hidden');
-	});
-
-	$scope.countries_loading = true;
-	
-	DataService.loadCountriesFromWorld().then(function(response) {
+	API.sendRequest('/api/world/', 'GET').then(function(response) {
 
 		response.sort(function(a, b) {
 			return b.mosaics - a.mosaics;
@@ -62,56 +52,228 @@ angular.module('FrontModule.controllers').controller('HomeCtrl', function($scope
 		$scope.countries = response;
 		
 		$scope.countries_loading = false;
+	});
+	
+	API.sendRequest('/api/latest/', 'GET').then(function(response) {
 		
-		$('#countries_block').removeClass('hidden');
+		$scope.mosaics = response;
+		
+		$scope.latest_loading = false;
 	});
 });
 
-angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, SearchService) {
+angular.module('FrontModule.controllers').controller('MosaicCtrl', function($scope, $window, API) {
+
+	$scope.loadMosaic = function(ref) {
+		
+		API.sendRequest('/api/mosaic/' + ref + '/', 'GET').then(function(response) {
+		
+			$scope.mosaic = response;
+
+			$scope.initMap();
+			
+			$('#page-loading').addClass('hidden');
+			$('#page-content').removeClass('hidden');
+		});
+	}
+
+	$scope.toggleMission = function(item) {
+		
+		if (!item.expanded) item.expanded = true;
+		else item.expanded = false;
+	}
+
+	$scope.remove = function(mission_ref, index) {
+
+		var data = { 'ref':$scope.mosaic.ref, 'mission':$scope.mosaic.missions[index] };
+		return API.sendRequest('/api/mosaic/remove/', 'POST', {}, data).then(function(response) {
+				
+			$scope.mosaic.creators = response.creators;
+			$scope.mosaic.distance = response.distance;
+			$scope.mosaic.missions = response.missions;
+		});
+	}
+
+	function compareOrderAsc(a, b) {
+		
+		if (parseInt(a.order) < parseInt(b.order))
+			return -1;
+			
+		if (parseInt(a.order) > parseInt(b.order))
+			return 1;
+		
+		if (a.title < b.title)
+			return -1;
+			
+		if (a.title > b.title)
+			return 1;
+			
+		return 0;
+	}
+	
+	$scope.reorderMission = function(index, ref, newOrder) {
+		
+		var data = { 'ref':ref, 'order':newOrder };
+		API.sendRequest('/api/mission/order/', 'POST', {}, data);
+		
+		$scope.mosaic.missions[index].order = newOrder;
+		$scope.mosaic.missions.sort(compareOrderAsc);
+	}
+	
+	$scope.delete = function(name) {
+		
+		if (name == $scope.mosaic.title) {
+			
+			var data = { 'ref':$scope.mosaic.ref };
+			API.sendRequest('/api/mosaic/delete/', 'POST', {}, data);
+			
+			$window.location.href = '/';
+		}
+	}
+
+	$scope.initMap = function() {
+		
+		var style = [{featureType:"all",elementType:"all",stylers:[{visibility:"on"},{hue:"#131c1c"},{saturation:"-50"},{invert_lightness:!0}]},{featureType:"water",elementType:"all",stylers:[{visibility:"on"},{hue:"#005eff"},{invert_lightness:!0}]},{featureType:"poi",stylers:[{visibility:"off"}]},{featureType:"transit",elementType:"all",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels.icon",stylers:[{invert_lightness:!0}]}];
+		
+		var map = new google.maps.Map(document.getElementById('map'), {
+			
+			zoom: 8,
+			styles : style,
+			zoomControl: true,
+			disableDefaultUI: true,
+			fullscreenControl: true,
+			center: {lat: $scope.mosaic.missions[0].startLat, lng: $scope.mosaic.missions[0].startLng},
+		});
+		
+		var latlngbounds = new google.maps.LatLngBounds();
+		
+		var image = {
+			scaledSize: new google.maps.Size(35, 35),
+			origin: new google.maps.Point(0, 0),
+			anchor: new google.maps.Point(17, 18),
+			labelOrigin: new google.maps.Point(17, 19),
+			url: 'https://www.myingressmosaics.com/static/img/neutral.png',
+		};
+		
+		var lineSymbol = {
+			path: 'M 0,0 0,-5',
+			strokeOpacity: 1,
+			scale: 1
+		};
+		
+		var circleSymbol = {
+			path: google.maps.SymbolPath.CIRCLE
+		};
+		
+		var nextlatLng = null;
+		var previouslatLng = null;
+		
+		for (var m of $scope.mosaic.missions) {
+		
+			/* Mission marker */
+			
+			var label = {};
+			if ($scope.mosaic.type == 'sequence') {
+				label = { text:String(m.order), color:'#FFFFFF', fontFamily:'Coda', fontSize:'.5rem', fontWeight:'400', }
+			}
+			
+	        var marker = new google.maps.Marker({
+	        	
+				map: map,
+				icon: image,
+				label: label,
+				position: {lat: m.startLat, lng: m.startLng},
+	        });
+	        
+	        var mlatLng = new google.maps.LatLng(m.startLat, m.startLng);
+	        latlngbounds.extend(mlatLng);
+	        
+	        /* Mission transit */
+	        
+	        nextlatLng = mlatLng;
+	        
+	        if (nextlatLng && previouslatLng && $scope.mosaic.type == 'sequence') {
+	        	
+				var transitRoadmapCoordinates= [];
+				
+		        transitRoadmapCoordinates.push(previouslatLng);
+		        transitRoadmapCoordinates.push(nextlatLng);
+		        
+				var transitRoadmap = new google.maps.Polyline({
+					path: transitRoadmapCoordinates,
+					geodesic: true,
+					strokeColor: '#ebbc4a',
+					strokeOpacity: 0,
+					strokeWeight: 1,
+					icons: [{
+						icon: lineSymbol,
+						offset: '0',
+						repeat: '10px'
+					},],
+		        });
+		        
+		        transitRoadmap.setMap(map);
+	        }
+
+			/* Mission roadmap */
+			
+			var roadmapCoordinates= [];
+		
+			for (var p of m.portals) {
+				
+				if (p.lat != 0.0 && p.lng != 0.0) {
+					
+			        var platLng = new google.maps.LatLng(p.lat, p.lng);
+			        roadmapCoordinates.push(platLng);
+			        
+			        previouslatLng = platLng;
+				}
+			}
+	        
+			var roadmap = new google.maps.Polyline({
+				path: roadmapCoordinates,
+				geodesic: true,
+				strokeColor: '#ebbc4a',
+				strokeOpacity: 0.95,
+				strokeWeight: 2,
+				icons: [{
+					icon: circleSymbol,
+					offset: '100%',
+				},],
+			});
+	        
+	        roadmap.setMap(map);
+	        
+		}
+		
+		map.setCenter(latlngbounds.getCenter());
+		map.fitBounds(latlngbounds); 
+	}
+});
+
+angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, API) {
+	
+	$scope.mosaics = null;
+	$scope.search_loading = false;
 	
 	$('#page-loading').addClass('hidden');
 	$('#page-content').removeClass('hidden');
-	
-	/* Search */
-	
-	$scope.search_loading = false;
-	
-	$scope.searchModel = {text:SearchService.data.search_text};
 
-	$scope.no_result = SearchService.data.no_result;
-	
-	$scope.mosaics = SearchService.data.mosaics;
-
-	$('#result_block').removeClass('hidden');
-
-	$scope.search = function() {
+	$scope.search = function(text) {
 		
 		$scope.search_loading = true;
 		
-		$scope.no_result = false;
-		
-		$scope.cities = null;
-		$scope.regions = null;
 		$scope.mosaics = null;
-		$scope.creators = null;
-		$scope.countries = null;
-	
-		SearchService.reset();
-		
-		if ($scope.searchModel.text) {
+
+		if (text) {
 			
-			if ($scope.searchModel.text.length > 2) {
+			if (text.length > 2) {
 		
-				SearchService.search($scope.searchModel.text).then(function(response) {
+				var data = { 'text':text };
+				API.sendRequest('/api/search/', 'POST', {}, data).then(function(response) {
 					
-					$scope.no_result = SearchService.data.no_result;
-					
-					$scope.cities = SearchService.data.cities;
-					$scope.regions = SearchService.data.regions;
-					$scope.mosaics = SearchService.data.mosaics;
-					$scope.creators = SearchService.data.creators;
-					$scope.countries = SearchService.data.countries;
-	
+					$scope.mosaics = response.mosaics;
+
 					$scope.search_loading = false;
 				});
 			}
@@ -127,7 +289,273 @@ angular.module('FrontModule.controllers').controller('SearchCtrl', function($sco
 	}
 });
 
-angular.module('FrontModule.controllers').controller('MissionsCtrl', function($scope, $window, UserService, CreateService, API) {
+angular.module('FrontModule.controllers').controller('MapCtrl', function($scope, $rootScope, $cookies, $compile, API) {
+	
+	$('#page-loading').addClass('hidden');
+	$('#page-content').removeClass('hidden');
+	
+	var refArray = [];
+
+	$rootScope.infowindow = new google.maps.InfoWindow({
+		content: '',
+		pixelOffset: new google.maps.Size(0, 0)
+	});
+
+	$scope.initLocation = null;
+
+	$scope.initMap = function(location) {
+		
+		$scope.initLocation = location;
+		
+		var style = [{featureType:"all",elementType:"all",stylers:[{visibility:"on"},{hue:"#131c1c"},{saturation:"-50"},{invert_lightness:!0}]},{featureType:"water",elementType:"all",stylers:[{visibility:"on"},{hue:"#005eff"},{invert_lightness:!0}]},{featureType:"poi",stylers:[{visibility:"off"}]},{featureType:"transit",elementType:"all",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels.icon",stylers:[{invert_lightness:!0}]}];
+		
+		var startLat = parseFloat($cookies.get('startLat'));
+		var startLng = parseFloat($cookies.get('startLng'));
+		
+		if (!startLat) startLat = 0.0;
+		if (!startLng) startLng = 0.0;
+		
+		var startZoom = parseInt($cookies.get('startZoom'));
+		
+		if (!startZoom) startZoom = 15;
+		
+		var map = new google.maps.Map(document.getElementById('map'), {
+			
+			zoom: startZoom,
+			styles : style,
+			zoomControl: true,
+			disableDefaultUI: true,
+			center: {lat: startLat, lng: startLng},
+		});
+		
+		var geocoder = new google.maps.Geocoder();
+        
+        if (location) {
+        	
+        	document.getElementById('address').value = location;
+			geocoder.geocode({'address': location}, function(results, status) {
+				
+				if (status === 'OK') {
+					
+					map.setCenter(results[0].geometry.location);
+					map.fitBounds(results[0].geometry.bounds);
+					
+				} else {
+				}
+			});
+        }
+		
+		function GeolocationControl(controlDiv, map) {
+		
+		    var controlUI = document.createElement('div');
+		    controlUI.style.backgroundColor = '#FFFFFF';
+		    controlUI.style.borderStyle = 'solid';
+		    controlUI.style.borderWidth = '1px';
+		    controlUI.style.borderColor = 'white';
+		    controlUI.style.cursor = 'pointer';
+		    controlUI.style.textAlign = 'center';
+		    controlUI.style.marginRight = '.65rem';
+		    controlUI.style.padding = '.375rem';
+		    controlUI.style.borderRadius = '.125rem';
+		    controlDiv.appendChild(controlUI);
+		
+		    var controlText = document.createElement('div');
+		    controlText.style.fontFamily = 'Arial,sans-serif';
+		    controlText.style.fontSize = '1rem';
+		    controlText.style.color = '#000000';
+		    controlText.innerHTML = '<i class="fa fa-crosshairs"></i>';
+		    controlUI.appendChild(controlText);
+		
+		    google.maps.event.addDomListener(controlUI, 'click', geolocate);
+		}
+		
+		function geolocate() {
+		
+		    if (navigator.geolocation) {
+		
+		        navigator.geolocation.getCurrentPosition(function (position) {
+		
+		            var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+		            map.setCenter(pos);
+		            map.setZoom(15);
+		        });
+		    }
+		}
+	
+		var geolocationDiv = document.createElement('div');
+		var geolocationControl = new GeolocationControl(geolocationDiv, map);
+		
+		map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(geolocationDiv);
+		
+		var image = {
+		    scaledSize: new google.maps.Size(25, 25),
+			origin: new google.maps.Point(0, 0),
+			anchor: new google.maps.Point(12, 13),
+			url: 'https://commondatastorage.googleapis.com/ingress.com/img/map_icons/marker_images/enl_lev8.png',
+		};
+		
+		map.addListener('idle', function(e) {
+			
+			var center = map.getCenter();
+			
+			$cookies.put('startLat', center.lat());
+			$cookies.put('startLng', center.lng());
+			
+			$cookies.put('startZoom', map.getZoom());
+			
+			var bds = map.getBounds();
+			
+			var South_Lat = bds.getSouthWest().lat();
+			var South_Lng = bds.getSouthWest().lng();
+			var North_Lat = bds.getNorthEast().lat();
+			var North_Lng = bds.getNorthEast().lng();
+			
+			var data = {'sLat':South_Lat, 'sLng':South_Lng, 'nLat':North_Lat, 'nLng':North_Lng};
+			API.sendRequest('/api/map/', 'POST', {}, data).then(function(response) {
+				
+				if (response) {
+					
+					var contentLoading =
+						'<div class="loading-line px-2 py-1">' +
+						'	<img src="/static/img/loading.png" />' +
+						'	Loading data...' +
+						'</div>'
+					;
+					
+					for (var item of response) {
+					
+						if (refArray.indexOf(item.ref) == -1) {
+							
+							refArray.push(item.ref);
+
+							var latLng = new google.maps.LatLng(item.startLat, item.startLng);
+							var marker = new google.maps.Marker({
+								position: latLng,
+								map: map,
+								icon: image,
+							});
+							
+							google.maps.event.addListener(marker, 'click', (function (marker, ref, infowindow) {
+								
+								return function () {
+									
+									var contentDiv = angular.element('<div/>');
+									contentDiv.append(contentLoading);
+									
+									var compiledContent = $compile(contentDiv)($scope);
+									
+									infowindow.setContent(compiledContent[0]);
+									infowindow.open($scope.map, marker);
+									
+									var data = {'ref':ref};
+									API.sendRequest('/api/map/mosaic/', 'POST', {}, data).then(function(response) {
+										
+										if (response) {
+											
+											var details = response[0];
+										
+											var contentImage = '';
+											for (var m of details.missions.reverse()) {
+												
+												contentImage +=	
+												'<div style="flex:0 0 calc(100% / ' + details.cols + ');">' +
+												'	<img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url(' + m.image + '=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />' +
+												'</div>'
+												;
+											}
+											
+											var contentClass = '';
+											if (details.missions.length > 24) contentClass = 'f-align-start scrollbar scrollbar-mini';
+											if (details.missions.length <= 24) contentClass = 'f-align-center pr-1';
+
+											var contentDistance = '';
+											if (details.type == 'sequence') contentDistance = details.distance.toFixed(2).toString() + ' km';
+											if (details.type == 'serie') contentDistance = 'serie';
+											if (details.type == 'sequence' && details.distance > 10.0 && details.distance < 30.0) contentDistance += '<span class="mx-1">&middot;</span><i class="fa fa-bicycle mx-1"></i>';
+											if (details.type == 'sequence' && details.distance > 30.0) contentDistance += '<span class="mx-1">&middot;</span><i class="fa fa-car mx-1"></i>';
+
+											var contentString =
+												'<a class="btn btn-primary text-transform-normal f-col p-2" style="width:175px; align-items:initial!important;" href="/mosaic/' + details.ref + '">' +
+													
+												'	<div class="bg-black f-row f-justify-center ' + contentClass + '" style="height:105px; overflow-y:auto; padding-top:4px; padding-bottom:4px; padding-left:4px;">' +
+														
+												'		<div class="f-row f-wrap f-justify-center f-align-center" style="padding:0 calc((6 - ' + details.cols + ') / 2 * 16.666667%); width:100%!important;">' + contentImage + '</div>' +
+														
+												'	</div>' +
+													
+												'	<div class="f-col">' +
+														
+										        '    	<div class="text-white mt-2 mb-1" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">' + details.title + '</div>' +
+										        '    	<div class="text-normal">' + details.missions.length + ' <i class="fa fa-th mx-1"></i> <span class="mr-1">&middot;</span>' + contentDistance + '</div>' +
+										            	
+												'	</div>' +
+													
+												'</a>' +
+											'';
+
+											contentDiv = angular.element('<div/>');
+											contentDiv.append(contentString);
+											
+											var compiledContent = $compile(contentDiv)($scope);
+											
+											infowindow.setContent(compiledContent[0]);
+										}			
+									});
+								};
+								
+							})(marker, item.ref, $rootScope.infowindow));
+						}
+					}
+				}
+			});
+		});
+		
+		if (startLat == 0.0 && startLng == 0.0 && !location) {
+			
+			if (navigator.geolocation) {
+				
+				navigator.geolocation.getCurrentPosition(function(position) {
+					
+					var pos = {
+						lat: position.coords.latitude,
+						lng: position.coords.longitude
+					};
+				
+					map.setCenter(pos);
+	
+				}, function() {
+				});
+				
+			} else {
+			}
+		}
+		
+		function geocodeAddress(geocoder, resultsMap) {
+			
+			var address = document.getElementById('address').value;
+			geocoder.geocode({'address': address}, function(results, status) {
+				
+				if (status === 'OK') {
+					
+					resultsMap.setCenter(results[0].geometry.location);
+					resultsMap.fitBounds(results[0].geometry.bounds);
+					
+				} else {
+				}
+			});
+		}
+
+    	document.getElementById('submit').addEventListener('click', function() {
+        	geocodeAddress(geocoder, map);
+        });
+	}
+
+	$scope.$on('user-loaded', function(event, args) {
+		$scope.initMap($scope.initLocation);
+	});
+});
+
+angular.module('FrontModule.controllers').controller('RegistrationCtrl', function($scope, $window, API) {
 	
 	$scope.$on('user-loaded', function(event, args) {
 		
@@ -431,599 +859,24 @@ angular.module('FrontModule.controllers').controller('MissionsCtrl', function($s
 	}
 });
 
-angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API, $rootScope, $scope, $window, MosaicService) {
-
-	$scope.loadMosaic = function(ref) {
-		
-		API.sendRequest('/api/mosaic/' + ref + '/', 'GET').then(function(response) {
-		
-			MosaicService.data.mosaic = response;
-			
-			$scope.mosaic = MosaicService.data.mosaic;
-			$scope.potentials = MosaicService.data.potentials;
-			
-			$scope.initMap();
-
-			if ($scope.mosaic) {
-				
-				$('#block-mosaic').removeClass('hidden');
-				$('#block-admin').removeClass('hidden');
-			}
-			else {
-				
-				$('#block-nomosaic').removeClass('hidden');
-			}
-	
-			$('#page-loading').addClass('hidden');
-			$('#page-content').removeClass('hidden');
-		});
-	}
-	
-	/* Displaying */
-	
-	$scope.toggleMission = function(item) {
-		
-		if (!item.expanded) item.expanded = true;
-		else item.expanded = false;
-	}
-	
-	/* Edit */
-	
-	$scope.editMode = false;
-	$scope.editLoading = false;
-	
-	$scope.editModel = {ref:null, city:null, region:null, desc:null, type:null, cols:null, rows:null, title:null, country:null};
-	
-	$scope.openEdit = function() {
-		
-		$scope.editModel.ref = $scope.mosaic.ref;
-		$scope.editModel.city = $scope.mosaic.city;
-		$scope.editModel.desc = $scope.mosaic.desc;
-		$scope.editModel.type = $scope.mosaic.type;
-		$scope.editModel.cols = $scope.mosaic.cols;
-		$scope.editModel.rows = $scope.mosaic.rows;
-		$scope.editModel.title = $scope.mosaic.title;
-		$scope.editModel.region = $scope.mosaic.region;
-		$scope.editModel.country = $scope.mosaic.country;
-		
-		$scope.editMode = true;
-		$scope.reorderMode = false;
-		$scope.addMode = false;
-		$scope.deleteMode = false;
-	}
-	
-	$scope.closeEdit = function() {
-		
-		$scope.editMode = false;
-	}
-	
-	$scope.edit = function() {
-		
-		$scope.editLoading = true;
-			
-		MosaicService.edit($scope.editModel).then(function(response) {
-
-			$scope.editMode = false;
-			$scope.editLoading = false;
-			
-		}, function(response) {
-			
-			$scope.editMode = false;
-			$scope.editLoading = false;
-		});
-	}
-	
-	/* Reorder */
-	
-	$scope.missionsMode = false;
-	$scope.reorderLoading = false;
-	
-	$scope.reorderModel = {ref:null, missions:null};
-	
-	$scope.openMissions = function() {
-		
-		$scope.reorderModel.ref = $scope.mosaic.ref;
-		$scope.reorderModel.missions = $scope.mosaic.missions;
-
-		$scope.editMode = false;
-		$scope.missionsMode = true;
-		$scope.addMode = false;
-		$scope.deleteMode = false;
-	}
-	
-	$scope.closeissions = function() {
-		
-		$scope.missionsMode = false;
-	}
-	
-	$scope.remove = function(mission_ref, index) {
-
-		$scope.reorderModel.missions.splice(index, 1);
-		MosaicService.remove(mission_ref);
-	}
-
-	function compareOrderAsc(a, b) {
-		
-		if (parseInt(a.order) < parseInt(b.order))
-			return -1;
-			
-		if (parseInt(a.order) > parseInt(b.order))
-			return 1;
-		
-		if (a.title < b.title)
-			return -1;
-			
-		if (a.title > b.title)
-			return 1;
-			
-		return 0;
-	}
-	
-	$scope.reorderMission = function(index, ref, newOrder) {
-		
-		var data = { 'ref':ref, 'order':newOrder };
-		API.sendRequest('/api/mission/order/', 'POST', {}, data);
-		
-		$scope.mosaic.missions[index].order = newOrder;
-		$scope.mosaic.missions.sort(compareOrderAsc);
-	}
-	
-	/* Add */
-	
-	$scope.addMode = false;
-	
-	$scope.openAdd = function() {
-		
-		$scope.editMode = false;
-		$scope.reorderMode = false;
-		$scope.addMode = true;
-		$scope.deleteMode = false;
-	}
-	
-	$scope.closeAdd = function() {
-		
-		$scope.addMode = false;
-	}
-	
-	$scope.add = function(item, order) {
-		
-		var index = $scope.potentials.indexOf(item);
-		if (index > -1) {
-		    $scope.potentials.splice(index, 1);
-		}
-		
-		item.order = order
-		
-		MosaicService.add(item.ref, order);
-	}
-
-	/* Delete */
-	
-	$scope.deleteMode = false;
-	
-	$scope.deleteModel = {name:null};
-	
-	$scope.openDelete = function() {
-		
-		$scope.editMode = false;
-		$scope.reorderMode = false;
-		$scope.addMode = false;
-		$scope.deleteMode = true;
-	}
-	
-	$scope.closeDelete = function() {
-		
-		$scope.deleteMode = false;
-	}
-	
-	$scope.delete = function() {
-		
-		if ($scope.deleteModel.name == $scope.mosaic.title) {
-			
-			MosaicService.delete();
-			$window.location.href = '/';
-		}
-	}
-	
-	/* Map */
-
-	$scope.initMap = function() {
-		
-		var style = [{featureType:"all",elementType:"all",stylers:[{visibility:"on"},{hue:"#131c1c"},{saturation:"-50"},{invert_lightness:!0}]},{featureType:"water",elementType:"all",stylers:[{visibility:"on"},{hue:"#005eff"},{invert_lightness:!0}]},{featureType:"poi",stylers:[{visibility:"off"}]},{featureType:"transit",elementType:"all",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels.icon",stylers:[{invert_lightness:!0}]}];
-		
-		var map = new google.maps.Map(document.getElementById('map'), {
-			
-			zoom: 8,
-			styles : style,
-			zoomControl: true,
-			disableDefaultUI: true,
-			fullscreenControl: true,
-			center: {lat: $scope.mosaic.missions[0].startLat, lng: $scope.mosaic.missions[0].startLng},
-		});
-		
-		var latlngbounds = new google.maps.LatLngBounds();
-		
-		var image = {
-			scaledSize: new google.maps.Size(35, 35),
-			origin: new google.maps.Point(0, 0),
-			anchor: new google.maps.Point(17, 18),
-			labelOrigin: new google.maps.Point(17, 19),
-			url: 'https://www.myingressmosaics.com/static/img/neutral.png',
-		};
-		
-		var lineSymbol = {
-			path: 'M 0,0 0,-5',
-			strokeOpacity: 1,
-			scale: 1
-		};
-		
-		var circleSymbol = {
-			path: google.maps.SymbolPath.CIRCLE
-		};
-		
-		var nextlatLng = null;
-		var previouslatLng = null;
-		
-		for (var m of $scope.mosaic.missions) {
-		
-			/* Mission marker */
-			
-			var label = {};
-			if ($scope.mosaic.type == 'sequence') {
-				label = { text:String(m.order), color:'#FFFFFF', fontFamily:'Coda', fontSize:'.5rem', fontWeight:'400', }
-			}
-			
-	        var marker = new google.maps.Marker({
-	        	
-				map: map,
-				icon: image,
-				label: label,
-				position: {lat: m.startLat, lng: m.startLng},
-	        });
-	        
-	        var mlatLng = new google.maps.LatLng(m.startLat, m.startLng);
-	        latlngbounds.extend(mlatLng);
-	        
-	        /* Mission transit */
-	        
-	        nextlatLng = mlatLng;
-	        
-	        if (nextlatLng && previouslatLng && $scope.mosaic.type == 'sequence') {
-	        	
-				var transitRoadmapCoordinates= [];
-				
-		        transitRoadmapCoordinates.push(previouslatLng);
-		        transitRoadmapCoordinates.push(nextlatLng);
-		        
-				var transitRoadmap = new google.maps.Polyline({
-					path: transitRoadmapCoordinates,
-					geodesic: true,
-					strokeColor: '#ebbc4a',
-					strokeOpacity: 0,
-					strokeWeight: 1,
-					icons: [{
-						icon: lineSymbol,
-						offset: '0',
-						repeat: '10px'
-					},],
-		        });
-		        
-		        transitRoadmap.setMap(map);
-	        }
-
-			/* Mission roadmap */
-			
-			var roadmapCoordinates= [];
-		
-			for (var p of m.portals) {
-				
-				if (p.lat != 0.0 && p.lng != 0.0) {
-					
-			        var platLng = new google.maps.LatLng(p.lat, p.lng);
-			        roadmapCoordinates.push(platLng);
-			        
-			        previouslatLng = platLng;
-				}
-			}
-	        
-			var roadmap = new google.maps.Polyline({
-				path: roadmapCoordinates,
-				geodesic: true,
-				strokeColor: '#ebbc4a',
-				strokeOpacity: 0.95,
-				strokeWeight: 2,
-				icons: [{
-					icon: circleSymbol,
-					offset: '100%',
-				},],
-			});
-	        
-	        roadmap.setMap(map);
-	        
-		}
-		
-		map.setCenter(latlngbounds.getCenter());
-		map.fitBounds(latlngbounds); 
-	}
-});
-
-angular.module('FrontModule.controllers').controller('MapCtrl', function($scope, $rootScope, $cookies, $compile, MapService) {
+angular.module('FrontModule.controllers').controller('LoginCtrl', function($scope, $auth, $cookies, $window, API) {
 	
 	$('#page-loading').addClass('hidden');
 	$('#page-content').removeClass('hidden');
-	
-	/* Map */
-	
-	var refArray = [];
-
-	$rootScope.infowindow = new google.maps.InfoWindow({
-		content: '',
-		pixelOffset: new google.maps.Size(0, 0)
-	});
-
-	$scope.initLocation = null;
-
-	$scope.initMap = function(location) {
-		
-		$scope.initLocation = location;
-		
-		var style = [{featureType:"all",elementType:"all",stylers:[{visibility:"on"},{hue:"#131c1c"},{saturation:"-50"},{invert_lightness:!0}]},{featureType:"water",elementType:"all",stylers:[{visibility:"on"},{hue:"#005eff"},{invert_lightness:!0}]},{featureType:"poi",stylers:[{visibility:"off"}]},{featureType:"transit",elementType:"all",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels.icon",stylers:[{invert_lightness:!0}]}];
-		
-		var startLat = parseFloat($cookies.get('startLat'));
-		var startLng = parseFloat($cookies.get('startLng'));
-		
-		if (!startLat) startLat = 0.0;
-		if (!startLng) startLng = 0.0;
-		
-		var startZoom = parseInt($cookies.get('startZoom'));
-		
-		if (!startZoom) startZoom = 15;
-		
-		var map = new google.maps.Map(document.getElementById('map'), {
-			
-			zoom: startZoom,
-			styles : style,
-			zoomControl: true,
-			disableDefaultUI: true,
-			center: {lat: startLat, lng: startLng},
-		});
-		
-		var geocoder = new google.maps.Geocoder();
-        
-        if (location) {
-        	
-        	document.getElementById('address').value = location;
-			geocoder.geocode({'address': location}, function(results, status) {
-				
-				if (status === 'OK') {
-					
-					map.setCenter(results[0].geometry.location);
-					map.fitBounds(results[0].geometry.bounds);
-					
-				} else {
-				}
-			});
-        }
-		
-		function GeolocationControl(controlDiv, map) {
-		
-		    var controlUI = document.createElement('div');
-		    controlUI.style.backgroundColor = '#FFFFFF';
-		    controlUI.style.borderStyle = 'solid';
-		    controlUI.style.borderWidth = '1px';
-		    controlUI.style.borderColor = 'white';
-		    controlUI.style.cursor = 'pointer';
-		    controlUI.style.textAlign = 'center';
-		    controlUI.style.marginRight = '.65rem';
-		    controlUI.style.padding = '.375rem';
-		    controlUI.style.borderRadius = '.125rem';
-		    controlDiv.appendChild(controlUI);
-		
-		    var controlText = document.createElement('div');
-		    controlText.style.fontFamily = 'Arial,sans-serif';
-		    controlText.style.fontSize = '1rem';
-		    controlText.style.color = '#000000';
-		    controlText.innerHTML = '<i class="fa fa-crosshairs"></i>';
-		    controlUI.appendChild(controlText);
-		
-		    google.maps.event.addDomListener(controlUI, 'click', geolocate);
-		}
-		
-		function geolocate() {
-		
-		    if (navigator.geolocation) {
-		
-		        navigator.geolocation.getCurrentPosition(function (position) {
-		
-		            var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-		            map.setCenter(pos);
-		            map.setZoom(15);
-		        });
-		    }
-		}
-	
-		var geolocationDiv = document.createElement('div');
-		var geolocationControl = new GeolocationControl(geolocationDiv, map);
-		
-		map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(geolocationDiv);
-		
-		var image = {
-		    scaledSize: new google.maps.Size(25, 25),
-			origin: new google.maps.Point(0, 0),
-			anchor: new google.maps.Point(12, 13),
-			url: 'https://commondatastorage.googleapis.com/ingress.com/img/map_icons/marker_images/enl_lev8.png',
-		};
-		
-		map.addListener('idle', function(e) {
-			
-			var center = map.getCenter();
-			
-			$cookies.put('startLat', center.lat());
-			$cookies.put('startLng', center.lng());
-			
-			$cookies.put('startZoom', map.getZoom());
-			
-			var bds = map.getBounds();
-			
-			var South_Lat = bds.getSouthWest().lat();
-			var South_Lng = bds.getSouthWest().lng();
-			var North_Lat = bds.getNorthEast().lat();
-			var North_Lng = bds.getNorthEast().lng();
-			
-			MapService.getMosaics(South_Lat, South_Lng, North_Lat, North_Lng).then(function(response) {
-				
-				if (response) {
-					
-					var contentLoading =
-						'<div class="loading-line px-2 py-1">' +
-						'	<img src="/static/img/loading.png" />' +
-						'	Loading data...' +
-						'</div>'
-					;
-					
-					for (var item of response) {
-					
-						if (refArray.indexOf(item.ref) == -1) {
-							
-							refArray.push(item.ref);
-
-							var latLng = new google.maps.LatLng(item.startLat, item.startLng);
-							var marker = new google.maps.Marker({
-								position: latLng,
-								map: map,
-								icon: image,
-							});
-							
-							google.maps.event.addListener(marker, 'click', (function (marker, ref, infowindow) {
-								
-								return function () {
-									
-									var contentDiv = angular.element('<div/>');
-									contentDiv.append(contentLoading);
-									
-									var compiledContent = $compile(contentDiv)($scope);
-									
-									infowindow.setContent(compiledContent[0]);
-									infowindow.open($scope.map, marker);
-									
-									MapService.getMosaicDetails(ref).then(function(response) {
-										
-										if (response) {
-											
-											var details = response[0];
-										
-											var contentImage = '';
-											for (var m of details.missions.reverse()) {
-												
-												contentImage +=	
-												'<div style="flex:0 0 calc(100% / ' + details.cols + ');">' +
-												'	<img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url(' + m.image + '=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />' +
-												'</div>'
-												;
-											}
-											
-											var contentClass = '';
-											if (details.missions.length > 24) contentClass = 'f-align-start scrollbar scrollbar-mini';
-											if (details.missions.length <= 24) contentClass = 'f-align-center pr-1';
-
-											var contentDistance = '';
-											if (details.type == 'sequence') contentDistance = details.distance.toFixed(2).toString() + ' km';
-											if (details.type == 'serie') contentDistance = 'serie';
-											if (details.type == 'sequence' && details.distance > 10.0 && details.distance < 30.0) contentDistance += '<span class="mx-1">&middot;</span><i class="fa fa-bicycle mx-1"></i>';
-											if (details.type == 'sequence' && details.distance > 30.0) contentDistance += '<span class="mx-1">&middot;</span><i class="fa fa-car mx-1"></i>';
-
-											var contentString =
-												'<a class="btn btn-primary text-transform-normal f-col p-2" style="width:175px; align-items:initial!important;" href="/mosaic/' + details.ref + '">' +
-													
-												'	<div class="bg-black f-row f-justify-center ' + contentClass + '" style="height:105px; overflow-y:auto; padding-top:4px; padding-bottom:4px; padding-left:4px;">' +
-														
-												'		<div class="f-row f-wrap f-justify-center f-align-center" style="padding:0 calc((6 - ' + details.cols + ') / 2 * 16.666667%); width:100%!important;">' + contentImage + '</div>' +
-														
-												'	</div>' +
-													
-												'	<div class="f-col">' +
-														
-										        '    	<div class="text-white mt-2 mb-1" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">' + details.title + '</div>' +
-										        '    	<div class="text-normal">' + details.missions.length + ' <i class="fa fa-th mx-1"></i> <span class="mr-1">&middot;</span>' + contentDistance + '</div>' +
-										            	
-												'	</div>' +
-													
-												'</a>' +
-											'';
-
-											contentDiv = angular.element('<div/>');
-											contentDiv.append(contentString);
-											
-											var compiledContent = $compile(contentDiv)($scope);
-											
-											infowindow.setContent(compiledContent[0]);
-										}			
-									});
-								};
-								
-							})(marker, item.ref, $rootScope.infowindow));
-						}
-					}
-				}
-			});
-		});
-		
-		if (startLat == 0.0 && startLng == 0.0 && !location) {
-			
-			if (navigator.geolocation) {
-				
-				navigator.geolocation.getCurrentPosition(function(position) {
-					
-					var pos = {
-						lat: position.coords.latitude,
-						lng: position.coords.longitude
-					};
-				
-					map.setCenter(pos);
-	
-				}, function() {
-				});
-				
-			} else {
-			}
-		}
-		
-		function geocodeAddress(geocoder, resultsMap) {
-			
-			var address = document.getElementById('address').value;
-			geocoder.geocode({'address': address}, function(results, status) {
-				
-				if (status === 'OK') {
-					
-					resultsMap.setCenter(results[0].geometry.location);
-					resultsMap.fitBounds(results[0].geometry.bounds);
-					
-				} else {
-				}
-			});
-		}
-
-    	document.getElementById('submit').addEventListener('click', function() {
-        	geocodeAddress(geocoder, map);
-        });
-	}
-
-	$scope.$on('user-loaded', function(event, args) {
-		$scope.initMap($scope.initLocation);
-	});
-});
-
-angular.module('FrontModule.controllers').controller('LoginCtrl', function($scope, API, $auth, $cookies, $window, UserService) {
-	
-	$('#page-loading').addClass('hidden');
-	$('#page-content').removeClass('hidden');
-	
-	$scope.loginModel = { username:null, password:null };
 	
 	$scope.unknown = false;
 	$scope.signingin = false;
 	
-	$scope.socialLogin = UserService.socialLogin;
+	$scope.socialLogin = function(provider) {
+			
+		$auth.authenticate(provider).then(function(response) {
+			
+			$auth.setToken(response.data.token);
+			$cookies.token = response.data.token;
+			
+			$window.location.href = '/';
+		});
+	}
 	
 	$scope.localLogin = function(username, password) {
 		
@@ -1031,12 +884,10 @@ angular.module('FrontModule.controllers').controller('LoginCtrl', function($scop
 		$scope.signingin = true;
 		
 		var data = { 'username':username, 'password':password }
-		return API.sendRequest('/api/user/login/', 'POST', {}, data).then(function(response) {
+		API.sendRequest('/api/user/login/', 'POST', {}, data).then(function(response) {
 			
 			$auth.setToken(response.token);
 			$cookies.token = response.token;
-		
-			UserService.init();
 			
 			$window.location.href = '/';
 			
@@ -1049,12 +900,10 @@ angular.module('FrontModule.controllers').controller('LoginCtrl', function($scop
 	}
 });
 
-angular.module('FrontModule.controllers').controller('RegisterCtrl', function($scope, API, $auth, $cookies, $window, UserService) {
+angular.module('FrontModule.controllers').controller('RegisterCtrl', function($scope, $auth, $cookies, $window, API) {
 	
 	$('#page-loading').addClass('hidden');
 	$('#page-content').removeClass('hidden');
-	
-	$scope.registerModel = { username:null, password1:null, password2:null, email:null };
 	
 	$scope.already = false;
 	$scope.passwords = false;
@@ -1067,13 +916,11 @@ angular.module('FrontModule.controllers').controller('RegisterCtrl', function($s
 		$scope.registering = true;
 		
 		var data = { 'username':username, 'password1':password1, 'password2':password2, 'email':email }
-		return API.sendRequest('/api/user/register/', 'POST', {}, data).then(function(response) {
+		API.sendRequest('/api/user/register/', 'POST', {}, data).then(function(response) {
 			
 			$auth.setToken(response.token);
 			$cookies.token = response.token;
-			
-			UserService.init();
-			
+
 			$window.location.href = '/';
 			
 		}, function(response) {
@@ -1086,7 +933,7 @@ angular.module('FrontModule.controllers').controller('RegisterCtrl', function($s
 	}
 });
 
-angular.module('FrontModule.controllers').controller('ProfileCtrl', function($rootScope, $scope, UserService) {
+angular.module('FrontModule.controllers').controller('ProfileCtrl', function($scope, API) {
 	
 	$scope.$on('user-loaded', function(event, args) {
 		
@@ -1094,15 +941,14 @@ angular.module('FrontModule.controllers').controller('ProfileCtrl', function($ro
 		$('#page-content').removeClass('hidden');
 	});
 
-	/* Edit */
-	
 	$scope.editLoading = false;
 
 	$scope.editName = function(newName) {
 		
 		$scope.editLoading = true;
 			
-		UserService.updateName(newName).then(function(response) {
+		var data = { 'name':newName };
+		API.sendRequest('/api/user/edit/name/', 'POST', {}, data).then(function(response) {
 
 			$scope.editLoading = false;
 			
@@ -1110,66 +956,6 @@ angular.module('FrontModule.controllers').controller('ProfileCtrl', function($ro
 			
 			$scope.editLoading = false;
 		});
-	}
-});
-
-angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, $window, SearchService) {
-	
-	$('#page-loading').addClass('hidden');
-	$('#page-content').removeClass('hidden');
-	
-	/* Search */
-	
-	$('#result_block').removeClass('hidden');
-	
-	$scope.search_loading = false;
-	
-	$scope.searchModel = {text:SearchService.data.search_text};
-
-	$scope.no_result = SearchService.data.no_result;
-	
-	$scope.mosaics = SearchService.data.mosaics;
-
-	$scope.search = function() {
-		
-		$scope.search_loading = true;
-		
-		$scope.no_result = false;
-		
-		$scope.cities = null;
-		$scope.regions = null;
-		$scope.mosaics = null;
-		$scope.creators = null;
-		$scope.countries = null;
-	
-		SearchService.reset();
-		
-		if ($scope.searchModel.text) {
-			
-			if ($scope.searchModel.text.length > 2) {
-		
-				SearchService.search($scope.searchModel.text).then(function(response) {
-					
-					$scope.no_result = SearchService.data.no_result;
-					
-					$scope.cities = SearchService.data.cities;
-					$scope.regions = SearchService.data.regions;
-					$scope.mosaics = SearchService.data.mosaics;
-					$scope.creators = SearchService.data.creators;
-					$scope.countries = SearchService.data.countries;
-	
-					$scope.search_loading = false;
-				});
-			}
-			else {
-					
-				$scope.search_loading = false;
-			}
-		}
-		else {
-				
-			$scope.search_loading = false;
-		}
 	}
 });
 
@@ -1233,15 +1019,15 @@ angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($
 	}
 });
 
-angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', function($scope, $rootScope, API) {
+angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', function($scope, API) {
 
-	$rootScope.loading_page = true;
+	$scope.loading_page = true;
 	
-	$rootScope.mosaics = [];
+	$scope.mosaics = [];
 	
 	API.sendRequest('/api/adm/registration/mosaics/', 'POST').then(function(response) {
 		
-		$rootScope.mosaics = [];
+		$scope.mosaics = [];
 		
 		for (var item of response) {
 			
@@ -1264,10 +1050,10 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 				'missions': [],
 			}
 			
-			$rootScope.mosaics.push(obj);
+			$scope.mosaics.push(obj);
 		}
 
-		$rootScope.loading_page = false;
+		$scope.loading_page = false;
 	
 	$('#page-loading').addClass('hidden');
 	$('#page-content').removeClass('hidden');
@@ -1445,7 +1231,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 	
 	$scope.removeMosaic = function(mosaic) {
 		
-		$rootScope.mosaics.splice($rootScope.mosaics.indexOf(mosaic), 1);
+		$scope.mosaics.splice($scope.mosaics.indexOf(mosaic), 1);
 	}
 	
 	$scope.createMosaic = function(mosaic) {
@@ -1454,7 +1240,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 
 		API.sendRequest('/api/mosaic/create/', 'POST', {}, mosaic).then(function(response) {
 
-			$rootScope.mosaics.splice($rootScope.mosaics.indexOf(mosaic), 1);
+			$scope.mosaics.splice($scope.mosaics.indexOf(mosaic), 1);
 
 			mosaic.creating = false;
 		});
@@ -1468,7 +1254,6 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 			API.sendRequest('/api/mission/delete/', 'POST', {}, data);
 		}
 		
-		$rootScope.mosaics.splice($rootScope.mosaics.indexOf(mosaic), 1);
+		$scope.mosaics.splice($scope.mosaics.indexOf(mosaic), 1);
 	}
-
 });
