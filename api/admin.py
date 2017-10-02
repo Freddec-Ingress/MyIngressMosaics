@@ -11,3 +11,4 @@ from .models import *
 admin.site.register(Profile)
 admin.site.register(Mosaic)
 admin.site.register(Mission)
+admin.site.register(Comment)

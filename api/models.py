@@ -74,6 +74,9 @@ class Mosaic(models.Model):
 	registerer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='mosaics')
 	register_date = models.DateField(default=datetime.now)
 	
+	lovers = models.ManyToManyField(User, related_name='mosaics_loved')
+	completers = models.ManyToManyField(User, related_name='mosaics_completed')
+	
 	# Admin displaying
 	
 	def __str__(self):
@@ -314,7 +317,7 @@ class Mission(models.Model):
 	startLat = models.FloatField(null=True, blank=True)
 	startLng = models.FloatField(null=True, blank=True)
 	distance = models.FloatField(null=True, blank=True)
-			
+	
 	mosaic = models.ForeignKey('Mosaic', on_delete=models.SET_NULL, null=True, blank=True, related_name='missions')
 	
 	# Admin displaying
@@ -508,3 +511,20 @@ class Mission(models.Model):
 		data['portals'] = self.getPortalsData()
 		
 		return data
+
+
+
+@python_2_unicode_compatible
+class Comment(models.Model):
+	
+	user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='comments')
+	mosaic = models.ForeignKey('Mosaic', on_delete=models.SET_NULL, null=True, blank=True, related_name='comments')
+
+	text = models.TextField()
+	create_date = models.DateField(default=datetime.now)
+	update_date = models.DateField(default=datetime.now)
+	
+	# Admin displaying
+	
+	def __str__(self):
+		return self.user
