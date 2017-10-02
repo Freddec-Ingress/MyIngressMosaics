@@ -26,21 +26,21 @@
 
 {% verbatim %}
 
-	<div class="section p-2">
+	<div class="block">
 		
-		<div class="item bg-dark">
+		<div class="panel">
 			
-			<form name="form" novalidate>
+			<form class="row" name="form" novalidate>
 		
-				<div ng-if="passwords" class="item">
+				<div ng-if="passwords" class="item-12">
 					<span class="c-danger">The 2 passwords are not consistent</span>
 				</div>
 		
-				<div ng-if="already" class="item">
+				<div ng-if="already" class="item-12">
 					<span class="c-danger">Username already exists</span>
 				</div>
 				
-				<div class="item">
+				<div class="item-12">
 					
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
@@ -53,7 +53,7 @@
 					
 				</div>
 		
-				<div class="item">
+				<div class="item-12">
 					
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></span>
@@ -67,7 +67,7 @@
 					
 				</div>
 		
-				<div class="item">
+				<div class="item-12">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
 						<input type="password" class="form-control" placeholder="password" name="password1" ng-model="registerModel.password1" required="" />
@@ -77,7 +77,7 @@
 					</div>
 				</div>
 		
-				<div class="item">
+				<div class="item-12">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
 						<input type="password" class="form-control" placeholder="confirm password" name="password2" ng-model="registerModel.password2" required="" />
@@ -87,19 +87,18 @@
 					</div>
 				</div>
 
-				<div class="f-row">
-					<div class="item width-6 ta-right">
-						<button type="submit" class="btn btn-primary" ng-click="register(registerModel.username, registerModel.password1, registerModel.password2, registerModel.email);" ng-disabled="registering || !registerModel.username || !registerModel.email || !registerModel.password1 || !registerModel.password2">
-							<span class="mx-4">Sign up</span>
-						</button>
-					</div>
-					<div class="item width-6">
-						<a class="btn" href="/login">
-							<span class="mx-4">Sign in</span>
-						</a>
-					</div>
+				<div class="item-6 ta-right">
+					<button type="submit" class="btn-primary" style="width:100px;" ng-click="register(registerModel.username, registerModel.password1, registerModel.password2, registerModel.email);" ng-disabled="registering || !registerModel.username || !registerModel.email || !registerModel.password1 || !registerModel.password2">
+						Sign up
+					</button>
 				</div>
 				
+				<div class="item-6">
+					<a class="btn" style="width:100px;" href="/login">
+						Sign in
+					</a>
+				</div>
+
 			</form>
 		    
 		</div>

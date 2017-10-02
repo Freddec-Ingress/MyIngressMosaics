@@ -33,197 +33,217 @@
 
 {% verbatim %}
 
-	<div id="block-loading" class="p-2 ta-center">
-		<i class="fa fa-spinner rotating mr-1"></i>
-		Loading data...
-	</div>
-
-	<div id="block-nomosaic" class="p-2 ta-center c-danger hidden">
+	<div ng-show="!mosaic" class="block ta-center c-danger hidden">
 		No mosaic found
 	</div>
 
-	<div id="block-mosaic" class="section item hidden">
+	<div ng-show="mosaic">
 		
-		<div class="item">
+		<div class="block">
+			
 			<div class="panel">
-			
-				<div class="item c-white fs-head1">
-					{{mosaic.title}}
-				</div>
 				
-				<div class="item">
-					<div class="mosaic-img">
+				<div class="col">
 					
-					<div class="content-{{mosaic.cols}}">
-			            <div class="item" ng-repeat="m in mosaic.missions | reverse">
-			                <img src="/static/img/mask.png" style="background-image:url({{m.image}}=s100);" />
-			            </div>
-		            </div>
-		
-				</div>
-				</div>
-				
-				<div class="item">
-				    <a href="/map/{{mosaic.country}}">{{mosaic.country}}</a><span class="mx-1">></span><a href="/map/{{mosaic.region}},{{mosaic.country}}">{{mosaic.region}}</a><span class="mx-1">></span><a href="/map/{{mosaic.city}},{{mosaic.region}},{{mosaic.country}}">{{mosaic.city}}</a>
-				</div>
-				
-				<div class="item">
-					{{mosaic.missions.length}} <i class="fa fa-th mx-1"></i><span class="mx-1">&middot;</span>{{mosaic.type}}
-					<span class="mx-1">&middot;</span>{{mosaic.portals}} waypoints<span class="mx-1">&middot;</span>{{mosaic.uniques}} uniques<span ng-show="mosaic.type ==  'sequence'"><span class="mx-1">&middot;</span>{{mosaic.distance | number:2}} km
-					<span ng-show="mosaic.distance > 10.0" class="mx-1">&middot;</span><i ng-show="mosaic.distance > 10.0 && mosaic.distance < 30.0" class="fa fa-bicycle mx-1"></i><i ng-show="mosaic.distance > 30.0" class="fa fa-car mx-1"></i></span>
-				</div>
-				
-				<div class="item">
-		        	<span class="mr-2" ng-repeat="creator in mosaic.creators" ng-class="{'c-enligtened': creator.faction == 'E', 'c-resistance': creator.faction == 'R',}">
-		        		{{creator.name}}
-		        	</span>
-				</div>
-
-				<div class="item f-row" style="height:37px;">
+					<div class="item c-white ts-big">
+						{{mosaic.title}}
+					</div>
 					
-					<div class="item width-6 ta-right">
+					<div class="item">
+						<div style="display:flex; align-items:center; justify-content:center; background:#0b0c0d; padding:.25rem;">
 						
-						<div id="fb-root"></div>
-						
-						<script>
-							(function(d, s, id) {
-								var js, fjs = d.getElementsByTagName(s)[0];
-								if (d.getElementById(id)) return;
-								js = d.createElement(s); js.id = id;
-								js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10";
-								fjs.parentNode.insertBefore(js, fjs);
-							}(document, 'script', 'facebook-jssdk'));
-						</script>
-						
-						{% endverbatim %}
-						<div class="fb-share-button" data-href="https://www.myingressmosaics.com/mosaic/{{ref}}" data-layout="button_count" data-size="small" data-mobile-iframe="true">
-							<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"></a>
+							<div class="row" style="align-items:center; justify-content:center; padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%); width:100%;">
+					            <div ng-repeat="m in mosaic.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+					                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+					            </div>
+				            </div>
+				
 						</div>
-						{% verbatim %}
-					
 					</div>
 					
-					<div class="item width-6">
+					<div class="item">
+					    <a href="/map/{{mosaic.country}}">{{mosaic.country}}</a>
+					    <span class="text-separator">></span>
+					    <a href="/map/{{mosaic.region}},{{mosaic.country}}">{{mosaic.region}}</a>
+					    <span class="text-separator">></span>
+					    <a href="/map/{{mosaic.city}},{{mosaic.region}},{{mosaic.country}}">{{mosaic.city}}</a>
+					</div>
+					
+					<div class="item">
+						{{mosaic.missions.length}} <i class="fa fa-th mx-1"></i>
+						<span class="text-separator">&middot;</span>
+						{{mosaic.type}}
+						<span class="text-separator">&middot;</span>
+						{{mosaic.portals}} waypoints
+						<span class="text-separator">&middot;</span>
+						{{mosaic.uniques}} uniques
+						<span ng-show="mosaic.type ==  'sequence'">
+							<span class="text-separator">&middot;</span>
+							{{mosaic.distance | number:2}} km
+							<span ng-show="mosaic.distance > 10.0" class="text-separator">&middot;</span>
+							<i ng-show="mosaic.distance > 10.0 && mosaic.distance < 30.0" class="fa fa-bicycle"></i>
+							<i ng-show="mosaic.distance > 30.0" class="fa fa-car"></i>
+						</span>
+					</div>
+					
+					<div class="row">
+			        	<div class="item" ng-repeat="creator in mosaic.creators" ng-class="{'c-enligtened': creator.faction == 'E', 'c-resistance': creator.faction == 'R',}">
+			        		{{creator.name}}
+			        	</div>
+					</div>
+					
+					<div class="row" style="height:37px;">
 						
-						{% endverbatim %}
-						<script src="https://apis.google.com/js/platform.js" async defer></script>
-						<div class="g-plus" data-action="share" data-annotation="bubble" data-href="https://www.myingressmosaics.com/mosaic/{{ref}}"></div>			
-						{% verbatim %}
+						<div class="item-6 ta-right">
+							
+							<div id="fb-root"></div>
+							
+							<script>
+								(function(d, s, id) {
+									var js, fjs = d.getElementsByTagName(s)[0];
+									if (d.getElementById(id)) return;
+									js = d.createElement(s); js.id = id;
+									js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10";
+									fjs.parentNode.insertBefore(js, fjs);
+								}(document, 'script', 'facebook-jssdk'));
+							</script>
+							
+							{% endverbatim %}
+							<div class="fb-share-button" data-href="https://www.myingressmosaics.com/mosaic/{{ref}}" data-layout="button_count" data-size="small" data-mobile-iframe="true">
+								<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"></a>
+							</div>
+							{% verbatim %}
 						
+						</div>
+						
+						<div class="item-6">
+							
+							{% endverbatim %}
+							<script src="https://apis.google.com/js/platform.js" async defer></script>
+							<div class="g-plus" data-action="share" data-annotation="bubble" data-href="https://www.myingressmosaics.com/mosaic/{{ref}}"></div>			
+							{% verbatim %}
+							
+						</div>
+						
+					</div>
+					
+					<div class="item">
+						<div id="map"></div>
 					</div>
 					
 				</div>
+				
+			</div>
 			
-				<div class="item">
-			    	<div id="map"></div>
-				</div>
-
-	            <div class="py-1 border-dark-b" ng-repeat="item in mosaic.missions">
-	
-            		<div class="item f-row hover" ng-click="toggleMission(item);">
-            			
-	                    <div class="c-white">
-	                    	<i ng-hide="item.expanded" class="mr-2 fa fa-caret-right"></i>
-	                    	<i ng-show="item.expanded" class="mr-2 fa fa-caret-down"></i>
-	                    </div>
-	                    
-	                    <div class="c-white mr-auto">
-	                        {{item.title}}
-	                    </div>
-	                    
-	                    <div class="ta-right" style="width:2rem;">
-	                        <a href="https://www.ingress.com/mission/{{item.ref}}" target="blank">
-	                            <i class="fa fa-external-link"></i>
-	                        </a>
-	                    </div>
-	                    
+		</div>
+		
+		<div class="block">
+			
+			<div class="panel" ng-repeat="item in mosaic.missions">
+				
+				<div class="row hover" ng-click="toggleMission(item);">
+					
+                    <div class="item c-white">
+                    	<i ng-hide="item.expanded" class="mr-2 fa fa-caret-right"></i>
+                    	<i ng-show="item.expanded" class="mr-2 fa fa-caret-down"></i>
                     </div>
                     
-            		<div ng-show="item.expanded">
-            			
-            			<div class="item">
-            				{{item.portals.length}} waypoints
-            				<i class="mx-1 fa fa-long-arrow-right"></i>
-            				<span class="" ng-repeat="portal in item.portals">
-            					<span ng-if="$index > 0" class="mx-1">&middot;</span>
-            					<span ng-class="{'c-lighter':!portal.unavailable, 'c-danger':portal.unavailable}">
-            						<span ng-if="portal.action == 0">Objectives</span>
-            						<span ng-if="portal.action == 1">Hack</span>
-            						<span ng-if="portal.action == 2">Capture or Upgrade</span>
-            						<span ng-if="portal.action == 7">View</span>
-            						<span ng-if="portal.action == 8">Passphrase</span>
-            					</span>
-            				</span>
-            			</div>
-            			
-            			<div class="item" style="white-space:normal;">
-	                        {{item.desc}}
-	                    </div>
-            			
+                    <div class="item grow c-white">
+                        {{item.title}}
                     </div>
-	                    
-	            </div>
-
+                    
+                    <div class="item">
+                        <a href="https://www.ingress.com/mission/{{item.ref}}" target="blank">
+                            <i class="fa fa-external-link"></i>
+                        </a>
+                    </div>
+                    
+                </div>
+                
+                <div ng-show="item.expanded" class="col">
+					
+					<div class="item">
+						{{item.portals.length}} waypoints
+						<i class="text-separator fa fa-long-arrow-right"></i>
+        				<span class="" ng-repeat="portal in item.portals">
+        					<span ng-if="$index > 0" class="text-separator">&middot;</span>
+        					<span ng-class="{'c-lighter':!portal.unavailable, 'c-danger':portal.unavailable}">
+        						<span ng-if="portal.action == 0">Objectives</span>
+        						<span ng-if="portal.action == 1">Hack</span>
+        						<span ng-if="portal.action == 2">Capture or Upgrade</span>
+        						<span ng-if="portal.action == 7">View</span>
+        						<span ng-if="portal.action == 8">Passphrase</span>
+        					</span>
+        				</span>
+        			</div>
+					
+					<div class="item">
+                        {{item.desc}}
+                    </div>
+					
+                </div>
+                
+            </div>
+            
+		</div>
+		
+		<div ng-if="user.superuser" class="block">
+			
+			<div class="f-row mb-2">
+				
+				<button class="btn btn-secondary mr-2" ng-click="openMissions();">
+					Missions
+				</button>
+				
+				<button class="btn btn-secondary" ng-click="openDelete();">
+					Delete
+				</button>
+				
 			</div>
-		</div>
-		
-	</div>
-
-	<div ng-if="user.superuser" id="block-admin" class="p-2">
-		
-		<div class="f-row mb-2">
 			
-			<button class="btn btn-secondary mr-2" ng-click="openMissions();">
-				Missions
-			</button>
-			
-			<button class="btn btn-secondary" ng-click="openDelete();">
-				Delete
-			</button>
-			
-		</div>
-		
-		<div ng-show="missionsMode" class="panel mb-4">
-			
-	        <table class="mb-4">
-	            <tbody>
-	                <tr ng-repeat="item in mosaic.missions">
-	                	<td class="px-1">
-							<div class="f-row f-align-center">
-								
-    							<div class="mr-2" style="width:2.5rem;">
-    								<input class="form-control text-center" ng-model="item.order" ng-blur="reorderMission($index, item.ref, item.order);" />
-    							</div>
-
-    							<div class="mr-auto">
-    								{{item.title}}
-    							</div>
-
-    							<div class="ml-4">
-    								<a ng-click="remove(item.ref, $index);"><i class="fa fa-trash"></i></a>
-    							</div>
-							
-							</div>
-	                    </td>
-	                </tr>
-	            </tbody>
-	       </table>
-   		
-		</div>
-		
-		<div ng-show="deleteMode" class="panel mb-4">
-			
-			<div class="f-row">
-				<input type="text" class="form-control mr-2" placeholder="" ng-model="deleteModel.name" />
-    			<button class="btn btn-primary" ng-click="delete();">
-    				Delete
-    			</button>
-    		</div>
-			
-		</div>
-		
-	</div>
+			<div ng-show="missionsMode" class="panel mb-4">
+				
+		        <table class="mb-4">
+		            <tbody>
+		                <tr ng-repeat="item in mosaic.missions">
+		                	<td class="px-1">
+								<div class="f-row f-align-center">
+									
+	    							<div class="mr-2" style="width:2.5rem;">
+	    								<input class="form-control text-center" ng-model="item.order" ng-blur="reorderMission($index, item.ref, item.order);" />
+	    							</div>
 	
+	    							<div class="mr-auto">
+	    								{{item.title}}
+	    							</div>
+	
+	    							<div class="ml-4">
+	    								<a ng-click="remove(item.ref, $index);"><i class="fa fa-trash"></i></a>
+	    							</div>
+								
+								</div>
+		                    </td>
+		                </tr>
+		            </tbody>
+		       </table>
+	   		
+			</div>
+			
+			<div ng-show="deleteMode" class="panel mb-4">
+				
+				<div class="f-row">
+					<input type="text" class="form-control mr-2" placeholder="" ng-model="deleteModel.name" />
+	    			<button class="btn btn-primary" ng-click="delete();">
+	    				Delete
+	    			</button>
+	    		</div>
+				
+			</div>
+			
+		</div>
+		
+	</div>
+
 </div>
 
 {% endverbatim %}

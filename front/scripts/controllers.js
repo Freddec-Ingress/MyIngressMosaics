@@ -1,44 +1,42 @@
 angular.module('FrontModule.controllers', [])
 
-angular.module('FrontModule.controllers').controller('RootCtrl', function($rootScope, $scope, $window, UserService) {
+angular.module('FrontModule.controllers').controller('RootCtrl', function($rootScope, $auth, API) {
 	
-	var supported_lang = ['en', 'fr'];
-	
-	var user_lang = 'en';
-	
-	var lang = $window.navigator.language || $window.navigator.userLanguage;
-	if (supported_lang.indexOf(lang) != -1) user_lang = lang;
-
-	$rootScope.user_loading = true;
-	
-	UserService.init().then(function(response) {
+	API.sendRequest('/api/user/', 'GET').then(function(response) {
 		
-		$rootScope.user = UserService.data;
-		
-		$scope.logout = UserService.logout;
-		
-		if ($rootScope.user.authenticated) $('#authenticated_block').removeClass('hidden');
-		if (!$rootScope.user.authenticated) $('#anonymous_block').removeClass('hidden');
-		
-		$scope.user_loading = false;
-		
-		$('#page-content').removeClass('hidden');
-		
-		$rootScope.$broadcast('user-loaded');
+		if (response) {
+			
+			$rootScope.user = {
+				name: response.name,
+				superuser: response.superuser,
+				authenticated: $auth.isAuthenticated(),
+			}
+		}
+		else {
+			
+			$rootScope.user = {
+				name: null,
+				superuser: false,
+				authenticated: false,
+			}
+		}
 	});
-	
+
 	$rootScope.menu_open = false;
 	
-	$scope.openMenu = function() {
+	$rootScope.openMenu = function() {
 		$rootScope.menu_open = true;
 	}
 	
-	$scope.closeMenu = function() {
+	$rootScope.closeMenu = function() {
 		$rootScope.menu_open = false;
 	}
 });
 
 angular.module('FrontModule.controllers').controller('HomeCtrl', function($scope, DataService) {
+	
+	$('#page-loading').addClass('hidden');
+	$('#page-content').removeClass('hidden');
 	
 	$scope.latest_loading = true;
 	
@@ -68,6 +66,9 @@ angular.module('FrontModule.controllers').controller('HomeCtrl', function($scope
 });
 
 angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, SearchService) {
+	
+	$('#page-loading').addClass('hidden');
+	$('#page-content').removeClass('hidden');
 	
 	/* Search */
 	
@@ -125,6 +126,9 @@ angular.module('FrontModule.controllers').controller('SearchCtrl', function($sco
 });
 
 angular.module('FrontModule.controllers').controller('MissionsCtrl', function($scope, $window, UserService, CreateService, API) {
+	
+	$('#page-loading').addClass('hidden');
+	$('#page-content').removeClass('hidden');
 
 	$scope.searchModel = {
 		
@@ -435,8 +439,6 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 			
 			$scope.initMap();
 
-			$('#block-loading').addClass('hidden');
-			
 			if ($scope.mosaic) {
 				
 				$('#block-mosaic').removeClass('hidden');
@@ -446,6 +448,9 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 				
 				$('#block-nomosaic').removeClass('hidden');
 			}
+	
+			$('#page-loading').addClass('hidden');
+			$('#page-content').removeClass('hidden');
 		});
 	}
 	
@@ -739,6 +744,9 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function(API,
 
 angular.module('FrontModule.controllers').controller('MapCtrl', function($scope, $rootScope, $cookies, $compile, MapService) {
 	
+	$('#page-loading').addClass('hidden');
+	$('#page-content').removeClass('hidden');
+	
 	/* Map */
 	
 	var refArray = [];
@@ -1002,6 +1010,9 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 
 angular.module('FrontModule.controllers').controller('LoginCtrl', function($scope, API, $auth, $cookies, $window, UserService) {
 	
+	$('#page-loading').addClass('hidden');
+	$('#page-content').removeClass('hidden');
+	
 	$scope.loginModel = { username:null, password:null };
 	
 	$scope.unknown = false;
@@ -1035,6 +1046,9 @@ angular.module('FrontModule.controllers').controller('LoginCtrl', function($scop
 
 angular.module('FrontModule.controllers').controller('RegisterCtrl', function($scope, API, $auth, $cookies, $window, UserService) {
 	
+	$('#page-loading').addClass('hidden');
+	$('#page-content').removeClass('hidden');
+	
 	$scope.registerModel = { username:null, password1:null, password2:null, email:null };
 	
 	$scope.already = false;
@@ -1067,16 +1081,15 @@ angular.module('FrontModule.controllers').controller('RegisterCtrl', function($s
 	}
 });
 
-angular.module('FrontModule.controllers').controller('ProfileCtrl', function($scope, UserService) {
-
-	$scope.user = UserService.data;
+angular.module('FrontModule.controllers').controller('ProfileCtrl', function($rootScope, $scope, UserService) {
 	
+	$('#page-loading').addClass('hidden');
+	$('#page-content').removeClass('hidden');
+
 	/* Edit */
 	
 	$scope.editLoading = false;
-	
-	$scope.editModel = {name:$scope.user.name};
-	
+
 	$scope.editName = function(newName) {
 		
 		$scope.editLoading = true;
@@ -1093,6 +1106,9 @@ angular.module('FrontModule.controllers').controller('ProfileCtrl', function($sc
 });
 
 angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, $window, SearchService) {
+	
+	$('#page-loading').addClass('hidden');
+	$('#page-content').removeClass('hidden');
 	
 	/* Search */
 	
@@ -1160,6 +1176,9 @@ angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($
 		$scope.countries = response.countries;
 		
 		$scope.loading_page = false;
+	
+	$('#page-loading').addClass('hidden');
+	$('#page-content').removeClass('hidden');
 	});
 	
 	$scope.loading_regions = false;
@@ -1241,6 +1260,9 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 		}
 
 		$rootScope.loading_page = false;
+	
+	$('#page-loading').addClass('hidden');
+	$('#page-content').removeClass('hidden');
 	});
 	
 	function compareOrderAsc(a, b) {

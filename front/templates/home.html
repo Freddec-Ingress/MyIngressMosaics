@@ -26,104 +26,114 @@
 
 {% verbatim %}
 	
-	<div class="section">
-		<h2 class="item fs-head2 c-highlight ta-center">
-			Search, Register and Share all Ingress Mosaics
-		</h2>
-	</div>
+	<h2 class="heading">
+		Search, Register and Share all Ingress Mosaics
+	</h2>
 	
-	<div class="section f-row">
-	     
-		<div class="item width-4">
-		    <a class="btn btn-primary btn-block ta-center" href="/map">
-		        <div class="item">
-		        	<i class="fa fa-map" style="font-size:2rem;"></i>
-		        </div>
-		        <div class="item">
-		        	Map
-		        </div>
-		    </a>
-	    </div>
-	     
-		<div class="item width-4">
-		    <a class="btn btn-primary btn-block ta-center" href="/search">
-		        <div class="item">
-			        <i class="fa fa-search" style="font-size:2rem;"></i>
-		        </div>
-		        <div class="item">
-		        	Search
-		        </div>
-		    </a>
-	    </div>
-	
-		<div class="item width-4">
-		    <a class="btn btn-primary btn-block ta-center" href="/registration">
-		        <div class="item">
-			        <i class="fa fa-plus-square" style="font-size:2rem;"></i>
-		        </div>
-		        <div class="item">
-		        	Registration
-		        </div>
-		    </a>
-	    </div>
-	
-	</div>
-	
-	<div class="section f-row" style="height:37px;">
+	<div class="block">
 		
-		<div class="item width-6 ta-right">
+		<div class="row">
 			
-			<div id="fb-root"></div>
+			<div class="item-4">
+			    <a class="btn-primary btn-block" href="/map">
+			    	<div class="col">
+				        <div class="item">
+				        	<i class="fa fa-map" style="font-size:2rem;"></i>
+				        </div>
+				        <div class="item">
+				        	Map
+				        </div>
+			        </div>
+			    </a>
+		    </div>
 			
-			<script>
-				(function(d, s, id) {
-					var js, fjs = d.getElementsByTagName(s)[0];
-					if (d.getElementById(id)) return;
-					js = d.createElement(s); js.id = id;
-					js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10";
-					fjs.parentNode.insertBefore(js, fjs);
-				}(document, 'script', 'facebook-jssdk'));
-			</script>
+			<div class="item-4">
+			    <a class="btn-primary btn-block" href="/search">
+			    	<div class="col">
+				        <div class="item">
+					        <i class="fa fa-search" style="font-size:2rem;"></i>
+				        </div>
+				        <div class="item">
+				        	Search
+				        </div>
+			        </div>
+			    </a>
+		    </div>
 			
-			<div class="fb-share-button" data-href="https://www.myingressmosaics.com" data-layout="button_count" data-size="small" data-mobile-iframe="true">
-				<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">
-				</a>
-			</div>
+			<div class="item-4">
+			    <a class="btn-primary btn-block" href="/registration">
+					<div class="col">
+					    <div class="item">
+					        <i class="fa fa-plus-square" style="font-size:2rem;"></i>
+				        </div>
+				        <div class="item">
+				        	Registration
+				        </div>
+			        </div>
+			    </a>
+		    </div>
 		
-		</div>
-		
-		<div class="item width-6">
-			
-			<script src="https://apis.google.com/js/platform.js" async defer></script>
-			<div class="g-plus" data-action="share" data-annotation="bubble" data-href="https://www.myingressmosaics.com"></div>			
-			
 		</div>
 		
 	</div>
 	
-	<div class="section">
+	<div class="block" style="height:37px;">
 		
-		<div class="item">
-			<div class="ttrans-uppercase border-light-b">
-				Countries
-			</div>
-		</div>
-		
-		<div class="item" ng-hide="!countries_loading">
-			<i class="fa fa-spinner rotating mr-1"></i>
-			Loading data...
-		</div>
-	
-		<div id="countries_block" class="hidden f-row f-wrap">
+		<div class="row">
 			
-			<div class="item width-12 width-xl-3" ng-repeat="country in countries">
+			<div class="item-6 ta-right">
 				
-				<a href="/map/{{country.name}}" class="btn btn-primary btn-block">
+				<div id="fb-root"></div>
+				
+				<script>
+					(function(d, s, id) {
+						var js, fjs = d.getElementsByTagName(s)[0];
+						if (d.getElementById(id)) return;
+						js = d.createElement(s); js.id = id;
+						js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10";
+						fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk'));
+				</script>
+				
+				<div class="fb-share-button" data-href="https://www.myingressmosaics.com" data-layout="button_count" data-size="small" data-mobile-iframe="true">
+					<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">
+					</a>
+				</div>
+			
+			</div>
+			
+			<div class="item-6">
+				
+				<script src="https://apis.google.com/js/platform.js" async defer></script>
+				<div class="g-plus" data-action="share" data-annotation="bubble" data-href="https://www.myingressmosaics.com"></div>			
+				
+			</div>
+			
+		</div>
+		
+	</div>
+	
+	<div class="title">
+		Countries
+	</div>
+		
+	<div class="block" ng-hide="!countries_loading">
+		<i class="fa fa-spinner"></i>
+		Loading data...
+	</div>
+	
+	<div id="countries_block" class="block hidden">
+	
+		<div class="row">
+			
+			<div class="item-12 item-xl-3" ng-repeat="country in countries">
+				
+				<a href="/map/{{country.name}}" class="btn-primary btn-block">
 					
-					<div class="f-row f-align-center">
+					<div class="row valign-center">
 						
-						<div class="item">
-							<span class="flag-icon" style="position: relative; top: -1px;" ng-class="{
+						<div class="item grow ta-left ellipsis">
+							<span class="flag-icon" ng-class="{
 					            'flag-icon-fr': country.name == 'France',
 					            'flag-icon-gb': country.name == 'United Kingdom',
 					            'flag-icon-my': country.name == 'Malaysia',
@@ -174,9 +184,6 @@
 						        'flag-icon-in': country.name == 'India',
 						        'flag-icon-nl': country.name == 'Netherlands',
 					        }"></span>
-					    </div>
-					    
-						<div class="item mr-auto ellipsis">
 				        	{{country.name}}
 				        </div>
 				        
@@ -194,22 +201,20 @@
 		
 	</div>
 	
-	<div class="section">
+	<div class="title">
+		Latest mosaics
+	</div>
 	
-		<div class="item">
-			<div class="ttrans-uppercase border-light-b">
-				Latest mosaics
-			</div>
-		</div>
-		
-		<div class="item" ng-hide="!latest_loading">
-			<i class="fa fa-spinner rotating mr-1"></i>
-			Loading data...
-		</div>
-
-		<div id="latest_block" class="hidden f-row f-wrap">
+	<div class="block" ng-hide="!latest_loading">
+		<i class="fa fa-spinner"></i>
+		Loading data...
+	</div>
+	
+	<div id="latest_block" class="block hidden">
+	
+		<div class="row">
 			
-			<div class="item width-6 width-xl-3" ng-repeat="mosaic in mosaics">
+			<div class="item-6 item-xl-3" ng-repeat="mosaic in mosaics">
 				<mosaic-vignet mosaic="mosaic"></mosaic-vignet>
 			</div>
 			
