@@ -197,9 +197,15 @@
 		        
 			</div>
 			
+			<div ng-show="!last_contries" class="item-12">
+				<a ng-click="last_contries = true;">
+					Show all
+				</a>
+			</div>
+			
 		</div>
-	
-		<div class="row">
+		
+		<div ng-show="last_contries" class="row">
 			
 			<div class="item-12 item-xl-3" ng-repeat="country in lastCountries">
 				
@@ -270,6 +276,12 @@
 					
 				</a>
 		        
+			</div>
+			
+			<div class="item-12">
+				<a ng-click="last_contries = false;">
+					Hide
+				</a>
 			</div>
 			
 		</div>

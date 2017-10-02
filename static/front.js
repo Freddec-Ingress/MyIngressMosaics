@@ -521,8 +521,8 @@ angular.module('FrontModule.controllers').controller('HomeCtrl', function($scope
 			return b.mosaics - a.mosaics;
 		});
 		
-		$scope.firstCountries = response.slice(0,3);
-		$scope.lastCountries = response.slice(4);
+		$scope.firstCountries = response.slice(0,4);
+		$scope.lastCountries = response.slice(5);
 		
 		$scope.countries_loading = false;
 	});
