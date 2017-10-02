@@ -49,7 +49,8 @@ angular.module('FrontModule.controllers').controller('HomeCtrl', function($scope
 			return b.mosaics - a.mosaics;
 		});
 		
-		$scope.countries = response;
+		$scope.firstCountries = response.slice(0,3);
+		$scope.lastCountries = response.slice(4);
 		
 		$scope.countries_loading = false;
 	});
