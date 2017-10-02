@@ -30,32 +30,24 @@
 	    
 	    <div class="block">
 	    	
-	    	<div class="col">
+	    	<div class="row">
 	    	
-			    <div class="item c-danger ta-center">
+			    <div class="item-12 c-danger ta-center">
 				    Restricted area
 			    </div>
 			
-				<div class="item">
-				
-				    <div class="row">
-				    	
-						<div class="item-6 ta-right">
-							<a class="btn-secondary" href="/login" style="width:100px;">
-								Sign in
-							</a>
-						</div>
-					
-						<div class="item-6">
-							<a class="btn-secondary" href="/register" style="width:100px;">
-								Sign up
-							</a>
-						</div>
-				
-					</div>
-				
+				<div class="item-6 ta-right">
+					<a class="btn-secondary" href="/login" style="width:100px;">
+						Sign in
+					</a>
 				</div>
-				
+			
+				<div class="item-6">
+					<a class="btn-secondary" href="/register" style="width:100px;">
+						Sign up
+					</a>
+				</div>
+
 			</div>
 			
 		</div>
@@ -67,24 +59,20 @@
 		<div class="block">
 		
 	        <div class="panel">
-	        	
-	        	<div class="row">
-	        		
-		            <div class="item grow">
-		            	<input type="text" class="form-control" ng-model="user.name" />
-					</div>
-					
-					<div class="item">
-						<button class="btn-primary" style="width:100px;" ng-click="editName(user.name);" ng-disabled="editLoading || !user.name">
-	            			<span ng-show="editLoading">
-	            				<i class="fa fa-spinner"></i>
-	            			</span>
-						    Save
-						</button>
-					</div>
-					
-		        </div>
-					
+
+	            <div class="item grow">
+	            	<input type="text" class="form-control" ng-model="user.name" />
+				</div>
+				
+				<div class="item">
+					<button class="btn-primary" style="width:100px;" ng-click="editName(user.name);" ng-disabled="editLoading || !user.name">
+            			<span ng-show="editLoading">
+            				<i class="fa fa-spinner"></i>
+            			</span>
+					    Save
+					</button>
+				</div>
+
 	        </div>
 
 		</div>
