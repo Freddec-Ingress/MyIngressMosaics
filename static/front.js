@@ -982,6 +982,8 @@ angular.module('FrontModule.controllers').controller('RootCtrl', function($rootS
 				authenticated: false,
 			}
 		}
+		
+		$rootScope.$broadcast('user-loaded');
 	});
 
 	$rootScope.menu_open = false;
@@ -1089,8 +1091,11 @@ angular.module('FrontModule.controllers').controller('SearchCtrl', function($sco
 
 angular.module('FrontModule.controllers').controller('MissionsCtrl', function($scope, $window, UserService, CreateService, API) {
 	
-	$('#page-loading').addClass('hidden');
-	$('#page-content').removeClass('hidden');
+	$scope.$on('user-loaded', function(event, args) {
+		
+		$('#page-loading').addClass('hidden');
+		$('#page-content').removeClass('hidden');
+	});
 
 	$scope.searchModel = {
 		
@@ -2045,8 +2050,11 @@ angular.module('FrontModule.controllers').controller('RegisterCtrl', function($s
 
 angular.module('FrontModule.controllers').controller('ProfileCtrl', function($rootScope, $scope, UserService) {
 	
-	$('#page-loading').addClass('hidden');
-	$('#page-content').removeClass('hidden');
+	$scope.$on('user-loaded', function(event, args) {
+		
+		$('#page-loading').addClass('hidden');
+		$('#page-content').removeClass('hidden');
+	});
 
 	/* Edit */
 	
