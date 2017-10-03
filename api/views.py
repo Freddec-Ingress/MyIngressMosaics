@@ -186,8 +186,12 @@ def user_getProfile(request):
 	
 	data = {
 		'name': request.user.username,
+		'faction': None,
 		'superuser': request.user.is_superuser,
 	}
+	
+	if request.user.profile:
+		data['faction'] = request.user.profile.faction
 	
 	return Response(data, status=status.HTTP_200_OK)
 
@@ -196,10 +200,13 @@ def user_getProfile(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
-def user_editName(request):
+def user_edit(request):
 	
 	request.user.username = request.data['name']
 	request.user.save()
+	
+	request.user.profile.faction = request.data['faction']
+	request.user.profile.save()
 	
 	return Response(None, status=status.HTTP_200_OK)
 

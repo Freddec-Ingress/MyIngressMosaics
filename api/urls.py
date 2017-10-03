@@ -14,7 +14,7 @@ urlpatterns = [
 	url(r'^ext_check/',				ext_isMissionRegistered),
 	url(r'^ext_bounds/',			ext_checkBounds),
 	
-	url(r'^user/edit/name/',		user_editName),
+	url(r'^user/edit/',				user_edit),
 	url(r'^user/register/',			user_register),
 	url(r'^user/logout/',			user_logout),
 	url(r'^user/login/',			user_login),

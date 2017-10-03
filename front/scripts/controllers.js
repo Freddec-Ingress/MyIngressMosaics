@@ -8,6 +8,7 @@ angular.module('FrontModule.controllers').controller('RootCtrl', function($rootS
 			
 			$rootScope.user = {
 				name: response.name,
+				faction: response.faction,
 				superuser: response.superuser,
 				authenticated: $auth.isAuthenticated(),
 			}
@@ -16,6 +17,7 @@ angular.module('FrontModule.controllers').controller('RootCtrl', function($rootS
 			
 			$rootScope.user = {
 				name: null,
+				faction: null,
 				superuser: false,
 				authenticated: false,
 			}
@@ -990,12 +992,12 @@ angular.module('FrontModule.controllers').controller('ProfileCtrl', function($sc
 
 	$scope.editLoading = false;
 
-	$scope.editName = function(newName) {
+	$scope.edit = function(newName, newFaction) {
 		
 		$scope.editLoading = true;
 			
-		var data = { 'name':newName };
-		API.sendRequest('/api/user/edit/name/', 'POST', {}, data).then(function(response) {
+		var data = { 'name':newName, 'faction':newFaction };
+		API.sendRequest('/api/user/edit/', 'POST', {}, data).then(function(response) {
 
 			$scope.editLoading = false;
 			
