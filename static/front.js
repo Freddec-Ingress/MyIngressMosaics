@@ -986,7 +986,8 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 							});
 							
 							console.log(item);
-							console.log(latLng);
+							console.log(latLng.lat());
+							console.log(latLng.lng());
 							
 							google.maps.event.addListener(marker, 'click', (function (marker, ref, infowindow) {
 								
