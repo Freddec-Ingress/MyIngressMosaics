@@ -503,8 +503,6 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 					for (var item of response) {
 					
 						if (refArray.indexOf(item.ref) == -1) {
-							
-							refArray.push(item.ref);
 
 							var latLng = new google.maps.LatLng(item.startLat, item.startLng);
 							var marker = new google.maps.Marker({
@@ -582,6 +580,8 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 								};
 								
 							})(marker, item.ref, $rootScope.infowindow));
+							
+							refArray.push(item.ref);
 						}
 					}
 				}
