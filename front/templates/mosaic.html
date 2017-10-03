@@ -256,10 +256,37 @@
 		            		<span ng-class="{'c-enligtened': item.faction == 'E', 'c-resistance': item.faction == 'R',}">{{item.username}}</span>
 		            	</div>
 		             	
-		            	<div class="item-12">
+		            	<div ng-show="!item.edit" class="item-12">
 		            		{{item.text}}
 		            	</div>
 		           	
+		            	<div ng-show="item.edit" class="item-12">
+		            		<textarea class="form-control" ng-model="item.text">
+		            			{{item.text}}
+		            		</textarea>
+		            	</div>
+		            	
+		            	<div ng-show="item.edit" class="item">
+		            		<button class="btn-primary btn-mini" ng-click="editComment(item);" ng-disabled="item.editing">
+			        			<span ng-show="item.editing">
+		            				<i class="fa fa-spinner rotating"></i>
+		            			</span>
+		            			Save
+		            		</button>
+		            	</div>
+		            	
+		            	<div ng-show="item.edit" class="item">
+		            		<button class="btn-secondary btn-mini" ng-click="item.edit=false;">
+		            			Cancel
+		            		</button>
+		            	</div>
+		            	
+		            	<div ng-show="!item.edit" class="item-12">
+		            		<a ng-click="item.edit=true;">Edit</a>
+		            		<span class="text-separator">&middot;</span>
+		            		<a ng-click="deleteComment(item.id, $index);">Delete</a>
+		            	</div>
+		            	
 		            </div>
 	            
 		        </div>

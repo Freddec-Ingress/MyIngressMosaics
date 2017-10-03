@@ -296,6 +296,8 @@ a:hover, a:focus, .hover:hover { color: inherit; cursor: pointer; text-decoratio
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { margin: 0; -webkit-appearance: none; }
 
+textarea.form-control { padding-top: .25rem; padding-bottom: .25rem; }
+
 
 
 /* Button ------------------------------------------------------------------- */
