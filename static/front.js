@@ -1019,8 +1019,8 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 											var contentDistance = '';
 											if (details.type == 'sequence') contentDistance = details.distance.toFixed(2).toString() + ' km';
 											if (details.type == 'serie') contentDistance = 'serie';
-											if (details.type == 'sequence' && details.distance > 10.0 && details.distance < 30.0) contentDistance += '<span class="mx-1">&middot;</span><i class="fa fa-bicycle mx-1"></i>';
-											if (details.type == 'sequence' && details.distance > 30.0) contentDistance += '<span class="mx-1">&middot;</span><i class="fa fa-car mx-1"></i>';
+											if (details.type == 'sequence' && details.distance > 10.0 && details.distance < 30.0) contentDistance += '<span class="text-separator">&middot;</span><i class="fa fa-bicycle"></i>';
+											if (details.type == 'sequence' && details.distance > 30.0) contentDistance += '<span class="text-separator">&middot;</span><i class="fa fa-car"></i>';
 
 											var contentString =
 												'<a class="btn-primary btn-block ta-left ttrans-normal" style="width:170px; font: 400 .75rem/1.5 \'Coda\',sans-serif!important;" href="/mosaic/' + details.ref + '">' +
@@ -1031,10 +1031,10 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 														
 												'	</div>' +
 													
-												'	<div class="f-col">' +
+												'	<div class="row">' +
 														
-										        '    	<div class="text-white mt-2 mb-1" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">' + details.title + '</div>' +
-										        '    	<div class="text-normal">' + details.missions.length + ' <i class="fa fa-th"></i> <span class="text-separator">&middot;</span>' + contentDistance + '</div>' +
+										        '    	<div class="item-12 ellipsis">' + details.title + '</div>' +
+										        '    	<div class="item-12 c-highlight">' + details.missions.length + ' <i class="fa fa-th"></i> <span class="text-separator">&middot;</span>' + contentDistance + '</div>' +
 										            	
 												'	</div>' +
 													
