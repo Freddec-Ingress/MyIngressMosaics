@@ -985,6 +985,8 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 								icon: image,
 							});
 							
+							console.log(marker);
+							
 							google.maps.event.addListener(marker, 'click', (function (marker, ref, infowindow) {
 								
 								return function () {
