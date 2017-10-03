@@ -512,11 +512,7 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 								map: map,
 								icon: image,
 							});
-							
-							console.log(item);
-							console.log(latLng.lat());
-							console.log(latLng.lng());
-							
+
 							google.maps.event.addListener(marker, 'click', (function (marker, ref, infowindow) {
 								
 								return function () {
@@ -557,7 +553,7 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 											if (details.type == 'sequence' && details.distance > 30.0) contentDistance += '<span class="mx-1">&middot;</span><i class="fa fa-car mx-1"></i>';
 
 											var contentString =
-												'<a class="btn-primary btn-block ta-left ttrans-normal" href="/mosaic/' + details.ref + '">' +
+												'<a class="btn-primary btn-block ta-left ttrans-normal" style="width:250px;" href="/mosaic/' + details.ref + '">' +
 													
 												'	<div class="item' + contentClass + '" style="margin-bottom:.25rem; display:flex; align-items:center; justify-content:center; background:#0b0c0d; height:105px; overflow-y:hidden; padding:.25rem;">' +
 														
