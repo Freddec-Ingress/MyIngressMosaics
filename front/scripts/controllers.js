@@ -513,7 +513,8 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 								icon: image,
 							});
 							
-							console.log(marker);
+							console.log(item);
+							console.log(latLng);
 							
 							google.maps.event.addListener(marker, 'click', (function (marker, ref, infowindow) {
 								
