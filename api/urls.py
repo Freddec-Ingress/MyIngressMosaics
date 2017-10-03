@@ -44,6 +44,10 @@ urlpatterns = [
 	url(r'^map/mosaic/',			map_getMosaicOverview),
 	url(r'^map/',					map_getMosaics),
 
+	url(r'^comment/add/',			comment_add),
+	url(r'^comment/update/',		comment_update),
+	url(r'^comment/delete/',		comment_delete),
+	
 	url(r'^adm/countries',			adm_getCountries),
 	
 	url(r'^adm/regions',			adm_getRegions),

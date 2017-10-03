@@ -31,6 +31,8 @@ class Profile(models.Model):
 
 	user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
 
+	faction = models.CharField(max_length=4, null=True, blank=True)
+	
 	# Admin displaying
 	
 	def __str__(self):
@@ -269,6 +271,7 @@ class Mosaic(models.Model):
 			
 			'creators': [],
 			'missions': [],
+			'comments': [],
 		}
 		
 		creators = []
@@ -286,7 +289,10 @@ class Mosaic(models.Model):
 			creators.append(cData)
 
 		data['creators'] = [dict(t) for t in set([tuple(d.items()) for d in creators])]
-
+		
+		for item in Comment.objects.filter(mosaic=self).order_by('-update_date'):
+			data['comments'].append(item.serialize())
+		
 		return data
 
 
@@ -533,3 +539,16 @@ class Comment(models.Model):
 	
 	def __str__(self):
 		return self.user
+		
+	# Serialization
+	
+	def serialize(self):
+		
+		data = {
+			
+			'username': self.user.username,
+			'faction': self.user.profile.faction,
+			'text': self.text,
+		}
+			
+		return data
