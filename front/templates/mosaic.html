@@ -147,7 +147,23 @@
 			
 		</div>
 		
-		<div class="block">
+		<div class="block-tabs">
+				
+			<div class="item-6 ta-right">
+				<button class="btn-secondary btn-mini" style="width:130px;" ng-click="missionsMode = true; commentsMode = false;" ng-class="{'active': missionsMode}">
+					Missions
+				</button>
+			</div>
+			
+			<div class="item-6">
+				<button class="btn-secondary btn-mini" style="width:130px;" ng-click="missionsMode = false; commentsMode = true;" ng-class="{'active': commentsMode}">
+					Comments ({{mosaic.comments.length}})
+				</button>
+			</div>
+			
+		</div>
+		
+		<div ng-show="missionsMode" class="block">
 			
 			<div class="panel" ng-repeat="item in mosaic.missions">
 				
@@ -197,6 +213,60 @@
             
 		</div>
 		
+		<div ng-show="commentsMode" class="block">
+            
+            <div ng-show="user.authenticated && !addComment" class="row">
+            	
+	            <div class="item-12 ta-center">
+	            	<a ng-click="addComment=true;">Add a comment</a>
+	            </div>
+	            
+            </div>
+            
+            <div ng-show="addComment" class="panel">
+            	
+            	<div class="item-12">
+            		<textarea class="form-control" ng-model="newCommentText">
+            		</textarea>
+            	</div>
+            	
+            	<div class="item">
+            		<button class="btn-primary btn-mini" ng-click="createComment(newCommentText);" ng-disabled="addingComment">
+	        			<span ng-show="addingComment">
+            				<i class="fa fa-spinner rotating"></i>
+            			</span>
+            			Save
+            		</button>
+            	</div>
+            	
+            	<div class="item">
+            		<button class="btn-secondary btn-mini" ng-click="addComment=false;">
+            			Cancel
+            		</button>
+            	</div>
+            	
+            </div>
+            
+            <div class="row">
+            	<div class="item-12">
+           	
+		            <div class="panel" ng-repeat="item in mosaic.comments">
+		            	
+		            	<div class="item-12">
+		            		<span ng-class="{'c-enligtened': item.faction == 'E', 'c-resistance': item.faction == 'R',}">{{item.username}}</span>
+		            	</div>
+		             	
+		            	<div class="item-12">
+		            		{{item.text}}
+		            	</div>
+		           	
+		            </div>
+	            
+		        </div>
+	        </div>
+            
+		</div>
+		
 		<div ng-if="user.superuser" class="block">
 			
 			<div class="f-row mb-2">
@@ -211,7 +281,7 @@
 				
 			</div>
 			
-			<div ng-show="missionsMode" class="panel mb-4">
+			<div ng-show="admMissionsMode" class="panel mb-4">
 				
 		        <table class="mb-4">
 		            <tbody>

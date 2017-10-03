@@ -764,6 +764,21 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
     	    $scope.mosaic.is_completed = false;
 	    }
 	}
+
+	$scope.addComment = false;
+	$scope.createComment = function(text) {
+		
+		$scope.addingComment = true;
+		
+		var data = { 'ref':$scope.mosaic.ref, 'text':text };
+		API.sendRequest('/api/comment/add/', 'POST', {}, data).then(function(response) {
+			
+			$scope.mosaic.comments.unshift(response);
+			
+			$scope.addComment = false;
+			$scope.addingComment = false;
+		});
+	}
 });
 
 angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, API) {

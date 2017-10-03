@@ -701,6 +701,16 @@ def comment_add(request):
 	
 	data = None
 	
+	result = Mosaic.objects.filter(ref=request.data['ref'])
+	if result.count() > 0:
+		
+		mosaic = result[0]
+		
+		comment = Comment(user=request.user, mosaic=mosaic, text=request.data['text'])
+		comment.save()
+	
+		data = comment.serialize()
+	
 	return Response(data, status=status.HTTP_200_OK)
 
 
@@ -710,9 +720,15 @@ def comment_add(request):
 @permission_classes((IsAuthenticated, ))
 def comment_update(request):
 	
-	data = None
+	result = Comment.objects.filter(pk=request.data['id'])
+	if result.count() > 0:
+		
+		comment = result[0]
+		
+		comment.text = request.data['text']
+		comment.save()
 	
-	return Response(data, status=status.HTTP_200_OK)
+	return Response(None, status=status.HTTP_200_OK)
 
 
 
@@ -721,9 +737,14 @@ def comment_update(request):
 @permission_classes((IsAuthenticated, ))
 def comment_delete(request):
 	
-	data = None
+	result = Comment.objects.filter(pk=request.data['id'])
+	if result.count() > 0:
+		
+		comment = result[0]
+
+		comment.delete()
 	
-	return Response(data, status=status.HTTP_200_OK)
+	return Response(None, status=status.HTTP_200_OK)
 
 
 
