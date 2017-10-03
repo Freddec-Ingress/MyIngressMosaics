@@ -60,16 +60,29 @@
 		
 	        <div class="panel">
 
-	            <div class="item grow">
+	            <div class="item-12">
 	            	<input type="text" class="form-control" ng-model="user.name" />
 				</div>
+
+	            <div class="item-12">
+	            	<select class="form-control" ng-model="user.faction">
+	            		<option value="E">Enlightened</option>
+	            		<option value="R">Resistant</option>
+	            	</select>
+				</div>
 				
-				<div class="item">
+				<div class="item-6">
 					<button class="btn-primary" style="width:100px;" ng-click="edit(user.name, user.faction);" ng-disabled="editLoading || !user.name">
             			<span ng-show="editLoading">
             				<i class="fa fa-spinner"></i>
             			</span>
 					    Save
+					</button>
+				</div>
+				
+				<div class="item-6 ta-right">
+					<button class="btn-danger" style="width:100px;" ng-click="logout();">
+						Sign out
 					</button>
 				</div>
 
@@ -140,15 +153,7 @@
 			</div>
 			
 		</div>
-		
-		<div class="block">
-		
-			<button class="btn-primary" style="width:100px;" ng-click="logout();">
-				Sign out
-			</button>
 
-		</div>
-	
 	</div>
 
 </div>
