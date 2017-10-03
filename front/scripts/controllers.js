@@ -553,11 +553,11 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 											if (details.type == 'sequence' && details.distance > 30.0) contentDistance += '<span class="mx-1">&middot;</span><i class="fa fa-car mx-1"></i>';
 
 											var contentString =
-												'<a class="btn-primary btn-block ta-left ttrans-normal" style="width:170px;" href="/mosaic/' + details.ref + '">' +
+												'<a class="btn-primary btn-block ta-left ttrans-normal" style="width:170px; font: 400 .75rem/1.5 \'Coda\',sans-serif!important;" href="/mosaic/' + details.ref + '">' +
 													
-												'	<div class="item' + contentClass + '" style="margin-bottom:.25rem; display:flex; align-items:center; justify-content:center; background:#0b0c0d; overflow-y:hidden; padding:.25rem;">' +
+												'	<div class="item ' + contentClass + '" style="height:105px; margin-bottom:.25rem; display:flex; align-items:center; justify-content:center; background:#0b0c0d; overflow-y:hidden; padding:.25rem;">' +
 														
-												'		<div class="row" style="align-items:center; justify-content:center; padding:0 calc((6 - ' + details.cols + ') / 2 * 16.666667%); width:100%;">' + contentImage + '</div>' +
+												'		<div class="row" style="align-items:center; justify-content:center; padding:0 calc(-.25rem + ((6 - ' + details.cols + ') / 2 * 16.666667%)); width:100%;">' + contentImage + '</div>' +
 														
 												'	</div>' +
 													
