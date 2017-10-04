@@ -24,32 +24,26 @@
 {% verbatim %}
 
 <div id="page-container" ng-controller="AdmRegistrationCtrl">
-    
-	<div ng-show="loading_page" class="mt-4 px-2 py-1">
-			
-		<div class="loading-line px-2 py-1">
-			<img src="/static/img/loading.png" />
-			Loading page...
-		</div>
-		
-	</div>
-    
-    <div ng-show="!loading_page" class="mt-4">
-        
-        <div class="panel mb-4" ng-repeat="mosaic in mosaics">
-            
-            <div class="f-row pt-1 pb-2">
 
-                <div class="mr-auto f-row f-nowrap">
-                    <input type="text" class="form-control" style="width:25rem;" ng-model="mosaic.name" />
+    <div class="block">
+        
+        <div class="panel" ng-repeat="mosaic in mosaics">
+            
+            <div class="item-12 row">
+
+                <div class="item grow">
+                    <input type="text" class="form-control" ng-model="mosaic.name" />
+                </div>
+                
+                <div class="item">
                     <input id="searchButton" type="submit" style="width:67px;" class="btn btn-primary ml-2" ng-click="refrech(mosaic);" value="Refresh" ng-disabled="mosaic.loading">
                 </div>
                 
-                <div class="" style="line-height: 2rem;">
+                <div class="item">
                     {{mosaic.count}}
                 </div>
                 
-                <div class="" style="line-height: 2rem;">
+                <div class="item">
                     <a ng-click="removeMosaic(mosaic);">
                         <i class="fa fa-trash ml-4"></i>
                     </a>
@@ -191,5 +185,7 @@
 {% endblock %}
 
 {% block extra-script %}
+
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuXb2ncs76tO-2SN8hvkE5Zt4VwtPoNcM&amp;language=en"></script>
+	
 {% endblock %}
