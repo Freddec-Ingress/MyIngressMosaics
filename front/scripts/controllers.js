@@ -415,6 +415,8 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 			url: 'https://commondatastorage.googleapis.com/ingress.com/img/map_icons/marker_images/enl_lev8.png',
 		};
 		
+		var firstIdle = true;
+		
 		map.addListener('idle', function(e) {
 			
 			var center = map.getCenter();
@@ -437,17 +439,15 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 				if (response) {
 					
 					var contentLoading =
-						'<div class="loading-line px-2 py-1">' +
-						'	<img src="/static/img/loading.png" />' +
+						'<div class="ta-center">' +
+						'	<i class="fa fa-spinner"></i>' +
 						'	Loading data...' +
 						'</div>'
 					;
 					
 					for (var item of response) {
 					
-						if (refArray.indexOf(item.ref) == -1) {
-							
-							refArray.push(item.ref);
+						if (refArray.indexOf(item.ref) == -1 || firstIdle) {
 
 							var latLng = new google.maps.LatLng(item.startLat, item.startLng);
 							var marker = new google.maps.Marker({
@@ -492,11 +492,11 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 											var contentDistance = '';
 											if (details.type == 'sequence') contentDistance = details.distance.toFixed(2).toString() + ' km';
 											if (details.type == 'serie') contentDistance = 'serie';
-											if (details.type == 'sequence' && details.distance > 10.0 && details.distance < 30.0) contentDistance += '<span class="mx-1">&middot;</span><i class="fa fa-bicycle mx-1"></i>';
-											if (details.type == 'sequence' && details.distance > 30.0) contentDistance += '<span class="mx-1">&middot;</span><i class="fa fa-car mx-1"></i>';
+											if (details.type == 'sequence' && details.distance > 10.0 && details.distance < 30.0) contentDistance += '<span class="text-separator">&middot;</span><i class="fa fa-bicycle"></i>';
+											if (details.type == 'sequence' && details.distance > 30.0) contentDistance += '<span class="text-separator">&middot;</span><i class="fa fa-car"></i>';
 
 											var contentString =
-												'<a class="btn-primary btn-block ta-left ttrans-normal" href="/mosaic/' + details.ref + '">' +
+												'<a class="btn-primary btn-block ta-left ttrans-normal" style="width:170px;" href="/mosaic/' + details.ref + '">' +
 													
 												'	<div class="item' + contentClass + '" style="margin-bottom:.25rem; display:flex; align-items:center; justify-content:center; background:#0b0c0d; height:105px; overflow-y:hidden; padding:.25rem;">' +
 														
@@ -525,8 +525,12 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 								};
 								
 							})(marker, item.ref, $rootScope.infowindow));
+							
+							refArray.push(item.ref);
 						}
 					}
+					
+					firstIdle = false;
 				}
 			});
 		});
