@@ -816,7 +816,7 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 
 	$rootScope.infowindow = new google.maps.InfoWindow({
 		content: '',
-		pixelOffset: new google.maps.Size(0, 0)
+		pixelOffset: new google.maps.Size(-1, 15)
 	});
 
 	$scope.initLocation = null;
