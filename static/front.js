@@ -813,8 +813,6 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 	
 	$('#page-loading').addClass('hidden');
 	$('#page-content').removeClass('hidden');
-	
-	var refArray = [];
 
 	$rootScope.infowindow = new google.maps.InfoWindow({
 		content: '',
@@ -913,8 +911,9 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 			anchor: new google.maps.Point(12, 13),
 			url: 'https://commondatastorage.googleapis.com/ingress.com/img/map_icons/marker_images/enl_lev8.png',
 		};
-		
-		var firstIdle = true;
+	
+		var refArray = [];
+		var markerArray = [];
 		
 		map.addListener('idle', function(e) {
 			
@@ -946,7 +945,9 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 					
 					for (var item of response) {
 					
-						if (refArray.indexOf(item.ref) == -1 || firstIdle) {
+						var index = refArray.indexOf(item.ref)
+						
+						if (index == -1) {
 
 							var latLng = new google.maps.LatLng(item.startLat, item.startLng);
 							var marker = new google.maps.Marker({
@@ -1026,10 +1027,15 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 							})(marker, item.ref, $rootScope.infowindow));
 							
 							refArray.push(item.ref);
+							markerArray.push(marker);
 						}
+						
+						index = refArray.indexOf(item.ref);
+						var mk = refArray[index];
+						
+						mk.setMap(map);
+						mk.setVisible(true);
 					}
-					
-					firstIdle = false;
 				}
 			});
 		});
