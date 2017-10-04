@@ -73,14 +73,22 @@
 					</button>
 				</div>
 				
-				<div class="item-12">
-				    <a href="/world/{{mosaic.country}}">{{mosaic.country}}</a>
-				    <span class="text-separator">></span>
-				    <a href="/world/{{mosaic.country}}/{{mosaic.region}}">{{mosaic.region}}</a>
-				    <span class="text-separator">></span>
-				    <a href="/world/{{mosaic.country}}/{{mosaic.region}}/{{mosaic.city}}">{{mosaic.city}}</a>
-				    <span class="text-separator">&middot;</span>
-				    <a href="/map/{{mosaic.city}},{{mosaic.region}},{{mosaic.country}}"><i class="fa fa-map"></i></a>
+				<div class="item-12 row">
+					<div class="item grow">
+						<a href="/world">World</a>
+						<span class="text-separator">></span>
+					    <a href="/world/{{mosaic.country}}">{{mosaic.country}}</a>
+					    <span class="text-separator">></span>
+					    <a href="/world/{{mosaic.country}}/{{mosaic.region}}">{{mosaic.region}}</a>
+					    <span class="text-separator">></span>
+					    <a href="/world/{{mosaic.country}}/{{mosaic.region}}/{{mosaic.city}}">{{mosaic.city}}</a>
+					</div>
+					<div class="item">
+					    <a href="/map/{{mosaic.city}},{{mosaic.region}},{{mosaic.country}}">
+					    	<i class="fa fa-map text-separator"></i>
+					    	Map
+					    </a>
+					</div>
 				</div>
 				
 				<div class="item-12">

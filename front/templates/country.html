@@ -25,12 +25,20 @@
 
 {% verbatim %}
 
-	<div class="block">
-		<a href="/world">World</a>
-		<span class="text-separator">></span>
-		<span class="c-white">{{country}}</span>
-		<span class="text-separator">&middot;</span>
-		<a href="/map/{{country}}"><i class="fa fa-map"></i></a>
+	<div class="title ttrans-normal">
+		<div class="row">
+			<div class="item grow">
+				<a href="/world">World</a>
+				<span class="text-separator">></span>
+				<span class="c-white">{{country}}</span>
+			</div>
+			<div class="item">
+				<a href="/map/{{country}}">
+					<i class="fa fa-map text-separator"></i>
+					Map
+				</a>
+			</div>
+		</div>
 	</div>
 
 	<div class="block">

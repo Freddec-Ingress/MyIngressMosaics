@@ -114,7 +114,25 @@
 	</div>
 	
 	<div class="title">
-		Countries
+		<div class="row">
+			
+			<div class="item grow">
+				{{countries.length}} countries
+			</div>
+			
+			<div class="item ttrans-normal" ng-init="show_countries = false;">
+				
+				<a ng-show="!show_countries" ng-click="show_countries = true;">
+					Show
+				</a>
+				
+				<a ng-show="show_countries" ng-click="show_countries = false;">
+					Hide
+				</a>
+						
+			</div>
+			
+		</div>
 	</div>
 		
 	<div class="block" ng-hide="!countries_loading">
@@ -124,9 +142,9 @@
 	
 	<div ng-show="!countries_loading" class="block">
 	
-		<div class="row">
+		<div ng-show="show_countries" class="row">
 			
-			<div class="item-12 item-xl-3" ng-repeat="country in firstCountries">
+			<div class="item-12 item-xl-3" ng-repeat="country in countries">
 				
 				<a href="/world/{{country.name}}" class="btn-primary btn-block">
 					
@@ -196,104 +214,31 @@
 				</a>
 		        
 			</div>
-			
-			<div ng-show="!last_contries" class="item-12">
-				<a ng-click="last_contries = true;">
-					Show more
-				</a>
-			</div>
 
-			<div ng-show="last_contries" class="item-12">
-				
-				<div class="row">
-					
-					<div class="item-12 item-xl-3" ng-repeat="country in lastCountries">
-						
-						<a href="/world/{{country.name}}" class="btn-primary btn-block">
-							
-							<div class="row valign-center">
-								
-								<div class="item grow ta-left ellipsis">
-									<span class="flag-icon" ng-class="{
-							            'flag-icon-fr': country.name == 'France',
-							            'flag-icon-gb': country.name == 'United Kingdom',
-							            'flag-icon-my': country.name == 'Malaysia',
-							            'flag-icon-sg': country.name == 'Singapore',
-							            'flag-icon-us': country.name == 'United States',
-							            'flag-icon-mx': country.name == 'Mexico',
-							            'flag-icon-nz': country.name == 'New Zealand',
-							            'flag-icon-mv': country.name == 'Maldives',
-							            'flag-icon-do': country.name == 'Dominican Republic',
-							            'flag-icon-au': country.name == 'Australia',
-							            'flag-icon-hu': country.name == 'Hungary',
-							            'flag-icon-lk': country.name == 'Sri Lanka',
-							            'flag-icon-id': country.name == 'Indonesia',
-							            'flag-icon-de': country.name == 'Germany',
-							            'flag-icon-pl': country.name == 'Poland',
-								        'flag-icon-ru': country.name == 'Russia',
-								        'flag-icon-hk': country.name == 'Hong Kong',
-								        'flag-icon-mu': country.name == 'Mauritius',
-								        'flag-icon-th': country.name == 'Thailand',
-								        'flag-icon-cz': country.name == 'Czechia',
-								        'flag-icon-cn': country.name == 'China',
-								        'flag-icon-es': country.name == 'Spain',
-								        'flag-icon-ch': country.name == 'Switzerland',
-								        'flag-icon-ca': country.name == 'Canada',
-								        'flag-icon-at': country.name == 'Austria',
-								        'flag-icon-is': country.name == 'Iceland',
-								        'flag-icon-za': country.name == 'South Africa',
-								        'flag-icon-ad': country.name == 'Andorra',
-								        'flag-icon-it': country.name == 'Italy',
-								        'flag-icon-il': country.name == 'Israel',
-								        'flag-icon-pt': country.name == 'Portugal',
-								        'flag-icon-ie': country.name == 'Ireland',
-								        'flag-icon-gr': country.name == 'Greece',
-								        'flag-icon-tr': country.name == 'Turkey',
-								        'flag-icon-jp': country.name == 'Japan',
-								        'flag-icon-dk': country.name == 'Denmark',
-								        'flag-icon-se': country.name == 'Sweden',
-								        'flag-icon-no': country.name == 'Norway',
-								        'flag-icon-fi': country.name == 'Finland',
-								        'flag-icon-lv': country.name == 'Latvia',
-								        'flag-icon-ee': country.name == 'Estonia',
-								        'flag-icon-lt': country.name == 'Lithuania',
-								        'flag-icon-sk': country.name == 'Slovakia',
-								        'flag-icon-hr': country.name == 'Croatia',
-								        'flag-icon-ar': country.name == 'Argentina',
-								        'flag-icon-uy': country.name == 'Uruguay',
-								        'flag-icon-tw': country.name == 'Taiwan',
-								        'flag-icon-in': country.name == 'India',
-								        'flag-icon-nl': country.name == 'Netherlands',
-							        }"></span>
-						        	{{country.name}}
-						        </div>
-						        
-						        <div class="item c-lighter">
-						        	{{country.mosaics}}
-						        </div>
-						        
-							</div>
-							
-						</a>
-				        
-					</div>
-					
-					<div class="item-12">
-						<a ng-click="last_contries = false;">
-							Hide
-						</a>
-					</div>
-					
-				</div>
-				
-			</div>
-		
 		</div>
 		
 	</div>
 	
 	<div class="title">
-		Latest mosaics
+		<div class="row">
+			
+			<div class="item grow">
+				The 12 latest mosaics
+			</div>
+			
+			<div class="item ttrans-normal" ng-init="show_latest = false;">
+				
+				<a ng-show="!show_latest" ng-click="show_latest = true;">
+					Show
+				</a>
+				
+				<a ng-show="show_latest" ng-click="show_latest = false;">
+					Hide
+				</a>
+						
+			</div>
+			
+		</div>
 	</div>
 	
 	<div class="block" ng-hide="!latest_loading">
@@ -303,7 +248,7 @@
 	
 	<div ng-show="!latest_loading" class="block">
 	
-		<div class="row">
+		<div ng-show="show_latest" class="row">
 			
 			<div class="item-6 item-xl-3" ng-repeat="mosaic in mosaics">
 				<mosaic-vignet mosaic="mosaic"></mosaic-vignet>
