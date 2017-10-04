@@ -209,26 +209,22 @@
 	            		        	No mission
 	            		        </div>
 	            		        
-	    		                <div class="panel" ng-repeat="item in mosaicModel.missions">
+	    		                <div class="panel valign-center" ng-repeat="item in mosaicModel.missions">
 	    		                	
-	    		                	<div class="row valign-center">
-	    		                		
-		    		                	<div class="item">
-		    			                    <input type="text" class="form-control ta-center" ng-blur="reorder();" ng-model="item.order" style="min-width:2.5rem; width:2.5rem; min-height:1.5rem; line-height:1.5rem;" />
-		    		                	</div>
-		    		                	
-		    		                	<div class="item grow ellipsis">
-		    			                     {{item.title}}
-		    		                	</div>
-		    		                	
-		    		                	<div class="item">
-					                        <a ng-click="removeMission(item);">
-					                            <i class="fa fa-minus-square"></i>
-					                        </a>
-		    		                    </div>
-		    		                    
-		    		                </div>
-	    		                    
+ 	    		                	<div class="item">
+	    			                    <input type="text" class="form-control ta-center" ng-blur="reorder();" ng-model="item.order" style="min-width:2.5rem; width:2.5rem; min-height:1.5rem; line-height:1.5rem;" />
+	    		                	</div>
+	    		                	
+	    		                	<div class="item grow ellipsis">
+	    			                     {{item.title}}
+	    		                	</div>
+	    		                	
+	    		                	<div class="item">
+				                        <a ng-click="removeMission(item);">
+				                            <i class="fa fa-minus-square"></i>
+				                        </a>
+	    		                    </div>
+   		                    
 	    		                </div>
 	    		                
 	                        </div>
@@ -252,7 +248,7 @@
     	        	
     				<button class="btn-primary ta-center" style="width:100px;" ng-click="createMosaic();" ng-disabled="creating || !mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || (mosaicModel.missions.length < 1)">
             			<span ng-show="creating">
-            				<i class="fa fa-spinner rotating"></i>
+            				<i class="fa fa-spinner"></i>
             			</span>
     				    Create
     				</button>

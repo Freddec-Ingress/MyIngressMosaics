@@ -270,6 +270,17 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
     	    $scope.mosaic.is_completed = false;
 	    }
 	}
+	
+	$scope.updateMosaic = function() {
+		
+		$scope.updating = true;
+		
+		var data = { 'ref':$scope.mosaic.ref, 'city':$scope.mosaic.city, 'type':$scope.mosaic.type, 'cols':parseInt($scope.mosaic.cols), 'title':$scope.mosaic.title, 'region':$scope.mosaic.region, 'country':$scope.mosaic.country };
+		API.sendRequest('/api/mosaic/edit/', 'POST', {}, data).then(function(response) {
+			
+			$scope.updating = false;
+		});
+	}
 });
 
 angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, API) {

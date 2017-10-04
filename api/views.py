@@ -308,7 +308,7 @@ def mosaic_edit(request):
 		
 		mosaic.save()
 	
-		data = mosaic.serialize()
+		data = mosaic.detailsSerialize()
 		return Response(data, status=status.HTTP_200_OK)
 		
 	return Response(None, status=status.HTTP_404_NOT_FOUND)

@@ -160,13 +160,13 @@
 		<div class="block-tabs">
 				
 			<div class="item-6 ta-right">
-				<button class="btn-secondary btn-mini" style="width:130px;" ng-click="missionsMode = true; commentsMode = false;" ng-class="{'active': missionsMode}">
+				<button class="btn-secondary btn-block btn-mini" ng-click="missionsMode = true; commentsMode = false;" ng-class="{'active': missionsMode}">
 					Missions
 				</button>
 			</div>
 			
 			<div class="item-6">
-				<button class="btn-secondary btn-mini" style="width:130px;" ng-click="missionsMode = false; commentsMode = true;" ng-class="{'active': commentsMode}">
+				<button class="btn-secondary btn-block btn-mini" ng-click="missionsMode = false; commentsMode = true;" ng-class="{'active': commentsMode}">
 					Comments ({{mosaic.comments.length}})
 				</button>
 			</div>
@@ -304,56 +304,123 @@
             
 		</div>
 		
-		<div ng-if="user.superuser" class="block">
+		<div ng-if="user.superuser">
 			
-			<div class="f-row mb-2">
+			<div class="block-tabs">
 				
-				<button class="btn btn-secondary mr-2" ng-click="openMissions();">
-					Missions
-				</button>
+				<div class="item-4">
+					<button class="btn-danger btn-block btn-mini" ng-click="admDetailsMode = true; admMissionsMode = false; admDeleteMode = false;" ng-class="{'active': admDetailsMode}">
+						Details
+					</button>
+				</div>
 				
-				<button class="btn btn-secondary" ng-click="openDelete();">
-					Delete
-				</button>
+				<div class="item-4">
+					<button class="btn-danger btn-block btn-mini" ng-click="admDetailsMode = false; admMissionsMode = true; admDeleteMode = false;" ng-class="{'active': admMissionsMode}">
+						Missions
+					</button>
+				</div>
+				
+				<div class="item-4 ta-right">
+					<button class="btn-danger btn-block btn-mini" ng-click="admDetailsMode = false; admMissionsMode = false; admDeleteMode = true;" ng-class="{'active': admDeleteMode}">
+						Delete
+					</button>
+				</div>
 				
 			</div>
 			
-			<div ng-show="admMissionsMode" class="panel mb-4">
+			<div ng-show="admDetailsMode" class="block">
 				
-		        <table class="mb-4">
-		            <tbody>
-		                <tr ng-repeat="item in mosaic.missions">
-		                	<td class="px-1">
-								<div class="f-row f-align-center">
-									
-	    							<div class="mr-2" style="width:2.5rem;">
-	    								<input class="form-control text-center" ng-model="item.order" ng-blur="reorderMission($index, item.ref, item.order);" />
-	    							</div>
+	            <div class="panel">
 	
-	    							<div class="mr-auto">
-	    								{{item.title}}
-	    							</div>
+	    	        <div class="item-6 item-xl-4">
+	    	            <label>Title</label>
+	    	            <input type="text" class="form-control" ng-model="mosaic.title" />
+	    	        </div>
+		        
+	    	        <div class="item-6 item-xl-4">
+	    	            <label>Type</label>
+	    	            <select class="form-control" ng-model="mosaic.type">
+	    	                <option value="sequence">sequence</option>
+	    	                <option value="serie">serie</option>
+	    	            </select>
+	    	        </div>
 	
-	    							<div class="ml-4">
-	    								<a ng-click="remove(item.ref, $index);"><i class="fa fa-trash"></i></a>
-	    							</div>
-								
-								</div>
-		                    </td>
-		                </tr>
-		            </tbody>
-		       </table>
-	   		
+	    	        <div class="item-6 item-xl-4">
+	    	            <label>Columns</label>
+	    	            <select class="form-control" ng-model="mosaic.cols" />
+	        	                <option value="6">6</option>
+	        	                <option value="5">5</option>
+	        	                <option value="4">4</option>
+	        	                <option value="3">3</option>
+	        	                <option value="2">2</option>
+	        	                <option value="1">1</option>
+	       	            </select>
+	    	        </div>
+	
+	    	        <div class="item-6 item-xl-4">
+	    	            <label>Country</label>
+	    	            <input type="text" class="form-control" ng-model="mosaic.country" />
+	    	        </div>
+	
+	    	        <div class="item-6 item-xl-4">
+	    	            <label>Region</label>
+	    	            <input type="text" class="form-control" ng-model="mosaic.region" />
+	    	        </div>
+	
+	    	        <div class="item-6 item-xl-4">
+	    	            <label>City</label>
+	    	            <input type="text" class="form-control" ng-model="mosaic.city" />
+	    	        </div>
+	    	        
+	    	        <div class="item-12 ta-center">
+	    	        	
+	    				<button class="btn-primary ta-center" style="width:100px;" ng-click="updateMosaic();" ng-disabled="updating || !mosaic.title || !mosaic.type || !mosaic.cols || !mosaic.country">
+	            			<span ng-show="updating">
+	            				<i class="fa fa-spinner"></i>
+	            			</span>
+	    				    Update
+	    				</button>
+	    
+	    	        </div>
+	    	        
+				</div>
+				
 			</div>
 			
-			<div ng-show="deleteMode" class="panel mb-4">
+			<div ng-show="admMissionsMode" class="block">
 				
-				<div class="f-row">
-					<input type="text" class="form-control mr-2" placeholder="" ng-model="deleteModel.name" />
-	    			<button class="btn btn-primary" ng-click="delete();">
-	    				Delete
-	    			</button>
-	    		</div>
+                <div class="panel valign-center" ng-repeat="item in mosaic.missions">
+
+					<div class="item">
+						<input class="form-control ta-center" ng-model="item.order" ng-blur="reorderMission($index, item.ref, item.order);"  style="min-width:2.5rem; width:2.5rem; min-height:1.5rem; line-height:1.5rem;" />
+					</div>
+
+					<div class="item grow ellipsis">
+						{{item.title}}
+					</div>
+
+					<div class="item">
+						<a ng-click="remove(item.ref, $index);">
+							<i class="fa fa-trash"></i>
+						</a>
+					</div>
+						
+                </div>
+
+			</div>
+			
+			<div ng-show="admDeleteMode" class="block">
+				
+				<form class="panel">
+					<div class="item grow">
+						<input type="text" class="form-control" placeholder="" ng-model="deleteModelName" ng-init="deleteModelName = mosaic.title;" />
+					</div>
+					<div class="item">
+		    			<button type="submit" class="btn btn-primary" ng-click="delete(deleteModelName);">
+		    				Delete
+		    			</button>
+		    		</div>
+	    		</form>
 				
 			</div>
 			
