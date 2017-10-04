@@ -837,16 +837,9 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 		
 		if (!startZoom) startZoom = 15;
 		
-		var map = new google.maps.Map(document.getElementById('map'), {
-			
-			zoom: startZoom,
-			styles : style,
-			zoomControl: true,
-			disableDefaultUI: true,
-			center: {lat: startLat, lng: startLng},
-		});
-		
 		var geocoder = new google.maps.Geocoder();
+        
+        var startBounds = null;
         
         if (location) {
         	
@@ -855,8 +848,10 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 				
 				if (status === 'OK') {
 					
-					map.setCenter(results[0].geometry.location);
-					map.fitBounds(results[0].geometry.bounds);
+					startLat = results[0].geometry.location.lat;
+					startLng = results[0].geometry.location.lng;
+					
+					startBounds = results[0].geometry.bounds;
 					
 				} else {
 				}
@@ -899,6 +894,33 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 		        });
 		    }
 		}
+		
+		if (startLat == 0.0 && startLng == 0.0 && !location) {
+			
+			if (navigator.geolocation) {
+				
+				navigator.geolocation.getCurrentPosition(function(position) {
+					
+					startLat = position.coords.latitude;
+					startLng = position.coords.longitude;
+	
+				}, function() {
+				});
+				
+			} else {
+			}
+		}
+		
+		var map = new google.maps.Map(document.getElementById('map'), {
+			
+			zoom: startZoom,
+			styles : style,
+			zoomControl: true,
+			disableDefaultUI: true,
+			center: {lat: startLat, lng: startLng},
+		});
+		
+		if (startBounds) map.fitBounds(startBounds);
 	
 		var geolocationDiv = document.createElement('div');
 		var geolocationControl = new GeolocationControl(geolocationDiv, map);
@@ -913,7 +935,6 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 		};
 	
 		var refArray = [];
-		var markerArray = [];
 		
 		map.addListener('idle', function(e) {
 			
@@ -1027,38 +1048,11 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 							})(marker, item.ref, $rootScope.infowindow));
 							
 							refArray.push(item.ref);
-							markerArray.push(marker);
 						}
-						
-						index = refArray.indexOf(item.ref);
-						var mk = refArray[index];
-						
-						mk.setMap(map);
-						mk.setVisible(true);
 					}
 				}
 			});
 		});
-		
-		if (startLat == 0.0 && startLng == 0.0 && !location) {
-			
-			if (navigator.geolocation) {
-				
-				navigator.geolocation.getCurrentPosition(function(position) {
-					
-					var pos = {
-						lat: position.coords.latitude,
-						lng: position.coords.longitude
-					};
-				
-					map.setCenter(pos);
-	
-				}, function() {
-				});
-				
-			} else {
-			}
-		}
 		
 		function geocodeAddress(geocoder, resultsMap) {
 			
