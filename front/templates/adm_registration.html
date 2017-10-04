@@ -29,14 +29,14 @@
         
         <div class="panel" ng-repeat="mosaic in mosaics">
             
-            <div class="item-12 row">
+            <div class="item-12 row valign-center">
 
                 <div class="item grow">
                     <input type="text" class="form-control" ng-model="mosaic.name" />
                 </div>
                 
                 <div class="item">
-                    <input id="searchButton" type="submit" style="width:67px;" class="btn btn-primary ml-2" ng-click="refrech(mosaic);" value="Refresh" ng-disabled="mosaic.loading">
+                    <input id="searchButton" type="submit" style="width:67px;" class="btn btn-primary ml-2" ng-click="refrech(mosaic);" value="Open" ng-disabled="mosaic.loading">
                 </div>
                 
                 <div class="item">
@@ -51,44 +51,40 @@
                
             </div>
             
-            <div ng-show="mosaic.loading || mosaic.missions.length > 0" class="pt-4" style="border-top:1px solid black;">
+            <div ng-show="mosaic.loading || mosaic.missions.length > 0" style="border-top:1px solid black;">
                 
-        		<div ng-show="mosaic.loading" class="loading-line px-2 py-1">
-        			<img src="/static/img/loading.png" />
+        		<div ng-show="mosaic.loading">
+        			<i class="fa fa-spinner"></i>
         			Loading data...
         		</div>
         		
                 <div ng-show="!mosaic.loading && mosaic.missions.length > 0">
                     
-                    <div class="f-row">
-                    
-            	        <div class="group width-4 pr-1">
-            	            <label class="m-0">Title</label>
-            	            <input type="text" class="form-control" ng-model="mosaic.title" />
-            	        </div>
-            	        
-            	        <div class="group width-4 px-1">
-            	            <label class="m-0">Type</label>
-            	            <select class="form-control" ng-model="mosaic.type">
-            	                <option value="sequence">sequence</option>
-            	                <option value="serie">serie</option>
-            	            </select>
-            	        </div>
-        
-            	        <div class="group width-4 pl-1">
-            	            <label class="m-0">Columns</label>
-            	            <select class="form-control" ng-model="mosaic.columns" />
-                	                <option value="6">6</option>
-                	                <option value="5">5</option>
-                	                <option value="4">4</option>
-                	                <option value="3">3</option>
-                	                <option value="2">2</option>
-                	                <option value="1">1</option>
-               	            </select>
-            	        </div>
-            	        
-                    </div>
-                    
+        	        <div class="item-4">
+        	            <label>Title</label>
+        	            <input type="text" class="form-control" ng-model="mosaic.title" />
+        	        </div>
+        	        
+        	        <div class="item-4">
+        	            <label>Type</label>
+        	            <select class="form-control" ng-model="mosaic.type">
+        	                <option value="sequence">sequence</option>
+        	                <option value="serie">serie</option>
+        	            </select>
+        	        </div>
+    
+        	        <div class="group width-4 pl-1">
+        	            <label class="m-0">Columns</label>
+        	            <select class="form-control" ng-model="mosaic.columns" />
+            	                <option value="6">6</option>
+            	                <option value="5">5</option>
+            	                <option value="4">4</option>
+            	                <option value="3">3</option>
+            	                <option value="2">2</option>
+            	                <option value="1">1</option>
+           	            </select>
+        	        </div>
+
                     <div class="f-row">
                         
             	        <div class="group width-4 pr-1">
