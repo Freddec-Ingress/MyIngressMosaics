@@ -564,7 +564,7 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 					
 					startBounds = results[0].geometry.bounds;
 					
-					map = createMap(startLat, startLng, 15, startBounds, geocoder);
+					map = createMap(15, startLat, startLng, startBounds, geocoder);
 					
 				} else {
 				}
@@ -595,7 +595,7 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 				}
 			}
 		
-			map = createMap(startLat, startLng, startZoom, null, geocoder);
+			map = createMap(startZoom, startLat, startLng, null, geocoder);
 		}
 	}
 
