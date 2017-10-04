@@ -399,7 +399,7 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 		template: '' +
 			'<a class="btn-primary btn-block ta-left ttrans-normal" href="/mosaic/{{mosaic.ref}}">' +
 				
-			'	<div class="item" style="margin-bottom:.25rem; display:flex; align-items:center; justify-content:center; background:#0b0c0d; height:105px; overflow-y:hidden; padding:.25rem;" ng-class="{\'scrollbar\': mosaic.missions.length > 24}">' +
+			'	<div class="item" style="margin-bottom:.25rem; display:flex; justify-content:center; background:#0b0c0d; height:105px; overflow-y:hidden; padding:.25rem;" ng-class="{\'scrollbar valign-start\': mosaic.missions.length > 24, \'valign-center\': mosaic.missions.length <= 24}">' +
 					
 			'		<div class="row" style="align-items:center; justify-content:center; padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%); width:100%;">' +
 			'            <div ng-repeat="m in mosaic.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.cols}});">' +
@@ -411,57 +411,7 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 				
 	        '   <div class="ellipsis" style="margin-bottom:.25rem;">{{mosaic.title}}</div>' +
 	        '   <div class="c-lighter ellipsis">' +
-	        '       <span class="flag-icon" ng-class="{' +
-	        '       		\'flag-icon-fr\': mosaic.country == \'France\',' +
-	        '       		\'flag-icon-gb\': mosaic.country == \'United Kingdom\',' +
-	        '       		\'flag-icon-my\': mosaic.country == \'Malaysia\',' +
-	        '       		\'flag-icon-sg\': mosaic.country == \'Singapore\',' +
-	        '       		\'flag-icon-us\': mosaic.country == \'United States\',' +
-	        '       		\'flag-icon-mx\': mosaic.country == \'Mexico\',' +
-	        '       		\'flag-icon-nz\': mosaic.country == \'New Zealand\',' +
-	        '       		\'flag-icon-mv\': mosaic.country == \'Maldives\',' +
-	        '       		\'flag-icon-do\': mosaic.country == \'Dominican Republic\',' +
-	        '       		\'flag-icon-au\': mosaic.country == \'Australia\',' +
-	        '       		\'flag-icon-hu\': mosaic.country == \'Hungary\',' +
-	        '       		\'flag-icon-lk\': mosaic.country == \'Sri Lanka\',' +
-	        '       		\'flag-icon-id\': mosaic.country == \'Indonesia\',' +
-	        '       		\'flag-icon-de\': mosaic.country == \'Germany\',' +
-	        '       		\'flag-icon-pl\': mosaic.country == \'Poland\',' +
-		    '       		\'flag-icon-ru\': mosaic.country == \'Russia\',' +
-		    '       		\'flag-icon-hk\': mosaic.country == \'Hong Kong\',' +
-		    '       		\'flag-icon-mu\': mosaic.country == \'Mauritius\',' +
-		    '       		\'flag-icon-th\': mosaic.country == \'Thailand\',' +
-		    '       		\'flag-icon-cz\': mosaic.country == \'Czechia\',' +
-		    '       		\'flag-icon-cn\': mosaic.country == \'China\',' +
-		    '       		\'flag-icon-es\': mosaic.country == \'Spain\',' +
-		    '       		\'flag-icon-ch\': mosaic.country == \'Switzerland\',' +
-		    '       		\'flag-icon-ca\': mosaic.country == \'Canada\',' +
-		    '       		\'flag-icon-at\': mosaic.country == \'Austria\',' +
-		    '       		\'flag-icon-is\': mosaic.country == \'Iceland\',' +
-		    '       		\'flag-icon-za\': mosaic.country == \'South Africa\',' +
-		    '       		\'flag-icon-ad\': mosaic.country == \'Andorra\',' +
-		    '       		\'flag-icon-it\': mosaic.country == \'Italy\',' +
-		    '       		\'flag-icon-il\': mosaic.country == \'Israel\',' +
-		    '       		\'flag-icon-pt\': mosaic.country == \'Portugal\',' +
-		    '       		\'flag-icon-ie\': mosaic.country == \'Ireland\',' +
-		    '       		\'flag-icon-gr\': mosaic.country == \'Greece\',' +
-		    '       		\'flag-icon-tr\': mosaic.country == \'Turkey\',' +
-		    '       		\'flag-icon-jp\': mosaic.country == \'Japan\',' +
-		    '       		\'flag-icon-dk\': mosaic.country == \'Denmark\',' +
-		    '       		\'flag-icon-se\': mosaic.country == \'Sweden\',' +
-		    '       		\'flag-icon-no\': mosaic.country == \'Norway\',' +
-		    '       		\'flag-icon-fi\': mosaic.country == \'Finland\',' +
-		    '       		\'flag-icon-lv\': mosaic.country == \'Latvia\',' +
-		    '       		\'flag-icon-ee\': mosaic.country == \'Estonia\',' +
-		    '       		\'flag-icon-lt\': mosaic.country == \'Lithuania\',' +
-		    '       		\'flag-icon-sk\': mosaic.country == \'Slovakia\',' +
-		    '       		\'flag-icon-hr\': mosaic.country == \'Croatia\',' +
-		    '       		\'flag-icon-ar\': mosaic.country == \'Argentina\',' +
-		    '       		\'flag-icon-uy\': mosaic.country == \'Uruguay\',' +
-		    '       		\'flag-icon-tw\': mosaic.country == \'Taiwan\',' +
-		    '       		\'flag-icon-in\': mosaic.country == \'India\',' +
-		    '       		\'flag-icon-nl\': mosaic.country == \'Netherlands\',' +
-	        '        	}"></span>' +
+	        '       <flag country="mosaic.country"></flag>' +
 	        '    	{{mosaic.location}}' +
 	        '   </div>' +
 	        '   <div class="c-lighter">{{mosaic.missions.length}} <i class="fa fa-th"></i> <span class="text-separator">&middot;</span> <span ng-if="mosaic.type == \'sequence\'">{{mosaic.distance | number:2}} km</span><span ng-if="mosaic.type == \'serie\'">serie</span><span ng-show="mosaic.type != \'serie\' && mosaic.distance > 10.0" class="text-separator">&middot;</span><i ng-show="mosaic.type != \'serie\' && mosaic.distance > 10.0 && mosaic.distance < 30.0" class="fa fa-bicycle"></i><i ng-show="mosaic.type != \'serie\' && mosaic.distance > 30.0" class="fa fa-car"></i></div>' +
@@ -470,6 +420,72 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 		'',
 	};
 });
+
+angular.module('FrontModule.directives').directive('flag', function() {
+	
+	return {
+		
+		replace: true,
+		restrict: 'E',
+		
+		scope: { country: '=' },
+		
+		template: '' +
+	        '       <span class="flag-icon" ng-class="{' +
+	        '       		\'flag-icon-fr\': country == \'France\',' +
+	        '       		\'flag-icon-gb\': country == \'United Kingdom\',' +
+	        '       		\'flag-icon-my\': country == \'Malaysia\',' +
+	        '       		\'flag-icon-sg\': country == \'Singapore\',' +
+	        '       		\'flag-icon-us\': country == \'United States\',' +
+	        '       		\'flag-icon-mx\': country == \'Mexico\',' +
+	        '       		\'flag-icon-nz\': country == \'New Zealand\',' +
+	        '       		\'flag-icon-mv\': country == \'Maldives\',' +
+	        '       		\'flag-icon-do\': country == \'Dominican Republic\',' +
+	        '       		\'flag-icon-au\': country == \'Australia\',' +
+	        '       		\'flag-icon-hu\': country == \'Hungary\',' +
+	        '       		\'flag-icon-lk\': country == \'Sri Lanka\',' +
+	        '       		\'flag-icon-id\': country == \'Indonesia\',' +
+	        '       		\'flag-icon-de\': country == \'Germany\',' +
+	        '       		\'flag-icon-pl\': country == \'Poland\',' +
+		    '       		\'flag-icon-ru\': country == \'Russia\',' +
+		    '       		\'flag-icon-hk\': country == \'Hong Kong\',' +
+		    '       		\'flag-icon-mu\': country == \'Mauritius\',' +
+		    '       		\'flag-icon-th\': country == \'Thailand\',' +
+		    '       		\'flag-icon-cz\': country == \'Czechia\',' +
+		    '       		\'flag-icon-cn\': country == \'China\',' +
+		    '       		\'flag-icon-es\': country == \'Spain\',' +
+		    '       		\'flag-icon-ch\': country == \'Switzerland\',' +
+		    '       		\'flag-icon-ca\': country == \'Canada\',' +
+		    '       		\'flag-icon-at\': country == \'Austria\',' +
+		    '       		\'flag-icon-is\': country == \'Iceland\',' +
+		    '       		\'flag-icon-za\': country == \'South Africa\',' +
+		    '       		\'flag-icon-ad\': country == \'Andorra\',' +
+		    '       		\'flag-icon-it\': country == \'Italy\',' +
+		    '       		\'flag-icon-il\': country == \'Israel\',' +
+		    '       		\'flag-icon-pt\': country == \'Portugal\',' +
+		    '       		\'flag-icon-ie\': country == \'Ireland\',' +
+		    '       		\'flag-icon-gr\': country == \'Greece\',' +
+		    '       		\'flag-icon-tr\': country == \'Turkey\',' +
+		    '       		\'flag-icon-jp\': country == \'Japan\',' +
+		    '       		\'flag-icon-dk\': country == \'Denmark\',' +
+		    '       		\'flag-icon-se\': country == \'Sweden\',' +
+		    '       		\'flag-icon-no\': country == \'Norway\',' +
+		    '       		\'flag-icon-fi\': country == \'Finland\',' +
+		    '       		\'flag-icon-lv\': country == \'Latvia\',' +
+		    '       		\'flag-icon-ee\': country == \'Estonia\',' +
+		    '       		\'flag-icon-lt\': country == \'Lithuania\',' +
+		    '       		\'flag-icon-sk\': country == \'Slovakia\',' +
+		    '       		\'flag-icon-hr\': country == \'Croatia\',' +
+		    '       		\'flag-icon-ar\': country == \'Argentina\',' +
+		    '       		\'flag-icon-uy\': country == \'Uruguay\',' +
+		    '       		\'flag-icon-tw\': country == \'Taiwan\',' +
+		    '       		\'flag-icon-in\': country == \'India\',' +
+		    '       		\'flag-icon-nl\': country == \'Netherlands\',' +
+	        '        	}"></span>' +
+		'',
+	};
+});
+
 angular.module('FrontModule.controllers', [])
 
 angular.module('FrontModule.controllers').controller('RootCtrl', function($rootScope, $auth, API) {
@@ -958,31 +974,31 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 											}
 											
 											var contentClass = '';
-											if (details.missions.length > 24) contentClass = 'scrollbar';
-											if (details.missions.length <= 24) contentClass = '';
+											if (details.missions.length > 24) contentClass = 'scrollbar valign-start';
+											if (details.missions.length <= 24) contentClass = 'valign-center';
 
 											var contentDistance = '';
 											if (details.type == 'sequence') contentDistance = details.distance.toFixed(2).toString() + ' km';
 											if (details.type == 'serie') contentDistance = 'serie';
 											if (details.type == 'sequence' && details.distance > 10.0 && details.distance < 30.0) contentDistance += '<span class="text-separator">&middot;</span><i class="fa fa-bicycle"></i>';
 											if (details.type == 'sequence' && details.distance > 30.0) contentDistance += '<span class="text-separator">&middot;</span><i class="fa fa-car"></i>';
-
+											
 											var contentString =
-												'<a class="btn-primary btn-block ta-left ttrans-normal" style="width:170px;" href="/mosaic/' + details.ref + '">' +
+												'<a class="btn-primary btn-block ta-left ttrans-normal" style="width:170px; font: 400 .75rem/1.5 \'Coda\',sans-serif;" href="/mosaic/' + details.ref + '">' +
 													
-												'	<div class="item' + contentClass + '" style="margin-bottom:.25rem; display:flex; align-items:center; justify-content:center; background:#0b0c0d; height:105px; overflow-y:hidden; padding:.25rem;">' +
+												'	<div class="item ' + contentClass + '" style="margin-bottom:.25rem; display:flex; justify-content:center; background:#0b0c0d; height:105px; overflow-y:hidden; padding:.25rem;">' +
 														
 												'		<div class="row" style="align-items:center; justify-content:center; padding:0 calc((6 - ' + details.cols + ') / 2 * 16.666667%); width:100%;">' + contentImage + '</div>' +
 														
 												'	</div>' +
 													
-												'	<div class="f-col">' +
-														
-										        '    	<div class="text-white mt-2 mb-1" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">' + details.title + '</div>' +
-										        '    	<div class="text-normal">' + details.missions.length + ' <i class="fa fa-th"></i> <span class="text-separator">&middot;</span>' + contentDistance + '</div>' +
-										            	
-												'	</div>' +
-													
+										        '    	<div class="ellipsis" style="margin-bottom:.25rem;">' + details.title + '</div>' +
+											        '   <div class="c-lighter ellipsis">' +
+											        '       <flag country="\'' + details.country + '\'"></flag>' +
+											        details.location +
+											        '   </div>' +
+										        '    	<div class="c-lighter">' + details.missions.length + ' <i class="fa fa-th"></i> <span class="text-separator">&middot;</span>' + contentDistance + '</div>' +
+
 												'</a>' +
 											'';
 

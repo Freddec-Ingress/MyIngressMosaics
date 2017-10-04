@@ -255,7 +255,9 @@ a:hover, a:focus, .hover:hover { color: inherit; cursor: pointer; text-decoratio
     display: flex!important; flex-direction: row; flex-wrap: wrap;
 }
 
-.row.valign-center { align-items: baseline; }
+.valign-start { align-items: flex-start; }
+.valign-center { align-items: center; }
+.valign-baseline { align-items: baseline; }
 
 .item { padding: .25rem; }
 

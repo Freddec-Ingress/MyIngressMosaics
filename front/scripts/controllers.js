@@ -486,31 +486,31 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 											}
 											
 											var contentClass = '';
-											if (details.missions.length > 24) contentClass = 'scrollbar';
-											if (details.missions.length <= 24) contentClass = '';
+											if (details.missions.length > 24) contentClass = 'scrollbar valign-start';
+											if (details.missions.length <= 24) contentClass = 'valign-center';
 
 											var contentDistance = '';
 											if (details.type == 'sequence') contentDistance = details.distance.toFixed(2).toString() + ' km';
 											if (details.type == 'serie') contentDistance = 'serie';
 											if (details.type == 'sequence' && details.distance > 10.0 && details.distance < 30.0) contentDistance += '<span class="text-separator">&middot;</span><i class="fa fa-bicycle"></i>';
 											if (details.type == 'sequence' && details.distance > 30.0) contentDistance += '<span class="text-separator">&middot;</span><i class="fa fa-car"></i>';
-
+											
 											var contentString =
-												'<a class="btn-primary btn-block ta-left ttrans-normal" style="width:170px;" href="/mosaic/' + details.ref + '">' +
+												'<a class="btn-primary btn-block ta-left ttrans-normal" style="width:170px; font: 400 .75rem/1.5 \'Coda\',sans-serif;" href="/mosaic/' + details.ref + '">' +
 													
-												'	<div class="item' + contentClass + '" style="margin-bottom:.25rem; display:flex; align-items:center; justify-content:center; background:#0b0c0d; height:105px; overflow-y:hidden; padding:.25rem;">' +
+												'	<div class="item ' + contentClass + '" style="margin-bottom:.25rem; display:flex; justify-content:center; background:#0b0c0d; height:105px; overflow-y:hidden; padding:.25rem;">' +
 														
 												'		<div class="row" style="align-items:center; justify-content:center; padding:0 calc((6 - ' + details.cols + ') / 2 * 16.666667%); width:100%;">' + contentImage + '</div>' +
 														
 												'	</div>' +
 													
-												'	<div class="f-col">' +
-														
-										        '    	<div class="text-white mt-2 mb-1" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">' + details.title + '</div>' +
-										        '    	<div class="text-normal">' + details.missions.length + ' <i class="fa fa-th"></i> <span class="text-separator">&middot;</span>' + contentDistance + '</div>' +
-										            	
-												'	</div>' +
-													
+										        '    	<div class="ellipsis" style="margin-bottom:.25rem;">' + details.title + '</div>' +
+											        '   <div class="c-lighter ellipsis">' +
+											        '       <flag country="\'' + details.country + '\'"></flag>' +
+											        details.location +
+											        '   </div>' +
+										        '    	<div class="c-lighter">' + details.missions.length + ' <i class="fa fa-th"></i> <span class="text-separator">&middot;</span>' + contentDistance + '</div>' +
+
 												'</a>' +
 											'';
 
