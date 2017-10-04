@@ -53,7 +53,7 @@
                 </div>
             </div>
             
-            <div class="item-12" ng-show="mosaic.loading || mosaic.missions.length > 0" style="border-top:1px solid black;">
+            <div class="item-12" ng-show="mosaic.loading || mosaic.missions.length > 0">
                 <div class="row">
                         
             		<div class="item-12" ng-show="mosaic.loading">
@@ -105,48 +105,46 @@
                 	        </div>
     
                             <div class="item-6">
-                                <label class="m-0">Preview</label>
-                				<div class="bg-black f-row f-justify-center" style="height:230px; overflow-y:auto; padding-top:4px; padding-bottom:4px; padding-left:4px;" ng-class="{'f-align-start scrollbar scrollbar-mini': mosaic.missions.length > 24, 'f-align-center pr-1': mosaic.missions.length <= 24}">
-                					
-                					<div class="f-row f-wrap f-justify-center f-align-center" style="padding:0 calc((6 - {{mosaic.columns}}) / 2 * 16.666667%); width:100%;">
-                			            <div ng-repeat="m in mosaic.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.columns}});">
-                			                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-                			           </div>
-                					</div>
-                					
-                				</div>
+                                <label>Preview</label>
+             					<div style="display:flex; height:200px; justify-content:center; background:#0b0c0d; padding:.25rem;" ng-class="{'scrollbar valign-start': mosaic.missions.length > 18, 'valign-center': mosaic.missions.length <= 18}">
+            					
+            						<div class="row" style="align-items:center; justify-content:center; padding:0 calc((6 - {{mosaic.columns}}) / 2 * 16.666667%); width:100%;">
+            				            <div ng-repeat="m in mosaic.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.columns}});">
+            				                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+            				            </div>
+            			            </div>
+            			
+            					</div>
                             </div>
                             
                             <div class="item-6">
                                 <label class="m-0">{{mosaic.missions.length}} Missions</label>
-                                <div class="bg-black px-1 scrollbar" style="border-top:4px solid black; border-bottom:4px solid black; flex:1; overflow:auto; height:230px;">
-                    		        <table class="card-table">
-                    		            <tbody>
-                    		                <tr ng-repeat="item in mosaic.missions">
-                    		                	<td class="px-1">
-                    			                    
-                    			                    <div class="f-row f-align-center">
-                    			                        
-                    			                        <div class="mr-2" style="width:3rem;">
-                    			                            <input type="text" class="form-control text-center" ng-blur="reorderMosaic(mosaic);" ng-model="item.order" style="height:1.75rem;" />
-                    			                        </div>
-                    			                        
-                    			                        <div class="c-normal mr-auto" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;" title="{{item.title}}">
-                    				                        {{item.title}}
-                    				                    </div>
-                    			                        
-                                                        <a tabindex="0" href="https://www.ingress.com/mission/{{item.ref}}" target="blank">
-                                                            <i class="fa fa-external-link mx-2"></i>
-                                                        </a>
-                        			                        
-                    			                     </div>
-                    			                    
-                    		                    </td>
-                    		                </tr>
-                    		            </tbody>
-                		           </table>
-                                </div>
-                            </div>
+    		                    <div class="scrollbar" style="overflow:auto; height:200px; background:#0B0C0D; border:4px solid #0B0C0D;">
+    	            		        
+    	            		        <div ng-if="mosaic.missions < 1" class="item">
+    	            		        	No mission
+    	            		        </div>
+    	            		        
+    	    		                <div class="panel valign-center" ng-repeat="item in mosaic.missions">
+    	    		                	
+     	    		                	<div class="item">
+    	    			                    <input type="text" class="form-control ta-center" ng-blur="reorder();" ng-model="item.order" style="min-width:2.5rem; width:2.5rem; min-height:1.5rem; line-height:1.5rem;" />
+    	    		                	</div>
+    	    		                	
+    	    		                	<div class="item grow ellipsis">
+    	    			                     {{item.title}}
+    	    		                	</div>
+    	    		                	
+    	    		                	<div class="item">
+    				                        <a ng-click="removeMission(item);">
+    				                            <i class="fa fa-minus-square"></i>
+    				                        </a>
+    	    		                    </div>
+       		                    
+    	    		                </div>
+    	    		                
+    	                        </div>
+                             </div>
     
                 	        <div class="item-6">
                 	        	
