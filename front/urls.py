@@ -24,7 +24,6 @@ urlpatterns = [
 	url(r'^register', views.register),
 	url(r'^profile', views.profile),
 	
-	url(r'^adm_region', views.adm_region),
 	url(r'^adm_registration', views.adm_registration),
 	
 	url(r'^world/(?P<country>[\w \-,]+)/(?P<region>[\w \-,]+)/(?P<city>[\w \-,]+)', views.city),

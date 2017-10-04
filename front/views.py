@@ -214,14 +214,7 @@ def search(request):
 	
 	context = {}
 	return render(request, 'search.html', context)
-	
-	
-	
-def adm_region(request):
-	
-	context = {}
-	return render(request, 'adm_region.html', context)
-	
+
 	
 	
 def adm_registration(request):

@@ -69,6 +69,24 @@
 		
 	</div>
 
+	<div ng-if="user.superuser" class="block">
+		
+		<div class="panel" ng-repeat="region in regions">
+			
+			<div class="item grow">
+				<input type="text" class="form-control" placeholder="" ng-model="region.newname" />
+			</div>
+			
+			<div class="item">
+				<button type="submit" class="btn btn-primary" ng-click="rename(region);">
+					Rename
+				</button>
+			</div>
+			
+		</div>
+		
+	</div>
+
 </div>
 
 {% endverbatim %}
