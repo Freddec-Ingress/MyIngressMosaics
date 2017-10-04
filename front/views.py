@@ -228,3 +228,31 @@ def adm_registration(request):
 	
 	context = {}
 	return render(request, 'adm_registration.html', context)
+
+
+
+def city(request, country, region, city):
+	
+	context = { 'country':country, 'region':region, 'city':city }
+	return render(request, 'city.html', context)
+
+
+
+def region(request, country, region):
+	
+	context = { 'country':country, 'region':region }
+	return render(request, 'region.html', context)
+
+
+
+def country(request, country):
+	
+	context = { 'country':country }
+	return render(request, 'country.html', context)
+
+
+
+def world(request):
+	
+	context = {}
+	return render(request, 'world.html', context)

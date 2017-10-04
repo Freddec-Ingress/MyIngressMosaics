@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block extra-head %}
+
+	<title>MIM - Ingress Mosaics, Banners, Series</title>
+
+	<meta property="og:url" content="https://www.myingressmosaics.com">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="MyIngressMosaics">
+	<meta property="og:description" content="Search, Register and Share all Ingress Mosaics">
+	
+{% endblock %}
+
+{% block header %}
+
+	{{city}}
+	
+{% endblock %}
+
+{% block content %}
+
+<div id="page-container" ng-controller="CityCtrl" ng-init="loadCity('{{country}}', '{{region}}', '{{city}}');">
+
+{% verbatim %}
+
+	<div class="title">
+		Mosaics
+	</div>
+
+	<div class="block">
+	
+		<div class="row">
+			
+			<div class="item-6 item-xl-3" ng-repeat="mosaic in mosaics">
+				<mosaic-vignet mosaic="mosaic"></mosaic-vignet>
+			</div>
+			
+		</div>
+		
+	</div>
+	
+</div>
+
+{% endverbatim %}
+{% endblock %}

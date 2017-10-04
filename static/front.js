@@ -764,41 +764,6 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
     	    $scope.mosaic.is_completed = false;
 	    }
 	}
-
-	$scope.addComment = false;
-	$scope.createComment = function(text) {
-		
-		$scope.addingComment = true;
-		
-		var data = { 'ref':$scope.mosaic.ref, 'text':text };
-		API.sendRequest('/api/comment/add/', 'POST', {}, data).then(function(response) {
-			
-			$scope.mosaic.comments.unshift(response);
-			
-			$scope.addComment = false;
-			$scope.addingComment = false;
-		});
-	}
-	
-	$scope.editComment = function(comment) {
-		
-		comment.editing = true;
-		
-		var data = { 'id':comment.id, 'text':comment.text };
-		API.sendRequest('/api/comment/update/', 'POST', {}, data).then(function(response) {
-			
-			comment.edit = false;
-			comment.editing = false;
-		});
-	}
-	
-	$scope.deleteComment = function(id, index) {
-		
-		var data = { 'id':id };
-		API.sendRequest('/api/comment/delete/', 'POST', {}, data);
-		
-		$scope.mosaic.comments.splice(index, 1);
-	}
 });
 
 angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, API) {
@@ -975,6 +940,8 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 					for (var item of response) {
 					
 						if (refArray.indexOf(item.ref) == -1) {
+							
+							refArray.push(item.ref);
 
 							var latLng = new google.maps.LatLng(item.startLat, item.startLng);
 							var marker = new google.maps.Marker({
@@ -982,7 +949,7 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 								map: map,
 								icon: image,
 							});
-
+							
 							google.maps.event.addListener(marker, 'click', (function (marker, ref, infowindow) {
 								
 								return function () {
@@ -1019,22 +986,22 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 											var contentDistance = '';
 											if (details.type == 'sequence') contentDistance = details.distance.toFixed(2).toString() + ' km';
 											if (details.type == 'serie') contentDistance = 'serie';
-											if (details.type == 'sequence' && details.distance > 10.0 && details.distance < 30.0) contentDistance += '<span class="text-separator">&middot;</span><i class="fa fa-bicycle"></i>';
-											if (details.type == 'sequence' && details.distance > 30.0) contentDistance += '<span class="text-separator">&middot;</span><i class="fa fa-car"></i>';
+											if (details.type == 'sequence' && details.distance > 10.0 && details.distance < 30.0) contentDistance += '<span class="mx-1">&middot;</span><i class="fa fa-bicycle mx-1"></i>';
+											if (details.type == 'sequence' && details.distance > 30.0) contentDistance += '<span class="mx-1">&middot;</span><i class="fa fa-car mx-1"></i>';
 
 											var contentString =
-												'<a class="btn-primary btn-block ta-left ttrans-normal" style="width:170px; font: 400 .75rem/1.5 \'Coda\',sans-serif!important;" href="/mosaic/' + details.ref + '">' +
+												'<a class="btn-primary btn-block ta-left ttrans-normal" href="/mosaic/' + details.ref + '">' +
 													
-												'	<div class="item ' + contentClass + '" style="height:105px; margin-bottom:.25rem; display:flex; align-items:center; justify-content:center; background:#0b0c0d; overflow-y:hidden; padding:.25rem;">' +
+												'	<div class="item' + contentClass + '" style="margin-bottom:.25rem; display:flex; align-items:center; justify-content:center; background:#0b0c0d; height:105px; overflow-y:hidden; padding:.25rem;">' +
 														
-												'		<div class="row" style="align-items:center; justify-content:center; padding:0 calc(-.25rem + ((6 - ' + details.cols + ') / 2 * 16.666667%)); width:100%;">' + contentImage + '</div>' +
+												'		<div class="row" style="align-items:center; justify-content:center; padding:0 calc((6 - ' + details.cols + ') / 2 * 16.666667%); width:100%;">' + contentImage + '</div>' +
 														
 												'	</div>' +
 													
-												'	<div class="row">' +
+												'	<div class="f-col">' +
 														
-										        '    	<div class="item-12 ellipsis">' + details.title + '</div>' +
-										        '    	<div class="item-12 c-highlight">' + details.missions.length + ' <i class="fa fa-th"></i> <span class="text-separator">&middot;</span>' + contentDistance + '</div>' +
+										        '    	<div class="text-white mt-2 mb-1" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">' + details.title + '</div>' +
+										        '    	<div class="text-normal">' + details.missions.length + ' <i class="fa fa-th"></i> <span class="text-separator">&middot;</span>' + contentDistance + '</div>' +
 										            	
 												'	</div>' +
 													
@@ -1052,8 +1019,6 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 								};
 								
 							})(marker, item.ref, $rootScope.infowindow));
-							
-							refArray.push(item.ref);
 						}
 					}
 				}
@@ -1824,6 +1789,57 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 		}
 		
 		$scope.mosaics.splice($scope.mosaics.indexOf(mosaic), 1);
+	}
+});
+
+angular.module('FrontModule.controllers').controller('CountryCtrl', function($scope, API) {
+	
+	$scope.loadCountry = function(name) {
+		
+		$scope.country = name;
+		
+		API.sendRequest('/api/country/' + name + '/', 'GET').then(function(response) {
+
+			$scope.regions = response;
+			
+			$('#page-loading').addClass('hidden');
+			$('#page-content').removeClass('hidden');
+		});
+	}
+});
+
+angular.module('FrontModule.controllers').controller('RegionCtrl', function($scope, API) {
+	
+	$scope.loadRegion = function(country, name) {
+		
+		$scope.country = country;
+		$scope.region = name;
+		
+		API.sendRequest('/api/region/' + country + '/' + name + '/', 'GET').then(function(response) {
+
+			$scope.cities = response;
+			
+			$('#page-loading').addClass('hidden');
+			$('#page-content').removeClass('hidden');
+		});
+	}
+});
+
+angular.module('FrontModule.controllers').controller('CityCtrl', function($scope, API) {
+	
+	$scope.loadCity = function(country, region, name) {
+		
+		$scope.country = country;
+		$scope.region = region;
+		$scope.city = name;
+		
+		API.sendRequest('/api/city/' + country + '/' + region + '/' + name + '/', 'GET').then(function(response) {
+
+			$scope.mosaics = response;
+			
+			$('#page-loading').addClass('hidden');
+			$('#page-content').removeClass('hidden');
+		});
 	}
 });
 angular.module('FrontModule', ['satellizer', 'ngCookies',

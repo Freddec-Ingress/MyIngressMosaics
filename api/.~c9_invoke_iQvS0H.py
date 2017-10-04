@@ -576,77 +576,9 @@ def data_getMosaicsByCountry(request):
 
 
 
-#---------------------------------------------------------------------------------------------------
-@api_view(['GET'])
-@permission_classes((AllowAny, ))
-def data_getMosaicsByRegion(request, name):
-	
-	data = None
-	
-	results = Mosaic.objects.filter(country=name).values('region').distinct()
-	if (results.count() > 0):
-		
-		data = []
-		
-		for item in results:
-			
-			region = {
-				'mosaics': Mosaic.objects.filter(country=name, region=item['region']).count(),
-				'name': item['region'],
-			}
-			
-			data.append(region)
-	
-	return Response(data, status=status.HTTP_200_OK)
-	
-
-
-#---------------------------------------------------------------------------------------------------
-@api_view(['GET'])
-@permission_classes((AllowAny, ))
-def data_getMosaicsByCity(request, country, name):
-	
-	data = None
-	
-	results = Mosaic.objects.filter(country=country, region=name).values('city').distinct()
-	if (results.count() > 0):
-		
-		data = []
-		
-		for item in results:
-			
-			city = {
-				'mosaics': Mosaic.objects.filter(country=country, region=name, city=item['city']).count(),
-				'name': item['city'],
-			}
-			
-			data.append(city)
-	
-	return Response(data, status=status.HTTP_200_OK)
-
-
-
-#---------------------------------------------------------------------------------------------------
-@api_view(['GET'])
-@permission_classes((AllowAny, ))
-def data_getMosaicsOfCity(request, country, region, name):
-	
-	results = Mosaic.objects.filter(country=country, region=region, city=name).order_by('-pk')
-	if results.count() > 0:
-		
-		data = []
-		
-		for item in results:
-			
-			mosaic = item.overviewSerialize()
-			data.append(mosaic)
-		
-		return Response(data, status=status.HTTP_200_OK)
-		
-	return Response(None, status=status.HTTP_404_NOT_FOUND)
-
-
-
+data_getMosaicsByRegion    
+    
+    
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((AllowAny, ))

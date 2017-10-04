@@ -27,5 +27,10 @@ urlpatterns = [
 	url(r'^adm_region', views.adm_region),
 	url(r'^adm_registration', views.adm_registration),
 	
+	url(r'^world/(?P<country>[\w \-,]+)/(?P<region>[\w \-,]+)/(?P<city>[\w \-,]+)', views.city),
+	url(r'^world/(?P<country>[\w \-,]+)/(?P<region>[\w \-,]+)', views.region),
+	url(r'^world/(?P<country>[\w \-,]+)', views.country),
+	url(r'^world', views.world),
+	
 	url(r'^.*', views.home, name='home'),
 ]
