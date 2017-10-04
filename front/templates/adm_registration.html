@@ -29,84 +29,81 @@
         
         <div class="panel" ng-repeat="mosaic in mosaics">
             
-            <div class="item-12 row valign-center">
-
-                <div class="item grow">
-                    <input type="text" class="form-control" ng-model="mosaic.name" />
+            <div class="item-12">
+                <div class="row valign-center">
+    
+                    <div class="item grow">
+                        <input type="text" class="form-control" ng-model="mosaic.name" />
+                    </div>
+                    
+                    <div class="item">
+                        <input id="searchButton" type="submit" style="width:67px;" class="btn btn-primary ml-2" ng-click="refrech(mosaic);" value="Open" ng-disabled="mosaic.loading">
+                    </div>
+                    
+                    <div class="item">
+                        {{mosaic.count}}
+                    </div>
+                    
+                    <div class="item">
+                        <a ng-click="removeMosaic(mosaic);">
+                            <i class="fa fa-trash ml-4"></i>
+                        </a>
+                    </div>
+                   
                 </div>
-                
-                <div class="item">
-                    <input id="searchButton" type="submit" style="width:67px;" class="btn btn-primary ml-2" ng-click="refrech(mosaic);" value="Open" ng-disabled="mosaic.loading">
-                </div>
-                
-                <div class="item">
-                    {{mosaic.count}}
-                </div>
-                
-                <div class="item">
-                    <a ng-click="removeMosaic(mosaic);">
-                        <i class="fa fa-trash ml-4"></i>
-                    </a>
-                </div>
-               
             </div>
             
-            <div class="item-12 row" ng-show="mosaic.loading || mosaic.missions.length > 0" style="border-top:1px solid black;">
-                
-        		<div class="item-12" ng-show="mosaic.loading">
-        			<i class="fa fa-spinner"></i>
-        			Loading data...
-        		</div>
-        		
-                <div ng-show="!mosaic.loading && mosaic.missions.length > 0">
-                    
-        	        <div class="item-4">
-        	            <label>Title</label>
-        	            <input type="text" class="form-control" ng-model="mosaic.title" />
-        	        </div>
-        	        
-        	        <div class="item-4">
-        	            <label>Type</label>
-        	            <select class="form-control" ng-model="mosaic.type">
-        	                <option value="sequence">sequence</option>
-        	                <option value="serie">serie</option>
-        	            </select>
-        	        </div>
-    
-        	        <div class="group width-4 pl-1">
-        	            <label class="m-0">Columns</label>
-        	            <select class="form-control" ng-model="mosaic.columns" />
-            	                <option value="6">6</option>
-            	                <option value="5">5</option>
-            	                <option value="4">4</option>
-            	                <option value="3">3</option>
-            	                <option value="2">2</option>
-            	                <option value="1">1</option>
-           	            </select>
-        	        </div>
-
-                    <div class="f-row">
+            <div class="item-12" ng-show="mosaic.loading || mosaic.missions.length > 0" style="border-top:1px solid black;">
+                <div class="row">
                         
-            	        <div class="group width-4 pr-1">
+            		<div class="item-12" ng-show="mosaic.loading">
+            			<i class="fa fa-spinner"></i>
+            			Loading data...
+            		</div>
+            		
+                    <div ng-show="!mosaic.loading && mosaic.missions.length > 0">
+                        
+            	        <div class="item-4">
+            	            <label>Title</label>
+            	            <input type="text" class="form-control" ng-model="mosaic.title" />
+            	        </div>
+            	        
+            	        <div class="item-4">
+            	            <label>Type</label>
+            	            <select class="form-control" ng-model="mosaic.type">
+            	                <option value="sequence">sequence</option>
+            	                <option value="serie">serie</option>
+            	            </select>
+            	        </div>
+        
+            	        <div class="item-4">
+            	            <label class="m-0">Columns</label>
+            	            <select class="form-control" ng-model="mosaic.columns" />
+                	                <option value="6">6</option>
+                	                <option value="5">5</option>
+                	                <option value="4">4</option>
+                	                <option value="3">3</option>
+                	                <option value="2">2</option>
+                	                <option value="1">1</option>
+               	            </select>
+            	        </div>
+    
+            	        <div class="item-4">
             	            <label class="m-0">Country</label>
             	            <input type="text" class="form-control" ng-model="mosaic.country" />
             	        </div>
         
-            	        <div class="group width-4 px-1">
+            	        <div class="item-4">
             	            <label class="m-0">Region</label>
             	            <input type="text" class="form-control" ng-model="mosaic.region" />
             	        </div>
         
-            	        <div class="group width-4 pl-1">
+            	        <div class="item-4">
             	            <label class="m-0">City</label>
             	            <input type="text" class="form-control" ng-model="mosaic.city" />
             	        </div>
-            	        
-        	        </div>
-                    
-                    <div class="f-row">
-                        
-                        <div class="width-6 pr-1">
+
+                        <div class="item-6">
                             <label class="m-0">Preview</label>
             				<div class="bg-black f-row f-justify-center" style="height:230px; overflow-y:auto; padding-top:4px; padding-bottom:4px; padding-left:4px;" ng-class="{'f-align-start scrollbar scrollbar-mini': mosaic.missions.length > 24, 'f-align-center pr-1': mosaic.missions.length <= 24}">
             					
@@ -119,7 +116,7 @@
             				</div>
                         </div>
                         
-                        <div class="width-6 pl-1">
+                        <div class="item-6">
                             <label class="m-0">{{mosaic.missions.length}} Missions</label>
                             <div class="bg-black px-1 scrollbar" style="border-top:4px solid black; border-bottom:4px solid black; flex:1; overflow:auto; height:230px;">
                 		        <table class="card-table">
@@ -149,26 +146,25 @@
             		           </table>
                             </div>
                         </div>
-                        
-        	        </div>
-        	        
-        	        <div class="form-button-bar mt-3 mb-2">
-        	        	
-        				<button class="btn btn-primary mx-2" ng-click="createMosaic(mosaic);" ng-disabled="mosaic.creating || !mosaic.title || !mosaic.type || !mosaic.columns || !mosaic.country || (mosaic.missions.length < 1)">
-        				    <span>Create</span>
-                			<div ng-show="mosaic.creating" class="loading-line py-1 pl-2">
-                				<img src="/static/img/loading.png" />
-                			</div>
-        				</button>
-    
-        				<button class="btn btn-secondary mx-2" ng-click="deleteMosaic(mosaic);">
-        				    Delete
-        				</button>
-        				
-        	        </div>
-                
+
+            	        <div class="form-button-bar mt-3 mb-2">
+            	        	
+            				<button class="btn btn-primary mx-2" ng-click="createMosaic(mosaic);" ng-disabled="mosaic.creating || !mosaic.title || !mosaic.type || !mosaic.columns || !mosaic.country || (mosaic.missions.length < 1)">
+            				    <span>Create</span>
+                    			<div ng-show="mosaic.creating" class="loading-line py-1 pl-2">
+                    				<img src="/static/img/loading.png" />
+                    			</div>
+            				</button>
+        
+            				<button class="btn btn-secondary mx-2" ng-click="deleteMosaic(mosaic);">
+            				    Delete
+            				</button>
+            				
+            	        </div>
+                    
+                    </div>
+                    
                 </div>
-                
             </div>
             
         </div>
