@@ -74,11 +74,13 @@
 				</div>
 				
 				<div class="item-12">
-				    <a href="/map/{{mosaic.country}}">{{mosaic.country}}</a>
+				    <a href="/world/{{mosaic.country}}">{{mosaic.country}}</a>
 				    <span class="text-separator">></span>
-				    <a href="/map/{{mosaic.region}},{{mosaic.country}}">{{mosaic.region}}</a>
+				    <a href="/world/{{mosaic.country}}/{{mosaic.region}}">{{mosaic.region}}</a>
 				    <span class="text-separator">></span>
-				    <a href="/map/{{mosaic.city}},{{mosaic.region}},{{mosaic.country}}">{{mosaic.city}}</a>
+				    <a href="/world/{{mosaic.country}}/{{mosaic.region}}/{{mosaic.city}}">{{mosaic.city}}</a>
+				    <span class="text-separator">&middot;</span>
+				    <a href="/map/{{mosaic.city}},{{mosaic.region}},{{mosaic.country}}"><i class="fa fa-map"></i></a>
 				</div>
 				
 				<div class="item-12">
