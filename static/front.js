@@ -821,42 +821,33 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 
 	$scope.initLocation = null;
 
-	$scope.initMap = function(location) {
-		
-		$scope.initLocation = location;
+	function createMap(startZoom, startLat, startLng, startBounds, geocoder) {
 		
 		var style = [{featureType:"all",elementType:"all",stylers:[{visibility:"on"},{hue:"#131c1c"},{saturation:"-50"},{invert_lightness:!0}]},{featureType:"water",elementType:"all",stylers:[{visibility:"on"},{hue:"#005eff"},{invert_lightness:!0}]},{featureType:"poi",stylers:[{visibility:"off"}]},{featureType:"transit",elementType:"all",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels.icon",stylers:[{invert_lightness:!0}]}];
 		
-		var startLat = parseFloat($cookies.get('startLat'));
-		var startLng = parseFloat($cookies.get('startLng'));
+		var map = new google.maps.Map(document.getElementById('map'), {
+			
+			zoom: startZoom,
+			styles : style,
+			zoomControl: true,
+			disableDefaultUI: true,
+			center: {lat: startLat, lng: startLng},
+		});
 		
-		if (!startLat) startLat = 0.0;
-		if (!startLng) startLng = 0.0;
+		if (startBounds) map.fitBounds(startBounds);
 		
-		var startZoom = parseInt($cookies.get('startZoom'));
+		function geolocate() {
 		
-		if (!startZoom) startZoom = 15;
+		    if (navigator.geolocation) {
 		
-		var geocoder = new google.maps.Geocoder();
-        
-        var startBounds = null;
-        
-        if (location) {
-        	
-        	document.getElementById('address').value = location;
-			geocoder.geocode({'address': location}, function(results, status) {
-				
-				if (status === 'OK') {
-					
-					startLat = results[0].geometry.location.lat;
-					startLng = results[0].geometry.location.lng;
-					
-					startBounds = results[0].geometry.bounds;
-					
-				} else {
-				}
-			});
-        }
+		        navigator.geolocation.getCurrentPosition(function (position) {
+		
+		            var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+		            map.setCenter(pos);
+		            map.setZoom(15);
+		        });
+		    }
+		}
 		
 		function GeolocationControl(controlDiv, map) {
 		
@@ -882,46 +873,6 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 		    google.maps.event.addDomListener(controlUI, 'click', geolocate);
 		}
 		
-		function geolocate() {
-		
-		    if (navigator.geolocation) {
-		
-		        navigator.geolocation.getCurrentPosition(function (position) {
-		
-		            var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-		            map.setCenter(pos);
-		            map.setZoom(15);
-		        });
-		    }
-		}
-		
-		if (startLat == 0.0 && startLng == 0.0 && !location) {
-			
-			if (navigator.geolocation) {
-				
-				navigator.geolocation.getCurrentPosition(function(position) {
-					
-					startLat = position.coords.latitude;
-					startLng = position.coords.longitude;
-	
-				}, function() {
-				});
-				
-			} else {
-			}
-		}
-		
-		var map = new google.maps.Map(document.getElementById('map'), {
-			
-			zoom: startZoom,
-			styles : style,
-			zoomControl: true,
-			disableDefaultUI: true,
-			center: {lat: startLat, lng: startLng},
-		});
-		
-		if (startBounds) map.fitBounds(startBounds);
-	
 		var geolocationDiv = document.createElement('div');
 		var geolocationControl = new GeolocationControl(geolocationDiv, map);
 		
@@ -1072,6 +1023,68 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
     	document.getElementById('submit').addEventListener('click', function() {
         	geocodeAddress(geocoder, map);
         });
+        
+		return map;
+	}
+
+	$scope.initMap = function(location) {
+		
+		$scope.initLocation = location;
+        
+        var startLat = 0.0;
+        var startLng = 0.0;
+        
+        var startBounds = null;
+        
+        var map = null;
+	
+		var geocoder = new google.maps.Geocoder();
+        
+        if (location) {
+        	
+        	document.getElementById('address').value = location;
+			geocoder.geocode({'address': location}, function(results, status) {
+				
+				if (status === 'OK') {
+					
+					startLat = results[0].geometry.location.lat();
+					startLng = results[0].geometry.location.lng();
+					
+					startBounds = results[0].geometry.bounds;
+					
+					map = createMap(startLat, startLng, 15, startBounds, geocoder);
+					
+				} else {
+				}
+			});
+        }
+		else {
+			
+			startLat = parseFloat($cookies.get('startLat'));
+			startLng = parseFloat($cookies.get('startLng'));
+			
+			var startZoom = parseInt($cookies.get('startZoom'));
+			
+			if (!startZoom) startZoom = 15;
+			
+			if (startLat == 0.0 && startLng == 0.0 && !location) {
+				
+				if (navigator.geolocation) {
+					
+					navigator.geolocation.getCurrentPosition(function(position) {
+						
+						startLat = position.coords.latitude;
+						startLng = position.coords.longitude;
+		
+					}, function() {
+					});
+					
+				} else {
+				}
+			}
+		
+			map = createMap(startLat, startLng, startZoom, null, geocoder);
+		}
 	}
 
 	$scope.$on('user-loaded', function(event, args) {
