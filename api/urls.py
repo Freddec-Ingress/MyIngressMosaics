@@ -37,7 +37,6 @@ urlpatterns = [
 	url(r'^mission/order/',			mission_order),
 
 	url(r'^missions/',				data_searchForMissions),
-	url(r'^latest/',				data_getLastestMosaics),
 	url(r'^search/',				data_searchForMosaics),
 
 	url(r'^world/',					data_getMosaicsByCountry),

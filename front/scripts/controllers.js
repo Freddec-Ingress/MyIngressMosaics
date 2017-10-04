@@ -39,29 +39,8 @@ angular.module('FrontModule.controllers').controller('RootCtrl', function($rootS
 
 angular.module('FrontModule.controllers').controller('HomeCtrl', function($scope, API) {
 	
-	$scope.latest_loading = true;
-	$scope.countries_loading = true;
-	
 	$('#page-loading').addClass('hidden');
 	$('#page-content').removeClass('hidden');
-	
-	API.sendRequest('/api/world/', 'GET').then(function(response) {
-
-		response.sort(function(a, b) {
-			return b.mosaics - a.mosaics;
-		});
-		
-		$scope.countries = response;
-
-		$scope.countries_loading = false;
-	});
-	
-	API.sendRequest('/api/latest/', 'GET').then(function(response) {
-		
-		$scope.mosaics = response;
-		
-		$scope.latest_loading = false;
-	});
 });
 
 angular.module('FrontModule.controllers').controller('MosaicCtrl', function($scope, $window, API) {

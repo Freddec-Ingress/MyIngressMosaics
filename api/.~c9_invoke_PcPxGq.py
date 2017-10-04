@@ -533,6 +533,27 @@ def mission_order(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes((AllowAny, ))
+def data_getLastestMosaics(request):
+		
+	results = Mosaic.objects.order_by('-pk')[:12]
+	if results.count() > 0:
+		
+		data = []
+		
+		for item in results:
+			
+			mosaic = item.overviewSerialize()
+			data.append(mosaic)
+		
+		return Response(data, status=status.HTTP_200_OK)
+		
+	return Response(None, status=status.HTTP_404_NOT_FOUND)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['GET'])
+@permission_classes((AllowAny, ))
 def data_getMosaicsByCountry(request):
 	
 	data = None
