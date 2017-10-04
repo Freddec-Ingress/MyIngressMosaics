@@ -21,9 +21,92 @@
 
 {% block content %}
 
-<div id="page-container">
+<div id="page-container" ng-controller="WorldCtrl">
 
 {% verbatim %}
+
+	<div class="title">
+		Countries
+	</div>
+	
+	<div class="block">
+	
+		<div class="row">
+			
+			<div class="item-12 item-xl-3" ng-repeat="country in countries">
+				
+				<a href="/world/{{country.name}}" class="btn-primary btn-block">
+					
+					<div class="row valign-center">
+						
+						<div class="item grow ta-left ellipsis">
+							<span class="flag-icon" ng-class="{
+					            'flag-icon-fr': country.name == 'France',
+					            'flag-icon-gb': country.name == 'United Kingdom',
+					            'flag-icon-my': country.name == 'Malaysia',
+					            'flag-icon-sg': country.name == 'Singapore',
+					            'flag-icon-us': country.name == 'United States',
+					            'flag-icon-mx': country.name == 'Mexico',
+					            'flag-icon-nz': country.name == 'New Zealand',
+					            'flag-icon-mv': country.name == 'Maldives',
+					            'flag-icon-do': country.name == 'Dominican Republic',
+					            'flag-icon-au': country.name == 'Australia',
+					            'flag-icon-hu': country.name == 'Hungary',
+					            'flag-icon-lk': country.name == 'Sri Lanka',
+					            'flag-icon-id': country.name == 'Indonesia',
+					            'flag-icon-de': country.name == 'Germany',
+					            'flag-icon-pl': country.name == 'Poland',
+						        'flag-icon-ru': country.name == 'Russia',
+						        'flag-icon-hk': country.name == 'Hong Kong',
+						        'flag-icon-mu': country.name == 'Mauritius',
+						        'flag-icon-th': country.name == 'Thailand',
+						        'flag-icon-cz': country.name == 'Czechia',
+						        'flag-icon-cn': country.name == 'China',
+						        'flag-icon-es': country.name == 'Spain',
+						        'flag-icon-ch': country.name == 'Switzerland',
+						        'flag-icon-ca': country.name == 'Canada',
+						        'flag-icon-at': country.name == 'Austria',
+						        'flag-icon-is': country.name == 'Iceland',
+						        'flag-icon-za': country.name == 'South Africa',
+						        'flag-icon-ad': country.name == 'Andorra',
+						        'flag-icon-it': country.name == 'Italy',
+						        'flag-icon-il': country.name == 'Israel',
+						        'flag-icon-pt': country.name == 'Portugal',
+						        'flag-icon-ie': country.name == 'Ireland',
+						        'flag-icon-gr': country.name == 'Greece',
+						        'flag-icon-tr': country.name == 'Turkey',
+						        'flag-icon-jp': country.name == 'Japan',
+						        'flag-icon-dk': country.name == 'Denmark',
+						        'flag-icon-se': country.name == 'Sweden',
+						        'flag-icon-no': country.name == 'Norway',
+						        'flag-icon-fi': country.name == 'Finland',
+						        'flag-icon-lv': country.name == 'Latvia',
+						        'flag-icon-ee': country.name == 'Estonia',
+						        'flag-icon-lt': country.name == 'Lithuania',
+						        'flag-icon-sk': country.name == 'Slovakia',
+						        'flag-icon-hr': country.name == 'Croatia',
+						        'flag-icon-ar': country.name == 'Argentina',
+						        'flag-icon-uy': country.name == 'Uruguay',
+						        'flag-icon-tw': country.name == 'Taiwan',
+						        'flag-icon-in': country.name == 'India',
+						        'flag-icon-nl': country.name == 'Netherlands',
+					        }"></span>
+				        	{{country.name}}
+				        </div>
+				        
+				        <div class="item c-lighter">
+				        	{{country.mosaics}}
+				        </div>
+				        
+					</div>
+					
+				</a>
+		        
+			</div>
+
+		</div>
+		
+	</div>
 
 </div>
 

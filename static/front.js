@@ -1792,6 +1792,21 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 	}
 });
 
+angular.module('FrontModule.controllers').controller('WorldCtrl', function($scope, API) {
+	
+	API.sendRequest('/api/world/', 'GET').then(function(response) {
+
+		response.sort(function(a, b) {
+			return b.mosaics - a.mosaics;
+		});
+		
+		$scope.countries = response;
+		
+		$('#page-loading').addClass('hidden');
+		$('#page-content').removeClass('hidden');
+	});
+});
+
 angular.module('FrontModule.controllers').controller('CountryCtrl', function($scope, API) {
 	
 	$scope.loadCountry = function(name) {
@@ -1800,6 +1815,10 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 		
 		API.sendRequest('/api/country/' + name + '/', 'GET').then(function(response) {
 
+			response.sort(function(a, b) {
+				return b.mosaics - a.mosaics;
+			});
+			
 			$scope.regions = response;
 			
 			$('#page-loading').addClass('hidden');
@@ -1816,6 +1835,10 @@ angular.module('FrontModule.controllers').controller('RegionCtrl', function($sco
 		$scope.region = name;
 		
 		API.sendRequest('/api/region/' + country + '/' + name + '/', 'GET').then(function(response) {
+
+			response.sort(function(a, b) {
+				return b.mosaics - a.mosaics;
+			});
 
 			$scope.cities = response;
 			
