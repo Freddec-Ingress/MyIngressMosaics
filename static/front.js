@@ -1844,7 +1844,7 @@ angular.module('FrontModule.controllers').controller('WorldCtrl', function($scop
 		$scope.sort = 'name';
 		
 		$scope.countries.sort(function(a, b) {
-			return b.name - a.name;
+			return a.name.localeCompare(b.name);
 		});
 	}
 });
