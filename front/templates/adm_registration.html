@@ -44,12 +44,6 @@
                         <div style="width:50px">{{mosaic.count}}</div>
                     </div>
                     
-                    <div class="item">
-                        <a ng-click="removeMosaic(mosaic);">
-                            Hide
-                        </a>
-                    </div>
-                   
                 </div>
             </div>
             
@@ -146,7 +140,7 @@
     	                        </div>
                              </div>
     
-                	        <div class="item-12 ta-center">
+                	        <div class="item-6 ta-right">
                 	        	
                 				<button class="btn-primary" style="width:100px;" ng-click="createMosaic(mosaic);" ng-disabled="mosaic.creating || !mosaic.title || !mosaic.type || !mosaic.columns || !mosaic.country || !mosaic.region || !mosaic.city || (mosaic.missions.length < 1)">
                         			<div ng-show="mosaic.creating">
@@ -156,6 +150,12 @@
                 				</button>
                 				
                 	        </div>
+    
+                	        <div class="item-6">
+                                <button class="btn-secondary" ng-click="removeMosaic(mosaic);">
+                                    Exclude
+                                </button>
+            	            </div>
 
                         </div>
                     </div>
