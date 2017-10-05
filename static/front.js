@@ -1705,7 +1705,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 	
 	$scope.removeMosaic = function(mosaic) {
 		
-		for (var mission in mosaic.missions) {
+		for (var mission of mosaic.missions) {
 			
 			var data = {'ref':mission.ref};
 			API.sendRequest('/api/adm/mission/exclude/', 'POST', {}, data);
