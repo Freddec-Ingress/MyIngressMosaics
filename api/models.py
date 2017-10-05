@@ -328,6 +328,7 @@ class Mission(models.Model):
 	startLat = models.FloatField(null=True, blank=True)
 	startLng = models.FloatField(null=True, blank=True)
 	distance = models.FloatField(null=True, blank=True)
+	admin = models.BooleanField(default=True)
 	
 	mosaic = models.ForeignKey('Mosaic', on_delete=models.SET_NULL, null=True, blank=True, related_name='missions')
 	
