@@ -1430,6 +1430,10 @@ angular.module('FrontModule.controllers').controller('RegionCtrl', function($sco
 
 			$scope.cities = response;
 			
+			for (var city of $scope.cities) {
+				city.newname = city.name;
+			}
+			
 			$('#page-loading').addClass('hidden');
 			$('#page-content').removeClass('hidden');
 		});
@@ -1451,6 +1455,14 @@ angular.module('FrontModule.controllers').controller('RegionCtrl', function($sco
 		$scope.cities.sort(function(a, b) {
 			return a.name.localeCompare(b.name);
 		});
+	}
+	
+	$scope.rename = function(city) {
+		
+		var data = {'country': $scope.country, 'region':$scope.region, 'city':city.name, 'new_city':city.newname};
+		API.sendRequest('/api/adm/city/rename', 'POST', {}, data);
+		
+		city.name = city.newname
 	}
 });
 

@@ -780,46 +780,17 @@ def comment_delete(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
-def adm_getCountries(request):
+def adm_renameCity(request):
 	
 	data = None
 	
-	results = Mosaic.objects.values('country').order_by('country').distinct()
+	results = Mosaic.objects.filter(country=request.data['country'], region=request.data['region'], city=request.data['city'])
 	if (results.count() > 0):
-		
-		data = { 'countries': [], }
 		
 		for item in results:
 			
-			country = {
-				'name': item['country'],
-			}
-			
-			data['countries'].append(country)
-	
-	return Response(data, status=status.HTTP_200_OK)
-
-
-
-#---------------------------------------------------------------------------------------------------
-@api_view(['POST'])
-@permission_classes((IsAuthenticated, ))
-def adm_getRegions(request):
-	
-	data = None
-	
-	results = Mosaic.objects.filter(country=request.data['country']).values('region').order_by('region').distinct()
-	if (results.count() > 0):
-		
-		data = { 'regions': [], }
-		
-		for item in results:
-			
-			region = {
-				'name': item['region'],
-			}
-			
-			data['regions'].append(region)
+			item.city = request.data['new_city']
+			item.save()
 	
 	return Response(data, status=status.HTTP_200_OK)
 
