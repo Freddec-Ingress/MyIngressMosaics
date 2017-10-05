@@ -751,6 +751,16 @@ def comment_add(request):
 	
 	data = None
 	
+	result = Mosaic.objects.filter(ref=request.data['ref'])
+	if result.count() > 0:
+		
+		mosaic = result[0]
+		
+		comment = Comment(user=request.user, mosaic=mosaic, text=request.data['text'])
+		comment.save()
+	
+		data = comment.serialize()
+	
 	return Response(data, status=status.HTTP_200_OK)
 
 
@@ -762,6 +772,14 @@ def comment_update(request):
 	
 	data = None
 	
+	result = Comment.objects.filter(pk=request.data['id'])
+	if result.count() > 0:
+		
+		comment = result[0]
+		
+		comment.text = request.data['text']
+		comment.save()
+	
 	return Response(data, status=status.HTTP_200_OK)
 
 
@@ -772,6 +790,13 @@ def comment_update(request):
 def comment_delete(request):
 	
 	data = None
+	
+	result = Comment.objects.filter(pk=request.data['id'])
+	if result.count() > 0:
+		
+		comment = result[0]
+
+		comment.delete()
 	
 	return Response(data, status=status.HTTP_200_OK)
 
@@ -817,7 +842,7 @@ def adm_renameRegion(request):
 
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
-@permission_classes((AllowAny, ))
+@permission_classes((IsAuthenticated, ))
 def adm_getMosaics(request):
 	
 	data = None
@@ -825,7 +850,7 @@ def adm_getMosaics(request):
 	from django.db.models import Count
 	
 	fieldname = 'name'
-	results = Mission.objects.filter(mosaic__isnull=True).values(fieldname).order_by(fieldname).annotate(count=Count(fieldname)).order_by('-count')
+	results = Mission.objects.filter(mosaic__isnull=True, admin=True).values(fieldname).order_by(fieldname).annotate(count=Count(fieldname)).order_by('-count')
 	if (results.count() > 0):
 		
 		data = []
@@ -841,3 +866,20 @@ def adm_getMosaics(request):
 				data.append(obj)
 	
 	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def adm_excludeMission(request):
+	
+	results = Mission.objects.filter(ref=request.data['ref'], mosaic__isnull=True)
+	if (results.count() > 0):
+	
+		mission = results[0]
+		mission.admin = False
+		mission.save()
+	
+	return Response(None, status=status.HTTP_200_OK)
+	

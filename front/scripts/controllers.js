@@ -1122,6 +1122,12 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 	
 	$scope.removeMosaic = function(mosaic) {
 		
+		for (var mission in mosaic.missions) {
+			
+			var data = {'ref':mission.ref};
+			API.sendRequest('/api/adm/mission/exclude/', 'POST', {}, data);
+		}
+		
 		$scope.mosaics.splice($scope.mosaics.indexOf(mosaic), 1);
 	}
 	
@@ -1135,17 +1141,6 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 
 			mosaic.creating = false;
 		});
-	}
-
-	$scope.deleteMosaic = function(mosaic) {
-		
-		for (var m of mosaic.missions) {
-			
-			var data = { 'ref': m.ref };
-			API.sendRequest('/api/mission/delete/', 'POST', {}, data);
-		}
-		
-		$scope.mosaics.splice($scope.mosaics.indexOf(mosaic), 1);
 	}
 });
 
