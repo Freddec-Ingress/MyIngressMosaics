@@ -49,6 +49,24 @@
 	
 		<div class="row">
 			
+			<div class="item-12" style="padding-top:.75rem; padding-bottom:.75rem;">
+				<div class="row valign-baseline">
+					
+					<div class="item">
+						Sort:
+					</div>
+					
+					<div class="item">
+						<a class="badge-link" ng-class="{'active': sort=='missions'}" ng-click="sortByMissions();">Missions</a>
+					</div>
+					
+					<div class="item">
+						<a class="badge-link" ng-class="{'active': sort=='name'}", ng-click="sortByName();">Name</a>
+					</div>
+					
+				</div>
+			</div>
+			
 			<div class="item-6 item-xl-3" ng-repeat="mosaic in mosaics">
 				<mosaic-vignet mosaic="mosaic"></mosaic-vignet>
 			</div>

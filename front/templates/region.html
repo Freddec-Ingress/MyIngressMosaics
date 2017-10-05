@@ -47,6 +47,24 @@
 	
 		<div class="row">
 			
+			<div class="item-12" style="padding-top:.75rem; padding-bottom:.75rem;">
+				<div class="row valign-baseline">
+					
+					<div class="item">
+						Sort:
+					</div>
+					
+					<div class="item">
+						<a class="badge-link" ng-class="{'active': sort=='mosaics'}" ng-click="sortByMosaics();">Mosaics</a>
+					</div>
+					
+					<div class="item">
+						<a class="badge-link" ng-class="{'active': sort=='name'}", ng-click="sortByName();">Name</a>
+					</div>
+					
+				</div>
+			</div>
+			
 			<div class="item-12 item-xl-3" ng-repeat="city in cities">
 				
 				<a href="/world/{{country}}/{{region}}/{{city.name}}" class="btn-primary btn-block">

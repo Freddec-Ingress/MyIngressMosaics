@@ -1851,6 +1851,8 @@ angular.module('FrontModule.controllers').controller('WorldCtrl', function($scop
 
 angular.module('FrontModule.controllers').controller('CountryCtrl', function($scope, API) {
 	
+	$scope.sort = 'mosaics';
+	
 	$scope.loadCountry = function(name) {
 		
 		$scope.country = name;
@@ -1872,6 +1874,24 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 		});
 	}
 	
+	$scope.sortByMosaics = function() {
+		
+		$scope.sort = 'mosaics';
+		
+		$scope.regions.sort(function(a, b) {
+			return b.mosaics - a.mosaics;
+		});
+	}
+	
+	$scope.sortByName = function() {
+		
+		$scope.sort = 'name';
+		
+		$scope.regions.sort(function(a, b) {
+			return a.name.localeCompare(b.name);
+		});
+	}
+	
 	$scope.rename = function(region) {
 		
 		var data = {'country': $scope.country, 'region':region.name, 'new_region':region.newname};
@@ -1882,6 +1902,8 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 });
 
 angular.module('FrontModule.controllers').controller('RegionCtrl', function($scope, API) {
+	
+	$scope.sort = 'mosaics';
 	
 	$scope.loadRegion = function(country, name) {
 		
@@ -1900,9 +1922,29 @@ angular.module('FrontModule.controllers').controller('RegionCtrl', function($sco
 			$('#page-content').removeClass('hidden');
 		});
 	}
+	
+	$scope.sortByMosaics = function() {
+		
+		$scope.sort = 'mosaics';
+		
+		$scope.cities.sort(function(a, b) {
+			return b.mosaics - a.mosaics;
+		});
+	}
+	
+	$scope.sortByName = function() {
+		
+		$scope.sort = 'name';
+		
+		$scope.cities.sort(function(a, b) {
+			return a.name.localeCompare(b.name);
+		});
+	}
 });
 
 angular.module('FrontModule.controllers').controller('CityCtrl', function($scope, API) {
+	
+	$scope.sort = 'missions';
 	
 	$scope.loadCity = function(country, region, name) {
 		
@@ -1914,8 +1956,28 @@ angular.module('FrontModule.controllers').controller('CityCtrl', function($scope
 
 			$scope.mosaics = response;
 			
+			$scope.sortByMissions();
+			
 			$('#page-loading').addClass('hidden');
 			$('#page-content').removeClass('hidden');
+		});
+	}
+	
+	$scope.sortByMissions = function() {
+		
+		$scope.sort = 'missions';
+		
+		$scope.mosaics.sort(function(a, b) {
+			return b.missions.length - a.missions.length;
+		});
+	}
+	
+	$scope.sortByName = function() {
+		
+		$scope.sort = 'name';
+		
+		$scope.mosaics.sort(function(a, b) {
+			return a.title.localeCompare(b.title);
 		});
 	}
 });
