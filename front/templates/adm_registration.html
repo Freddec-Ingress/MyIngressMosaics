@@ -148,7 +148,7 @@
     
                 	        <div class="item-6 ta-right">
                 	        	
-                				<button class="btn-primary" style="width:100px;" ng-click="createMosaic(mosaic);" ng-disabled="mosaic.creating || !mosaic.title || !mosaic.type || !mosaic.columns || !mosaic.country || (mosaic.missions.length < 1)">
+                				<button class="btn-primary" style="width:100px;" ng-click="createMosaic(mosaic);" ng-disabled="mosaic.creating || !mosaic.title || !mosaic.type || !mosaic.columns || !mosaic.country || !mosaic.region || !mosaic.city || (mosaic.missions.length < 1)">
                         			<div ng-show="mosaic.creating">
                         				<i class="fa fa-spinner"></i>
                         			</div>

@@ -246,7 +246,7 @@
 	        	
     	        <div class="item-12 ta-center">
     	        	
-    				<button class="btn-primary ta-center" style="width:100px;" ng-click="createMosaic();" ng-disabled="creating || !mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || (mosaicModel.missions.length < 1)">
+    				<button class="btn-primary ta-center" style="width:100px;" ng-click="createMosaic();" ng-disabled="creating || !mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || !mosaicModel.region || !mosaicModel.city || (mosaicModel.missions.length < 1)">
             			<span ng-show="creating">
             				<i class="fa fa-spinner"></i>
             			</span>

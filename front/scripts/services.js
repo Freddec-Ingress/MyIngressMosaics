@@ -32,3 +32,99 @@ angular.module('FrontModule.services').service('API', function($q, $http, $cooki
 	
 	return service;
 });
+
+angular.module('FrontModule.services').service('UtilsService', function() {
+	
+	var service = {
+		
+		getOrderFromMissionName: function(name) {
+			
+			var order = 0;
+			
+			var found = name.match(/[0-9]+/);
+			if (found) { order = parseInt(found[0]); }
+			else {
+			
+				found = name.match(/(０|１|２|３|４|５|６|７|８|９)+/);
+				if (found) {
+					
+					var arrayCharracter = ['３９','３８','３７','３６','３５','３４','３３','３２','３１','３０',
+										   '２９','２８','２７','２６','２５','２４','２３','２２','２１','２０',
+										   '１９','１８','１７','１６','１５','１４','１３','１２','１１','１０',
+											 '９',  '８',  '７',  '６',  '５',  '４',  '３',  '２',  '１',  '０']
+											 
+					var arrayInteger = [39,38,37,36,35,34,33,32,31,30,
+										29,28,27,26,25,24,23,22,21,20,
+										19,18,17,16,15,14,13,12,11,10,
+					                     9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+					
+					for (var i in arrayCharracter) {
+						
+						found = name.match(arrayCharracter[i]);
+						if (found) {
+							order = arrayInteger[i];
+							break;
+						}
+					}
+				}
+				else {
+					
+					found = name.match(/(①|②|③|④|⑤|⑥|⑦|⑧|⑨|⑩|⑪|⑫|⑬|⑭|⑮|⑯|⑰|⑱|⑲|⑳|㉑|㉒|㉓|㉔)+/);
+					if (found) {
+						
+						if (found[0] == '①') order = 1;
+						if (found[0] == '②') order = 2;
+						if (found[0] == '③') order = 3;
+						if (found[0] == '④') order = 4;
+ 						if (found[0] == '⑤') order = 5;
+						if (found[0] == '⑥') order = 6;
+						if (found[0] == '⑦') order = 7;
+						if (found[0] == '⑧') order = 8;
+						if (found[0] == '⑨') order = 9;
+						if (found[0] == '⑩') order = 10;
+						if (found[0] == '⑪') order = 11;
+						if (found[0] == '⑫') order = 12;
+						if (found[0] == '⑬') order = 13;
+						if (found[0] == '⑭') order = 14;
+						if (found[0] == '⑮') order = 15;
+						if (found[0] == '⑯') order = 16;
+						if (found[0] == '⑰') order = 17;
+						if (found[0] == '⑱') order = 18;
+						if (found[0] == '⑲') order = 19;
+						if (found[0] == '⑳') order = 20;
+						if (found[0] == '㉑') order = 21;
+						if (found[0] == '㉒') order = 22;
+						if (found[0] == '㉓') order = 23;
+						if (found[0] == '㉔') order = 24;
+					}
+				}
+			}
+			
+			return order;
+		},
+		
+		checkMosaicLocations: function(mosaic) {
+			
+			if (mosaic.country == 'Japan') {
+				
+				if (mosaic.region) mosaic.region = mosaic.region.replace(/ō/g, 'o');
+				if (mosaic.region) mosaic.region = mosaic.region.replace(/Ō/g, 'O');
+				if (mosaic.region) mosaic.region = mosaic.region.replace(' Prefecture', '');
+				if (mosaic.region && mosaic.region.substring(mosaic.region.length-3, mosaic.region.length) == '-to') mosaic.region = mosaic.region.substring(0, mosaic.region.length-3);
+				if (mosaic.region && mosaic.region.substring(mosaic.region.length-3, mosaic.region.length) == '-fu') mosaic.region = mosaic.region.substring(0, mosaic.region.length-3);
+				if (mosaic.region && mosaic.region.substring(mosaic.region.length-4, mosaic.region.length) == '-ken') mosaic.region = mosaic.region.substring(0, mosaic.region.length-4);
+				
+				if (mosaic.city) mosaic.city = mosaic.city.replace(/ō/g, 'o');
+				if (mosaic.city) mosaic.city = mosaic.city.replace(/Ō/g, 'O');
+				if (mosaic.city && mosaic.city.substring(mosaic.city.length-3, mosaic.city.length) == '-ku') mosaic.city = mosaic.city.substring(0, mosaic.city.length-3);
+				if (mosaic.city && mosaic.city.substring(mosaic.city.length-4, mosaic.city.length) == '-son') mosaic.city = mosaic.city.substring(0, mosaic.city.length-4);
+				if (mosaic.city && mosaic.city.substring(mosaic.city.length-4, mosaic.city.length) == '-shi') mosaic.city = mosaic.city.substring(0, mosaic.city.length-4);
+				if (mosaic.city && mosaic.city.substring(mosaic.city.length-4, mosaic.city.length) == '-cho') mosaic.city = mosaic.city.substring(0, mosaic.city.length-4);
+				if (mosaic.city && mosaic.city.substring(mosaic.city.length-5, mosaic.city.length) == '-mura') mosaic.city = mosaic.city.substring(0, mosaic.city.length-5);
+				if (mosaic.city && mosaic.city.substring(mosaic.city.length-6, mosaic.city.length) == '-machi') mosaic.city = mosaic.city.substring(0, mosaic.city.length-6);
+			}
+		},
+	}
+	
+	return service;
+});
