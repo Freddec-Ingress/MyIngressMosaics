@@ -1816,6 +1816,8 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 
 angular.module('FrontModule.controllers').controller('WorldCtrl', function($scope, API) {
 	
+	$scope.sort = 'mosaics';
+	
 	API.sendRequest('/api/world/', 'GET').then(function(response) {
 
 		response.sort(function(a, b) {
@@ -1827,6 +1829,24 @@ angular.module('FrontModule.controllers').controller('WorldCtrl', function($scop
 		$('#page-loading').addClass('hidden');
 		$('#page-content').removeClass('hidden');
 	});
+	
+	$scope.sortByMosaics = function() {
+		
+		$scope.sort = 'mosaics';
+		
+		$scope.countries.sort(function(a, b) {
+			return b.mosaics - a.mosaics;
+		});
+	}
+	
+	$scope.sortByName = function() {
+		
+		$scope.sort = 'name';
+		
+		$scope.countries.sort(function(a, b) {
+			return b.name - a.name;
+		});
+	}
 });
 
 angular.module('FrontModule.controllers').controller('CountryCtrl', function($scope, API) {

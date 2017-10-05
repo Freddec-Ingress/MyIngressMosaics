@@ -287,6 +287,22 @@ a:hover, a:focus, .hover:hover { color: inherit; cursor: pointer; text-decoratio
 
 
 
+/* Badge -------------------------------------------------------------------- */
+
+.badge-link {
+    display: inline-block;
+    padding: .25rem .5rem;
+    text-align: center;
+    border-radius: 10rem;
+}
+
+.badge-link.active {
+    color: #ffffff;
+    background-color: #ebbc4a;
+}
+
+
+
 /******************************************************************************/
 /* FORM                                                                       */
 /******************************************************************************/
