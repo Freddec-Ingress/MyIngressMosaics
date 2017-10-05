@@ -54,5 +54,6 @@ urlpatterns = [
 	url(r'^adm/city/rename',				adm_renameCity),
 	url(r'^adm/region/rename',				adm_renameRegion),
 	url(r'^adm/registration/mosaics/',		adm_getMosaics),
+	url(r'^adm/registration/creators/',		adm_getCreators),
 	url(r'^adm/mission/exclude',			adm_excludeMission),
 ]

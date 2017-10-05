@@ -882,4 +882,32 @@ def adm_excludeMission(request):
 		mission.save()
 	
 	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def adm_getCreators(request):
 	
+	data = None
+	
+	from django.db.models import Count
+	
+	fieldname = 'creator'
+	results = Mission.objects.filter(mosaic__isnull=True, admin=True).values(fieldname).order_by(fieldname).annotate(count=Count(fieldname)).order_by('-count')
+	if (results.count() > 0):
+		
+		data = []
+		
+		for item in results:
+			if item['count'] >= 6:
+				
+				obj = {
+					'name': item[fieldname],
+					'count': item['count'],
+				}
+				
+				data.append(obj)
+	
+	return Response(data, status=status.HTTP_200_OK)

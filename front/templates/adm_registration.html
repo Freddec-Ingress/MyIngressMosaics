@@ -167,6 +167,32 @@
 		
 	</div>
     
+    <div class="block">
+        
+        <div class="panel" ng-repeat="creator in creators">
+            
+            <div class="item-12">
+                <div class="row valign-center">
+    
+                    <div class="item grow">
+                        <input type="text" class="form-control" ng-model="creator.name" />
+                    </div>
+                    
+                    <div class="item">
+                        <input type="submit" style="width:67px;" class="btn-primary" ng-click="refreshCreator(creator);" value="Open" ng-disabled="creator.loading">
+                    </div>
+                    
+                    <div class="item ta-center">
+                        <div style="width:50px">{{creator.count}}</div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+        
+	</div>
+	
 </div>
 
 {% endverbatim %}

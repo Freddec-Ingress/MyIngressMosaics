@@ -1022,10 +1022,13 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 			$scope.mosaics.push(obj);
 		}
 
-		$scope.loading_page = false;
-	
-	$('#page-loading').addClass('hidden');
-	$('#page-content').removeClass('hidden');
+		API.sendRequest('/api/adm/registration/creators/', 'POST').then(function(response) {
+			
+			$scope.creators = response;
+			
+			$('#page-loading').addClass('hidden');
+			$('#page-content').removeClass('hidden');
+		});
 	});
 	
 	function compareOrderAsc(a, b) {
