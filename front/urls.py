@@ -31,5 +31,5 @@ urlpatterns = [
 	url(r'^world/(?P<country>[\w \-,]+)', views.country),
 	url(r'^world', views.world),
 	
-	url(r'^.*', views.home, name='home'),
+	url(r'^.*', views.world),
 ]
