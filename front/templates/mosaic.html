@@ -39,8 +39,28 @@
 
 	<div ng-show="mosaic">
 		
-		<div class="block">
+		<div class="title ttrans-normal">
+			<div class="row">
+				<div class="item grow">
+					<a href="/world">World</a>
+					<span class="text-separator">></span>
+					<a href="/world/{{mosaic.country}}">{{mosaic.country}}</a>
+					<span class="text-separator">></span>
+					<a href="/world/{{mosaic.country}}/{{mosaic.region}}">{{mosaic.region}}</a>
+					<span class="text-separator">></span>
+					<a href="/world/{{mosaic.country}}/{{mosaic.region}}/{{mosaic.city}}">{{mosaic.city}}</a>
+				</div>
+				<div class="item">
+					<a href="/map/{{mosaic.city}},{{mosaic.region}},{{mosaic.country}}">
+						<i class="fa fa-map text-separator"></i>
+						Map
+					</a>
+				</div>
+			</div>
+		</div>
 			
+		<div class="block">
+	
 			<div class="panel">
 				
 				<div class="item-12 c-white ts-big">
@@ -72,25 +92,7 @@
 						<i class="fa fa-check-square" ng-class="{'c-green':mosaic.is_completed}"></i>
 					</button>
 				</div>
-				
-				<div class="item-12 row">
-					<div class="item grow">
-						<a href="/world">World</a>
-						<span class="text-separator">></span>
-					    <a href="/world/{{mosaic.country}}">{{mosaic.country}}</a>
-					    <span class="text-separator">></span>
-					    <a href="/world/{{mosaic.country}}/{{mosaic.region}}">{{mosaic.region}}</a>
-					    <span class="text-separator">></span>
-					    <a href="/world/{{mosaic.country}}/{{mosaic.region}}/{{mosaic.city}}">{{mosaic.city}}</a>
-					</div>
-					<div class="item">
-					    <a href="/map/{{mosaic.city}},{{mosaic.region}},{{mosaic.country}}">
-					    	<i class="fa fa-map text-separator"></i>
-					    	Map
-					    </a>
-					</div>
-				</div>
-				
+
 				<div class="item-12">
 					{{mosaic.missions.length}} <i class="fa fa-th mx-1"></i>
 					<span class="text-separator">&middot;</span>

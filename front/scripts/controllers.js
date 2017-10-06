@@ -600,6 +600,8 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 
 angular.module('FrontModule.controllers').controller('RegistrationCtrl', function($scope, $window, API, UtilsService) {
 	
+	$scope.selectedPotential = null;
+	
 	$scope.$on('user-loaded', function(event, args) {
 	
 		API.sendRequest('/api/potentials/', 'POST').then(function(response) {
@@ -840,24 +842,15 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		
 			$window.open('https://www.myingressmosaics.com/mosaic/' + response);
 			
-			$('#createButton').text('Create');
-			$scope.creating = false;
-		
-		}, function(response) {
-			
-			var missions = $scope.mosaicModel.missions.slice();
-			for (var m of missions) {
-				$scope.mosaicModel.missions.splice($scope.mosaicModel.missions.indexOf(m), 1);
+			if ($scope.selectedPotential) {
+				
+				var index = $scope.potentials.indexOf($scope.selectedPotential);
+				if (index != -1) {
+					
+					$scope.potentials.splice(index, 1);
+				}
 			}
-			
-			$scope.mosaicModel.city = null;
-			$scope.mosaicModel.type = 'sequence';
-			$scope.mosaicModel.title = null;
-			$scope.mosaicModel.region = null;
-			$scope.mosaicModel.columns = '6';
-			$scope.mosaicModel.country = null;
-		
-			$window.open('https://www.myingressmosaics.com/mosaic/' + response);
+			$scope.selectedPotential = null;
 			
 			$('#createButton').text('Create');
 			$scope.creating = false;
