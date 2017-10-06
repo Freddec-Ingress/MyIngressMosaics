@@ -600,8 +600,6 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 
 angular.module('FrontModule.controllers').controller('RegistrationCtrl', function($scope, $window, API, UtilsService) {
 	
-	$scope.searchText = null;
-	
 	$scope.$on('user-loaded', function(event, args) {
 	
 		API.sendRequest('/api/potentials/', 'POST').then(function(response) {
@@ -615,34 +613,38 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 	
 	$scope.searchModel = {
 		
+		'text': '',
 		'results': [],
 	}
 	
 	$scope.searching = false;
 	
-	$scope.search = function(text) {
+	$scope.search = function() {
 		
-		$scope.searchText = text;
 		$scope.searchModel.results = [];
-		
-		$('#searchBox').val(text);
-		
+
 		$scope.searching = true;
 		
-		if (!text) {
+		if (!$scope.searchModel.text) {
 			
 			$scope.searching = false;
 			return;
 		}
 		
-		$window.scrollTo(0, 0);
-		
-		var data = {'text': text}
+		var data = {'text': $scope.searchModel.text}
 		API.sendRequest('/api/missions/', 'POST', {}, data).then(function(response) {
 			
 			$scope.searchModel.results = response.missions;
 			$scope.searching = false;
 		});
+	}
+	
+	$scope.searchAdv = function(text) {
+		
+		$scope.searchModel.text = text;
+		$scope.search();
+		
+		$window.scrollTo(0, 0);
 	}
 	
 	$scope.mosaicModel = {
