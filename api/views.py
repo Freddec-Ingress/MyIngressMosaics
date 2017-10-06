@@ -871,3 +871,19 @@ def data_getPotentials(request):
 				data.append(obj)
 	
 	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def adm_excludePotential(request):
+	
+	results = Mission.objects.filter(mosaic__isnull=True, name=request.data['name'])
+	for item in results:
+		
+		item.admin = False
+		item.save()
+	
+	return Response(None, status=status.HTTP_200_OK)
+	

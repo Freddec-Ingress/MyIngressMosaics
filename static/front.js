@@ -1435,6 +1435,15 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 			});
 		});
 	}
+	
+	$scope.excludePotential = function(index, potential) {
+		
+		var data = { 'name':potential.name }
+		API.sendRequest('/api/adm/potential/exclude/', 'POST', {}, data).then(function(response) {
+			
+			$scope.potentials.splice(index, 1);
+		});
+	}
 });
 
 angular.module('FrontModule.controllers').controller('LoginCtrl', function($scope, $auth, $cookies, $window, API) {
