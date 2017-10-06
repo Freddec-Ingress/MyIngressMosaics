@@ -625,6 +625,8 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		$scope.searchText = text;
 		$scope.searchModel.results = [];
 		
+		$('#searchBox').val(text);
+		
 		$scope.searching = true;
 		
 		if (!text) {
