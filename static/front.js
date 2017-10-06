@@ -1423,12 +1423,12 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 			$scope.mosaicModel.region = null;
 			$scope.mosaicModel.columns = '6';
 			$scope.mosaicModel.country = null;
+		
+			$window.open('https://www.myingressmosaics.com/mosaic/' + response);
 			
 			API.sendRequest('/api/potentials/', 'POST').then(function(response) {
 				
 				$scope.potentials = response;
-		
-				$window.open('https://www.myingressmosaics.com/mosaic/' + response);
 				
 				$('#createButton').text('Create');
 				$scope.creating = false;
