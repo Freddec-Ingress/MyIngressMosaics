@@ -1183,7 +1183,7 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 
 angular.module('FrontModule.controllers').controller('RegistrationCtrl', function($scope, $window, API, UtilsService) {
 	
-	$scope.selectedPotential = null;
+	$scope.searchText = null;
 	
 	$scope.$on('user-loaded', function(event, args) {
 	
@@ -1422,21 +1422,16 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 			$scope.mosaicModel.region = null;
 			$scope.mosaicModel.columns = '6';
 			$scope.mosaicModel.country = null;
-		
-			$window.open('https://www.myingressmosaics.com/mosaic/' + response);
 			
-			if ($scope.selectedPotential) {
+			API.sendRequest('/api/potentials/', 'POST').then(function(response) {
 				
-				var index = $scope.potentials.indexOf($scope.selectedPotential);
-				if (index != -1) {
-					
-					$scope.potentials.splice(index, 1);
-				}
-			}
-			$scope.selectedPotential = null;
-			
-			$('#createButton').text('Create');
-			$scope.creating = false;
+				$scope.potentials = response;
+		
+				$window.open('https://www.myingressmosaics.com/mosaic/' + response);
+				
+				$('#createButton').text('Create');
+				$scope.creating = false;
+			});
 		});
 	}
 });

@@ -84,7 +84,7 @@
 						</div>
 						
 						<div class="item">
-							<button id="searchButton" type="submit" style="width:100px;" class="btn btn-primary ml-2 ta-center" ng-click="selectedPotential = null; search(searchText);" ng-disabled="searching">
+							<button id="searchButton" type="submit" style="width:100px;" class="btn btn-primary ml-2 ta-center" ng-click="search(searchText);" ng-disabled="searching">
 								<span ng-show="searching">
 									<i class="fa fa-spinner rotating mr-1"></i>
 								</span>
@@ -274,7 +274,7 @@
 			
 				<div class="item-12 item-xl-3" ng-repeat="potential in potentials">
 				
-					<a class="btn-primary btn-block" ng-click="searchText = potential.name; selectedPotential = potential; search(searchText);">
+					<a class="btn-primary btn-block" ng-click="searchText = potential.name; search(searchText);">
 					
 						<div class="row valign-center">
 							
