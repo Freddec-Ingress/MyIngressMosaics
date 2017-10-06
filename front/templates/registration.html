@@ -288,13 +288,13 @@
 					        
 						</div>
 						
-						<div ng-if="user.superuser" class="row valign-center">
-							<a ng-click="excludePotential($index, potential);">
-								Exclude
-							</a>
-						</div>
-						
 					</a>
+					
+					<div ng-if="user.superuser">
+						<a class="item" ng-click="excludePotential($index, potential);">
+							Exclude
+						</a>
+					</div>
 		        
 		        </div>
 		        
