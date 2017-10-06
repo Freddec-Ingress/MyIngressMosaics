@@ -1218,6 +1218,8 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 			return;
 		}
 		
+		$window.scrollTo(0, 0);
+		
 		var data = {'text': text}
 		API.sendRequest('/api/missions/', 'POST', {}, data).then(function(response) {
 			
