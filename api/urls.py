@@ -51,9 +51,8 @@ urlpatterns = [
 	url(r'^comment/update/',		comment_update),
 	url(r'^comment/delete/',		comment_delete),
 	
+	url(r'^potentials/',		data_getPotentials),
+	
 	url(r'^adm/city/rename',				adm_renameCity),
 	url(r'^adm/region/rename',				adm_renameRegion),
-	url(r'^adm/registration/mosaics/',		adm_getMosaics),
-	url(r'^adm/registration/creators/',		adm_getCreators),
-	url(r'^adm/mission/exclude',			adm_excludeMission),
 ]

@@ -848,58 +848,13 @@ def adm_renameRegion(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
-def adm_getMosaics(request):
+def data_getPotentials(request):
 	
 	data = None
 	
 	from django.db.models import Count
 	
 	fieldname = 'name'
-	results = Mission.objects.filter(mosaic__isnull=True, admin=True).values(fieldname).order_by(fieldname).annotate(count=Count(fieldname)).order_by('-count')
-	if (results.count() > 0):
-		
-		data = []
-		
-		for item in results:
-			if item['count'] >= 6:
-				
-				obj = {
-					'name': item[fieldname],
-					'count': item['count'],
-				}
-				
-				data.append(obj)
-	
-	return Response(data, status=status.HTTP_200_OK)
-
-
-
-#---------------------------------------------------------------------------------------------------
-@api_view(['POST'])
-@permission_classes((IsAuthenticated, ))
-def adm_excludeMission(request):
-	
-	results = Mission.objects.filter(ref=request.data['ref'], mosaic__isnull=True)
-	if (results.count() > 0):
-	
-		mission = results[0]
-		mission.admin = False
-		mission.save()
-	
-	return Response(None, status=status.HTTP_200_OK)
-
-
-
-#---------------------------------------------------------------------------------------------------
-@api_view(['POST'])
-@permission_classes((IsAuthenticated, ))
-def adm_getCreators(request):
-	
-	data = None
-	
-	from django.db.models import Count
-	
-	fieldname = 'creator'
 	results = Mission.objects.filter(mosaic__isnull=True, admin=True).values(fieldname).order_by(fieldname).annotate(count=Count(fieldname)).order_by('-count')
 	if (results.count() > 0):
 		

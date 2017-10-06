@@ -80,11 +80,11 @@
 					<form class="row">
 					
 						<div class="item grow">
-							<input type="text" class="form-control" placeholder="mosaic name, creator" ng-model="searchModel.text" />
+							<input type="text" class="form-control" placeholder="mosaic name, creator" ng-model="searchText" />
 						</div>
 						
 						<div class="item">
-							<button id="searchButton" type="submit" style="width:100px;" class="btn btn-primary ml-2 ta-center" ng-click="search();" ng-disabled="searching">
+							<button id="searchButton" type="submit" style="width:100px;" class="btn btn-primary ml-2 ta-center" ng-click="search(searchText);" ng-disabled="searching">
 								<span ng-show="searching">
 									<i class="fa fa-spinner rotating mr-1"></i>
 								</span>
@@ -259,11 +259,41 @@
 	        
         </div>
 
-		<div ng-if="user.superuser" class="block">
+		<div class="title">
+			Potential mosaics
+		</div>
+		
+		<div class="block">
 			
-			<a class="btn-danger" href="/adm_registration">
-				Admin Registration
-			</a>
+			<div class="row">
+			
+				<div class="item-12">
+					No potential
+				</div>
+			
+				<div class="item-12 item-xl-3" ng-repeat="potential in potentials">
+				
+					<a class="btn-primary btn-block">
+					
+						<div class="row valign-center">
+							
+							<div class="item grow ta-left ellipsis">
+					        	{{potential.name}}
+					        </div>
+					        
+					        <div class="item c-lighter">
+					        	{{potential.count}}
+					        </div>
+					        
+						</div>
+						
+					</a>
+		        
+		        </div>
+		        
+			</div>
+
+		</div>
 			
 		</div>
 			

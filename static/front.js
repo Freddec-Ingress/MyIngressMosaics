@@ -1184,37 +1184,39 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 angular.module('FrontModule.controllers').controller('RegistrationCtrl', function($scope, $window, API, UtilsService) {
 	
 	$scope.$on('user-loaded', function(event, args) {
-		
-		$('#page-loading').addClass('hidden');
-		$('#page-content').removeClass('hidden');
+	
+		API.sendRequest('/api/potentials/', 'POST').then(function(response) {
+			
+			$scope.potentials = response;
+			
+			$('#page-loading').addClass('hidden');
+			$('#page-content').removeClass('hidden');
+		});
 	});
-
+	
 	$scope.searchModel = {
 		
-		'text': null,
 		'results': [],
 	}
 	
 	$scope.searching = false;
 	
-	$scope.search = function() {
+	$scope.search = function(text) {
 		
 		$scope.searchModel.results = [];
 		
-		$('#searchButton').val('');
 		$scope.searching = true;
 		
-		if (!$scope.searchModel.text) {
-			$('#searchButton').val('Search');
+		if (!text) {
+			
 			$scope.searching = false;
 			return;
 		}
 		
-		var data = {'text': $scope.searchModel.text}
+		var data = {'text': text}
 		API.sendRequest('/api/missions/', 'POST', {}, data).then(function(response) {
 			
 			$scope.searchModel.results = response.missions;
-			$('#searchButton').val('Search');
 			$scope.searching = false;
 		});
 	}
@@ -1561,165 +1563,6 @@ angular.module('FrontModule.controllers').controller('ProfileCtrl', function($sc
 		API.sendRequest('/api/user/logout/', 'POST').then(function(response) {
 			
 			$window.location.href = '/';
-		});
-	}
-});
-
-angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', function($scope, API, UtilsService) {
-
-	$scope.loading_page = true;
-	
-	$scope.mosaics = [];
-	
-	API.sendRequest('/api/adm/registration/mosaics/', 'POST').then(function(response) {
-		
-		$scope.mosaics = [];
-		
-		for (var item of response) {
-			
-			var obj = {
-				
-				'name': item.name,
-				'count': item.count,
-				
-				'loading': false,
-				'creating': false,
-				
-				'type': 'sequence',
-				'title': item.name,
-				'columns': '6',
-				
-				'city': null,
-				'region': null,
-				'country': null,
-				
-				'missions': [],
-			}
-			
-			$scope.mosaics.push(obj);
-		}
-
-		API.sendRequest('/api/adm/registration/creators/', 'POST').then(function(response) {
-			
-			$scope.creators = response;
-			
-			$('#page-loading').addClass('hidden');
-			$('#page-content').removeClass('hidden');
-		});
-	});
-	
-	function compareOrderAsc(a, b) {
-		
-		if (parseInt(a.order) < parseInt(b.order))
-			return -1;
-			
-		if (parseInt(a.order) > parseInt(b.order))
-			return 1;
-		
-		if (a.title < b.title)
-			return -1;
-			
-		if (a.title > b.title)
-			return 1;
-			
-		return 0;
-	}
-	
-	$scope.refrech = function(mosaic) {
-		
-		mosaic.missions = [];
-		
-		mosaic.loading = true;
-
-		var data = {'text': mosaic.name}
-		API.sendRequest('/api/missions/', 'POST', {}, data).then(function(response) {
-			
-			if (!response.missions || response.missions.length < 1) {
-				
-				mosaic.loading = false;
-				return;
-			}
-			
-			mosaic.title = mosaic.name;
-			
-			mosaic.missions = response.missions;
-			
-			for (var item of mosaic.missions) {
-				
-				var order = UtilsService.getOrderFromMissionName(item.title);
-				item.order = order.toString();
-			}
-			
-			mosaic.missions.sort(compareOrderAsc);
-			
-			var geocoder = new google.maps.Geocoder;
-			
-			var latlng = {
-				lat: parseFloat(mosaic.missions[0].startLat),
-				lng: parseFloat(mosaic.missions[0].startLng),
-			};
-			
-			geocoder.geocode({'location': latlng, 'language': 'en'}, function(results, status) {
-				
-				if (status === 'OK') {
-					
-					var components = null;
-					if (results[0]) components = results[0].address_components;
-					if (results[1]) components = results[1].address_components;
-					
-					if (components) {
-						
-						var admin2 = null;
-						var admin3 = null;
-						
-						for (var item of components) {
-							
-							if (item.types[0] == 'country') mosaic.country = item.long_name;
-							if (item.types[0] == 'locality') mosaic.city = item.long_name;
-							if (item.types[0] == 'administrative_area_level_1') mosaic.region = item.long_name;
-							if (item.types[0] == 'administrative_area_level_2') admin2 = item.long_name;
-							if (item.types[0] == 'administrative_area_level_3') admin3 = item.long_name;
-						}
-						
-						if (!mosaic.city && admin2) mosaic.city = item.admin2;
-						if (!mosaic.city && admin3) mosaic.city = item.admin3;
-						
-						UtilsService.checkMosaicLocations(mosaic);
-						
-						$scope.$applyAsync();
-					}
-				}
-				
-				mosaic.loading = false;
-			});
-		});
-	}
-
-	$scope.reorderMosaic = function(mosaic) {
-		
-		mosaic.missions.sort(compareOrderAsc);
-	}
-	
-	$scope.removeMosaic = function(mosaic) {
-		
-		for (var mission of mosaic.missions) {
-			
-			var data = {'ref':mission.ref};
-			API.sendRequest('/api/adm/mission/exclude/', 'POST', {}, data);
-		}
-		
-		$scope.mosaics.splice($scope.mosaics.indexOf(mosaic), 1);
-	}
-	
-	$scope.createMosaic = function(mosaic) {
-
-		mosaic.creating = true;
-
-		API.sendRequest('/api/mosaic/create/', 'POST', {}, mosaic).then(function(response) {
-
-			$scope.mosaics.splice($scope.mosaics.indexOf(mosaic), 1);
-
-			mosaic.creating = false;
 		});
 	}
 });

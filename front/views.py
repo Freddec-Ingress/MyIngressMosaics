@@ -196,13 +196,6 @@ def search(request):
 	context = {}
 	return render(request, 'search.html', context)
 
-	
-	
-def adm_registration(request):
-	
-	context = {}
-	return render(request, 'adm_registration.html', context)
-
 
 
 def city(request, country, region, city):

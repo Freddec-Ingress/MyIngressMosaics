@@ -17,13 +17,14 @@ urlpatterns = [
 	url(r'^mosaic/(?P<ref>\w+)/preview',        views.preview),
 	url(r'^mosaic/(?P<ref>\w+)',        views.mosaic),
 	
-	url(r'^registration',  views.registration),
-	
 	url(r'^search',        views.search),
 	url(r'^login',         views.login),
+	url(r'^registration',  views.registration),
 	url(r'^register', views.register),
 	url(r'^profile', views.profile),
-
+	
+	url(r'^adm_registration', views.adm_registration),
+	
 	url(r'^world/(?P<country>[\w \-,]+)/(?P<region>[\w \-,]+)/(?P<city>[\w \-,]+)', views.city),
 	url(r'^world/(?P<country>[\w \-,]+)/(?P<region>[\w \-,]+)', views.region),
 	url(r'^world/(?P<country>[\w \-,]+)', views.country),
@@ -31,3 +32,37 @@ urlpatterns = [
 	
 	url(r'^.*', views.world),
 ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
