@@ -19,7 +19,6 @@ urlpatterns = [
 	
 	url(r'^search',        views.search),
 	url(r'^login',         views.login),
-	url(r'^creator',       views.creator),
 	url(r'^registration',  views.registration),
 	url(r'^register', views.register),
 	url(r'^profile', views.profile),

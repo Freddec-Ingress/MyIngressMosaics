@@ -11,20 +11,6 @@ import urllib, io
 
 from operator import itemgetter, attrgetter, methodcaller
 
-
-
-def creator(request):
-	
-	context = {}
-	return render(request, 'creator.html', context)
-	
-	
-	
-def home(request):
-	
-	context = {}
-	return render(request, 'home.html', context)
-	
 	
 	
 def login(request):
@@ -54,6 +40,7 @@ def sitemap(request):
     
 	text += '<url><loc>https://www.myingressmosaics.com</loc><changefreq>daily</changefreq></url>'
 	text += '<url><loc>https://www.myingressmosaics.com/map</loc><changefreq>daily</changefreq></url>'
+	text += '<url><loc>https://www.myingressmosaics.com/world</loc><changefreq>daily</changefreq></url>'
 	text += '<url><loc>https://www.myingressmosaics.com/search</loc><changefreq>daily</changefreq></url>'
     
     # Mosaic URLs
@@ -67,6 +54,7 @@ def sitemap(request):
 	countries = Mosaic.objects.values('country').distinct()
 	for country in countries:
 		text += '<url><loc>https://www.myingressmosaics.com/map/' + country['country'] + '</loc><changefreq>daily</changefreq></url>'
+		text += '<url><loc>https://www.myingressmosaics.com/world/' + country['country'] + '</loc><changefreq>daily</changefreq></url>'
 
 	text += '</urlset>'
     
@@ -179,14 +167,7 @@ def mosaic(request, ref):
 		context = { 'ref': ref }
 		
 	return render(request, 'mosaic.html', context)
-	
-	
-	
-def plugin(request):
-	
-	context = {}
-	return render(request, 'plugin.html', context)
-	
+
 	
 	
 def profile(request):

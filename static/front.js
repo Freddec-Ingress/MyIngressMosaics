@@ -620,12 +620,6 @@ angular.module('FrontModule.controllers').controller('RootCtrl', function($rootS
 	}
 });
 
-angular.module('FrontModule.controllers').controller('HomeCtrl', function($scope, API) {
-	
-	$('#page-loading').addClass('hidden');
-	$('#page-content').removeClass('hidden');
-});
-
 angular.module('FrontModule.controllers').controller('MosaicCtrl', function($scope, $window, API) {
 
 	$scope.loadMosaic = function(ref) {
@@ -1732,15 +1726,12 @@ angular.module('FrontModule.controllers').controller('AdmRegistrationCtrl', func
 
 angular.module('FrontModule.controllers').controller('WorldCtrl', function($scope, API) {
 	
-	$scope.sort = 'mosaics';
-	
 	API.sendRequest('/api/world/', 'GET').then(function(response) {
 
-		response.sort(function(a, b) {
-			return b.mosaics - a.mosaics;
-		});
+		$scope.count = response.count;
+		$scope.countries = response.countries;
 		
-		$scope.countries = response;
+		$scope.sortByMosaics();
 		
 		$('#page-loading').addClass('hidden');
 		$('#page-content').removeClass('hidden');
