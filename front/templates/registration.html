@@ -260,6 +260,7 @@
         </div>
 
 		<div class="title">
+			<span ng-show="potentials.length > 0">{{potentials.length}}</span>
 			Potential mosaics
 		</div>
 		
@@ -267,13 +268,13 @@
 			
 			<div class="row">
 			
-				<div class="item-12">
+				<div ng-show="potentials.length < 1" class="item-12">
 					No potential
 				</div>
 			
 				<div class="item-12 item-xl-3" ng-repeat="potential in potentials">
 				
-					<a class="btn-primary btn-block">
+					<a class="btn-primary btn-block" ng-click="searchText = potential.name; search(searchText);">
 					
 						<div class="row valign-center">
 							
