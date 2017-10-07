@@ -873,10 +873,11 @@ def data_getPotentials(request):
 				data.append(obj)
 
 			else:
+				if item[fieldname]:
 				
-				if len(item[fieldname]) > 7:
-					text = item[fieldname][:6]
-					rest.append(text)
+					if len(item[fieldname]) > 7:
+						text = item[fieldname][:6]
+						rest.append(text)
 		
 		tested = []
 		for item in rest:
