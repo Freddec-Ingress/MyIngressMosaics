@@ -605,6 +605,9 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		API.sendRequest('/api/potentials/', 'POST').then(function(response) {
 			
 			$scope.potentials = response;
+			$scope.potentials.sort(function(a, b) {
+				return b.count - a.count;
+			});
 			
 			$('#page-loading').addClass('hidden');
 			$('#page-content').removeClass('hidden');
