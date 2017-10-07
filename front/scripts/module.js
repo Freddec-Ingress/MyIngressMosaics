@@ -5,7 +5,7 @@ angular.module('FrontModule', ['satellizer', 'ngCookies',
 
 /* Satellizer config */
 
-angular.module('FrontModule').config(function($authProvider, $locale) {
+angular.module('FrontModule').config(function($authProvider) {
 	
 	$authProvider.facebook({
 		
@@ -21,8 +21,6 @@ angular.module('FrontModule').config(function($authProvider, $locale) {
 
 	$authProvider.authToken = 'Token';
 	$authProvider.tokenType = 'Token';
-	
-	$locale.NUMBER_FORMATS.GROUP_SEP = ' ';
 });
 
 
