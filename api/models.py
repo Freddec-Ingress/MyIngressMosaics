@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import re
 import json
 
 from math import *
@@ -335,7 +336,10 @@ class Mission(models.Model):
 	# Admin displaying
 	
 	def __str__(self):
-		return self.title
+		if self.name:
+			return self.title + '|' + self.name
+		else:
+			return self.title
 
 	# Portals data
 	
@@ -437,7 +441,7 @@ class Mission(models.Model):
 		self.name = self.name.replace('  ', ' ')
 		self.name = self.name.replace('　', ' ')
 		self.name = self.name.strip()
-
+			
 		portals = self.getPortalsData()
 
 		self.startLat = 0.0

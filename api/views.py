@@ -860,8 +860,10 @@ def data_getPotentials(request):
 		
 		data = []
 		
+		rest = []
+		
 		for item in results:
-			if item['count'] >= 6:
+			if item['count'] >= 3:
 				
 				obj = {
 					'name': item[fieldname],
@@ -869,6 +871,27 @@ def data_getPotentials(request):
 				}
 				
 				data.append(obj)
+
+			else:
+				
+				rest.append(item[fieldname])
+		
+		tested = []
+		for item in rest:
+			
+			testString = item[:6]
+			if testString not in tested:
+				
+				tested.append(testString)
+				count = Mission.objects.filter(mosaic__isnull=True, admin=True, name__icontains=testString).count()
+				if count >= 3:
+				
+					obj = {
+						'name': testString,
+						'count': count,
+					}
+					
+					data.append(obj)
 	
 	return Response(data, status=status.HTTP_200_OK)
 
