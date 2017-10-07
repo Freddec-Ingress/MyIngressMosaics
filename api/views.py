@@ -874,7 +874,9 @@ def data_getPotentials(request):
 
 			else:
 				
-				rest.append(item[fieldname][:6])
+				if len(item[fieldname]) > 7:
+					text = item[fieldname][:6]
+					rest.append(text)
 		
 		tested = []
 		for item in rest:
