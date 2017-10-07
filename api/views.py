@@ -874,20 +874,19 @@ def data_getPotentials(request):
 
 			else:
 				
-				rest.append(item[fieldname])
+				rest.append(item[fieldname][:6])
 		
 		tested = []
 		for item in rest:
 			
-			testString = item[:6]
-			if testString not in tested:
+			if item not in tested:
 				
-				tested.append(testString)
-				count = Mission.objects.filter(mosaic__isnull=True, admin=True, name__icontains=testString).count()
+				tested.append(item)
+				count = rest.count(item)
 				if count >= 3:
 				
 					obj = {
-						'name': testString,
+						'name': item,
 						'count': count,
 					}
 					
