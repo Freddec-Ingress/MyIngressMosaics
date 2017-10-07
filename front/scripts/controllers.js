@@ -855,6 +855,8 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 				
 				$('#createButton').text('Create');
 				$scope.creating = false;
+		
+				$window.scrollTo(0, 0);
 			});
 		});
 	}
