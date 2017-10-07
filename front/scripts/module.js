@@ -3,7 +3,7 @@ angular.module('FrontModule', ['satellizer', 'ngCookies',
 
 
 
-/* Satellizer config */
+/* Config */
 
 angular.module('FrontModule').config(function($authProvider) {
 	
@@ -23,6 +23,15 @@ angular.module('FrontModule').config(function($authProvider) {
 	$authProvider.tokenType = 'Token';
 });
 
+
+
+/* Running */
+
+angular.module('FrontModule').run(['$locale', function($locale) {
+	
+	$locale.NUMBER_FORMATS.GROUP_SEP = ' ';
+	$locale.NUMBER_FORMATS.DECIMAL_SEP = '.';
+}]);
 
 
 
