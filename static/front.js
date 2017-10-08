@@ -1184,18 +1184,25 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 angular.module('FrontModule.controllers').controller('RegistrationCtrl', function($scope, $window, API, UtilsService) {
 	
 	$scope.$on('user-loaded', function(event, args) {
+		
+		$('#page-loading').addClass('hidden');
+		$('#page-content').removeClass('hidden');
 	
+	});
+	
+	$scope.refreshingPotential = false;
+	$scope.refreshPotentials = function() {
+	
+		$scope.refreshingPotential = true;
+		
 		API.sendRequest('/api/potentials/', 'POST').then(function(response) {
 			
 			$scope.potentials = response;
 			$scope.potentials.sort(function(a, b) {
 				return b.count - a.count;
 			});
-			
-			$('#page-loading').addClass('hidden');
-			$('#page-content').removeClass('hidden');
 		});
-	});
+	}
 	
 	$scope.searchModel = {
 		
@@ -1285,8 +1292,10 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		for (var m of missions) {
 			$scope.removeMission(m);
 		}
+		
+		$window.scrollTo(0, 0);
 	}
-			
+	
 	$scope.removeMission = function(item) {
 		
 		$scope.searchModel.results.push(item);
@@ -1435,15 +1444,10 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		
 			$window.open('https://www.myingressmosaics.com/mosaic/' + response);
 			
-			API.sendRequest('/api/potentials/', 'POST').then(function(response) {
-				
-				$scope.potentials = response;
-				
-				$('#createButton').text('Create');
-				$scope.creating = false;
-		
-				$window.scrollTo(0, 0);
-			});
+			$('#createButton').text('Create');
+			$scope.creating = false;
+	
+			$window.scrollTo(0, 0);
 		});
 	}
 	
