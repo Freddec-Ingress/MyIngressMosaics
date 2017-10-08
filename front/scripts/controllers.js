@@ -619,6 +619,8 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 			$scope.potentials.sort(function(a, b) {
 				return b.count - a.count;
 			});
+			
+			$scope.refreshingPotential = false;
 		});
 	}
 	
