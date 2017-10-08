@@ -1187,7 +1187,8 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		
 		$('#page-loading').addClass('hidden');
 		$('#page-content').removeClass('hidden');
-	
+		
+		$scope.refreshPotentials();
 	});
 	
 	$scope.refreshingPotential = false;
