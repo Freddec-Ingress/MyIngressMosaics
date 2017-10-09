@@ -758,7 +758,7 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		for (var m of missions) {
 			
 			var data = { 'ref':m.ref }
-			API.sendRequest('/api/adm/mission/exclude/', 'POST', {}, data);
+			API.sendRequest('/api/mission/exclude/', 'POST', {}, data);
 		}
 	}
 	
