@@ -757,8 +757,8 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		var missions = $scope.searchModel.results.slice();
 		for (var m of missions) {
 			
-			var data = { 'name':m.name }
-			API.sendRequest('/api/adm/potential/exclude/', 'POST', {}, data);
+			var data = { 'ref':m.ref }
+			API.sendRequest('/api/adm/mission/exclude/', 'POST', {}, data);
 		}
 	}
 	

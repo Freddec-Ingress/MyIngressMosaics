@@ -35,6 +35,7 @@ urlpatterns = [
 	
 	url(r'^mission/delete/',		mission_delete),
 	url(r'^mission/order/',			mission_order),
+	url(r'^mission/exclude/',		mission_exclude),
 
 	url(r'^missions/',				data_searchForMissions),
 	url(r'^search/',				data_searchForMosaics),

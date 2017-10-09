@@ -516,6 +516,21 @@ def mission_delete(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
+def mission_exclude(request):
+	
+	result = Mission.objects.filter(ref=request.data['ref'])
+	if result.count() > 0:
+		
+		result[0].admin = False
+		result[0].save()
+		
+	return Response(None, status=status.HTTP_200_OK)
+	
+	
+	
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
 def mission_order(request):
 	
 	result = Mission.objects.filter(ref=request.data['ref'])
