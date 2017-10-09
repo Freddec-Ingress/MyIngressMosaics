@@ -129,8 +129,14 @@
 	                
                 <div class="item-12">
                     {{searchModel.results.length}} missions
-                    <span ng-if="searchModel.results.length > 0" class="text-separator">&middot;</span>
-                    <a ng-if="searchModel.results.length > 0" ng-click="addAll();">Add all</a>
+                    <span ng-if="searchModel.results.length > 0">
+	                    <span class="text-separator">&middot;</span>
+	                    <a ng-click="addAll();">Add all</a>
+	                    <span ng-if="user.superuser">
+	                    	<span class="text-separator">&middot;</span>
+	                  	  	<a ng-click="excludeAll();">Exclude all</a>
+	                    </span>
+	            	</span>
                 </div>
                 
             </div>

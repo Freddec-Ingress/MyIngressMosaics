@@ -752,6 +752,16 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		}
 	}
 	
+	$scope.excludeAll = function() {
+		
+		var missions = $scope.searchModel.results.slice();
+		for (var m of missions) {
+			
+			var data = { 'name':m.name }
+			API.sendRequest('/api/adm/potential/exclude/', 'POST', {}, data);
+		}
+	}
+	
 	$scope.addMission = function(item) {
 		
 		$scope.mosaicModel.missions.push(item);
