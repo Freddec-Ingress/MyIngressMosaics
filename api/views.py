@@ -518,11 +518,11 @@ def mission_delete(request):
 @permission_classes((IsAuthenticated, ))
 def mission_exclude(request):
 	
-	result = Mission.objects.filter(ref=request.data['ref'])
-	if result.count() > 0:
+	results = Mission.objects.filter(ref=request.data['ref'])
+	for item in results:
 		
-		result[0].admin = False
-		result[0].save()
+		item.admin = False
+		item.save()
 		
 	return Response(None, status=status.HTTP_200_OK)
 	
