@@ -467,6 +467,25 @@ angular.module('FrontModule.services').service('UtilsService', function() {
 							if (found[0] == 'る') order = 11;
 							if (found[0] == 'を') order = 12;
 						}
+						else {
+							
+							found = name.match(/(壱|弐|参|四|伍|六|七|八|九|拾|拾壱|拾弐)+/);
+							if (found) {
+								
+								if (found[0] == '壱') order = 1;
+								if (found[0] == '弐') order = 2;
+								if (found[0] == '参') order = 3;
+								if (found[0] == '四') order = 4;
+		 						if (found[0] == '伍') order = 5;
+								if (found[0] == '六') order = 6;
+								if (found[0] == '七') order = 7;
+								if (found[0] == '八') order = 8;
+								if (found[0] == '九') order = 9;
+								if (found[0] == '拾') order = 10;
+								if (found[0] == '拾壱') order = 11;
+								if (found[0] == '拾弐') order = 12;
+							}
+						}
 					}
 				}
 			}
