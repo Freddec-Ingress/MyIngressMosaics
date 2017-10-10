@@ -99,42 +99,49 @@ angular.module('FrontModule.services').service('UtilsService', function() {
 					}
 					else {
 						
-						found = name.match(/(い|ろ|は|に|ほ|へ|と|ち|り|ぬ|る|を)+/);
+						found = name.match(/(一|壱|二|弐|三|参|四|五|伍|六|七|八|九|十|拾|十一|拾壱|十二|拾弐)+/);
 						if (found) {
 							
-							if (found[0] == 'い') order = 1;
-							if (found[0] == 'ろ') order = 2;
-							if (found[0] == 'は') order = 3;
-							if (found[0] == 'に') order = 4;
-	 						if (found[0] == 'ほ') order = 5;
-							if (found[0] == 'へ') order = 6;
-							if (found[0] == 'と') order = 7;
-							if (found[0] == 'ち') order = 8;
-							if (found[0] == 'り') order = 9;
-							if (found[0] == 'ぬ') order = 10;
-							if (found[0] == 'る') order = 11;
-							if (found[0] == 'を') order = 12;
+							switch(found) {
+								
+								case '一': order = 1; break;
+								case '壱': order = 1; break;
+								case '二': order = 2; break;
+								case '弐': order = 2; break;
+								case '三': order = 3; break;
+								case '参': order = 3; break;
+								case '四': order = 4; break;
+								case '五': order = 5; break;
+		 						case '伍': order = 5; break;
+								case '六': order = 6; break;
+								case '七': order = 7; break;
+								case '八': order = 8; break;
+								case '九': order = 9; break;
+								case '十': order = 10; break;
+								case '拾': order = 10; break;
+								case '十一': order = 11; break;
+								case '拾壱': order = 11; break;
+								case '十二': order = 12; break;
+								case '拾弐': order = 12; break;
+							}
 						}
 						else {
 							
-							found = name.match(/(壱|弐|参|四|伍|六|七|八|九|拾|拾壱|拾弐)+/);
+							found = name.match(/(い|ろ|は|に|ほ|へ|と|ち|り|ぬ|る|を)+/);
 							if (found) {
 								
-								switch(found) {
-									
-									case '壱': order = 1; break;
-									case '弐': order = 2; break;
-									case '参': order = 3; break;
-									case '四': order = 4; break;
-			 						case '伍': order = 5; break;
-									case '六': order = 6; break;
-									case '七': order = 7; break;
-									case '八': order = 8; break;
-									case '九': order = 9; break;
-									case '拾': order = 10; break;
-									case '拾壱': order = 11; break;
-									case '拾弐': order = 12; break;
-								}
+								if (found[0] == 'い') order = 1;
+								if (found[0] == 'ろ') order = 2;
+								if (found[0] == 'は') order = 3;
+								if (found[0] == 'に') order = 4;
+		 						if (found[0] == 'ほ') order = 5;
+								if (found[0] == 'へ') order = 6;
+								if (found[0] == 'と') order = 7;
+								if (found[0] == 'ち') order = 8;
+								if (found[0] == 'り') order = 9;
+								if (found[0] == 'ぬ') order = 10;
+								if (found[0] == 'る') order = 11;
+								if (found[0] == 'を') order = 12;
 							}
 						}
 					}
