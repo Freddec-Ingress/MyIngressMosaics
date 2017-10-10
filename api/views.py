@@ -901,7 +901,7 @@ def data_getPotentials(request):
 				
 				tested.append(item)
 				count = rest.count(item)
-				if count >= 3:
+				if count == 6 or count == 12 or count == 18 or count == 24 or count == 30:
 				
 					obj = {
 						'name': item,
