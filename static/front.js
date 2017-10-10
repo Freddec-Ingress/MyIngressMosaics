@@ -472,18 +472,21 @@ angular.module('FrontModule.services').service('UtilsService', function() {
 							found = name.match(/(壱|弐|参|四|伍|六|七|八|九|拾|拾壱|拾弐)+/);
 							if (found) {
 								
-								if (found[0] == '壱') order = 1;
-								if (found[0] == '弐') order = 2;
-								if (found[0] == '参') order = 3;
-								if (found[0] == '四') order = 4;
-		 						if (found[0] == '伍') order = 5;
-								if (found[0] == '六') order = 6;
-								if (found[0] == '七') order = 7;
-								if (found[0] == '八') order = 8;
-								if (found[0] == '九') order = 9;
-								if (found[0] == '拾') order = 10;
-								if (found[0] == '拾壱') order = 11;
-								if (found[0] == '拾弐') order = 12;
+								switch(found) {
+									
+									case '壱': order = 1; break;
+									case '弐': order = 2; break;
+									case '参': order = 3; break;
+									case '四': order = 4; break;
+			 						case '伍': order = 5; break;
+									case '六': order = 6; break;
+									case '七': order = 7; break;
+									case '八': order = 8; break;
+									case '九': order = 9; break;
+									case '拾': order = 10; break;
+									case '拾壱': order = 11; break;
+									case '拾弐': order = 12; break;
+								}
 							}
 						}
 					}
@@ -614,6 +617,7 @@ angular.module('FrontModule.directives').directive('flag', function() {
 		    '       		\'flag-icon-tw\': country == \'Taiwan\',' +
 		    '       		\'flag-icon-in\': country == \'India\',' +
 		    '       		\'flag-icon-nl\': country == \'Netherlands\',' +
+		    '       		\'flag-icon-eg\': country == \'Egypt\',' +
 	        '        	}"></span>' +
 		'',
 	};

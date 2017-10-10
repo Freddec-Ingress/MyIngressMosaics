@@ -94,6 +94,7 @@ angular.module('FrontModule.directives').directive('flag', function() {
 		    '       		\'flag-icon-tw\': country == \'Taiwan\',' +
 		    '       		\'flag-icon-in\': country == \'India\',' +
 		    '       		\'flag-icon-nl\': country == \'Netherlands\',' +
+		    '       		\'flag-icon-eg\': country == \'Egypt\',' +
 	        '        	}"></span>' +
 		'',
 	};
