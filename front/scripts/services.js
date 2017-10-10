@@ -97,6 +97,25 @@ angular.module('FrontModule.services').service('UtilsService', function() {
 						if (found[0] == '㉓') order = 23;
 						if (found[0] == '㉔') order = 24;
 					}
+					else {
+						
+						found = name.match(/(い|ろ|は|に|ほ|へ|と|ち|り|ぬ|る|を)+/);
+						if (found) {
+							
+							if (found[0] == 'い') order = 1;
+							if (found[0] == 'ろ') order = 2;
+							if (found[0] == 'は') order = 3;
+							if (found[0] == 'に') order = 4;
+	 						if (found[0] == 'ほ') order = 5;
+							if (found[0] == 'へ') order = 6;
+							if (found[0] == 'と') order = 7;
+							if (found[0] == 'ち') order = 8;
+							if (found[0] == 'り') order = 9;
+							if (found[0] == 'ぬ') order = 10;
+							if (found[0] == 'る') order = 11;
+							if (found[0] == 'を') order = 12;
+						}
+					}
 				}
 			}
 			
