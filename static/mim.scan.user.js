@@ -224,12 +224,14 @@ function processNextLocation() {
     var location = locationsToBeProcessed.slice(0, 1);
 
     currentLocation = String(location);
+    console.log('Location: ' + currentLocation);
+
     geocoder.geocode({'address': currentLocation}, function(results, status) {
 
         if (status === 'OK') {
 
             M.setCenter(results[0].geometry.location);
-            M.setZoom(13);
+            M.setZoom(14);
 
             window.startScanning();
         }
@@ -271,6 +273,8 @@ function processNextTiles() {
         currentProcessed_count = 0;
         currentToBeProcessed_count = 0;
 
+        processNextLocation();
+
         scanning = false;
 
         $('#tm_start').show();
@@ -294,8 +298,6 @@ function processNextTiles() {
             fillColor: '#550000',
         });
     }
-
-    console.log('check tiles...');
 
     callIngressAPI('getEntities', data, function(data, textStatus, jqXHR) {
 
@@ -394,8 +396,6 @@ function processNextPortal() {
 
     var portal = portalsToBeProcessed[0];
 
-    console.log('check portal...');
-
     var data = { guid: portal.id };
     callIngressAPI('getTopMissionsForPortal', data, function(data, textStatus, jqXHR) {
 
@@ -445,8 +445,6 @@ function processNextMission() {
 
     missionsInProcess.push(mission_id);
 
-    console.log('check mission...');
-
     var data = { guid: mission_id };
     callIngressAPI('getMissionDetails', data, function(data, textStatus, jqXHR) {
 
@@ -459,13 +457,16 @@ function processNextMission() {
             return;
         }
 
+        missionsProcessed.push(mission_id);
+        missionsToBeProcessed.splice(0, 1);
+
         data.result.push(username);
         var requestData = data.result;
         callMIMAPI('ext_register', data.result, function(data, textStatus, jqXHR) {
 
-            console.log('\t' + requestData[1]);
-
             if (requestData[9][0][5] && data == 'Registered') {
+
+                console.log('\t' + requestData[1]);
 
                 var marker = new google.maps.Marker({
                     position: {lat: requestData[9][0][5][2]/1000000.0, lng: requestData[9][0][5][3]/1000000.0},
@@ -482,9 +483,6 @@ function processNextMission() {
                 });
             }
         });
-
-        missionsProcessed.push(mission_id);
-        missionsToBeProcessed.splice(0, 1);
 
         processNextMission();
 
@@ -557,10 +555,6 @@ function init() {
         if (scanning === true) return;
 
         window.checkBounds();
-
-        console.clear();
-
-        console.log('Location: ' + currentLocation);
 
         tilesToBeProcessed = [];
 
