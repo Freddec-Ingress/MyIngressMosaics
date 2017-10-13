@@ -19,7 +19,10 @@ urlpatterns = [
 	
 	url(r'^registration',  views.registration),
 	
+	url(r'^search/(?P<searchstring>[\w \-,]+)',           views.search),
 	url(r'^search',        views.search),
+	
+	
 	url(r'^login',         views.login),
 	url(r'^register', views.register),
 	url(r'^profile', views.profile),

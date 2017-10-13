@@ -191,9 +191,9 @@ def registration(request):
 	
 	
 	
-def search(request):
+def search(request, searchstring = ''):
 	
-	context = {}
+	context = {'searchstring':searchstring}
 	return render(request, 'search.html', context)
 
 

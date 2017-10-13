@@ -911,11 +911,20 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 
 angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, API) {
 	
+	$scope.searchtext = null;
 	$scope.mosaics = null;
 	$scope.search_loading = false;
 	
 	$('#page-loading').addClass('hidden');
 	$('#page-content').removeClass('hidden');
+
+	$scope.init = function(text) {
+		
+		if (!text) return;
+		
+		$scope.searchtext = text;
+		$scope.search(text);
+	}
 
 	$scope.search = function(text) {
 		

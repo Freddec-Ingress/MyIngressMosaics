@@ -211,9 +211,15 @@ a:hover, a:focus, .hover:hover { color: inherit; cursor: pointer; text-decoratio
 
 .heading {
     color: #B2DFDB;
-    padding: .5rem;
-    margin: 0 0 1rem 0;
+    margin: 0 0 .5rem 0;
     font-size: 1.25rem;
+    text-align: center;
+}
+
+.subheading {
+    color: rgba(255,255,255,.75);
+    margin: 0 0 .5rem 0;
+    font-size: .875rem;
     text-align: center;
 }
 
