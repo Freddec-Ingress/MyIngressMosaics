@@ -1060,12 +1060,11 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 		$scope.country = name;
 		
 		API.sendRequest('/api/country/' + name + '/', 'GET').then(function(response) {
-
-			response.sort(function(a, b) {
-				return b.mosaics - a.mosaics;
-			});
 			
-			$scope.regions = response;
+			$scope.count = response.count;
+			$scope.regions = response.regions;
+			
+			$scope.sortByMosaics();
 			
 			for (var region of $scope.regions) {
 				region.newname = region.name;
@@ -1114,11 +1113,10 @@ angular.module('FrontModule.controllers').controller('RegionCtrl', function($sco
 		
 		API.sendRequest('/api/region/' + country + '/' + name + '/', 'GET').then(function(response) {
 
-			response.sort(function(a, b) {
-				return b.mosaics - a.mosaics;
-			});
-
-			$scope.cities = response;
+			$scope.count = response.count;
+			$scope.cities = response.cities;
+			
+			$scope.sortByMosaics();
 			
 			for (var city of $scope.cities) {
 				city.newname = city.name;

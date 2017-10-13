@@ -585,7 +585,10 @@ def data_getMosaicsByRegion(request, name):
 	results = Mosaic.objects.filter(country=name).values('region').distinct()
 	if (results.count() > 0):
 		
-		data = []
+		data = {
+			'count': 0,
+			'regions': [],
+		}
 		
 		for item in results:
 			
@@ -594,7 +597,9 @@ def data_getMosaicsByRegion(request, name):
 				'name': item['region'],
 			}
 			
-			data.append(region)
+			data['regions'].append(region)
+	
+		data['count'] = Mosaic.objects.filter(country=name).count()
 	
 	return Response(data, status=status.HTTP_200_OK)
 	
@@ -610,7 +615,10 @@ def data_getMosaicsByCity(request, country, name):
 	results = Mosaic.objects.filter(country=country, region=name).values('city').distinct()
 	if (results.count() > 0):
 		
-		data = []
+		data = {
+			'count': 0,
+			'cities': [],
+		}
 		
 		for item in results:
 			
@@ -619,7 +627,9 @@ def data_getMosaicsByCity(request, country, name):
 				'name': item['city'],
 			}
 			
-			data.append(city)
+			data['cities'].append(city)
+	
+		data['count'] = Mosaic.objects.filter(country=country, region=name).count()
 	
 	return Response(data, status=status.HTTP_200_OK)
 
