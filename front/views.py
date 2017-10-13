@@ -55,6 +55,20 @@ def sitemap(request):
 	for country in countries:
 		text += '<url><loc>https://www.myingressmosaics.com/map/' + country['country'] + '</loc><changefreq>daily</changefreq></url>'
 		text += '<url><loc>https://www.myingressmosaics.com/world/' + country['country'] + '</loc><changefreq>daily</changefreq></url>'
+     
+	# Region URLs
+	
+	countries = Mosaic.objects.values('country', 'region').distinct()
+	for country in countries:
+		text += '<url><loc>https://www.myingressmosaics.com/map/' + country['country'] + ',' + country['region'] + '</loc><changefreq>daily</changefreq></url>'
+		text += '<url><loc>https://www.myingressmosaics.com/world/' + country['country'] + '/' + country['region'] + '</loc><changefreq>daily</changefreq></url>'
+     
+	# City URLs
+	
+	countries = Mosaic.objects.values('country', 'region', 'city').distinct()
+	for country in countries:
+		text += '<url><loc>https://www.myingressmosaics.com/map/' + country['country'] + ',' + country['region'] + ',' + country['city'] + '</loc><changefreq>daily</changefreq></url>'
+		text += '<url><loc>https://www.myingressmosaics.com/world/' + country['country'] + '/' + country['region'] + '/' + country['city'] + '</loc><changefreq>daily</changefreq></url>'
 
 	text += '</urlset>'
     
