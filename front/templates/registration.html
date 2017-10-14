@@ -54,7 +54,7 @@
 	</div>
     
     <div ng-if="user.authenticated">
-    
+		
         <div class="block">
         	
 	        <div class="row">
@@ -70,7 +70,7 @@
  	       </div>
  	       
         </div>
-
+		
         <div class="block">
             
             <div class="panel">
@@ -263,69 +263,7 @@
 	        </div>
 	        
         </div>
-
-		<div class="title">
-			<div class="row">
-				
-				<div class="item grow">
-					<span ng-show="potentials.length > 0">{{potentials.length}}</span>
-					Potential mosaics
-				</div>
-				
-				<div class="item">
-					<a ng-click="refreshPotentials();">
-						Refresh
-					</a>
-				</div>
-				
-			</div>
-		</div>
 		
-		<div class="block">
-			
-			<div class="row">
-			
-				<div ng-show="refreshingPotential" class="item-12">
-					<i class="fa fa-spinner"></i>
-					Loading data...
-				</div>
-			
-				<div ng-show="!refreshingPotential && potentials.length < 1" class="item-12">
-					No potential
-				</div>
-			
-				<div class="item-12 item-xl-3" ng-repeat="potential in potentials">
-				
-					<a class="btn-primary btn-block" ng-click="searchAdv(potential.name);">
-					
-						<div class="row valign-center">
-							
-							<div class="item grow ta-left ellipsis">
-					        	{{potential.name}}
-					        </div>
-					        
-					        <div class="item c-lighter">
-					        	{{potential.count}}
-					        </div>
-					        
-						</div>
-						
-					</a>
-					
-					<div ng-if="user.superuser">
-						<a class="item" ng-click="excludePotential($index, potential);">
-							Exclude
-						</a>
-					</div>
-		        
-		        </div>
-		        
-			</div>
-
-		</div>
-			
-		</div>
-			
     </div>
 
 </div>
