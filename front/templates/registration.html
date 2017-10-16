@@ -266,6 +266,19 @@
 		
 		<div ng-if="user.superuser">
 			
+			<div class="title ttrans-normal">
+				<div class="row">
+					<div class="item grow">
+						Potentials
+					</div>
+					<div class="item">
+						<a ng-click="refreshPotentials();">
+							Refresh
+						</a>
+					</div>
+				</div>
+			</div>
+	
 			<div class="block" ng-show="refreshingPotential">
 				<i class="fa fa-spinner"></i>
 				Loading potential...
@@ -277,7 +290,7 @@
 					
 					<div class="item-12 item-xl-3" ng-repeat="potential in potentials">
 						
-						<a class="btn-primary btn-block">
+						<a ng-click="searchAdv(potential.name);" class="btn-primary btn-block">
 							
 							<div class="row valign-center">
 								
@@ -286,11 +299,15 @@
 						        </div>
 						        
 						        <div class="item">
-						        	<span class="badge-dark badge-mini">{{potential.mosaics}}</span>
+						        	<span class="badge-dark badge-mini">{{potential.count}}</span>
 						        </div>
 						        
 							</div>
 							
+						</a>
+						
+						<a ng-click="excludePotential($index, potential);" style="padding:.25rem .5rem;">
+							Exclude
 						</a>
 				        
 					</div>
