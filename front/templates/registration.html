@@ -264,6 +264,43 @@
 	        
         </div>
 		
+		<div ng-if="user.superuser">
+			
+			<div class="block" ng-show="refreshingPotential">
+				<i class="fa fa-spinner"></i>
+				Loading potential...
+			</div>
+			
+			<div class="block" ng-show="!refreshingPotential">
+				
+				<div class="row">
+					
+					<div class="item-12 item-xl-3" ng-repeat="potential in potentials">
+						
+						<a class="btn-primary btn-block">
+							
+							<div class="row valign-center">
+								
+								<div class="item grow ta-left ellipsis">
+						        	{{potential.name}}
+						        </div>
+						        
+						        <div class="item">
+						        	<span class="badge-dark badge-mini">{{potential.mosaics}}</span>
+						        </div>
+						        
+							</div>
+							
+						</a>
+				        
+					</div>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+			
     </div>
 
 </div>
