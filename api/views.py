@@ -884,9 +884,7 @@ def data_getPotentials(request):
 	if (results.count() > 0):
 		
 		data = []
-		
-		rest = []
-		
+
 		for item in results:
 			if item['count'] >= 3:
 				
@@ -897,29 +895,6 @@ def data_getPotentials(request):
 				
 				data.append(obj)
 
-			else:
-				if item[fieldname]:
-				
-					if len(item[fieldname]) > 7:
-						text = item[fieldname][:6]
-						rest.append(text)
-		
-		tested = []
-		for item in rest:
-			
-			if item not in tested:
-				
-				tested.append(item)
-				count = rest.count(item)
-				if count == 6 or count == 12 or count == 18 or count == 24 or count == 30:
-				
-					obj = {
-						'name': item,
-						'count': count,
-					}
-					
-					data.append(obj)
-	
 	return Response(data, status=status.HTTP_200_OK)
 
 
