@@ -452,6 +452,7 @@ textarea.form-control { padding-top: .25rem; padding-bottom: .25rem; }
 .c-green { color: #00ff00; }
 .c-white { color: #ffffff; }
 .c-danger { color: #f44336; }
+.c-warning { color: #FFFF00; }
 .c-lighter { color: rgba(255,255,255,.75); }
 .c-enligtened { color: #28f428; }
 .c-resistance { color: #00c2ff; }

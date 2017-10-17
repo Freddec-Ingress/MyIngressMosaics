@@ -237,6 +237,7 @@ class Mosaic(models.Model):
 			'title': self.title,
 			'country': self.country,
 			'distance': self.distance,
+			'has_fake': False,
 			
 			'location': location,
 
@@ -244,6 +245,9 @@ class Mosaic(models.Model):
 		}
 		
 		for item in self.missions.all().order_by('order'):
+			
+			if 'Unavailable' not in item.ref:
+				data['has_fake'] = True
 			
 			mission_data = item.imgSerialize()
 			data['missions'].append(mission_data)
@@ -271,6 +275,7 @@ class Mosaic(models.Model):
 			'startLng': self.startLng,
 			'completers': self.completers.all().count(),
 			
+			'has_fake': False,
 			'is_loved': False,
 			'is_completed': False,
 			
@@ -282,6 +287,9 @@ class Mosaic(models.Model):
 		creators = []
 
 		for item in self.missions.all().order_by('order'):
+			
+			if 'Unavailable' not in item.ref:
+				data['has_fake'] = True
 			
 			mData = item.detailsSerialize()
 			data['missions'].append(mData)
