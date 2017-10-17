@@ -279,6 +279,48 @@
 				<div class="title">
 					<div class="row">
 						<div class="item grow">
+							{{opportunities.length}} Opportunities
+						</div>
+						<div class="item">
+							<a ng-click="refreshOpportunities();">
+								Refresh
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+			<div class="block" ng-show="refreshingOpportunities">
+				<i class="fa fa-spinner"></i>
+				Loading opportunities...
+			</div>
+			
+			<div class="block" ng-show="!refreshingOpportunities">
+				
+				<div class="row">
+					<div class="item-12 item-xl-3" ng-repeat="opportunity in opportunities">
+						
+						<div class="panel">
+							
+							<div class="row valign-center">
+								
+								<div class="item grow ta-left ellipsis">
+						        	{{opportunity.name}}
+						        </div>
+
+							</div>
+							
+						</div>
+
+					</div>
+				</div>
+				
+			</div>
+					
+			<div class="block">
+				<div class="title">
+					<div class="row">
+						<div class="item grow">
 							{{potentials.length}} Potentials
 						</div>
 						<div class="item">

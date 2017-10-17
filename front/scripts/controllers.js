@@ -617,6 +617,7 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		$('#page-loading').addClass('hidden');
 		$('#page-content').removeClass('hidden');
 		
+		$scope.refreshOpportunities();
 		$scope.refreshPotentials();
 	});
 	
@@ -633,6 +634,19 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 			});
 			
 			$scope.refreshingPotential = false;
+		});
+	}
+	
+	$scope.refreshingOpportunities = false;
+	$scope.refreshOpportunities = function() {
+	
+		$scope.refreshingOpportunities = true;
+		
+		API.sendRequest('/api/opportunities/', 'POST').then(function(response) {
+			
+			$scope.opportunities = response;
+			
+			$scope.refreshingOpportunities = false;
 		});
 	}
 	
