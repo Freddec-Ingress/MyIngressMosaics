@@ -90,7 +90,7 @@
 		<div ng-if="mosaic.has_fake" class="block">
 			
 			<div class="ta-center c-warning">
-				<i class="fa fa-warning"></i>
+				<i class="fa fa-warning text-separator"></i>
 				Some missions are missing. Please post comment if you know they are available.
 			</div>
 			
@@ -209,7 +209,7 @@
 	                    	<i ng-show="item.expanded" class="mr-2 fa fa-fw fa-caret-down"></i>
 	                    </div>
 	                    
-	                    <div class="item grow c-white">
+	                    <div class="item grow c-white" ng-class="{'c-white':item.title!='Fake mission', 'c-danger':item.title=='Fake mission'}">
 	                        {{item.title}}
 	                    </div>
 	                    
@@ -225,7 +225,11 @@
                 
                 <div class="item-12 row" ng-show="item.expanded" style="margin:0; padding:.5rem; background-color:rgba(0,0,0,.25);">
 
-					<div class="item-12">
+					<div ng-show="item.title=='Fake mission'" class="item-12 c-danger">
+						Mission missing. Please post comment if you know it is available.
+					</div>
+					
+					<div ng-show="item.title!='Fake mission'" class="item-12">
 						{{item.portals.length}} waypoints
 						<i class="text-separator fa fa-long-arrow-right"></i>
         				<span class="" ng-repeat="portal in item.portals">
@@ -240,7 +244,7 @@
         				</span>
         			</div>
 					
-					<div class="item-12">
+					<div ng-show="item.title!='Fake mission'" class="item-12">
                         {{item.desc}}
                     </div>
 

@@ -553,7 +553,7 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 			'	</div>' +
 				
 	        '   <div class="ellipsis" style="margin-bottom:.25rem;">' +
-	        '		<i ng-if="mosaic.has_fake" class="fa fa-warning" style="padding-right:.5rem;"></i>{{mosaic.title}}' +
+	        '		<i ng-if="mosaic.has_fake" class="fa fa-warning c-warning" style="padding-right:.5rem;"></i>{{mosaic.title}}' +
 	        '	</div>' +
 	        '   <div class="c-lighter ellipsis">' +
 	        '       <flag country="mosaic.country"></flag>' +
