@@ -129,9 +129,10 @@ class Mosaic(models.Model):
 			
 		for m in mosaic.missions.all():
 	
-			file = io.BytesIO(urllib.request.urlopen(m.image + '=s100').read())
-			mimg = Image.open(file)
-			
+			if 'Unavailable' not in item.ref:
+				file = io.BytesIO(urllib.request.urlopen(m.image + '=s100').read())
+				mimg = Image.open(file)
+				
 			order = mcount - m.order
 			
 			y = int(order / mosaic.cols)
@@ -140,7 +141,9 @@ class Mosaic(models.Model):
 			xoffset = paddingX + (x * 100)
 			yoffset = paddingY + (y * 100)
 			
-			image.paste(mimg, (int(xoffset), int(yoffset)));
+			if 'Unavailable' not in item.ref:
+				image.paste(mimg, (int(xoffset), int(yoffset)));
+				
 			image.paste(maskimg, (int(xoffset), int(yoffset)), maskimg);
 	
 		imgByteArr = io.BytesIO()
@@ -169,16 +172,17 @@ class Mosaic(models.Model):
 		
 		for item in self.missions.all().order_by('order'):
 			
-			mData = item.detailsSerialize()
-			
-			missions.append(mData)
-
-			self.portals += len(mData['portals'])
-			
-			portals += mData['portals']
-			
-			if mData['creator'] not in self.creators:
-				self.creators += '|' + mData['creator'] + '|'
+			if 'Unavailable' not in item.ref:
+				mData = item.detailsSerialize()
+				
+				missions.append(mData)
+	
+				self.portals += len(mData['portals'])
+				
+				portals += mData['portals']
+				
+				if mData['creator'] not in self.creators:
+					self.creators += '|' + mData['creator'] + '|'
 
 		self.uniques = len([dict(t) for t in set([tuple(d.items()) for d in portals])])
 		
@@ -524,7 +528,8 @@ class Mission(models.Model):
 			'portals': [],
 		}
 		
-		data['portals'] = self.getPortalsData()
+		if 'Unavailable' not in self.ref:
+			data['portals'] = self.getPortalsData()
 		
 		return data
 

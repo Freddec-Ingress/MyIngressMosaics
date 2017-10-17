@@ -145,6 +145,10 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 		
 		for (var m of $scope.mosaic.missions) {
 		
+			if (m.ref.indexOf('Unavailable') !== -1) {
+				continue;
+			}
+		
 			/* Mission marker */
 			
 			var label = {};
@@ -218,7 +222,6 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 			});
 	        
 	        roadmap.setMap(map);
-	        
 		}
 		
 		map.setCenter(latlngbounds.getCenter());
@@ -771,6 +774,17 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		}
 	}
 	
+	$scope.addFake = function(fakeorder) {
+		
+		var item = {
+			'ref': 'Unavailable',
+			'order': fakeorder,
+			'title': 'Fake mission',
+		}
+		
+		$scope.addMission(item);
+	}
+	
 	$scope.addMission = function(item) {
 		
 		$scope.mosaicModel.missions.push(item);
@@ -854,7 +868,8 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 			});
 		}
 		
-		var order = UtilsService.getOrderFromMissionName(item.title);
+		var order = item.order;
+		if (!item.order || item.order < 1) order = UtilsService.getOrderFromMissionName(item.title);
 		item.order = order.toString();
 		
 		$scope.mosaicModel.missions.sort(compareOrderAsc);

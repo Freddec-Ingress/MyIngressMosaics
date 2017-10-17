@@ -249,13 +249,19 @@ def mosaic_create(request):
 	
 	for m in request.data['missions']:
 		
-		result = Mission.objects.filter(ref=m['ref'])
-		if result.count() > 0:
+		if m['ref'] == 'Unavailable':
 			
-			item = result[0]
-			item.mosaic = mosaic
-			item.order = m['order']
+			item = Mission(data='{}', title='Fake mission', ref='Unavailable-'+mosaic.ref, mosaic=mosaic, order=m['order'])
 			item.save()
+			
+		else:
+			result = Mission.objects.filter(ref=m['ref'])
+			if result.count() > 0:
+				
+				item = result[0]
+				item.mosaic = mosaic
+				item.order = m['order']
+				item.save()
 	
 	mosaic.computeInternalData()
 	
