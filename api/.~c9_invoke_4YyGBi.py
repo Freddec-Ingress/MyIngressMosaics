@@ -246,7 +246,7 @@ class Mosaic(models.Model):
 		
 		for item in self.missions.all().order_by('order'):
 			
-			if 'Unavailable' in item.ref:
+			if 'Unavailable' not in item.ref:
 				data['has_fake'] = True
 			
 			mission_data = item.imgSerialize()
@@ -288,7 +288,7 @@ class Mosaic(models.Model):
 
 		for item in self.missions.all().order_by('order'):
 			
-			if 'Unavailable' in item.ref:
+			if 'Unavailable' not in item.ref:
 				data['has_fake'] = True
 			
 			mData = item.detailsSerialize()
