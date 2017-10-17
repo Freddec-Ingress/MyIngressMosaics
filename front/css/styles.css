@@ -189,7 +189,7 @@ a:hover, a:focus, .hover:hover { color: inherit; cursor: pointer; text-decoratio
 
 /* Container ---------------------------------------------------------------- */
 
-#page-container { margin: 1rem 0; width: 100%; min-height: 100%; }
+#page-container { margin: 0; width: 100%; min-height: 100%; }
 
 @media (min-width:  768px) { #page-container { margin: 1rem auto; width: 720px; } }
 @media (min-width:  992px) { #page-container { margin: 1rem auto; width: 720px; } }
@@ -214,13 +214,10 @@ a:hover, a:focus, .hover:hover { color: inherit; cursor: pointer; text-decoratio
     margin: 0 0 .5rem 0;
     font-size: .675rem;
     text-align: center;
-    text-transform: uppercase;
 }
 
 .title {
-    margin: 0 .5rem;
     padding: .5rem 0 .25rem 0;
-    text-transform: uppercase;
     color: rgba(255,255,255,.75);
     border-bottom: 1px solid rgba(255,255,255,.75);
 }
@@ -254,6 +251,8 @@ a:hover, a:focus, .hover:hover { color: inherit; cursor: pointer; text-decoratio
     margin: -.25rem;
     display: flex!important; flex-direction: row; flex-wrap: wrap;
 }
+
+.align-center { justify-content: center; }
 
 .valign-start { align-items: flex-start; }
 .valign-center { align-items: center; }
@@ -295,7 +294,8 @@ a:hover, a:focus, .hover:hover { color: inherit; cursor: pointer; text-decoratio
 
 /* Badge -------------------------------------------------------------------- */
 
-.badge-link, .badge-dark {
+.badge-link, .badge-dark, .badge-btn {
+    border: 0;
     display: inline-block;
     padding: .25rem .5rem;
     text-align: center;
@@ -307,6 +307,11 @@ a:hover, a:focus, .hover:hover { color: inherit; cursor: pointer; text-decoratio
     background-color: #ebbc4a;
 }
 
+.badge-btn {
+    color: #ffffff;
+    background-color: #009688;
+}
+
 .badge-dark {
     color: rgba(255,255,255,.75);
     background-color: #004d40;
@@ -314,7 +319,6 @@ a:hover, a:focus, .hover:hover { color: inherit; cursor: pointer; text-decoratio
 
 .badge-mini {
     font-size: 10px;
-    padding: 0 .5rem;
 }
 
 

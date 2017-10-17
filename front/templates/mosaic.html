@@ -39,33 +39,57 @@
 
 	<div ng-show="mosaic">
 		
-		<div class="title ttrans-normal">
-			<div class="row">
-				<div class="item grow">
-					<a href="/world">World</a>
-					<span class="text-separator">></span>
-					<a href="/world/{{mosaic.country}}">{{mosaic.country}}</a>
-					<span class="text-separator">></span>
-					<a href="/world/{{mosaic.country}}/{{mosaic.region}}">{{mosaic.region}}</a>
-					<span class="text-separator">></span>
-					<a href="/world/{{mosaic.country}}/{{mosaic.region}}/{{mosaic.city}}">{{mosaic.city}}</a>
-				</div>
-				<div class="item">
-					<a href="/map/{{mosaic.city}},{{mosaic.region}},{{mosaic.country}}">
-						<i class="fa fa-map text-separator"></i>
-						Map
-					</a>
+		<div class="block">
+			<div class="title">
+				<div class="row">
+					<div class="item grow">
+						<a href="/world">World</a>
+						<span class="text-separator">></span>
+						<a href="/world/{{mosaic.country}}">{{mosaic.country}}</a>
+						<span class="text-separator">></span>
+						<a href="/world/{{mosaic.country}}/{{mosaic.region}}">{{mosaic.region}}</a>
+						<span class="text-separator">></span>
+						<a href="/world/{{mosaic.country}}/{{mosaic.region}}/{{mosaic.city}}">{{mosaic.city}}</a>
+					</div>
+					<div class="item">
+						<a href="/map/{{mosaic.city}},{{mosaic.region}},{{mosaic.country}}">
+							<i class="fa fa-map text-separator"></i>
+							Map
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>
 			
 		<div class="block">
+			
+			<h2 class="heading">
+				{{mosaic.title}}
+			</h2>
+			
+			<div class="row" style="margin-top:.5rem;">
+				
+				<div class="item-6 ta-right">
+					<button class="badge-btn badge-mini" ng-click="love();" ng-disabled="!user.authenticated">
+						{{mosaic.lovers}}
+						<i class="fa fa-heart" ng-class="{'c-red':mosaic.is_loved}"></i>
+					</button>
+				</div>
+				
+				<div class="item-6">
+					<button class="badge-btn badge-mini" ng-click="complete();" ng-disabled="!user.authenticated">
+						{{mosaic.completers}}
+						<i class="fa fa-check-square" ng-class="{'c-green':mosaic.is_completed}"></i>
+					</button>
+				</div>
+				
+			</div>
+			
+		</div>
+	
+		<div class="block">
 	
 			<div class="panel">
-				
-				<div class="item-12 c-white ts-big">
-					{{mosaic.title}}
-				</div>
 				
 				<div class="item-12">
 					<div style="display:flex; align-items:center; justify-content:center; background:#0b0c0d; padding:.25rem;">
@@ -79,28 +103,10 @@
 					</div>
 				</div>
 				
-				<div class="item-6 ta-right">
-					<button class="btn-primary btn-mini" ng-click="love();" ng-disabled="!user.authenticated">
-						{{mosaic.lovers}}
-						<i class="fa fa-heart" ng-class="{'c-red':mosaic.is_loved}"></i>
-					</button>
-				</div>
-				
-				<div class="item-6">
-					<button class="btn-primary btn-mini" ng-click="complete();" ng-disabled="!user.authenticated">
-						{{mosaic.completers}}
-						<i class="fa fa-check-square" ng-class="{'c-green':mosaic.is_completed}"></i>
-					</button>
-				</div>
-
-				<div class="item-12">
+				<div class="item-12 ta-center">
 					{{mosaic.missions.length}} <i class="fa fa-th mx-1"></i>
 					<span class="text-separator">&middot;</span>
 					{{mosaic.type}}
-					<span class="text-separator">&middot;</span>
-					{{mosaic.portals}} waypoints
-					<span class="text-separator">&middot;</span>
-					{{mosaic.uniques}} uniques
 					<span ng-show="mosaic.type ==  'sequence'">
 						<span class="text-separator">&middot;</span>
 						{{mosaic.distance | number:2}} km
@@ -110,7 +116,13 @@
 					</span>
 				</div>
 				
-				<div class="item-12 row">
+				<div class="item-12 ta-center">
+					{{mosaic.portals}} waypoints
+					<span class="text-separator">&middot;</span>
+					{{mosaic.uniques}} uniques
+				</div>
+				
+				<div class="item-12 row align-center">
 		        	<div class="item" ng-repeat="creator in mosaic.creators" ng-class="{'c-enligtened': creator.faction == 'E', 'c-resistance': creator.faction == 'R',}">
 		        		{{creator.name}}
 		        	</div>
@@ -163,7 +175,7 @@
 				
 			<div class="item-6 ta-right">
 				<button class="btn-secondary btn-block btn-mini" ng-click="missionsMode = true; commentsMode = false;" ng-class="{'active': missionsMode}">
-					Missions
+					Missions ({{mosaic.missions.length}})
 				</button>
 			</div>
 			
@@ -179,27 +191,31 @@
 			
 			<div class="panel" ng-repeat="item in mosaic.missions">
 				
-				<div class="item-12 row hover" ng-click="toggleMission(item);">
+				<div class="item-12 hover" ng-click="toggleMission(item);">
 					
-                    <div class="item c-white">
-                    	<i ng-hide="item.expanded" class="mr-2 fa fa-caret-right"></i>
-                    	<i ng-show="item.expanded" class="mr-2 fa fa-caret-down"></i>
-                    </div>
+					<div class="row">
+						
+	                    <div class="item c-white">
+	                    	<i ng-hide="item.expanded" class="mr-2 fa fa-fw fa-caret-right"></i>
+	                    	<i ng-show="item.expanded" class="mr-2 fa fa-fw fa-caret-down"></i>
+	                    </div>
+	                    
+	                    <div class="item grow c-white">
+	                        {{item.title}}
+	                    </div>
+	                    
+	                    <div class="item">
+	                        <a href="https://www.ingress.com/mission/{{item.ref}}" target="blank">
+	                            <i class="fa fa-external-link"></i>
+	                        </a>
+	                    </div>
                     
-                    <div class="item grow c-white">
-                        {{item.title}}
-                    </div>
-                    
-                    <div class="item">
-                        <a href="https://www.ingress.com/mission/{{item.ref}}" target="blank">
-                            <i class="fa fa-external-link"></i>
-                        </a>
-                    </div>
-                    
+	                </div>
+	                
                 </div>
                 
-                <div ng-show="item.expanded">
-					
+                <div class="item-12 row" ng-show="item.expanded" style="margin:0; padding:.5rem; background-color:rgba(0,0,0,.25);">
+
 					<div class="item-12">
 						{{item.portals.length}} waypoints
 						<i class="text-separator fa fa-long-arrow-right"></i>
@@ -218,7 +234,7 @@
 					<div class="item-12">
                         {{item.desc}}
                     </div>
-					
+
                 </div>
                 
             </div>

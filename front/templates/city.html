@@ -15,7 +15,7 @@
 
 {% block header %}
 
-	{{city}}
+	City
 	
 {% endblock %}
 
@@ -24,6 +24,26 @@
 <div id="page-container" ng-controller="CityCtrl" ng-init="loadCity('{{country}}', '{{region}}', '{{city}}');">
 
 {% verbatim %}
+	
+	<div class="block">
+		<div class="title ttrans-normal">
+		<div class="row">
+			<div class="item grow">
+				<a href="/world">World</a>
+				<span class="text-separator">></span>
+				<a href="/world/{{country}}">{{country}}</a>
+				<span class="text-separator">></span>
+				<a href="/world/{{country}}/{{region}}">{{region}}</a>
+			</div>
+			<div class="item">
+				<a href="/map/{{city}},{{region}},{{country}}">
+					<i class="fa fa-map text-separator"></i>
+					Map
+				</a>
+			</div>
+		</div>
+	</div>
+	</div>
 
 	<div class="block">
 		
@@ -36,38 +56,14 @@
 		</h3>
 		
 	</div>
-	
-	<div class="title ttrans-normal">
-		<div class="row">
-			<div class="item grow">
-				<a href="/world">World</a>
-				<span class="text-separator">></span>
-				<a href="/world/{{country}}">{{country}}</a>
-				<span class="text-separator">></span>
-				<a href="/world/{{country}}/{{region}}">{{region}}</a>
-				<span class="text-separator">></span>
-				<span class="c-white">{{city}}</span>
-			</div>
-			<div class="item">
-				<a href="/map/{{city}},{{region}},{{country}}">
-					<i class="fa fa-map text-separator"></i>
-					Map
-				</a>
-			</div>
-		</div>
-	</div>
 
 	<div class="block">
 	
 		<div class="row">
 			
 			<div class="item-12" style="padding-top:.75rem; padding-bottom:.75rem;">
-				<div class="row valign-baseline">
-					
-					<div class="item">
-						Sort
-					</div>
-					
+				<div class="row align-center valign-baseline">
+
 					<div class="item">
 						<a class="badge-link" ng-class="{'active': sort=='missions'}" ng-click="sortByMissions();">Missions</a>
 					</div>

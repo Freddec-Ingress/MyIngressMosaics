@@ -25,14 +25,14 @@
 
 {% verbatim %}
 
-	<div class="block">
+	<div class="block" style="margin-top:1rem;">
 		
 		<h2 class="heading">
 			Ingress Mosaics, Banners and Mission series
 		</h2>
 		
 		<h3 class="subheading">
-			{{count|number}} Mosaics
+			{{count|number}} registered mosaics
 		</h3>
 		
 	</div>
@@ -40,11 +40,11 @@
     <div class="block">
      	<form class="panel">
 			<div class="item grow">
-				<input type="text" class="form-control" placeholder="mosaic name, mosaic creator, location" ng-model="searchtext" />
+				<input type="text" class="form-control" placeholder="Search for a mosaic" ng-model="searchtext" />
 			</div>
 			<div class="item">
 				<a type="submit" class="btn-primary" href="/search/{{searchtext}}">
-					Search
+					<i class="fa fa-fw fa-search"></i>
 				</a>
 			</div>
 		</form>
@@ -55,12 +55,8 @@
 		<div class="row">
 			
 			<div class="item-12" style="padding-top:.75rem; padding-bottom:.75rem;">
-				<div class="row valign-baseline">
-					
-					<div class="item">
-						Sort
-					</div>
-					
+				<div class="row align-center valign-baseline">
+
 					<div class="item">
 						<a class="badge-link" ng-class="{'active': sort=='mosaics'}" ng-click="sortByMosaics();">Mosaics</a>
 					</div>
