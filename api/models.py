@@ -129,7 +129,7 @@ class Mosaic(models.Model):
 			
 		for m in mosaic.missions.all():
 	
-			if 'Unavailable' not in item.ref:
+			if 'Unavailable' not in m.ref:
 				file = io.BytesIO(urllib.request.urlopen(m.image + '=s100').read())
 				mimg = Image.open(file)
 				
@@ -141,7 +141,7 @@ class Mosaic(models.Model):
 			xoffset = paddingX + (x * 100)
 			yoffset = paddingY + (y * 100)
 			
-			if 'Unavailable' not in item.ref:
+			if 'Unavailable' not in m.ref:
 				image.paste(mimg, (int(xoffset), int(yoffset)));
 				
 			image.paste(maskimg, (int(xoffset), int(yoffset)), maskimg);
