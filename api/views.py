@@ -251,7 +251,7 @@ def mosaic_create(request):
 		
 		if m['ref'] == 'Unavailable':
 			
-			item = Mission(data='{}', title='Fake mission', ref='Unavailable-'+mosaic.ref, mosaic=mosaic, order=m['order'])
+			item = Mission(data='{}', title='Fake mission', ref='Unavailable-'+m['order']+mosaic.ref, mosaic=mosaic, order=m['order'])
 			item.save()
 			
 		else:
