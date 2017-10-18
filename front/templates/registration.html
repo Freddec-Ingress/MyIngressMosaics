@@ -300,17 +300,21 @@
 				<div class="row">
 					<div class="item-12 item-xl-3" ng-repeat="opportunity in opportunities">
 						
-						<div class="panel">
+						<a href="https://ingressmosaik.com{{opportunity.link}}" target="blank" class="btn-primary btn-block">
 							
 							<div class="row valign-center">
 								
-								<div class="item grow ta-left ellipsis">
+								<div class="item-12 ta-left ellipsis">
 						        	{{opportunity.name}}
 						        </div>
 
+								<div class="item-12 ta-left ellipsis">
+						        	{{opportunity.city}}
+						        </div>
+						        
 							</div>
 							
-						</div>
+						</a>
 
 					</div>
 				</div>
