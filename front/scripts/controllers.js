@@ -646,7 +646,7 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 			
 			$scope.opportunities = response;
 			$scope.opportunities.sort(function(a, b) {
-				return b.city - a.city;
+				return a.city.localeCompare(b.city);
 			});
 			
 			$scope.refreshingOpportunities = false;
