@@ -37,7 +37,15 @@ def ext_isMissionRegistered(request):
 	
 		result = Mission.objects.filter(ref = item['mid'])
 		if result.count() > 0:
-			data.append({'mid':item['mid'], 'status': 'registered'})
+			m = result[0]
+			if m.mosaic:
+				mdata = m.mosaic.overviewSerialize()
+				if mdata['has_fake']:
+					data.append({'mid':item['mid'], 'status': 'incomplete'})
+				else:
+					data.append({'mid':item['mid'], 'status': 'completed'})
+			else:
+				data.append({'mid':item['mid'], 'status': 'registered'})
 		else:
 			data.append({'mid':item['mid'], 'status': 'notregistered'})
 	
