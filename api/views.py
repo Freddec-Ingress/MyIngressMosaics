@@ -914,9 +914,6 @@ def data_getOpportunities(request):
 	
 	currentArray = []
 	
-	currentArray.append({'name':'Colton Hall', 'link':'/mosaic/3409', 'city':'Monterey'});
-	currentArray.append({'name':'MissionDay Oakland', 'link':'/mosaic/3951', 'city':'Oakland'});
-	currentArray.append({'name':'Santa Cruz Art Tour Series', 'link':'/mosaic/20087', 'city':'Santa Cruz'});
 	currentArray.append({'name':'Explore Galt Ca', 'link':'/mosaic/406', 'city':'Galt'});
 	currentArray.append({'name':'Bointa Reistance Key', 'link':'/mosaic/512', 'city':'Chula Vista'});
 	currentArray.append({'name':'SMC Moraga', 'link':'/mosaic/3374', 'city':'Moraga'});
