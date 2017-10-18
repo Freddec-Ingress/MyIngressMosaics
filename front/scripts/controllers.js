@@ -645,6 +645,9 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		API.sendRequest('/api/opportunities/', 'POST').then(function(response) {
 			
 			$scope.opportunities = response;
+			$scope.opportunities.sort(function(a, b) {
+				return b.city - a.city;
+			});
 			
 			$scope.refreshingOpportunities = false;
 		});
