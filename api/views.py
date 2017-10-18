@@ -974,10 +974,10 @@ def data_getOpportunities(request):
 	currentArray.append({'name':'Pasadena', 'link':'/mosaic/12710', 'city':'Pasadena'});
 	currentArray.append({'name':'OC Odyssey', 'link':'/mosaic/4145', 'city':'Orange'});
 	currentArray.append({'name':'Golden Gate at Night', 'link':'/mosaic/21056', 'city':'San Francisco'});
-
+	
 	for item in currentArray:
 		
-		results = Mosaic.objects.filter(title=item['name'])
+		results = Mosaic.objects.filter(title__icontains=item['name'])
 		if results.count() < 1:
 			data.append(item)
 	
