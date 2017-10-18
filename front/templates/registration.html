@@ -190,7 +190,7 @@
 					
 						<div class="row" style="align-items:center; padding:0 calc((6 - {{mosaicModel.columns}}) / 2 * 16.666667%); width:100%;" ng-class="{'align-center':mosaicModel.type=='sequence'}">
 				            <div ng-repeat="m in mosaicModel.missions | reverse" style="flex:0 0 calc(100% / {{mosaicModel.columns}});">
-				                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 85% 85%; background-position: 50% 49%; float:left; background-repeat: no-repeat;" />
+				                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
 				            </div>
 			            </div>
 			
@@ -308,10 +308,6 @@
 						        	{{opportunity.name}}
 						        </div>
 
-								<div class="item-12 ta-left ellipsis" style="text-transform:normal; font-size:75%;">
-						        	{{opportunity.city}}
-						        </div>
-						        
 							</div>
 							
 						</a>
