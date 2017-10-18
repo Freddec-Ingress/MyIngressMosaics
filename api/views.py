@@ -1071,7 +1071,7 @@ def data_getOpportunities(request):
 
 	for item in currentArray:
 		
-		results = Mosaic.objects.filter(title=item.name)
+		results = Mosaic.objects.filter(title=item['name'])
 		if results.count() < 1:
 			data.append(item)
 	
