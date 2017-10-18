@@ -1280,9 +1280,6 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		API.sendRequest('/api/opportunities/', 'POST').then(function(response) {
 			
 			$scope.opportunities = response;
-			$scope.opportunities.sort(function(a, b) {
-				return a.city.localeCompare(b.city);
-			});
 			
 			$scope.refreshingOpportunities = false;
 		});

@@ -922,7 +922,6 @@ def data_getOpportunities(request):
 	currentArray.append({'name':'Joe Philley Tribute Series', 'link':'/mosaic/3378', 'city':'Temecula'});
 	currentArray.append({'name':'Resistance is Inevitable', 'link':'/mosaic/3391', 'city':'San Luis Obispo'});
 	currentArray.append({'name':'Albany Bulb Art and Nature Walk', 'link':'/mosaic/3396', 'city':'Berkeley'});
-	currentArray.append({'name':'Aptos Skyline', 'link':'/mosaic/3397', 'city':'Aptos'});
 	currentArray.append({'name':'Bike Trooper Series', 'link':'/mosaic/3401', 'city':'Seaside'});
 	currentArray.append({'name':'Bro San Francisco', 'link':'/mosaic/3402', 'city':'San Francisco'});
 	currentArray.append({'name':'Doyle Hollis', 'link':'/mosaic/3411', 'city':'Emeryville'});
@@ -932,8 +931,6 @@ def data_getOpportunities(request):
 	currentArray.append({'name':'Glyph Master Oakland', 'link':'/mosaic/3434', 'city':'Oakland'});
 	currentArray.append({'name':'JLS Build-A-Rainbow', 'link':'/mosaic/3438', 'city':'Oakland'});
 	currentArray.append({'name':'View from the Top', 'link':'/mosaic/3443', 'city':'San Luis Obispo'});
-	currentArray.append({'name':'Learn Your Glyph-tionary Word - Brentwood', 'link':'/mosaic/3444', 'city':'Brentwood'});
-	currentArray.append({'name':'Learn Your Glyph-tionary Word - Livermore', 'link':'/mosaic/3445', 'city':'Livermore'});
 	currentArray.append({'name':'Make Your Choice  Seaside', 'link':'/mosaic/3449', 'city':'Seaside'});
 	currentArray.append({'name':'Moraga Meander', 'link':'/mosaic/3450', 'city':'Moraga'});
 	currentArray.append({'name':'Niles Mission Series', 'link':'/mosaic/3452', 'city':'Fremont'});
