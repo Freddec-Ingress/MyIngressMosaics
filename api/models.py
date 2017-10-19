@@ -564,6 +564,7 @@ class Comment(models.Model):
 		
 		data = {
 			
+			'id': self.pk,
 			'username': self.user.username,
 			'faction': self.user.profile.faction,
 			'text': self.text,

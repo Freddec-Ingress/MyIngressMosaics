@@ -308,7 +308,7 @@
 		            	</div>
 		            	
 		            	<div ng-show="item.edit" class="item">
-		            		<button class="btn-primary btn-mini" ng-click="editComment(item);" ng-disabled="item.editing">
+		            		<button class="btn-primary btn-mini" ng-click="editComment(item);" ng-disabled="item.editing || !item.text">
 			        			<span ng-show="item.editing">
 		            				<i class="fa fa-spinner rotating"></i>
 		            			</span>

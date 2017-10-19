@@ -278,6 +278,47 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 			$scope.updating = false;
 		});
 	}
+	
+	$scope.addComment = false;
+	$scope.addingComment = false;
+	$scope.createComment = function(text) {
+		
+		if (!text) return;
+		
+		$scope.addingComment = true;
+		
+		var data = {'ref':$scope.mosaic.ref, 'text':text}
+		API.sendRequest('/api/comment/add/', 'POST', {}, data).then(function(response) {
+			
+			$scope.mosaic.comments.push(response);
+			
+			$scope.addComment = false;
+			$scope.addingComment = false;
+		});
+	}
+	
+	$scope.editComment = function(comment) {
+		
+		if (!comment.text) return;
+		
+		comment.editing = true;
+		
+		var data = {'id':comment.id, 'text':comment.text}
+		API.sendRequest('/api/comment/update/', 'POST', {}, data).then(function(response) {
+		
+			comment.edit = false;
+			comment.editing = false;
+		});
+	}
+	
+	$scope.deleteComment = function(id, index) {
+		
+		var data = {'id':id}
+		API.sendRequest('/api/comment/delete/', 'POST', {}, data).then(function(response) {
+			
+			$scope.mosaic.comments.splice(index, 1);
+		});
+	}
 });
 
 angular.module('FrontModule.controllers').controller('SearchCtrl', function($scope, API) {
