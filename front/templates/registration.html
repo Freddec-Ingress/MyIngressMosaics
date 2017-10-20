@@ -188,7 +188,7 @@
                     
  					<div class="form-control" style="display:flex; height:291px; justify-content:center; background:#0b0c0d; padding:.25rem;" ng-class="{'scrollbar valign-start': mosaicModel.missions.length > 30, 'valign-center': mosaicModel.missions.length <= 30}">
 					
-						<div class="row" style="align-items:center; padding:0 calc((6 - {{mosaicModel.columns}}) / 2 * 16.666667%); width:100%;" ng-class="{'align-center':mosaicModel.type=='sequence'}">
+						<div class="row" style="align-items:center; padding:0 calc((6 - {{mosaicModel.columns}}) / 2 * 16.666667%); width:100%;" ng-class="{'align-center':mosaicModel.type=='sequence' || (mosaicModel.type=='serie' && mosaicModel.missions.length < 6)}">
 				            <div ng-repeat="m in mosaicModel.missions | reverse" style="flex:0 0 calc(100% / {{mosaicModel.columns}});">
 				                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
 				            </div>
@@ -275,7 +275,8 @@
 		
 		<div ng-if="user.superuser">
 			
-			<div class="block">
+			<div class="block" ng-show="!refreshingOpportunities">
+				
 				<div class="title">
 					<div class="row">
 						<div class="item grow">
@@ -288,15 +289,12 @@
 						</div>
 					</div>
 				</div>
-			</div>
-	
-			<div class="block" ng-show="refreshingOpportunities">
-				<i class="fa fa-spinner"></i>
-				Loading opportunities...
-			</div>
-			
-			<div class="block" ng-show="!refreshingOpportunities">
 				
+				<div ng-show="refreshingOpportunities">
+					<i class="fa fa-spinner"></i>
+					Loading opportunities...
+				</div>
+			
 				<div class="row">
 					<div class="item-12 item-xl-3" ng-repeat="opportunity in opportunities">
 						
@@ -304,7 +302,7 @@
 							
 							<div class="row valign-center">
 								
-								<div class="item-12 ellipsis">
+								<div class="item-12 ta-left ellipsis">
 						        	{{opportunity.name}}<br>
 						        	<span style="font-size:75%;">{{opportunity.city}}</span>
 						        </div>
@@ -318,7 +316,8 @@
 				
 			</div>
 					
-			<div class="block">
+			<div class="block" ng-show="!refreshingPotential">
+				
 				<div class="title">
 					<div class="row">
 						<div class="item grow">
@@ -331,15 +330,12 @@
 						</div>
 					</div>
 				</div>
-			</div>
-	
-			<div class="block" ng-show="refreshingPotential">
-				<i class="fa fa-spinner"></i>
-				Loading potential...
-			</div>
-			
-			<div class="block" ng-show="!refreshingPotential">
 				
+				<div ng-show="refreshingPotential">
+					<i class="fa fa-spinner"></i>
+					Loading potential...
+				</div>
+			
 				<div class="row">
 					
 					<div class="item-12 item-xl-3" ng-repeat="potential in potentials">
