@@ -246,7 +246,7 @@
 									<input type="text" class="form-control" placeholder="order" ng-model="fakeorder" />
 								</div>
 								<div class="item">
-									<button type="submit" class="btn-primary" ng-click="addFake(fakeorder);" ng-disabled="creating || !mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || !mosaicModel.region || !mosaicModel.city || (mosaicModel.missions.length < 1)">
+									<button type="submit" class="btn-primary" ng-click="addFake(fakeorder); fakeorder=null;" ng-disabled="creating || !mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || !mosaicModel.region || !mosaicModel.city || (mosaicModel.missions.length < 1)">
 										Add fake
 									</button>
 								</div>
