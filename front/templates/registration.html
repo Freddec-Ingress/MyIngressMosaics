@@ -300,12 +300,13 @@
 				<div class="row">
 					<div class="item-12 item-xl-3" ng-repeat="opportunity in opportunities">
 						
-						<a href="https://ingressmosaik.com{{opportunity.link}}" target="blank" class="btn-primary btn-block">
+						<a href="https://ingressmosaik.com{{opportunity.link}}" target="blank" class="btn-primary btn-block ttrans-normal">
 							
 							<div class="row valign-center">
 								
-								<div class="item-12 ta-left ellipsis">
-						        	{{opportunity.name}}
+								<div class="item-12 ellipsis">
+						        	{{opportunity.name}}<br>
+						        	<span style="font-size:75%;">{{opportunity.city}}</span>
 						        </div>
 
 							</div>
