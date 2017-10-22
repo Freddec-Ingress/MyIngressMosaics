@@ -275,7 +275,7 @@
 		
 		<div ng-if="user.superuser">
 			
-			<div class="block" ng-show="!refreshingOpportunities">
+			<div class="block">
 				
 				<div class="title subblock">
 					<div class="row">
@@ -295,7 +295,7 @@
 					Loading opportunities...
 				</div>
 			
-				<div class="row">
+				<div class="row" ng-show="!refreshingOpportunities">
 					<div class="item-12 item-xl-3" ng-repeat="opportunity in opportunities">
 						
 						<a href="https://ingressmosaik.com{{opportunity.link}}" target="blank" class="btn-primary btn-block ttrans-normal">
@@ -315,7 +315,7 @@
 				
 			</div>
 					
-			<div class="block" ng-show="!refreshingPotential">
+			<div class="block">
 				
 				<div class="title subblock">
 					<div class="row">
@@ -335,7 +335,7 @@
 					Loading potential...
 				</div>
 			
-				<div class="row">
+				<div class="row" ng-show="!refreshingPotential">
 					
 					<div class="item-12 item-xl-3" ng-repeat="potential in potentials">
 						
@@ -355,7 +355,7 @@
 							
 						</a>
 						
-						<a ng-click="excludePotential($index, potential);" style="margin:.25rem .5rem 1rem;">
+						<a ng-click="excludePotential($index, potential);" style="position:realtive; top:.5rem;">
 							Exclude
 						</a>
 				        
