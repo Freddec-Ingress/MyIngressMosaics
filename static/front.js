@@ -1297,6 +1297,71 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		$scope.refreshPotentials();
 	});
 	
+	function readCookie(name) {
+	
+	    var C, i, c = document.cookie.split('; ');
+	
+	    var cookies = {};
+	    for (i = c.length - 1; i >= 0; i--) {
+	        C = c[i].split('=');
+	        cookies[C[0]] = unescape(C[1]);
+	    }
+	
+	    return cookies[name];
+	}
+	
+	var NIANTIC_CURRENT_VERSION = null;
+	function callIngressAPI(action, data, successCallback, errorCallback) {
+	
+	    var post_data = JSON.stringify($.extend({}, data, {v: NIANTIC_CURRENT_VERSION}));
+	
+	    var onError = function(jqXHR, textStatus, errorThrown) {
+	
+	        if (errorCallback) {
+	            errorCallback(jqXHR, textStatus, errorThrown);
+	        }
+	    };
+	
+	    var onSuccess = function(data, textStatus, jqXHR) {
+	
+	        if (successCallback) {
+	            successCallback(data, textStatus, jqXHR);
+	        }
+	    };
+	
+	    var result = $.ajax({
+	        url: 'https://www.ingress.com/r/' + action,
+	        type: 'POST',
+	        data: post_data,
+	        context: data,
+	        dataType: 'json',
+	        success: [onSuccess],
+	        error: [onError],
+	        contentType: 'application/json; charset=utf-8',
+	        beforeSend: function(req) {
+	            req.setRequestHeader('X-CSRFToken', readCookie('csrftoken'));
+	        }
+	    });
+	
+	    result.action = action;
+	
+	    return result;
+	}
+
+	$scope.registering = false;
+	$scope.registerModelMissionId = null;
+	$scope.registerMission = function(registerModelMissionId) {
+		
+		$scope.registering = true;
+		
+	    var data = { guid: registerModelMissionId };
+	    callIngressAPI('getMissionDetails/', data, function(data, textStatus, jqXHR) {
+			
+			$scope.registering = false;
+			$scope.registerModelMissionId = null;
+	    });
+	}
+	
 	$scope.refreshingPotential = false;
 	$scope.refreshPotentials = function() {
 	
