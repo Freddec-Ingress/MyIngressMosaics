@@ -68,8 +68,9 @@ def ext_registerMission(request):
 		
 		mission.computeInternalData()
 		
-		return Response('Registered', status=status.HTTP_200_OK)
-		
+		from django.http import JsonResponse
+		return JsonResponse('Registered')
+
 	else:
 		
 		mission = results[0]
@@ -81,7 +82,8 @@ def ext_registerMission(request):
 			
 			mission.computeInternalData()
 
-	return Response('Updated', status=status.HTTP_200_OK)
+	from django.http import JsonResponse
+	return JsonResponse('Updated')
 
 
 
