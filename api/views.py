@@ -55,7 +55,8 @@ def ext_isMissionRegistered(request):
 
 
 #---------------------------------------------------------------------------------------------------
-@csrf_exempt
+@api_view(['POST'])
+@permission_classes((AllowAny, ))
 def ext_registerMission(request):
 
 	obj = json.loads(request.body)
@@ -68,9 +69,8 @@ def ext_registerMission(request):
 		
 		mission.computeInternalData()
 		
-		from django.http import JsonResponse
-		return JsonResponse('Registered')
-
+		return Response('Registered', status=status.HTTP_200_OK)
+		
 	else:
 		
 		mission = results[0]
@@ -82,8 +82,7 @@ def ext_registerMission(request):
 			
 			mission.computeInternalData()
 
-	from django.http import JsonResponse
-	return JsonResponse('Updated')
+	return Response('Updated', status=status.HTTP_200_OK)
 
 
 
