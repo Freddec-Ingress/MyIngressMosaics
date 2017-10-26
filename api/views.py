@@ -55,7 +55,8 @@ def ext_isMissionRegistered(request):
 
 
 #---------------------------------------------------------------------------------------------------
-@csrf_exempt
+@api_view(['POST'])
+@permission_classes((AllowAny, ))
 def ext_registerMission(request):
 
 	obj = json.loads(request.body)
