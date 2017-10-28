@@ -131,10 +131,16 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '404579985700-eig13jlsdvbe6bhmtsis46tsn7nij4ju.a
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '5YRXxGQOfnrBAWtNgLb2ulds'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email', ]
 
+REST_SESSION_LOGIN = False
+
 REST_FRAMEWORK = {
-	'DEFAULT_AUTHENTICATION_CLASSES': (
-		'rest_framework.authentication.TokenAuthentication',
-	)
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+            'rest_framework.authentication.TokenAuthentication',
+    ],
+    
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
 }
 
 AUTHENTICATION_BACKENDS = (
