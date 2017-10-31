@@ -212,7 +212,29 @@ function callMIMAPI(action, data, successCallback, errorCallback) {
 
 var currentLocation = '';
 var locationsToBeProcessed = [];
-
+/*
+locationsToBeProcessed.push('Bad Salzuflen, Germany');
+locationsToBeProcessed.push('Barntrup, Germany');
+locationsToBeProcessed.push('Beckum, Germany');
+locationsToBeProcessed.push('Bedburg, Germany');
+locationsToBeProcessed.push('Bedburg-Hau, Germany');
+locationsToBeProcessed.push('Bergheim, Germany');
+locationsToBeProcessed.push('Bergisch Gladbach, Germany');
+locationsToBeProcessed.push('Bergkamen, Germany');
+locationsToBeProcessed.push('Bielefeld, Germany');
+locationsToBeProcessed.push('Billerbeck, Germany');
+locationsToBeProcessed.push('Blomberg, Germany');
+locationsToBeProcessed.push('Bocholt, Germany');
+locationsToBeProcessed.push('Bochum, Germany');
+locationsToBeProcessed.push('Bonn, Germany');
+locationsToBeProcessed.push('Borken, Germany');
+locationsToBeProcessed.push('Brakel, Germany');
+locationsToBeProcessed.push('Brilon, Germany');
+locationsToBeProcessed.push('Brüggen, Germany');
+locationsToBeProcessed.push('Brühl, Germany');
+locationsToBeProcessed.push('Bönen, Germany');
+locationsToBeProcessed.push('Bünde, Germany');
+*/
 var geocoder = new google.maps.Geocoder();
 
 function processNextLocation() {
@@ -257,18 +279,18 @@ var missionsToBeProcessed = [];
 
 function processNextTiles() {
 
+    portalsToBeProcessed = [];
+
+    missionsProcessed = [];
+    missionsInProcess = [];
+    missionsToBeProcessed = [];
+
     if (!scanning || tilesToBeProcessed.length < 1) {
 
         tilesToBeProcessed = [];
 
         currentProcessed_count = 0;
         currentToBeProcessed_count = 0;
-
-        portalsToBeProcessed = [];
-
-        missionsProcessed = [];
-        missionsInProcess = [];
-        missionsToBeProcessed = [];
 
         currentProcessed_count = 0;
         currentToBeProcessed_count = 0;
@@ -286,19 +308,88 @@ function processNextTiles() {
         return;
     }
 
-    var data = { tileKeys: [] };
+    var tile = tilesToBeProcessed.slice(0, 1)[0];
 
-    var tiles = tilesToBeProcessed.slice(0, 12);
-    for (var tile of tiles) {
+    tile.rect.setOptions({
+        strokeColor: '#000055',
+        fillColor: '#000055',
+    });
 
-        data.tileKeys.push(tile.id);
+    var dataBounds = {
+        eastE6: Math.trunc(tile.east * 1000000),
+        northE6: Math.trunc(tile.north * 1000000),
+        southE6: Math.trunc(tile.south * 1000000),
+        westE6: Math.trunc(tile.west * 1000000),
+    };
 
-        tile.rect.setOptions({
-            strokeColor: '#550000',
-            fillColor: '#550000',
+    callIngressAPI('getTopMissionsInBounds', dataBounds, function(data, textStatus, jqXHR) {
+
+        if (tilesProcessed.indexOf(tile) != -1) {
+
+            tilesToBeProcessed.splice(tilesToBeProcessed.indexOf(tile), 1);
+            processNextTiles();
+            return;
+        }
+
+        tilesProcessed.push(tile);
+        tilesToBeProcessed.splice(tilesToBeProcessed.indexOf(tile), 1);
+
+        if (!data.result || data.result.length < 1) {
+
+            tile.rect.setOptions({
+                strokeColor: '#555500',
+                fillColor: '#555500',
+            });
+
+            processNextTiles();
+            return;
+        }
+
+        var missions = [];
+        for (var item of data.result) {
+
+            var mission = {mid: item[0]};
+            missions.push(mission);
+        }
+
+        callMIMAPI('ext_check', missions, function(data, textStatus, jqXHR) {
+
+            if (!data) {
+
+                processNextTiles();
+                return;
+            }
+
+            for (var item of data.data) {
+
+                if (item.status == 'notregistered') {
+
+                    var mission_id = item.mid;
+                    missionsToBeProcessed.push(mission_id);
+                }
+                else {
+
+                    var marker = new google.maps.Marker({
+                        position: {lat: item.startLat, lng: item.startLng},
+                        map: M,
+                        icon: mImageRes,
+                    });
+                }
+            }
+
+            processNextMission();
+
+            tile.rect.setOptions({
+                strokeColor: '#555500',
+                fillColor: '#555500',
+            });
         });
-    }
 
+    }, function(jqXHR, textStatus, errorThrown) {
+
+        setTimeout(processNextTiles, 1000);
+    });
+/*
     callIngressAPI('getEntities', data, function(data, textStatus, jqXHR) {
 
         for (var tile_id in data.result.map) {
@@ -381,6 +472,7 @@ function processNextTiles() {
 
         setTimeout(processNextTiles, 1000);
     });
+*/
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -430,7 +522,7 @@ var mImageEnl = {
 function processNextMission() {
 
     if (missionsToBeProcessed.length < 1) {
-        processNextPortal();
+        processNextTiles();
         return;
     }
 
@@ -554,8 +646,6 @@ function init() {
 
         if (scanning === true) return;
 
-        window.checkBounds();
-
         tilesToBeProcessed = [];
 
         var bds = M.getBounds();
@@ -567,7 +657,7 @@ function init() {
 
         var zoom = 19;
         var minLevel = 0;
-        var tilesPerEdge = 32000;
+        var tilesPerEdge = 512000;
 
         var xStart = Math.floor((west + 180) / 360 * tilesPerEdge);
         var xEnd = Math.floor((east + 180) / 360 * tilesPerEdge);
