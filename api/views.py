@@ -41,9 +41,9 @@ def ext_isMissionRegistered(request):
 			if m.mosaic:
 				mdata = m.mosaic.overviewSerialize()
 				if mdata['has_fake']:
-					data.append({'mid':item['mid'], 'status': 'incomplete', 'startLat':m.startLat, 'startLng':m.startLng})
+					data.append({'mid':item['mid'], 'status': 'incomplete', 'mosaicref':m.ref, 'startLat':m.startLat, 'startLng':m.startLng})
 				else:
-					data.append({'mid':item['mid'], 'status': 'completed', 'startLat':m.startLat, 'startLng':m.startLng})
+					data.append({'mid':item['mid'], 'status': 'completed', 'mosaicref':m.ref, 'startLat':m.startLat, 'startLng':m.startLng})
 			else:
 				data.append({'mid':item['mid'], 'status': 'registered', 'startLat':m.startLat, 'startLng':m.startLng})
 		else:
