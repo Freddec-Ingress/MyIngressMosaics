@@ -628,6 +628,7 @@ angular.module('FrontModule.directives').directive('flag', function() {
 		    '       		\'flag-icon-nl\': country == \'Netherlands\',' +
 		    '       		\'flag-icon-eg\': country == \'Egypt\',' +
 		    '       		\'flag-icon-be\': country == \'Belgium\',' +
+		    '       		\'flag-icon-ph\': country == \'Philippines\',' +
 	        '        	}"></span>' +
 		'',
 	};

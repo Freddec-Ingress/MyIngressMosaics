@@ -62,11 +62,6 @@ document.getElementById('dashboard_container').innerHTML +=
     '       Stop scanning' +
     '</div>';
 
-document.getElementById('dashboard_container').innerHTML +=
-    '<div id="tm_check" class="unselectable bottom_right_tab_button" onclick="checkBounds();">' +
-    '       Check missions' +
-    '</div>';
-
 document.getElementById('loading_msg_text').innerHTML = 'Scanning Data...';
 
 //--------------------------------------------------------------------------------------------------
@@ -212,29 +207,7 @@ function callMIMAPI(action, data, successCallback, errorCallback) {
 
 var currentLocation = '';
 var locationsToBeProcessed = [];
-/*
-locationsToBeProcessed.push('Bad Salzuflen, Germany');
-locationsToBeProcessed.push('Barntrup, Germany');
-locationsToBeProcessed.push('Beckum, Germany');
-locationsToBeProcessed.push('Bedburg, Germany');
-locationsToBeProcessed.push('Bedburg-Hau, Germany');
-locationsToBeProcessed.push('Bergheim, Germany');
-locationsToBeProcessed.push('Bergisch Gladbach, Germany');
-locationsToBeProcessed.push('Bergkamen, Germany');
-locationsToBeProcessed.push('Bielefeld, Germany');
-locationsToBeProcessed.push('Billerbeck, Germany');
-locationsToBeProcessed.push('Blomberg, Germany');
-locationsToBeProcessed.push('Bocholt, Germany');
-locationsToBeProcessed.push('Bochum, Germany');
-locationsToBeProcessed.push('Bonn, Germany');
-locationsToBeProcessed.push('Borken, Germany');
-locationsToBeProcessed.push('Brakel, Germany');
-locationsToBeProcessed.push('Brilon, Germany');
-locationsToBeProcessed.push('Brüggen, Germany');
-locationsToBeProcessed.push('Brühl, Germany');
-locationsToBeProcessed.push('Bönen, Germany');
-locationsToBeProcessed.push('Bünde, Germany');
-*/
+
 var geocoder = new google.maps.Geocoder();
 
 function processNextLocation() {
