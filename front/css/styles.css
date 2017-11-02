@@ -211,7 +211,6 @@ a:hover, a:focus, .hover:hover { color: inherit; cursor: pointer; text-decoratio
 
 .subheading {
     color: rgba(255,255,255,.75);
-    margin: 0 0 .5rem 0;
     font-size: .675rem;
     text-align: center;
 }
