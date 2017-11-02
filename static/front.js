@@ -1551,6 +1551,14 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 			$window.scrollTo(0, 0);
 		});
 	}
+	
+	$scope.deleteMission = function(item) {
+		
+		$scope.missions.splice($scope.missions.indexOf(item), 1);
+		
+		var data = {'ref':item.ref};
+		API.sendRequest('/api/mission/delete/', 'POST', {}, data);
+	}
 });
 
 angular.module('FrontModule.controllers').controller('LoginCtrl', function($scope, $auth, $cookies, $window, API) {
