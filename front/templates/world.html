@@ -25,7 +25,7 @@
 
 {% verbatim %}
 
-	<div class="block" style="margin-top:1rem;">
+	<div class="block">
 		
 		<h2 class="heading">
 			Ingress Mosaics, Banners and Mission series
@@ -113,13 +113,13 @@
 				<div class="item grow">
 					{{countries.length|number}} countries
 				</div>
-
-				<div class="item">
-					<a class="badge-link badge-mini" ng-class="{'active': sort=='mosaics'}" ng-click="sortByMosaics();">Mosaics</a>
-				</div>
 				
 				<div class="item">
 					<a class="badge-link badge-mini" ng-class="{'active': sort=='name'}", ng-click="sortByName();">Name</a>
+				</div>
+
+				<div class="item">
+					<a class="badge-link badge-mini" ng-class="{'active': sort=='mosaics'}" ng-click="sortByMosaics();">Mosaics</a>
 				</div>
 				
 			</div>
