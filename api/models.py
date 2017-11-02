@@ -343,8 +343,8 @@ class Mission(models.Model):
 	startLng = models.FloatField(null=True, blank=True)
 	distance = models.FloatField(null=True, blank=True)
 	admin = models.BooleanField(default=True)
-
-	registerer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='missions')
+	registerer = models.TextField(null=True, blank=True)
+	
 	mosaic = models.ForeignKey('Mosaic', on_delete=models.SET_NULL, null=True, blank=True, related_name='missions')
 	
 	# Admin displaying
@@ -473,6 +473,9 @@ class Mission(models.Model):
 				
 			if pData1['lat'] != 0.0 and pData1['lng'] != 0.0 and pData2['lat'] != 0.0 and pData2['lng'] != 0.0:
 				self.distance += getDistanceFromLatLng(pData1['lat'], pData1['lng'], pData2['lat'], pData2['lng'])
+				
+		if not self.registerer and jsondata[11]:
+			self.registerer = jsondata[11]
 				
 		self.save()
 		

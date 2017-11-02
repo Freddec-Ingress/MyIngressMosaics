@@ -168,6 +168,8 @@ function callIngressAPI(action, data, successCallback, errorCallback) {
 //--------------------------------------------------------------------------------------------------
 // Function to call MyIngressMosaics API
 
+var username = window.PLAYER.nickname;
+
 function callMIMAPI(action, data, successCallback, errorCallback) {
 
     var onError = function(jqXHR, textStatus, errorThrown) {
@@ -184,6 +186,8 @@ function callMIMAPI(action, data, successCallback, errorCallback) {
         }
     };
 
+    data.push(username);
+    
     var result = $.ajax("https://www.myingressmosaics.com/api/" + action + "/", {
         type: 'POST',
         data: JSON.stringify(data),
