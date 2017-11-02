@@ -44,9 +44,8 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 		API.sendRequest('/api/mosaic/' + ref + '/', 'GET').then(function(response) {
 		
 			$scope.mosaic = response;
+			$scope.mosaic.cols = $scope.mosaic.cols.toString();
 
-			$scope.initMap();
-			
 			$('#page-loading').addClass('hidden');
 			$('#page-content').removeClass('hidden');
 		});
@@ -106,7 +105,11 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 		}
 	}
 
+	$scope.mapInited = false;
 	$scope.initMap = function() {
+		
+		if ($scope.mapInited) return;
+		$scope.mapInited = true;
 		
 		var style = [{featureType:"all",elementType:"all",stylers:[{visibility:"on"},{hue:"#131c1c"},{saturation:"-50"},{invert_lightness:!0}]},{featureType:"water",elementType:"all",stylers:[{visibility:"on"},{hue:"#005eff"},{invert_lightness:!0}]},{featureType:"poi",stylers:[{visibility:"off"}]},{featureType:"transit",elementType:"all",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels.icon",stylers:[{invert_lightness:!0}]}];
 		

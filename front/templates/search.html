@@ -50,19 +50,19 @@
 		</div>
 	    
 	    <div ng-if="mosaics && mosaics.length > 0">
-	    
-			<div class="block">
-				<div class="title">
-					{{mosaics.length}} mosaics found
-				</div>
-			</div>
 	    	
 			<div class="block">
+				
+				<div class="title subblock">
+					{{mosaics.length}} mosaics found
+				</div>
+				
 		    	<div class="row">
 		    		<div class="item-6 item-xl-3" ng-repeat="mosaic in mosaics">
 		    			<mosaic-vignet mosaic="mosaic"></mosaic-vignet>
 		    		</div>
 		    	</div>
+		    	
 	    	</div>
 	    
 	    </div>
