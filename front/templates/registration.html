@@ -25,6 +25,14 @@
     
 {% verbatim %}
 	
+	<div class="block" style="margin-top:1rem;">
+		
+		<h2 class="heading">
+			Mosaic Registration
+		</h2>
+		
+	</div>
+	
 	<div ng-if="!user.authenticated">
 	    
 	    <div class="block">
@@ -56,48 +64,17 @@
     <div ng-if="user.authenticated">
 		
         <div class="block">
-        	
-	        <div class="row">
-
-            	<div class="item-12">
-            		To register missions from Intel Map, please use our Chrome extension <a href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">MIM Hunting Tool</a>
-            	</div>
-            	
- 	       </div>
- 	       
-        </div>
-
-        <div class="block">
             
             <div class="panel">
 
-				<div class="item-12">
-					<form class="row">
-					
-						<div class="item grow">
-							<input id="searchBox" type="text" class="form-control" placeholder="mosaic name, creator" ng-model="searchModel.text" />
-						</div>
-						
-						<div class="item">
-							<button id="searchButton" type="submit" style="width:100px;" class="btn btn-primary ml-2 ta-center" ng-click="search();" ng-disabled="searching">
-								<span ng-show="searching">
-									<i class="fa fa-spinner rotating mr-1"></i>
-								</span>
-								Search
-							</button>
-						</div>
-					
-					</form>
-				</div>
-	                
                 <div class="item-12">
-                    <div style="overflow:auto; height:200px; background:#0B0C0D; border:4px solid #0B0C0D;" ng-class="{'scrollbar': searchModel.results.length > 5}">
+                    <div style="overflow:auto; height:200px; background:#0B0C0D; border:4px solid #0B0C0D;" ng-class="{'scrollbar': missions.length > 5}">
                     
-                        <div ng-if="searchModel.results.length < 1" class="item">
-                        	No mission
+                        <div ng-if="missions.length < 1" class="item ta-center">
+                        	No mission registered. To register missions from Intel Map, please use our Chrome extension <a href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">MIM Hunting Tool.</a>
                         </div>
                         
-	                    <div class="panel" ng-repeat="item in searchModel.results">
+	                    <div class="panel" ng-repeat="item in missions">
 
 	                        <div class="item">
 	                             <a ng-click="addMission(item);"><i class="fa fa-plus-square"></i></a>
@@ -123,15 +100,21 @@
                 </div>
 	                
                 <div class="item-12">
-                    {{searchModel.results.length}} missions
-                    <span ng-if="searchModel.results.length > 0">
+                	
+                    <span ng-if="missions.length < 1">0</span>
+                    <span ng-if="missions.length > 0">{{missions.length}}</span>
+                    missions
+                    
+                    <span ng-if="missions.length > 0">
+                    	
 	                    <span class="text-separator">&middot;</span>
 	                    <a ng-click="addAll();">Add all</a>
-	                    <span ng-if="user.superuser">
-	                    	<span class="text-separator">&middot;</span>
-	                  	  	<a ng-click="excludeAll();">Exclude all</a>
-	                    </span>
+	                    
+                    	<span class="text-separator">&middot;</span>
+                  	  	<a ng-click="refreshMissions();">Refresh</a>
+                  	  	
 	            	</span>
+	            	
                 </div>
                 
             </div>
@@ -186,7 +169,7 @@
                 	
                     <label>Preview</label>
                     
- 					<div class="form-control" style="border:4px solid #0B0C0D; display:flex; height:291px; justify-content:center; background:#0b0c0d; padding:.25rem;" ng-class="{'scrollbar valign-start': mosaicModel.missions.length > 30, 'valign-center': mosaicModel.missions.length <= 30}">
+ 					<div class="form-control" style="border:4px solid #0B0C0D; display:flex; height:245px; justify-content:center; background:#0b0c0d; padding:.25rem;" ng-class="{'scrollbar valign-start': mosaicModel.missions.length > 30, 'valign-center': mosaicModel.missions.length <= 30}">
 					
 						<div class="row" style="align-items:center; padding:0 calc((6 - {{mosaicModel.columns}}) / 2 * 16.666667%); width:100%;" ng-class="{'align-center':mosaicModel.type=='sequence' || (mosaicModel.type=='serie' && mosaicModel.missions.length < 6)}">
 				            <div ng-repeat="m in mosaicModel.missions | reverse" style="flex:0 0 calc(100% / {{mosaicModel.columns}});">
@@ -234,22 +217,25 @@
 	    		                
 	                        </div>
                         </div>
-
-			        	<div class="item-12 ta-center c-danger">
-			        	    If mosaic is not complete, you could add 'fake' missions and post comment after to complete mosaic.
-			        	</div>
 			        	
-			        	<div class="item-12 ta-center">
+			        	<div class="item-12">
 			        		
 					     	<form class="row">
+
+					        	<div class="item-8 c-danger ta-right">
+					        	    If your mosaic is not complete, you could add 'fake' missions and complete it later.
+					        	</div>
+					        	
 								<div class="item grow">
-									<input type="text" class="form-control" placeholder="order" ng-model="fakeorder" />
+									<input type="text" class="form-control ta-center" placeholder="order" ng-model="fakeorder" />
 								</div>
+								
 								<div class="item">
 									<button type="submit" class="btn-primary" ng-click="addFake(fakeorder); fakeorder=null;" ng-disabled="creating || !mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || !mosaicModel.region || !mosaicModel.city || (mosaicModel.missions.length < 1)">
-										Add fake
+										Add
 									</button>
 								</div>
+								
 							</form>
 			        		
 			        	</div>
@@ -272,101 +258,7 @@
 	        </div>
 	        
         </div>
-		
-		<div ng-if="user.superuser">
-			
-			<div class="block">
-				
-				<div class="title subblock">
-					<div class="row">
-						<div class="item grow">
-							{{opportunities.length}} Opportunities
-						</div>
-						<div class="item">
-							<a ng-click="refreshOpportunities();">
-								Refresh
-							</a>
-						</div>
-					</div>
-				</div>
-				
-				<div ng-show="refreshingOpportunities">
-					<i class="fa fa-spinner"></i>
-					Loading opportunities...
-				</div>
-			
-				<div class="row" ng-show="!refreshingOpportunities">
-					<div class="item-12 item-xl-3" ng-repeat="opportunity in opportunities">
-						
-						<a href="https://ingressmosaik.com{{opportunity.link}}" target="blank" class="btn-primary btn-block ttrans-normal">
-							
-							<div class="row valign-center">
-								
-								<div class="item-12 ta-left ellipsis">
-						        	{{opportunity.name}}
-						        </div>
 
-							</div>
-							
-						</a>
-
-					</div>
-				</div>
-				
-			</div>
-					
-			<div class="block">
-				
-				<div class="title subblock">
-					<div class="row">
-						<div class="item grow">
-							{{potentials.length}} Potentials
-						</div>
-						<div class="item">
-							<a ng-click="refreshPotentials();">
-								Refresh
-							</a>
-						</div>
-					</div>
-				</div>
-				
-				<div ng-show="refreshingPotential">
-					<i class="fa fa-spinner"></i>
-					Loading potential...
-				</div>
-			
-				<div class="row" ng-show="!refreshingPotential">
-					
-					<div class="item-12 item-xl-3" ng-repeat="potential in potentials">
-						
-						<a ng-click="searchAdv(potential.name);" class="btn-primary btn-block">
-							
-							<div class="row valign-center">
-								
-								<div class="item grow ta-left ellipsis">
-						        	{{potential.name}}
-						        </div>
-						        
-						        <div class="item">
-						        	<span class="badge-dark badge-mini">{{potential.count}}</span>
-						        </div>
-						        
-							</div>
-							
-						</a>
-						
-						<a ng-click="excludePotential($index, potential);" style="position:realtive; top:.5rem;">
-							Exclude
-						</a>
-				        
-					</div>
-					
-				</div>
-				
-			</div>
-			
-		</div>
-			
     </div>
 
 </div>

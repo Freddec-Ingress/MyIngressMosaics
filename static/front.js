@@ -1298,140 +1298,27 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		$('#page-loading').addClass('hidden');
 		$('#page-content').removeClass('hidden');
 		
-		$scope.refreshOpportunities();
-		$scope.refreshPotentials();
+		$scope.refreshMissions();
 	});
+
+	$scope.missions = [];
+
+	$scope.refreshingMissions = false;
+	$scope.refreshMissions = function() {
 	
-	function readCookie(name) {
-	
-	    var C, i, c = document.cookie.split('; ');
-	
-	    var cookies = {};
-	    for (i = c.length - 1; i >= 0; i--) {
-	        C = c[i].split('=');
-	        cookies[C[0]] = unescape(C[1]);
-	    }
-	
-	    return cookies[name];
-	}
-	
-	var NIANTIC_CURRENT_VERSION = null;
-	function callIngressAPI(action, data, successCallback, errorCallback) {
-	
-	    var post_data = JSON.stringify($.extend({}, data, {v: NIANTIC_CURRENT_VERSION}));
-	
-	    var onError = function(jqXHR, textStatus, errorThrown) {
-	
-	        if (errorCallback) {
-	            errorCallback(jqXHR, textStatus, errorThrown);
-	        }
-	    };
-	
-	    var onSuccess = function(data, textStatus, jqXHR) {
-	
-	        if (successCallback) {
-	            successCallback(data, textStatus, jqXHR);
-	        }
-	    };
-	
-	    var result = $.ajax({
-	        url: 'https://www.ingress.com/r/' + action,
-	        type: 'POST',
-	        data: post_data,
-	        context: data,
-	        dataType: 'json',
-	        success: [onSuccess],
-	        error: [onError],
-	        contentType: 'application/json; charset=utf-8',
-	        beforeSend: function(req) {
-	            req.setRequestHeader('X-CSRFToken', readCookie('csrftoken'));
-	        }
-	    });
-	
-	    result.action = action;
-	
-	    return result;
+		$scope.missions = [];
+		$scope.refreshingMissions = true;
+		
+		API.sendRequest('/api/missions/', 'POST').then(function(response) {
+			
+			$scope.missions = response.missions;
+			if (!$scope.missions) $scope.missions = [];
+			else $scope.missions.sort(compareCreatorTitleAsc);
+			
+			$scope.refreshingMissions = false;
+		});
 	}
 
-	$scope.registering = false;
-	$scope.registerModelMissionId = null;
-	$scope.registerMission = function(registerModelMissionId) {
-		
-		$scope.registering = true;
-		
-	    var data = { guid: registerModelMissionId };
-	    callIngressAPI('getMissionDetails/', data, function(data, textStatus, jqXHR) {
-			
-			$scope.registering = false;
-			$scope.registerModelMissionId = null;
-	    });
-	}
-	
-	$scope.refreshingPotential = false;
-	$scope.refreshPotentials = function() {
-	
-		$scope.refreshingPotential = true;
-		
-		API.sendRequest('/api/potentials/', 'POST').then(function(response) {
-			
-			$scope.potentials = response;
-			$scope.potentials.sort(function(a, b) {
-				return b.count - a.count;
-			});
-			
-			$scope.refreshingPotential = false;
-		});
-	}
-	
-	$scope.refreshingOpportunities = false;
-	$scope.refreshOpportunities = function() {
-	
-		$scope.refreshingOpportunities = true;
-		
-		API.sendRequest('/api/opportunities/', 'POST').then(function(response) {
-			
-			$scope.opportunities = response;
-			
-			$scope.refreshingOpportunities = false;
-		});
-	}
-	
-	$scope.searchModel = {
-		
-		'text': '',
-		'results': [],
-	}
-	
-	$scope.searching = false;
-	
-	$scope.search = function() {
-		
-		$scope.searchModel.results = [];
-
-		$scope.searching = true;
-		
-		if (!$scope.searchModel.text) {
-			
-			$scope.searching = false;
-			return;
-		}
-		
-		var data = {'text': $scope.searchModel.text}
-		API.sendRequest('/api/missions/', 'POST', {}, data).then(function(response) {
-			
-			$scope.searchModel.results = response.missions;
-			$scope.searching = false;
-		});
-	}
-	
-	$scope.searchAdv = function(text) {
-		
-		$scope.searchModel.text = text;
-		$scope.search();
-		
-		$window.scrollTo(0, 0);
-	}
-	
 	$scope.mosaicModel = {
 		
 		'city': null,
@@ -1443,7 +1330,7 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		
 		'missions': [],
 	}
-	
+
 	function compareOrderAsc(a, b) {
 		
 		if (parseInt(a.order) < parseInt(b.order))
@@ -1490,7 +1377,7 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 	
 	$scope.removeMission = function(item) {
 		
-		$scope.searchModel.results.push(item);
+		$scope.missions.push(item);
 		
 		$scope.mosaicModel.missions.splice($scope.mosaicModel.missions.indexOf(item), 1);
 		
@@ -1508,7 +1395,7 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 			$scope.mosaicModel.missions.sort(compareOrderAsc);
 		}
 		
-		$scope.searchModel.results.sort(compareCreatorTitleAsc);
+		$scope.missions.sort(compareCreatorTitleAsc);
 	}
 	
 	$scope.reorder = function() {
@@ -1518,7 +1405,7 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 	
 	$scope.addAll = function() {
 		
-		var missions = $scope.searchModel.results.slice();
+		var missions = $scope.missions.slice();
 		for (var m of missions) {
 			$scope.addMission(m);
 		}
@@ -1549,7 +1436,7 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		
 		$scope.mosaicModel.missions.push(item);
 		
-		$scope.searchModel.results.splice($scope.searchModel.results.indexOf(item), 1);
+		$scope.missions.splice($scope.missions.indexOf(item), 1);
 		
 		if (!$scope.mosaicModel.title) {
 			
@@ -1662,15 +1549,6 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 			$scope.creating = false;
 	
 			$window.scrollTo(0, 0);
-		});
-	}
-	
-	$scope.excludePotential = function(index, potential) {
-		
-		var data = { 'name':potential.name }
-		API.sendRequest('/api/adm/potential/exclude/', 'POST', {}, data).then(function(response) {
-			
-			$scope.potentials.splice(index, 1);
 		});
 	}
 });
