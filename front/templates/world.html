@@ -38,6 +38,43 @@
 	</div>
 
 	<div class="block">
+		<div class="row" style="margin-top:.5rem; height:29px;">
+			
+			<div class="item-6 ta-right">
+				
+				<div id="fb-root"></div>
+				
+				<script>
+					(function(d, s, id) {
+						var js, fjs = d.getElementsByTagName(s)[0];
+						if (d.getElementById(id)) return;
+						js = d.createElement(s); js.id = id;
+						js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10";
+						fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk'));
+				</script>
+				
+				{% endverbatim %}
+				<div class="fb-share-button" data-href="https://www.myingressmosaics.com/mosaic/{{ref}}" data-layout="button_count" data-size="small" data-mobile-iframe="true">
+					<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"></a>
+				</div>
+				{% verbatim %}
+			
+			</div>
+			
+			<div class="item-6">
+				
+				{% endverbatim %}
+				<script src="https://apis.google.com/js/platform.js" async defer></script>
+				<div class="g-plus" data-action="share" data-annotation="bubble" data-href="https://www.myingressmosaics.com/mosaic/{{ref}}"></div>			
+				{% verbatim %}
+				
+			</div>
+			
+		</div>
+	</div>
+
+	<div class="block">
         <div class="ta-center">
         	To register missions from Intel Map, please use our Chrome extension <a href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">MIM Hunting Tool.</a>
         </div>
