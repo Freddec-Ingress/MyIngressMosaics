@@ -168,11 +168,7 @@ function callIngressAPI(action, data, successCallback, errorCallback) {
 //--------------------------------------------------------------------------------------------------
 // Function to call MyIngressMosaics API
 
-var username = window.PLAYER.nickname;
-
 function callMIMAPI(action, data, successCallback, errorCallback) {
-
-    var post_data = data;
 
     var onError = function(jqXHR, textStatus, errorThrown) {
 
@@ -190,7 +186,7 @@ function callMIMAPI(action, data, successCallback, errorCallback) {
 
     var result = $.ajax("https://www.myingressmosaics.com/api/" + action + "/", {
         type: 'POST',
-        data: JSON.stringify(post_data),
+        data: JSON.stringify(data),
         dataType: 'json',
         success: [onSuccess],
         error: [onError],
@@ -241,9 +237,6 @@ function processNextLocation() {
 var tilesProcessed = [];
 var tilesToBeProcessed = [];
 
-var currentProcessed_count = 0;
-var currentToBeProcessed_count = 0;
-
 var portalsToBeProcessed = [];
 
 var missionsProcessed = [];
@@ -262,12 +255,6 @@ function processNextTiles() {
 
         tilesToBeProcessed = [];
 
-        currentProcessed_count = 0;
-        currentToBeProcessed_count = 0;
-
-        currentProcessed_count = 0;
-        currentToBeProcessed_count = 0;
-
         processNextLocation();
 
         scanning = false;
@@ -281,161 +268,77 @@ function processNextTiles() {
         return;
     }
 
-    var tile = tilesToBeProcessed.slice(0, 1)[0];
+    var data = { tileKeys: [] };
 
-    tile.rect.setOptions({
-        strokeColor: '#000055',
-        fillColor: '#000055',
-    });
+    var tiles = tilesToBeProcessed.slice(0, 12);
+    for (var tile of tiles) {
 
-    var dataBounds = {
-        eastE6: Math.trunc(tile.east * 1000000),
-        northE6: Math.trunc(tile.north * 1000000),
-        southE6: Math.trunc(tile.south * 1000000),
-        westE6: Math.trunc(tile.west * 1000000),
-    };
+        data.tileKeys.push(tile.id);
 
-    callIngressAPI('getTopMissionsInBounds', dataBounds, function(data, textStatus, jqXHR) {
-
-        if (tilesProcessed.indexOf(tile) != -1) {
-
-            tilesToBeProcessed.splice(tilesToBeProcessed.indexOf(tile), 1);
-            processNextTiles();
-            return;
-        }
-
-        tilesProcessed.push(tile);
-        tilesToBeProcessed.splice(tilesToBeProcessed.indexOf(tile), 1);
-
-        if (!data.result || data.result.length < 1) {
-
-            tile.rect.setOptions({
-                strokeColor: '#555500',
-                fillColor: '#555500',
-            });
-
-            processNextTiles();
-            return;
-        }
-
-        var missions = [];
-        for (var item of data.result) {
-
-            var mission = {mid: item[0]};
-            missions.push(mission);
-        }
-
-        callMIMAPI('ext_check', missions, function(data, textStatus, jqXHR) {
-
-            if (!data) {
-
-                processNextTiles();
-                return;
-            }
-
-            for (var item of data.data) {
-
-                if (item.status == 'notregistered') {
-
-                    var mission_id = item.mid;
-                    missionsToBeProcessed.push(mission_id);
-                }
-                else {
-
-                    var marker = new google.maps.Marker({
-                        position: {lat: item.startLat, lng: item.startLng},
-                        map: M,
-                        icon: mImageRes,
-                    });
-                }
-            }
-
-            processNextMission();
-
-            tile.rect.setOptions({
-                strokeColor: '#555500',
-                fillColor: '#555500',
-            });
+        tile.rect.setOptions({
+            strokeColor: '#550000',
+            fillColor: '#550000',
         });
+    }
 
-    }, function(jqXHR, textStatus, errorThrown) {
-
-        setTimeout(processNextTiles, 1000);
-    });
-/*
     callIngressAPI('getEntities', data, function(data, textStatus, jqXHR) {
 
         for (var tile_id in data.result.map) {
 
             var val = data.result.map[tile_id];
-            if ('error' in val) {
+            if ('error' in val) continue;
+
+            var tile = null;
+            for (var t of tiles) {
+                if (t.id == tile_id) {
+                    tile = t;
+                }
             }
-            else {
 
-                var tile = null;
-                for (var t of tiles) {
-                    if (t.id == tile_id) {
-                        tile = t;
-                    }
-                }
+            tilesProcessed.push(tile);
+            tilesToBeProcessed.splice(tilesToBeProcessed.indexOf(tile), 1);
 
-                if (tilesProcessed.indexOf(tile) != -1) {
+            tile.rect.setOptions({
+                strokeColor: '#555500',
+                fillColor: '#555500',
+            });
 
-                    tilesToBeProcessed.splice(tilesToBeProcessed.indexOf(tile), 1);
-                    continue;
-                }
+            for (var item of val.gameEntities) {
+                if (item[2][0] == 'p' && item[2][10] === true) {
 
-                tilesProcessed.push(tile);
-                tilesToBeProcessed.splice(tilesToBeProcessed.indexOf(tile), 1);
-
-                tile.rect.setOptions({
-                    strokeColor: '#555500',
-                    fillColor: '#555500',
-                });
-
-                currentProcessed_count += 1;
-                var text = '' + currentProcessed_count + '/' + currentToBeProcessed_count;
-                document.getElementById('loading_msg_text').innerHTML = 'Scanning Data... ' + text;
-
-                var has_portal = false;
-
-                for (var item of val.gameEntities) {
-                    if (item[2][0] == 'p' && item[2][10] === true) {
-
-                        var portal = {
-                            'id': item[0],
-                            'lat': item[2][2] / 1000000.0,
-                            'lng': item[2][3] / 1000000.0,
-                        };
-
-                        portalsToBeProcessed.push(portal);
-
-                        has_portal = true;
-                    }
-                }
-
-                if (has_portal) {
-
-                    var dataBounds = {
-                        eastE6: Math.trunc(tile.east * 1000000),
-                        northE6: Math.trunc(tile.north * 1000000),
-                        southE6: Math.trunc(tile.south * 1000000),
-                        westE6: Math.trunc(tile.west * 1000000),
+                    var portal = {
+                        'id': item[0],
+                        'lat': item[2][2] / 1000000.0,
+                        'lng': item[2][3] / 1000000.0,
                     };
 
-                    callIngressAPI('getTopMissionsInBounds', dataBounds, function(data, textStatus, jqXHR) {
+                    portalsToBeProcessed.push(portal);
+                }
+            }
 
-                        if (!data.result) return;
+            if (portalsToBeProcessed.length > 0) {
 
-                        for (var item of data.result) {
+                checkBounds(tile);
 
-                            var mission_id = item[0];
+                var dataBounds = {
+                    eastE6: Math.trunc(tile.east * 1000000),
+                    northE6: Math.trunc(tile.north * 1000000),
+                    southE6: Math.trunc(tile.south * 1000000),
+                    westE6: Math.trunc(tile.west * 1000000),
+                };
+
+                callIngressAPI('getTopMissionsInBounds', dataBounds, function(data, textStatus, jqXHR) {
+
+                    if (!data.result) return;
+
+                    for (var item of data.result) {
+
+                        var mission_id = item[0];
+                        if (missionsProcessed.indexOf(mission_id) == -1 && missionsToBeProcessed.indexOf(mission_id) == -1 && missionsInProcess.indexOf(mission_id) == -1) {
                             missionsToBeProcessed.push(mission_id);
                         }
-
-                    }, function(jqXHR, textStatus, errorThrown) {
-                    });
-                }
+                    }
+                });
             }
         }
 
@@ -445,7 +348,6 @@ function processNextTiles() {
 
         setTimeout(processNextTiles, 1000);
     });
-*/
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -468,7 +370,9 @@ function processNextPortal() {
             for (var item of data.result) {
 
                 var mission_id = item[0];
-                missionsToBeProcessed.push(mission_id);
+                if (missionsProcessed.indexOf(mission_id) == -1 && missionsToBeProcessed.indexOf(mission_id) == -1 && missionsInProcess.indexOf(mission_id) == -1) {
+                    missionsToBeProcessed.push(mission_id);
+                }
             }
         }
 
@@ -495,13 +399,13 @@ var mImageEnl = {
 function processNextMission() {
 
     if (missionsToBeProcessed.length < 1) {
-        processNextTiles();
+        processNextPortal();
         return;
     }
 
     var mission_id = missionsToBeProcessed[0];
 
-    if (missionsInProcess.indexOf(mission_id) != -1) {
+    if (missionsProcessed.indexOf(mission_id) != -1 || missionsInProcess.indexOf(mission_id) != -1) {
 
         missionsToBeProcessed.splice(0, 1);
         processNextMission();
@@ -515,17 +419,9 @@ function processNextMission() {
 
         if (!data.result) return;
 
-        if (missionsProcessed.indexOf(mission_id) != -1) {
-
-            missionsToBeProcessed.splice(0, 1);
-            processNextMission();
-            return;
-        }
-
         missionsProcessed.push(mission_id);
         missionsToBeProcessed.splice(0, 1);
 
-        data.result.push(username);
         var requestData = data.result;
         callMIMAPI('ext_register', data.result, function(data, textStatus, jqXHR) {
 
@@ -630,7 +526,7 @@ function init() {
 
         var zoom = 19;
         var minLevel = 0;
-        var tilesPerEdge = 512000;
+        var tilesPerEdge = 32000;
 
         var xStart = Math.floor((west + 180) / 360 * tilesPerEdge);
         var xEnd = Math.floor((east + 180) / 360 * tilesPerEdge);
@@ -732,18 +628,9 @@ function init() {
         window.startScanning();
     };
 
-    window.checkBounds = function() {
+    window.checkBounds = function(tile) {
 
-        var center = M.getCenter();
-
-        var bds = M.getBounds();
-
-        var South_Lat = bds.getSouthWest().lat();
-        var South_Lng = bds.getSouthWest().lng();
-        var North_Lat = bds.getNorthEast().lat();
-        var North_Lng = bds.getNorthEast().lng();
-
-        var data = { sLat: South_Lat, sLng: South_Lng, nLat: North_Lat, nLng: North_Lng };
+        var data = { sLat: tile.south, sLng: tile.west, nLat: tile.north, nLng: tile.east };
         callMIMAPI('ext_bounds', data, function(data, textStatus, jqXHR) {
 
             if (data) {

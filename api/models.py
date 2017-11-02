@@ -62,6 +62,7 @@ class Mosaic(models.Model):
 	ref = models.CharField(max_length=32, default=_createRef, unique=True)
 	cols = models.IntegerField(default=6)
 	type = models.CharField(max_length=64, default='sequence')
+	tags =  models.TextField(null=True, blank=True)
 	city = models.CharField(max_length=64)
 	title = models.CharField(max_length=256)
 	status = models.CharField(max_length=64, default='active')
@@ -342,7 +343,8 @@ class Mission(models.Model):
 	startLng = models.FloatField(null=True, blank=True)
 	distance = models.FloatField(null=True, blank=True)
 	admin = models.BooleanField(default=True)
-	
+
+	registerer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='missions')
 	mosaic = models.ForeignKey('Mosaic', on_delete=models.SET_NULL, null=True, blank=True, related_name='missions')
 	
 	# Admin displaying
