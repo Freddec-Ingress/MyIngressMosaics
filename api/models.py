@@ -561,7 +561,7 @@ class Comment(models.Model):
 	# Admin displaying
 	
 	def __str__(self):
-		return self.user.username
+		return self.user.username + ' - ' + self.mosaic.ref
 		
 	# Serialization
 	
