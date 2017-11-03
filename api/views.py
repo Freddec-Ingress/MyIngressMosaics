@@ -970,7 +970,7 @@ def event_view(request):
 	
 	data = { 'cities': [], }
 	
-	results = Mosaic.objects.filter(tags__icontains=request.data['event']).values('city', 'region', 'country')
+	results = Mosaic.objects.filter(tags__icontains=request.data['event']).values('city', 'region', 'country').distinct()
 	if results.count() > 0:
 		
 		for item in results:
