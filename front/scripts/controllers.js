@@ -1320,6 +1320,12 @@ angular.module('FrontModule.controllers').controller('EventsCtrl', function($sco
 			$scope.cities.sort(function(a, b) {
 				return b.mosaics.length - a.mosaics.length;
 			});
+			
+			for (var city of $scope.cities) {
+				city.mosaics.sort(function(a, b) {
+					return b.missions.length - a.missions.length;
+				});
+			}
 
 			$scope.selecting = false;
 		});

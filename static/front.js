@@ -1955,8 +1955,14 @@ angular.module('FrontModule.controllers').controller('EventsCtrl', function($sco
 			if (!$scope.cities) $scope.cities = [];
 
 			$scope.cities.sort(function(a, b) {
-				return a.mosaics.length - b.mosaics.length;
+				return b.mosaics.length - a.mosaics.length;
 			});
+			
+			for (var city of $scope.cities) {
+				city.mosaics.sort(function(a, b) {
+					return b.missions.length - a.missions.length;
+				});
+			}
 
 			$scope.selecting = false;
 		});
