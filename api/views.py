@@ -367,6 +367,7 @@ def mosaic_reorder(request):
 				mission.order = item['order']
 				mission.save()
 	
+		mosaic.computeInternalData()
 		mosaic.save()
 		
 		data = mosaic.detailsSerialize()
@@ -417,6 +418,7 @@ def mosaic_removeMission(request):
 			mission.mosaic = None
 			mission.save()
 			
+			mosaic.computeInternalData()
 			mosaic.save()
 			
 			data = mosaic.detailsSerialize()
@@ -449,6 +451,7 @@ def mosaic_addMission(request):
 			mission.order = request.data['order']
 			mission.save()
 			
+			mosaic.computeInternalData()
 			mosaic.save()
 			
 			data = mosaic.detailsSerialize()
