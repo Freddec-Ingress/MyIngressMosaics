@@ -702,7 +702,7 @@ def data_searchForMissions(request):
 			data['missions'].append(item.overviewSerialize())
 
 		if request.user.is_superuser:
-			results = Mission.objects.filter(mosaic__isnull=True, registerer__isnull=True).order_by('-creator')
+			results = Mission.objects.filter(mosaic__isnull=True, registerer__isnull=True).order_by('-creator')[:1000]
 			for item in results:
 				data['missions'].append(item.overviewSerialize())
 	
