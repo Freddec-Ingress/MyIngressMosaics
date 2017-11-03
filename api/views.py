@@ -960,3 +960,27 @@ def adm_excludePotential(request):
 		item.save()
 	
 	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((AllowAny, ))
+def event_view(request):
+	
+	data = { 'cities': [], }
+	
+	results = Mosaic.objects.filter(tags__icontains=request.data['event']).values('city', 'region', 'country')
+	if results.count() > 0:
+		
+		for item in results:
+			obj = {'city':item['city'], 'region':item['region'], 'country':item['country'], 'mosaics':[]}
+			data['cities'].append(obj)
+	
+		for item in data['cities']:
+			
+			mosaics = Mosaic.objects.filter(tags__icontains=request.data['event'], city=item.city, region=item.region, country=item.country)
+			for mosaic in mosaics:
+				item['mosaics'].append(mosaic.overviewSerialize())
+	
+	return Response(data, status=status.HTTP_200_OK)

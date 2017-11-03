@@ -214,8 +214,8 @@ def search(request, searchstring = ''):
 	
 def events(request, eventstring = ''):
 	
-	context = {'eventstring':eventstring}
-	return render(request, 'events.html', context)
+	context = {'searchstring':searchstring}
+	return render(request, 'search.html', context)
 
 
 

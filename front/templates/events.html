@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block extra-head %}
+
+	<title>MIM - Ingress Mosaics, Banners and Mission series</title>
+
+	<meta property="og:url" content="https://www.myingressmosaics.com">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="MyIngressMosaics">
+	<meta property="og:description" content="Ingress Mosaics, Banners and Mission series">
+	
+{% endblock %}
+
+{% block header %}
+
+	{% trans 'Events' %}
+	
+{% endblock %}
+
+{% block content %}
+
+<div id="page-container" ng-controller="EventsCtrl" ng-init="init('{{eventstring}}');">
+
+{% verbatim %}
+
+	<div class="block">
+		
+		<h2 class="heading">
+			Mosaics of Ingress Events
+		</h2>
+		
+		<h3 class="subheading">
+			Dedicated page to mosaics associated with Ingress events (XM Anomaly & Mission Day)
+		</h3>
+		
+	</div>
+
+    <div class="block">
+     	<form class="panel">
+			<div class="item grow">
+				<select class="form-control" ng-model="selecttext" ng-change="select(selecttext);">
+					<option value="05112017_XMA">05-Nov-2017 XM Anomaly</option>
+					<option value="05112017_MD">05-Nov-2017 Mission Day</option>
+				</select>
+			</div>
+		</form>
+	</div>
+
+	<div ng-show="displayResults">
+					
+		<div ng-if="selecting" class="block ta-center">
+			<i class="fa fa-spinner"></i>
+			Loading mosaics...
+		</div>
+		
+		<div ng-if="!selecting && cities.length < 1" class="block ta-center c-warning">
+			Mosaics are coming soon ;)
+		</div>
+		
+		<div class="block" ng-repeat="item in cities">
+			
+			<div class="title subblock">
+				{{item.city}}, {{item.region}}, {{item.country}}
+			</div>
+			
+			<div class="row">
+				<div class="item-6 item-xl-3" ng-repeat="mosaic in item.mosaics">
+					<mosaic-vignet mosaic="mosaic"></mosaic-vignet>
+				</div>
+			</div>
+			
+		</div>
+
+	</div>
+	
+</div>
+
+{% endverbatim %}
+{% endblock %}

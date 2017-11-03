@@ -1287,3 +1287,37 @@ angular.module('FrontModule.controllers').controller('CityCtrl', function($scope
 		});
 	}
 });
+
+angular.module('FrontModule.controllers').controller('EventsCtrl', function($scope, API) {
+	
+	$('#page-loading').addClass('hidden');
+	$('#page-content').removeClass('hidden');
+
+	$scope.cities = [];
+	$scope.selecting = false;
+	$scope.selecttext = null;
+	$scope.displayResults = false;
+
+	$scope.init = function(text) {
+		
+		if (!text) return;
+		$scope.select(text);
+	}
+	
+	$scope.select = function(text) {
+		
+		$scope.cities = [];
+		$scope.selecting = true;
+		$scope.selecttext = text;
+		$scope.displayResults = true;
+		
+		var data = {'event':text};
+		API.sendRequest('/api/event/', 'POST', {}, data).then(function(response) {
+			
+			$scope.cities = response.cities;
+			if (!$scope.cities) $scope.cities = [];
+
+			$scope.selecting = false;
+		});
+	}
+});

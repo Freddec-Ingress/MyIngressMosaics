@@ -22,6 +22,8 @@ urlpatterns = [
 	url(r'^search/(?P<searchstring>[\w \-,]+)',           views.search),
 	url(r'^search',        views.search),
 	
+	url(r'^events/(?P<eventstring>[\w \-,]+)',           views.events),
+	url(r'^events',        views.events),
 	
 	url(r'^login',         views.login),
 	url(r'^register', views.register),
