@@ -377,6 +377,58 @@
 
 			</div>
 			
+			<div ng-show="user.superuser || mosaic.registerer == user" class="block">
+				
+				<div class="title subblock">
+					Add missing mission
+				</div>
+
+		     	<form class="panel">
+					<div class="item grow">
+						<input type="text" class="form-control" ng-model="searchtext" />
+					</div>
+					<div class="item">
+						<button type="submit" class="btn-primary" ng-click="searchMission(searchtext);">
+							Search
+						</button>
+					</div>
+				</form>
+				
+				<div ng-show="displayResults">
+					
+					<div ng-if="searching" class="block ta-center">
+						<i class="fa fa-spinner"></i>
+						Searching for missions...
+					</div>
+					
+					<div ng-if="!searching && missions.length < 1" class="block ta-center c-danger">
+						No mission found
+					</div>
+					
+	                <div class="panel valign-center" ng-repeat="item in missions">
+
+                        <div class="item">
+                             <a ng-click="addMission(item);"><i class="fa fa-plus-square"></i></a>
+                         </div>
+	
+						<div class="item">
+							<input class="form-control ta-center" ng-model="item.order" style="min-width:2.5rem; width:2.5rem; min-height:1.5rem; line-height:1.5rem;" />
+						</div>
+	
+						<div class="item grow ellipsis">
+							{{item.title}}
+						</div>
+	                    
+                        <div class="item" ng-class="{'c-enligtened': item.faction == 'E', 'c-resistance': item.faction == 'R',}">
+                            {{item.creator}}
+                        </div>
+							
+	                </div>
+	                
+				</div>
+				
+			</div>
+			
 		</div>
 		
 		<div ng-show="commentsMode" class="block">

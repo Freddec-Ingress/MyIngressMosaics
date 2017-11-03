@@ -243,6 +243,22 @@ def user_getRegisteredMissions(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
+def mosaic_searchForMissions(request):
+	
+	data = { 'missions': [], }
+
+	results = Mission.objects.filter(mosaic__isnull=True).filter(Q(title__icontains=request.data['text']) | Q(creator__icontains=request.data['text']))
+	if results.count() > 0:
+		for mission in results:
+			data['missions'].append(mission.overviewSerialize())
+	
+	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
 def mosaic_create(request):
 	
 	mosaic = Mosaic(	registerer = request.user,
@@ -403,7 +419,7 @@ def mosaic_removeMission(request):
 			
 			mosaic.save()
 			
-			data = mosaic.serialize()
+			data = mosaic.detailsSerialize()
 			return Response(data, status=status.HTTP_200_OK)
 	
 	return Response(None, status=status.HTTP_404_NOT_FOUND)
@@ -435,7 +451,7 @@ def mosaic_addMission(request):
 			
 			mosaic.save()
 			
-			data = mosaic.serialize()
+			data = mosaic.detailsSerialize()
 			return Response(data, status=status.HTTP_200_OK)
 	
 	return Response(None, status=status.HTTP_404_NOT_FOUND)

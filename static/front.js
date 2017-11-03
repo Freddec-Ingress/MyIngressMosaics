@@ -696,7 +696,7 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 
 	$scope.remove = function(mission_ref, index) {
 
-		var data = { 'ref':$scope.mosaic.ref, 'mission':$scope.mosaic.missions[index] };
+		var data = { 'ref':$scope.mosaic.ref, 'mission':$scope.mosaic.missions[index].ref };
 		return API.sendRequest('/api/mosaic/remove/', 'POST', {}, data).then(function(response) {
 				
 			$scope.mosaic.creators = response.creators;
@@ -958,6 +958,76 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 			
 			$scope.mosaic.comments.splice(index, 1);
 		});
+	}
+	
+	/* Adding missing missions */
+	
+	$scope.missions = []
+	
+	$scope.searching = false;
+	
+	$scope.displayResults = false;
+	
+	function compareOrderAsc(a, b) {
+		
+		if (parseInt(a.order) < parseInt(b.order))
+			return -1;
+			
+		if (parseInt(a.order) > parseInt(b.order))
+			return 1;
+		
+		if (a.title < b.title)
+			return -1;
+			
+		if (a.title > b.title)
+			return 1;
+			
+		return 0;
+	}
+	
+	function compareCreatorTitleAsc(a, b) {
+		
+		if (a.creator < b.creator)
+			return -1;
+			
+		if (a.creator > b.creator)
+			return 1;
+		
+		if (a.title < b.title)
+			return -1;
+			
+		if (a.title > b.title)
+			return 1;
+		
+		return 0;
+	}
+	
+	$scope.searchMission = function(searchtext) {
+		
+		$scope.missions = []
+		$scope.searching = true;
+		$scope.displayResults = true;
+		
+		var data = {'text':searchtext};
+		API.sendRequest('/api/mosaic/missions/', 'POST', {}, data).then(function(response) {
+			
+			$scope.missions = response.missions;
+			if (!$scope.missions) $scope.missions = [];
+			else $scope.missions.sort(compareCreatorTitleAsc);
+			
+			$scope.searching = false;
+		});
+	}
+	
+	$scope.addMission = function(item) {
+		
+		$scope.missions.splice($scope.missions.indexOf(item), 1);
+
+		$scope.mosaic.missions.push(item);
+		$scope.mosaic.missions.sort(compareOrderAsc);
+
+		var data = {'ref':$scope.mosaic.ref, 'mission':item.ref, 'order':item.order};
+		API.sendRequest('/api/mosaic/add/', 'POST', {}, data);
 	}
 });
 
