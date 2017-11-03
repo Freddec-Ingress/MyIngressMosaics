@@ -62,7 +62,11 @@
 		<div class="block" ng-repeat="item in cities">
 			
 			<div class="title subblock">
-				{{item.city}}, {{item.region}}, {{item.country}}
+				<a href="/world/{{item.country}}">{{item.country}}</a>
+				<span class="text-separator">></span>
+				<a href="/world/{{item.country}}/{{item.region}}">{{item.region}}</a>
+				<span class="text-separator">></span>
+				<a href="/world/{{item.country}}/{{item.region}}/{{item.city}}">{{item.city}}</a>
 			</div>
 			
 			<div class="row">

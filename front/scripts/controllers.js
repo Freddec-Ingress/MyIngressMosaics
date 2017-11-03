@@ -1317,6 +1317,10 @@ angular.module('FrontModule.controllers').controller('EventsCtrl', function($sco
 			$scope.cities = response.cities;
 			if (!$scope.cities) $scope.cities = [];
 
+			$scope.cities.sort(function(a, b) {
+				return a.mosaics.length - b.mosaics.length;
+			});
+
 			$scope.selecting = false;
 		});
 	}
