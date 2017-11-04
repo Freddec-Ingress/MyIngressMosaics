@@ -702,12 +702,8 @@ def data_searchForMissions(request):
 			data['missions'].append(item.overviewSerialize())
 
 		if request.user.is_superuser:
-			Mission.objects.filter(mosaic__isnull=True, registerer__isnull=True, title__isnull=True).delete()
-			
-			results = Mission.objects.filter(mosaic__isnull=True, registerer__isnull=True).order_by('-creator')[:1000]
-			for item in results:
-				data['missions'].append(item.overviewSerialize())
-	
+			Mission.objects.filter(mosaic__isnull=True, registerer__isnull=True).delete()
+
 	else:
 		data = { 'missions': None, }
 	
