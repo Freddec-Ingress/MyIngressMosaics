@@ -1,7 +1,7 @@
 // ==UserScript==
 // @id             myingressmosaics@freddec
 // @name           MyIngressMosaics Scanning plugin
-// @version        1.0.11
+// @version        1.0.12
 // @include        https://*.ingress.com/intel*
 // @include        http://*.ingress.com/intel*
 // @match          https://*.ingress.com/intel*
@@ -186,8 +186,6 @@ function callMIMAPI(action, data, successCallback, errorCallback) {
         }
     };
 
-    data.push(username);
-    
     var result = $.ajax("https://www.myingressmosaics.com/api/" + action + "/", {
         type: 'POST',
         data: JSON.stringify(data),
@@ -426,6 +424,7 @@ function processNextMission() {
         missionsProcessed.push(mission_id);
         missionsToBeProcessed.splice(0, 1);
 
+        data.result.push(username);
         var requestData = data.result;
         callMIMAPI('ext_register', data.result, function(data, textStatus, jqXHR) {
 
