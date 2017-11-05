@@ -694,6 +694,8 @@ def data_getMosaicsOfCity(request, country, region, name):
 @permission_classes((AllowAny, ))
 def data_searchForMissions(request):
 	
+	results = Mission.objects.filter(mosaic__isnull=True, registerer='FIiptart').update(registerer='RivmanBX')
+	
 	results = Mission.objects.filter(mosaic__isnull=True, registerer=request.user)
 	if (results.count() > 0):
 
