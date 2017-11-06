@@ -21,7 +21,7 @@
 
 {% block content %}
 
-<div id="page-container" ng-controller="RegionCtrl" ng-init="loadRegion('{{country}}', '{{region}}');">
+<div id="page-container" ng-controller="RegionCtrl" ng-init="loadRegion('{{country}}', '{{region|escape}}');">
 
 {% verbatim %}
 
