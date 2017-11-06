@@ -122,27 +122,29 @@
 				
 		</div>
 		
-		<div class="block-tabs">
+		<div class="block">
+			<div class="tabs">
+					
+				<div class="item-4 ta-right">
+					<button class="btn-secondary btn-block btn-mini" ng-click="detailsMode = true; missionsMode = false; commentsMode = false;" ng-class="{'active': detailsMode}">
+						Details
+					</button>
+				</div>
+					
+				<div class="item-4 ta-right">
+					<button class="btn-secondary btn-block btn-mini" ng-click="initMap(); detailsMode = false; missionsMode = true; commentsMode = false;" ng-class="{'active': missionsMode}">
+						<span ng-if="mosaic.has_fake" class="c-warning"><i class="fa fa-warning text-separator"></i></span>
+						Missions
+					</button>
+				</div>
 				
-			<div class="item-4 ta-right">
-				<button class="btn-secondary btn-block btn-mini" ng-click="detailsMode = true; missionsMode = false; commentsMode = false;" ng-class="{'active': detailsMode}">
-					Details
-				</button>
-			</div>
+				<div class="item-4">
+					<button class="btn-secondary btn-block btn-mini" ng-click="detailsMode = false; missionsMode = false; commentsMode = true;" ng-class="{'active': commentsMode}">
+						Comments
+					</button>
+				</div>
 				
-			<div class="item-4 ta-right">
-				<button class="btn-secondary btn-block btn-mini" ng-click="initMap(); detailsMode = false; missionsMode = true; commentsMode = false;" ng-class="{'active': missionsMode}">
-					<span ng-if="mosaic.has_fake" class="c-warning"><i class="fa fa-warning text-separator"></i></span>
-					Missions
-				</button>
 			</div>
-			
-			<div class="item-4">
-				<button class="btn-secondary btn-block btn-mini" ng-click="detailsMode = false; missionsMode = false; commentsMode = true;" ng-class="{'active': commentsMode}">
-					Comments
-				</button>
-			</div>
-			
 		</div>
 		
 		<div ng-init="detailsMode = true;" ng-show="detailsMode">
