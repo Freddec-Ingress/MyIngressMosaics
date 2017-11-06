@@ -748,6 +748,7 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 			if (!$scope.missions) $scope.missions = [];
 			else {
 				
+				console.log($scope.mosaicModel.missions);
 				for (var item of $scope.mosaicModel.missions) {
 				
 					var index = $scope.missions.indexOf(item);
