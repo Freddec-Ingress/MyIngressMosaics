@@ -1385,6 +1385,12 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 			if (!$scope.missions) $scope.missions = [];
 			else $scope.missions.sort(compareCreatorTitleAsc);
 			
+			for (var item of $scope.mosaicModel.missions) {
+			
+				var index = $scope.missions.indexOf(item);
+				if (index != -1) $scope.missions.splice(index, 1);
+			}
+			
 			$scope.refreshingMissions = false;
 		});
 	}

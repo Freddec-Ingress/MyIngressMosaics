@@ -102,7 +102,7 @@
                             </div>
                             
                             <div class="item">
-                                <a href="https://www.ingress.com/mission/{{item.ref}}" target="blank">
+                                <a href="https://www.ingress.com/intel?ll={{item.startLat}},{{item.startLng}}&z=17&pll={{item.startLat}},{{item.startLng}}" target="blank">
                                     <i class="fa fa-external-link"></i>
                                 </a>
                             </div>
@@ -218,6 +218,12 @@
 	            		        
 	    		                <div class="panel valign-center" ng-repeat="item in mosaicModel.missions">
 	    		                	
+	    		                	<div class="item">
+				                        <a ng-click="removeMission(item);">
+				                            <i class="fa fa-minus-square"></i>
+				                        </a>
+	    		                    </div>
+	    		                	
  	    		                	<div class="item">
 	    			                    <input type="text" class="form-control ta-center" ng-blur="reorder();" ng-model="item.order" style="min-width:2.5rem; width:2.5rem; min-height:1.5rem; line-height:1.5rem;" />
 	    		                	</div>
@@ -225,13 +231,13 @@
 	    		                	<div class="item grow ellipsis" ng-class="{'c-danger':item.title=='Fake mission'}">
 	    			                     {{item.title}}
 	    		                	</div>
-	    		                	
-	    		                	<div class="item">
-				                        <a ng-click="removeMission(item);">
-				                            <i class="fa fa-minus-square"></i>
-				                        </a>
-	    		                    </div>
-   		                    
+		                            
+		                            <div class="item">
+		                                <a href="https://www.ingress.com/intel?ll={{item.startLat}},{{item.startLng}}&z=17&pll={{item.startLat}},{{item.startLng}}" target="blank">
+		                                    <i class="fa fa-external-link"></i>
+		                                </a>
+		                            </div>
+		    		                    
 	    		                </div>
 	    		                
 	                        </div>
