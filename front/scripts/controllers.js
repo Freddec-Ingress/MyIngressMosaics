@@ -746,12 +746,15 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 			
 			$scope.missions = response.missions;
 			if (!$scope.missions) $scope.missions = [];
-			else $scope.missions.sort(compareCreatorTitleAsc);
-			
-			for (var item of $scope.mosaicModel.missions) {
-			
-				var index = $scope.missions.indexOf(item);
-				if (index != -1) $scope.missions.splice(index, 1);
+			else {
+				
+				for (var item of $scope.mosaicModel.missions) {
+				
+					var index = $scope.missions.indexOf(item);
+					if (index != -1) $scope.missions.splice(index, 1);
+				}
+				
+				$scope.missions.sort(compareCreatorTitleAsc);
 			}
 			
 			$scope.refreshingMissions = false;
@@ -873,9 +876,11 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 	
 	$scope.addMission = function(item) {
 		
-		$scope.mosaicModel.missions.push(item);
+		var index = $scope.mosaicModel.missions.indexOf(item);
+		if (index == -1) $scope.mosaicModel.missions.push(item);
 		
-		$scope.missions.splice($scope.missions.indexOf(item), 1);
+		index = $scope.missions.indexOf(item);
+		if (index != -1) $scope.missions.splice(index, 1);
 		
 		if (!$scope.mosaicModel.title) {
 			
