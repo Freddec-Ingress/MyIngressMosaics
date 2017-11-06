@@ -42,9 +42,9 @@ urlpatterns = [
 	url(r'^search/',				data_searchForMosaics),
 
 	url(r'^world/',					data_getMosaicsByCountry),
-	url(r'^country/(?P<name>[\w \-,]+)/$',				data_getMosaicsByRegion),
-	url(r'^region/(?P<country>[\w \-,]+)/(?P<name>[\w \-,]+)/$',				data_getMosaicsByCity),
-	url(r'^city/(?P<country>[\w \-,]+)/(?P<region>[\w \-,]+)/(?P<name>[\w \-,]+)/$',				data_getMosaicsOfCity),
+	url(r'^country/(?P<name>[\w \-,\']+)/$',				data_getMosaicsByRegion),
+	url(r'^region/(?P<country>[\w \-,\']+)/(?P<name>[\w \-,\']+)/$',				data_getMosaicsByCity),
+	url(r'^city/(?P<country>[\w \-,\']+)/(?P<region>[\w \-,\']+)/(?P<name>[\w \-,\']+)/$',				data_getMosaicsOfCity),
 	
 	url(r'^map/mosaic/',			map_getMosaicOverview),
 	url(r'^map/',					map_getMosaics),

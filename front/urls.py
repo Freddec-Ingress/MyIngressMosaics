@@ -29,9 +29,9 @@ urlpatterns = [
 	url(r'^register', views.register),
 	url(r'^profile', views.profile),
 
-	url(r'^world/(?P<country>[\w \-,]+)/(?P<region>[\w \-,]+)/(?P<city>[\w \-,]+)', views.city),
-	url(r'^world/(?P<country>[\w \-,]+)/(?P<region>[\w \-,]+)', views.region),
-	url(r'^world/(?P<country>[\w \-,]+)', views.country),
+	url(r'^world/(?P<country>[\w \-,\']+)/(?P<region>[\w \-,\']+)/(?P<city>[\w \-,\']+)', views.city),
+	url(r'^world/(?P<country>[\w \-,\']+)/(?P<region>[\w \-,\']+)', views.region),
+	url(r'^world/(?P<country>[\w \-,\']+)', views.country),
 	url(r'^world', views.world),
 	
 	url(r'^.*', views.world),
