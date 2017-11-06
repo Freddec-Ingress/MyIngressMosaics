@@ -1372,6 +1372,7 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 	});
 
 	$scope.missions = [];
+	$scope.filterText = '';
 
 	var isMissionInArray = function(array, mission) {
 
