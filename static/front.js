@@ -1404,11 +1404,9 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 			if (!$scope.missions) $scope.missions = [];
 			else {
 				
-				console.log($scope.mosaicModel.missions);
 				for (var item of $scope.mosaicModel.missions) {
 				
 					var index = isMissionInArray($scope.missions, item);
-					console.log(index);
 					if (index != -1) $scope.missions.splice(index, 1);
 				}
 				
@@ -1534,11 +1532,9 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 	
 	$scope.addMission = function(item) {
 		
-		var index = $scope.mosaicModel.missions.indexOf(item);
-		if (index == -1) $scope.mosaicModel.missions.push(item);
+		$scope.mosaicModel.missions.push(item);
 		
-		index = $scope.missions.indexOf(item);
-		if (index != -1) $scope.missions.splice(index, 1);
+		$scope.missions.splice($scope.missions.indexOf(item), 1);
 		
 		if (!$scope.mosaicModel.title) {
 			

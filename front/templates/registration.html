@@ -83,6 +83,12 @@
 					
                 	<span class="text-separator">&middot;</span>
               	  	<a ng-click="refreshMissions();">Refresh</a>
+              	  	
+              	  	<span ng-if="missions.length > 0">
+              	  		&middot;
+              	  		Filter
+              	  		<input type="text" class="form-control" ng-model="filterText" style="min-height:1.5rem; line-height:1.5rem;" />
+              	  	</span>
 	            	
                 </div>
 
@@ -98,7 +104,7 @@
                         	No mission registered. To register missions from Intel Map, please use our Chrome extension <a href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">MIM Hunting Tool.</a>
                         </div>
                         
-	                    <div class="panel" ng-repeat="item in missions">
+	                    <div class="panel" ng-repeat="item in missions | filter:filterText">
 
 	                        <div class="item">
 	                             <a ng-click="addMission(item);"><i class="fa fa-plus-square"></i></a>
