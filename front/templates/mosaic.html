@@ -405,7 +405,7 @@
 	            </div>
             </div>
             
-		</div>
+			</div>
 		
 			<div ng-show="user.superuser || mosaic.registerer == user" class="block">
 				
@@ -431,6 +431,32 @@
 						
                 </div>
 
+			</div>
+			
+			<div ng-show="user.superuser || mosaic.registerer == user" class="block">
+				
+				<div class="title subblock">
+					Add fake mission
+				</div>
+				
+		     	<form class="panel valign-center">
+
+		        	<div class="item grow c-danger">
+		        	    If your mosaic is not complete, you could add 'fake' missions and complete it later.
+		        	</div>
+		        	
+					<div class="item">
+						<input type="text" class="form-control ta-center" placeholder="order" ng-model="fakeorder" />
+					</div>
+					
+					<div class="item">
+						<button type="submit" class="btn-primary" ng-click="addFake(fakeorder); fakeorder=null;">
+							Add
+						</button>
+					</div>
+					
+				</form>
+				
 			</div>
 			
 			<div ng-show="user.superuser || mosaic.registerer == user" class="block">

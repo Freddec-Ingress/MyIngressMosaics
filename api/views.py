@@ -442,20 +442,27 @@ def mosaic_addMission(request):
 		
 		mosaic = result[0]
 		
-		result = Mission.objects.filter(ref=request.data['mission'], mosaic__isnull=True)
-		if result.count() > 0:
+		if request.data['mission'] == 'Unavailable':
 			
-			mission = result[0]
+			item = Mission(data='{}', title='Fake mission', ref='Unavailable-' + request.data['order'] + mosaic.ref, mosaic=mosaic, order=request.data['order'])
+			item.save()
 			
-			mission.mosaic = mosaic
-			mission.order = request.data['order']
-			mission.save()
+		else:
 			
-			mosaic.computeInternalData()
-			mosaic.save()
+			result = Mission.objects.filter(ref=request.data['mission'], mosaic__isnull=True)
+			if result.count() > 0:
+				
+				mission = result[0]
+				
+				mission.mosaic = mosaic
+				mission.order = request.data['order']
+				mission.save()
 			
-			data = mosaic.detailsSerialize()
-			return Response(data, status=status.HTTP_200_OK)
+		mosaic.computeInternalData()
+		mosaic.save()
+		
+		data = mosaic.detailsSerialize()
+		return Response(data, status=status.HTTP_200_OK)
 	
 	return Response(None, status=status.HTTP_404_NOT_FOUND)
 

@@ -960,6 +960,23 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 		});
 	}
 	
+	/* Adding fake missions */
+	
+	$scope.addFake = function(fakeorder) {
+		
+		var item = {
+			'ref': 'Unavailable',
+			'order': fakeorder,
+			'title': 'Fake mission',
+		}
+		
+		$scope.mosaic.missions.push(item);
+		$scope.mosaic.missions.sort(compareOrderAsc);
+
+		var data = {'ref':$scope.mosaic.ref, 'mission':item.ref, 'order':item.order};
+		API.sendRequest('/api/mosaic/add/', 'POST', {}, data);
+	}
+	
 	/* Adding missing missions */
 	
 	$scope.missions = []
