@@ -6,6 +6,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 from django.http import HttpResponse
 
+import re
 import math, os
 import urllib, io
 
@@ -228,7 +229,7 @@ def city(request, country, region, city):
 
 def region(request, country, region):
 	
-	context = { 'country':country, 'region':region }
+	context = { 'country':country, 'region':re.escape(region) }
 	return render(request, 'region.html', context)
 
 
