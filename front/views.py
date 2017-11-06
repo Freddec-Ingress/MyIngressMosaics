@@ -229,7 +229,7 @@ def city(request, country, region, city):
 
 def region(request, country, region):
 	
-	context = { 'country':country, 'region':region }
+	context = { 'country':country, 'region':re.escape(region), 'regionlabel':region }
 	return render(request, 'region.html', context)
 
 

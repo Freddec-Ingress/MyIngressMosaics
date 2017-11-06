@@ -4,7 +4,7 @@
 
 {% block extra-head %}
 
-	<title>MIM - {{region}}, {{country}}</title>
+	<title>MIM - {{regionlabel}}, {{country}}</title>
 
 	<meta property="og:url" content="https://www.myingressmosaics.com/world/{{country}}/{{region}}">
 	<meta property="og:type" content="website">
@@ -21,7 +21,7 @@
 
 {% block content %}
 
-<div id="page-container" ng-controller="RegionCtrl" ng-init="loadRegion('{{country}}', '{{region|escape}}');">
+<div id="page-container" ng-controller="RegionCtrl" ng-init="loadRegion('{{country}}', '{{region}}');">
 
 {% verbatim %}
 
