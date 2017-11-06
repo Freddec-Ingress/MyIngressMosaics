@@ -383,6 +383,8 @@ textarea.form-control { padding-top: .25rem; padding-bottom: .25rem; }
 
 .btn-mini { min-height: .75rem; line-height: .75rem; min-width: 75px; }
 
+.btn-icon { padding: .25rem; min-height: 30px; min-width: 30px; display:inline-flex; align-items:center; justify-content:center; }
+
 
 
 /* Control ------------------------------------------------------------------ */

@@ -150,6 +150,41 @@
 		<div ng-init="detailsMode = true;" ng-show="detailsMode">
 	
 			<div class="block">
+				
+				<div class="title subblock">
+					Start this mosaic
+				</div>
+				
+				<div class="panel valign-center align-center">
+
+                    <div class="item" style="padding-top:0; padding-bottom:0;">
+                        <a class="btn-primary btn-icon" href="https://www.ingress.com/intel?ll={{mosaic.startLat}},{{mosaic.startLng}}&z=17&pll={{mosaic.startLat}},{{mosaic.startLng}}" target="blank">
+                            <i class="fa fa-fw fa-external-link"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="item" style="padding-top:0; padding-bottom:0;">
+                        <a class="btn-primary btn-icon" href="https://www.google.com/maps/dir//{{mosaic.startLat}},{{mosaic.startLng}}" target="blank">
+                            <i class="fa fa-fw fa-map-marker"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="item" style="padding-top:0; padding-bottom:0;">
+                        <a class="btn-primary btn-icon" href="https://waze.com/ul?ll={{mosaic.startLat}},{{mosaic.startLng}}" target="blank">
+                            <img src="/static/img/waze.png">
+                        </a>
+                    </div>
+	                    
+				</div>
+				
+			</div>
+			
+			<div class="block">
+				
+				<div class="title subblock">
+					Preview
+				</div>
+				
 				<div class="panel">
 					
 					<div class="item-12">
@@ -190,6 +225,7 @@
 					</div>
 	
 				</div>
+				
 			</div>
 			
 			<div ng-show="user.superuser || mosaic.registerer == user" class="block">
@@ -289,66 +325,84 @@
 					
 				</div>
 				
+				<div class="title subblock">
+					Roadmap
+				</div>
+				
 				<div class="panel">
 				
-				<div class="item-12">
-					<div id="map"></div>
+					<div class="item-12">
+						<div id="map"></div>
+					</div>
+	
 				</div>
-
-			</div>
 			
-			<div class="panel" ng-repeat="item in mosaic.missions">
+				<div class="panel" ng-repeat="item in mosaic.missions">
 				
-				<div class="item-12 hover" ng-click="toggleMission(item);">
+				<div class="item-12 hover">
 					
-					<div class="row">
+					<div class="row valign-center">
 						
-	                    <div class="item c-white">
+	                    <div class="item c-white" ng-click="toggleMission(item);">
 	                    	<i ng-hide="item.expanded" class="mr-2 fa fa-fw fa-caret-right"></i>
 	                    	<i ng-show="item.expanded" class="mr-2 fa fa-fw fa-caret-down"></i>
 	                    </div>
 	                    
-	                    <div class="item grow c-white" ng-class="{'c-white':item.title!='Fake mission', 'c-danger':item.title=='Fake mission'}">
+	                    <div class="item grow c-white" ng-click="toggleMission(item);" ng-class="{'c-white':item.title!='Fake mission', 'c-danger':item.title=='Fake mission'}">
 	                        {{item.title}}
 	                    </div>
 	                    
-	                    <div class="item">
-	                        <a href="https://www.ingress.com/intel?ll={{item.startLat}},{{item.startLng}}&z=17&pll={{item.startLat}},{{item.startLng}}" target="blank">
-	                            <i class="fa fa-external-link"></i>
+	                    <div class="item" style="padding-top:0; padding-bottom:0;">
+	                        <a class="btn-primary btn-icon" href="https://www.ingress.com/intel?ll={{item.startLat}},{{item.startLng}}&z=17&pll={{item.startLat}},{{item.startLng}}" target="blank">
+	                            <i class="fa fa-fw fa-external-link"></i>
 	                        </a>
 	                    </div>
-                    
+	                    
+	                    <div class="item" style="padding-top:0; padding-bottom:0;">
+	                        <a class="btn-primary btn-icon" href="https://www.google.com/maps/dir//{{item.startLat}},{{item.startLng}}" target="blank">
+	                            <i class="fa fa-fw fa-map-marker"></i>
+	                        </a>
+	                    </div>
+	                    
+	                    <div class="item" style="padding-top:0; padding-bottom:0;">
+	                        <a class="btn-primary btn-icon" href="https://waze.com/ul?ll={{item.startLat}},{{item.startLng}}" target="blank">
+	                            <img src="/static/img/waze.png">
+	                        </a>
+	                    </div>
+                      
 	                </div>
 	                
                 </div>
                 
-                <div class="item-12 row" ng-show="item.expanded" style="margin:0; padding:.5rem; background-color:rgba(0,0,0,.25);">
-
-					<div ng-show="item.title=='Fake mission'" class="item-12 c-danger">
-						Mission missing. Please post comment if you know it is available.
-					</div>
-					
-					<div ng-show="item.title!='Fake mission'" class="item-12">
-						{{item.portals.length}} waypoints
-						<i class="text-separator fa fa-long-arrow-right"></i>
-        				<span class="" ng-repeat="portal in item.portals">
-        					<span ng-if="$index > 0" class="text-separator">&middot;</span>
-        					<span ng-class="{'c-lighter':!portal.unavailable, 'c-danger':portal.unavailable}">
-        						<span ng-if="portal.action == 0">Objectives</span>
-        						<span ng-if="portal.action == 1">Hack</span>
-        						<span ng-if="portal.action == 2">Capture or Upgrade</span>
-        						<span ng-if="portal.action == 7">View</span>
-        						<span ng-if="portal.action == 8">Passphrase</span>
-        					</span>
-        				</span>
-        			</div>
-					
-					<div ng-show="item.title!='Fake mission'" class="item-12">
-                        {{item.desc}}
-                    </div>
-
-                </div>
-                
+                <div class="item-12" ng-show="item.expanded">
+	                <div style="padding:.25rem; background-color:rgba(0,0,0,.25);">
+	
+						<div ng-show="item.title=='Fake mission'" class="item-12 c-danger">
+							Mission missing. Please post comment if you know it is available.
+						</div>
+						
+						<div ng-show="item.title!='Fake mission'" class="item-12">
+							{{item.portals.length}} waypoints
+							<i class="text-separator fa fa-long-arrow-right"></i>
+	        				<span class="" ng-repeat="portal in item.portals">
+	        					<span ng-if="$index > 0" class="text-separator">&middot;</span>
+	        					<span ng-class="{'c-lighter':!portal.unavailable, 'c-danger':portal.unavailable}">
+	        						<span ng-if="portal.action == 0">Objectives</span>
+	        						<span ng-if="portal.action == 1">Hack</span>
+	        						<span ng-if="portal.action == 2">Capture or Upgrade</span>
+	        						<span ng-if="portal.action == 7">View</span>
+	        						<span ng-if="portal.action == 8">Passphrase</span>
+	        					</span>
+	        				</span>
+	        			</div>
+						
+						<div ng-show="item.title!='Fake mission'" class="item-12">
+	                        {{item.desc}}
+	                    </div>
+	
+	                </div>
+	                
+	            </div>
             </div>
             
 		</div>
