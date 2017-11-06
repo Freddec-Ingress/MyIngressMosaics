@@ -87,7 +87,7 @@
               	  	<span ng-if="missions.length > 0">
               	  		<span class="text-separator">&middot;</span>
               	  		Filter
-              	  		<input type="text" class="form-control" ng-model="filterText" style="margin-left:.25rem; display:inline-block; width:auto; min-height:1.5rem; line-height:1.5rem;" />
+              	  		<input type="text" class="form-control" ng-model="filterText" ng-change="filterMissions(filterText);" style="margin-left:.25rem; display:inline-block; width:auto; min-height:1.5rem; line-height:1.5rem;" />
               	  	</span>
 	            	
                 </div>
