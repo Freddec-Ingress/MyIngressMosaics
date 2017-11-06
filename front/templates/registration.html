@@ -85,9 +85,9 @@
               	  	<a ng-click="refreshMissions();">Refresh</a>
               	  	
               	  	<span ng-if="missions.length > 0">
-              	  		&middot;
+              	  		<span class="text-separator">&middot;</span>
               	  		Filter
-              	  		<input type="text" class="form-control" ng-model="filterText" style="min-height:1.5rem; line-height:1.5rem;" />
+              	  		<input type="text" class="form-control" ng-model="filterText" ng-change="filterMissions(filterText);" style="diplay:inline-block; min-height:1.5rem; line-height:1.5rem;" />
               	  	</span>
 	            	
                 </div>

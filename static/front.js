@@ -1417,6 +1417,11 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		});
 	}
 
+	$scope.filterText = '';
+	$scope.filterMissions = function(text) {
+		console.log(text);
+	}
+
 	$scope.mosaicModel = {
 		
 		'city': null,
