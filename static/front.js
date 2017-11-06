@@ -1396,6 +1396,7 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 	$scope.refreshMissions = function() {
 	
 		$scope.missions = [];
+		$scope.filterText = '';
 		$scope.refreshingMissions = true;
 		
 		API.sendRequest('/api/missions/', 'POST').then(function(response) {
@@ -1415,11 +1416,6 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 			
 			$scope.refreshingMissions = false;
 		});
-	}
-
-	$scope.filterText = '';
-	$scope.filterMissions = function(text) {
-		console.log(text);
 	}
 
 	$scope.mosaicModel = {
