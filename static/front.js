@@ -1373,6 +1373,25 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 
 	$scope.missions = [];
 
+	var isMissionInArray = function(array, mission) {
+
+		var index = -1;
+		
+		var temp = -1;
+		for (var item of array) {
+
+			temp += 1;
+			
+			if (item.ref == mission.ref) {
+				
+				index = temp;
+				break;
+			}
+		}
+		
+		return index;
+	}
+
 	$scope.refreshingMissions = false;
 	$scope.refreshMissions = function() {
 	
@@ -1388,7 +1407,7 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 				console.log($scope.mosaicModel.missions);
 				for (var item of $scope.mosaicModel.missions) {
 				
-					var index = $scope.missions.indexOf(item);
+					var index = isMissionInArray($scope.missions, item);
 					console.log(index);
 					if (index != -1) $scope.missions.splice(index, 1);
 				}
