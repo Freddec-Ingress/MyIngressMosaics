@@ -59,22 +59,23 @@
 		</div>
 		
 		<div class="row">
-			<div class="block item-12 item-xl-4" ng-repeat="item in cities">
-				
-				<div class="title subblock">
-					<a href="/world/{{item.country}}">{{item.country}}</a>
-					<span class="text-separator">></span>
-					<a href="/world/{{item.country}}/{{item.region}}">{{item.region}}</a>
-					<span class="text-separator">></span>
-					<a href="/world/{{item.country}}/{{item.region}}/{{item.city}}">{{item.city}}</a>
-				</div>
-				
-				<div class="row align-center">
-					<div class="item" ng-repeat="mosaic in item.mosaics" style="max-width:170px;">
-						<mosaic-vignet mosaic="mosaic"></mosaic-vignet>
+			<div class="item-12 item-xl-4" ng-repeat="item in cities">
+				<div class="block">	
+					<div class="title subblock ellipsis ta-center">
+						<a href="/world/{{item.country}}">{{item.country}}</a>
+						<span class="text-separator">></span>
+						<a href="/world/{{item.country}}/{{item.region}}">{{item.region}}</a>
+						<span class="text-separator">></span>
+						<a href="/world/{{item.country}}/{{item.region}}/{{item.city}}">{{item.city}}</a>
 					</div>
+					
+					<div class="row align-center">
+						<div class="item" ng-repeat="mosaic in item.mosaics" style="max-width:170px;">
+							<mosaic-vignet mosaic="mosaic"></mosaic-vignet>
+						</div>
+					</div>
+					
 				</div>
-				
 			</div>
 		</div>
 	
