@@ -134,8 +134,8 @@
 					
 					<div class="row valign-center">
 						
-						<div class="item grow ta-left ellipsis">
-							<span class="flag-icon" ng-class="{
+						<div class="item" style="align-self:flex-start;">
+							<span class="flag-icon" style="margin-right:0; top:-2px;" ng-class="{
 					            'flag-icon-fr': country.name == 'France',
 					            'flag-icon-gb': country.name == 'United Kingdom',
 					            'flag-icon-my': country.name == 'Malaysia',
@@ -190,7 +190,11 @@
 						        'flag-icon-ph': country.name == 'Philippines',
 						        'flag-icon-pa': country.name == 'Panama',
 					        }"></span>
-				        	{{country.name}}
+				        </div>
+				        
+				        <div class="item ta-left grow ellipsis" style="line-height:1.25;">
+				        	{{getCountryLabel(country.name)}}
+				        	<br><span class="subheading ttrans-normal">{{country.name}}</span>
 				        </div>
 				        
 				        <div class="item">

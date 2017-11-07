@@ -176,3 +176,24 @@ angular.module('FrontModule.services').service('UtilsService', function() {
 	
 	return service;
 });
+
+var countryLabelMap = new Map();
+countryLabelMap.set('', '');
+
+angular.module('FrontModule.services').service('GeoLabelService', function() {
+	
+	var service = {
+		
+		getCountryLabel: function(enLabel) {
+			
+			var localeLabel = enLabel;
+			
+			var value = countryLabelMap.get(enLabel);
+			if (value) localeLabel = value;
+			
+			return localeLabel;
+		},
+	}
+	
+	return service;
+});

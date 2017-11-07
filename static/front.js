@@ -528,6 +528,27 @@ angular.module('FrontModule.services').service('UtilsService', function() {
 	
 	return service;
 });
+
+var countryLabelMap = new Map();
+countryLabelMap.set('', '');
+
+angular.module('FrontModule.services').service('GeoLabelService', function() {
+	
+	var service = {
+		
+		getCountryLabel: function(enLabel) {
+			
+			var localeLabel = enLabel;
+			
+			var value = countryLabelMap.get(enLabel);
+			if (value) localeLabel = value;
+			
+			return localeLabel;
+		},
+	}
+	
+	return service;
+});
 angular.module('FrontModule.directives', [])
 
 angular.module('FrontModule.directives').directive('mosaicVignet', function() {
@@ -1972,7 +1993,7 @@ angular.module('FrontModule.controllers').controller('ProfileCtrl', function($sc
 	}
 });
 
-angular.module('FrontModule.controllers').controller('WorldCtrl', function($scope, API) {
+angular.module('FrontModule.controllers').controller('WorldCtrl', function($scope, API, GeoLabelService) {
 	
 	API.sendRequest('/api/world/', 'GET').then(function(response) {
 
@@ -2002,6 +2023,8 @@ angular.module('FrontModule.controllers').controller('WorldCtrl', function($scop
 			return a.name.localeCompare(b.name);
 		});
 	}
+	
+	$scope.getCountryLabel = GeoLabelService.getCountryLabel;
 });
 
 angular.module('FrontModule.controllers').controller('CountryCtrl', function($scope, API) {
