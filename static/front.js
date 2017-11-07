@@ -1726,6 +1726,26 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 			$scope.refreshingPotentials = false;
 		});
 	}
+	
+	$scope.togglePotential = function(potential) {
+		
+		potential.open = !potential.open;
+		
+		if (potential.open) {
+			
+			if (potential.missions.length < 1) {
+				
+				potential.missions = [];
+				potential.loading = true;
+				
+				var data = {'name':potential.title};
+				API.sendRequest('/api/potential/name/', 'POST', {}, data).then(function(response) {
+					
+					if (response) potential.missions = response;
+				});
+			}
+		}
+	}
 });
 
 angular.module('FrontModule.controllers').controller('LoginCtrl', function($scope, $auth, $cookies, $window, API) {
