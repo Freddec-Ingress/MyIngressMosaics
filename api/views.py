@@ -947,6 +947,25 @@ def data_getPotentials(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
+def data_getPotentialMissionByName(request):
+	
+	data = None
+
+	results = Mission.objects.filter(mosaic__isnull=True, registerer=request.user, name=request.data['name'])
+	if (results.count() > 0):
+		
+		data = []
+		
+		for item in results:
+			data.append(item.overviewSerialize())
+				
+	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
 def data_getOpportunities(request):
 	
 	data = []

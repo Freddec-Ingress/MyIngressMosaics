@@ -54,6 +54,8 @@ urlpatterns = [
 	url(r'^comment/delete/',		comment_delete),
 	
 	url(r'^potentials/',		data_getPotentials),
+	url(r'^potential/name/',		data_getPotentialMissionByName),
+
 	url(r'^opportunities/',		data_getOpportunities),
 	
 	url(r'^adm/city/rename',				adm_renameCity),

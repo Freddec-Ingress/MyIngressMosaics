@@ -1104,7 +1104,10 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 				var data = {'name':potential.title};
 				API.sendRequest('/api/potential/name/', 'POST', {}, data).then(function(response) {
 					
-					if (response) potential.missions = response;
+					if (response) {
+						
+						potential.missions = response;
+					}
 				});
 			}
 		}
