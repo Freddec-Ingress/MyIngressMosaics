@@ -67,240 +67,438 @@
     
     <div ng-if="user.authenticated">
 		
-        <div class="block">
-            
-            <div class="title subblock">
-            	Your registered missions
-            </div>
-            
-            <div class="panel">
-	                
-                <div class="item-12">
-                	
-                    <span ng-if="missions.length < 1">0</span>
-                    <span ng-if="missions.length > 0">{{missions.length}}</span>
-                    missions
-					
-                	<span class="text-separator">&middot;</span>
-              	  	<a ng-click="refreshMissions();">Refresh</a>
-              	  	
-              	  	<span ng-if="missions.length > 0">
-              	  		<span class="text-separator">&middot;</span>
-              	  		Filter
-              	  		<input type="text" class="form-control" ng-model="filterText" ng-change="filterMissions(filterText);" style="margin-left:.25rem; display:inline-block; width:auto; min-height:1.5rem; line-height:1.5rem;" />
-              	  	</span>
-	            	
-                </div>
-
-                <div class="item-12">
-                    <div style="overflow:auto; height:400px; background:#0B0C0D; border:4px solid #0B0C0D;" ng-class="{'scrollbar': missions.length > 10}">
-                    
-                        <div ng-if="refreshingMissions" class="item ta-center">
-                        	<i class="fa fa-spinner"></i>
-                        	Refreshing...
-                        </div>
-                        
-                        <div ng-if="missions.length < 1 && !refreshingMissions" class="item ta-center">
-                        	No mission registered. To register missions from Intel Map, please use our Chrome extension <a href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">MIM Hunting Tool.</a>
-                        </div>
-                        
-	                    <div class="panel" ng-repeat="item in missions | filter:filterText">
-
-	                        <div class="item">
-	                             <a ng-click="addMission(item);"><i class="fa fa-plus-square"></i></a>
-	                         </div>
-	                         
-	                        <div class="item" style="padding-top:0; padding-bottom:0;">
-	                        	<img src="/static/img/mask.png" style="width:26px; background-color:#000000; background-image:url({{item.image}}=s25); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-	                        </div>
-	                         
-	                        <div class="item grow ellipsis">
-		                        {{item.title}}
-		                    </div>
-		                    
-                            <div class="item" ng-class="{'c-enligtened': item.faction == 'E', 'c-resistance': item.faction == 'R',}">
-                                {{item.creator}}
-                            </div>
-                            
-                            <div class="item">
-                                <a href="https://www.ingress.com/intel?ll={{item.startLat}},{{item.startLng}}&z=17&pll={{item.startLat}},{{item.startLng}}" target="blank">
-                                    <i class="fa fa-external-link"></i>
-                                </a>
-                            </div>
-                            
-                            <div class="item">
-                                <a ng-click="deleteMission(item);">
-                                    <i class="fa fa-trash"></i>
-                                </a>
-                            </div>
-
-	                     </div>
-                        
-                    </div>
-                </div>
-	                
-                <div class="item-12">
-
-                    <span ng-if="missions.length > 0">
-                    	
-	                    <a ng-click="addAll();">Add all</a>
-                  	  	
-	            	</span>
-
-                </div>
-                
-            </div>
-            
-        </div>
-        
-        <div class="block">
-            
-            <div class="title subblock">
-            	Mosaic registration
-            </div>
-
-            <div class="panel">
-
-    	        <div class="item-6 item-xl-4">
-    	            <label>Title</label>
-    	            <input type="text" class="form-control" ng-model="mosaicModel.title" />
-    	        </div>
-	        
-    	        <div class="item-6 item-xl-4">
-    	            <label>Type</label>
-    	            <select class="form-control" ng-model="mosaicModel.type">
-    	                <option value="sequence">sequence</option>
-    	                <option value="serie">serie</option>
-    	            </select>
-    	        </div>
-
-    	        <div class="item-6 item-xl-4">
-    	            <label>Columns</label>
-    	            <select class="form-control" ng-model="mosaicModel.columns" />
-        	                <option value="6">6</option>
-        	                <option value="5">5</option>
-        	                <option value="4">4</option>
-        	                <option value="3">3</option>
-        	                <option value="2">2</option>
-        	                <option value="1">1</option>
-       	            </select>
-    	        </div>
-
-    	        <div class="item-6 item-xl-4">
-    	            <label>Country</label>
-    	            <input type="text" class="form-control" ng-model="mosaicModel.country" />
-    	        </div>
-
-    	        <div class="item-6 item-xl-4">
-    	            <label>Region</label>
-    	            <input type="text" class="form-control" ng-model="mosaicModel.region" />
-    	        </div>
-
-    	        <div class="item-6 item-xl-4">
-    	            <label>City</label>
-    	            <input type="text" class="form-control" ng-model="mosaicModel.city" />
-    	        </div>
-
-                <div class="item-12 item-xl-6">
-                	
-                    <label>Preview</label>
-                    
- 					<div class="form-control" style="border:4px solid #0B0C0D; display:flex; height:245px; justify-content:center; background:#0b0c0d; padding:.25rem;" ng-class="{'scrollbar valign-start': mosaicModel.missions.length > 30, 'valign-center': mosaicModel.missions.length <= 30}">
-					
-						<div class="row" style="align-items:center; padding:0 calc((6 - {{mosaicModel.columns}}) / 2 * 16.666667%); width:100%;" ng-class="{'align-center':mosaicModel.type=='sequence' || (mosaicModel.type=='serie' && mosaicModel.missions.length < 6)}">
-				            <div ng-repeat="m in mosaicModel.missions | reverse" style="flex:0 0 calc(100% / {{mosaicModel.columns}});">
-				                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-				            </div>
-			            </div>
+		<div ng-if="!mode_advanced">
 			
-					</div>
-
-                </div>
-                
-                <div class="item-12 item-xl-6">
-                	
-                    <div class="row">
-                    	
-                        <div class="item-12">
-	                        <label>
-	                        	Missions ({{mosaicModel.missions.length}})
-	                            <span ng-if="mosaicModel.missions.length > 0" class="text-separator">&middot;</span>
-	                            <a ng-if="mosaicModel.missions.length > 0" ng-click="clearAll();">Clear all</a>
-	                        </label>
-		                    <div style="overflow:auto; height:200px; background:#0B0C0D; border:4px solid #0B0C0D;" ng-class="{'scrollbar': mosaicModel.missions.length > 4}">
-	            		        
-	            		        <div ng-if="mosaicModel.missions < 1" class="item">
-	            		        	No mission
-	            		        </div>
-	            		        
-	    		                <div class="panel valign-center" ng-repeat="item in mosaicModel.missions">
-	    		                	
-	    		                	<div class="item">
-				                        <a ng-click="removeMission(item);">
-				                            <i class="fa fa-minus-square"></i>
-				                        </a>
-	    		                    </div>
-	    		                	
- 	    		                	<div class="item">
-	    			                    <input type="text" class="form-control ta-center" ng-blur="reorder();" ng-model="item.order" style="min-width:2.5rem; width:2.5rem; min-height:1.5rem; line-height:1.5rem;" />
-	    		                	</div>
-	    		                	
-	    		                	<div class="item grow ellipsis" ng-class="{'c-danger':item.title=='Fake mission'}">
-	    			                     {{item.title}}
-	    		                	</div>
-		                            
-		                            <div class="item">
-		                                <a href="https://www.ingress.com/intel?ll={{item.startLat}},{{item.startLng}}&z=17&pll={{item.startLat}},{{item.startLng}}" target="blank">
-		                                    <i class="fa fa-external-link"></i>
-		                                </a>
-		                            </div>
-		    		                    
-	    		                </div>
-	    		                
+	        <div class="block">
+	            
+	            <div class="title subblock">
+	            	<div class="row">
+	            		
+	            		<div class="item grow">
+	            			Your registered missions
+	            		</div>
+	            		
+	            		<div class="item">
+	            			<a ng-click="toggleAdvancedMode();">Advanced mode</a>
+	            		</div>
+	            		
+	            	</div>
+	            </div>
+	            
+	            <div class="panel">
+		                
+	                <div class="item-12">
+	                	
+	                    <span ng-if="missions.length < 1">0</span>
+	                    <span ng-if="missions.length > 0">{{missions.length}}</span>
+	                    missions
+						
+	                	<span class="text-separator">&middot;</span>
+	              	  	<a ng-click="refreshMissions();">Refresh</a>
+	              	  	
+	              	  	<span ng-if="missions.length > 0">
+	              	  		<span class="text-separator">&middot;</span>
+	              	  		Filter
+	              	  		<input type="text" class="form-control" ng-model="filterText" ng-change="filterMissions(filterText);" style="margin-left:.25rem; display:inline-block; width:auto; min-height:1.5rem; line-height:1.5rem;" />
+	              	  	</span>
+		            	
+	                </div>
+	
+	                <div class="item-12">
+	                    <div style="overflow:auto; height:400px; background:#0B0C0D; border:4px solid #0B0C0D;" ng-class="{'scrollbar': missions.length > 10}">
+	                    
+	                        <div ng-if="refreshingMissions" class="item ta-center">
+	                        	<i class="fa fa-spinner"></i>
+	                        	Refreshing...
 	                        </div>
-                        </div>
-			        	
-			        	<div class="item-12">
-			        		
-					     	<form class="row">
-
-					        	<div class="item-8 c-danger ta-right">
-					        	    If your mosaic is not complete, you could add 'fake' missions and complete it later.
-					        	</div>
-					        	
-								<div class="item grow">
-									<input type="text" class="form-control ta-center" placeholder="order" ng-model="fakeorder" />
-								</div>
-								
-								<div class="item">
-									<button type="submit" class="btn-primary" ng-click="addFake(fakeorder); fakeorder=null;" ng-disabled="creating || !mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || !mosaicModel.region || !mosaicModel.city || (mosaicModel.missions.length < 1)">
-										Add
-									</button>
-								</div>
-								
-							</form>
-			        		
-			        	</div>
-	        	
-                    </div>
-                    
-                </div>
-	        
-    	        <div class="item-12 ta-center">
-    	        	
-    				<button class="btn-primary ta-center" style="width:100px;" ng-click="createMosaic();" ng-disabled="creating || !mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || !mosaicModel.region || !mosaicModel.city || (mosaicModel.missions.length < 1)">
-            			<span ng-show="creating">
-            				<i class="fa fa-spinner"></i>
-            			</span>
-    				    Create
-    				</button>
-    
-    	        </div>
-
+	                        
+	                        <div ng-if="missions.length < 1 && !refreshingMissions" class="item ta-center">
+	                        	No mission registered. To register missions from Intel Map, please use our Chrome extension <a href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">MIM Hunting Tool.</a>
+	                        </div>
+	                        
+		                    <div class="panel" ng-repeat="item in missions | filter:filterText">
+	
+		                        <div class="item">
+		                             <a ng-click="addMission(item);"><i class="fa fa-plus-square"></i></a>
+		                         </div>
+		                         
+		                        <div class="item" style="padding-top:0; padding-bottom:0;">
+		                        	<img src="/static/img/mask.png" style="width:26px; background-color:#000000; background-image:url({{item.image}}=s25); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+		                        </div>
+		                         
+		                        <div class="item grow ellipsis">
+			                        {{item.title}}
+			                    </div>
+			                    
+	                            <div class="item" ng-class="{'c-enligtened': item.faction == 'E', 'c-resistance': item.faction == 'R',}">
+	                                {{item.creator}}
+	                            </div>
+	                            
+	                            <div class="item">
+	                                <a href="https://www.ingress.com/intel?ll={{item.startLat}},{{item.startLng}}&z=17&pll={{item.startLat}},{{item.startLng}}" target="blank">
+	                                    <i class="fa fa-external-link"></i>
+	                                </a>
+	                            </div>
+	                            
+	                            <div class="item">
+	                                <a ng-click="deleteMission(item);">
+	                                    <i class="fa fa-trash"></i>
+	                                </a>
+	                            </div>
+	
+		                     </div>
+	                        
+	                    </div>
+	                </div>
+		                
+	                <div class="item-12">
+	
+	                    <span ng-if="missions.length > 0">
+	                    	
+		                    <a ng-click="addAll();">Add all</a>
+	                  	  	
+		            	</span>
+	
+	                </div>
+	                
+	            </div>
+	            
 	        </div>
 	        
-        </div>
+	        <div class="block">
+	            
+	            <div class="title subblock">
+	            	Mosaic registration
+	            </div>
+	
+	            <div class="panel">
+	
+	    	        <div class="item-6 item-xl-4">
+	    	            <label>Title</label>
+	    	            <input type="text" class="form-control" ng-model="mosaicModel.title" />
+	    	        </div>
+		        
+	    	        <div class="item-6 item-xl-4">
+	    	            <label>Type</label>
+	    	            <select class="form-control" ng-model="mosaicModel.type">
+	    	                <option value="sequence">sequence</option>
+	    	                <option value="serie">serie</option>
+	    	            </select>
+	    	        </div>
+	
+	    	        <div class="item-6 item-xl-4">
+	    	            <label>Columns</label>
+	    	            <select class="form-control" ng-model="mosaicModel.columns" />
+	        	                <option value="6">6</option>
+	        	                <option value="5">5</option>
+	        	                <option value="4">4</option>
+	        	                <option value="3">3</option>
+	        	                <option value="2">2</option>
+	        	                <option value="1">1</option>
+	       	            </select>
+	    	        </div>
+	
+	    	        <div class="item-6 item-xl-4">
+	    	            <label>Country</label>
+	    	            <input type="text" class="form-control" ng-model="mosaicModel.country" />
+	    	        </div>
+	
+	    	        <div class="item-6 item-xl-4">
+	    	            <label>Region</label>
+	    	            <input type="text" class="form-control" ng-model="mosaicModel.region" />
+	    	        </div>
+	
+	    	        <div class="item-6 item-xl-4">
+	    	            <label>City</label>
+	    	            <input type="text" class="form-control" ng-model="mosaicModel.city" />
+	    	        </div>
+	
+	                <div class="item-12 item-xl-6">
+	                	
+	                    <label>Preview</label>
+	                    
+	 					<div class="form-control" style="border:4px solid #0B0C0D; display:flex; height:245px; justify-content:center; background:#0b0c0d; padding:.25rem;" ng-class="{'scrollbar valign-start': mosaicModel.missions.length > 30, 'valign-center': mosaicModel.missions.length <= 30}">
+						
+							<div class="row" style="align-items:center; padding:0 calc((6 - {{mosaicModel.columns}}) / 2 * 16.666667%); width:100%;" ng-class="{'align-center':mosaicModel.type=='sequence' || (mosaicModel.type=='serie' && mosaicModel.missions.length < 6)}">
+					            <div ng-repeat="m in mosaicModel.missions | reverse" style="flex:0 0 calc(100% / {{mosaicModel.columns}});">
+					                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+					            </div>
+				            </div>
+				
+						</div>
+	
+	                </div>
+	                
+	                <div class="item-12 item-xl-6">
+	                	
+	                    <div class="row">
+	                    	
+	                        <div class="item-12">
+		                        <label>
+		                        	Missions ({{mosaicModel.missions.length}})
+		                            <span ng-if="mosaicModel.missions.length > 0" class="text-separator">&middot;</span>
+		                            <a ng-if="mosaicModel.missions.length > 0" ng-click="clearAll();">Clear all</a>
+		                        </label>
+			                    <div style="overflow:auto; height:200px; background:#0B0C0D; border:4px solid #0B0C0D;" ng-class="{'scrollbar': mosaicModel.missions.length > 4}">
+		            		        
+		            		        <div ng-if="mosaicModel.missions < 1" class="item">
+		            		        	No mission
+		            		        </div>
+		            		        
+		    		                <div class="panel valign-center" ng-repeat="item in mosaicModel.missions">
+		    		                	
+		    		                	<div class="item">
+					                        <a ng-click="removeMission(item);">
+					                            <i class="fa fa-minus-square"></i>
+					                        </a>
+		    		                    </div>
+		    		                	
+	 	    		                	<div class="item">
+		    			                    <input type="text" class="form-control ta-center" ng-blur="reorder();" ng-model="item.order" style="min-width:2.5rem; width:2.5rem; min-height:1.5rem; line-height:1.5rem;" />
+		    		                	</div>
+		    		                	
+		    		                	<div class="item grow ellipsis" ng-class="{'c-danger':item.title=='Fake mission'}">
+		    			                     {{item.title}}
+		    		                	</div>
+			                            
+			                            <div class="item">
+			                                <a href="https://www.ingress.com/intel?ll={{item.startLat}},{{item.startLng}}&z=17&pll={{item.startLat}},{{item.startLng}}" target="blank">
+			                                    <i class="fa fa-external-link"></i>
+			                                </a>
+			                            </div>
+			    		                    
+		    		                </div>
+		    		                
+		                        </div>
+	                        </div>
+				        	
+				        	<div class="item-12">
+				        		
+						     	<form class="row">
+	
+						        	<div class="item-8 c-danger ta-right">
+						        	    If your mosaic is not complete, you could add 'fake' missions and complete it later.
+						        	</div>
+						        	
+									<div class="item grow">
+										<input type="text" class="form-control ta-center" placeholder="order" ng-model="fakeorder" />
+									</div>
+									
+									<div class="item">
+										<button type="submit" class="btn-primary" ng-click="addFake(fakeorder); fakeorder=null;" ng-disabled="creating || !mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || !mosaicModel.region || !mosaicModel.city || (mosaicModel.missions.length < 1)">
+											Add
+										</button>
+									</div>
+									
+								</form>
+				        		
+				        	</div>
+		        	
+	                    </div>
+	                    
+	                </div>
+		        
+	    	        <div class="item-12 ta-center">
+	    	        	
+	    				<button class="btn-primary ta-center" style="width:100px;" ng-click="createMosaic();" ng-disabled="creating || !mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || !mosaicModel.region || !mosaicModel.city || (mosaicModel.missions.length < 1)">
+	            			<span ng-show="creating">
+	            				<i class="fa fa-spinner"></i>
+	            			</span>
+	    				    Create
+	    				</button>
+	    
+	    	        </div>
+	
+		        </div>
+		        
+	        </div>
+		
+		</div>
 
+		<div ng-if="mode_advanced">
+			
+			<div ng-if="refreshingPotentials">
+				
+				<div class="ta-center">
+					<i class="fa fa-spinner"></i>
+					Loading potentials...
+				</div>
+				
+			</div>
+			
+			<div ng-if="!refreshingPotentials">
+				
+				<div class="block" ng-repeat="item in potentials">
+					<div class="panel">
+						
+						<div class="item-12">
+							<div class="row">
+								
+			                    <div class="item c-white" ng-click="togglePotential(item);">
+			                    	<i ng-hide="item.open" class="mr-2 fa fa-fw fa-caret-right"></i>
+			                    	<i ng-show="item.open" class="mr-2 fa fa-fw fa-caret-down"></i>
+			                    </div>
+								
+			                    <div class="item grow c-white" ng-click="togglePotential(item);">
+			                        {{item.title}}
+			                        ({{item.count}})
+			                    </div>
+			                    
+							</div>
+						</div>
+						
+						<div ng-if="item.loading" class="item-12 ta-center">
+							<i class="fa fa-spinner"></i>
+							Loading missions...
+						</div>
+						
+						<div ng-if="!item.loading && item.open" class="item-12">
+							
+			    	        <div class="item-6 item-xl-4">
+			    	            <label>Title</label>
+			    	            <input type="text" class="form-control" ng-model="item.title" />
+			    	        </div>
+				        
+			    	        <div class="item-6 item-xl-4">
+			    	            <label>Type</label>
+			    	            <select class="form-control" ng-model="item.type">
+			    	                <option value="sequence">sequence</option>
+			    	                <option value="serie">serie</option>
+			    	            </select>
+			    	        </div>
+			
+			    	        <div class="item-6 item-xl-4">
+			    	            <label>Columns</label>
+			    	            <select class="form-control" ng-model="item.columns" />
+			        	                <option value="6">6</option>
+			        	                <option value="5">5</option>
+			        	                <option value="4">4</option>
+			        	                <option value="3">3</option>
+			        	                <option value="2">2</option>
+			        	                <option value="1">1</option>
+			       	            </select>
+			    	        </div>
+			
+			    	        <div class="item-6 item-xl-4">
+			    	            <label>Country</label>
+			    	            <input type="text" class="form-control" ng-model="item.country" />
+			    	        </div>
+			
+			    	        <div class="item-6 item-xl-4">
+			    	            <label>Region</label>
+			    	            <input type="text" class="form-control" ng-model="item.region" />
+			    	        </div>
+			
+			    	        <div class="item-6 item-xl-4">
+			    	            <label>City</label>
+			    	            <input type="text" class="form-control" ng-model="item.city" />
+			    	        </div>
+			
+			                <div class="item-12 item-xl-6">
+			                	
+			                    <label>Preview</label>
+			                    
+			 					<div class="form-control" style="border:4px solid #0B0C0D; display:flex; height:245px; justify-content:center; background:#0b0c0d; padding:.25rem;" ng-class="{'scrollbar valign-start': item.missions.length > 30, 'valign-center': item.missions.length <= 30}">
+								
+									<div class="row" style="align-items:center; padding:0 calc((6 - {{item.columns}}) / 2 * 16.666667%); width:100%;" ng-class="{'align-center':item.type=='sequence' || (item.type=='serie' && item.missions.length < 6)}">
+							            <div ng-repeat="m in item.missions | reverse" style="flex:0 0 calc(100% / {{item.columns}});">
+							                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+							            </div>
+						            </div>
+						
+								</div>
+			
+			                </div>
+			                
+			                <div class="item-12 item-xl-6">
+			                	
+			                    <div class="row">
+			                    	
+			                        <div class="item-12">
+				                        <label>
+				                        	Missions ({{item.missions.length}})
+				                            <span ng-if="item.missions.length > 0" class="text-separator">&middot;</span>
+				                            <a ng-if="item.missions.length > 0" ng-click="clearAll();">Clear all</a>
+				                        </label>
+					                    <div style="overflow:auto; height:200px; background:#0B0C0D; border:4px solid #0B0C0D;" ng-class="{'scrollbar': item.missions.length > 4}">
+				            		        
+				            		        <div ng-if="item.missions < 1" class="item">
+				            		        	No mission
+				            		        </div>
+				            		        
+				    		                <div class="panel valign-center" ng-repeat="item in item.missions">
+				    		                	
+				    		                	<div class="item">
+							                        <a ng-click="removeMission(item);">
+							                            <i class="fa fa-minus-square"></i>
+							                        </a>
+				    		                    </div>
+				    		                	
+			 	    		                	<div class="item">
+				    			                    <input type="text" class="form-control ta-center" ng-blur="reorder();" ng-model="item.order" style="min-width:2.5rem; width:2.5rem; min-height:1.5rem; line-height:1.5rem;" />
+				    		                	</div>
+				    		                	
+				    		                	<div class="item grow ellipsis" ng-class="{'c-danger':item.title=='Fake mission'}">
+				    			                     {{item.title}}
+				    		                	</div>
+					                            
+					                            <div class="item">
+					                                <a href="https://www.ingress.com/intel?ll={{item.startLat}},{{item.startLng}}&z=17&pll={{item.startLat}},{{item.startLng}}" target="blank">
+					                                    <i class="fa fa-external-link"></i>
+					                                </a>
+					                            </div>
+					    		                    
+				    		                </div>
+				    		                
+				                        </div>
+			                        </div>
+						        	
+						        	<div class="item-12">
+						        		
+								     	<form class="row">
+			
+								        	<div class="item-8 c-danger ta-right">
+								        	    If your mosaic is not complete, you could add 'fake' missions and complete it later.
+								        	</div>
+								        	
+											<div class="item grow">
+												<input type="text" class="form-control ta-center" placeholder="order" ng-model="fakeorder" />
+											</div>
+											
+											<div class="item">
+												<button type="submit" class="btn-primary" ng-click="addFake(fakeorder); fakeorder=null;" ng-disabled="creating || !mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || !mosaicModel.region || !mosaicModel.city || (mosaicModel.missions.length < 1)">
+													Add
+												</button>
+											</div>
+											
+										</form>
+						        		
+						        	</div>
+				        	
+			                    </div>
+			                    
+			                </div>
+				        	
+			    	        <div class="item-12 ta-center">
+			    	        	
+			    				<button class="btn-primary ta-center" style="width:100px;" ng-click="createMosaic();" ng-disabled="creating || !mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || !mosaicModel.region || !mosaicModel.city || (mosaicModel.missions.length < 1)">
+			            			<span ng-show="creating">
+			            				<i class="fa fa-spinner"></i>
+			            			</span>
+			    				    Create
+			    				</button>
+			    
+			    	        </div>
+			    	        
+						</div>
+						
+					</div>
+				</div>
+				
+			</div>
+			
+		</div>
+		
     </div>
 
 </div>

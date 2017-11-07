@@ -743,6 +743,16 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 
 angular.module('FrontModule.controllers').controller('RegistrationCtrl', function($scope, $window, API, UtilsService) {
 	
+	$scope.mode_advanced = false;
+	
+	$scope.toggleAdvancedMode = function() {
+		
+		$scope.mode_advanced = !$scope.mode_advanced;
+		
+		if (!$scope.mode_advanced) $scope.refreshMissions();
+		if ($scope.mode_advanced) $scope.refreshPotentials();
+	}
+	
 	$scope.$on('user-loaded', function(event, args) {
 		
 		$('#page-loading').addClass('hidden');
@@ -1042,6 +1052,42 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		
 		var data = {'ref':item.ref};
 		API.sendRequest('/api/mission/delete/', 'POST', {}, data);
+	}
+	
+	/* Potentials management */
+	
+	$scope.potentials = [];
+	$scope.refreshingPotentials = false;
+	
+	$scope.refreshPotentials = function() {
+		
+		$scope.potentials = [];
+		$scope.refreshingPotentials = true;
+		
+		API.sendRequest('/api/potentials/', 'POST').then(function(response) {
+			
+			if (response) {
+				for (var item of response) {
+					
+					var obj = {
+						'city': null,
+						'open': false,
+						'type': 'sequence',
+						'title': item.name,
+						'count': item.count,
+						'region': null,
+						'columns': '6',
+						'loading': false,
+						'country': null,
+						'missions': [],
+					};
+					
+					$scope.potentials.push(obj);
+				}
+			}
+			
+			$scope.refreshingPotentials = false;
+		});
 	}
 });
 
