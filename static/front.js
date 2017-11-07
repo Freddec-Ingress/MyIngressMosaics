@@ -1715,6 +1715,7 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 						'region': null,
 						'columns': '6',
 						'loading': false,
+						'creating': false,
 						'country': null,
 						'missions': [],
 					};
@@ -1733,71 +1734,122 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		
 		if (potential.open) {
 			
-			if (potential.missions.length < 1) {
-				
-				potential.missions = [];
-				potential.loading = true;
-				
-				var data = {'name':potential.title};
-				API.sendRequest('/api/potential/name/', 'POST', {}, data).then(function(response) {
-					
-					if (response) {
-						
-						potential.missions = response;
-						
-						var geocoder = new google.maps.Geocoder;
-						
-						var latlng = {
-							lat: parseFloat(potential.missions[0].startLat),
-							lng: parseFloat(potential.missions[0].startLng),
-						};
-						
-						geocoder.geocode({'location': latlng}, function(results, status) {
-							
-							if (status === 'OK') {
-								
-								var components = null;
-								if (results[0]) components = results[0].address_components;
-								if (results[1]) components = results[1].address_components;
-								
-								if (components) {
-									
-									var admin2 = null;
-									var admin3 = null;
-									
-									for (var item of components) {
-										
-										if (item.types[0] == 'country') potential.country = item.long_name;
-										if (item.types[0] == 'locality') potential.city = item.long_name;
-										if (item.types[0] == 'administrative_area_level_1') potential.region = item.long_name;
-										if (item.types[0] == 'administrative_area_level_2') admin2 = item.long_name;
-										if (item.types[0] == 'administrative_area_level_3') admin3 = item.long_name;
-									}
-									
-									if (!potential.city && admin2) potential.city = item.admin2;
-									if (!potential.city && admin3) potential.city = item.admin3;
-									
-									UtilsService.checkMosaicLocations(potential);
-									
-									$scope.$applyAsync();
-								}
-							}
-						});
-						
-						for (var item of potential.missions) {
-							
-							var order = item.order;
-							if (!item.order || item.order < 1) order = UtilsService.getOrderFromMissionName(item.title);
-							item.order = order.toString();
-						}
-						
-						potential.missions.sort(compareOrderAsc);
-					}
-					
-					potential.loading = false;
-				});
-			}
+			if (potential.missions.length < 1) $scope.refreshPotential(potential);
 		}
+	}
+	
+	$scope.refreshPotential = function(potential) {
+		
+		potential.missions = [];
+		potential.loading = true;
+		
+		var data = {'name':potential.title};
+		API.sendRequest('/api/potential/name/', 'POST', {}, data).then(function(response) {
+			
+			if (response) {
+				
+				potential.missions = response;
+				
+				var geocoder = new google.maps.Geocoder;
+				
+				var latlng = {
+					lat: parseFloat(potential.missions[0].startLat),
+					lng: parseFloat(potential.missions[0].startLng),
+				};
+				
+				geocoder.geocode({'location': latlng}, function(results, status) {
+					
+					if (status === 'OK') {
+						
+						var components = null;
+						if (results[0]) components = results[0].address_components;
+						if (results[1]) components = results[1].address_components;
+						
+						if (components) {
+							
+							var admin2 = null;
+							var admin3 = null;
+							
+							for (var item of components) {
+								
+								if (item.types[0] == 'country') potential.country = item.long_name;
+								if (item.types[0] == 'locality') potential.city = item.long_name;
+								if (item.types[0] == 'administrative_area_level_1') potential.region = item.long_name;
+								if (item.types[0] == 'administrative_area_level_2') admin2 = item.long_name;
+								if (item.types[0] == 'administrative_area_level_3') admin3 = item.long_name;
+							}
+							
+							if (!potential.city && admin2) potential.city = item.admin2;
+							if (!potential.city && admin3) potential.city = item.admin3;
+							
+							UtilsService.checkMosaicLocations(potential);
+							
+							$scope.$applyAsync();
+						}
+					}
+				});
+				
+				for (var item of potential.missions) {
+					
+					var order = item.order;
+					if (!item.order || item.order < 1) order = UtilsService.getOrderFromMissionName(item.title);
+					item.order = order.toString();
+				}
+				
+				potential.missions.sort(compareOrderAsc);
+			}
+			
+			potential.loading = false;
+		});
+	}
+	
+	$scope.removeMissionFromPotential = function(potential, item) {
+		
+		potential.missions.splice(potential.missions.indexOf(item), 1);
+		
+		if (potential.missions.length < 1) {
+			
+			potential.city = null;
+			potential.type = 'sequence';
+			potential.title = null;
+			potential.region = null;
+			potential.columns = '6';
+			potential.country = null;
+		}
+		else {
+		
+			potential.missions.sort(compareOrderAsc);
+		}
+	}
+	
+	$scope.reorderPotential = function(potential) {
+		
+		potential.missions.sort(compareOrderAsc);
+	}
+	
+	$scope.addPotentialFake = function(potential, fakeorder) {
+		
+		var item = {
+			'ref': 'Unavailable',
+			'order': fakeorder,
+			'title': 'Fake mission',
+		}
+		
+		potential.missions.push(item);
+		
+		potential.missions.sort(compareOrderAsc);
+	}
+	
+	$scope.createPotential = function(potential) {
+
+		potential.creating = true;
+
+		API.sendRequest('/api/mosaic/create/', 'POST', {}, potential).then(function(response) {
+
+			$scope.potentials.splice($scope.potentials.indexOf(potential), 1);
+
+			$window.open('https://www.myingressmosaics.com/mosaic/' + response);
+		});
 	}
 });
 

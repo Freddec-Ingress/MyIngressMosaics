@@ -337,7 +337,7 @@
 				<div class="block" ng-repeat="item in potentials">
 					
 					<div class="panel">
-						<div class="row hover">
+						<div class="item-12 hover">
 							
 		                    <div class="item c-white" ng-click="togglePotential(item);">
 		                    	<i ng-hide="item.open" class="mr-2 fa fa-fw fa-caret-right"></i>
@@ -347,6 +347,10 @@
 		                    <div class="item grow c-white" ng-click="togglePotential(item);">
 		                        {{item.title}}
 		                        ({{item.count}})
+		                    </div>
+		                    
+		                    <div class="item">
+		                    	<a ng-click="refreshPotential(item);">Refresh</a>
 		                    </div>
 		                    
 						</div>
@@ -422,8 +426,6 @@
 		                        <div class="item-12">
 			                        <label>
 			                        	Missions ({{item.missions.length}})
-			                            <span ng-if="item.missions.length > 0" class="text-separator">&middot;</span>
-			                            <a ng-if="item.missions.length > 0" ng-click="clearAll();">Clear all</a>
 			                        </label>
 				                    <div style="overflow:auto; height:200px; background:#0B0C0D; border:4px solid #0B0C0D;" ng-class="{'scrollbar': item.missions.length > 4}">
 			            		        
@@ -431,24 +433,24 @@
 			            		        	No mission
 			            		        </div>
 			            		        
-			    		                <div class="panel valign-center" ng-repeat="item in item.missions">
+			    		                <div class="panel valign-center" ng-repeat="m in item.missions">
 			    		                	
 			    		                	<div class="item">
-						                        <a ng-click="removeMission(item);">
+						                        <a ng-click="removeMissionFromPotential(item, m);">
 						                            <i class="fa fa-minus-square"></i>
 						                        </a>
 			    		                    </div>
 			    		                	
 		 	    		                	<div class="item">
-			    			                    <input type="text" class="form-control ta-center" ng-blur="reorder();" ng-model="item.order" style="min-width:2.5rem; width:2.5rem; min-height:1.5rem; line-height:1.5rem;" />
+			    			                    <input type="text" class="form-control ta-center" ng-blur="reorderPotential(item);" ng-model="m.order" style="min-width:2.5rem; width:2.5rem; min-height:1.5rem; line-height:1.5rem;" />
 			    		                	</div>
 			    		                	
-			    		                	<div class="item grow ellipsis" ng-class="{'c-danger':item.title=='Fake mission'}">
-			    			                     {{item.title}}
+			    		                	<div class="item grow ellipsis" ng-class="{'c-danger':m.title=='Fake mission'}">
+			    			                     {{m.title}}
 			    		                	</div>
 				                            
 				                            <div class="item">
-				                                <a href="https://www.ingress.com/intel?ll={{item.startLat}},{{item.startLng}}&z=17&pll={{item.startLat}},{{item.startLng}}" target="blank">
+				                                <a href="https://www.ingress.com/intel?ll={{m.startLat}},{{m.startLng}}&z=17&pll={{m.startLat}},{{m.startLng}}" target="blank">
 				                                    <i class="fa fa-external-link"></i>
 				                                </a>
 				                            </div>
@@ -471,7 +473,7 @@
 										</div>
 										
 										<div class="item">
-											<button type="submit" class="btn-primary" ng-click="addFake(fakeorder); fakeorder=null;" ng-disabled="creating || !mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || !mosaicModel.region || !mosaicModel.city || (mosaicModel.missions.length < 1)">
+											<button type="submit" class="btn-primary" ng-click="addPotentialFake(item, fakeorder); fakeorder=null;" ng-disabled="item.creating || !item.title || !item.type || !item.columns || !item.country || !item.region || !item.city || (item.missions.length < 1)">
 												Add
 											</button>
 										</div>
@@ -486,8 +488,8 @@
 			        	
 		    	        <div class="item-12 ta-center">
 		    	        	
-		    				<button class="btn-primary ta-center" style="width:100px;" ng-click="createMosaic();" ng-disabled="creating || !mosaicModel.title || !mosaicModel.type || !mosaicModel.columns || !mosaicModel.country || !mosaicModel.region || !mosaicModel.city || (mosaicModel.missions.length < 1)">
-		            			<span ng-show="creating">
+		    				<button class="btn-primary ta-center" style="width:100px;" ng-click="createPotential(item);" ng-disabled="item.creating || !item.title || !item.type || !item.columns || !item.country || !item.region || !item.city || (item.missions.length < 1)">
+		            			<span ng-show="item.creating">
 		            				<i class="fa fa-spinner"></i>
 		            			</span>
 		    				    Create
