@@ -336,24 +336,22 @@
 				
 				<div class="block" ng-repeat="item in potentials">
 					
-					<div class="panel">
-						<div class="item-12 hover">
-							
-		                    <div class="item c-white" ng-click="togglePotential(item);">
-		                    	<i ng-hide="item.open" class="mr-2 fa fa-fw fa-caret-right"></i>
-		                    	<i ng-show="item.open" class="mr-2 fa fa-fw fa-caret-down"></i>
-		                    </div>
-							
-		                    <div class="item grow c-white" ng-click="togglePotential(item);">
-		                        {{item.title}}
-		                        ({{item.count}})
-		                    </div>
-		                    
-		                    <div class="item">
-		                    	<a ng-click="refreshPotential(item);">Refresh</a>
-		                    </div>
-		                    
-						</div>
+					<div class="panel hover">
+
+	                    <div class="item c-white" ng-click="togglePotential(item);">
+	                    	<i ng-hide="item.open" class="mr-2 fa fa-fw fa-caret-right"></i>
+	                    	<i ng-show="item.open" class="mr-2 fa fa-fw fa-caret-down"></i>
+	                    </div>
+						
+	                    <div class="item grow c-white" ng-click="togglePotential(item);">
+	                        {{item.title}}
+	                        ({{item.count}})
+	                    </div>
+	                    
+	                    <div class="item">
+	                    	<a ng-click="refreshPotential(item);">Refresh</a>
+	                    </div>
+	                    
 					</div>
 					
 					<div ng-if="item.loading && item.open" class="item-12 ta-center">
