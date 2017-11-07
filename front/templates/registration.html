@@ -348,7 +348,7 @@
 	                        ({{item.count}})
 	                    </div>
 	                    
-	                    <div class="item">
+	                    <div class="item" ng-show="!item.loading && item.open">
 	                    	<a ng-click="refreshPotential(item);">Refresh</a>
 	                    </div>
 	                    
