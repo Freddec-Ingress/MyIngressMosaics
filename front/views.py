@@ -245,3 +245,10 @@ def world(request):
 	
 	context = {}
 	return render(request, 'world.html', context)
+
+
+
+def recruitment(request):
+	
+	context = {}
+	return render(request, 'recruitment.html', context)

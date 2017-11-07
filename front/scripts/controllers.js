@@ -1555,3 +1555,9 @@ angular.module('FrontModule.controllers').controller('EventsCtrl', function($sco
 		});
 	}
 });
+
+angular.module('FrontModule.controllers').controller('RecruitmentCtrl', function($scope, API) {
+	
+	$('#page-loading').addClass('hidden');
+	$('#page-content').removeClass('hidden');
+});
