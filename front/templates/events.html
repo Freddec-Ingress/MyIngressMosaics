@@ -59,7 +59,7 @@
 		</div>
 		
 		<div class="row">
-			<div class="item-12 item-xl-3">
+			<div class="item-12 item-xl-4">
 				<div class="block" ng-repeat="item in cities">
 					
 					<div class="title subblock">
@@ -71,7 +71,7 @@
 					</div>
 					
 					<div class="row align-center">
-						<div class="item-6 item-xl-3" ng-repeat="mosaic in item.mosaics">
+						<div class="item" ng-repeat="mosaic in item.mosaics" style="max-width:150px;">
 							<mosaic-vignet mosaic="mosaic"></mosaic-vignet>
 						</div>
 					</div>
