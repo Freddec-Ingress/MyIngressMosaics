@@ -217,7 +217,7 @@
 	                	
 	                    <label>Preview</label>
 	                    
-	 					<div class="form-control" style="border:4px solid #0B0C0D; display:flex; height:245px; justify-content:center; background:#0b0c0d; padding:.25rem;" ng-class="{'scrollbar valign-start': mosaicModel.missions.length > 30, 'valign-center': mosaicModel.missions.length <= 30}">
+	 					<div class="form-control" style="border:4px solid #0B0C0D; display:flex; height:245px; justify-content:center; background:#0b0c0d; padding:.25rem;" ng-class="{'scrollbar valign-start': mosaicModel.missions.length > 24, 'valign-center': mosaicModel.missions.length <= 24}">
 						
 							<div class="row" style="align-items:center; padding:0 calc((6 - {{mosaicModel.columns}}) / 2 * 16.666667%); width:100%;" ng-class="{'align-center':mosaicModel.type=='sequence' || (mosaicModel.type=='serie' && mosaicModel.missions.length < 6)}">
 					            <div ng-repeat="m in mosaicModel.missions | reverse" style="flex:0 0 calc(100% / {{mosaicModel.columns}});">
@@ -405,7 +405,7 @@
 		                	
 		                    <label>Preview</label>
 		                    
-		 					<div class="form-control" style="border:4px solid #0B0C0D; display:flex; height:245px; justify-content:center; background:#0b0c0d; padding:.25rem;" ng-class="{'scrollbar valign-start': item.missions.length > 30, 'valign-center': item.missions.length <= 30}">
+		 					<div class="form-control" style="border:4px solid #0B0C0D; display:flex; height:245px; justify-content:center; background:#0b0c0d; padding:.25rem;" ng-class="{'scrollbar valign-start': item.missions.length > 24, 'valign-center': item.missions.length <= 24}">
 							
 								<div class="row" style="align-items:center; padding:0 calc((6 - {{item.columns}}) / 2 * 16.666667%); width:100%;" ng-class="{'align-center':item.type=='sequence' || (item.type=='serie' && item.missions.length < 6)}">
 						            <div ng-repeat="m in item.missions | reverse" style="flex:0 0 calc(100% / {{item.columns}});">
