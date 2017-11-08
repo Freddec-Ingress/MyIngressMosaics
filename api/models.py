@@ -510,6 +510,7 @@ class Mission(models.Model):
 		data = {
 			
 			'ref': self.ref,
+			'desc': self.desc,
 			'order': self.order,
 			'title': self.title,
 			'image': self.image,
