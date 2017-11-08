@@ -207,8 +207,7 @@ class Mosaic(models.Model):
 					self.distance += getDistanceFromLatLng(pData1['lat'], pData1['lng'], pData2['lat'], pData2['lng'])
 					
 		self.save()
-		self.generatePreview()
-	
+
 	# Map serialization
 	
 	def mapSerialize(self):
