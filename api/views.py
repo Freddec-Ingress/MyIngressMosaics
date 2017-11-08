@@ -227,7 +227,7 @@ def user_getRegisteredMissions(request):
 	
 	missions = None
 	
-	results = Mission.objects.filter(mosaic__isnull = True).order_by('title')
+	results = Mission.objects.filter(mosaic__isnull = True, admin=True).order_by('title')
 	if results.count() > 0:
 		
 		missions = []
@@ -247,7 +247,7 @@ def mosaic_searchForMissions(request):
 	
 	data = { 'missions': [], }
 
-	results = Mission.objects.filter(mosaic__isnull=True).filter(Q(title__icontains=request.data['text']) | Q(creator__icontains=request.data['text']))
+	results = Mission.objects.filter(mosaic__isnull=True, admin=True).filter(Q(title__icontains=request.data['text']) | Q(creator__icontains=request.data['text']))
 	if results.count() > 0:
 		for mission in results:
 			data['missions'].append(mission.overviewSerialize())
@@ -703,7 +703,7 @@ def data_searchForMissions(request):
 	
 	results = Mission.objects.filter(mosaic__isnull=True, registerer='FIiptart').update(registerer='RivmanBX')
 	
-	results = Mission.objects.filter(mosaic__isnull=True, registerer=request.user)
+	results = Mission.objects.filter(mosaic__isnull=True, registerer=request.user, admin=True)
 	if (results.count() > 0):
 
 		data = { 'missions': [], }
@@ -925,7 +925,7 @@ def data_getPotentials(request):
 	from django.db.models import Count
 	
 	fieldname = 'name'
-	results = Mission.objects.filter(mosaic__isnull=True, registerer=request.user).values(fieldname).order_by(fieldname).annotate(count=Count(fieldname)).order_by('-count')
+	results = Mission.objects.filter(mosaic__isnull=True, registerer=request.user, admin=True).values(fieldname).order_by(fieldname).annotate(count=Count(fieldname)).order_by('-count')
 	if (results.count() > 0):
 		
 		data = []
@@ -951,7 +951,7 @@ def data_getPotentialMissionByName(request):
 	
 	data = None
 
-	results = Mission.objects.filter(mosaic__isnull=True, registerer=request.user, name=request.data['name'])
+	results = Mission.objects.filter(mosaic__isnull=True, registerer=request.user, admin=True, name=request.data['name'])
 	if (results.count() > 0):
 		
 		data = []

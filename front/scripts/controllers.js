@@ -1051,7 +1051,7 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		$scope.missions.splice($scope.missions.indexOf(item), 1);
 		
 		var data = {'ref':item.ref};
-		API.sendRequest('/api/mission/delete/', 'POST', {}, data);
+		API.sendRequest('/api/mission/exclude/', 'POST', {}, data);
 	}
 	
 	/* Potentials management */
