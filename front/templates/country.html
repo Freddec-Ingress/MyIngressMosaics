@@ -33,7 +33,7 @@
 					<a href="/"><i class="fa fa-home text-separator" style="margin-left:0;"></i> Home</a>
 				</div>
 				<div class="item">
-					<a href="/map/{{country}}">
+					<a href="/map/{{country.name}}">
 						<i class="fa fa-map text-separator"></i>
 						Map
 					</a>
@@ -46,12 +46,14 @@
 	<div class="block">
 		
 		<h2 class="heading">
-			{{getCountryLocaleLabel(country)}}
+			{{country.locale}}
 		</h2>
 		
 		<h3 class="subheading">
-			{{country}}
-			<span class="text-separator">&middot;</span>
+			<span ng-if="country.locale != country.name">
+				{{country.name}}
+				<span class="text-separator">&middot;</span>
+			</span>
 			{{count|number}} Mosaics
 		</h3>
 		
@@ -83,7 +85,7 @@
 
 			<div class="item-12 item-xl-3" ng-repeat="region in regions">
 				
-				<a href="/world/{{country}}/{{region.name}}" class="btn-primary btn-block">
+				<a href="/world/{{country.name}}/{{region.name}}" class="btn-primary btn-block">
 					
 					<div class="row valign-center">
 						

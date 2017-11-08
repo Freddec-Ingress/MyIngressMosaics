@@ -2161,7 +2161,7 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 	
 	$scope.loadCountry = function(name) {
 		
-		$scope.country = name;
+		$scope.country = {'name':name, 'locale':GeoLabelService.getCountryLocaleLabel(name)};
 
 		API.sendRequest('/api/country/' + name + '/', 'GET').then(function(response) {
 			
@@ -2172,7 +2172,7 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 			
 			for (var region of $scope.regions) {
 				region.newname = region.name;
-				region.locale = GeoLabelService.getRegionLocaleLabel($scope.country, region.name);
+				region.locale = GeoLabelService.getRegionLocaleLabel($scope.country.name, region.name);
 			}
 			
 			$('#page-loading').addClass('hidden');
@@ -2200,13 +2200,11 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 	
 	$scope.rename = function(region) {
 		
-		var data = {'country': $scope.country, 'region':region.name, 'new_region':region.newname};
+		var data = {'country': $scope.country.name, 'region':region.name, 'new_region':region.newname};
 		API.sendRequest('/api/adm/region/rename', 'POST', {}, data);
 		
 		region.name = region.newname
 	}
-	
-	$scope.getCountryLocaleLabel = GeoLabelService.getCountryLocaleLabel;
 });
 
 angular.module('FrontModule.controllers').controller('RegionCtrl', function($scope, API, GeoLabelService) {
