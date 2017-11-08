@@ -587,7 +587,7 @@ countryLabelMap.set('Egypt', 'مِصر');
 var jp_regionLocaleLabelMap = new Map();
 
 var regionLocaleLabelMap = new Map();
-countryLabelMap.set('Japan', jp_regionLocaleLabelMap);
+regionLocaleLabelMap.set('Japan', jp_regionLocaleLabelMap);
 
 angular.module('FrontModule.services').service('GeoLabelService', function() {
 	
