@@ -1376,6 +1376,8 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 	$scope.loadCountry = function(name) {
 		
 		$scope.country = name;
+	
+		$scope.regionLocaleLabelMap = GeoLabelService.getRegionLocaleLabelMap($scope.country);
 		
 		API.sendRequest('/api/country/' + name + '/', 'GET').then(function(response) {
 			
@@ -1420,8 +1422,6 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 	}
 	
 	$scope.getCountryLabel = GeoLabelService.getCountryLabel;
-	
-	$scope.regionLocaleLabelMap = GeoLabelService.getRegionLocaleLabelMap($scope.country);
 
 	$scope.getRegionLocaleLabel = function(enLabel) {
 		
