@@ -21,6 +21,10 @@ module.exports = function(grunt) {
 					'vendor/satellizer/js/satellizer.min.js',
 					'vendor/angular-cookies/js/angular-cookies.min.js',
 					
+					'front/data/country_locale.js',
+					'front/data/region_locale.js',
+					'front/data/city_locale.js',
+					
 					'front/scripts/services.js',
 					'front/scripts/directives.js',
 					'front/scripts/controllers.js',

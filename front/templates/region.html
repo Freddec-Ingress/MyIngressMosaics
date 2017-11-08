@@ -46,32 +46,40 @@
 	<div class="block">
 		
 		<h2 class="heading">
-			{{region}}
+			{{getRegionLocaleLabel(country, region)}}
 		</h2>
 		
 		<h3 class="subheading">
+			{{region}}
+			<span class="text-separator">&middot;</span>
 			{{count|number}} Mosaics
 		</h3>
 		
 	</div>
 	
 	<div class="block">
+			
+		<div class="title subblock">
+			
+			<div class="row valign-baseline">
+			
+				<div class="item grow">
+					{{cities.length|number}} cities
+				</div>
+				
+				<div class="item">
+					<a class="badge-link badge-mini" ng-class="{'active': sort=='name'}", ng-click="sortByName();">Name</a>
+				</div>
+
+				<div class="item">
+					<a class="badge-link badge-mini" ng-class="{'active': sort=='mosaics'}" ng-click="sortByMosaics();">Mosaics</a>
+				</div>
+				
+			</div>
+			
+		</div>
 	
 		<div class="row">
-			
-			<div class="item-12" style="padding-top:.75rem; padding-bottom:.75rem;">
-				<div class="row align-center valign-baseline">
-
-					<div class="item">
-						<a class="badge-link" ng-class="{'active': sort=='mosaics'}" ng-click="sortByMosaics();">Mosaics</a>
-					</div>
-					
-					<div class="item">
-						<a class="badge-link" ng-class="{'active': sort=='name'}", ng-click="sortByName();">Name</a>
-					</div>
-					
-				</div>
-			</div>
 			
 			<div class="item-12 item-xl-3" ng-repeat="city in cities">
 				
@@ -80,7 +88,10 @@
 					<div class="row valign-center">
 						
 						<div class="item grow ta-left ellipsis">
-				        	{{city.name}}
+							{{city.locale}}
+							<div ng-if="city.locale != city.name">
+					        	<span class="subheading ttrans-normal">{{city.name}}</span>
+							</div>
 				        </div>
 				        
 				        <div class="item">

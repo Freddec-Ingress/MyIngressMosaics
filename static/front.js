@@ -350,6 +350,114 @@ c){var e=a|0,f=c;void 0===f&&(f=Math.min(b(a),3));Math.pow(10,f);return 1==e&&0=
 f+" > 4096 bytes)!");k.cookie=e}}c.module("ngCookies",["ng"]).info({angularVersion:"1.6.4"}).provider("$cookies",[function(){var b=this.defaults={};this.$get=["$$cookieReader","$$cookieWriter",function(a,g){return{get:function(d){return a()[d]},getObject:function(d){return(d=this.get(d))?c.fromJson(d):d},getAll:function(){return a()},put:function(d,a,m){g(d,a,m?c.extend({},b,m):b)},putObject:function(d,b,a){this.put(d,c.toJson(b),a)},remove:function(a,k){g(a,void 0,k?c.extend({},b,k):b)}}}]}]);c.module("ngCookies").factory("$cookieStore",
 ["$cookies",function(b){return{get:function(a){return b.getObject(a)},put:function(a,c){b.putObject(a,c)},remove:function(a){b.remove(a)}}}]);l.$inject=["$document","$log","$browser"];c.module("ngCookies").provider("$$cookieWriter",function(){this.$get=l})})(window,window.angular);
 
+var countryLocaleLabelMap = new Map();
+
+countryLocaleLabelMap.set('United States', 'United States');
+countryLocaleLabelMap.set('Japan', '日本');
+countryLocaleLabelMap.set('United Kingdom', 'United Kingdom');
+countryLocaleLabelMap.set('Spain', 'España');
+countryLocaleLabelMap.set('France', 'France');
+countryLocaleLabelMap.set('Germany', 'Deutschland');
+countryLocaleLabelMap.set('China', '中国');
+countryLocaleLabelMap.set('Sri Lanka', 'ශ්‍රී ලංකා');
+countryLocaleLabelMap.set('Hong Kong', '香港');
+countryLocaleLabelMap.set('South Africa', 'South Africa');
+countryLocaleLabelMap.set('Czechia', 'Česko');
+countryLocaleLabelMap.set('Argentina', 'Argentina');
+countryLocaleLabelMap.set('Austria', 'Österreich');
+countryLocaleLabelMap.set('Malaysia', 'Malaysia');
+countryLocaleLabelMap.set('Australia', 'Australia');
+countryLocaleLabelMap.set('Poland', 'Polska');
+countryLocaleLabelMap.set('Switzerland', 'Switzerland');
+countryLocaleLabelMap.set('Hungary', 'Magyarország');
+countryLocaleLabelMap.set('Thailand', 'ประเทศไทย');
+countryLocaleLabelMap.set('Italy', 'Italia');
+countryLocaleLabelMap.set('Mexico', 'México');
+countryLocaleLabelMap.set('Finland', 'Suomi');
+countryLocaleLabelMap.set('Portugal', 'Portugal');
+countryLocaleLabelMap.set('Norway', 'Norge');
+countryLocaleLabelMap.set('New Zealand', 'New Zealand');
+countryLocaleLabelMap.set('Philippines', 'Pilipinas');
+countryLocaleLabelMap.set('Uruguay', 'Uruguay');
+countryLocaleLabelMap.set('Ireland', 'Éire');
+countryLocaleLabelMap.set('Belgium', 'Belgium');
+countryLocaleLabelMap.set('Russia', 'Росси́я');
+countryLocaleLabelMap.set('Croatia', 'Hrvatska');
+countryLocaleLabelMap.set('Sweden', 'Sverige');
+countryLocaleLabelMap.set('Estonia', 'Eesti');
+countryLocaleLabelMap.set('Latvia', 'Latvija');
+countryLocaleLabelMap.set('Dominican Republic', 'República Dominicana');
+countryLocaleLabelMap.set('Maldives', 'Maldives');
+countryLocaleLabelMap.set('Israel', 'יִשְׂרָאֵל‎');
+countryLocaleLabelMap.set('Lithuania', 'Lietuva');
+countryLocaleLabelMap.set('Slovakia', 'Slovensko');
+countryLocaleLabelMap.set('Andorra', 'Andorra');
+countryLocaleLabelMap.set('Singapore', 'Singapore');
+countryLocaleLabelMap.set('Panama', 'Panamá');
+countryLocaleLabelMap.set('Greece', 'Ελλάδα');
+countryLocaleLabelMap.set('Canada', 'Canada');
+countryLocaleLabelMap.set('India', '');
+countryLocaleLabelMap.set('Denmark', 'Danmark');
+countryLocaleLabelMap.set('Iceland', 'Ísland');
+countryLocaleLabelMap.set('Turkey', 'Türkiye');
+countryLocaleLabelMap.set('Indonesia', 'Indonesia');
+countryLocaleLabelMap.set('Taiwan', '台湾');
+countryLocaleLabelMap.set('Netherlands', 'Nederland');
+countryLocaleLabelMap.set('Mauritius', 'Maurice');
+countryLocaleLabelMap.set('Egypt', 'مِصر');
+var regionLocaleLabelMap = new Map();
+
+/* Japan */
+
+regionLocaleLabelMap.set('Japan,Hokkaido', '北海道');
+regionLocaleLabelMap.set('Japan,Aomori', '青森');
+regionLocaleLabelMap.set('Japan,Iwate', '岩手');
+regionLocaleLabelMap.set('Japan,Miyagi', '宮城');
+regionLocaleLabelMap.set('Japan,Akita', '秋田');
+regionLocaleLabelMap.set('Japan,Yamagata', '山形');
+regionLocaleLabelMap.set('Japan,Fukushima', '福島');
+regionLocaleLabelMap.set('Japan,Ibaraki', '茨城');
+regionLocaleLabelMap.set('Japan,Tochigi', '栃木');
+regionLocaleLabelMap.set('Japan,Gunma', '群馬');
+regionLocaleLabelMap.set('Japan,Saitama', '埼玉');
+regionLocaleLabelMap.set('Japan,Chiba', '千葉');
+regionLocaleLabelMap.set('Japan,Tokyo', '東京');
+regionLocaleLabelMap.set('Japan,Kanagawa', '神奈川');
+regionLocaleLabelMap.set('Japan,Niigata', '新潟');
+regionLocaleLabelMap.set('Japan,Toyama', '富山');
+regionLocaleLabelMap.set('Japan,Ishikawa', '石川');
+regionLocaleLabelMap.set('Japan,Fukui', '福井');
+regionLocaleLabelMap.set('Japan,Yamanashi', '山梨');
+regionLocaleLabelMap.set('Japan,Nagano', '長野');
+regionLocaleLabelMap.set('Japan,Gifu', '岐阜');
+regionLocaleLabelMap.set('Japan,Shizuoka', '静岡');
+regionLocaleLabelMap.set('Japan,Aichi', '愛知');
+regionLocaleLabelMap.set('Japan,Mie', '三重');
+regionLocaleLabelMap.set('Japan,Shiga', '滋賀');
+regionLocaleLabelMap.set('Japan,Kyoto', '京都');
+regionLocaleLabelMap.set('Japan,Osaka', '大阪');
+regionLocaleLabelMap.set('Japan,Hyogo', '兵庫');
+regionLocaleLabelMap.set('Japan,Nara', '奈良');
+regionLocaleLabelMap.set('Japan,Wakayama', '和歌山');
+regionLocaleLabelMap.set('Japan,Tottori', '鳥取');
+regionLocaleLabelMap.set('Japan,Shimane', '島根');
+regionLocaleLabelMap.set('Japan,Okayama', '岡山');
+regionLocaleLabelMap.set('Japan,Hiroshima', '広島');
+regionLocaleLabelMap.set('Japan,Yamaguchi', '山口');
+regionLocaleLabelMap.set('Japan,Tokushima', '徳島');
+regionLocaleLabelMap.set('Japan,Kagawa', '香川');
+regionLocaleLabelMap.set('Japan,Ehime', '愛媛');
+regionLocaleLabelMap.set('Japan,Kochi', '高知');
+regionLocaleLabelMap.set('Japan,Fukuoka', '福岡');
+regionLocaleLabelMap.set('Japan,Saga', '佐賀');
+regionLocaleLabelMap.set('Japan,Nagasaki', '長崎');
+regionLocaleLabelMap.set('Japan,Kumamoto', '熊本');
+regionLocaleLabelMap.set('Japan,Oita', '大分');
+regionLocaleLabelMap.set('Japan,Miyazaki', '宮崎');
+regionLocaleLabelMap.set('Japan,Kagoshima', '鹿児島');
+regionLocaleLabelMap.set('Japan,Okinawa', '沖縄');
+var cityLocaleLabelMap = new Map();
+
 angular.module('FrontModule.services', [])
 
 angular.module('FrontModule.services').service('API', function($q, $http, $cookies) {
@@ -529,135 +637,41 @@ angular.module('FrontModule.services').service('UtilsService', function() {
 	return service;
 });
 
-var countryLabelMap = new Map();
-countryLabelMap.set('United States', 'United States');
-countryLabelMap.set('Japan', '日本');
-countryLabelMap.set('United Kingdom', 'United Kingdom');
-countryLabelMap.set('Spain', 'España');
-countryLabelMap.set('France', 'France');
-countryLabelMap.set('Germany', 'Deutschland');
-countryLabelMap.set('China', '中国');
-countryLabelMap.set('Sri Lanka', 'ශ්‍රී ලංකා');
-countryLabelMap.set('Hong Kong', '香港');
-countryLabelMap.set('South Africa', 'South Africa');
-countryLabelMap.set('Czechia', 'Česko');
-countryLabelMap.set('Argentina', 'Argentina');
-countryLabelMap.set('Austria', 'Österreich');
-countryLabelMap.set('Malaysia', 'Malaysia');
-countryLabelMap.set('Australia', 'Australia');
-countryLabelMap.set('Poland', 'Polska');
-countryLabelMap.set('Switzerland', 'Switzerland');
-countryLabelMap.set('Hungary', 'Magyarország');
-countryLabelMap.set('Thailand', 'ประเทศไทย');
-countryLabelMap.set('Italy', 'Italia');
-countryLabelMap.set('Mexico', 'México');
-countryLabelMap.set('Finland', 'Suomi');
-countryLabelMap.set('Portugal', 'Portugal');
-countryLabelMap.set('Norway', 'Norge');
-countryLabelMap.set('New Zealand', 'New Zealand');
-countryLabelMap.set('Philippines', 'Pilipinas');
-countryLabelMap.set('Uruguay', 'Uruguay');
-countryLabelMap.set('Ireland', 'Éire');
-countryLabelMap.set('Belgium', 'Belgium');
-countryLabelMap.set('Russia', 'Росси́я');
-countryLabelMap.set('Croatia', 'Hrvatska');
-countryLabelMap.set('Sweden', 'Sverige');
-countryLabelMap.set('Estonia', 'Eesti');
-countryLabelMap.set('Latvia', 'Latvija');
-countryLabelMap.set('Dominican Republic', 'República Dominicana');
-countryLabelMap.set('Maldives', 'Maldives');
-countryLabelMap.set('Israel', 'יִשְׂרָאֵל‎');
-countryLabelMap.set('Lithuania', 'Lietuva');
-countryLabelMap.set('Slovakia', 'Slovensko');
-countryLabelMap.set('Andorra', 'Andorra');
-countryLabelMap.set('Singapore', 'Singapore');
-countryLabelMap.set('Panama', 'Panamá');
-countryLabelMap.set('Greece', 'Ελλάδα');
-countryLabelMap.set('Canada', 'Canada');
-countryLabelMap.set('India', '');
-countryLabelMap.set('Denmark', 'Danmark');
-countryLabelMap.set('Iceland', 'Ísland');
-countryLabelMap.set('Turkey', 'Türkiye');
-countryLabelMap.set('Indonesia', 'Indonesia');
-countryLabelMap.set('Taiwan', '台湾');
-countryLabelMap.set('Netherlands', 'Nederland');
-countryLabelMap.set('Mauritius', 'Maurice');
-countryLabelMap.set('Egypt', 'مِصر');
-
-var jp_regionLocaleLabelMap = new Map();
-jp_regionLocaleLabelMap.set('Hokkaido', '北海道');
-jp_regionLocaleLabelMap.set('Aomori', '青森');
-jp_regionLocaleLabelMap.set('Iwate', '岩手');
-jp_regionLocaleLabelMap.set('Miyagi', '宮城');
-jp_regionLocaleLabelMap.set('Akita', '秋田');
-jp_regionLocaleLabelMap.set('Yamagata', '山形');
-jp_regionLocaleLabelMap.set('Fukushima', '福島');
-jp_regionLocaleLabelMap.set('Ibaraki', '茨城');
-jp_regionLocaleLabelMap.set('Tochigi', '栃木');
-jp_regionLocaleLabelMap.set('Gunma', '群馬');
-jp_regionLocaleLabelMap.set('Saitama', '埼玉');
-jp_regionLocaleLabelMap.set('Chiba', '千葉');
-jp_regionLocaleLabelMap.set('Tokyo', '東京');
-jp_regionLocaleLabelMap.set('Kanagawa', '神奈川');
-jp_regionLocaleLabelMap.set('Niigata', '新潟');
-jp_regionLocaleLabelMap.set('Toyama', '富山');
-jp_regionLocaleLabelMap.set('Ishikawa', '石川');
-jp_regionLocaleLabelMap.set('Fukui', '福井');
-jp_regionLocaleLabelMap.set('Yamanashi', '山梨');
-jp_regionLocaleLabelMap.set('Nagano', '長野');
-jp_regionLocaleLabelMap.set('Gifu', '岐阜');
-jp_regionLocaleLabelMap.set('Shizuoka', '静岡');
-jp_regionLocaleLabelMap.set('Aichi', '愛知');
-jp_regionLocaleLabelMap.set('Mie', '三重');
-jp_regionLocaleLabelMap.set('Shiga', '滋賀');
-jp_regionLocaleLabelMap.set('Kyoto', '京都');
-jp_regionLocaleLabelMap.set('Osaka', '大阪');
-jp_regionLocaleLabelMap.set('Hyogo', '兵庫');
-jp_regionLocaleLabelMap.set('Nara', '奈良');
-jp_regionLocaleLabelMap.set('Wakayama', '和歌山');
-jp_regionLocaleLabelMap.set('Tottori', '鳥取');
-jp_regionLocaleLabelMap.set('Shimane', '島根');
-jp_regionLocaleLabelMap.set('Okayama', '岡山');
-jp_regionLocaleLabelMap.set('Hiroshima', '広島');
-jp_regionLocaleLabelMap.set('Yamaguchi', '山口');
-jp_regionLocaleLabelMap.set('Tokushima', '徳島');
-jp_regionLocaleLabelMap.set('Kagawa', '香川');
-jp_regionLocaleLabelMap.set('Ehime', '愛媛');
-jp_regionLocaleLabelMap.set('Kochi', '高知');
-jp_regionLocaleLabelMap.set('Fukuoka', '福岡');
-jp_regionLocaleLabelMap.set('Saga', '佐賀');
-jp_regionLocaleLabelMap.set('Nagasaki', '長崎');
-jp_regionLocaleLabelMap.set('Kumamoto', '熊本');
-jp_regionLocaleLabelMap.set('Oita', '大分');
-jp_regionLocaleLabelMap.set('Miyazaki', '宮崎');
-jp_regionLocaleLabelMap.set('Kagoshima', '鹿児島');
-jp_regionLocaleLabelMap.set('Okinawa', '沖縄');
-
-var regionLocaleLabelMap = new Map();
-regionLocaleLabelMap.set('Japan', jp_regionLocaleLabelMap);
-
 angular.module('FrontModule.services').service('GeoLabelService', function() {
 	
 	var service = {
 		
-		getCountryLabel: function(enLabel) {
+		getCountryLocaleLabel: function(country) {
 			
-			var localeLabel = enLabel;
+			var localeLabel = country;
 			
-			var value = countryLabelMap.get(enLabel);
+			var key = country;
+			var value = countryLocaleLabelMap.get(key);
 			if (value) localeLabel = value;
 			
 			return localeLabel;
 		},
 
-		getRegionLocaleLabelMap: function(country) {
+		getRegionLocaleLabel: function(country, region) {
 			
-			var map = null;
+			var localeLabel = region;
 			
-			var value = regionLocaleLabelMap.get(country);
-			if (value) map = value;
+			var key = country + ',' + region;
+			var value = regionLocaleLabelMap.get(key);
+			if (value) localeLabel = value;
 			
-			return map;
+			return localeLabel;
+		},
+
+		getCityLocaleLabel: function(country, region, city) {
+			
+			var localeLabel = city;
+			
+			var key = country + ',' + region + ',' + city;
+			var value = cityLocaleLabelMap.get(key);
+			if (value) localeLabel = value;
+			
+			return localeLabel;
 		},
 	}
 	
@@ -2138,7 +2152,7 @@ angular.module('FrontModule.controllers').controller('WorldCtrl', function($scop
 		});
 	}
 	
-	$scope.getCountryLabel = GeoLabelService.getCountryLabel;
+	$scope.getCountryLabel = GeoLabelService.getCountryLocaleLabel;
 });
 
 angular.module('FrontModule.controllers').controller('CountryCtrl', function($scope, API, GeoLabelService) {
@@ -2148,9 +2162,7 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 	$scope.loadCountry = function(name) {
 		
 		$scope.country = name;
-	
-		$scope.regionLocaleLabelMap = GeoLabelService.getRegionLocaleLabelMap($scope.country);
-		
+
 		API.sendRequest('/api/country/' + name + '/', 'GET').then(function(response) {
 			
 			$scope.count = response.count;
@@ -2160,6 +2172,7 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 			
 			for (var region of $scope.regions) {
 				region.newname = region.name;
+				region.locale = GeoLabelService.getRegionLocaleLabel($scope.country, region.name);
 			}
 			
 			$('#page-loading').addClass('hidden');
@@ -2193,20 +2206,10 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 		region.name = region.newname
 	}
 	
-	$scope.getCountryLabel = GeoLabelService.getCountryLabel;
-
-	$scope.getRegionLocaleLabel = function(enLabel) {
-		
-		var localeLabel = enLabel;
-		
-		var value = $scope.regionLocaleLabelMap.get(enLabel);
-		if (value) localeLabel = value;
-		
-		return localeLabel;
-	}
+	$scope.getCountryLocaleLabel = GeoLabelService.getCountryLocaleLabel;
 });
 
-angular.module('FrontModule.controllers').controller('RegionCtrl', function($scope, API) {
+angular.module('FrontModule.controllers').controller('RegionCtrl', function($scope, API, GeoLabelService) {
 	
 	$scope.sort = 'mosaics';
 	
@@ -2224,6 +2227,7 @@ angular.module('FrontModule.controllers').controller('RegionCtrl', function($sco
 			
 			for (var city of $scope.cities) {
 				city.newname = city.name;
+				city.locale = GeoLabelService.getCityLocaleLabel($scope.country, $scope.region, city.name);
 			}
 			
 			$('#page-loading').addClass('hidden');
@@ -2256,9 +2260,11 @@ angular.module('FrontModule.controllers').controller('RegionCtrl', function($sco
 		
 		city.name = city.newname
 	}
+	
+	$scope.getRegionLocaleLabel = GeoLabelService.getRegionLocaleLabel;
 });
 
-angular.module('FrontModule.controllers').controller('CityCtrl', function($scope, API) {
+angular.module('FrontModule.controllers').controller('CityCtrl', function($scope, API, GeoLabelService) {
 	
 	$scope.sort = 'missions';
 	
@@ -2296,6 +2302,8 @@ angular.module('FrontModule.controllers').controller('CityCtrl', function($scope
 			return a.title.localeCompare(b.title);
 		});
 	}
+	
+	$scope.getCityLocaleLabel = GeoLabelService.getCityLocaleLabel;
 });
 
 angular.module('FrontModule.controllers').controller('EventsCtrl', function($scope, API) {

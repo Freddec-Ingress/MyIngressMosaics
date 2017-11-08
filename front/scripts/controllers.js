@@ -1366,7 +1366,7 @@ angular.module('FrontModule.controllers').controller('WorldCtrl', function($scop
 		});
 	}
 	
-	$scope.getCountryLabel = GeoLabelService.getCountryLabel;
+	$scope.getCountryLabel = GeoLabelService.getCountryLocaleLabel;
 });
 
 angular.module('FrontModule.controllers').controller('CountryCtrl', function($scope, API, GeoLabelService) {
@@ -1376,9 +1376,7 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 	$scope.loadCountry = function(name) {
 		
 		$scope.country = name;
-	
-		$scope.regionLocaleLabelMap = GeoLabelService.getRegionLocaleLabelMap($scope.country);
-		
+
 		API.sendRequest('/api/country/' + name + '/', 'GET').then(function(response) {
 			
 			$scope.count = response.count;
@@ -1388,6 +1386,7 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 			
 			for (var region of $scope.regions) {
 				region.newname = region.name;
+				region.locale = GeoLabelService.getRegionLocaleLabel($scope.country, region.name);
 			}
 			
 			$('#page-loading').addClass('hidden');
@@ -1421,20 +1420,10 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 		region.name = region.newname
 	}
 	
-	$scope.getCountryLabel = GeoLabelService.getCountryLabel;
-
-	$scope.getRegionLocaleLabel = function(enLabel) {
-		
-		var localeLabel = enLabel;
-		
-		var value = $scope.regionLocaleLabelMap.get(enLabel);
-		if (value) localeLabel = value;
-		
-		return localeLabel;
-	}
+	$scope.getCountryLocaleLabel = GeoLabelService.getCountryLocaleLabel;
 });
 
-angular.module('FrontModule.controllers').controller('RegionCtrl', function($scope, API) {
+angular.module('FrontModule.controllers').controller('RegionCtrl', function($scope, API, GeoLabelService) {
 	
 	$scope.sort = 'mosaics';
 	
@@ -1452,6 +1441,7 @@ angular.module('FrontModule.controllers').controller('RegionCtrl', function($sco
 			
 			for (var city of $scope.cities) {
 				city.newname = city.name;
+				city.locale = GeoLabelService.getCityLocaleLabel($scope.country, $scope.region, city.name);
 			}
 			
 			$('#page-loading').addClass('hidden');
@@ -1484,9 +1474,11 @@ angular.module('FrontModule.controllers').controller('RegionCtrl', function($sco
 		
 		city.name = city.newname
 	}
+	
+	$scope.getRegionLocaleLabel = GeoLabelService.getRegionLocaleLabel;
 });
 
-angular.module('FrontModule.controllers').controller('CityCtrl', function($scope, API) {
+angular.module('FrontModule.controllers').controller('CityCtrl', function($scope, API, GeoLabelService) {
 	
 	$scope.sort = 'missions';
 	
@@ -1524,6 +1516,8 @@ angular.module('FrontModule.controllers').controller('CityCtrl', function($scope
 			return a.title.localeCompare(b.title);
 		});
 	}
+	
+	$scope.getCityLocaleLabel = GeoLabelService.getCityLocaleLabel;
 });
 
 angular.module('FrontModule.controllers').controller('EventsCtrl', function($scope, API) {
