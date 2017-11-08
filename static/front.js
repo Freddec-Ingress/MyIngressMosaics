@@ -585,6 +585,53 @@ countryLabelMap.set('Mauritius', 'Maurice');
 countryLabelMap.set('Egypt', 'مِصر');
 
 var jp_regionLocaleLabelMap = new Map();
+jp_regionLocaleLabelMap.set('Hokkaido', '北海道');
+jp_regionLocaleLabelMap.set('Aomori', '青森');
+jp_regionLocaleLabelMap.set('Iwate', '岩手');
+jp_regionLocaleLabelMap.set('Miyagi', '宮城');
+jp_regionLocaleLabelMap.set('Akita', '秋田');
+jp_regionLocaleLabelMap.set('Yamagata', '山形');
+jp_regionLocaleLabelMap.set('Fukushima', '福島');
+jp_regionLocaleLabelMap.set('Ibaraki', '茨城');
+jp_regionLocaleLabelMap.set('Tochigi', '栃木');
+jp_regionLocaleLabelMap.set('Gunma', '群馬');
+jp_regionLocaleLabelMap.set('Saitama', '埼玉');
+jp_regionLocaleLabelMap.set('Chiba', '千葉');
+jp_regionLocaleLabelMap.set('Tokyo', '東京');
+jp_regionLocaleLabelMap.set('Kanagawa', '神奈川');
+jp_regionLocaleLabelMap.set('Niigata', '新潟');
+jp_regionLocaleLabelMap.set('Toyama', '富山');
+jp_regionLocaleLabelMap.set('Ishikawa', '石川');
+jp_regionLocaleLabelMap.set('Fukui', '福井');
+jp_regionLocaleLabelMap.set('Yamanashi', '山梨');
+jp_regionLocaleLabelMap.set('Nagano', '長野');
+jp_regionLocaleLabelMap.set('Gifu', '岐阜');
+jp_regionLocaleLabelMap.set('Shizuoka', '静岡');
+jp_regionLocaleLabelMap.set('Aichi', '愛知');
+jp_regionLocaleLabelMap.set('Mie', '三重');
+jp_regionLocaleLabelMap.set('Shiga', '滋賀');
+jp_regionLocaleLabelMap.set('Kyoto', '京都');
+jp_regionLocaleLabelMap.set('Osaka', '大阪');
+jp_regionLocaleLabelMap.set('Hyogo', '兵庫');
+jp_regionLocaleLabelMap.set('Nara', '奈良');
+jp_regionLocaleLabelMap.set('Wakayama', '和歌山');
+jp_regionLocaleLabelMap.set('Tottori', '鳥取');
+jp_regionLocaleLabelMap.set('Shimane', '島根');
+jp_regionLocaleLabelMap.set('Okayama', '岡山');
+jp_regionLocaleLabelMap.set('Hiroshima', '広島');
+jp_regionLocaleLabelMap.set('Yamaguchi', '山口');
+jp_regionLocaleLabelMap.set('Tokushima', '徳島');
+jp_regionLocaleLabelMap.set('Kagawa', '香川');
+jp_regionLocaleLabelMap.set('Ehime', '愛媛');
+jp_regionLocaleLabelMap.set('Kochi', '高知');
+jp_regionLocaleLabelMap.set('Fukuoka', '福岡');
+jp_regionLocaleLabelMap.set('Saga', '佐賀');
+jp_regionLocaleLabelMap.set('Nagasaki', '長崎');
+jp_regionLocaleLabelMap.set('Kumamoto', '熊本');
+jp_regionLocaleLabelMap.set('Oita', '大分');
+jp_regionLocaleLabelMap.set('Miyazaki', '宮崎');
+jp_regionLocaleLabelMap.set('Kagoshima', '鹿児島');
+jp_regionLocaleLabelMap.set('Okinawa', '沖縄');
 
 var regionLocaleLabelMap = new Map();
 regionLocaleLabelMap.set('Japan', jp_regionLocaleLabelMap);
@@ -609,10 +656,6 @@ angular.module('FrontModule.services').service('GeoLabelService', function() {
 			
 			var value = regionLocaleLabelMap.get(country);
 			if (value) map = value;
-			
-			console.log(regionLocaleLabelMap);
-			console.log(country);
-			console.log(map);
 			
 			return map;
 		},
