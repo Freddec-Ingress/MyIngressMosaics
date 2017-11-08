@@ -46,10 +46,12 @@
 	<div class="block">
 		
 		<h2 class="heading">
-			{{country}}
+			{{getCountryLabel(country)}}
 		</h2>
 		
 		<h3 class="subheading">
+			{{country}}
+			<span class="text-separator">&middot;</span>
 			{{count|number}} Mosaics
 		</h3>
 		
@@ -57,22 +59,28 @@
 
 	<div class="block">
 	
-		<div class="row">
+		<div class="title subblock">
 			
-			<div class="item-12" style="padding-top:.75rem; padding-bottom:.75rem;">
-				<div class="row align-center valign-baseline">
-
-					<div class="item">
-						<a class="badge-link" ng-class="{'active': sort=='mosaics'}" ng-click="sortByMosaics();">Mosaics</a>
-					</div>
-					
-					<div class="item">
-						<a class="badge-link" ng-class="{'active': sort=='name'}", ng-click="sortByName();">Name</a>
-					</div>
-					
+			<div class="row valign-baseline">
+			
+				<div class="item grow">
+					{{regions.length|number}} regions
 				</div>
+				
+				<div class="item">
+					<a class="badge-link badge-mini" ng-class="{'active': sort=='name'}", ng-click="sortByName();">Name</a>
+				</div>
+
+				<div class="item">
+					<a class="badge-link badge-mini" ng-class="{'active': sort=='mosaics'}" ng-click="sortByMosaics();">Mosaics</a>
+				</div>
+				
 			</div>
 			
+		</div>
+		
+		<div class="row">
+
 			<div class="item-12 item-xl-3" ng-repeat="region in regions">
 				
 				<a href="/world/{{country}}/{{region.name}}" class="btn-primary btn-block">

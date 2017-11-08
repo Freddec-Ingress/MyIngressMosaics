@@ -1369,7 +1369,7 @@ angular.module('FrontModule.controllers').controller('WorldCtrl', function($scop
 	$scope.getCountryLabel = GeoLabelService.getCountryLabel;
 });
 
-angular.module('FrontModule.controllers').controller('CountryCtrl', function($scope, API) {
+angular.module('FrontModule.controllers').controller('CountryCtrl', function($scope, API, GeoLabelService) {
 	
 	$scope.sort = 'mosaics';
 	
@@ -1418,6 +1418,8 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 		
 		region.name = region.newname
 	}
+	
+	$scope.getCountryLabel = GeoLabelService.getCountryLabel;
 });
 
 angular.module('FrontModule.controllers').controller('RegionCtrl', function($scope, API) {
