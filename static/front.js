@@ -584,9 +584,16 @@ countryLabelMap.set('Netherlands', 'Nederland');
 countryLabelMap.set('Mauritius', 'Maurice');
 countryLabelMap.set('Egypt', 'مِصر');
 
+var jp_regionLocaleLabelMap = new Map();
+
+var regionLocaleLabelMap = new Map();
+countryLabelMap.set('Japan', jp_regionLocaleLabelMap);
+
 angular.module('FrontModule.services').service('GeoLabelService', function() {
 	
 	var service = {
+		
+		countryRegionLocaleList: ['Japan'],
 		
 		getCountryLabel: function(enLabel) {
 			
@@ -596,6 +603,22 @@ angular.module('FrontModule.services').service('GeoLabelService', function() {
 			if (value) localeLabel = value;
 			
 			return localeLabel;
+		},
+		
+		getDisplayLocaleRegion: function(country) {
+			
+			if (country in service.countryRegionLocaleList) return true;
+			return false;
+		},
+		
+		getRegionLocaleLabelMap: function(country) {
+			
+			var map = null;
+			
+			var value = regionLocaleLabelMap.get(country);
+			if (value) map = value;
+			
+			return map;
 		},
 	}
 	
@@ -2130,6 +2153,23 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 	}
 	
 	$scope.getCountryLabel = GeoLabelService.getCountryLabel;
+	
+	$scope.displayLocale = false;
+	$scope.displayLocale = GeoLabelService.getDisplayLocaleRegion($scope.country);
+	
+	if ($scope.displayLocale) {
+		$scope.regionLocaleLabelMap = GeoLabelService.getRegionLocaleLabelMap($scope.country);
+	}
+	
+	$scope.getRegionLocaleLabel = function(enLabel) {
+		
+		var localeLabel = enLabel;
+		
+		var value = $scope.regionLocaleLabelMap.get(enLabel);
+		if (value) localeLabel = value;
+		
+		return localeLabel;
+	}
 });
 
 angular.module('FrontModule.controllers').controller('RegionCtrl', function($scope, API) {

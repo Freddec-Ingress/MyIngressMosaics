@@ -88,7 +88,11 @@
 					<div class="row valign-center">
 						
 						<div class="item grow ta-left ellipsis">
-				        	{{region.name}}
+							<div ng-if="!displayLocale">{{region.name}}</div>
+							<div ng-if="displayLocale">
+					        	{{getRegionLocaleLabel(region.name)}}
+					        	<br><span class="subheading ttrans-normal">{{region.name}}</span>
+							</div>
 				        </div>
 				        
 				        <div class="item">

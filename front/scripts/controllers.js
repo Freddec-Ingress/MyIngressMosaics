@@ -1420,6 +1420,23 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 	}
 	
 	$scope.getCountryLabel = GeoLabelService.getCountryLabel;
+	
+	$scope.displayLocale = false;
+	$scope.displayLocale = GeoLabelService.getDisplayLocaleRegion($scope.country);
+	
+	if ($scope.displayLocale) {
+		$scope.regionLocaleLabelMap = GeoLabelService.getRegionLocaleLabelMap($scope.country);
+	}
+	
+	$scope.getRegionLocaleLabel = function(enLabel) {
+		
+		var localeLabel = enLabel;
+		
+		var value = $scope.regionLocaleLabelMap.get(enLabel);
+		if (value) localeLabel = value;
+		
+		return localeLabel;
+	}
 });
 
 angular.module('FrontModule.controllers').controller('RegionCtrl', function($scope, API) {

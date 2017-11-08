@@ -232,9 +232,16 @@ countryLabelMap.set('Netherlands', 'Nederland');
 countryLabelMap.set('Mauritius', 'Maurice');
 countryLabelMap.set('Egypt', 'مِصر');
 
+var jp_regionLocaleLabelMap = new Map();
+
+var regionLocaleLabelMap = new Map();
+countryLabelMap.set('Japan', jp_regionLocaleLabelMap);
+
 angular.module('FrontModule.services').service('GeoLabelService', function() {
 	
 	var service = {
+		
+		countryRegionLocaleList: ['Japan'],
 		
 		getCountryLabel: function(enLabel) {
 			
@@ -244,6 +251,22 @@ angular.module('FrontModule.services').service('GeoLabelService', function() {
 			if (value) localeLabel = value;
 			
 			return localeLabel;
+		},
+		
+		getDisplayLocaleRegion: function(country) {
+			
+			if (country in service.countryRegionLocaleList) return true;
+			return false;
+		},
+		
+		getRegionLocaleLabelMap: function(country) {
+			
+			var map = null;
+			
+			var value = regionLocaleLabelMap.get(country);
+			if (value) map = value;
+			
+			return map;
 		},
 	}
 	
