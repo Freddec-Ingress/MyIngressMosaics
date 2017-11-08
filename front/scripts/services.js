@@ -258,6 +258,10 @@ angular.module('FrontModule.services').service('GeoLabelService', function() {
 			var value = regionLocaleLabelMap.get(country);
 			if (value) map = value;
 			
+			console.log(regionLocaleLabelMap);
+			console.log(country);
+			console.log(map);
+			
 			return map;
 		},
 	}
