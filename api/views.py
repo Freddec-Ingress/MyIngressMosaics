@@ -45,7 +45,11 @@ def ext_isMissionRegistered(request):
 				else:
 					data.append({'mid':item['mid'], 'status': 'completed', 'mosaicref':m.mosaic.ref, 'startLat':m.startLat, 'startLng':m.startLng})
 			else:
-				data.append({'mid':item['mid'], 'status': 'registered', 'startLat':m.startLat, 'startLng':m.startLng})
+				if m.admin == True:
+					data.append({'mid':item['mid'], 'status': 'registered', 'startLat':m.startLat, 'startLng':m.startLng})
+				else:
+					data.append({'mid':item['mid'], 'status': 'hidden', 'startLat':m.startLat, 'startLng':m.startLng})
+					
 		else:
 			data.append({'mid':item['mid'], 'status': 'notregistered'})
 	
@@ -78,6 +82,7 @@ def ext_registerMission(request):
 		if mission.data != request.body:
 		
 			mission.data = request.body
+			mission.data = True
 			mission.save()
 			
 			mission.computeInternalData()
