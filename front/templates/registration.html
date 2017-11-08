@@ -126,7 +126,7 @@
 		                        	<img src="/static/img/mask.png" style="width:26px; background-color:#000000; background-image:url({{item.image}}=s25); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
 		                        </div>
 		                         
-		                        <div class="item grow ellipsis">
+		                        <div class="item grow ellipsis" title="{{item.desc}}">
 			                        {{item.title}}
 			                    </div>
 			                    
@@ -443,7 +443,7 @@
 			    			                    <input type="text" class="form-control ta-center" ng-blur="reorderPotential(item);" ng-model="m.order" style="min-width:2.5rem; width:2.5rem; min-height:1.5rem; line-height:1.5rem;" />
 			    		                	</div>
 			    		                	
-			    		                	<div class="item grow ellipsis" ng-class="{'c-danger':m.title=='Fake mission'}">
+			    		                	<div class="item grow ellipsis" title="{{item.desc}}" ng-class="{'c-danger':m.title=='Fake mission'}">
 			    			                     {{m.title}}
 			    		                	</div>
 				                            
