@@ -675,7 +675,7 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 		scope: { mosaic: '=' },
 		
 		template: '' +
-			'<a class="btn-primary btn-block ta-left ttrans-normal" href="/mosaic/{{mosaic.ref}}">' +
+			'<a class="btn-primary btn-block ta-center ttrans-normal" href="/mosaic/{{mosaic.ref}}">' +
 				
 			'	<div class="item" style="margin-bottom:.25rem; display:flex; justify-content:center; background:#0b0c0d; height:105px; overflow-y:hidden; padding:.25rem;" ng-class="{\'scrollbar valign-start\': mosaic.missions.length > 24, \'valign-center\': mosaic.missions.length <= 24}">' +
 					
