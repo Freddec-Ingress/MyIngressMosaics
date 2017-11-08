@@ -2213,8 +2213,8 @@ angular.module('FrontModule.controllers').controller('RegionCtrl', function($sco
 	
 	$scope.loadRegion = function(country, name) {
 		
-		$scope.country = country;
-		$scope.region = name;
+		$scope.country = {'name':country, 'locale':GeoLabelService.getCountryLocaleLabel(country)};
+		$scope.region = {'name':name, 'locale':GeoLabelService.getRegionLocaleLabel(country, name)};
 		
 		API.sendRequest('/api/region/' + country + '/' + name + '/', 'GET').then(function(response) {
 
@@ -2225,7 +2225,7 @@ angular.module('FrontModule.controllers').controller('RegionCtrl', function($sco
 			
 			for (var city of $scope.cities) {
 				city.newname = city.name;
-				city.locale = GeoLabelService.getCityLocaleLabel($scope.country, $scope.region, city.name);
+				city.locale = GeoLabelService.getCityLocaleLabel($scope.country.name, $scope.region.name, city.name);
 			}
 			
 			$('#page-loading').addClass('hidden');
@@ -2253,13 +2253,11 @@ angular.module('FrontModule.controllers').controller('RegionCtrl', function($sco
 	
 	$scope.rename = function(city) {
 		
-		var data = {'country': $scope.country, 'region':$scope.region, 'city':city.name, 'new_city':city.newname};
+		var data = {'country': $scope.country.name, 'region':$scope.region.name, 'city':city.name, 'new_city':city.newname};
 		API.sendRequest('/api/adm/city/rename', 'POST', {}, data);
 		
 		city.name = city.newname
 	}
-	
-	$scope.getRegionLocaleLabel = GeoLabelService.getRegionLocaleLabel;
 });
 
 angular.module('FrontModule.controllers').controller('CityCtrl', function($scope, API, GeoLabelService) {
@@ -2268,9 +2266,9 @@ angular.module('FrontModule.controllers').controller('CityCtrl', function($scope
 	
 	$scope.loadCity = function(country, region, name) {
 		
-		$scope.country = country;
-		$scope.region = region;
-		$scope.city = name;
+		$scope.country = {'name':country, 'locale':GeoLabelService.getCountryLocaleLabel(country)};
+		$scope.region = {'name':region, 'locale':GeoLabelService.getRegionLocaleLabel(country, region)};
+		$scope.city = {'name':name, 'locale':GeoLabelService.getCityLocaleLabel(country, region, name)};
 		
 		API.sendRequest('/api/city/' + country + '/' + region + '/' + name + '/', 'GET').then(function(response) {
 
@@ -2300,8 +2298,6 @@ angular.module('FrontModule.controllers').controller('CityCtrl', function($scope
 			return a.title.localeCompare(b.title);
 		});
 	}
-	
-	$scope.getCityLocaleLabel = GeoLabelService.getCityLocaleLabel;
 });
 
 angular.module('FrontModule.controllers').controller('EventsCtrl', function($scope, API) {

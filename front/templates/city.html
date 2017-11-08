@@ -31,12 +31,12 @@
 			<div class="item grow">
 				<a href="/"><i class="fa fa-home text-separator" style="margin-left:0;"></i> Home</a>
 				<span class="text-separator">></span>
-				<a href="/world/{{country}}">{{country}}</a>
+				<a href="/world/{{country.name}}">{{country.locale}}</a>
 				<span class="text-separator">></span>
-				<a href="/world/{{country}}/{{region}}">{{region}}</a>
+				<a href="/world/{{country.name}}/{{region.name}}">{{region.locale}}</a>
 			</div>
 			<div class="item">
-				<a href="/map/{{city}},{{region}},{{country}}">
+				<a href="/map/{{city.name}},{{region.name}},{{country.name}}">
 					<i class="fa fa-map text-separator"></i>
 					Map
 				</a>
@@ -48,12 +48,14 @@
 	<div class="block">
 		
 		<h2 class="heading">
-			{{getCityLocaleLabel(country, region, city)}}
+			{{city.locale}}
 		</h2>
 		
 		<h3 class="subheading">
-			{{city}}
-			<span class="text-separator">&middot;</span>
+			<span ng-if="city.locale != city.name">
+				{{city.name}}
+				<span class="text-separator">&middot;</span>
+			</span>
 			{{mosaics.length|number}} Mosaics
 		</h3>
 		
