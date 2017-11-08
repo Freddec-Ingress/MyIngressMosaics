@@ -241,8 +241,6 @@ angular.module('FrontModule.services').service('GeoLabelService', function() {
 	
 	var service = {
 		
-		countryRegionLocaleList: ['Japan'],
-		
 		getCountryLabel: function(enLabel) {
 			
 			var localeLabel = enLabel;
@@ -252,13 +250,7 @@ angular.module('FrontModule.services').service('GeoLabelService', function() {
 			
 			return localeLabel;
 		},
-		
-		getDisplayLocaleRegion: function(country) {
-			
-			if (country in service.countryRegionLocaleList) return true;
-			return false;
-		},
-		
+
 		getRegionLocaleLabelMap: function(country) {
 			
 			var map = null;

@@ -1421,13 +1421,8 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 	
 	$scope.getCountryLabel = GeoLabelService.getCountryLabel;
 	
-	$scope.displayLocale = false;
-	$scope.displayLocale = GeoLabelService.getDisplayLocaleRegion($scope.country);
-	
-	if ($scope.displayLocale) {
-		$scope.regionLocaleLabelMap = GeoLabelService.getRegionLocaleLabelMap($scope.country);
-	}
-	
+	$scope.regionLocaleLabelMap = GeoLabelService.getRegionLocaleLabelMap($scope.country);
+
 	$scope.getRegionLocaleLabel = function(enLabel) {
 		
 		var localeLabel = enLabel;

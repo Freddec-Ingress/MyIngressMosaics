@@ -593,8 +593,6 @@ angular.module('FrontModule.services').service('GeoLabelService', function() {
 	
 	var service = {
 		
-		countryRegionLocaleList: ['Japan'],
-		
 		getCountryLabel: function(enLabel) {
 			
 			var localeLabel = enLabel;
@@ -604,13 +602,7 @@ angular.module('FrontModule.services').service('GeoLabelService', function() {
 			
 			return localeLabel;
 		},
-		
-		getDisplayLocaleRegion: function(country) {
-			
-			if (country in service.countryRegionLocaleList) return true;
-			return false;
-		},
-		
+
 		getRegionLocaleLabelMap: function(country) {
 			
 			var map = null;
@@ -2154,13 +2146,8 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 	
 	$scope.getCountryLabel = GeoLabelService.getCountryLabel;
 	
-	$scope.displayLocale = false;
-	$scope.displayLocale = GeoLabelService.getDisplayLocaleRegion($scope.country);
-	
-	if ($scope.displayLocale) {
-		$scope.regionLocaleLabelMap = GeoLabelService.getRegionLocaleLabelMap($scope.country);
-	}
-	
+	$scope.regionLocaleLabelMap = GeoLabelService.getRegionLocaleLabelMap($scope.country);
+
 	$scope.getRegionLocaleLabel = function(enLabel) {
 		
 		var localeLabel = enLabel;
