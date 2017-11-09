@@ -46,7 +46,7 @@
 	<div class="block">
 		
 		<h2 class="heading">
-			{{country.locale}}
+			<span ng-show="country.locale">{{country.locale}}</span><span ng-hide="country.locale">{{country.name}}</span>
 		</h2>
 		
 		<h3 class="subheading">

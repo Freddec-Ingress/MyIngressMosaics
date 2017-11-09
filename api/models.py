@@ -112,7 +112,6 @@ class Region(models.Model):
 @python_2_unicode_compatible
 class City(models.Model):
 
-	country = models.ForeignKey(Country, on_delete=models.SET_NULL, null=True, blank=True, related_name='cities')
 	region = models.ForeignKey(Region, on_delete=models.SET_NULL, null=True, blank=True, related_name='cities')
 	
 	name = models.CharField(max_length=512)
@@ -129,7 +128,6 @@ class City(models.Model):
 		
 		data = {
 
-			'country': self.country.serialize(),
 			'region': self.region.serialize(),
 
 			'id': self.pk,
@@ -166,8 +164,6 @@ class Mosaic(models.Model):
 	registerer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='mosaics')
 	register_date = models.DateField(default=datetime.now)
 	
-	country = models.ForeignKey(Country, related_name='mosaics')
-	region = models.ForeignKey(Region, related_name='mosaics')
 	city = models.ForeignKey(City, related_name='mosaics')
 	
 	lovers = models.ManyToManyField(User, null=True, blank=True, related_name='mosaics_loved')
@@ -317,21 +313,16 @@ class Mosaic(models.Model):
 	
 	def overviewSerialize(self):
 		
-		location = self.city.serialize()
-		if not location: location = self.region.serialize()
-		if not location: location = self.country.serialize()
-		
 		data = {
 			
 			'ref': self.ref,
 			'cols': self.cols,
 			'type': self.type,
 			'title': self.title,
-			'country': self.country.serialize(),
 			'distance': self.distance,
 			'has_fake': False,
 			
-			'location': location,
+			'city': self.city.serialize(),
 
 			'missions': [],
 		}
@@ -358,8 +349,6 @@ class Mosaic(models.Model):
 			'city': self.city.serialize(),
 			'title': self.title,
 			'lovers': self.lovers.all().count(),
-			'region': self.region.serialize(),
-			'country': self.country.serialize(),
 			'portals': self.portals,
 			'uniques': self.uniques,
 			'distance': self.distance,

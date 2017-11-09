@@ -45,11 +45,7 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 		
 			$scope.mosaic = response;
 			$scope.mosaic.cols = $scope.mosaic.cols.toString();
-			
-			$scope.mosaic.country = $scope.mosaic.country.name;
-			$scope.mosaic.region = $scope.mosaic.region.name;
-			$scope.mosaic.city = $scope.mosaic.city.name;
-			
+
 			$('#page-loading').addClass('hidden');
 			$('#page-content').removeClass('hidden');
 		});
@@ -1445,17 +1441,16 @@ angular.module('FrontModule.controllers').controller('WorldCtrl', function($scop
 	}
 });
 
-angular.module('FrontModule.controllers').controller('CountryCtrl', function($scope, API, GeoLabelService) {
+angular.module('FrontModule.controllers').controller('CountryCtrl', function($scope, API) {
 	
 	$scope.sort = 'mosaics';
 	
 	$scope.loadCountry = function(name) {
 		
-		$scope.country = {'name':name, 'locale':GeoLabelService.getCountryLocaleLabel(name)};
-
 		API.sendRequest('/api/country/' + name + '/', 'GET').then(function(response) {
 			
 			$scope.count = response.count;
+			$scope.country = response.country;
 			$scope.regions = response.regions;
 			
 			$scope.sortByMosaics();
@@ -1498,26 +1493,20 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 	}
 });
 
-angular.module('FrontModule.controllers').controller('RegionCtrl', function($scope, API, GeoLabelService) {
+angular.module('FrontModule.controllers').controller('RegionCtrl', function($scope, API) {
 	
 	$scope.sort = 'mosaics';
 	
 	$scope.loadRegion = function(country, name) {
 		
-		$scope.country = {'name':country, 'locale':GeoLabelService.getCountryLocaleLabel(country)};
-		$scope.region = {'name':name, 'locale':GeoLabelService.getRegionLocaleLabel(country, name)};
-		
 		API.sendRequest('/api/region/' + country + '/' + name + '/', 'GET').then(function(response) {
 
 			$scope.count = response.count;
+			$scope.region = response.region;
 			$scope.cities = response.cities;
+			$scope.country = response.country;
 			
 			$scope.sortByMosaics();
-			
-			for (var city of $scope.cities) {
-				city.newname = city.name;
-				city.locale = GeoLabelService.getCityLocaleLabel($scope.country.name, $scope.region.name, city.name);
-			}
 			
 			$('#page-loading').addClass('hidden');
 			$('#page-content').removeClass('hidden');
@@ -1557,19 +1546,18 @@ angular.module('FrontModule.controllers').controller('RegionCtrl', function($sco
 	}
 });
 
-angular.module('FrontModule.controllers').controller('CityCtrl', function($scope, API, GeoLabelService) {
+angular.module('FrontModule.controllers').controller('CityCtrl', function($scope, API) {
 	
 	$scope.sort = 'missions';
 	
 	$scope.loadCity = function(country, region, name) {
 		
-		$scope.country = {'name':country, 'locale':GeoLabelService.getCountryLocaleLabel(country)};
-		$scope.region = {'name':region, 'locale':GeoLabelService.getRegionLocaleLabel(country, region)};
-		$scope.city = {'name':name, 'locale':GeoLabelService.getCityLocaleLabel(country, region, name)};
-		
 		API.sendRequest('/api/city/' + country + '/' + region + '/' + name + '/', 'GET').then(function(response) {
-
-			$scope.mosaics = response;
+			
+			$scope.country = response.country;
+			$scope.region = response.region;
+			$scope.city = response.city;
+			$scope.mosaics = response.mosaics;
 			
 			$scope.sortByMissions();
 			

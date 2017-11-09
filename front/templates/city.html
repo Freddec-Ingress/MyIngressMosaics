@@ -31,9 +31,9 @@
 			<div class="item grow">
 				<a href="/"><i class="fa fa-home text-separator" style="margin-left:0;"></i> Home</a>
 				<span class="text-separator">></span>
-				<a href="/world/{{country.name}}">{{country.locale}}</a>
+				<a href="/world/{{country.name}}"><span ng-show="country.locale">{{country.locale}}</span><span ng-hide="country.locale">{{country.name}}</span></a>
 				<span class="text-separator">></span>
-				<a href="/world/{{country.name}}/{{region.name}}">{{region.locale}}</a>
+				<a href="/world/{{country.name}}/{{region.name}}"><span ng-show="region.locale">{{region.locale}}</span><span ng-hide="region.locale">{{region.name}}</span></a>
 			</div>
 			<div class="item">
 				<a href="/map/{{city.name}},{{region.name}},{{country.name}}">
@@ -48,11 +48,11 @@
 	<div class="block">
 		
 		<h2 class="heading">
-			{{city.locale}}
+			<span ng-show="city.locale">{{city.locale}}</span><span ng-hide="city.locale">{{city.name}}</span>
 		</h2>
 		
 		<h3 class="subheading">
-			<span ng-if="city.locale != city.name">
+			<span ng-if="city.locale && city.locale != city.name">
 				{{city.name}}
 				<span class="text-separator">&middot;</span>
 			</span>

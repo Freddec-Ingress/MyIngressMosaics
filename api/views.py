@@ -651,9 +651,10 @@ def data_getMosaicsByCountry(request):
 		for item in results:
 			
 			country = {
-				'mosaics': item.mosaics.count(),
+				'mosaics': Mosaic.objects.filter(city__region__country=item).count(),
 				'name': item.name,
 				'locale': item.locale,
+				'id': item.pk,
 			}
 			
 			data['countries'].append(country)
@@ -671,18 +672,21 @@ def data_getMosaicsByRegion(request, name):
 	
 	data = None
 	
+	country = Country.objects.get(name=name)
+
 	results = Region.objects.filter(country__name=name)
 	if (results.count() > 0):
 		
 		data = {
 			'count': 0,
+			'country': country.serialize(),
 			'regions': [],
 		}
 		
 		for item in results:
 			
 			region = {
-				'mosaics': item.mosaics.count(),
+				'mosaics': Mosaic.objects.filter(city__region=item).count(),
 				'name': item.name,
 				'locale': item.locale,
 				'id': item.pk,
@@ -690,7 +694,7 @@ def data_getMosaicsByRegion(request, name):
 			
 			data['regions'].append(region)
 	
-		data['count'] = Mosaic.objects.filter(country__name=name).count()
+		data['count'] = Mosaic.objects.filter(city__region__country__name=name).count()
 	
 	return Response(data, status=status.HTTP_200_OK)
 	
@@ -703,11 +707,16 @@ def data_getMosaicsByCity(request, country, name):
 	
 	data = None
 	
-	results = City.objects.filter(country__name=country, region__name=name)
+	country = Country.objects.get(name=country)
+	region = Region.objects.get(country=country, name=name)
+	
+	results = City.objects.filter(region__country__name=country, region__name=name)
 	if (results.count() > 0):
 		
 		data = {
 			'count': 0,
+			'country': country.serialize(),
+			'region': region.serialize(),
 			'cities': [],
 		}
 		
@@ -717,11 +726,12 @@ def data_getMosaicsByCity(request, country, name):
 				'mosaics': item.mosaics.count(),
 				'name': item.name,
 				'locale': item.locale,
+				'id': item.pk,
 			}
 			
 			data['cities'].append(city)
 	
-		data['count'] = Mosaic.objects.filter(country__name=country, region__name=name).count()
+		data['count'] = Mosaic.objects.filter(city__region__name=name).count()
 	
 	return Response(data, status=status.HTTP_200_OK)
 
@@ -732,15 +742,25 @@ def data_getMosaicsByCity(request, country, name):
 @permission_classes((AllowAny, ))
 def data_getMosaicsOfCity(request, country, region, name):
 	
-	results = Mosaic.objects.filter(country__name=country, region__name=region, city__name=name).order_by('-pk')
+	country = Country.objects.get(name=country)
+	region = Region.objects.get(country=country, name=region)
+	city = City.objects.get(region=region, name=name)
+	
+	results = Mosaic.objects.filter(city=city).order_by('-pk')
 	if results.count() > 0:
 		
-		data = []
+		data = {
+			'count': 0,
+			'country': country.serialize(),
+			'region': region.serialize(),
+			'city': city.serialize(),
+			'mosaics': [],
+		}
 		
 		for item in results:
 			
 			mosaic = item.overviewSerialize()
-			data.append(mosaic)
+			data['mosaics'].append(mosaic)
 		
 		return Response(data, status=status.HTTP_200_OK)
 		
@@ -795,14 +815,14 @@ def data_searchForMosaics(request):
 		
 	# Country search
 	
-	results = Mosaic.objects.filter(Q(country__name__icontains=request.data['text']) | Q(country__locale__icontains=request.data['text']))
+	results = Mosaic.objects.filter(Q(city__region__country__name__icontains=request.data['text']) | Q(city__region__country__locale__icontains=request.data['text']))
 	if (results.count() > 0):
 		for mosaic in results:
 			array.append(mosaic)
 		
 	# Region search
 	
-	results = Mosaic.objects.filter(Q(region__name__icontains=request.data['text']) | Q(region__locale__icontains=request.data['text']))
+	results = Mosaic.objects.filter(Q(city__region__name__icontains=request.data['text']) | Q(city__region__locale__icontains=request.data['text']))
 	if (results.count() > 0):
 		for mosaic in results:
 			array.append(mosaic)

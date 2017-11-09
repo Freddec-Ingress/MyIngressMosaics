@@ -45,11 +45,11 @@
 					<div class="item grow">
 						<a href="/"><i class="fa fa-home text-separator" style="margin-left:0;"></i> Home</a>
 						<span class="text-separator">></span>
-						<a href="/world/{{mosaic.country.name}}">{{mosaic.country.name}}</a>
+						<a href="/world/{{mosaic.city.region.country.name}}"><span ng-show="mosaic.city.region.country.locale">{{mosaic.city.region.country.locale}}</span><span ng-hide="mosaic.city.region.country.locale">{{mosaic.city.region.country.name}}</span></a>
 						<span class="text-separator">></span>
-						<a href="/world/{{mosaic.country.name}}/{{mosaic.region.name}}">{{mosaic.region.name}}</a>
+						<a href="/world/{{mosaic.city.region.country.name}}/{{mosaic.city.region.name}}"><span ng-show="mosaic.city.region.locale">{{mosaic.city.region.locale}}</span><span ng-hide="mosaic.city.region.locale">{{mosaic.city.region.name}}</span></a>
 						<span class="text-separator">></span>
-						<a href="/world/{{mosaic.country.name}}/{{mosaic.region.name}}/{{mosaic.city.name}}">{{mosaic.city.name}}</a>
+						<a href="/world/{{mosaic.city.region.country.name}}/{{mosaic.city.region.name}}/{{mosaic.city.name}}"><span ng-show="mosaic.city.locale">{{mosaic.city.locale}}</span><span ng-hide="mosaic.city.locale">{{mosaic.city.name}}</span></a>
 					</div>
 					<div class="item">
 						<a href="/map/{{mosaic.city.name}},{{mosaic.region.name}},{{mosaic.country.name}}">
@@ -263,17 +263,17 @@
 	
 	    	        <div class="item-6 item-xl-4">
 	    	            <label>Country</label>
-	    	            <input type="text" class="form-control" ng-model="mosaic.country" />
+	    	            <input type="text" class="form-control" ng-model="mosaic.city.region.country.name" />
 	    	        </div>
 	
 	    	        <div class="item-6 item-xl-4">
 	    	            <label>Region</label>
-	    	            <input type="text" class="form-control" ng-model="mosaic.region" />
+	    	            <input type="text" class="form-control" ng-model="mosaic.city.region.name" />
 	    	        </div>
 	
 	    	        <div class="item-6 item-xl-4">
 	    	            <label>City</label>
-	    	            <input type="text" class="form-control" ng-model="mosaic.city" />
+	    	            <input type="text" class="form-control" ng-model="mosaic.city.name" />
 	    	        </div>
 	    	        
 	    	        <div class="item-12 ta-center">

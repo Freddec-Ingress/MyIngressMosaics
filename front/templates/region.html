@@ -31,7 +31,9 @@
 			<div class="item grow">
 				<a href="/"><i class="fa fa-home text-separator" style="margin-left:0;"></i> Home</a>
 				<span class="text-separator">></span>
-				<a href="/world/{{country.name}}">{{country.locale}}</a>
+				<a href="/world/{{country.name}}">
+					<span ng-show="country.locale">{{country.locale}}</span><span ng-hide="country.locale">{{country.name}}</span>
+				</a>
 			</div>
 			<div class="item">
 				<a href="/map/{{region.name}},{{country.name}}">
@@ -46,11 +48,11 @@
 	<div class="block">
 		
 		<h2 class="heading">
-			{{region.locale}}
+			<span ng-show="region.locale">{{region.locale}}</span><span ng-hide="region.locale">{{region.name}}</span>
 		</h2>
 		
 		<h3 class="subheading">
-			<span ng-if="region.locale != region.name">
+			<span ng-if="region.locale && region.locale != region.name">
 				{{region.name}}
 				<span class="text-separator">&middot;</span>
 			</span>
@@ -85,13 +87,13 @@
 			
 			<div class="item-12 item-xl-3" ng-repeat="city in cities">
 				
-				<a href="/world/{{country.name}}/{{region.name}}/{{city.name}}" class="btn-primary btn-block">
+				<a href="/world/{{country.name}}/{{region.name}}/{{city.name}}" class="btn-primary btn-block" style="height:48px;">
 					
 					<div class="row valign-center">
 						
 						<div class="item grow ta-left ellipsis" style="line-height:1.25;">
-							{{city.locale}}
-							<div ng-if="city.locale != city.name">
+							<span ng-show="city.locale">{{city.locale}}</span><span ng-hide="city.locale">{{city.name}}</span>
+							<div ng-if="city.locale && city.locale != city.name">
 					        	<span class="subheading ttrans-normal">{{city.name}}</span>
 							</div>
 				        </div>
