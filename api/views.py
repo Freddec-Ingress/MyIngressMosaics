@@ -1189,8 +1189,8 @@ def region_move(request):
 	src = Region.objects.get(pk=request.data['src_id'])
 	dest = Region.objects.get(pk=request.data['dest_id'])
 	
-	for item in src.mosaics.all():
-		item.region = dest
+	for item in Mosaic.objects.filter(city__region=src):
+		item.city.region = dest
 		item.save()
 
 	src.delete()
@@ -1241,3 +1241,21 @@ def city_update(request):
 	data = { 'city': item.serialize(), }
 	
 	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def city_move(request):
+	
+	src = City.objects.get(pk=request.data['src_id'])
+	dest = City.objects.get(pk=request.data['dest_id'])
+	
+	for item in src.mosaics.all():
+		item.city = dest
+		item.save()
+
+	src.delete()
+	
+	return Response(None, status=status.HTTP_200_OK)

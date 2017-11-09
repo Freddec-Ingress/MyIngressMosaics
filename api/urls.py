@@ -53,6 +53,7 @@ urlpatterns = [
 	url(r'^city/list/',				city_getListFromCountryRegion),
 	url(r'^city/create/',			city_create),
 	url(r'^city/update/',			city_update),
+	url(r'^city/move/',				city_move),
 
 	url(r'^world/',					data_getMosaicsByCountry),
 	url(r'^country/(?P<name>[\w \-,\']+)/$',				data_getMosaicsByRegion),
