@@ -1485,6 +1485,12 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 			$scope.loadCountry($scope.country.name);
 		});
 	}
+	
+	$scope.update = function(region) {
+		
+		var data = {'id':region.id, 'new_name': region.name, 'new_locale':region.locale};
+		API.sendRequest('/api/region/update/', 'POST', {}, data);
+	}
 });
 
 angular.module('FrontModule.controllers').controller('RegionCtrl', function($scope, API, GeoLabelService) {

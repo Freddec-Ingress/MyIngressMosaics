@@ -151,15 +151,15 @@
 			<div class="panel" ng-repeat="region in regions">
 				
 				<div class="item grow">
-					<input class="form-control" ng-model="new_name" value="{{region.name}}">
+					<input class="form-control" ng-model="region.name">
 				</div>
 				
 				<div class="item grow">
-					<input class="form-control" ng-model="new_locale" value="{{region.locale}}">
+					<input class="form-control" ng-model="region.locale">
 				</div>
 				
 				<div class="item">
-					<button type="submit" class="btn btn-primary" ng-click="update(region.id, new_name, new_locale);">
+					<button type="submit" class="btn btn-primary" ng-click="update(region);">
 						Update
 					</button>
 				</div>

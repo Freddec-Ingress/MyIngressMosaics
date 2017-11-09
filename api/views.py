@@ -1153,8 +1153,8 @@ def region_create(request):
 def region_update(request):
 	
 	item = Region.objects.get(pk=request.data['id'])
-	item.name = request.data['name']
-	item.locale = request.data['locale']
+	item.name = request.data['new_name']
+	item.locale = request.data['new_locale']
 	item.save()
 	
 	data = { 'region': item.serialize(), }
