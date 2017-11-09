@@ -1437,6 +1437,12 @@ angular.module('FrontModule.controllers').controller('WorldCtrl', function($scop
 			return a.name.localeCompare(b.name);
 		});
 	}
+	
+	$scope.update = function(country) {
+		
+		var data = {'id':country.id, 'new_name':country.name, 'new_locale':country.locale};
+		API.sendRequest('/api/country/update/', 'POST', {}, data);
+	}
 });
 
 angular.module('FrontModule.controllers').controller('CountryCtrl', function($scope, API, GeoLabelService) {

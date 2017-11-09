@@ -232,6 +232,36 @@
 		
 	</div>
 
+	<div ng-if="user.superuser">
+		
+		<div class="block">
+			
+			<div class="subblock title">
+				Update countries
+			</div>
+			
+			<div class="panel" ng-repeat="country in countries">
+				
+				<div class="item grow">
+					<input class="form-control" ng-model="country.name">
+				</div>
+				
+				<div class="item grow">
+					<input class="form-control" ng-model="country.locale">
+				</div>
+				
+				<div class="item">
+					<button type="submit" class="btn btn-primary" ng-click="update(country);">
+						Update
+					</button>
+				</div>
+				
+			</div>
+			
+		</div>
+
+	</div>
+	
 </div>
 
 {% endverbatim %}
