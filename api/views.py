@@ -1126,8 +1126,8 @@ def country_create(request):
 def country_update(request):
 	
 	item = Country.objects.get(pk=request.data['id'])
-	item.name = request.data['name']
-	item.locale = request.data['locale']
+	item.name = request.data['new_name']
+	item.locale = request.data['new_locale']
 	item.save()
 	
 	data = { 'country': item.serialize(), }
