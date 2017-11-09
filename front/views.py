@@ -257,7 +257,7 @@ def recruitment(request):
 	
 def migrate(request):
 	
-	results = Mosaic.objects.all()
+	results = Mosaic.objects.filter(Q(country_obj__isnull=True) | Q(region_obj__isnull=True) | Q(city_obj__isnull=True))
 	for item in results:
 		
 		country = Country.objects.get(name=item.country)
