@@ -259,17 +259,13 @@ def recruitment(request):
 	
 def migrate(request):
 	
-	results = Mosaic.objects.filter(Q(country_obj__isnull=True) | Q(region_obj__isnull=True) | Q(city_obj__isnull=True))
-	for item in results:
+	cities = City.objects.filter(region__isnull=True)
+	for city in cities:
 		
-		country = Country.objects.get(name=item.country)
-		region = Region.objects.get(country=country, name=item.region)
-		city = City.objects.get(country=country, region=region, name=item.city)
+		city.mosaics.delete()
+		city.delete()
 	
-		item.country_obj = country
-		item.region_obj = region
-		item.city_obj = city
-		item.save()
+	Region.objects.filter(country__isnull=True)
 	
 	context = {}
 	return render(request, 'world.html', context)
