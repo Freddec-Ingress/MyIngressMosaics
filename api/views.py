@@ -685,6 +685,7 @@ def data_getMosaicsByRegion(request, name):
 				'mosaics': item.mosaics.count(),
 				'name': item.name,
 				'locale': item.locale,
+				'id': item.pk,
 			}
 			
 			data['regions'].append(region)
