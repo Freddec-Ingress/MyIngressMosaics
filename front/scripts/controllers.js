@@ -716,7 +716,7 @@ angular.module('FrontModule.controllers').controller('MapCtrl', function($scope,
 			
 			if (!startZoom) startZoom = 15;
 			
-			if (startLat == 0.0 && startLng == 0.0 && !location) {
+			if (!startLat || !startLng) {
 				
 				if (navigator.geolocation) {
 					
