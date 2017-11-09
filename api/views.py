@@ -1177,7 +1177,7 @@ def region_move(request):
 
 	src.delete()
 	
-	return Response(data, status=status.HTTP_200_OK)
+	return Response(None, status=status.HTTP_200_OK)
 
 
 
