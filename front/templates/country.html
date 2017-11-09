@@ -90,8 +90,8 @@
 					<div class="row valign-center">
 						
 						<div class="item grow ta-left ellipsis" style="line-height:1.25;">
-							{{region.locale}}
-							<div ng-if="region.locale != region.name">
+							<span ng-show="region.locale">{{region.locale}}</span><span ng-hide="region.locale">{{region.name}}</span>
+							<div ng-if="region.locale && region.locale != region.name">
 					        	<span class="subheading ttrans-normal">{{region.name}}</span>
 							</div>
 				        </div>

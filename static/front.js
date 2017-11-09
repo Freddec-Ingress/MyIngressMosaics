@@ -2261,12 +2261,7 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 			$scope.regions = response.regions;
 			
 			$scope.sortByMosaics();
-			
-			for (var region of $scope.regions) {
-				region.newname = region.name;
-				region.locale = GeoLabelService.getRegionLocaleLabel($scope.country.name, region.name);
-			}
-			
+
 			$('#page-loading').addClass('hidden');
 			$('#page-content').removeClass('hidden');
 		});
@@ -2298,13 +2293,10 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 		});
 	}
 	
-	$scope.update = function(region, new_name, new_locale) {
+	$scope.update = function(region) {
 		
-		var data = {'id':region.id, 'new_name': new_name, 'new_locale':new_locale};
-		API.sendRequest('/api/region/update/', 'POST', {}, data).then(function(response) {
-			region.name = new_name;
-			region.locale = new_locale;
-		});
+		var data = {'id':region.id, 'new_name': region.name, 'new_locale':region.locale};
+		API.sendRequest('/api/region/update/', 'POST', {}, data);
 	}
 });
 

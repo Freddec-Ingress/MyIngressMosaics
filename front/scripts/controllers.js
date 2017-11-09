@@ -1449,12 +1449,7 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 			$scope.regions = response.regions;
 			
 			$scope.sortByMosaics();
-			
-			for (var region of $scope.regions) {
-				region.newname = region.name;
-				region.locale = GeoLabelService.getRegionLocaleLabel($scope.country.name, region.name);
-			}
-			
+
 			$('#page-loading').addClass('hidden');
 			$('#page-content').removeClass('hidden');
 		});
