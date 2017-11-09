@@ -163,11 +163,11 @@ def mosaic(request, ref):
 	
 	if (mosaic):
 		
-		desc = mosaic.country
+		desc = mosaic.country.name
 		if mosaic.region:
-			desc += ' > ' + mosaic.region
+			desc += ' > ' + mosaic.region.name
 		if mosaic.city:
-			desc += ' > ' + mosaic.city
+			desc += ' > ' + mosaic.city.name
 		desc += ' - ' + str(len(mosaic.missions.all())) + ' missions' + ' - ' + mosaic.type
 	
 		mcount = mosaic.missions.count()
