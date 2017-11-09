@@ -40,6 +40,18 @@ urlpatterns = [
 
 	url(r'^missions/',				data_searchForMissions),
 	url(r'^search/',				data_searchForMosaics),
+	
+	url(r'^country/list/',			country_getList),
+	url(r'^country/create/',		country_create),
+	url(r'^country/update/',		country_update),
+	
+	url(r'^region/list/',			region_getListFromCountry),
+	url(r'^region/create/',			region_create),
+	url(r'^region/update/',			region_update),
+	
+	url(r'^city/list/',				city_getListFromCountryRegion),
+	url(r'^city/create/',			city_create),
+	url(r'^city/update/',			city_update),
 
 	url(r'^world/',					data_getMosaicsByCountry),
 	url(r'^country/(?P<name>[\w \-,\']+)/$',				data_getMosaicsByRegion),

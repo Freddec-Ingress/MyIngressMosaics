@@ -35,6 +35,7 @@ urlpatterns = [
 	url(r'^world', views.world),
 	
 	url(r'^recruitment', views.recruitment),
+	url(r'^migrate', views.migrate),
 	
 	url(r'^.*', views.world),
 ]

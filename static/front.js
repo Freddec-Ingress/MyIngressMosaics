@@ -483,6 +483,7 @@ cityLocaleLabelMap.set('Japan,Tokyo,Nerima', '練馬区');
 cityLocaleLabelMap.set('Japan,Tokyo,Adachi', '足立区');
 cityLocaleLabelMap.set('Japan,Tokyo,Katsushika', '葛飾区');
 cityLocaleLabelMap.set('Japan,Tokyo,Edogawa', '江戸川区');
+
 angular.module('FrontModule.services', [])
 
 angular.module('FrontModule.services').service('API', function($q, $http, $cookies) {
@@ -1564,7 +1565,12 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		if ($scope.mode_advanced) $scope.refreshPotentials();
 	}
 	
+	var countryList = null;
 	$scope.$on('user-loaded', function(event, args) {
+		
+		API.sendRequest('/api/country/list/', 'POST').then(function(response) {
+			countryList = response.countries;
+		});
 		
 		$('#page-loading').addClass('hidden');
 		$('#page-content').removeClass('hidden');
@@ -1787,6 +1793,10 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 				lng: parseFloat($scope.mosaicModel.missions[0].startLng),
 			};
 			
+			$scope.countries = [];
+			$scope.regions = [];
+			$scope.cities = [];
+
 			geocoder.geocode({'location': latlng}, function(results, status) {
 				
 				if (status === 'OK') {
@@ -1813,6 +1823,65 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 						if (!$scope.mosaicModel.city && admin3) $scope.mosaicModel.city = item.admin3;
 						
 						UtilsService.checkMosaicLocations($scope.mosaicModel);
+						
+						/* Country */
+						
+						var cur_country = null;
+						for (var country of countryList) {
+							if (country.name == $scope.mosaicModel.country || country.locale == $scope.mosaicModel.country) {
+								
+								cur_country = country;
+								
+								$scope.mosaicModel.country = country.name;
+								$scope.countries = countryList;
+								break;
+							}
+						}
+						
+						/* Region */
+						
+						if (cur_country) {
+							
+							var data = {'country_id':cur_country.id};
+							API.sendRequest('/api/region/list/', 'POST', {}, data).then(function(response) {
+								
+								var regionList = response.regions;
+								
+								var cur_region = null;
+								for (var region of regionList) {
+									if (region.name == $scope.mosaicModel.region || region.locale == $scope.mosaicModel.region) {
+										
+										cur_region = region;
+										
+										$scope.mosaicModel.region = region.name;
+										$scope.regions = regionList;
+										break;
+									}
+								}
+								
+								/* City */
+								
+								if (cur_region) {
+									
+									var data = {'country_id':cur_country.id, 'region_id':cur_region.id};
+									API.sendRequest('/api/city/list/', 'POST', {}, data).then(function(response) {
+										
+										var cityList = response.cities;
+										
+										var cur_city = null;
+										for (var city of cityList) {
+											if (city.name == $scope.mosaicModel.city || city.locale == $scope.mosaicModel.city) {
+												
+												cur_city = city;
+												
+												$scope.mosaicModel.city = city.name;
+												$scope.cities = cityList;
+											}
+										}
+									});
+								}
+							});
+						}
 						
 						$scope.$applyAsync();
 					}

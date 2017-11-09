@@ -252,3 +252,47 @@ def recruitment(request):
 	
 	context = {}
 	return render(request, 'recruitment.html', context)
+	
+	
+	
+def migrate(request):
+	
+	Country.objects.all().delete()
+	Region.objects.all().delete()
+	City.objects.all().delete()
+	
+	country_name_results = Mosaic.objects.values('country').distinct()
+	if (country_name_results.count() > 0):
+		
+		for country_name in country_name_results:
+			country = Country(name=country_name['country'])
+			country.save()
+			
+			region_name_results = Mosaic.objects.filter(country=country_name['country']).values('region').distinct()
+			if (region_name_results.count() > 0):
+				
+				for region_name in region_name_results:
+					region = Region(country=country, name=region_name['region'])
+					region.save()
+					
+					city_name_results = Mosaic.objects.filter(country=country_name['country'], region=region_name['region']).values('city').distinct()
+					if (city_name_results.count() > 0):
+						
+						for city_name in city_name_results:
+							city = City(country=country, region=region, name=city_name['city'])
+							city.save()
+							
+	results = Mosaic.objects.all()
+	for item in results:
+		
+		country = Country.objects.get(name=item.country)
+		region = Region.objects.get(country=country, name=item.region)
+		city = City.objects.get(country=country, region=region, name=item.city)
+	
+		item.country_obj = country
+		item.region_obj = region
+		item.city_obj = city
+		item.save()
+	
+	context = {}
+	return render(request, 'world.html', context)

@@ -200,17 +200,26 @@
 	
 	    	        <div class="item-6 item-xl-4">
 	    	            <label>Country</label>
-	    	            <input type="text" class="form-control" ng-model="mosaicModel.country" />
+	    	            <select ng-show="countries.length > 0" class="form-control" ng-model="mosaicModel.country">
+	    	            	<option ng-repeat="item in countries" value="{{item.name}}">{{item.name}}</option>
+	    	            </select>
+	    	            <input ng-hide="countries.length > 0" type="text" class="form-control" ng-model="mosaicModel.country" />
 	    	        </div>
 	
 	    	        <div class="item-6 item-xl-4">
 	    	            <label>Region</label>
-	    	            <input type="text" class="form-control" ng-model="mosaicModel.region" />
+	    	            <select ng-show="regions.length > 0" class="form-control" ng-model="mosaicModel.region">
+	    	            	<option ng-repeat="item in regions" value="{{item.name}}">{{item.name}}</option>
+	    	            </select>
+	    	            <input ng-hide="regions.length > 0" type="text" class="form-control" ng-model="mosaicModel.region" />
 	    	        </div>
 	
 	    	        <div class="item-6 item-xl-4">
 	    	            <label>City</label>
-	    	            <input type="text" class="form-control" ng-model="mosaicModel.city" />
+	    	            <select ng-show="cities.length > 0" class="form-control" ng-model="mosaicModel.city">
+	    	            	<option ng-repeat="item in cities" value="{{item.name}}">{{item.name}}</option>
+	    	            </select>
+	    	            <input ng-hide="cities.length > 0" type="text" class="form-control" ng-model="mosaicModel.city" />
 	    	        </div>
 	
 	                <div class="item-12 item-xl-6">

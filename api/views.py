@@ -1024,3 +1024,138 @@ def event_view(request):
 				item['mosaics'].append(mosaic.overviewSerialize())
 	
 	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def country_getList(request):
+	
+	data = { 'countries': [], }
+	
+	results = Country.objects.all()
+	for item in results:
+		data['countries'].append(item.serialize())
+	
+	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def country_create(request):
+	
+	item = Country(name=request.data['name'])
+	item.save()
+	
+	data = { 'country': item.serialize(), }
+	
+	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def country_update(request):
+	
+	item = Country.objects.get(pk=request.data['id'])
+	item.name = request.data['name']
+	item.locale = request.data['locale']
+	item.save()
+	
+	data = { 'country': item.serialize(), }
+	
+	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def region_getListFromCountry(request):
+	
+	data = { 'regions': [], }
+	
+	results = Region.objects.filter(country__pk=request.data['country_id'])
+	for item in results:
+		data['regions'].append(item.serialize())
+	
+	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def region_create(request):
+	
+	item = Region(country__pk=request.data['country_id'], name=request.data['name'])
+	item.save()
+	
+	data = { 'region': item.serialize(), }
+	
+	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def region_update(request):
+	
+	item = Region.objects.get(pk=request.data['id'])
+	item.name = request.data['name']
+	item.locale = request.data['locale']
+	item.save()
+	
+	data = { 'region': item.serialize(), }
+	
+	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def city_getListFromCountryRegion(request):
+	
+	data = { 'cities': [], }
+	
+	results = City.objects.filter(country__pk=request.data['country_id'], region__pk=request.data['region_id'])
+	for item in results:
+		data['cities'].append(item.serialize())
+	
+	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def city_create(request):
+	
+	item = City(country__pk=request.data['country_id'], region__pk=request.data['region_id'], name=request.data['name'])
+	item.save()
+	
+	data = { 'city': item.serialize(), }
+	
+	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def city_update(request):
+	
+	item = City.objects.get(pk=request.data['id'])
+	item.name = request.data['name']
+	item.locale = request.data['locale']
+	item.save()
+	
+	data = { 'city': item.serialize(), }
+	
+	return Response(data, status=status.HTTP_200_OK)

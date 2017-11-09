@@ -51,6 +51,97 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 #---------------------------------------------------------------------------------------------------
+@python_2_unicode_compatible
+class Country(models.Model):
+	
+	name = models.CharField(max_length=512)
+	locale = models.CharField(max_length=512, null=True, blank=True)
+	
+	# Admin displaying
+	
+	def __str__(self):
+		return self.name
+		
+	# Serialization
+	
+	def serialize(self):
+		
+		data = {
+			
+			'id': self.pk,
+			'name': self.name,
+			'locale': self.locale,
+		}
+		
+		return data
+
+
+
+#---------------------------------------------------------------------------------------------------
+@python_2_unicode_compatible
+class Region(models.Model):
+
+	country = models.ForeignKey(Country, on_delete=models.SET_NULL, null=True, blank=True, related_name='regions')
+	
+	name = models.CharField(max_length=512)
+	locale = models.CharField(max_length=512, null=True, blank=True)
+	
+	# Admin displaying
+	
+	def __str__(self):
+		return self.name
+		
+	# Serialization
+	
+	def serialize(self):
+		
+		data = {
+
+			'country': self.country.serialize(),
+			
+			'id': self.pk,
+			'name': self.name,
+			'locale': self.locale,
+		}
+		
+		return data
+
+
+
+#---------------------------------------------------------------------------------------------------
+@python_2_unicode_compatible
+class City(models.Model):
+
+	country = models.ForeignKey(Country, on_delete=models.SET_NULL, null=True, blank=True, related_name='cities')
+	region = models.ForeignKey(Region, on_delete=models.SET_NULL, null=True, blank=True, related_name='cities')
+	
+	name = models.CharField(max_length=512)
+	locale = models.CharField(max_length=512, null=True, blank=True)
+	
+	# Admin displaying
+	
+	def __str__(self):
+		return self.name
+		
+	# Serialization
+	
+	def serialize(self):
+		
+		data = {
+
+			'country': self.country.serialize(),
+			'region': self.region.serialize(),
+
+			'id': self.pk,
+			'name': self.name,
+			'locale': self.locale,
+		}
+		
+		return data
+
+
+
+#---------------------------------------------------------------------------------------------------
 from django.utils.crypto import get_random_string
 
 def _createRef():
@@ -77,6 +168,10 @@ class Mosaic(models.Model):
 	creators = models.CharField(max_length=512, null=True, blank=True)
 	registerer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='mosaics')
 	register_date = models.DateField(default=datetime.now)
+	
+	country_obj = models.ForeignKey(Country, on_delete=models.SET_NULL, null=True, blank=True, related_name='mosaics')
+	region_obj = models.ForeignKey(Region, on_delete=models.SET_NULL, null=True, blank=True, related_name='mosaics')
+	city_obj = models.ForeignKey(City, on_delete=models.SET_NULL, null=True, blank=True, related_name='mosaics')
 	
 	lovers = models.ManyToManyField(User, related_name='mosaics_loved')
 	completers = models.ManyToManyField(User, related_name='mosaics_completed')

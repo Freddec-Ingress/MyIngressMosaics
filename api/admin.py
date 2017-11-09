@@ -9,6 +9,9 @@ from .models import *
 
 #---------------------------------------------------------------------------------------------------
 admin.site.register(Profile)
+admin.site.register(Country)
+admin.site.register(Region)
+admin.site.register(City)
 admin.site.register(Mosaic)
 admin.site.register(Mission)
 admin.site.register(Comment)
