@@ -857,7 +857,11 @@ angular.module('FrontModule.controllers').controller('MosaicCtrl', function($sco
 		
 			$scope.mosaic = response;
 			$scope.mosaic.cols = $scope.mosaic.cols.toString();
-
+			
+			$scope.mosaic.country = $scope.mosaic.country.name;
+			$scope.mosaic.region = $scope.mosaic.region.name;
+			$scope.mosaic.city = $scope.mosaic.city.name;
+			
 			$('#page-loading').addClass('hidden');
 			$('#page-content').removeClass('hidden');
 		});
