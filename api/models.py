@@ -317,9 +317,9 @@ class Mosaic(models.Model):
 	
 	def overviewSerialize(self):
 		
-		location = self.city
-		if not location: location = self.region
-		if not location: location = self.country
+		location = self.city.serialize()
+		if not location: location = self.region.serialize()
+		if not location: location = self.country.serialize()
 		
 		data = {
 			
@@ -327,7 +327,7 @@ class Mosaic(models.Model):
 			'cols': self.cols,
 			'type': self.type,
 			'title': self.title,
-			'country': self.country,
+			'country': self.country.serialize(),
 			'distance': self.distance,
 			'has_fake': False,
 			
@@ -355,11 +355,11 @@ class Mosaic(models.Model):
 			'ref': self.ref,
 			'cols': self.cols,
 			'type': self.type,
-			'city': self.city,
+			'city': self.city.serialize(),
 			'title': self.title,
 			'lovers': self.lovers.all().count(),
-			'region': self.region,
-			'country': self.country,
+			'region': self.region.serialize(),
+			'country': self.country.serialize(),
 			'portals': self.portals,
 			'uniques': self.uniques,
 			'distance': self.distance,
