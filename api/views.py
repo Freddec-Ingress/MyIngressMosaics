@@ -678,7 +678,7 @@ def data_getMosaicsByCity(request, country, name):
 			
 			data['cities'].append(city)
 	
-		data['count'] = Mosaic.objects.filter(country__name=country, region_name=name).count()
+		data['count'] = Mosaic.objects.filter(country__name=country, region__name=name).count()
 	
 	return Response(data, status=status.HTTP_200_OK)
 
