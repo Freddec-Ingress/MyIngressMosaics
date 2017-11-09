@@ -170,8 +170,8 @@ class Mosaic(models.Model):
 	region = models.ForeignKey(Region, related_name='mosaics')
 	city = models.ForeignKey(City, related_name='mosaics')
 	
-	lovers = models.ManyToManyField(User, related_name='mosaics_loved')
-	completers = models.ManyToManyField(User, related_name='mosaics_completed')
+	lovers = models.ManyToManyField(User, null=True, blank=True, related_name='mosaics_loved')
+	completers = models.ManyToManyField(User, null=True, blank=True, related_name='mosaics_completed')
 	
 	# Admin displaying
 	
