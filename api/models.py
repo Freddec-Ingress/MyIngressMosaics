@@ -81,7 +81,7 @@ class Country(models.Model):
 @python_2_unicode_compatible
 class Region(models.Model):
 
-	country = models.ForeignKey(Country, on_delete=models.SET_NULL, null=True, blank=True, related_name='regions')
+	country = models.ForeignKey(Country, related_name='regions')
 	
 	name = models.CharField(max_length=512)
 	locale = models.CharField(max_length=512, null=True, blank=True)
@@ -112,7 +112,7 @@ class Region(models.Model):
 @python_2_unicode_compatible
 class City(models.Model):
 
-	region = models.ForeignKey(Region, on_delete=models.SET_NULL, null=True, blank=True, related_name='cities')
+	region = models.ForeignKey(Region, related_name='cities')
 	
 	name = models.CharField(max_length=512)
 	locale = models.CharField(max_length=512, null=True, blank=True)
