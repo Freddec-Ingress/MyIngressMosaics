@@ -280,20 +280,18 @@ def mosaic_create(request):
 		region = Region(country=country, name=request.data['region'])
 		region.save()
 		
-	results = City.objects.filter(country=country, region=region, name=request.data['city'])
+	results = City.objects.filter(region=region, name=request.data['city'])
 	if results.count() > 0:
 		city = results[0]
 	else:
-		city = City(country=country, region=region, name=request.data['city'])
+		city = City(region=region, name=request.data['city'])
 		city.save()
 		
 	mosaic = Mosaic(	registerer = request.user,
 						cols = int(request.data['columns']),
 						type = request.data['type'],
 						city = city,
-						title = request.data['title'],
-						region = region,
-						country = country
+						title = request.data['title']
 					)
 	mosaic.save()
 	
