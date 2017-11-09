@@ -119,14 +119,14 @@
 		<div class="panel">
 			
 			<div class="item grow">
-				<select class="form-control">
-					<option ng-repeat="region in regions" value="{{region.id}}" ng-model="src_id">{{region.name}}</option>
+				<select class="form-control" ng-model="src_id">
+					<option ng-repeat="region in regions" value="{{region.id}}">{{region.name}}</option>
 				</select>
 			</div>
 			
 			<div class="item grow">
-				<select class="form-control">
-					<option ng-repeat="region in regions" value="{{region.id}}" ng-model="dest_id">{{region.name}}</option>
+				<select class="form-control" ng-model="dest_id">
+					<option ng-repeat="region in regions" value="{{region.id}}">{{region.name}}</option>
 				</select>
 			</div>
 			
