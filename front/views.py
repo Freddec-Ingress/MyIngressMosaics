@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from django.db.models import Q
+
 from api.models import *
 
 from PIL import Image, ImageDraw, ImageFont
