@@ -262,7 +262,7 @@ def migrate(request):
 	cities = City.objects.filter(region__isnull=True)
 	for city in cities:
 		
-		city.mosaics.delete()
+		city.mosaics.all().delete()
 		city.delete()
 	
 	Region.objects.filter(country__isnull=True)
