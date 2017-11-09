@@ -199,7 +199,7 @@
 	    	        </div>
 	
 	    	        <div class="item-6 item-xl-4">
-	    	            <label>Country</label>
+	    	            <label>Country (EN)</label>
 	    	            <select ng-show="countries.length > 0" class="form-control" ng-model="mosaicModel.country">
 	    	            	<option ng-repeat="item in countries" value="{{item.name}}">{{item.name}}</option>
 	    	            </select>
@@ -207,7 +207,7 @@
 	    	        </div>
 	
 	    	        <div class="item-6 item-xl-4">
-	    	            <label>Region</label>
+	    	            <label>Region (EN)</label>
 	    	            <select ng-show="regions.length > 0" class="form-control" ng-model="mosaicModel.region">
 	    	            	<option ng-repeat="item in regions" value="{{item.name}}">{{item.name}}</option>
 	    	            </select>
@@ -215,7 +215,7 @@
 	    	        </div>
 	
 	    	        <div class="item-6 item-xl-4">
-	    	            <label>City</label>
+	    	            <label>City (EN)</label>
 	    	            <select ng-show="cities.length > 0" class="form-control" ng-model="mosaicModel.city">
 	    	            	<option ng-repeat="item in cities" value="{{item.name}}">{{item.name}}</option>
 	    	            </select>
@@ -352,7 +352,7 @@
 	                    	<i ng-show="item.open" class="mr-2 fa fa-fw fa-caret-down"></i>
 	                    </div>
 						
-	                    <div class="item grow c-white" ng-click="togglePotential(item);">
+	                    <div class="item grow c-white" ng-click="togglePotential(item);" ng-class="{'c-danger':isCountValid(item.count)}">
 	                        {{item.title}}
 	                        ({{item.count}})
 	                    </div>
@@ -396,17 +396,17 @@
 		    	        </div>
 		
 		    	        <div class="item-6 item-xl-4">
-		    	            <label>Country</label>
+		    	            <label>Country (EN)</label>
 		    	            <input type="text" class="form-control" ng-model="item.country" />
 		    	        </div>
 		
 		    	        <div class="item-6 item-xl-4">
-		    	            <label>Region</label>
+		    	            <label>Region (EN)</label>
 		    	            <input type="text" class="form-control" ng-model="item.region" />
 		    	        </div>
 		
 		    	        <div class="item-6 item-xl-4">
-		    	            <label>City</label>
+		    	            <label>City (EN)</label>
 		    	            <input type="text" class="form-control" ng-model="item.city" />
 		    	        </div>
 		

@@ -2107,6 +2107,13 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 			$window.open('https://www.myingressmosaics.com/mosaic/' + response);
 		});
 	}
+	
+	$scope.isCountValid = function(count) {
+		
+		var remainder = (count/6) % 1;
+		if (remainder > 0) return false;
+		return true;
+	}
 });
 
 angular.module('FrontModule.controllers').controller('LoginCtrl', function($scope, $auth, $cookies, $window, API) {
