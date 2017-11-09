@@ -2354,12 +2354,18 @@ angular.module('FrontModule.controllers').controller('RegionCtrl', function($sco
 		});
 	}
 	
-	$scope.rename = function(city) {
+	$scope.merge = function(src_id, dest_id) {
 		
-		var data = {'country': $scope.country.name, 'region':$scope.region.name, 'city':city.name, 'new_city':city.newname};
-		API.sendRequest('/api/adm/city/rename', 'POST', {}, data);
+		var data = {'src_id': src_id, 'dest_id':dest_id};
+		API.sendRequest('/api/city/move/', 'POST', {}, data).then(function(response) {
+			$scope.loadRegion($scope.country.name, $scope.region.name);
+		});
+	}
+	
+	$scope.update = function(city) {
 		
-		city.name = city.newname
+		var data = {'id':city.id, 'new_name': city.name, 'new_locale':city.locale};
+		API.sendRequest('/api/city/update/', 'POST', {}, data);
 	}
 });
 

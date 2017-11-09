@@ -110,18 +110,60 @@
 		
 	</div>
 
-	<div ng-if="user.superuser" class="block">
+	<div ng-if="user.superuser">
 		
-		<div class="panel" ng-repeat="city in cities">
+		<div class="block">
 			
-			<div class="item grow">
-				<input type="text" class="form-control" placeholder="" ng-model="city.newname" />
+			<div class="subblock title">
+				Merge 2 cities
 			</div>
 			
-			<div class="item">
-				<button type="submit" class="btn btn-primary" ng-click="rename(city);">
-					Rename
-				</button>
+			<div class="panel">
+				
+				<div class="item grow">
+					<select class="form-control" ng-model="src_id">
+						<option ng-repeat="city in cities" value="{{city.id}}">{{city.name}}</option>
+					</select>
+				</div>
+				
+				<div class="item grow">
+					<select class="form-control" ng-model="dest_id">
+						<option ng-repeat="city in cities" value="{{city.id}}">{{city.name}}</option>
+					</select>
+				</div>
+				
+				<div class="item">
+					<button type="submit" class="btn btn-primary" ng-click="merge(src_id, dest_id);">
+						Merge
+					</button>
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		<div class="block">
+			
+			<div class="subblock title">
+				Update cities
+			</div>
+			
+			<div class="panel" ng-repeat="city in cities">
+				
+				<div class="item grow">
+					<input class="form-control" ng-model="city.name">
+				</div>
+				
+				<div class="item grow">
+					<input class="form-control" ng-model="city.locale">
+				</div>
+				
+				<div class="item">
+					<button type="submit" class="btn btn-primary" ng-click="update(city);">
+						Update
+					</button>
+				</div>
+				
 			</div>
 			
 		</div>
