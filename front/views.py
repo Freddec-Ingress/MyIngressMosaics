@@ -54,24 +54,24 @@ def sitemap(request):
      
 	# Country URLs
 	
-	countries = Mosaic.objects.values('country').distinct()
+	countries = Country.objects.all()
 	for country in countries:
-		text += '<url><loc>https://www.myingressmosaics.com/map/' + country['country'] + '</loc><changefreq>daily</changefreq></url>'
-		text += '<url><loc>https://www.myingressmosaics.com/world/' + country['country'] + '</loc><changefreq>daily</changefreq></url>'
+		text += '<url><loc>https://www.myingressmosaics.com/map/' + country.name + '</loc><changefreq>daily</changefreq></url>'
+		text += '<url><loc>https://www.myingressmosaics.com/world/' + country.name + '</loc><changefreq>daily</changefreq></url>'
      
 	# Region URLs
 	
-	countries = Mosaic.objects.values('country', 'region').distinct()
-	for country in countries:
-		text += '<url><loc>https://www.myingressmosaics.com/map/' + country['country'] + ',' + country['region'] + '</loc><changefreq>daily</changefreq></url>'
-		text += '<url><loc>https://www.myingressmosaics.com/world/' + country['country'] + '/' + country['region'] + '</loc><changefreq>daily</changefreq></url>'
+	regions = Region.objects.all()
+	for region in regions:
+		text += '<url><loc>https://www.myingressmosaics.com/map/' + region.country.name + ',' + region.name + '</loc><changefreq>daily</changefreq></url>'
+		text += '<url><loc>https://www.myingressmosaics.com/world/' + region.country.name + '/' + region.name + '</loc><changefreq>daily</changefreq></url>'
      
 	# City URLs
 	
-	countries = Mosaic.objects.values('country', 'region', 'city').distinct()
-	for country in countries:
-		text += '<url><loc>https://www.myingressmosaics.com/map/' + country['country'] + ',' + country['region'] + ',' + country['city'] + '</loc><changefreq>daily</changefreq></url>'
-		text += '<url><loc>https://www.myingressmosaics.com/world/' + country['country'] + '/' + country['region'] + '/' + country['city'] + '</loc><changefreq>daily</changefreq></url>'
+	cities = City.objects.all()
+	for city in cities:
+		text += '<url><loc>https://www.myingressmosaics.com/map/' + city.country.name + ',' + city.region.name + ',' + city.name + '</loc><changefreq>daily</changefreq></url>'
+		text += '<url><loc>https://www.myingressmosaics.com/world/' + city.country.name + '/' + city.region.name + '/' + city.name + '</loc><changefreq>daily</changefreq></url>'
 
 	text += '</urlset>'
     
