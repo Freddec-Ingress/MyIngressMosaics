@@ -1478,12 +1478,12 @@ angular.module('FrontModule.controllers').controller('CountryCtrl', function($sc
 		});
 	}
 	
-	$scope.rename = function(region) {
+	$scope.merge = function(src_id, dest_id) {
 		
-		var data = {'country': $scope.country.name, 'region':region.name, 'new_region':region.newname};
-		API.sendRequest('/api/adm/region/rename', 'POST', {}, data);
-		
-		region.name = region.newname
+		var data = {'src_id': src_id, 'dest_id':dest_id};
+		API.sendRequest('/api/region/move/', 'POST', {}, data).then(function(response) {
+			$scope.loadCountry($scope.country.name);
+		});
 	}
 });
 

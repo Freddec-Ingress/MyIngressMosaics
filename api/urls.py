@@ -48,6 +48,7 @@ urlpatterns = [
 	url(r'^region/list/',			region_getListFromCountry),
 	url(r'^region/create/',			region_create),
 	url(r'^region/update/',			region_update),
+	url(r'^region/move/',			region_move),
 	
 	url(r'^city/list/',				city_getListFromCountryRegion),
 	url(r'^city/create/',			city_create),

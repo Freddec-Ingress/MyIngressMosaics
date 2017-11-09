@@ -112,15 +112,27 @@
 
 	<div ng-if="user.superuser" class="block">
 		
-		<div class="panel" ng-repeat="region in regions">
+		<div class="subblock title">
+			Merge 2 regions
+		</div>
+		
+		<div class="panel">
 			
 			<div class="item grow">
-				<input type="text" class="form-control" placeholder="" ng-model="region.newname" />
+				<select class="form-control">
+					<option ng-repeat="region in regions" value="{{region.id}}" ng-model="src_id">{{region.name}}</option>
+				</select>
+			</div>
+			
+			<div class="item grow">
+				<select class="form-control">
+					<option ng-repeat="region in regions" value="{{region.id}}" ng-model="dest_id">{{region.name}}</option>
+				</select>
 			</div>
 			
 			<div class="item">
-				<button type="submit" class="btn btn-primary" ng-click="rename(region);">
-					Rename
+				<button type="submit" class="btn btn-primary" ng-click="merge(src_id, dest_id);">
+					Merge
 				</button>
 			</div>
 			

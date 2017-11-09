@@ -1165,6 +1165,24 @@ def region_update(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
+def region_move(request):
+	
+	src = Region.objects.get(pk=request.data['src_id'])
+	dest = Region.objects.get(pk=request.data['dest_id'])
+	
+	for item in src.mosaics.all():
+		item.region = dest
+		item.save()
+
+	src.delete()
+	
+	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
 def city_getListFromCountryRegion(request):
 	
 	data = { 'cities': [], }
