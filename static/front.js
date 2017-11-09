@@ -2215,7 +2215,7 @@ angular.module('FrontModule.controllers').controller('ProfileCtrl', function($sc
 	}
 });
 
-angular.module('FrontModule.controllers').controller('WorldCtrl', function($scope, API, GeoLabelService) {
+angular.module('FrontModule.controllers').controller('WorldCtrl', function($scope, API) {
 	
 	API.sendRequest('/api/world/', 'GET').then(function(response) {
 
@@ -2245,8 +2245,6 @@ angular.module('FrontModule.controllers').controller('WorldCtrl', function($scop
 			return a.name.localeCompare(b.name);
 		});
 	}
-	
-	$scope.getCountryLabel = GeoLabelService.getCountryLocaleLabel;
 });
 
 angular.module('FrontModule.controllers').controller('CountryCtrl', function($scope, API, GeoLabelService) {

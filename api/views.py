@@ -610,7 +610,8 @@ def data_getMosaicsByCountry(request):
 			
 			country = {
 				'mosaics': Mosaic.objects.filter(country=item['country']).count(),
-				'name': item['country'],
+				'name': item['country'].name,
+				'locale': item['country'].locale,
 			}
 			
 			data['countries'].append(country)
