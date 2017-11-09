@@ -1793,7 +1793,6 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 								cur_country = country;
 								
 								$scope.mosaicModel.country = country.name;
-								$scope.countries = countryList;
 								break;
 							}
 						}
@@ -1814,7 +1813,6 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 										cur_region = region;
 										
 										$scope.mosaicModel.region = region.name;
-										$scope.regions = regionList;
 										break;
 									}
 								}
@@ -1835,7 +1833,6 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 												cur_city = city;
 												
 												$scope.mosaicModel.city = city.name;
-												$scope.cities = cityList;
 											}
 										}
 									});
