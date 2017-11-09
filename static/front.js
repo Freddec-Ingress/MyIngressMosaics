@@ -2111,8 +2111,8 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 	$scope.isCountValid = function(count) {
 		
 		var remainder = (count/6) % 1;
-		if (remainder > 0) return false;
-		return true;
+		if (remainder > 0) return true;
+		return false;
 	}
 });
 

@@ -352,9 +352,9 @@
 	                    	<i ng-show="item.open" class="mr-2 fa fa-fw fa-caret-down"></i>
 	                    </div>
 						
-	                    <div class="item grow c-white" ng-click="togglePotential(item);" ng-class="{'c-danger':isCountValid(item.count)}">
+	                    <div class="item grow c-white" ng-click="togglePotential(item);">
 	                        {{item.title}}
-	                        ({{item.count}})
+	                        <span ng-class="{'c-danger':isCountValid(item.count)}">({{item.count}})</span>
 	                    </div>
 	                    
 	                    <div class="item" ng-show="!item.loading && item.open">
