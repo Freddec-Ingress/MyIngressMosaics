@@ -214,7 +214,7 @@
 				        </div>
 				        
 				        <div class="item ta-left grow ellipsis" style="line-height:1.25;">
-				        	{{country.locale}}
+				        	<span ng-show="country.locale">{{country.locale}}</span><span ng-hide="country.locale">{{country.name}}</span>
 				        	<br><span class="subheading ttrans-normal">{{country.name}}</span>
 				        </div>
 				        

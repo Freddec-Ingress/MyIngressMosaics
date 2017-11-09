@@ -629,7 +629,7 @@ def data_getMosaicsByRegion(request, name):
 	
 	data = None
 	
-	results = Mosaic.objects.filter(country=name).values('region').distinct()
+	results = Region.objects.filter(country__name=name)
 	if (results.count() > 0):
 		
 		data = {
@@ -640,13 +640,14 @@ def data_getMosaicsByRegion(request, name):
 		for item in results:
 			
 			region = {
-				'mosaics': Mosaic.objects.filter(country=name, region=item['region']).count(),
-				'name': item['region'],
+				'mosaics': item.mosaics.count(),
+				'name': item.name,
+				'locale': item.locale,
 			}
 			
 			data['regions'].append(region)
 	
-		data['count'] = Mosaic.objects.filter(country=name).count()
+		data['count'] = Mosaic.objects.filter(country__name=name).count()
 	
 	return Response(data, status=status.HTTP_200_OK)
 	
@@ -659,7 +660,7 @@ def data_getMosaicsByCity(request, country, name):
 	
 	data = None
 	
-	results = Mosaic.objects.filter(country=country, region=name).values('city').distinct()
+	results = City.objects.filter(country__name=country, region__name=name)
 	if (results.count() > 0):
 		
 		data = {
@@ -670,13 +671,14 @@ def data_getMosaicsByCity(request, country, name):
 		for item in results:
 			
 			city = {
-				'mosaics': Mosaic.objects.filter(country=country, region=name, city=item['city']).count(),
-				'name': item['city'],
+				'mosaics': item.mosaics.count(),
+				'name': item.name,
+				'locale': item.locale,
 			}
 			
 			data['cities'].append(city)
 	
-		data['count'] = Mosaic.objects.filter(country=country, region=name).count()
+		data['count'] = Mosaic.objects.filter(country__name=country, region_name=name).count()
 	
 	return Response(data, status=status.HTTP_200_OK)
 
@@ -687,7 +689,7 @@ def data_getMosaicsByCity(request, country, name):
 @permission_classes((AllowAny, ))
 def data_getMosaicsOfCity(request, country, region, name):
 	
-	results = Mosaic.objects.filter(country=country, region=region, city=name).order_by('-pk')
+	results = Mosaic.objects.filter(country__name=country, region__name=region, city__name=name).order_by('-pk')
 	if results.count() > 0:
 		
 		data = []
