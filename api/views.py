@@ -266,21 +266,21 @@ def mosaic_searchForMissions(request):
 @permission_classes((IsAuthenticated, ))
 def mosaic_create(request):
 	
-	results = Country.object.filter(name=request.data['country'])
+	results = Country.objects.filter(name=request.data['country'])
 	if results.count() > 0:
 		country = results[0]
 	else:
 		country = Country(name=request.data['country'])
 		country.save()
 		
-	results = Region.object.filter(country=country, name=request.data['region'])
+	results = Region.objects.filter(country=country, name=request.data['region'])
 	if results.count() > 0:
 		region = results[0]
 	else:
 		region = Region(country=country, name=request.data['region'])
 		region.save()
 		
-	results = City.object.filter(country=country, region=region, name=request.data['city'])
+	results = City.objects.filter(country=country, region=region, name=request.data['city'])
 	if results.count() > 0:
 		city = results[0]
 	else:
@@ -356,21 +356,21 @@ def mosaic_edit(request):
 	if result.count() > 0:
 		mosaic = result[0]
 		
-		results = Country.object.filter(name=request.data['country'])
+		results = Country.objects.filter(name=request.data['country'])
 		if results.count() > 0:
 			country = results[0]
 		else:
 			country = Country(name=request.data['country'])
 			country.save()
 			
-		results = Region.object.filter(country=country, name=request.data['region'])
+		results = Region.objects.filter(country=country, name=request.data['region'])
 		if results.count() > 0:
 			region = results[0]
 		else:
 			region = Region(country=country, name=request.data['region'])
 			region.save()
 			
-		results = City.object.filter(country=country, region=region, name=request.data['city'])
+		results = City.objects.filter(country=country, region=region, name=request.data['city'])
 		if results.count() > 0:
 			city = results[0]
 		else:
