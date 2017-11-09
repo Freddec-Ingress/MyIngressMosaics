@@ -26,8 +26,8 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 	        '		<i ng-if="mosaic.has_fake" class="fa fa-warning c-warning" style="padding-right:.5rem;"></i>{{mosaic.title}}' +
 	        '	</div>' +
 	        '   <div class="c-lighter ellipsis">' +
-	        '       <flag country="mosaic.country"></flag>' +
-	        '    	{{mosaic.location}}' +
+	        '       <flag country="mosaic.country.name"></flag>' +
+	        '    	{{mosaic.location.name}}' +
 	        '   </div>' +
 	        '   <div class="c-lighter">{{mosaic.missions.length}} <i class="fa fa-th"></i> <span class="text-separator">&middot;</span> <span ng-if="mosaic.type == \'sequence\'">{{mosaic.distance | number:2}} km</span><span ng-if="mosaic.type == \'serie\'">serie</span><span ng-show="mosaic.type != \'serie\' && mosaic.distance > 10.0" class="text-separator">&middot;</span><i ng-show="mosaic.type != \'serie\' && mosaic.distance > 10.0 && mosaic.distance < 30.0" class="fa fa-bicycle"></i><i ng-show="mosaic.type != \'serie\' && mosaic.distance > 30.0" class="fa fa-car"></i></div>' +
 				
