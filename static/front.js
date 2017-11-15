@@ -2035,7 +2035,7 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		
 		$scope.filterText = text;
 		
-		if (!$scope.filterText) $scope.filteredMissions = $scope.missions;
+		if (!$scope.filterText) $scope.filteredMissions = $scope.missions.slice();
 		else  {
 			
 			for (var item of $scope.missions) {
@@ -2045,9 +2045,6 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 				}
 			}
 		}
-		
-		console.log($scope.missions);
-		console.log($scope.filterText);
 	}
 	
 	$scope.addAllMissions = function() {
@@ -2211,9 +2208,6 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		item.order = order.toString();
 		
 		$scope.mosaicModel.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
-		
-		console.log($scope.missions);
-		console.log($scope.filterText);
 	}
 	
 	$scope.deleteAllMissions = function() {
