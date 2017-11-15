@@ -228,10 +228,10 @@
 	                	
 	                    <label>Preview</label>
 	                    
-	                    <div class="form-control" style="padding:0;">
-		 					<div style="border:3px solid #0B0C0D; display:flex; height:245px; justify-content:center; padding:.25rem;" ng-class="{'scrollbar valign-start': mosaicModel.missions.length > 24, 'valign-center': mosaicModel.missions.length <= 24}">
+	                    <div class="form-control" style="padding:0; height:245px;">
+		 					<div class="scrollbar" style="border:3px solid #0B0C0D; display:flex; justify-content:center; padding:.25rem;">
 							
-								<div class="row" style="align-items:center; padding:0 calc((6 - {{mosaicModel.columns}}) / 2 * 16.666667%); width:100%;" ng-class="{'align-center':mosaicModel.type=='sequence' || (mosaicModel.type=='serie' && mosaicModel.missions.length < 6)}">
+								<div class="row" style="align-items:center; padding:0 calc((6 - {{mosaicModel.columns}}) / 2 * 16.666667%); width:100%;">
 						            <div ng-repeat="m in mosaicModel.offset track by $index" style="flex:0 0 calc(100% / {{mosaicModel.columns}});">
 						            </div>
 						            <div ng-repeat="m in mosaicModel.missions | reverse" style="flex:0 0 calc(100% / {{mosaicModel.columns}});">
