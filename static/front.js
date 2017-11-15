@@ -2412,59 +2412,64 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 						
 							/* Country */
 							
-							var cur_country = null;
-							for (var country of countryList) {
-								if (country.name == potential.country || country.locale == potential.country) {
-									
-									cur_country = country;
-									
-									potential.country = country.name;
-									break;
-								}
-							}
-							
-							/* Region */
-							
-							if (cur_country) {
+							API.sendRequest('/api/country/list/', 'POST').then(function(response) {
 								
-								var data = {'country_id':cur_country.id};
-								API.sendRequest('/api/region/list/', 'POST', {}, data).then(function(response) {
-									
-									var regionList = response.regions;
-									
-									var cur_region = null;
-									for (var region of regionList) {
-										if (region.name == potential.region || region.locale == potential.region) {
-											
-											cur_region = region;
-											
-											potential.region = region.name;
-											break;
-										}
-									}
-									
-									/* City */
-									
-									if (cur_region) {
+								var countryList = response.countries;
+							
+								var cur_country = null;
+								for (var country of countryList) {
+									if (country.name == potential.country || country.locale == potential.country) {
 										
-										var data = {'country_id':cur_country.id, 'region_id':cur_region.id};
-										API.sendRequest('/api/city/list/', 'POST', {}, data).then(function(response) {
-											
-											var cityList = response.cities;
-											
-											var cur_city = null;
-											for (var city of cityList) {
-												if (city.name == potential.city || city.locale == potential.city) {
-													
-													cur_city = city;
-													
-													potential.city = city.name;
-												}
-											}
-										});
+										cur_country = country;
+										
+										potential.country = country.name;
+										break;
 									}
-								});
+								}
+								
+								/* Region */
+								
+								if (cur_country) {
+									
+									var data = {'country_id':cur_country.id};
+									API.sendRequest('/api/region/list/', 'POST', {}, data).then(function(response) {
+										
+										var regionList = response.regions;
+										
+										var cur_region = null;
+										for (var region of regionList) {
+											if (region.name == potential.region || region.locale == potential.region) {
+												
+												cur_region = region;
+												
+												potential.region = region.name;
+												break;
+											}
+										}
+										
+										/* City */
+										
+										if (cur_region) {
+											
+											var data = {'country_id':cur_country.id, 'region_id':cur_region.id};
+											API.sendRequest('/api/city/list/', 'POST', {}, data).then(function(response) {
+												
+												var cityList = response.cities;
+												
+												var cur_city = null;
+												for (var city of cityList) {
+													if (city.name == potential.city || city.locale == potential.city) {
+														
+														cur_city = city;
+														
+														potential.city = city.name;
+													}
+												}
+											});
+										}
+									});
 							}
+							});
 							
 							$scope.$applyAsync();
 						}
@@ -2478,7 +2483,7 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 					item.order = order.toString();
 				}
 				
-				potential.missions.sort(compareOrderAsc);
+				potential.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
 			}
 			
 			potential.loading = false;
