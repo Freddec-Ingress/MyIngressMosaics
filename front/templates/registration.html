@@ -101,7 +101,7 @@
 	
 	                <div class="item-12">
 	                	<div class="form-control" style="padding:0;">
-	                    	<div class="scrollbar" style="height:400px; border:3px solid #0B0C0D;">
+	                    	<div style="height:400px; border:3px solid #0B0C0D;" ng-class="{'scrollbar':filteredMissions.length > 11}">
 	                    
 	                        <div ng-if="refreshingMissions" class="item ta-center">
 	                        	<i class="fa fa-spinner"></i>
@@ -254,7 +254,8 @@
 		                            <span ng-if="mosaicModel.missions.length > 0" class="text-separator">&middot;</span>
 		                            <a ng-if="mosaicModel.missions.length > 0" ng-click="clearAll();">Clear all</a>
 		                        </label>
-			                    <div style="overflow:auto; height:200px; background:#0B0C0D; border:4px solid #0B0C0D;" ng-class="{'scrollbar': mosaicModel.missions.length > 4}">
+		                        <div class="form-control" style="padding:0;">
+			                    	<div style="overflow:auto; height:200px; background:#0B0C0D; border:3px solid #0B0C0D;" ng-class="{'scrollbar': mosaicModel.missions.length > 4}">
 		            		        
 		            		        <div ng-if="mosaicModel.missions < 1" class="item">
 		            		        	No mission
@@ -284,6 +285,7 @@
 			    		                    
 		    		                </div>
 		    		                
+		                        </div>
 		                        </div>
 	                        </div>
 				        	
