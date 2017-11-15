@@ -290,7 +290,7 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 	function computeOffset() {
 		
 		var temp = 0;
-		if ($scope.mosaicModel.missions.length > 6) {
+		if ($scope.mosaicModel.missions.length > $scope.mosaicModel.columns) {
 			temp = 6 - $scope.mosaicModel.missions.length % 6;
 			if (temp < 0 || temp > 5) temp = 0;
 		}
