@@ -542,8 +542,6 @@ textarea.form-control { padding-top: .25rem; padding-bottom: .25rem; }
 .scrollbar {
     overflow-y: auto!important;
     overflow-x: hidden!important;
-    padding-right: 0!important;
-    border-right: 0!important;
 }
 
 .scrollbar::-webkit-scrollbar {
