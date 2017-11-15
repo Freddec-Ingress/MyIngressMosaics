@@ -400,6 +400,8 @@ textarea.form-control { padding-top: .25rem; padding-bottom: .25rem; }
 
 .form-control:focus { outline: none; border-color: #b2dfdb; }
 
+input[type=text].form-control { padding: 0 .75rem; }
+
 
 
 /* Input group -------------------------------------------------------------- */
@@ -542,6 +544,7 @@ textarea.form-control { padding-top: .25rem; padding-bottom: .25rem; }
 .scrollbar, .preview-container {
     overflow-y: auto!important;
     overflow-x: hidden!important;
+    border-right: 0!important;
 }
 
 .scrollbar::-webkit-scrollbar, .preview-container::-webkit-scrollbar {
@@ -557,6 +560,7 @@ textarea.form-control { padding-top: .25rem; padding-bottom: .25rem; }
 	border-radius: 3px;
 	background-color: #004D40;
 	border: 2px solid #000000;
+	border-top: 0; border-bottom: 0;
 }
 
 
