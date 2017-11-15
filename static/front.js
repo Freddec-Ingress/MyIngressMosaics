@@ -2242,9 +2242,10 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		'offset': 0,
 	}
 
-	var computeOffset = function() {
+	function computeOffset() {
 		
 		$scope.mosaicModel.offset = $scope.mosaicModel.missions.length % 6;
+		console.log($scope.mosaicModel.offset);
 		if ($scope.mosaicModel.offset < 0 || $scope.mosaicModel.offset > 5) $scope.mosaicModel.offset = 0;
 	}
 
