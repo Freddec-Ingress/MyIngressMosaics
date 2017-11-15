@@ -284,14 +284,16 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		'country': null,
 		'missions': [],
 		'creating': false,
-		'offset': 0,
+		'offset': [],
 	}
 
 	function computeOffset() {
 		
-		$scope.mosaicModel.offset = $scope.mosaicModel.missions.length % 6;
-		console.log($scope.mosaicModel.offset);
-		if ($scope.mosaicModel.offset < 0 || $scope.mosaicModel.offset > 5) $scope.mosaicModel.offset = 0;
+		var temp = 6 - $scope.mosaicModel.missions.length % 6;
+		console.log(temp);
+		if (temp < 0 || temp > 5) temp = 0;
+		
+		$scope.mosaicModel.offset = new Array(temp);
 	}
 
 	$scope.clearAll = function() {
