@@ -103,6 +103,7 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 	$scope.addMissionToModel = function(item) {
 		
 		$scope.mosaicModel.missions.push(item);
+		computeOffset();
 		
 		$scope.filteredMissions.splice($scope.filteredMissions.indexOf(item), 1);
 		
@@ -283,8 +284,15 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		'country': null,
 		'missions': [],
 		'creating': false,
+		'offset': 0,
 	}
-	
+
+	var computeOffset = function() {
+		
+		$scope.mosaicModel.offset = $scope.mosaicModel.missions.length % 6;
+		if ($scope.mosaicModel.offset < 0 || $scope.mosaicModel.offset > 5) $scope.mosaicModel.offset = 0;
+	}
+
 	$scope.clearAll = function() {
 		
 		var missions = $scope.mosaicModel.missions.slice();
@@ -298,7 +306,8 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 	$scope.removeMission = function(item) {
 		
 		$scope.mosaicModel.missions.splice($scope.mosaicModel.missions.indexOf(item), 1);
-		
+		computeOffset();
+
 		if ($scope.mosaicModel.missions.length < 1) {
 			
 			$scope.mosaicModel.city = null;
