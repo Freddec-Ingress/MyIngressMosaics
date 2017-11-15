@@ -2268,7 +2268,9 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 			$scope.mosaicModel.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
 		}
 		
-		$scope.filterMissions($scope.filterText);
+		if (item.title.indexOf($scope.filterText) != -1 || item.creator.indexOf($scope.filterText) != -1) {
+			$scope.filteredMissions.push(item);
+		}
 	}
 	
 	$scope.reorder = function() {
