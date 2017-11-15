@@ -2246,8 +2246,8 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		
 		var temp = 0;
 		if ($scope.mosaicModel.missions.length > $scope.mosaicModel.columns) {
-			temp = 6 - $scope.mosaicModel.missions.length % 6;
-			if (temp < 0 || temp > 5) temp = 0;
+			temp = $scope.mosaicModel.columns - $scope.mosaicModel.missions.length % $scope.mosaicModel.columns;
+			if (temp < 0 || temp > ($scope.mosaicModel.columns - 1)) temp = 0;
 		}
 		
 		$scope.mosaicModel.offset = new Array(temp);
