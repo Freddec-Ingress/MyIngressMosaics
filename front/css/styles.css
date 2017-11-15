@@ -539,21 +539,21 @@ textarea.form-control { padding-top: .25rem; padding-bottom: .25rem; }
 
 /* Scrollbar ---------------------------------------------------------------- */
 
-.scrollbar {
+.scrollbar, .preview-container {
     overflow-y: auto!important;
     overflow-x: hidden!important;
 }
 
-.scrollbar::-webkit-scrollbar {
+.scrollbar::-webkit-scrollbar, .preview-container::-webkit-scrollbar {
 	width: 8px;
 	background-color: transparent;
 }
 
-.scrollbar::-webkit-scrollbar-track {
+.scrollbar::-webkit-scrollbar-track, .preview-container::-webkit-scrollbar-track {
 	background-color: transparent;
 }
 
-.scrollbar::-webkit-scrollbar-thumb {
+.scrollbar::-webkit-scrollbar-thumb, .preview-container::-webkit-scrollbar-thumb {
 	border-radius: 3px;
 	background-color: #004D40;
 	border: 2px solid #000000;
@@ -566,3 +566,29 @@ textarea.form-control { padding-top: .25rem; padding-bottom: .25rem; }
 .hidden { display: none!important; }
 @media (max-width:767px) { .hidden-xs { display: none!important; } }
 @media (min-width:768px) { .hidden-xl { display: none!important; } }
+
+
+
+/******************************************************************************/
+/* SITE SPECIFIC                                                              */
+/******************************************************************************/
+
+/* Mosaic image preview ----------------------------------------------------- */
+
+.preview-container {
+    background-color:#0B0C0D;
+    height:100%; border:3px solid #0B0C0D; padding:.25rem;
+    display:flex; align-items:center; justify-content:center;
+}
+
+.preview-content {
+    width:100%;
+    margin:-.25rem;
+    display:flex; justify-content:center; align-items:center; flex-wrap:wrap;
+}
+
+.preview-content img {
+    float:left;
+    width:100%; background-color:#000000;
+    background-size:95% 95%; background-position:50% 50%; background-repeat:no-repeat;
+}
