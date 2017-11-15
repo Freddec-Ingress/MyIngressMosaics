@@ -2211,6 +2211,9 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		item.order = order.toString();
 		
 		$scope.mosaicModel.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
+		
+		console.log($scope.missions);
+		console.log($scope.filterText);
 	}
 	
 	$scope.deleteAllMissions = function() {
