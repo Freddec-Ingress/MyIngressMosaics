@@ -2273,7 +2273,7 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 	
 	$scope.reorder = function() {
 		
-		$scope.mosaicModel.missions.sort(UtilsService.sortMissionsByCreatorTitleAsc);
+		$scope.mosaicModel.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
 	}
 
 	$scope.addFake = function(fakeorder) {
