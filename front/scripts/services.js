@@ -37,6 +37,40 @@ angular.module('FrontModule.services').service('UtilsService', function() {
 	
 	var service = {
 		
+		sortMissionsByCreatorTitleAsc: function(a, b) {
+			
+			if (a.creator < b.creator)
+				return -1;
+				
+			if (a.creator > b.creator)
+				return 1;
+			
+			if (a.title < b.title)
+				return -1;
+				
+			if (a.title > b.title)
+				return 1;
+			
+			return 0;
+		},
+
+		sortMissionsByOrderTitleAsc: function(a, b) {
+			
+			if (parseInt(a.order) < parseInt(b.order))
+				return -1;
+				
+			if (parseInt(a.order) > parseInt(b.order))
+				return 1;
+			
+			if (a.title < b.title)
+				return -1;
+				
+			if (a.title > b.title)
+				return 1;
+				
+			return 0;
+		},
+	
 		getOrderFromMissionName: function(name) {
 			
 			var order = 0;

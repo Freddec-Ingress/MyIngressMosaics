@@ -103,12 +103,12 @@
 	                        	Refreshing...
 	                        </div>
 	                        
-	                        <div ng-if="missions.length < 1 && !refreshingMissions" class="item ta-center">
+	                        <div ng-if="filteredMissions.length < 1 && !refreshingMissions" class="item ta-center">
 	                        	No mission registered
 	                        	<br><a href="https://www.myingressmosaics.com/recruitment">Become a mosaic hunter</a>
 	                        </div>
 	                        
-		                    <div class="panel" ng-repeat="item in missions | filter:filterText">
+		                    <div class="panel" ng-repeat="item in filteredMissions">
 	
 		                        <div class="item">
 		                             <a ng-click="addMission(item);"><i class="fa fa-plus-square"></i></a>
@@ -146,8 +146,8 @@
 		                
 	                <div class="item-12">
 	
-	                    <span ng-if="missions.length < 1">0</span>
-	                    <span ng-if="missions.length > 0">{{missions.length}}</span>
+	                    <span ng-if="filteredMissions.length < 1">0</span>
+	                    <span ng-if="filteredMissions.length > 0">{{filteredMissions.length}}</span>
 	                    missions
 						
 	                	<span class="text-separator">&middot;</span>
