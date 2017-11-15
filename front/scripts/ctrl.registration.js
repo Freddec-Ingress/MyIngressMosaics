@@ -90,6 +90,9 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 				}
 			}
 		}
+		
+		console.log($scope.missions);
+		console.log($scope.filterText);
 	}
 	
 	$scope.addAllMissions = function() {

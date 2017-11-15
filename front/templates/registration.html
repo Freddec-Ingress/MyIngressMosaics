@@ -85,7 +85,12 @@
 	                <div class="item grow row valign-center">
 	                	
 	                	<div class="item">
+	                		
+		              	  	<a ng-click="refreshMissions();">Refresh</a>
+		                	<span class="text-separator">&middot;</span>
+		              	  	
 	              	  		Filter
+	              	  		
 		              	</div>
 		              	
 		                <div class="item grow">
@@ -118,7 +123,7 @@
 		                        	<img src="/static/img/mask.png" style="width:26px; background-color:#000000; background-image:url({{item.image}}=s25); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
 		                        </div>
 		                         
-		                        <div class="item grow ellipsis" title="{{item.desc}}">
+		                        <div class="item grow ellipsis" title="{{item.title}} - {{item.desc}}">
 			                        {{item.title}}
 			                    </div>
 			                    
@@ -150,9 +155,6 @@
 	                    <span ng-if="filteredMissions.length > 0">{{filteredMissions.length}}</span>
 	                    missions
 						
-	                	<span class="text-separator">&middot;</span>
-	              	  	<a ng-click="refreshMissions();">Refresh</a>
-	              	  	
 	                	<span class="text-separator">&middot;</span>
 	                    <a ng-click="addAll();">Add all</a>
 	              	  	
