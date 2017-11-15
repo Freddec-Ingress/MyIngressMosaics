@@ -2040,7 +2040,7 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 			
 			for (var item of $scope.missions) {
 				
-				if (text in item.title || text in item.creator) {
+				if (item.title.indexOf(text) != -1 || item.creator.indexOf(text) != -1) {
 					$scope.filteredMissions.push(item);
 				}
 			}
