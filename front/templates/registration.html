@@ -235,7 +235,7 @@
 						            <div ng-repeat="m in mosaicModel.missions | reverse" style="flex:0 0 calc(100% / {{mosaicModel.columns}});">
 						                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
 						            </div>
-						            <div ng-repeat="m in Array(mosaicModel.offset)" style="flex:0 0 calc(100% / {{mosaicModel.columns}});">
+						            <div ng-repeat="m in mosaicModel.offset" style="flex:0 0 calc(100% / {{mosaicModel.columns}});">
 						            </div>
 					            </div>
 					
