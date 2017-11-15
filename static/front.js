@@ -2268,8 +2268,10 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 			$scope.mosaicModel.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
 		}
 		
-		if (item.title.indexOf($scope.filterText) != -1 || item.creator.indexOf($scope.filterText) != -1) {
+		if (!$scope.filterText || item.title.indexOf($scope.filterText) != -1 || item.creator.indexOf($scope.filterText) != -1) {
+			
 			$scope.filteredMissions.push(item);
+			$scope.filteredMissions.sort(UtilsService.sortMissionsByCreatorTitleAsc);
 		}
 	}
 	
