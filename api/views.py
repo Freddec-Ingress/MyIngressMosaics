@@ -361,18 +361,18 @@ def mosaic_edit(request):
 			country = Country(name=request.data['city']['region']['country']['name'])
 			country.save()
 			
-		results = Region.objects.filter(country=country, name=request.data['region'])
+		results = Region.objects.filter(country=country, name=request.data['city']['region']['name'])
 		if results.count() > 0:
 			region = results[0]
 		else:
-			region = Region(country=country, name=request.data['region'])
+			region = Region(country=country, name=request.data['city']['region']['name'])
 			region.save()
 			
-		results = City.objects.filter(country=country, region=region, name=request.data['city'])
+		results = City.objects.filter(country=country, region=region, name=request.data['city']['name'])
 		if results.count() > 0:
 			city = results[0]
 		else:
-			city = City(country=country, region=region, name=request.data['city'])
+			city = City(country=country, region=region, name=request.data['city']['name'])
 			city.save()
 			
 		mosaic.city = city
