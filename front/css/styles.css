@@ -257,7 +257,7 @@ a:hover, a:focus, .hover:hover { color: inherit; cursor: pointer; text-decoratio
 
 .align-center { justify-content: center; }
 
-.valign-start { align-items: flex-start; }
+.valign-start { align-items: flex-start!important; }
 .valign-center { align-items: center; }
 .valign-baseline { align-items: baseline; }
 
