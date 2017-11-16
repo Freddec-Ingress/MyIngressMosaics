@@ -231,7 +231,7 @@
 	                    <div class="form-control" style="padding:0; height:245px;">
 		 					<div class="preview-container">
 							
-								<div class="preview-content" style="padding:0 calc((6 - {{mosaicModel.columns}}) / 2 * 16.666667%);">
+								<div class="preview-content" style="padding:0 calc((6 - {{mosaicModel.columns}}) / 2 * 16.666667%);" ng-class="{'valign-start':mosaicModel.missions.length>24}">
 						            <div ng-repeat="m in mosaicModel.offset track by $index" style="flex:0 0 calc(100% / {{mosaicModel.columns}});">
 						            </div>
 						            <div ng-repeat="m in mosaicModel.missions | reverse" style="flex:0 0 calc(100% / {{mosaicModel.columns}});">
@@ -273,7 +273,7 @@
 		    			                    <input type="text" class="form-control ta-center" ng-blur="reorder();" ng-model="item.order" style="min-width:2.5rem; width:2.5rem; min-height:1.5rem; line-height:1.5rem;" />
 		    		                	</div>
 		    		                	
-		    		                	<div class="item grow ellipsis" title="{{item.desc}}" ng-class="{'c-danger':item.title=='Fake mission'}">
+		    		                	<div class="item grow ellipsis" title="{{item.title}} - {{item.desc}}" ng-class="{'c-danger':item.title=='Fake mission'}">
 		    			                     {{item.title}}
 		    		                	</div>
 			                            
