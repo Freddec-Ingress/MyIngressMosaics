@@ -587,7 +587,7 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		
 		potential.missions.push(item);
 		
-		potential.missions.sort(compareOrderAsc);
+		potential.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
 	}
 	
 	$scope.createPotential = function(potential) {
