@@ -189,6 +189,8 @@ a:hover, a:focus, .hover:hover { color: inherit; cursor: pointer; text-decoratio
 
 #page-mosaic-content {
 	flex:1 1 auto;
+    height: 0px;
+	overflow-y: auto;
 }
 
 #page-mosaic-footer {
