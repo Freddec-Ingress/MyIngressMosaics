@@ -166,8 +166,8 @@ class Mosaic(models.Model):
 	
 	city = models.ForeignKey(City, related_name='mosaics')
 	
-	lovers = models.ManyToManyField(User, null=True, blank=True, related_name='mosaics_loved')
-	completers = models.ManyToManyField(User, null=True, blank=True, related_name='mosaics_completed')
+	lovers = models.ManyToManyField(User, related_name='mosaics_loved')
+	completers = models.ManyToManyField(User, related_name='mosaics_completed')
 	
 	# Admin displaying
 	
@@ -364,7 +364,7 @@ class Mosaic(models.Model):
 			'missions': [],
 			'comments': [],
 		}
-		
+
 		creators = []
 
 		for item in self.missions.all().order_by('order'):

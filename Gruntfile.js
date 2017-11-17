@@ -14,6 +14,21 @@ module.exports = function(grunt) {
 				],
 				dest: 'static/front.css'
 			},
+			css2: {
+				src: [
+					'vendor/flag-icon-css/css/flag-icon.min.css',
+					'vendor/font-awesome/css/font-awesome.min.css',
+
+					'front/css/html.css',
+					'front/css/layout.css',
+					'front/css/grid.css',
+					'front/css/button.css',
+					'front/css/typography.css',
+					'front/css/utils.css',
+					'front/css/newmosaic.css',
+				],
+				dest: 'static/newfront.css'
+			},
 		    js: {
 				src: [
 					'vendor/jquery/js/jquery.min.js',
@@ -29,6 +44,7 @@ module.exports = function(grunt) {
 					'front/scripts/directives.js',
 					'front/scripts/controllers.js',
 					'front/scripts/ctrl.registration.js',
+					'front/scripts/ctrl.newmosaic.js',
 					'front/scripts/module.js',
 				],
 				dest: 'static/front.js'

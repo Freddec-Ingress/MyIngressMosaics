@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<meta name="robots" content="index, follow">
+		<meta name="revisit-after" content="7 days">
+		
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Coda:100,300,400,700" type="text/css">
+		
+		<link rel="stylesheet" href="/static/newfront.css" />
+		
+	</head>
+	
+	<body ng-app="FrontModule" ng-controller="RootCtrl">
+		
+		<div id="layout-container">
+			
+			<div id="layout-pane-menu">
+			</div>
+			
+			<div id="layout-pane-page">
+				
+				<div id="layout-page-header">
+				</div>
+				
+				<div id="layout-page-content" ng-controller="NewMosaicCtrl" ng-init="load_mosaic('{{ref}}');">
+
+{% verbatim %}
+
+					<div id="layout-page-loading" class="block" ng-hide="loaded">
+						<i class="fa fa-spinner rotating text-mr"></i>
+						Loading page...
+					</div>
+					
+					<div id="layout-page-container" ng-class="{'active':loaded}">
+
+						<div id="page-mosaic-header" class="block">
+							
+							<div id="block-mosaic-title" class="row">
+								
+								<div class="item text">
+									{{mosaic.title}}
+								</div>
+								
+							</div>
+							
+							<div id="block-mosaic-like" class="row">
+								
+								<div class="item text">
+									
+									<div id="fb-root"></div>
+									
+									<script>
+										(function(d, s, id) {
+											var js, fjs = d.getElementsByTagName(s)[0];
+											if (d.getElementById(id)) return;
+											js = d.createElement(s); js.id = id;
+											js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10";
+											fjs.parentNode.insertBefore(js, fjs);
+										}(document, 'script', 'facebook-jssdk'));
+									</script>
+									
+									{% endverbatim %}
+										<div class="fb-like"
+											data-href="https://www.myingressmosaics.com/mosaic/{{ref}}"
+											data-layout="button"
+											data-size="small"
+											data-mobile-iframe="true">
+										</div>
+									{% verbatim %}
+
+								</div>
+				
+								<div class="item text" style="display:flex;">
+									
+									{% endverbatim %}
+										<script src="https://apis.google.com/js/platform.js" async defer></script>
+										<div class="g-plus" data-action="share" data-annotation="none" data-href="https://www.myingressmosaics.com/mosaic/{{ref}}"></div>			
+									{% verbatim %}
+									
+								</div>
+								
+								<div class="item text">
+									<button class="btn btn-badge" ng-click="toggle_love();" ng-class="{'active':mosaic.is_loved, 'btn-transparent':!user.authenticated}" ng-disabled="!user.authenticated">
+										<i class="fa fa-heart icon"></i>
+										<span class="text">{{mosaic.lovers}}</span>
+									</button>
+								</div>
+								
+								<div class="item text">
+									<button class="btn btn-badge">
+										<i class="fa fa-check-square icon"></i>
+										<span class="text">56</span>
+									</button>
+								</div>
+								
+							</div>
+							
+						</div>
+						
+						<div id="page-mosaic-content" class="block">
+							
+							<div class="tab" ng-show="current_tab == 1">
+								
+								<div style="display:flex; align-items:center; justify-content:center; background:#0b0c0d; padding:.25rem;">
+								
+									<div class="row" style="align-items:center; justify-content:center; padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%); width:100%;">
+							            <div ng-repeat="m in mosaic.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+							                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+							            </div>
+						            </div>
+						
+								</div>
+								
+							</div>
+							
+							<div class="tab" ng-show="current_tab == 2">
+								
+								<div id="block-mosaic-resume" class="row line">
+									
+									<div class="item text">
+										24
+										<i class="fa fa-th mx-1"></i>
+									</div>
+									
+									<div class="item text">
+										44.55 km
+									</div>
+									
+									<div class="item text">
+										<i class="fa fa-car"></i>
+									</div>
+									
+									<div class="item text">
+										955 uniques
+									</div>
+									
+								</div>
+								
+								<div id="block-mosaic-creator" class="row">
+									
+									<div class="item text">
+										
+									</div>
+									
+								</div>
+							
+							</div>
+							
+							<div class="tab" ng-show="current_tab == 3">
+							</div>
+							
+						</div>
+						
+						<div id="page-mosaic-footer">
+							
+							<div id="block-mosaic-tabs" class="row-tabs">
+								
+								<div class="item-tab" ng-click="open_tab(1);" ng-class="{'active':current_tab == 1}">
+									<span class="text">Preview</span>
+								</div>
+								
+								<div class="item-tab" ng-click="open_tab(2);" ng-class="{'active':current_tab == 2}">
+									<span class="text">Details</span>
+								</div>
+								
+								<div class="item-tab" ng-click="open_tab(3);" ng-class="{'active':current_tab == 3}">
+									<span class="text">Comments (10)</span>
+								</div>
+								
+							</div>
+							
+						</div>
+						
+					</div>
+					
+{% endverbatim %}
+
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		<script>
+		
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+			
+			ga('create', 'UA-66838342-2', 'auto');
+			ga('send', 'pageview');
+		
+		</script>
+
+		<script src="/static/front.js"></script>
+
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuXb2ncs76tO-2SN8hvkE5Zt4VwtPoNcM&amp;language=en"></script>
+
+	</body>
+	
+</html>

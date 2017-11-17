@@ -274,5 +274,12 @@ def migrate(request):
 
 def new_mosaic(request, ref):
 
-	context = { 'ref': ref }
+	mosaic = Mosaic.objects.get(ref=ref)
+	
+	data = mosaic.detailsSerialize()
+	
+	if request.user.mosaics_loved.filter(ref=ref).co:
+		data.is_loved = True
+	
+	context = { 'mosaic': data }
 	return render(request, 'new_mosaic.html', context)

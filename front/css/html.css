@@ -1,0 +1,28 @@
+* {
+    color: inherit;
+    position: relative;
+    line-height: inherit;
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+    font-family: inherit; font-size: inherit; font-weight: inherit;
+}
+
+*:focus {
+	outline:0;
+}
+
+html {
+    height: 100%;
+    background-color: #0B0C0D;
+    -webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+}
+
+body {
+    height: 100%;
+    color: #5afbea;
+    -webkit-font-smoothing: antialiased;
+    font: 400 14px/normal 'Coda',sans-serif;
+}
+
+a { color: #ebbc4a; text-decoration: none; }
+a:hover, a:focus, .hover:hover { color: inherit; cursor: pointer; text-decoration: inherit; }

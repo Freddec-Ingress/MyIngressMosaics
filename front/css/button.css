@@ -1,0 +1,49 @@
+.btn {
+	cursor:pointer;
+	border:1px solid #5afbea;
+	padding:.5rem 1rem;
+	text-align:center;
+	background-color:#1f4549;
+	background-image:
+		-webkit-gradient(linear, 0 top, 0 10, from(rgba(255, 255, 255, 0.22)), to(transparent)),
+		-webkit-gradient(linear, 0 bottom, 0 28, from(rgba(255, 255, 255, 0.22)), to(transparent));
+	background-image:
+		gradient(linear, 0 top, 0 10, from(rgba(255, 255, 255, 0.22)), to(transparent)),
+		gradient(linear, 0 bottom, 0 28, from(rgba(255, 255, 255, 0.22)), to(transparent));
+	background-image:
+		-moz-gradient(linear, 0 top, 0 10, from(rgba(255, 255, 255, 0.22)), to(transparent)),
+		-moz-gradient(linear, 0 bottom, 0 28, from(rgba(255, 255, 255, 0.22)), to(transparent));
+	background-image:
+		-o-gradient(linear, 0 top, 0 10, from(rgba(255, 255, 255, 0.22)), to(transparent)),
+		-o-gradient(linear, 0 bottom, 0 28, from(rgba(255, 255, 255, 0.22)), to(transparent));
+}
+
+.btn-badge {
+	border:0;
+	height:20px;
+	padding:0 .5rem;
+	border-radius:3px;
+	background-color:transparent;
+	background-image:
+		-webkit-gradient(linear, 0 top, 0 5, from(rgba(255, 255, 255, 0.22)), to(transparent)),
+		-webkit-gradient(linear, 0 bottom, 0 5, from(rgba(255, 255, 255, 0.22)), to(transparent));
+	font-size:11px; font-weight:bold;
+	display:flex; flex-direction:row; align-items:stretch;
+}
+
+.btn-badge.active {
+	color:white;
+	background-color:#1f4549;
+}
+
+.btn-badge .icon {
+	font-size:13px;
+	margin-right:.5rem;
+}
+
+.btn-transparent {
+	cursor:auto;
+	border:0;
+	padding-left:0;
+	background-color:transparent; background-image:none;
+}
