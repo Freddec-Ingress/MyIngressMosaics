@@ -574,7 +574,7 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 	
 	$scope.reorderPotential = function(potential) {
 		
-		potential.missions.sort(compareOrderAsc);
+		potential.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
 	}
 	
 	$scope.addPotentialFake = function(potential, fakeorder) {
