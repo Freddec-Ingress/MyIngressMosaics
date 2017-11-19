@@ -250,9 +250,18 @@
 	                    	
 	                        <div class="item-12">
 		                        <label>
+		                        	
 		                        	Missions ({{mosaicModel.missions.length}})
+		                        	
 		                            <span ng-if="mosaicModel.missions.length > 0" class="text-separator">&middot;</span>
 		                            <a ng-if="mosaicModel.missions.length > 0" ng-click="clearAll();">Clear all</a>
+		                        	
+		                            <span ng-if="mosaicModel.missions.length > 0" class="text-separator">&middot;</span>
+		                            <a ng-if="mosaicModel.missions.length > 0" ng-click="orderAsc();">Order Asc</a>
+		                        	
+		                            <span ng-if="mosaicModel.missions.length > 0" class="text-separator">&middot;</span>
+		                            <a ng-if="mosaicModel.missions.length > 0" ng-click="orderDesc();">Order Desc</a>
+
 		                        </label>
 		                        <div class="form-control" style="padding:0;">
 			                    	<div style="overflow:auto; height:200px; background:#0B0C0D; border:3px solid #0B0C0D;" ng-class="{'scrollbar': mosaicModel.missions.length > 4}">
