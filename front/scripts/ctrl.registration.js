@@ -334,6 +334,30 @@ angular.module('FrontModule.controllers').controller('RegistrationCtrl', functio
 		}
 	}
 	
+	$scope.orderAsc = function() {
+		
+		var index = 0;
+		for (var m of $scope.mosaicModel.missions) {
+			
+			index += 1;
+			m.order = index;
+		}
+		
+		$scope.mosaicModel.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
+	}
+
+	$scope.orderDesc = function() {
+		
+		var index = $scope.mosaicModel.missions.length + 1;
+		for (var m of $scope.mosaicModel.missions) {
+			
+			index -= 1;
+			m.order = index;
+		}
+		
+		$scope.mosaicModel.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
+	}
+	
 	$scope.reorder = function() {
 		
 		$scope.mosaicModel.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
