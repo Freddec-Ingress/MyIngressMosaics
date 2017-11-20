@@ -20,12 +20,12 @@ module.exports = function(grunt) {
 					'vendor/font-awesome/css/font-awesome.min.css',
 
 					'front/css/html.css',
-					'front/css/layout.css',
-					'front/css/grid.css',
-					'front/css/button.css',
-					'front/css/typography.css',
+					'front/css/tabs.css',
+					'front/css/badge.css',
+					'front/css/modal.css',
 					'front/css/utils.css',
-					'front/css/newmosaic.css',
+					'front/css/layout.css',
+					'front/css/button.css',
 				],
 				dest: 'static/newfront.css'
 			},

@@ -1,0 +1,14 @@
+.tabs { display:flex!important; flex-direction:row!important; }
+
+.tabs > .item {
+	flex:1 1 auto;
+	cursor:pointer;
+	padding:.75rem;
+	text-align:center;
+	border-top:1px solid #174540;
+}
+
+.tabs > .item:hover > .text { color:#ffffff; }
+
+.tabs > .item.active { border-top:1px solid #ffffff; }
+.tabs > .item.active > .text { color:#ffffff; text-decoration:none; }

@@ -2612,6 +2612,20 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
     		API.sendRequest('/api/mosaic/unlove/', 'POST', {}, data);
 		}
 	}
+
+	/* Mission details displaying */
+
+	$scope.mission_selected = null;
+
+	$scope.displayMissionDetails = function(mission) {
+		
+		$scope.mission_selected = mission;
+	}
+
+	$scope.closeMissionDetails = function() {
+		
+		$scope.mission_selected = null;
+	}
 	
 	/* Tab management */
 	
