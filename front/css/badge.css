@@ -10,7 +10,7 @@
 
 .badge.active { color:white; }
 .badge.inactive { color:black; }
-
+.badge.transparent { background-color:transparent; }
 
 
 .badge > .icon { color:#5afbea; font-size:13px; margin-right:.5rem; }

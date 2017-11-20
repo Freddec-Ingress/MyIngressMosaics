@@ -105,14 +105,14 @@
 						</div>
 						
 						<div class="item">
-							<button class="badge" ng-click="toggle_love();" ng-class="{'active':mosaic.is_loved, 'btn-transparent':!user.authenticated}" ng-disabled="!user.authenticated">
+							<button class="badge" ng-click="toggle_love();" ng-class="{'active':mosaic.is_loved, 'transparent':!user.authenticated}" ng-disabled="!user.authenticated">
 								<i class="fa fa-heart icon"></i>
 								<span class="text">{{mosaic.lovers}}</span>
 							</button>
 						</div>
 						
 						<div class="item">
-							<button class="badge" ng-click="toggle_complete();" ng-class="{'active':mosaic.is_completed, 'btn-transparent':!user.authenticated}" ng-disabled="!user.authenticated">
+							<button class="badge" ng-click="toggle_complete();" ng-class="{'active':mosaic.is_completed, 'transparent':!user.authenticated}" ng-disabled="!user.authenticated">
 								<i class="fa fa-check-square icon"></i>
 								<span class="text">{{mosaic.completers}}</span>
 							</button>
@@ -232,7 +232,7 @@
 					            	<div class="preview">
 					            		
 					            		<div class="text-center font-size-small mb-small">
-						            		<span class="color-muted">#{{$index}}.</span>
+						            		<span class="color-muted">#{{mosaic.missions.length - $index}}.</span>
 						            		<span class="color-light">{{m.title}}</span>
 						            	</div>
 						            	
