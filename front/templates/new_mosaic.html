@@ -192,14 +192,21 @@
 								
 								<ul class="grid col">
 									
-									<li class="item col" ng-repeat="portal in mission_selected.portals">
-										<span class="font-size-normal color-light">
-											{{portal.title}}
-										</span>
-										<span class="font-size-small color-dark">
-											<span ng-show="portal.action==1">Hack this Portal</span>
-											<span ng-show="">Capture or Upgrade Portal</span>
-										</span>
+									<li class="item grid row" ng-repeat="portal in mission_selected.portals">
+										<div class="item text-muted">
+											#{{$index}}.
+										</div>
+										<div class="item col">
+											<span class="font-size-normal color-light">
+												{{portal.title}}
+											</span>
+											<span class="font-size-small color-dark">
+												<span ng-show="portal.action==1">Hack this Portal</span>
+												<span ng-show="portal.action==2">Capture or Upgrade Portal</span>
+												<span ng-show="portal.action==7">View this Field Trip Waypoint</span>
+												<span ng-show="portal.action==8">Enter the Passphrase</span>
+											</span>
+										</div>
 									</li>
 
 								</ul>
