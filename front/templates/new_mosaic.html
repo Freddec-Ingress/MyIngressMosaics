@@ -224,7 +224,7 @@
 						
 						<div class="tab" ng-show="current_tab == 1">
 							
-							<div class="row wrap align-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
+							<div class="row wrap align-center mb-normal" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
 					            <div ng-repeat="m in mosaic.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.cols}});" ng-click="displayMissionDetails(m);">
 					                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
 					            </div>

@@ -175,7 +175,7 @@ ul > li { list-style:none; }
 
 
 
-.scrollable { flex:1 1 auto; overflow-y: auto; }
+.scrollable { flex:1 1 auto; height:0px; overflow-y: auto; }
 
 
 
