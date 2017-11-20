@@ -74,4 +74,4 @@
 
 .mission-vignet > img { z-index:-1; flex:1 1 100%; margin:-1px; }
 
-.mission-vignet > img > .preview { flex:1 1 100%; background-color:rgba(0,0,0,0.25); }
+.mission-vignet > .preview { display:none; flex:1 1 100%; background-color:rgba(0,0,0,0.25); }
