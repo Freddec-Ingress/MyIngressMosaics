@@ -150,7 +150,7 @@
 										<dl>
 											
 											<dt class="w4">Order</dt>
-											<dd class="w8">{{mission_selected.order}}</dd>
+											<dd class="w8">#{{mission_selected.order}}</dd>
 											
 											<dt class="w4">Creator</dt>
 											<dd class="w8 font-size-small" ng-class="{'color-enlightened':mission_selected.faction=='E', 'color-resistant':mission_selected.faction=='R'}">{{mission_selected.creator}}</dd>
@@ -165,19 +165,19 @@
 								<div class="grid row align-center mb-normal">
 									
 									<div class="item">
-				                        <a class="btn" href="https://www.ingress.com/intel?ll={{mosaic.startLat}},{{mosaic.startLng}}&z=17&pll={{mosaic.startLat}},{{mosaic.startLng}}" target="blank">
+				                        <a class="btn" href="https://www.ingress.com/intel?ll={{mission_selected.startLat}},{{mission_selected.startLng}}&z=17&pll={{mission_selected.startLat}},{{mission_selected.startLng}}" target="blank">
 				                            <i class="fa fa-fw fa-external-link"></i>
 				                        </a>
 									</div>
 									
 									<div class="item">
-				                        <a class="btn" href="https://www.google.com/maps/dir//{{mosaic.startLat}},{{mosaic.startLng}}" target="blank">
+				                        <a class="btn" href="https://www.google.com/maps/dir//{{mission_selected.startLat}},{{mission_selected.startLng}}" target="blank">
 				                            <i class="fa fa-fw fa-map-marker"></i>
 				                        </a>
 									</div>
 									
 									<div class="item">
-				                        <a class="btn" href="https://waze.com/ul?ll={{mosaic.startLat}},{{mosaic.startLng}}" target="blank">
+				                        <a class="btn" href="https://waze.com/ul?ll={{mission_selected.startLat}},{{mission_selected.startLng}}" target="blank">
 				                            <img src="/static/img/waze.png">
 				                        </a>
 									</div>
@@ -185,33 +185,23 @@
 								</div>
 								
 								<div class="mb-normal font-size-small color-dark">
-									Visit both Upper and Lower Buttermilk Falls, capturing and fully deploying or upgrading all available resonator slots at each portal. Maximize your AP gain! JUST DO IT!
+									{{mission_selected.desc}}
 								</div>
 								
 								<hr class="mb-normal">
 								
 								<ul class="grid col">
 									
-									<li class="item col">
-										<span class="font-size-normal color-light">Buttermilk Falls State Park Waymark</span>
-										<span class="font-size-small color-dark">Capture or Upgrade Portal</span>
+									<li class="item col" ng-repeat="portal in mission_selected.portals">
+										<span class="font-size-normal color-light">
+											{{portal.title}}
+										</span>
+										<span class="font-size-small color-dark">
+											<span ng-show="portal.action==1">Hack this Portal</span>
+											<span ng-show="">Capture or Upgrade Portal</span>
+										</span>
 									</li>
-									
-									<li class="item col">
-										<span class="font-size-normal color-light">Buttermilk Falls State Park Waymark</span>
-										<span class="font-size-small color-dark">Capture or Upgrade Portal</span>
-									</li>
-									
-									<li class="item col">
-										<span class="font-size-normal color-light">Buttermilk Falls State Park Waymark</span>
-										<span class="font-size-small color-dark">Capture or Upgrade Portal</span>
-									</li>
-									
-									<li class="item col">
-										<span class="font-size-normal color-light">Buttermilk Falls State Park Waymark</span>
-										<span class="font-size-small color-dark">Capture or Upgrade Portal</span>
-									</li>
-									
+
 								</ul>
 								
 							</div>
