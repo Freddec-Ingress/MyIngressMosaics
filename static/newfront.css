@@ -67,6 +67,7 @@ ul > li { list-style:none; }
 }
 
 .tabs > .item:hover > .text { color:#ffffff; }
+.tabs > .item:hover > .badge { color:#ffffff; }
 
 .tabs > .item.active { border-top:1px solid #ffffff; }
 .tabs > .item.active > .text { color:#ffffff; text-decoration:none; }
