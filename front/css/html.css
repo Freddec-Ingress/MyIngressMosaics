@@ -37,6 +37,10 @@ a:hover, a:focus, .hover:hover { color: inherit; cursor: pointer; text-decoratio
 
 
 
+button { cursor: pointer; }
+
+
+
 dl { display:flex; flex-wrap:wrap; margin:0; }
 dt { padding:.375rem; display:flex; align-items:flex-end; justify-content:flex-end; font-size:13px; color:#666; }
 dd { padding:.375rem; display:flex; font-size:15px; margin:0; }
