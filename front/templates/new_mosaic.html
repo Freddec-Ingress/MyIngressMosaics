@@ -254,25 +254,25 @@
 						
 						<dl>
 							
-							<dt>Location</dt>
-							<dd>{{mosaic.city.name}}</dd>
+							<dt class="w4">Location</dt>
+							<dd class="w8">{{mosaic.city.name}}</dd>
 							
-							<dt>Missions</dt>
-							<dd>
+							<dt class="w4">Missions</dt>
+							<dd class="w8">
 								{{mosaic.missions.length}}
 								<span ng-show="mosaic.type=='sequence'">in sequence</span>
 								<span ng-show="mosaic.type=='serie'">in serie</span>
 							</dd>
 							
-							<dt>Waypoints</dt>
-							<dd>{{mosaic.uniques}} uniques / {{mosaic.portals}}</dd>
+							<dt class="w4">Waypoints</dt>
+							<dd class="w8">{{mosaic.uniques}} uniques / {{mosaic.portals}}</dd>
 							
-							<dt ng-show="mosaic.type=='sequence'">Distance</dt>
-							<dd ng-show="mosaic.type=='sequence'">{{mosaic.distance | number:2}} km</dd>
+							<dt class="w4" ng-show="mosaic.type=='sequence'">Distance</dt>
+							<dd class="w8" ng-show="mosaic.type=='sequence'">{{mosaic.distance | number:2}} km</dd>
 							
-							<dt>Creators</dt>
-							<dd class="col">
-								<span ng-repeat="creator in mosaic.creators" ng-class="{'color-enligtened': creator.faction == 'E', 'color-resistance': creator.faction == 'R}">
+							<dt class="w4">Creators</dt>
+							<dd class="w8 col">
+								<span ng-repeat="creator in mosaic.creators" ng-class="{'color-enlightened': creator.faction == 'E', 'color-resistant': creator.faction == 'R}">
 									{{creator.name}}
 								</span>
 							</dd>
