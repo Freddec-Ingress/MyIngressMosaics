@@ -214,7 +214,7 @@ ul > li { list-style:none; }
 
 .mission-vignet > img { z-index:-1; flex:1 1 100%; margin:-1px; }
 
-.mission-vignet > .preview { display:none; padding:.375rem; align-items:center; justify-content:center; position:absolute; top:0; bottom:0; left:0; right:0; background-color:rgba(0,0,0,0.25); }
+.mission-vignet > .preview { display:none; flex-direction:column; padding:.375rem; align-items:center; justify-content:center; position:absolute; top:0; bottom:0; left:0; right:0; background-color:rgba(0,0,0,0.25); }
 
 #header {
 	min-height:60px;
