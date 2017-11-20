@@ -129,7 +129,7 @@
 							<div class="modal-header">
 								
 								<span class="title">
-									Mission title
+									{{mission_selected.title}}
 								</span>
 								
 								<span class="close" ng-click="closeMissionDetails();">
@@ -140,20 +140,20 @@
 							
 							<div class="modal-content">
 								
-								<div class="grid row">
+								<div class="grid row mb-normal">
 									
 									<div class="item">
-										<img  width="64px" height="64px" src="https://lh3.googleusercontent.com/uvaBWHwbE6LO5P4gs6hHp9rpwCZarhCdUT62-98jzw073cPMsKR6iHm8ajxAMEL5MjCQbgedqcSR6C9CWNs">
+										<img  width="64px" height="64px" src="{{mission_selected.image}}">
 									</div>
 									
 									<div class="item">
 										<dl>
 											
 											<dt class="w4">Order</dt>
-											<dd class="w8">#125</dd>
+											<dd class="w8">{{mission_selected.order}}</dd>
 											
 											<dt class="w4">Creator</dt>
-											<dd class="w8 font-size-small color-enlightened">TotoMgreat</dd>
+											<dd class="w8 font-size-small" ng-class="{'color-enlightened':mission_selected.faction=='E', 'color-resistant':mission_selected.faction=='R'}">{{mission_selected.creator}}</dd>
 											
 										</dl>
 									</div>
