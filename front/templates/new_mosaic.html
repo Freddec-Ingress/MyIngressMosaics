@@ -220,54 +220,56 @@
 						
 					</div>
 	
-					<div class="scrollable">
+					<div class="grow tab col" ng-show="current_tab == 1">
 						
-						<div class="tab" ng-show="current_tab == 1">
-							
+						<div class="scrollable">
 							<div class="row wrap align-center mb-normal" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
-					            <div ng-repeat="m in mosaic.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.cols}});" ng-click="displayMissionDetails(m);">
+					            <div ng-repeat="m in mosaic.missions | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});" ng-click="displayMissionDetails(m);">
 					                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
 					            </div>
 				            </div>
+						</div>
+				            
+			            <div class="font-size-small color-muted align-center mb-normal">
+			            	Click on mission image to display mission details
+			            </div>
 	
+					</div>
+					
+					<div class="tab" ng-show="current_tab == 2">
+						
+						<div id="block-mosaic-resume" class="row line">
+							
+							<div class="item text">
+								24
+								<i class="fa fa-th mx-1"></i>
+							</div>
+							
+							<div class="item text">
+								44.55 km
+							</div>
+							
+							<div class="item text">
+								<i class="fa fa-car"></i>
+							</div>
+							
+							<div class="item text">
+								955 uniques
+							</div>
+							
 						</div>
 						
-						<div class="tab" ng-show="current_tab == 2">
+						<div id="block-mosaic-creator" class="row">
 							
-							<div id="block-mosaic-resume" class="row line">
-								
-								<div class="item text">
-									24
-									<i class="fa fa-th mx-1"></i>
-								</div>
-								
-								<div class="item text">
-									44.55 km
-								</div>
-								
-								<div class="item text">
-									<i class="fa fa-car"></i>
-								</div>
-								
-								<div class="item text">
-									955 uniques
-								</div>
+							<div class="item text">
 								
 							</div>
 							
-							<div id="block-mosaic-creator" class="row">
-								
-								<div class="item text">
-									
-								</div>
-								
-							</div>
-						
 						</div>
-						
-						<div class="tab" ng-show="current_tab == 3">
-						</div>
-						
+					
+					</div>
+					
+					<div class="tab" ng-show="current_tab == 3">
 					</div>
 				
 				</div>

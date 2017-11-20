@@ -73,7 +73,7 @@ ul > li { list-style:none; }
 
 .badge {
 	border:0;
-	height:20px; width:100%;
+	height:20px;
 	padding:0 .5rem;
 	border-radius:3px;
 	background-color:#1f4549;
@@ -200,6 +200,11 @@ ul > li { list-style:none; }
 
 .mb-small { margin-bottom:10px; }
 .mb-normal { margin-bottom:20px; }
+
+
+
+.mission-vignet { cursor:pointer; }
+.mission-vignet:hover { border:1px solid #489299; }
 #header {
 	min-height:60px;
 	border-bottom:1px solid #489299;

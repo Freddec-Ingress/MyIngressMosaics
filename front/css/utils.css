@@ -61,3 +61,8 @@
 
 .mb-small { margin-bottom:10px; }
 .mb-normal { margin-bottom:20px; }
+
+
+
+.mission-vignet { cursor:pointer; }
+.mission-vignet:hover { border:1px solid #489299; }
