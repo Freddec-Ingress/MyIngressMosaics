@@ -120,7 +120,7 @@
 						
 					</div>
 	
-					<hr>
+					<hr class="mb-small">
 	
 					<div class="modal-container" ng-if="mission_selected">
 						
@@ -160,7 +160,7 @@
 									
 								</div>
 								
-								<hr>
+								<hr class="mb-normal">
 								
 								<div class="grid row align-center mb-normal">
 									
@@ -188,7 +188,7 @@
 									Visit both Upper and Lower Buttermilk Falls, capturing and fully deploying or upgrading all available resonator slots at each portal. Maximize your AP gain! JUST DO IT!
 								</div>
 								
-								<hr>
+								<hr class="mb-normal">
 								
 								<ul class="grid col">
 									
@@ -222,7 +222,7 @@
 	
 					<div class="grow tab col" ng-show="current_tab == 1">
 						
-						<div class="scrollable">
+						<div class="scrollable mb-small">
 							<div class="row wrap align-center mb-normal" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
 					            <div ng-repeat="m in mosaic.missions | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});" ng-click="displayMissionDetails(m);">
 					                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
@@ -230,7 +230,7 @@
 				            </div>
 						</div>
 				            
-			            <div class="font-size-small color-muted align-center mb-normal">
+			            <div class="font-size-small color-muted align-center mb-small">
 			            	Click on mission image to display mission details
 			            </div>
 	
