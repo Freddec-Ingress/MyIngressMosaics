@@ -68,5 +68,7 @@
 
 
 
-.mission-vignet { cursor:pointer; }
+.mission-vignet { cursor:pointer; display:flex; align-items:center; justify-content:center; border:1px solid transparent; }
 .mission-vignet:hover { border:1px solid #489299; }
+
+.mission-vignet > img { flex:1 1 100%; margin:-1px; }
