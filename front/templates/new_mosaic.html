@@ -254,9 +254,29 @@
 						
 						<dl>
 							
-							<dt>Missions</dt>
-							<dd>{{mosaic.missions.length}}</dd>
+							<dt>Location</dt>
+							<dd>{{mosaic.city.name}}</dd>
 							
+							<dt>Missions</dt>
+							<dd>
+								{{mosaic.missions.length}}
+								<span ng-show="mosaic.type=='sequence'">in sequence</span>
+								<span ng-show="mosaic.type=='serie'">in serie</span>
+							</dd>
+							
+							<dt>Waypoints</dt>
+							<dd>{{mosaic.uniques}} uniques / {{mosaic.portals}}</dd>
+							
+							<dt ng-show="mosaic.type=='sequence'">Distance</dt>
+							<dd ng-show="mosaic.type=='sequence'">{{mosaic.distance | number:2}} km</dd>
+							
+							<dt>Creators</dt>
+							<dd class="col">
+								<span ng-repeat="creator in mosaic.creators" ng-class="{'color-enligtened': creator.faction == 'E', 'color-resistance': creator.faction == 'R}">
+									{{creator.name}}
+								</span>
+							</dd>
+								
 						</dl>
 						
 					</div>
