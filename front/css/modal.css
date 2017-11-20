@@ -37,6 +37,7 @@
 .modal-header > .close > .fa-times {
 	color:#489299;
 	font-size:15px;
+	top:-1px; left:1px;
 }
 
 .modal-content {
