@@ -78,6 +78,22 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 		$scope.mission_selected = null;
 	}
 	
+	/* Comment edit displaying */
+	
+	$scope.comment_selected = null;
+	
+	$scope.displayCommentEdit = function(comment) {
+		
+		if (!comment) comment = { 'text':null }
+		
+		$scope.comment_selected = comment;
+	}
+
+	$scope.closeCommentEdit = function() {
+		
+		$scope.mission_selected = null;
+	}
+	
 	/* Tab management */
 	
 	$scope.current_tab = 0;
