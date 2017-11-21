@@ -11,10 +11,11 @@
 
 
 
-::-webkit-scrollbar { width: 10px; background-color: transparent; }
-::-webkit-scrollbar-track { background-color: transparent; }
-::-webkit-scrollbar-thumb { border: 2px solid #000000; border-radius: 3px; background-color: #1b3c39; }
-
+@media (min-width:  992px) {
+	::-webkit-scrollbar { width: 10px; background-color: transparent; }
+	::-webkit-scrollbar-track { background-color: transparent; }
+	::-webkit-scrollbar-thumb { border: 2px solid #000000; border-radius: 3px; background-color: #1b3c39; }
+}
 
 
 html {
