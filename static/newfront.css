@@ -156,6 +156,7 @@ ul > li { list-style:none; }
 .row.align-around { justify-content:space-around; }
 .row.align-between { justify-content:space-between; }
 
+.self-valign-top { align-self:flex-start; }
 
 
 .w3 { flex: 0 0 25%; max-width: 25%; }
