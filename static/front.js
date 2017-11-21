@@ -2684,7 +2684,10 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 
 	$scope.closeCommentEdit = function() {
 		
-		$scope.mission_selected = null;
+		$scope.comment_selected = null;
+	}
+	
+	$scope.saveComment = function(comment) {
 	}
 	
 	/* Tab management */
