@@ -78,6 +78,10 @@ ul > li { list-style:none; }
 .tabs > .item.active { border-top:1px solid #ffffff; }
 .tabs > .item.active > .text { color:#ffffff; text-decoration:none; }
 
+.tab {
+	flex-grow:1;
+	display:flex; flex-direction:column;
+}
 .badge {
 	border:0;
 	height:22px;
@@ -282,6 +286,7 @@ ul > li { list-style:none; }
 
 .container {
 	flex:1 1 100%;
+	overflow-x:hidden;
 	display:none; flex-direction:column; align-items:stretch;
 }
 
