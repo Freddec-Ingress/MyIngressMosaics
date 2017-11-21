@@ -311,7 +311,7 @@ ul > li { list-style:none; }
 	min-height:34px;
 }
 .control {
-    padding:0 20px;
+    padding:8px 10px 0;
     background-color:black;
     display:block; width:100%; min-height:34px;
     border-radius: .125rem; border: 1px solid #009688;
