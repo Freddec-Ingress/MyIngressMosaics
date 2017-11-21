@@ -1,4 +1,4 @@
-angular.module('FrontModule', ['satellizer', 'ngCookies',
+angular.module('FrontModule', ['satellizer', 'ngCookies', 'toastr',
 							   'FrontModule.services', 'FrontModule.controllers', 'FrontModule.directives', ]);
 
 

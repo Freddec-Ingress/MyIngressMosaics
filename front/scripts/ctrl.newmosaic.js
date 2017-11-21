@@ -1,24 +1,32 @@
-angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($scope, $window, API) {
+angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($scope, $window, toastr, API) {
 
 	/* Lovers management */
 
-	$scope.toggle_love = function() {
+	$scope.toggle_love = function(user) {
 		
-		$scope.mosaic.is_loved = !$scope.mosaic.is_loved;
-		
-		if ($scope.mosaic.is_loved) {
+		if (!user.authenticated) {
 			
-			$scope.mosaic.lovers += 1;
-			
-			var data = { 'ref':$scope.mosaic.ref };
-    		API.sendRequest('/api/mosaic/love/', 'POST', {}, data);
 		}
 		else {
 			
-			$scope.mosaic.lovers -= 1;
+			$scope.mosaic.is_loved = !$scope.mosaic.is_loved;
 			
-			var data = { 'ref':$scope.mosaic.ref };
-    		API.sendRequest('/api/mosaic/unlove/', 'POST', {}, data);
+			if ($scope.mosaic.is_loved) {
+				
+				$scope.mosaic.lovers += 1;
+				
+				var data = { 'ref':$scope.mosaic.ref };
+	    		API.sendRequest('/api/mosaic/love/', 'POST', {}, data).then(function(response) {
+	    			toastr.success('', 'Mosaic added to your favorite list!');
+	    		});
+			}
+			else {
+				
+				$scope.mosaic.lovers -= 1;
+				
+				var data = { 'ref':$scope.mosaic.ref };
+	    		API.sendRequest('/api/mosaic/unlove/', 'POST', {}, data);
+			}
 		}
 	}
 

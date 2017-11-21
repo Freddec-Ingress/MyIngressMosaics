@@ -105,7 +105,7 @@
 						</div>
 						
 						<div class="item">
-							<button class="badge" ng-click="toggle_love();" ng-class="{'active':mosaic.is_loved, 'transparent':!user.authenticated}" ng-disabled="!user.authenticated">
+							<button class="badge" ng-click="toggle_love(user);" ng-class="{'active':mosaic.is_loved}">
 								<i class="fa fa-heart icon"></i>
 								<span class="text">{{mosaic.lovers}}</span>
 							</button>
