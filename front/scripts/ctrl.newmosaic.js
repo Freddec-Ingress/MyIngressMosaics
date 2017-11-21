@@ -34,23 +34,33 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 
 	/* Completers management */
 
-	$scope.toggle_complete = function() {
+	$scope.toggle_complete = function(user) {
 		
-		$scope.mosaic.is_completed = !$scope.mosaic.is_completed;
-		
-		if ($scope.mosaic.is_completed) {
-			
-			$scope.mosaic.completers += 1;
-			
-			var data = { 'ref':$scope.mosaic.ref };
-    		API.sendRequest('/api/mosaic/complete/', 'POST', {}, data);
+		if (!user.authenticated) {
+			toastr.error('To perform this action you must be signed in! <a class="ml-small" href="/login" target="blank">Sign in</a>', {allowHtml: true});
 		}
 		else {
 			
-			$scope.mosaic.completers -= 1;
+			$scope.mosaic.is_completed = !$scope.mosaic.is_completed;
 			
-			var data = { 'ref':$scope.mosaic.ref };
-    		API.sendRequest('/api/mosaic/uncomplete/', 'POST', {}, data);
+			if ($scope.mosaic.is_completed) {
+				
+				$scope.mosaic.completers += 1;
+				
+				var data = { 'ref':$scope.mosaic.ref };
+	    		API.sendRequest('/api/mosaic/complete/', 'POST', {}, data).then(function(response) {
+	    			toastr.success('Mosaic added to your complete list!');
+	    		});
+			}
+			else {
+				
+				$scope.mosaic.completers -= 1;
+				
+				var data = { 'ref':$scope.mosaic.ref };
+	    		API.sendRequest('/api/mosaic/uncomplete/', 'POST', {}, data).then(function(response) {
+	    			toastr.success('Mosaic removed from your complete list!');
+	    		});
+			}
 		}
 	}
 	

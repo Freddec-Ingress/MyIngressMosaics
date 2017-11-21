@@ -112,7 +112,7 @@
 						</div>
 						
 						<div class="item">
-							<button class="badge" ng-click="toggle_complete();" ng-class="{'active':mosaic.is_completed, 'transparent':!user.authenticated}" ng-disabled="!user.authenticated">
+							<button class="badge" ng-click="toggle_complete(user);" ng-class="{'active':mosaic.is_completed">
 								<i class="fa fa-check-square icon"></i>
 								<span class="text">{{mosaic.completers}}</span>
 							</button>
