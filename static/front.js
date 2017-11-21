@@ -2598,7 +2598,7 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 	$scope.toggle_love = function(user) {
 		
 		if (!user.authenticated) {
-			
+			toastr.success('To perform this action you must be signed in!<br><a href="/login" target="blank">Sign in</a>', {allowHtml: true});
 		}
 		else {
 			
@@ -2610,7 +2610,7 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 				
 				var data = { 'ref':$scope.mosaic.ref };
 	    		API.sendRequest('/api/mosaic/love/', 'POST', {}, data).then(function(response) {
-	    			toastr.success('', 'Mosaic added to your favorite list!');
+	    			toastr.success('Mosaic added to your favorite list!');
 	    		});
 			}
 			else {
@@ -2618,7 +2618,9 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 				$scope.mosaic.lovers -= 1;
 				
 				var data = { 'ref':$scope.mosaic.ref };
-	    		API.sendRequest('/api/mosaic/unlove/', 'POST', {}, data);
+	    		API.sendRequest('/api/mosaic/unlove/', 'POST', {}, data).then(function(response) {
+	    			toastr.success('Mosaic removed from your favorite list!');
+	    		});
 			}
 		}
 	}
