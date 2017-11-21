@@ -61,7 +61,7 @@
 			<div class="container" ng-class="{'active':loaded}">
 
 				<div class="grow col">
-
+					
 					<div class="row align-center mb-small">
 						<span class="font-size-big color-light">
 							{{mosaic.title}}
@@ -119,9 +119,9 @@
 						</div>
 						
 					</div>
-	
+					
 					<hr class="mb-small">
-	
+					
 					<div class="modal-container" ng-if="mission_selected">
 						
 						<div class="modal-box">
@@ -193,8 +193,8 @@
 								<ul class="grid col">
 									
 									<li class="item grid row" ng-repeat="portal in mission_selected.portals">
-										<div class="item font-size-small color-muted" style="padding-top:9px;">
-											#{{$index}}.
+										<div class="item font-size-small color-muted" style="width:55px; padding-top:9px;">
+											#{{$index + 1}}.
 										</div>
 										<div class="item col">
 											<span class="font-size-normal color-light">
@@ -216,7 +216,7 @@
 						</div>
 						
 					</div>
-	
+					
 					<div class="grow tab col" ng-show="current_tab == 1">
 						
 						<div class="scrollable mb-small">
@@ -266,7 +266,7 @@
 								</dd>
 								
 								<dt class="w4">Waypoints</dt>
-								<dd class="w8">{{mosaic.uniques}} uniques / {{mosaic.portals}}</dd>
+								<dd class="w8">{{mosaic.uniques}} uniques / {{mosaic.portals}} total</dd>
 								
 								<dt class="w4" ng-show="mosaic.type=='sequence'">Distance</dt>
 								<dd class="w8" ng-show="mosaic.type=='sequence'">{{mosaic.distance | number:2}} km</dd>
@@ -277,7 +277,7 @@
 										{{creator.name}}
 									</span>
 								</dd>
-									
+								
 							</dl>
 						</div>
 						
