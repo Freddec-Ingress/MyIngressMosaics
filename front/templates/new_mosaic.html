@@ -241,7 +241,7 @@
 				            	</div>
 				            	
 				            	<div>
-				            		<button class="btn" ng-click="saveComment(comment_selected);">
+				            		<button class="btn" ng-click="saveComment(user, comment_selected);">
 				            			Save
 				            		</button>
 				            	</div>
@@ -291,7 +291,10 @@
 							<dl>
 								
 								<dt class="w4">Location</dt>
-								<dd class="w8">{{mosaic.city.name}}</dd>
+								<dd class="w8">
+									<flag country="{{mosaic.city.region.country.name}}"></flag>
+									{{mosaic.city.name}}
+								</dd>
 								
 								<dt class="w4">Missions</dt>
 								<dd class="w8">
@@ -347,7 +350,7 @@
 										</div>
 										
 										<div class="item">
-											<button class="btn btn-mini" ng-click="deleteComment($index, comment);">
+											<button class="btn btn-mini" ng-click="deleteComment(user, $index, comment);">
 												Delete
 											</button>
 										</div>

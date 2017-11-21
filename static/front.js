@@ -2641,18 +2641,14 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 				$scope.mosaic.completers += 1;
 				
 				var data = { 'ref':$scope.mosaic.ref };
-	    		API.sendRequest('/api/mosaic/complete/', 'POST', {}, data).then(function(response) {
-	    			toastr.success('Mosaic added to your complete list!');
-	    		});
+	    		API.sendRequest('/api/mosaic/complete/', 'POST', {}, data);
 			}
 			else {
 				
 				$scope.mosaic.completers -= 1;
 				
 				var data = { 'ref':$scope.mosaic.ref };
-	    		API.sendRequest('/api/mosaic/uncomplete/', 'POST', {}, data).then(function(response) {
-	    			toastr.success('Mosaic removed from your complete list!');
-	    		});
+	    		API.sendRequest('/api/mosaic/uncomplete/', 'POST', {}, data);
 			}
 		}
 	}
@@ -2687,36 +2683,48 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 		$scope.comment_selected = null;
 	}
 	
-	$scope.saveComment = function(comment) {
+	$scope.saveComment = function(user, comment) {
 		
-		if (!comment.text) return;
-		
-		if (!comment.id) {
-			
-			var data = {'ref':$scope.mosaic.ref, 'text':comment.text}
-			API.sendRequest('/api/comment/add/', 'POST', {}, data).then(function(response) {
-			
-				$scope.mosaic.comments.unshift(response);
-				$scope.closeCommentEdit();
-			});
+		if (!user.authenticated) {
+			toastr.error('To perform this action you must be signed in! <a class="ml-small" href="/login" target="blank">Sign in</a>', {allowHtml: true});
 		}
 		else {
 			
-			var data = {'id':comment.id, 'text':comment.text}
-			API.sendRequest('/api/comment/update/', 'POST', {}, data).then(function(response) {
+			if (!comment.text) return;
 			
-				$scope.closeCommentEdit();
-			});
+			if (!comment.id) {
+				
+				var data = {'ref':$scope.mosaic.ref, 'text':comment.text}
+				API.sendRequest('/api/comment/add/', 'POST', {}, data).then(function(response) {
+				
+					$scope.mosaic.comments.unshift(response);
+					$scope.closeCommentEdit();
+				});
+			}
+			else {
+				
+				var data = {'id':comment.id, 'text':comment.text}
+				API.sendRequest('/api/comment/update/', 'POST', {}, data).then(function(response) {
+				
+					$scope.closeCommentEdit();
+				});
+			}
 		}
 	}
 	
-	$scope.deleteComment = function(index, comment) {
+	$scope.deleteComment = function(user, index, comment) {
 		
-		var data = {'id':comment.id}
-		API.sendRequest('/api/comment/delete/', 'POST', {}, data).then(function(response) {
-			
-			$scope.mosaic.comments.splice(index, 1);
-		});
+		if (!user.authenticated) {
+			toastr.error('To perform this action you must be signed in! <a class="ml-small" href="/login" target="blank">Sign in</a>', {allowHtml: true});
+		}
+		else {
+		
+			var data = {'id':comment.id}
+			API.sendRequest('/api/comment/delete/', 'POST', {}, data).then(function(response) {
+				
+				$scope.mosaic.comments.splice(index, 1);
+			});
+		}
 	}
 	
 	/* Tab management */
