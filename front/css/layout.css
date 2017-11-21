@@ -12,12 +12,11 @@
 
 #header .item {
 	flex-basis:0; flex-grow:1;
-	color:#489299; text-align:center;
+	color:#5afbea; text-align:center;
 	display:flex; flex-direction:column; align-items:stretch; justify-content:center;
 }
 
 #header .item > .icon {
-	color:#5afbea;
 	height:25px;
 	font-size:20px;
 }

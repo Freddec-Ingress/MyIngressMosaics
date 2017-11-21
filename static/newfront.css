@@ -83,7 +83,7 @@ ul > li { list-style:none; }
 	padding:0 .5rem;
 	border-radius:3px;
 	background-color:#1f4549;
-	color:#489299; font-size:11px; font-weight:bold;
+	color:#5afbea; font-size:11px; font-weight:bold;
 	display:flex; flex-direction:row; align-items:center; justify-content:center;
 }
 
@@ -92,7 +92,7 @@ ul > li { list-style:none; }
 .badge.transparent { background-color:transparent; }
 
 
-.badge > .icon { color:#5afbea; font-size:13px; margin-right:.5rem; }
+.badge > .icon { font-size:13px; margin-right:.5rem; }
 
 .badge.active > .icon { color:white; }
 .badge.inactive > .icon { color:black; }
@@ -250,12 +250,11 @@ ul > li { list-style:none; }
 
 #header .item {
 	flex-basis:0; flex-grow:1;
-	color:#489299; text-align:center;
+	color:#5afbea; text-align:center;
 	display:flex; flex-direction:column; align-items:stretch; justify-content:center;
 }
 
 #header .item > .icon {
-	color:#5afbea;
 	height:25px;
 	font-size:20px;
 }
