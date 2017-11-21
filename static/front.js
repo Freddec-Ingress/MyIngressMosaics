@@ -2598,7 +2598,7 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 	$scope.toggle_love = function(user) {
 		
 		if (!user.authenticated) {
-			toastr.success('To perform this action you must be signed in!<br><a href="/login" target="blank">Sign in</a>', {allowHtml: true});
+			toastr.error('To perform this action you must be signed in! <a class="color-link" href="/login" target="blank">Sign in</a>', {allowHtml: true});
 		}
 		else {
 			
