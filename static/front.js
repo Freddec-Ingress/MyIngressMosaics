@@ -2744,6 +2744,14 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 		
 			$scope.mosaic = response;
 			
+			var temp = 0;
+			if ($scope.mosaic.missions.length > $scope.mosaic.cols) {
+				temp = $scope.mosaic.cols - $scope.mosaic.missions.length % $scope.mosaic.cols;
+				if (temp < 0 || temp > ($scope.mosaic.cols - 1)) temp = 0;
+			}
+			
+			$scope.offset = new Array(temp);
+			
 			$scope.open_tab(1);
 			
 			$scope.loaded = true;
