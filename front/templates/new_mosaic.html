@@ -112,7 +112,7 @@
 						</div>
 						
 						<div class="item">
-							<button class="badge" ng-click="toggle_complete(user);" ng-class="{'active':mosaic.is_completed">
+							<button class="badge" ng-click="toggle_complete(user);" ng-class="{'active':mosaic.is_completed}">
 								<i class="fa fa-check-square icon"></i>
 								<span class="text">{{mosaic.completers}}</span>
 							</button>
@@ -285,10 +285,34 @@
 					
 					<div class="grow tab col" ng-show="current_tab == 3">
 						
-						<ul class="scrollable">
-						</ul>
+						<div class="scrollable mb-small">
+							
+							<div class="text-center" ng-show="mosaic.comments.length > 0">
+								<span class="color-muted">No comment</span>
+							</div>
+							
+							<ul class="grid col">
+								
+								<li class="item">
+									
+									<div>
+										<span ng-class="{'c-enligtened': item.faction == 'E', 'c-resistance': item.faction == 'R'}">{{item.username}}</span>
+									</div>
+									
+									<div>
+										{{item.text}}
+									</div>
+									
+								</li>
+								
+							</ul>
+							
+						</div>
 						
-						<div>
+						<div class="text-center mb-small">
+							<button class="btn">
+								New comment
+							</button>
 						</div>
 						
 					</div>
