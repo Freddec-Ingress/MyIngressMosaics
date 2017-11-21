@@ -1,7 +1,7 @@
 .btn {
 	cursor:pointer;
 	border:1px solid #5afbea;
-	padding:9px 20px;
+	padding:0 20px;
 	color:#5afbea; text-align:center;
 	background-color:#1f4549;
 	background-image:
@@ -17,4 +17,5 @@
 		-o-gradient(linear, 0 top, 0 10, from(rgba(255, 255, 255, 0.22)), to(transparent)),
 		-o-gradient(linear, 0 bottom, 0 28, from(rgba(255, 255, 255, 0.22)), to(transparent));
 	display:flex; align-items:center; justify-content:center;
+	min-height:34px;
 }
