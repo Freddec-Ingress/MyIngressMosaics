@@ -148,7 +148,7 @@ ul > li { list-style:none; }
 .row { display:flex; flex-direction:row; flex-shrink: 0; }
 .col { display:flex; flex-direction:column; flex-shrink: 0; }
 
-.grid > .item { display:flex; padding:.375rem; }
+.grid > .item { padding:.375rem; }
 
 .row.align-center { justify-content:center; }
 .row.align-left { justify-content:flex-start; }
