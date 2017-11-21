@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<meta name="robots" content="index, follow">
+		<meta name="revisit-after" content="7 days">
+		
+		<link rel="shortcut icon" href="/static/img/logo.jpg" />
+		
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Coda:100,300,400,700" type="text/css">
+		
+		<link rel="stylesheet" href="/static/newfront.css" />
+		
+		{% block extra-head %}{% endblock %}
+		
+	</head>
+	
+	<body ng-app="FrontModule" ng-controller="RootCtrl">
+		
+		<div id="header">
+			<div class="container active">
+				
+				<a href="/" class="item">
+					<i class="icon fa fa-home"></i>
+					<span class="text">Home</span>
+				</a>
+				
+				<a href="/search" class="item">
+					<i class="icon fa fa-search"></i>
+					<span class="text">Search</span>
+				</a>
+				
+				<a href="/map" class="item">
+					<i class="icon fa fa-map"></i>
+					<span class="text">Map</span>
+				</a>
+				
+				<a href="/registration" class="item">
+					<i class="icon fa fa-plus-square"></i>
+					<span class="text">Hunt</span>
+				</a>
+				
+				<a href="/profile" class="item">
+					<i class="icon fa fa-user"></i>
+					<span class="text">Profile</span>
+				</a>
+			
+			</div>
+		</div>
+
+		{% block content %}{% endblock %}
+		
+		<script>
+		
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+			
+			ga('create', 'UA-66838342-2', 'auto');
+			ga('send', 'pageview');
+		
+		</script>
+
+		<script src="/static/front.js"></script>
+
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuXb2ncs76tO-2SN8hvkE5Zt4VwtPoNcM&amp;language=en"></script>
+
+	</body>
+	
+</html>
