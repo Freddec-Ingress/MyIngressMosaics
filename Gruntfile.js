@@ -9,7 +9,6 @@ module.exports = function(grunt) {
 				src: [
 					'vendor/flag-icon-css/css/flag-icon.min.css',
 					'vendor/font-awesome/css/font-awesome.min.css',
-					'vendor/angular-toastr/css/angular-toastr.min.css',
 
 					'front/css/styles.css',
 				],
@@ -19,6 +18,7 @@ module.exports = function(grunt) {
 				src: [
 					'vendor/flag-icon-css/css/flag-icon.min.css',
 					'vendor/font-awesome/css/font-awesome.min.css',
+					'vendor/angular-toastr/css/angular-toastr.min.css',
 
 					'front/css/html.css',
 					'front/css/tabs.css',
