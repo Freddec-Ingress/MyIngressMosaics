@@ -22,6 +22,28 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 		}
 	}
 
+	/* Completers management */
+
+	$scope.toggle_complete = function() {
+		
+		$scope.mosaic.is_completed = !$scope.mosaic.is_completed;
+		
+		if ($scope.mosaic.is_completed) {
+			
+			$scope.mosaic.completers += 1;
+			
+			var data = { 'ref':$scope.mosaic.ref };
+    		API.sendRequest('/api/mosaic/complete/', 'POST', {}, data);
+		}
+		else {
+			
+			$scope.mosaic.completers -= 1;
+			
+			var data = { 'ref':$scope.mosaic.ref };
+    		API.sendRequest('/api/mosaic/uncomplete/', 'POST', {}, data);
+		}
+	}
+	
 	/* Mission details displaying */
 
 	$scope.mission_selected = null;
