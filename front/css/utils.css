@@ -43,7 +43,7 @@
 
 
 
-.scrollable { flex:1 1 auto; height:0px; overflow-y: auto; }
+.scrollable { flex:1 1 auto; height:0px; overflow-y:auto; overflow-x:hidden; }
 
 
 
@@ -66,6 +66,8 @@
 .text-center { text-align:center; }
 
 
+
+.mt-small { margin-top:10px; }
 
 .ml-small { margin-left:10px; }
 

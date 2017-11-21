@@ -295,13 +295,15 @@
 								
 								<li class="item" ng-repeat="comment in mosaic.comments">
 									
-									<div>
+									<div class="font-size-small">
 										<span ng-class="{'color-enligtened': comment.faction == 'E', 'color-resistant': comment.faction == 'R'}">{{comment.username}}</span>
 									</div>
 									
 									<div>
-										{{comment.text}}
+										<span class="color-light">{{comment.text}}</span>
 									</div>
+									
+									<hr class="mt-small mb-small">
 									
 								</li>
 								
