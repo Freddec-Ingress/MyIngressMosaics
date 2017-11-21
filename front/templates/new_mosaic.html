@@ -287,20 +287,20 @@
 						
 						<div class="scrollable mb-small">
 							
-							<div class="text-center" ng-show="mosaic.comments.length > 0">
+							<div class="text-center" ng-show="mosaic.comments.length < 1">
 								<span class="color-muted">No comment</span>
 							</div>
 							
 							<ul class="grid col">
 								
-								<li class="item">
+								<li class="item" ng-repeat="comment in mosaic.comments">
 									
 									<div>
-										<span ng-class="{'c-enligtened': item.faction == 'E', 'c-resistance': item.faction == 'R'}">{{item.username}}</span>
+										<span ng-class="{'color-enligtened': comment.faction == 'E', 'color-resistant': comment.faction == 'R'}">{{comment.username}}</span>
 									</div>
 									
 									<div>
-										{{item.text}}
+										{{comment.text}}
 									</div>
 									
 								</li>
@@ -309,7 +309,7 @@
 							
 						</div>
 						
-						<div class="text-center mb-small">
+						<div class="row align-center mb-small">
 							<button class="btn">
 								New comment
 							</button>
