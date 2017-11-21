@@ -310,6 +310,8 @@ ul > li { list-style:none; }
 	display:flex; align-items:center; justify-content:center;
 	min-height:34px;
 }
+
+.btn-mini { min-height:24px; padding:0 10px; background-image:none; }
 .control {
     padding:8px 10px 0;
     background-color:black;
