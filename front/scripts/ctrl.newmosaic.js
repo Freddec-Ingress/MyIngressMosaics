@@ -103,7 +103,7 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 			var data = {'ref':$scope.mosaic.ref, 'text':comment.text}
 			API.sendRequest('/api/comment/add/', 'POST', {}, data).then(function(response) {
 			
-				$scope.mosaic.comments.push(response);
+				$scope.mosaic.comments.unshift(response);
 				$scope.closeCommentEdit();
 			});
 		}
