@@ -61,19 +61,19 @@ hr { border:0; border-top:1px solid #174540; margin:0; width:100%; }
 ul { margin:0; padding:0; }
 ul > li { list-style:none; }
 
-.tabs { display:flex!important; flex-direction:row!important; }
+.tabs { display:flex; flex-direction:row; }
 
 .tabs > .item {
-	flex-grow:1; flex-basis:0;
 	cursor:pointer;
-	padding:.75rem;
+	height:45px; padding:0 .75rem;
 	text-align:center;
 	border-top:1px solid #174540;
-	display:flex; align-items:center; justify-content:center;
+	display:flex; align-items:center; justify-content:center; flex-grow:1; flex-basis:0;
 }
 
+.tabs > .item > .text { font-size:18px; }
+
 .tabs > .item:hover > .text { color:#ffffff; }
-.tabs > .item:hover > .badge { color:#ffffff; }
 
 .tabs > .item.active { border-top:1px solid #ffffff; }
 .tabs > .item.active > .text { color:#ffffff; text-decoration:none; }
