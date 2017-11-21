@@ -33,65 +33,44 @@
 
 		<div class="grow col">
 			
-			<div class="text-center mt-normal mb-small">
-				<span class="font-size-big color-light">
-					{{mosaic.title}}
-				</span>
-			</div>
-			
-			<div class="grid row align-center mb-small">
+			<div class="modal-container" ng-if="comment_selected">
 				
-				<div class="item">
+				<div class="modal-box">
 					
-					<div id="fb-root"></div>
+					<div class="modal-header">
+						
+						<span class="title">
+							Comment
+						</span>
+						
+						<span class="close" ng-click="closeCommentEdit();">
+							<i class="fa fa-times"></i>
+						</span>
+						
+					</div>
 					
-					<script>
-						(function(d, s, id) {
-							var js, fjs = d.getElementsByTagName(s)[0];
-							if (d.getElementById(id)) return;
-							js = d.createElement(s); js.id = id;
-							js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10";
-							fjs.parentNode.insertBefore(js, fjs);
-						}(document, 'script', 'facebook-jssdk'));
-					</script>
+					<div class="modal-content">
+						
+		            	<div class="mb-small">
+		            		<textarea class="control" rows="5" ng-model="comment_selected.text">
+		            		</textarea>
+		            	</div>
+		            	
+		            	<div>
+		            		<button class="btn" ng-click="saveComment(user, comment_selected);">
+		            			Save
+		            		</button>
+		            	</div>
+						
+					</div>
 					
-					{% endverbatim %}
-						<div class="fb-like"
-							data-href="https://www.myingressmosaics.com/mosaic/{{ref}}"
-							data-layout="button"
-							data-size="small"
-							data-mobile-iframe="true">
-						</div>
-					{% verbatim %}
-
-				</div>
-
-				<div class="item">
-					
-					{% endverbatim %}
-						<script src="https://apis.google.com/js/platform.js" async defer></script>
-						<div class="g-plus" data-action="share" data-annotation="none" data-href="https://www.myingressmosaics.com/mosaic/{{ref}}"></div>			
-					{% verbatim %}
-					
-				</div>
-				
-				<div class="item">
-					<button class="badge" ng-click="toggle_love(user);" ng-class="{'active':mosaic.is_loved}">
-						<i class="fa fa-heart icon"></i>
-						<span class="text">{{mosaic.lovers}}</span>
-					</button>
-				</div>
-				
-				<div class="item">
-					<button class="badge" ng-click="toggle_complete(user);" ng-class="{'active':mosaic.is_completed}">
-						<i class="fa fa-check-square icon"></i>
-						<span class="text">{{mosaic.completers}}</span>
-					</button>
 				</div>
 				
 			</div>
 			
-			<div class="modal-container" ng-if="mission_selected">
+			<div class="grow tab col" ng-show="current_tab == 1">
+			
+				<div class="modal-container" ng-if="mission_selected">
 				
 				<div class="modal-box" ng-if="mission_selected.creator && mission_selected.portals.length > 0">
 					
@@ -235,42 +214,63 @@
 				
 			</div>
 			
-			<div class="modal-container" ng-if="comment_selected">
+				<div class="text-center mt-normal mb-small">
+				<span class="font-size-big color-light">
+					{{mosaic.title}}
+				</span>
+			</div>
+			
+				<div class="grid row align-center mb-small">
 				
-				<div class="modal-box">
+				<div class="item">
 					
-					<div class="modal-header">
-						
-						<span class="title">
-							Comment
-						</span>
-						
-						<span class="close" ng-click="closeCommentEdit();">
-							<i class="fa fa-times"></i>
-						</span>
-						
-					</div>
+					<div id="fb-root"></div>
 					
-					<div class="modal-content">
-						
-		            	<div class="mb-small">
-		            		<textarea class="control" rows="5" ng-model="comment_selected.text">
-		            		</textarea>
-		            	</div>
-		            	
-		            	<div>
-		            		<button class="btn" ng-click="saveComment(user, comment_selected);">
-		            			Save
-		            		</button>
-		            	</div>
-						
-					</div>
+					<script>
+						(function(d, s, id) {
+							var js, fjs = d.getElementsByTagName(s)[0];
+							if (d.getElementById(id)) return;
+							js = d.createElement(s); js.id = id;
+							js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10";
+							fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+					</script>
+					
+					{% endverbatim %}
+						<div class="fb-like"
+							data-href="https://www.myingressmosaics.com/mosaic/{{ref}}"
+							data-layout="button"
+							data-size="small"
+							data-mobile-iframe="true">
+						</div>
+					{% verbatim %}
+
+				</div>
+
+				<div class="item">
+					
+					{% endverbatim %}
+						<script src="https://apis.google.com/js/platform.js" async defer></script>
+						<div class="g-plus" data-action="share" data-annotation="none" data-href="https://www.myingressmosaics.com/mosaic/{{ref}}"></div>			
+					{% verbatim %}
 					
 				</div>
 				
+				<div class="item">
+					<button class="badge" ng-click="toggle_love(user);" ng-class="{'active':mosaic.is_loved}">
+						<i class="fa fa-heart icon"></i>
+						<span class="text">{{mosaic.lovers}}</span>
+					</button>
+				</div>
+				
+				<div class="item">
+					<button class="badge" ng-click="toggle_complete(user);" ng-class="{'active':mosaic.is_completed}">
+						<i class="fa fa-check-square icon"></i>
+						<span class="text">{{mosaic.completers}}</span>
+					</button>
+				</div>
+				
 			</div>
-			
-			<div class="grow tab col" ng-show="current_tab == 1">
 				
 				<div class="scrollable mb-small">
 				
@@ -305,11 +305,7 @@
 			            
 		            </div>
 				</div>
-		            
-	            <div class="font-size-small color-muted text-center mb-small">
-	            	Click on mission image to display details
-	            </div>
-
+				
 			</div>
 			
 			<div class="grow tab col" ng-show="current_tab == 2">
@@ -414,8 +410,6 @@
 			
 			<div class="item" ng-click="open_tab(1);" ng-class="{'active':current_tab == 1}">
 				<span class="text" ng-class="{'color-warning': mosaic.has_fake}">
-					{{mosaic.missions.length}}
-					&nbsp;
 					<i class="fa fa-th"></i>
 				</span>
 			</div>
@@ -434,8 +428,6 @@
 			
 			<div class="item row align-center" ng-click="open_tab(4);" ng-class="{'active':current_tab == 4}">
 				<span class="text">
-					{{mosaic.comments.length}}
-					&nbsp;
 					<i class="fa fa-comment"></i>
 				</span>
 			</div>
