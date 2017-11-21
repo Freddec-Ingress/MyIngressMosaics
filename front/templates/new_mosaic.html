@@ -39,7 +39,7 @@
 				</span>
 			</div>
 			
-			<div class="grid row align-center mb-normal">
+			<div class="grid row align-center mb-small">
 				
 				<div class="item">
 					
@@ -275,6 +275,11 @@
 			<div class="grow tab col" ng-show="current_tab == 1">
 				
 				<div class="scrollable mb-small">
+				
+		            <div ng-show="mosaic.has_fake" class="font-size-small color-warning text-center mb-small">
+		            	Warning, some missions are not available
+		            </div>
+		            
 					<div class="row wrap align-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
 						
 			            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
@@ -311,6 +316,14 @@
 			
 			<div class="grow tab col" ng-show="current_tab == 2">
 				
+				<div class="grow row mb-small">
+					<div id="map" class="grow"></div>
+				</div>
+				
+			</div>
+				
+			<div class="grow tab col" ng-show="current_tab == 3">
+				
 				<div class="scrollable mb-small">
 					<dl>
 						
@@ -345,7 +358,7 @@
 				
 			</div>
 			
-			<div class="grow tab col" ng-show="current_tab == 3">
+			<div class="grow tab col" ng-show="current_tab == 4">
 				
 				<div class="scrollable mb-small">
 					
@@ -389,7 +402,7 @@
 					
 				</div>
 				
-				<div class="row align-center mb-small">
+				<div class="row align-center mb-normal">
 					<button class="btn" ng-click="displayCommentEdit();">
 						New comment
 					</button>
@@ -402,16 +415,31 @@
 		<div class="tabs">
 			
 			<div class="item" ng-click="open_tab(1);" ng-class="{'active':current_tab == 1}">
-				<span class="text">Preview</span>
+				<span class="text" ng-class="{'color-warning': mosaic.has_fake}">
+					{{mosaic.missions.length}}
+					&nbsp;
+					<i class="fa fa-th"></i>
+				</span>
 			</div>
 			
-			<div class="item" ng-click="open_tab(2);" ng-class="{'active':current_tab == 2}">
-				<span class="text">Details</span>
+			<div class="item" ng-click="initMap(); open_tab(2);" ng-class="{'active':current_tab == 2}">
+				<span class="text">
+					<i class="fa fa-map"></i>
+				</span>
 			</div>
 			
-			<div class="item row align-center" ng-click="open_tab(3);" ng-class="{'active':current_tab == 3}">
-				<span class="text">Comments</span>
-				<span class="ml-small badge">{{mosaic.comments.length}}</span>
+			<div class="item" ng-click="open_tab(3);" ng-class="{'active':current_tab == 3}">
+				<span class="text">
+					<i class="fa fa-indent"></i>
+				</span>
+			</div>
+			
+			<div class="item row align-center" ng-click="open_tab(4);" ng-class="{'active':current_tab == 4}">
+				<span class="text">
+					{{mosaic.comments.length}}
+					&nbsp;
+					<i class="fa fa-comment"></i>
+				</span>
 			</div>
 
 		</div>

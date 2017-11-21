@@ -11,6 +11,7 @@
 }
 
 #header .item {
+	padding-top:5px;
 	flex-basis:0; flex-grow:1;
 	color:#5afbea; text-align:center;
 	display:flex; flex-direction:column; align-items:stretch; justify-content:center;

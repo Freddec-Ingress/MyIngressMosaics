@@ -2727,6 +2727,97 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 		}
 	}
 	
+	/* Map management */
+	
+	var mapInitiated = false;
+	
+	$scope.initMap = function() {
+		
+		if (mapInitiated) return;
+		mapInitiated = true;
+		
+		var style = [{featureType:"all",elementType:"all",stylers:[{visibility:"on"},{hue:"#131c1c"},{saturation:"-50"},{invert_lightness:!0}]},{featureType:"water",elementType:"all",stylers:[{visibility:"on"},{hue:"#005eff"},{invert_lightness:!0}]},{featureType:"poi",stylers:[{visibility:"off"}]},{featureType:"transit",elementType:"all",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels.icon",stylers:[{invert_lightness:!0}]}];
+		
+		var map = new google.maps.Map(document.getElementById('map'), {
+			
+			zoom: 8,
+			styles: style,
+			zoomControl: true,
+			disableDefaultUI: true,
+			fullscreenControl: true,
+			center: {lat:$scope.mosaic.startLat, lng:$scope.mosaic.startLng},
+		});
+		
+		var latlngbounds = new google.maps.LatLngBounds();
+		
+		var image = {
+			scaledSize: new google.maps.Size(35, 35),
+			origin: new google.maps.Point(0, 0),
+			anchor: new google.maps.Point(17, 18),
+			labelOrigin: new google.maps.Point(17, 19),
+			url: 'https://www.myingressmosaics.com/static/img/neutral.png',
+		};
+
+		var index = 0;
+		for (var m of $scope.mosaic.missions) {
+		
+			if (m.ref.indexOf('Unavailable') !== -1) continue;
+		
+			var roadmapCoordinates= [];
+		
+			for (var p of m.portals) {
+				
+				if (p.lat != 0.0 && p.lng != 0.0) {
+					
+			        var platLng = new google.maps.LatLng(p.lat, p.lng);
+			        roadmapCoordinates.push(platLng);
+			        
+			        new google.maps.Marker({
+			        	
+						map: map,
+						icon: {
+				            path: google.maps.SymbolPath.CIRCLE,
+				            strokeColor: '#ebbc4a',
+				            scale: 2
+				    	},
+						position: {lat: p.lat, lng: p.lng},
+			        });
+				}
+			}
+	        
+			var roadmap = new google.maps.Polyline({
+				path: roadmapCoordinates,
+				geodesic: true,
+				strokeColor: '#ebbc4a',
+				strokeOpacity: 0.95,
+				strokeWeight: 2,
+			});
+	        
+	        roadmap.setMap(map);
+	        
+			var label = {};
+			if ($scope.mosaic.type == 'sequence') {
+				label = { text:String(index), color:'#FFFFFF', fontFamily:'Coda', fontSize:'.5rem', fontWeight:'400', }
+			}
+			
+	        new google.maps.Marker({
+	        	
+				map: map,
+				icon: image,
+				label: label,
+				position: {lat: m.startLat, lng: m.startLng},
+	        });
+	        
+	        var mlatLng = new google.maps.LatLng(m.startLat, m.startLng);
+	        latlngbounds.extend(mlatLng);
+	        
+	        index += 1;
+		}
+	        
+		map.setCenter(latlngbounds.getCenter());
+		map.fitBounds(latlngbounds); 
+	}
+	
 	/* Tab management */
 	
 	$scope.current_tab = 0;
