@@ -338,6 +338,22 @@
 										<span class="color-light">{{comment.text}}</span>
 									</div>
 									
+									<div class="grid row" ng-show="comment.username == user.username">
+										
+										<div class="item">
+											<button class="btn" ng-click="displayCommentEdit(comment);">
+												Edit
+											</button>
+										</div>
+										
+										<div class="item">
+											<button class="btn" ng-click="deleteComment($index, comment);">
+												Delete
+											</button>
+										</div>
+										
+									</div>
+									
 									<hr class="mt-small">
 									
 								</li>

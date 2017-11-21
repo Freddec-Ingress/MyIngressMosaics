@@ -2691,11 +2691,31 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 		
 		if (!comment.text) return;
 		
-		var data = {'ref':$scope.mosaic.ref, 'text':comment.text}
-		API.sendRequest('/api/comment/add/', 'POST', {}, data).then(function(response) {
+		if (!comment.id) {
+			
+			var data = {'ref':$scope.mosaic.ref, 'text':comment.text}
+			API.sendRequest('/api/comment/add/', 'POST', {}, data).then(function(response) {
+			
+				$scope.mosaic.comments.push(response);
+				$scope.closeCommentEdit();
+			});
+		}
+		else {
+			
+			var data = {'id':comment.id, 'text':comment.text}
+			API.sendRequest('/api/comment/update/', 'POST', {}, data).then(function(response) {
+			
+				$scope.closeCommentEdit();
+			});
+		}
+	}
+	
+	$scope.deleteComment = function(index, comment) {
 		
-			$scope.mosaic.comments.push(response);
-			$scope.closeCommentEdit();
+		var data = {'id':comment.id}
+		API.sendRequest('/api/comment/delete/', 'POST', {}, data).then(function(response) {
+			
+			$scope.mosaic.comments.splice(index, 1);
 		});
 	}
 	
