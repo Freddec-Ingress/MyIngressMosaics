@@ -2907,21 +2907,24 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	$scope.selectMission = function(mission) {
 	
 		mission.selected = true;
-		$scope.filtered.push(mission);
+		$scope.selected.push(mission);
 	}
 	
 	$scope.unselectMission = function(mission) {
 	
 		mission.selected = false;
 		
-		var index = $scope.filtered.indexOf(mission);
-		$scope.filtered.splice(index, 1);
+		var index = $scope.selected.indexOf(mission);
+		$scope.selected.splice(index, 1);
 	}
 	
 	$scope.removeMission = function(mission) {
 		
 		var index = $scope.filtered.indexOf(mission);
 		$scope.filtered.splice(index, 1);
+		
+		index = $scope.selected.indexOf(mission);
+		$scope.selected.splice(index, 1);
 		
 		index = $scope.missions.indexOf(mission);
 		$scope.missions.splice(index, 1);
