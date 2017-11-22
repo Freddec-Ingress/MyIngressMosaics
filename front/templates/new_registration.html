@@ -25,6 +25,22 @@
 		
 		<div class="grow flex-col" ng-show="current_step == 1">
 			
+			<div class="flex">
+				
+				<div class="item">
+					<button class="btn" ng-click="refreshMissions();">
+						<i class="fa fa-"></i>
+					</button>
+				</div>
+				
+				<div class="item">
+					<input class="control" ng-model="filter" ng-change="filterMissions(filter);" />
+				</div>
+				
+			</div>
+			
+			<hr>
+				
 			<div class="scrollable">
 				
 				<div ng-if="refreshing" class="mt-normal flex justify-center">
