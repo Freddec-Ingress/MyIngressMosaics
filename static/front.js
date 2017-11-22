@@ -2918,6 +2918,18 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		$scope.filtered.splice(index, 1);
 	}
 	
+	$scope.removeMission = function(mission) {
+		
+		var index = $scope.filtered.indexOf(mission);
+		$scope.filtered.splice(index, 1);
+		
+		index = $scope.missions.indexOf(mission);
+		$scope.missions.splice(index, 1);
+		
+		var data = { 'ref':mission.ref };
+		API.sendRequest('/api/mission/exclude/', 'POST', {}, data);
+	}
+	
 	/* Page loading */
 
 	$scope.refreshMissions();
