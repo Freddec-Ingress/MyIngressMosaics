@@ -52,7 +52,7 @@
 
 
 
-.scrollable { flex-grow:1; height:0; overflow-y:auto; overflow-x:hidden; }
+.scrollable { flex:1 1 auto; height:0; overflow-y:auto; overflow-x:hidden; }
 
 
 

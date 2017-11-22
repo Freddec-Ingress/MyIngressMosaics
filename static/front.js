@@ -2910,6 +2910,15 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		$scope.selected.push(mission);
 	}
 	
+	$scope.selectAll = function() {
+		
+		for (var mission of $scope.filtered) {
+			if (!mission.selected) {
+				$scope.selectMission(mission);
+			}
+		}
+	}
+	
 	$scope.unselectMission = function(mission) {
 	
 		mission.selected = false;
