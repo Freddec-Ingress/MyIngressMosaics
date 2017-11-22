@@ -2883,7 +2883,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 			$scope.missions.sort(UtilsService.sortMissionsByCreatorTitleAsc);
 
 			$scope.filterMissions($scope.filter);
-			
+
 			$scope.refreshing = false;
 		});
 	}
@@ -2941,6 +2941,23 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		
 		var data = { 'ref':mission.ref };
 		API.sendRequest('/api/mission/exclude/', 'POST', {}, data);
+	}
+	
+	/* Step #2 management */
+	
+	$scope.columns = 6;
+	
+	$scope.offset = [];
+	
+	$scope.computeOffset = function() {
+		
+		var temp = 0;
+		if ($scope.selected.length > $scope.columns) {
+			temp = $scope.columns - $scope.selected.length % $scope.columns;
+			if (temp < 0 || temp > ($scope.columns - 1)) temp = 0;
+		}
+		
+		$scope.offset = new Array(temp);
 	}
 	
 	/* Page loading */
