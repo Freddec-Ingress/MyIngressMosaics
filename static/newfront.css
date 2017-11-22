@@ -350,9 +350,11 @@ ul > li { list-style:none; }
 
 .btn-danger { color:#f44336; border-color:#f44336; background-color:transparent; }
 .control {
-    padding:8px 10px 0;
+    padding:0 10px 0;
     background-color:black;
     display:block; width:100%; min-height:34px;
     border-radius: .125rem; border: 1px solid #009688;
     color: #ffffff; font: 400 13px/1.5 'Coda',sans-serif;
 }
+
+textarea.control { padding:8px 10px 0; }
