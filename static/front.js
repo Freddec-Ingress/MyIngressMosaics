@@ -2949,6 +2949,8 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	
 	$scope.offset = [];
 	
+	$scope.mission_selected = null;
+	
 	$scope.computeOffset = function() {
 		
 		var temp = 0;
@@ -2958,6 +2960,16 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		}
 		
 		$scope.offset = new Array(temp);
+	}
+	
+	$scope.displayOrder = function(mission) {
+		
+		$scope.mission_selected = mission;
+	}
+
+	$scope.closeOrder = function() {
+		
+		$scope.mission_selected = null;
 	}
 	
 	/* Page loading */
