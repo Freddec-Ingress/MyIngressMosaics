@@ -118,19 +118,29 @@
 			
 			<hr>
 			
-			<div class="flex p-normal">
-				
-				<button class="btn btn-mini">
-					Select All
-				</button>
-				
-				<button class="btn self-end" ng-class="{'disabled':selected.length < 3}">
-					<div class="row">
-						<span class="item">Next</span>
-						<i class="item fa fa-angle-double-right"></i>
+			<div class="p-normal">
+				<div class="row">
+					
+					<div class="item grow">
+						
+						{{filtered.length}} missions
+						
+						<button class="btn btn-mini">
+							Select All
+						</button>
+						
 					</div>
-				</button>
-				
+					
+					<div class="item grow">
+						<button class="btn self-end" ng-class="{'disabled':selected.length < 3}">
+							<div class="row">
+								<span class="item">Next</span>
+								<i class="item fa fa-angle-double-right"></i>
+							</div>
+						</button>
+					</div>
+					
+				</div>
 			</div>
 			
 		</div>

@@ -27,6 +27,6 @@
 
 .btn-icon { padding:0; display:flex; justify-content:center; align-items:center; min-height:24px; width:24px; background-image:none; }
 
-.btn-mini { min-height:24px; padding:0 10px; background-image:none; }
+.btn-mini { min-height:24px; height:24px; padding:0 10px; background-image:none; }
 
 .btn-danger { color:#f44336; border-color:#f44336; background-color:transparent; }
