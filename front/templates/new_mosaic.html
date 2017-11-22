@@ -308,17 +308,23 @@
 				
 			<div class="tab" ng-show="current_tab == 2">
 				
-				<div class="scrollable mt-normal">
+				<div class="scrollable m-small font-size-small">
 					
-					<div class="mt-small">
+					<div class="mb-small">
 						<span class="color-muted">Details</span>
 					</div>
 					
-					<div class="grid row">
+					<div class="grid row wrap">
 						
 						<div class="item">
 							<flag class="mr-small" country="mosaic.city.region.country.name"></flag>
 							<span class="color-normal">{{mosaic.city.name}}, {{mosaic.city.region.name}}</span>
+						</div>
+						
+						<div class="item">
+							<span class="color-normal">{{mosaic.missions.length}} missions</span>
+							<span class="color-normal" ng-show="mosaic.type=='sequence'">&nbsp;in sequence</span>
+							<span class="color-normal" ng-show="mosaic.type=='serie'">&nbsp;in serie</span>
 						</div>
 						
 					</div>
