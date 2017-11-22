@@ -314,36 +314,24 @@
 						<span class="color-muted">Details</span>
 					</div>
 					
-					<div class="grid row wrap mb-small">
+					<div class="ml-normal mb-small">
 						
-						<div class="item row valign-center">
+						<div class="row valign-center">
 							<flag class="mr-small" country="mosaic.city.region.country.name"></flag>
 							<span class="color-normal">{{mosaic.city.name}}, {{mosaic.city.region.name}}</span>
 						</div>
-						
-						<div class="item">
-							<span class="color-muted">&middot;</span>
-						</div>
 							
-						<div class="item">
+						<div class="">
 							<span class="color-normal">{{mosaic.missions.length}} missions</span>
 							<span class="color-normal" ng-show="mosaic.type=='sequence'">&nbsp;in sequence</span>
 							<span class="color-normal" ng-show="mosaic.type=='serie'">&nbsp;in serie</span>
 						</div>
-						
-						<div class="item">
-							<span class="color-muted">&middot;</span>
-						</div>
 							
-						<div class="item">
+						<div class="">
 							<span class="color-normal">{{mosaic.portals}} waypoints, {{mosaic.uniques}} uniques</span>
 						</div>
-						
-						<div class="item" ng-show="mosaic.type=='sequence'">
-							<span class="color-muted">&middot;</span>
-						</div>
 							
-						<div class="item" ng-show="mosaic.type=='sequence'">
+						<div class="" ng-show="mosaic.type=='sequence'">
 							<span class="color-normal">{{mosaic.distance | number:2}} km</span>
 						</div>
 						
@@ -353,7 +341,7 @@
 						<span class="color-muted">Creators</span>
 					</div>
 					
-					<div class="grid row wrap mb-small">
+					<div class="grid row wrap ml-normal mb-small">
 						
 						<div class="item" ng-repeat="creator in mosaic.creators">
 							<span ng-class="{'color-enlightened': creator.faction == 'E', 'color-resistant': creator.faction == 'R'}">
