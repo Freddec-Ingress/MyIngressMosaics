@@ -31,12 +31,12 @@
 					
 					<div class="item">
 						<button class="btn" ng-click="refreshMissions();">
-							<i class="fa fa-"></i>
+							<i class="fa fa-refresh"></i>
 						</button>
 					</div>
 					
-					<div class="item">
-						<input class="control" ng-model="filter" ng-change="filterMissions(filter);" />
+					<div class="item grow">
+						<input class="control" placeholder="Filter" ng-model="filter" ng-change="filterMissions(filter);" />
 					</div>
 					
 				</div>
@@ -118,10 +118,17 @@
 			
 			<hr>
 			
-			<div class="flex justify-end p-normal">
+			<div class="flex p-normal">
 				
-				<button class="btn" ng-class="{'disabled':selected.length < 3}">
-					Next >>
+				<button class="btn btn-mini">
+					Select All
+				</button>
+				
+				<button class="btn self-end" ng-class="{'disabled':selected.length < 3}">
+					<div class="row">
+						<span class="item">Next</span>
+						<i class="item fa fa-angle-double-right"></i>
+					</div>
 				</button>
 				
 			</div>
