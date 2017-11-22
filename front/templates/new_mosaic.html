@@ -283,22 +283,10 @@
 			            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
 			            </div>
 			            
-			            <div ng-repeat="m in mosaic.missions | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});" ng-click="displayMissionDetails(m);">
+			            <div ng-repeat="m in mosaic.missions | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
 			            	
 			                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
 			            
-			            	<div class="preview">
-			            		
-			            		<div class="text-center font-size-small mb-small">
-				            		<span class="color-muted">#{{mosaic.missions.length - $index}}.</span>
-				            	</div>
-				            	
-				            	<div class="text-center font-size-small">
-				            		<a>Details</a>
-				            	</div>
-				            	
-			            	</div>
-			            	
 			            </div>
 			            
 		            </div>

@@ -5,6 +5,12 @@
 
 .grid > .item { padding:.375rem; }
 
+
+
+.flag-icon.item { padding:0; margin:.375rem; }
+
+
+
 .row.align-center { justify-content:center; }
 .row.align-left { justify-content:flex-start; }
 .row.align-right { justify-content:flex-end; }
