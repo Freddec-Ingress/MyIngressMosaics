@@ -215,62 +215,62 @@
 			<div class="tab" ng-show="current_tab == 1">
 			
 				<div class="text-center mt-normal mb-small">
-				<span class="font-size-big color-light">
-					{{mosaic.title}}
-				</span>
-			</div>
-			
-				<div class="grid row align-center mb-small">
-				
-				<div class="item">
-					
-					<div id="fb-root"></div>
-					
-					<script>
-						(function(d, s, id) {
-							var js, fjs = d.getElementsByTagName(s)[0];
-							if (d.getElementById(id)) return;
-							js = d.createElement(s); js.id = id;
-							js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10";
-							fjs.parentNode.insertBefore(js, fjs);
-						}(document, 'script', 'facebook-jssdk'));
-					</script>
-					
-					{% endverbatim %}
-						<div class="fb-like"
-							data-href="https://www.myingressmosaics.com/mosaic/{{ref}}"
-							data-layout="button"
-							data-size="small"
-							data-mobile-iframe="true">
-						</div>
-					{% verbatim %}
-
-				</div>
-
-				<div class="item">
-					
-					{% endverbatim %}
-						<script src="https://apis.google.com/js/platform.js" async defer></script>
-						<div class="g-plus" data-action="share" data-annotation="none" data-href="https://www.myingressmosaics.com/mosaic/{{ref}}"></div>			
-					{% verbatim %}
-					
+					<span class="font-size-big color-light">
+						{{mosaic.title}}
+					</span>
 				</div>
 				
-				<div class="item">
-					<button class="badge" ng-click="toggle_love(user);" ng-class="{'active':mosaic.is_loved}">
-						<i class="fa fa-heart icon"></i>
-						<span class="text">{{mosaic.lovers}}</span>
-					</button>
+					<div class="grid row align-center mb-small">
+					
+					<div class="item">
+						
+						<div id="fb-root"></div>
+						
+						<script>
+							(function(d, s, id) {
+								var js, fjs = d.getElementsByTagName(s)[0];
+								if (d.getElementById(id)) return;
+								js = d.createElement(s); js.id = id;
+								js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10";
+								fjs.parentNode.insertBefore(js, fjs);
+							}(document, 'script', 'facebook-jssdk'));
+						</script>
+						
+						{% endverbatim %}
+							<div class="fb-like"
+								data-href="https://www.myingressmosaics.com/mosaic/{{ref}}"
+								data-layout="button"
+								data-size="small"
+								data-mobile-iframe="true">
+							</div>
+						{% verbatim %}
+	
+					</div>
+	
+					<div class="item">
+						
+						{% endverbatim %}
+							<script src="https://apis.google.com/js/platform.js" async defer></script>
+							<div class="g-plus" data-action="share" data-annotation="none" data-href="https://www.myingressmosaics.com/mosaic/{{ref}}"></div>			
+						{% verbatim %}
+						
+					</div>
+					
+					<div class="item">
+						<button class="badge" ng-click="toggle_love(user);" ng-class="{'active':mosaic.is_loved}">
+							<i class="fa fa-heart icon"></i>
+							<span class="text">{{mosaic.lovers}}</span>
+						</button>
+					</div>
+					
+					<div class="item">
+						<button class="badge" ng-click="toggle_complete(user);" ng-class="{'active':mosaic.is_completed}">
+							<i class="fa fa-check-square icon"></i>
+							<span class="text">{{mosaic.completers}}</span>
+						</button>
+					</div>
+					
 				</div>
-				
-				<div class="item">
-					<button class="badge" ng-click="toggle_complete(user);" ng-class="{'active':mosaic.is_completed}">
-						<i class="fa fa-check-square icon"></i>
-						<span class="text">{{mosaic.completers}}</span>
-					</button>
-				</div>
-				
-			</div>
 				
 				<div class="scrollable">
 				
@@ -335,6 +335,20 @@
 							<span ng-class="{'color-enlightened': creator.faction == 'E', 'color-resistant': creator.faction == 'R'}">
 								{{creator.name}}
 							</span>
+						</div>
+						
+					</div>
+					
+					<div class="mb-small">
+						<span class="color-muted">Missions</span>
+					</div>
+					
+					<div class="grid row wrap ml-normal mb-small">
+						
+						<div class="item" ng-repeat="missions in mosaic.missions">
+							<button class="btn btn-secondary">
+								#{{$index + 1}}.
+							</button>
 						</div>
 						
 					</div>
