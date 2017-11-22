@@ -48,7 +48,7 @@
                     
                     <div class="" ng-repeat="mission in filtered">
                     	
-                    	<div class="row nowrap">
+                    	<div class="flex align-center nowrap">
                     		
 			                <div class="item">
 			                	<i class="fa"></i>
@@ -61,11 +61,11 @@
 	                    	<div class="item grow ellipsis">
 	                    		
 	                    		<div class="">
-		                    		<span class="">{{mission.title}}</span>
+		                    		<span class="color-light">{{mission.title}}</span>
 	                    		</div>
 	                    		
 	                    		<div class="">
-		                    		<span class="">{{mission.creator}}</span>
+		                    		<span ng-class="{'color-enlightened': creator.faction == 'E', 'color-resistant': creator.faction == 'R'}">{{mission.creator}}</span>
 	                    		</div>
 	                    		
 	                    	</div>
