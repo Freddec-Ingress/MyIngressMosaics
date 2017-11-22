@@ -2892,7 +2892,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		$scope.filter = text;
 		$scope.filtered = [];
 		
-		if (!$scope.filter) $scope.filter = $scope.missions.slice();
+		if (!$scope.filter) $scope.filtered = $scope.missions.slice();
 		else  {
 			
 			for (var item of $scope.missions) {
