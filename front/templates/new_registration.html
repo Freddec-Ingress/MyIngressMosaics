@@ -48,16 +48,34 @@
                     
                     <div class="" ng-repeat="mission in filtered">
                     	
-		                <div class="">
-		        			<img src="/static/img/mask.png" style="width:26px; background-color:#000000; background-image:url({{mission.image}}=s25); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-                    	</div>
-                    	
-                    	<div class="">
-                    		{{mission.title}}
-                    	</div>
-                    	
-                    	<div class="">
-                    		{{item.creator}}
+                    	<div class="row nowrap">
+                    		
+			                <div class="item">
+			                	<i class="fa"></i>
+	                    	</div>
+	                    	
+			                <div class="item">
+			        			<img src="/static/img/mask.png" style="width:26px; background-color:#000000; background-image:url({{mission.image}}=s25); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+	                    	</div>
+	                    	
+	                    	<div class="item grow ellipsis">
+	                    		
+	                    		<div class="">
+		                    		<span class="">{{mission.title}}</span>
+	                    		</div>
+	                    		
+	                    		<div class="">
+		                    		<span class="">{{mission.creator}}</span>
+	                    		</div>
+	                    		
+	                    	</div>
+	                    	
+	                    	<div class="item">
+                                <a class="btn btn-mini" href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=17&pll={{mission.startLat}},{{mission.startLng}}" target="blank">
+                                    <i class="fa fa-external-link"></i>
+                                </a>
+	                    	</div>
+	                    	
                     	</div>
                     	
                     	<hr>
