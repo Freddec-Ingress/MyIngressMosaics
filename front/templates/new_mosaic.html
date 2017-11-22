@@ -345,7 +345,7 @@
 					
 					<div class="grid row wrap ml-normal mb-small">
 						
-						<div class="item grow" ng-repeat="missions in mosaic.missions">
+						<div class="item" ng-repeat="mission in mosaic.missions" ng-click="displayMissionDetails(mission);">
 							<button class="btn btn-secondary" style="width:80px;">
 								#{{$index + 1}}.
 							</button>
@@ -405,7 +405,7 @@
 								
 							</div>
 							
-							<hr class="mt-small">
+							<hr>
 							
 						</li>
 						
