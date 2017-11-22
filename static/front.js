@@ -2907,11 +2907,15 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	$scope.selectMission = function(mission) {
 	
 		mission.selected = true;
+		$scope.filtered.push(mission);
 	}
 	
 	$scope.unselectMission = function(mission) {
 	
 		mission.selected = false;
+		
+		var index = $scope.filtered.indexOf(mission);
+		$scope.filtered.splice(index, 1);
 	}
 	
 	/* Page loading */
