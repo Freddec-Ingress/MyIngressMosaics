@@ -68,13 +68,19 @@
                     
                     <div ng-repeat="mission in filtered">
                     	
-                    	<div class="p-normal">
+                    	<div class="p-normal" ng-class="{'bgcolor-highlight':mission.selected}">
 	                    	<div class="row align-center nowrap">
 	                		
 		                    	<div class="item">
+		                    		
 	                                <a class="btn btn-icon" ng-hide="mission.selected" ng-click="selectMission(mission);">
 	                                    <i class="fa fa-plus-square"></i>
 	                                </a>
+		                    		
+	                                <a class="btn btn-icon" ng-show="mission.selected" ng-click="unselectMission(mission);">
+	                                    <i class="fa fa-minus-square"></i>
+	                                </a>
+	                                
 		                    	</div>
 		                    	
 				                <div class="item">
@@ -121,7 +127,7 @@
 			<div class="p-normal">
 				<div class="row">
 					
-					<div class="item grow">
+					<div class="item grow flex">
 						
 						<div class="text-center">
 							
