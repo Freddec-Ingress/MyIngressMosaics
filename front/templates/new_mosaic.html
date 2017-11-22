@@ -309,12 +309,24 @@
 			<div class="tab" ng-show="current_tab == 2">
 				
 				<div class="scrollable mt-normal">
+					
+					<div class="mt-small">
+						<span class="color-muted">Details</span>
+					</div>
+					
+					<div class="grid row">
+						
+						<div class="item">
+							<flag class="mr-small" country="mosaic.city.region.country.name"></flag>
+							<span class="color-normal">{{mosaic.city.name}}, {{mosaic.city.region.name}}</span>
+						</div>
+						
+					</div>
+					
 					<dl>
 						
 						<dt class="w4">Location</dt>
 						<dd class="w8">
-							<flag class="mr-small" country="mosaic.city.region.country.name"></flag>
-							{{mosaic.city.name}}
 						</dd>
 						
 						<dt class="w4">Missions</dt>
@@ -412,13 +424,13 @@
 				</span>
 			</div>
 			
-			<div class="item" ng-click="open_tab(3);" ng-class="{'active':current_tab == 3}">
+			<div class="item" ng-click="open_tab(2);" ng-class="{'active':current_tab == 2}">
 				<span class="text">
 					<i class="fa fa-indent"></i>
 				</span>
 			</div>
 			
-			<div class="item" ng-click="initMap(); open_tab(2);" ng-class="{'active':current_tab == 2}">
+			<div class="item" ng-click="initMap(); open_tab(3);" ng-class="{'active':current_tab == 3}">
 				<span class="text">
 					<i class="fa fa-map"></i>
 				</span>
