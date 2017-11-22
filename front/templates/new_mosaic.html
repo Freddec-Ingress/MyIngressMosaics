@@ -375,28 +375,32 @@
 					
 					<ul class="col">
 						
-						<li class="p-small" ng-repeat="comment in mosaic.comments">
+						<li ng-repeat="comment in mosaic.comments">
 							
-							<div class="font-size-small">
-								<span ng-class="{'color-enlightened': comment.faction == 'E', 'color-resistant': comment.faction == 'R'}">{{comment.username}}</span>
-							</div>
-							
-							<div>
-								<span class="color-light">{{comment.text}}</span>
-							</div>
-							
-							<div class="grid row" ng-show="comment.username == user.name">
+							<div class="p-small">
 								
-								<div class="item">
-									<button class="btn btn-mini" ng-click="displayCommentEdit(comment);">
-										Edit
-									</button>
+								<div class="font-size-small">
+									<span ng-class="{'color-enlightened': comment.faction == 'E', 'color-resistant': comment.faction == 'R'}">{{comment.username}}</span>
 								</div>
 								
-								<div class="item">
-									<button class="btn btn-mini" ng-click="deleteComment(user, $index, comment);">
-										Delete
-									</button>
+								<div class="mb-small">
+									<span class="color-light">{{comment.text}}</span>
+								</div>
+								
+								<div class="grid row" ng-show="comment.username == user.name">
+									
+									<div class="item">
+										<button class="btn btn-mini" ng-click="displayCommentEdit(comment);">
+											Edit
+										</button>
+									</div>
+									
+									<div class="item">
+										<button class="btn btn-mini" ng-click="deleteComment(user, $index, comment);">
+											Delete
+										</button>
+									</div>
+									
 								</div>
 								
 							</div>
