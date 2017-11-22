@@ -50,8 +50,10 @@
                     	
                     	<div class="flex align-center nowrap">
                     		
-			                <div class="item">
-			                	<i class="fa"></i>
+	                    	<div class="item">
+                                <a class="btn btn-mini" ng-click="selectMission(mission);">
+                                    <i class="fa fa-plus-square"></i>
+                                </a>
 	                    	</div>
 	                    	
 			                <div class="item">
@@ -65,9 +67,15 @@
 	                    		</div>
 	                    		
 	                    		<div class="">
-		                    		<span ng-class="{'color-enlightened': creator.faction == 'E', 'color-resistant': creator.faction == 'R'}">{{mission.creator}}</span>
+		                    		<span ng-class="{'color-enlightened': mission.faction == 'E', 'color-resistant': mission.faction == 'R'}">{{mission.creator}}</span>
 	                    		</div>
 	                    		
+	                    	</div>
+	                    	
+	                    	<div class="item">
+                                <a class="btn btn-mini" ng-click="deleteMission(mission);">
+                                    <i class="fa fa-trash"></i>
+                                </a>
 	                    	</div>
 	                    	
 	                    	<div class="item">
