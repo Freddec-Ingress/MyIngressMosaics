@@ -373,9 +373,9 @@
 						<span class="color-muted">No comment</span>
 					</div>
 					
-					<ul class="grid col">
+					<ul class="col">
 						
-						<li class="item" ng-repeat="comment in mosaic.comments">
+						<li class="p-small" ng-repeat="comment in mosaic.comments">
 							
 							<div class="font-size-small">
 								<span ng-class="{'color-enlightened': comment.faction == 'E', 'color-resistant': comment.faction == 'R'}">{{comment.username}}</span>
@@ -385,7 +385,7 @@
 								<span class="color-light">{{comment.text}}</span>
 							</div>
 							
-							<div class="grid row mt-small" ng-show="comment.username == user.name">
+							<div class="grid row" ng-show="comment.username == user.name">
 								
 								<div class="item">
 									<button class="btn btn-mini" ng-click="displayCommentEdit(comment);">

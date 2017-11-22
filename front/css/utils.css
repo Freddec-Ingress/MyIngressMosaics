@@ -90,6 +90,10 @@
 
 
 
+.p-small { padding:10px; }
+
+
+
 .ellipsis { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 
 
