@@ -25,9 +25,9 @@
 		
 		<div class="grow flex-col" ng-show="current_step == 1">
 			
-			<div class="scrollable mt-normal">
+			<div class="scrollable">
 				
-				<div ng-if="refreshing" class="flex justify-center">
+				<div ng-if="refreshing" class="mt-normal flex justify-center">
 					<i class="item fa fa-spinner rotating"></i>
 					<span class="item">Refreshing...</span>
 				</div>
@@ -36,7 +36,7 @@
 					
                     <div ng-if="filtered.length < 1">
                     	
-                    	<div class="text-center mb-normal">
+                    	<div class="text-center mt-normal mb-normal">
                     		<span class="color-muted">No mission</span>
                     	</div>
                     	
@@ -46,12 +46,12 @@
                     	
                     </div>
                     
-                    <div class="" ng-repeat="mission in filtered">
+                    <div ng-repeat="mission in filtered">
                     	
                     	<div class="flex align-center nowrap">
                     		
 	                    	<div class="item">
-                                <a class="btn btn-mini" ng-click="selectMission(mission);">
+                                <a class="btn btn-icon" ng-click="selectMission(mission);">
                                     <i class="fa fa-plus-square"></i>
                                 </a>
 	                    	</div>
@@ -73,13 +73,13 @@
 	                    	</div>
 	                    	
 	                    	<div class="item">
-                                <a class="btn btn-mini" ng-click="deleteMission(mission);">
+                                <a class="btn btn-icon" ng-click="deleteMission(mission);">
                                     <i class="fa fa-trash"></i>
                                 </a>
 	                    	</div>
 	                    	
 	                    	<div class="item">
-                                <a class="btn btn-mini" href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=17&pll={{mission.startLat}},{{mission.startLng}}" target="blank">
+                                <a class="btn btn-icon" href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=17&pll={{mission.startLat}},{{mission.startLng}}" target="blank">
                                     <i class="fa fa-external-link"></i>
                                 </a>
 	                    	</div>
