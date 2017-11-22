@@ -2873,6 +2873,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		
 		$scope.missions = [];
 		$scope.filtered = [];
+		$scope.selected = [];
 		
 		API.sendRequest('/api/missions/', 'POST').then(function(response) {
 			
