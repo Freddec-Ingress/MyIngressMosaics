@@ -338,12 +338,14 @@
 						<span class="color-muted">Missions</span>
 					</div>
 					
-					<div class="row wrap ml-big mb-normal">
+					<div class="row wrap ml-big mb-normal justify-center">
 						
-						<div class="item" ng-repeat="mission in mosaic.missions" ng-click="displayMissionDetails(mission);">
-							<button class="btn" style="width:80px;" ng-class="{'btn-danger':!mission.creator && mission.portals.length < 1}">
-								#{{$index + 1}}.
-							</button>
+						<div class="flex wrap justify-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
+							<div class="item" ng-repeat="mission in mosaic.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.cols}});" ng-click="displayMissionDetails(mission);">
+								<button class="btn" ng-class="{'btn-danger':!mission.creator && mission.portals.length < 1}">
+									#{{mosaic.missions.length - $index}}.
+								</button>
+							</div>
 						</div>
 						
 					</div>

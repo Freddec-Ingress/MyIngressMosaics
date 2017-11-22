@@ -39,5 +39,7 @@ urlpatterns = [
 	
 	url(r'^new_mosaic/(?P<ref>\w+)', views.new_mosaic),
 	
+	url(r'^new_registration',  views.new_registration),
+	
 	url(r'^.*', views.world),
 ]

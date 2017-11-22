@@ -303,3 +303,10 @@ def new_mosaic(request, ref):
 		context = { 'ref': ref }
 		
 	return render(request, 'new_mosaic.html', context)
+	
+	
+	
+def new_registration(request):
+	
+	context = {}
+	return render(request, 'new_registration.html', context)

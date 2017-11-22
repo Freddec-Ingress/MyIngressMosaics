@@ -1,0 +1,44 @@
+{% extends 'new_base.html' %}
+
+{% block extra-head %}
+
+	<title>MIM - Hunt</title>
+
+	<meta property="og:url" content="https://www.myingressmosaics.com">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="MyIngressMosaics">
+	<meta property="og:description" content="Ingress Mosaics, Banners and Mission series">
+
+{% endblock %}
+
+{% block content %}
+<div id="content" ng-controller="NewRegistrationCtrl">
+
+{% verbatim %}
+
+	<div id="loading" ng-hide="loaded">
+		<i class="item fa fa-spinner rotating"></i>
+		<span class="item">Loading page...</span>
+	</div>
+	
+	<div class="container" ng-class="{'active':loaded}">
+		
+		<div class="grow flex" ng-show="current_step == 1">
+			
+			<div class="steps">
+				
+				<span class="steps-line"></span>
+				
+			</div>
+			
+			<div class="scrollable">
+			</div>
+			
+		</div>
+		
+	</div>
+			
+{% endverbatim %}
+
+</div>
+{% endblock %}
