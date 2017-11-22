@@ -56,6 +56,11 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		}
 	}
 	
+	$scope.selectMission = function(mission) {
+	
+		mission.selected = true;
+	}
+	
 	/* Page loading */
 
 	$scope.refreshMissions();

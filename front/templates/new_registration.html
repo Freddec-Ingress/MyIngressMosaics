@@ -70,42 +70,42 @@
                     	
                     	<div class="p-normal">
 	                    	<div class="row align-center nowrap">
-                    		
-	                    	<div class="item">
-                                <a class="btn btn-icon" ng-click="selectMission(mission);">
-                                    <i class="fa fa-plus-square"></i>
-                                </a>
+	                		
+		                    	<div class="item">
+	                                <a class="btn btn-icon" ng-hide="mission.selected" ng-click="selectMission(mission);">
+	                                    <i class="fa fa-plus-square"></i>
+	                                </a>
+		                    	</div>
+		                    	
+				                <div class="item">
+				        			<img src="/static/img/mask.png" style="width:26px; background-color:#000000; background-image:url({{mission.image}}=s25); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+		                    	</div>
+		                    	
+		                    	<div class="item grow ellipsis">
+		                    		
+		                    		<div class="ellipsis">
+			                    		<span class="color-light">{{mission.title}}</span>
+		                    		</div>
+		                    		
+		                    		<div class="">
+			                    		<span ng-class="{'color-enlightened': mission.faction == 'E', 'color-resistant': mission.faction == 'R'}">{{mission.creator}}</span>
+		                    		</div>
+		                    		
+		                    	</div>
+		                    	
+		                    	<div class="item">
+	                                <a class="btn btn-icon" ng-click="deleteMission(mission);">
+	                                    <i class="fa fa-trash"></i>
+	                                </a>
+		                    	</div>
+		                    	
+		                    	<div class="item">
+	                                <a class="btn btn-icon" href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=17&pll={{mission.startLat}},{{mission.startLng}}" target="blank">
+	                                    <i class="fa fa-external-link"></i>
+	                                </a>
+		                    	</div>
+		                    	
 	                    	</div>
-	                    	
-			                <div class="item">
-			        			<img src="/static/img/mask.png" style="width:26px; background-color:#000000; background-image:url({{mission.image}}=s25); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-	                    	</div>
-	                    	
-	                    	<div class="item grow ellipsis">
-	                    		
-	                    		<div class="ellipsis">
-		                    		<span class="color-light">{{mission.title}}</span>
-	                    		</div>
-	                    		
-	                    		<div class="">
-		                    		<span ng-class="{'color-enlightened': mission.faction == 'E', 'color-resistant': mission.faction == 'R'}">{{mission.creator}}</span>
-	                    		</div>
-	                    		
-	                    	</div>
-	                    	
-	                    	<div class="item">
-                                <a class="btn btn-icon" ng-click="deleteMission(mission);">
-                                    <i class="fa fa-trash"></i>
-                                </a>
-	                    	</div>
-	                    	
-	                    	<div class="item">
-                                <a class="btn btn-icon" href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=17&pll={{mission.startLat}},{{mission.startLng}}" target="blank">
-                                    <i class="fa fa-external-link"></i>
-                                </a>
-	                    	</div>
-	                    	
-                    	</div>
                     	</div>
                     	
                     	<hr>
@@ -135,8 +135,8 @@
 						
 					</div>
 					
-					<div class="item">
-						<button class="btn self-center" ng-class="{'disabled':selected.length < 3}">
+					<div class="item self-center">
+						<button class="btn" ng-class="{'disabled':selected.length < 3}">
 							<div class="row">
 								<span class="item">Next</span>
 								<i class="item fa fa-angle-double-right"></i>
