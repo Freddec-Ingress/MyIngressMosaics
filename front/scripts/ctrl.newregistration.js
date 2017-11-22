@@ -97,7 +97,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	
 	/* Step #2 management */
 	
-	$scope.columns = 6;
+	$scope.columns = '6';
 	
 	$scope.offset = [];
 	
