@@ -314,24 +314,24 @@
 						<span class="color-muted">Details</span>
 					</div>
 					
-					<div class="ml-normal mb-small">
+					<div class="grid col ml-normal mb-small">
 						
-						<div class="row valign-center">
-							<flag class="mr-small" country="mosaic.city.region.country.name"></flag>
-							<span class="color-normal">{{mosaic.city.name}}, {{mosaic.city.region.name}}</span>
+						<div class="item grid row valign-center">
+							<flag class="item" country="mosaic.city.region.country.name"></flag>
+							<span class="item color-normal">{{mosaic.city.name}}, {{mosaic.city.region.name}}</span>
 						</div>
 							
-						<div class="">
+						<div class="item ">
 							<span class="color-normal">{{mosaic.missions.length}} missions</span>
 							<span class="color-normal" ng-show="mosaic.type=='sequence'">&nbsp;in sequence</span>
 							<span class="color-normal" ng-show="mosaic.type=='serie'">&nbsp;in serie</span>
 						</div>
 							
-						<div class="">
+						<div class="item ">
 							<span class="color-normal">{{mosaic.portals}} waypoints, {{mosaic.uniques}} uniques</span>
 						</div>
 							
-						<div class="" ng-show="mosaic.type=='sequence'">
+						<div class="item " ng-show="mosaic.type=='sequence'">
 							<span class="color-normal">{{mosaic.distance | number:2}} km</span>
 						</div>
 						
