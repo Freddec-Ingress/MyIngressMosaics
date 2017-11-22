@@ -142,7 +142,37 @@
 					</div>
 					
 					<div class="item self-center">
-						<button class="btn" ng-class="{'disabled':selected.length < 3}">
+						<button class="btn" ng-class="{'disabled':selected.length < 3}" ng-click="open_step(2);">
+							<div class="row">
+								<span class="item">Next</span>
+								<i class="item fa fa-angle-double-right"></i>
+							</div>
+						</button>
+					</div>
+					
+				</div>
+			</div>
+			
+		</div>
+		
+		<div class="grow flex-col" ng-show="current_step == 2">
+			
+			<hr>
+			
+			<div class="p-normal">
+				<div class="row">
+					
+					<div class="item grow flex">
+						<button class="btn" ng-click="open_step(1);">
+							<div class="row">
+								<i class="item fa fa-angle-double-left"></i>
+								<span class="item">Back</span>
+							</div>
+						</button>
+					</div>
+					
+					<div class="item self-center">
+						<button class="btn" ng-click="open_step(3);">
 							<div class="row">
 								<span class="item">Next</span>
 								<i class="item fa fa-angle-double-right"></i>
