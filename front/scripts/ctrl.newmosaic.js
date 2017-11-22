@@ -165,7 +165,7 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 			url: 'https://www.myingressmosaics.com/static/img/neutral.png',
 		};
 
-		var index = 0;
+		var index = 1;
 		for (var m of $scope.mosaic.missions) {
 		
 			if (m.ref.indexOf('Unavailable') !== -1) continue;
@@ -202,11 +202,8 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 	        
 	        roadmap.setMap(map);
 	        
-			var label = {};
-			if ($scope.mosaic.type == 'sequence') {
-				label = { text:String(index), color:'#FFFFFF', fontFamily:'Coda', fontSize:'.5rem', fontWeight:'400', }
-			}
-			
+			var label = { text:String(index), color:'#FFFFFF', fontFamily:'Coda', fontSize:'.5rem', fontWeight:'400', }
+
 	        new google.maps.Marker({
 	        	
 				map: map,

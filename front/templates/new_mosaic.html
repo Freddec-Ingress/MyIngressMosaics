@@ -305,16 +305,8 @@
 				</div>
 				
 			</div>
-			
+				
 			<div class="tab" ng-show="current_tab == 2">
-				
-				<div class="grow row">
-					<div id="map" class="grow"></div>
-				</div>
-				
-			</div>
-				
-			<div class="tab" ng-show="current_tab == 3">
 				
 				<div class="scrollable mt-normal">
 					<dl>
@@ -346,6 +338,14 @@
 						</dd>
 						
 					</dl>
+				</div>
+				
+			</div>
+			
+			<div class="tab" ng-show="current_tab == 3">
+				
+				<div class="grow row">
+					<div id="map" class="grow"></div>
 				</div>
 				
 			</div>
@@ -412,21 +412,21 @@
 				</span>
 			</div>
 			
-			<div class="item" ng-click="initMap(); open_tab(2);" ng-class="{'active':current_tab == 2}">
-				<span class="text">
-					<i class="fa fa-map"></i>
-				</span>
-			</div>
-			
 			<div class="item" ng-click="open_tab(3);" ng-class="{'active':current_tab == 3}">
 				<span class="text">
 					<i class="fa fa-indent"></i>
 				</span>
 			</div>
 			
+			<div class="item" ng-click="initMap(); open_tab(2);" ng-class="{'active':current_tab == 2}">
+				<span class="text">
+					<i class="fa fa-map"></i>
+				</span>
+			</div>
+			
 			<div class="item row align-center" ng-click="open_tab(4);" ng-class="{'active':current_tab == 4}">
 				<span class="text">
-					<i class="fa fa-comment"></i>
+					<i class="fa fa-comments"></i>
 				</span>
 			</div>
 
