@@ -342,7 +342,7 @@
 						
 						<div class="flex wrap justify-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
 							<div class="item" ng-repeat="mission in mosaic.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.cols}});" ng-click="displayMissionDetails(mission);">
-								<button class="btn" style="padding:0;" ng-class="{'btn-danger':!mission.creator && mission.portals.length < 1}">
+								<button class="btn" style="padding:0; width:100%; font-size:smaller;" ng-class="{'btn-danger':!mission.creator && mission.portals.length < 1}">
 									#{{mosaic.missions.length - $index}}.
 								</button>
 							</div>
