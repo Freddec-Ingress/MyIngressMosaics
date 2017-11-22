@@ -31,7 +31,7 @@
 	
 	<div class="container" ng-class="{'active':loaded}">
 
-		<div class="grow col">
+		<div class="grow flex">
 			
 			<div class="modal-container" ng-if="mission_selected">
 				
@@ -220,7 +220,7 @@
 					</span>
 				</div>
 				
-					<div class="grid row align-center mb-small">
+				<div class="row align-center mb-small">
 					
 					<div class="item">
 						
@@ -273,11 +273,7 @@
 				</div>
 				
 				<div class="scrollable">
-				
-		            <div ng-show="mosaic.has_fake" class="font-size-small color-warning text-center mb-small">
-		            	Warning, some missions are not available
-		            </div>
-		            
+
 					<div class="row wrap align-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
 						
 			            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
@@ -290,19 +286,20 @@
 			            </div>
 			            
 		            </div>
+		            
 				</div>
 				
 			</div>
 				
 			<div class="tab" ng-show="current_tab == 2">
 				
-				<div class="scrollable m-small font-size-small">
+				<div class="scrollable p-small text-small">
 					
 					<div class="mb-small">
 						<span class="color-muted">Details</span>
 					</div>
 					
-					<div class="grid col ml-normal mb-small">
+					<div class="col ml-normal mb-small">
 						
 						<div class="item grid row valign-center">
 							<flag class="item" country="mosaic.city.region.country.name"></flag>
