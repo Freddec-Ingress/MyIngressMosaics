@@ -51,29 +51,31 @@
 					
 					<div class="modal-content">
 						
-						<div class="grid row mb-normal">
+						<div class="row mb-normal">
 							
-							<div class="item">
+							<div class="item flex">
 								<img  width="64px" height="64px" src="{{mission_selected.image}}">
 							</div>
 							
 							<div class="item">
-								<dl>
+
+								<div class="row">
+									<div class="item text-right" style="width:60px;"><span class="color-muted">Order</span></div>
+									<div class="item">#{{mission_selected.order}}</div>
+								</div>
+								
+								<div class="row">
+									<div class="item text-right" style="width:60px;"><span class="color-muted">Creator</span></div>
+									<div class="item" ng-class="{'color-enlightened':mission_selected.faction=='E', 'color-resistant':mission_selected.faction=='R'}">{{mission_selected.creator}}</div>
+								</div>
 									
-									<dt class="w4">Order</dt>
-									<dd class="w8">#{{mission_selected.order}}</dd>
-									
-									<dt class="w4">Creator</dt>
-									<dd class="w8 font-size-small" ng-class="{'color-enlightened':mission_selected.faction=='E', 'color-resistant':mission_selected.faction=='R'}">{{mission_selected.creator}}</dd>
-									
-								</dl>
 							</div>
 							
 						</div>
 						
 						<hr class="mb-normal">
 						
-						<div class="grid row align-center mb-normal">
+						<div class="row justify-center mb-normal">
 							
 							<div class="item">
 		                        <a class="btn" href="https://www.ingress.com/intel?ll={{mission_selected.startLat}},{{mission_selected.startLng}}&z=17&pll={{mission_selected.startLat}},{{mission_selected.startLng}}" target="blank">
@@ -95,7 +97,7 @@
 							
 						</div>
 						
-						<div class="mb-normal font-size-small color-dark">
+						<div class="mb-normal color-dark">
 							{{mission_selected.desc}}
 						</div>
 						
@@ -103,15 +105,15 @@
 						
 						<ul class="grid col">
 							
-							<li class="item grid row" ng-repeat="portal in mission_selected.portals">
-								<div class="item noshrink font-size-small color-muted" style="width:40px; padding-top:9px;">
+							<li class="item row" ng-repeat="portal in mission_selected.portals">
+								<div class="item noshrink color-muted text-right" style="width:40px;">
 									#{{$index + 1}}.
 								</div>
 								<div class="item">
-									<div class="font-size-normal color-light">
+									<div class="color-light">
 										{{portal.title}}
 									</div>
-									<div class="font-size-small color-dark">
+									<div class="color-dark">
 										<span ng-show="portal.action==1">Hack this Portal</span>
 										<span ng-show="portal.action==2">Capture or Upgrade Portal</span>
 										<span ng-show="portal.action==7">View this Field Trip Waypoint</span>
@@ -142,14 +144,14 @@
 					
 					<div class="modal-content">
 						
-						<div class="grid row mb-small">
+						<div class="row mb-normal">
 							
 							<div class="item">
-								<span class="font-size-small color-muted">Order</span>
+								<span class="color-muted">Order</span>
 							</div>
 							
 							<div class="item">
-								<span class="font-size-small color-normal">#{{mission_selected.order}}</span>
+								<span class="color-normal">#{{mission_selected.order}}</span>
 							</div>
 							
 						</div>
@@ -157,10 +159,8 @@
 						<div class="mb-normal">
 							<span class="color-danger">This mission was not available in Ingress game during mosaic registration. If you know that this mission is available now, please post a comment.</span>
 						</div>
-						
-						<hr class="mb-normal">
-						
-		            	<div class="mb-small">
+
+		            	<div class="mb-normal">
 		            		<textarea class="control" rows="5" ng-model="comment_text">
 		            		</textarea>
 		            	</div>
@@ -195,7 +195,7 @@
 					
 					<div class="modal-content">
 						
-		            	<div class="mb-small">
+		            	<div class="mb-normal">
 		            		<textarea class="control" rows="5" ng-model="comment_selected.text">
 		            		</textarea>
 		            	</div>
@@ -341,7 +341,7 @@
 					<div class="row wrap ml-big mb-normal">
 						
 						<div class="item" ng-repeat="mission in mosaic.missions" ng-click="displayMissionDetails(mission);">
-							<button class="btn" style="width:80px;">
+							<button class="btn" style="width:80px;" ng-class="{'btn-danger':!mission.creator && mission.portals.length < 1}">
 								#{{$index + 1}}.
 							</button>
 						</div>
