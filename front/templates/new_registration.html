@@ -32,6 +32,28 @@
 			</div>
 			
 			<div class="scrollable">
+				
+				<div ng-if="refreshing" class="flex justify-center">
+					<i class="item fa fa-spinner rotating"></i>
+					<span class="item">Refreshing...</span>
+				</div>
+				
+				<div ng-if="!refreshing">
+					
+                    <div ng-if="filtered.length < 1">
+                    	
+                    	<div class="text-center">
+                    		<span class="color-muted">No mission</span>
+                    	</div>
+                    	
+                    	<div ng-if="missions.length < 1" class="text-center">
+                    		<a href="https://www.myingressmosaics.com/recruitment">Become a mosaic hunter</a>
+                    	</div>
+                    	
+                    </div>
+                    
+				</div>
+				
 			</div>
 			
 		</div>
