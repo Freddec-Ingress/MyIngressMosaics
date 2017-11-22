@@ -34,7 +34,7 @@
 	display:flex; flex-direction:row; align-items:stretch; justify-content:center;
 }
 
-#loading { display:flex; align-items:center; justify-content:center; color:#69ccca; padding:20px; text-align:center;}
+#loading { display:flex; align-items:center; justify-content:center; }
 
 
 
