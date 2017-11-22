@@ -123,16 +123,20 @@
 					
 					<div class="item grow">
 						
-						{{filtered.length}} missions
-						
-						<button class="btn btn-mini">
-							Select All
-						</button>
+						<div class="text-center">
+							
+							{{filtered.length}} missions
+							
+							<button class="btn btn-mini">
+								Select All
+							</button>
+							
+						</div>
 						
 					</div>
 					
-					<div class="item grow">
-						<button class="btn self-end" ng-class="{'disabled':selected.length < 3}">
+					<div class="item">
+						<button class="btn self-center" ng-class="{'disabled':selected.length < 3}">
 							<div class="row">
 								<span class="item">Next</span>
 								<i class="item fa fa-angle-double-right"></i>
