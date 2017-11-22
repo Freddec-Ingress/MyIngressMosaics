@@ -314,48 +314,55 @@
 						<span class="color-muted">Details</span>
 					</div>
 					
-					<div class="grid row wrap">
+					<div class="grid row wrap mb-small">
 						
-						<div class="item">
+						<div class="item row valign-center">
 							<flag class="mr-small" country="mosaic.city.region.country.name"></flag>
 							<span class="color-normal">{{mosaic.city.name}}, {{mosaic.city.region.name}}</span>
 						</div>
 						
+						<div class="item">
+							<span class="color-muted">&middot;</span>
+						</div>
+							
 						<div class="item">
 							<span class="color-normal">{{mosaic.missions.length}} missions</span>
 							<span class="color-normal" ng-show="mosaic.type=='sequence'">&nbsp;in sequence</span>
 							<span class="color-normal" ng-show="mosaic.type=='serie'">&nbsp;in serie</span>
 						</div>
 						
+						<div class="item">
+							<span class="color-muted">&middot;</span>
+						</div>
+							
+						<div class="item">
+							<span class="color-normal">{{mosaic.portals}} waypoints, {{mosaic.uniques}} uniques</span>
+						</div>
+						
+						<div class="item" ng-show="mosaic.type=='sequence'">
+							<span class="color-muted">&middot;</span>
+						</div>
+							
+						<div class="item" ng-show="mosaic.type=='sequence'">
+							<span class="color-normal">{{mosaic.distance | number:2}} km</span>
+						</div>
+						
 					</div>
 					
-					<dl>
+					<div class="mb-small">
+						<span class="color-muted">Creators</span>
+					</div>
+					
+					<div class="grid row wrap mb-small">
 						
-						<dt class="w4">Location</dt>
-						<dd class="w8">
-						</dd>
-						
-						<dt class="w4">Missions</dt>
-						<dd class="w8">
-							{{mosaic.missions.length}}
-							<span ng-show="mosaic.type=='sequence'">&nbsp;in sequence</span>
-							<span ng-show="mosaic.type=='serie'">&nbsp;in serie</span>
-						</dd>
-						
-						<dt class="w4">Waypoints</dt>
-						<dd class="w8">{{mosaic.uniques}} uniques / {{mosaic.portals}} total</dd>
-						
-						<dt class="w4" ng-show="mosaic.type=='sequence'">Distance</dt>
-						<dd class="w8" ng-show="mosaic.type=='sequence'">{{mosaic.distance | number:2}} km</dd>
-						
-						<dt class="w4 self-valign-top">Creators</dt>
-						<dd class="w8 col">
-							<span ng-repeat="creator in mosaic.creators" ng-class="{'color-enlightened': creator.faction == 'E', 'color-resistant': creator.faction == 'R'}">
+						<div class="item" ng-repeat="creator in mosaic.creators">
+							<span ng-class="{'color-enlightened': creator.faction == 'E', 'color-resistant': creator.faction == 'R'}">
 								{{creator.name}}
 							</span>
-						</dd>
+						</div>
 						
-					</dl>
+					</div>
+					
 				</div>
 				
 			</div>
