@@ -23,15 +23,9 @@
 	
 	<div class="container" ng-class="{'active':loaded}">
 		
-		<div class="grow flex" ng-show="current_step == 1">
+		<div class="grow flex-col" ng-show="current_step == 1">
 			
-			<div class="steps">
-				
-				<span class="steps-line"></span>
-				
-			</div>
-			
-			<div class="scrollable">
+			<div class="scrollable mt-normal">
 				
 				<div ng-if="refreshing" class="flex justify-center">
 					<i class="item fa fa-spinner rotating"></i>
@@ -42,7 +36,7 @@
 					
                     <div ng-if="filtered.length < 1">
                     	
-                    	<div class="text-center">
+                    	<div class="text-center mb-normal">
                     		<span class="color-muted">No mission</span>
                     	</div>
                     	
@@ -52,7 +46,35 @@
                     	
                     </div>
                     
+                    <div class="" ng-repeat="mission in filtered">
+                    	
+		                <div class="">
+		        			<img src="/static/img/mask.png" style="width:26px; background-color:#000000; background-image:url({{mission.image}}=s25); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+                    	</div>
+                    	
+                    	<div class="">
+                    		{{mission.title}}
+                    	</div>
+                    	
+                    	<div class="">
+                    		{{item.creator}}
+                    	</div>
+                    	
+                    	<hr>
+                    	
+                    </div>
+                    
 				</div>
+				
+			</div>
+			
+			<hr>
+			
+			<div class="flex justify-end p-normal">
+				
+				<button class="btn" ng-class="{'disabled':selected.length < 3}">
+					Next >>
+				</button>
 				
 			</div>
 			

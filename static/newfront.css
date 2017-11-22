@@ -151,6 +151,7 @@ ul > li { list-style:none; }
 	overflow-y: auto;
 }
 .flex { display:flex; }
+.flex-col { display:flex; flex-direction:column; }
 
 .row, .col { margin:-.375rem; }
 
@@ -203,7 +204,7 @@ ul > li { list-style:none; }
 
 
 
-.scrollable { flex:1 1 auto; overflow-y:auto; overflow-x:hidden; }
+.scrollable { flex-grow:1; height:0; overflow-y:auto; overflow-x:hidden; }
 
 
 
@@ -337,6 +338,11 @@ ul > li { list-style:none; }
 	display:flex; align-items:center; justify-content:center;
 	min-height:34px;
 }
+
+.btn.disabled { background-color: rgb(68, 68, 68);
+    color: #ACAFAF;
+    border-color: #ACAFAF;
+    background-image: none; }
 
 .btn-mini { min-height:24px; padding:0 10px; background-image:none; }
 

@@ -1,4 +1,5 @@
 .flex { display:flex; }
+.flex-col { display:flex; flex-direction:column; }
 
 .row, .col { margin:-.375rem; }
 
@@ -51,7 +52,7 @@
 
 
 
-.scrollable { flex:1 1 auto; overflow-y:auto; overflow-x:hidden; }
+.scrollable { flex-grow:1; height:0; overflow-y:auto; overflow-x:hidden; }
 
 
 

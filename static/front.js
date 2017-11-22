@@ -2861,6 +2861,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	
 	$scope.missions = [];
 	$scope.filtered = [];
+	$scope.selected = [];
 	
 	$scope.refreshing = false;
 	
