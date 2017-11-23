@@ -66,6 +66,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 			$scope.selected.push(mission);
 			
 			var order = UtilsService.getOrderFromMissionName(mission.title);
+			if (order < 1) order = $scope.selected.indexOf(mission);
 			mission.order = order.toString();
 			
 			$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
@@ -155,6 +156,12 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
 		
 		$scope.closeOrder();
+	}
+	
+	$scope.retireMission = function(mission) {
+		
+		var index = $scope.selected.indexOf(mission);
+		$scope.selected.splice(index, 1);
 	}
 	
 	/* Page loading */

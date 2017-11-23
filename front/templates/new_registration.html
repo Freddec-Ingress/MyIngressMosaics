@@ -215,44 +215,48 @@
 		
 		<div class="grow flex-col" ng-show="current_step == 2">
 			
-			<div class="p-normal">
-				<div class="row">
-					
-					<div class="item self-center text-right" style="min-width:150px; width:150px;">
-						Number of columns
+			<div class="flex justify-center">
+				<div>
+					<div class="p-normal">
+						<div class="row">
+							
+							<div class="item self-center text-right" style="min-width:150px; width:150px;">
+								Number of columns
+							</div>
+							
+							<div class="item">
+								<select class="control" ng-model="columns" ng-change="computeOffset();">
+									<option value="6">6</option>
+									<option value="5">5</option>
+									<option value="4">4</option>
+									<option value="3">3</option>
+									<option value="2">2</option>
+									<option value="1">1</option>
+								</select>
+							</div>
+							
+						</div>
 					</div>
 					
-					<div class="item">
-						<select class="control" ng-model="columns" ng-change="computeOffset();">
-							<option value="6">6</option>
-							<option value="5">5</option>
-							<option value="4">4</option>
-							<option value="3">3</option>
-							<option value="2">2</option>
-							<option value="1">1</option>
-						</select>
+					<div class="p-normal">
+						<div class="row">
+							
+							<div class="item self-center text-right" style="min-width:150px; width:150px;">
+								For missing missions, indicate here order
+							</div>
+							
+							<div class="item" style="min-width:64px; width:64px;">
+								<input type="text" class="control" ng-model="fakeorder" />
+							</div>
+							
+							<div class="item">
+								<button class="btn" ng-click="addFake(fakeorder);">
+									Add
+								</button>
+							</div>
+							
+						</div>
 					</div>
-					
-				</div>
-			</div>
-			
-			<div class="p-normal">
-				<div class="row">
-					
-					<div class="item self-center text-right" style="min-width:150px; width:150px;">
-						For missing missions, indicate here order
-					</div>
-					
-					<div class="item" style="min-width:64px; width:64px;">
-						<input type="text" class="control" ng-model="fakeorder" />
-					</div>
-					
-					<div class="item">
-						<button class="btn" ng-click="addFake(fakeorder);">
-							Add
-						</button>
-					</div>
-					
 				</div>
 			</div>
 			
