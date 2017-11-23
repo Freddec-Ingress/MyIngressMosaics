@@ -61,6 +61,11 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	
 		mission.selected = true;
 		$scope.selected.push(mission);
+		
+		var order = UtilsService.getOrderFromMissionName(mission.title);
+		mission.order = order.toString();
+		
+		$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
 	}
 	
 	$scope.selectAll = function() {
@@ -122,6 +127,16 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	$scope.closeOrder = function() {
 		
 		$scope.mission_selected = null;
+	}
+	
+	$scope.saveOrder = function(order) {
+		
+		if (!order) return;
+		
+		$scope.mission_selected.order = order;
+		$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
+		
+		$scope.closeOrder();
 	}
 	
 	/* Page loading */
