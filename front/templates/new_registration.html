@@ -65,9 +65,9 @@
 					<div class="row">
 						
 		            	<div class="item">
-		            		<button class="btn btn-danger" ng-click="retireMission(mission_selected);">
+		            		<a ng-click="retireMission(mission_selected);">
 		            			Remove this mission
-		            		</button>
+		            		</a>
 		            	</div>
 		            	
 					</div>
@@ -370,6 +370,39 @@
 			
 		</div>
 		
+		<div class="grow flex-col" ng-show="current_step == 4">
+			
+			<div class="grow col p-normal">
+			</div>
+			
+			<hr>
+			
+			<div class="p-normal">
+				<div class="row">
+					
+					<div class="item grow flex">
+						<button class="btn" ng-click="open_step(3);">
+							<div class="row">
+								<i class="item fa fa-angle-double-left"></i>
+								<span class="item">Back</span>
+							</div>
+						</button>
+					</div>
+					
+					<div class="item self-center">
+						<button class="btn btn-danger" ng-click="createMosaic();">
+							<div class="row">
+								<span class="item">Validate</span>
+								<i class="item fa fa-angle-double-right"></i>
+							</div>
+						</button>
+					</div>
+					
+				</div>
+			</div>
+			
+		</div>
+			
 	</div>
 			
 {% endverbatim %}

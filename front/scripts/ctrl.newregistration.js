@@ -175,7 +175,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	/* Step #3 management */
 	
 	$scope.mosaic_name = '';
-	$scope.mosaic_type = '';
+	$scope.mosaic_type = 'sequence';
 	
 	$scope.city_name = '';
 	$scope.region_name = '';
@@ -321,6 +321,12 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 				}
 			}
 		});
+	}
+	
+	/* Step #4 management */
+	
+	$scope.createMosaic = function() {
+		
 	}
 	
 	/* Page loading */
