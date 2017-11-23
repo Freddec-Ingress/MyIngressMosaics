@@ -22,6 +22,11 @@
 	</div>
 	
 	<div class="container" ng-class="{'active':loaded}">
+	
+		<div id="loading" ng-show="creating">
+			<i class="item fa fa-spinner rotating"></i>
+			<span class="item">Creating mosaic...</span>
+		</div>
 		
 		<div class="modal-container" ng-if="mission_selected">
 			<div class="modal-box" style="width:207px;">

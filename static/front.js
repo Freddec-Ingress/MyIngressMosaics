@@ -3173,7 +3173,11 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	
 	/* Step #4 management */
 	
+	$scope.creating = false;
+	
 	$scope.createMosaic = function() {
+		
+		$scope.creating = true;
 		
 		var data = {
 			'country': $scope.country_name,
@@ -3206,6 +3210,8 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 			$window.open('https://www.myingressmosaics.com/mosaic/' + response);
 			
 			$scope.open_step(1);
+			
+			$scope.creating = false;
 		});
 	}
 	
