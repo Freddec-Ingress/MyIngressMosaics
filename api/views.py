@@ -312,7 +312,6 @@ def mosaic_create(request):
 				item.save()
 	
 	mosaic.computeInternalData()
-	mosaic.generatePreview()
 	
 	return Response(mosaic.ref, status=status.HTTP_200_OK)
 
