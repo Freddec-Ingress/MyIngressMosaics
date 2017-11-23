@@ -2855,6 +2855,12 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	$scope.open_step = function(id) {
 		
 		$scope.current_step = id;
+		
+		if ($scope.current_step == 3) {
+			
+			if (!$scope.mosaic_name) $scope.computeMosaicName();
+			if (!$scope.city_name || !$scope.region_name || !$scope.country_name) $scope.computeLocation();
+		}
 	}
 	
 	/* Step #1 management */
@@ -3010,6 +3016,159 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		
 		var index = $scope.selected.indexOf(mission);
 		$scope.selected.splice(index, 1);
+		
+		$scope.closeOrder();
+	}
+	
+	/* Step #3 management */
+	
+	$scope.mosaic_name = '';
+	$scope.mosaic_type = '';
+	
+	$scope.city_name = '';
+	$scope.region_name = '';
+	$scope.country_name = '';
+	
+	$scope.computeMosaicName = function() {
+		
+		$scope.mosaic_name = '';
+		
+		var mosaic_name = $scope.selected[0].title;
+		mosaic_name = mosaic_name.replace(/0|1|2|3|4|5|6|7|8|9|#/g, '');
+		mosaic_name = mosaic_name.replace(/０|１|２|３|４|５|６|７|８|９/g, '');
+		mosaic_name = mosaic_name.replace(/①|②|③|④|⑤|⑥/g, '');
+		mosaic_name = mosaic_name.replace('.', '');
+		mosaic_name = mosaic_name.replace('(', '');
+		mosaic_name = mosaic_name.replace(')', '');
+		mosaic_name = mosaic_name.replace('（', '');
+		mosaic_name = mosaic_name.replace('）', '');
+		mosaic_name = mosaic_name.replace('/', '');
+		mosaic_name = mosaic_name.replace('[', '');
+		mosaic_name = mosaic_name.replace(']', '');
+		mosaic_name = mosaic_name.replace('【', '');
+		mosaic_name = mosaic_name.replace('】', '');
+		mosaic_name = mosaic_name.replace('-', '');
+		mosaic_name = mosaic_name.replace('-', '');
+		mosaic_name = mosaic_name.replace('－', '');
+		mosaic_name = mosaic_name.replace('_', '');
+		mosaic_name = mosaic_name.replace(':', '');
+		mosaic_name = mosaic_name.replace('of ', '');
+		mosaic_name = mosaic_name.replace(' of', '');
+		mosaic_name = mosaic_name.replace('part ', '');
+		mosaic_name = mosaic_name.replace(' part', '');
+		mosaic_name = mosaic_name.replace('Part ', '');
+		mosaic_name = mosaic_name.replace(' Part', '');
+		mosaic_name = mosaic_name.replace('  ', ' ');
+		mosaic_name = mosaic_name.replace('  ', ' ');
+		mosaic_name = mosaic_name.replace('　', ' ');
+		mosaic_name = mosaic_name.trim();
+		
+		$scope.mosaic_name = mosaic_name;
+	}
+	
+	$scope.computeLocation = function() {
+		
+		$scope.city_name = '';
+		$scope.region_name = '';
+		$scope.country_name = '';
+		
+		var geocoder = new google.maps.Geocoder;
+		
+		var latlng = {
+			lat: parseFloat($scope.selected[0].startLat),
+			lng: parseFloat($scope.selected[0].startLng),
+		};
+
+		geocoder.geocode({'location': latlng}, function(results, status) {
+			
+			if (status === 'OK') {
+				
+				var components = null;
+				if (results[0]) components = results[0].address_components;
+				if (results[1]) components = results[1].address_components;
+				
+				if (components) {
+					
+					var admin2 = null;
+					var admin3 = null;
+					
+					for (var item of components) {
+						
+						if (item.types[0] == 'country') $scope.country_name = item.long_name;
+						if (item.types[0] == 'locality') $scope.city_name = item.long_name;
+						if (item.types[0] == 'administrative_area_level_1') $scope.region_name = item.long_name;
+						if (item.types[0] == 'administrative_area_level_2') admin2 = item.long_name;
+						if (item.types[0] == 'administrative_area_level_3') admin3 = item.long_name;
+					}
+					
+					if (!$scope.city_name && admin2) $scope.city_name = item.admin2;
+					if (!$scope.city_name && admin3) $scope.city_name = item.admin3;
+					
+					/* Country */
+					
+					API.sendRequest('/api/country/list/', 'POST').then(function(response) {
+						
+						var countryList = response.countries;
+
+						var cur_country = null;
+						for (var country of countryList) {
+							if (country.name == $scope.country_name || country.locale == $scope.country_name) {
+								
+								cur_country = country;
+								
+								$scope.country_name = country.name;
+								break;
+							}
+						}
+						
+						/* Region */
+						
+						if (cur_country) {
+							
+							var data = {'country_id':cur_country.id};
+							API.sendRequest('/api/region/list/', 'POST', {}, data).then(function(response) {
+								
+								var regionList = response.regions;
+								
+								var cur_region = null;
+								for (var region of regionList) {
+									if (region.name == $scope.region_name || region.locale == $scope.region_name) {
+										
+										cur_region = region;
+										
+										$scope.region_name = region.name;
+										break;
+									}
+								}
+								
+								/* City */
+								
+								if (cur_region) {
+									
+									var data = {'country_id':cur_country.id, 'region_id':cur_region.id};
+									API.sendRequest('/api/city/list/', 'POST', {}, data).then(function(response) {
+										
+										var cityList = response.cities;
+										
+										var cur_city = null;
+										for (var city of cityList) {
+											if (city.name == $scope.city_name || city.locale == $scope.city_name) {
+												
+												cur_city = city;
+												
+												$scope.city_name = city.name;
+											}
+										}
+									});
+								}
+							});
+						}
+					});
+					
+					$scope.$applyAsync();
+				}
+			}
+		});
 	}
 	
 	/* Page loading */
