@@ -341,7 +341,7 @@ ul > li { list-style:none; }
 	min-height:34px;
 }
 
-.btn.disabled { background-color: rgb(68, 68, 68);
+.btn.disabled, .btn[disabled] { background-color: rgb(68, 68, 68);
     color: #ACAFAF;
     border-color: #ACAFAF;
     background-image: none; }
