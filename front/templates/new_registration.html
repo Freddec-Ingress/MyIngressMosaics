@@ -40,15 +40,37 @@
 				
 				<div class="modal-content">
 					
-	            	<div class="mb-normal">
-	            		<input type="text" class="control" ng-model="order" ng-init="order=mission_selected.order;">
-	            	</div>
-	            	
-	            	<div>
-	            		<button class="btn" ng-click="saveOrder(order);">
-	            			Save
-	            		</button>
-	            	</div>
+					<div class="row">
+						
+						<div class="item">
+							<span class="color-light">{{mission_selected.title}}</span>
+						</div>
+						
+					</div>
+					
+					<div class="row">
+						
+		            	<div class="item">
+		            		<input type="text" class="control" ng-model="order" ng-init="order=mission_selected.order;">
+		            	</div>
+		            	
+		            	<div class="item">
+		            		<button class="btn" ng-click="saveOrder(order);">
+		            			Save
+		            		</button>
+		            	</div>
+		            	
+					</div>
+					
+					<div class="row justify-center">
+						
+		            	<div class="item">
+		            		<button class="btn" ng-click="retireMission(mission_selected);">
+		            			Remove
+		            		</button>
+		            	</div>
+		            	
+					</div>
 					
 				</div>
 				

@@ -110,6 +110,21 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	$scope.offset = [];
 	
 	$scope.mission_selected = null;
+
+	$scope.addFake = function(fakeorder) {
+		
+		var mission = {
+			'ref': 'Unavailable',
+			'order': fakeorder,
+			'title': 'Fake mission',
+		}
+		
+		$scope.selected.push(mission);
+		
+		$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
+		
+		$scope.computeOffset();
+	}
 	
 	$scope.computeOffset = function() {
 		
