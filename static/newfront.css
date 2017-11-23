@@ -350,7 +350,12 @@ ul > li { list-style:none; }
 
 .btn-mini { min-height:24px; height:24px; padding:0 10px; background-image:none; }
 
-.btn-danger { color:#f44336; border-color:#f44336; background-color:transparent; }
+.btn-danger {
+	color:#ffae38; border-color:#ffae38; background-color:#522F00;
+	background-image:
+		-webkit-gradient(linear, 0 top, 0 10, from(#935810), to(transparent)),
+		-webkit-gradient(linear, 0 bottom, 0 28, from(#935810), to(transparent));
+}
 .control {
     padding:0 10px 0;
     background-color:black;
@@ -360,3 +365,5 @@ ul > li { list-style:none; }
 }
 
 textarea.control { padding:8px 10px 0; }
+
+input[type=text].control { padding:8px 10px 0 14px; }

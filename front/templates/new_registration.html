@@ -48,7 +48,7 @@
 						
 					</div>
 					
-					<div class="row">
+					<div class="row mb-big">
 						
 		            	<div class="item">
 		            		<input type="text" class="control" ng-model="order" ng-init="order=mission_selected.order;">
@@ -62,11 +62,11 @@
 		            	
 					</div>
 					
-					<div class="row justify-center">
+					<div class="row">
 						
 		            	<div class="item">
-		            		<button class="btn" ng-click="retireMission(mission_selected);">
-		            			Remove
+		            		<button class="btn btn-danger" ng-click="retireMission(mission_selected);">
+		            			Remove this mission
 		            		</button>
 		            	</div>
 		            	
@@ -243,7 +243,7 @@
 						For missing missions, indicate here order
 					</div>
 					
-					<div class="item">
+					<div class="item" style="min-width:64px; width:64px;">
 						<input type="text" class="control" ng-model="fakeorder" />
 					</div>
 					
