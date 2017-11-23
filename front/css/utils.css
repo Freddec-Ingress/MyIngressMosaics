@@ -112,5 +112,5 @@
 
 
 
-.mission-vignet { display:flex; align-items:center; justify-content:center; border:1px solid transparent; }
+.mission-vignet { display:flex; flex-direction:column; align-items:center; justify-content:center; border:1px solid transparent; }
 .mission-vignet > img { z-index:-1; flex:1 1 100%; margin:-1px; }

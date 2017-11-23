@@ -69,6 +69,8 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 			mission.order = order.toString();
 			
 			$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
+			
+			$scope.computeOffset();
 		}
 		else {
 			
