@@ -380,23 +380,17 @@
 				
 				<div class="item flex-col">
 					
-					<span class="color-muted">Details</span>
-					
-					<div class="ml-big">
-						
-						<div class="flex">
-							<flag class="item" country="country_name"></flag>
-							<span class="item">{{city_name}}, {{region_name}}</span>
-						</div>
-							
-						<div class="item ">
-							<span>{{selected.length}} missions</span>
-							<span ng-show="mosaic_type=='sequence'">&nbsp;in sequence</span>
-							<span ng-show="mosaic_type=='serie'">&nbsp;in serie</span>
-						</div>
-						
+					<div class="flex justify-center">
+						<flag class="item" country="country_name"></flag>
+						<span class="item">{{city_name}}, {{region_name}}</span>
 					</div>
-					
+						
+					<div class="item justify-center">
+						<span>{{selected.length}} missions</span>
+						<span ng-show="mosaic_type=='sequence'">&nbsp;in sequence</span>
+						<span ng-show="mosaic_type=='serie'">&nbsp;in serie</span>
+					</div>
+
 				</div>
 				
 				<hr>
