@@ -82,7 +82,27 @@
 			</div>
 		</div>
 		
-		<div class="grow flex-col" ng-show="current_step == 1">
+		<div class="grow flex-col" ng-show="current_step == 0 && !creating">
+			
+			<div ng-if="!user.authenticated">
+			    
+			    <div class="p-normal">
+			    	
+			    	<div class="row">
+			    	
+					    <div class="item c-danger ta-center">
+						    To register mosaics and become a mosaic hunter you have to sign in and register missions from Intel Map.
+					    </div>
+						
+					</div>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		<div class="grow flex-col" ng-show="current_step == 1 && !creating">
 			
 			<div class="p-normal">
 				
@@ -218,7 +238,7 @@
 			
 		</div>
 		
-		<div class="grow flex-col" ng-show="current_step == 2">
+		<div class="grow flex-col" ng-show="current_step == 2 && !creating">
 			
 			<div class="flex justify-center">
 				<div>
@@ -313,7 +333,7 @@
 			
 		</div>
 		
-		<div class="grow flex-col" ng-show="current_step == 3">
+		<div class="grow flex-col" ng-show="current_step == 3 && !creating">
 			
 			<div class="grow col p-normal">
 			
@@ -375,7 +395,7 @@
 			
 		</div>
 		
-		<div class="grow flex-col" ng-show="current_step == 4">
+		<div class="grow flex-col" ng-show="current_step == 4 && !creating">
 			
 			<div class="grow col p-normal">
 				

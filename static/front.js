@@ -3209,7 +3209,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		
 			$window.open('https://www.myingressmosaics.com/mosaic/' + response);
 			
-			$scope.open_step(1);
+			$scope.open_step(0);
 			
 			$scope.creating = false;
 		});
@@ -3219,7 +3219,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 
 	$scope.refreshMissions();
 	
-	$scope.open_step(1);
+	$scope.open_step(0);
 	
 	$scope.loaded = true;
 });
