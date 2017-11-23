@@ -317,3 +317,52 @@ def new_search(request, searchstring = ''):
 	
 	context = { 'searchstring':searchstring }
 	return render(request, 'new_search.html', context)
+
+	
+	
+def new_profile(request):
+	
+	context = {}
+	return render(request, 'new_profile.html', context)
+
+	
+	
+def new_login(request):
+	
+	context = {}
+	return render(request, 'new_login.html', context)
+	
+	
+	
+def new_register(request):
+	
+	context = {}
+	return render(request, 'new_register.html', context)
+	
+	
+	
+def new_map(request, location = ''):
+	
+	context = {'location': location}
+	return render(request, 'new_map.html', context)
+
+
+
+def new_world(request):
+	
+	context = {}
+	return render(request, 'world.html', context)
+
+
+
+def new_country(request, country):
+	
+	context = { 'country':country }
+	return render(request, 'country.html', context)
+
+
+
+def new_recruitment(request):
+	
+	context = {}
+	return render(request, 'new_recruitment.html', context)

@@ -37,12 +37,28 @@ urlpatterns = [
 	url(r'^recruitment', views.recruitment),
 	url(r'^migrate', views.migrate),
 	
-	url(r'^new_mosaic/(?P<ref>\w+)', views.new_mosaic),
 	
-	url(r'^new_registration',  views.new_registration),
 	
-	url(r'^new_search/(?P<searchstring>[\w \-,]+)',           views.new_search),
-	url(r'^new_search',        views.new_search),
+	url(r'^new_mosaic/(?P<ref>\w+)',				views.new_mosaic),
 	
-	url(r'^.*', views.world),
+	url(r'^new_registration',						views.new_registration),
+	
+	url(r'^new_search/(?P<searchstring>[\w \-,]+)',	views.new_search),
+	url(r'^new_search',     						views.new_search),
+	
+	url(r'^new_profile',							views.new_profile),
+	
+	url(r'^new_map/(?P<location>[\w \-,]+)',		views.new_map),
+	url(r'^new_map',        						views.new_map),
+	
+	url(r'^new_login',      						views.new_login),
+	
+	url(r'^new_register',							views.new_register),
+	
+	url(r'^new_world/(?P<country>[\w \-,\']+)', 	views.new_country),
+	url(r'^new_world',								views.new_world),
+	
+	url(r'^new_recruitment',						views.new_recruitment),
+	
+	url(r'^.*', 									views.world),
 ]

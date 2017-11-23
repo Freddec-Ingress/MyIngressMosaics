@@ -7,12 +7,6 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	$scope.open_step = function(id) {
 		
 		$scope.current_step = id;
-		
-		if ($scope.current_step == 3) {
-			
-			if (!$scope.mosaic_name) $scope.computeMosaicName();
-			if (!$scope.city_name || !$scope.region_name || !$scope.country_name) $scope.computeLocation();
-		}
 	}
 	
 	/* Step #1 management */
@@ -63,36 +57,27 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		}
 	}
 	
-	$scope.toggleSelectMission = function(mission) {
+	$scope.selectMission = function(mission) {
 	
-		mission.selected = !mission.selected;
-		
-		if (mission.selected) {
-			
-			$scope.selected.push(mission);
-			
-			var order = UtilsService.getOrderFromMissionName(mission.title);
-			if (order < 1) order = $scope.selected.indexOf(mission);
-			mission.order = order.toString();
-			
-			$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
-			
-			$scope.computeOffset();
-		}
-		else {
-			
-			var index = $scope.selected.indexOf(mission);
-			$scope.selected.splice(index, 1);
-		}
+		mission.selected = true;
+		$scope.selected.push(mission);
 	}
 	
 	$scope.selectAll = function() {
 		
 		for (var mission of $scope.filtered) {
 			if (!mission.selected) {
-				$scope.toggleSelectMission(mission);
+				$scope.selectMission(mission);
 			}
 		}
+	}
+	
+	$scope.unselectMission = function(mission) {
+	
+		mission.selected = false;
+		
+		var index = $scope.selected.indexOf(mission);
+		$scope.selected.splice(index, 1);
 	}
 	
 	$scope.removeMission = function(mission) {
@@ -117,21 +102,6 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	$scope.offset = [];
 	
 	$scope.mission_selected = null;
-
-	$scope.addFake = function(fakeorder) {
-		
-		var mission = {
-			'ref': 'Unavailable',
-			'order': fakeorder,
-			'title': 'Fake mission',
-		}
-		
-		$scope.selected.push(mission);
-		
-		$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
-		
-		$scope.computeOffset();
-	}
 	
 	$scope.computeOffset = function() {
 		
@@ -154,224 +124,11 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		$scope.mission_selected = null;
 	}
 	
-	$scope.saveOrder = function(order) {
-		
-		if (!order) return;
-		
-		$scope.mission_selected.order = order;
-		$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
-		
-		$scope.closeOrder();
-	}
-	
-	$scope.retireMission = function(mission) {
-		
-		var index = $scope.selected.indexOf(mission);
-		$scope.selected.splice(index, 1);
-		
-		$scope.closeOrder();
-	}
-	
-	/* Step #3 management */
-	
-	$scope.mosaic_name = '';
-	$scope.mosaic_type = 'sequence';
-	
-	$scope.city_name = '';
-	$scope.region_name = '';
-	$scope.country_name = '';
-	
-	$scope.computeMosaicName = function() {
-		
-		$scope.mosaic_name = '';
-		
-		var mosaic_name = $scope.selected[0].title;
-		mosaic_name = mosaic_name.replace(/0|1|2|3|4|5|6|7|8|9|#/g, '');
-		mosaic_name = mosaic_name.replace(/０|１|２|３|４|５|６|７|８|９/g, '');
-		mosaic_name = mosaic_name.replace(/①|②|③|④|⑤|⑥/g, '');
-		mosaic_name = mosaic_name.replace('.', '');
-		mosaic_name = mosaic_name.replace('(', '');
-		mosaic_name = mosaic_name.replace(')', '');
-		mosaic_name = mosaic_name.replace('（', '');
-		mosaic_name = mosaic_name.replace('）', '');
-		mosaic_name = mosaic_name.replace('/', '');
-		mosaic_name = mosaic_name.replace('[', '');
-		mosaic_name = mosaic_name.replace(']', '');
-		mosaic_name = mosaic_name.replace('【', '');
-		mosaic_name = mosaic_name.replace('】', '');
-		mosaic_name = mosaic_name.replace('-', '');
-		mosaic_name = mosaic_name.replace('-', '');
-		mosaic_name = mosaic_name.replace('－', '');
-		mosaic_name = mosaic_name.replace('_', '');
-		mosaic_name = mosaic_name.replace(':', '');
-		mosaic_name = mosaic_name.replace('of ', '');
-		mosaic_name = mosaic_name.replace(' of', '');
-		mosaic_name = mosaic_name.replace('part ', '');
-		mosaic_name = mosaic_name.replace(' part', '');
-		mosaic_name = mosaic_name.replace('Part ', '');
-		mosaic_name = mosaic_name.replace(' Part', '');
-		mosaic_name = mosaic_name.replace('  ', ' ');
-		mosaic_name = mosaic_name.replace('  ', ' ');
-		mosaic_name = mosaic_name.replace('　', ' ');
-		mosaic_name = mosaic_name.trim();
-		
-		$scope.mosaic_name = mosaic_name;
-	}
-	
-	$scope.computeLocation = function() {
-		
-		$scope.city_name = '';
-		$scope.region_name = '';
-		$scope.country_name = '';
-		
-		var geocoder = new google.maps.Geocoder;
-		
-		var latlng = {
-			lat: parseFloat($scope.selected[0].startLat),
-			lng: parseFloat($scope.selected[0].startLng),
-		};
-
-		geocoder.geocode({'location': latlng}, function(results, status) {
-			
-			if (status === 'OK') {
-				
-				var components = null;
-				if (results[0]) components = results[0].address_components;
-				if (results[1]) components = results[1].address_components;
-				
-				if (components) {
-					
-					var admin2 = null;
-					var admin3 = null;
-					
-					for (var item of components) {
-						
-						if (item.types[0] == 'country') $scope.country_name = item.long_name;
-						if (item.types[0] == 'locality') $scope.city_name = item.long_name;
-						if (item.types[0] == 'administrative_area_level_1') $scope.region_name = item.long_name;
-						if (item.types[0] == 'administrative_area_level_2') admin2 = item.long_name;
-						if (item.types[0] == 'administrative_area_level_3') admin3 = item.long_name;
-					}
-					
-					if (!$scope.city_name && admin2) $scope.city_name = item.admin2;
-					if (!$scope.city_name && admin3) $scope.city_name = item.admin3;
-					
-					/* Country */
-					
-					API.sendRequest('/api/country/list/', 'POST').then(function(response) {
-						
-						var countryList = response.countries;
-
-						var cur_country = null;
-						for (var country of countryList) {
-							if (country.name == $scope.country_name || country.locale == $scope.country_name) {
-								
-								cur_country = country;
-								
-								$scope.country_name = country.name;
-								break;
-							}
-						}
-						
-						/* Region */
-						
-						if (cur_country) {
-							
-							var data = {'country_id':cur_country.id};
-							API.sendRequest('/api/region/list/', 'POST', {}, data).then(function(response) {
-								
-								var regionList = response.regions;
-								
-								var cur_region = null;
-								for (var region of regionList) {
-									if (region.name == $scope.region_name || region.locale == $scope.region_name) {
-										
-										cur_region = region;
-										
-										$scope.region_name = region.name;
-										break;
-									}
-								}
-								
-								/* City */
-								
-								if (cur_region) {
-									
-									var data = {'country_id':cur_country.id, 'region_id':cur_region.id};
-									API.sendRequest('/api/city/list/', 'POST', {}, data).then(function(response) {
-										
-										var cityList = response.cities;
-										
-										var cur_city = null;
-										for (var city of cityList) {
-											if (city.name == $scope.city_name || city.locale == $scope.city_name) {
-												
-												cur_city = city;
-												
-												$scope.city_name = city.name;
-											}
-										}
-									});
-								}
-							});
-						}
-					});
-					
-					$scope.$applyAsync();
-				}
-			}
-		});
-	}
-	
-	/* Step #4 management */
-	
-	$scope.creating = false;
-	
-	$scope.createMosaic = function() {
-		
-		$scope.creating = true;
-		
-		var data = {
-			'country': $scope.country_name,
-			'region': $scope.region_name,
-			'city': $scope.city_name,
-			'columns': $scope.columns,
-			'type': $scope.mosaic_type,
-			'title': $scope.mosaic_name,
-			'missions': $scope.selected,
-		};
-		API.sendRequest('/api/mosaic/create/', 'POST', {}, data).then(function(response) {
-
-			$scope.refreshMissions();
-	
-			$scope.filter = '';
-			
-			$scope.columns = '6';
-			
-			$scope.offset = [];
-			
-			$scope.mission_selected = null;
-			
-			$scope.mosaic_name = '';
-			$scope.mosaic_type = 'sequence';
-			
-			$scope.city_name = '';
-			$scope.region_name = '';
-			$scope.country_name = '';
-		
-			$window.open('https://www.myingressmosaics.com/mosaic/' + response);
-			
-			$scope.open_step(0);
-			
-			$scope.creating = false;
-		});
-	}
-	
 	/* Page loading */
 
 	$scope.refreshMissions();
 	
-	$scope.open_step(0);
+	$scope.open_step(1);
 	
 	$scope.loaded = true;
 });

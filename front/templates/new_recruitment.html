@@ -1,0 +1,33 @@
+{% extends 'new_base.html' %}
+
+{% block extra-head %}
+
+	<title>MIM - Recruitment</title>
+
+	<meta property="og:url" content="https://www.myingressmosaics.com">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="MyIngressMosaics">
+	<meta property="og:description" content="Ingress Mosaics, Banners and Mission series">
+
+{% endblock %}
+
+{% block content %}
+<div id="content" ng-controller="NewRecruitmentCtrl">
+
+{% verbatim %}
+
+	<div id="loading" ng-hide="loaded">
+		<i class="item fa fa-spinner rotating"></i>
+		<span class="item">Loading page...</span>
+	</div>
+	
+	<div class="container" ng-class="{'active':loaded}">
+		
+		
+		
+	</div>
+	
+{% endverbatim %}
+
+</div>
+{% endblock %}
