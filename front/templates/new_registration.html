@@ -384,11 +384,22 @@
 					
 					<div class="ml-big">
 						
-						<span class=""></span>
+						<div class="flex">
+							<flag class="item" country="country_name"></flag>
+							<span class="item">{{city_name}}, {{region_name}}</span>
+						</div>
+							
+						<div class="item ">
+							<span>{{selected.length}} missions</span>
+							<span ng-show="mosaic_type=='sequence'">&nbsp;in sequence</span>
+							<span ng-show="mosaic_type=='serie'">&nbsp;in serie</span>
+						</div>
 						
 					</div>
 					
 				</div>
+				
+				<hr>
 				
 				<div class="scrollable flex align-center p-normal">
 					
@@ -399,9 +410,6 @@
 			            
 			            <div ng-repeat="mission in selected | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{columns}});" ng-click="displayOrder(mission);">
 			                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{mission.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-			                <div class="text-center">
-			                	<a>{{mission.order}}</a>
-			                </div>
 			            </div>
 			            
 		            </div>
@@ -428,7 +436,6 @@
 						<button class="btn btn-danger" ng-click="createMosaic();">
 							<div class="row">
 								<span class="item">Validate</span>
-								<i class="item fa fa-angle-double-right"></i>
 							</div>
 						</button>
 					</div>
