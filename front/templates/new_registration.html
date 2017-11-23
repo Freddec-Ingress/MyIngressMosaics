@@ -163,11 +163,15 @@
 						
 						<div class="text-center">
 							
-							{{filtered.length}} missions
+							<div>
+								{{filtered.length}} missions
+							</div>
 							
-							<button class="btn btn-mini" ng-click="selectAll();">
-								Select All
-							</button>
+							<div>
+								<a ng-click="selectAll();">
+									Select All
+								</a>
+							</div>
 							
 						</div>
 						
@@ -192,7 +196,7 @@
 			<div class="p-normal">
 				<div class="row justify-center">
 					
-					<div class="item self-center">
+					<div class="item self-center text-right" style="width:150px;">
 						Number of columns
 					</div>
 					
@@ -215,7 +219,7 @@
 			<div class="p-normal">
 				<div class="row justify-center">
 					
-					<div class="item self-center">
+					<div class="item self-center text-right" style="width:150px;">
 						For missing missions, indicate here order
 					</div>
 					
