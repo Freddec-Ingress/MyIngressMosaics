@@ -2905,32 +2905,33 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		}
 	}
 	
-	$scope.selectMission = function(mission) {
+	$scope.toggleSelectMission = function(mission) {
 	
-		mission.selected = true;
-		$scope.selected.push(mission);
+		mission.selected = !mission.selected;
 		
-		var order = UtilsService.getOrderFromMissionName(mission.title);
-		mission.order = order.toString();
-		
-		$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
+		if (mission.selected) {
+			
+			$scope.selected.push(mission);
+			
+			var order = UtilsService.getOrderFromMissionName(mission.title);
+			mission.order = order.toString();
+			
+			$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
+		}
+		else {
+			
+			var index = $scope.selected.indexOf(mission);
+			$scope.selected.splice(index, 1);
+		}
 	}
 	
 	$scope.selectAll = function() {
 		
 		for (var mission of $scope.filtered) {
 			if (!mission.selected) {
-				$scope.selectMission(mission);
+				$scope.toggleSelectMission(mission);
 			}
 		}
-	}
-	
-	$scope.unselectMission = function(mission) {
-	
-		mission.selected = false;
-		
-		var index = $scope.selected.indexOf(mission);
-		$scope.selected.splice(index, 1);
 	}
 	
 	$scope.removeMission = function(mission) {

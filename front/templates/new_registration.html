@@ -105,21 +105,21 @@
 	                		
 		                    	<div class="item">
 		                    		
-	                                <a class="btn btn-icon" ng-hide="mission.selected" ng-click="selectMission(mission);">
+	                                <a class="btn btn-icon" ng-hide="mission.selected" ng-click="toggleSelectMission(mission);">
 	                                    <i class="fa fa-plus-square"></i>
 	                                </a>
 		                    		
-	                                <a class="btn btn-icon" ng-show="mission.selected" ng-click="unselectMission(mission);">
+	                                <a class="btn btn-icon" ng-show="mission.selected" ng-click="toggleSelectMission(mission);">
 	                                    <i class="fa fa-minus-square"></i>
 	                                </a>
 	                                
 		                    	</div>
 		                    	
-				                <div class="item">
+				                <div class="item" ng-click="toggleSelectMission(mission);">
 				        			<img src="/static/img/mask.png" style="width:26px; background-color:#000000; background-image:url({{mission.image}}=s25); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
 		                    	</div>
 		                    	
-		                    	<div class="item grow ellipsis">
+		                    	<div class="item grow ellipsis" ng-click="toggleSelectMission(mission);">
 		                    		
 		                    		<div class="ellipsis">
 			                    		<span class="color-light">{{mission.title}}</span>
@@ -245,17 +245,15 @@
 		            
 		            <div ng-repeat="mission in selected | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{columns}});" ng-click="displayOrder(mission);">
 		                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{mission.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-		                {{mission.order}}
+		                <div class="text-center">
+		                	<a>{{mission.order}}</a>
+		                </div>
 		            </div>
 		            
 	            </div>
 			
 			</div>
-			
-			<div class="flex justify-center p-normal">
-				<span class="color-muted text-center">You could change mission order by clicking on mission images</span>
-			</div>
-			
+
 			<hr>
 			
 			<div class="p-normal">
