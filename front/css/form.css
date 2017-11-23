@@ -8,4 +8,4 @@
 
 textarea.control { padding:8px 10px 0; }
 
-input[type=text].control { padding:8px 10px 0 14px; }
+input[type=text].control { padding:0 10px 0 14px; }
