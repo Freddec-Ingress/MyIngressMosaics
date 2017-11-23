@@ -112,6 +112,28 @@
 				
 			</div>
 			
+			<div ng-if="user.authenticated">
+				
+			    <div class="p-normal">
+			    	
+			    	<div class="col">
+			    		
+					    <div class="item text-center">
+						    If you have few registered missions and/or registered missions specific to a mosaic, the simple mode is for you!
+					    </div>
+				    
+				    	<div class="item flex justify-center">
+				    		<button class="btn" ng-click="open_step(1);">
+				    			Simple mode
+				    		</button>
+				    	</div>
+			    		
+					</div>
+					
+				</div>
+				
+			</div>
+			
 		</div>
 		
 		<div class="grow flex-col" ng-show="current_step == 1 && !creating">
