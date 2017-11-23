@@ -196,7 +196,7 @@
 			<div class="p-normal">
 				<div class="row">
 					
-					<div class="item self-center text-right" style="min-width:150px;">
+					<div class="item self-center text-right" style="min-width:150px; width:150px;">
 						Number of columns
 					</div>
 					
@@ -214,12 +214,10 @@
 				</div>
 			</div>
 			
-			<hr>
-			
 			<div class="p-normal">
 				<div class="row">
 					
-					<div class="item self-center text-right" style="min-width:150px;">
+					<div class="item self-center text-right" style="min-width:150px; width:150px;">
 						For missing missions, indicate here order
 					</div>
 					
@@ -247,6 +245,7 @@
 		            
 		            <div ng-repeat="mission in selected | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{columns}});" ng-click="displayOrder(mission);">
 		                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{mission.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+		                {{mission.order}}
 		            </div>
 		            
 	            </div>
@@ -254,7 +253,7 @@
 			</div>
 			
 			<div class="flex justify-center p-normal">
-				<span class="color-muted text-center">Validate mission order by clicking on mission images</span>
+				<span class="color-muted text-center">You could change mission order by clicking on mission images</span>
 			</div>
 			
 			<hr>
