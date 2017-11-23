@@ -212,6 +212,28 @@
 			
 			<hr>
 			
+			<div class="p-normal">
+				<div class="row justify-center">
+					
+					<div class="item self-center">
+						For missing missions, indicate here order
+					</div>
+					
+					<div class="item">
+						<input type="text" class="control" ng-model="fakeorder" />
+					</div>
+					
+					<div class="item">
+						<button class="btn" ng-click="addFake(fakeorder);">
+							Add
+						</button>
+					</div>
+					
+				</div>
+			</div>
+			
+			<hr>
+			
 			<div class="scrollable flex align-center">
 				
 				<div class="flex grow wrap justify-center" style="padding:0 calc((6 - {{columns}}) / 2 * 16.666667%);">
