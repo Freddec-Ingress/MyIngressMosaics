@@ -1,0 +1,105 @@
+{% extends 'new_base.html' %}
+
+{% block extra-head %}
+
+	<title>MIM - Hunt</title>
+
+	<meta property="og:url" content="https://www.myingressmosaics.com">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="MyIngressMosaics">
+	<meta property="og:description" content="Ingress Mosaics, Banners and Mission series">
+
+{% endblock %}
+
+{% block content %}
+<div id="content" ng-controller="NewSearchCtrl" ng-init="init('{{searchstring}}');">
+
+{% verbatim %}
+
+	<div id="loading" ng-hide="loaded">
+		<i class="item fa fa-spinner rotating"></i>
+		<span class="item">Loading page...</span>
+	</div>
+	
+	<div class="container" ng-class="{'active':loaded}">
+		
+		<div class="p-normal">
+			
+			<div class="row">
+				
+				<div class="item grow">
+					<input class="control" placeholder="Mosaic name, creator name, location..." ng-model="searchtext" />
+				</div>
+				
+				<div class="item">
+					<button class="btn" type="submit" ng-click="search(searchtext);">
+						<i class="fa fa-search"></i>
+					</button>
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		<hr>
+		
+		<div class="scrollable">
+			
+			<div id="loading" class="p-normal" ng-show="searching">
+				<i class="item fa fa-spinner rotating"></i>
+				<span class="item">Searching...</span>
+			</div>
+				
+			<div ng-show="mosaics && mosaics.length < 1" class="p-normal text-center">
+				<span class="color-danger">No mosaic found</span>
+			</div>
+		
+	    	<div ng-show="mosaics && mosaics.length > 0">
+	    		
+	    		<div ng-repeat="mosaic in mosaics">
+	    			
+	    			<div class="p-normal">
+		    			<div class="row align-center">
+		    				
+		    				<div class="item grow">
+		    					
+		    					<div class="mb-normal">
+		    						<span class="color-light">{{mosaic.title}}</span>
+		    					</div>
+		    					
+								<div class="row ml-normal mb-none">
+									<flag class="item" country="mosaic.city.region.country.name" style="margin-left:0;"></flag>
+									<span class="item">{{mosaic.city.name}}, {{mosaic.city.region.name}}</span>
+								</div>
+								
+		    					<div class="ml-normal color-muted">
+									<span>{{mosaic.missions.length}} missions</span>
+									<span ng-show="mosaic.type=='sequence'">&nbsp;in sequence</span>
+									<span ng-show="mosaic.type=='serie'">&nbsp;in serie</span>
+		    					</div>
+		    					
+		    				</div>
+		    				
+		    				<div class="item">
+		    					<a class="btn btn-icon" href="/mosaic/{{mosaic.ref}}" target="blank">
+                                    <i class="fa fa-chevron-right"></i>
+                                </a>
+		    				</div>
+		    				
+		    			</div>
+	    			</div>
+	    			
+	    			<hr>
+	    			
+	    		</div>
+	    		
+			</div>
+	    	
+		</div>
+		
+	</div>
+	
+{% endverbatim %}
+
+</div>
+{% endblock %}

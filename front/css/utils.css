@@ -80,6 +80,18 @@
 
 
 
+.m-none { margin:0; }
+.mt-none { margin-top:0; }
+.ml-none { margin-left:0; }
+.mr-none { margin-right:0; }
+.mb-none { margin-bottom:0; }
+
+.m-small { margin:3px; }
+.mt-small { margin-top:3px; }
+.ml-small { margin-left:3px; }
+.mr-small { margin-right:3px; }
+.mb-small { margin-bottom:3px; }
+
 .m-normal { margin:10px; }
 .mt-normal { margin-top:10px; }
 .ml-normal { margin-left:10px; }

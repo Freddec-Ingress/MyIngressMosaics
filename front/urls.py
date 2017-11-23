@@ -41,5 +41,8 @@ urlpatterns = [
 	
 	url(r'^new_registration',  views.new_registration),
 	
+	url(r'^new_search/(?P<searchstring>[\w \-,]+)',           views.new_search),
+	url(r'^new_search',        views.new_search),
+	
 	url(r'^.*', views.world),
 ]

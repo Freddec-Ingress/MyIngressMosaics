@@ -310,3 +310,10 @@ def new_registration(request):
 	
 	context = {}
 	return render(request, 'new_registration.html', context)
+	
+	
+	
+def new_search(request, searchstring = ''):
+	
+	context = { 'searchstring':searchstring }
+	return render(request, 'new_search.html', context)
