@@ -308,6 +308,68 @@
 			
 		</div>
 		
+		<div class="grow flex-col" ng-show="current_step == 3">
+			
+			<div class="grow col p-normal">
+			
+				<div class="item flex-col">
+					<span class="color-muted">Mosaic name</div>
+					<input class="control" ng-model="mosaic_name" />
+				</div>
+			
+				<div class="item flex-col">
+					<span class="color-muted">Mosaic type</div>
+					<select class="control" ng-model="mosaic_name">
+						<option value="sequence">sequence</option>
+						<option value="serie">serie</option>
+					</select>
+				</div>
+			
+				<div class="item flex-col">
+					<span class="color-muted">Country</div>
+					<input class="control" ng-model="country_name" />
+				</div>
+			
+				<div class="item flex-col">
+					<span class="color-muted">Region</div>
+					<input class="control" ng-model="region_name" />
+				</div>
+			
+				<div class="item flex-col">
+					<span class="color-muted">City</div>
+					<input class="control" ng-model="city_name" />
+				</div>
+			
+			</div>
+			
+			<hr>
+			
+			<div class="p-normal">
+				<div class="row">
+					
+					<div class="item grow flex">
+						<button class="btn" ng-click="open_step(2);">
+							<div class="row">
+								<i class="item fa fa-angle-double-left"></i>
+								<span class="item">Back</span>
+							</div>
+						</button>
+					</div>
+					
+					<div class="item self-center">
+						<button class="btn" ng-click="open_step(4);">
+							<div class="row">
+								<span class="item">Next</span>
+								<i class="item fa fa-angle-double-right"></i>
+							</div>
+						</button>
+					</div>
+					
+				</div>
+			</div>
+			
+		</div>
+		
 	</div>
 			
 {% endverbatim %}
