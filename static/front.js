@@ -3298,7 +3298,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 		    scaledSize: new google.maps.Size(25, 25),
 			origin: new google.maps.Point(0, 0),
 			anchor: new google.maps.Point(12, 13),
-			url: 'https://commondatastorage.googleapis.com/ingress.com/img/map_icons/marker_images/enl_lev8.png',
+			url: 'https://www.myingressmosaics.com/static/img/circle_sgl.png',
 		};
 	
 		var refArray = [];
@@ -3386,7 +3386,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 							}
 							
 							var markerCluster = new MarkerClusterer(map, markerArray,
-							            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+							{ imagePath: 'https://www.myingressmosaics.com/static/img/' });
 						}
 					});
 				});
