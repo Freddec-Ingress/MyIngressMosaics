@@ -140,7 +140,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 								}
 							}
 							
-							var markerCluster = new google.maps.MarkerClusterer(map, markerArray,
+							var markerCluster = new MarkerClusterer(map, markerArray,
 							            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 						}
 					});
