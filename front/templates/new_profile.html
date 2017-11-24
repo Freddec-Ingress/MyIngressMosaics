@@ -21,9 +21,196 @@
 		<span class="item">Loading page...</span>
 	</div>
 	
-	<div class="container" ng-class="{'active':loaded}">
+	<div class="container" ng-class="{'active':loaded && user}">
 		
+		<div ng-if="!user.authenticated" class="self-center">
+			
+		    <div class="p-normal mt-big" style="max-width:300px;">
+		    	
+		    	<div class="col">
+		    	
+				    <div class="item text-center">
+					    To access to profile page, you have to sign in.
+				    </div>
+
+			    	<div class="item flex justify-center">
+			    		<a class="btn" href="/login">
+			    			Sign in
+			    		</a>
+			    	</div>
+
+				</div>
+				
+			</div>
+			
+		</div>
 		
+		<div ng-if="user.authenticated" class="grow flex-col">
+			
+			<div class="tab" ng-show="current_tab == 1">
+				
+				<div class="grow col p-normal">
+					
+					<div class="item flex-col">
+						<span>Username</span>
+						<input type="text" class="control" ng-model="user.name" />
+					</div>
+					
+					<div class="item">
+						<button class="btn" ng-click="edit(user.name, user.faction);" ng-disabled="!user.name">
+						    Save
+						</button>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+			<div class="tab" ng-show="current_tab == 2">
+				
+			    <div class="p-normal mt-big self-center" style="max-width:300px;" ng-show="loved.length < 1">
+			    	
+			    	<div class="col">
+			    	
+					    <div class="item text-center">
+						    <span class="color-muted">No mosaic loved</span>
+					    </div>
+						
+					</div>
+					
+				</div>
+				
+	    		<div ng-repeat="mosaic in loved">
+	    			
+	    			<div class="p-normal">
+		    			<div class="row align-center">
+		    				
+		    				<div class="item grow">
+		    					
+		    					<div class="mb-normal">
+		    						<span class="color-light">{{mosaic.title}}</span>
+		    					</div>
+		    					
+								<div class="row ml-normal mb-none">
+									<flag class="item" country="mosaic.city.region.country.name" style="margin-left:0;"></flag>
+									<span class="item">{{mosaic.city.name}}, {{mosaic.city.region.name}}</span>
+								</div>
+								
+		    					<div class="ml-normal color-muted">
+									<span>{{mosaic.missions.length}} missions</span>
+									<span ng-show="mosaic.type=='sequence'">&nbsp;in sequence</span>
+									<span ng-show="mosaic.type=='serie'">&nbsp;in serie</span>
+		    					</div>
+		    					
+		    				</div>
+		    				
+		    				<div class="item">
+		    					<a class="btn btn-icon" href="/mosaic/{{mosaic.ref}}" target="blank">
+                                    <i class="fa fa-chevron-right"></i>
+                                </a>
+		    				</div>
+		    				
+		    			</div>
+	    			</div>
+	    			
+	    			<hr>
+	    			
+	    		</div>
+				
+			</div>
+			
+			<div class="tab" ng-show="current_tab == 3">
+				
+			    <div class="p-normal mt-big self-center" style="max-width:300px;" ng-show="completed.length < 1">
+			    	
+			    	<div class="col">
+			    	
+					    <div class="item text-center">
+						    <span class="color-muted">No mosaic completed</span>
+					    </div>
+						
+					</div>
+					
+				</div>
+				
+	    		<div ng-repeat="mosaic in completed">
+	    			
+	    			<div class="p-normal">
+		    			<div class="row align-center">
+		    				
+		    				<div class="item grow">
+		    					
+		    					<div class="mb-normal">
+		    						<span class="color-light">{{mosaic.title}}</span>
+		    					</div>
+		    					
+								<div class="row ml-normal mb-none">
+									<flag class="item" country="mosaic.city.region.country.name" style="margin-left:0;"></flag>
+									<span class="item">{{mosaic.city.name}}, {{mosaic.city.region.name}}</span>
+								</div>
+								
+		    					<div class="ml-normal color-muted">
+									<span>{{mosaic.missions.length}} missions</span>
+									<span ng-show="mosaic.type=='sequence'">&nbsp;in sequence</span>
+									<span ng-show="mosaic.type=='serie'">&nbsp;in serie</span>
+		    					</div>
+		    					
+		    				</div>
+		    				
+		    				<div class="item">
+		    					<a class="btn btn-icon" href="/mosaic/{{mosaic.ref}}" target="blank">
+                                    <i class="fa fa-chevron-right"></i>
+                                </a>
+		    				</div>
+		    				
+		    			</div>
+	    			</div>
+	    			
+	    			<hr>
+	    			
+	    		</div>
+	    		
+			</div>
+			
+			<div class="tab" ng-show="current_tab == 4">
+				
+			    <div class="p-normal mt-big self-center" style="max-width:300px;">
+					<button class="btn btn-danger" ng-click="logout();">
+					    Sign out
+					</button>
+				</div>
+				
+			</div>
+
+			<div class="tabs">
+				
+				<div class="item" ng-click="open_tab(1);" ng-class="{'active':current_tab == 1}">
+					<span class="text">
+						<i class="fa fa-address-card"></i>
+					</span>
+				</div>
+				
+				<div class="item" ng-click="open_tab(2);" ng-class="{'active':current_tab == 2}">
+					<span class="text">
+						<i class="fa fa-heart"></i>
+					</span>
+				</div>
+				
+				<div class="item" ng-click="open_tab(3);" ng-class="{'active':current_tab == 3}">
+					<span class="text">
+						<i class="fa fa-check-square"></i>
+					</span>
+				</div>
+				
+				<div class="item" ng-click="open_tab(4);" ng-class="{'active':current_tab == 4}">
+					<span class="text">
+						<i class="fa fa-power-off"></i>
+					</span>
+				</div>
+				
+			</div>
+			
+		</div>
 		
 	</div>
 	
