@@ -3382,9 +3382,9 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 													var details = response[0];
 													
 													var contentString = '' +
-														'<a class="text-center">' +
-															'<span class="color-black">' + details.title + '</span><br>' + 
-															'<span class="color-grey">' + details.missions.length + ' missions</span><br>' + 
+														'<a class="flex-col align-center ml-normal">' +
+															'<span class="color-black mb-small text-bold">' + details.title + '</span><br>' + 
+															'<span class="color-grey mb-normal">' + details.missions.length + ' missions</span><br>' + 
 															'<span class="color-link">Open mosaic page</span>' + 
 														'</a>';
 														'';
