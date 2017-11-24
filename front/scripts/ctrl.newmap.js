@@ -1,4 +1,4 @@
-angular.module('FrontModule.controllers').controller('NewMapCtrl', function($scope, $window, $cookies, API) {
+angular.module('FrontModule.controllers').controller('NewMapCtrl', function($scope, $window, API) {
 	
 	/* Map management */
 	
@@ -58,6 +58,11 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 	
 		var refArray = [];
 		
+		var infowindow = new google.maps.InfoWindow({
+			content: '',
+			pixelOffset: new google.maps.Size(-1, 15)
+		});
+
 		var geocoder = new google.maps.Geocoder();
 		
 		function geocodeAddress(geocoder, resultsMap) {
@@ -94,13 +99,6 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 				map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(geolocationDiv);
 		
 				map.addListener('idle', function(e) {
-			
-					var center = map.getCenter();
-					
-					$cookies.put('startLat', center.lat());
-					$cookies.put('startLng', center.lng());
-					
-					$cookies.put('startZoom', map.getZoom());
 					
 					var bds = map.getBounds();
 					
@@ -202,7 +200,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 											});
 										};
 										
-									})(marker, item.ref, $rootScope.infowindow));
+									})(marker, item.ref, infowindow));
 									
 									refArray.push(item.ref);
 								}
