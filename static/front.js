@@ -3344,6 +3344,9 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 				var geolocationControl = new GeolocationControl(geolocationDiv, map);
 				map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(geolocationDiv);
 		
+				var markerCluster = new MarkerClusterer(map, null,
+										{ imagePath: 'https://www.myingressmosaics.com/static/img/m' });
+										
 				map.addListener('idle', function(e) {
 					
 					var bds = map.getBounds();
@@ -3383,8 +3386,8 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 													
 													var contentString = '' +
 														'<a class="flex-col align-center ml-normal">' +
-															'<span class="color-black mb-small text-bold">' + details.title + '</span><br>' + 
-															'<span class="color-grey mb-normal">' + details.missions.length + ' missions</span><br>' + 
+															'<span class="color-black mb-small text-bold">' + details.title + '</span>' + 
+															'<span class="color-grey mb-normal">' + details.missions.length + ' missions</span>' + 
 															'<span class="color-link">Open mosaic page</span>' + 
 														'</a>';
 														'';
@@ -3407,12 +3410,11 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 								}
 							}
 							
-							var zoom = map.getBounds();
-							if (zoom < 18) {
+							markerCluster.clearMarkers();
 							
-								var markerCluster = new MarkerClusterer(map, markerArray,
-								{ imagePath: 'https://www.myingressmosaics.com/static/img/m' });
-							}
+							var zoom = map.getZoom();
+							console.log(zoom);
+							if (zoom < 18) markerCluster.addMarkers(markerArray);
 						}
 					});
 				});
