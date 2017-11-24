@@ -786,6 +786,25 @@ def data_searchForMissions(request):
 		data = { 'missions': None, }
 	
 	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((AllowAny, ))
+def data_newSearchForMissions(request):
+	
+	results = Mission.objects.filter(mosaic__isnull=True).filter(Q(title__icontains=request.data['text']) | Q(creator__icontains=request.data['text']))
+	if (results.count() > 0):
+	
+		data = { 'missions': [], }
+		for item in results:
+			data['missions'].append(item.overviewSerialize())
+			
+	else:
+		data = { 'missions': None, }
+	
+	return Response(data, status=status.HTTP_200_OK)
     
     
     

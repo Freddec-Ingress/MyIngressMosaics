@@ -82,74 +82,20 @@
 			</div>
 		</div>
 		
-		<div class="grow flex-col" ng-show="user && current_step == 0 && !creating">
-			
-			<div ng-if="!user.authenticated" class="self-center">
-			    
-			    <div class="p-normal mt-big" style="max-width:250px;">
-			    	
-			    	<div class="col">
-			    	
-					    <div class="item text-center">
-						    To register mosaics and become a mosaic hunter you have to sign in and register missions from Intel Map.
-					    </div>
-				    
-				    	<div class="item flex justify-center">
-				    		<a href="/recruitment">
-				    			How to become a mosaic hunter?
-				    		</a>
-				    	</div>
-						
-				    	<div class="item flex justify-center">
-				    		<a class="btn" href="/login">
-				    			Sign in
-				    		</a>
-				    	</div>
-
-					</div>
-					
-				</div>
-				
-			</div>
-			
-			<div ng-if="user.authenticated" class="self-center">
-				
-			    <div class="p-normal mt-big" style="max-width:250px;">
-			    	
-			    	<div class="col">
-			    		
-					    <div class="item text-center">
-						    If you have few registered missions and/or registered missions specific to a mosaic, the simple mode is for you!
-					    </div>
-				    
-				    	<div class="item flex justify-center">
-				    		<button class="btn" ng-click="open_step(1);">
-				    			Simple mode
-				    		</button>
-				    	</div>
-			    		
-					</div>
-					
-				</div>
-				
-			</div>
-			
-		</div>
-		
 		<div class="grow flex-col" ng-show="current_step == 1 && !creating">
 			
 			<div class="p-normal">
 				
 				<div class="row">
 					
-					<div class="item">
-						<button class="btn" ng-click="refreshMissions();">
-							<i class="fa fa-refresh"></i>
-						</button>
+					<div class="item grow">
+						<input class="control" placeholder="Mission name, creator" ng-model="text" />
 					</div>
 					
-					<div class="item grow">
-						<input class="control" placeholder="Filter" ng-model="filter" ng-change="filterMissions(filter);" />
+					<div class="item">
+						<button class="btn" ng-click="refreshMissions(text);">
+							<i class="fa fa-refresh"></i>
+						</button>
 					</div>
 					
 				</div>
