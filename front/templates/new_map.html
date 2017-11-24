@@ -23,7 +23,27 @@
 	
 	<div class="container" ng-class="{'active':loaded}">
 		
-		
+		<div class="grow flex-col">
+			
+			<form class="p-normal" style="z-index:5;">
+				<div class="row">
+					
+					<div class="item grow">
+						<input id="address" class="control" type="text" placeholder="Enter location" value="" />
+					</div>
+					
+					<div class="item">
+						<button id="submit" class="btn" type="submit" ng-click="initMap();">
+							Go
+						</button>
+					</div>
+					
+				</div>
+			</form>
+			
+			<div id="map" class="grow" ng-init="initMap();"></div>
+
+		</div>
 		
 	</div>
 	
