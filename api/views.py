@@ -828,28 +828,7 @@ def data_searchForMosaics(request):
 	if (results.count() > 0):
 		for mosaic in results:
 			array.append(mosaic)
-		
-	# Country search
 	
-	results = Mosaic.objects.filter(Q(city__region__country__name__icontains=request.data['text']) | Q(city__region__country__locale__icontains=request.data['text']))
-	if (results.count() > 0):
-		for mosaic in results:
-			array.append(mosaic)
-		
-	# Region search
-	
-	results = Mosaic.objects.filter(Q(city__region__name__icontains=request.data['text']) | Q(city__region__locale__icontains=request.data['text']))
-	if (results.count() > 0):
-		for mosaic in results:
-			array.append(mosaic)
-		
-	# City search
-	
-	results = Mosaic.objects.filter(Q(city__name__icontains=request.data['text']) | Q(city__locale__icontains=request.data['text']))
-	if (results.count() > 0):
-		for mosaic in results:
-			array.append(mosaic)
-				
 	if (len(array) > 0):
 		
 		temp = list(set(array))

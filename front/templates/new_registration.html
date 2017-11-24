@@ -82,148 +82,152 @@
 			</div>
 		</div>
 		
-		<div class="grow flex-col" ng-show="current_step == 1 && !creating">
+		<div class="grow flex-col" ng-show="user && current_step == 1 && !creating">
 			
-			<div class="p-normal">
-				
-				<div class="row">
-					
-					<div class="item grow">
-						<input class="control" placeholder="Mission name, creator" ng-model="text" />
-					</div>
-					
-					<div class="item">
-						<button class="btn" ng-click="refreshMissions(text);">
-							<i class="fa fa-refresh"></i>
-						</button>
+			<div ng-if="!user.authenticated" class="self-center">
+			    
+			    <div class="p-normal mt-big" style="max-width:300px;">
+			    	
+			    	<div class="col">
+			    	
+					    <div class="item text-center">
+						    To register mosaics you have to sign in.
+					    </div>
+
+				    	<div class="item flex justify-center">
+				    		<a class="btn" href="/login">
+				    			Sign in
+				    		</a>
+				    	</div>
+
 					</div>
 					
 				</div>
 				
-			</div>
+			</div>			
 			
-			<hr>
+			<div class="grow flex-col" ng-if="user.authenticated">
 				
-			<div class="scrollable">
-				
-				<div ng-if="refreshing" class="mt-normal flex justify-center">
-					<i class="item fa fa-spinner rotating"></i>
-					<span class="item">Refreshing...</span>
-				</div>
-				
-				<div ng-if="!refreshing">
+				<div class="p-normal">
 					
-                    <div ng-if="filtered.length < 1">
-                    	
-                    	<div class="text-center mt-normal mb-normal">
-                    		<span class="color-muted">No mission</span>
-                    	</div>
-                    	
-                    	<div ng-if="missions.length < 1" class="text-center">
-                    		<a href="/recruitment">How to become a mosaic hunter?</a>
-                    	</div>
-                    	
-                    </div>
-                    
-                    <div ng-repeat="mission in filtered">
-                    	
-                    	<div class="p-normal" ng-class="{'bgcolor-highlight':mission.selected}">
-	                    	<div class="row align-center nowrap">
-	                		
-		                    	<div class="item">
-		                    		
-	                                <a class="btn btn-icon" ng-hide="mission.selected" ng-click="toggleSelectMission(mission);">
-	                                    <i class="fa fa-plus-square"></i>
-	                                </a>
-		                    		
-	                                <a class="btn btn-icon" ng-show="mission.selected" ng-click="toggleSelectMission(mission);">
-	                                    <i class="fa fa-minus-square"></i>
-	                                </a>
-	                                
-		                    	</div>
-		                    	
-				                <div class="item" ng-click="toggleSelectMission(mission);">
-				        			<img src="/static/img/mask.png" style="width:26px; background-color:#000000; background-image:url({{mission.image}}=s25); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-		                    	</div>
-		                    	
-		                    	<div class="item grow ellipsis" ng-click="toggleSelectMission(mission);">
-		                    		
-		                    		<div class="ellipsis">
-			                    		<span class="color-light">{{mission.title}}</span>
-		                    		</div>
-		                    		
-		                    		<div class="">
-			                    		<span ng-class="{'color-enlightened': mission.faction == 'E', 'color-resistant': mission.faction == 'R'}">{{mission.creator}}</span>
-		                    		</div>
-		                    		
-		                    	</div>
-		                    	
-		                    	<div class="item">
-	                                <a class="btn btn-icon" ng-click="removeMission(mission);">
-	                                    <i class="fa fa-trash"></i>
-	                                </a>
-		                    	</div>
-		                    	
-		                    	<div class="item">
-	                                <a class="btn btn-icon" href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=17&pll={{mission.startLat}},{{mission.startLng}}" target="blank">
-	                                    <i class="fa fa-external-link"></i>
-	                                </a>
-		                    	</div>
-		                    	
-	                    	</div>
-                    	</div>
-                    	
-                    	<hr>
-                    	
-                    </div>
-                    
-				</div>
-				
-			</div>
-			
-			<hr>
-			
-			<div class="p-normal">
-				<div class="row">
-					
-					<div class="item grow flex">
-						<button class="btn" ng-click="open_step(0);">
-							<div class="row">
-								<i class="item fa fa-angle-double-left"></i>
-								<span class="item">Back</span>
-							</div>
-						</button>
-					</div>
-					
-					<div class="item grow flex">
+					<div class="row">
 						
-						<div class="text-center">
-							
-							<div>
-								{{filtered.length}} missions
-							</div>
-							
-							<div>
-								<a ng-click="selectAll();">
-									Select All
-								</a>
-							</div>
-							
+						<div class="item grow">
+							<input class="control" placeholder="Mission name, creator" ng-model="text" />
+						</div>
+						
+						<div class="item">
+							<button class="btn" ng-click="refreshMissions(text);">
+								<i class="fa fa-refresh"></i>
+							</button>
 						</div>
 						
 					</div>
 					
-					<div class="item self-center">
-						<button class="btn" ng-class="{'disabled':selected.length < 3}" ng-click="open_step(2);">
-							<div class="row">
-								<span class="item">Next</span>
-								<i class="item fa fa-angle-double-right"></i>
-							</div>
-						</button>
+				</div>
+				
+				<hr>
+					
+				<div class="scrollable">
+					
+					<div ng-if="refreshing" class="mt-normal flex align-center justify-center">
+						<i class="item fa fa-spinner rotating"></i>
+						<span class="item">Refreshing...</span>
+					</div>
+					
+					<div ng-if="!refreshing">
+						
+	                    <div ng-if="missions.length < 1">
+	                    	
+	                    	<div class="text-center mt-normal mb-normal">
+	                    		<span class="color-muted">No mission</span>
+	                    	</div>
+	                    	
+	                    	<div class="flex align-center justify-center">
+	                    		
+	                    		<div class="p-normal text-center" style="width:300px;">
+	                    			<div class="mb-normal">To register missions by yourself, click here</div>
+	                    			<a href="/recruitment">How to become a mosaic hunter?</a>
+	                    		</div>
+	                    		
+	                    	</div>
+	                    	
+	                    </div>
+	                    
+	                    <div ng-repeat="mission in missions">
+	                    	
+	                    	<div class="p-normal" ng-class="{'bgcolor-highlight':mission.selected}">
+		                    	<div class="row align-center nowrap">
+	
+					                <a class="item" ng-click="toggleSelectMission(mission);">
+					        			<img src="/static/img/mask.png" style="width:26px; background-color:#000000; background-image:url({{mission.image}}=s25); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+			                    	</a>
+			                    	
+			                    	<a class="item grow ellipsis" ng-click="toggleSelectMission(mission);">
+			                    		
+			                    		<div class="ellipsis">
+				                    		<span class="color-light">{{mission.title}}</span>
+			                    		</div>
+			                    		
+			                    		<div class="">
+				                    		<span ng-class="{'color-enlightened': mission.faction == 'E', 'color-resistant': mission.faction == 'R'}">{{mission.creator}}</span>
+			                    		</div>
+			                    		
+			                    	</a>
+	
+			                    	<div class="item">
+		                                <a class="btn btn-icon" href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=17&pll={{mission.startLat}},{{mission.startLng}}" target="blank">
+		                                    <i class="fa fa-external-link"></i>
+		                                </a>
+			                    	</div>
+			                    	
+		                    	</div>
+	                    	</div>
+	                    	
+	                    	<hr>
+	                    	
+	                    </div>
+	                    
 					</div>
 					
 				</div>
-			</div>
+				
+				<hr>
+				
+				<div class="p-normal">
+					<div class="row">
+						
+						<div class="item grow flex">
+							
+							<div class="text-center ml-normal">
+								
+								<div>
+									{{missions.length}} missions
+								</div>
+								
+								<div>
+									<a ng-click="selectAll();">
+										Select All
+									</a>
+								</div>
+								
+							</div>
+							
+						</div>
+						
+						<div class="item self-center">
+							<button class="btn" ng-class="{'disabled':selected.length < 3}" ng-click="open_step(2);">
+								<div class="row">
+									<span class="item">Next</span>
+									<i class="item fa fa-angle-double-right"></i>
+								</div>
+							</button>
+						</div>
+						
+					</div>
+				</div>
+				
+			</div>			
 			
 		</div>
 		
@@ -388,11 +392,11 @@
 			
 			<div class="grow col p-normal">
 				
-				<div class="item text-center">
+				<div class="item text-center pb-none">
 					<span class="text-big color-light">{{mosaic_name}}</span>
 				</div>
 				
-				<div class="item flex-col">
+				<div class="item flex-col pt-none">
 					
 					<div class="flex justify-center">
 						<flag class="item" country="country_name"></flag>

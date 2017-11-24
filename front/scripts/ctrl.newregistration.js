@@ -24,6 +24,10 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	
 	$scope.refreshMissions = function(text) {
 		
+		if (!text) return;
+		
+		if (text.length < 3) return;
+		
 		$scope.refreshing = true;
 		
 		$scope.missions = [];
