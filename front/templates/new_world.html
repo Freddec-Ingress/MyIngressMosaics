@@ -87,19 +87,19 @@
 	    
     	<div ng-repeat="country in countries">
     		
-    		<a class="p-normal flex" href="/world/{{country.name}}">
+    		<a class="p-normal row" href="/world/{{country.name}}">
     			
-    			<div class="item">
-    				<flag class="item" country="mosaic.city.region.country.name"></flag>
+    			<div class="item flex-col justify-center">
+    				<flag country="country.name"></flag>
     			</div>
     			
-    			<div class="item">
-    				<span class="">{{country.locale}}</span>
-    				<span class="">{{country.name}}</span>
+    			<div class="item flex-col justify-center grow">
+    				<span class="block color-light text-medium">{{country.locale}}</span>
+    				<span class="block color-normal text-small">{{country.name}}</span>
     			</div>
      			
-    			<div class="item">
-    				<span class="badge">{{country.mosaics|number}}</span>
+    			<div class="item flex-col justify-center" style="width:50px;">
+    				<span class="btn btn-mini">{{country.mosaics|number}}</span>
     			</div>
      			
     		</a>
