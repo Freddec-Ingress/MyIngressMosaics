@@ -138,8 +138,8 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 													
 													var contentString = '' +
 														'<a class="flex-col align-center ml-normal">' +
-															'<span class="color-black mb-small text-bold">' + details.title + '</span><br>' + 
-															'<span class="color-grey mb-normal">' + details.missions.length + ' missions</span><br>' + 
+															'<span class="color-black mb-small text-bold">' + details.title + '</span>' + 
+															'<span class="color-grey mb-normal">' + details.missions.length + ' missions</span>' + 
 															'<span class="color-link">Open mosaic page</span>' + 
 														'</a>';
 														'';
@@ -162,7 +162,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 								}
 							}
 							
-							var zoom = map.getBounds();
+							var zoom = map.getZoom();
 							if (zoom < 18) {
 							
 								var markerCluster = new MarkerClusterer(map, markerArray,
