@@ -1,0 +1,116 @@
+{% extends 'new_base.html' %}
+
+{% block extra-head %}
+
+	<title>MIM - Home</title>
+
+	<meta property="og:url" content="https://www.myingressmosaics.com">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="MyIngressMosaics">
+	<meta property="og:description" content="Ingress Mosaics, Banners and Mission series">
+
+{% endblock %}
+
+{% block content %}
+<div id="content" ng-controller="NewWorldCtrl">
+
+{% verbatim %}
+
+	<div id="loading" ng-hide="loaded">
+		<i class="item fa fa-spinner rotating"></i>
+		<span class="item">Loading page...</span>
+	</div>
+	
+	<div class="container" ng-class="{'active':loaded}">
+		
+		<div class="p-normal mt-big text-center">
+			<span class="text-big color-light block">Ingress Mosaics, Banners and Mission series</span>
+			<span class="block">{{count|number}} registered mosaics by agents for agents</span>
+		</div>
+		
+		<div class="row justify-center mb-normal">
+			
+			<div class="item">
+				
+				<div id="fb-root"></div>
+				
+				<script>
+					(function(d, s, id) {
+						var js, fjs = d.getElementsByTagName(s)[0];
+						if (d.getElementById(id)) return;
+						js = d.createElement(s); js.id = id;
+						js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10";
+						fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk'));
+				</script>
+				
+				{% endverbatim %}
+					<div class="fb-like"
+						data-href="https://www.myingressmosaics.com"
+						data-layout="button"
+						data-size="small"
+						data-mobile-iframe="true">
+					</div>
+				{% verbatim %}
+
+			</div>
+
+			<div class="item flex">
+				
+				{% endverbatim %}
+					<script src="https://apis.google.com/js/platform.js" async defer></script>
+					<div class="g-plus" data-action="share" data-annotation="none" data-href="https://www.myingressmosaics.com"></div>			
+				{% verbatim %}
+				
+			</div>
+			
+		</div>
+		
+	    <div class="p-normal mt-big">
+	     	<form class="row">
+				<div class="item grow">
+					<input type="text" class="control" placeholder="Search for a mosaic" ng-model="searchtext" />
+				</div>
+				<div class="item">
+					<a type="submit" class="btn" href="/search/{{searchtext}}">
+						<i class="fa fa-fw fa-search"></i>
+					</a>
+				</div>
+			</form>
+		</div>
+		
+	    <div class="p-normal mt-big">
+	    	<span class="block text-center">Countries with mosaics</span>
+	    </div>
+	    
+	    <hr>
+	    
+    	<div ng-repeat="country in countries">
+    		
+    		<a class="p-normal flex" href="/world/{{country.name}}">
+    			
+    			<div class="item">
+    				<flag class="item" country="mosaic.city.region.country.name"></flag>
+    			</div>
+    			
+    			<div class="item">
+    				<span class="">{{country.locale}}</span>
+    				<span class="">{{country.name}}</span>
+    			</div>
+     			
+    			<div class="item">
+    				<span class="badge">{{country.mosaics|number}}</span>
+    			</div>
+     			
+    		</a>
+    		
+    		<hr>
+    		
+    	</div>
+					
+	</div>
+	
+{% endverbatim %}
+
+</div>
+{% endblock %}
