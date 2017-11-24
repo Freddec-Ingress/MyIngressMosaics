@@ -163,9 +163,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 							}
 							
 							var markerCluster = new MarkerClusterer(map, markerArray, { imagePath: 'https://www.myingressmosaics.com/static/img/m' });
-
-							var zoom = map.getZoom();
-							if (zoom > 17) markerCluster.clearMarkers();
+							markerCluster.setMaxZoom(17);
 						}
 					});
 				});
