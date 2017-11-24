@@ -3421,6 +3421,10 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 		        
 		        var autocomplete = new google.maps.places.Autocomplete(input);
 		        autocomplete.bindTo('bounds', map);
+		        
+		        autocomplete.addListener('place_changed', function() {
+		        	geocodeAddress(geocoder, map);
+		        });
 			});
 		}
 	}
