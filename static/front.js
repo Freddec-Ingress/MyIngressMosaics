@@ -3532,7 +3532,17 @@ angular.module('FrontModule.controllers').controller('NewWorldCtrl', function($s
 	
 	/* Page loading */
 	
-	$scope.loaded = true;
+	API.sendRequest('/api/world/', 'GET').then(function(response) {
+
+		$scope.count = response.count;
+		$scope.countries = response.countries;
+		
+		$scope.countries.sort(function(a, b) {
+			return b.mosaics - a.mosaics;
+		});
+		
+		$scope.loaded = true;
+	});
 });
 angular.module('FrontModule', ['satellizer', 'ngCookies', 'toastr',
 							   'FrontModule.services', 'FrontModule.controllers', 'FrontModule.directives', ]);

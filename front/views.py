@@ -351,14 +351,14 @@ def new_map(request, location = ''):
 def new_world(request):
 	
 	context = {}
-	return render(request, 'world.html', context)
+	return render(request, 'new_world.html', context)
 
 
 
 def new_country(request, country):
 	
 	context = { 'country':country }
-	return render(request, 'country.html', context)
+	return render(request, 'new_country.html', context)
 
 
 
