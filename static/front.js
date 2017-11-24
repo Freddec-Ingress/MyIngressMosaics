@@ -3243,7 +3243,7 @@ angular.module('FrontModule.controllers').controller('NewLoginCtrl', function($s
 	
 	$scope.loaded = true;
 });
-angular.module('FrontModule.controllers').controller('NewMapCtrl', function($scope, $window, API) {
+angular.module('FrontModule.controllers').controller('NewMapCtrl', function($scope, $window, $compile, API) {
 	
 	/* Map management */
 	

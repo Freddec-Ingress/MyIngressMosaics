@@ -1,4 +1,4 @@
-angular.module('FrontModule.controllers').controller('NewMapCtrl', function($scope, $window, API) {
+angular.module('FrontModule.controllers').controller('NewMapCtrl', function($scope, $window, $compile, API) {
 	
 	/* Map management */
 	
