@@ -171,6 +171,11 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 		    	document.getElementById('submit').addEventListener('click', function() {
 		        	geocodeAddress(geocoder, map);
 		        });
+		        
+		        var input = document.getElementById('address');
+		        
+		        var autocomplete = new google.maps.places.Autocomplete(input);
+		        autocomplete.bindTo('bounds', map);
 			});
 		}
 	}
