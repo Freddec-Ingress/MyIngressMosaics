@@ -57,6 +57,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 		};
 	
 		var refArray = [];
+		var markerArray = [];
 		
 		var infowindow = new google.maps.InfoWindow({
 			content: '',
@@ -130,43 +131,17 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 										return function () {
 											
 											$window.open('https://www.myingressmosaics.com/mosaic/' + ref);
-/*											
-											var contentDiv = angular.element('<div/>');
-											contentDiv.append(contentLoading);
-											
-											var compiledContent = $compile(contentDiv)($scope);
-											
-											infowindow.setContent(compiledContent[0]);
-											infowindow.open($scope.map, marker);
-											
-											var data = {'ref':ref};
-											API.sendRequest('/api/map/mosaic/', 'POST', {}, data).then(function(response) {
-												
-												if (response) {
-													
-													var details = response[0];
-													
-													var contentString =
-														'<a class="flex-col" style="font: 400 .75rem/1.5 \'Coda\',sans-serif;" href="/mosaic/' + details.ref + '">' +
-												        '	<span class="text-big">' + details.title + '</span>' +
-														'</a>' +
-													'';
-		
-													contentDiv = angular.element('<div/>');
-													contentDiv.append(contentString);
-													
-													var compiledContent = $compile(contentDiv)($scope);
-													
-													infowindow.setContent(compiledContent[0]);
-												}			
-											});*/
 										};
 										
 									})(marker, item.ref, infowindow));
 									
 									refArray.push(item.ref);
+									markerArray.push(marker);
 								}
 							}
+							
+							var markerCluster = new google.maps.MarkerClusterer(map, markerArray,
+							            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 						}
 					});
 				});
