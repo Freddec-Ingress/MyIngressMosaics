@@ -130,7 +130,23 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 										
 										return function () {
 											
-											$window.open('https://www.myingressmosaics.com/mosaic/' + ref);
+											var data = {'ref':ref};
+											API.sendRequest('/api/map/mosaic/', 'POST', {}, data).then(function(response) {
+												if (response) {
+													
+													var details = response[0];
+													
+													var contentString = details.title;
+													
+													var contentDiv = angular.element('<div/>');
+													contentDiv.append(contentString);													
+													
+													var compiledContent = $compile(contentDiv)($scope);
+													
+													infowindow.setContent(compiledContent[0]);
+													infowindow.open($scope.map, marker);
+												}
+											});
 										};
 										
 									})(marker, item.ref, infowindow));
