@@ -112,13 +112,6 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 						
 						if (response) {
 							
-							var contentLoading =
-								'<div class="ta-center">' +
-								'	<i class="fa fa-spinner"></i>' +
-								'	Loading data...' +
-								'</div>'
-							;
-							
 							for (var item of response) {
 							
 								var index = refArray.indexOf(item.ref)
@@ -136,6 +129,8 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 										
 										return function () {
 											
+											$window.open('https://www.myingressmosaics.com/mosaic/' + ref);
+/*											
 											var contentDiv = angular.element('<div/>');
 											contentDiv.append(contentLoading);
 											
@@ -164,7 +159,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 													
 													infowindow.setContent(compiledContent[0]);
 												}			
-											});
+											});*/
 										};
 										
 									})(marker, item.ref, infowindow));
