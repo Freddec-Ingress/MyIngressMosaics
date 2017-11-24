@@ -162,8 +162,12 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 								}
 							}
 							
-							var markerCluster = new MarkerClusterer(map, markerArray,
-							{ imagePath: 'https://www.myingressmosaics.com/static/img/m' });
+							var zoom = map.getBounds();
+							if (zoom < 18) {
+							
+								var markerCluster = new MarkerClusterer(map, markerArray,
+								{ imagePath: 'https://www.myingressmosaics.com/static/img/m' });
+							}
 						}
 					});
 				});
