@@ -3240,7 +3240,16 @@ angular.module('FrontModule.controllers').controller('NewCountryCtrl', function(
 	
 	/* Page loading */
 	
-	$scope.loaded = true;
+	$scope.loadCountry = function(name) {
+		
+		API.sendRequest('/api/country/' + name + '/', 'GET').then(function(response) {
+			
+			$scope.country = response.country;
+			$scope.regions = response.regions;
+			
+			$scope.loaded = true;
+		});
+	}
 });
 angular.module('FrontModule.controllers').controller('NewLoginCtrl', function($scope, $window, $auth, $cookies, API) {
 	

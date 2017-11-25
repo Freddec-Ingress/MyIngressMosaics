@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block content %}
-<div id="content" ng-controller="NewCountryCtrl">
+<div id="content" ng-controller="NewCountryCtrl" ng-init="loadCountry('{{country}}');">
 
 {% verbatim %}
 
@@ -45,28 +45,28 @@
 		
 		<hr>
 		
-		<div class="p-normal">
-			<div class="row align-center">
-				
-				<div class="item">
-					<span class="text-small color-muted">Region</span>
-				</div>
-				
-				<div class="item grow">
-					<span class="text-medium color-light">{{region.name}}</span>
-				</div>
-				
-				<div class="item">
-					<button class="btn btn-mini">
-						Change
-					</button>
-				</div>
-				
-			</div>
-		</div>
-		
-		<hr>
-		
+    	<div ng-repeat="region in regions">
+    		
+    		<a class="p-normal row" href="/world/{{country.name}}/{{region.name}}">
+    			
+    			<div class="item flex-col justify-center grow">
+    				<span class="block color-light text-medium">{{region.locale}}</span>
+    				<span class="block color-normal text-small">{{region.name}}</span>
+    			</div>
+     			
+    			<div class="item flex-col justify-center" style="width:75px;">
+    				<span class="btn btn-mini">
+    					{{region.mosaics|number}}
+    					<i class="item fa fa-angle-double-right pr-none"></i>
+    				</span>
+    			</div>
+     			
+    		</a>
+    		
+    		<hr>
+    		
+    	</div>
+
 	</div>
 	
 {% endverbatim %}
