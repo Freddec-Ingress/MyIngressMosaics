@@ -2878,6 +2878,8 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		
 		if (text.length < 3) return;
 		
+		$scope.searchText = text;
+		
 		$scope.refreshing = true;
 		
 		$scope.missions = [];
