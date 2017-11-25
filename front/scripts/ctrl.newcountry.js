@@ -6,6 +6,7 @@ angular.module('FrontModule.controllers').controller('NewCountryCtrl', function(
 		
 		API.sendRequest('/api/country/' + name + '/', 'GET').then(function(response) {
 			
+			$scope.count = response.count;
 			$scope.country = response.country;
 			$scope.regions = response.regions;
 			

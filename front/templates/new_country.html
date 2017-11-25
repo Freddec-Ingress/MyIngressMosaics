@@ -26,9 +26,9 @@
 		<div class="p-normal">
 			<div class="row align-center">
 				
-				<div class="item">
-					<span class="text-small color-muted">Country</span>
-				</div>
+    			<div class="item flex-col justify-center">
+    				<flag country="country.name"></flag>
+    			</div>
 				
 				<div class="item grow">
 					<span class="text-medium color-light block">{{country.locale}}</span>
@@ -47,7 +47,7 @@
 		<hr>
 		
 	    <div class="p-normal mt-big">
-	    	<span class="block text-center">Regions with mosaics</span>
+	    	<span class="block text-center">{{regions.length}} regions with {{count}} mosaics</span>
 	    </div>
 		
 		<hr>
@@ -58,9 +58,9 @@
 	    		<a class="p-normal row" href="/world/{{country.name}}/{{region.name}}">
 	    			
 	    			<div class="item flex-col justify-center grow">
-	    				<span class="block color-light text-medium" ng-show="region.locale">{{region.locale}}</span>
 	    				<span class="block color-light text-medium" ng-show="!region.locale">{{region.name}}</span>
-	    				<span class="block color-normal text-small" ng-show="region.locale!=region.name">{{region.name}}</span>
+	    				<span class="block color-light text-medium" ng-show="region.locale">{{region.locale}}</span>
+	    				<span class="block color-normal text-small" ng-show="region.locale">{{region.name}}</span>
 	    			</div>
 	     			
 	    			<div class="item flex-col justify-center" style="width:75px;">
