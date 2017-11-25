@@ -31,7 +31,8 @@
 				</div>
 				
 				<div class="item grow">
-					<span class="text-medium color-light">{{country.name}}</span>
+					<span class="text-medium color-light block">{{country.locale}}</span>
+					<span class="text-small color-normal block">{{country.name}}</span>
 				</div>
 				
 				<div class="item">
@@ -51,26 +52,29 @@
 		
 		<hr>
 		
-    	<div ng-repeat="region in regions">
-    		
-    		<a class="p-normal row" href="/world/{{country.name}}/{{region.name}}">
-    			
-    			<div class="item flex-col justify-center grow">
-    				<span class="block color-light text-medium">{{region.locale}}</span>
-    				<span class="block color-normal text-small">{{region.name}}</span>
-    			</div>
-     			
-    			<div class="item flex-col justify-center" style="width:75px;">
-    				<span class="btn btn-mini">
-    					{{region.mosaics|number}}
-    					<i class="item fa fa-angle-double-right pr-none"></i>
-    				</span>
-    			</div>
-     			
-    		</a>
-    		
-    		<hr>
-    		
+    	<div class="scrollable">
+	    	<div ng-repeat="region in regions">
+	    		
+	    		<a class="p-normal row" href="/world/{{country.name}}/{{region.name}}">
+	    			
+	    			<div class="item flex-col justify-center grow">
+	    				<span class="block color-light text-medium" ng-show="region.locale">{{region.locale}}</span>
+	    				<span class="block color-light text-medium" ng-show="!region.locale">{{region.name}}</span>
+	    				<span class="block color-normal text-small" ng-show="region.locale!=region.name">{{region.name}}</span>
+	    			</div>
+	     			
+	    			<div class="item flex-col justify-center" style="width:75px;">
+	    				<span class="btn btn-mini">
+	    					{{region.mosaics|number}}
+	    					<i class="item fa fa-angle-double-right pr-none"></i>
+	    				</span>
+	    			</div>
+	     			
+	    		</a>
+	    		
+	    		<hr>
+	    		
+	    	</div>
     	</div>
 
 	</div>
