@@ -22,6 +22,8 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	
 	$scope.refreshing = false;
 	
+	$scope.searchText = '';
+	
 	$scope.refreshMissions = function(text) {
 		
 		if (!text) return;
@@ -311,6 +313,8 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 
 			$scope.missions = [];
 			$scope.selected = [];
+			
+			$scope.searchText = '';
 			
 			$scope.columns = '6';
 			
