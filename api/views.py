@@ -723,6 +723,43 @@ def data_getMosaicsByCity(request, country, name):
 			'country': country.serialize(),
 			'region': region.serialize(),
 			'cities': [],
+		}
+		
+		for item in results:
+			
+			city = {
+				'mosaics': item.mosaics.all().count(),
+				'name': item.name,
+				'locale': item.locale,
+				'id': item.pk,
+			}
+			
+			data['cities'].append(city)
+	
+		data['count'] = Mosaic.objects.filter(city__region__name=name).count()
+		
+	return Response(data, status=status.HTTP_200_OK)
+	
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['GET'])
+@permission_classes((AllowAny, ))
+def newdata_getMosaicsByCity(request, country, name):
+	
+	data = None
+	
+	country = Country.objects.get(name=country)
+	region = Region.objects.get(country=country, name=name)
+	
+	results = City.objects.filter(region__country__name=country, region__name=name).order_by('name')
+	if (results.count() > 0):
+		
+		data = {
+			'count': 0,
+			'country': country.serialize(),
+			'region': region.serialize(),
+			'cities': [],
 			'regions': [],
 			'by_missions': [],
 			'by_date': [],
