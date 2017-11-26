@@ -58,6 +58,7 @@ module.exports = function(grunt) {
 					'front/scripts/ctrl.newrecruitment.js',
 					'front/scripts/ctrl.newregister.js',
 					'front/scripts/ctrl.newworld.js',
+					'front/scripts/ctrl.newregion.js',
 					'front/scripts/module.js',
 				],
 				dest: 'static/front.js'

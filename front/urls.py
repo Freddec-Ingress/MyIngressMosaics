@@ -55,6 +55,7 @@ urlpatterns = [
 	
 	url(r'^new_register',							views.new_register),
 	
+	url(r'^new_world/(?P<country>[\w \-,\']+)/(?P<region>[\w|\W \-,\']+)', views.new_region),
 	url(r'^new_world/(?P<country>[\w \-,\']+)', 	views.new_country),
 	url(r'^new_world',								views.new_world),
 	

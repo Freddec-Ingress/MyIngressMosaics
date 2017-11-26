@@ -355,6 +355,13 @@ def new_world(request):
 
 
 
+def new_region(request, country, region):
+	
+	context = { 'country':country, 'region':re.escape(region), 'regionlabel':region }
+	return render(request, 'new_region.html', context)
+	
+	
+	
 def new_country(request, country):
 	
 	context = { 'country':country }
