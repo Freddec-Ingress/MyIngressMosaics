@@ -122,7 +122,7 @@
 			</div>
 		</div>
 		
-		<div ng-show="current_sort=='by_city'">
+		<div class="scrollable" ng-show="current_sort=='by_city'">
 			
 			<div class="" ng-repeat="city in bycities">
 				
@@ -136,11 +136,9 @@
 		    				
 		    				<div class="item grow">
 		    					
-		    					<div class="mb-normal">
-		    						<span class="color-light">{{mosaic.title}}</span>
-		    					</div>
-		    					
-		    					<div class="ml-normal color-muted">
+	    						<span class="text-medium color-light block">{{mosaic.title}}</span>
+
+		    					<div class="color-muted">
 									<span>{{mosaic.missions.length}} missions</span>
 									<span ng-show="mosaic.type=='sequence'">&nbsp;in sequence</span>
 									<span ng-show="mosaic.type=='serie'">&nbsp;in serie</span>
