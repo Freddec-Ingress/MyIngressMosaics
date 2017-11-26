@@ -9,6 +9,7 @@ angular.module('FrontModule.controllers').controller('NewCountryCtrl', function(
 			$scope.count = response.count;
 			$scope.country = response.country;
 			$scope.regions = response.regions;
+			$scope.countries = response.countries;
 			
 			$scope.regions.sort(function(a, b) {
 				return b.mosaics - a.mosaics;

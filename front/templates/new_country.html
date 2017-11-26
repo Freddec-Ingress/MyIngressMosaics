@@ -23,6 +23,57 @@
 	
 	<div class="container" ng-class="{'active':loaded}">
 		
+		<div class="modal-container" ng-show="changing">
+			
+			<div class="modal-box" style="width:100%;">
+				
+				<div class="modal-header">
+					
+					<span class="title">
+						Select a country
+					</span>
+					
+					<span class="close" ng-click="changing=false;">
+						<i class="fa fa-times"></i>
+					</span>
+					
+				</div>
+				
+				<div class="modal-content p-none">
+					
+			    	<div ng-repeat="country in countries">
+    		
+			    		<a class="p-normal row" href="/world/{{country.name}}">
+			    			
+			    			<div class="item flex-col justify-center">
+			    				<flag country="country.name"></flag>
+			    			</div>
+			    			
+			    			<div class="item flex-col justify-center grow">
+			    				<span class="block color-light text-medium" ng-show="!country.locale">{{country.name}}</span>
+			    				<span class="block color-light text-medium" ng-show="country.locale">{{country.locale}}</span>
+			    				<span class="block color-normal text-small" ng-show="country.locale">{{country.name}}</span>
+			    			</div>
+			     			
+			    			<div class="item flex-col justify-center" style="width:75px;">
+			    				<span class="btn btn-mini">
+			    					{{country.mosaics|number}}
+			    					<i class="item fa fa-angle-double-right pr-none"></i>
+			    				</span>
+			    			</div>
+			     			
+			    		</a>
+			    		
+			    		<hr>
+			    		
+			    	</div>
+					
+				</div>
+				
+			</div>
+
+		</div>
+			
 		<div class="p-normal">
 			<div class="row align-center">
 				
@@ -31,12 +82,13 @@
     			</div>
 				
 				<div class="item grow">
-					<span class="text-medium color-light block">{{country.locale}}</span>
-					<span class="text-small color-normal block">{{country.name}}</span>
+	    			<span class="text-medium color-light block" ng-show="!country.locale">{{country.name}}</span>
+					<span class="text-medium color-light block" ng-show="country.locale">{{country.locale}}</span>
+					<span class="text-small color-normal block" ng-show="country.locale">{{country.name}}</span>
 				</div>
 				
 				<div class="item">
-					<button class="btn btn-mini">
+					<button class="btn btn-mini" ng-click="changing=true;">
 						Change
 					</button>
 				</div>

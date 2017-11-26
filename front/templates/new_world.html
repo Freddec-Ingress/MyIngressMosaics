@@ -25,7 +25,7 @@
 		
 		<div class="p-normal mt-big text-center">
 			<span class="text-big color-light block">Ingress Mosaics, Banners and Mission series</span>
-			<span class="block">{{count|number}} registered mosaics by agents for agents</span>
+			<span class="block">By agents for agents</span>
 		</div>
 		
 		<div class="row justify-center mb-normal">
@@ -80,7 +80,7 @@
 		</div>
 		
 	    <div class="p-normal mt-big">
-	    	<span class="block text-center">Countries with mosaics</span>
+	    	<span class="block text-center">{{countries.length}} countries with {{count|number}} mosaics</span>
 	    </div>
 	    
 	    <hr>
@@ -94,8 +94,9 @@
     			</div>
     			
     			<div class="item flex-col justify-center grow">
-    				<span class="block color-light text-medium">{{country.locale}}</span>
-    				<span class="block color-normal text-small">{{country.name}}</span>
+    				<span class="block color-light text-medium" ng-show="!country.locale">{{country.name}}</span>
+    				<span class="block color-light text-medium" ng-show="country.locale">{{country.locale}}</span>
+    				<span class="block color-normal text-small" ng-show="country.locale">{{country.name}}</span>
     			</div>
      			
     			<div class="item flex-col justify-center" style="width:75px;">

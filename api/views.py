@@ -678,6 +678,7 @@ def data_getMosaicsByRegion(request, name):
 			'count': 0,
 			'country': country.serialize(),
 			'regions': [],
+			'countries': [],
 		}
 		
 		for item in results:
@@ -693,6 +694,12 @@ def data_getMosaicsByRegion(request, name):
 	
 		data['count'] = Mosaic.objects.filter(city__region__country__name=name).count()
 	
+		results = Country.objects.all()
+		for item in results:
+			temp = item.serialize()
+			temp['mosaics'] = Mosaic.objects.filter(city__region__country=item).count()
+			data['countries'].append(temp)
+			
 	return Response(data, status=status.HTTP_200_OK)
 	
 
