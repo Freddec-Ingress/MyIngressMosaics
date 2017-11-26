@@ -82,7 +82,7 @@
 				</div>
 				
 				<div class="item">
-					<button class="btn btn-mini" ng-click="changing=true;">
+					<button class="btn btn-mini" style="width:63px;" ng-click="changing=true;">
 						Change
 					</button>
 				</div>
@@ -97,6 +97,79 @@
 	    </div>
 		
 		<hr>
+		
+		<div class="p-normal">
+			<div class="row justify-center">
+				
+				<div class="item">
+					<div class="badge" ng-click="sortByCity();" ng-class="{'transparent color-link': current_sort!='by_city'}">
+						By city
+					</div>
+				</div>
+				
+				<div class="item">
+					<div class="badge" ng-click="sortByMissions();" ng-class="{'transparent color-link': current_sort!='by_missions'}">
+						By missions
+					</div>
+				</div>
+				
+				<div class="item">
+					<div class="badge" ng-click="sortByDate();" ng-class="{'transparent color-link': current_sort!='by_date'}">
+						By date
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		
+		<div ng-show="current_sort=='by_city'">
+			
+			<div class="" ng-repeat="city in bycities">
+				
+				<span class="block p-normal text-medium">{{city.name}}</span>
+				<hr>
+				
+	    		<div ng-repeat="mosaic in city.mosaics">
+	    			
+	    			<div class="p-normal">
+		    			<div class="row align-center">
+		    				
+		    				<div class="item grow">
+		    					
+		    					<div class="mb-normal">
+		    						<span class="color-light">{{mosaic.title}}</span>
+		    					</div>
+		    					
+		    					<div class="ml-normal color-muted">
+									<span>{{mosaic.missions.length}} missions</span>
+									<span ng-show="mosaic.type=='sequence'">&nbsp;in sequence</span>
+									<span ng-show="mosaic.type=='serie'">&nbsp;in serie</span>
+		    					</div>
+		    					
+		    				</div>
+		    				
+		    				<div class="item">
+		    					<a class="btn btn-icon" href="/mosaic/{{mosaic.ref}}" target="blank">
+                                    <i class="fa fa-chevron-right"></i>
+                                </a>
+		    				</div>
+		    				
+		    			</div>
+	    			</div>
+	    			
+	    			<hr>
+	    			
+	    		</div>
+				
+			</div>
+			
+		</div>
+		
+		<div ng-show="current_sort=='by_missions'">
+		</div>
+		
+		<div ng-show="current_sort=='by_date'">
+		</div>
 		
 	</div>
 	

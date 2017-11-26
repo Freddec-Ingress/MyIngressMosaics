@@ -17,6 +17,7 @@ from .models import *
 from django.http import HttpResponse
 
 from django.db.models import Q
+from django.db.models import Count
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -723,16 +724,21 @@ def data_getMosaicsByCity(request, country, name):
 			'region': region.serialize(),
 			'cities': [],
 			'regions': [],
+			'by_missions': [],
+			'by_date': [],
 		}
 		
 		for item in results:
 			
 			city = {
-				'mosaics': item.mosaics.count(),
+				'mosaics': [],
 				'name': item.name,
 				'locale': item.locale,
 				'id': item.pk,
 			}
+			
+			for mosaic in item.mosaics.all():
+				city['mosaics'].append(mosaic.overviewSerialize())
 			
 			data['cities'].append(city)
 	
@@ -743,6 +749,24 @@ def data_getMosaicsByCity(request, country, name):
 			temp = item.serialize()
 			temp['mosaics'] = Mosaic.objects.filter(city__region=item).count()
 			data['regions'].append(temp)
+
+		array = Mosaic.objects.filter(city__region=item).annotate(count = Count('missions')).values('count').distinct()
+		for item2 in array:
+			
+			obj = {
+				'count': item2['count'],
+				'mosaics': [],
+			}
+			
+			mosaics = Mosaic.objects.filter(city__region=item).annotate(count = Count('missions')).filter(count=item2['count'])
+			for mosaic in mosaics:
+				obj['mosaics'].append(mosaic.overviewSerialize())
+				
+			data['by_missions'].append(obj)
+	
+		array = Mosaic.objects.filter(city__region=item).order_by('-pk')
+		for item2 in array:
+			data['by_date'].append(item2.overviewSerialize())
 	
 	return Response(data, status=status.HTTP_200_OK)
 
