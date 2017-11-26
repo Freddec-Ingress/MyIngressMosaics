@@ -234,7 +234,7 @@
 		<div class="grow flex-col" ng-show="current_step == 2 && !creating">
 			
 			<div class="flex justify-center">
-				<div>
+				<div class="flex wrap">
 					<div class="p-normal">
 						<div class="row">
 							
@@ -296,6 +296,18 @@
 		            
 	            </div>
 			
+			</div>
+			
+			<div class="flex justify-center">
+				
+				<div class="item">
+					<a ng-click="reorderAsc();">Order Asc</a>
+				</div>
+				
+				<div class="item">
+					<a ng-click="reorderDesc();">Order Desc</a>
+				</div>
+				
 			</div>
 
 			<hr>

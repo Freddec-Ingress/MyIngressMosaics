@@ -2991,6 +2991,30 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		$scope.closeOrder();
 	}
 	
+	$scope.reorderAsc = function() {
+		
+		var index = 0;
+		for (var m of $scope.selected) {
+			
+			index += 1;
+			m.order = index;
+		}
+		
+		$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
+	}
+	
+	$scope.reorderDesc = function() {
+		
+		var index = $scope.selected.length + 1;
+		for (var m of $scope.selected) {
+			
+			index -= 1;
+			m.order = index;
+		}
+		
+		$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
+	}
+	
 	/* Step #3 management */
 	
 	$scope.mosaic_name = '';
