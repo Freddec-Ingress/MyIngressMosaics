@@ -216,7 +216,7 @@
 						</div>
 						
 						<div class="item self-center">
-							<button class="btn" ng-class="{'disabled':selected.length < 3}" ng-click="open_step(2);">
+							<button class="btn" ng-class="{'disabled':selected.length < 3}" ng-click="open_step(2);" ng-disabled="selected.length < 3">
 								<div class="row">
 									<span class="item">({{selected.length}}) Next</span>
 									<i class="item fa fa-angle-double-right"></i>
