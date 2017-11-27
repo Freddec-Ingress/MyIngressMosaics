@@ -35,7 +35,6 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		$scope.refreshing = true;
 		
 		$scope.missions = [];
-		$scope.selected = [];
 		
 		var data = { 'text':text };
 		API.sendRequest('/api/new_missions/', 'POST', {}, data).then(function(response) {
@@ -44,6 +43,15 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 			if (!$scope.missions) $scope.missions = [];
 
 			$scope.missions.sort(UtilsService.sortMissionsByCreatorTitleAsc);
+			
+			for (var mission of $scope.missions) {
+				for (var select of $scope.selected) {
+					if (mission.ref == select.ref) {
+						mission.selected = true;
+						break;
+					}
+				}
+			}
 
 			$scope.refreshing = false;
 		});
