@@ -95,13 +95,13 @@
 		<div class="p-normal">
 			<div class="row justify-center">
 				
-				<div class="item">
+				<div class="item noshrink">
 					<div class="badge" ng-click="sortByCity();" ng-class="{'transparent color-link': current_sort!='by_city'}">
 						By city
 					</div>
 				</div>
 				
-				<div class="item grow">
+				<div class="item grow" style="overflow-x:auto;">
 					<div class="row">
 					
 						<div class="item" ng-repeat="index in by_city_indexes track by $index">
