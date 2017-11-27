@@ -23,12 +23,12 @@
 	
 	<div class="container" ng-class="{'active':loaded}">
 		
-		<div class="p-normal mt-big text-center">
+		<div class="p-normal mt-normal text-center">
 			<span class="text-big color-light block">Ingress Mosaics, Banners and Mission series</span>
 			<span class="block">By agents for agents</span>
 		</div>
 		
-		<div class="row justify-center mb-normal">
+		<div class="row justify-center">
 			
 			<div class="item">
 				
@@ -79,41 +79,40 @@
 			</form>
 		</div>
 		
-	    <div class="p-normal mt-big">
-	    	<span class="block text-center">{{countries.length}} countries with {{count|number}} mosaics</span>
-	    </div>
-	    
-	    <hr>
-	    
-    	<div ng-repeat="country in countries">
-    		
-    		<a class="p-normal block" href="/world/{{country.name}}">
-	    		<div class="row">
-	    			
-	    			<div class="item flex-col justify-center">
-	    				<flag country="country.name"></flag>
-	    			</div>
-	    			
-	    			<div class="item flex-col justify-center grow">
-	    				<span class="block color-light text-medium" ng-show="!country.locale">{{country.name}}</span>
-	    				<span class="block color-light text-medium" ng-show="country.locale">{{country.locale}}</span>
-	    				<span class="block color-normal text-small" ng-show="country.locale">{{country.name}}</span>
-	    			</div>
-	     			
-	    			<div class="item flex-col justify-center" style="width:75px;">
-	    				<span class="btn btn-mini">
-	    					{{country.mosaics|number}}
-	    					<i class="item fa fa-angle-double-right pr-none"></i>
-	    				</span>
-	    			</div>
-	     			
-	    		</div>
-    		</a>
-    		
-    		<hr>
-    		
-    	</div>
-					
+		<hr class=" mt-big">
+		    
+	    <div class="scrollable">
+		    
+	    	<div ng-repeat="country in countries">
+	    		
+	    		<a class="p-normal block" href="/world/{{country.name}}">
+		    		<div class="row">
+		    			
+		    			<div class="item flex-col justify-center">
+		    				<flag country="country.name"></flag>
+		    			</div>
+		    			
+		    			<div class="item flex-col justify-center grow">
+		    				<span class="block color-light text-medium" ng-show="!country.locale">{{country.name}}</span>
+		    				<span class="block color-light text-medium" ng-show="country.locale">{{country.locale}}</span>
+		    				<span class="block color-normal text-small" ng-show="country.locale">{{country.name}}</span>
+		    			</div>
+		     			
+		    			<div class="item flex-col justify-center" style="width:75px;">
+		    				<span class="btn btn-mini">
+		    					{{country.mosaics|number}}
+		    					<i class="item fa fa-angle-double-right pr-none"></i>
+		    				</span>
+		    			</div>
+		     			
+		    		</div>
+	    		</a>
+	    		
+	    		<hr>
+	    		
+	    	</div>
+		</div>
+			
 	</div>
 	
 {% endverbatim %}
