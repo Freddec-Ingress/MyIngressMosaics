@@ -66,7 +66,7 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 				$scope.by_city_list.push(obj);
 				
 				var index = city_name[0];
-				if (!(index in $scope.by_city_indexes)) $scope.by_city_indexes.push(index);
+				if ($scope.by_city_indexes.indexOf(index) == -1) $scope.by_city_indexes.push(index);
 			}
 			
 			$scope.by_city_list.sort(function(a, b) {

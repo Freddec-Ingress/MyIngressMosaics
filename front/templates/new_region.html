@@ -104,8 +104,8 @@
 				<div class="item grow">
 					<div class="row">
 					
-						<div class="item">
-							<div class="badge" ng-repeat="index in by_city_indexes track by $index" ng-click="setCurrentIndex(index);" ng-class="{'transparent color-link': current_index!=index}">
+						<div class="item" ng-repeat="index in by_city_indexes track by $index">
+							<div class="badge" ng-click="setCurrentIndex(index);" ng-class="{'transparent color-link': current_index!=index}">
 								{{index}}
 							</div>
 						</div>
