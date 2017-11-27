@@ -1,46 +1,36 @@
 {% extends 'base.html' %}
 
-{% load i18n %}
-
 {% block extra-head %}
 
-	<title>MIM - Ingress Mosaics, Banners and Mission series</title>
+	<title>MIM - Home</title>
 
 	<meta property="og:url" content="https://www.myingressmosaics.com">
 	<meta property="og:type" content="website">
-	<meta property="og:title" content="MIM - Ingress Mosaics, Banners and Mission series">
-	<meta property="og:description" content="MIM - Ingress Mosaics, Banners and Mission series">
-	
-{% endblock %}
+	<meta property="og:title" content="MyIngressMosaics">
+	<meta property="og:description" content="Ingress Mosaics, Banners and Mission series">
 
-{% block header %}
-
-	{% trans 'Home' %}
-	
 {% endblock %}
 
 {% block content %}
-
-<div id="page-container" ng-controller="WorldCtrl">
+<div id="content" ng-controller="NewWorldCtrl">
 
 {% verbatim %}
 
-	<div class="block">
-		
-		<h2 class="heading">
-			Ingress Mosaics, Banners and Mission series
-		</h2>
-		
-		<h3 class="subheading">
-			{{count|number}} registered mosaics by agents for agents
-		</h3>
-		
+	<div id="loading" ng-hide="loaded">
+		<i class="item fa fa-spinner rotating"></i>
+		<span class="item">Loading page...</span>
 	</div>
-
-	<div class="block">
-		<div class="row" style="height:29px;">
+	
+	<div class="container" ng-class="{'active':loaded}">
+		
+		<div class="p-normal mt-big text-center">
+			<span class="text-big color-light block">Ingress Mosaics, Banners and Mission series</span>
+			<span class="block">By agents for agents</span>
+		</div>
+		
+		<div class="row justify-center mb-normal">
 			
-			<div class="item-6 ta-right">
+			<div class="item">
 				
 				<div id="fb-root"></div>
 				
@@ -55,206 +45,78 @@
 				</script>
 				
 				{% endverbatim %}
-				<div class="fb-share-button" data-href="https://www.myingressmosaics.com" data-layout="button_count" data-size="small" data-mobile-iframe="true">
-					<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"></a>
-				</div>
+					<div class="fb-like"
+						data-href="https://www.myingressmosaics.com"
+						data-layout="button"
+						data-size="small"
+						data-mobile-iframe="true">
+					</div>
 				{% verbatim %}
-			
+
 			</div>
-			
-			<div class="item-6">
+
+			<div class="item flex">
 				
 				{% endverbatim %}
-				<script src="https://apis.google.com/js/platform.js" async defer></script>
-				<div class="g-plus" data-action="share" data-annotation="bubble" data-href="https://www.myingressmosaics.com"></div>			
+					<script src="https://apis.google.com/js/platform.js" async defer></script>
+					<div class="g-plus" data-action="share" data-annotation="none" data-href="https://www.myingressmosaics.com"></div>			
 				{% verbatim %}
 				
 			</div>
 			
 		</div>
-	</div>
-	
-    <div class="block">
-     	<form class="panel">
-			<div class="item grow">
-				<input type="text" class="form-control" placeholder="Search for a mosaic" ng-model="searchtext" />
-			</div>
-			<div class="item">
-				<a type="submit" class="btn-primary" href="/search/{{searchtext}}">
-					<i class="fa fa-fw fa-search"></i>
-				</a>
-			</div>
-		</form>
-	</div>
-
-	<div class="block">
-        <div class="ta-center">
-        	<a href="/recruitment" class="btn btn-secondary">
-		    	<div class="row align-center">
-		    		
-		        	<div class="item">
-		        	    <img src="/static/img/we-need-you.png" width="40px" style="margin-left:.75rem; margin-right:.75rem;">
-		        	</div>
-		        	
-		        	<div class="item" style="margin-right:.75rem;">
-		        	    
-		        		<h2 class="heading">
-		        			We need you!
-		        		</h2>
-		        		
-		        		<h3 class="subheading ttrans-normal">
-		        			Become a mosaic hunter
-		        		</h3>
-		        		
-		        		<span class=" ttrans-normal">
-		        			Click here
-		        		</span>
-		        		
-		        	</div>
-		    		
-		    	</div>
-        	</a>
-        </div>
-	</div>
-
-	<div class="block">
 		
-		<div class="title subblock">
-			
-			<div class="row valign-baseline">
-			
+	    <div class="p-normal mt-big">
+	     	<form class="row">
 				<div class="item grow">
-					{{countries.length|number}} countries
+					<input type="text" class="control" placeholder="Search for a mosaic" ng-model="searchtext" />
 				</div>
-				
 				<div class="item">
-					<a class="badge-link badge-mini" ng-class="{'active': sort=='name'}", ng-click="sortByName();">Name</a>
+					<a type="submit" class="btn" href="/search/{{searchtext}}">
+						<i class="fa fa-fw fa-search"></i>
+					</a>
 				</div>
-
-				<div class="item">
-					<a class="badge-link badge-mini" ng-class="{'active': sort=='mosaics'}" ng-click="sortByMosaics();">Mosaics</a>
-				</div>
-				
-			</div>
-			
+			</form>
 		</div>
-	
-		<div class="row">
-			
-			<div class="item-12 item-xl-3" ng-repeat="country in countries">
-				
-				<a href="/world/{{country.name}}" class="btn-primary btn-block">
+		
+	    <div class="p-normal mt-big">
+	    	<span class="block text-center">{{countries.length}} countries with {{count|number}} mosaics</span>
+	    </div>
+	    
+	    <hr>
+	    
+    	<div ng-repeat="country in countries">
+    		
+    		<a class="p-normal block" href="/world/{{country.name}}">
+	    		<div class="row">
+	    			
+	    			<div class="item flex-col justify-center">
+	    				<flag country="country.name"></flag>
+	    			</div>
+	    			
+	    			<div class="item flex-col justify-center grow">
+	    				<span class="block color-light text-medium" ng-show="!country.locale">{{country.name}}</span>
+	    				<span class="block color-light text-medium" ng-show="country.locale">{{country.locale}}</span>
+	    				<span class="block color-normal text-small" ng-show="country.locale">{{country.name}}</span>
+	    			</div>
+	     			
+	    			<div class="item flex-col justify-center" style="width:75px;">
+	    				<span class="btn btn-mini">
+	    					{{country.mosaics|number}}
+	    					<i class="item fa fa-angle-double-right pr-none"></i>
+	    				</span>
+	    			</div>
+	     			
+	    		</div>
+    		</a>
+    		
+    		<hr>
+    		
+    	</div>
 					
-					<div class="row valign-center">
-						
-						<div class="item" style="align-self:flex-start;">
-							<span class="flag-icon" style="margin-right:0; top:-3px;" ng-class="{
-					            'flag-icon-fr': country.name == 'France',
-					            'flag-icon-gb': country.name == 'United Kingdom',
-					            'flag-icon-my': country.name == 'Malaysia',
-					            'flag-icon-sg': country.name == 'Singapore',
-					            'flag-icon-us': country.name == 'United States',
-					            'flag-icon-mx': country.name == 'Mexico',
-					            'flag-icon-nz': country.name == 'New Zealand',
-					            'flag-icon-mv': country.name == 'Maldives',
-					            'flag-icon-do': country.name == 'Dominican Republic',
-					            'flag-icon-au': country.name == 'Australia',
-					            'flag-icon-hu': country.name == 'Hungary',
-					            'flag-icon-lk': country.name == 'Sri Lanka',
-					            'flag-icon-id': country.name == 'Indonesia',
-					            'flag-icon-de': country.name == 'Germany',
-					            'flag-icon-pl': country.name == 'Poland',
-						        'flag-icon-ru': country.name == 'Russia',
-						        'flag-icon-hk': country.name == 'Hong Kong',
-						        'flag-icon-mu': country.name == 'Mauritius',
-						        'flag-icon-th': country.name == 'Thailand',
-						        'flag-icon-cz': country.name == 'Czechia',
-						        'flag-icon-cn': country.name == 'China',
-						        'flag-icon-es': country.name == 'Spain',
-						        'flag-icon-ch': country.name == 'Switzerland',
-						        'flag-icon-ca': country.name == 'Canada',
-						        'flag-icon-at': country.name == 'Austria',
-						        'flag-icon-is': country.name == 'Iceland',
-						        'flag-icon-za': country.name == 'South Africa',
-						        'flag-icon-ad': country.name == 'Andorra',
-						        'flag-icon-it': country.name == 'Italy',
-						        'flag-icon-il': country.name == 'Israel',
-						        'flag-icon-pt': country.name == 'Portugal',
-						        'flag-icon-ie': country.name == 'Ireland',
-						        'flag-icon-gr': country.name == 'Greece',
-						        'flag-icon-tr': country.name == 'Turkey',
-						        'flag-icon-jp': country.name == 'Japan',
-						        'flag-icon-dk': country.name == 'Denmark',
-						        'flag-icon-se': country.name == 'Sweden',
-						        'flag-icon-no': country.name == 'Norway',
-						        'flag-icon-fi': country.name == 'Finland',
-						        'flag-icon-lv': country.name == 'Latvia',
-						        'flag-icon-ee': country.name == 'Estonia',
-						        'flag-icon-lt': country.name == 'Lithuania',
-						        'flag-icon-sk': country.name == 'Slovakia',
-						        'flag-icon-hr': country.name == 'Croatia',
-						        'flag-icon-ar': country.name == 'Argentina',
-						        'flag-icon-uy': country.name == 'Uruguay',
-						        'flag-icon-tw': country.name == 'Taiwan',
-						        'flag-icon-in': country.name == 'India',
-						        'flag-icon-nl': country.name == 'Netherlands',
-						        'flag-icon-eg': country.name == 'Egypt',
-						        'flag-icon-be': country.name == 'Belgium',
-						        'flag-icon-ph': country.name == 'Philippines',
-						        'flag-icon-pa': country.name == 'Panama',
-					        }"></span>
-				        </div>
-				        
-				        <div class="item ta-left grow ellipsis" style="line-height:1.25;">
-				        	<span ng-show="country.locale">{{country.locale}}</span><span ng-hide="country.locale">{{country.name}}</span>
-				        	<br><span class="subheading ttrans-normal">{{country.name}}</span>
-				        </div>
-				        
-				        <div class="item">
-				        	<span class="badge-dark badge-mini">{{country.mosaics|number}}</span>
-				        </div>
-				        
-					</div>
-					
-				</a>
-		        
-			</div>
-
-		</div>
-		
-	</div>
-
-	<div ng-if="user.superuser">
-		
-		<div class="block">
-			
-			<div class="subblock title">
-				Update countries
-			</div>
-			
-			<div class="panel" ng-repeat="country in countries">
-				
-				<div class="item grow">
-					<input class="form-control" ng-model="country.name">
-				</div>
-				
-				<div class="item grow">
-					<input class="form-control" ng-model="country.locale">
-				</div>
-				
-				<div class="item">
-					<button type="submit" class="btn btn-primary" ng-click="update(country);">
-						Update
-					</button>
-				</div>
-				
-			</div>
-			
-		</div>
-
 	</div>
 	
-</div>
-
 {% endverbatim %}
+
+</div>
 {% endblock %}

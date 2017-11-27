@@ -1,156 +1,220 @@
 {% extends 'base.html' %}
 
-{% load i18n %}
-
 {% block extra-head %}
 
-	<title>MIM - Ingress Mosaics, Banners and Mission series</title>
+	<title>MIM - Profile</title>
 
 	<meta property="og:url" content="https://www.myingressmosaics.com">
 	<meta property="og:type" content="website">
 	<meta property="og:title" content="MyIngressMosaics">
 	<meta property="og:description" content="Ingress Mosaics, Banners and Mission series">
-	
-{% endblock %}
 
-{% block header %}
-
-	{% trans 'Profile' %}
-	
 {% endblock %}
 
 {% block content %}
-
-<div id="page-container" ng-controller="ProfileCtrl">
+<div id="content" ng-controller="NewProfileCtrl">
 
 {% verbatim %}
 
-	<div ng-if="!user.authenticated">
-	    
-	    <div class="block">
-	    	
-	    	<div class="row">
-	    	
-			    <div class="item-12 c-danger ta-center">
-				    Restricted area
-			    </div>
+	<div id="loading" ng-hide="loaded">
+		<i class="item fa fa-spinner rotating"></i>
+		<span class="item">Loading page...</span>
+	</div>
+	
+	<div class="container" ng-class="{'active':loaded && user}">
+		
+		<div ng-if="!user.authenticated" class="self-center">
 			
-				<div class="item-6 ta-right">
-					<a class="btn-secondary" href="/login" style="width:100px;">
-						Sign in
-					</a>
-				</div>
-			
-				<div class="item-6">
-					<a class="btn-secondary" href="/register" style="width:100px;">
-						Sign up
-					</a>
-				</div>
+		    <div class="p-normal mt-big" style="max-width:300px;">
+		    	
+		    	<div class="col">
+		    	
+				    <div class="item text-center">
+					    To access to profile page, you have to sign in.
+				    </div>
 
+			    	<div class="item flex justify-center">
+			    		<a class="btn" href="/login">
+			    			Sign in
+			    		</a>
+			    	</div>
+
+				</div>
+				
 			</div>
 			
 		</div>
 		
-	</div>
-	
-	<div ng-if="user.authenticated">
-		
-		<div class="block">
-		
-	        <div class="panel">
-
-	            <div class="item grow">
-	            	<input type="text" class="form-control" ng-model="user.name" />
+		<div ng-if="user.authenticated" class="grow flex-col">
+			
+			<div class="tab" ng-show="current_tab == 1">
+				
+				<div class="grow col p-normal">
+					
+					<div class="item flex-col">
+						<span>Username</span>
+						<input type="text" class="control" ng-model="user.name" />
+					</div>
+					
+					<div class="item">
+						<button class="btn" ng-click="edit(user.name, user.faction);" ng-disabled="!user.name">
+						    Save
+						</button>
+					</div>
+					
 				</div>
 				
-				<div class="item">
-					<button class="btn-primary" style="width:100px;" ng-click="edit(user.name, user.faction);" ng-disabled="editLoading || !user.name">
-            			<span ng-show="editLoading">
-            				<i class="fa fa-spinner"></i>
-            			</span>
-					    Save
+			</div>
+			
+			<div class="tab" ng-show="current_tab == 2">
+				
+			    <div class="p-normal mt-big self-center" style="max-width:300px;" ng-show="loved.length < 1">
+			    	
+			    	<div class="col">
+			    	
+					    <div class="item text-center">
+						    <span class="color-muted">No mosaic loved</span>
+					    </div>
+						
+					</div>
+					
+				</div>
+				
+	    		<div ng-repeat="mosaic in loved">
+	    			
+	    			<div class="p-normal">
+		    			<div class="row align-center">
+		    				
+		    				<div class="item grow">
+		    					
+		    					<div class="mb-normal">
+		    						<span class="color-light">{{mosaic.title}}</span>
+		    					</div>
+		    					
+								<div class="row ml-normal mb-none">
+									<flag class="item" country="mosaic.city.region.country.name" style="margin-left:0;"></flag>
+									<span class="item">{{mosaic.city.name}}, {{mosaic.city.region.name}}</span>
+								</div>
+								
+		    					<div class="ml-normal color-muted">
+									<span>{{mosaic.missions.length}} missions</span>
+									<span ng-show="mosaic.type=='sequence'">&nbsp;in sequence</span>
+									<span ng-show="mosaic.type=='serie'">&nbsp;in serie</span>
+		    					</div>
+		    					
+		    				</div>
+		    				
+		    				<div class="item">
+		    					<a class="btn btn-icon" href="/mosaic/{{mosaic.ref}}" target="blank">
+                                    <i class="fa fa-chevron-right"></i>
+                                </a>
+		    				</div>
+		    				
+		    			</div>
+	    			</div>
+	    			
+	    			<hr>
+	    			
+	    		</div>
+				
+			</div>
+			
+			<div class="tab" ng-show="current_tab == 3">
+				
+			    <div class="p-normal mt-big self-center" style="max-width:300px;" ng-show="completed.length < 1">
+			    	
+			    	<div class="col">
+			    	
+					    <div class="item text-center">
+						    <span class="color-muted">No mosaic completed</span>
+					    </div>
+						
+					</div>
+					
+				</div>
+				
+	    		<div ng-repeat="mosaic in completed">
+	    			
+	    			<div class="p-normal">
+		    			<div class="row align-center">
+		    				
+		    				<div class="item grow">
+		    					
+		    					<div class="mb-normal">
+		    						<span class="color-light">{{mosaic.title}}</span>
+		    					</div>
+		    					
+								<div class="row ml-normal mb-none">
+									<flag class="item" country="mosaic.city.region.country.name" style="margin-left:0;"></flag>
+									<span class="item">{{mosaic.city.name}}, {{mosaic.city.region.name}}</span>
+								</div>
+								
+		    					<div class="ml-normal color-muted">
+									<span>{{mosaic.missions.length}} missions</span>
+									<span ng-show="mosaic.type=='sequence'">&nbsp;in sequence</span>
+									<span ng-show="mosaic.type=='serie'">&nbsp;in serie</span>
+		    					</div>
+		    					
+		    				</div>
+		    				
+		    				<div class="item">
+		    					<a class="btn btn-icon" href="/mosaic/{{mosaic.ref}}" target="blank">
+                                    <i class="fa fa-chevron-right"></i>
+                                </a>
+		    				</div>
+		    				
+		    			</div>
+	    			</div>
+	    			
+	    			<hr>
+	    			
+	    		</div>
+	    		
+			</div>
+			
+			<div class="tab" ng-show="current_tab == 4">
+				
+			    <div class="p-normal mt-big self-center" style="max-width:300px;">
+					<button class="btn btn-danger" ng-click="logout();">
+					    Sign out
 					</button>
 				</div>
-
-	        </div>
-
-		</div>
-		
-		<div class="block">
-		
-			<div class="title subblock d-flex">
-			
-			<div class="grow">
-				{{loved.length}} mosaic loved
-			</div>
-			
-			<div ng-show="!show_loved && loved.length > 0">
-				<a ng-click="show_loved = true;">
-					Show all
-				</a>
-			</div>
 				
-			<div ng-show="show_loved && loved.length > 0">
-				<a ng-click="show_loved = false;">
-					Hide all
-				</a>
 			</div>
-			
-		</div>
-			
-			<div class="row">
-					
-				<div ng-show="show_loved" class="item-6 item-xl-3" ng-repeat="mosaic in loved">
-					<mosaic-vignet mosaic="mosaic"></mosaic-vignet>
-				</div>
-			
-			</div>
-			
-		</div>
-		
-		<div class="block">
-			
-			<div class="title subblock d-flex">
-			
-			<div class="grow">
-				{{completed.length}} mosaic completed
-			</div>
-			
-			<div ng-show="!show_completed && completed.length > 0">
-				<a ng-click="show_completed = true;">
-					Show all
-				</a>
-			</div>
-				
-			<div ng-show="show_completed && completed.length > 0">
-				<a ng-click="show_completed = false;">
-					Hide all
-				</a>
-			</div>
-			
-		</div>
-			
-			<div class="row">
-					
-				<div ng-show="show_completed" class="item-6 item-xl-3" ng-repeat="mosaic in completed">
-					<mosaic-vignet mosaic="mosaic"></mosaic-vignet>
-				</div>
-			
-			</div>
-			
-		</div>
-		
-		<div class="block">
-		
-			<button class="btn-primary" style="width:100px;" ng-click="logout();">
-				Sign out
-			</button>
 
+			<div class="tabs">
+				
+				<div class="item" ng-click="open_tab(1);" ng-class="{'active':current_tab == 1}">
+					<span class="text">
+						<i class="fa fa-address-card"></i>
+					</span>
+				</div>
+				
+				<div class="item" ng-click="open_tab(2);" ng-class="{'active':current_tab == 2}">
+					<span class="text">
+						<i class="fa fa-heart"></i>
+					</span>
+				</div>
+				
+				<div class="item" ng-click="open_tab(3);" ng-class="{'active':current_tab == 3}">
+					<span class="text">
+						<i class="fa fa-check-square"></i>
+					</span>
+				</div>
+				
+				<div class="item" ng-click="open_tab(4);" ng-class="{'active':current_tab == 4}">
+					<span class="text">
+						<i class="fa fa-power-off"></i>
+					</span>
+				</div>
+				
+			</div>
+			
 		</div>
-	
+		
 	</div>
+	
+{% endverbatim %}
 
 </div>
-
-{% endverbatim %}
 {% endblock %}

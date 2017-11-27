@@ -1,105 +1,98 @@
 {% extends 'base.html' %}
 
-{% load i18n %}
-
 {% block extra-head %}
 
-	<title>MIM - Ingress Mosaics, Banners and Mission series</title>
+	<title>MIM - Recruitment</title>
 
 	<meta property="og:url" content="https://www.myingressmosaics.com">
 	<meta property="og:type" content="website">
-	<meta property="og:title" content="MIM - Ingress Mosaics, Banners and Mission series">
-	<meta property="og:description" content="MIM - Ingress Mosaics, Banners and Mission series">
-	
-{% endblock %}
+	<meta property="og:title" content="MyIngressMosaics">
+	<meta property="og:description" content="Ingress Mosaics, Banners and Mission series">
 
-{% block header %}
-
-	{% trans 'Recruitment' %}
-	
 {% endblock %}
 
 {% block content %}
-
-<div id="page-container" ng-controller="RecruitmentCtrl">
+<div id="content" ng-controller="NewRecruitmentCtrl">
 
 {% verbatim %}
 
-	<div class="block">
-    	<div class="row align-center">
-    		
-        	<div class="item">
-        	    <img src="/static/img/we-need-you.png" width="40px" style="margin-right:.75rem;">
-        	</div>
-        	
-        	<div class="item">
-        	    
-        		<h2 class="heading">
-        			We need you!
-        		</h2>
-        		
-        		<h3 class="subheading">
-        			Become a mosaic hunter
-        		</h3>
-        		
-        	</div>
-    		
-    	</div>
+	<div id="loading" ng-hide="loaded">
+		<i class="item fa fa-spinner rotating"></i>
+		<span class="item">Loading page...</span>
 	</div>
 	
-	<div class="block ta-center">
-	    MIM site is a collaborative site, so we need mosaic hunters in every country. You love missions, you love mosaics, please join us! No need to be level 16 to be a good mosaic hunter ;)
+	<div class="container" ng-class="{'active':loaded}">
+		
+		<div class="p-normal mt-normal">
+	    	<div class="row justify-center">
+	    		
+	        	<div class="item mt-small">
+	        	    <img src="/static/img/we-need-you.png" width="40px" style="margin-right:.75rem;">
+	        	</div>
+	        	
+	        	<div class="item flex-col align-center">
+	        		<span class="text-big color-light">We need you!</span>
+	        		<span class="subheading">Become a mosaic hunter</span>
+	        	</div>
+	    		
+	    	</div>
+		</div>
+		
+		<div class="p-normal mt-normal self-center" style="max-width:300px">
+			<div class="col">
+				
+				<span class="item text-center">
+					MIM site is a collaborative site, so we need mosaic hunters in every country. You love missions, you love mosaics, please join us! No need to be level 16 to be a good mosaic hunter ;)
+				</span>
+				
+			</div>
+		</div>
+		
+		<div class="p-normal mt-normal self-center" style="max-width:300px">
+			<div class="col">
+				
+				<span class="text-center text-uppercase color-light">How to become a mosaic hunter?</span>
+				<span class="text-center mb-normal">Just sign in or create an account</span>
+				<span class="flex justify-center">
+					<a class="btn" style="width:200px;" href="/login" target="blank">
+						Sign in
+					</a>
+				</span>
+				
+			</div>
+		</div>
+		
+		<div class="p-normal mt-normal self-center" style="max-width:300px">
+			<div class="col">
+				
+				<span class="text-center text-uppercase color-light">How to register missions?</span>
+				<span class="text-center mb-normal">Install and use our Chrome extension</span>
+				<span class="flex justify-center">
+					<a class="btn" style="width:200px;" href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="blank">
+						MIM Hunting Tool
+					</a>
+				</span>
+					
+			</div>
+		</div>
+		
+		<div class="p-normal mt-normal self-center" style="max-width:300px">
+			<div class="col">
+				
+				<span class="text-center text-uppercase color-light">How to create mosaics?</span>
+				<span class="text-center mb-normal">Go to hunt page, select missions and follow steps</span>
+				<span class="flex justify-center">
+					<a class="btn" style="width:200px;" href="/registration" target="blank">
+						Hunt page
+					</a>
+				</span>
+					
+			</div>
+		</div>
+		
 	</div>
 	
-	<div class="block">
-	    
-    	<div class="subblock title ttrans-uppercase c-white">
-    	    How to become a mosaic hunter?
-    	</div>
-    	
-    	<div>
-    	    <a href="/login">Sign in/Sign up</a> to MIM site ; you could sign in with Facebook
-    	</div>
-    	
-	</div>
-	
-	<div class="block">
-	    
-    	<div class="subblock title ttrans-uppercase c-white">
-    	    How to register missions to MIM site?
-    	</div>
-    	
-    	<div class="subblock">
-        	Install our Chrome extension <a href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">MIM Hunting Tool.</a>
-    	</div>
-    	
-    	<div class="">
-    	    Once installed you could register missions in 1 click! A contextual help is embedded.
-    	</div>
-    	
-	</div>
-	
-	<div class="block">
-	    
-    	<div class="subblock title ttrans-uppercase c-white">
-    	    How to create mosaics to MIM site?
-    	</div>
-     	
-    	<div class="subblock">
-    	    Go to <a href="/registration">Registration page</a> ; your registered missions will be displayed.
-    	</div>
-    	
-    	<div class="subblock">
-    	    Select some missions, verify data and mosaic image preview, then click on "Create" button.
-    	</div>
-    	
-    	<div class="">
-    	    That's it! You have just created your first mosaic to MIM site.
-    	</div>
-    	
-	</div>
+{% endverbatim %}
 
 </div>
-
-{% endverbatim %}
 {% endblock %}

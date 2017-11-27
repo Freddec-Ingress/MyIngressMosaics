@@ -16,20 +16,6 @@ from operator import itemgetter, attrgetter, methodcaller
 
 	
 	
-def login(request):
-	
-	context = {}
-	return render(request, 'login.html', context)
-	
-	
-	
-def map(request, location = ''):
-	
-	context = {'location': location}
-	return render(request, 'map.html', context)
-
-
-
 def sitemap(request):
 
 	text = ''
@@ -80,81 +66,8 @@ def sitemap(request):
 
 
 
-def preview(request, ref):
-
-	mosaic = Mosaic.objects.get(ref=ref)
-	
-	mcount = mosaic.missions.count()
-	
-	mosaic_rows = int(math.ceil(mcount / mosaic.cols))
-	
-	img_height = 32 + 20 + (100 * mosaic_rows)
-	if (img_height < 352):
-		img_height = 352
-	
-	image = Image.new('RGBA', (632, img_height), (0, 77, 64))
-
-	draw = ImageDraw.Draw(image)
-	draw.rectangle(((8, 8), (624, img_height - 52 + 24)), fill = 'black')
-	
-	fontfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/fonts/coda-regular.ttf').read())
-	
-	font = ImageFont.truetype(fontfile, 15)
-	draw.text((16, img_height - 25), 'MIM - MyIngressMosaics.com', fill=(255, 255, 255), font=font)
-	
-	realx = 0
-	if mcount < mosaic.cols:
-		realx = mcount * 100
-	else:
-		realx = mosaic.cols * 100
-	
-	realy = mosaic_rows * 100
-	
-	paddingX = 16 + (600 - realx) / 2
-	
-	if mosaic_rows < 4:
-		paddingY = 16 + (300 - realy) / 2
-	else:
-		paddingY = 16
-
-	maskfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/img/mask.png').read())
-	maskimg = Image.open(maskfile)
-		
-	for m in mosaic.missions.all():
-
-		file = io.BytesIO(urllib.request.urlopen(m.image + '=s100').read())
-		mimg = Image.open(file)
-		
-		order = mcount - m.order
-		
-		y = int(order / mosaic.cols)
-		x = int(order - (y * mosaic.cols))
-		
-		xoffset = paddingX + (x * 100)
-		yoffset = paddingY + (y * 100)
-		
-		image.paste(mimg, (int(xoffset), int(yoffset)));
-		image.paste(maskimg, (int(xoffset), int(yoffset)), maskimg);
-
-	response = HttpResponse(content_type = 'image/png')
-	image.save(response, 'PNG')
-	
-	imgByteArr = io.BytesIO()
-	image.save(imgByteArr, format='PNG')
-	imgByteArr = imgByteArr.getvalue()
-
-	from django.core.files.storage import default_storage
-	name = ''+ref+'.png'
-	file = default_storage.open(name, 'w')
-	file.write(imgByteArr)
-	file.close()
-
-	return response
-
-
-
 def mosaic(request, ref):
-	
+
 	mosaic = None
 	
 	results = Mosaic.objects.filter(ref=ref)
@@ -184,20 +97,6 @@ def mosaic(request, ref):
 		context = { 'ref': ref }
 		
 	return render(request, 'mosaic.html', context)
-
-	
-	
-def profile(request):
-	
-	context = {}
-	return render(request, 'profile.html', context)
-	
-	
-	
-def register(request):
-	
-	context = {}
-	return render(request, 'register.html', context)
 	
 	
 	
@@ -210,36 +109,36 @@ def registration(request):
 	
 def search(request, searchstring = ''):
 	
-	context = {'searchstring':searchstring}
+	context = { 'searchstring':searchstring }
 	return render(request, 'search.html', context)
+
+	
+	
+def profile(request):
+	
+	context = {}
+	return render(request, 'profile.html', context)
+
+	
+	
+def login(request):
+	
+	context = {}
+	return render(request, 'login.html', context)
 	
 	
 	
-def events(request, eventstring = ''):
+def register(request):
 	
-	context = {'eventstring':eventstring}
-	return render(request, 'events.html', context)
-
-
-
-def city(request, country, region, city):
+	context = {}
+	return render(request, 'register.html', context)
 	
-	context = { 'country':country, 'region':region, 'city':city }
-	return render(request, 'city.html', context)
-
-
-
-def region(request, country, region):
 	
-	context = { 'country':country, 'region':re.escape(region), 'regionlabel':region }
-	return render(request, 'region.html', context)
-
-
-
-def country(request, country):
 	
-	context = { 'country':country }
-	return render(request, 'country.html', context)
+def map(request, location = ''):
+	
+	context = {'location': location}
+	return render(request, 'map.html', context)
 
 
 
@@ -250,126 +149,21 @@ def world(request):
 
 
 
+def region(request, country, region):
+	
+	context = { 'country':country, 'region':re.escape(region), 'regionlabel':region }
+	return render(request, 'region.html', context)
+	
+	
+	
+def country(request, country):
+	
+	context = { 'country':country }
+	return render(request, 'country.html', context)
+
+
+
 def recruitment(request):
 	
 	context = {}
 	return render(request, 'recruitment.html', context)
-	
-	
-	
-def migrate(request):
-	
-	cities = City.objects.filter(region__isnull=True)
-	for city in cities:
-		
-		city.mosaics.all().delete()
-		city.delete()
-	
-	Region.objects.filter(country__isnull=True)
-	
-	context = {}
-	return render(request, 'world.html', context)
-
-
-
-def new_mosaic(request, ref):
-
-	mosaic = None
-	
-	results = Mosaic.objects.filter(ref=ref)
-	if (results.count() > 0):
-		mosaic = results[0]
-	
-	if (mosaic):
-		
-		desc = mosaic.city.region.country.name
-		if mosaic.city.region:
-			desc += ' > ' + mosaic.city.region.name
-		if mosaic.city:
-			desc += ' > ' + mosaic.city.name
-		desc += ' - ' + str(len(mosaic.missions.all())) + ' missions' + ' - ' + mosaic.type
-	
-		mcount = mosaic.missions.count()
-		
-		mosaic_rows = int(math.ceil(mcount / mosaic.cols))
-		
-		img_height = 32 + 20 + (100 * mosaic_rows)
-		if (img_height < 352):
-			img_height = 352
-		
-		context = { 'ref': ref, 'name': mosaic.title, 'desc': desc, 'img_height': img_height }
-		
-	else:
-		context = { 'ref': ref }
-		
-	return render(request, 'new_mosaic.html', context)
-	
-	
-	
-def new_registration(request):
-	
-	context = {}
-	return render(request, 'new_registration.html', context)
-	
-	
-	
-def new_search(request, searchstring = ''):
-	
-	context = { 'searchstring':searchstring }
-	return render(request, 'new_search.html', context)
-
-	
-	
-def new_profile(request):
-	
-	context = {}
-	return render(request, 'new_profile.html', context)
-
-	
-	
-def new_login(request):
-	
-	context = {}
-	return render(request, 'new_login.html', context)
-	
-	
-	
-def new_register(request):
-	
-	context = {}
-	return render(request, 'new_register.html', context)
-	
-	
-	
-def new_map(request, location = ''):
-	
-	context = {'location': location}
-	return render(request, 'new_map.html', context)
-
-
-
-def new_world(request):
-	
-	context = {}
-	return render(request, 'new_world.html', context)
-
-
-
-def new_region(request, country, region):
-	
-	context = { 'country':country, 'region':re.escape(region), 'regionlabel':region }
-	return render(request, 'new_region.html', context)
-	
-	
-	
-def new_country(request, country):
-	
-	context = { 'country':country }
-	return render(request, 'new_country.html', context)
-
-
-
-def new_recruitment(request):
-	
-	context = {}
-	return render(request, 'new_recruitment.html', context)

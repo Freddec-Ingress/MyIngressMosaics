@@ -1,48 +1,55 @@
 {% extends 'base.html' %}
 
-{% load i18n %}
-
 {% block extra-head %}
 
-	<title>MIM - Ingress Mosaics, Banners and Mission series</title>
+	<title>MIM - Map</title>
 
 	<meta property="og:url" content="https://www.myingressmosaics.com">
 	<meta property="og:type" content="website">
 	<meta property="og:title" content="MyIngressMosaics">
 	<meta property="og:description" content="Ingress Mosaics, Banners and Mission series">
-	
-{% endblock %}
 
-{% block header %}
-
-	{% trans 'Map' %}
-	
 {% endblock %}
 
 {% block content %}
+<div id="content" ng-controller="NewMapCtrl">
 
-<form class="block" style="z-index:5;">
-	<div class="row">
+{% verbatim %}
+
+	<div id="loading" ng-hide="loaded">
+		<i class="item fa fa-spinner rotating"></i>
+		<span class="item">Loading page...</span>
+	</div>
+	
+	<div class="container" ng-class="{'active':loaded}" style="flex:1 1 100%;">
 		
-		<div class="item grow">
-			<input id="address" class="form-control" type="textbox" placeholder="Enter location" value="" />
-		</div>
-		
-		<div class="item">
-			<button id="submit" class="btn-primary" type="submit">
-				Go
-			</button>
+		<div class="grow flex-col">
+			
+			<form class="p-normal" style="z-index:5;">
+				<div class="row">
+					
+					<div class="item grow">
+						<input id="address" class="control" type="text" placeholder="Enter location" value="" />
+					</div>
+					
+					<div class="item">
+						<button id="submit" class="btn" type="submit">
+							Go
+						</button>
+					</div>
+					
+				</div>
+			</form>
+			
+			<div id="map" class="grow" ng-init="initMap();"></div>
+
 		</div>
 		
 	</div>
-</form>
-
-<div id="map" ng-controller="MapCtrl" ng-init="initMap('{{location}}');" style="height:100%; position:absolute; top:0px; left:0px; right:0px;"></div>
-
-{% endblock %}
-
-{% block extra-script %}
-
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuXb2ncs76tO-2SN8hvkE5Zt4VwtPoNcM&amp;language=en"></script>
 	
+	<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    
+{% endverbatim %}
+
+</div>
 {% endblock %}

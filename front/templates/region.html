@@ -1,178 +1,279 @@
 {% extends 'base.html' %}
 
-{% load i18n %}
-
 {% block extra-head %}
 
 	<title>MIM - {{regionlabel}}, {{country}}</title>
 
-	<meta property="og:url" content="https://www.myingressmosaics.com/world/{{country}}/{{region}}">
+	<meta property="og:url" content="https://www.myingressmosaics.com">
 	<meta property="og:type" content="website">
-	<meta property="og:title" content="MIM - {{region}}, {{country}}">
-	<meta property="og:description" content="MIM - {{region}}, {{country}} - Ingress Mosaics, Banners and Mission series">
-	
-{% endblock %}
+	<meta property="og:title" content="MyIngressMosaics">
+	<meta property="og:description" content="Ingress Mosaics, Banners and Mission series">
 
-{% block header %}
-
-	Region
-	
 {% endblock %}
 
 {% block content %}
-
-<div id="page-container" ng-controller="RegionCtrl" ng-init="loadRegion('{{country}}', '{{region}}');">
+<div id="content" ng-controller="NewRegionCtrl" ng-init="loadRegion('{{country}}', '{{region}}');">
 
 {% verbatim %}
 
-	<div class="block">
-		<div class="title ttrans-normal">
-		<div class="row">
-			<div class="item grow">
-				<a href="/"><i class="fa fa-home text-separator" style="margin-left:0;"></i> Home</a>
-				<span class="text-separator">></span>
-				<a href="/world/{{country.name}}">
-					<span ng-show="country.locale">{{country.locale}}</span><span ng-hide="country.locale">{{country.name}}</span>
-				</a>
-			</div>
-			<div class="item">
-				<a href="/map/{{region.name}},{{country.name}}">
-					<i class="fa fa-map text-separator"></i>
-					Map
-				</a>
-			</div>
-		</div>
-	</div>
+	<div id="loading" ng-hide="loaded">
+		<i class="item fa fa-spinner rotating"></i>
+		<span class="item">Loading page...</span>
 	</div>
 	
-	<div class="block">
+	<div class="container" ng-class="{'active':loaded}">
 		
-		<h2 class="heading">
-			<span ng-show="region.locale">{{region.locale}}</span><span ng-hide="region.locale">{{region.name}}</span>
-		</h2>
-		
-		<h3 class="subheading">
-			<span ng-if="region.locale && region.locale != region.name">
-				{{region.name}}
-				<span class="text-separator">&middot;</span>
-			</span>
-			{{count|number}} Mosaics
-		</h3>
-		
-	</div>
-	
-	<div class="block">
+		<div class="modal-container" ng-show="changing">
 			
-		<div class="title subblock">
-			
-			<div class="row valign-baseline">
-			
-				<div class="item grow">
-					{{cities.length|number}} cities
-				</div>
+			<div class="modal-box" style="width:100%;">
 				
-				<div class="item">
-					<a class="badge-link badge-mini" ng-class="{'active': sort=='name'}", ng-click="sortByName();">Name</a>
-				</div>
-
-				<div class="item">
-					<a class="badge-link badge-mini" ng-class="{'active': sort=='mosaics'}" ng-click="sortByMosaics();">Mosaics</a>
-				</div>
-				
-			</div>
-			
-		</div>
-	
-		<div class="row">
-			
-			<div class="item-12 item-xl-3" ng-repeat="city in cities">
-				
-				<a href="/world/{{country.name}}/{{region.name}}/{{city.name}}" class="btn-primary btn-block" style="height:48px;">
+				<div class="modal-header">
 					
-					<div class="row valign-center">
-						
-						<div class="item grow ta-left ellipsis" style="line-height:1.25;">
-							<span ng-show="city.locale">{{city.locale}}</span><span ng-hide="city.locale">{{city.name}}</span>
-							<div ng-if="city.locale && city.locale != city.name">
-					        	<span class="subheading ttrans-normal">{{city.name}}</span>
-							</div>
-				        </div>
-				        
-				        <div class="item">
-				        	<span class="badge-dark badge-mini">{{city.mosaics}}</span>
-				        </div>
-				        
+					<span class="title">
+						Select a region
+					</span>
+					
+					<span class="close" ng-click="changing=false;">
+						<i class="fa fa-times"></i>
+					</span>
+					
+				</div>
+				
+				<div class="modal-content p-none">
+					
+			    	<div ng-repeat="region in regions">
+    		
+			    		<a class="p-normal block" href="/world/{{country.name}}/{{region.name}}">
+				    		<div class="row">
+				    			
+				    			<div class="item flex-col justify-center grow">
+				    				<span class="block color-light text-medium" ng-show="!region.locale">{{region.name}}</span>
+				    				<span class="block color-light text-medium" ng-show="region.locale">{{region.locale}}</span>
+				    				<span class="block color-normal text-small" ng-show="region.locale">{{region.name}}</span>
+				    			</div>
+				     			
+				    			<div class="item flex-col justify-center" style="width:75px;">
+				    				<span class="btn btn-mini">
+				    					{{region.mosaic_count|number}}
+				    					<i class="item fa fa-angle-double-right pr-none"></i>
+				    				</span>
+				    			</div>
+				     			
+				    		</div>
+			    		</a>
+			    		
+			    		<hr>
+			    		
+			    	</div>
+					
+				</div>
+				
+			</div>
+
+		</div>
+		
+		<div class="modal-container" ng-show="sorting">
+			
+			<div class="modal-box">
+				
+				<div class="modal-header">
+					
+					<span class="title">
+						Sorting
+					</span>
+					
+					<span class="close" ng-click="sorting=false;">
+						<i class="fa fa-times"></i>
+					</span>
+					
+				</div>
+				
+				<div class="modal-content p-none">
+					
+					<div class="p-normal ml-big mr-big color-light" ng-click="sortByCity(); sorting=false;">
+						Sort by cities
 					</div>
 					
-				</a>
-		        
-			</div>
-
-		</div>
-		
-	</div>
-
-	<div ng-if="user.superuser">
-		
-		<div class="block">
-			
-			<div class="subblock title">
-				Merge 2 cities
-			</div>
-			
-			<div class="panel">
-				
-				<div class="item grow">
-					<select class="form-control" ng-model="src_id">
-						<option ng-repeat="city in cities" value="{{city.id}}">{{city.name}}</option>
-					</select>
+					<hr>
+					
+					<div class="p-normal ml-big mr-big color-light" ng-click="sortByMissions(); sorting=false;">
+						Sort by missions
+					</div>
+					
+					<hr>
+					
+					<div class="p-normal ml-big mr-big color-light" ng-click="sortByDate(); sorting=false;">
+						Sort by date
+					</div>
+					
 				</div>
 				
+			</div>
+		</div>
+		
+		<div class="p-normal">
+			<div class="row align-center">
+				
 				<div class="item grow">
-					<select class="form-control" ng-model="dest_id">
-						<option ng-repeat="city in cities" value="{{city.id}}">{{city.name}}</option>
-					</select>
+	    			<span class="text-medium color-light block" ng-show="!region.locale">{{region.name}}</span>
+					<span class="text-medium color-light block" ng-show="region.locale">{{region.locale}}</span>
+					<span class="text-small color-normal block" ng-show="region.locale">{{region.name}}</span>
 				</div>
 				
 				<div class="item">
-					<button type="submit" class="btn btn-primary" ng-click="merge(src_id, dest_id);">
-						Merge
+					<button class="btn btn-mini" style="width:63px;" ng-click="changing=true;">
+						Change
 					</button>
 				</div>
 				
 			</div>
+		</div>
+		
+		<hr>
+		
+		<div class="p-normal">
+			<div class="row justify-center">
+				
+				<div class="item noshrink">
+					<a class="badge transparent" ng-click="sorting=true;">
+						<i class="fa fa-caret-down mr-normal"></i>
+						<span ng-show="current_sort=='by_city'">By city</span>
+						<span ng-show="current_sort=='by_missions'">By missions</span>
+						<span ng-show="current_sort=='by_date'">By date</span>
+					</a>
+				</div>
+
+				<div class="item grow" style="overflow-x:auto;">
+					<div id="index_container" class="row">
+					
+						<div class="item" ng-repeat="index in indexes track by $index">
+							<a class="badge" ng-click="setCurrentIndex(index);" ng-class="{'transparent color-link': current_index!=index}">
+								{{index}}
+							</a>
+						</div>
+					
+					</div>
+				</div>
+
+			</div>
+		</div>
+		
+		<div class="scrollable" ng-show="current_sort=='by_city'">
+			
+			<div class="" ng-repeat="city in by_city_list" ng-show="city.name[0] == current_index">
+				
+				<span class="block mt-big p-normal text-medium">{{city.name}}</span>
+				<hr>
+				
+	    		<div ng-repeat="mosaic in city.mosaics">
+	    			
+	    			<a class="block p-normal" href="/mosaic/{{mosaic.ref}}" target="blank">
+		    			<div class="row align-center">
+		    				
+		    				<div class="item grow">
+		    					
+	    						<span class="text-medium color-light block">{{mosaic.name}}</span>
+
+		    					<div class="color-muted">
+									<span>{{mosaic.mission_count}} missions</span>
+									<span ng-show="mosaic.type=='sequence'">&nbsp;in sequence</span>
+									<span ng-show="mosaic.type=='serie'">&nbsp;in serie</span>
+		    					</div>
+		    					
+		    				</div>
+		    				
+		    				<div class="item">
+		    					<button class="btn btn-icon">
+                                    <i class="fa fa-chevron-right"></i>
+                                </button>
+		    				</div>
+		    				
+		    			</div>
+	    			</a>
+	    			
+	    			<hr>
+	    			
+	    		</div>
+				
+			</div>
 			
 		</div>
 		
-		<div class="block">
+		<div class="scrollable" ng-show="current_sort=='by_missions'">
 			
-			<div class="subblock title">
-				Update cities
-			</div>
+    		<div ng-repeat="count in by_missions_list" ng-show="count.count == current_index">
+    			<div ng-repeat="mosaic in count.mosaics">
+    				
+	    			<a class="block p-normal" href="/mosaic/{{mosaic.ref}}" target="blank">
+		    			<div class="row align-center">
+		    				
+		    				<div class="item grow">
+		    					
+	    						<span class="text-medium color-light block">{{mosaic.name}}</span>
+	    						<span class="text-normal color-normal block">{{mosaic.city.name}}</span>
+	
+		    					<div class="color-muted">
+									<span>{{mosaic.mission_count}} missions</span>
+									<span ng-show="mosaic.type=='sequence'">&nbsp;in sequence</span>
+									<span ng-show="mosaic.type=='serie'">&nbsp;in serie</span>
+		    					</div>
+		    					
+		    				</div>
+		    				
+		    				<div class="item">
+		    					<button class="btn btn-icon">
+	                                <i class="fa fa-chevron-right"></i>
+	                            </button>
+		    				</div>
+		    				
+		    			</div>
+	     			</a>
+	     			
+	    			<hr>
+	    			
+    			</div>
+    		</div>
+    		
+		</div>
+		
+		<div class="scrollable" ng-show="current_sort=='by_date'">
 			
-			<div class="panel" ng-repeat="city in cities">
-				
-				<div class="item grow">
-					<input class="form-control" ng-model="city.name">
-				</div>
-				
-				<div class="item grow">
-					<input class="form-control" ng-model="city.locale">
-				</div>
-				
-				<div class="item">
-					<button type="submit" class="btn btn-primary" ng-click="update(city);">
-						Update
-					</button>
-				</div>
-				
-			</div>
+    		<div ng-repeat="mosaic in by_date_list">
+    			
+    			<a class="block p-normal" href="/mosaic/{{mosaic.ref}}" target="blank">
+	    			<div class="row align-center">
+	    				
+	    				<div class="item grow">
+	    					
+    						<span class="text-medium color-light block">{{mosaic.name}}</span>
+    						<span class="text-normal color-normal block">{{mosaic.city.name}}</span>
+
+	    					<div class="color-muted">
+								<span>{{mosaic.mission_count}} missions</span>
+								<span ng-show="mosaic.type=='sequence'">&nbsp;in sequence</span>
+								<span ng-show="mosaic.type=='serie'">&nbsp;in serie</span>
+	    					</div>
+	    					
+	    				</div>
+	    				
+	    				<div class="item">
+	    					<button class="btn btn-icon">
+                                <i class="fa fa-chevron-right"></i>
+                            </button>
+	    				</div>
+	    				
+	    			</div>
+    			</a>
+    			
+    			<hr>
+    			
+    		</div>
 			
 		</div>
 		
 	</div>
+	
+{% endverbatim %}
 
 </div>
-
-{% endverbatim %}
 {% endblock %}

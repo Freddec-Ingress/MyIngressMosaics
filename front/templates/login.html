@@ -1,94 +1,52 @@
 {% extends 'base.html' %}
 
-{% load i18n %}
-
 {% block extra-head %}
 
-	<title>MIM - Ingress Mosaics, Banners and Mission series</title>
+	<title>MIM - Login</title>
 
 	<meta property="og:url" content="https://www.myingressmosaics.com">
 	<meta property="og:type" content="website">
 	<meta property="og:title" content="MyIngressMosaics">
 	<meta property="og:description" content="Ingress Mosaics, Banners and Mission series">
-	
-{% endblock %}
 
-{% block header %}
-
-	{% trans 'Sign in' %}
-	
 {% endblock %}
 
 {% block content %}
-
-<div id="page-container" ng-controller="LoginCtrl">
+<div id="content" ng-controller="NewLoginCtrl">
 
 {% verbatim %}
 
-	<div class="block">
-		
-		<a href="javascript:;" class="btn-block btn-facebook ta-center" ng-click="socialLogin('facebook')">
-			<i class="fa fa-facebook-official"></i>
-			Sign in with Facebook
-		</a>
-
+	<div id="loading" ng-hide="loaded">
+		<i class="item fa fa-spinner rotating"></i>
+		<span class="item">Loading page...</span>
 	</div>
-
-	<div class="block">
+	
+	<div class="container" ng-class="{'active':loaded}">
+		
+		<div class="p-normal flex justify-center mt-big">
 			
-		<div class="title subblock">
-			Sign in with local account
+			<a href="javascript:;" class="btn btn-facebook" style="width:300px;" ng-click="socialLogin('facebook')">
+				<i class="fa fa-facebook-official mr-normal"></i>
+				Sign in with Facebook
+			</a>
+			
 		</div>
 		
-		<form class="panel" name="form" novalidate>
-
-			<div ng-if="unknown" class="item-12">
-				<span class="c-danger">Username or password incorrect</span>
-			</div>
-			
-			<div class="item-12">
+		<div class="p-normal flex justify-center mt-big">
+			<div class="flex-col" style="width:300px;">
 				
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-					<input type="text" class="form-control" placeholder="username" name="username" ng-model="loginModel.username" required="" />
-				</div>
-				
-				<div ng-show="form.$submitted || form.username.$touched">
-					<p class="item c-danger" ng-show="form.username.$error.required">Field required</p>
-				</div>
+				<span class="self-center mb-normal">Sign in with a local account</span>
+				<input type="text" class="control mb-small" placeholder="username" name="username" ng-model="loginModel.username" required="" />
+				<input type="password" class="control mb-normal" placeholder="password" name="password" ng-model="loginModel.password" required="" />
+				<button class="btn mb-big" ng-click="localLogin(loginModel.username, loginModel.password);" ng-disabled="signingin || !loginModel.username || !loginModel.password">Sign in</button>
+				<a class="text-center" href="/register">Create a local account</a>
 				
 			</div>
-	
-			<div class="item-12">
-				
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
-					<input type="password" class="form-control" placeholder="password" name="password" ng-model="loginModel.password" required="" />
-				</div>
-				
-				<div ng-show="form.$submitted || form.password.$touched">
-					<p class="item c-danger" ng-show="form.password.$error.required">Field required</p>
-				</div>
-				
-			</div>
-	
-			<div class="item-6 ta-right">
-				<button class="btn-primary" style="width:100px;" ng-click="localLogin(loginModel.username, loginModel.password);" ng-disabled="signingin || !loginModel.username || !loginModel.password">
-					Sign in
-				</button>
-			</div>
-			
-			<div class="item-6">
-				<a class="btn" style="width:100px;" href="/register">
-					Sign up
-				</a>
-			</div>
-
-		</form>
-
+		</div>
+		
 	</div>
+	
+{% endverbatim %}
 
 </div>
-
-{% endverbatim %}
 {% endblock %}
