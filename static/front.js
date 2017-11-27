@@ -2328,8 +2328,10 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 						if (item.types[0] == 'administrative_area_level_3') admin3 = item.long_name;
 					}
 					
-					if (!$scope.city_name && admin2) $scope.city_name = item.admin2;
-					if (!$scope.city_name && admin3) $scope.city_name = item.admin3;
+					if (!$scope.city_name && admin2) $scope.city_name = admin2;
+					if (!$scope.city_name && admin3) $scope.city_name = admin3;
+					
+					console.log($scope.city_name);
 					
 					/* Country */
 					
