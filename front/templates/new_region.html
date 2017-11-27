@@ -54,7 +54,7 @@
 				     			
 				    			<div class="item flex-col justify-center" style="width:75px;">
 				    				<span class="btn btn-mini">
-				    					{{region.mosaics|number}}
+				    					{{region.mosaic_count|number}}
 				    					<i class="item fa fa-angle-double-right pr-none"></i>
 				    				</span>
 				    			</div>
@@ -92,12 +92,6 @@
 		
 		<hr>
 		
-	    <div class="p-normal mt-big">
-	    	<span class="block text-center">{{count}} mosaics</span>
-	    </div>
-		
-		<hr>
-		
 		<div class="p-normal">
 			<div class="row justify-center">
 				
@@ -107,15 +101,15 @@
 					</div>
 				</div>
 				
-				<div class="item">
-					<div class="badge" ng-click="sortByMissions();" ng-class="{'transparent color-link': current_sort!='by_missions'}">
-						By missions
-					</div>
-				</div>
-				
-				<div class="item">
-					<div class="badge" ng-click="sortByDate();" ng-class="{'transparent color-link': current_sort!='by_date'}">
-						By date
+				<div class="item grow">
+					<div class="row">
+					
+						<div class="item">
+							<div class="badge" ng-repeat="index in by_city_indexes" ng-click="setCurrentIndex(index);" ng-class="{'transparent color-link': current_index!=index}">
+								{{index}}
+							</div>
+						</div>
+					
 					</div>
 				</div>
 				
@@ -124,7 +118,7 @@
 		
 		<div class="scrollable" ng-show="current_sort=='by_city'">
 			
-			<div class="" ng-repeat="city in by_city_list">
+			<div class="" ng-repeat="city in by_city_list" ng-show="city.name[0] == current_index">
 				
 				<span class="block mt-big p-normal text-medium">{{city.name}}</span>
 				<hr>

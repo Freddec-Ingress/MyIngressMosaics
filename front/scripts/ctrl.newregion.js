@@ -19,6 +19,17 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 		$scope.current_sort = 'by_date';
 	}
 	
+	/* Index management */
+	
+	$scope.current_index = null;
+	
+	$scope.by_city_indexes = [];
+	
+	$scope.setCurrentIndex = function(index) {
+		
+		$scope.current_index = index;
+	}
+	
 	/* Page loading */
 	
 	$scope.loadRegion = function(country_name, region_name) {
@@ -53,6 +64,9 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 				});
 				
 				$scope.by_city_list.push(obj);
+				
+				var index = city_name[0];
+				if (!(index in $scope.by_city_indexes)) $scope.by_city_indexes.push(index);
 			}
 			
 			$scope.by_city_list.sort(function(a, b) {
