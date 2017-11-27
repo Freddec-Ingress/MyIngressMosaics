@@ -291,7 +291,7 @@
 			
 			<div class="tab" ng-show="current_tab == 2">
 				
-				<div class="scrollable p-normal">
+				<div class="scrollable p-normal pb-none mb-normal">
 					
 					<div class="mb-normal">
 						<span class="color-muted">Details</span>
@@ -338,7 +338,7 @@
 						<span class="color-muted">Missions</span>
 					</div>
 					
-					<div class="row wrap ml-big mb-normal">
+					<div class="row wrap">
 						
 						<div class="flex grow wrap" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
 							<div class="item" ng-repeat="mission in mosaic.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.cols}});" ng-click="displayMissionDetails(mission);">
