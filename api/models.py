@@ -296,6 +296,22 @@ class Mosaic(models.Model):
 					
 		self.save()
 
+	# Mini serialization
+	
+	def miniSerialize(self):
+		
+		data = {
+			
+			'id': self.pk,
+			'ref': self.ref,
+			'name': self.title,
+			'type': self.type,
+			'city': { 'name': self.city.name },
+			'mission_count': self.missions.all().count(),
+		}
+			
+		return data
+
 	# Map serialization
 	
 	def mapSerialize(self):

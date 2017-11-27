@@ -124,7 +124,7 @@
 		
 		<div class="scrollable" ng-show="current_sort=='by_city'">
 			
-			<div class="" ng-repeat="city in bycities">
+			<div class="" ng-repeat="city in by_city_list">
 				
 				<span class="block mt-big p-normal text-medium">{{city.name}}</span>
 				<hr>
@@ -136,10 +136,10 @@
 		    				
 		    				<div class="item grow">
 		    					
-	    						<span class="text-medium color-light block">{{mosaic.title}}</span>
+	    						<span class="text-medium color-light block">{{mosaic.name}}</span>
 
 		    					<div class="color-muted">
-									<span>{{mosaic.missions.length}} missions</span>
+									<span>{{mosaic.mission_count}} missions</span>
 									<span ng-show="mosaic.type=='sequence'">&nbsp;in sequence</span>
 									<span ng-show="mosaic.type=='serie'">&nbsp;in serie</span>
 		    					</div>

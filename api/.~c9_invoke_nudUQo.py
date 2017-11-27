@@ -791,7 +791,7 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 	
 		# List of mission count
 	
-		mission_count = mosaic_data['mission_count']
+		mission_count = mosaic_data.mission_count
 		if mission_count not in data['list_of_mission_count']:
 			data['list_of_mission_count'].append(mission_count)
 	
