@@ -127,6 +127,12 @@
 .pr-none { padding-right:0; }
 .pb-none { padding-bottom:0; }
 
+.p-small { padding:3px; }
+.pt-small { padding-top:3px; }
+.pl-small { padding-left:3px; }
+.pr-small { padding-right:3px; }
+.pb-small { padding-bottom:3px; }
+
 .p-normal { padding:10px; }
 .pt-normal { padding-top:10px; }
 .pl-normal { padding-left:10px; }
@@ -138,6 +144,15 @@
 .pl-big { padding-left:20px; }
 .pl-big { padding-right:20px; }
 .pb-big { padding-bottom:20px; }
+
+@media (min-width:720px) {
+	
+	.p-xl-none { padding:0; }
+	.pt-xl-none { padding-top:0; }
+	.pl-xl-none { padding-left:0; }
+	.pr-xl-none { padding-right:0; }
+	.pb-xl-none { padding-bottom:0; }
+}
 
 
 
