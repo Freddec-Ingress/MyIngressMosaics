@@ -236,6 +236,8 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 				
 				if (components) {
 					
+					console.log(components);
+					
 					var admin2 = null;
 					var admin3 = null;
 					
