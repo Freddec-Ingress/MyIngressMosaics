@@ -3650,7 +3650,11 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 			}
 			
 			$scope.by_city_list.sort(function(a, b) {
-				return a.name - b.name;
+				
+				if (a.name > b.name) return 1;
+				if (a.name < b.name) return -1;
+				
+				return 0;
 			});
 			
 			/* By mission list */
