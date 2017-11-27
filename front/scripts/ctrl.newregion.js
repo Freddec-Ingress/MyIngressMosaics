@@ -29,11 +29,7 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 		
 		$scope.current_index = index;
 	}
-	
-	$scope.scrollRight = function() {
-		$('#index_container').scrollLeft( 300 );
-	}
-	
+
 	/* Page loading */
 	
 	$scope.loadRegion = function(country_name, region_name) {
