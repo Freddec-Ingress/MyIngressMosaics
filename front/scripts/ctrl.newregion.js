@@ -77,6 +77,10 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 				return 0;
 			});
 			
+			$scope.by_city_indexes.sort();
+
+			$scope.setCurrentIndex($scope.by_city_indexes[0]);
+			
 			/* By mission list */
 			
 			/* By date list */
