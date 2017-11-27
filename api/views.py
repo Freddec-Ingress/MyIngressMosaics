@@ -803,12 +803,16 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 			
 	# By city list of mosaic data
 	
+	data['list_of_city_name'] = sorted(data['list_of_city_name'])
+	
 	for city_name in data['list_of_city_name']:
 		
 		obj = { 'name':city_name, 'mosaics':[] }
 		for mosaic_obj in mosaic_list:
 			if mosaic_obj.city.name == city_name:
 				obj['mosaics'].append(mosaic_obj.miniSerialize())
+		
+		obj['mosaics'] = sorted(obj['mosaics'], key=lambda obj: obj['mission_count'])
 		
 		data['by_city_list_of_mosaic_data'].append(obj)
 		
