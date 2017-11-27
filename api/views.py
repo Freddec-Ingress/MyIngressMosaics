@@ -757,6 +757,8 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 		
 		'list_of_city_name': [],
 		'list_of_mission_count': [],
+		
+		'by_city_list_of_mosaic_data': [],
 	}
 	
 	# Country data
@@ -798,7 +800,18 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 		mission_count = mosaic_data['mission_count']
 		if mission_count not in data['list_of_mission_count']:
 			data['list_of_mission_count'].append(mission_count)
+			
+	# By city list of mosaic data
 	
+	for city_name in data['list_of_city_name']:
+		
+		obj = { 'name':city_name, 'mosaics':[] }
+		for mosaic_obj in mosaic_list:
+			if mosaic_obj.city.name == city_name:
+				obj['mosaics'].append(mosaic_obj.miniSerialize())
+		
+		data['by_city_list_of_mosaic_data'].append(obj)
+		
 	return Response(data, status=status.HTTP_200_OK)
 
 

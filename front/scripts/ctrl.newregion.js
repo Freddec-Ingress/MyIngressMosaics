@@ -7,23 +7,29 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 	$scope.sortByCity = function() {
 		
 		$scope.current_sort = 'by_city';
+		$scope.indexes = $scope.by_city_indexes;
 	}
 	
 	$scope.sortByMissions = function() {
 		
 		$scope.current_sort = 'by_missions';
+		$scope.indexes = $scope.by_missions_indexes;
 	}
 	
 	$scope.sortByDate = function() {
 		
 		$scope.current_sort = 'by_date';
+		$scope.indexes = [];
 	}
 	
 	/* Index management */
 	
 	$scope.current_index = null;
 	
+	$scope.indexes = [];
+	
 	$scope.by_city_indexes = [];
+	$scope.by_missions_indexes = [];
 	
 	$scope.setCurrentIndex = function(index) {
 		
@@ -51,31 +57,12 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 			
 			/* By city list */
 			
-			$scope.by_city_list = [];
+			$scope.by_city_list = response.by_city_list_of_mosaic_data;
 			for (var city_name of response.list_of_city_name) {
-				
-				var obj = { 'name':city_name, 'mosaics':[] };
-				for (var mosaic of mosaics) {
-					if (mosaic.city.name == city_name) obj.mosaics.push(mosaic);
-				}
-				
-				obj.mosaics.sort(function(a, b) {
-					return a.mission_count - b.mission_count;
-				});
-				
-				$scope.by_city_list.push(obj);
 				
 				var index = city_name[0];
 				if ($scope.by_city_indexes.indexOf(index) == -1) $scope.by_city_indexes.push(index);
 			}
-			
-			$scope.by_city_list.sort(function(a, b) {
-				
-				if (a.name > b.name) return 1;
-				if (a.name < b.name) return -1;
-				
-				return 0;
-			});
 			
 			$scope.by_city_indexes.sort();
 
