@@ -108,7 +108,7 @@
 			
 			<div class="grow flex-col" ng-if="user.authenticated">
 				
-				<div class="p-normal">
+				<div class="p-normal pr-xl-none pl-xl-none">
 					
 					<form class="row">
 						
@@ -126,7 +126,7 @@
 					
 				</div>
 				
-				<hr>
+				<hr ng-if="missions.length < 1">
 					
 				<div class="scrollable">
 					
