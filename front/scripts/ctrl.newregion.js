@@ -8,12 +8,16 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 		
 		$scope.current_sort = 'by_city';
 		$scope.indexes = $scope.by_city_indexes;
+		
+		$scope.setCurrentIndex($scope.by_city_indexes[0]);
 	}
 	
 	$scope.sortByMissions = function() {
 		
 		$scope.current_sort = 'by_missions';
 		$scope.indexes = $scope.by_missions_indexes;
+		
+		$scope.setCurrentIndex($scope.by_missions_indexes[0]);
 	}
 	
 	$scope.sortByDate = function() {
@@ -69,6 +73,9 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 			$scope.setCurrentIndex($scope.by_city_indexes[0]);
 			
 			/* By mission list */
+			
+			$scope.by_missions_list = response.by_missions_list_of_mosaic_data;
+			$scope.by_missions_indexes = response.list_of_mission_count;
 			
 			/* By date list */
 			

@@ -199,10 +199,76 @@
 			
 		</div>
 		
-		<div ng-show="current_sort=='by_missions'">
+		<div class="scrollable" ng-show="current_sort=='by_missions'">
+			
+    		<div ng-repeat="count in by_missions_list" ng-show="count.count == current_index">
+    			<div ng-repeat="mosaic in count.mosaics">
+    				
+	    			<div class="p-normal">
+		    			<div class="row align-center">
+		    				
+		    				<div class="item grow">
+		    					
+	    						<span class="text-medium color-light block">{{mosaic.name}}</span>
+	    						<span class="text-normal color-normal block">{{mosaic.city.name}}</span>
+	
+		    					<div class="color-muted">
+									<span>{{mosaic.mission_count}} missions</span>
+									<span ng-show="mosaic.type=='sequence'">&nbsp;in sequence</span>
+									<span ng-show="mosaic.type=='serie'">&nbsp;in serie</span>
+		    					</div>
+		    					
+		    				</div>
+		    				
+		    				<div class="item">
+		    					<a class="btn btn-icon" href="/mosaic/{{mosaic.ref}}" target="blank">
+	                                <i class="fa fa-chevron-right"></i>
+	                            </a>
+		    				</div>
+		    				
+		    			</div>
+	     			</div>
+	     			
+	    			<hr>
+	    			
+    			</div>
+    		</div>
+    		
 		</div>
 		
-		<div ng-show="current_sort=='by_date'">
+		<div class="scrollable" ng-show="current_sort=='by_date'">
+			
+    		<div ng-repeat="mosaic in by_date_list">
+    			
+    			<div class="p-normal">
+	    			<div class="row align-center">
+	    				
+	    				<div class="item grow">
+	    					
+    						<span class="text-medium color-light block">{{mosaic.name}}</span>
+    						<span class="text-normal color-normal block">{{mosaic.city.name}}</span>
+
+	    					<div class="color-muted">
+								<span>{{mosaic.mission_count}} missions</span>
+								<span ng-show="mosaic.type=='sequence'">&nbsp;in sequence</span>
+								<span ng-show="mosaic.type=='serie'">&nbsp;in serie</span>
+	    					</div>
+	    					
+	    				</div>
+	    				
+	    				<div class="item">
+	    					<a class="btn btn-icon" href="/mosaic/{{mosaic.ref}}" target="blank">
+                                <i class="fa fa-chevron-right"></i>
+                            </a>
+	    				</div>
+	    				
+	    			</div>
+    			</div>
+    			
+    			<hr>
+    			
+    		</div>
+			
 		</div>
 		
 	</div>

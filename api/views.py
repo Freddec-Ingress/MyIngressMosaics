@@ -759,6 +759,7 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 		'list_of_mission_count': [],
 		
 		'by_city_list_of_mosaic_data': [],
+		'by_missions_list_of_mosaic_data': [],
 	}
 	
 	# Country data
@@ -808,13 +809,28 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 	for city_name in data['list_of_city_name']:
 		
 		obj = { 'name':city_name, 'mosaics':[] }
-		for mosaic_obj in mosaic_list:
-			if mosaic_obj.city.name == city_name:
-				obj['mosaics'].append(mosaic_obj.miniSerialize())
+		for mosaic_data in data['list_of_mosaic_data']:
+			if mosaic_data['city']['name'] == city_name:
+				obj['mosaics'].append(mosaic_data)
 		
 		obj['mosaics'] = sorted(obj['mosaics'], key=lambda obj: obj['mission_count'])
 		
 		data['by_city_list_of_mosaic_data'].append(obj)
+			
+	# By missions list of mosaic data
+	
+	data['list_of_mission_count'] = sorted(data['list_of_mission_count'])
+	
+	for mission_count in data['list_of_mission_count']:
+		
+		obj = { 'count':mission_count, 'mosaics':[] }
+		for mosaic_data in data['list_of_mosaic_data']:
+			if mosaic_data['mission_count'] == mission_count:
+				obj['mosaics'].append(mosaic_data)
+		
+		obj['mosaics'] = sorted(obj['mosaics'], key=lambda obj: obj['name'])
+		
+		data['by_missions_list_of_mosaic_data'].append(obj)
 		
 	return Response(data, status=status.HTTP_200_OK)
 
