@@ -100,9 +100,15 @@
 						By city
 					</div>
 				</div>
+					
+				<div class="item">
+					<div class="badge" ng-click="scrollLeft();">
+						<i class="fa fa-caret-left"></i>
+					</div>
+				</div>
 				
-				<div class="item grow" style="overflow-x:auto;">
-					<div class="row">
+				<div class="item grow" style="overflow-x:hidden;">
+					<div id="index_container" class="row">
 					
 						<div class="item" ng-repeat="index in by_city_indexes track by $index">
 							<div class="badge" ng-click="setCurrentIndex(index);" ng-class="{'transparent color-link': current_index!=index}">
@@ -110,6 +116,12 @@
 							</div>
 						</div>
 					
+					</div>
+				</div>
+					
+				<div class="item">
+					<div class="badge" ng-click="scrollRight();">
+						<i class="fa fa-caret-right"></i>
 					</div>
 				</div>
 				
