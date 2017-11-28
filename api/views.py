@@ -798,7 +798,7 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 	
 		# List of mission count
 	
-		mission_count = mosaic_data['mission_count']
+		mission_count = len(mosaic_data['missions'])
 		if mission_count not in data['list_of_mission_count']:
 			data['list_of_mission_count'].append(mission_count)
 			
@@ -813,7 +813,7 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 			if mosaic_data['city']['name'] == city_name:
 				obj['mosaics'].append(mosaic_data)
 		
-		obj['mosaics'] = sorted(obj['mosaics'], key=lambda obj: obj['mission_count'])
+		obj['mosaics'] = sorted(obj['mosaics'], key=lambda obj: len(obj['missions']))
 		
 		data['by_city_list_of_mosaic_data'].append(obj)
 			
@@ -825,7 +825,7 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 		
 		obj = { 'count':mission_count, 'mosaics':[] }
 		for mosaic_data in data['list_of_mosaic_data']:
-			if mosaic_data['mission_count'] == mission_count:
+			if len(mosaic_data['missions']) == mission_count:
 				obj['mosaics'].append(mosaic_data)
 		
 		obj['mosaics'] = sorted(obj['mosaics'], key=lambda obj: obj['name'])
