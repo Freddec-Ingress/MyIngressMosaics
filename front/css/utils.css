@@ -27,6 +27,7 @@
 .self-center { align-self:center; }
 .self-around { align-self:space-around; }
 .self-between { align-self:space-between; }
+.self-stretch { align-self:stretch; }
 
 .grow { flex-grow:1; }
 .nogrow { flex-grow:0; }

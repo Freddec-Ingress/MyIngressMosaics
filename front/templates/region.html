@@ -168,12 +168,25 @@
 	    			<a class="block p-normal pl-xl-none pr-xl-none" href="/mosaic/{{mosaic.ref}}" target="blank">
 		    			<div class="row align-center">
 		    				
-		    				<div class="item">
+		    				<div class="item flex self-stretch align-center justify-center" style="width:100px; max-width:100px;">
+		    					
+								<div class="flex wrap justify-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
+									
+						            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+						            </div>
+						            
+						            <div ng-repeat="m in mosaic.missions | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+						                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+						            </div>
+						            
+					            </div>
+		    					
 		    				</div>
 		    				
 		    				<div class="item grow">
 		    					
 	    						<span class="text-medium color-light block">{{mosaic.name}}</span>
+	    						<span class="text-normal color-normal block">{{mosaic.city.name}}</span>
 
 		    					<div class="color-muted">
 									<span>{{mosaic.missions.length}} missions</span>

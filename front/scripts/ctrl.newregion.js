@@ -59,6 +59,19 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 			
 			$scope.count = mosaics.length;
 			
+			/* Offset */
+			
+			for (var mosaic of mosaics) {
+				
+				var temp = 0;
+				if (mosaic.missions.length > mosaic.cols) {
+					temp = mosaic.cols - mosaic.missions.length % mosaic.cols;
+					if (temp < 0 || temp > (mosaic.cols - 1)) temp = 0;
+				}
+				
+				mosaic.offset = new Array(temp);
+			}
+			
 			/* By city list */
 			
 			$scope.by_city_list = response.by_city_list_of_mosaic_data;

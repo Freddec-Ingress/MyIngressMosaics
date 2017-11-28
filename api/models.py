@@ -304,6 +304,7 @@ class Mosaic(models.Model):
 			
 			'id': self.pk,
 			'ref': self.ref,
+			'cols': self.cols,
 			'name': self.title,
 			'type': self.type,
 			'city': { 'name': self.city.name },
