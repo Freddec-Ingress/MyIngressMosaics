@@ -111,31 +111,29 @@
 			</div>
 		</div>
 		
-		<div class="p-normal">
-			<div class="row align-center">
-				
-				<div class="item grow">
-	    			<span class="text-medium color-light block" ng-show="!region.locale">{{region.name}}</span>
-					<span class="text-medium color-light block" ng-show="region.locale">{{region.locale}}</span>
-					<span class="text-small color-normal block" ng-show="region.locale">{{region.name}} <span class="color-muted">en</span></span>
-				</div>
+		<div class="p-normal mt-normal">
+			<div class="row align-center justify-center">
 				
 				<div class="item">
-					<button class="btn btn-mini" style="width:63px;" ng-click="changing=true;">
-						Change
-					</button>
+	    			<span class="text-big text-center color-light block" ng-show="!region.locale">{{region.name}}</span>
+					<span class="text-big text-center color-light block" ng-show="region.locale">{{region.locale}}</span>
+					<span class="text-small text-center color-normal block" ng-show="region.locale"><span class="color-muted mr-normal">EN</span>{{region.name}}</span>
 				</div>
 				
 			</div>
 		</div>
 		
+	    <div class="p-normal mt-big">
+	    	<span class="block text-center">{{count}} mosaics</span>
+	    </div>
+	    
 		<hr>
 		
 		<div class="p-normal">
 			<div class="row justify-center">
 				
 				<div class="item noshrink">
-					<a class="badge transparent" ng-click="sorting=true;">
+					<a class="badge transparent pl-none" ng-click="sorting=true;">
 						<i class="fa fa-caret-down mr-normal"></i>
 						<span ng-show="current_sort=='by_city'">By city</span>
 						<span ng-show="current_sort=='by_missions'">By missions</span>

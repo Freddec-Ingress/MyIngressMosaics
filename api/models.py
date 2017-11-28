@@ -307,8 +307,14 @@ class Mosaic(models.Model):
 			'name': self.title,
 			'type': self.type,
 			'city': { 'name': self.city.name },
-			'mission_count': self.missions.all().count(),
+			
+			'missions': [],
 		}
+			
+		for mission in self.missions.all().order_by('order'):
+			
+			mission_data = { 'image':mission.image }
+			data['missions'].append(mission_data)
 			
 		return data
 
