@@ -748,90 +748,28 @@ def data_getMosaicsByCity(request, country, name):
 def newdata_getMosaicsByCity(request, country_name, region_name):
 	
 	data = {
-		
-		'country_data': None,
 		'region_data': None,
-
-		'list_of_region_data': [],
-		'list_of_mosaic_data': [],
-		
-		'list_of_city_name': [],
-		'list_of_mission_count': [],
-		
-		'by_city_list_of_mosaic_data': [],
-		'by_missions_list_of_mosaic_data': [],
+		'list_of_city_data': [],
 	}
-	
-	# Country data
-	
-	country_obj = Country.objects.get(name=country_name)
-	data['country_data'] = country_obj.serialize()
 	
 	# Region data
 	
-	region_obj = Region.objects.get(country=country_obj, name=region_name)
-	data['region_data'] = region_obj.serialize()
+	region_obj = Region.objects.get(country__name=country_name, name=region_name)
+	region_data = { 'name':region_obj.name, 'locale':region_obj.locale, 'mosaic_count':Mosaic.objects.filter(city__region=region_obj).count() }
+	data['region_data'] = region_data
 	
-	# List of region data
+	# List of city data
 	
-	region_list = Region.objects.filter(country=country_obj)
-	for region_obj in region_list:
+	for city_obj in region_obj.cities.all():
+	
+		city_data = { 'name':city_obj.name, 'mosaics': [] }
 		
-		region_data = region_obj.serialize()
-		region_data['mosaic_count'] = Mosaic.objects.filter(city__region=region_obj).count()
+		for mosaic_obj in city_obj.mosaics.all():
+			mosaic_data = mosaic_obj.miniSerialize()
+			city_data['mosaics'].append(mosaic_data);
 		
-		data['list_of_region_data'].append(region_data)
-
-	# List of mosaic data
+		data['list_of_city_data'].append(city_data);
 	
-	mosaic_list = Mosaic.objects.filter(city__region__name=region_name)
-	for mosaic_obj in mosaic_list:
-		mosaic_data = mosaic_obj.miniSerialize()
-		
-		data['list_of_mosaic_data'].append(mosaic_data)
-	
-		# List of city name
-	
-		city_name = mosaic_data['city']['name']
-		if city_name not in data['list_of_city_name']:
-			data['list_of_city_name'].append(city_name)
-	
-		# List of mission count
-	
-		mission_count = len(mosaic_data['missions'])
-		if mission_count not in data['list_of_mission_count']:
-			data['list_of_mission_count'].append(mission_count)
-			
-	# By city list of mosaic data
-	
-	data['list_of_city_name'] = sorted(data['list_of_city_name'])
-	
-	for city_name in data['list_of_city_name']:
-		
-		obj = { 'name':city_name, 'mosaics':[] }
-		for mosaic_data in data['list_of_mosaic_data']:
-			if mosaic_data['city']['name'] == city_name:
-				obj['mosaics'].append(mosaic_data)
-		
-		obj['mosaics'] = sorted(obj['mosaics'], key=lambda obj: len(obj['missions']))
-		
-		data['by_city_list_of_mosaic_data'].append(obj)
-			
-	# By missions list of mosaic data
-	
-	data['list_of_mission_count'] = sorted(data['list_of_mission_count'])
-	
-	for mission_count in data['list_of_mission_count']:
-		
-		obj = { 'count':mission_count, 'mosaics':[] }
-		for mosaic_data in data['list_of_mosaic_data']:
-			if len(mosaic_data['missions']) == mission_count:
-				obj['mosaics'].append(mosaic_data)
-		
-		obj['mosaics'] = sorted(obj['mosaics'], key=lambda obj: obj['name'])
-		
-		data['by_missions_list_of_mosaic_data'].append(obj)
-		
 	return Response(data, status=status.HTTP_200_OK)
 
 
