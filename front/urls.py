@@ -33,5 +33,7 @@ urlpatterns = [
 	
 	url(r'^recruitment',						views.recruitment),
 	
+	url(r'^adm/region',							views.adm_region),
+	
 	url(r'^.*', 								views.world),
 ]

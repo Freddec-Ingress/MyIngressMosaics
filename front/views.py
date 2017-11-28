@@ -158,3 +158,10 @@ def recruitment(request):
 	
 	context = {}
 	return render(request, 'recruitment.html', context)
+
+
+
+def adm_region(request):	
+	
+	context = {}
+	return render(request, 'adm_region.html', context)

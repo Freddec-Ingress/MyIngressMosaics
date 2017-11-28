@@ -1132,7 +1132,7 @@ def country_getList(request):
 	
 	data = { 'countries': [], }
 	
-	results = Country.objects.all()
+	results = Country.objects.all().order_by('name')
 	for item in results:
 		data['countries'].append(item.serialize())
 	
