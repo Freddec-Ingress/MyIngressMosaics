@@ -202,12 +202,8 @@
 							<div class="text-center ml-normal">
 								
 								<div>
-									{{missions.length}} missions
-								</div>
-								
-								<div>
 									<a ng-click="selectAll();">
-										Select All
+										Select All ({{missions.length}})
 									</a>
 								</div>
 								
@@ -278,26 +274,6 @@
 				</div>
 			</div>
 			
-			<hr>
-			
-			<div class="scrollable flex p-normal align-start">
-				
-				<div class="flex grow wrap justify-center" style="padding:0 calc((6 - {{columns}}) / 2 * 16.666667%);">
-					
-		            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / {{columns}});">
-		            </div>
-		            
-		            <div ng-repeat="mission in selected | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{columns}});" ng-click="displayOrder(mission);">
-		                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{mission.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-		                <div class="text-center">
-		                	<a>{{mission.order}}</a>
-		                </div>
-		            </div>
-		            
-	            </div>
-			
-			</div>
-			
 			<div class="flex justify-center">
 				
 				<div class="item">
@@ -309,7 +285,27 @@
 				</div>
 				
 			</div>
-
+			
+			<hr>
+			
+			<div class="scrollable flex p-normal align-start">
+				
+				<a class="flex grow wrap justify-center" style="padding:0 calc((6 - {{columns}}) / 2 * 16.666667%);">
+					
+		            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / {{columns}});">
+		            </div>
+		            
+		            <div ng-repeat="mission in selected | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{columns}});" ng-click="displayOrder(mission);">
+		                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{mission.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+		                <div class="text-center">
+		                	<a>{{mission.order}}</a>
+		                </div>
+		            </div>
+		            
+	            </a>
+			
+			</div>
+			
 			<hr>
 			
 			<div class="p-normal">
