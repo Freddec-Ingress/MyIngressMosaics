@@ -358,13 +358,13 @@ ul > li { list-style:none; }
 
 .container {
 	flex:1 0 100%;
-	max-width: 720px;
+	max-width: 100%;
 	display:none; flex-direction:column; align-items:stretch;
 }
 
-@media (min-width:  768px) { .container { flex:1 0 720px; } }
-@media (min-width:  992px) { .container { flex:1 0 720px; } }
-@media (min-width: 1200px) { .container { flex:1 0 720px; } }
+@media (min-width:  768px) { .container { flex:1 0 720px; max-width: 720px; } }
+@media (min-width:  992px) { .container { flex:1 0 720px; max-width: 720px; } }
+@media (min-width: 1200px) { .container { flex:1 0 720px; max-width: 720px; } }
 
 .container.active { display:flex; }
 
