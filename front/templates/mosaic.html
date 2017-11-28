@@ -220,6 +220,21 @@
 					</span>
 				</div>
 				
+				<div class="item flex-col pt-none">
+					
+					<div class="item flex justify-center">
+						<flag class="mr-small" country="mosaic.city.region.country.name"></flag>
+						{{mosaic.city.name}}, {{mosaic.city.region.name}}
+					</div>
+						
+					<div class="text-center color-muted">
+						<span>{{mosaic.missions.length}} missions</span>
+						<span ng-show="mosaic_type=='sequence'">&nbsp;in sequence</span>
+						<span ng-show="mosaic_type=='serie'">&nbsp;in serie</span>
+					</div>
+
+				</div>
+				
 				<div class="row justify-center mb-big">
 					
 					<div class="item">
