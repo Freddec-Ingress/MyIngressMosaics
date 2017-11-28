@@ -160,7 +160,7 @@
 			
 			<div class="" ng-repeat="city in by_city_list" ng-show="city.name[0] == current_index">
 				
-				<span class="block mt-big p-normal text-medium">{{city.name}}</span>
+				<span class="block mt-big p-normal pl-xl-none pr-xl-none text-normal">{{city.name}}</span>
 				<hr>
 				
 	    		<div ng-repeat="mosaic in city.mosaics">
@@ -168,12 +168,15 @@
 	    			<a class="block p-normal pl-xl-none pr-xl-none" href="/mosaic/{{mosaic.ref}}" target="blank">
 		    			<div class="row align-center">
 		    				
+		    				<div class="item">
+		    				</div>
+		    				
 		    				<div class="item grow">
 		    					
 	    						<span class="text-medium color-light block">{{mosaic.name}}</span>
 
 		    					<div class="color-muted">
-									<span>{{mosaic.mission_count}} missions</span>
+									<span>{{mosaic.missions.length}} missions</span>
 									<span ng-show="mosaic.type=='sequence'">&nbsp;in sequence</span>
 									<span ng-show="mosaic.type=='serie'">&nbsp;in serie</span>
 		    					</div>
