@@ -40,7 +40,8 @@
 
 
 .container {
-	flex:1 1 100%;
+	flex:1 0 100%;
+	max-width: 720px;
 	display:none; flex-direction:column; align-items:stretch;
 }
 
