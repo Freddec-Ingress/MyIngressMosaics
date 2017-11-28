@@ -15,6 +15,13 @@ angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($
 	
 	/* Region management */
 	
+	$scope.createRegion = function(country_id, name, locale) {
+	    
+        var data = { 'country_id':country_id, 'name':name, 'locale':locale };
+        API.sendRequest('/api/region/create/', 'POST', {}, data).then(function(response) {
+        });
+	}
+	
 	$scope.mergeRegions = function(src_id, dest_id) {
 	    
         var data = { 'src_id':src_id, 'dest_id':dest_id };

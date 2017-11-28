@@ -1190,7 +1190,7 @@ def region_getListFromCountry(request):
 @permission_classes((IsAuthenticated, ))
 def region_create(request):
 	
-	item = Region(country__pk=request.data['country_id'], name=request.data['name'])
+	item = Region(country__pk=request.data['country_id'], name=request.data['name'], locale=request.data['locale'])
 	item.save()
 	
 	data = { 'region': item.serialize(), }

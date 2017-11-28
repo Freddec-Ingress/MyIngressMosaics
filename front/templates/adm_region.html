@@ -27,9 +27,33 @@
 			
 			<span class="block">Country</span>
 			
-			<select class="control" ng-model="selected_country_name" ng-change="selectCountry(selected_country_name);">
+			<select class="control" ng-model="country_id" ng-change="selectCountry(country_id);">
 				<option ng-repeat="country in countries" value="{{country.id}}">{{country.name}}</value>
 			</select>
+			
+		</div>
+		
+		<div class="mt-normal p-normal pr-xl-none pl-xl-none" ng-show="regions.length > 0">
+			
+			<span class="block">Create new region</span>
+			
+			<div class="row">
+				
+				<div class="item grow">
+					<input class="control" placeholder="name" ng-model="name">
+				</div>
+				
+				<div class="item grow">
+					<input class="control" placeholder="locale" ng-model="locale">
+				</div>
+				
+				<div class="item">
+					<button class="btn" ng-click="createRegion(country_id, name, locale);">
+						Create
+					</button>
+				</div>
+				
+			</div>
 			
 		</div>
 		
@@ -68,11 +92,11 @@
 			<div class="row" ng-repeat="region in regions">
 				
 				<div class="item grow">
-					<input class="control" ng-model="new_name" ng-init="new_name = region.name;">
+					<input class="control" placeholder="name" ng-model="new_name" ng-init="new_name = region.name;">
 				</div>
 				
 				<div class="item grow">
-					<input class="control" ng-model="new_locale" ng-init="new_locale = region.locale;">
+					<input class="control" placeholder="locale" ng-model="new_locale" ng-init="new_locale = region.locale;">
 				</div>
 				
 				<div class="item">
