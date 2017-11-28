@@ -329,7 +329,7 @@ ul > li { list-style:none; }
 }
 
 #header .item {
-	padding-top:5px;
+	padding-top:10px;
 	flex-basis:0; flex-grow:1;
 	color:#5afbea; text-align:center;
 	display:flex; flex-direction:column; align-items:stretch; justify-content:center;
