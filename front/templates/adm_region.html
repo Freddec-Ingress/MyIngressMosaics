@@ -31,7 +31,7 @@
 				<option ng-repeat="country in countries" value="{{country.id}}">{{country.name}}</value>
 			</select>
 			
-			<div class="mt-small">
+			<div class="mt-small" ng-show="country_id">
 				<a ng-click="selectCountry(country_id);">Refresh</a>
 			</div>
 			
