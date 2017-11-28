@@ -156,7 +156,7 @@
 			</div>
 		</div>
 		
-		<div class="scrollable" ng-show="current_sort=='by_city'">
+		<div class="mb-big" ng-show="current_sort=='by_city'">
 			
 			<div class="" ng-repeat="city in by_city_list" ng-show="city.name[0] == current_index">
 				
@@ -165,7 +165,7 @@
 				
 	    		<div ng-repeat="mosaic in city.mosaics">
 	    			
-	    			<a class="block p-normal" href="/mosaic/{{mosaic.ref}}" target="blank">
+	    			<a class="block p-normal pl-xl-none pr-xl-none" href="/mosaic/{{mosaic.ref}}" target="blank">
 		    			<div class="row align-center">
 		    				
 		    				<div class="item grow">
@@ -197,7 +197,7 @@
 			
 		</div>
 		
-		<div class="scrollable" ng-show="current_sort=='by_missions'">
+		<div class="mb-big" ng-show="current_sort=='by_missions'">
 			
     		<div ng-repeat="count in by_missions_list" ng-show="count.count == current_index">
     			<div ng-repeat="mosaic in count.mosaics">
@@ -234,7 +234,7 @@
     		
 		</div>
 		
-		<div class="scrollable" ng-show="current_sort=='by_date'">
+		<div class="mb-big" ng-show="current_sort=='by_date'">
 			
     		<div ng-repeat="mosaic in by_date_list">
     			

@@ -44,13 +44,13 @@
     	<div class="mb-big">
 	    	<div ng-repeat="region in regions">
 	    		
-	    		<a class="p-normal block" href="/world/{{country.name}}/{{region.name}}">
+	    		<a class="p-normal block pl-xl-none pr-xl-none" href="/world/{{country.name}}/{{region.name}}">
 		    		<div class="row">
 		    			
 		    			<div class="item flex-col justify-center grow">
 		    				<span class="block color-light text-medium" ng-show="!region.locale">{{region.name}}</span>
 		    				<span class="block color-light text-medium" ng-show="region.locale">{{region.locale}}</span>
-		    				<span class="block color-normal text-small" ng-show="region.locale">{{region.name}}</span>
+		    				<span class="block color-normal text-small" ng-show="region.locale"><span class="color-muted mr-normal">EN</span>{{region.name}}</span>
 		    			</div>
 		     			
 		    			<div class="item flex-col justify-center" style="width:75px;">
