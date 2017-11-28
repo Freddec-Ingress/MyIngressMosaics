@@ -348,6 +348,7 @@ ul > li { list-style:none; }
 
 #content {
 	flex:1 1 auto;
+	overflow-y: auto;
 	display:flex; flex-direction:row; align-items:stretch; justify-content:center;
 }
 
@@ -357,7 +358,6 @@ ul > li { list-style:none; }
 
 .container {
 	flex:1 1 100%;
-	overflow-x:hidden;
 	display:none; flex-direction:column; align-items:stretch;
 }
 
