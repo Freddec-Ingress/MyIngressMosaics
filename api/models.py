@@ -81,7 +81,7 @@ class Country(models.Model):
 @python_2_unicode_compatible
 class Region(models.Model):
 
-	country = models.ForeignKey(Country, related_name='regions')
+	country = models.ForeignKey(Country, on_delete=models.SET_NULL, null=True, related_name='regions')
 	
 	name = models.CharField(max_length=512)
 	locale = models.CharField(max_length=512, null=True, blank=True)
@@ -112,7 +112,7 @@ class Region(models.Model):
 @python_2_unicode_compatible
 class City(models.Model):
 
-	region = models.ForeignKey(Region, related_name='cities')
+	region = models.ForeignKey(Region, on_delete=models.SET_NULL, null=True, related_name='cities')
 	
 	name = models.CharField(max_length=512)
 	locale = models.CharField(max_length=512, null=True, blank=True)
@@ -164,7 +164,7 @@ class Mosaic(models.Model):
 	registerer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='mosaics')
 	register_date = models.DateField(default=datetime.now)
 	
-	city = models.ForeignKey(City, related_name='mosaics')
+	city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True, related_name='mosaics')
 	
 	lovers = models.ManyToManyField(User, blank=True, related_name='mosaics_loved')
 	completers = models.ManyToManyField(User, blank=True, related_name='mosaics_completed')
