@@ -1222,8 +1222,8 @@ def region_move(request):
 	src = Region.objects.get(pk=request.data['src_id'])
 	dest = Region.objects.get(pk=request.data['dest_id'])
 	
-	for item in Mosaic.objects.filter(city__region=src):
-		item.city.region = dest
+	for item in City.objects.filter(region=src):
+		item.region = dest
 		item.save()
 
 	src.delete()
