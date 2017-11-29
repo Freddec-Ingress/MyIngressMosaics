@@ -405,17 +405,14 @@ function processNextMission() {
 
     var mids = missionsToBeProcessed.slice(0, 12);
     for (var mid of mids) {
+
         var mission_id = missionsToBeProcessed[0];
+        if (missionsProcessed.indexOf(mid) == -1 || missionsInProcess.indexOf(mid) == -1) {
 
-        if (missionsProcessed.indexOf(mid) != -1 || missionsInProcess.indexOf(mid) != -1) {
+            missionsInProcess.push(mid);
 
-            missionsToBeProcessed.splice(0, 1);
-            continue;
+            data.push({ mid: mid });
         }
-
-        missionsInProcess.push(mid);
-
-        data.push({ mid: mid });
     }
 
     if (data.length > 0) {
@@ -447,8 +444,6 @@ function processNextMission() {
                         });
                     });
 
-                    processNextMission();
-
                 }, function(jqXHR, textStatus, errorThrown) {
 
                     setTimeout(processNextMission, 1000);
@@ -461,15 +456,11 @@ function processNextMission() {
                     map: M,
                     icon: mImageRes,
                 });
-
-                processNextMission();
             }
         }
-    });
-    }
-    else {
 
         processNextMission();
+    });
     }
 }
 
