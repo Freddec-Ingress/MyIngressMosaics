@@ -77,6 +77,8 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 			
 			var index = $scope.selected.indexOf(mission);
 			$scope.selected.splice(index, 1);
+			
+			$scope.computeOffset();
 		}
 	}
 	
