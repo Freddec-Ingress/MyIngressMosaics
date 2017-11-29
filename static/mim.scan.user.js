@@ -1,7 +1,7 @@
 // ==UserScript==
 // @id             myingressmosaics@freddec
 // @name           MyIngressMosaics Scanning plugin
-// @version        1.0.12
+// @version        1.0.11
 // @include        https://*.ingress.com/intel*
 // @include        http://*.ingress.com/intel*
 // @match          https://*.ingress.com/intel*
@@ -320,8 +320,6 @@ function processNextTiles() {
 
             if (portalsToBeProcessed.length > 0) {
 
-                checkBounds(tile);
-
                 var dataBounds = {
                     eastE6: Math.trunc(tile.east * 1000000),
                     northE6: Math.trunc(tile.north * 1000000),
@@ -331,8 +329,6 @@ function processNextTiles() {
 
                 callIngressAPI('getTopMissionsInBounds', dataBounds, function(data, textStatus, jqXHR) {
 
-                    if (!data.result) return;
-
                     for (var item of data.result) {
 
                         var mission_id = item[0];
@@ -341,7 +337,7 @@ function processNextTiles() {
                         }
                     }
                 });
-            }
+           }
         }
 
         processNextPortal();
@@ -405,55 +401,76 @@ function processNextMission() {
         return;
     }
 
-    var mission_id = missionsToBeProcessed[0];
+    var data = [];
 
-    if (missionsProcessed.indexOf(mission_id) != -1 || missionsInProcess.indexOf(mission_id) != -1) {
+    var mids = missionsToBeProcessed.slice(0, 12);
+    for (var mid of mids) {
+        var mission_id = missionsToBeProcessed[0];
 
-        missionsToBeProcessed.splice(0, 1);
-        processNextMission();
-        return;
+        if (missionsProcessed.indexOf(mid) != -1 || missionsInProcess.indexOf(mid) != -1) {
+
+            missionsToBeProcessed.splice(0, 1);
+            continue;
+        }
+
+        missionsInProcess.push(mid);
+
+        data.push({ mid: mid });
     }
 
-    missionsInProcess.push(mission_id);
+    if (data.length > 0) {
 
-    var data = { guid: mission_id };
-    callIngressAPI('getMissionDetails', data, function(data, textStatus, jqXHR) {
+        callMIMAPI('ext_check', data, function(data, textStatus, jqXHR) {
 
-        if (!data.result) return;
+        for (var item of data.data) {
 
-        missionsProcessed.push(mission_id);
-        missionsToBeProcessed.splice(0, 1);
+            missionsProcessed.push(item.mid);
+            missionsToBeProcessed.splice(0, 1);
 
-        data.result.push(username);
-        var requestData = data.result;
-        callMIMAPI('ext_register', data.result, function(data, textStatus, jqXHR) {
+            if (item.status == 'notregistered') {
 
-            if (requestData[9][0][5] && data == 'Registered') {
+                data = { guid: mission_id };
+                callIngressAPI('getMissionDetails', data, function(data, textStatus, jqXHR) {
 
-                console.log('\t' + requestData[1]);
+                    if (!data.result) return;
 
-                var marker = new google.maps.Marker({
-                    position: {lat: requestData[9][0][5][2]/1000000.0, lng: requestData[9][0][5][3]/1000000.0},
-                    map: M,
-                    icon: mImageEnl,
+                    var requestData = data.result;
+                    data.result.push(username);
+                    callMIMAPI('ext_register', data.result, function(data, textStatus, jqXHR) {
+
+                        console.log('\t' + requestData[1]);
+
+                        var marker = new google.maps.Marker({
+                            position: {lat: requestData[9][0][5][2]/1000000.0, lng: requestData[9][0][5][3]/1000000.0},
+                            map: M,
+                            icon: mImageEnl,
+                        });
+                    });
+
+                    processNextMission();
+
+                }, function(jqXHR, textStatus, errorThrown) {
+
+                    setTimeout(processNextMission, 1000);
                 });
             }
-            if (requestData[9][0][5] && data == 'Updated') {
+            else {
 
                 var marker = new google.maps.Marker({
-                    position: {lat: requestData[9][0][5][2]/1000000.0, lng: requestData[9][0][5][3]/1000000.0},
+                    position: {lat: item.startLat, lng: item.startLng},
                     map: M,
                     icon: mImageRes,
                 });
+
+                processNextMission();
             }
-        });
+        }
+    });
+    }
+    else {
 
         processNextMission();
-
-    }, function(jqXHR, textStatus, errorThrown) {
-
-        setTimeout(processNextMission, 1000);
-    });
+    }
 }
 
 //--------------------------------------------------------------------------------------------------
