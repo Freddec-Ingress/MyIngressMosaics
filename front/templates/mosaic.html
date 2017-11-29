@@ -222,10 +222,10 @@
 				
 				<div class="item flex-col pt-none">
 					
-					<a class="item flex justify-center" href="/world/{{mosaic.city.region.country.name}}/{{mosaic.city.region.name}}">
+					<div class="item flex justify-center">
 						<flag class="mr-small" country="mosaic.city.region.country.name"></flag>
-						{{mosaic.city.name}}, {{mosaic.city.region.name}}
-					</a>
+						{{mosaic.city.name}}, <a href="/world/{{mosaic.city.region.country.name}}/{{mosaic.city.region.name}}">{{mosaic.city.region.name}}</a>
+					</div>
 						
 					<div class="text-center color-muted">
 						<span>{{mosaic.missions.length}} missions</span>
@@ -316,7 +316,7 @@
 						
 						<div class="flex">
 							<flag class="item" country="mosaic.city.region.country.name"></flag>
-							<span class="item">{{mosaic.city.name}}, {{mosaic.city.region.name}}</span>
+							<span class="item">{{mosaic.city.name}}, <a href="/world/{{mosaic.city.region.country.name}}/{{mosaic.city.region.name}}">{{mosaic.city.region.name}}</a></span>
 						</div>
 							
 						<div class="item ">
