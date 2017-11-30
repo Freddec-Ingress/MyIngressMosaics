@@ -1304,3 +1304,15 @@ def city_move(request):
 	src.delete()
 	
 	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def city_delete(request):
+	
+	item = City.objects.get(pk=request.data['id'])
+	item.delete()
+	
+	return Response(None, status=status.HTTP_200_OK)

@@ -165,3 +165,10 @@ def adm_region(request):
 	
 	context = {}
 	return render(request, 'adm_region.html', context)
+
+
+
+def adm_city(request):	
+	
+	context = {}
+	return render(request, 'adm_city.html', context)

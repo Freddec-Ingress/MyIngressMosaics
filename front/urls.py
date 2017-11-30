@@ -34,6 +34,7 @@ urlpatterns = [
 	url(r'^recruitment',						views.recruitment),
 	
 	url(r'^adm/region',							views.adm_region),
+	url(r'^adm/city',							views.adm_city),
 	
 	url(r'^.*', 								views.world),
 ]
