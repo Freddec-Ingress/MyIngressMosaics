@@ -1251,7 +1251,7 @@ def city_getListFromCountryRegion(request):
 	
 	data = { 'cities': [], }
 	
-	results = City.objects.filter(region__pk=request.data['region_id']).order_by('name')
+	results = City.objects.filter(region__pk=request.data['region_id']).order_by('-name')
 	for item in results:
 		data['cities'].append(item.serialize())
 	
