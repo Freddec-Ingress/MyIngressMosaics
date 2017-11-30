@@ -21,8 +21,8 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 			$scope.cities = response.list_of_city_data;
 
 			$scope.cities.sort(function(a, b) {
-				if (a.name > b.name) return 1;
-				if (a.name < b.name) return -1;
+				if (a.name > b.name) return -1;
+				if (a.name < b.name) return 1;
 				return 0;
 			});
 
