@@ -20,6 +20,12 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 			$scope.region = response.region_data;
 			$scope.cities = response.list_of_city_data;
 
+			$scope.cities.sort(function(a, b) {
+				if (a.name > b.name) return 1;
+				if (a.name < b.name) return -1;
+				return 0;
+			});
+
 			/* Index & Offset */
 			
 			for (var city of $scope.cities) {

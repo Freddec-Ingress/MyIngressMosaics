@@ -712,7 +712,7 @@ def data_getMosaicsByCity(request, country, name):
 	country = Country.objects.get(name=country)
 	region = Region.objects.get(country=country, name=name)
 	
-	results = City.objects.filter(region=region).order_by('-name')
+	results = City.objects.filter(region=region).order_by('name')
 	if (results.count() > 0):
 		
 		data = {
