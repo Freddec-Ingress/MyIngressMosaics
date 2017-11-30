@@ -1264,7 +1264,9 @@ def city_getListFromCountryRegion(request):
 @permission_classes((IsAuthenticated, ))
 def city_create(request):
 	
-	item = City(region__pk=request.data['region_id'], name=request.data['name'], locale=request.data['locale'])
+	region = Region.objects.get(pk=request.data['region_id'])
+	
+	item = City(region=region, name=request.data['name'], locale=request.data['locale'])
 	item.save()
 	
 	data = { 'city': item.serialize(), }
