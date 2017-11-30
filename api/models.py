@@ -102,6 +102,7 @@ class Region(models.Model):
 			'id': self.pk,
 			'name': self.name,
 			'locale': self.locale,
+			'city_count': self.cities.all().count(),
 		}
 		
 		return data

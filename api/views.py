@@ -1235,6 +1235,18 @@ def region_move(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
+def region_delete(request):
+	
+	item = Region.objects.get(pk=request.data['id'])
+	item.delete()
+	
+	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
 def city_getListFromCountryRegion(request):
 	
 	data = { 'cities': [], }

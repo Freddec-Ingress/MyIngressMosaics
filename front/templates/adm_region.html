@@ -32,7 +32,7 @@
 			</select>
 			
 			<div class="mt-small" ng-show="country_id">
-				<a ng-click="selectCountry(country_id);">Refresh</a>
+				<a ng-click="refreshCountry();">Refresh</a>
 			</div>
 			
 		</div>
@@ -106,6 +106,16 @@
 				<div class="item">
 					<button class="btn" ng-click="updateRegion(region.id, new_name, new_locale);">
 						Update
+					</button>
+				</div>
+				
+				<div class="item self-center">
+					<span ng-class="{'color-danger':region.city_count < 1}">{{region.city_count}}</span>
+				</div>
+				
+				<div class="item">
+					<button class="btn btn-danger" ng-click="deleteRegion(region.id);">
+						Delete
 					</button>
 				</div>
 				

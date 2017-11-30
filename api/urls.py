@@ -50,6 +50,7 @@ urlpatterns = [
 	url(r'^region/create/',			region_create),
 	url(r'^region/update/',			region_update),
 	url(r'^region/move/',			region_move),
+	url(r'^region/delete/',			region_delete),
 	
 	url(r'^city/list/',				city_getListFromCountryRegion),
 	url(r'^city/create/',			city_create),
