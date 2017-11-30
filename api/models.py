@@ -134,6 +134,7 @@ class City(models.Model):
 			'id': self.pk,
 			'name': self.name,
 			'locale': self.locale,
+			'mosaic_count': self.mosaics.all().count(),
 		}
 		
 		return data

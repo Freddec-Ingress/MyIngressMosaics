@@ -30,16 +30,26 @@
 			<select class="control" ng-model="country_id" ng-change="selectCountry(country_id);">
 				<option ng-repeat="country in countries" value="{{country.id}}">{{country.name}}</value>
 			</select>
+
+		</div>
+		
+		<div class="mt-normal p-normal pr-xl-none pl-xl-none" ng-show="country_id">
 			
-			<div class="mt-small" ng-show="country_id">
-				<a ng-click="refreshCountry();">Refresh</a>
+			<span class="block">Region</span>
+			
+			<select class="control" ng-model="region_id" ng-change="selectRegion(region_id);">
+				<option ng-repeat="region in regions" value="{{region.id}}">{{region.name}}</value>
+			</select>
+			
+			<div class="mt-small" ng-show="region_id">
+				<a ng-click="refreshRegion();">Refresh</a>
 			</div>
 			
 		</div>
 		
-		<div class="mt-normal p-normal pr-xl-none pl-xl-none" ng-show="regions.length > 0">
+		<div class="mt-normal p-normal pr-xl-none pl-xl-none" ng-show="cities.length > 0">
 			
-			<span class="block">Create new region</span>
+			<span class="block">Create new city</span>
 			
 			<div class="row">
 				
@@ -52,7 +62,7 @@
 				</div>
 				
 				<div class="item">
-					<button class="btn" ng-click="createRegion(country_id, name, locale);">
+					<button class="btn" ng-click="createCity(region_id, name, locale);">
 						Create
 					</button>
 				</div>
@@ -61,26 +71,26 @@
 			
 		</div>
 		
-		<div class="mt-normal p-normal pr-xl-none pl-xl-none" ng-show="regions.length > 0">
+		<div class="mt-normal p-normal pr-xl-none pl-xl-none" ng-show="cities.length > 0">
 			
-			<span class="block">Merge 2 regions</span>
+			<span class="block">Merge 2 cities</span>
 			
 			<div class="row">
 				
 				<div class="item grow">
 					<select class="control" ng-model="src_id">
-						<option ng-repeat="region in regions" value="{{region.id}}">{{region.name}}</value>
+						<option ng-repeat="city in cities" value="{{city.id}}">{{city.name}}</value>
 					</select>
 				</div>
 				
 				<div class="item grow">
 					<select class="control" ng-model="dest_id">
-						<option ng-repeat="region in regions" value="{{region.id}}">{{region.name}}</value>
+						<option ng-repeat="city in cities" value="{{city.id}}">{{city.name}}</value>
 					</select>
 				</div>
 				
 				<div class="item">
-					<button class="btn" ng-click="mergeRegions(src_id, dest_id);">
+					<button class="btn" ng-click="mergeCities(src_id, dest_id);">
 						Merge
 					</button>
 				</div>
@@ -89,32 +99,32 @@
 			
 		</div>
 		
-		<div class="mt-normal p-normal pr-xl-none pl-xl-none" ng-show="regions.length > 0">
+		<div class="mt-normal p-normal pr-xl-none pl-xl-none" ng-show="cities.length > 0">
 			
-			<span class="block">Manage regions</span>
+			<span class="block">Manage cities</span>
 			
-			<div class="row" ng-repeat="region in regions">
+			<div class="row" ng-repeat="city in cities">
 				
 				<div class="item grow">
-					<input class="control" placeholder="name" ng-model="new_name" ng-init="new_name = region.name;">
+					<input class="control" placeholder="name" ng-model="new_name" ng-init="new_name = city.name;">
 				</div>
 				
 				<div class="item grow">
-					<input class="control" placeholder="locale" ng-model="new_locale" ng-init="new_locale = region.locale;">
+					<input class="control" placeholder="locale" ng-model="new_locale" ng-init="new_locale = city.locale;">
 				</div>
 				
 				<div class="item">
-					<button class="btn" ng-click="updateRegion(region.id, new_name, new_locale);">
+					<button class="btn" ng-click="updateCity(city.id, new_name, new_locale);">
 						Update
 					</button>
 				</div>
 				
 				<div class="item self-center text-center" style="width:40px;">
-					<span ng-class="{'color-danger':region.city_count < 1}">{{region.city_count}}</span>
+					<span ng-class="{'color-danger':city.mosaic_count < 1}">{{city.mosaic_count}}</span>
 				</div>
 				
 				<div class="item">
-					<button class="btn btn-danger" ng-click="deleteRegion(region.id);">
+					<button class="btn btn-danger" ng-click="deleteCity(city.id);">
 						Delete
 					</button>
 				</div>

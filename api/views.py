@@ -1251,7 +1251,7 @@ def city_getListFromCountryRegion(request):
 	
 	data = { 'cities': [], }
 	
-	results = City.objects.filter(region__pk=request.data['region_id'])
+	results = City.objects.filter(region__pk=request.data['region_id']).order_by('name')
 	for item in results:
 		data['cities'].append(item.serialize())
 	
@@ -1264,7 +1264,7 @@ def city_getListFromCountryRegion(request):
 @permission_classes((IsAuthenticated, ))
 def city_create(request):
 	
-	item = City(country__pk=request.data['country_id'], region__pk=request.data['region_id'], name=request.data['name'])
+	item = City(region__pk=request.data['region_id'], name=request.data['name'], locale=request.data['locale'])
 	item.save()
 	
 	data = { 'city': item.serialize(), }

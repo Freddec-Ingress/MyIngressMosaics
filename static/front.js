@@ -2957,15 +2957,11 @@ angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($
     	$scope.loaded = true;
 	});
 });
-angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($scope, API) {
+angular.module('FrontModule.controllers').controller('AdmCityCtrl', function($scope, API) {
 	
 	/* Country management */
 	
-	var selected_country_id = null;
-	
 	$scope.selectCountry = function(country_id) {
-	    
-	    selected_country_id = country_id;
 	    
         $scope.regions = [];
         
@@ -2976,46 +2972,63 @@ angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($
         });
 	}
 	
-	$scope.refreshCountry = function() {
-	    
-	    $scope.selectCountry(selected_country_id);
-	}
-	
 	/* Region management */
 	
-	$scope.createRegion = function(country_id, name, locale) {
+	var selected_region_id = null;
+	
+	$scope.selectRegion = function(region_id) {
 	    
-        var data = { 'country_id':country_id, 'name':name, 'locale':locale };
-        API.sendRequest('/api/region/create/', 'POST', {}, data).then(function(response) {
+	    selected_region_id = region_id;
+	    
+        $scope.cities = [];
+        
+        var data = { 'region_id':region_id };
+        API.sendRequest('/api/city/list/', 'POST', {}, data).then(function(response) {
             
-            $scope.refreshCountry();
+            $scope.cities = response.cities;
         });
 	}
 	
-	$scope.mergeRegions = function(src_id, dest_id) {
+	$scope.refreshRegion = function() {
+	    
+	    $scope.selectRegion(selected_region_id);
+	}
+	
+	/* City management */
+	
+	$scope.createCity = function(region_id, name, locale) {
+	    
+        var data = { 'region_id':region_id, 'name':name, 'locale':locale };
+        API.sendRequest('/api/city/create/', 'POST', {}, data).then(function(response) {
+            
+            $scope.refreshRegion();
+        });
+	}
+	
+	$scope.mergeCities = function(src_id, dest_id) {
 	    
         var data = { 'src_id':src_id, 'dest_id':dest_id };
-        API.sendRequest('/api/region/move/', 'POST', {}, data).then(function(response) {
+        API.sendRequest('/api/city/move/', 'POST', {}, data).then(function(response) {
             
-            $scope.refreshCountry();
+            $scope.refreshRegion();
         });
 	}
 	
-	$scope.updateRegion = function(region_id, new_name, new_locale) {
+	$scope.updateCity = function(city_id, new_name, new_locale) {
 	    
-        var data = { 'id':region_id, 'new_name':new_name, 'new_locale':new_locale };
-        API.sendRequest('/api/region/update/', 'POST', {}, data).then(function(response) {
+        var data = { 'id':city_id, 'new_name':new_name, 'new_locale':new_locale };
+        API.sendRequest('/api/city/update/', 'POST', {}, data).then(function(response) {
             
-            $scope.refreshCountry();
+            $scope.refreshRegion();
         });
 	}
 	
-	$scope.deleteRegion = function(region_id) {
+	$scope.deleteCity = function(city_id) {
 	    
-        var data = { 'id':region_id };
-        API.sendRequest('/api/region/delete/', 'POST', {}, data).then(function(response) {
+        var data = { 'id':city_id };
+        API.sendRequest('/api/city/delete/', 'POST', {}, data).then(function(response) {
             
-            $scope.refreshCountry();
+            $scope.refreshRegion();
         });
 	}
 	
