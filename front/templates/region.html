@@ -61,7 +61,7 @@
 		
 		<div class="mb-big">
 			
-			<div class="" ng-repeat="city in cities" ng-show="city.name[0] == current_index">
+			<div class="" ng-repeat="city in cities | reverse" ng-show="city.name[0] == current_index">
 				
 				<span class="block mt-big p-normal pl-xl-none pr-xl-none text-normal">{{city.name}}</span>
 				<hr>
