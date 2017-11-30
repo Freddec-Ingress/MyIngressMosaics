@@ -712,7 +712,7 @@ def data_getMosaicsByCity(request, country, name):
 	country = Country.objects.get(name=country)
 	region = Region.objects.get(country=country, name=name)
 	
-	results = City.objects.filter(region__country__name=country, region__name=name).order_by('name')
+	results = City.objects.filter(region=region).order_by('-name')
 	if (results.count() > 0):
 		
 		data = {
@@ -733,7 +733,7 @@ def data_getMosaicsByCity(request, country, name):
 			
 			data['cities'].append(city)
 	
-		data['count'] = Mosaic.objects.filter(city__region__name=name).count()
+		data['count'] = Mosaic.objects.filter(city__region=region).count()
 		
 	return Response(data, status=status.HTTP_200_OK)
 	
@@ -1251,7 +1251,7 @@ def city_getListFromCountryRegion(request):
 	
 	data = { 'cities': [], }
 	
-	results = City.objects.filter(region__pk=request.data['region_id']).order_by('-name')
+	results = City.objects.filter(region__pk=request.data['region_id']).order_by('name')
 	for item in results:
 		data['cities'].append(item.serialize())
 	
