@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block extra-head %}
+
+	<title>MIM - Administration</title>
+
+	<meta property="og:url" content="https://www.myingressmosaics.com">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="MyIngressMosaics">
+	<meta property="og:description" content="Ingress Mosaics, Banners and Mission series">
+
+{% endblock %}
+
+{% block content %}
+<div id="content" ng-controller="AdmMosaicCtrl">
+
+{% verbatim %}
+
+	<div id="loading" ng-hide="loaded">
+		<i class="item fa fa-spinner rotating"></i>
+		<span class="item">Loading page...</span>
+	</div>
+	
+	<div class="container" ng-class="{'active':loaded}">
+		
+		<div class="mt-normal p-normal pr-xl-none pl-xl-none">
+			
+			<span class="block">Ref</span>
+			
+			<input class="control" ng-model="mosaic_ref" />
+
+			<div class="mt-small">
+				<a ng-click="selectMosaic(mosaic_ref);">Refresh</a>
+			</div>
+			
+		</div>
+		
+		<div class="mt-normal p-normal pr-xl-none pl-xl-none" ng-show="mosaic">
+			
+			<span class="block">Delete this mosaic</span>
+			
+			<div class="row">
+				
+				<div class="item">
+					<button class="btn btn-danger" ng-click="deleteMosaic(mosaic);">
+						Delete
+					</button>
+				</div>
+				
+			</div>
+			
+		</div>
+		
+	</div>
+	
+{% endverbatim %}
+
+</div>
+{% endblock %}
