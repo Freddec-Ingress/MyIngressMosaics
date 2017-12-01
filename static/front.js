@@ -3215,18 +3215,18 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
         for (var mosaic of $scope.mosaics) {
         	
         	var index = $scope.mosaics.indexOf(mosaic);
-        	if (!$scope.mosaics.missions) $scope.mosaics.splice(index, 1);
+        	if (!mosaic.missions) $scope.mosaics.splice(index, 1);
         	else {
         		
-        		var count = $scope.mosaics.missions.length;
+        		var count = mosaic.missions.length;
         		if (count < 3) $scope.mosaics.splice(index, 1);
         	}
         }
         
         $scope.mosaics.sort(function(a, b) {
         	
-        	if (a.missions.length > b.missions.length) return 1;
-        	if (a.missions.length < b.missions.length) return -1;
+        	if (a.missions.length > b.missions.length) return -1;
+        	if (a.missions.length < b.missions.length) return 1;
         	
         	if (a.name > b.name) return 1;
         	if (a.name < b.name) return -1;
