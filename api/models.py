@@ -455,10 +455,10 @@ class Mission(models.Model):
 	# Admin displaying
 	
 	def __str__(self):
-		if self.name:
-			return self.title + '|' + self.name
-		else:
+		if self.title:
 			return self.title
+		else:
+			return ''
 
 	# Portals data
 	
