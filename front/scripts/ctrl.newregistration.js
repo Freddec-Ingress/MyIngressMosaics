@@ -247,9 +247,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 				if (results[1]) components = results[1].address_components;
 				
 				if (components) {
-					
-					console.log(components);
-					
+
 					var admin2 = null;
 					var admin3 = null;
 					

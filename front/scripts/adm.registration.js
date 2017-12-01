@@ -9,10 +9,14 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		mosaic.open = true;
 		
 		var temp = 0;
-		if ($scope.missions.length > $scope.columns) {
-			temp = $scope.columns - $scope.missions.length % $scope.columns;
-			if (temp < 0 || temp > ($scope.columns - 1)) temp = 0;
+		if (mosaic.missions.length > mosaic.columns) {
+			temp = mosaic.columns - mosaic.missions.length % mosaic.columns;
+			if (temp < 0 || temp > (mosaic.columns - 1)) temp = 0;
 		}
+		
+		mosaic.columns = '6';
+		
+		console.log(mosaic);
 		
 		mosaic.offset = new Array(temp);
 		
@@ -32,9 +36,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 				if (results[1]) components = results[1].address_components;
 				
 				if (components) {
-					
-					console.log(components);
-					
+
 					var admin2 = null;
 					var admin3 = null;
 					
@@ -203,7 +205,8 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
         	}
         }
         
-        for (var mosaic of $scope.mosaics) {
+        var temp = $scope.mosaics.slice();
+        for (var mosaic of temp) {
         	
         	var index = $scope.mosaics.indexOf(mosaic);
 

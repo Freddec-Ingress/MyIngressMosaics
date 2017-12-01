@@ -31,15 +31,134 @@
 					<div class="item grow">
 						<input type="text" class="control" ng-model="mosaic.name" />
 					</div>
-					<div class="item text-center" style="width:75px;">
+					<div class="item text-center" style="width:75px;" ng-show="!mosaic.open">
 						{{mosaic.missions.length}}
 					</div>
-					<div class="item">
+					<div class="item" ng-show="!mosaic.open">
 						<button class="btn" ng-click="openMosaic(mosaic);">
 							Open
 						</button>
 					</div>
 				</div>
+			</div>
+			
+			<div ng-if="mosaic.open">
+				
+				<div class="row" style="height:312px;">
+					
+					<div class="item grow flex-col" style="max-width:50%;">
+						
+						<span class="block">Preview</span>
+						<div class="scrollable flex align-start p-normal" style="border: 1px solid #009688; border-radius: .125rem;">
+							
+							<div class="flex grow wrap justify-center" style="padding:0 calc((6 - {{mosaic.columns}}) / 2 * 16.666667%);">
+								
+					            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.columns}});">
+					            </div>
+					            
+					            <div ng-repeat="mission in mosaic.missions | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.columns}});">
+					                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{mission.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+					            </div>
+					            
+				            </div>
+						
+						</div>
+						
+					</div>
+					
+					<div class="item grow">
+						
+						<div class="mb-normal">
+							<span class="block">Columns</span>
+							<select class="control" ng-model="mosaic.columns">
+								<option value="6">6</option>
+								<option value="5">5</option>
+								<option value="4">4</option>
+								<option value="3">3</option>
+								<option value="2">2</option>
+								<option value="1">1</option>
+							</select>
+						</div>
+						
+						<div class="mb-normal">
+							<span class="block">Type</span>
+							<select class="control" ng-model="mosaic.type">
+								<option value="sequence">sequence</option>
+								<option value="serie">serie</option>
+							</select>
+						</div>
+						
+						<div class="mb-normal">
+							<span class="block">Country (en)</span>
+							<input type="create" class="control" ng-model="mosaic.country" />
+						</div>
+						
+						<div class="mb-normal">
+							<span class="block">Region (en)</span>
+							<input type="create" class="control" ng-model="mosaic.region" />
+						</div>
+						
+						<div class="mb-normal">
+							<span class="block">City (en)</span>
+							<input type="create" class="control" ng-model="mosaic.city" />
+						</div>
+						
+					</div>
+					
+				</div>
+				
+				<div class="col mb-normal mt-normal scrollable" style="max-height:300px; height:auto;">
+					
+					<div class="flex align-center" ng-repeat="mission in mosaic.missions">
+						
+						<div class="item">
+							<button class="btn btn-danger" ng-click="excludeMission(mosaic, mission);">
+								<i class="fa fa-trash"></i>
+							</button>
+						</div>
+						
+						<div class="item">
+							<a class="btn" href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=17&pll={{mission.startLat}},{{mission.startLng}}" target="blank">
+								<i class="fa fa-external-link"></i>
+							</a>
+						</div>
+						
+						<div class="item" style="width:75px;">
+							<input type="text" class="control text-center" ng-model="mission.order" />
+						</div>
+						
+						<div class="item grow" title="{{mission.desc}}">
+							{{mission.title}}
+						</div>
+						
+						<div class="item">
+							<span ng-class="{'color-enlightened': mission.faction == 'E', 'color-resistant': mission.faction == 'R'}">
+								{{mission.creator}}
+							</span>
+						</div>
+						
+					</div>
+					
+				</div>
+				
+				<hr>
+			
+				<div class="row mt-normal mb-normal">
+					
+					<div class="item grow">
+						<button class="btn btn-danger" ng-click="excludeMosaic(mosaic);">
+							Exclude
+						</button>
+					</div>
+					
+					<div class="item">
+						<button class="btn" ng-click="createMosaic(mosaic);">
+							Create
+						</button>
+					</div>
+					
+				</div>
+				
 			</div>
 			
 			<hr>
