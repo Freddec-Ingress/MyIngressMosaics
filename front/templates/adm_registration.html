@@ -49,7 +49,7 @@
 					<div class="item grow flex-col" style="max-width:50%;">
 						
 						<span class="block">Preview</span>
-						<div class="scrollable flex align-start p-normal" style="border: 1px solid #009688; border-radius: .125rem;">
+						<div class="scrollable flex align-start" style="border: 1px solid #009688; border-radius: .125rem;">
 							
 							<div class="flex grow wrap justify-center" style="padding:0 calc((6 - {{mosaic.columns}}) / 2 * 16.666667%);">
 								
@@ -70,7 +70,7 @@
 						
 						<div class="mb-normal">
 							<span class="block">Columns</span>
-							<select class="control" ng-model="mosaic.columns">
+							<select class="control" ng-model="mosaic.columns" ng-change="computeOffsetMosaic(mosaic);">
 								<option value="6">6</option>
 								<option value="5">5</option>
 								<option value="4">4</option>
@@ -124,7 +124,7 @@
 						</div>
 						
 						<div class="item" style="width:75px;">
-							<input type="text" class="control text-center" ng-model="mission.order" />
+							<input type="text" class="control text-center" ng-model="mission.order" ng-change="reorderMosaic(mosaic);" />
 						</div>
 						
 						<div class="item grow" title="{{mission.desc}}">

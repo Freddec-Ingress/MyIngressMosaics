@@ -8,18 +8,10 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		
 		mosaic.open = true;
 		
-		var temp = 0;
-		if (mosaic.missions.length > mosaic.columns) {
-			temp = mosaic.columns - mosaic.missions.length % mosaic.columns;
-			if (temp < 0 || temp > (mosaic.columns - 1)) temp = 0;
-		}
+		$scope.computeOffsetMosaic(mosaic);
 		
 		mosaic.columns = '6';
-		
-		console.log(mosaic);
-		
-		mosaic.offset = new Array(temp);
-		
+
 		var geocoder = new google.maps.Geocoder;
 		
 		var latlng = {
@@ -119,6 +111,17 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		});
 	}
 	
+	$scope.computeOffsetMosaic = function(mosaic) {
+		
+		var temp = 0;
+		if (mosaic.missions.length > mosaic.columns) {
+			temp = mosaic.columns - mosaic.missions.length % mosaic.columns;
+			if (temp < 0 || temp > (mosaic.columns - 1)) temp = 0;
+		}
+		
+		mosaic.offset = new Array(temp);
+	}
+	
 	$scope.createMosaic = function(mosaic) {
 		
 		var data = {
@@ -146,6 +149,11 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		$scope.mosaics.splice(index, 1);
 	}
 	
+	$scope.reorderMosaic = function(mosaic) {
+		
+		mosaic.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
+	}
+	
 	/* Mission management */
 	
 	$scope.excludeMission = function(mosaic, mission) {
@@ -168,10 +176,6 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
         if (missions && missions.length > 0) {
         	
         	for (var mission of missions) {
-        		
-		    	var order = UtilsService.getOrderFromMissionName(mission.title);
-				if (order < 1) order = 0;
-				mission.order = order.toString();
 				
         		var mosaic = null;
         		
@@ -202,6 +206,10 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
         		}
         		
         		mosaic.missions.push(mission);
+        		
+		    	var order = UtilsService.getOrderFromMissionName(mission.title);
+				if (order < 1) order = mosaic.missions.indexOf(mission) + 1;
+				mission.order = order.toString();
         	}
         }
         
@@ -212,6 +220,8 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 
     		var count = mosaic.missions.length;
     		if (count < 3) $scope.mosaics.splice(index, 1);
+    		
+    		$scope.reorderMosaic(mosaic);
         }
         
         $scope.mosaics.sort(function(a, b) {
