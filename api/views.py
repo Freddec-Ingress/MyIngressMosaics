@@ -807,7 +807,7 @@ def data_getMosaicsOfCity(request, country, region, name):
 @permission_classes((AllowAny, ))
 def data_searchForMissions(request):
 	
-	results = Mission.objects.filter(mosaic__isnull=True, registerer=request.user, admin=True).annotate(count=Count('name')).order_by('-count').filter(count__gte=3)
+	results = Mission.objects.filter(mosaic__isnull=True, registerer=request.user, admin=True).annotate(count=Count('name')).order_by('name')
 	if (results.count() > 0):
 
 		data = { 'missions': [], }
