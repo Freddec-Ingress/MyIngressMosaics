@@ -3050,6 +3050,8 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 	
 	/* Mosaic management */
 	
+	$scope.mosaics = [];
+	
 	$scope.openMosaic = function(mosaic) {
 		
 		mosaic.open = true;
