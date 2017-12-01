@@ -1,4 +1,4 @@
-angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', function($scope, API, UtilsService) {
+angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', function($scope, $window, API, UtilsService) {
 	
 	/* Mosaic management */
 	
@@ -138,6 +138,8 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 			
 			var index = $scope.mosaics.indexOf(mosaic);
 			$scope.mosaics.splice(index, 1);
+			
+			$window.open('https://www.myingressmosaics.com/mosaic/' + response);
 		});
 	}
 	
