@@ -25,18 +25,20 @@
 		
 		<div class="p-normal pr-xl-none pl-xl-none mt-normal" ng-repeat="mosaic in mosaics">
 			
-			<span class="block">Name</span>
-			<div class="row align-center">
-				<div class="item grow">
-					<input type="text" class="control" ng-model="mosaic.name" />
-				</div>
-				<div class="item text-center" style="width:75px;">
-					{{mosaic.missions.length}}
-				</div>
-				<div class="item">
-					<button class="btn" ng-click="openMosaic(mosaic);">
-						Open
-					</button>
+			<div class="mb-normal">
+				<span class="block">Name</span>
+				<div class="row align-center">
+					<div class="item grow">
+						<input type="text" class="control" ng-model="mosaic.name" />
+					</div>
+					<div class="item text-center" style="width:75px;">
+						{{mosaic.missions.length}}
+					</div>
+					<div class="item">
+						<button class="btn" ng-click="openMosaic(mosaic);">
+							Open
+						</button>
+					</div>
 				</div>
 			</div>
 			
