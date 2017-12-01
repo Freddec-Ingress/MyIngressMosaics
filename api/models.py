@@ -618,6 +618,7 @@ class Mission(models.Model):
 			'desc': self.desc,
 			'order': self.order,
 			'title': self.title,
+			'name': self.name,
 			'image': self.image,
 			'creator': self.creator,
 			'faction': self.faction,
