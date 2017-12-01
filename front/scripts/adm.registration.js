@@ -117,6 +117,45 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		});
 	}
 	
+	$scope.createMosaic = function(mosaic) {
+		
+		var data = {
+			'country': mosaic.country,
+			'region': mosaic.region,
+			'city': mosaic.city,
+			'columns': mosaic.columns,
+			'type': mosaic.type,
+			'title': mosaic.name,
+			'missions': mosaic.missions,
+		};
+		
+		API.sendRequest('/api/mosaic/create/', 'POST', {}, data).then(function(response) {
+			
+			var index = $scope.mosaics.indexOf(mosaic);
+			$scope.mosaics.splice(index, 1);
+		});
+	}
+	
+	$scope.excludeMosaic = function(mosaic) {
+		
+		for (var mission of mosaic.missions) $scope.excludeMission(mosaic, mission);
+		
+		var index = $scope.mosaics.indexOf(mosaic);
+		$scope.mosaics.splice(index, 1);
+	}
+	
+	/* Mission management */
+	
+	$scope.excludeMission = function(mosaic, mission) {
+		
+		var data = { 'ref':mission.ref };
+		API.sendRequest('/api/mission/exclude/', 'POST', {}, data).then(function(response) {
+			
+			var index = mosaic.missions.indexOf(mission);
+			mosaic.missions.splice(index, 1);
+		});
+	}
+	
 	/* Page loading */
 	
 	API.sendRequest('/api/missions/', 'POST').then(function(response) {
@@ -167,12 +206,9 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
         for (var mosaic of $scope.mosaics) {
         	
         	var index = $scope.mosaics.indexOf(mosaic);
-        	if (!mosaic.missions) $scope.mosaics.splice(index, 1);
-        	else {
-        		
-        		var count = mosaic.missions.length;
-        		if (count < 3) $scope.mosaics.splice(index, 1);
-        	}
+
+    		var count = mosaic.missions.length;
+    		if (count < 3) $scope.mosaics.splice(index, 1);
         }
         
         $scope.mosaics.sort(function(a, b) {
