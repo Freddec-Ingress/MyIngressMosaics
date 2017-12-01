@@ -265,8 +265,6 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 					if (!$scope.city_name && admin2) $scope.city_name = admin2;
 					if (!$scope.city_name && admin3) $scope.city_name = admin3;
 					
-					console.log($scope.city_name);
-					
 					/* Country */
 					
 					API.sendRequest('/api/country/list/', 'POST').then(function(response) {

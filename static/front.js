@@ -3048,6 +3048,12 @@ angular.module('FrontModule.controllers').controller('AdmCityCtrl', function($sc
     	$scope.loaded = true;
 	});
 });
+angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', function($scope, API) {
+	
+	/* Page loading */
+	
+    $scope.loaded = true;
+});
 angular.module('FrontModule', ['satellizer', 'ngCookies', 'toastr',
 							   'FrontModule.services', 'FrontModule.controllers', 'FrontModule.directives', ]);
 

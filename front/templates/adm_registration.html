@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block extra-head %}
+
+	<title>MIM - Administration</title>
+
+	<meta property="og:url" content="https://www.myingressmosaics.com">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="MyIngressMosaics">
+	<meta property="og:description" content="Ingress Mosaics, Banners and Mission series">
+
+{% endblock %}
+
+{% block content %}
+<div id="content" ng-controller="AdmRegistationCtrl">
+
+{% verbatim %}
+
+	<div id="loading" ng-hide="loaded">
+		<i class="item fa fa-spinner rotating"></i>
+		<span class="item">Loading page...</span>
+	</div>
+	
+	<div class="container" ng-class="{'active':loaded}">
+		
+		<div class="p-normal pr-xl-none pl-xl-none mt-normal" ng-repeat="mosaic in mosaics">
+			
+			<span class="block">Name</span>
+			<div class="row align-center">
+				<div class="item grow">
+					<input type="text" class="control" ng-model="mosaic.name" />
+				</div>
+				<div class="item text-center" style="width:75px;">
+					{{mosaic.missions.length}}
+				</div>
+				<div class="item">
+					<button class="btn" ng-click="openMosaic(mosaic);">
+						Open
+					</button>
+				</div>
+			</div>
+			
+			<hr>
+			
+		</div>
+		
+	</div>
+	
+{% endverbatim %}
+
+</div>
+{% endblock %}

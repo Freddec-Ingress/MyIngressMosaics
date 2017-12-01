@@ -172,3 +172,10 @@ def adm_city(request):
 	
 	context = {}
 	return render(request, 'adm_city.html', context)
+
+
+
+def adm_registration(request):	
+	
+	context = {}
+	return render(request, 'adm_registration.html', context)
