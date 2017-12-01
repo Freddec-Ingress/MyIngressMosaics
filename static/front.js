@@ -3177,7 +3177,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
         	for (var mission of missions) {
         		
 		    	var order = UtilsService.getOrderFromMissionName(mission.title);
-				if (order < 1) order = $scope.selected.indexOf(mission) + 1;
+				if (order < 1) order = 0;
 				mission.order = order.toString();
 				
         		var mosaic = null;
