@@ -807,9 +807,7 @@ def data_getMosaicsOfCity(request, country, region, name):
 @permission_classes((AllowAny, ))
 def data_searchForMissions(request):
 	
-	results = Mission.objects.filter(mosaic__isnull=True, registerer='FIiptart').update(registerer='RivmanBX')
-	
-	results = Mission.objects.filter(mosaic__isnull=True, registerer=request.user, admin=True)
+	results = Mission.objects.filter(mosaic__isnull=True, registerer=request.user, admin=True).annotate(count=Count('name')).order_by('-count').filter(count__gte=3)
 	if (results.count() > 0):
 
 		data = { 'missions': [], }
@@ -818,7 +816,7 @@ def data_searchForMissions(request):
 
 		if request.user.is_superuser:
 			Mission.objects.filter(mosaic__isnull=True, registerer__isnull=True).delete()
-
+		
 	else:
 		data = { 'missions': None, }
 	
