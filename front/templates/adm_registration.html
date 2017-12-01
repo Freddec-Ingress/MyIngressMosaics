@@ -124,7 +124,7 @@
 						</div>
 						
 						<div class="item" style="width:75px;">
-							<input type="text" class="control text-center" ng-model="mission.order" ng-change="reorderMosaic(mosaic);" />
+							<input type="text" class="control text-center" ng-model="mission.order" ng-blur="reorderMosaic(mosaic);" />
 						</div>
 						
 						<div class="item grow" title="{{mission.desc}}">
