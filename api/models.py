@@ -246,6 +246,8 @@ class Mosaic(models.Model):
 		file = default_storage.open(name, 'w')
 		file.write(imgByteArr)
 		file.close()
+		
+		return default_storage.path(name)
 	
 	# Internal data computing
 

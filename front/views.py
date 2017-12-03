@@ -60,9 +60,7 @@ def sitemap(request):
 def preview(request, ref):
 
 	mosaic = Mosaic.objects.get(ref=ref)
-	mosaic.generatePreview();
-
-	return redirect('/staticfiles/preview/' + ref + '.png')
+	return redirect(mosaic.generatePreview())
 	
 	
 	
