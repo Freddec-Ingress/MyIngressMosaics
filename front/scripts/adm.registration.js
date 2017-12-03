@@ -245,9 +245,14 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
         	var index = $scope.mosaics.indexOf(mosaic);
 
     		var count = mosaic.missions.length;
-    		if (count < 3) $scope.mosaics.splice(index, 1);
-    		
-    		$scope.reorderMosaic(mosaic);
+    		if (count < 3) {
+    			
+    			$scope.excludeMosaic(mosaic);
+    			$scope.mosaics.splice(index, 1);
+    		}
+    		else {
+    			$scope.reorderMosaic(mosaic);
+    		}
         }
         
         $scope.mosaics.sort(function(a, b) {
