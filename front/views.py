@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django.db.models import Q
 
@@ -57,6 +57,15 @@ def sitemap(request):
 
 
 
+def preview(request, ref):
+
+	mosaic = Mosaic.objects.get(ref=ref)
+	mosaic.generatePreview();
+
+	return redirect('/staticfiles/preview/' + ref + '.png')
+	
+	
+	
 def mosaic(request, ref):
 
 	mosaic = None

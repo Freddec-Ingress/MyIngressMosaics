@@ -242,7 +242,7 @@ class Mosaic(models.Model):
 		imgByteArr = imgByteArr.getvalue()
 	
 		from django.core.files.storage import default_storage
-		name = '' + self.ref + '.png'
+		name = '/preview/' + self.ref + '.png'
 		file = default_storage.open(name, 'w')
 		file.write(imgByteArr)
 		file.close()

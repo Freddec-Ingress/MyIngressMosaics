@@ -19,12 +19,10 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 SITE_ID = 1
 
-DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
-GS_BUCKET_NAME = 'myingressmosaics-previews'
-GS_AUTO_CREATE_ACL = 'publicRead'
-
-os.environ.setdefault('GOOGLE_APPLICATION_CREDENTIALS', os.path.join(BASE_DIR, 'server/MyIngressMosaics-31aa0035c150.json'))
+MEDIA_URL = '/preview/'
+MEDIA_ROOT = os.path.join(BASE_DIR, '/static/preview')
 
 INSTALLED_APPS = [
     'django.contrib.admin',

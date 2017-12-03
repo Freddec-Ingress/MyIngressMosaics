@@ -11,6 +11,7 @@ urlpatterns = [
 	url(r'^robots.txt$', lambda r: HttpResponse('User-agent: *\nDisallow: /admin/\nDisallow: /api/', content_type='text/plain')),
 	url(r'^sitemap.xml$', views.sitemap),
 
+	url(r'^mosaic/(?P<ref>\w+)/preview',		views.preview),
 	url(r'^mosaic/(?P<ref>\w+)',				views.mosaic),
 	
 	url(r'^registration',						views.registration),
