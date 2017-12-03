@@ -243,9 +243,7 @@ class Mosaic(models.Model):
 	
 		from django.core.files.storage import default_storage
 		name = '' + self.ref + '.png'
-		file = default_storage.open(name, 'w')
-		file.write(imgByteArr)
-		file.close()
+		file = default_storage.save(name, imgByteArr)
 		
 		return default_storage.path(name)
 	
