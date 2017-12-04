@@ -226,10 +226,10 @@
 			<div class="flex justify-center">
 				<div class="flex wrap">
 					<div class="p-normal">
-						<div class="row">
+						<div class="row align-center">
 							
 							<div class="item self-center text-right" style="min-width:150px; width:150px;">
-								Number of columns
+								Columns
 							</div>
 							
 							<div class="item">
@@ -243,44 +243,18 @@
 								</select>
 							</div>
 							
-						</div>
-					</div>
-					
-					<div class="p-normal">
-						<div class="row">
-							
-							<div class="item self-center text-right" style="min-width:150px; width:150px;">
-								For missing missions, indicate here order
-							</div>
-							
-							<div class="item" style="min-width:64px; width:64px;">
-								<input type="text" class="control" ng-model="fakeorder" />
+							<div class="item">
+								<a ng-click="reorderAsc();">Order Asc</a>
 							</div>
 							
 							<div class="item">
-								<button class="btn" ng-click="addFake(fakeorder);">
-									Add
-								</button>
+								<a ng-click="reorderDesc();">Order Desc</a>
 							</div>
 							
 						</div>
 					</div>
 				</div>
 			</div>
-			
-			<div class="flex justify-center">
-				
-				<div class="item">
-					<a ng-click="reorderAsc();">Order Asc</a>
-				</div>
-				
-				<div class="item">
-					<a ng-click="reorderDesc();">Order Desc</a>
-				</div>
-				
-			</div>
-			
-			<hr>
 			
 			<div class="scrollable flex p-normal align-start">
 				
