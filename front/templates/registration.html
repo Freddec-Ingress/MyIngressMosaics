@@ -223,39 +223,35 @@
 		
 		<div class="grow flex-col" ng-show="current_step == 2 && !creating">
 			
-			<div class="flex justify-center">
-				<div class="flex wrap">
-					<div class="p-normal">
-						<div class="row align-center">
-							
-							<div class="item self-center text-right" style="min-width:150px; width:150px;">
-								Columns
-							</div>
-							
-							<div class="item">
-								<select class="control" ng-model="columns" ng-change="computeOffset();">
-									<option value="6">6</option>
-									<option value="5">5</option>
-									<option value="4">4</option>
-									<option value="3">3</option>
-									<option value="2">2</option>
-									<option value="1">1</option>
-								</select>
-							</div>
-							
-							<div class="item">
-								<a ng-click="reorderAsc();">Order Asc</a>
-							</div>
-							
-							<div class="item">
-								<a ng-click="reorderDesc();">Order Desc</a>
-							</div>
-							
-						</div>
+			<div class="p-normal">
+				<div class="row align-center justify-center">
+					
+					<div class="item self-center text-right" style="min-width:150px; width:150px;">
+						Columns
 					</div>
+					
+					<div class="item">
+						<select class="control" ng-model="columns" ng-change="computeOffset();">
+							<option value="6">6</option>
+							<option value="5">5</option>
+							<option value="4">4</option>
+							<option value="3">3</option>
+							<option value="2">2</option>
+							<option value="1">1</option>
+						</select>
+					</div>
+					
+					<div class="item">
+						<a ng-click="reorderAsc();">Order Asc</a>
+					</div>
+					
+					<div class="item">
+						<a ng-click="reorderDesc();">Order Desc</a>
+					</div>
+					
 				</div>
 			</div>
-			
+
 			<div class="scrollable flex p-normal align-start">
 				
 				<div class="flex grow wrap justify-center" style="padding:0 calc((6 - {{columns}}) / 2 * 16.666667%);">
