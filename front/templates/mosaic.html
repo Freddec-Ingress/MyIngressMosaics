@@ -263,9 +263,9 @@
 					
 				</div>
 				
-				<div class="scrollable flex align-start justify-center pr-normal pl-normal mb-normal pr-xl-none pl-xl-none">
+				<div class="flex justify-center align-center">
 
-					<div class="flex wrap justify-center" style="max-width:420px; padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
+					<div class="item flex justify-center wrap" style="max-width:420px; padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
 						
 			            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
 			            </div>
@@ -278,67 +278,56 @@
 		            
 				</div>
 				
-			</div>
-			
-			<div class="tab" ng-show="current_tab == 2">
-				
-				<div class="scrollable p-normal pb-none mb-normal">
+				<div class="flex">
 					
-					<div class="mb-normal">
+					<div class="item">
 						<span class="color-muted">Details</span>
 					</div>
 					
-					<div class="col ml-big mb-normal">
-						
-						<div class="flex">
-							<flag class="item" country="mosaic.city.region.country.name"></flag>
-							<span class="item">{{mosaic.city.name}} <a class="ml-normal" href="/world/{{mosaic.city.region.country.name}}/{{mosaic.city.region.name}}">{{mosaic.city.region.name}}</a></span>
-						</div>
-							
-						<div class="item ">
-							<span>{{mosaic.missions.length}} missions</span>
-							<span ng-show="mosaic.type=='sequence'">&nbsp;in sequence</span>
-							<span ng-show="mosaic.type=='serie'">&nbsp;in serie</span>
-						</div>
-							
-						<div class="item ">
-							<span>{{mosaic.portals}} waypoints, {{mosaic.uniques}} uniques</span>
-						</div>
-							
-						<div class="item " ng-show="mosaic.type=='sequence'">
-							<span>{{mosaic.distance | number:2}} km</span>
-						</div>
-						
+				</div>
+				
+				<div class="flex ml-big">
+					
+					<div class="item ">
+						<span>{{mosaic.portals}} waypoints, {{mosaic.uniques}} uniques</span>
 					</div>
 					
-					<div class="mb-normal">
-						<span class="color-muted">Creators</span>
+				</div>
+				
+				<div class="flex ml-big">
+						
+					<div class="item " ng-show="mosaic.type=='sequence'">
+						<span>{{mosaic.distance | number:2}} km</span>
 					</div>
 					
-					<div class="row wrap ml-big mb-normal">
-						
-						<div class="item" ng-repeat="creator in mosaic.creators">
-							<span ng-class="{'color-enlightened': creator.faction == 'E', 'color-resistant': creator.faction == 'R'}">
-								{{creator.name}}
-							</span>
+				</div>
+				
+				<div class="mb-normal">
+					<span class="color-muted">Creators</span>
+				</div>
+				
+				<div class="row wrap ml-big mb-normal">
+					
+					<div class="item" ng-repeat="creator in mosaic.creators">
+						<span ng-class="{'color-enlightened': creator.faction == 'E', 'color-resistant': creator.faction == 'R'}">
+							{{creator.name}}
+						</span>
+					</div>
+					
+				</div>
+				
+				<div class="mb-normal">
+					<span class="color-muted">Missions</span>
+				</div>
+				
+				<div class="row wrap">
+					
+					<div class="flex grow wrap" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
+						<div class="item" ng-repeat="mission in mosaic.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.cols}});" ng-click="displayMissionDetails(mission);">
+							<button class="btn" style="padding:0; width:100%; font-size:smaller;" ng-class="{'btn-danger':!mission.creator && mission.portals.length < 1}">
+								{{mosaic.missions.length - $index}}
+							</button>
 						</div>
-						
-					</div>
-					
-					<div class="mb-normal">
-						<span class="color-muted">Missions</span>
-					</div>
-					
-					<div class="row wrap">
-						
-						<div class="flex grow wrap" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
-							<div class="item" ng-repeat="mission in mosaic.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.cols}});" ng-click="displayMissionDetails(mission);">
-								<button class="btn" style="padding:0; width:100%; font-size:smaller;" ng-class="{'btn-danger':!mission.creator && mission.portals.length < 1}">
-									{{mosaic.missions.length - $index}}
-								</button>
-							</div>
-						</div>
-						
 					</div>
 					
 				</div>
