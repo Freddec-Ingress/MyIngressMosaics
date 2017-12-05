@@ -79,8 +79,8 @@
 						
 					</div>
 					
-					<div class="row">
-						<div class="item">
+					<div class="row mb-normal">
+						<div class="item grow">
 							<hr />
 						</div>
 					</div>
@@ -88,7 +88,7 @@
 					<ul class="flex-col">
 						
 						<li class="flex" ng-repeat="portal in mission_selected.portals">
-							<div class="noshrink color-muted text-right" style="width:40px;">
+							<div class="pt-small noshrink color-muted text-right" style="width:40px;">
 								#{{$index + 1}}.
 							</div>
 							<div class="flex-col">
@@ -100,7 +100,7 @@
 									<span class="color-dark" ng-show="portal.action==7">View this Field Trip Waypoint</span>
 									<span class="color-dark" ng-show="portal.action==8">Enter the Passphrase</span>
 								</div>
-								<div class="flex">
+								<div class="flex mb-normal">
 									<div class="item">
 				                        <a class="btn btn-mini" href="https://www.ingress.com/intel?ll={{portal.startLat}},{{portal.startLng}}&z=17&pll={{portal.startLat}},{{portal.startLng}}" target="blank">
 				                            <i class="fa fa-fw fa-external-link"></i>
