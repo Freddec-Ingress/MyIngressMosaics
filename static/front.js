@@ -391,6 +391,17 @@ angular.module('FrontModule.services').service('UtilsService', function() {
 	
 	var service = {
 		
+		sortMissionsByTitleAsc: function(a, b) {
+			
+			if (a.title < b.title)
+				return -1;
+				
+			if (a.title > b.title)
+				return 1;
+			
+			return 0;
+		},
+
 		sortMissionsByCreatorTitleAsc: function(a, b) {
 			
 			if (a.creator < b.creator)
@@ -2501,9 +2512,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	
 	$scope.reorderAlphaMosaic = function() {
 		
-		$scope.selected.sort(function(a, b) {
-			return b.title - a.title;
-		});
+		$scope.selected.sort(UtilsService.sortMissionsByTitleAsc);
 		
 		var index = 0;
 		for (var m of $scope.selected) {
