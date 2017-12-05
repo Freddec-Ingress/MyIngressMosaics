@@ -79,19 +79,23 @@
 						
 					</div>
 					
-					<hr class="mb-normal">
+					<div class="row">
+						<div class="item">
+							<hr />
+						</div>
+					</div>
 					
-					<ul class="grid col">
+					<ul class="flex-col">
 						
-						<li class="item row" ng-repeat="portal in mission_selected.portals">
+						<li class="row" ng-repeat="portal in mission_selected.portals">
 							<div class="item noshrink color-muted text-right" style="width:40px;">
 								#{{$index + 1}}.
 							</div>
-							<div class="item">
-								<div class="color-light">
+							<div class="flex-col">
+								<div class="item color-light">
 									{{portal.title}}
 								</div>
-								<div class="color-dark">
+								<div class="item color-dark">
 									<span ng-show="portal.action==1">Hack this Portal</span>
 									<span ng-show="portal.action==2">Capture or Upgrade Portal</span>
 									<span ng-show="portal.action==7">View this Field Trip Waypoint</span>
