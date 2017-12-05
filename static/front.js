@@ -2499,10 +2499,10 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
 	}
 	
-	$scope.reorderAlphaMosaic = function(mosaic) {
+	$scope.reorderAlphaMosaic = function() {
 		
 		$scope.selected.sort(function(a, b) {
-			return a.title - b.title;
+			return b.title - a.title;
 		});
 		
 		var index = 0;
