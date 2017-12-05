@@ -71,8 +71,6 @@
 						
 					</div>
 					
-					<hr class="mb-normal">
-					
 					<div class="row justify-center mb-normal">
 						
 						<div class="item">
@@ -116,6 +114,25 @@
 									<span ng-show="portal.action==2">Capture or Upgrade Portal</span>
 									<span ng-show="portal.action==7">View this Field Trip Waypoint</span>
 									<span ng-show="portal.action==8">Enter the Passphrase</span>
+								</div>
+								<div class="flex">
+									<div class="item">
+				                        <a class="btn btn-mini" href="https://www.ingress.com/intel?ll={{portal.startLat}},{{portal.startLng}}&z=17&pll={{portal.startLat}},{{portal.startLng}}" target="blank">
+				                            <i class="fa fa-fw fa-external-link"></i>
+				                        </a>
+									</div>
+									
+									<div class="item">
+				                        <a class="btn btn-mini" href="https://www.google.com/maps/dir//{{portal.startLat}},{{portal.startLng}}" target="blank">
+				                            <i class="fa fa-fw fa-map-marker"></i>
+				                        </a>
+									</div>
+									
+									<div class="item">
+				                        <a class="btn btn-mini" href="https://waze.com/ul?ll={{portal.startLat}},{{portal.startLng}}" target="blank">
+				                            <img src="/static/img/waze.png">
+				                        </a>
+									</div>
 								</div>
 							</div>
 						</li>
