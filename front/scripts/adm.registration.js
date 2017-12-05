@@ -4,6 +4,15 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 	
 	$scope.mosaics = [];
 	
+	$scope.isMissionCountValid = function(mosaic) {
+		
+		var count = mosaic.missions.length;
+		var rest = count % 6;
+		
+		if (rest == 0) return true;
+		return false;
+	}
+	
 	$scope.openMosaic = function(mosaic) {
 		
 		mosaic.open = true;

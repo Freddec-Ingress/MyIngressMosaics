@@ -32,7 +32,7 @@
 						<input type="text" class="control" ng-model="mosaic.name" />
 					</div>
 					<div class="item text-center" style="width:75px;" ng-show="!mosaic.open">
-						{{mosaic.missions.length}}
+						<span ng-class="{'color-danger':isMissionCountValid(mosaic)}">{{mosaic.missions.length}}</span>
 					</div>
 					<div class="item" ng-show="!mosaic.open">
 						<button class="btn" ng-click="openMosaic(mosaic);">
@@ -110,15 +110,23 @@
 				<div class="row mt-normal">
 					
 					<div class="item">
-						<span class="color-muted">{{mosaic.missions.length}} missions</span>
+						<span class="color-normal">{{mosaic.missions.length}} missions</span>
 					</div>
 						
 					<div class="item">
 						<a ng-click="reorderAscMosaic(mosaic);">Order Asc</a>
 					</div>
 					
-					<div class="item">
+					<div class="item grow">
 						<a ng-click="reorderDescMosaic(mosaic);">Order Desc</a>
+					</div>
+						
+					<div class="item">
+						<a href="https://ingressmosaik.com/search?f={{mosaic.name}}" target="blank">IM Name</a>
+					</div>
+						 
+					<div class="item">
+						<a href="https://ingressmosaik.com/search?f={{mosaic.missions[0].creator}}" target="blank">IM author</a>
 					</div>
 					
 				</div>
