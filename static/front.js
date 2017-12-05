@@ -3425,6 +3425,8 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 	
 	$scope.createMosaic = function(mosaic) {
 		
+		$scope.reorderAscMosaic(mosaic);
+		
 		var data = {
 			'country': mosaic.country,
 			'region': mosaic.region,
@@ -3440,7 +3442,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 			var index = $scope.mosaics.indexOf(mosaic);
 			$scope.mosaics.splice(index, 1);
 			
-			$window.open('https://www.myingressmosaics.com/mosaic/' + response);
+			$scope.openMosaic($scope.mosaics[index]);
 		});
 	}
 	
