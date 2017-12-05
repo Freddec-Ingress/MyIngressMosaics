@@ -212,7 +212,7 @@
 				
 			</div>
 			
-			<div ng-show="current_tab == 1">
+			<div class="flex-col align-center" ng-show="current_tab == 1">
 			
 				<div class="text-center mt-big">
 					<span class="text-big color-light">
@@ -270,9 +270,10 @@
 			            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
 			            </div>
 			            
-			            <div ng-repeat="m in mosaic.missions | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+			            <a ng-repeat="m in mosaic.missions | reverse" ng-click="displayMissionDetails(mission);" class="block mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
 			                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-			            </div>
+			                <div style="position:aboslute;">{{m.order}}</div>
+			            </a>
 			            
 		            </div>
 		            
@@ -320,14 +321,6 @@
 						<span ng-class="{'color-enlightened': creator.faction == 'E', 'color-resistant': creator.faction == 'R'}">
 							{{creator.name}}
 						</span>
-					</div>
-					
-				</div>
-				
-				<div class="flex">
-					
-					<div class="item">
-						<span class="color-muted">Missions</span>
 					</div>
 					
 				</div>
