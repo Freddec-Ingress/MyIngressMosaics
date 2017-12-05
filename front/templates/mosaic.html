@@ -212,7 +212,7 @@
 				
 			</div>
 			
-			<div class="tab" ng-show="current_tab == 1">
+			<div ng-show="current_tab == 1">
 			
 				<div class="text-center mt-big">
 					<span class="text-big color-light">
@@ -263,7 +263,7 @@
 					
 				</div>
 				
-				<div class="flex justify-center align-center">
+				<div class="item flex justify-center align-center">
 
 					<div class="item flex justify-center wrap" style="max-width:420px; padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
 						
@@ -289,7 +289,11 @@
 				<div class="flex ml-big">
 					
 					<div class="item ">
-						<span>{{mosaic.portals}} waypoints, {{mosaic.uniques}} uniques</span>
+						{{mosaic.portals}} waypoints
+					</div>
+					
+					<div class="item ">
+						{{mosaic.uniques}} uniques
 					</div>
 					
 				</div>
@@ -302,11 +306,15 @@
 					
 				</div>
 				
-				<div class="mb-normal">
-					<span class="color-muted">Creators</span>
+				<div class="flex">
+					
+					<div class="item">
+						<span class="color-muted">Creators</span>
+					</div>
+					
 				</div>
 				
-				<div class="row wrap ml-big mb-normal">
+				<div class="flex wrap ml-big">
 					
 					<div class="item" ng-repeat="creator in mosaic.creators">
 						<span ng-class="{'color-enlightened': creator.faction == 'E', 'color-resistant': creator.faction == 'R'}">
@@ -316,8 +324,12 @@
 					
 				</div>
 				
-				<div class="mb-normal">
-					<span class="color-muted">Missions</span>
+				<div class="flex">
+					
+					<div class="item">
+						<span class="color-muted">Missions</span>
+					</div>
+					
 				</div>
 				
 				<div class="row wrap">
