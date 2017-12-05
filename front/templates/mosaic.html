@@ -87,19 +87,18 @@
 					
 					<ul class="flex-col">
 						
-						<li class="row" ng-repeat="portal in mission_selected.portals">
-							<div class="item noshrink color-muted text-right" style="width:40px;">
+						<li class="flex" ng-repeat="portal in mission_selected.portals">
+							<div class="noshrink color-muted text-right" style="width:40px;">
 								#{{$index + 1}}.
 							</div>
 							<div class="flex-col">
-								<div class="item color-light">
-									{{portal.title}}
-								</div>
-								<div class="item color-dark">
-									<span ng-show="portal.action==1">Hack this Portal</span>
-									<span ng-show="portal.action==2">Capture or Upgrade Portal</span>
-									<span ng-show="portal.action==7">View this Field Trip Waypoint</span>
-									<span ng-show="portal.action==8">Enter the Passphrase</span>
+								<div class="item">
+									<span class="color-light">{{portal.title}}</span>
+									<br />
+									<span class="color-dark" ng-show="portal.action==1">Hack this Portal</span>
+									<span class="color-dark" ng-show="portal.action==2">Capture or Upgrade Portal</span>
+									<span class="color-dark" ng-show="portal.action==7">View this Field Trip Waypoint</span>
+									<span class="color-dark" ng-show="portal.action==8">Enter the Passphrase</span>
 								</div>
 								<div class="flex">
 									<div class="item">
