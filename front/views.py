@@ -98,9 +98,9 @@ def mosaic(request, ref):
 	
 	
 	
-def registration(request):
+def registration(request, searchstring = ''):
 	
-	context = {}
+	context = { 'searchstring':searchstring }
 	return render(request, 'registration.html', context)
 	
 	

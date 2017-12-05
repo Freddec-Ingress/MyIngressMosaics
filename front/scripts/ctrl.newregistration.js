@@ -377,7 +377,12 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	
 	/* Page loading */
 
-	$scope.open_step(1);
+	$scope.init = function(text) {
 	
-	$scope.loaded = true;
+		$scope.open_step(1);
+		
+		$scope.loaded = true;
+		
+		$scope.refreshMissions(text);
+	}
 });

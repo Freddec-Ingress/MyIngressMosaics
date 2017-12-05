@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block content %}
-<div id="content" ng-controller="NewRegistrationCtrl">
+<div id="content" ng-controller="NewRegistrationCtrl" ng-init="init('{{searchstring}}');">
 
 {% verbatim %}
 
