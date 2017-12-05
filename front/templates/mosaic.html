@@ -337,7 +337,7 @@
 			
 			<div class="flex">
 				
-				<div class="item" style="height:400px;width:100%">
+				<div class="item" style="height:420px;width:100%">
 					<div id="map" style="height:100%;width:100%"></div>
 				</div>
 				
@@ -351,52 +351,56 @@
 				
 			</div>
 		
-			<div class="scrollable mb-normal">
+			<div class="flex ml-big" ng-show="mosaic.comments.length < 1">
 				
-				<div class="mt-normal text-center" ng-show="mosaic.comments.length < 1">
-					<span class="color-muted">No comment</span>
-				</div>
-				
-				<div ng-repeat="comment in mosaic.comments">
-					
-					<div class="p-normal">
-						
-						<div>
-							<span ng-class="{'color-enlightened': comment.faction == 'E', 'color-resistant': comment.faction == 'R'}">{{comment.username}}</span>
-						</div>
-						
-						<div class="mb-normal">
-							<span class="color-light">{{comment.text}}</span>
-						</div>
-						
-						<div class="row" ng-show="comment.username == user.name">
-							
-							<div class="item">
-								<button class="btn btn-mini" ng-click="displayCommentEdit(comment);">
-									Edit
-								</button>
-							</div>
-							
-							<div class="item">
-								<button class="btn btn-mini" ng-click="deleteComment(user, $index, comment);">
-									Delete
-								</button>
-							</div>
-							
-						</div>
-						
-					</div>
-					
-					<hr>
-					
+				<div class="item">
+					<span class="color-normal">No comment</span>
 				</div>
 				
 			</div>
 			
-			<div class="flex justify-center mb-normal">
-				<button class="btn" ng-click="displayCommentEdit();">
-					New comment
-				</button>
+			<div ng-repeat="comment in mosaic.comments">
+				
+				<div class="p-normal">
+					
+					<div>
+						<span ng-class="{'color-enlightened': comment.faction == 'E', 'color-resistant': comment.faction == 'R'}">{{comment.username}}</span>
+					</div>
+					
+					<div class="mb-normal">
+						<span class="color-light">{{comment.text}}</span>
+					</div>
+					
+					<div class="row" ng-show="comment.username == user.name">
+						
+						<div class="item">
+							<button class="btn btn-mini" ng-click="displayCommentEdit(comment);">
+								Edit
+							</button>
+						</div>
+						
+						<div class="item">
+							<button class="btn btn-mini" ng-click="deleteComment(user, $index, comment);">
+								Delete
+							</button>
+						</div>
+						
+					</div>
+					
+				</div>
+				
+				<hr>
+				
+			</div>
+			
+			<div class="flex justify-center">
+				
+				<div class="item">
+					<button class="btn btn-mini" ng-click="displayCommentEdit();">
+						New comment
+					</button>
+				</div>
+				
 			</div>
 			
 		</div>
