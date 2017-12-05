@@ -191,6 +191,22 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		mosaic.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
 	}
 	
+	$scope.reorderAlphaMosaic = function(mosaic) {
+		
+		mosaic.missions.sort(function(a, b) {
+			return a.title - b.title;
+		});
+		
+		var index = 0;
+		for (var m of mosaic.missions) {
+			
+			index += 1;
+			m.order = index;
+		}
+		
+		mosaic.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
+	}
+	
 	/* Mission management */
 	
 	$scope.excludeMission = function(mosaic, mission) {

@@ -2499,6 +2499,22 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
 	}
 	
+	$scope.reorderAlphaMosaic = function(mosaic) {
+		
+		$scope.selected.sort(function(a, b) {
+			return a.title - b.title;
+		});
+		
+		var index = 0;
+		for (var m of $scope.selected) {
+			
+			index += 1;
+			m.order = index;
+		}
+		
+		$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
+	}
+	
 	/* Step #3 management */
 	
 	$scope.mosaic_name = '';
@@ -3477,6 +3493,22 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		for (var m of mosaic.missions) {
 			
 			index -= 1;
+			m.order = index;
+		}
+		
+		mosaic.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
+	}
+	
+	$scope.reorderAlphaMosaic = function(mosaic) {
+		
+		mosaic.missions.sort(function(a, b) {
+			return a.title - b.title;
+		});
+		
+		var index = 0;
+		for (var m of mosaic.missions) {
+			
+			index += 1;
 			m.order = index;
 		}
 		
