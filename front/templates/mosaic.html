@@ -220,17 +220,31 @@
 					</span>
 				</div>
 				
-				<div class="item flex-col pt-none">
+				<div class="flex justify-center align-center">
 					
-					<div class="item flex justify-center">
-						<flag class="mr-small" country="mosaic.city.region.country.name"></flag>
-						{{mosaic.city.name}} <a class="ml-normal" href="/world/{{mosaic.city.region.country.name}}/{{mosaic.city.region.name}}">{{mosaic.city.region.name}}</a>
+					<div class="item">
+						<flag country="mosaic.city.region.country.name"></flag>
 					</div>
-						
-					<div class="text-center color-muted">
+					
+					<div class="item">
+						{{mosaic.city.name}}
+					</div>
+					
+					<div class="item">
+						<a class="ml-normal" href="/world/{{mosaic.city.region.country.name}}/{{mosaic.city.region.name}}">{{mosaic.city.region.name}}</a>
+					</div>
+					
+				</div>
+				
+				<div class="flex justify-center align-center">
+					
+					<div class="item">
 						<span>{{mosaic.missions.length}} missions</span>
-						<span ng-show="mosaic.type=='sequence'">&nbsp;in sequence</span>
-						<span ng-show="mosaic.type=='serie'">&nbsp;in serie</span>
+					</div>
+					
+					<div class="item">
+						<span class="badge" ng-show="mosaic.type=='sequence'">&nbsp;sequence</span>
+						<span class="badge" ng-show="mosaic.type=='serie'">&nbsp;serie</span>
 					</div>
 
 				</div>
