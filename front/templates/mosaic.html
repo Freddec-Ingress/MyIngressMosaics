@@ -88,7 +88,7 @@
 					<ul class="flex-col">
 						
 						<li class="flex" ng-repeat="portal in mission_selected.portals">
-							<div class="pt-small noshrink color-muted text-right" style="width:40px;">
+							<div class="pt-small noshrink color-muted text-right" style="width:35px;">
 								#{{$index + 1}}.
 							</div>
 							<div class="flex-col">
@@ -354,17 +354,17 @@
 			
 			<div ng-repeat="comment in mosaic.comments">
 				
-				<div class="p-normal">
+				<div class="flex-col">
 					
-					<div>
-						<span ng-class="{'color-enlightened': comment.faction == 'E', 'color-resistant': comment.faction == 'R'}">{{comment.username}}</span>
+					<div class="flex">
+						<div class="item">
+							<span ng-class="{'color-enlightened': comment.faction == 'E', 'color-resistant': comment.faction == 'R'}">{{comment.username}}</span>
+							<br />
+							<span class="color-light">{{comment.text}}</span>
+						</div>
 					</div>
-					
-					<div class="mb-normal">
-						<span class="color-light">{{comment.text}}</span>
-					</div>
-					
-					<div class="row" ng-show="comment.username == user.name">
+
+					<div class="flex" ng-show="comment.username == user.name">
 						
 						<div class="item">
 							<button class="btn btn-mini" ng-click="displayCommentEdit(comment);">
