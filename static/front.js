@@ -2296,15 +2296,6 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 		map.fitBounds(latlngbounds); 
 	}
 	
-	/* Tab management */
-	
-	$scope.current_tab = 0;
-	
-	$scope.open_tab = function(id) {
-		
-		$scope.current_tab = id;
-	}
-	
 	/* Page loading */
 	
 	$scope.load_mosaic = function(ref) {
@@ -2321,7 +2312,7 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 			
 			$scope.offset = new Array(temp);
 			
-			$scope.open_tab(1);
+			$scope.initMap();
 			
 			$scope.loaded = true;
 		});
