@@ -32,7 +32,7 @@
 						<input type="text" class="control" ng-model="mosaic.name" />
 					</div>
 					<div class="item text-center" style="width:75px;" ng-show="!mosaic.open">
-						<span ng-class="{'color-danger':isMissionCountValid(mosaic)}">{{mosaic.missions.length}}</span>
+						<span ng-class="{'color-danger':!isMissionCountValid(mosaic)}">{{mosaic.missions.length}}</span>
 					</div>
 					<div class="item" ng-show="!mosaic.open">
 						<button class="btn" ng-click="openMosaic(mosaic);">
