@@ -49,20 +49,20 @@
 				
 				<div class="modal-content">
 					
-					<div class="row mb-normal">
+					<div class="row">
 						
 						<div class="item flex">
 							<img  width="64px" height="64px" src="{{mission_selected.image}}">
 						</div>
 						
-						<div class="item">
+						<div class="flex-col">
 
-							<div class="row">
+							<div class="flex">
 								<div class="item text-right" style="width:60px;"><span class="color-muted">Order</span></div>
 								<div class="item">#{{mission_selected.order}}</div>
 							</div>
 							
-							<div class="row">
+							<div class="flex">
 								<div class="item text-right" style="width:60px;"><span class="color-muted">Creator</span></div>
 								<div class="item" ng-class="{'color-enlightened':mission_selected.faction=='E', 'color-resistant':mission_selected.faction=='R'}">{{mission_selected.creator}}</div>
 							</div>
@@ -71,30 +71,12 @@
 						
 					</div>
 					
-					<div class="row justify-center mb-normal">
+					<div class="row">
 						
 						<div class="item">
-	                        <a class="btn" href="https://www.ingress.com/intel?ll={{mission_selected.startLat}},{{mission_selected.startLng}}&z=17&pll={{mission_selected.startLat}},{{mission_selected.startLng}}" target="blank">
-	                            <i class="fa fa-fw fa-external-link"></i>
-	                        </a>
+							<span class="color-dark">{{mission_selected.desc}}</span>
 						</div>
 						
-						<div class="item">
-	                        <a class="btn" href="https://www.google.com/maps/dir//{{mission_selected.startLat}},{{mission_selected.startLng}}" target="blank">
-	                            <i class="fa fa-fw fa-map-marker"></i>
-	                        </a>
-						</div>
-						
-						<div class="item">
-	                        <a class="btn" href="https://waze.com/ul?ll={{mission_selected.startLat}},{{mission_selected.startLng}}" target="blank">
-	                            <img src="/static/img/waze.png">
-	                        </a>
-						</div>
-						
-					</div>
-					
-					<div class="mb-normal color-dark">
-						{{mission_selected.desc}}
 					</div>
 					
 					<hr class="mb-normal">
