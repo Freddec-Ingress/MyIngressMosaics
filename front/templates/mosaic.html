@@ -355,9 +355,11 @@
 			<div ng-repeat="comment in mosaic.comments">
 				
 				<div class="flex-col">
+				
+					<hr class="item grow">
 					
 					<div class="flex">
-						<div class="item">
+						<div class="item text-left">
 							<span ng-class="{'color-enlightened': comment.faction == 'E', 'color-resistant': comment.faction == 'R'}">{{comment.username}}</span>
 							<br />
 							<span class="color-light">{{comment.text}}</span>
@@ -382,9 +384,9 @@
 					
 				</div>
 				
-				<hr>
-				
 			</div>
+			
+			<hr class="item grow">
 			
 			<div class="flex justify-center mb-big">
 				
