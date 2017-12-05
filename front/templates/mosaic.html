@@ -212,194 +212,202 @@
 			
 		</div>
 		
-		<div class="text-center">
+		<div class="flex justify-end">
+			
+			<div class="item">
+				<button class="badge" ng-click="toggle_love(user);" ng-class="{'active':mosaic.is_loved}">
+					<i class="fa fa-heart icon"></i>
+					<span class="text">{{mosaic.lovers}}</span>
+				</button>
+			</div>
+			
+			<div class="item">
+				<button class="badge" ng-click="toggle_complete(user);" ng-class="{'active':mosaic.is_completed}">
+					<i class="fa fa-check-square icon"></i>
+					<span class="text">{{mosaic.completers}}</span>
+				</button>
+			</div>
+			
+		</div>
 		
-			<div class="text-center mt-big">
-				<span class="text-big color-light">
-					{{mosaic.title}}
+		<div class="text-center mt-big">
+			<span class="text-big color-light">
+				{{mosaic.title}}
+			</span>
+		</div>
+		
+		<div class="flex justify-center align-center">
+			
+			<div class="item">
+				<flag country="mosaic.city.region.country.name"></flag>
+			</div>
+			
+			<div class="item">
+				{{mosaic.city.name}}
+			</div>
+			
+			<div class="item">
+				<a href="/world/{{mosaic.city.region.country.name}}/{{mosaic.city.region.name}}">{{mosaic.city.region.name}}</a>
+			</div>
+			
+		</div>
+		
+		<div class="flex justify-center align-center">
+			
+			<div class="item">
+				<span>{{mosaic.missions.length}} missions</span>
+			</div>
+			
+		</div>
+		
+		<div class="item flex justify-center align-center">
+
+			<div class="item flex grow justify-center wrap" style="max-width:420px; padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
+				
+	            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+	            </div>
+	            
+	            <a ng-repeat="m in mosaic.missions | reverse" ng-click="displayMissionDetails(m);" class="block mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+	                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+	                <div style="position:absolute;bottom:0;right:0;font-size:8px;">{{m.order}}</div>
+	            </a>
+	            
+            </div>
+            
+		</div>
+		
+		<div class="flex">
+			
+			<div class="item">
+				<span class="color-muted">Details</span>
+			</div>
+			
+		</div>
+		
+		<div class="flex ml-big">
+			
+			<div class="item">
+				<span>{{mosaic.missions.length}} missions</span>
+			</div>
+		
+		</div>
+		
+		<div class="flex ml-big">
+			
+			<div class="item ">
+				{{mosaic.portals}} waypoints
+			</div>
+			
+			<div class="item ">
+				{{mosaic.uniques}} uniques
+			</div>
+			
+		</div>
+		
+		<div class="flex ml-big">
+				
+			<div class="item" ng-show="mosaic.type=='sequence'">
+				<span>{{mosaic.distance | number:2}} km</span>
+			</div>
+			
+		</div>
+		
+		<div class="flex">
+			
+			<div class="item">
+				<span class="color-muted">Creators</span>
+			</div>
+			
+		</div>
+		
+		<div class="flex wrap ml-big">
+			
+			<div class="item" ng-repeat="creator in mosaic.creators">
+				<span ng-class="{'color-enlightened': creator.faction == 'E', 'color-resistant': creator.faction == 'R'}">
+					{{creator.name}}
 				</span>
 			</div>
 			
-			<div class="flex justify-center align-center">
-				
-				<div class="item">
-					<flag country="mosaic.city.region.country.name"></flag>
-				</div>
-				
-				<div class="item">
-					{{mosaic.city.name}}
-				</div>
-				
-				<div class="item">
-					<a href="/world/{{mosaic.city.region.country.name}}/{{mosaic.city.region.name}}">{{mosaic.city.region.name}}</a>
-				</div>
-				
-			</div>
-			
-			<div class="flex justify-center align-center">
-				
-				<div class="item">
-					<span>{{mosaic.missions.length}} missions</span>
-				</div>
-				
-				<div class="item">
-					<button class="badge" ng-click="toggle_love(user);" ng-class="{'active':mosaic.is_loved}">
-						<i class="fa fa-heart icon"></i>
-						<span class="text">{{mosaic.lovers}}</span>
-					</button>
-				</div>
-				
-				<div class="item">
-					<button class="badge" ng-click="toggle_complete(user);" ng-class="{'active':mosaic.is_completed}">
-						<i class="fa fa-check-square icon"></i>
-						<span class="text">{{mosaic.completers}}</span>
-					</button>
-				</div>
-				
-			</div>
-			
-			<div class="item flex justify-center align-center">
-
-				<div class="item flex grow justify-center wrap" style="max-width:420px; padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
-					
-		            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-		            </div>
-		            
-		            <a ng-repeat="m in mosaic.missions | reverse" ng-click="displayMissionDetails(m);" class="block mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-		                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-		                <div style="position:absolute;bottom:0;right:0;font-size:8px;">{{m.order}}</div>
-		            </a>
-		            
-	            </div>
-	            
-			</div>
-			
-			<div class="flex">
-				
-				<div class="item">
-					<span class="color-muted">Details</span>
-				</div>
-				
-			</div>
-			
-			<div class="flex ml-big">
-				
-				<div class="item ">
-					{{mosaic.portals}} waypoints
-				</div>
-				
-				<div class="item ">
-					{{mosaic.uniques}} uniques
-				</div>
-				
-			</div>
-			
-			<div class="flex ml-big">
-					
-				<div class="item" ng-show="mosaic.type=='sequence'">
-					<span>{{mosaic.distance | number:2}} km</span>
-				</div>
-				
-			</div>
-			
-			<div class="flex">
-				
-				<div class="item">
-					<span class="color-muted">Creators</span>
-				</div>
-				
-			</div>
-			
-			<div class="flex wrap ml-big">
-				
-				<div class="item" ng-repeat="creator in mosaic.creators">
-					<span ng-class="{'color-enlightened': creator.faction == 'E', 'color-resistant': creator.faction == 'R'}">
-						{{creator.name}}
-					</span>
-				</div>
-				
-			</div>
-			
-			<div class="flex">
-				
-				<div class="item">
-					<span class="color-muted">Roadmap</span>
-				</div>
-				
-			</div>
-			
-			<div class="flex">
-				
-				<div class="item" style="height:420px;width:100%">
-					<div id="map" style="height:100%;width:100%"></div>
-				</div>
-				
-			</div>
-
-			<div class="flex">
-				
-				<div class="item">
-					<span class="color-muted">Comments</span>
-				</div>
-				
-			</div>
+		</div>
 		
-			<div class="flex ml-big" ng-show="mosaic.comments.length < 1">
-				
-				<div class="item">
-					<span class="color-normal">No comment</span>
-				</div>
-				
+		<div class="flex">
+			
+			<div class="item">
+				<span class="color-muted">Roadmap</span>
 			</div>
 			
-			<div ng-repeat="comment in mosaic.comments">
-				
-				<div class="flex-col">
-				
-					<div class="item grow">
-						<hr />
-					</div>
-					
-					<div class="flex">
-						<div class="item text-left">
-							<span ng-class="{'color-enlightened': comment.faction == 'E', 'color-resistant': comment.faction == 'R'}">{{comment.username}}</span>
-							<br />
-							<span class="color-light">{{comment.text}}</span>
-						</div>
-					</div>
+		</div>
+		
+		<div class="flex">
+			
+			<div class="item" style="height:420px;width:100%">
+				<div id="map" style="height:100%;width:100%"></div>
+			</div>
+			
+		</div>
 
-					<div class="flex" ng-show="comment.username == user.name">
-						
-						<div class="item">
-							<button class="btn btn-mini" ng-click="displayCommentEdit(comment);">
-								Edit
-							</button>
-						</div>
-						
-						<div class="item">
-							<button class="btn btn-mini" ng-click="deleteComment(user, $index, comment);">
-								Delete
-							</button>
-						</div>
-						
+		<div class="flex">
+			
+			<div class="item">
+				<span class="color-muted">Comments</span>
+			</div>
+			
+		</div>
+	
+		<div class="flex ml-big" ng-show="mosaic.comments.length < 1">
+			
+			<div class="item">
+				<span class="color-normal">No comment</span>
+			</div>
+			
+		</div>
+		
+		<div ng-repeat="comment in mosaic.comments">
+			
+			<div class="flex-col">
+			
+				<div class="item grow">
+					<hr />
+				</div>
+				
+				<div class="flex">
+					<div class="item text-left">
+						<span ng-class="{'color-enlightened': comment.faction == 'E', 'color-resistant': comment.faction == 'R'}">{{comment.username}}</span>
+						<br />
+						<span class="color-light">{{comment.text}}</span>
+					</div>
+				</div>
+
+				<div class="flex" ng-show="comment.username == user.name">
+					
+					<div class="item">
+						<button class="btn btn-mini" ng-click="displayCommentEdit(comment);">
+							Edit
+						</button>
+					</div>
+					
+					<div class="item">
+						<button class="btn btn-mini" ng-click="deleteComment(user, $index, comment);">
+							Delete
+						</button>
 					</div>
 					
 				</div>
 				
 			</div>
 			
-			<div class="item grow">
-				<hr />
-			</div>
+		</div>
+		
+		<div class="item grow">
+			<hr />
+		</div>
+		
+		<div class="flex justify-center mb-big">
 			
-			<div class="flex justify-center mb-big">
-				
-				<div class="item">
-					<button class="btn btn-mini" ng-click="displayCommentEdit();">
-						New comment
-					</button>
-				</div>
-				
+			<div class="item">
+				<button class="btn btn-mini" ng-click="displayCommentEdit();">
+					New comment
+				</button>
 			</div>
 			
 		</div>
