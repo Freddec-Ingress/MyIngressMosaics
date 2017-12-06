@@ -94,7 +94,21 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 					center: {lat: startLat, lng: startLng},
 					zoom: startZoom
 		        });
-
+		        
+				var image = {
+				    scaledSize: new google.maps.Size(25, 25),
+					origin: new google.maps.Point(0, 0),
+					anchor: new google.maps.Point(12, 13),
+					url: 'https://www.myingressmosaics.com/static/img/marker_me.png',
+				};
+		
+				var latLng = new google.maps.LatLng(startLat, startLng);
+				var marker = new google.maps.Marker({
+					position: latLng,
+					map: map,
+					icon: imageMe,
+				});
+		        
 				var geolocationControl = new GeolocationControl(geolocationDiv, map);
 				map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(geolocationDiv);
 
