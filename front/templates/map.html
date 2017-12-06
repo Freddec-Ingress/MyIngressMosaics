@@ -23,6 +23,28 @@
 	
 	<div class="container" ng-class="{'active':loaded}" style="flex:1 1 100%; max-width:100%">
 		
+		<div class="modal-container align-center" ng-show="flag_no_mosaic">
+			
+			<div class="modal-box">
+				
+				<div class="modal-content flex align-center">
+					
+					<div class="item">
+						<span class="color-normal">No mosaic. Please try to zoom out.</span>
+					</div>
+
+					<div class="item">
+						<span class="close" ng-click="flag_no_mosaic=false;">
+							<i class="fa fa-times"></i>
+						</span>
+					</div>
+
+				</div>
+				
+			</div>
+			
+		</div>
+		
 		<div class="flex justify-center">
 			
 			<form class="grow flex align-center" style="z-index:5;max-width:720px;">

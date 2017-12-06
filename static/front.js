@@ -2834,7 +2834,9 @@ angular.module('FrontModule.controllers').controller('NewLoginCtrl', function($s
 angular.module('FrontModule.controllers').controller('NewMapCtrl', function($scope, $window, $compile, API) {
 	
 	/* Map management */
-	
+
+	$scope.flag_no_mosaic = false;
+
 	$scope.initMap = function() {
 		
 		var map = null;
@@ -2947,6 +2949,8 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 
 				map.addListener('idle', function(e) {
 					
+					$scope.flag_no_mosaic = false;
+					
 					var bds = map.getBounds();
 					
 					var South_Lat = bds.getSouthWest().lat();
@@ -3010,6 +3014,10 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 							
 							var markerCluster = new MarkerClusterer(map, markerArray, { imagePath: 'https://www.myingressmosaics.com/static/img/m' });
 							markerCluster.setMaxZoom(17);
+						}
+						else {
+							
+							$scope.flag_no_mosaic = true;
 						}
 					});
 				});
