@@ -29,6 +29,7 @@ urlpatterns = [
 	
 	url(r'^register',							views.register),
 	
+	url(r'^world/(?P<country>[\w \-,\']+)/(?P<region>[\w|\W \-,\']+)/(?P<city>[\w|\W \-,\']+)',	views.city),
 	url(r'^world/(?P<country>[\w \-,\']+)/(?P<region>[\w|\W \-,\']+)',	views.region),
 	url(r'^world/(?P<country>[\w \-,\']+)', 	views.country),
 	url(r'^world',								views.world),

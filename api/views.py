@@ -777,13 +777,10 @@ def data_getMosaicsOfCity(request, country, region, name):
 	region = Region.objects.get(country=country, name=region)
 	city = City.objects.get(region=region, name=name)
 	
-	results = Mosaic.objects.filter(city=city).order_by('-pk')
+	results = Mosaic.objects.filter(city=city).order_by('title')
 	if results.count() > 0:
 		
 		data = {
-			'count': 0,
-			'country': country.serialize(),
-			'region': region.serialize(),
 			'city': city.serialize(),
 			'mosaics': [],
 		}
