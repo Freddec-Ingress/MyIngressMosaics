@@ -633,29 +633,10 @@ def mission_order(request):
 @permission_classes((AllowAny, ))
 def data_getMosaicsByCountry(request):
 	
-	data = None
-	
-	results = Country.objects.all()
-	if (results.count() > 0):
-		
-		data = {
-			'count': 0,
-			'countries': [],
-		}
-		
-		for item in results:
-			
-			country = {
-				'mosaics': Mosaic.objects.filter(city__region__country=item).count(),
-				'name': item.name,
-				'locale': item.locale,
-				'id': item.pk,
-			}
-			
-			data['countries'].append(country)
-			
-		data['count'] = Mosaic.objects.all().count()
-	
+	data = {
+		'mosaic_count':Mosaic.objects.all().count(), 
+	}
+
 	return Response(data, status=status.HTTP_200_OK)
 
 
@@ -773,26 +754,34 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 @permission_classes((AllowAny, ))
 def data_getMosaicsOfCity(request, country, region, name):
 	
-	country = Country.objects.get(name=country)
-	region = Region.objects.get(country=country, name=region)
-	city = City.objects.get(region=region, name=name)
-	
-	results = Mosaic.objects.filter(city=city).order_by('title')
-	if results.count() > 0:
-		
-		data = {
-			'city': city.serialize(),
-			'mosaics': [],
-		}
-		
-		for item in results:
+	data = {
+		'city': {},
+		'mosaics': [],
+	}
 			
-			mosaic = item.overviewSerialize()
-			data['mosaics'].append(mosaic)
+	results = Country.objects.filter(name=country)
+	if results.count() > 0:
+		country = results[0]
+	
+		results = Region.objects.filter(country=country, name=region)
+		if results.count() > 0:
+			region = results[0]
 		
-		return Response(data, status=status.HTTP_200_OK)
-		
-	return Response(None, status=status.HTTP_404_NOT_FOUND)
+			results = City.objects.filter(region=region, name=name)
+			if results.count() > 0:
+				city = results[0]
+				
+				data['city'] = city.serialize()
+				
+				results = Mosaic.objects.filter(city=city).order_by('title')
+				if results.count() > 0:
+					
+					for item in results:
+						
+						mosaic = item.overviewSerialize()
+						data['mosaics'].append(mosaic)
+			
+	return Response(data, status=status.HTTP_200_OK)
 
 
 

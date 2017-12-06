@@ -75,7 +75,6 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 					
 					resultsMap.setCenter(results[0].geometry.location);
 					resultsMap.fitBounds(results[0].geometry.bounds);
-					
 				}
 			});
 		}

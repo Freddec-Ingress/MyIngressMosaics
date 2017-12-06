@@ -23,100 +23,121 @@
 	
 	<div class="container" ng-class="{'active':loaded}">
 		
-		<div class="p-normal mt-normal text-center">
-			<span class="text-big color-light block">Ingress Mosaics, Banners and Mission series</span>
-			<span class="block">by agents for agents</span>
-		</div>
-		
-		<div class="row justify-center">
+		<div class="flex-col mt-big">
 			
 			<div class="item">
-				
-				<div id="fb-root"></div>
-				
-				<script>
-					(function(d, s, id) {
-						var js, fjs = d.getElementsByTagName(s)[0];
-						if (d.getElementById(id)) return;
-						js = d.createElement(s); js.id = id;
-						js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10";
-						fjs.parentNode.insertBefore(js, fjs);
-					}(document, 'script', 'facebook-jssdk'));
-				</script>
-				
-				{% endverbatim %}
-					<div class="fb-like"
-						data-href="https://www.myingressmosaics.com"
-						data-layout="button"
-						data-size="small"
-						data-mobile-iframe="true">
-					</div>
-				{% verbatim %}
-
-			</div>
-
-			<div class="item flex">
-				
-				{% endverbatim %}
-					<script src="https://apis.google.com/js/platform.js" async defer></script>
-					<div class="g-plus" data-action="share" data-annotation="none" data-href="https://www.myingressmosaics.com"></div>			
-				{% verbatim %}
-				
+				<span class="block text-center text-big color-light">Ingress Mosaics, Banners and Mission series</span>
+				<span class="block text-center">{{mosaic_count|number}} registered mosaics by agents for agents</span>
 			</div>
 			
 		</div>
 		
-	    <div class="p-normal mt-big pl-xl-none pr-xl-none">
-	     	<form class="row">
-				<div class="item grow">
-					<input type="text" class="control" placeholder="Search for a mosaic" ng-model="searchtext" />
-				</div>
-				<div class="item" style="width:75px;">
-					<a class="btn" type="submit" href="/search/{{searchtext}}">
-						<i class="fa fa-fw fa-search"></i>
-					</a>
-				</div>
-			</form>
-		</div>
-		
-	    <div class="p-normal mt-big">
-	    	<span class="block text-center">{{countries.length}} countries with {{count|number}} mosaics</span>
-	    </div>
-	    
-		<hr>
-		    
-	    <div class="mb-big">
-		    
-	    	<div ng-repeat="country in countries">
-	    		
-	    		<a class="p-normal block pl-xl-none pr-xl-none" href="/world/{{country.name}}">
-		    		<div class="row">
-		    			
-		    			<div class="item flex-col justify-center">
-		    				<flag country="country.name"></flag>
-		    			</div>
-		    			
-		    			<div class="item flex-col justify-center grow">
-		    				<span class="block color-light text-medium" ng-show="!country.locale">{{country.name}}</span>
-		    				<span class="block color-light text-medium" ng-show="country.locale">{{country.locale}}</span>
-		    				<span class="block color-normal text-small" ng-show="country.locale"><span class="color-muted mr-normal">EN</span>{{country.name}}</span>
-		    			</div>
-		     			
-		    			<div class="item flex-col justify-center" style="width:75px;">
-		    				<span class="btn btn-mini">
-		    					{{country.mosaics|number}}
-		    					<i class="item fa fa-angle-double-right pr-none"></i>
-		    				</span>
-		    			</div>
-		     			
-		    		</div>
+	    <div class="flex-col align-center mt-big">
+	    	
+	    	<div class="item">
+	    		<a class="btn" href="/map">
+	    			<i class="fa fa-crosshairs"></i>
+	    			<span class="ml-normal">Nearby mosaics</span>
 	    		</a>
-	    		
-	    		<hr>
-	    		
 	    	</div>
+	    	
 		</div>
+		
+	    <div class="flex-col align-center mt-big">
+	    	
+	    	<div class="item pb-none">
+	    		<span class="color-normal">Search for a city</span>
+	    	</div>
+	    	
+	     	<form class="self-stretch flex">
+	     		
+				<div class="item grow">
+					<input id="city_input" type="text" class="control text-center" placeholder="City name" ng-model="searchtext" />
+				</div>
+
+			</form>
 			
+		</div>
+		
+		<div class="flex align-center justify-center mt-big" ng-show="flag_searching">
+			
+			<div class="item">
+				<i class="fa fa-spinner rotating"></i>
+			</div>
+			
+			<div class="item">
+				<span class="item">Searching...</span>
+			</div>
+			
+		</div>
+		
+		<div class="flex align-center justify-center mt-big" ng-show="flag_city_unknown">
+			
+	    	<div class="item">
+	    		<span class="color-danger">City unknown</span>
+	    	</div>
+	    	
+		</div>
+		
+		<div class="flex-col align-center justify-center mt-big" ng-show="city && mosaics.length < 1">
+			
+	    	<div class="item">
+	    		<span class="color-danger">No mosaic registered</span>
+	    	</div>
+	    	
+	    	<div class="item">
+	    		<a href="/registration">Be the first to register mosaic for this city</a>
+	    	</div>
+
+		</div>
+	    
+		<div class="flex-col mt-big" ng-show="city && mosaics.length > 0">
+			
+			<div class="item grow">
+				<hr/>
+			</div>
+
+			<div ng-repeat="mosaic in mosaics">
+				
+				<a class="flex align-center" href="/mosaic/{{mosaic.ref}}" target="_blank" style="max-height:70px;min-height:70px;">
+					
+	    			<div class="item flex noshrink justify-center" ng-class="{'align-center':mosaic.missions.length<25, 'align-start':mosaic.missions.length>24}" style="width:125px; max-width:125px; overflow-y:auto; max-height:70px;">
+						
+						<div class="flex wrap justify-center shrink" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
+							
+				            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+				            </div>
+				            
+				            <div ng-repeat="m in mosaic.missions | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+				                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+				            </div>
+				            
+			            </div>
+			            
+					</div>
+						
+					<div class="item grow">
+						
+						<span class="text-medium color-light block">{{mosaic.title}}</span>
+						<span class="color-muted block">{{mosaic.missions.length}} missions</span>
+						
+					</div>
+					
+					<div class="item noshrink mr-normal">
+						<i class="fa fa-chevron-right text-small color-normal"></i>
+					</div>
+					
+				</a>
+
+				<div class="flex">
+					<div class="item grow">
+						<hr/>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		
 	</div>
 	
 {% endverbatim %}

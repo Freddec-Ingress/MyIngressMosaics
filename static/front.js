@@ -2908,7 +2908,6 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 					
 					resultsMap.setCenter(results[0].geometry.location);
 					resultsMap.fitBounds(results[0].geometry.bounds);
-					
 				}
 			});
 		}
@@ -3096,13 +3095,56 @@ angular.module('FrontModule.controllers').controller('NewWorldCtrl', function($s
 	
 	API.sendRequest('/api/world/', 'GET').then(function(response) {
 
-		$scope.count = response.count;
-		$scope.countries = response.countries;
+		$scope.mosaic_count = response.mosaic_count;
+		$scope.city_count = response.city_count;
 		
-		$scope.countries.sort(function(a, b) {
-			return b.mosaics - a.mosaics;
-		});
+        var input = document.getElementById('city_input');
+        var options = {
+			types: ['(cities)'],
+		};
 		
+        var autocomplete = new google.maps.places.Autocomplete(input, options);
+
+        autocomplete.addListener('place_changed', function() {
+        	
+         	$scope.flag_searching = true;
+         	
+	       	$scope.flag_city_unknown = false;
+        	
+        	$scope.city = null;
+        	$scope.mosaics = null;
+        	
+        	var country_name = null;
+        	var region_name = null;
+        	var city_name = null;
+        	
+        	var place = autocomplete.getPlace();
+        	for (var i = 0; i < place.address_components.length; i++) {
+        		
+        		var addressType = place.address_components[i].types[0];
+        		if (addressType == 'country') country_name = place.address_components[i]['long_name'];
+        		if (addressType == 'administrative_area_level_1') region_name = place.address_components[i]['long_name'];
+        		if (addressType == 'locality') city_name = place.address_components[i]['long_name'];
+        	}
+        	
+        	if (!country_name || !region_name || !city_name) {
+        		
+        		$scope.flag_city_unknown = true;
+        		
+        		$scope.flag_searching = false;
+        	}
+        	else {
+        		
+				API.sendRequest('/api/city/' + country_name + '/' + region_name + '/' + city_name + '/', 'GET').then(function(response) {
+					
+					$scope.city = response.city;
+					$scope.mosaics = response.mosaics;
+					
+					$scope.flag_searching = false;
+				});
+        	}
+        });
+
 		$scope.loaded = true;
 	});
 });

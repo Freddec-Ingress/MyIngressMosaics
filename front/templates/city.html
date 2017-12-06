@@ -58,7 +58,7 @@
 					
 	    			<div class="item flex noshrink justify-center" ng-class="{'align-center':mosaic.missions.length<25, 'align-start':mosaic.missions.length>24}" style="width:125px; max-width:125px; overflow-y:auto; max-height:70px;">
 						
-						<div class="flex wrap justify-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
+						<div class="flex wrap justify-center shrink" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
 							
 				            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
 				            </div>
