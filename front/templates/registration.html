@@ -108,9 +108,13 @@
 			
 			<div class="grow flex-col" ng-if="user.authenticated">
 				
-				<div class="p-normal pr-xl-none pl-xl-none">
+				<div class="mt-big item flex-col align-stretch">
 					
-					<form class="row">
+					<div class="item pb-none text-center">
+						<span class="color-normal">Select missions included in mosaic</span>
+					</div>
+					
+					<form class="flex">
 						
 						<div class="item grow">
 							<input class="control" placeholder="Mission name, creator" ng-model="searchText" />
@@ -135,19 +139,18 @@
 						<span class="item">Refreshing...</span>
 					</div>
 					
-					<div ng-if="!refreshing">
+					<div class="mt-big" ng-if="!refreshing && missions">
 						
 	                    <div ng-if="missions.length < 1">
 	                    	
-	                    	<div class="text-center mt-normal mb-normal">
-	                    		<span class="color-muted">No mission</span>
+	                    	<div class="text-center">
+	                    		<span class="color-danger">No mission</span>
 	                    	</div>
 	                    	
-	                    	<div class="flex align-center justify-center">
+	                    	<div class="flex align-center justify-center mt-normal">
 	                    		
-	                    		<div class="p-normal text-center" style="width:300px;">
-	                    			<div class="mb-normal">To register missions by yourself, click here</div>
-	                    			<a href="/recruitment">How to become a mosaic hunter?</a>
+	                    		<div class="text-center" style="width:300px;">
+	                    			<a href="/recruitment">To register missions by yourself, click here</a>
 	                    		</div>
 	                    		
 	                    	</div>
@@ -192,9 +195,9 @@
 					
 				</div>
 				
-				<hr>
+				<hr ng-show="missions.length > 0">
 				
-				<div class="p-normal pr-xl-none pl-xl-none">
+				<div class="p-normal pr-xl-none pl-xl-none" ng-show="missions.length > 0">
 					<div class="row">
 						
 						<div class="item grow flex align-center">

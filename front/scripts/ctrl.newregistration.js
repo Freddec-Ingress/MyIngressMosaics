@@ -17,7 +17,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	
 	/* Step #1 management */
 	
-	$scope.missions = [];
+	$scope.missions = null;
 	$scope.selected = [];
 	
 	$scope.refreshing = false;
