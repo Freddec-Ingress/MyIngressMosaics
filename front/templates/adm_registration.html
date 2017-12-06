@@ -132,19 +132,19 @@
 					<div class="flex noshrink align-center" ng-repeat="mission in mosaic.missions">
 						
 						<div class="item">
-							<button class="btn btn-danger p-none" ng-click="excludeMission(mosaic, mission);">
+							<a ng-click="excludeMission(mosaic, mission);">
 								<i class="fa fa-trash"></i>
-							</button>
+							</a>
 						</div>
 						
 						<div class="item">
-							<a class="btn p-none" href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=17&pll={{mission.startLat}},{{mission.startLng}}" target="_blank">
+							<a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=17&pll={{mission.startLat}},{{mission.startLng}}" target="_blank">
 								<i class="fa fa-external-link"></i>
 							</a>
 						</div>
 						
-						<div class="item" style="width:75px;">
-							<input type="text" class="control text-center" ng-model="mission.order" ng-blur="reorderMosaic(mosaic);" />
+						<div class="item" style="min-width:45px;">
+							<input type="text" class="control text-center" style="padding:0;" ng-model="mission.order" ng-blur="reorderMosaic(mosaic);" />
 						</div>
 						
 						<div class="item grow" title="{{mission.desc}}">
