@@ -226,14 +226,14 @@
 		
 		<div class="grow flex-col" ng-show="current_step == 2 && !creating">
 			
-			<div class="p-normal">
+			<div class="p-normal mt-big">
 				<div class="row align-center justify-center">
 					
 					<div class="item self-center text-right">
 						Columns
 					</div>
 					
-					<div class="item mr-big">
+					<div class="item mr-big" style="width: 95px;">
 						<select class="control" ng-model="columns" ng-change="computeOffset();">
 							<option value="6">6</option>
 							<option value="5">5</option>
@@ -244,15 +244,15 @@
 						</select>
 					</div>
 					
-					<div class="item">
+					<div class="item text-center">
 						<a ng-click="reorderAsc();">Order Asc</a>
 					</div>
 					
-					<div class="item">
+					<div class="item text-center">
 						<a ng-click="reorderDesc();">Order Desc</a>
 					</div>
 					
-					<div class="item">
+					<div class="item text-center">
 						<a ng-click="reorderAlphaMosaic();">Order Alpha</a>
 					</div>
 					
@@ -261,16 +261,14 @@
 
 			<div class="scrollable flex justify-center p-normal align-start">
 				
-				<div class="flex grow wrap justify-center" style="max-width:420px; padding:0 calc((6 - {{columns}}) / 2 * 16.666667%);">
+				<div class="flex grow shrink wrap justify-center" style="max-width:420px; padding:0 calc((6 - {{columns}}) / 2 * 16.666667%);">
 					
 		            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / {{columns}});">
 		            </div>
 		            
 		            <a ng-repeat="mission in selected | reverse" title="{{mission.title}} - {{mission.desc}}" class="block mission-vignet" style="flex:0 0 calc(100% / {{columns}});" ng-click="displayOrder(mission);">
 		                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{mission.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-		                <div class="text-center">
-		                	{{mission.order}}
-		                </div>
+		                <div style="position:absolute;bottom:0;right:0;font-size:8px;">{{mission.order}}</div>
 		            </a>
 		            
 	            </div>
