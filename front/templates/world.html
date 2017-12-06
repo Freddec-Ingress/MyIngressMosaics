@@ -101,7 +101,7 @@
 				
 				<a class="flex align-center" href="/mosaic/{{mosaic.ref}}" target="_blank" style="max-height:70px;min-height:70px;">
 					
-	    			<div class="item flex noshrink justify-center" ng-class="{'align-center':mosaic.missions.length<25, 'align-start':mosaic.missions.length>24}" style="width:125px; max-width:125px; overflow-y:auto; max-height:70px;">
+	    			<div class="item pt-none pb-none flex noshrink justify-center" ng-class="{'align-center':mosaic.missions.length<25, 'align-start':mosaic.missions.length>24}" style="width:125px; max-width:125px; overflow-y:auto; max-height:70px;">
 						
 						<div class="flex wrap justify-center shrink" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
 							
@@ -116,7 +116,7 @@
 			            
 					</div>
 						
-					<div class="item grow">
+					<div class="item grow ellipsis">
 						
 						<span class="text-medium color-light block">{{mosaic.title}}</span>
 						<span class="color-muted block">{{mosaic.missions.length}} missions</span>
