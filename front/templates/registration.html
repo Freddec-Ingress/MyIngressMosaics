@@ -305,19 +305,11 @@
 		
 		<div class="grow flex-col" ng-show="current_step == 3 && !creating">
 			
-			<div class="grow col p-normal pr-xl-none pl-xl-non">
+			<div class="grow col p-normal mt-big pr-xl-none pl-xl-non">
 			
 				<div class="item flex-col">
 					<span>Mosaic name</span>
 					<input type="text" class="control" ng-model="mosaic_name" />
-				</div>
-			
-				<div class="item flex-col">
-					<span>Mosaic type</span>
-					<select class="control" ng-model="mosaic_type">
-						<option value="sequence">sequence</option>
-						<option value="serie">serie</option>
-					</select>
 				</div>
 			
 				<div class="item flex-col">
@@ -367,7 +359,7 @@
 		
 		<div class="grow flex-col" ng-show="current_step == 4 && !creating">
 			
-			<div class="grow col p-normal">
+			<div class="grow col p-normal mt-big">
 				
 				<div class="item text-center pb-none">
 					<span class="text-big color-light">{{mosaic_name}}</span>
@@ -377,26 +369,21 @@
 					
 					<div class="item flex justify-center">
 						<flag class="mr-small" country="country_name"></flag>
-						{{city_name}}, {{region_name}}
-					</div>
-						
-					<div class="text-center">
-						<span>{{selected.length}} missions</span>
-						<span ng-show="mosaic_type=='sequence'">&nbsp;in sequence</span>
-						<span ng-show="mosaic_type=='serie'">&nbsp;in serie</span>
+						{{city_name}}
 					</div>
 
 				</div>
 				
 				<div class="scrollable flex justify-center align-start p-normal">
 					
-					<div class="flex grow wrap justify-center" style="max-width:420px; padding:0 calc((6 - {{columns}}) / 2 * 16.666667%);">
+					<div class="flex grow shrink wrap justify-center" style="max-width:420px; padding:0 calc((6 - {{columns}}) / 2 * 16.666667%);">
 						
 			            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / {{columns}});">
 			            </div>
 			            
 			            <div ng-repeat="mission in selected | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{columns}});" ng-click="displayOrder(mission);">
 			                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{mission.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+		                	<div style="position:absolute;bottom:0;right:0;font-size:8px;">{{mission.order}}</div>
 			            </div>
 			            
 		            </div>
