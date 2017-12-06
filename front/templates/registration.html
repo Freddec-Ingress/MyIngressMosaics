@@ -130,8 +130,6 @@
 					
 				</div>
 				
-				<hr ng-if="missions.length > 0">
-					
 				<div class="scrollable">
 					
 					<div ng-if="refreshing" class="mt-normal flex align-center justify-center">
@@ -157,6 +155,8 @@
 	                    	
 	                    </div>
 	                    
+						<hr ng-if="missions.length > 0">
+					
 	                    <div ng-repeat="mission in missions">
 	                    	
 	                    	<div class="p-normal" ng-class="{'bgcolor-highlight':mission.selected}">
