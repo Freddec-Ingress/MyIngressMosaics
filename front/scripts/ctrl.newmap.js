@@ -95,7 +95,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 					zoom: startZoom
 		        });
 		        
-				var image = {
+				var imageMe = {
 				    scaledSize: new google.maps.Size(25, 25),
 					origin: new google.maps.Point(0, 0),
 					anchor: new google.maps.Point(12, 13),

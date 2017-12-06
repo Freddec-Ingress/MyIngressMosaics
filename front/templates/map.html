@@ -21,28 +21,32 @@
 		<span class="item">Loading page...</span>
 	</div>
 	
-	<div class="container" ng-class="{'active':loaded}" style="flex:1 1 100%;">
+	<div class="container" ng-class="{'active':loaded}" style="flex:1 1 100%; max-width:100%">
 		
-		<div class="grow flex-col">
+		<div class="flex justify-center">
 			
-			<form class="p-normal pr-xl-none pl-xl-none" style="z-index:5;">
-				<div class="row">
-					
-					<div class="item grow">
-						<input id="address" class="control" type="text" placeholder="Enter location" value="" />
-					</div>
-					
-					<div class="item">
-						<button id="submit" class="btn" type="submit">
-							Go
-						</button>
-					</div>
-					
+			<form class="grow flex align-center" style="z-index:5;max-width:720px;">
+
+				<div class="item grow">
+					<input id="address" class="control" type="text" placeholder="Enter location" value="" />
 				</div>
+				
+				<div class="item">
+					<button id="submit" class="btn" type="submit">
+						Go
+					</button>
+				</div>
+				
 			</form>
 			
-			<div id="map" class="grow" ng-init="initMap();"></div>
-
+		</div>
+			
+		<div class="grow flex">
+			
+			<div class="item grow flex">
+				<div id="map" class="grow" ng-init="initMap();"></div>
+			</div>
+			
 		</div>
 		
 	</div>
