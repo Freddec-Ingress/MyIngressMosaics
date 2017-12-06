@@ -23,12 +23,16 @@
 	
 	<div class="container" ng-class="{'active':loaded}">
 		
-		<div class="p-normal pr-xl-none pl-xl-none">
+		<div class="flex-col align-center mt-big">
 			
-			<form class="row">
+			<div class="item pb-none">
+				<span class="color-normal">Search for mosaics</span>
+			</div>
+			
+			<form class="self-stretch flex">
 				
 				<div class="item grow">
-					<input class="control" placeholder="Mosaic name, creator" ng-model="searchtext" />
+					<input class="control text-center" placeholder="Mosaic name or creator" ng-model="searchtext" />
 				</div>
 				
 				<div class="item">
@@ -41,9 +45,7 @@
 			
 		</div>
 		
-		<hr ng-show="mosaics && mosaics.length > 0">
-		
-		<div class="mb-big">
+		<div class="mb-big mt-big">
 			
 			<div id="loading" class="p-normal" ng-show="searching">
 				<i class="item fa fa-spinner rotating"></i>
@@ -54,6 +56,8 @@
 				<span class="color-danger">No mosaic found</span>
 			</div>
 		
+			<hr ng-show="mosaics && mosaics.length > 0">
+		
 	    	<div ng-show="mosaics && mosaics.length > 0">
 	    		
 	    		<div ng-repeat="mosaic in mosaics">
@@ -61,9 +65,9 @@
 	    			<a class="block p-normal pr-xl-none pl-xl-none" href="/mosaic/{{mosaic.ref}}" target="blank">
 		    			<div class="row align-center">
 		    				
-		    				<div class="item flex noshrink self-stretch justify-center" ng-class="{'align-center':mosaic.missions.length<25, 'align-start pr-none pt-none pb-none':mosaic.missions.length>24}" style="width:100px; max-width:100px; max-height:70px; overflow-y:auto;">
+		    				<div class="item flex noshrink self-stretch justify-center" ng-class="{'align-center':mosaic.missions.length<25, 'align-start pr-none pt-none pb-none':mosaic.missions.length>24}" style="width:125px; max-width:125px; max-height:70px; overflow-y:auto;">
 		    					
-								<div class="flex wrap justify-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
+								<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
 									
 						            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
 						            </div>
@@ -82,22 +86,18 @@
 
 								<span class="flex color-normal">
 									<flag class="mr-small" country="mosaic.city.region.country.name"></flag>
-									{{mosaic.city.name}}, {{mosaic.city.region.name}}
+									{{mosaic.city.name}}
 								</span>
 								
 		    					<span class="block color-muted">
 									{{mosaic.missions.length}} missions
-									<span ng-show="mosaic.type=='sequence'">&nbsp;in sequence</span>
-									<span ng-show="mosaic.type=='serie'">&nbsp;in serie</span>
 		    					</span>
 		    					
 		    				</div>
 		    				
-		    				<div class="item">
-		    					<button class="btn btn-icon">
-                                    <i class="fa fa-chevron-right"></i>
-                                </button>
-		    				</div>
+							<div class="item noshrink mr-normal">
+								<i class="fa fa-chevron-right text-small color-normal"></i>
+							</div>
 		    				
 		    			</div>
 	    			</a>

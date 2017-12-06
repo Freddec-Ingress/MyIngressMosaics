@@ -164,7 +164,7 @@ def user_logout(request):
 
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((AllowAny, ))
 def user_getDetails(request):
 	
 	data = {
@@ -172,19 +172,21 @@ def user_getDetails(request):
 		'completed': [],
 	}
 	
-	results = request.user.mosaics_loved.all()
-	if results.count() > 0:
-		for item in results:
-			
-			mosaic = item.overviewSerialize()
-			data['loved'].append(mosaic)
-	
-	results = request.user.mosaics_completed.all()
-	if results.count() > 0:
-		for item in results:
-			
-			mosaic = item.overviewSerialize()
-			data['completed'].append(mosaic)
+	if not request.user.is_anonymous:
+		
+		results = request.user.mosaics_loved.all()
+		if results.count() > 0:
+			for item in results:
+				
+				mosaic = item.overviewSerialize()
+				data['loved'].append(mosaic)
+		
+		results = request.user.mosaics_completed.all()
+		if results.count() > 0:
+			for item in results:
+				
+				mosaic = item.overviewSerialize()
+				data['completed'].append(mosaic)
 	
 	return Response(data, status=status.HTTP_200_OK)
 
