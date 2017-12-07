@@ -31,7 +31,7 @@
 	
 	<div class="container" ng-class="{'active':loaded}">
 
-		<div class="modal-container" ng-if="mission_selected">
+		<div class="modal-container" ng-show="mission_selected">
 			
 			<div class="modal-box" ng-if="mission_selected.creator && mission_selected.portals.length > 0">
 				
@@ -177,7 +177,7 @@
 			
 		</div>
 
-		<div class="modal-container" ng-if="comment_selected">
+		<div class="modal-container" ng-show="comment_selected">
 			
 			<div class="modal-box">
 				

@@ -212,9 +212,13 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 				position: {lat: m.startLat, lng: m.startLng},
 	        });
 	        
-	        startMarker.addListener('click', function() {
-	        	$scope.displayMissionDetails(m);
-	        });
+	        google.maps.event.addListener(startMarker, 'click', (function(marker, mission) {
+	        	
+	        	return function () {
+	        		$scope.displayMissionDetails(mission);
+	        	};
+										
+			})(startMarker, m));
 	        
 	        var mlatLng = new google.maps.LatLng(m.startLat, m.startLng);
 	        latlngbounds.extend(mlatLng);

@@ -23,47 +23,38 @@
 	
 	<div class="container" ng-class="{'active':loaded}">
 
-		<div class="p-normal mt-normal">
-			<div class="row align-center justify-center">
-				
-				<div class="item">
-	    			<span class="text-big text-center color-light block" ng-show="!country.locale">{{country.name}}</span>
-					<span class="text-big text-center color-light block" ng-show="country.locale">{{country.locale}}</span>
-					<span class="text-small text-center color-normal block" ng-show="country.locale"><span class="color-muted mr-normal">EN</span>{{country.name}}</span>
-				</div>
+		<div class="flex-col align-center mt-big">
 
-			</div>
-		</div>
+    		<span class="text-big text-center color-light">{{country.name}}</span>
 
-	    <div class="p-normal mt-big">
-	    	<span class="block text-center">{{regions.length}} regions with {{count}} mosaics</span>
-	    </div>
+		    <div class="item">
+		    	<span class="color-normal">{{count}} mosaics in {{regions.length}} regions</span>
+		    </div>
 		
-		<hr>
+		</div>
+		
+		<hr class="mt-big mb-small">
 		
     	<div class="mb-big">
 	    	<div ng-repeat="region in regions">
 	    		
-	    		<a class="p-normal block pl-xl-none pr-xl-none" href="/world/{{country.name}}/{{region.name}}">
-		    		<div class="row">
-		    			
-		    			<div class="item flex-col justify-center grow">
-		    				<span class="block color-light text-medium" ng-show="!region.locale">{{region.name}}</span>
-		    				<span class="block color-light text-medium" ng-show="region.locale">{{region.locale}}</span>
-		    				<span class="block color-normal text-small" ng-show="region.locale"><span class="color-muted mr-normal">EN</span>{{region.name}}</span>
-		    			</div>
-		     			
-		    			<div class="item flex-col justify-center" style="width:75px;">
-		    				<span class="btn btn-mini">
-		    					{{region.mosaics|number}}
-		    					<i class="item fa fa-angle-double-right pr-none"></i>
-		    				</span>
-		    			</div>
-		     			
+	    		<a class="flex align-center" href="/world/{{country.name}}/{{region.name}}">
+
+	    			<div class="item grow">
+	    				<span class="color-light text-medium">{{region.name}}</span>
 	    			</div>
+	     			
+	    			<div class="item">
+	    				<span class="color-normal">{{region.mosaics|number}}</span>
+	    			</div>
+	     			
+					<div class="item pr-normal pr-xl-none">
+						<i class="fa fa-chevron-right text-small color-normal"></i>
+					</div>
+					
 	    		</a>
 	    		
-	    		<hr>
+	    		<hr class="mt-small mb-small">
 	    		
 	    	</div>
     	</div>

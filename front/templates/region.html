@@ -23,22 +23,28 @@
 	
 	<div class="container" ng-class="{'active':loaded}">
 		
-		<div class="p-normal mt-normal">
-			<div class="row align-center justify-center">
-				
+		<div class="flex-col align-center mt-big">
+    		
+    		<span class="text-big text-center color-light">{{region.name}}</span>
+    		
+    		<div class="flex align-center">
+    			
+	    		<div class="item">
+	    			<flag country="region.country.name"></flag>
+	    		</div>
+	    		
 				<div class="item">
-	    			<span class="text-big text-center color-light block" ng-show="!region.locale">{{region.name}}</span>
-					<span class="text-big text-center color-light block" ng-show="region.locale">{{region.locale}}</span>
-					<span class="text-small text-center color-normal block" ng-show="region.locale"><span class="color-muted mr-normal">EN</span>{{region.name}}</span>
+					<a href="/world/{{region.country.name}}">{{region.country.name}}</a>
 				</div>
-				
-			</div>
+			
+	    	</div>
+    		
+    		<div class="item mt-big">
+		    	<span class="text-center">{{region.mosaic_count}} mosaics in {{cities.length}} cities</span>
+	    	</div>
+	    	
 		</div>
-		
-	    <div class="p-normal mt-big">
-	    	<span class="block text-center">{{cities.length}} cities with {{region.mosaic_count}} mosaics</span>
-	    </div>
-	    
+
 		<hr>
 		
 		<div class="p-normal pr-xl-none pl-xl-none">
@@ -63,48 +69,47 @@
 			
 			<div class="" ng-repeat="city in cities | reverse" ng-show="city.name[0] == current_index">
 				
-				<span class="block mt-big p-normal pl-xl-none pr-xl-none text-normal">{{city.name}}</span>
+				<span class="block mt-big p-normal pl-xl-none pr-xl-none text-medium">{{city.name}}</span>
 				<hr>
 				
 	    		<div ng-repeat="mosaic in city.mosaics">
 	    			
-	    			<a class="block p-normal pl-xl-none pr-xl-none" href="/mosaic/{{mosaic.ref}}" target="blank">
-		    			<div class="row align-center" style="max-height:70px;">
-		    				
-		    				<div class="item flex noshrink self-stretch justify-center" ng-class="{'align-center':mosaic.missions.length<25, 'align-start pr-none pt-none pb-none':mosaic.missions.length>24}" style="width:100px; max-width:100px; max-height:70px; overflow-y:auto;">
-		    					
-								<div class="flex wrap justify-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
-									
-						            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-						            </div>
-						            
-						            <div ng-repeat="m in mosaic.missions | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-						                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-						            </div>
-						            
+	    			<a class="flex align-center" href="/mosaic/{{mosaic.ref}}" target="blank">
+	
+	    				<div class="item flex justify-center pl-xl-none" style="width:125px; max-width:125px;">
+	    					
+							<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
+								
+					            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
 					            </div>
-		    					
-		    				</div>
-		    				
-		    				<div class="item grow">
-		    					
-	    						<span class="text-medium color-light block">{{mosaic.name}}</span>
-
-		    					<div class="color-muted">
-									<span>{{mosaic.missions.length}} missions</span>
-									<span ng-show="mosaic.type=='sequence'">&nbsp;in sequence</span>
-									<span ng-show="mosaic.type=='serie'">&nbsp;in serie</span>
-		    					</div>
-		    					
-		    				</div>
-		    				
-		    				<div class="item noshrink">
-		    					<button class="btn btn-icon">
-                                    <i class="fa fa-chevron-right"></i>
-                                </button>
-		    				</div>
-		    				
-		    			</div>
+					            
+					            <div ng-repeat="m in mosaic.missions | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+					                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+					            </div>
+					            
+				            </div>
+	    					
+	    				</div>
+	    				
+	    				<div class="item grow">
+	    					
+	    					<span class="text-medium color-light block mb-small">{{mosaic.title}}</span>
+	
+							<div class="flex mb-small">
+								<flag class="mr-small" country="mosaic.city.region.country.name"></flag>
+								<span class="color-normal">{{mosaic.city.name}}</span>
+							</div>
+							
+	    					<span class="block color-muted">
+								{{mosaic.missions.length}} missions
+	    					</span>
+	    					
+	    				</div>
+	    				
+						<div class="item pr-normal pr-xl-none">
+							<i class="fa fa-chevron-right text-small color-normal"></i>
+						</div>
+	    				
 	    			</a>
 	    			
 	    			<hr>

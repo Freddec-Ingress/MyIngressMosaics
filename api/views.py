@@ -732,7 +732,8 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 	# Region data
 	
 	region_obj = Region.objects.get(country__name=country_name, name=region_name)
-	region_data = { 'name':region_obj.name, 'locale':region_obj.locale, 'mosaic_count':Mosaic.objects.filter(city__region=region_obj).count() }
+	region_data = region_obj.serialize()
+	region_data['mosaic_count'] = Mosaic.objects.filter(city__region=region_obj).count()
 	data['region_data'] = region_data
 	
 	# List of city data
@@ -742,7 +743,7 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 		city_data = { 'name':city_obj.name, 'mosaics': [] }
 		
 		for mosaic_obj in city_obj.mosaics.all().annotate(Count('missions')).order_by('missions__count', 'title'):
-			mosaic_data = mosaic_obj.miniSerialize()
+			mosaic_data = mosaic_obj.overviewSerialize()
 			city_data['mosaics'].append(mosaic_data);
 		
 		data['list_of_city_data'].append(city_data);
