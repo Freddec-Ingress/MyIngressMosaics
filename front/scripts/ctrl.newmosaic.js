@@ -204,12 +204,16 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 	        
 			var label = { text:String(index), color:'#FFFFFF', fontFamily:'Coda', fontSize:'.5rem', fontWeight:'400', }
 
-	        new google.maps.Marker({
+	        var startMarker = new google.maps.Marker({
 	        	
 				map: map,
 				icon: image,
 				label: label,
 				position: {lat: m.startLat, lng: m.startLng},
+	        });
+	        
+	        startMarker.addListener('click', function() {
+	        	$scope.displayMissionDetails(m);
 	        });
 	        
 	        var mlatLng = new google.maps.LatLng(m.startLat, m.startLng);
@@ -237,6 +241,13 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 			}
 			
 			$scope.offset = new Array(temp);
+			
+			var index = 0;
+			for (var mission of $scope.mosaic.missions) {
+				
+				index += 1;
+				mission.order = index;
+			}
 			
 			$scope.initMap();
 			
