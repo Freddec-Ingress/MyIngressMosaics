@@ -48,16 +48,13 @@
 					<div class="col">
 						
 						<div class="item">
-							<span class="text-medium color-light">{{mission_selected.title}}</span>
+							<span class="text-medium color-light block">{{mission_selected.title}}</span>
+							<span class="color-dark block">{{mission_selected.desc}}</span>
 						</div>
-						
-						<div class="item mb-small">
-							<span class="color-dark">{{mission_selected.desc}}</span>
-						</div>
-						
+
 					</div>
 					
-					<form class="row mb-big">
+					<form class="row mb-small">
 						
 		            	<div class="item">
 		            		<input type="text" class="control" ng-model="order" ng-init="order=mission_selected.order;">
