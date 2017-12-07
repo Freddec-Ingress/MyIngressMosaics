@@ -97,13 +97,13 @@
 				<hr/>
 			</div>
 
-			<div ng-repeat="mosaic in mosaics">
-				
-				<a class="flex align-center" href="/mosaic/{{mosaic.ref}}" target="_blank" style="max-height:70px;min-height:70px;">
-					
-	    			<div class="item pt-none pb-none flex noshrink justify-center" ng-class="{'align-center':mosaic.missions.length<25, 'align-start':mosaic.missions.length>24}" style="width:125px; max-width:125px; overflow-y:auto; max-height:70px;">
-						
-						<div class="flex wrap justify-center shrink" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
+    		<div ng-repeat="mosaic in mosaics">
+    			
+    			<a class="flex align-center" href="/mosaic/{{mosaic.ref}}" target="blank">
+
+    				<div class="item flex justify-center pl-xl-none" style="width:125px; max-width:125px;">
+    					
+						<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
 							
 				            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
 				            </div>
@@ -113,29 +113,34 @@
 				            </div>
 				            
 			            </div>
-			            
-					</div>
+    					
+    				</div>
+    				
+    				<div class="item grow">
+    					
+    					<span class="text-medium color-light block mb-small">{{mosaic.title}}</span>
+
+						<span class="flex color-normal block mb-small">
+							<flag class="mr-small" country="mosaic.city.region.country.name"></flag>
+							{{mosaic.city.name}}
+						</span>
 						
-					<div class="item grow ellipsis">
-						
-						<span class="text-medium color-light block">{{mosaic.title}}</span>
-						<span class="color-muted block">{{mosaic.missions.length}} missions</span>
-						
-					</div>
-					
-					<div class="item noshrink mr-normal">
+    					<span class="block color-muted">
+							{{mosaic.missions.length}} missions
+    					</span>
+    					
+    				</div>
+    				
+					<div class="item pr-normal pr-xl-none">
 						<i class="fa fa-chevron-right text-small color-normal"></i>
 					</div>
-					
-				</a>
-
-				<div class="flex">
-					<div class="item grow">
-						<hr/>
-					</div>
-				</div>
-				
-			</div>
+    				
+    			</a>
+    			
+    			<hr>
+    			
+    		</div>
+    		
 		</div>
 		
 	    <div class="item flex-col align-center mt-big">
