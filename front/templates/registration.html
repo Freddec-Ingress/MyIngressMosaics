@@ -45,10 +45,14 @@
 				
 				<div class="modal-content">
 					
-					<div class="row">
+					<div class="col">
 						
 						<div class="item">
 							<span class="color-light">{{mission_selected.title}}</span>
+						</div>
+						
+						<div class="item">
+							<span class="color-dark">{{mission_selected.desc}}</span>
 						</div>
 						
 					</div>
@@ -69,6 +73,12 @@
 					
 					<div class="row">
 						
+                    	<div class="item grow">
+                            <a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=17&pll={{mission.startLat}},{{mission.startLng}}" target="blank">
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                    	</div>
+                    	
 		            	<div class="item">
 		            		<a ng-click="retireMission(mission_selected);">
 		            			Remove this mission
@@ -179,7 +189,7 @@
 			                    	</a>
 	
 			                    	<div class="item">
-		                                <a class="btn btn-icon" href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=17&pll={{mission.startLat}},{{mission.startLng}}" target="blank">
+		                                <a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=17&pll={{mission.startLat}},{{mission.startLng}}" target="blank">
 		                                    <i class="fa fa-external-link"></i>
 		                                </a>
 			                    	</div>
