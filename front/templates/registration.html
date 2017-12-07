@@ -108,7 +108,7 @@
 			
 			<div class="grow flex-col" ng-if="user.authenticated">
 				
-				<div class="mt-big item flex-col align-stretch">
+				<div class="mt-big item flex-col align-stretch pr-xl-none pl-xl-none">
 					
 					<div class="item pb-none text-center">
 						<span class="color-normal">Select missions included in mosaic</span>
@@ -116,11 +116,11 @@
 					
 					<form class="flex">
 						
-						<div class="item grow">
+						<div class="item grow pl-xl-none">
 							<input class="control" placeholder="Mission name, creator" ng-model="searchText" />
 						</div>
 						
-						<div class="item">
+						<div class="item pr-xl-none">
 							<button class="btn" type="submit" ng-click="refreshMissions(searchText);">
 								<i class="fa fa-refresh"></i>
 							</button>
