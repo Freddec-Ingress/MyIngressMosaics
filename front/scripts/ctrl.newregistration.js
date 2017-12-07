@@ -363,10 +363,13 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		};
 		API.sendRequest('/api/mosaic/create/', 'POST', {}, data).then(function(response) {
 
-			$scope.missions = [];
-			$scope.selected = [];
+			for (var mission of $scope.selected) {
+				
+				var index = $scope.missions.indexOf(mission);
+				$scope.missions.splice(index, 1);
+			}
 			
-			$scope.searchText = '';
+			$scope.selected = [];
 			
 			$scope.columns = '6';
 			
