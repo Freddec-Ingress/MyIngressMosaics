@@ -48,10 +48,10 @@
 					<div class="col">
 						
 						<div class="item">
-							<span class="color-light">{{mission_selected.title}}</span>
+							<span class="text-medium color-light">{{mission_selected.title}}</span>
 						</div>
 						
-						<div class="item">
+						<div class="item mb-small">
 							<span class="color-dark">{{mission_selected.desc}}</span>
 						</div>
 						
@@ -269,20 +269,23 @@
 				</div>
 			</div>
 
-			<div class="scrollable flex justify-center p-normal align-start">
+			<div class="flex align-center justify-center" style="overflow-y:auto;">
 				
-				<div class="flex grow shrink wrap justify-center" style="max-width:420px; padding:0 calc((6 - {{columns}}) / 2 * 16.666667%);">
+				<div class="flex justify-center" style="width:420px; max-width:420px;">
 					
-		            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / {{columns}});">
+					<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - {{columns}}) / 2 * 16.666667%);">
+						
+			            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{columns}});">
+			            </div>
+			            
+			            <div ng-repeat="m in selected | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{columns}});">
+			                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+			            </div>
+			            
 		            </div>
-		            
-		            <a ng-repeat="mission in selected | reverse" title="{{mission.title}} - {{mission.desc}}" class="block mission-vignet" style="flex:0 0 calc(100% / {{columns}});" ng-click="displayOrder(mission);">
-		                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{mission.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-		                <div style="position:absolute;bottom:0;right:0;font-size:8px;">{{mission.order}}</div>
-		            </a>
-		            
-	            </div>
-			
+					
+				</div>
+				
 			</div>
 			
 			<hr>
