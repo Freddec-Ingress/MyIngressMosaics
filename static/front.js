@@ -3021,7 +3021,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 													var details = response[0];
 													
 													var contentString = '' +
-														'<a class="flex-col align-center ml-normal" target="blank" href="/mosaic/' + details.ref + '">' +
+														'<a class="flex-col align-center ml-normal" target="_blank" href="/mosaic/' + details.ref + '">' +
 															'<span class="color-black mb-small text-bold">' + details.title + '</span>' + 
 															'<span class="color-grey mb-normal">' + details.missions.length + ' missions</span>' + 
 															'<span class="color-link">Open mosaic page</span>' + 
