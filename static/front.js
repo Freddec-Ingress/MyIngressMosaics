@@ -2765,6 +2765,14 @@ angular.module('FrontModule.controllers').controller('NewSearchCtrl', function($
 		API.sendRequest('/api/search/', 'POST', {}, data).then(function(response) {
 			
 			$scope.mosaics = response.mosaics;
+			
+			$scope.mosaics.sort(function(a, b) {
+				
+				if (a.title > b.title) return -1;
+				if (a.title < b.title) return 1;
+				
+				return 0;
+			});
 
 			$scope.searching = false;
 		});
