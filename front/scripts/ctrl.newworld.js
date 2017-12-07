@@ -51,8 +51,8 @@ angular.module('FrontModule.controllers').controller('NewWorldCtrl', function($s
 					
 					$scope.mosaics.sort(function(a, b) {
 						
-						if (a.title > b.title) return -1;
-						if (a.title < b.title) return 1;
+						if (a.title > b.title) return 1;
+						if (a.title < b.title) return -1;
 						
 						return 0;
 					});
