@@ -278,9 +278,10 @@
 			            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{columns}});">
 			            </div>
 			            
-			            <div ng-repeat="m in selected | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{columns}});">
+			            <a ng-repeat="m in selected | reverse" class="mission-vignet block" style="flex:0 0 calc(100% / {{columns}});" ng-click="$scope.displayOrder(m);">
 			                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-			            </div>
+			            	<div style="position:absolute;bottom:0;right:0;font-size:8px;">{{mission.order}}</div>
+			            </a>
 			            
 		            </div>
 					
