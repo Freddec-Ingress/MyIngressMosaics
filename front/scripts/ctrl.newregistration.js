@@ -193,6 +193,21 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
 	}
 	
+	$scope.reorderByEnd = function() {
+		
+		var last = $scope.selected[$scope.selected.length - 1];
+		var start = last.order;
+		
+		var index = 0;
+		for (var m of $scope.selected) {
+			
+			index += 1;
+			m.order = start - $scope.selected.length + index;
+		}
+		
+		$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
+	}
+	
 	/* Step #3 management */
 	
 	$scope.mosaic_name = '';
