@@ -170,7 +170,7 @@
 					</div>
 					
 					<div class="item">
-						<button class="btn" ng-click="createMosaic(mosaic);">
+						<button class="btn" ng-click="createMosaic(mosaic);" ng-disabled="!mosaic.name || mosaic.missions.length < 1 || !mosaic.columns || !mosaic.country || !mosaic.region || !mosaic.city">
 							Create
 						</button>
 					</div>
