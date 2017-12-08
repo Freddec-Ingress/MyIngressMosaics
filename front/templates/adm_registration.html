@@ -99,24 +99,24 @@
 					
 				</div>
 				
-				<div class="row mt-normal">
+				<div class="row mt-normal align-center">
 					
-					<div class="item text-center">
-						<span class="color-normal">{{mosaic.missions.length}} missions</span>
-					</div>
+					<div class="grow flex align-center">
 						
-					<div class="item text-center">
-						<a ng-click="reorderAscMosaic(mosaic);">Order Asc</a>
+						<div class="item text-center">
+							<span class="color-normal">{{mosaic.missions.length}} missions</span>
+						</div>
+							
+						<div class="item text-center">
+							<a ng-click="reorderAscMosaic(mosaic);">Reorder</a>
+						</div>
+						
+						<div class="item text-center">
+							<a ng-click="reorderDescMosaic(mosaic);">Reverse order</a>
+						</div>
+						
 					</div>
 					
-					<div class="item grow text-center">
-						<a ng-click="reorderDescMosaic(mosaic);">Order Desc</a>
-					</div>
-						
-					<div class="item text-center">
-						<a href="https://ingressmosaik.com/search?f={{mosaic.name}}" target="_blank">IM Name</a>
-					</div>
-						 
 					<div class="item text-center">
 						<a href="https://ingressmosaik.com/search?f={{mosaic.missions[0].creator}}" target="_blank">IM Creator</a>
 					</div>
