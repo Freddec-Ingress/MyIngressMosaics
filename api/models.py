@@ -700,4 +700,4 @@ class Search(models.Model):
 	# Admin displaying
 	
 	def __str__(self):
-		return self.city + ', ' + self.region + ', ' + self.country + ' - ' + mosaic.str()
+		return self.city + ', ' + self.region + ', ' + self.country + ' - ' + str(self.mosaic)

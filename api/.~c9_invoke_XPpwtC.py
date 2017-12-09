@@ -785,11 +785,7 @@ def data_getMosaicsOfCity(request, country, region, name):
 						data['mosaics'].append(mosaic)
 			
 	
-	search = Search(city=name, region=region, country=country)
-	
-	if len(data['mosaics']) > 0:
-		search.mosaic=True
-	
+	search = Search(city=city, region=region, country=country)
 	search.save()
 	
 	return Response(data, status=status.HTTP_200_OK)
