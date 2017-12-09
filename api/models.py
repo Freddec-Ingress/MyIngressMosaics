@@ -683,3 +683,21 @@ class Comment(models.Model):
 		}
 			
 		return data
+
+
+
+@python_2_unicode_compatible
+class Search(models.Model):
+	
+	date = models.DateField(default=datetime.now)
+
+	city = models.TextField()
+	region = models.TextField()
+	country = models.TextField()
+
+	mosaic = models.BooleanField(default=False)
+	
+	# Admin displaying
+	
+	def __str__(self):
+		return self.city + ', ' + self.region + ', ' + self.country + ' - ' + mosaic.str()
