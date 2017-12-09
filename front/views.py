@@ -31,6 +31,8 @@ def sitemap(request):
 	text += '<url><loc>https://www.myingressmosaics.com/map</loc><changefreq>daily</changefreq></url>'
 	text += '<url><loc>https://www.myingressmosaics.com/world</loc><changefreq>daily</changefreq></url>'
 	text += '<url><loc>https://www.myingressmosaics.com/search</loc><changefreq>daily</changefreq></url>'
+	text += '<url><loc>https://www.myingressmosaics.com/profile</loc><changefreq>daily</changefreq></url>'
+	text += '<url><loc>https://www.myingressmosaics.com/registration</loc><changefreq>daily</changefreq></url>'
     
     # Mosaic URLs
     
@@ -49,7 +51,13 @@ def sitemap(request):
 	regions = Region.objects.all()
 	for region in regions:
 		text += '<url><loc>https://www.myingressmosaics.com/world/' + region.country.name + '/' + region.name + '</loc><changefreq>daily</changefreq></url>'
-    
+      
+	# City URLs
+	
+	cities = City.objects.all()
+	for city in cities:
+		text += '<url><loc>https://www.myingressmosaics.com/world/' + city.region.country.name + '/' + city.region.name + '/' + city.name + '</loc><changefreq>daily</changefreq></url>'
+   
 	text += '</urlset>'
     
 	response = HttpResponse(text, content_type = 'text/plain')
