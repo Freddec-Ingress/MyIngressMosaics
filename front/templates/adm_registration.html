@@ -37,7 +37,7 @@
 						<span ng-class="{'color-danger':!isMissionCountValid(mosaic)}">{{mosaic.missions.length}}</span>
 					</div>
 					
-					<div class="item text-center">
+					<div class="item text-center" ng-show="!mosaic.open">
 						<a href="https://ingressmosaik.com/search?f={{mosaic.creator}}" target="_blank">IM Creator</a>
 					</div>
 					
