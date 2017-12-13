@@ -28,17 +28,25 @@
 			<div class="mb-normal">
 				<span class="block">Name</span>
 				<div class="row align-center">
+					
 					<div class="item grow">
 						<input type="text" class="control" ng-model="mosaic.name" />
 					</div>
+					
 					<div class="item text-center" style="width:75px;" ng-show="!mosaic.open">
 						<span ng-class="{'color-danger':!isMissionCountValid(mosaic)}">{{mosaic.missions.length}}</span>
 					</div>
+					
+					<div class="item" ng-show="!mosaic.open">
+						<a href="/registration/{{mosaic.creator}}" target="blank">IM Creator</a>
+					</div>
+					
 					<div class="item" ng-show="!mosaic.open">
 						<button class="btn" ng-click="openMosaic(mosaic);">
 							Open
 						</button>
 					</div>
+					
 				</div>
 			</div>
 			

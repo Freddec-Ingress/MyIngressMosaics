@@ -249,6 +249,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
         				'region': null,
         				'country': null,
         				'missions': [],
+        				'creator': mission.creator,
         			}
         			
         			$scope.mosaics.push(mosaic);
