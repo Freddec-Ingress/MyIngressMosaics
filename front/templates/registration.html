@@ -45,16 +45,19 @@
 				
 				<div class="modal-content">
 					
-					<div class="col">
+					<div class="flex-col">
 						
 						<div class="item">
 							<span class="text-medium color-light block">{{mission_selected.title}}</span>
+						</div>
+						
+						<div class="item">
 							<span class="color-dark block">{{mission_selected.desc}}</span>
 						</div>
 
 					</div>
 					
-					<form class="row mb-small">
+					<form class="flex">
 						
 		            	<div class="item">
 		            		<input type="text" class="control" ng-model="order" ng-init="order=mission_selected.order;">
@@ -68,7 +71,7 @@
 		            	
 					</form>
 					
-					<div class="row">
+					<div class="flex">
 						
                     	<div class="item grow">
                             <a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=17&pll={{mission.startLat}},{{mission.startLng}}" target="blank">
@@ -252,7 +255,7 @@
 			
 			</div>
 			
-			<div class="flex">
+			<div class="flex justify-center">
 				
 				<div class="item text-center">
 					<a ng-click="reorderAsc();">Reorder</a>
@@ -271,21 +274,23 @@
 				</div>
 				
 			</div>
-				
-			<div class="item flex justify-center" style="width:100%; max-width:420px;">
-				
-				<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - {{columns}}) / 2 * 16.666667%);">
+			
+			<div class="flex justify-center">
+				<div class="item flex justify-center" style="width:100%; max-width:420px;">
 					
-		            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / {{columns}});">
+					<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - {{columns}}) / 2 * 16.666667%);">
+						
+			            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / {{columns}});">
+			            </div>
+			            
+			            <a ng-repeat="m in selected | reverse" class="mission-vignet block" style="flex:0 0 calc(100% / {{columns}});" ng-click="displayOrder(m);">
+			                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+			            	<div style="position:absolute;bottom:0;right:0;font-size:8px;">{{m.order}}</div>
+			            </a>
+			            
 		            </div>
-		            
-		            <a ng-repeat="m in selected | reverse" class="mission-vignet block" style="flex:0 0 calc(100% / {{columns}});" ng-click="displayOrder(m);">
-		                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-		            	<div style="position:absolute;bottom:0;right:0;font-size:8px;">{{m.order}}</div>
-		            </a>
-		            
-	            </div>
-				
+					
+				</div>
 			</div>
 			
 			<div class="grow">
@@ -293,7 +298,7 @@
 				<div class="flex justify-center align-center" ng-repeat="mission in selected">
 					
 					<div class="item" style="max-width:50px;min-width:50px;">
-						<input type="text" class="control text-center" ng-model="mission.order" ng-blur="sortMissionsByOrderTitleAsc();">
+						<input type="text" class="control text-center p-none" ng-model="mission.order" ng-blur="sortMissionsByOrderTitleAsc();">
 					</div>
 					
 					<div class="item grow">
