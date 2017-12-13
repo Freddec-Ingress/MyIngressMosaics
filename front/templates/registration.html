@@ -236,64 +236,64 @@
 		
 		<div class="grow flex-col" ng-show="current_step == 2 && !creating">
 			
-			<div class="mt-big flex align-center justify-center">
-
-				<div class="item">
-					Columns
-				</div>
+			<div class="grow flex-col scrollable">
 				
-				<div class="item" style="min-width: 65px; max-width: 65px;">
-					<select class="control" ng-model="columns" ng-change="computeOffset();">
-						<option value="6">6</option>
-						<option value="5">5</option>
-						<option value="4">4</option>
-						<option value="3">3</option>
-						<option value="2">2</option>
-						<option value="1">1</option>
-					</select>
-				</div>
-			
-			</div>
-			
-			<div class="flex justify-center">
-				
-				<div class="item text-center">
-					<a ng-click="reorderAsc();">Reorder</a>
-				</div>
-				
-				<div class="item text-center">
-					<a ng-click="reorderDesc();">Reverse order</a>
-				</div>
-				
-				<div class="item text-center">
-					<a ng-click="reorderAlphaMosaic();">Order Alpha</a>
-				</div>
-				
-				<div class="item text-center">
-					<a ng-click="reorderByEnd();">Order by end</a>
-				</div>
-				
-			</div>
-			
-			<div class="flex justify-center">
-				<div class="item flex justify-center" style="width:100%; max-width:420px;">
+				<div class="mt-big flex align-center justify-center">
+	
+					<div class="item">
+						Columns
+					</div>
 					
-					<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - {{columns}}) / 2 * 16.666667%);">
+					<div class="item" style="min-width: 65px; max-width: 65px;">
+						<select class="control" ng-model="columns" ng-change="computeOffset();">
+							<option value="6">6</option>
+							<option value="5">5</option>
+							<option value="4">4</option>
+							<option value="3">3</option>
+							<option value="2">2</option>
+							<option value="1">1</option>
+						</select>
+					</div>
+				
+				</div>
+				
+				<div class="flex justify-center">
+					
+					<div class="item text-center">
+						<a ng-click="reorderAsc();">Reorder</a>
+					</div>
+					
+					<div class="item text-center">
+						<a ng-click="reorderDesc();">Reverse order</a>
+					</div>
+					
+					<div class="item text-center">
+						<a ng-click="reorderAlphaMosaic();">Order Alpha</a>
+					</div>
+					
+					<div class="item text-center">
+						<a ng-click="reorderByEnd();">Order by end</a>
+					</div>
+					
+				</div>
+				
+				<div class="flex justify-center">
+					<div class="item flex justify-center" style="width:100%; max-width:420px;">
 						
-			            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / {{columns}});">
+						<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - {{columns}}) / 2 * 16.666667%);">
+							
+				            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / {{columns}});">
+				            </div>
+				            
+				            <a ng-repeat="m in selected | reverse" class="mission-vignet block" style="flex:0 0 calc(100% / {{columns}});" ng-click="displayOrder(m);">
+				                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+				            	<div style="position:absolute;bottom:0;right:0;font-size:8px;">{{m.order}}</div>
+				            </a>
+				            
 			            </div>
-			            
-			            <a ng-repeat="m in selected | reverse" class="mission-vignet block" style="flex:0 0 calc(100% / {{columns}});" ng-click="displayOrder(m);">
-			                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-			            	<div style="position:absolute;bottom:0;right:0;font-size:8px;">{{m.order}}</div>
-			            </a>
-			            
-		            </div>
-					
+						
+					</div>
 				</div>
-			</div>
-			
-			<div class="grow">
 				
 				<div class="flex justify-center align-center" ng-repeat="mission in selected">
 					
@@ -345,9 +345,9 @@
 		
 		<div class="grow flex-col" ng-show="current_step == 3 && !creating">
 			
-			<div class="grow col p-normal mt-big pr-xl-none pl-xl-non">
+			<div class="grow flex-col scrollable">
 			
-				<div class="item flex-col">
+				<div class="mt-big item flex-col">
 					<span>Mosaic name</span>
 					<input type="text" class="control" ng-model="mosaic_name" />
 				</div>
@@ -414,7 +414,7 @@
 		
 		<div class="grow flex-col" ng-show="current_step == 4 && !creating">
 			
-			<div class="grow flex-col">
+			<div class="grow flex-col scrollable">
 				
 				<div class="text-center mt-big">
 					<span class="text-big color-light">
