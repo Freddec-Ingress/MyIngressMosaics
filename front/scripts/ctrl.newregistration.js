@@ -208,6 +208,11 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
 	}
 	
+	$scope.sortMissionsByOrderTitleAsc = function() {
+		
+		$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
+	}
+	
 	/* Step #3 management */
 	
 	$scope.mosaic_name = '';
