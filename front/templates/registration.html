@@ -367,11 +367,19 @@
 					<input type="text" class="control" ng-model="city_name" />
 				</div>
 				
-				<div class="mt-big item flex-col grow" style="overflow-y:auto;">
-					<span class="block color-dark" ng-repeat="mission in selected">
-						<span class="text-right color-muted" style="width:25px;">#{{$index}}.</span>
-						{{mission.title}}
-					</span>
+				<div class="mt-big flex-col">
+					
+					<div class="flex" ng-repeat="mission in selected">
+						
+						<div class="item" style="min-width:25px;max-width:25px;">
+							<span class="block text-right color-muted">#{{$index}}.</span>
+						</div>
+						
+						<div class="item color-dark">
+							{{mission.title}}
+						</div>
+					</div>
+					
 				</div>
 			
 			</div>
@@ -406,64 +414,68 @@
 		
 		<div class="grow flex-col" ng-show="current_step == 4 && !creating">
 			
-			<div class="text-center mt-big">
-				<span class="text-big color-light">
-					{{mosaic_name}}
-				</span>
-			</div>
-			
-			<div class="item flex justify-center">
-
-				<div class="flex justify-center" style="width:420px; max-width:420px;">
-					
-					<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - {{columns}}) / 2 * 16.666667%);">
+			<div class="grow flex-col">
+				
+				<div class="text-center mt-big">
+					<span class="text-big color-light">
+						{{mosaic_name}}
+					</span>
+				</div>
+				
+				<div class="item flex justify-center">
+	
+					<div class="flex justify-center" style="width:100%; max-width:420px;">
 						
-			            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / {{columns}});">
+						<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - {{columns}}) / 2 * 16.666667%);">
+							
+				            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / {{columns}});">
+				            </div>
+				            
+				            <div ng-repeat="m in selected | reverse" class="mission-vignet block" style="flex:0 0 calc(100% / {{columns}});">
+				                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+				            	<div style="position:absolute;bottom:0;right:0;font-size:8px;">{{m.order}}</div>
+				            </div>
+				            
 			            </div>
-			            
-			            <div ng-repeat="m in selected | reverse" class="mission-vignet block" style="flex:0 0 calc(100% / {{columns}});">
-			                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-			            	<div style="position:absolute;bottom:0;right:0;font-size:8px;">{{m.order}}</div>
-			            </div>
-			            
-		            </div>
+						
+					</div>
+	
+				</div>
+				
+				<div class="flex">
+					
+					<div class="item">
+						<span class="color-muted">Details</span>
+					</div>
 					
 				</div>
-
-			</div>
-			
-			<div class="flex">
 				
-				<div class="item">
-					<span class="color-muted">Details</span>
+				<div class="flex ml-big align-center">
+					
+					<div class="item">
+						<flag country="country_name"></flag>
+					</div>
+					
+					<div class="item">
+						<span class="color-normal">{{country_name}}</span>
+					</div>
+					
+					<div class="item">
+						<span class="color-normal">{{region_name}}</span>
+					</div>
+					
+					<div class="item">
+						<span class="color-normal">{{city_name}}</span>
+					</div>
+					
 				</div>
 				
-			</div>
-			
-			<div class="flex ml-big align-center">
+				<div class="flex ml-big">
+					
+					<div class="item">
+						<span class="color-normal">{{selected.length}} missions</span>
+					</div>
 				
-				<div class="item">
-					<flag country="country_name"></flag>
-				</div>
-				
-				<div class="item">
-					<span class="color-normal">{{country_name}}</span>
-				</div>
-				
-				<div class="item">
-					<span class="color-normal">{{region_name}}</span>
-				</div>
-				
-				<div class="item">
-					<span class="color-normal">{{city_name}}</span>
-				</div>
-				
-			</div>
-			
-			<div class="flex ml-big">
-				
-				<div class="item">
-					<span class="color-normal">{{selected.length}} missions</span>
 				</div>
 			
 			</div>
