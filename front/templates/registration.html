@@ -298,7 +298,7 @@
 				<div class="flex justify-center align-center" ng-repeat="mission in selected">
 					
 					<div class="item" style="max-width:50px;min-width:50px;">
-						<input type="text" class="control text-center p-none" ng-model="mission.order" ng-blur="sortMissionsByOrderTitleAsc();">
+						<input type="text" class="control text-center" style="padding:0;" ng-model="mission.order" ng-blur="sortMissionsByOrderTitleAsc();">
 					</div>
 					
 					<div class="item grow">
@@ -365,6 +365,14 @@
 				<div class="item flex-col">
 					<span>City (EN)</span>
 					<input type="text" class="control" ng-model="city_name" />
+				</div>
+				
+				<div class="item flex-col">
+					<span>Missions</span>
+					<span class="block color-dark" ng-repeat="mission in selected">
+						<span class="color-muted">#{{$index}}.</span>
+						{{mission.title}}
+					</span>
 				</div>
 			
 			</div>
