@@ -345,43 +345,39 @@
 		
 		<div class="grow flex-col" ng-show="current_step == 3 && !creating">
 			
-			<div class="grow flex-col scrollable">
+			<div class="mt-big item flex-col">
+				<span>Mosaic name</span>
+				<input type="text" class="control" ng-model="mosaic_name" />
+			</div>
+		
+			<div class="item flex-col">
+				<span>Country (EN)</span>
+				<input type="text" class="control" ng-model="country_name" />
+			</div>
+		
+			<div class="item flex-col">
+				<span>Region (EN)</span>
+				<input type="text" class="control" ng-model="region_name" />
+			</div>
+		
+			<div class="item flex-col">
+				<span>City (EN)</span>
+				<input type="text" class="control" ng-model="city_name" />
+			</div>
 			
-				<div class="mt-big item flex-col">
-					<span>Mosaic name</span>
-					<input type="text" class="control" ng-model="mosaic_name" />
-				</div>
-			
-				<div class="item flex-col">
-					<span>Country (EN)</span>
-					<input type="text" class="control" ng-model="country_name" />
-				</div>
-			
-				<div class="item flex-col">
-					<span>Region (EN)</span>
-					<input type="text" class="control" ng-model="region_name" />
-				</div>
-			
-				<div class="item flex-col">
-					<span>City (EN)</span>
-					<input type="text" class="control" ng-model="city_name" />
-				</div>
+			<div class="grow mt-big flex-col scrollable">
 				
-				<div class="mt-big flex-col">
+				<div class="flex" ng-repeat="mission in selected">
 					
-					<div class="flex" ng-repeat="mission in selected">
-						
-						<div class="item" style="min-width:25px;max-width:25px;">
-							<span class="block text-right color-muted">#{{$index}}.</span>
-						</div>
-						
-						<div class="item color-dark">
-							{{mission.title}}
-						</div>
+					<div class="item" style="min-width:35px;max-width:35px;">
+						<span class="block text-right color-muted">#{{$index + 1}}.</span>
 					</div>
 					
+					<div class="item color-dark">
+						{{mission.title}}
+					</div>
 				</div>
-			
+				
 			</div>
 			
 			<hr>
@@ -442,15 +438,7 @@
 	
 				</div>
 				
-				<div class="flex">
-					
-					<div class="item">
-						<span class="color-muted">Details</span>
-					</div>
-					
-				</div>
-				
-				<div class="flex ml-big align-center">
+				<div class="flex justify-center align-center">
 					
 					<div class="item">
 						<flag country="country_name"></flag>
@@ -470,7 +458,7 @@
 					
 				</div>
 				
-				<div class="flex ml-big">
+				<div class="flex justify-center ">
 					
 					<div class="item">
 						<span class="color-normal">{{selected.length}} missions</span>
