@@ -239,7 +239,7 @@
 					Columns
 				</div>
 				
-				<div class="item" style="min-width: 75px; max-width: 75px;">
+				<div class="item" style="min-width: 65px; max-width: 65px;">
 					<select class="control" ng-model="columns" ng-change="computeOffset();">
 						<option value="6">6</option>
 						<option value="5">5</option>
@@ -272,7 +272,7 @@
 				
 			</div>
 				
-			<div class="flex justify-center" style="width:420px; max-width:420px;">
+			<div class="item flex justify-center" style="width:100%; max-width:420px;">
 				
 				<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - {{columns}}) / 2 * 16.666667%);">
 					
@@ -292,8 +292,8 @@
 				
 				<div class="flex justify-center align-center" ng-repeat="mission in selected">
 					
-					<div class="item" style="max-width:75px;min-width:75px;">
-						<input type="text" class="control" ng-model="mission.order" ng-blur="sortMissionsByOrderTitleAsc();">
+					<div class="item" style="max-width:50px;min-width:50px;">
+						<input type="text" class="control text-center" ng-model="mission.order" ng-blur="sortMissionsByOrderTitleAsc();">
 					</div>
 					
 					<div class="item grow">
