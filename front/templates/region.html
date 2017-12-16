@@ -40,7 +40,7 @@
 			
 	    	</div>
     		
-    		<div class="item mt-big">
+    		<div class="item mt-big self-start pr-xl-none pl-xl-none">
 		    	<span class="text-center">{{region.mosaic_count}} mosaics in {{cities.length}} cities</span>
 	    	</div>
 	    	
@@ -70,12 +70,12 @@
 			
 			<div class="" ng-repeat="city in cities | reverse" ng-show="city.name[0] == current_index">
 				
-				<span class="block mt-big p-normal pl-xl-none pr-xl-none text-medium">{{city.name}}</span>
+				<span class="block mt-big p-normal pl-xl-none pr-xl-none text-normal">{{city.name}}</span>
 				<hr>
 				
 	    		<div ng-repeat="mosaic in city.mosaics">
 	    			
-	    			<a class="flex align-center" href="/mosaic/{{mosaic.ref}}" target="blank">
+	    			<a class="flex align-center pt-small pb-small" href="/mosaic/{{mosaic.ref}}" target="blank">
 	
 	    				<div class="item flex justify-center pl-xl-none" style="width:125px; max-width:125px;">
 	    					
@@ -96,11 +96,6 @@
 	    					
 	    					<span class="text-medium color-light block mb-small">{{mosaic.title}}</span>
 	
-							<div class="flex mb-small">
-								<flag class="mr-small" country="mosaic.city.region.country.name"></flag>
-								<span class="color-normal">{{mosaic.city.name}}</span>
-							</div>
-							
 	    					<span class="block color-muted">
 								{{mosaic.missions.length}} missions
 	    					</span>
