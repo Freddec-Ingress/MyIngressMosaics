@@ -8,7 +8,7 @@ angular.module('FrontModule.controllers').controller('NewWorldCtrl', function($s
 		$scope.countries = response.countries;
 		
 		$scope.countries.sort(function(a, b) {
-			return a.mosaic_count - b.mosaic_count;
+			return b.mosaic_count - a.mosaic_count;
 		});
 		
         var input = document.getElementById('city_input');
