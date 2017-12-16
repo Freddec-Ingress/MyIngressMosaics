@@ -2,12 +2,12 @@
 
 {% block extra-head %}
 
-	<title>MIM - {{city_name|safe}}, {{region_name|safe}}, {{country_name|safe}}</title>
+	<title>MIM - {{country_label}}, {{region_label}}, {{city_label}}</title>
 
-	<meta property="og:url" content="https://www.myingressmosaics.com/world/{{country_name|safe}}/{{region_name|safe}}/{{city_name|safe}}">
+	<meta property="og:url" content="https://www.myingressmosaics.com/world/{{country_label}}/{{region_label}}/{{city_label}}">
 	<meta property="og:type" content="website">
-	<meta property="og:title" content="MyIngressMosaics">
-	<meta property="og:description" content="Ingress Mosaics, Banners and Mission series">
+	<meta property="og:title" content="MIM - {{country_label}}, {{region_label}}, {{city_label}}">
+	<meta property="og:description" content="Ingress mosaics in {{city_label}}, {{region_label}}, {{country_label}}">
 
 {% endblock %}
 

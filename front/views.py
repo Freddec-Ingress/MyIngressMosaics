@@ -157,7 +157,7 @@ def world(request):
 
 def city(request, country, region, city):
 	
-	context = { 'country_name':re.escape(country), 'region_name':re.escape(region), 'city_name':re.escape(city) }
+	context = { 'country_label':country, 'region_label':region, 'city_label':city, 'country_name':re.escape(country), 'region_name':re.escape(region), 'city_name':re.escape(city) }
 	return render(request, 'city.html', context)
 
 
