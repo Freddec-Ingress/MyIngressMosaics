@@ -5,7 +5,11 @@ angular.module('FrontModule.controllers').controller('NewWorldCtrl', function($s
 	API.sendRequest('/api/world/', 'GET').then(function(response) {
 
 		$scope.mosaic_count = response.mosaic_count;
-		$scope.city_count = response.city_count;
+		$scope.countries = response.countries;
+		
+		$scope.countries.sort(function(a, b) {
+			return a.mosaic_count - b.mosaic_count;
+		});
 		
         var input = document.getElementById('city_input');
         var options = {
@@ -44,32 +48,17 @@ angular.module('FrontModule.controllers').controller('NewWorldCtrl', function($s
         	}
         	else {
         		
-				API.sendRequest('/api/city/' + country_name + '/' + region_name + '/' + city_name + '/', 'GET').then(function(response) {
-					
-					$scope.city = response.city;
-					$scope.mosaics = response.mosaics;
-					
-					$scope.mosaics.sort(function(a, b) {
-						
-						if (a.title > b.title) return 1;
-						if (a.title < b.title) return -1;
-						
-						return 0;
-					});
-					
-					for (var mosaic of $scope.mosaics) {
-						
-						var temp = 0;
-						if (mosaic.missions.length > mosaic.cols) {
-							temp = mosaic.cols - mosaic.missions.length % mosaic.cols;
-							if (temp < 0 || temp > (mosaic.cols - 1)) temp = 0;
-						}
-						
-						mosaic.offset = new Array(temp);
-					}
-			
+        		API.sendRequest('/api/city/' + country_name + '/' + region_name + '/' + city_name + '/', 'GET').then(function(response) {
+        		
+        			$scope.city = response.city;
+        			$scope.mosaics = response.mosaics;
+        			
+        			if ($scope.mosaics && $scope.mosaics.length > 0) {
+						$window.location.href = '/world/' + country_name + '/' + region_name + '/' + city_name;
+        			}
+
 					$scope.flag_searching = false;
-				});
+        		});
         	}
         });
 

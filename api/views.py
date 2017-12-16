@@ -636,8 +636,20 @@ def mission_order(request):
 def data_getMosaicsByCountry(request):
 	
 	data = {
-		'mosaic_count':Mosaic.objects.all().count(), 
+		'mosaic_count': Mosaic.objects.all().count(),
+		'countries': [],
 	}
+	
+	results = Country.objects.all();
+	for country in results:
+		
+		item_data = {
+			'name':country.name,
+			'locale':country.locale,
+			'mosaic_count':Mosaic.objects.filter(city__region__country=country).count(),
+		}
+		
+		data['countries'].append(item_data)
 
 	return Response(data, status=status.HTTP_200_OK)
 
