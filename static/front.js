@@ -2373,6 +2373,8 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	
 	$scope.refreshMissions = function(text) {
 		
+		$scope.missions = [];
+		
 		if (!text) return;
 		
 		if (text.length < 3) return;
@@ -2380,8 +2382,6 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		$scope.searchText = text;
 		
 		$scope.refreshing = true;
-		
-		$scope.missions = [];
 		
 		var data = { 'text':text };
 		API.sendRequest('/api/new_missions/', 'POST', {}, data).then(function(response) {
