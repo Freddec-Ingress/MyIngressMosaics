@@ -739,32 +739,32 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 	data = {
 		'region_data': None,
 		'index_data': [
-			{'letter':'a', 'cities': []},
-			{'letter':'b', 'cities': []},
-			{'letter':'c', 'cities': []},
-			{'letter':'d', 'cities': []},
-			{'letter':'e', 'cities': []},
-			{'letter':'f', 'cities': []},
-			{'letter':'g', 'cities': []},
-			{'letter':'h', 'cities': []},
-			{'letter':'i', 'cities': []},
-			{'letter':'j', 'cities': []},
-			{'letter':'k', 'cities': []},
-			{'letter':'l', 'cities': []},
-			{'letter':'m', 'cities': []},
-			{'letter':'n', 'cities': []},
-			{'letter':'o', 'cities': []},
-			{'letter':'p', 'cities': []},
-			{'letter':'q', 'cities': []},
-			{'letter':'r', 'cities': []},
-			{'letter':'s', 'cities': []},
-			{'letter':'t', 'cities': []},
-			{'letter':'u', 'cities': []},
-			{'letter':'v', 'cities': []},
-			{'letter':'w', 'cities': []},
-			{'letter':'x', 'cities': []},
-			{'letter':'y', 'cities': []},
-			{'letter':'z', 'cities': []},
+			{'letter':'A', 'cities': []},
+			{'letter':'B', 'cities': []},
+			{'letter':'C', 'cities': []},
+			{'letter':'D', 'cities': []},
+			{'letter':'E', 'cities': []},
+			{'letter':'F', 'cities': []},
+			{'letter':'G', 'cities': []},
+			{'letter':'H', 'cities': []},
+			{'letter':'I', 'cities': []},
+			{'letter':'J', 'cities': []},
+			{'letter':'K', 'cities': []},
+			{'letter':'L', 'cities': []},
+			{'letter':'M', 'cities': []},
+			{'letter':'N', 'cities': []},
+			{'letter':'O', 'cities': []},
+			{'letter':'P', 'cities': []},
+			{'letter':'Q', 'cities': []},
+			{'letter':'R', 'cities': []},
+			{'letter':'S', 'cities': []},
+			{'letter':'T', 'cities': []},
+			{'letter':'U', 'cities': []},
+			{'letter':'V', 'cities': []},
+			{'letter':'W', 'cities': []},
+			{'letter':'X', 'cities': []},
+			{'letter':'Y', 'cities': []},
+			{'letter':'Z', 'cities': []},
 		],
 	}
 	
@@ -787,7 +787,7 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 			mosaic_data = mosaic_obj.overviewSerialize()
 			city_data['mosaics'].append(mosaic_data);
 			
-		first_letter = city_data['name'].lower()[0]
+		first_letter = city_data['name'].upper()[0]
 		for index in data['index_data']:
 			if index['letter'] == first_letter:
 				index['cities'].append(city_data);

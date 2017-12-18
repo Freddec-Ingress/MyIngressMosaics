@@ -3273,8 +3273,6 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 			$scope.region = response.region_data;
 			$scope.indexes = response.index_data;
 			
-			console.log($scope.indexes);
-			
 			/* Index & Offset */
 			
 			for (var index of $scope.indexes) {
