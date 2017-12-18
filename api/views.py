@@ -798,9 +798,7 @@ def data_getMosaicsOfCity(request, country, region, name):
 						
 	if len(data['mosaics']) < 1:
 		search = Search(city=name, region=region, country=country)
-		search.mosaic=True
-	
-	search.save()
+		search.save()
 	
 	return Response(data, status=status.HTTP_200_OK)
 
@@ -841,7 +839,11 @@ def data_newSearchForMissions(request):
 			data['missions'].append(item.overviewSerialize())
 			
 	else:
+		
 		data = { 'missions': None, }
+		
+		search = Search(name=request.data['text'])
+		search.save()
 	
 	return Response(data, status=status.HTTP_200_OK)
     
