@@ -401,9 +401,17 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 
 			for (var mission of $scope.selected) {
 				
-				var index = $scope.missions.indexOf(mission);
-				$scope.missions.splice(index, 1);
+				var index = -1;
+				for (var test of $scope.missions) {
+					
+					index += 1;
+					if (test.ref == mission.ref) break;
+				}
+				
+				if (index != -1) $scope.missions.splice(index, 1);
 			}
+			
+			if ($scope.missions.length < 1) $scope.missions = null;
 			
 			$scope.selected = [];
 			
