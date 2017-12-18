@@ -738,7 +738,6 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 	
 	data = {
 		'region_data': None,
-		'list_of_city_data': [],
 		'index_data': [
 			{'letter':'a', 'cities': []},
 			{'letter':'b', 'cities': []},
@@ -793,9 +792,7 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 			if index['letter'] == first_letter:
 				index['cities'].append(city_data);
 				break
-		
-		data['list_of_city_data'].append(city_data);
-	
+
 	return Response(data, status=status.HTTP_200_OK)
 
 

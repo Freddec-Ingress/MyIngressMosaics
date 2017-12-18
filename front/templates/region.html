@@ -41,7 +41,7 @@
 	    	</div>
     		
     		<div class="item mt-big self-start pr-xl-none pl-xl-none">
-		    	<span class="text-center">{{region.mosaic_count}} mosaics in {{cities.length}} cities</span>
+		    	<span class="text-center pl-small pl-xl-none">{{region.mosaic_count}} mosaics in {{cities.length}} cities</span>
 	    	</div>
 	    	
 		</div>
@@ -54,9 +54,9 @@
 				<div class="item grow" style="overflow-x:auto;">
 					<div id="index_container" class="row">
 					
-						<div class="item" ng-repeat="index in indexes track by $index">
+						<div class="item" ng-repeat="index in indexes track by $index" ng-show="index.cities.length > 0">
 							<a class="badge" ng-click="setCurrentIndex(index);" ng-class="{'transparent color-link': current_index!=index}">
-								{{index}}
+								{{index.letter}}
 							</a>
 						</div>
 					
@@ -68,7 +68,7 @@
 		
 		<div class="mb-big">
 			
-			<div class="" ng-repeat="city in cities | reverse" ng-show="city.name[0] == current_index">
+			<div ng-repeat="city in current_index.cities | reverse">
 				
 				<span class="block mt-big p-normal pl-xl-none pr-xl-none text-normal">{{city.name}}</span>
 				<hr>
