@@ -27,7 +27,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	
 	$scope.refreshMissions = function(text) {
 		
-		$scope.missions = [];
+		$scope.missions = null;
 		
 		if (!text) return;
 		
