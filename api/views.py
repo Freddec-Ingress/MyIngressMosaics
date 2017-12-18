@@ -739,6 +739,34 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 	data = {
 		'region_data': None,
 		'list_of_city_data': [],
+		'index_data': [
+			{'letter':'a', 'cities': []},
+			{'letter':'b', 'cities': []},
+			{'letter':'c', 'cities': []},
+			{'letter':'d', 'cities': []},
+			{'letter':'e', 'cities': []},
+			{'letter':'f', 'cities': []},
+			{'letter':'g', 'cities': []},
+			{'letter':'h', 'cities': []},
+			{'letter':'i', 'cities': []},
+			{'letter':'j', 'cities': []},
+			{'letter':'k', 'cities': []},
+			{'letter':'l', 'cities': []},
+			{'letter':'m', 'cities': []},
+			{'letter':'n', 'cities': []},
+			{'letter':'o', 'cities': []},
+			{'letter':'p', 'cities': []},
+			{'letter':'q', 'cities': []},
+			{'letter':'r', 'cities': []},
+			{'letter':'s', 'cities': []},
+			{'letter':'t', 'cities': []},
+			{'letter':'u', 'cities': []},
+			{'letter':'v', 'cities': []},
+			{'letter':'w', 'cities': []},
+			{'letter':'x', 'cities': []},
+			{'letter':'y', 'cities': []},
+			{'letter':'z', 'cities': []},
+		],
 	}
 	
 	# Region data
@@ -752,11 +780,19 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 	
 	for city_obj in region_obj.cities.all():
 	
-		city_data = { 'name':city_obj.name, 'mosaics': [] }
+		city_data = { 'name':city_obj.name, 'locale':city_obj.locale, 'mosaics': [] }
 		
-		for mosaic_obj in city_obj.mosaics.all().annotate(Count('missions')).order_by('missions__count', 'title'):
+		mosaics = city_obj.mosaics.all().annotate(Count('missions')).order_by('missions__count', 'title')
+		for mosaic_obj in mosaics:
+			
 			mosaic_data = mosaic_obj.overviewSerialize()
 			city_data['mosaics'].append(mosaic_data);
+			
+		first_letter = city_data['name'].lower()[0]
+		for index in data['index_data']:
+			if index['letter'] == first_letter:
+				index['cities'].append(city_data);
+				break
 		
 		data['list_of_city_data'].append(city_data);
 	
