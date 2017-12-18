@@ -795,11 +795,9 @@ def data_getMosaicsOfCity(request, country, region, name):
 						
 						mosaic = item.overviewSerialize()
 						data['mosaics'].append(mosaic)
-			
-	
-	search = Search(city=name, region=region, country=country)
-	
-	if len(data['mosaics']) > 0:
+						
+	if len(data['mosaics']) < 1:
+		search = Search(city=name, region=region, country=country)
 		search.mosaic=True
 	
 	search.save()

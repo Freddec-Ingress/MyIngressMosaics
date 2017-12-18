@@ -691,13 +691,18 @@ class Search(models.Model):
 	
 	date = models.DateField(default=datetime.now)
 
-	city = models.TextField()
-	region = models.TextField()
-	country = models.TextField()
+	city = models.TextField(null=True, blank=True)
+	region = models.TextField(null=True, blank=True)
+	country = models.TextField(null=True, blank=True)
 
-	mosaic = models.BooleanField(default=False)
+	name = models.TextField(null=True, blank=True)
 	
 	# Admin displaying
 	
 	def __str__(self):
-		return self.city + ', ' + self.region + ', ' + self.country + ' - ' + str(self.mosaic)
+		
+		if self.city and self.region and self.country:
+			return self.city + ', ' + self.region + ', ' + self.country
+			
+		if self.name:
+			return self.name
