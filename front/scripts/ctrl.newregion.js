@@ -37,6 +37,14 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 					}
 				}
 				
+				index.cities.sort(function(a, b) {
+					
+					if (a.name > b.name) return 1;
+					if (a.name < b.name) return -1;
+					
+					return 0;
+				});
+				
 				if (!$scope.current_index && index.cities.length > 0) $scope.current_index = index;
 			}
 			
