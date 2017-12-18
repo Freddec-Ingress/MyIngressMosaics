@@ -94,14 +94,38 @@
 		
 		<div class="grow flex-col" ng-show="user && current_step == 1 && !creating">
 			
+			<div class="mt-big self-stretch item flex-col pr-xl-none pl-xl-none">
+				
+				<div class="item pb-none pr-xl-none pl-xl-none">
+					<span class="color-normal">Tell us name, city and country of mosaic you want us to register</span>
+				</div>
+				
+				<div class="flex">
+					
+					<div class="item pl-xl-none grow ">
+						<input class="control" placeholder="Mosaic name, city and country" ng-model="requestText" />
+					</div>
+					
+					<div class="item pr-xl-none">
+						<button class="btn" type="submit" ng-click="sendRequest(requestText);">
+							Send
+						</button>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+			<hr class="mt-normal">
+			
 			<div ng-if="!user.authenticated" class="self-center">
 			    
-			    <div class="p-normal mt-big" style="max-width:300px;">
+			    <div class="p-normal mt-normal">
 			    	
 			    	<div class="col">
 			    	
 					    <div class="item text-center">
-						    To register mosaics you have to sign in.
+						    To register mosaics by yourself you have to sign in.
 					    </div>
 
 				    	<div class="item flex justify-center">
@@ -118,10 +142,10 @@
 			
 			<div class="grow flex-col" ng-if="user.authenticated">
 				
-				<div class="mt-big item flex-col align-stretch pr-xl-none pl-xl-none">
+				<div class="mt-normal item flex-col align-stretch pr-xl-none pl-xl-none">
 					
 					<div class="item pb-none pr-xl-none pl-xl-none">
-						<span class="color-normal">Search for missions to include in mosaic</span>
+						<span class="color-normal">Search for registered missions</span>
 					</div>
 					
 					<form class="flex">

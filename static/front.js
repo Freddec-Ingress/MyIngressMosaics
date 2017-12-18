@@ -2369,6 +2369,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	$scope.refreshing = false;
 	
 	$scope.searchText = '';
+	$scope.requestText = '';
 	
 	$scope.refreshMissions = function(text) {
 		
@@ -2435,6 +2436,21 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 				$scope.toggleSelectMission(mission);
 			}
 		}
+	}
+	
+	$scope.sendRequest = function() {
+		
+		if (!$scope.requestText) return;
+		
+		if ($scope.requestText.length < 3) return;
+		
+		var data = { 'text':$scope.requestText };
+		API.sendRequest('/api/new_missions/', 'POST', {}, data).then(function(response) {
+
+			$scope.requestText = '';
+			
+			toastr.success('Request sent!');
+		});
 	}
 	
 	/* Step #2 management */
