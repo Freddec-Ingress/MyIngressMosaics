@@ -70,7 +70,11 @@
 			
 			<div ng-repeat="city in current_index.cities | reverse">
 				
-				<span class="block mt-big p-normal pl-xl-none pr-xl-none text-normal">{{city.name}}</span>
+				<div class="mt-big p-normal pl-xl-none pr-xl-none">
+					<span class="text-normal">{{city.name}}</span>
+					<span class="text-dark ml-normal" ng-show="city.locale">{{city.locale}}</span>
+				</div>
+				
 				<hr>
 				
 	    		<div ng-repeat="mosaic in city.mosaics">
