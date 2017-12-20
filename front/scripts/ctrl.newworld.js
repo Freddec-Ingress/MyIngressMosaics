@@ -40,6 +40,8 @@ angular.module('FrontModule.controllers').controller('NewWorldCtrl', function($s
         		if (addressType == 'locality') city_name = place.address_components[i]['long_name'];
         	}
         	
+        	console.log(place.address_components);
+        	
         	if (!country_name || !region_name || !city_name) {
         		
         		$scope.flag_city_unknown = true;
