@@ -44,15 +44,13 @@
 			
 		</div>
 		
-		<div class="flex-col mt-big mb-big">
+		<div class="mt-big mb-big">
 			
-			<div class="item grow">
-				<hr/>
-			</div>
+			<hr/>
 
-    		<div ng-repeat="mosaic in mosaics">
+    		<div ng-repeat="mosaic in city.mosaics">
     			
-    			<a class="flex align-center" href="/mosaic/{{mosaic.ref}}" target="blank">
+    			<a class="flex align-center pt-small pb-small" href="/mosaic/{{mosaic.ref}}" target="blank">
 
     				<div class="item flex justify-center pl-xl-none" style="width:125px; max-width:125px;">
     					
@@ -71,7 +69,7 @@
     				
     				<div class="item grow">
     					
-    					<span class="text-medium color-light block mb-small">{{mosaic.title}}</span>
+    					<span class="text-medium color-light block">{{mosaic.title}}</span>
 
     					<span class="block color-muted">
 							{{mosaic.missions.length}} missions
