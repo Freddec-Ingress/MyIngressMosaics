@@ -3283,6 +3283,8 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 			$scope.region = response.region_data;
 			$scope.indexes = response.index_data;
 			
+			$scope.city_count = 0;
+			
 			/* Index & Offset */
 			
 			for (var index of $scope.indexes) {
@@ -3309,6 +3311,8 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 				});
 				
 				if (!$scope.current_index && index.cities.length > 0) $scope.current_index = index;
+				
+				$scope.city_count += index.cities.length;
 			}
 			
 			$scope.loaded = true;
