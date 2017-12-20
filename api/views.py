@@ -829,7 +829,7 @@ def data_getMosaicsOfCity(request, country, region, name):
 						mosaic = item.overviewSerialize()
 						data['mosaics'].append(mosaic)
 						
-	if len(data['mosaics']) < 1:
+	if len(data['mosaics']) < 1 and not request.user.is_superuser:
 		search = Search(city=name, region=region, country=country)
 		search.save()
 	
@@ -875,8 +875,9 @@ def data_newSearchForMissions(request):
 		
 		data = { 'missions': None, }
 		
-		search = Search(name=request.data['text'])
-		search.save()
+		if not request.user.is_superuser:
+			search = Search(name=request.data['text'])
+			search.save()
 	
 	return Response(data, status=status.HTTP_200_OK)
     
@@ -915,8 +916,9 @@ def data_searchForMosaics(request):
 		
 		data = { 'mosaics': [], }
 		
-		search = Search(name=request.data['text'])
-		search.save()
+		if not request.user.is_superuser:
+			search = Search(name=request.data['text'])
+			search.save()
 	
 	return Response(data, status=status.HTTP_200_OK)
 
