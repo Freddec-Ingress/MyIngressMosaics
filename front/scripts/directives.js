@@ -105,6 +105,10 @@ angular.module('FrontModule.directives').directive('flag', function() {
 		    '       		\'flag-icon-kr\': country == \'South Korea\',' +
 		    '       		\'flag-icon-cl\': country == \'Chile\',' +
 		    '       		\'flag-icon-bg\': country == \'Bulgaria\',' +
+		    '       		\'flag-icon-np\': country == \'Nepal\',' +
+		    '       		\'flag-icon-nc\': country == \'New Caledonia\',' +
+		    '       		\'flag-icon-pk\': country == \'Pakistan\',' +
+		    '       		\'flag-icon-ro\': country == \'Romania\',' +
 	        '        	}"></span>' +
 		'',
 	};
