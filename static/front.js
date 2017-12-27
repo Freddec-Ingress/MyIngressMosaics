@@ -987,6 +987,8 @@ angular.module('FrontModule.directives').directive('flag', function() {
 		    '       		\'flag-icon-br\': country == \'Brazil\',' +
 		    '       		\'flag-icon-lu\': country == \'Luxembourg\',' +
 		    '       		\'flag-icon-kr\': country == \'South Korea\',' +
+		    '       		\'flag-icon-cl\': country == \'Chile\',' +
+		    '       		\'flag-icon-bg\': country == \'Bulgaria\',' +
 	        '        	}"></span>' +
 		'',
 	};
