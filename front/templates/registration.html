@@ -94,30 +94,6 @@
 		
 		<div class="grow flex-col" ng-show="user && current_step == 1 && !creating">
 			
-			<div class="mt-big self-stretch item flex-col pr-xl-none pl-xl-none" ng-hide="(missions && missions.length > 0) || refreshing">
-				
-				<div class="item pb-none pr-xl-none pl-xl-none">
-					<span class="color-normal">Tell us name, city and country of mosaic you want us to register</span>
-				</div>
-				
-				<div class="flex">
-					
-					<div class="item pl-xl-none grow ">
-						<input class="control" placeholder="Mosaic name, city and country" ng-model="requestText" />
-					</div>
-					
-					<div class="item pr-xl-none">
-						<button class="btn" type="submit" ng-click="sendRequest(requestText);">
-							Send
-						</button>
-					</div>
-					
-				</div>
-				
-			</div>
-			
-			<hr class="mt-big" ng-hide="(missions && missions.length > 0) || refreshing">
-			
 			<div ng-if="!user.authenticated" class="self-center">
 			    
 			    <div class="p-normal mt-normal">
@@ -155,7 +131,7 @@
 						</div>
 						
 						<div class="item pr-xl-none">
-							<button class="btn" type="submit" ng-click="refreshMissions(searchText);">
+							<button class="btn" style="width:65px;" type="submit" ng-click="refreshMissions(searchText);">
 								<i class="fa fa-refresh"></i>
 							</button>
 						</div>
@@ -255,6 +231,30 @@
 				</div>
 				
 			</div>			
+			
+			<hr class="mt-big" ng-hide="(missions && missions.length > 0) || refreshing">
+			
+			<div class="mt-big self-stretch item flex-col pr-xl-none pl-xl-none" ng-hide="(missions && missions.length > 0) || refreshing">
+				
+				<div class="item pb-none pr-xl-none pl-xl-none">
+					<span class="color-normal">Tell us name, city and country of mosaic you want us to register</span>
+				</div>
+				
+				<div class="flex">
+					
+					<div class="item pl-xl-none grow ">
+						<input class="control" placeholder="Mosaic name, city and country" ng-model="requestText" />
+					</div>
+					
+					<div class="item pr-xl-none">
+						<button class="btn" style="width:65px;" type="submit" ng-click="sendRequest(requestText);">
+							Send
+						</button>
+					</div>
+					
+				</div>
+				
+			</div>
 			
 		</div>
 		
