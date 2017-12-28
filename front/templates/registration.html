@@ -338,6 +338,12 @@
 			            	<i class="fa fa-trash"></i>
 	            		</a>
 					</div>
+					
+					<div class="item">
+                        <a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=17&pll={{mission.startLat}},{{mission.startLng}}" target="blank">
+			            	<i class="fa fa-external-link"></i>
+	            		</a>
+					</div>
 						
 				</div>
 				
@@ -375,7 +381,7 @@
 			
 			<div class="mt-big item flex-col">
 				<span>Mosaic name</span>
-				<input type="text" class="control" ng-model="mosaic_name" />
+				<input id="name_input" type="text" class="control" ng-model="mosaic_name" />
 			</div>
 		
 			<div class="item flex-col">

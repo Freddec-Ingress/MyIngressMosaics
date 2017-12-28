@@ -2658,7 +2658,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		
 		$scope.mosaic_name = mosaic_name;
 		
-		$scope.$applyAsync();
+		$('#name_input').blur();
 	}
 
 	/* Step #4 management */
