@@ -116,7 +116,7 @@
 				
 			</div>			
 			
-			<div class="grow flex-col" ng-if="user.authenticated">
+			<div class="flex-col" ng-if="user.authenticated">
 				
 				<div class="mt-big item flex-col align-stretch pr-xl-none pl-xl-none">
 					
@@ -139,6 +139,34 @@
 					</form>
 					
 				</div>
+			
+			</div>
+			
+			<hr class="mt-big" ng-hide="(missions && missions.length > 0) || refreshing">
+			
+			<div class="mt-big self-stretch item flex-col pr-xl-none pl-xl-none" ng-hide="(missions && missions.length > 0) || refreshing">
+				
+				<div class="item pb-none pr-xl-none pl-xl-none">
+					<span class="color-normal">Tell us name, city and country of mosaic you want us to register</span>
+				</div>
+				
+				<div class="flex">
+					
+					<div class="item pl-xl-none grow ">
+						<input class="control" placeholder="Mosaic name, city and country" ng-model="requestText" />
+					</div>
+					
+					<div class="item pr-xl-none">
+						<button class="btn" style="width:65px;" type="submit" ng-click="sendRequest(requestText);">
+							Send
+						</button>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+			<div class="grow flex-col" ng-if="user.authenticated">
 				
 				<div class="scrollable mt-big">
 					
@@ -231,30 +259,6 @@
 				</div>
 				
 			</div>			
-			
-			<hr class="mt-big" ng-hide="(missions && missions.length > 0) || refreshing">
-			
-			<div class="mt-big self-stretch item flex-col pr-xl-none pl-xl-none" ng-hide="(missions && missions.length > 0) || refreshing">
-				
-				<div class="item pb-none pr-xl-none pl-xl-none">
-					<span class="color-normal">Tell us name, city and country of mosaic you want us to register</span>
-				</div>
-				
-				<div class="flex">
-					
-					<div class="item pl-xl-none grow ">
-						<input class="control" placeholder="Mosaic name, city and country" ng-model="requestText" />
-					</div>
-					
-					<div class="item pr-xl-none">
-						<button class="btn" style="width:65px;" type="submit" ng-click="sendRequest(requestText);">
-							Send
-						</button>
-					</div>
-					
-				</div>
-				
-			</div>
 			
 		</div>
 		
@@ -508,7 +512,7 @@
 			</div>
 			
 		</div>
-			
+		
 	</div>
 			
 {% endverbatim %}
