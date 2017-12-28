@@ -13,7 +13,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		return false;
 	}
 	
-	$scope.openMosaic = function(mosaic) {
+	$scope.openMosaic = function(mosaic, index) {
 		
 		mosaic.open = true;
 		
@@ -21,6 +21,36 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		
 		mosaic.columns = '6';
 
+	    var inputCity = document.getElementById('city_input_' + index.toString());
+	    var options = {
+			types: ['(cities)'],
+		};
+		
+	    var autocomplete = new google.maps.places.Autocomplete(inputCity, options);
+	        
+	    autocomplete.addListener('place_changed', function() {
+	    	
+			mosaic.city = '';
+			mosaic.region = '';
+			mosaic.country = '';
+	    	
+	    	var place = autocomplete.getPlace();
+	    	for (var i = 0; i < place.address_components.length; i++) {
+	    		
+	    		var addressType = place.address_components[i].types[0];
+	    		if (addressType == 'country') mosaic.country = place.address_components[i]['long_name'];
+	    		if (addressType == 'administrative_area_level_1') mosaic.region = place.address_components[i]['long_name'];
+	    		if (addressType == 'administrative_area_level_2' && !mosaic.region) mosaic.region = place.address_components[i]['long_name'];
+	    		if (addressType == 'locality') mosaic.city = place.address_components[i]['long_name'];
+	    	}
+	    	
+	    	console.log(place.address_components);
+	    	
+	     	console.log(mosaic.country);
+	    	console.log(mosaic.region);
+	    	console.log(mosaic.city);
+		});
+	
 		var geocoder = new google.maps.Geocoder;
 		
 		var latlng = {
@@ -38,83 +68,18 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 				
 				if (components) {
 
-					var admin2 = null;
-					var admin3 = null;
+					var city = null;
+					var region = null;
+					var country = null;
 					
 					for (var item of components) {
 						
-						if (item.types[0] == 'country') mosaic.country = item.long_name;
-						if (item.types[0] == 'locality') mosaic.city = item.long_name;
-						if (item.types[0] == 'administrative_area_level_1') mosaic.region = item.long_name;
-						if (item.types[0] == 'administrative_area_level_2') admin2 = item.long_name;
-						if (item.types[0] == 'administrative_area_level_3') admin3 = item.long_name;
+						if (item.types[0] == 'country') country = item.long_name;
+						if (item.types[0] == 'locality') city = item.long_name;
+						if (item.types[0] == 'administrative_area_level_1') region = item.long_name;
 					}
 					
-					if (!mosaic.city && admin2) mosaic.city = admin2;
-					if (!mosaic.city && admin3) mosaic.city = admin3;
-					
-					/* Country */
-					
-					API.sendRequest('/api/country/list/', 'POST').then(function(response) {
-						
-						var countryList = response.countries;
-
-						var cur_country = null;
-						for (var country of countryList) {
-							if (country.name == mosaic.country || country.locale == mosaic.country) {
-								
-								cur_country = country;
-								
-								mosaic.country = country.name;
-								break;
-							}
-						}
-						
-						/* Region */
-						
-						if (cur_country) {
-							
-							var data = {'country_id':cur_country.id};
-							API.sendRequest('/api/region/list/', 'POST', {}, data).then(function(response) {
-								
-								var regionList = response.regions;
-								
-								var cur_region = null;
-								for (var region of regionList) {
-									if (region.name == mosaic.region || region.locale == mosaic.region) {
-										
-										cur_region = region;
-										
-										mosaic.region = region.name;
-										break;
-									}
-								}
-								
-								/* City */
-								
-								if (cur_region) {
-									
-									var data = {'country_id':cur_country.id, 'region_id':cur_region.id};
-									API.sendRequest('/api/city/list/', 'POST', {}, data).then(function(response) {
-										
-										var cityList = response.cities;
-										
-										var cur_city = null;
-										for (var city of cityList) {
-											if (city.name == mosaic.city || city.locale == mosaic.city) {
-												
-												cur_city = city;
-												
-												mosaic.city = city.name;
-											}
-										}
-									});
-								}
-							});
-						}
-					});
-					
-					$scope.$applyAsync();
+					$('#city_input_' + index.toString()).val(country + ', ' + region + ', ' + city);
 				}
 			}
 		});

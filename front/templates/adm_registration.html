@@ -46,7 +46,7 @@
 					</div>
 					
 					<div class="item" ng-show="!mosaic.open">
-						<button class="btn" ng-click="openMosaic(mosaic);">
+						<button class="btn" ng-click="openMosaic(mosaic, $index);">
 							Open
 						</button>
 					</div>
@@ -91,20 +91,10 @@
 								<option value="1">1</option>
 							</select>
 						</div>
-
-						<div class="mb-normal">
-							<span class="block">Country (en)</span>
-							<input type="create" class="control" ng-model="mosaic.country" />
-						</div>
 						
 						<div class="mb-normal">
-							<span class="block">Region (en)</span>
-							<input type="create" class="control" ng-model="mosaic.region" />
-						</div>
-						
-						<div class="mb-normal">
-							<span class="block">City (en)</span>
-							<input type="create" class="control" ng-model="mosaic.city" />
+							<span class="block">City</span>
+							<input id="city_input_{{$index}}" type="create" class="control" />
 						</div>
 						
 					</div>
