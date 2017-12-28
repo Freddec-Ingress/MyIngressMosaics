@@ -376,7 +376,7 @@
 		
 			<div class="item flex-col">
 				<span>City</span>
-				<input id="city_input" type="text" class="control" placeholder="City name" ng-model="searchtext" />
+				<input id="city_input" type="text" class="control" placeholder="City name" />
 			</div>
 			
 			<div class="grow mt-big flex-col scrollable">
@@ -409,7 +409,7 @@
 					</div>
 					
 					<div class="item self-center">
-						<button class="btn" ng-click="open_step(4);" ng-disabled="!mosaic_name || !mosaic_type || !country_name || !region_name || !city_name">
+						<button class="btn" ng-click="open_step(4);" ng-disabled="!mosaic_name || !country_name || !region_name || !city_name">
 							<div class="row">
 								<span class="item">Next</span>
 								<i class="item fa fa-angle-double-right"></i>
