@@ -238,6 +238,31 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	$scope.region_name = '';
 	$scope.country_name = '';
 	
+    var inputCity = document.getElementById('city_input');
+    var options = {
+		types: ['(cities)'],
+	};
+	
+    var autocomplete = new google.maps.places.Autocomplete(inputCity, options);
+        
+    autocomplete.addListener('place_changed', function() {
+    	
+    	var country_name = null;
+    	var region_name = null;
+    	var city_name = null;
+    	
+    	var place = autocomplete.getPlace();
+    	for (var i = 0; i < place.address_components.length; i++) {
+    		
+    		var addressType = place.address_components[i].types[0];
+    		if (addressType == 'country') country_name = place.address_components[i]['long_name'];
+    		if (addressType == 'administrative_area_level_1') region_name = place.address_components[i]['long_name'];
+    		if (addressType == 'locality') city_name = place.address_components[i]['long_name'];
+    	}
+    	
+    	console.log(place.address_components);
+    });
+    
 	$scope.computeMosaicName = function() {
 		
 		$scope.mosaic_name = '';
@@ -312,6 +337,8 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 					
 					if (!$scope.city_name && admin2) $scope.city_name = admin2;
 					if (!$scope.city_name && admin3) $scope.city_name = admin3;
+					
+					$('#city_input').val($scope.country_name + ', ' + $scope.region_name + ', ' + $scope.city_name);
 					
 					/* Country */
 					
