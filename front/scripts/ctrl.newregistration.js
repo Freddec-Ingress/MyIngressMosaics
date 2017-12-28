@@ -255,10 +255,11 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
     		
     		var addressType = place.address_components[i].types[0];
     		if (addressType == 'country') $scope.country_name = place.address_components[i]['long_name'];
+    		if (addressType == 'locality') $scope.city_name = place.address_components[i]['long_name'];
     		if (addressType == 'administrative_area_level_1') $scope.region_name = place.address_components[i]['long_name'];
     		if (addressType == 'administrative_area_level_2' && !$scope.region_name) $scope.region_name = place.address_components[i]['long_name'];
-    		if (addressType == 'locality') $scope.city_name = place.address_components[i]['long_name'];
-    	}
+     		if (addressType == 'administrative_area_level_3' && !$scope.city_name) $scope.city_name = place.address_components[i]['long_name'];
+   	}
     	
     	console.log(place.address_components);
     	
