@@ -3520,39 +3520,6 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 	    	
 	    	$('#name_input_' + index.toString()).blur();
 		});
-	
-		var geocoder = new google.maps.Geocoder;
-		
-		var latlng = {
-			lat: parseFloat(mosaic.missions[0].startLat),
-			lng: parseFloat(mosaic.missions[0].startLng),
-		};
-
-		geocoder.geocode({'location': latlng}, function(results, status) {
-			
-			if (status === 'OK') {
-				
-				var components = null;
-				if (results[0]) components = results[0].address_components;
-				if (results[1]) components = results[1].address_components;
-				
-				if (components) {
-
-					var city = null;
-					var region = null;
-					var country = null;
-					
-					for (var item of components) {
-						
-						if (item.types[0] == 'country') country = item.long_name;
-						if (item.types[0] == 'locality') city = item.long_name;
-						if (item.types[0] == 'administrative_area_level_1') region = item.long_name;
-					}
-					
-					$('#city_input_' + index.toString()).val(city + ', ' + region + ', ' + country);
-				}
-			}
-		});
 	}
 	
 	$scope.computeOffsetMosaic = function(mosaic) {
