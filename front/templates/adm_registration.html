@@ -38,7 +38,7 @@
 					</div>
 					
 					<div class="item text-center" ng-show="!mosaic.open">
-						<span class="color-dark">{{mosaic.creator}}</span>
+						<a ng-click="go('https://ingressmosaik.com/search?f=' + {{mosaic.creator}});">IM Creator</a>
 					</div>
 					
 					<div class="item" ng-show="!mosaic.open">
@@ -120,7 +120,7 @@
 					</div>
 					
 					<div class="item text-center">
-						<span class="color-dark">{{mosaic.creator}}</span>
+						<a ng-click="go('https://ingressmosaik.com/search?f=' + {{mosaic.creator}});">IM Creator</a>
 					</div>
 						
 					<div class="item text-center">

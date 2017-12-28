@@ -184,6 +184,10 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		});
 	}
 	
+	$scope.go = function(url) {
+		$window.open(url);
+	}
+	
 	/* Page loading */
 	
 	API.sendRequest('/api/missions/', 'POST').then(function(response) {

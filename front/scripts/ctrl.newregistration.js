@@ -267,6 +267,8 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
     	console.log($scope.city_name);
 		
 		$('#name_input').blur();
+		
+		$scope.apply();
 	});
     
 	$scope.computeMosaicName = function() {
@@ -323,6 +325,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 			'title': $scope.mosaic_name,
 			'missions': $scope.selected,
 		};
+		
 		API.sendRequest('/api/mosaic/create/', 'POST', {}, data).then(function(response) {
 
 			for (var mission of $scope.selected) {
