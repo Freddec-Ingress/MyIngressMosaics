@@ -3510,6 +3510,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 	    		if (addressType == 'country') mosaic.country = place.address_components[i]['long_name'];
 	    		if (addressType == 'administrative_area_level_1') mosaic.region = place.address_components[i]['long_name'];
 	    		if (addressType == 'administrative_area_level_2' && !mosaic.region) mosaic.region = place.address_components[i]['long_name'];
+	    		if (addressType == 'administrative_area_level_3' && !mosaic.city) mosaic.city = place.address_components[i]['long_name'];
 	    		if (addressType == 'locality') mosaic.city = place.address_components[i]['long_name'];
 	    	}
 	    	
