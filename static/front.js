@@ -2366,7 +2366,6 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		if ($scope.current_step == 3) {
 			
 			if (!$scope.mosaic_name) $scope.computeMosaicName();
-			if (!$scope.city_name || !$scope.region_name || !$scope.country_name) $scope.computeLocation();
 		}
 	}
 	
