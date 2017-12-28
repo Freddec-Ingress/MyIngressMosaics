@@ -37,11 +37,16 @@ angular.module('FrontModule.controllers').controller('NewWorldCtrl', function($s
         		var addressType = place.address_components[i].types[0];
         		if (addressType == 'country') country_name = place.address_components[i]['long_name'];
         		if (addressType == 'administrative_area_level_1') region_name = place.address_components[i]['long_name'];
+	    		if (addressType == 'administrative_area_level_2' && !region_name) region_name = place.address_components[i]['long_name'];
         		if (addressType == 'locality') city_name = place.address_components[i]['long_name'];
         	}
         	
         	console.log(place.address_components);
-        	
+	    	
+	     	console.log(country_name);
+	    	console.log(region_name);
+	    	console.log(city_name);
+	        	
         	if (!country_name || !region_name || !city_name) {
         		
         		$scope.flag_city_unknown = true;

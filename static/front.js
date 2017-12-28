@@ -2602,20 +2602,25 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
         
     autocomplete.addListener('place_changed', function() {
     	
-    	var country_name = null;
-    	var region_name = null;
-    	var city_name = null;
+		$scope.city_name = '';
+		$scope.region_name = '';
+		$scope.country_name = '';
     	
     	var place = autocomplete.getPlace();
     	for (var i = 0; i < place.address_components.length; i++) {
     		
     		var addressType = place.address_components[i].types[0];
-    		if (addressType == 'country') country_name = place.address_components[i]['long_name'];
-    		if (addressType == 'administrative_area_level_1') region_name = place.address_components[i]['long_name'];
-    		if (addressType == 'locality') city_name = place.address_components[i]['long_name'];
+    		if (addressType == 'country') $scope.country_name = place.address_components[i]['long_name'];
+    		if (addressType == 'administrative_area_level_1') $scope.region_name = place.address_components[i]['long_name'];
+    		if (addressType == 'administrative_area_level_2' && !$scope.region_name) $scope.region_name = place.address_components[i]['long_name'];
+    		if (addressType == 'locality') $scope.city_name = place.address_components[i]['long_name'];
     	}
     	
     	console.log(place.address_components);
+    	
+     	console.log($scope.country_name);
+    	console.log($scope.region_name);
+    	console.log($scope.city_name);
     });
     
 	$scope.computeMosaicName = function() {
@@ -3267,11 +3272,16 @@ angular.module('FrontModule.controllers').controller('NewWorldCtrl', function($s
         		var addressType = place.address_components[i].types[0];
         		if (addressType == 'country') country_name = place.address_components[i]['long_name'];
         		if (addressType == 'administrative_area_level_1') region_name = place.address_components[i]['long_name'];
+	    		if (addressType == 'administrative_area_level_2' && !region_name) region_name = place.address_components[i]['long_name'];
         		if (addressType == 'locality') city_name = place.address_components[i]['long_name'];
         	}
         	
         	console.log(place.address_components);
-        	
+	    	
+	     	console.log(country_name);
+	    	console.log(region_name);
+	    	console.log(city_name);
+	        	
         	if (!country_name || !region_name || !city_name) {
         		
         		$scope.flag_city_unknown = true;
