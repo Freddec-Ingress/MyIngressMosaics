@@ -37,14 +37,6 @@
 						<span ng-class="{'color-danger':!isMissionCountValid(mosaic)}">{{mosaic.missions.length}}</span>
 					</div>
 					
-					<div class="item text-center" ng-show="!mosaic.open">
-						<a ng-click="go('https://ingressmosaik.com/search?f=' + mosaic.creator);">IM Creator</a>
-					</div>
-					
-					<div class="item" ng-show="!mosaic.open">
-						<a href="/registration/{{mosaic.creator}}" target="_blank">MIM Creator</a>
-					</div>
-					
 					<div class="item" ng-show="!mosaic.open">
 						<button class="btn" ng-click="openMosaic(mosaic, $index);">
 							Open
@@ -119,10 +111,6 @@
 						
 					</div>
 					
-					<div class="item text-center">
-						<a ng-click="go('https://ingressmosaik.com/search?f=' + {{mosaic.creator}});">IM Creator</a>
-					</div>
-						
 					<div class="item text-center">
 						<a href="/registration/{{mosaic.missions[0].creator}}" target="_blank">MIM Creator</a>
 					</div>
