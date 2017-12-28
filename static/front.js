@@ -2230,6 +2230,8 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 	
 	/* Map management */
 	
+	$scope.current_tab = 'roadmap';
+	
 	var mapInitiated = false;
 	
 	$scope.initMap = function() {

@@ -307,86 +307,129 @@
 				
 			</div>
 			
-			<div class="flex">
-				
-				<div class="item">
-					<span class="color-muted">Roadmap</span>
-				</div>
-				
-			</div>
+			<div class="flex align-center justify-center">
 			
-			<div class="flex">
-				
-				<div class="item" style="height:420px;width:100%">
-					<div id="map" style="height:100%;width:100%"></div>
-				</div>
-				
-			</div>
-	
-			<div class="flex">
-				
 				<div class="item">
-					<span class="color-muted">Comments</span>
-				</div>
-				
-			</div>
-		
-			<div class="flex ml-big" ng-show="mosaic.comments.length < 1">
-				
-				<div class="item">
-					<span class="color-normal">No comment</span>
-				</div>
-				
-			</div>
-			
-			<div ng-repeat="comment in mosaic.comments">
-				
-				<div class="flex-col">
-				
-					<div class="item grow">
-						<hr />
-					</div>
-					
-					<div class="flex">
-						<div class="item text-left">
-							<span ng-class="{'color-enlightened': comment.faction == 'E', 'color-resistant': comment.faction == 'R'}">{{comment.username}}</span>
-							<br />
-							<span class="color-light">{{comment.text}}</span>
-						</div>
-					</div>
-	
-					<div class="flex" ng-show="comment.username == user.name">
-						
-						<div class="item">
-							<button class="btn btn-mini" ng-click="displayCommentEdit(comment);">
-								Edit
-							</button>
-						</div>
-						
-						<div class="item">
-							<button class="btn btn-mini" ng-click="deleteComment(user, $index, comment);">
-								Delete
-							</button>
-						</div>
-						
-					</div>
-					
-				</div>
-				
-			</div>
-			
-			<div class="item grow">
-				<hr />
-			</div>
-			
-			<div class="flex justify-center mb-big">
-				
-				<div class="item">
-					<button class="btn btn-mini" ng-click="displayCommentEdit();">
-						New comment
+					<button class="btn btn-mini" ng-click="current_tab='roadmap'" ng-class="{'btn-transparent':current_tab!='roadmap'}">
+						Roadmap
 					</button>
 				</div>
+			
+				<div class="item">
+					<button class="btn btn-mini" ng-click="current_tab='mission'" ng-class="{'btn-transparent':current_tab!='mission'}">
+						Missions
+					</button>
+				</div>
+			
+				<div class="item">
+					<button class="btn btn-mini" ng-click="current_tab='comment'" ng-class="{'btn-transparent':current_tab!='comment'}">
+						Comment
+					</button>
+				</div>
+			
+			</div>
+			
+			<div ng-show="current_tab=='roadmap'">
+				<div class="flex">
+					
+					<div class="item" style="height:420px;width:100%">
+						<div id="map" style="height:100%;width:100%"></div>
+					</div>
+					
+				</div>
+			</div>
+			
+			<div ng-show="current_tab=='mission'">
+				<div class="group-list">
+					
+					<div class="group-list-item flex-col" ng-repeat="mission in mosaic.missions">
+						
+						<span class="item text-medium color-light">{{mission.title}}</span>
+						<span class="item color-dark">{{mission.desc}}</span>
+						
+						<div class="flex">
+							<div class="item">
+		                        <a class="btn btn-mini" href="https://www.ingress.com/intel?ll={{mission.portal[0].lat}},{{mission.portals[0].lng}}&z=17&pll={{mission.portals[0].lat}},{{mission.portals[0].lng}}" target="_blank">
+		                            <i class="fa fa-fw fa-external-link"></i>
+		                        </a>
+							</div>
+							
+							<div class="item">
+		                        <a class="btn btn-mini" href="https://www.google.com/maps/dir//{{mission.portals[0].lat}},{{mission.portals[0].lng}}" target="_blank">
+		                            <i class="fa fa-fw fa-map-marker"></i>
+		                        </a>
+							</div>
+							
+							<div class="item">
+		                        <a class="btn btn-mini" href="https://waze.com/ul?ll={{mission.portals[0].lat}},{{mission.portals[0].lng}}" target="_blank">
+		                            <img src="/static/img/waze.png">
+		                        </a>
+							</div>
+						</div>
+						
+					</div>
+					
+				</div>
+			</div>
+			
+			<div ng-show="current_tab=='comment'">
+				<div class="flex ml-big" ng-show="mosaic.comments.length < 1">
+					
+					<div class="item">
+						<span class="color-normal">No comment</span>
+					</div>
+					
+				</div>
 				
+				<div ng-repeat="comment in mosaic.comments">
+					
+					<div class="flex-col">
+					
+						<div class="item grow">
+							<hr />
+						</div>
+						
+						<div class="flex">
+							<div class="item text-left">
+								<span ng-class="{'color-enlightened': comment.faction == 'E', 'color-resistant': comment.faction == 'R'}">{{comment.username}}</span>
+								<br />
+								<span class="color-light">{{comment.text}}</span>
+							</div>
+						</div>
+		
+						<div class="flex" ng-show="comment.username == user.name">
+							
+							<div class="item">
+								<button class="btn btn-mini" ng-click="displayCommentEdit(comment);">
+									Edit
+								</button>
+							</div>
+							
+							<div class="item">
+								<button class="btn btn-mini" ng-click="deleteComment(user, $index, comment);">
+									Delete
+								</button>
+							</div>
+							
+						</div>
+						
+					</div>
+					
+				</div>
+				
+				<div class="item grow">
+					<hr />
+				</div>
+				
+				<div class="flex justify-center mb-big">
+					
+					<div class="item">
+						<button class="btn btn-mini" ng-click="displayCommentEdit();">
+							New comment
+						</button>
+					</div>
+					
+				</div>
 			</div>
 
 		</div>

@@ -396,6 +396,16 @@ ul > li { list-style:none; }
 	min-height:34px;
 }
 
+.btn-transparent {
+	cursor:pointer;
+	border:1px solid transparent;
+	padding:0 20px;
+	color:#ebbc4a; text-align:center;
+	background-color:transparent;
+	display:flex; align-items:center; justify-content:center;
+	min-height:34px;
+}
+
 .btn.disabled, .btn[disabled] { background-color: rgb(68, 68, 68);
     color: #ACAFAF;
     border-color: #ACAFAF;
