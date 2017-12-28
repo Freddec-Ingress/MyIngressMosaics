@@ -50,7 +50,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 	    	console.log(mosaic.region);
 	    	console.log(mosaic.city);
 	    	
-	    	$('name_input_' + index.toString()).blur();
+	    	$('#name_input_' + index.toString()).blur();
 		});
 	
 		var geocoder = new google.maps.Geocoder;
