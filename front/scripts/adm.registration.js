@@ -49,8 +49,8 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 	     	console.log(mosaic.country);
 	    	console.log(mosaic.region);
 	    	console.log(mosaic.city);
-	    	
-	    	$('#name_input_' + index.toString()).blur();
+
+			$scope.$apply();
 		});
 	}
 	
