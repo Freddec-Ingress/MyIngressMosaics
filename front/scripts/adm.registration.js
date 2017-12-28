@@ -49,6 +49,8 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 	     	console.log(mosaic.country);
 	    	console.log(mosaic.region);
 	    	console.log(mosaic.city);
+	    	
+	    	$('name_input_' + index.toString()).blur();
 		});
 	
 		var geocoder = new google.maps.Geocoder;
@@ -115,7 +117,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 			var index = $scope.mosaics.indexOf(mosaic);
 			$scope.mosaics.splice(index, 1);
 			
-			$scope.openMosaic($scope.mosaics[index]);
+			$scope.openMosaic($scope.mosaics[index], index+1);
 		});
 	}
 	
