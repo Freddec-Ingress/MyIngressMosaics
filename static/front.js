@@ -2626,7 +2626,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		
 		$('#name_input').blur();
 		
-		$scope.apply();
+		$scope.$apply();
 	});
     
 	$scope.computeMosaicName = function() {
