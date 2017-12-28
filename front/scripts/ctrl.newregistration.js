@@ -265,7 +265,9 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
      	console.log($scope.country_name);
     	console.log($scope.region_name);
     	console.log($scope.city_name);
-    });
+		
+		$('#name_input').blur();
+	});
     
 	$scope.computeMosaicName = function() {
 		
@@ -302,8 +304,6 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		mosaic_name = mosaic_name.trim();
 		
 		$scope.mosaic_name = mosaic_name;
-		
-		$('#name_input').blur();
 	}
 
 	/* Step #4 management */

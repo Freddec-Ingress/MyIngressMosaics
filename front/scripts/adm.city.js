@@ -75,6 +75,19 @@ angular.module('FrontModule.controllers').controller('AdmCityCtrl', function($sc
 	
 	/* Page loading */
 	
+    var input = document.getElementById('city_input');
+    var options = {
+		types: ['(cities)'],
+	};
+	
+    var autocomplete = new google.maps.places.Autocomplete(input, options);
+        
+    autocomplete.addListener('place_changed', function() {
+    	
+    	var place = autocomplete.getPlace();
+    	console.log(place.address_components);
+	});
+	
 	API.sendRequest('/api/country/list/', 'POST').then(function(response) {
     
         $scope.countries = response.countries;
