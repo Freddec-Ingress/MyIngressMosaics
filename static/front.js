@@ -3489,6 +3489,41 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		$scope.computeOffsetMosaic(mosaic);
 		
 		mosaic.columns = '6';
+		
+		var geocoder = new google.maps.Geocoder();
+		
+		var latlng = {
+			lat: parseFloat(mosaic.missions[0].startLat),
+			lng: parseFloat(mosaic.missions[0].startLng),
+		};
+		
+		geocoder.geocode({'location': latlng}, function(results, status) {
+			
+			if (status == 'OK') {
+				
+				var components = null;
+				if (results[0]) components = results[0].address_components;
+				if (results[1]) components = results[1].address_components;
+				
+				if (components) {
+					
+					var city = '';
+					var country = '';
+					
+					for (var item of components) {
+						
+						if (item.types[0] == 'country') country = item.long_name;
+						if (item.types[0] == 'locality') city = item.long_name;
+					}
+					
+					mosaic.default = country + ', ' + city;
+					
+					console.log(mosaic.default);
+					
+					$scope.$apply();
+				}
+			}
+		});
 
 	    var inputCity = document.getElementById('city_input_' + index.toString());
 	    var options = {
@@ -3654,6 +3689,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
         				'city': null,
         				'region': null,
         				'country': null,
+        				'default': null,
         				'missions': [],
         				'creator': mission.creator,
         			}
