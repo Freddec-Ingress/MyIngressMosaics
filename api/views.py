@@ -888,38 +888,70 @@ def data_newSearchForMissions(request):
 @permission_classes((AllowAny, ))
 def data_searchForMosaics(request):
 	
-	array = []
+	data = {
+		'mosaics': [],
+		'missions': [],
+	}
+	
+	mosaic_array = []
 	
 	# Creator search
 	
 	results = Mosaic.objects.filter(creators__icontains=request.data['text'])
 	if (results.count() > 0):
 		for mosaic in results:
-			array.append(mosaic)
+			mosaic_array.append(mosaic)
 		
 	# Title search
 	
 	results = Mosaic.objects.filter(title__icontains=request.data['text'])
 	if (results.count() > 0):
 		for mosaic in results:
-			array.append(mosaic)
+			mosaic_array.append(mosaic)
+		
+	# City search
 	
-	if (len(array) > 0):
+	results = Mosaic.objects.filter(city__name__icontains=request.data['text'])
+	if (results.count() > 0):
+		for mosaic in results:
+			mosaic_array.append(mosaic)
+	
+	if (len(mosaic_array) > 0):
 		
-		temp = list(set(array))
+		temp = list(set(mosaic_array))
 		
-		data = { 'mosaics': [], }
 		for item in temp:
 			data['mosaics'].append(item.overviewSerialize())
 	
 	else:
-		
-		data = { 'mosaics': [], }
-		
+
 		if not request.user.is_superuser:
 			search = Search(name=request.data['text'])
 			search.save()
 	
+	mission_array = []
+	
+	# Creator search
+	
+	results = Mission.objects.filter(mosaic__isnull=True, creator__icontains=request.data['text'])
+	if (results.count() > 0):
+		for mission in results:
+			mission_array.append(mission)
+		
+	# Title search
+	
+	results = Mission.objects.filter(mosaic__isnull=True, title__icontains=request.data['text'])
+	if (results.count() > 0):
+		for mission in results:
+			mission_array.append(mission)
+			
+	if (len(mission_array) > 0):
+		
+		temp = list(set(mission_array))
+		
+		for item in temp:
+			data['missions'].append(item.overviewSerialize())
+			
 	return Response(data, status=status.HTTP_200_OK)
 
 
