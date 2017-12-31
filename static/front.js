@@ -2368,6 +2368,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		if ($scope.current_step == 3) {
 			
 			if (!$scope.mosaic_name) $scope.computeMosaicName();
+			if (!$scope.default) $scope.computeDefault();
 		}
 	}
 	
@@ -2590,6 +2591,8 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	$scope.mosaic_name = '';
 	$scope.mosaic_type = 'sequence';
 	
+	$scope.default = '';
+	
 	$scope.city_name = '';
 	$scope.region_name = '';
 	$scope.country_name = '';
@@ -2664,6 +2667,50 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		mosaic_name = mosaic_name.trim();
 		
 		$scope.mosaic_name = mosaic_name;
+	}
+
+	$scope.computeDefault = function() {
+		
+		$scope.default = '';
+	
+		$scope.city_name = '';
+		$scope.region_name = '';
+		$scope.country_name = '';
+		
+		var geocoder = new google.maps.Geocoder();
+		
+		var latlng = {
+			lat: parseFloat($scope.selected[0].startLat),
+			lng: parseFloat($scope.selected[0].startLng),
+		};
+		
+		geocoder.geocode({'location': latlng}, function(results, status) {
+			
+			if (status == 'OK') {
+				
+				var components = null;
+				if (results[0]) components = results[0].address_components;
+				if (results[1]) components = results[1].address_components;
+				
+				if (components) {
+					
+					var city = '';
+					var country = '';
+					
+					for (var item of components) {
+						
+						if (item.types[0] == 'country') country = item.long_name;
+						if (item.types[0] == 'locality') city = item.long_name;
+					}
+					
+					$scope.default = country + ', ' + city;
+					
+					console.log($scope.default);
+					
+					$scope.$apply();
+				}
+			}
+		});
 	}
 
 	/* Step #4 management */
