@@ -50,8 +50,8 @@
 			<span class="item">Searching...</span>
 		</div>
 			
-		<div ng-show="mosaics && mosaics.length < 1" class="p-normal text-center mt-big">
-			<span class="color-danger">No mosaic found</span>
+		<div ng-show="mosaics && mosaics.length < 1 && missions && missions.length < 1" class="p-normal text-center mt-big">
+			<span class="color-danger">No mosaic, neither mission found</span>
 		</div>
 	
     	<div ng-show="mosaics && mosaics.length > 0">
@@ -116,10 +116,10 @@
     			<div class="group-list-item flex align-center pl-xl-none pr-xl-none" ng-repeat="mission in missions">
 				
 					<div class="item">
-						<img src="{{mission.image}}" width="25px" />
+						<img src="{{mission.image}}" width="60px" />
 					</div>
 				
-					<div class="item">
+					<div class="item grow">
 						<span class="item block color-light">{{mission.title}}</span>
 						<span class="item block" ng-class="{'color-enlightened':mission.faction=='E', 'color-resistant':mission.faction=='R'}">{{mission.creator}}</span>
 					</div>
@@ -131,6 +131,16 @@
 					</div>
 					
 				</div>
+			</div>
+			
+		</div>
+		
+		<div class="mt-big mb-big item flex justify-center">
+			
+			<div class="item">
+				<a class="btn" href="/registration/{{searchtext}}">
+					Register mosaic
+				</a>
 			</div>
 			
 		</div>
