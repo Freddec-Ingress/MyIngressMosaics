@@ -63,9 +63,9 @@
 				</div>
 	    		
 	    		<div class="group-list">
-	    			<a class="group-list-item flex align-center pl-xl-none pr-xl-none" href="/mosaic/{{mosaic.ref}}" target="blank" ng-repeat="mosaic in mosaics">
+	    			<div class="group-list-item flex align-center pl-xl-none pr-xl-none" ng-repeat="mosaic in mosaics">
 	
-	    				<div class="item flex justify-center pl-xl-none" style="width:125px; max-width:125px; max-height:102px; overflow-y:auto;" ng-class="{'pt-none pb-none pr-none':mosaic.missions.length > 30}">
+	    				<a class="item flex justify-center pl-xl-none" href="/mosaic/{{mosaic.ref}}" target="blank" style="width:125px; max-width:125px; max-height:102px; overflow-y:auto;" ng-class="{'pt-none pb-none pr-none':mosaic.missions.length > 30}">
 	    					
 							<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
 								
@@ -78,11 +78,11 @@
 					            
 				            </div>
 	    					
-	    				</div>
+	    				</a>
 	    				
 	    				<div class="item grow">
 	    					
-	    					<span class="item color-light block">{{mosaic.title}}</span>
+	    					<a class="item color-light block" href="/mosaic/{{mosaic.ref}}" target="blank">{{mosaic.title}}</a>
 	
 							<div class="flex">
 								<flag class="item mr-small" country="mosaic.city.region.country.name"></flag>
@@ -95,11 +95,11 @@
 	    					
 	    				</div>
 	    				
-						<div class="item pr-normal pr-xl-none">
+						<a class="item pr-xl-none" href="/mosaic/{{mosaic.ref}}" target="blank">
 							<i class="fa fa-chevron-right text-small color-normal"></i>
-						</div>
+						</a>
 	    				
-	    			</a>
+	    			</div>
     			</div>
     		
 			</div>
