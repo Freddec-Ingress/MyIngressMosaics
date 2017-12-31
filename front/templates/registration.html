@@ -384,28 +384,23 @@
 				<input id="name_input" type="text" class="control" ng-model="mosaic_name" />
 			</div>
 		
-			<div class="item flex-col">
-				<span>City</span>
-				<input id="city_input" type="text" class="control" placeholder="City name" />
-			</div>
-		
-			<div class="item">
-				<span class="color-dark">{{default}}</span>
-			</div>
-			
-			<div class="grow mt-big flex-col scrollable">
+			<div class="flex-col">
 				
-				<div class="flex" ng-repeat="mission in selected">
-					
-					<div class="item" style="min-width:35px;max-width:35px;">
-						<span class="block text-right color-muted">#{{$index + 1}}.</span>
-					</div>
-					
+				<div class="flex" ng-repeat="mission in selected | limitTo:0:3">
 					<div class="item color-dark">
 						{{mission.title}}
 					</div>
 				</div>
 				
+			</div>
+		
+			<div class="item flex-col">
+				<span>City</span>
+				<input id="city_input" type="text" class="control" placeholder="City name" />
+			</div>
+			
+			<div class="item grow">
+				<span class="color-dark">{{default}}</span>
 			</div>
 			
 			<hr>
