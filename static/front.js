@@ -2788,6 +2788,16 @@ angular.module('FrontModule.controllers').controller('NewSearchCtrl', function($
 				mosaic.offset = new Array(temp);
 			}
 
+			$scope.missions = response.missions;
+			
+			$scope.missions.sort(function(a, b) {
+				
+				if (a.title > b.title) return 1;
+				if (a.title < b.title) return -1;
+				
+				return 0;
+			});
+			
 			$scope.searching = false;
 		});
 	}

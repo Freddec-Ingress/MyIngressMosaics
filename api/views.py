@@ -918,7 +918,7 @@ def data_searchForMosaics(request):
 	
 	if (len(mosaic_array) > 0):
 		
-		temp = list(set(mosaic_array))
+		temp = list(set(mosaic_array))[:25]
 		
 		for item in temp:
 			data['mosaics'].append(item.overviewSerialize())
@@ -947,7 +947,7 @@ def data_searchForMosaics(request):
 			
 	if (len(mission_array) > 0):
 		
-		temp = list(set(mission_array))
+		temp = list(set(mission_array))[:50]
 		
 		for item in temp:
 			data['missions'].append(item.overviewSerialize())
