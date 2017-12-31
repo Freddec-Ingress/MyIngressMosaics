@@ -58,14 +58,14 @@
 		
 	    	<div ng-show="mosaics && mosaics.length > 0">
 	    		
-				<div class="item pr-xl-none pl-xl-none flex align-center mt-big">
+				<div class="item pr-xl-none pl-xl-none flex align-center">
 					<span class="item pb-none pr-xl-none pl-xl-none color-normal">{{mosaics.length}} mosaics</span>
 				</div>
 	    		
 	    		<div class="group-list">
-	    			<a class="group-list-item flex align-center" href="/mosaic/{{mosaic.ref}}" target="blank" ng-repeat="mosaic in mosaics">
+	    			<a class="group-list-item flex align-center pl-xl-none pr-xl-none" href="/mosaic/{{mosaic.ref}}" target="blank" ng-repeat="mosaic in mosaics">
 	
-	    				<div class="item flex justify-center pl-xl-none" style="width:125px; max-width:125px;">
+	    				<div class="item flex justify-center pl-xl-none" style="width:125px; max-width:125px; max-height:102px;">
 	    					
 							<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
 								
