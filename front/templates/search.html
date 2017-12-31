@@ -113,6 +113,24 @@
 			</div>
 			
 			<div class="group-list">
+    			<div class="group-list-item flex align-center pl-xl-none pr-xl-none" ng-repeat="mission in missions">
+				
+					<div class="item">
+						<img src="{{mission.image}}" width="25px" />
+					</div>
+				
+					<div class="item">
+						<span class="item block color-light">{{mission.title}}</span>
+						<span class="item block" ng-class="{'color-enlightened':mission.faction=='E', 'color-resistant':mission.faction=='R'}">{{mission.creator}}</span>
+					</div>
+				
+					<div class="item">
+                        <a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=17&pll={{mission.startLat}},{{mission.startLng}}" target="blank">
+                            <i class="fa fa-external-link"></i>
+                        </a>
+					</div>
+					
+				</div>
 			</div>
 			
 		</div>
