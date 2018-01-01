@@ -10,8 +10,8 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		
 		if ($scope.current_step == 3) {
 			
-			if (!$scope.mosaic_name) $scope.computeMosaicName();
-			if (!$scope.default) $scope.computeDefault();
+			$scope.computeMosaicName();
+			$scope.computeDefault();
 		}
 	}
 	
@@ -262,7 +262,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
     		if (addressType == 'administrative_area_level_1') $scope.region_name = place.address_components[i]['long_name'];
     		if (addressType == 'administrative_area_level_2' && !$scope.region_name) $scope.region_name = place.address_components[i]['long_name'];
      		if (addressType == 'administrative_area_level_3' && !$scope.city_name) $scope.city_name = place.address_components[i]['long_name'];
-   	}
+   		}
     	
     	console.log(place.address_components);
     	
@@ -319,6 +319,8 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		$scope.city_name = '';
 		$scope.region_name = '';
 		$scope.country_name = '';
+		
+		$scope.$apply();
 		
 		var geocoder = new google.maps.Geocoder();
 		
