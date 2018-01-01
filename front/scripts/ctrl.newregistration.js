@@ -320,8 +320,6 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		$scope.region_name = '';
 		$scope.country_name = '';
 		
-		$scope.$apply();
-		
 		var geocoder = new google.maps.Geocoder();
 		
 		var latlng = {
@@ -408,8 +406,6 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 			$scope.country_name = '';
 		
 			$('#city_input').value('');
-			
-			$scope.$apply();
 			
 			$window.open('https://www.myingressmosaics.com/mosaic/' + response);
 			
