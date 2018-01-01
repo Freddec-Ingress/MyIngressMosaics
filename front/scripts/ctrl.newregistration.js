@@ -263,13 +263,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
     		if (addressType == 'administrative_area_level_2' && !$scope.region_name) $scope.region_name = place.address_components[i]['long_name'];
      		if (addressType == 'administrative_area_level_3' && !$scope.city_name) $scope.city_name = place.address_components[i]['long_name'];
    		}
-    	
-    	console.log(place.address_components);
-    	
-     	console.log($scope.country_name);
-    	console.log($scope.region_name);
-    	console.log($scope.city_name);
-		
+
 		$('#name_input').blur();
 		
 		$scope.$apply();
@@ -347,9 +341,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 					}
 					
 					$scope.default = country + ', ' + city;
-					
-					console.log($scope.default);
-					
+
 					$scope.$apply();
 				}
 			}
@@ -405,7 +397,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 			$scope.region_name = '';
 			$scope.country_name = '';
 		
-			$('#city_input').value('');
+			$('#city_input').val('');
 			
 			$window.open('https://www.myingressmosaics.com/mosaic/' + response);
 			
