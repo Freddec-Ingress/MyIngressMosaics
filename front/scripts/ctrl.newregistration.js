@@ -407,6 +407,10 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 			$scope.region_name = '';
 			$scope.country_name = '';
 		
+			$('#city_input').value('');
+			
+			$scope.$apply();
+			
 			$window.open('https://www.myingressmosaics.com/mosaic/' + response);
 			
 			$scope.open_step(1);
