@@ -33,8 +33,20 @@
 						<input id="name_input_{{$index}}" type="text" class="control" ng-model="mosaic.name" />
 					</div>
 					
+					<div class="item" ng-show="!isMissionCountValid(mosaic);">
+						<span ng-class="{'color-enlightened': mosaic.missions[0].faction == 'E', 'color-resistant': mosaic.missions[0].faction == 'R'}">
+							{{mosaic.missions[0].creator}}
+						</span>
+					</div>
+						
 					<div class="item text-center" style="width:50px;" ng-show="!mosaic.open">
 						<span ng-class="{'color-danger':!isMissionCountValid(mosaic)}">{{mosaic.missions.length}}</span>
+					</div>
+					
+					<div class="item">
+						<button class="btn btn-danger" ng-click="excludeMosaic(mosaic);">
+							Exclude
+						</button>
 					</div>
 					
 					<div class="item" ng-show="!mosaic.open">
