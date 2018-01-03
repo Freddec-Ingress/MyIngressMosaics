@@ -119,6 +119,8 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 			
 			var index = $scope.mosaics.indexOf(mosaic);
 			$scope.mosaics.splice(index, 1);
+			
+			$scope.openMosaic($scope.mosaics[index], index);
 		});
 	}
 	
