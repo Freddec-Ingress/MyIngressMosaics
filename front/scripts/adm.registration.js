@@ -259,6 +259,9 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
         
         $scope.mosaics.sort(function(a, b) {
         	
+        	if (a.creator > b.creator) return 1;
+        	if (a.creator < b.creator) return -1;
+        	
         	if (a.missions.length > b.missions.length) return -1;
         	if (a.missions.length < b.missions.length) return 1;
         	
