@@ -23,7 +23,7 @@
 	
 	<div class="container" ng-class="{'active':loaded}">
 		
-		<div class="p-normal pr-xl-none pl-xl-none mt-normal" ng-repeat="mosaic in mosaics">
+		<div ng-repeat="mosaic in mosaics">
 			
 			<div ng-if="!isMissionCountValid(mosaic);">
 				
@@ -34,7 +34,7 @@
 					</div>
 					
 					<div class="item">
-						<a href="/registration/{{mosaic.missions[0].creator}}" target="_blank">MIM Creator</a>
+						{{mosaic.missions[0].creator}}
 					</div>
 					
 					<div class="item">
@@ -57,7 +57,7 @@
 						</div>
 					
 					<div class="item">
-						<button class="btn" ng-click="openMosaic(mosaic);">
+						<button class="btn" ng-click="openMosaic(mosaic, $index);">
 							Open
 						</button>
 					</div>
@@ -117,30 +117,22 @@
 								<span class="block color-dark">{{mosaic.default}}</span>
 							</div>
 							
-						</div>
-						
-					</div>
-					
-					<div class="row mt-normal align-center">
-						
-						<div class="grow flex align-center">
-							
-							<div class="item text-center">
-								<span class="color-normal">{{mosaic.missions.length}} missions</span>
-							</div>
+							<div class="grow flex align-center">
 								
-							<div class="item text-center">
-								<a ng-click="reorderAscMosaic(mosaic);">Reorder</a>
+								<div class="item text-center">
+									<span class="color-normal">{{mosaic.missions.length}} missions</span>
+								</div>
+									
+								<div class="item text-center">
+									<a ng-click="reorderAscMosaic(mosaic);">Reorder</a>
+								</div>
+								
+								<div class="item text-center">
+									<a ng-click="reorderDescMosaic(mosaic);">Reverse order</a>
+								</div>
+								
 							</div>
 							
-							<div class="item text-center">
-								<a ng-click="reorderDescMosaic(mosaic);">Reverse order</a>
-							</div>
-							
-						</div>
-						
-						<div class="item text-center">
-							<a href="/registration/{{mosaic.missions[0].creator}}" target="_blank">MIM Creator</a>
 						</div>
 						
 					</div>
