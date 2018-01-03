@@ -3576,7 +3576,9 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 			}
 		});
 
+		index = $scope.mosaics.indexOf(mosaic);
 	    var inputCity = document.getElementById('city_input_' + index.toString());
+	    console.log('city_input_' + index.toString());
 	    var options = {
 			types: ['(cities)'],
 		};
@@ -3640,7 +3642,6 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 			var index = $scope.mosaics.indexOf(mosaic);
 			$scope.mosaics.splice(index, 1);
 			
-			console.log(index);
 			$scope.openMosaic($scope.mosaics[index], index);
 		});
 	}
