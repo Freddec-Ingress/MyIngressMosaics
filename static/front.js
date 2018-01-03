@@ -3735,7 +3735,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
         				'name': name,
         				'type': 'sequence',
         				'open': false,
-        				'columns': 6,
+        				'columns': '6',
         				'offset': null,
         				'city': null,
         				'region': null,
