@@ -2715,6 +2715,11 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		
 		$scope.creating = true;
 		
+		if ($scope.region_name == '' || !$scope.region_name) {
+			
+			$scope.region_name = 'unknown';
+		}
+		
 		var data = {
 			'country': $scope.country_name,
 			'region': $scope.region_name,
@@ -3234,7 +3239,9 @@ angular.module('FrontModule.controllers').controller('NewWorldCtrl', function($s
 	     	console.log(country_name);
 	    	console.log(region_name);
 	    	console.log(city_name);
-	        	
+	        
+			if (!region_name) region_name = 'unknown';
+			
         	if (!country_name || !region_name || !city_name) {
         		
         		$scope.flag_city_unknown = true;
@@ -3628,6 +3635,11 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 	$scope.createMosaic = function(mosaic) {
 		
 		$scope.reorderAscMosaic(mosaic);
+		
+		if (mosaic.region == '' || !mosaic.region) {
+			
+			mosaic.region = 'unknown';
+		}
 		
 		var data = {
 			'country': mosaic.country,

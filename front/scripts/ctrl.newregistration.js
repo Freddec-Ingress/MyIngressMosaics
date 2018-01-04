@@ -356,6 +356,11 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		
 		$scope.creating = true;
 		
+		if ($scope.region_name == '' || !$scope.region_name) {
+			
+			$scope.region_name = 'unknown';
+		}
+		
 		var data = {
 			'country': $scope.country_name,
 			'region': $scope.region_name,

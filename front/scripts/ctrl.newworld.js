@@ -46,7 +46,9 @@ angular.module('FrontModule.controllers').controller('NewWorldCtrl', function($s
 	     	console.log(country_name);
 	    	console.log(region_name);
 	    	console.log(city_name);
-	        	
+	        
+			if (!region_name) region_name = 'unknown';
+			
         	if (!country_name || !region_name || !city_name) {
         		
         		$scope.flag_city_unknown = true;

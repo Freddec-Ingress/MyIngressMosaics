@@ -107,6 +107,11 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		
 		$scope.reorderAscMosaic(mosaic);
 		
+		if (mosaic.region == '' || !mosaic.region) {
+			
+			mosaic.region = 'unknown';
+		}
+		
 		var data = {
 			'country': mosaic.country,
 			'region': mosaic.region,
