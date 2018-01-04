@@ -994,6 +994,8 @@ angular.module('FrontModule.directives').directive('flag', function() {
 		    '       		\'flag-icon-pk\': country == \'Pakistan\',' +
 		    '       		\'flag-icon-ro\': country == \'Romania\',' +
 		    '       		\'flag-icon-ua\': country == \'Ukraine\',' +
+		    '       		\'flag-icon-vn\': country == \'Vietnam\',' +
+		    '       		\'flag-icon-bn\': country == \'Brunei\',' +
 	        '        	}"></span>' +
 		'',
 	};
