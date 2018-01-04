@@ -137,6 +137,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 						if (response) {
 							
 							$scope.mosaics = response;
+							console.log($scope.mosaics);
 							
 							for (var item of response) {
 							
@@ -188,11 +189,13 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 							}
 							
 							var markerCluster = new MarkerClusterer(map, markerArray, { imagePath: 'https://www.myingressmosaics.com/static/img/m' });
-							markerCluster.setMaxZoom(17);
+							markerCluster.setMaxZoom(15);
 							
 							$scope.flag_loading = false;
 						}
 						else {
+							
+							$scope.mosaics = [];
 							
 							$scope.flag_no_mosaic = true;
 							$scope.flag_loading = false;
