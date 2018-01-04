@@ -2,6 +2,8 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 	
 	/* Map management */
 
+	$scope.mosaics = [];
+
 	$scope.flag_loading = true;
 	$scope.flag_no_mosaic = false;
 
@@ -117,6 +119,8 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 
 				map.addListener('idle', function(e) {
 					
+					$scope.mosaics = [];
+					
 					$scope.flag_loading = true;
 					$scope.flag_no_mosaic = false;
 					
@@ -131,6 +135,8 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 					API.sendRequest('/api/map/', 'POST', {}, data).then(function(response) {
 						
 						if (response) {
+							
+							$scope.mosaics = response;
 							
 							for (var item of response) {
 							
