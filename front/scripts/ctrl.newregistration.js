@@ -333,14 +333,25 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 					
 					var city = '';
 					var country = '';
+					var admin1 = '';
+					var admin2 = '';
+					var admin3 = '';
 					
 					for (var item of components) {
 						
 						if (item.types[0] == 'country') country = item.long_name;
 						if (item.types[0] == 'locality') city = item.long_name;
+						if (item.types[0] == 'administrative_area_level_1') admin1 = item.long_name;
+						if (item.types[0] == 'administrative_area_level_2') admin2 = item.long_name;
+						if (item.types[0] == 'administrative_area_level_3') admin3 = item.long_name;
 					}
 					
-					$scope.default = country + ', ' + city;
+					$scope.default = '';
+					if (city) $scope.default += ', ' + city;
+					if (admin3) $scope.default += ', ' + admin3;
+					if (admin2) $scope.default += ', ' + admin2;
+					if (admin1) $scope.default += ', ' + admin1;
+					if (country) $scope.default += ', ' + country;
 
 					$scope.$apply();
 				}

@@ -40,16 +40,25 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 					
 					var city = '';
 					var country = '';
+					var admin1 = '';
+					var admin2 = '';
+					var admin3 = '';
 					
 					for (var item of components) {
 						
 						if (item.types[0] == 'country') country = item.long_name;
 						if (item.types[0] == 'locality') city = item.long_name;
+						if (item.types[0] == 'administrative_area_level_1') admin1 = item.long_name;
+						if (item.types[0] == 'administrative_area_level_2') admin2 = item.long_name;
+						if (item.types[0] == 'administrative_area_level_3') admin3 = item.long_name;
 					}
 					
-					mosaic.default = country + ', ' + city;
-					
-					console.log(mosaic.default);
+					mosaic.default = '';
+					if (city) mosaic.default += ', ' + city;
+					if (admin3) mosaic.default += ', ' + admin3;
+					if (admin2) mosaic.default += ', ' + admin2;
+					if (admin1) mosaic.default += ', ' + admin1;
+					if (country) mosaic.default += ', ' + country;
 					
 					$scope.$apply();
 				}
@@ -263,9 +272,6 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
         }
         
         $scope.mosaics.sort(function(a, b) {
-        	
-        	if (a.creator > b.creator) return 1;
-        	if (a.creator < b.creator) return -1;
         	
         	if (a.missions.length > b.missions.length) return -1;
         	if (a.missions.length < b.missions.length) return 1;
