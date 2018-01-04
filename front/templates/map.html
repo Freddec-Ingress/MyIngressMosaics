@@ -23,28 +23,6 @@
 	
 	<div class="container" ng-class="{'active':loaded}" style="flex:1 1 100%; max-width:100%">
 		
-		<div class="modal-container align-center" ng-show="flag_no_mosaic">
-			
-			<div class="modal-box">
-				
-				<div class="modal-content flex align-center">
-					
-					<div class="item">
-						<span class="color-normal">No mosaic. Please try to zoom out.</span>
-					</div>
-
-					<div class="item">
-						<span class="close" ng-click="flag_no_mosaic=false;">
-							<i class="fa fa-times"></i>
-						</span>
-					</div>
-
-				</div>
-				
-			</div>
-			
-		</div>
-		
 		<div class="item pb-none flex justify-center">
 			
 			<form class="grow flex align-center" style="z-index:5;max-width:720px;">
@@ -67,6 +45,19 @@
 			
 			<div class="item grow flex">
 				<div id="map" class="grow" ng-init="initMap();"></div>
+			</div>
+			
+		</div>
+		
+		<div class="item flex justify-center align-center">
+			
+			<div ng-show="flag_no_mosaic" class="item">
+				<span class="color-normal">No mosaic. Please try to zoom out.</span>
+			</div>
+			
+			<div ng-show="flag_loading" class="flex">
+				<i class="item fa fa-spinner rotating"></i>
+				<span class="item">Loading data...</span>
 			</div>
 			
 		</div>

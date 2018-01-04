@@ -2,6 +2,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 	
 	/* Map management */
 
+	$scope.flag_loading = true;
 	$scope.flag_no_mosaic = false;
 
 	$scope.initMap = function() {
@@ -116,6 +117,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 
 				map.addListener('idle', function(e) {
 					
+					$scope.flag_loading = true;
 					$scope.flag_no_mosaic = false;
 					
 					var bds = map.getBounds();
@@ -181,10 +183,13 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 							
 							var markerCluster = new MarkerClusterer(map, markerArray, { imagePath: 'https://www.myingressmosaics.com/static/img/m' });
 							markerCluster.setMaxZoom(17);
+							
+							$scope.flag_loading = false;
 						}
 						else {
 							
 							$scope.flag_no_mosaic = true;
+							$scope.flag_loading = false;
 						}
 					});
 				});
