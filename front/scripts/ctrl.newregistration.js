@@ -347,7 +347,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 					}
 					
 					$scope.default = '';
-					if (city) $scope.default += ', ' + city;
+					if (city) $scope.default += city;
 					if (admin3) $scope.default += ', ' + admin3;
 					if (admin2) $scope.default += ', ' + admin2;
 					if (admin1) $scope.default += ', ' + admin1;

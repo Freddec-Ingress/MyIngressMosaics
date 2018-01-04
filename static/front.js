@@ -2707,7 +2707,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 					}
 					
 					$scope.default = '';
-					if (city) $scope.default += ', ' + city;
+					if (city) $scope.default += city;
 					if (admin3) $scope.default += ', ' + admin3;
 					if (admin2) $scope.default += ', ' + admin2;
 					if (admin1) $scope.default += ', ' + admin1;
@@ -3608,7 +3608,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 					}
 					
 					mosaic.default = '';
-					if (city) mosaic.default += ', ' + city;
+					if (city) mosaic.default += city;
 					if (admin3) mosaic.default += ', ' + admin3;
 					if (admin2) mosaic.default += ', ' + admin2;
 					if (admin1) mosaic.default += ', ' + admin1;

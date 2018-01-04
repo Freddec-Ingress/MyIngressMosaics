@@ -54,7 +54,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 					}
 					
 					mosaic.default = '';
-					if (city) mosaic.default += ', ' + city;
+					if (city) mosaic.default += city;
 					if (admin3) mosaic.default += ', ' + admin3;
 					if (admin2) mosaic.default += ', ' + admin2;
 					if (admin1) mosaic.default += ', ' + admin1;
