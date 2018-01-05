@@ -49,11 +49,11 @@
 					<img src="{{user.picture}}" width="40px" height="40px" />
 				</div>
 				
-				<div class="flex-col">
-					<span class="item pb-none text-medium color-light">{{user.name}}</span>
-					<span ng-show="user.faction == 'E'" class="item" class="color-enlightened">Enlightened</span>
-					<span ng-show="user.faction == 'R'" class="item" class="color-resistant">Resistant</span>
-					<span ng-show="!user.faction" class="item" class="color-muted">Not defined</span>
+				<div class="item flex-col">
+					<span class="pb-none text-medium color-light">{{user.name}}</span>
+					<span ng-show="user.faction == 'E'" class="color-enlightened">Enlightened</span>
+					<span ng-show="user.faction == 'R'" class="color-resistant">Resistant</span>
+					<span ng-show="!user.faction" class="color-muted">Not defined</span>
 				</div>
 				
 			</div>
