@@ -158,8 +158,7 @@ def user_google(request):
 			user.save()
 		
 		user = authenticate(username=email, password='password')
-		login(request, user)
-	
+
 	return Response(UserTokenSerializer(user).data, status=status.HTTP_200_OK)
 
 
