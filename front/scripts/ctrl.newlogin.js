@@ -2,7 +2,7 @@ angular.module('FrontModule.controllers').controller('NewLoginCtrl', function($s
 	
 	/* Login management */
 	
-	$scope.socialLogin = function(provider) {
+	$scope.socialLogin = function(provider, next) {
 			
 		$auth.authenticate(provider).then(function(response) {
 			
@@ -11,7 +11,7 @@ angular.module('FrontModule.controllers').controller('NewLoginCtrl', function($s
 			$auth.setToken(response.data.token);
 			$cookies.token = response.data.token;
 			
-			$window.location.href = '/';
+			$window.location.href = next;
 		});
 	}
 	

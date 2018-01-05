@@ -1004,7 +1004,7 @@ angular.module('FrontModule.directives').directive('flag', function() {
 
 angular.module('FrontModule.controllers', [])
 
-angular.module('FrontModule.controllers').controller('RootCtrl', function($rootScope, $auth, API) {
+angular.module('FrontModule.controllers').controller('RootCtrl', function($rootScope, $auth, $cookies, $window, API) {
 	
 	API.sendRequest('/api/user/', 'GET').then(function(response) {
 		
@@ -1038,6 +1038,17 @@ angular.module('FrontModule.controllers').controller('RootCtrl', function($rootS
 	
 	$rootScope.closeMenu = function() {
 		$rootScope.menu_open = false;
+	}
+	
+	$scope.signin = function(provider, next) {
+			
+		$auth.authenticate(provider).then(function(response) {
+			
+			$auth.setToken(response.data.token);
+			$cookies.token = response.data.token;
+			
+			$window.location.href = next;
+		});
 	}
 });
 
@@ -2895,7 +2906,7 @@ angular.module('FrontModule.controllers').controller('NewLoginCtrl', function($s
 	
 	/* Login management */
 	
-	$scope.socialLogin = function(provider) {
+	$scope.socialLogin = function(provider, next) {
 			
 		$auth.authenticate(provider).then(function(response) {
 			
@@ -2904,7 +2915,7 @@ angular.module('FrontModule.controllers').controller('NewLoginCtrl', function($s
 			$auth.setToken(response.data.token);
 			$cookies.token = response.data.token;
 			
-			$window.location.href = '/';
+			$window.location.href = next;
 		});
 	}
 	

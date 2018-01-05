@@ -30,23 +30,6 @@
 				Sign in with Google
 			</a>
 			
-			<a href="javascript:;" class="btn btn-facebook" style="width:300px;" ng-click="socialLogin('facebook')">
-				<i class="fa fa-facebook-official mr-normal"></i>
-				Sign in with Facebook
-			</a>
-			
-		</div>
-		
-		<div class="p-normal flex justify-center mt-big">
-			<div class="flex-col" style="width:300px;">
-				
-				<span class="self-center mb-normal">Sign in with a local account</span>
-				<input type="text" class="control mb-small" placeholder="username" name="username" ng-model="loginModel.username" required="" />
-				<input type="password" class="control mb-normal" placeholder="password" name="password" ng-model="loginModel.password" required="" />
-				<button class="btn mb-big" ng-click="localLogin(loginModel.username, loginModel.password);" ng-disabled="signingin || !loginModel.username || !loginModel.password">Sign in</button>
-				<a class="text-center" href="/register">Create a local account</a>
-				
-			</div>
 		</div>
 		
 	</div>

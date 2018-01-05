@@ -23,24 +23,20 @@
 	
 	<div class="container" ng-class="{'active':loaded && user}">
 		
-		<div ng-if="!user.authenticated" class="self-center">
+		<div ng-if="!user.authenticated">
 			
-		    <div class="p-normal mt-big" style="max-width:300px;">
+		    <div class="mt-big item flex-col justify-center align-center">
 		    	
-		    	<div class="col">
-		    	
-				    <div class="item text-center">
-					    To access to profile page, you have to sign in.
-				    </div>
-
-			    	<div class="item flex justify-center">
-			    		<a class="btn" href="/login">
-			    			Sign in
-			    		</a>
-			    	</div>
-
-				</div>
+			    <div class="item">
+				    <span class="color-normal">To access to profile page, please sign in</span>
+			    </div>
 				
+		    	<div class="item">
+		    		<a class="btn" ng-click="signin('google', '/profile');">
+		    			Sign in
+		    		</a>
+		    	</div>
+
 			</div>
 			
 		</div>
@@ -182,22 +178,6 @@
 				
 			</div>
 
-			<div class="tabs">
-				
-				<div class="item" ng-click="open_tab(1);" ng-class="{'active':current_tab == 1}">
-					<span class="text">
-						<i class="fa fa-address-card"></i>
-					</span>
-				</div>
-				
-				<div class="item" ng-click="open_tab(4);" ng-class="{'active':current_tab == 4}">
-					<span class="text">
-						<i class="fa fa-power-off"></i>
-					</span>
-				</div>
-				
-			</div>
-			
 		</div>
 		
 	</div>
