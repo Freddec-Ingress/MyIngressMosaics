@@ -166,7 +166,7 @@ def user_google(request):
 		
 		Token.objects.get_or_create(user=user)
 	
-	user = authenticate(username=email, password='password')
+	user = authenticate(username=name, password='password')
 
 	return Response(UserTokenSerializer(user).data, status=status.HTTP_200_OK)
 
