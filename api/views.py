@@ -114,7 +114,7 @@ def ext_checkBounds(request):
 
 #---------------------------------------------------------------------------------------------------
 ACCESS_TOKEN_URL = 'https://accounts.google.com/o/oauth2/token'
-REDIRECT_URL = '/api/user/google/'
+REDIRECT_URL = 'https://www.myingressmosaics.com'
 USER_INFO_URL = 'https://www.googleapis.com/oauth2/v2/userinfo'
 
 @api_view(['POST'])
@@ -135,14 +135,14 @@ def user_google(request):
 		                
         response = requests.post(ACCESS_TOKEN_URL, data=params)
         if response.status_code != 200:
-        	raise(Exception('Invalid response, response code {c}'.format(c=response.status_code)))
+        	raise(Exception('ACCESS_TOKEN - Invalid response, response code {c}'.format(c=response.status_code)))
         	
         access_token = response.json()['access_token']
         
         params = urllib.urlencode({'access_token': access_token})
         response = requests.get(USER_INFO_URL + '?' + params)
         if response.status_code != 200:
-        	raise(Exception('Invalid response, response code {c}'.format(c=response.status_code)))
+        	raise(Exception('USER_INFO - Invalid response, response code {c}'.format(c=response.status_code)))
         	
         userInfo = response.json()
 
@@ -156,10 +156,10 @@ def user_google(request):
             user = User.objects.create_user(email, email, 'password')
             user.save()
 
-        user = authenticate(username=email, password='password')
-        login(request, user)
+			user = authenticate(username=email, password='password')
+			login(request, user)
         
-    return HttpResponseRedirect('/')
+    return Response(UserTokenSerializer(user).data, status=status.HTTP_200_OK)
 
 
 
