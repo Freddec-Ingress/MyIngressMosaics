@@ -165,6 +165,8 @@ def user_google(request):
 			user.profile.picture = userInfo['picture']
 			user.profile.locale = userInfo['locale']
 			user.profile.save()
+			
+			Token.objects.get_or_create(user=user)
 		
 		user = authenticate(username=email, password='password')
 
