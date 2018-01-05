@@ -51,11 +51,38 @@
 				
 				<div class="flex-col">
 					<span class="item color-light">{{user.name}}</span>
-					<span class="item" ng-class="{'':, '':, 'color-muted':user.faction!='E'&&user.faction!='R'}">{{user.faction}}</span>
+					<span ng-show="user.faction == 'E'" class="item" class="color-enlightened">Enlightened</span>
+					<span ng-show="user.faction == 'R'" class="item" class="color-resistant">Resistant</span>
+					<span ng-show="!user.faction" class="item" class="color-muted">Not defined</span>
 				</div>
 				
 			</div>
 
+			<div ng-if="!user.faction" lass="mt-big item flex-col">
+				
+				<div class="item">
+					<span class="color-normal">Please specify your faction</span>
+				</div>
+					
+				<div class="flex">
+					
+					<div class="item">
+						<select class="control" ng-model="newfaction">
+							<option value="E">Enlightened</option>
+							<option value="R">Resistant</option>
+						</select>
+					</div>
+					
+					<div class="item">
+						<button class="btn" ng-click="edit(newfaction); user.faction=newfaction;">
+							Save
+						</button>
+					</div>
+					
+				</div>
+				
+			</div>
+	
 		    <div class="mt-big item">
 				<button class="btn btn-danger" ng-click="logout();">
 				    Sign out

@@ -9,6 +9,7 @@ angular.module('FrontModule.controllers').controller('RootCtrl', function($rootS
 			$rootScope.user = {
 				name: response.name,
 				faction: response.faction,
+				picture: response.picture,
 				superuser: response.superuser,
 				authenticated: $auth.isAuthenticated(),
 			}
