@@ -2,6 +2,7 @@
 # coding: utf-8
 
 import json
+import requests
 
 from rest_framework import status
 from rest_framework import viewsets
