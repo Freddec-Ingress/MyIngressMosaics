@@ -14,6 +14,7 @@ from rest_social_auth.serializers import UserTokenSerializer
 
 from .models import *
 
+from django.conf import settings
 from django.http import HttpResponse
 
 from django.db.models import Q
