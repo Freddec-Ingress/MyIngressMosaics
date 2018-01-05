@@ -111,6 +111,60 @@ def ext_checkBounds(request):
 
 
 #---------------------------------------------------------------------------------------------------
+ACCESS_TOKEN_URL = 'https://accounts.google.com/o/oauth2/token'
+REDIRECT_URL = '/api/user/google/'
+USER_INFO_URL = 'https://www.googleapis.com/oauth2/v2/userinfo'
+
+@api_view(['POST'])
+@permission_classes((AllowAny, ))
+def user_google(request):
+	
+    if not request.user.is_active and request.GET.items():
+        
+        code = request.GET['code']
+
+        params = {
+            'code': code,
+            'client_id': settings.SOCIAL_AUTH_GOOGLE_OAUTH2_KEY,
+            'grant_type': 'authorization_code', 
+            'redirect_uri': REDIRECT_URL,
+            'client_secret': settings.SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET,
+        }
+		                
+        response = requests.post(ACCESS_TOKEN_URL, data=params)
+        if response.status_code != 200:
+        	raise(Exception('Invalid response, response code {c}'.format(c=response.status_code)))
+        	
+        access_token = response.json()['access_token']
+        
+        params = urllib.urlencode({'access_token': access_token})
+        response = requests.get(USER_INFO_URL + '?' + params)
+        if response.status_code != 200:
+        	raise(Exception('Invalid response, response code {c}'.format(c=response.status_code)))
+        	
+        userInfo = response.json()
+
+        email = userInfo['email']
+
+        try:
+            user = User.objects.get(username=email, email=email)
+            
+        except User.DoesNotExist:
+            
+            user = User.objects.create_user(email, email, 'password')
+            user.save()
+
+            profile = Profile(user=user)
+            profile.save()
+            
+        user = authenticate(username=email, password='password')
+        login(request, user)
+        
+    return HttpResponseRedirect('/')
+
+
+
+#---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((AllowAny, ))
 def user_login(request):

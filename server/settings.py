@@ -137,13 +137,13 @@ REST_FRAMEWORK = {
     ],
     
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
     ],
 }
 
 AUTHENTICATION_BACKENDS = (
-	'social_core.backends.facebook.FacebookOAuth2',
 	'social_core.backends.google.GoogleOAuth2',
+	'social_core.backends.facebook.FacebookOAuth2',
 	'django.contrib.auth.backends.ModelBackend',
 )
 
