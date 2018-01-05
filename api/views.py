@@ -121,7 +121,7 @@ def user_google(request):
 	
     if not request.user.is_active and request.POST.items():
         
-        code = request.POST['code']
+        code = request.data['code']
 
         params = {
             'code': code,
@@ -154,9 +154,6 @@ def user_google(request):
             user = User.objects.create_user(email, email, 'password')
             user.save()
 
-            profile = Profile(user=user)
-            profile.save()
-            
         user = authenticate(username=email, password='password')
         login(request, user)
         
