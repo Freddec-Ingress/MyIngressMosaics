@@ -6,6 +6,8 @@ angular.module('FrontModule.controllers').controller('NewLoginCtrl', function($s
 			
 		$auth.authenticate(provider).then(function(response) {
 			
+			console.log(response.data.token);
+			
 			$auth.setToken(response.data.token);
 			$cookies.token = response.data.token;
 			
