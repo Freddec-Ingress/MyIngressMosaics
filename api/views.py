@@ -279,9 +279,6 @@ def user_getProfile(request):
 @permission_classes((IsAuthenticated, ))
 def user_edit(request):
 	
-	request.user.username = request.data['name']
-	request.user.save()
-	
 	request.user.profile.faction = request.data['faction']
 	request.user.profile.save()
 	
