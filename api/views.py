@@ -119,9 +119,9 @@ USER_INFO_URL = 'https://www.googleapis.com/oauth2/v2/userinfo'
 @permission_classes((AllowAny, ))
 def user_google(request):
 	
-    if not request.user.is_active and request.GET.items():
+    if not request.user.is_active and request.POST.items():
         
-        code = request.GET['code']
+        code = request.POST['code']
 
         params = {
             'code': code,
