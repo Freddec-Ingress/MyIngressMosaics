@@ -1040,7 +1040,7 @@ angular.module('FrontModule.controllers').controller('RootCtrl', function($rootS
 		$rootScope.menu_open = false;
 	}
 	
-	$scope.signin = function(provider, next) {
+	$rootScope.signin = function(provider, next) {
 			
 		$auth.authenticate(provider).then(function(response) {
 			
