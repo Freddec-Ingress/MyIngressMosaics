@@ -24,7 +24,7 @@ from django.db.models import Count
 
 from django.views.decorators.csrf import csrf_exempt
 
-from django.contrib.auth import get_user_model, authenticate, logout
+from django.contrib.auth import get_user_model, authenticate, logout, login
 
 from operator import itemgetter, attrgetter, methodcaller
 
@@ -169,6 +169,7 @@ def user_google(request):
 			Token.objects.get_or_create(user=user)
 		
 		user = authenticate(username=email, password='password')
+		login(request, user)
 
 	return Response(UserTokenSerializer(user).data, status=status.HTTP_200_OK)
 
