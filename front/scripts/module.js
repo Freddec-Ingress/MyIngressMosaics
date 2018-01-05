@@ -9,17 +9,16 @@ angular.module('FrontModule').config(function($authProvider) {
 	
 	$authProvider.facebook({
 		
-		url: '/login/social/token_user/facebook',
-		clientId: '237811833398918'
+		clientId: '237811833398918',
+		responseType: 'token',
 	});
 
 	$authProvider.google({
 		
-		url: '/login/social/token_user/google',
-		clientId: '404579985700-eig13jlsdvbe6bhmtsis46tsn7nij4ju.apps.googleusercontent.com'
+		clientId: '404579985700-eig13jlsdvbe6bhmtsis46tsn7nij4ju.apps.googleusercontent.com',
 	});
 
-	$authProvider.authToken = 'Token';
+	$authProvider.tokenName = 'Token';
 	$authProvider.tokenType = 'Token';
 });
 
