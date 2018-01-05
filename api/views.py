@@ -146,7 +146,7 @@ def user_google(request):
 			raise(Exception('USER_INFO - Invalid response, response code {c}'.format(c=response.status_code)))
 		
 		userInfo = response.json()
-		print userInfo
+		print(userInfo)
 		
 		name = userInfo['email']
 		email = userInfo['email']
