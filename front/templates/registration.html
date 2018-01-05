@@ -96,22 +96,18 @@
 			
 			<div ng-if="!user.authenticated" class="self-center">
 			    
-			    <div class="p-normal mt-normal">
+			    <div class="mt-big item flex-col justify-center align-center">
 			    	
-			    	<div class="col">
-			    	
-					    <div class="item text-center">
-						    To register mosaics, please sign in
-					    </div>
-
-				    	<div class="item flex justify-center">
-				    		<a class="btn" href="/login">
-				    			Sign in
-				    		</a>
-				    	</div>
-
-					</div>
+				    <div class="item">
+					    <span class="color-normal">To register mosaics, please sign in</span>
+				    </div>
 					
+			    	<div class="item">
+			    		<a class="btn" ng-click="signin('google', '/registration');">
+			    			Sign in
+			    		</a>
+			    	</div>
+	
 				</div>
 				
 			</div>			
