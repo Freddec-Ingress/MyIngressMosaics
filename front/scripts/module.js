@@ -15,7 +15,7 @@ angular.module('FrontModule').config(function($authProvider) {
 
 	$authProvider.google({
 		
-		url: '/accounts.google.com/o/oauth2/v2/auth',
+		url: '/login/social/token_user/google',
 		clientId: '404579985700-eig13jlsdvbe6bhmtsis46tsn7nij4ju.apps.googleusercontent.com'
 	});
 
