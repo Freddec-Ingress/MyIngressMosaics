@@ -140,7 +140,7 @@ def user_google(request):
 		
 		access_token = response.json()['access_token']
 		
-		params = urllib.urlencode({'access_token': access_token})
+		params = urllib.parse.urlencode({'access_token': access_token})
 		response = requests.get(USER_INFO_URL + '?' + params)
 		if response.status_code != 200:
 			raise(Exception('USER_INFO - Invalid response, response code {c}'.format(c=response.status_code)))
