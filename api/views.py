@@ -2,6 +2,7 @@
 # coding: utf-8
 
 import json
+import urllib
 import requests
 
 from rest_framework import status
