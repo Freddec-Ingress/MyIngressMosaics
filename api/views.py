@@ -261,7 +261,8 @@ def user_getProfile(request):
 	
 	data = {
 		'name': request.user.username,
-		'faction': None,
+		'faction': request.profile.faction,
+		'picture': request.profile.picture,
 		'superuser': request.user.is_superuser,
 	}
 	
