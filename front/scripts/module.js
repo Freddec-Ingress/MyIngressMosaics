@@ -11,7 +11,6 @@ angular.module('FrontModule').config(function($authProvider) {
 		
 		url: '/login/social/token_user/facebook',
 		clientId: '237811833398918',
-		responseType: 'token',
 	});
 
 	$authProvider.google({
