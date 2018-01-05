@@ -127,11 +127,11 @@ def user_google(request):
 		code = request.data['code']
 		
 		params = {
-		'code': code,
-		'client_id': settings.SOCIAL_AUTH_GOOGLE_OAUTH2_KEY,
-		'grant_type': 'authorization_code', 
-		'redirect_uri': REDIRECT_URL,
-		'client_secret': settings.SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET,
+			'code': code,
+			'client_id': settings.SOCIAL_AUTH_GOOGLE_OAUTH2_KEY,
+			'grant_type': 'authorization_code', 
+			'redirect_uri': REDIRECT_URL,
+			'client_secret': settings.SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET,
 		}
 		
 		response = requests.post(ACCESS_TOKEN_URL, data=params)
@@ -146,11 +146,13 @@ def user_google(request):
 			raise(Exception('USER_INFO - Invalid response, response code {c}'.format(c=response.status_code)))
 		
 		userInfo = response.json()
+		print userInfo
 		
+		name = userInfo['email']
 		email = userInfo['email']
 		
 		try:
-			user = User.objects.get(username=email, email=email)
+			user = User.objects.get(username=name, email=email)
 		
 		except User.DoesNotExist:
 		
