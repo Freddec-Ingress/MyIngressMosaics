@@ -261,13 +261,14 @@ def user_getProfile(request):
 	
 	data = {
 		'name': request.user.username,
-		'faction': request.profile.faction,
-		'picture': request.profile.picture,
+		'faction': None,
+		'picture': None,
 		'superuser': request.user.is_superuser,
 	}
 	
 	if not request.user.is_anonymous and request.user.profile:
 		data['faction'] = request.user.profile.faction
+		data['picture'] = request.user.profile.picture
 	
 	return Response(data, status=status.HTTP_200_OK)
 
