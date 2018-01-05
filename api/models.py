@@ -33,6 +33,9 @@ class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
 
 	faction = models.CharField(max_length=4, null=True, blank=True)
+	family_name = models.CharField(max_length=64, null=True, blank=True)
+	picture = models.CharField(max_length=512, null=True, blank=True)
+	locale = models.CharField(max_length=4, null=True, blank=True)
 	
 	# Admin displaying
 	

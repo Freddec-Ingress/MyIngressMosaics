@@ -148,7 +148,7 @@ def user_google(request):
 		userInfo = response.json()
 		print(userInfo)
 		
-		name = userInfo['email']
+		name = userInfo['given_name']
 		email = userInfo['email']
 		
 		try:
@@ -156,8 +156,13 @@ def user_google(request):
 		
 		except User.DoesNotExist:
 		
-			user = User.objects.create_user(email, email, 'password')
+			user = User.objects.create_user(name, email, 'password')
 			user.save()
+			
+			user.profile.family_name = userInfo['family_name']
+			user.profile.picture = userInfo['picture']
+			user.profile.locale = userInfo['locale']
+			user.profile.save()
 		
 		user = authenticate(username=email, password='password')
 
