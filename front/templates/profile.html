@@ -43,14 +43,14 @@
 		
 		<div ng-if="user.authenticated">
 			
-			<div class="mt-big item flex align-center">
+			<div class="mt-big item flex justify-center align-center">
 				
-				<div class="item">
+				<div class="item flex align-center">
 					<img src="{{user.picture}}" width="40px" height="40px" />
 				</div>
 				
 				<div class="flex-col">
-					<span class="item color-light">{{user.name}}</span>
+					<span class="item pb-none text-medium color-light">{{user.name}}</span>
 					<span ng-show="user.faction == 'E'" class="item" class="color-enlightened">Enlightened</span>
 					<span ng-show="user.faction == 'R'" class="item" class="color-resistant">Resistant</span>
 					<span ng-show="!user.faction" class="item" class="color-muted">Not defined</span>
@@ -58,15 +58,15 @@
 				
 			</div>
 
-			<div ng-if="!user.faction" lass="mt-big item flex-col">
+			<div ng-if="!user.faction" class="mt-big item flex-col">
 				
-				<div class="item">
+				<div class="item pb-none">
 					<span class="color-normal">Please specify your faction</span>
 				</div>
 					
 				<div class="flex">
 					
-					<div class="item">
+					<div class="item grow">
 						<select class="control" ng-model="newfaction">
 							<option value="E">Enlightened</option>
 							<option value="R">Resistant</option>
@@ -83,7 +83,7 @@
 				
 			</div>
 	
-		    <div class="mt-big item">
+		    <div class="mt-big item flex justify-center">
 				<button class="btn btn-danger" ng-click="logout();">
 				    Sign out
 				</button>
