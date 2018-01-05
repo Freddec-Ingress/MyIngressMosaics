@@ -167,7 +167,7 @@ def user_google(request):
 		Token.objects.get_or_create(user=user)
 	
 	user = authenticate(username=email, password='password')
-	login(request, user)
+	login(request, user, backend='social_core.backends.google.GoogleOAuth2')
 
 	return Response(UserTokenSerializer(user).data, status=status.HTTP_200_OK)
 
