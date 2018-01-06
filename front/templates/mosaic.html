@@ -307,24 +307,18 @@
 				
 			</div>
 			
-			<div class="flex align-center justify-center">
+			<div class="tab-row">
 			
-				<div class="item">
-					<button class="btn btn-mini" style="border:0;font-size:13px;" ng-click="current_tab='roadmap'" ng-class="{'btn-transparent':current_tab!='roadmap'}">
-						Roadmap
-					</button>
+				<div class="tab" ng-click="current_tab='roadmap'" ng-class="{'active':current_tab=='roadmap'}">
+					Roadmap
 				</div>
-			
-				<div class="item">
-					<button class="btn btn-mini" style="border:0;font-size:13px;" ng-click="current_tab='mission'" ng-class="{'btn-transparent':current_tab!='mission'}">
-						Missions
-					</button>
+				
+				<div class="tab" ng-click="current_tab='mission'" ng-class="{'active':current_tab=='mission'}">
+					Missions ({{mosaic.missions.length}})
 				</div>
-			
-				<div class="item">
-					<button class="btn btn-mini" style="border:0;font-size:13px;" ng-click="current_tab='comment'" ng-class="{'btn-transparent':current_tab!='comment'}">
-						Comment
-					</button>
+				
+				<div class="tab" ng-click="current_tab='comment'" ng-class="{'active':current_tab=='comment'}">
+					Comments ({{mosaic.comments.length}})
 				</div>
 			
 			</div>
