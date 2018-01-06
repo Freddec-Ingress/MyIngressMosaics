@@ -230,25 +230,25 @@ def user_logout(request):
 def user_getDetails(request):
 	
 	data = {
-		'loved': [],
-		'completed': [],
+		'mosaics': [],
+		'missions': [],
 	}
 	
 	if not request.user.is_anonymous:
 		
-		results = request.user.mosaics_loved.all()
+		results = Mosaic.objects.filter(creators__contains=request.user.username)
 		if results.count() > 0:
 			for item in results:
 				
 				mosaic = item.overviewSerialize()
-				data['loved'].append(mosaic)
+				data['mosaics'].append(mosaic)
 		
-		results = request.user.mosaics_completed.all()
+		results = Mission.objects.filter(mosaic__isnull=True, creator=request.user.username)
 		if results.count() > 0:
 			for item in results:
 				
-				mosaic = item.overviewSerialize()
-				data['completed'].append(mosaic)
+				mission = item.overviewSerialize()
+				data['missions'].append(mission)
 	
 	return Response(data, status=status.HTTP_200_OK)
 

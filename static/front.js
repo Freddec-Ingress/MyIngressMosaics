@@ -3186,7 +3186,15 @@ angular.module('FrontModule.controllers').controller('NewProfileCtrl', function(
 	
 	/* Page loading */
 	
-	$scope.loaded = true;
+	$scope.current_tab = 'mosaic';
+	
+	API.sendRequest('/api/user/details/', 'POST').then(function(response) {
+		
+		$scope.mosaics = response.mosaics;
+		$scope.missions = response.missions;
+		
+		$scope.loaded = true;
+	});
 });
 angular.module('FrontModule.controllers').controller('NewRecruitmentCtrl', function($scope, $window, API) {
 	
