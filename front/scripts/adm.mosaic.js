@@ -4,9 +4,12 @@ angular.module('FrontModule.controllers').controller('AdmMosaicCtrl', function($
 	
 	$scope.selectMosaic = function(mosaic_ref) {
 	    
+	    $scope.loading = true;
+	    
 		API.sendRequest('/api/mosaic/' + mosaic_ref + '/', 'GET').then(function(response) {
             
             $scope.mosaic = response;
+            $scope.loading = false;
         });
 	}
 	
@@ -21,5 +24,17 @@ angular.module('FrontModule.controllers').controller('AdmMosaicCtrl', function($
 	
 	/* Page loading */
 	
-    $scope.loaded = true;
+	$scope.loading = false;
+	$scope.mosaic_ref = '';
+	
+	$scope.init = function(mosaic_ref) {
+
+		if (mosaic_ref) {
+			
+			$scope.mosaic_ref = mosaic_ref;
+			$scope.selectMosaic(mosaic_ref);
+		}
+		
+	    $scope.loaded = true;
+	}
 });

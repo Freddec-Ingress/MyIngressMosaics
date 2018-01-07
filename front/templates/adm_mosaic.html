@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block content %}
-<div id="content" ng-controller="AdmMosaicCtrl">
+<div id="content" ng-controller="AdmMosaicCtrl" ng-init="init('{{ref}}');">
 
 {% verbatim %}
 
@@ -31,6 +31,15 @@
 
 			<div class="mt-small">
 				<a ng-click="selectMosaic(mosaic_ref);">Refresh</a>
+			</div>
+			
+		</div>
+		
+		<div class="mt-normal item flex justify-center" ng-show="loading">
+			
+			<div class="item">
+				<i class="item fa fa-spinner rotating"></i>
+				<span class="item">Loading...</span>
 			</div>
 			
 		</div>

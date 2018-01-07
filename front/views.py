@@ -204,7 +204,7 @@ def adm_registration(request):
 	
 
 
-def adm_mosaic(request):	
+def adm_mosaic(request, ref):	
 	
-	context = {}
+	context = { 'ref':ref }
 	return render(request, 'adm_mosaic.html', context)

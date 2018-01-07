@@ -37,9 +37,11 @@ urlpatterns = [
 	url(r'^recruitment',						views.recruitment),
 	
 	url(r'^adm/registration',					views.adm_registration),
-	url(r'^adm/mosaic',							views.adm_mosaic),
 	url(r'^adm/region',							views.adm_region),
 	url(r'^adm/city',							views.adm_city),
+	
+	url(r'^adm/mosaic/(?P<ref>\w+)',			views.adm_mosaic),
+	url(r'^adm/mosaic',							views.adm_mosaic),
 	
 	url(r'^.*', 								views.world),
 ]

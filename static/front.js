@@ -997,6 +997,8 @@ angular.module('FrontModule.directives').directive('flag', function() {
 		    '       		\'flag-icon-vn\': country == \'Vietnam\',' +
 		    '       		\'flag-icon-bn\': country == \'Brunei\',' +
 		    '       		\'flag-icon-pe\': country == \'Peru\',' +
+		    '       		\'flag-icon-rs\': country == \'Serbia\',' +
+		    '       		\'flag-icon-mo\': country == \'Macau\',' +
 	        '        	}"></span>' +
 		'',
 	};
@@ -3850,9 +3852,12 @@ angular.module('FrontModule.controllers').controller('AdmMosaicCtrl', function($
 	
 	$scope.selectMosaic = function(mosaic_ref) {
 	    
+	    $scope.loading = true;
+	    
 		API.sendRequest('/api/mosaic/' + mosaic_ref + '/', 'GET').then(function(response) {
             
             $scope.mosaic = response;
+            $scope.loading = false;
         });
 	}
 	
@@ -3867,7 +3872,19 @@ angular.module('FrontModule.controllers').controller('AdmMosaicCtrl', function($
 	
 	/* Page loading */
 	
-    $scope.loaded = true;
+	$scope.loading = false;
+	$scope.mosaic_ref = '';
+	
+	$scope.init = function(mosaic_ref) {
+
+		if (mosaic_ref) {
+			
+			$scope.mosaic_ref = mosaic_ref;
+			$scope.selectMosaic(mosaic_ref);
+		}
+		
+	    $scope.loaded = true;
+	}
 });
 angular.module('FrontModule', ['satellizer', 'ngCookies', 'toastr',
 							   'FrontModule.services', 'FrontModule.controllers', 'FrontModule.directives', ]);
