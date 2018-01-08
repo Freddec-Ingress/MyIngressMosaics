@@ -185,7 +185,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 															missions_string + 
 														'</div>' +
 													'</div>' + 
-													'<div class="ml-normal flex-col">' + 
+													'<div class="ml-normal flex-col" style="flex-shrink:1;">' + 
 														'<span class="color-black text-medium mb-small text-bold">' + mosaic.title + '</span>' + 
 														'<span class="color-grey">' + mosaic.missions.length + ' missions</span>' + 
 													'</div>' + 
