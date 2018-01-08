@@ -1006,7 +1006,7 @@ angular.module('FrontModule.directives').directive('flag', function() {
 
 angular.module('FrontModule.controllers', [])
 
-angular.module('FrontModule.controllers').controller('RootCtrl', function($rootScope, $auth, $cookies, $window, API) {
+angular.module('FrontModule.controllers').controller('RootCtrl', function($rootScope, $http, $auth, $cookies, $window, API) {
 	
 	API.sendRequest('/api/user/', 'GET').then(function(response) {
 		
@@ -1028,6 +1028,24 @@ angular.module('FrontModule.controllers').controller('RootCtrl', function($rootS
 				superuser: false,
 				authenticated: false,
 			}
+		}
+		
+		$rootScope.$broadcast('user-loaded');
+		
+	}, function(response) {
+		
+		delete $http.defaults.headers.common.Authorization;
+    	delete $cookies.token;
+		
+		$auth.removeToken();
+
+		API.sendRequest('/api/user/logout/', 'POST');
+		
+		$rootScope.user = {
+			name: null,
+			faction: null,
+			superuser: false,
+			authenticated: false,
 		}
 		
 		$rootScope.$broadcast('user-loaded');
