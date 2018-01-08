@@ -5,8 +5,8 @@
 
 
 @media (min-width:720px) {
-	::-webkit-scrollbar { width:10px; height:10px; background-color:transparent; }
-	::-webkit-scrollbar-track { background-color:transparent; }
+	::-webkit-scrollbar { width:10px; height:10px; background-color:#000000; }
+	::-webkit-scrollbar-track { background-color:#000000; }
 	::-webkit-scrollbar-thumb { border:2px solid #000000; border-radius:3px; background-color:#1b3c39; }
 }
 
