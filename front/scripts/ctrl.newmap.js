@@ -179,7 +179,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 											
 											var contentString = '' +
 												'<a class="flex" target="_blank" href="/mosaic/' + mosaic.ref + '" >' +
-													'<div style="width:125px; max-width:125px; max-height:102px; overflow-y:auto;">' +
+													'<div style="width:125px; min-width:125px; max-width:125px; max-height:102px; overflow-y:auto;">' +
 														'<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - ' + mosaic.cols + ') / 2 * 16.666667%);">' +
 															offset_string +
 															missions_string + 
