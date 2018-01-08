@@ -3271,7 +3271,7 @@ angular.module('FrontModule.controllers').controller('NewWorldCtrl', function($s
 	    	console.log(region_name);
 	    	console.log(city_name);
 	        
-			if (!region_name) region_name = 'unknown';
+			if (!region_name) region_name = country_name;
 			
         	if (!country_name || !region_name || !city_name) {
         		
