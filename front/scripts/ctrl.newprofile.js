@@ -29,6 +29,9 @@ angular.module('FrontModule.controllers').controller('NewProfileCtrl', function(
 		
 		$scope.mosaics = response.mosaics;
 		$scope.missions = response.missions;
+		$scope.like = response.like;
+		$scope.todo = response.todo;
+		$scope.complete = response.complete;
 		
 		$scope.loaded = true;
 	});

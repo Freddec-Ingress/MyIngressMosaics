@@ -267,7 +267,7 @@ def user_getDetails(request):
 				mosaic = item.mosaic.overviewSerialize()
 				data['todo'].append(mosaic)
 		
-		results = Link.objects.filter(user=request.user, type='compete')
+		results = Link.objects.filter(user=request.user, type='complete')
 		if results.count() > 0:
 			for item in results:
 				
