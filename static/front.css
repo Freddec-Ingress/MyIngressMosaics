@@ -163,8 +163,8 @@ ul > li { list-style:none; }
 	flex:1 1 auto;
 	overflow-y: auto;
 }
-.flex { display:flex;  flex-direction:row; flex-shrink:0; }
-.flex-col { display:flex; flex-direction:column; flex-shrink:0; }
+.flex { display:flex;  flex-direction:row; }
+.flex-col { display:flex; flex-direction:column; }
 
 .row, .col { margin:-.375rem; }
 
