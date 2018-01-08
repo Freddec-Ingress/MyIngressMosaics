@@ -3109,11 +3109,11 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 											
 											var missions_string = '';
 											
-											for (var mission of mosaic.missions) {
+											for (var mission of mosaic.missions.reverse()) {
 												
 												missions_string +=
 										            '<div class="mission-vignet" style="flex:0 0 calc(100% / ' + mosaic.cols + ');">' +
-										                '<img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url(' + mission.image + '=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />' +
+										                '<img src="/static/img/mask.png" style="z-index:auto; width:100%; background-color:#000000; background-image:url(' + mission.image + '=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />' +
 										            '</div>';
 											}
 											
