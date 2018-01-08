@@ -155,11 +155,41 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 										
 										return function () {
 											
+											var offset_string = '';
+											
+											var temp = 0;
+											if (mosaic.missions.length > mosaic.cols) {
+												temp = mosaic.cols - mosaic.missions.length % mosaic.cols;
+												if (temp < 0 || temp > (mosaic.cols - 1)) temp = 0;
+											}
+											
+											for (var i = 0; i < temp; i++) {
+												offset_string += '<div style="flex:0 0 calc(100% / ' + mosaic.cols + ');"></div>';
+											}
+											
+											var missions_string = '';
+											
+											for (var mission of mosaic.missions) {
+												
+												missions_string +=
+										            '<div class="mission-vignet" style="flex:0 0 calc(100% / ' + mosaic.cols + ');">' +
+										                '<img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url(' + mission.image + '=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />' +
+										            '</div>';
+											}
+											
 											var contentString = '' +
-												'<a class="flex-col align-center ml-normal" target="_blank" href="/mosaic/' + mosaic.ref + '">' +
-													'<span class="color-black mb-small text-bold">' + mosaic.title + '</span>' + 
-													'<span class="color-grey mb-normal">' + mosaic.missions.length + ' missions</span>' + 
-													'<span class="color-link">Open mosaic page</span>' + 
+												'<a class="flex" target="_blank" href="/mosaic/' + mosaic.ref + '" >' +
+													'<div class="item" style="width:125px; max-width:125px; max-height:102px; overflow-y:auto;">' +
+														'<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - ' + mosaic.cols + ') / 2 * 16.666667%);">' +
+															offset_string +
+															missions_string + 
+														'</div>' +
+													'</div>' + 
+													'<div class="item flex-col">' + 
+														'<span class="color-black mb-small text-bold">' + mosaic.title + '</span>' + 
+														'<span class="color-grey mb-normal">' + mosaic.missions.length + ' missions</span>' + 
+														'<span class="color-link">Open mosaic page</span>' + 
+													'</div>' + 
 												'</a>';
 												'';
 											
