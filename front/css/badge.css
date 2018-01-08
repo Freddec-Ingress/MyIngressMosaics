@@ -2,6 +2,7 @@
 	padding: .375rem .75rem;
 	border-radius: .375rem;
 	background-color: #1f4549;
+	cursor: pointer;
 }
 
 .badge.active { color:white; }

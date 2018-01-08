@@ -257,7 +257,7 @@ def user_getDetails(request):
 		if results.count() > 0:
 			for item in results:
 				
-				mosaic = item['mosaic'].overviewSerialize()
+				mosaic = item.mosaic.overviewSerialize()
 				data['like'].append(mosaic)
 	
 	return Response(data, status=status.HTTP_200_OK)
@@ -626,7 +626,8 @@ def mosaic_unlink(request):
 		result = mosaic.links.filter(user=request.user, type=request.data['type'])
 		if result.count() > 0:
 			
-			mosaic.links.remove(request.user, type=request.data['type'])
+			link = result[0]
+			link.delete()
 	
 	return Response(None, status=status.HTTP_200_OK)
 
