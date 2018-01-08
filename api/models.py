@@ -349,6 +349,8 @@ class Mosaic(models.Model):
 			'title': self.title,
 			'distance': self.distance,
 			'has_fake': False,
+			'startLat': self.startLat,
+			'startLng': self.startLng,
 			
 			'city': self.city.serialize(),
 
