@@ -391,11 +391,20 @@ def mosaic_view(request, ref):
 		mosaic = result[0]
 		data = mosaic.detailsSerialize()
 		
-		if mosaic.lovers.filter(username=request.user.username).count() > 0:
-			data['is_loved'] = True
+		if not request.user.is_anonymous and mosaic.links.filter(user=request.user, type='like').count() > 0:
+			data['is_like'] = True
+		else:
+			data['is_like'] = False
 		
-		if mosaic.completers.filter(username=request.user.username).count() > 0:
-			data['is_completed'] = True
+		if not request.user.is_anonymous and mosaic.links.filter(user=request.user, type='todo').count() > 0:
+			data['is_todo'] = True
+		else:
+			data['is_like'] = False
+		
+		if not request.user.is_anonymous and mosaic.links.filter(user=request.user, type='complete').count() > 0:
+			data['is_complete'] = True
+		else:
+			data['is_like'] = False
 			
 	return Response(data, status=status.HTTP_200_OK)
 
@@ -571,6 +580,44 @@ def mosaic_addMission(request):
 		return Response(data, status=status.HTTP_200_OK)
 	
 	return Response(None, status=status.HTTP_404_NOT_FOUND)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def mosaic_link(request):
+	
+	result = Mosaic.objects.filter(ref=request.data['ref'])
+	if result.count() > 0:
+		
+		mosaic = result[0]
+		
+		result = mosaic.links.filter(user=request.user, type=request.data['type'])
+		if result.count() < 1:
+			
+			mosaic.links.add(request.user, type=request.data['type'])
+	
+	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def mosaic_unlink(request):
+	
+	result = Mosaic.objects.filter(ref=request.data['ref'])
+	if result.count() > 0:
+		
+		mosaic = result[0]
+		
+		result = mosaic.links.filter(user=request.user, type=request.data['type'])
+		if result.count() > 0:
+			
+			mosaic.links.remove(request.user, type=request.data['type'])
+	
+	return Response(None, status=status.HTTP_200_OK)
 
 
 

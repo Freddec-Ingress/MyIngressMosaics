@@ -96,13 +96,9 @@ ul > li { list-style:none; }
 
 
 .badge {
-	border:0;
-	height:20px;
-	padding:0 .5rem;
-	border-radius:3px;
-	background-color:#1f4549;
-	color:#5afbea; font-size:11px;
-	display:flex; flex-direction:row; align-items:center; justify-content:center;
+	padding: .375rem .75rem;
+	border-radius: .375rem;
+	background-color: #1f4549;
 }
 
 .badge.active { color:white; }

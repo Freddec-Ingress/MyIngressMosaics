@@ -29,6 +29,8 @@ urlpatterns = [
 	url(r'^mosaic/remove/',			mosaic_removeMission),
 	url(r'^mosaic/edit/',			mosaic_edit),
 	url(r'^mosaic/add/',			mosaic_addMission),
+	url(r'^mosaic/link/',			mosaic_link),
+	url(r'^mosaic/unlink/',			mosaic_unlink),
 	url(r'^mosaic/love/',			mosaic_love),
 	url(r'^mosaic/unlove/',			mosaic_unlove),
 	url(r'^mosaic/complete/',		mosaic_complete),

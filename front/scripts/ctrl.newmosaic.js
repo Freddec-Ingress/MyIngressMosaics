@@ -1,65 +1,73 @@
 angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($scope, $window, toastr, API) {
 
-	/* Lovers management */
+	/* Link management */
 
-	$scope.toggle_love = function(user) {
+	$scope.toggle_link = function(user, type) {
 		
 		if (!user.authenticated) {
-			toastr.error('To perform this action you must be signed in! <a class="ml-small" href="/login" target="blank">Sign in</a>', {allowHtml: true});
+			toastr.error('To perform this action, please sign in first on profile page.', {allowHtml: true});
 		}
 		else {
 			
-			$scope.mosaic.is_loved = !$scope.mosaic.is_loved;
-			
-			if ($scope.mosaic.is_loved) {
+			switch (type) {
 				
-				$scope.mosaic.lovers += 1;
+				case 'like':
+					$scope.mosaic.is_like = !$scope.mosaic.is_like;
+					if ($scope.mosaic.is_like) {
+						
+						$scope.mosaic.likers += 1;
+						
+						var data = { 'ref':$scope.mosaic.ref, 'type':type };
+			    		API.sendRequest('/api/mosaic/link/', 'POST', {}, data);
+					}
+					else {
+						
+						$scope.mosaic.likers -= 1;
+						
+						var data = { 'ref':$scope.mosaic.ref, 'type':type };
+			    		API.sendRequest('/api/mosaic/unlink/', 'POST', {}, data);
+					}
+					break;
 				
-				var data = { 'ref':$scope.mosaic.ref };
-	    		API.sendRequest('/api/mosaic/love/', 'POST', {}, data).then(function(response) {
-	    			toastr.success('Mosaic added to your favorite list!');
-	    		});
-			}
-			else {
+				case 'todo':
+					$scope.mosaic.is_todo = !$scope.mosaic.is_todo;
+					if ($scope.mosaic.is_todo) {
+						
+						$scope.mosaic.todoers += 1;
+						
+						var data = { 'ref':$scope.mosaic.ref, 'type':type };
+			    		API.sendRequest('/api/mosaic/link/', 'POST', {}, data);
+					}
+					else {
+						
+						$scope.mosaic.todoers -= 1;
+						
+						var data = { 'ref':$scope.mosaic.ref, 'type':type };
+			    		API.sendRequest('/api/mosaic/unlink/', 'POST', {}, data);
+					}
+					break;
 				
-				$scope.mosaic.lovers -= 1;
-				
-				var data = { 'ref':$scope.mosaic.ref };
-	    		API.sendRequest('/api/mosaic/unlove/', 'POST', {}, data).then(function(response) {
-	    			toastr.success('Mosaic removed from your favorite list!');
-	    		});
+				case 'complete':
+					$scope.mosaic.is_complete = !$scope.mosaic.is_complete;
+					if ($scope.mosaic.is_complete) {
+						
+						$scope.mosaic.completers += 1;
+						
+						var data = { 'ref':$scope.mosaic.ref, 'type':type };
+			    		API.sendRequest('/api/mosaic/link/', 'POST', {}, data);
+					}
+					else {
+						
+						$scope.mosaic.completers -= 1;
+						
+						var data = { 'ref':$scope.mosaic.ref, 'type':type };
+			    		API.sendRequest('/api/mosaic/unlink/', 'POST', {}, data);
+					}
+					break;
 			}
 		}
 	}
 
-	/* Completers management */
-
-	$scope.toggle_complete = function(user) {
-		
-		if (!user.authenticated) {
-			toastr.error('To perform this action you must be signed in! <a class="ml-small" href="/login" target="blank">Sign in</a>', {allowHtml: true});
-		}
-		else {
-			
-			$scope.mosaic.is_completed = !$scope.mosaic.is_completed;
-			
-			if ($scope.mosaic.is_completed) {
-				
-				$scope.mosaic.completers += 1;
-				
-				var data = { 'ref':$scope.mosaic.ref };
-	    		API.sendRequest('/api/mosaic/complete/', 'POST', {}, data);
-			}
-			else {
-				
-				$scope.mosaic.completers -= 1;
-				
-				var data = { 'ref':$scope.mosaic.ref };
-	    		API.sendRequest('/api/mosaic/uncomplete/', 'POST', {}, data);
-			}
-		}
-	}
-	
 	/* Mission details displaying */
 
 	$scope.mission_selected = null;

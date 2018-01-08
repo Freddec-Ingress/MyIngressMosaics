@@ -378,13 +378,14 @@ class Mosaic(models.Model):
 			'type': self.type,
 			'city': self.city.serialize(),
 			'title': self.title,
-			'lovers': self.lovers.all().count(),
+			'likers': self.links.filter(type='like').count(),
 			'portals': self.portals,
 			'uniques': self.uniques,
 			'distance': self.distance,
 			'startLat': self.startLat,
 			'startLng': self.startLng,
-			'completers': self.completers.all().count(),
+			'completers': self.links.filter(type='complete').count(),
+			'todoers': self.links.filter(type='todo').count(),
 			
 			'has_fake': False,
 			'is_loved': False,
@@ -711,3 +712,19 @@ class Search(models.Model):
 			
 		if self.name:
 			return self.name
+
+
+
+@python_2_unicode_compatible
+class Link(models.Model):
+	
+	user = models.ForeignKey(User, related_name='links')
+	mosaic = models.ForeignKey('Mosaic', related_name='links')
+
+	type = models.CharField(max_length=32)
+	
+	# Admin displaying
+	
+	def __str__(self):
+
+		return self.user.username + ' ' + self.type + ' ' + self.mosaic.title
