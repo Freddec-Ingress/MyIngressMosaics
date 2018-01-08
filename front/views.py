@@ -57,7 +57,14 @@ def sitemap(request):
 	cities = City.objects.all()
 	for city in cities:
 		text += '<url><loc>https://www.myingressmosaics.com/world/' + city.region.country.name + '/' + city.region.name + '/' + city.name + '</loc><changefreq>daily</changefreq></url>'
-   
+       
+	# Creator URLs
+	
+	creators = Mission.objects.order_by('creator').values('creator').distinct()
+	for creator in creators:
+		if creator['creator']:
+			text += '<url><loc>https://www.myingressmosaics.com/creator/' + creator['creator'] + '/' + '</loc><changefreq>daily</changefreq></url>'
+	
 	text += '</urlset>'
     
 	response = HttpResponse(text, content_type = 'text/plain')

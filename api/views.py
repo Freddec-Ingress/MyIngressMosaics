@@ -987,11 +987,11 @@ def data_getMosaicsByCreator(request, name):
 	if result.count() > 0:
 		data['faction'] = result[0].faction
 
-	result = Mosaic.objects.filter(creators__contains=name)
+	result = Mosaic.objects.filter(creators__contains=name).order_by('city__name', 'title')
 	for item in result:
 		data['mosaics'].append(item.overviewSerialize())
 
-	result = Mission.objects.filter(mosaic__isnull=True, creator=name)
+	result = Mission.objects.filter(mosaic__isnull=True, creator=name).order_by('title')
 	for item in result:
 		data['missions'].append(item.overviewSerialize())
 	
