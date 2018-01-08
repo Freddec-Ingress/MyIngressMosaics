@@ -169,7 +169,8 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 											
 											var missions_string = '';
 											
-											for (var mission of mosaic.missions.reverse()) {
+											var missions_array = mosaic.missions.slice();
+											for (var mission of missions_array.reverse()) {
 												
 												missions_string +=
 										            '<div class="mission-vignet" style="flex:0 0 calc(100% / ' + mosaic.cols + ');">' +
