@@ -1031,7 +1031,7 @@ def map_getMosaics(request):
 		
 		for item in results:
 			
-			mosaic = item.mapSerialize()
+			mosaic = item.overviewSerialize()
 			data.append(mosaic)
 
 	return Response(data, status=status.HTTP_200_OK)
