@@ -322,9 +322,9 @@
 			<div class="flex wrap ml-big">
 				
 				<div class="item" ng-repeat="creator in mosaic.creators">
-					<span ng-class="{'color-enlightened': creator.faction == 'E', 'color-resistant': creator.faction == 'R'}">
+					<a href="/creator/{{creator.name}}/" ng-class="{'color-enlightened': creator.faction == 'E', 'color-resistant': creator.faction == 'R'}">
 						{{creator.name}}
-					</span>
+					</a>
 				</div>
 				
 			</div>

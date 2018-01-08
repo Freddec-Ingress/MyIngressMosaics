@@ -972,6 +972,34 @@ def data_getMosaicsOfCity(request, country, region, name):
 
 
 #---------------------------------------------------------------------------------------------------
+@api_view(['GET'])
+@permission_classes((AllowAny, ))
+def data_getMosaicsByCreator(request, name):
+	
+	data = {
+		'name': name,
+		'faction': None,
+		'mosaics': [],
+		'missions': [],
+	}
+	
+	result = Mission.objects.filter(creator=name)
+	if result.count() > 0:
+		data['faction'] = result[0].faction
+
+	result = Mosaic.objects.filter(creators__contains=name)
+	for item in result:
+		data['mosaics'].append(item.overviewSerialize())
+
+	result = Mission.objects.filter(mosaic__isnull=True, creator=name)
+	for item in result:
+		data['missions'].append(item.overviewSerialize())
+	
+	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((AllowAny, ))
 def data_searchForMissions(request):

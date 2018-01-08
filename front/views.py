@@ -173,6 +173,13 @@ def country(request, country):
 	
 	context = { 'country':country }
 	return render(request, 'country.html', context)
+	
+	
+	
+def creator(request, name):
+	
+	context = { 'name':name }
+	return render(request, 'creator.html', context)
 
 
 
