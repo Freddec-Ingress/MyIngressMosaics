@@ -596,7 +596,8 @@ def mosaic_link(request):
 		result = mosaic.links.filter(user=request.user, type=request.data['type'])
 		if result.count() < 1:
 			
-			mosaic.links.add(request.user, type=request.data['type'])
+			link = Link(mosaic=mosaic, user=request.user, type=request.data['type'])
+			link.save()
 	
 	return Response(None, status=status.HTTP_200_OK)
 
