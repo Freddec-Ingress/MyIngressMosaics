@@ -241,6 +241,18 @@
 					</div>
 				</div>
 				
+				<div class="item">
+					<div class="badge" ng-click="toggle_link(user, 'todo');">
+						<span ng-class="{'color-dark':!mosaic.is_todo, 'color-light':mosaic.is_todo}">{{mosaic.todoers}} To do</span>
+					</div>
+				</div>
+				
+				<div class="item">
+					<div class="badge" ng-click="toggle_link(user, 'complete');">
+						<span ng-class="{'color-dark':!mosaic.is_complete, 'color-light':mosaic.is_complete}">{{mosaic.completers}} Completed</span>
+					</div>
+				</div>
+				
 			</div>
 			
 			<div class="flex">
