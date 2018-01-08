@@ -118,7 +118,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		
 		if (mosaic.region == '' || !mosaic.region) {
 			
-			mosaic.region = 'unknown';
+			mosaic.region = mosaic.country;
 		}
 		
 		var data = {

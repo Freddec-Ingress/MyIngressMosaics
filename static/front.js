@@ -2384,7 +2384,6 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		
 		if ($scope.current_step == 3) {
 			
-			$scope.computeMosaicName();
 			$scope.computeDefault();
 		}
 	}
@@ -2743,7 +2742,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		
 		if ($scope.region_name == '' || !$scope.region_name) {
 			
-			$scope.region_name = 'unknown';
+			$scope.region_name = $scope.country_name;
 		}
 		
 		var data = {
@@ -3679,7 +3678,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		
 		if (mosaic.region == '' || !mosaic.region) {
 			
-			mosaic.region = 'unknown';
+			mosaic.region = mosaic.country;
 		}
 		
 		var data = {
