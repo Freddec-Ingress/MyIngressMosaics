@@ -391,17 +391,17 @@ def mosaic_view(request, ref):
 		mosaic = result[0]
 		data = mosaic.detailsSerialize()
 		
-		if not request.user.is_anonymous and mosaic.links.filter(user=request.user, type='like').count() > 0:
+		if not request.user.is_anonymous and Link.objects.filter(mosaic=mosaic, user=request.user, type='like').count() > 0:
 			data['is_like'] = True
 		else:
 			data['is_like'] = False
 		
-		if not request.user.is_anonymous and mosaic.links.filter(user=request.user, type='todo').count() > 0:
+		if not request.user.is_anonymous and Link.objects.filter(mosaic=mosaic, user=request.user, type='todo').count() > 0:
 			data['is_todo'] = True
 		else:
 			data['is_like'] = False
 		
-		if not request.user.is_anonymous and mosaic.links.filter(user=request.user, type='complete').count() > 0:
+		if not request.user.is_anonymous and Link.objects.filter(mosaic=mosaic, user=request.user, type='complete').count() > 0:
 			data['is_complete'] = True
 		else:
 			data['is_like'] = False
