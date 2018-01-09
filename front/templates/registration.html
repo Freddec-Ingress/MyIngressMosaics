@@ -199,7 +199,11 @@
 							
 							<div ng-if="potentials.length>0">
 								
-								<div class="mt-big item">
+								<div class="item">
+									<span class="color-normal">{{potentials.length}} potential mosaics</span>
+								</div>
+								
+								<div class="item">
 									
 									<div class="group-list">
 										<div class="group-list-item flex align-center" ng-repeat="potential in potentials">
@@ -212,9 +216,9 @@
 												<a href="/registration/{{potential.name}}">{{potential.name}}</a>
 											</div>
 											
-											<div class="item grow">
-												<a class="btn btn-danger" ng-click="exclude(potential);">
-													X
+											<div class="item">
+												<a ng-click="exclude(potential);">
+													<i class="fa fa-times"></i>
 												</a>
 											</div>
 											
