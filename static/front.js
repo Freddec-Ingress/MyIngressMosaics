@@ -2427,14 +2427,16 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	
 	$scope.refreshMissions = function(text) {
 		
-		$scope.missions = null;
-		
-		if (!text) return;
-		
-		if (text.length < 3) return;
-		
 		$scope.searchText = text;
 		
+		$scope.missions = null;
+		
+		if (!text || text.length < 3) {
+			
+			$scope.get_potentials();
+			return;
+		}
+
 		$scope.refreshing = true;
 		
 		var data = { 'text':text };
@@ -2821,10 +2823,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 			
 			$scope.creating = false;
 			
-			$scope.refreshMissions(null);
-			
-			$scope.potential_state = 'init';
-			$scope.get_potentials();
+			$scope.refreshMissions();
 		});
 	}
 	
@@ -2835,11 +2834,6 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		$scope.open_step(1);
 		
 		$scope.refreshMissions(text);
-		
-		if (!text) {
-			
-			$scope.get_potentials();
-		}
 		
 		$scope.loaded = true;
 	}
