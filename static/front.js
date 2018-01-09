@@ -2820,6 +2820,11 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 			$scope.open_step(1);
 			
 			$scope.creating = false;
+			
+			$scope.refreshMissions(null);
+			
+			$scope.potential_state = 'init';
+			$scope.get_potentials();
 		});
 	}
 	
