@@ -2848,6 +2848,15 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 			$scope.potential_state = 'list';
 		});
 	}
+	
+	$scope.exclude = function(potential) {
+		
+		var index = $scope.potentials.indexOf(potential);
+		$scope.potentials.splice(index, 1);
+		
+		var data = { 'name':potential.name};
+		API.sendRequest('/api/adm/potential/exclude', 'POST', {}, data);
+	}
 });
 angular.module('FrontModule.controllers').controller('NewSearchCtrl', function($scope, $window, API) {
 	

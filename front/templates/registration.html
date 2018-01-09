@@ -205,7 +205,17 @@
 										<div class="group-list-item flex align-center" ng-repeat="potential in potentials">
 											
 											<div class="item">
-												<a>{{potential.name}}</a>
+												<span class="color-dark">{{potential.count}}</span>
+											</div>
+											
+											<div class="item grow">
+												<a href="/registration/{{potential.name}}">{{potential.name}}</a>
+											</div>
+											
+											<div class="item grow">
+												<a class="btn btn-danger" ng-click="exclude(potential);">
+													X
+												</a>
 											</div>
 											
 										</div>
