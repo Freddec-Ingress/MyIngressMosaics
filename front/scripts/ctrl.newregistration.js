@@ -428,9 +428,14 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	
 		$scope.open_step(1);
 		
-		$scope.loaded = true;
-		
 		$scope.refreshMissions(text);
+		
+		if (!text) {
+			
+			$scope.get_potentials();
+		}
+		
+		$scope.loaded = true;
 	}
 
 	/* Potentials management */
