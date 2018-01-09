@@ -147,7 +147,7 @@
 						<span class="item">Refreshing...</span>
 					</div>
 					
-					<div ng-if="!refreshing && !missions">
+					<div ng-if="!refreshing && !missions" class="grow flex-col">
 						
 						<div ng-if="potential_state=='init'">
 							
@@ -185,7 +185,7 @@
 							
 						</div>
 						
-						<div ng-if="potential_state=='list'" class="item pr-xl-none pl-xl-none">
+						<div ng-if="potential_state=='list'" class="item pr-xl-none pl-xl-none grow flex-col">
 							
 							<div ng-if="potentials.length<1">
 								
@@ -197,7 +197,7 @@
 							
 							</div>
 							
-							<div ng-if="potentials.length>0">
+							<div ng-if="potentials.length>0" class="grow flex-col">
 								
 								<div class="item pb-none pr-xl-none pl-xl-none">
 									<span class="color-normal">{{potentials.length}} potential mosaics</span>
