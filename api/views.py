@@ -1261,25 +1261,21 @@ def adm_renameRegion(request):
 @permission_classes((IsAuthenticated, ))
 def data_getPotentials(request):
 	
-	data = None
+	data = []
 	
 	from django.db.models import Count
 	
 	fieldname = 'name'
-	results = Mission.objects.filter(mosaic__isnull=True, registerer=request.user, admin=True).order_by(fieldname).values(fieldname).annotate(count=Count(fieldname)).order_by('-count')
-	if (results.count() > 0):
-		
-		data = []
-		
-		for item in results:
-			if item['count'] >= 3:
-				
-				obj = {
-					'name': item[fieldname],
-					'count': item['count'],
-				}
-				
-				data.append(obj)
+	results = Mission.objects.filter(mosaic__isnull=True, admin=True).order_by(fieldname).values(fieldname).annotate(count=Count(fieldname)).order_by('-count')
+	for item in results:
+		if item['count'] >= 3:
+			
+			obj = {
+				'name': item[fieldname],
+				'count': item['count'],
+			}
+			
+			data.append(obj)
 	
 	return Response(data, status=status.HTTP_200_OK)
 
