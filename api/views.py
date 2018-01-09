@@ -1266,11 +1266,11 @@ def data_getPotentials(request):
 	from django.db.models import Count
 	
 	fieldname = 'name'
-	results = Mission.objects.filter(mosaic__isnull=True, registerer=request.user, admin=True).values(fieldname).order_by(fieldname).annotate(count=Count(fieldname)).order_by('-count')
+	results = Mission.objects.filter(mosaic__isnull=True, registerer=request.user, admin=True).order_by(fieldname).values(fieldname).annotate(count=Count(fieldname)).order_by('-count')
 	if (results.count() > 0):
 		
 		data = []
-
+		
 		for item in results:
 			if item['count'] >= 3:
 				
@@ -1280,7 +1280,7 @@ def data_getPotentials(request):
 				}
 				
 				data.append(obj)
-
+	
 	return Response(data, status=status.HTTP_200_OK)
 
 

@@ -147,6 +147,78 @@
 						<span class="item">Refreshing...</span>
 					</div>
 					
+					<div ng-if="!refreshing && !missions">
+						
+						<div ng-if="potential_state=='init'">
+							
+							<div class="mt-big item flex justify-center">
+								
+						    	<div class="item">
+						    		<a class="btn flex align-center" href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">
+						    			<i class="fa fa-plus-square"></i>
+						    			<span class="ml-normal">MIM Hunting Tool</span>
+						    		</a>
+						    	</div>
+								
+							</div>
+							
+							<div class="mt-big item flex justify-center">
+								
+						    	<div class="item">
+						    		<a ng-click="get_potentials();">
+						    			See potential mosaics
+						    		</a>
+						    	</div>
+						    	
+							</div>
+							
+						</div>
+						
+						<div ng-if="potential_state=='searching'">
+							
+							<div class="mt-big item flex justify-center">
+								
+								<i class="item fa fa-spinner rotating"></i>
+								<span class="item">Detecting potential mosaics...</span>
+
+							</div>
+							
+						</div>
+						
+						<div ng-if="potential_state=='list'">
+							
+							<div ng-if="potentials.length<1">
+								
+								<div class="mt-big item flex justify-center">
+									
+									<span class="item color-danger">No potential</span>
+	
+								</div>
+							
+							</div>
+							
+							<div ng-if="potentials.length>0">
+								
+								<div class="mt-big item">
+									
+									<div class="group-list">
+										<div class="group-list-item flex align-center" ng-repeat="potential in potentials">
+											
+											<div class="item">
+												<a>{{potential.name}}</a>
+											</div>
+											
+										</div>
+									</div>
+									
+								</div>
+							
+							</div>
+							
+						</div>
+						
+					</div>
+					
 					<div ng-if="!refreshing && missions">
 						
 	                    <div ng-if="missions.length < 1">

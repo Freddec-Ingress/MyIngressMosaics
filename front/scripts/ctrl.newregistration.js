@@ -432,4 +432,20 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		
 		$scope.refreshMissions(text);
 	}
+
+	/* Potentials management */
+	
+	$scope.potential_state = 'init';
+	
+	$scope.get_potentials = function() {
+		
+		$scope.potential_state = 'searching';
+		
+		API.sendRequest('/api/potentials/', 'POST').then(function(response) {
+
+			$scope.potentials = response;
+
+			$scope.potential_state = 'list';
+		});
+	}
 });
