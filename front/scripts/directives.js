@@ -115,6 +115,7 @@ angular.module('FrontModule.directives').directive('flag', function() {
 		    '       		\'flag-icon-pe\': country == \'Peru\',' +
 		    '       		\'flag-icon-rs\': country == \'Serbia\',' +
 		    '       		\'flag-icon-mo\': country == \'Macau\',' +
+		    '       		\'flag-icon-by\': country == \'Belarus\',' +
 	        '        	}"></span>' +
 		'',
 	};
