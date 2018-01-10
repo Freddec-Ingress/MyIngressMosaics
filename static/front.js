@@ -2666,7 +2666,10 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
      		if (addressType == 'administrative_area_level_3' && !$scope.city_name) $scope.city_name = place.address_components[i]['long_name'];
    		}
 
-		$('#name_input').blur();
+		if ($scope.region_name == '' || !$scope.region_name) {
+			
+			$scope.region_name = $scope.country_name;
+		}
 		
 		$scope.$apply();
 	});

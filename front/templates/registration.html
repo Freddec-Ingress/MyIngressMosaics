@@ -278,7 +278,7 @@
 			                    	</a>
 	
 			                    	<div class="item">
-		                                <a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=17&pll={{mission.startLat}},{{mission.startLng}}" target="_blank">
+		                                <a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=19&pll={{mission.startLat}},{{mission.startLng}}" target="_blank">
 		                                    <i class="fa fa-external-link"></i>
 		                                </a>
 			                    	</div>
@@ -401,7 +401,7 @@
 					</div>
 					
 					<div class="item">
-                        <a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=17&pll={{mission.startLat}},{{mission.startLng}}" target="_blank">
+                        <a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=19&pll={{mission.startLat}},{{mission.startLng}}" target="_blank">
 			            	<i class="fa fa-external-link"></i>
 	            		</a>
 					</div>
@@ -445,7 +445,11 @@
 				<input id="name_input" type="text" class="control" ng-model="mosaic_name" />
 			</div>
 		
-			<div class="flex-col">
+			<div class="item color-muted">
+				Suggestion
+			</div>
+					
+			<div class="flex-col ml-big">
 				
 				<div class="flex" ng-repeat="mission in selected | limitTo:3">
 					<div class="item color-dark">
@@ -459,8 +463,12 @@
 				<span>City</span>
 				<input id="city_input" type="text" class="control" placeholder="City name" />
 			</div>
+		
+			<div class="item color-muted">
+				Suggestion
+			</div>
 			
-			<div class="item grow">
+			<div class="item grow ml-big">
 				<span class="color-dark">{{default}}</span>
 			</div>
 			
@@ -513,7 +521,7 @@
 				            
 				            <div ng-repeat="m in selected | reverse" class="mission-vignet block" style="flex:0 0 calc(100% / {{columns}});">
 				                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-				            	<div style="position:absolute;bottom:0;right:0;font-size:8px;">{{m.order}}</div>
+				            	<div class="color-dark" style="position:absolute;bottom:0;right:0;font-size:8px;">{{m.order}}</div>
 				            </div>
 				            
 			            </div>
