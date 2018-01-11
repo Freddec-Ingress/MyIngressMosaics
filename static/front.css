@@ -419,6 +419,10 @@ ul > li { list-style:none; }
 
 .container.active { display:flex; }
 
+.section {
+	margin:2rem 0 0 0; padding:.375rem;
+	display: flex; flex-direction: column; flex-shrink: 0;
+}
 .btn {
 	cursor:pointer;
 	border:1px solid #5afbea;

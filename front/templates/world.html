@@ -23,27 +23,27 @@
 	
 	<div class="container" ng-class="{'active':loaded}">
 		
-		<div class="item flex-col mt-big">
+		<div class="section">
 			
-			<div class="item">
-				<span class="block text-center text-big color-light">Ingress Mosaics, Banners and Mission series</span>
-				<span class="block text-center">{{mosaic_count|number}} registered mosaics by agents for agents</span>
+			<div class="item flex-col justify-center align-center">
+				<span class="text-big color-light text-center">Ingress Mosaics, Banners and Mission series</span>
+				<span class="text-normal color-normal text-center">{{mosaic_count|number}} registered mosaics by agents for agents</span>
 			</div>
 			
 		</div>
 
-	    <div class="item flex justify-center align-center mt-big">
+	    <div class="section">
 	    	
-	    	<div class="item">
+	    	<div class="item flex-col justify-center align-center">
 	    		<a class="btn flex align-center" href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">
-	    			<i class="fa fa-plus-square"></i>
-	    			<span class="ml-normal">MIM Hunting Tool</span>
+	    			<i class="item fa fa-plus-square"></i>
+	    			<span class="item">MIM Hunting Tool</span>
 	    		</a>
 	    	</div>
 	    	
 		</div>
 		
-	    <div class="item flex-col mt-big">
+	    <div class="section">
 	    	
 	    	<div class="item pb-none">
 	    		<span class="color-normal">Search for a city</span>
@@ -57,71 +57,71 @@
 
 			</form>
 			
-		</div>
-		
-		<div class="flex align-center justify-center mt-big" ng-show="flag_searching">
-			
-			<div class="item">
-				<i class="fa fa-spinner rotating"></i>
+			<div class="flex align-center justify-center mt-big" ng-show="flag_searching">
+				
+				<div class="item">
+					<i class="fa fa-spinner rotating"></i>
+				</div>
+				
+				<div class="item">
+					<span class="item">Searching...</span>
+				</div>
+				
 			</div>
 			
-			<div class="item">
-				<span class="item">Searching...</span>
+			<div class="flex align-center justify-center mt-big" ng-show="flag_city_unknown">
+				
+		    	<div class="item">
+		    		<span class="color-danger">City unknown</span>
+		    	</div>
+		    	
+			</div>
+			
+			<div class="flex-col align-center justify-center mt-big" ng-show="city && mosaics.length < 1">
+				
+		    	<div class="item">
+		    		<span class="color-danger">No mosaic registered</span>
+		    	</div>
+		    	
+		    	<div class="item">
+		    		<a href="/registration">Send a request or Be the first to register mosaic for this city</a>
+		    	</div>
+	
 			</div>
 			
 		</div>
 		
-		<div class="flex align-center justify-center mt-big" ng-show="flag_city_unknown">
-			
-	    	<div class="item">
-	    		<span class="color-danger">City unknown</span>
-	    	</div>
-	    	
-		</div>
-		
-		<div class="flex-col align-center justify-center mt-big" ng-show="city && mosaics.length < 1">
-			
-	    	<div class="item">
-	    		<span class="color-danger">No mosaic registered</span>
-	    	</div>
-	    	
-	    	<div class="item">
-	    		<a href="/registration">Send a request or Be the first to register mosaic for this city</a>
-	    	</div>
-
-		</div>
-		
-		<div class="item pb-none flex-col mt-big">
+		<div class="section">
 			
 			<span class="item pb-none color-normal">{{countries.length}} countries with mosaics</span>
 		
-			<div class="item pb-none">
+			<div class="item">
 				<hr>
+			</div>
+		
+			<div class="flex wrap">
+				<div class="width-12 width-xl-4 item" ng-repeat="country in countries">
+					<a class="item link-block flex align-center" href="/world/{{country.name}}">
+					
+						<div class="item flex-col align-center justify-center">
+							<span class="flag-icon flag-icon-{{country.code}}" style="width:1.5rem; line-height:2rem;"></span>
+						</div>
+						
+						<div class="item grow">
+							<span class="block color-light text-medium">{{country.name}}</span>
+							<span class="block color-dark text-small" ng-show="country.locale">{{country.locale}}</span>
+						</div>
+		
+						<div class="item flex-col align-center justify-center">
+							<span class="color-normal">{{country.mosaic_count|number}}</span>
+						</div>
+						
+					</a>
+				</div>
 			</div>
 
 		</div>
 		
-		<div class="item mb-big flex wrap">
-			<div class="width-12 width-xl-4 item" ng-repeat="country in countries">
-				<a class="item link-block flex align-center" href="/world/{{country.name}}">
-				
-					<div class="item flex-col align-center justify-center">
-						<span class="flag-icon flag-icon-{{country.code}}" style="width:1.5rem; line-height:2rem;"></span>
-					</div>
-					
-					<div class="item grow">
-						<span class="block color-light text-medium">{{country.name}}</span>
-						<span class="block color-dark text-small" ng-show="country.locale">{{country.locale}}</span>
-					</div>
-	
-					<div class="item flex-col align-center justify-center">
-						<span class="color-normal">{{country.mosaic_count|number}}</span>
-					</div>
-					
-				</a>
-			</div>
-		</div>
-
 	</div>
 	
 {% endverbatim %}
