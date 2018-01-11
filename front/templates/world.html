@@ -103,16 +103,16 @@
 			<div class="width-12 width-xl-4 item" ng-repeat="country in countries">
 				<a class="item link-block flex align-center" href="/world/{{country.name}}">
 				
-					<div class="item flex align-center justify-center">
+					<div class="item flex-col align-center justify-center">
 						<span class="flag-icon flag-icon-{{country.code}}" style="width:1.5rem; line-height:2rem;"></span>
 					</div>
 					
 					<div class="item grow">
-						<span class="color-light text-medium">{{country.name}}</span>
-						<span class="color-dark text-small" ng-show="country.locale">{{country.locale}}</span>
+						<span class="block color-light text-medium">{{country.name}}</span>
+						<span class="block color-dark text-small" ng-show="country.locale">{{country.locale}}</span>
 					</div>
 	
-					<div class="item">
+					<div class="item flex-col align-center justify-center">
 						<span class="color-normal">{{country.mosaic_count|number}}</span>
 					</div>
 					
