@@ -779,7 +779,7 @@ def data_getMosaicsByCountry(request):
 		
 		item_data = {
 			'name':country.name,
-			'code':country.code,
+			'cod':country.code,
 			'locale':country.locale,
 			'mosaic_count':Mosaic.objects.filter(city__region__country=country).count(),
 		}
