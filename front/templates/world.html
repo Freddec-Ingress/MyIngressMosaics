@@ -23,7 +23,7 @@
 	
 	<div class="container" ng-class="{'active':loaded}">
 		
-		<div class="flex-col mt-big">
+		<div class="item flex-col mt-big">
 			
 			<div class="item">
 				<span class="block text-center text-big color-light">Ingress Mosaics, Banners and Mission series</span>
@@ -32,7 +32,7 @@
 			
 		</div>
 
-	    <div class="flex justify-center align-center mt-big">
+	    <div class="item flex justify-center align-center mt-big">
 	    	
 	    	<div class="item">
 	    		<a class="btn flex align-center" href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">
@@ -96,10 +96,10 @@
 		</div>
 		
 		<div class="item">
-			<hr>
+			<hr class="item">
 		</div>
 		
-		<div class="mb-big flex wrap">
+		<div class="item mb-big flex wrap">
 			<div class="width-12 width-xl-4 item" ng-repeat="country in countries">
 				<a class="item link-block flex align-center" href="/world/{{country.name}}">
 				
