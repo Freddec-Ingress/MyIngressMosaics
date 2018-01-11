@@ -57,6 +57,7 @@ def save_user_profile(sender, instance, **kwargs):
 @python_2_unicode_compatible
 class Country(models.Model):
 	
+	code = models.CharField(max_length=2, null=True, blank=True)
 	name = models.CharField(max_length=512)
 	locale = models.CharField(max_length=512, null=True, blank=True)
 	

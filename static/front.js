@@ -2565,6 +2565,8 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	
 	$scope.retireMission = function(mission) {
 		
+		mission.selected = false;
+		
 		var index = $scope.selected.indexOf(mission);
 		$scope.selected.splice(index, 1);
 		
