@@ -440,6 +440,8 @@ angular.module('FrontModule.services').service('UtilsService', function() {
 			
 			var order = 0;
 			
+			if (!name) return order;
+			
 			var found = name.match(/[0-9]+/);
 			if (found) { order = parseInt(found[0]); }
 			else {
