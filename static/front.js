@@ -3687,7 +3687,18 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		
 		$scope.computeOffsetMosaic(mosaic);
 		
-		mosaic.columns = '6';
+        mosaic.missions.sort(function(a, b){
+        	
+        	if (a.order > b.order) return -1;
+        	if (a.order < b.order) return  1;
+        	
+        	if (a.title > b.title) return -1;
+        	if (a.title < b.title) return  1;
+        	
+        	return 0;
+        });
+
+ 		mosaic.columns = '6';
 		
 		var geocoder = new google.maps.Geocoder();
 		
@@ -3924,7 +3935,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
         	}
         }
         
-        mosaic.sort(function(a, b){
+        $scope.mosaics.sort(function(a, b){
         	
         	if (a.missions.length > b.missions.length) return -1;
         	if (a.missions.length < b.missions.length) return  1;
