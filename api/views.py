@@ -1007,10 +1007,17 @@ def data_searchForMissions(request):
 	
 	data = { 'missions': [], }
 	
-	results = Mission.objects.filter(mosaic__isnull=True, admin=True).annotate(count=Count('name')).order_by('count', 'name')
+	names = []
+	
+	fieldname = 'name'
+	results = Mission.objects.filter(mosaic__isnull=True, admin=True).order_by(fieldname).values(fieldname).annotate(count=Count(fieldname)).order('count', 'name')
 	for item in results:
 		if item['count'] >= 3:
-			data['missions'].append(item.overviewSerialize())
+			names.append(item['name'])
+	
+	results = Mission.objects.filter(mosaic__isnull=True, admin=True, name__in=names).order_by('name')
+	for item in results:
+		data['missions'].append(item.overviewSerialize())
 			
 	return Response(data, status=status.HTTP_200_OK)
 
