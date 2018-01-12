@@ -1007,12 +1007,13 @@ def data_searchForMissions(request):
 	
 	data = { 'missions': [], }
 	
-	results = Mission.objects.filter(mosaic__isnull=True, registerer=request.user, admin=True).annotate(count=Count('name')).filter(count__gte=3).order_by('-count', 'name')
+	results = Mission.objects.filter(mosaic__isnull=True, registerer=request.user, admin=True).annotate(count=Count('name')).order_by('-count', 'name')
 	if (results.count() > 0):
 
 		data = { 'missions': [], }
 		for item in results:
-			data['missions'].append(item.overviewSerialize())
+			if item.count > 2:
+				data['missions'].append(item.overviewSerialize())
 			
 	return Response(data, status=status.HTTP_200_OK)
 
