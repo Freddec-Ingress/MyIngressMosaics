@@ -1010,7 +1010,7 @@ def data_searchForMissions(request):
 	names = []
 	
 	fieldname = 'name'
-	results = Mission.objects.filter(mosaic__isnull=True, admin=True).order_by(fieldname).values(fieldname).annotate(count=Count(fieldname)).order('count', 'name')
+	results = Mission.objects.filter(mosaic__isnull=True, admin=True).order_by(fieldname).values(fieldname).annotate(count=Count(fieldname)).order_by('count', 'name')
 	for item in results:
 		if item['count'] >= 3:
 			names.append(item['name'])
