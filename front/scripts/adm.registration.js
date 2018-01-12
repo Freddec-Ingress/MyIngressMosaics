@@ -217,44 +217,42 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
         if (missions && missions.length > 0) {
         	
         	for (var mission of missions) {
-				if (mission.count > 2) {
-					
-	        		var mosaic = null;
-	        		
-	        		var name = mission.name;
-	        		var index = names.indexOf(name);
-	        		
-	        		if (index == -1) {
-	        			
-	        			names.push(name);
-	        			
-	        			mosaic = {
-	        				'name': name,
-	        				'type': 'sequence',
-	        				'open': false,
-	        				'columns': '6',
-	        				'offset': null,
-	        				'city': null,
-	        				'region': null,
-	        				'country': null,
-	        				'default': null,
-	        				'missions': [],
-	        				'creator': mission.creator,
-	        			}
-	        			
-	        			$scope.mosaics.push(mosaic);
-	        		}
-	        		else {
-	        			
-	        			mosaic = $scope.mosaics[index];
-	        		}
-	        		
-	        		mosaic.missions.push(mission);
-	        		
-			    	var order = UtilsService.getOrderFromMissionName(mission.title);
-					if (order < 1) order = mosaic.missions.indexOf(mission) + 1;
-					mission.order = order.toString();
-				}
+
+        		var mosaic = null;
+        		
+        		var name = mission.name;
+        		var index = names.indexOf(name);
+        		
+        		if (index == -1) {
+        			
+        			names.push(name);
+        			
+        			mosaic = {
+        				'name': name,
+        				'type': 'sequence',
+        				'open': false,
+        				'columns': '6',
+        				'offset': null,
+        				'city': null,
+        				'region': null,
+        				'country': null,
+        				'default': null,
+        				'missions': [],
+        				'creator': mission.creator,
+        			}
+        			
+        			$scope.mosaics.push(mosaic);
+        		}
+        		else {
+        			
+        			mosaic = $scope.mosaics[index];
+        		}
+        		
+        		mosaic.missions.push(mission);
+        		
+		    	var order = UtilsService.getOrderFromMissionName(mission.title);
+				if (order < 1) order = mosaic.missions.indexOf(mission) + 1;
+				mission.order = order.toString();
         	}
         }
         

@@ -25,7 +25,7 @@
 		
 		<div ng-repeat="mosaic in mosaics">
 			
-			<div ng-if="!isMissionCountValid(mosaic);">
+			<div ng-if="mosaic.missions.length > 2 && !isMissionCountValid(mosaic);">
 				
 				<div class="flex align-center">
 					
@@ -47,7 +47,7 @@
 				
 			</div>
 			
-			<div ng-if="isMissionCountValid(mosaic);">
+			<div ng-if="mosaic.missions.length > 2 && isMissionCountValid(mosaic);">
 				
 				<div ng-show="!mosaic.open">
 					<div class="flex align-center">
