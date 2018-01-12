@@ -40,6 +40,7 @@ urlpatterns = [
 	url(r'^mission/delete/',		mission_delete),
 	url(r'^mission/order/',			mission_order),
 	url(r'^mission/exclude/',		mission_exclude),
+	url(r'^missions/byname/',		data_missionsByName),
 
 	url(r'^new_missions/',			data_newSearchForMissions),
 	url(r'^missions/',				data_searchForMissions),

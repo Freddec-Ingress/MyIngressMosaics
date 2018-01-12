@@ -1002,6 +1002,23 @@ def data_getMosaicsByCreator(request, name):
 
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def data_missionsByName(request):
+	
+	data = {
+		'missions': [],
+	}
+	
+	results = Mission.objects.filter(mosaic__isnull=True, name=request.data['name'])
+	for item in results:
+		data['missions'].append(item.overviewSerialize())
+	
+	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
 @permission_classes((AllowAny, ))
 def data_searchForMissions(request):
 	

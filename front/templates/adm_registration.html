@@ -23,7 +23,7 @@
 	
 	<div class="container" ng-class="{'active':loaded}">
 		
-		<div ng-repeat="mosaic in mosaics">
+		<div class="mt-big" ng-repeat="mosaic in mosaics">
 			
 			<div ng-if="mosaic.missions.length > 2 && !isMissionCountValid(mosaic);">
 				
@@ -33,11 +33,23 @@
 						<a href="/registration/{{mosaic.name}}" target="blank">{{mosaic.name}}</a>
 					</div>
 					
+					<div class="item">
+						<a ng-click="refreshMissions(mosaic);">Refresh missions</a>
+					</div>
+					
 				</div>
 				
 				<hr>
 				
-				<div class="flex align-center" ng-repeat="mission in mosaic.missions">
+				<div ng-show="mosaic.refreshingMissions" class="flex align-center">
+					
+					<div class="item">
+						<span class="color-normal">Refreshing missions...</span>
+					</div>
+					
+				</div>
+				
+				<div ng-hide="mosaic.refreshingMissions" class="flex align-center" ng-repeat="mission in mosaic.missions">
 					
 					<div class="item" style="width:2rem;">
 						<span class="color-dark">{{mission.order}}</span>
@@ -59,13 +71,20 @@
 					
 				</div>
 				
-				<div class="flex align-center">
+				<div ng-hide="mosaic.refreshingMissions" class="flex align-center">
 					
-					<div class="item">
+					<div class="item grow">
 						<button class="btn btn-danger" ng-click="excludeMosaic(mosaic);">
 							Exclude
 						</button>
 					</div>
+					
+					<div class="item">
+						<button class="btn" ng-click="removeMosaic(mosaic);">
+							OK
+						</button>
+					</div>
+					
 				</div>
 				
 			</div>

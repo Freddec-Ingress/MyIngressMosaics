@@ -3814,6 +3814,12 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		$scope.mosaics.splice(index, 1);
 	}
 	
+	$scope.removeMosaic = function(mosaic) {
+		
+		var index = $scope.mosaics.indexOf(mosaic);
+		$scope.mosaics.splice(index, 1);
+	}
+	
 	$scope.reorderMosaic = function(mosaic) {
 		
 		mosaic.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
@@ -3868,6 +3874,28 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 			
 			var index = mosaic.missions.indexOf(mission);
 			mosaic.missions.splice(index, 1);
+		});
+	}
+	
+	$scope.refreshMissions = function(mosaic) {
+		
+		mosaic.refreshingMissions = true;
+		
+		var data = { 'name':mosaic.name };
+		API.sendRequest('/api/missions/byname/', 'POST', {}, data).then(function(response) {
+			
+			mosaic.missions = response.misssions;
+			
+			for (var mission of mosaic.missions) {
+				
+		    	var order = UtilsService.getOrderFromMissionName(mission.title);
+				if (order < 1) order = mosaic.missions.indexOf(mission) + 1;
+				mission.order = order.toString();
+			}
+			
+			mosaic.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
+			
+			mosaic.refreshingMissions = false;
 		});
 	}
 	
