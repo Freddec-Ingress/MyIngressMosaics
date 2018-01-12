@@ -3686,8 +3686,6 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		mosaic.open = true;
 		
 		$scope.computeOffsetMosaic(mosaic);
-		
-        mosaic.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
 
  		mosaic.columns = '6';
 		
@@ -3936,6 +3934,11 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
         	
         	return 0;
         });
+        
+        for (var mosaic of $scope.mosaics) {
+        	
+        	mosaic.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
+        }
         
     	$scope.loaded = true;
 	});
