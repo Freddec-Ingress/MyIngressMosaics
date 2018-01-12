@@ -1007,7 +1007,7 @@ def data_searchForMissions(request):
 	
 	data = { 'missions': [], }
 	
-	results = Mission.objects.filter(mosaic__isnull=True, admin=True).annotate(count=Count('name')).order_by('-count', 'name')
+	results = Mission.objects.filter(mosaic__isnull=True, admin=True).annotate(count=Count('name')).order_by('count', 'name')
 	for item in results:
 		data['missions'].append(item.overviewSerialize())
 			
