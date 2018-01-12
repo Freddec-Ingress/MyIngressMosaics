@@ -1032,7 +1032,7 @@ def data_searchForMissions(request):
 		if item['count'] >= 3:
 			names.append(item['name'])
 	
-	results = Mission.objects.filter(mosaic__isnull=True, admin=True, name__in=names).order_by('name')
+	results = Mission.objects.filter(mosaic__isnull=True, name__in=names).order_by('name')
 	for item in results:
 		data['missions'].append(item.overviewSerialize())
 			
