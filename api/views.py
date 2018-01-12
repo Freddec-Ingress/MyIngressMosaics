@@ -1010,7 +1010,6 @@ def data_searchForMissions(request):
 	results = Mission.objects.filter(mosaic__isnull=True, admin=True).annotate(count=Count('name')).order_by('-count', 'name')
 	if (results.count() > 0):
 
-		data = { 'missions': [], }
 		for item in results:
 			if item.count > 2:
 				data['missions'].append(item.overviewSerialize())
