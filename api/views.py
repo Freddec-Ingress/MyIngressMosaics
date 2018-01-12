@@ -1008,7 +1008,7 @@ def data_searchForMissions(request):
 	data = { 'potentials': [], }
 	
 	fieldname = 'name'
-	results = Mission.objects.filter(mosaic__isnull=True, admin=True).order_by(fieldname).values(fieldname).annotate(count=Count(fieldname)).order_by('-count', 'name')
+	results = Mission.objects.filter(mosaic__isnull=True, admin=True).order_by(fieldname).values(fieldname).annotate(count=Count(fieldname)).filter(count__gte=3).order_by('count', 'name')[:100]
 	for item in results:
 		if item['count'] >= 3:
 			
