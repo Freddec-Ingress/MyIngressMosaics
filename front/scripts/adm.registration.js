@@ -256,6 +256,17 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
         	}
         }
         
+        mosaic.sort(function(a, b){
+        	
+        	if (a.missions.length > b.missions.length) return -1;
+        	if (a.missions.length < b.missions.length) return  1;
+        	
+        	if (a.name > b.name) return -1;
+        	if (a.name < b.name) return  1;
+        	
+        	return 0;
+        });
+        
     	$scope.loaded = true;
 	});
 });
