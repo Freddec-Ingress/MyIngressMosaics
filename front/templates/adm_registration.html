@@ -49,6 +49,28 @@
 					
 				</div>
 				
+				<div class="flex align-center" ng-repeat="mission in mosaic.missions">
+					
+					<div class="item">
+						<span class="color-dark">{{mission.order}}</span>
+					</div>
+					
+					<div class="item grow">
+						<span class="color-normal">{{mission.title}}</span>
+					</div>
+					
+					<div class="item">
+						<span class="color-normal">{{mission.creator}}</span>
+					</div>
+					
+					<div class="item">
+						<a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=17&pll={{mission.startLat}},{{mission.startLng}}" target="_blank">
+							<i class="fa fa-external-link"></i>
+						</a>
+					</div>
+					
+				</div>
+				
 			</div>
 			
 			<div ng-if="mosaic.missions.length > 2 && isMissionCountValid(mosaic);">
