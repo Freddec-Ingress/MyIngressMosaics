@@ -1005,20 +1005,14 @@ def data_getMosaicsByCreator(request, name):
 @permission_classes((AllowAny, ))
 def data_searchForMissions(request):
 	
-	data = { 'potentials': [], }
+	data = { 'missions': [], }
 	
-	fieldname = 'name'
-	results = Mission.objects.filter(mosaic__isnull=True, admin=True).order_by(fieldname).annotate(count=Count(fieldname)).filter(count__gte=3).order_by('count', 'name')[:100]
-	for item in results:
-		if item['count'] >= 3:
-			
-			potential = {
-				'name': item[fieldname],
-				'count': item['count'],
-				'missions': [],
-			}
+	results = Mission.objects.filter(mosaic__isnull=True, registerer=request.user, admin=True).annotate(count=Count('name')).filter(count__gte=3).order_by('-count', 'name')
+	if (results.count() > 0):
 
-			data['potentials'].append(potential)
+		data = { 'missions': [], }
+		for item in results:
+			data['missions'].append(item.overviewSerialize())
 			
 	return Response(data, status=status.HTTP_200_OK)
 

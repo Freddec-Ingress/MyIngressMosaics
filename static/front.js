@@ -3877,29 +3877,50 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 	
 	API.sendRequest('/api/missions/', 'POST').then(function(response) {
     
-    	for (var potential of response.potentials) {
-			
-    		var mosaic = {
-				'name': potential.name,
-				'type': 'sequence',
-				'open': false,
-				'columns': '6',
-				'offset': null,
-				'city': null,
-				'region': null,
-				'country': null,
-				'default': null,
-				'missions': potential.missions,
-				'creator': potential.missions[0].creator,
-			}
-    		
-    		for (var mission of mosaic.missions) {
-    			
+    	var names = [];
+    
+        var missions = response.missions;
+        if (missions && missions.length > 0) {
+        	
+        	for (var mission of missions) {
+				
+        		var mosaic = null;
+        		
+        		var name = mission.name;
+        		var index = names.indexOf(name);
+        		
+        		if (index == -1) {
+        			
+        			names.push(name);
+        			
+        			mosaic = {
+        				'name': name,
+        				'type': 'sequence',
+        				'open': false,
+        				'columns': '6',
+        				'offset': null,
+        				'city': null,
+        				'region': null,
+        				'country': null,
+        				'default': null,
+        				'missions': [],
+        				'creator': mission.creator,
+        			}
+        			
+        			$scope.mosaics.push(mosaic);
+        		}
+        		else {
+        			
+        			mosaic = $scope.mosaics[index];
+        		}
+        		
+        		mosaic.missions.push(mission);
+        		
 		    	var order = UtilsService.getOrderFromMissionName(mission.title);
 				if (order < 1) order = mosaic.missions.indexOf(mission) + 1;
 				mission.order = order.toString();
-    		}
-    	}
+        	}
+        }
         
     	$scope.loaded = true;
 	});
