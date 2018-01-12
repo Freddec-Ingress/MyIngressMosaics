@@ -1009,7 +1009,8 @@ def data_searchForMissions(request):
 	
 	results = Mission.objects.filter(mosaic__isnull=True, admin=True).annotate(count=Count('name')).order_by('count', 'name')
 	for item in results:
-		data['missions'].append(item.overviewSerialize())
+		if item['count'] >= 3:
+			data['missions'].append(item.overviewSerialize())
 			
 	return Response(data, status=status.HTTP_200_OK)
 
