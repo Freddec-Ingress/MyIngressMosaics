@@ -1017,11 +1017,7 @@ def data_searchForMissions(request):
 				'count': item['count'],
 				'missions': [],
 			}
-			
-			missions = Mission.objects.filter(mosaic__isnull=True, admin=True, name=item[fieldname])
-			for mission in missions:
-				potential['missions'].append(mission.overviewSerialize())
-			
+
 			data['potentials'].append(potential)
 			
 	return Response(data, status=status.HTTP_200_OK)
