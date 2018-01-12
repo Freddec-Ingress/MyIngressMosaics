@@ -3877,76 +3877,29 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 	
 	API.sendRequest('/api/missions/', 'POST').then(function(response) {
     
-    	var names = [];
-    
-        var missions = response.missions;
-        if (missions && missions.length > 0) {
-        	
-        	for (var mission of missions) {
-				
-        		var mosaic = null;
-        		
-        		var name = mission.name;
-        		var index = names.indexOf(name);
-        		
-        		if (index == -1) {
-        			
-        			names.push(name);
-        			
-        			mosaic = {
-        				'name': name,
-        				'type': 'sequence',
-        				'open': false,
-        				'columns': '6',
-        				'offset': null,
-        				'city': null,
-        				'region': null,
-        				'country': null,
-        				'default': null,
-        				'missions': [],
-        				'creator': mission.creator,
-        			}
-        			
-        			$scope.mosaics.push(mosaic);
-        		}
-        		else {
-        			
-        			mosaic = $scope.mosaics[index];
-        		}
-        		
-        		mosaic.missions.push(mission);
-        		
+    	for (var potential of response.potentials) {
+			
+    		var mosaic = {
+				'name': potential.name,
+				'type': 'sequence',
+				'open': false,
+				'columns': '6',
+				'offset': null,
+				'city': null,
+				'region': null,
+				'country': null,
+				'default': null,
+				'missions': potential.missions,
+				'creator': potential.missions[0].creator,
+			}
+    		
+    		for (var mission of mosaic.missions) {
+    			
 		    	var order = UtilsService.getOrderFromMissionName(mission.title);
 				if (order < 1) order = mosaic.missions.indexOf(mission) + 1;
 				mission.order = order.toString();
-        	}
-        }
-        
-        var temp = $scope.mosaics.slice();
-        for (var mosaic of temp) {
-        	
-        	var index = $scope.mosaics.indexOf(mosaic);
-
-    		var count = mosaic.missions.length;
-    		if (count < 3) {
-    			
-    			$scope.excludeMosaic(mosaic);
     		}
-    		else {
-    			$scope.reorderMosaic(mosaic);
-    		}
-        }
-        
-        $scope.mosaics.sort(function(a, b) {
-        	
-        	if (a.missions.length > b.missions.length) return -1;
-        	if (a.missions.length < b.missions.length) return 1;
-        	
-        	if (a.name > b.name) return 1;
-        	if (a.name < b.name) return -1;
-        	
-        	return 0;
-        });
+    	}
         
     	$scope.loaded = true;
 	});
