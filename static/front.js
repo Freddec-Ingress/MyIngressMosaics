@@ -3886,11 +3886,8 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		var data = { 'name':mosaic.name };
 		API.sendRequest('/api/missions/byname/', 'POST', {}, data).then(function(response) {
 			
-			console.log(response);
-			
-			mosaic.missions = response.misssions;
-			console.log(mosaic.missions);
-			
+			mosaic.missions = response.missions;
+
 			for (var mission of mosaic.missions) {
 				
 		    	var order = UtilsService.getOrderFromMissionName(mission.title);
