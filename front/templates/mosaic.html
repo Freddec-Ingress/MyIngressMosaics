@@ -371,13 +371,15 @@
 							</div>
 							
 							<div class="flex">
-								<span class="item color-muted">{{mission.portals}} actions</span>
-								<span class="item color-dark flex wrap" ng-repeat="portal in mission.portals">
-									<span class="color-muted text-small">#{{$index}}</span>
-									<span ng-show="portal.action==1">Hack</span>
-									<span ng-show="portal.action==2">Capture</span>
-									<span ng-show="portal.action==7">View</span>
-									<span ng-show="portal.action==8">Passphrase</span>
+								<span class="item color-muted">{{mission.portals.length}} actions</span>
+								<span>
+									<span class="item color-dark" ng-repeat="portal in mission.portals">
+										<span class="color-muted text-small">#{{$index}}</span>
+										<span ng-show="portal.action==1">Hack</span>
+										<span ng-show="portal.action==2">Capture</span>
+										<span ng-show="portal.action==7">View</span>
+										<span ng-show="portal.action==8">Passphrase</span>
+									</span>
 								</span>
 							</div>
 							
