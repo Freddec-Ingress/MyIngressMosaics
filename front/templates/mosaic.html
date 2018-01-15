@@ -361,9 +361,9 @@
 			<div ng-show="current_tab=='mission'">
 				
 				<div class="item">
-					<div class="group-list">
+					<div class="flex-col">
 						
-						<div class="group-list-item flex-col" ng-repeat="mission in mosaic.missions">
+						<div class="bg-block flex-col" ng-repeat="mission in mosaic.missions">
 							
 							<div class="item flex-col">
 								<span class="text-medium color-light">{{mission.title}}</span>
@@ -371,8 +371,8 @@
 							</div>
 							
 							<div class="flex">
-								<span class="item color-muted">{{mission.portals.length}} actions</span>
-								<span>
+								<span class="item flex noshrink color-muted">{{mission.portals.length}} actions</span>
+								<span class="flex wrap">
 									<span class="item color-dark" ng-repeat="portal in mission.portals">
 										<span class="color-muted text-small">#{{$index}}</span>
 										<span ng-show="portal.action==1">Hack</span>

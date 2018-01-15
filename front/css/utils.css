@@ -41,7 +41,8 @@
 	.width-xl-12 { -webkit-box-flex: 0; -ms-flex: 0 0 100.000000%; flex: 0 0 100.000000%; max-width: 100.000000%; }
 }
 
-.link-block { background-color:rgba(255,255,255,.05); border-radius:.375rem; cursor:pointer; }
+.link-block, .bg-block { background-color:rgba(255,255,255,.05); border-radius:.375rem; }
+.link-block { cursor:pointer; }
 .link-block:hover { background-color:rgba(255,255,255,.1); }
 
 .flag-icon.item { padding:0; margin:.375rem; }
