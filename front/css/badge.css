@@ -4,6 +4,9 @@
 	background-color: #1f4549;
 	cursor: pointer;
 }
+.badge:hover, .badge:hover span {
+	color:#5afbea!important;
+}
 
 .badge.active { color:white; }
 .badge.inactive { color:black; }
