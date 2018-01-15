@@ -307,91 +307,95 @@
 		
 		<div class="grow flex-col" ng-show="current_step == 2 && !creating">
 
-			<div class="mt-big flex align-center justify-center">
-
-				<div class="item">
-					Columns
-				</div>
+			<div class="section">
+	
+				<div class="flex align-center justify-center">
+	
+					<div class="item">
+						Columns
+					</div>
+					
+					<div class="item" style="min-width: 65px; max-width: 65px;">
+						<select class="control" ng-model="columns" ng-change="computeOffset();">
+							<option value="6">6</option>
+							<option value="5">5</option>
+							<option value="4">4</option>
+							<option value="3">3</option>
+							<option value="2">2</option>
+							<option value="1">1</option>
+						</select>
+					</div>
 				
-				<div class="item" style="min-width: 65px; max-width: 65px;">
-					<select class="control" ng-model="columns" ng-change="computeOffset();">
-						<option value="6">6</option>
-						<option value="5">5</option>
-						<option value="4">4</option>
-						<option value="3">3</option>
-						<option value="2">2</option>
-						<option value="1">1</option>
-					</select>
 				</div>
-			
-			</div>
-			
-			<div class="flex justify-center">
-				
-				<div class="item text-center">
-					<a ng-click="reorderAsc();">Reorder</a>
-				</div>
-				
-				<div class="item text-center">
-					<a ng-click="reorderDesc();">Reverse order</a>
-				</div>
-				
-				<div class="item text-center">
-					<a ng-click="reorderAlphaMosaic();">Order Alpha</a>
-				</div>
-				
-				<div class="item text-center">
-					<a ng-click="reorderByEnd();">Order by end</a>
-				</div>
-				
-			</div>
-			
-			<div class="flex-col">
 				
 				<div class="flex justify-center">
-					<div class="item flex justify-center" style="width:100%; max-width:420px;">
-						
-						<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - {{columns}}) / 2 * 16.666667%);">
-							
-				            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / {{columns}});">
-				            </div>
-				            
-				            <a ng-repeat="m in selected | reverse" class="mission-vignet block" style="flex:0 0 calc(100% / {{columns}});" ng-click="displayOrder(m);">
-				                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-				            	<div style="position:absolute;bottom:0;right:0;font-size:8px;">{{m.order}}</div>
-				            </a>
-				            
-			            </div>
-						
+					
+					<div class="item text-center">
+						<a ng-click="reorderAsc();">Reorder</a>
 					</div>
+					
+					<div class="item text-center">
+						<a ng-click="reorderDesc();">Reverse order</a>
+					</div>
+					
+					<div class="item text-center">
+						<a ng-click="reorderAlphaMosaic();">Order Alpha</a>
+					</div>
+					
+					<div class="item text-center">
+						<a ng-click="reorderByEnd();">Order by end</a>
+					</div>
+					
 				</div>
 				
-				<div class="flex justify-center align-center" ng-repeat="mission in selected">
+				<div class="flex-col">
 					
-					<div class="item" style="max-width:50px;min-width:50px;">
-						<input type="text" class="control text-center" style="padding:0;" ng-model="mission.order" ng-blur="sortMissionsByOrderTitleAsc();">
+					<div class="flex justify-center">
+						<div class="item flex justify-center" style="width:100%; max-width:420px;">
+							
+							<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - {{columns}}) / 2 * 16.666667%);">
+								
+					            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / {{columns}});">
+					            </div>
+					            
+					            <a ng-repeat="m in selected | reverse" class="mission-vignet block" style="flex:0 0 calc(100% / {{columns}});" ng-click="displayOrder(m);">
+					                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+					            	<div style="position:absolute;bottom:0;right:0;font-size:8px;">{{m.order}}</div>
+					            </a>
+					            
+				            </div>
+							
+						</div>
 					</div>
 					
-					<div class="item grow">
-						<span class="color-light block" title="{{mission.desc}}">{{mission.title}}</span>
-					</div>
-					
-					<div class="item">
-						<a ng-click="retireMission(mission);">
-			            	<i class="fa fa-trash"></i>
-	            		</a>
-					</div>
-					
-					<div class="item">
-                        <a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=19&pll={{mission.startLat}},{{mission.startLng}}" target="_blank">
-			            	<i class="fa fa-external-link"></i>
-	            		</a>
-					</div>
+					<div class="flex justify-center align-center" ng-repeat="mission in selected">
 						
+						<div class="item" style="max-width:50px;min-width:50px;">
+							<input type="text" class="control text-center" style="padding:0;" ng-model="mission.order" ng-blur="sortMissionsByOrderTitleAsc();">
+						</div>
+						
+						<div class="item grow">
+							<span class="color-light block" title="{{mission.desc}}">{{mission.title}}</span>
+						</div>
+						
+						<div class="item">
+							<a ng-click="retireMission(mission);">
+				            	<i class="fa fa-trash"></i>
+		            		</a>
+						</div>
+						
+						<div class="item">
+	                        <a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=19&pll={{mission.startLat}},{{mission.startLng}}" target="_blank">
+				            	<i class="fa fa-external-link"></i>
+		            		</a>
+						</div>
+							
+					</div>
+					
 				</div>
 				
 			</div>
-
+			
 			<div class="flex justify-center" style="position:fixed; bottom:0; left:0; right:0; background-color:#000000;">
 				<div class="item container active">
 					
@@ -428,61 +432,71 @@
 		
 		<div class="grow flex-col" ng-show="current_step == 3 && !creating">
 			
-			<div class="mt-big item flex-col">
-				<span>Mosaic name</span>
-				<input id="name_input" type="text" class="control" ng-model="mosaic_name" />
-			</div>
-		
-			<div class="item color-muted">
-				Suggestion
-			</div>
+			<div class="section">
 					
-			<div class="flex-col ml-big">
-				
-				<div class="flex" ng-repeat="mission in selected | limitTo:3">
-					<div class="item color-dark">
-						{{mission.title}}
+				<div class="item flex-col">
+					<span>Mosaic name</span>
+					<input id="name_input" type="text" class="control" ng-model="mosaic_name" />
+				</div>
+			
+				<div class="item color-muted">
+					Suggestion
+				</div>
+						
+				<div class="flex-col ml-big">
+					
+					<div class="flex" ng-repeat="mission in selected | limitTo:3">
+						<div class="item color-dark">
+							{{mission.title}}
+						</div>
 					</div>
+					
+				</div>
+			
+				<div class="item flex-col mt-big">
+					<span>City</span>
+					<input id="city_input" type="text" class="control" placeholder="City name" />
+				</div>
+			
+				<div class="item color-muted">
+					Suggestion
 				</div>
 				
-			</div>
-		
-			<div class="item flex-col mt-big">
-				<span>City</span>
-				<input id="city_input" type="text" class="control" placeholder="City name" />
-			</div>
-		
-			<div class="item color-muted">
-				Suggestion
+				<div class="item grow ml-big">
+					<span class="color-dark">{{default}}</span>
+				</div>
+			
 			</div>
 			
-			<div class="item grow ml-big">
-				<span class="color-dark">{{default}}</span>
-			</div>
-			
-			<hr>
-			
-			<div class="p-normal pr-xl-none pl-xl-none">
-				<div class="row">
+			<div class="flex justify-center" style="position:fixed; bottom:0; left:0; right:0; background-color:#000000;">
+				<div class="item container active">
 					
-					<div class="item grow flex">
-						<button class="btn" ng-click="open_step(2);">
-							<div class="row">
-								<i class="item fa fa-angle-double-left"></i>
-								<span class="item">Back</span>
-							</div>
-						</button>
+					<div class="item">
+						<hr>
 					</div>
 					
-					<div class="item self-center">
-						<button class="btn" ng-click="open_step(4);" ng-disabled="!mosaic_name || !country_name || !city_name">
-							<div class="row">
-								<span class="item">Next</span>
-								<i class="item fa fa-angle-double-right"></i>
-							</div>
-						</button>
+					<div class="flex">
+						
+						<div class="item grow flex">
+							<button class="btn" ng-click="open_step(2);">
+								<div class="row">
+									<i class="item fa fa-angle-double-left"></i>
+									<span class="item">Back</span>
+								</div>
+							</button>
+						</div>
+						
+						<div class="item self-center">
+							<button class="btn" ng-click="open_step(4);" ng-disabled="!mosaic_name || !country_name || !city_name">
+								<div class="row">
+									<span class="item">Next</span>
+									<i class="item fa fa-angle-double-right"></i>
+								</div>
+							</button>
+						</div>
+						
 					</div>
-					
+			
 				</div>
 			</div>
 			
