@@ -412,58 +412,52 @@
 				
 				<div class="item" ng-show="mosaic.comments.length < 1">
 					
-					<div class="item bg-block text-center">
-						<span class="color-normal">No comment</span>
+					<div class="item bg-block">
+						<span class="color-dark">No comment</span>
 					</div>
 					
 				</div>
 				
-				<div ng-repeat="comment in mosaic.comments">
+				<div class="flex-col" ng-show="mosaic.comments.length > 0">
 					
-					<div class="flex-col">
-					
-						<div class="item grow">
-							<hr />
-						</div>
-						
-						<div class="flex">
-							<div class="item text-left">
-								<span ng-class="{'color-enlightened': comment.faction == 'E', 'color-resistant': comment.faction == 'R'}">{{comment.username}}</span>
-								<br />
-								<span class="color-light">{{comment.text}}</span>
-							</div>
-						</div>
-		
-						<div class="flex" ng-show="comment.username == user.name">
+					<div class="item" ng-repeat="comment in mosaic.comments">
+						<div class="bg-block">
 							
-							<div class="item">
-								<button class="btn btn-mini" ng-click="displayCommentEdit(comment);">
-									Edit
-								</button>
+							<div class="flex">
+								<div class="item text-left">
+									<span ng-class="{'color-enlightened': comment.faction == 'E', 'color-resistant': comment.faction == 'R'}">{{comment.username}}</span>
+									<br />
+									<span class="color-light">{{comment.text}}</span>
+								</div>
 							</div>
-							
-							<div class="item">
-								<button class="btn btn-mini" ng-click="deleteComment(user, $index, comment);">
-									Delete
-								</button>
+			
+							<div class="flex" ng-show="comment.username == user.name">
+								
+								<div class="item">
+									<button class="btn btn-mini" ng-click="displayCommentEdit(comment);">
+										Edit
+									</button>
+								</div>
+								
+								<div class="item">
+									<button class="btn btn-mini" ng-click="deleteComment(user, $index, comment);">
+										Delete
+									</button>
+								</div>
+								
 							</div>
 							
 						</div>
-						
 					</div>
 					
 				</div>
 				
 				<div class="item">
-					
-					<div class="item">
-						<button class="link-block" ng-click="displayCommentEdit();">
-							Post a comment
-						</button>
-					</div>
-					
+					<button class="btn" ng-click="displayCommentEdit();">
+						Post a comment
+					</button>
 				</div>
-				
+
 			</div>
 
 		</div>
