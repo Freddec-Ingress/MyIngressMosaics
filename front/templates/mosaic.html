@@ -362,7 +362,7 @@
 				
 				<div class="item" ng-repeat="mission in mosaic.missions">
 					
-					<div class="bg-block flex-col">
+					<div class="item bg-block flex-col">
 						
 						<div class="flex-col">
 							<div>
@@ -394,7 +394,7 @@
 						
 						<div class="flex wrap">
 							<span class="item color-dark" ng-repeat="portal in mission.portals">
-								<span class="color-muted text-small mr-normal">{{$index+1}}</span>
+								<span class="color-muted text-small mr-small text-right" style="width:15px;">{{$index+1}}</span>
 								<span ng-show="portal.action==1">Hack</span>
 								<span ng-show="portal.action==2">Capture</span>
 								<span ng-show="portal.action==7">View</span>
