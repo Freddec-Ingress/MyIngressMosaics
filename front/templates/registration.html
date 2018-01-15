@@ -225,9 +225,9 @@
 						<div class="item">
 							
 							<div class="group-list">
-                    			<div class="group-list-item" ng-repeat="mission in missions">
+                    			<div class="group-list-item" ng-repeat="mission in missions" ng-class="{'bgcolor-highlight':mission.selected}">
 	                    	
-			                    	<div class="flex align-center nowrap" ng-class="{'bgcolor-highlight':mission.selected}">
+			                    	<div class="flex align-center nowrap">
 		
 						                <a class="item" ng-click="toggleSelectMission(mission);">
 						        			<img src="/static/img/mask.png" style="width:26px; background-color:#000000; background-image:url({{mission.image}}=s25); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
@@ -258,32 +258,32 @@
 							
 						</div>
 	
-						<div class="flex justify-center" style="position:fixed; bottom:0; left:0; right:0;">
-							<div class="container active">
+						<div class="flex justify-center" style="position:fixed; bottom:0; left:0; right:0; background-color:#000000;">
+							<div class="item container active">
 								
-								<hr>
+								<div class="item">
+									<hr>
+								</div>
 								
-								<div class="p-normal pr-xl-none pl-xl-none">
-									<div class="row">
+								<div class="item flex">
+
+									<div class="item grow flex align-center">
 										
-										<div class="item grow flex align-center">
-											
-											<a ng-click="selectAll();">
-												Select All ({{missions.length}})
-											</a>
-				
-										</div>
-										
-										<div class="item self-center">
-											<button class="btn" ng-class="{'disabled':selected.length < 3}" ng-click="open_step(2);" ng-disabled="selected.length < 3">
-												<div class="row">
-													<span class="item">({{selected.length}}) Next</span>
-													<i class="item fa fa-angle-double-right"></i>
-												</div>
-											</button>
-										</div>
-										
+										<a ng-click="selectAll();">
+											Select All ({{missions.length}})
+										</a>
+			
 									</div>
+									
+									<div class="item self-center">
+										<button class="btn" ng-class="{'disabled':selected.length < 3}" ng-click="open_step(2);" ng-disabled="selected.length < 3">
+											<div class="row">
+												<span class="item">({{selected.length}}) Next</span>
+												<i class="item fa fa-angle-double-right"></i>
+											</div>
+										</button>
+									</div>
+									
 								</div>
 								
 							</div>
