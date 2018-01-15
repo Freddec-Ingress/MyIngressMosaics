@@ -24,52 +24,45 @@
 	
 	<div class="container" ng-class="{'active':loaded}">
 		
-		<div class="flex-col align-center mt-big">
-    		
-    		<span class="text-big text-center color-light">{{region.name}}</span>
-    		
-    		<div class="flex align-center">
-    			
-	    		<div class="item" ng-show="region.locale">
-	    			<span class="color-dark">{{region.locale}}</span>
-	    		</div>
-	    		
-	    		<div class="item">
-	    			<span class="flag-icon flag-icon-{{region.country.code}}"></span>
-	    		</div>
-	    		
-				<div class="item">
-					<a href="/world/{{region.country.name}}">{{region.country.name}}</a>
-				</div>
+		<div class="section">
 			
-	    	</div>
-    		
-    		<div class="item mt-big self-start pr-xl-none pl-xl-none">
-		    	<span class="text-center pl-small pl-xl-none">{{region.mosaic_count}} mosaics in {{city_count}} cities</span>
-	    	</div>
-	    	
+			<div class="item flex-col justify-center align-center">
+				
+				<span class="text-big color-light text-center">{{region.name}}</span>
+				
+	    		<div class="flex justify-center align-center">
+					<span class="mr-small flag-icon flag-icon-{{region.country.code}}" style="line-height: inherit;"></span>
+					<a class="mr-big" href="/world/{{region.country.name}}">{{region.country.name}}</a>
+	    		</div>
+	    		
+			</div>
+			
 		</div>
-
-		<hr>
 		
-		<div class="p-normal pr-xl-none pl-xl-none">
-			<div class="row justify-center">
+		<div class="section">
+    		
+    		<span class="item pb-none color-normal">{{city_count}} cities with mosaics</span>
+    		
+			<div class="item">
+				<hr>
+			</div>
+
+			<div class="flex">
 				
 				<div class="item grow" style="overflow-x:auto;">
-					<div id="index_container" class="row">
-					
+
 						<div class="item" ng-repeat="index in indexes track by $index" ng-show="index.cities.length > 0">
 							<a class="badge" ng-click="setCurrentIndex(index);" ng-class="{'transparent color-link': current_index!=index}">
 								{{index.letter}}
 							</a>
 						</div>
 					
-					</div>
 				</div>
 
 			</div>
+			
 		</div>
-		
+
 		<div class="mb-big">
 			
 			<div ng-repeat="city in current_index.cities | reverse">
