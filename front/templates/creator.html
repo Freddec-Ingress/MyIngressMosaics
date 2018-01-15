@@ -24,147 +24,124 @@
 	
 	<div class="container" ng-class="{'active':loaded}">
 	    
-	    <div class="mt-big item flex justify-center">
+	    <div class="section">
 	        
-	        <div class="item">
-	            <span class="text-big" ng-class="{'color-enlightened': faction == 'E', 'color-resistant': faction == 'R'}">{{name}}</span>
+	        <div class="flex jutify-center">
+	        	
+		        <div class="item">
+		            <span class="text-big" ng-class="{'color-enlightened': faction == 'E', 'color-resistant': faction == 'R'}">{{name}}</span>
+	            </div>
+	            
             </div>
             
 	    </div>
 	    
-		<div class="mt-big tab-row">
-		
-			<div class="tab" ng-click="current_tab='mosaic'" ng-class="{'active':current_tab=='mosaic'}">
-				Mosaics ({{mosaics.length}})
-			</div>
+		<div class="section">
 			
-			<div class="tab" ng-click="current_tab='mission'" ng-class="{'active':current_tab=='mission'}">
-				Missions ({{missions.length}})
-			</div>
-            
-	    </div>
-	    
-		<div ng-show="current_tab=='mosaic'">
+			<div class="tab-row mt-big">
 			
-			<div ng-show="mosaics.length < 1">
+				<div class="tab" ng-click="current_tab='mosaic'" ng-class="{'active':current_tab=='mosaic'}">
+					Mosaics ({{mosaics.length}})
+				</div>
 				
-				<div class="item flex justify-center">
-					<div class="item">
-						<span class="color-dark">No registered mosaic</span>
+				<div class="tab" ng-click="current_tab='mission'" ng-class="{'active':current_tab=='mission'}">
+					Missions ({{missions.length}})
+				</div>
+
+			</div>
+			
+			<div ng-show="current_tab=='mosaic'">
+				
+				<div class="item" ng-show="mosaics.length < 1">
+					
+					<div class="item bg-block">
+						<span class="color-dark">No mosaic</span>
 					</div>
+					
 				</div>
 				
-				<div class="item flex justify-center">
-					<div class="item">
-						<a class="btn" href="/registration">
-							<i class="fa fa-plus-square"></i>
-							<span class="ml-normal">Register mosaic</span>
-						</a>
-					</div>
-				</div>
-				
-			</div>
-			
-			<div ng-show="mosaics.length > 0">
-				
-				<div class="item">
-	    			<div class="group-list">
-	    			    <div class="group-list-item flex align-center pl-xl-none pr-xl-none" ng-repeat="mosaic in mosaics">
-	
-	    				<a class="item flex justify-center pl-xl-none" href="/mosaic/{{mosaic.ref}}" target="blank" style="width:125px; max-width:125px; max-height:102px; overflow-y:auto;" ng-class="{'pt-none pb-none pr-none':mosaic.missions.length > 30}">
-	    					
-							<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
-								
-					            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-					            </div>
-					            
-					            <div ng-repeat="m in mosaic.missions | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-					                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-					            </div>
-					            
-				            </div>
-	    					
-	    				</a>
-	    				
-	    				<div class="item grow">
-	    					
-	    					<div class="flex align-center">
-	    						<a class="text-medium color-light block" href="/mosaic/{{mosaic.ref}}" target="blank">{{mosaic.title}}</a>
-								<span class="ml-normal color-muted">{{mosaic.missions.length}}</span>
-							</div>
-	
-							<div class="flex mt-small">
-								<flag class="mr-small" country="mosaic.city.region.country.name"></flag>
-								<a href="/world/{{mosaic.city.region.country.name}}/{{mosaic.city.region.name}}/{{mosaic.city.name}}" target="blank">{{mosaic.city.name}}</a>
-							</div>
-						
-	    				</div>
-	    				
-						<a class="item pr-xl-none" href="/mosaic/{{mosaic.ref}}" target="blank">
-							<i class="fa fa-chevron-right text-small color-normal"></i>
-						</a>
-	    				
-	    			</div>
-				    </div>
-				</div>
-				
-			</div>
-			
-		</div>
-			
-		<div ng-show="current_tab=='mission'">
-			
-			<div ng-show="missions.length < 1">
-				
-				<div class="item flex justify-center">
-					<div class="item">
-						<span class="color-dark">No registered mission</span>
-					</div>
-				</div>
-				
-				<div class="item flex justify-center">
-			    	<div class="item">
-			    		<a class="btn flex align-center" href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">
-			    			<i class="fa fa-plus-square"></i>
-			    			<span class="ml-normal">MIM Hunting Tool</span>
-			    		</a>
-			    	</div>
-		    	</div>
-    	
-			</div>
-			
-			<div ng-show="missions.length > 0">
-				
-				<div class="item">
-					<div class="group-list">
-		    			<div class="group-list-item flex align-center pl-xl-none pr-xl-none" ng-repeat="mission in missions">
-						
-							<div class="item flex">
-								<img src="{{mission.image}}" width="40px" height="40px" />
-							</div>
-						
-							<div class="item grow">
-								<span class="block text-medium color-light">{{mission.title}}</span>
-								<span class="block" ng-class="{'color-enlightened':mission.faction=='E', 'color-resistant':mission.faction=='R'}">{{mission.creator}}</span>
-							</div>
-						
-							<div class="item">
-		                        <a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=17&pll={{mission.startLat}},{{mission.startLng}}" target="blank">
-		                            <i class="fa fa-external-link"></i>
-		                        </a>
-							</div>
+				<div class="flex wrap" ng-show="mosaics.length > 0">
+					<div class="width-12 width-xl-6 item" ng-repeat="mosaic in mosaics">
+						<a class="item link-block flex" href="/mosaic/{{mosaic.ref}}" target="_blank">
 							
+		    				<div class="item flex justify-center align-start pl-xl-none" style="width:125px; max-width:125px; max-height:92px; overflow-y:auto;">
+		    					
+								<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
+									
+						            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+						            </div>
+						            
+						            <div ng-repeat="m in mosaic.missions | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+						                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+						            </div>
+						            
+					            </div>
+		    					
+		    				</div>
+		    				
+		    				<div class="item grow" style="max-height:92px;">
+		    					
+		    					<span class="text-medium color-light block">{{mosaic.title}}</span>
+		
+		    					<div class="text-small color-dark">
+									<span class=" mr-small flag-icon flag-icon-{{mosaic.city.region.country.code}}"></span>
+									<span>{{mosaic.city.name}}</span>
+		    					</div>
+		    					
+		    				</div>
+		    				
+	 		   			</a>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div ng-show="current_tab=='mission'">
+				
+				<div class="item" ng-show="missions.length < 1">
+					
+					<div class="item bg-block">
+						<span class="color-dark">No mission</span>
+					</div>
+					
+				</div>
+				
+				<div class="flex wrap" ng-show="missions.length > 0">
+					
+					<div class="width-12 width-xl-6 item" ng-repeat="mission in missions">
+						<div class="item bg-block flex align-center">
+						
+			                <div class="item">
+			        			<img src="/static/img/mask.png" style="width:26px; background-color:#000000; background-image:url({{mission.image}}=s25); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+	                    	</div>
+	                    	
+	                    	<div class="item grow ellipsis" title="{{mission.desc}}">
+	                    		
+	                    		<div class="ellipsis">
+		                    		<span class="text-medium color-light">{{mission.title}}</span>
+	                    		</div>
+	                    		
+	                    		<div class="text-small">
+		                    		<a href="/search/{{mission.creator}}" ng-class="{'color-enlightened': mission.faction == 'E', 'color-resistant': mission.faction == 'R'}">{{mission.creator}}</a>
+	                    		</div>
+	                    		
+	                    	</div>
+
+	                    	<div class="item">
+                                <a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=19&pll={{mission.startLat}},{{mission.startLng}}" target="_blank">
+                                    <i class="fa fa-external-link"></i>
+                                </a>
+	                    	</div>
+			                    	
 						</div>
 					</div>
-				</div>
-				
-				<div class="item flex justify-center">
+					
 					<div class="item">
-						<a class="btn" href="/registration/{{name}}">
-							<i class="fa fa-plus-square"></i>
-							<span class="ml-normal">Register mosaic</span>
+						<a class="btn" href="/registration/{{searchtext}}" target="_blank">
+							Register a mosaic
 						</a>
 					</div>
+					
 				</div>
 				
 			</div>
