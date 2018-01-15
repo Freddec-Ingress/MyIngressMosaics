@@ -1,4 +1,4 @@
-.tab-row { display:flex; flex-direction:row; flex-shrink:0; flex-wrap:nowrap; align-items:stretch; overflow-x:auto; margin:.375rem; border-bottom:1px solid #174540; }
+.tab-row { display:flex; flex-direction:row; flex-shrink:0; flex-wrap:nowrap; align-items:stretch; overflow-x:auto; margin:.375rem .375rem 0 .375rem; border-bottom:1px solid #174540; }
 
 .tab-row .tab {
 	display:flex; align-items:center; justify-content:center; flex-wrap:nowrap; flex-shrink:0;
