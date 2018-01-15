@@ -453,7 +453,11 @@
 					
 				</div>
 			
-				<div class="item flex-col mt-big">
+			</div>
+			
+			<div class="section">
+			
+				<div class="item flex-col">
 					<span>City</span>
 					<input id="city_input" type="text" class="control" placeholder="City name" />
 				</div>
@@ -504,12 +508,34 @@
 		
 		<div class="grow flex-col" ng-show="current_step == 4 && !creating">
 			
-			<div class="grow flex-col scrollable">
+			<div class="section">
 				
-				<div class="text-center mt-big">
-					<span class="text-big color-light">
-						{{mosaic_name}}
-					</span>
+				<div class="flex-col align-center">
+					
+					<div class="item">
+						<span class="text-big color-light">{{mosaic_name}}</span>
+					</div>
+					
+					<div class="flex">
+						
+						<div class="item">
+							<span class="color-normal">{{country_name}}</span>
+						</div>
+						
+						<div class="item">
+							<span class="color-normal">{{region_name}}</span>
+						</div>
+						
+						<div class="item">
+							<span class="color-normal">{{city_name}}</span>
+						</div>
+						
+					</div>
+					
+					<div class="item">
+						<span class="color-dark">{{selected.length}} missions</span>
+					</div>
+
 				</div>
 				
 				<div class="item flex justify-center">
@@ -531,37 +557,35 @@
 					</div>
 	
 				</div>
-				
-				<div class="flex justify-center ">
-					
-					<div class="item">
-						<span class="color-normal">{{selected.length}} missions</span>
-					</div>
-				
-				</div>
 			
 			</div>
 			
-			<hr class="mt-big">
-			
-			<div class="p-normal pr-xl-none pl-xl-none">
-				<div class="row">
+			<div class="flex justify-center" style="position:fixed; bottom:0; left:0; right:0; background-color:#000000;">
+				<div class="item container active">
 					
-					<div class="item grow flex">
-						<button class="btn" ng-click="open_step(3);">
-							<div class="row">
-								<i class="item fa fa-angle-double-left"></i>
-								<span class="item">Back</span>
-							</div>
-						</button>
+					<div class="item">
+						<hr>
 					</div>
 					
-					<div class="item self-center">
-						<button class="btn btn-danger" ng-click="createMosaic();">
-							<div class="row">
-								<span class="item">Validate</span>
-							</div>
-						</button>
+					<div class="flex">
+					
+						<div class="item grow flex">
+							<button class="btn" ng-click="open_step(3);">
+								<div class="row">
+									<i class="item fa fa-angle-double-left"></i>
+									<span class="item">Back</span>
+								</div>
+							</button>
+						</div>
+						
+						<div class="item self-center">
+							<button class="btn btn-danger" ng-click="createMosaic();">
+								<div class="row">
+									<span class="item">Validate</span>
+								</div>
+							</button>
+						</div>
+					
 					</div>
 					
 				</div>
