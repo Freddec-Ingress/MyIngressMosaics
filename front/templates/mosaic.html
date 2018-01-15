@@ -371,19 +371,6 @@
 							</div>
 							
 							<div class="flex">
-								<span class="item flex noshrink color-muted">{{mission.portals.length}} actions</span>
-								<span class="flex wrap">
-									<span class="item color-dark" ng-repeat="portal in mission.portals">
-										<span class="color-muted text-small">#{{$index}}</span>
-										<span ng-show="portal.action==1">Hack</span>
-										<span ng-show="portal.action==2">Capture</span>
-										<span ng-show="portal.action==7">View</span>
-										<span ng-show="portal.action==8">Passphrase</span>
-									</span>
-								</span>
-							</div>
-							
-							<div class="flex">
 								<div class="item">
 			                        <a class="btn btn-mini" href="https://www.ingress.com/intel?ll={{mission.portal[0].lat}},{{mission.portals[0].lng}}&z=17&pll={{mission.portals[0].lat}},{{mission.portals[0].lng}}" target="_blank">
 			                            <i class="fa fa-fw fa-external-link"></i>
@@ -401,6 +388,16 @@
 			                            <img src="/static/img/waze.png">
 			                        </a>
 								</div>
+							</div>
+							
+							<div class="flex wrap">
+								<span class="item color-dark" ng-repeat="portal in mission.portals">
+									<span class="color-muted text-small">#{{$index}}</span>
+									<span ng-show="portal.action==1">Hack</span>
+									<span ng-show="portal.action==2">Capture</span>
+									<span ng-show="portal.action==7">View</span>
+									<span ng-show="portal.action==8">Passphrase</span>
+								</span>
 							</div>
 							
 						</div>
