@@ -332,7 +332,7 @@
 				
 			</div>
 			
-			<div class="tab-row">
+			<div class="tab-row mt-big">
 			
 				<div class="tab" ng-click="current_tab='roadmap'" ng-class="{'active':current_tab=='roadmap'}">
 					Roadmap
@@ -393,8 +393,8 @@
 						</div>
 						
 						<div class="flex wrap">
-							<span class="item color-dark" ng-repeat="portal in mission.portals">
-								<span class="color-muted text-small mr-small text-right" style="width:15px;">{{$index+1}}</span>
+							<span class="item color-normal" ng-repeat="portal in mission.portals">
+								<span class="color-muted text-small mr-small text-right" style="display:inline-block; width:15px;">{{$index+1}}</span>
 								<span ng-show="portal.action==1">Hack</span>
 								<span ng-show="portal.action==2">Capture</span>
 								<span ng-show="portal.action==7">View</span>
