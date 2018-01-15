@@ -1045,7 +1045,7 @@ def data_searchForMissions(request):
 @permission_classes((AllowAny, ))
 def data_newSearchForMissions(request):
 	
-	results = Mission.objects.filter(mosaic__isnull=True).filter(Q(title__icontains=request.data['text']) | Q(creator__icontains=request.data['text']))
+	results = Mission.objects.filter(mosaic__isnull=True).filter(Q(name__icontains=request.data['text']) | Q(title__icontains=request.data['text']) | Q(creator__icontains=request.data['text']))
 	if (results.count() > 0):
 	
 		data = { 'missions': [], }
@@ -1112,6 +1112,13 @@ def data_searchForMosaics(request):
 	# Title search
 	
 	results = Mission.objects.filter(mosaic__isnull=True, title__icontains=request.data['text'])
+	if (results.count() > 0):
+		for mission in results:
+			mission_array.append(mission)
+		
+	# Name search
+	
+	results = Mission.objects.filter(mosaic__isnull=True, name__icontains=request.data['text'])
 	if (results.count() > 0):
 		for mission in results:
 			mission_array.append(mission)
