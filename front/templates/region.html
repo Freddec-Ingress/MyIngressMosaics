@@ -66,7 +66,7 @@
 		<div class="section" ng-repeat="city in current_index.cities | reverse">
 			
 			<div class="item pb-none color-normal">
-				<a class="mr-normal" href="/world/{{city.region.country.name}}/{{city.region.name}}/{{city.name}}">{{city.name}}</a>
+				<a class="mr-normal" href="/world/{{region.country.name}}/{{region.name}}/{{city.name}}">{{city.name}}</a>
 				<span class="color-dark mr-normal" ng-show="city.locale">{{city.locale}}</span>
 				<span class="color-muted">{{city.mosaics.length}}</span>
 			</div>
