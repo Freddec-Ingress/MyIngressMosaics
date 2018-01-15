@@ -46,16 +46,16 @@
 			<div class="item">
 				<hr>
 			</div>
-
+			
 			<div class="flex">
 				
-				<div class="item grow" style="overflow-x:auto;">
+				<div class="grow flex shrink" style="overflow-x:auto;">
 
-						<div class="item" ng-repeat="index in indexes track by $index" ng-show="index.cities.length > 0">
-							<a class="badge" ng-click="setCurrentIndex(index);" ng-class="{'transparent color-link': current_index!=index}">
-								{{index.letter}}
-							</a>
-						</div>
+					<div class="item" ng-repeat="index in indexes track by $index" ng-show="index.cities.length > 0">
+						<a class="badge item" ng-click="setCurrentIndex(index);" ng-class="{'transparent color-link': current_index!=index}">
+							{{index.letter}}
+						</a>
+					</div>
 					
 				</div>
 
@@ -63,16 +63,19 @@
 			
 		</div>
 
-		<div class="mb-big">
+		<div class="section">
 			
 			<div ng-repeat="city in current_index.cities | reverse">
 				
-				<div class="mt-big p-normal pl-xl-none pr-xl-none">
-					<span class="text-normal">{{city.name}}</span>
-					<span class="color-dark ml-normal" ng-show="city.locale">{{city.locale}}</span>
+				<div class="item pb-none color-normal">
+					<span class="text-normal mr-normal">{{city.name}}</span>
+					<span class="color-dark mr-normal" ng-show="city.locale">{{city.locale}}</span>
+					<span class="color-muted">{{city.mosaics.length}}</span>
 				</div>
 				
-				<hr>
+				<div class="item">
+					<hr>
+				</div>
 				
 	    		<div ng-repeat="mosaic in city.mosaics">
 	    			
