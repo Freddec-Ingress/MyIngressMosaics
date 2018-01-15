@@ -1100,12 +1100,6 @@ def data_searchForMosaics(request):
 		for item in temp:
 			data['mosaics'].append(item.overviewSerialize())
 	
-	else:
-
-		if not request.user.is_superuser:
-			search = Search(name=request.data['text'])
-			search.save()
-	
 	mission_array = []
 	
 	# Creator search
@@ -1128,6 +1122,12 @@ def data_searchForMosaics(request):
 		
 		for item in temp:
 			data['missions'].append(item.overviewSerialize())
+			
+	if (len(mission_array) < 1) and (len(mosaic_array) < 1):
+
+		if not request.user.is_superuser:
+			search = Search(name=request.data['text'])
+			search.save()
 			
 	return Response(data, status=status.HTTP_200_OK)
 
