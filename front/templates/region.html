@@ -63,25 +63,23 @@
 			
 		</div>
 
-		<div class="section">
+		<div class="section" ng-repeat="city in current_index.cities | reverse">
 			
-			<div ng-repeat="city in current_index.cities | reverse">
-				
-				<div class="item pb-none color-normal">
-					<span class="text-normal mr-normal">{{city.name}}</span>
-					<span class="color-dark mr-normal" ng-show="city.locale">{{city.locale}}</span>
-					<span class="color-muted">{{city.mosaics.length}}</span>
-				</div>
-				
-				<div class="item">
-					<hr>
-				</div>
-				
-	    		<div ng-repeat="mosaic in city.mosaics">
-	    			
-	    			<a class="flex align-center pt-small pb-small" href="/mosaic/{{mosaic.ref}}" target="blank">
-	
-	    				<div class="item flex justify-center pl-xl-none" style="width:125px; max-width:125px;">
+			<div class="item pb-none color-normal">
+				<span class="text-normal mr-normal">{{city.name}}</span>
+				<span class="color-dark mr-normal" ng-show="city.locale">{{city.locale}}</span>
+				<span class="color-muted">{{city.mosaics.length}}</span>
+			</div>
+			
+			<div class="item">
+				<hr>
+			</div>
+			
+			<div class="flex wrap">
+				<div class="width-12 width-xl-6 item" ng-repeat="mosaic in mosaics">
+					<a class="item link-block flex" href="/mosaic/{{mosaic.ref}}" target="_blank">
+						
+	    				<div class="item flex justify-center align-start pl-xl-none" style="width:125px; max-width:125px; max-height:92px; overflow-y:auto;">
 	    					
 							<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
 								
@@ -96,26 +94,18 @@
 	    					
 	    				</div>
 	    				
-	    				<div class="item grow">
+	    				<div class="item grow" style="max-height:92px;">
 	    					
 	    					<span class="text-medium color-light block">{{mosaic.title}}</span>
 	
-	    					<span class="block color-muted">
+	    					<span class="block text-small color-dark">
 								{{mosaic.missions.length}} missions
 	    					</span>
 	    					
 	    				</div>
 	    				
-						<div class="item pr-normal pr-xl-none">
-							<i class="fa fa-chevron-right text-small color-normal"></i>
-						</div>
-	    				
-	    			</a>
-	    			
-	    			<hr>
-	    			
-	    		</div>
-				
+ 		   			</a>
+				</div>
 			</div>
 			
 		</div>
