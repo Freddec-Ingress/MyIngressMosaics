@@ -31,9 +31,11 @@ body {
     font:400 13px/normal 'Coda',sans-serif;
     color:#5afbea;
     height:100%;
-    margin:0;
+	margin:0px;
+	padding-top:60px;
     text-align:left;
     background-color:black;
+    display:flex;
     -webkit-font-smoothing:antialiased;
 }
 
@@ -403,7 +405,7 @@ ul > li { list-style:none; }
 
 #content {
 	overflow-y: auto;
-	margin-top: 60px;
+	flex:1 1 auto;
 	display:flex; flex-direction:row; align-items:stretch; justify-content:center;
 }
 
