@@ -236,20 +236,23 @@
 			<div class="item flex justify-center">
 				
 				<div class="item">
-					<div class="badge" ng-click="toggle_link(user, 'like');" style="width:75px;">
-						<span ng-class="{'color-dark':!mosaic.is_like, 'color-light':mosaic.is_like}">{{mosaic.likers}} Like</span>
+					<div class="badge flex justify-center align-center" ng-click="toggle_link(user, 'like');" style="width:75px;">
+						<span class="item" ng-class="{'color-dark':!mosaic.is_like, 'color-light':mosaic.is_like}">{{mosaic.likers}}</span>
+						<span class="item" ng-class="{'color-dark':!mosaic.is_like, 'color-light':mosaic.is_like}">Like</span>
 					</div>
 				</div>
 				
 				<div class="item">
-					<div class="badge" ng-click="toggle_link(user, 'todo');" style="width:75px;">
-						<span ng-class="{'color-dark':!mosaic.is_todo, 'color-light':mosaic.is_todo}">{{mosaic.todoers}} To do</span>
+					<div class="badge flex justify-center align-center" ng-click="toggle_link(user, 'todo');" style="width:75px;">
+						<span class="item" ng-class="{'color-dark':!mosaic.is_todo, 'color-light':mosaic.is_todo}">{{mosaic.todoers}}</span>
+						<span class="item" ng-class="{'color-dark':!mosaic.is_todo, 'color-light':mosaic.is_todo}">To do</span>
 					</div>
 				</div>
 				
 				<div class="item">
-					<div class="badge" ng-click="toggle_link(user, 'complete');" style="width:75px;">
-						<span ng-class="{'color-dark':!mosaic.is_complete, 'color-light':mosaic.is_complete}">{{mosaic.completers}} Done</span>
+					<div class="badge flex justify-center align-center" ng-click="toggle_link(user, 'complete');" style="width:75px;">
+						<span class="item" ng-class="{'color-dark':!mosaic.is_complete, 'color-light':mosaic.is_complete}">{{mosaic.completers}}</span>
+						<span class="item" ng-class="{'color-dark':!mosaic.is_complete, 'color-light':mosaic.is_complete}">Done</span>
 					</div>
 				</div>
 				

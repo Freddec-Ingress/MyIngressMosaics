@@ -96,7 +96,7 @@ ul > li { list-style:none; }
 
 
 .badge {
-	padding: .375rem .75rem;
+	padding: 0 .375rem;
 	border-radius: .375rem;
 	background-color: #1f4549;
 	cursor: pointer;
