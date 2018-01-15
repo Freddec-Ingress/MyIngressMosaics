@@ -346,7 +346,7 @@
 				
 			</div>
 			
-			<div class="grow flex-col scrollable">
+			<div class="flex-col">
 				
 				<div class="flex justify-center">
 					<div class="item flex justify-center" style="width:100%; max-width:420px;">
@@ -392,31 +392,37 @@
 				
 			</div>
 
-			<hr class="mt-big">
-			
-			<div class="p-normal pr-xl-none pl-xl-none">
-				<div class="row">
+			<div class="flex justify-center" style="position:fixed; bottom:0; left:0; right:0; background-color:#000000;">
+				<div class="item container active">
 					
-					<div class="item grow flex">
-						<button class="btn" ng-click="open_step(1);">
-							<div class="row">
-								<i class="item fa fa-angle-double-left"></i>
-								<span class="item">Back</span>
-							</div>
-						</button>
+					<div class="item">
+						<hr>
 					</div>
 					
-					<div class="item self-center">
-						<button class="btn" ng-click="open_step(3);">
-							<div class="row">
-								<span class="item">Next</span>
-								<i class="item fa fa-angle-double-right"></i>
-							</div>
-						</button>
+					<div class="flex">
+						
+						<div class="item grow flex">
+							<button class="btn" ng-click="open_step(1);">
+								<div class="row">
+									<i class="item fa fa-angle-double-left"></i>
+									<span class="item">Back</span>
+								</div>
+							</button>
+						</div>
+						
+						<div class="item self-center">
+							<button class="btn" ng-click="open_step(3);">
+								<div class="row">
+									<span class="item">Next</span>
+									<i class="item fa fa-angle-double-right"></i>
+								</div>
+							</button>
+						</div>
+					
 					</div>
 					
 				</div>
-			</div>
+			</div>	
 			
 		</div>
 		
