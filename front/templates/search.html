@@ -31,11 +31,11 @@
 			
 			<form class="self-stretch flex">
 				
-				<div class="item grow pl-xl-none">
+				<div class="item grow">
 					<input class="control" placeholder="Mosaic name or creator" ng-model="searchtext" />
 				</div>
 				
-				<div class="item pr-xl-none">
+				<div class="item">
 					<button class="btn" type="submit" ng-click="search(searchtext);">
 						<i class="fa fa-search"></i>
 					</button>
@@ -122,6 +122,36 @@
 						<span class="color-dark">No mission</span>
 					</div>
 					
+				</div>
+				
+				<div class="flex wrap" ng-show="mosaics.length > 0">
+					<div class="width-12 width-xl-6 item" ng-repeat="mission in missions">
+						<div class="item bg-block flex align-center">
+						
+			                <div class="item">
+			        			<img src="/static/img/mask.png" style="width:26px; background-color:#000000; background-image:url({{mission.image}}=s25); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+	                    	</div>
+	                    	
+	                    	<div class="item grow ellipsis" title="{{mission.desc}}">
+	                    		
+	                    		<div class="ellipsis">
+		                    		<span class="color-light">{{mission.title}}</span>
+	                    		</div>
+	                    		
+	                    		<div class="">
+		                    		<span ng-class="{'color-enlightened': mission.faction == 'E', 'color-resistant': mission.faction == 'R'}">{{mission.creator}}</span>
+	                    		</div>
+	                    		
+	                    	</div>
+
+	                    	<div class="item">
+                                <a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=19&pll={{mission.startLat}},{{mission.startLng}}" target="_blank">
+                                    <i class="fa fa-external-link"></i>
+                                </a>
+	                    	</div>
+			                    	
+						</div>
+					</div>
 				</div>
 				
 			</div>
