@@ -421,12 +421,11 @@
 				<div class="flex-col" ng-show="mosaic.comments.length > 0">
 					
 					<div class="item" ng-repeat="comment in mosaic.comments">
-						<div class="bg-block">
+						<div class="item bg-block">
 							
 							<div class="flex">
 								<div class="item text-left">
-									<span ng-class="{'color-enlightened': comment.faction == 'E', 'color-resistant': comment.faction == 'R'}">{{comment.username}}</span>
-									<br />
+									<span class="block mb-normal" ng-class="{'color-enlightened': comment.faction == 'E', 'color-resistant': comment.faction == 'R'}">{{comment.username}}</span>
 									<span class="color-light">{{comment.text}}</span>
 								</div>
 							</div>
@@ -434,15 +433,15 @@
 							<div class="flex" ng-show="comment.username == user.name">
 								
 								<div class="item">
-									<button class="btn btn-mini" ng-click="displayCommentEdit(comment);">
+									<a ng-click="displayCommentEdit(comment);">
 										Edit
-									</button>
+									</a>
 								</div>
 								
 								<div class="item">
-									<button class="btn btn-mini" ng-click="deleteComment(user, $index, comment);">
+									<a ng-click="deleteComment(user, $index, comment);">
 										Delete
-									</button>
+									</a>
 								</div>
 								
 							</div>
