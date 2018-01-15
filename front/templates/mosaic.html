@@ -409,9 +409,10 @@
 			</div>
 			
 			<div ng-show="current_tab=='comment'">
-				<div class="flex ml-big" ng-show="mosaic.comments.length < 1">
+				
+				<div class="item" ng-show="mosaic.comments.length < 1">
 					
-					<div class="item">
+					<div class="item bg-block text-center">
 						<span class="color-normal">No comment</span>
 					</div>
 					
@@ -453,19 +454,16 @@
 					
 				</div>
 				
-				<div class="item grow">
-					<hr />
-				</div>
-				
-				<div class="flex justify-center mb-big">
+				<div class="item">
 					
 					<div class="item">
-						<button class="btn btn-mini" ng-click="displayCommentEdit();">
-							New comment
+						<button class="link-block" ng-click="displayCommentEdit();">
+							Post a comment
 						</button>
 					</div>
 					
 				</div>
+				
 			</div>
 
 		</div>
