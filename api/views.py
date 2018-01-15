@@ -1056,10 +1056,6 @@ def data_newSearchForMissions(request):
 		
 		data = { 'missions': None, }
 		
-		if not request.user.is_superuser:
-			search = Search(name=request.data['text'])
-			search.save()
-	
 	return Response(data, status=status.HTTP_200_OK)
     
     
