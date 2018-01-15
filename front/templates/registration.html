@@ -200,7 +200,7 @@
 							<div ng-if="potentials.length>0" class="grow flex-col">
 								
 								<div class="item pb-none pr-xl-none pl-xl-none">
-									<span class="block color-normal">{{potentials.length}} potential mosaics</span>
+									<span class="block color-normal mb-small">{{potentials.length}} potential mosaics</span>
 									<span class="block color-dark">Feel free to register any mosaic you want. Missions are registered by MIM team and we need help to register all those mosaics. You're welcome ! :)</span>
 								</div>
 								
@@ -295,30 +295,34 @@
 					
 				</div>
 				
-				<hr ng-show="missions.length > 0">
-				
-				<div class="p-normal pr-xl-none pl-xl-none" ng-show="missions.length > 0">
-					<div class="row">
-						
-						<div class="item grow flex align-center">
+				<div ng-show="missions.length > 0" style="position:fixed; bottom:0;">
+					
+					<hr>
+					
+					<div class="p-normal pr-xl-none pl-xl-none">
+						<div class="row">
 							
-							<a ng-click="selectAll();">
-								Select All ({{missions.length}})
-							</a>
-
+							<div class="item grow flex align-center">
+								
+								<a ng-click="selectAll();">
+									Select All ({{missions.length}})
+								</a>
+	
+							</div>
+							
+							<div class="item self-center">
+								<button class="btn" ng-class="{'disabled':selected.length < 3}" ng-click="open_step(2);" ng-disabled="selected.length < 3">
+									<div class="row">
+										<span class="item">({{selected.length}}) Next</span>
+										<i class="item fa fa-angle-double-right"></i>
+									</div>
+								</button>
+							</div>
+							
 						</div>
-						
-						<div class="item self-center">
-							<button class="btn" ng-class="{'disabled':selected.length < 3}" ng-click="open_step(2);" ng-disabled="selected.length < 3">
-								<div class="row">
-									<span class="item">({{selected.length}}) Next</span>
-									<i class="item fa fa-angle-double-right"></i>
-								</div>
-							</button>
-						</div>
-						
 					</div>
-				</div>
+					
+				</div>	
 				
 			</div>			
 			
