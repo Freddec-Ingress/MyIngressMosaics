@@ -24,57 +24,47 @@
 	
 	<div class="container" ng-class="{'active':loaded}">
 
-		<div class="flex-col align-center mt-big">
-
-			<div class="flex align-center justify-center">
-    		
- 		   		<div class="item flex">
-    				<span class="flag-icon flag-icon-{{country.code}}"></span>
-    			</div>
-    			
-    			<span class="text-big text-center color-light">{{country.name}}</span>
+		<div class="section">
+			
+			<div class="item flex-col justify-center align-center">
+   			
+	   			<span class="text-big color-light text-center">{{country.name}}</span>
+				
+	    		<div class="flex justify-center align-center">
+					<span class="color-normal">{{count}} mosaics</a>
+	    		</div>
     			
 			</div>
 			
-			<div class="flex align-center justify-center">
-				
-			    <div class="item" ng-show="country.locale">
-			    	<span class="color-dark">{{country.locale}}</span>
-			    </div>
-			    
-			    <div class="item">
-			    	<span class="color-normal">{{count}} mosaics</span>
-			    </div>
-			    
+		</div>
+		
+		<div class="section">
+			
+			<span class="item pb-none color-normal">{{regions.length}} regions with mosaics</span>
+		
+			<div class="item">
+				<hr>
 			</div>
 		
-		</div>
-		
-		<div class="item pr-xl-none pl-xl-none flex align-center mt-big">
-			<span class="item pb-none pr-xl-none pl-xl-none color-normal">{{regions.length}} regions</span>
-		</div>
-		
-		<div class="mb-big">
-	    	<div class="group-list mb-big pr-xl-none pl-xl-none">
-	    		<a class="group-list-item flex align-center pr-xl-none pl-xl-none" ng-repeat="region in regions" href="/world/{{country.name}}/{{region.name}}">
-	
-	    			<div class="item grow flex-col pl-xl-none">
-	    				<span class="color-light text-medium">{{region.name}}</span>
-						<span class="color-normal text-normal" ng-show="region.locale">{{region.locale}}</span>
-	    			</div>
-	     			
-	    			<div class="item">
-	    				<span class="color-normal">{{region.mosaics|number}}</span>
-	    			</div>
-	     			
-					<div class="item pr-xl-none">
-						<i class="fa fa-chevron-right text-small color-normal"></i>
-					</div>
+			<div class="flex wrap">
+				<div class="width-12 width-xl-4 item" ng-repeat="region in regions">
+					<a class="item link-block flex align-center" href="/world/{{country.name}}/{{region.name}}">
 					
-	    		</a>
-	    	</div>
+						<div class="item grow">
+							<span class="block color-light text-medium">{{region.name}}</span>
+							<span class="block color-dark text-small" ng-show="region.locale">{{region.locale}}</span>
+						</div>
+		
+						<div class="item flex-col align-center justify-center">
+							<span class="color-normal">{{region.mosaics|number}}</span>
+						</div>
+						
+					</a>
+				</div>
+			</div>
+			
 		</div>
-
+		
 	</div>
 	
 {% endverbatim %}
