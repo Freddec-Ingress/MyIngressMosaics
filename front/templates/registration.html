@@ -222,12 +222,12 @@
                     
 					<div ng-if="missions.length > 0">
 				
+						<div class="item pb-none">
+							<span class="color-normal">{{missions.length}} missions</span>
+						</div>
+						
 						<div class="item">
-                    	
-							<div class="item pb-none">
-								<span class="color-dark">{{missions.length}} missions</span>
-							</div>
-								
+ 								
 							<div class="group-list">
                     			<div class="group-list-item" ng-repeat="mission in missions" ng-class="{'bgcolor-highlight':mission.selected}">
 	                    	

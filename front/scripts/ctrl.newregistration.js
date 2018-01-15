@@ -96,7 +96,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	$scope.unselectAll = function() {
 		
 		for (var mission of $scope.missions) {
-			if (!mission.selected) {
+			if (mission.selected) {
 				$scope.toggleSelectMission(mission);
 			}
 		}
