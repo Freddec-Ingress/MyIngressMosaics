@@ -206,88 +206,90 @@
                     <div ng-if="missions.length < 1">
                     	
 						<div class="item">
-							<span class="item color-dark">No mission</span>
+							<span class="color-dark">No mission</span>
 						</div>
                    	
                     	<div class="item">
                     		
-					    	<div class="item">
-					    		<span class="color-normal">To register missions by yourself: </span>
-					    		<a href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">
-					    			MIM Hunting Tool
-					    		</a>
-					    	</div>
-                    		
+				    		<span class="color-normal">To register missions by yourself, try the</span>
+				    		<a href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank">
+				    			MIM Hunting Tool
+				    		</a>
+                		
                     	</div>
                     	
                     </div>
                     
-					<hr ng-if="missions.length > 0">
+					<div ng-if="missions.length > 0">
 				
-                    <div ng-repeat="mission in missions">
-                    	
-                    	<div class="p-normal" ng-class="{'bgcolor-highlight':mission.selected}">
-	                    	<div class="row align-center nowrap">
-
-				                <a class="item" ng-click="toggleSelectMission(mission);">
-				        			<img src="/static/img/mask.png" style="width:26px; background-color:#000000; background-image:url({{mission.image}}=s25); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-		                    	</a>
-		                    	
-		                    	<a class="item grow ellipsis" title="{{mission.desc}}" ng-click="toggleSelectMission(mission);">
-		                    		
-		                    		<div class="ellipsis">
-			                    		<span class="color-light">{{mission.title}}</span>
-		                    		</div>
-		                    		
-		                    		<div class="">
-			                    		<span ng-class="{'color-enlightened': mission.faction == 'E', 'color-resistant': mission.faction == 'R'}">{{mission.creator}}</span>
-		                    		</div>
-		                    		
-		                    	</a>
-
-		                    	<div class="item">
-	                                <a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=19&pll={{mission.startLat}},{{mission.startLng}}" target="_blank">
-	                                    <i class="fa fa-external-link"></i>
-	                                </a>
-		                    	</div>
-		                    	
-	                    	</div>
-                    	</div>
-                    	
-                    	<hr>
-                    	
-                    </div>
-
-					<div ng-show="missions.length > 0" style="position:fixed; bottom:0; left:0; right:0;">
-						<div class="container active">
+						<div class="item">
 							
-							<hr>
-							
-							<div class="p-normal pr-xl-none pl-xl-none">
-								<div class="row">
-									
-									<div class="item grow flex align-center">
-										
-										<a ng-click="selectAll();">
-											Select All ({{missions.length}})
-										</a>
-			
-									</div>
-									
-									<div class="item self-center">
-										<button class="btn" ng-class="{'disabled':selected.length < 3}" ng-click="open_step(2);" ng-disabled="selected.length < 3">
-											<div class="row">
-												<span class="item">({{selected.length}}) Next</span>
-												<i class="item fa fa-angle-double-right"></i>
-											</div>
-										</button>
-									</div>
-									
-								</div>
+							<div class="group-list">
+                    			<div class="group-list-item" ng-repeat="mission in missions">
+	                    	
+			                    	<div class="flex align-center nowrap" ng-class="{'bgcolor-highlight':mission.selected}">
+		
+						                <a class="item" ng-click="toggleSelectMission(mission);">
+						        			<img src="/static/img/mask.png" style="width:26px; background-color:#000000; background-image:url({{mission.image}}=s25); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+				                    	</a>
+				                    	
+				                    	<a class="item grow ellipsis" title="{{mission.desc}}" ng-click="toggleSelectMission(mission);">
+				                    		
+				                    		<div class="ellipsis">
+					                    		<span class="color-light">{{mission.title}}</span>
+				                    		</div>
+				                    		
+				                    		<div class="">
+					                    		<span ng-class="{'color-enlightened': mission.faction == 'E', 'color-resistant': mission.faction == 'R'}">{{mission.creator}}</span>
+				                    		</div>
+				                    		
+				                    	</a>
+		
+				                    	<div class="item">
+			                                <a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=19&pll={{mission.startLat}},{{mission.startLng}}" target="_blank">
+			                                    <i class="fa fa-external-link"></i>
+			                                </a>
+				                    	</div>
+				                    	
+			                    	</div>
+
+	                    		</div>
 							</div>
 							
 						</div>
-					</div>	
+	
+						<div class="flex justify-center" style="position:fixed; bottom:0; left:0; right:0;">
+							<div class="container active">
+								
+								<hr>
+								
+								<div class="p-normal pr-xl-none pl-xl-none">
+									<div class="row">
+										
+										<div class="item grow flex align-center">
+											
+											<a ng-click="selectAll();">
+												Select All ({{missions.length}})
+											</a>
+				
+										</div>
+										
+										<div class="item self-center">
+											<button class="btn" ng-class="{'disabled':selected.length < 3}" ng-click="open_step(2);" ng-disabled="selected.length < 3">
+												<div class="row">
+													<span class="item">({{selected.length}}) Next</span>
+													<i class="item fa fa-angle-double-right"></i>
+												</div>
+											</button>
+										</div>
+										
+									</div>
+								</div>
+								
+							</div>
+						</div>	
+	                
+	                </div>
 	                
 				</div>
 				
