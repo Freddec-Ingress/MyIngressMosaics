@@ -114,19 +114,19 @@
 			
 			<div class="flex-col" ng-if="user.authenticated">
 				
-				<div class="mt-big item flex-col align-stretch pr-xl-none pl-xl-none">
+				<div class="section">
 					
-					<div class="item pb-none pr-xl-none pl-xl-none">
+					<div class="item pb-none">
 						<span class="color-normal">Search for registered missions</span>
 					</div>
 					
 					<form class="flex">
 						
-						<div class="item grow pl-xl-none">
+						<div class="item grow">
 							<input class="control" placeholder="Mission name, creator" ng-model="searchText" />
 						</div>
 						
-						<div class="item pr-xl-none">
+						<div class="item">
 							<button class="btn" style="width:65px;" type="submit" ng-click="refreshMissions(searchText);">
 								<i class="fa fa-refresh"></i>
 							</button>
@@ -135,11 +135,7 @@
 					</form>
 					
 				</div>
-			
-			</div>
 
-			<div class="grow flex-col" ng-if="user.authenticated">
-				
 				<div class="mt-big flex-col" style="margin-bottom:55px;">
 					
 					<div ng-if="refreshing" class="flex align-center justify-center">
@@ -296,32 +292,34 @@
 				</div>
 				
 				<div ng-show="missions.length > 0" style="position:fixed; bottom:0; left:0; right:0;">
-					
-					<hr>
-					
-					<div class="p-normal pr-xl-none pl-xl-none">
-						<div class="row">
-							
-							<div class="item grow flex align-center">
+					<div class="container active">
+						
+						<hr>
+						
+						<div class="p-normal pr-xl-none pl-xl-none">
+							<div class="row">
 								
-								<a ng-click="selectAll();">
-									Select All ({{missions.length}})
-								</a>
-	
+								<div class="item grow flex align-center">
+									
+									<a ng-click="selectAll();">
+										Select All ({{missions.length}})
+									</a>
+		
+								</div>
+								
+								<div class="item self-center">
+									<button class="btn" ng-class="{'disabled':selected.length < 3}" ng-click="open_step(2);" ng-disabled="selected.length < 3">
+										<div class="row">
+											<span class="item">({{selected.length}}) Next</span>
+											<i class="item fa fa-angle-double-right"></i>
+										</div>
+									</button>
+								</div>
+								
 							</div>
-							
-							<div class="item self-center">
-								<button class="btn" ng-class="{'disabled':selected.length < 3}" ng-click="open_step(2);" ng-disabled="selected.length < 3">
-									<div class="row">
-										<span class="item">({{selected.length}}) Next</span>
-										<i class="item fa fa-angle-double-right"></i>
-									</div>
-								</button>
-							</div>
-							
 						</div>
+						
 					</div>
-					
 				</div>	
 				
 			</div>			
