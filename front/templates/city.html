@@ -24,22 +24,18 @@
 	
 	<div class="container" ng-class="{'active':loaded}">
 		
-		<div class="flex justify-center align-center mt-big">
-			<span class="text-big color-light">{{city.name}}</span>
-		</div>
-		
-		<div class="flex justify-center align-center">
+		<div class="section">
 			
-			<div class="item">
-				<span class="flag-icon flag-icon-{{city.region.country.code}}"></span>
-			</div>
-			
-			<div class="item">
-				<a href="/world/{{city.region.country.name}}">{{city.region.country.name}}</a>
-			</div>
-			
-			<div class="item">
-				<a href="/world/{{city.region.country.name}}/{{city.region.name}}">{{city.region.name}}</a>
+			<div class="item flex-col justify-center align-center">
+				
+				<span class="text-big color-light text-center">{{city.name}}</span>
+				
+				<div class="flex justify-center align-center">
+					<span class="mr-normal flag-icon flag-icon-{{city.region.country.code}}"></span>
+					<a class="mr-normal" href="/world/{{city.region.country.name}}">{{city.region.country.name}}</a>
+					<a href="/world/{{city.region.country.name}}/{{city.region.name}}">{{city.region.name}}</a>
+				</div>
+				
 			</div>
 			
 		</div>
