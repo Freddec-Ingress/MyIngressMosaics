@@ -223,7 +223,11 @@
 					<div ng-if="missions.length > 0">
 				
 						<div class="item">
-							
+                    	
+							<div class="item pb-none">
+								<span class="color-dark">{{missions.length}} missions</span>
+							</div>
+								
 							<div class="group-list">
                     			<div class="group-list-item" ng-repeat="mission in missions" ng-class="{'bgcolor-highlight':mission.selected}">
 	                    	
@@ -265,17 +269,21 @@
 									<hr>
 								</div>
 								
-								<div class="item flex">
+								<div class="flex">
 
 									<div class="grow flex align-center">
 										
-										<a ng-click="selectAll();">
-											Select All ({{missions.length}})
+										<a class="item" ng-click="selectAll();">
+											Select All
+										</a>
+										
+										<a class="item" ng-click="unselectAll();">
+											Unselect All
 										</a>
 			
 									</div>
 									
-									<div class="self-center">
+									<div class="item self-center">
 										<button class="btn" ng-class="{'disabled':selected.length < 3}" ng-click="open_step(2);" ng-disabled="selected.length < 3">
 											<div class="row">
 												<span class="item">({{selected.length}}) Next</span>
