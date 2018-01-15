@@ -35,8 +35,8 @@ angular.module('FrontModule.controllers').controller('NewSearchCtrl', function($
 			
 			$scope.mosaics.sort(function(a, b) {
 				
-				if (a.title > b.title) return 1;
-				if (a.title < b.title) return -1;
+				if (a.missions.length > b.missions.length) return 1;
+				if (a.missions.length < b.missions.length) return -1;
 				
 				return 0;
 			});
@@ -62,11 +62,15 @@ angular.module('FrontModule.controllers').controller('NewSearchCtrl', function($
 				return 0;
 			});
 			
+			$scope.current_tab = 'mosaic';
+			
 			$scope.searching = false;
 		});
 	}
 	
 	/* Page loading */
+	
+	$scope.current_tab = 'mosaic';
 	
 	$scope.loaded = true;
 });
