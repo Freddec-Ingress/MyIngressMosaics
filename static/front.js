@@ -3719,7 +3719,12 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 	$scope.rename = function(potential, new_name) {
 		
 		var data = { 'name':potential.name, 'new_name':new_name };
-		API.sendRequest('/api/adm/potential/rename', 'POST', {}, data);
+		API.sendRequest('/api/adm/potential/rename', 'POST', {}, data).then(function(response) {
+			
+			potential.name = new_name;
+			
+			$scope.refresh_missions(potential);
+		});
 	}
 	
 	$scope.validate = function(potential) {
