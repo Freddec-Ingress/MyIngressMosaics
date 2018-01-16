@@ -84,6 +84,7 @@ urlpatterns = [
 	
 	url(r'^adm/city/rename',				adm_renameCity),
 	url(r'^adm/region/rename',				adm_renameRegion),
+	url(r'^adm/mission/exclude',				adm_excludeMission),
 	url(r'^adm/potential/exclude',				adm_excludePotential),
 	url(r'^adm/potential/validate',				adm_validatePotential),
 	url(r'^adm/potential/rename',				adm_renamePotential),

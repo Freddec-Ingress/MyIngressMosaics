@@ -3711,6 +3711,9 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		
 		var index = potential.missions.indexOf(mission);
 		potential.missions.splice(index, 1);
+		
+		var data = { 'ref':mission.ref};
+		API.sendRequest('/api/adm/mission/exclude', 'POST', {}, data);
 	}
 	
 	$scope.exclude = function(potential) {
