@@ -163,26 +163,16 @@
 								<span class="block color-dark">Only potential mosaics validated by MIM team are displayed here. Feel free to register any mosaic you want. To register another mosaic, just search missions with form above.</span>
 							</div>
 							
-							<div class="item">
+							<div class="flex wrap">
 								
-								<div class="group-list">
-									<div class="group-list-item flex align-center" ng-repeat="potential in potentials">
-										
-										<div class="item">
-											<span class="color-dark">{{potential.count}}</span>
-										</div>
-										
+								<div class="item width-12 width-xl-4" ng-repeat="potential in potentials">
+									<a class="link-block">
+
 										<div class="item grow">
 											<a href="/registration/{{potential.name}}" target="_blank">{{potential.name}}</a>
 										</div>
-										
-										<div class="item">
-											<a ng-click="exclude(potential);">
-												<i class="fa fa-times"></i>
-											</a>
-										</div>
-										
-									</div>
+
+									</a>
 								</div>
 								
 							</div>
