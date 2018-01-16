@@ -23,25 +23,51 @@
 	
 	<div class="container" ng-class="{'active':loaded}">
 		
-		<div class="mt-normal p-normal pr-xl-none pl-xl-none">
+		<div class="section">
 			
-			<span class="block">Ref</span>
-			
-			<input class="control" ng-model="mission_ref" />
+			<div class="flex-col">
+			    
+			    <div class="item pb-none">
+			        <span class="color-normal">Ref</span>
+			    </div>
+			    
+			    <div class="item">
+    			    <input class="control" ng-model="mission_ref" />
+                </div>
 
-			<div class="mt-small">
-				<a ng-click="selectMission(mission_ref);">Refresh</a>
-			</div>
+    			<div class="item">
+    				<a ng-click="selectMission(mission_ref);">Refresh</a>
+    			</div>
+                    
+            </div>
 			
 		</div>
 		
-		<div class="mt-normal item flex justify-center" ng-show="loading">
+		<div class="section" ng-show="loading">
 			
 			<div class="item">
 				<i class="item fa fa-spinner rotating"></i>
 				<span class="item">Loading...</span>
 			</div>
 			
+		</div>
+		
+		<div class="section" ng-hide="loading">
+			<div class="flex-col">
+			    
+			    <div class="item pb-none">
+			        <span class="color-normal">Name</span>
+			    </div>
+			    
+			    <div class="item">
+    			    <input class="control" ng-model="mission.name" />
+                </div>
+
+    			<div class="item">
+    				<a ng-click="updateMission(mission);">Update</a>
+    			</div>
+                    
+            </div>
 		</div>
 		
 	</div>

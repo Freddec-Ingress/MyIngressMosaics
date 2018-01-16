@@ -722,6 +722,25 @@ def mosaic_uncomplete(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
+def mission_update(request):
+	
+	data = { 'mission':None, }
+	
+	result = Mission.objects.filter(ref=request.data['ref'])
+	if result.count() > 0:
+		
+		mission.name = request.data['name']
+		mission.save()
+		
+		data['mission'] = mission.detailsSerialize()
+		
+	return Response(data, status=status.HTTP_200_OK)
+	
+	
+	
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
 def mission_details(request):
 	
 	data = { 'mission':None, }
