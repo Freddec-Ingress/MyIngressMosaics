@@ -13,21 +13,16 @@ angular.module('FrontModule.controllers').controller('AdmMissionCtrl', function(
 	    var data = { 'ref':mission_ref };
 		API.sendRequest('/api/mission/details/', 'POST', {}, data).then(function(response) {
             
-            $scope.mission = response;
+            $scope.mission = response.mission;
             $scope.loading = false;
-            
-            console.log($scope.mission);
         });
 	}
 	
 	$scope.updateMission = function(mission) {
 	    
 	    $scope.loading = true;
-	    
-        console.log($scope.mission);
         
 	    var data = { 'ref':$scope.mission.ref, 'name':$scope.mission.name };
-	    console.log(data);
 		API.sendRequest('/api/mission/update/', 'POST', {}, data).then(function(response) {
             
             $scope.mission = response;
