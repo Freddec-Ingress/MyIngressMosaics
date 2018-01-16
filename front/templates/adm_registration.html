@@ -90,11 +90,11 @@
 							<span class="color-dark">{{potential.missions.length}} missions</span>
 						</div>
 						
-						<div class="item">
+						<div class="item pt-none">
 							<div class="group-list" style="max-height:200px; overflow-y:auto;">
 								<div class="group-list-item flex align-center" ng-repeat="mission in potential.missions">
 									
-									<div class="item">
+									<div class="item grow">
 										<span class="color-normal">{{mission.title}}</span>
 									</div>
 									
@@ -110,6 +110,22 @@
 									
 								</div>
 							</div>
+						</div>
+						
+						<div class="flex">
+							
+							<div class="item grow">
+								<button class="btn btn-danger" ng-click="">
+									Exclude
+								</button>
+							</div>
+							
+							<div class="item">
+								<button class="btn" ng-click="">
+									Validate
+								</button>
+							</div>
+							
 						</div>
 						
 					</div>
