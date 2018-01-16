@@ -51,6 +51,7 @@ module.exports = function(grunt) {
 					'front/scripts/adm.city.js',
 					'front/scripts/adm.registration.js',
 					'front/scripts/adm.mosaic.js',
+					'front/scripts/adm.mission.js',
 					'front/scripts/module.js',
 				],
 				dest: 'static/front.js'
