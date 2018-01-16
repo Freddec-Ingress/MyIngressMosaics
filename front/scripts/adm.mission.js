@@ -15,6 +15,8 @@ angular.module('FrontModule.controllers').controller('AdmMissionCtrl', function(
             
             $scope.mission = response;
             $scope.loading = false;
+            
+            console.log($scope.mission);
         });
 	}
 	
@@ -22,6 +24,8 @@ angular.module('FrontModule.controllers').controller('AdmMissionCtrl', function(
 	    
 	    $scope.loading = true;
 	    
+        console.log($scope.mission);
+        
 	    var data = { 'ref':$scope.mission.ref, 'name':$scope.mission.name };
 	    console.log(data);
 		API.sendRequest('/api/mission/update/', 'POST', {}, data).then(function(response) {
