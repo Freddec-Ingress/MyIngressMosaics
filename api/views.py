@@ -729,6 +729,8 @@ def mission_update(request):
 	result = Mission.objects.filter(ref=request.data['ref'])
 	if result.count() > 0:
 		
+		mission = result[0]
+		
 		mission.name = request.data['name']
 		mission.save()
 		
@@ -747,6 +749,9 @@ def mission_details(request):
 	
 	result = Mission.objects.filter(ref=request.data['ref'])
 	if result.count() > 0:
+		
+		mission = result[0]
+		
 		data['mission'] = mission.detailsSerialize()
 		
 	return Response(data, status=status.HTTP_200_OK)
