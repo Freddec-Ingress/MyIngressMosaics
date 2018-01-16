@@ -164,17 +164,13 @@
 							</div>
 							
 							<div class="flex wrap">
-								
-								<div class="item width-12 width-xl-4" ng-repeat="potential in potentials">
-									<a class="item flex link-block">
-
-										<div class="item grow">
-											<a href="/registration/{{potential.name}}" target="_blank">{{potential.name}}</a>
+								<div class="width-12 width-xl-4 item" ng-repeat="potential in potentials">
+									<a class="item link-block flex align-center" href="/registration/{{potential.name}}" target="_blank">
+										<div class="item">
+											<span>{{potential.name}}</span>
 										</div>
-
 									</a>
 								</div>
-								
 							</div>
 						
 						</div>
