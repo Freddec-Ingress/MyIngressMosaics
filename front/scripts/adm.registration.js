@@ -37,6 +37,8 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 	
 	/* Page loading */
 	
+	$scope.loaded = true;
+	
 	$scope.refreshing_potentials = false;
 	
 	$scope.refresh_potentials = function() {
