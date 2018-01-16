@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block extra-head %}
+
+	<title>MIM - Administration</title>
+
+	<meta property="og:url" content="https://www.myingressmosaics.com">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="MyIngressMosaics">
+	<meta property="og:description" content="Ingress Mosaics, Banners and Mission series">
+
+{% endblock %}
+
+{% block content %}
+<div id="content" ng-controller="AdmMissionCtrl">
+
+{% verbatim %}
+
+	<div id="loading" ng-hide="loaded">
+		<i class="item fa fa-spinner rotating"></i>
+		<span class="item">Loading page...</span>
+	</div>
+	
+	<div class="container" ng-class="{'active':loaded}">
+		
+		<div class="mt-normal p-normal pr-xl-none pl-xl-none">
+			
+			<span class="block">Ref</span>
+			
+			<input class="control" ng-model="mission_ref" />
+
+			<div class="mt-small">
+				<a ng-click="selectMission(mission_ref);">Refresh</a>
+			</div>
+			
+		</div>
+		
+		<div class="mt-normal item flex justify-center" ng-show="loading">
+			
+			<div class="item">
+				<i class="item fa fa-spinner rotating"></i>
+				<span class="item">Loading...</span>
+			</div>
+			
+		</div>
+		
+	</div>
+	
+{% endverbatim %}
+
+</div>
+{% endblock %}

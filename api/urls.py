@@ -37,6 +37,7 @@ urlpatterns = [
 	url(r'^mosaic/uncomplete/',		mosaic_uncomplete),
 	url(r'^mosaic/(?P<ref>\w+)/$',	mosaic_view),
 	
+	url(r'^mission/details/',		mission_details),
 	url(r'^mission/delete/',		mission_delete),
 	url(r'^mission/order/',			mission_order),
 	url(r'^mission/exclude/',		mission_exclude),

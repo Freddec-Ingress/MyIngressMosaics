@@ -222,3 +222,9 @@ def adm_mosaic(request, ref):
 	
 	context = { 'ref':ref }
 	return render(request, 'adm_mosaic.html', context)
+	
+
+
+def adm_mission(request):	
+	
+	return render(request, 'adm_mission.html', context)
