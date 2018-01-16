@@ -3820,14 +3820,14 @@ angular.module('FrontModule.controllers').controller('AdmMissionCtrl', function(
         });
 	}
 	
-	$scope.updateMission = function(mission) {
+	$scope.updateMission = function() {
 	    
 	    $scope.loading = true;
         
 	    var data = { 'ref':$scope.mission.ref, 'name':$scope.mission.name };
 		API.sendRequest('/api/mission/update/', 'POST', {}, data).then(function(response) {
             
-            $scope.mission = response;
+            $scope.mission = response.mission;
             $scope.loading = false;
         });
 	}
