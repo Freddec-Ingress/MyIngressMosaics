@@ -3810,6 +3810,8 @@ angular.module('FrontModule.controllers').controller('AdmMissionCtrl', function(
 	    
 	    $scope.loading = true;
 	    
+	    $scope.mission = null;
+	    
 	    var data = { 'ref':mission_ref };
 		API.sendRequest('/api/mission/details/', 'POST', {}, data).then(function(response) {
             
@@ -3832,6 +3834,8 @@ angular.module('FrontModule.controllers').controller('AdmMissionCtrl', function(
 	}
 	
 	/* Page loading */
+	
+	$scope.mission = null;
 	
     $scope.loaded = true;
 });
