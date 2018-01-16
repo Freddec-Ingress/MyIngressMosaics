@@ -51,9 +51,45 @@
 			<div class="item" ng-repeat="potential in potentials">
 				<div class="bg-block">
 					
-					<div class="flex justify-center align-center">
+					<div class="flex align-center">
+						
 						<div class="item">
-							<span class="color-normal">{{potential.name}}</span>
+							<span class="color-dark">{{potential.count}}</span>
+						</div>
+						
+						<div class="item grow">
+							<span class="color-light">{{potential.name}}</span>
+						</div>
+						
+						<div class="item">
+							<a ng-click="refresh_missions(potential);">Refresh</a>
+						</div>
+						
+					</div>
+					
+					<div class="flex justify-center align-center" ng-show="potential.refreshing_missions">
+						
+						<div class="item">
+							<i class="fa fa-spinner rotating"></i>
+						</div>
+						
+						<div class="item">
+							<span class="color-normal">Refreshing... </span>
+						</div>
+						
+					</div>
+					
+					<div class="flex" ng-hide="potential.refreshing_missions">
+						<div class="item">
+							<div class="group-list">
+								<div class="group-list-item flex align-center" ng-repeat="mission in potential.missions">
+									
+									<div class="item">
+										<span class="color-normal">{{mission.title}}</span>
+									</div>
+									
+								</div>
+							</div>
 						</div>
 					</div>
 					
