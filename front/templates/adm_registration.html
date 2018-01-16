@@ -21,7 +21,7 @@
 		<span class="item">Loading page...</span>
 	</div>
 	
-	<div class="container" ng-class="{'active':loaded}">
+	<div class="container" ng-class="{'active':loaded}" ng-init="refresh_potentials();">
 		
 		<div class="section">
 			<div class="flex justify-center align-center">
@@ -48,8 +48,17 @@
 		</div>
 		
 		<div class="section" ng-hide="refreshing_potentials">
+			
+			<div class="item pb-none">
+				<span class="color-normal">{{potentials.length}} potentials</span>
+			</div>
+			
+			<div class="item">
+				<hr>
+			</div>
+			
 			<div class="item" ng-repeat="potential in potentials">
-				<div class="bg-block">
+				<div class="item bg-block">
 					
 					<div class="flex align-center">
 						
@@ -79,9 +88,14 @@
 						
 					</div>
 					
-					<div class="flex" ng-hide="potential.refreshing_missions">
+					<div class="flex-col" ng-hide="potential.refreshing_missions">
+						
+						<div class="item pb-none">
+							<span class="color-normal">{{potential.missions.length}} missions</span>
+						</div>
+						
 						<div class="item">
-							<div class="group-list">
+							<div class="group-list" style="max-height:200px; overflow-y:auto;">
 								<div class="group-list-item flex align-center" ng-repeat="mission in potential.missions">
 									
 									<div class="item">
@@ -91,10 +105,12 @@
 								</div>
 							</div>
 						</div>
+						
 					</div>
 					
 				</div>
 			</div>
+			
 		</div>
 
 	</div>
