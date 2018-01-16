@@ -1306,6 +1306,31 @@ def data_getPotentials(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
+def data_getPotentialsToValidate(request):
+	
+	data = []
+	
+	from django.db.models import Count
+	
+	fieldname = 'name'
+	results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=False).order_by(fieldname).values(fieldname).annotate(count=Count(fieldname)).order_by('-count', 'name')
+	for item in results:
+		if item['count'] >= 3:
+			
+			obj = {
+				'name': item[fieldname],
+				'count': item['count'],
+			}
+			
+			data.append(obj)
+	
+	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
 def data_getPotentialMissionByName(request):
 	
 	data = None
@@ -1350,6 +1375,21 @@ def adm_excludePotential(request):
 	for item in results:
 		
 		item.admin = False
+		item.save()
+	
+	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def adm_validatePotential(request):
+	
+	results = Mission.objects.filter(mosaic__isnull=True, name=request.data['name'], admin=True, validated=False)
+	for item in results:
+		
+		item.validated = True
 		item.save()
 	
 	return Response(None, status=status.HTTP_200_OK)

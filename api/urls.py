@@ -76,6 +76,7 @@ urlpatterns = [
 	url(r'^comment/update/',		comment_update),
 	url(r'^comment/delete/',		comment_delete),
 	
+	url(r'^potentials/tovalidate/',		data_getPotentialsToValidate),
 	url(r'^potentials/',		data_getPotentials),
 	url(r'^potential/name/',		data_getPotentialMissionByName),
 
@@ -84,6 +85,7 @@ urlpatterns = [
 	url(r'^adm/city/rename',				adm_renameCity),
 	url(r'^adm/region/rename',				adm_renameRegion),
 	url(r'^adm/potential/exclude',				adm_excludePotential),
+	url(r'^adm/potential/validate',				adm_validatePotential),
 
 	url(r'^event/',				event_view),
 ]

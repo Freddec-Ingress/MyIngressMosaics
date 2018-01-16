@@ -56,7 +56,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		
 		$scope.potentials = [];
 		
-		API.sendRequest('/api/potentials/', 'POST').then(function(response) {
+		API.sendRequest('/api/potentials/tovalidate/', 'POST').then(function(response) {
 		
 			$scope.potentials = response;
 			
