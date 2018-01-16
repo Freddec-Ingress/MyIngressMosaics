@@ -23,224 +23,44 @@
 	
 	<div class="container" ng-class="{'active':loaded}">
 		
-		<div class="mt-big" ng-repeat="mosaic in mosaics">
-			
-			<div ng-if="mosaic.missions.length > 2 && !isMissionCountValid(mosaic);">
-				
-				<div class="flex align-center">
-					
-					<div class="item grow">
-						<a href="/registration/{{mosaic.name}}" target="blank">{{mosaic.name}}</a>
-					</div>
-					
-					<div class="item">
-						<a ng-click="refreshMissions(mosaic);">Refresh missions</a>
-					</div>
-					
+		<div class="section">
+			<div class="flex justify-center align-center">
+				<div class="item">
+					<button class="btn" ng-click="refresh_potentials">
+						Refresh
+					</button>
 				</div>
-				
-				<hr>
-				
-				<div ng-show="mosaic.refreshingMissions" class="flex align-center">
-					
-					<div class="item">
-						<span class="color-normal">Refreshing missions...</span>
-					</div>
-					
-				</div>
-				
-				<div ng-hide="mosaic.refreshingMissions" class="flex align-center" ng-repeat="mission in mosaic.missions">
-					
-					<div class="item" style="width:2rem;">
-						<span class="color-dark">{{mission.order}}</span>
-					</div>
-					
-					<div class="item grow">
-						<span class="color-normal">{{mission.title}}</span>
-					</div>
-					
-					<div class="item">
-						<a href="/registration/{{mission.creator}}" target="blank">{{mission.creator}}</a>
-					</div>
-					
-					<div class="item">
-						<a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=17&pll={{mission.startLat}},{{mission.startLng}}" target="_blank">
-							<i class="fa fa-external-link"></i>
-						</a>
-					</div>
-					
-				</div>
-				
-				<div ng-hide="mosaic.refreshingMissions" class="flex align-center">
-					
-					<div class="item grow">
-						<button class="btn btn-danger" ng-click="excludeMosaic(mosaic);">
-							Exclude
-						</button>
-					</div>
-					
-					<div class="item">
-						<button class="btn" ng-click="removeMosaic(mosaic);">
-							OK
-						</button>
-					</div>
-					
-				</div>
-				
 			</div>
-			
-			<div ng-if="mosaic.missions.length > 2 && isMissionCountValid(mosaic);">
-				
-				<div ng-show="!mosaic.open">
-					<div class="flex align-center">
-						
-						<div class="item grow">
-							{{mosaic.name}}
-						</div>
-					
-						<div class="item">
-							<button class="btn" ng-click="openMosaic(mosaic, $index);">
-								Open
-							</button>
-						</div>
-					
-						<div class="item">
-							<button class="btn" ng-click="removeMosaic(mosaic);">
-								OK
-							</button>
-						</div>
-						
-					</div>
-				</div>
-				
-				<div ng-show="mosaic.open">
-					
-					<div class="row mt-normal" style="height:250px;">
-						
-						<div class="item grow flex-col" style="max-width:50%;">
-							
-							<span class="block">Preview</span>
-							<div class="scrollable flex align-start" style="border: 1px solid #009688; border-radius: .125rem;">
-								
-								<div class="flex shrink grow wrap justify-center" style="padding:0 calc((6 - {{mosaic.columns}}) / 2 * 16.666667%);">
-									
-						            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.columns}});">
-						            </div>
-						            
-						            <div ng-repeat="mission in mosaic.missions | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.columns}});">
-						                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{mission.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-						            </div>
-						            
-					            </div>
-							
-							</div>
-							
-						</div>
-						
-						<div class="item grow">
-							
-							<div class="mb-normal">
-								<span class="block">Name</span>
-								<input id="name_input_{{$index}}" type="text" class="control" ng-model="mosaic.name" />
-							</div>
-							
-							<div class="mb-normal">
-								<span class="block">Columns</span>
-								<select class="control" ng-model="mosaic.columns" ng-change="computeOffsetMosaic(mosaic);">
-									<option value="6">6</option>
-									<option value="5">5</option>
-									<option value="4">4</option>
-									<option value="3">3</option>
-									<option value="2">2</option>
-									<option value="1">1</option>
-								</select>
-							</div>
-							
-							<div class="mb-normal">
-								<span class="block">City</span>
-								<input id="city_input_{{$index}}" type="create" class="control" />
-							</div>
-							
-							<div class="mb-normal">
-								<span class="block color-dark">{{mosaic.default}}</span>
-							</div>
-							
-							<div class="grow flex align-center">
-								
-								<div class="item text-center pl-none">
-									<span class="color-normal">{{mosaic.missions.length}} missions</span>
-								</div>
-									
-								<div class="item text-center">
-									<a ng-click="reorderAscMosaic(mosaic);">Reorder</a>
-								</div>
-								
-								<div class="item text-center">
-									<a ng-click="reorderDescMosaic(mosaic);">Reverse order</a>
-								</div>
-								
-							</div>
-							
-						</div>
-						
-					</div>
-					
-					<div class="col mb-normal mt-normal scrollable" style="max-height:200px; height:auto;">
-						
-						<div class="flex noshrink align-center" ng-repeat="mission in mosaic.missions">
-							
-							<div class="item">
-								<a ng-click="excludeMission(mosaic, mission);">
-									<i class="fa fa-trash"></i>
-								</a>
-							</div>
-							
-							<div class="item">
-								<a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=17&pll={{mission.startLat}},{{mission.startLng}}" target="_blank">
-									<i class="fa fa-external-link"></i>
-								</a>
-							</div>
-							
-							<div style="min-width:45px;max-width:45px;">
-								<input type="text" class="control text-center" style="padding:0;" ng-model="mission.order" ng-blur="reorderMosaic(mosaic);" />
-							</div>
-							
-							<div class="item grow" title="{{mission.desc}}">
-								{{mission.title}}
-							</div>
-							
-							<div class="item">
-								<span ng-class="{'color-enlightened': mission.faction == 'E', 'color-resistant': mission.faction == 'R'}">
-									{{mission.creator}}
-								</span>
-							</div>
-							
-						</div>
-						
-					</div>
-		
-					<div class="row pt-normal mb-normal">
-						
-						<div class="item grow">
-							<button class="btn btn-danger" ng-click="excludeMosaic(mosaic);">
-								Exclude
-							</button>
-						</div>
-						
-						<div class="item">
-							<button class="btn" ng-click="createMosaic(mosaic);" ng-disabled="!mosaic.name || mosaic.missions.length < 1 || !mosaic.columns || !mosaic.country || !mosaic.city">
-								Create
-							</button>
-						</div>
-						
-					</div>
-					
-				</div>
-				
-			</div>
-
 		</div>
 		
+		<div class="section" ng-show="refreshing_potentials">
+			<div class="flex justify-center align-center">
+				
+				<div class="item">
+					<i class="fa fa-spinner rotating"></i>
+				</div>
+				
+				<div class="item">
+					<span class="color-normal">Refreshing... </span>
+				</div>
+				
+			</div>
+		</div>
+		
+		<div class="section" ng-hide="refreshing_potentials">
+			<div class="item" ng-repeat="potential in potentials">
+				<div class="bg-block">
+					
+					<div class="flex justify-center align-center">
+						<div class="item">
+							<span class="color-normal">{{potential.name}}</span>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
 	</div>
 	
 {% endverbatim %}
