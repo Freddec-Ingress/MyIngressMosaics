@@ -1388,10 +1388,25 @@ def adm_validatePotential(request):
 	
 	results = Mission.objects.filter(mosaic__isnull=True, name=request.data['name'], admin=True, validated=False)
 	for item in results:
-		
+
 		item.validated = True
 		item.save()
 	
+	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def adm_renamePotential(request):
+	
+	results = Mission.objects.filter(mosaic__isnull=True, name=request.data['name'], admin=True, validated=False)
+	for item in results:
+		
+		item.name = request.data['new_name']
+		item.save()
+		
 	return Response(None, status=status.HTTP_200_OK)
 
 

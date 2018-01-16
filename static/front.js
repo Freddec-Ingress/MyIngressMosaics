@@ -3716,6 +3716,12 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		API.sendRequest('/api/adm/potential/exclude', 'POST', {}, data);
 	}
 	
+	$scope.rename = function(potential, new_name) {
+		
+		var data = { 'name':potential.name, 'new_name':new_name };
+		API.sendRequest('/api/adm/potential/rename', 'POST', {}, data);
+	}
+	
 	$scope.validate = function(potential) {
 		
 		var index = $scope.potentials.indexOf(potential);

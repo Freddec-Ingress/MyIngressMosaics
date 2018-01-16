@@ -115,6 +115,20 @@
 						<div class="flex">
 							
 							<div class="item grow">
+								<input type="text" class="control" ng-model="new_name" ng-init="new_name=potential.name;" />
+							</div>
+							
+							<div class="item">
+								<button class="btn" ng-click="rename(potential, new_name);">
+									Rename
+								</button>
+							</div>
+							
+						</div>
+						
+						<div class="flex">
+							
+							<div class="item grow">
 								<button class="btn btn-danger" ng-click="">
 									Exclude
 								</button>
