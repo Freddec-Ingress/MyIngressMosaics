@@ -62,10 +62,6 @@
 					
 					<div class="flex align-center">
 						
-						<div class="item">
-							<span class="color-dark">{{potential.count}}</span>
-						</div>
-						
 						<div class="item grow">
 							<span class="color-light">{{potential.name}}</span>
 						</div>
@@ -88,10 +84,10 @@
 						
 					</div>
 					
-					<div class="flex-col" ng-hide="potential.refreshing_missions">
+					<div class="flex-col" ng-hide="potential.refreshing_missions || potential.missions.length < 1">
 						
 						<div class="item pb-none">
-							<span class="color-normal">{{potential.missions.length}} missions</span>
+							<span class="color-dark">{{potential.missions.length}} missions</span>
 						</div>
 						
 						<div class="item">
@@ -100,6 +96,16 @@
 									
 									<div class="item">
 										<span class="color-normal">{{mission.title}}</span>
+									</div>
+									
+									<div class="item">
+										<span class="color-dark">{{mission.creator}}</span>
+									</div>
+									
+									<div class="item">
+		                                <a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=19&pll={{mission.startLat}},{{mission.startLng}}" target="_blank">
+		                                    <i class="fa fa-external-link"></i>
+		                                </a>
 									</div>
 									
 								</div>
