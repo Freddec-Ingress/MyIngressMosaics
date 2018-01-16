@@ -21,6 +21,7 @@ angular.module('FrontModule.controllers').controller('AdmMissionCtrl', function(
 	    $scope.loading = true;
 	    
 	    var data = { 'ref':mission.ref, 'name':mission.name };
+	    console.log(data);
 		API.sendRequest('/api/mission/update/', 'POST', {}, data).then(function(response) {
             
             $scope.mission = response;
