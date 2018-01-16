@@ -3724,25 +3724,20 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		var data = { 'name':potential.name};
 		API.sendRequest('/api/adm/potential/exclude', 'POST', {}, data);
 	}
-	
-	$scope.rename = function(potential, new_name) {
+
+	$scope.validate = function(potential, new_name) {
+		
+		var index = $scope.potentials.indexOf(potential);
+		$scope.potentials.splice(index, 1);
 		
 		var data = { 'name':potential.name, 'new_name':new_name };
 		API.sendRequest('/api/adm/potential/rename', 'POST', {}, data).then(function(response) {
 			
 			potential.name = new_name;
 			
-			$scope.refresh_missions(potential);
+			var data = { 'name':potential.name};
+			API.sendRequest('/api/adm/potential/validate', 'POST', {}, data);
 		});
-	}
-	
-	$scope.validate = function(potential) {
-		
-		var index = $scope.potentials.indexOf(potential);
-		$scope.potentials.splice(index, 1);
-		
-		var data = { 'name':potential.name};
-		API.sendRequest('/api/adm/potential/validate', 'POST', {}, data);
 	}
 	
 	/* Page loading */
