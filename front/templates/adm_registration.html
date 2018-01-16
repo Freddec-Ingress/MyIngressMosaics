@@ -94,6 +94,12 @@
 							<div class="group-list" style="max-height:200px; overflow-y:auto;">
 								<div class="group-list-item flex align-center" ng-repeat="mission in potential.missions">
 									
+									<div class="item">
+		                                <a ng-click="remove_mission(potential, mission);">
+		                                    <i class="fa fa-times"></i>
+		                                </a>
+									</div>
+									
 									<div class="item grow">
 										<span class="color-normal">{{mission.title}}</span>
 									</div>
