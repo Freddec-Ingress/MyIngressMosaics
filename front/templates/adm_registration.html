@@ -84,7 +84,7 @@
 						
 					</div>
 					
-					<div class="flex-col" ng-hide="potential.refreshing_missions || potential.missions.length < 1">
+					<div class="flex-col" ng-hide="potential.refreshing_missions || !potential.missions">
 						
 						<div class="item pb-none">
 							<span class="color-dark">{{potential.missions.length}} missions</span>

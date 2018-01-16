@@ -3694,6 +3694,15 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 			
 			potential.missions = response.missions;
 			
+			for (var mission of potential.missions) {
+				
+				var order = UtilsService.getOrderFromMissionName(mission.title);
+				if (order < 1) order = $scope.selected.indexOf(mission) + 1;
+				mission.order = order;
+			}
+			
+			potential.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
+			
 			potential.refreshing_missions = false;
 		});
 	}
