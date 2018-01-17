@@ -166,9 +166,15 @@
 							<div class="flex wrap">
 								<div class="width-12 width-xl-4 item" ng-repeat="potential in potentials">
 									<a class="item link-block flex align-center" href="/registration/{{potential.name}}" target="_blank">
-										<div class="item ellipsis">
+										
+										<div class="item grow ellipsis">
 											<span>{{potential.name}}</span>
 										</div>
+										
+										<div class="item">
+											<span class="text-small color-dark">{{potential.count}}</span>
+										</div>
+										
 									</a>
 								</div>
 							</div>
