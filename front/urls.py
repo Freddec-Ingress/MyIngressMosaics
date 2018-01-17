@@ -14,7 +14,7 @@ urlpatterns = [
 	url(r'^mosaic/(?P<ref>\w+)/preview',		views.preview),
 	url(r'^mosaic/(?P<ref>\w+)',				views.mosaic),
 	
-	url(r'^registration/(?P<searchstring>[\w|\W \-,.\'#]+)',					views.registration),
+	url(r'^registration/(?P<searchstring>[\w|\W \-,|#.\']+)',					views.registration),
 	url(r'^registration',												views.registration),
 	
 	url(r'^search/(?P<searchstring>[\w \-,]+)',	views.search),
