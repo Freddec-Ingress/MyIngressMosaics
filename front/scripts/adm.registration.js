@@ -46,23 +46,13 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 
 	$scope.rename = function(potential, new_name) {
 		
-		var done = 0;
-		
-		for (var mission of potential.missions) {
+		var data = { 'name':potential.name, 'new_name':new_name };
+		API.sendRequest('/api/adm/potential/rename', 'POST', {}, data).then(function(response) {
 			
-			var data = { 'ref':mission.ref, 'name':potential };
-			API.sendRequest('/api/mission/update/', 'POST', {}, data).then(function(response) {
-				
-				done += 1;
-			});
-		}
-		
-		while (done < potential.missions.length)
-		;
+			potential.name = new_name;
 			
-		potential.name = new_name;
-		
-		$scope.refresh_missions(potential);
+			$scope.refresh_missions(potential);
+		});
 	}
 	
 	$scope.validate = function(potential, new_name) {
@@ -70,24 +60,17 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		var index = $scope.potentials.indexOf(potential);
 		$scope.potentials.splice(index, 1);
 		
-		var done = 0;
+		var refs = [];
+		for (var mission of potential.missions) refs.append(mission.ref);
 		
-		for (var mission of potential.missions) {
+		var data = { 'refs':refs, 'new_name':new_name };
+		API.sendRequest('/api/adm/potential/rename', 'POST', {}, data).then(function(response) {
 			
-			var data = { 'ref':mission.ref, 'name':potential };
-			API.sendRequest('/api/mission/update/', 'POST', {}, data).then(function(response) {
-				
-				done += 1;
-			});
-		}
-		
-		while (done < potential.missions.length)
-		;
-		
-		potential.name = new_name;
-		
-		var data = { 'name':potential.name};
-		API.sendRequest('/api/adm/potential/validate', 'POST', {}, data);
+			potential.name = new_name;
+			
+			var data = { 'refs':refs};
+			API.sendRequest('/api/adm/potential/validate', 'POST', {}, data);
+		});
 	}
 	
 	/* Page loading */
