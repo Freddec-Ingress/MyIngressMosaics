@@ -1352,12 +1352,13 @@ def data_getPotentialsToValidate(request):
 	from django.db.models import Count
 	
 	fieldname = 'name'
-	results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=False).order_by(fieldname).values(fieldname).annotate(count=Count(fieldname)).order_by('-count', 'name')
+	results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=False).order_by(fieldname).values(fieldname, 'creator').annotate(count=Count(fieldname)).order_by('-count', 'name')
 	for item in results:
 		if item['count'] >= 3:
 			
 			obj = {
 				'name': item[fieldname],
+				'creator': item['creator'],
 				'count': item['count'],
 			}
 			
@@ -1438,7 +1439,7 @@ def adm_excludePotential(request):
 @permission_classes((IsAuthenticated, ))
 def adm_validatePotential(request):
 	
-	results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=False, ref__in=request.data['refs'])
+	results = Mission.objects.filter(ref__in=request.data['refs'])
 	for item in results:
 
 		item.validated = True
@@ -1453,7 +1454,7 @@ def adm_validatePotential(request):
 @permission_classes((IsAuthenticated, ))
 def adm_renamePotential(request):
 	
-	results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=False, ref__in=request.data['refs'])
+	results = Mission.objects.filter(ref__in=request.data['refs'])
 	for item in results:
 		
 		item.name = request.data['new_name']
