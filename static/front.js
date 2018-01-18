@@ -2401,7 +2401,7 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 		});
 	}
 });
-angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', function($scope, $window, toastr, API, UtilsService) {
+angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', function($scope, $window, $location, toastr, API, UtilsService) {
 	
 	/* Tab management */
 	
@@ -2834,6 +2834,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 			$('#city_input').val('');
 			
 			$window.open('https://www.myingressmosaics.com/mosaic/' + response);
+			$location.path('/registration')
 			
 			$scope.open_step(1);
 			
@@ -3727,7 +3728,10 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 
 	$scope.rename = function(potential, new_name) {
 		
-		var data = { 'name':potential.name, 'new_name':new_name };
+		var refs = [];
+		for (var mission of potential.missions) refs.push(mission.ref);
+		
+		var data = { 'refs':refs, 'new_name':new_name };
 		API.sendRequest('/api/adm/potential/rename', 'POST', {}, data).then(function(response) {
 			
 			potential.name = new_name;

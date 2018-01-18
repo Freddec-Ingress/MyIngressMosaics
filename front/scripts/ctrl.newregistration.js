@@ -1,4 +1,4 @@
-angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', function($scope, $window, toastr, API, UtilsService) {
+angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', function($scope, $window, $location, toastr, API, UtilsService) {
 	
 	/* Tab management */
 	
@@ -431,6 +431,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 			$('#city_input').val('');
 			
 			$window.open('https://www.myingressmosaics.com/mosaic/' + response);
+			$location.path('/registration')
 			
 			$scope.open_step(1);
 			
