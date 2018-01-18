@@ -66,16 +66,20 @@
 							<span class="color-light" ng-class="{'color-danger':potential.count!=6&&potential.count!=12&&potential.count!=18&&potential.count!=24&&potential.count!=30&&potential.count!=36&&potential.count!=42&&potential.count!=48&&potential.count!=54}">{{potential.name}}</span>
 						</div>
 						
-						<div class="item">
+						<div class="item" ng-hide="potential.refreshing_missions || potential.missions">
 							<span class="color-dark">{{potential.creator}}</span>
 						</div>
 						
-						<div class="item">
+						<div class="item" ng-hide="potential.refreshing_missions || potential.missions">
 							<a ng-click="exclude(potential);">Exclude</a>
 						</div>
 						
-						<div class="item">
+						<div class="item" ng-hide="potential.refreshing_missions || potential.missions">
 							<a ng-click="refresh_missions(potential);">Open</a>
+						</div>
+						
+						<div class="item" ng-show="potential.refreshing_missions || potential.missions">
+							<a ng-click="refresh_missions(potential);">Refresh</a>
 						</div>
 						
 					</div>
