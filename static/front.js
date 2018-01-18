@@ -3742,7 +3742,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		$scope.potentials.splice(index, 1);
 		
 		var refs = [];
-		for (var mission of potential.missions) refs.append(mission.ref);
+		for (var mission of potential.missions) refs.push(mission.ref);
 		
 		var data = { 'refs':refs, 'new_name':new_name };
 		API.sendRequest('/api/adm/potential/rename', 'POST', {}, data).then(function(response) {
