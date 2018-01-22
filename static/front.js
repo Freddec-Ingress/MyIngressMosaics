@@ -2834,7 +2834,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 			$('#city_input').val('');
 			
 			$window.open('https://www.myingressmosaics.com/mosaic/' + response);
-			$location.path('/registration')
+			$location.path('https://www.myingressmosaics.com/registration')
 			
 			$scope.open_step(1);
 			
