@@ -670,7 +670,7 @@ class Mission(models.Model):
 class Comment(models.Model):
 	
 	user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='comments')
-	c = models.ForeignKey('Mosaic', on_delete=models.SET_NULL, null=True, blank=True, related_name='comments')
+	mosaic = models.ForeignKey('Mosaic', on_delete=models.SET_NULL, null=True, blank=True, related_name='comments')
 
 	text = models.TextField()
 	create_date = models.DateField(default=datetime.now)
