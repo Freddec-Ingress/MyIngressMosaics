@@ -684,7 +684,7 @@ class Comment(models.Model):
 			text += self.user.username
 		text += ' - '
 		if self.mosaic:
-			text += self.mosaic
+			text += self.mosaic.title
 		return text
 		
 	# Serialization
