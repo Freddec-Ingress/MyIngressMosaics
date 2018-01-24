@@ -24,38 +24,37 @@
 	<div class="container" ng-class="{'active':loaded}" ng-init="refresh_potentials();">
 		
 		<div class="section">
-			<div class="flex justify-center align-center">
-				<div class="item">
-					<button class="btn" ng-click="refresh_potentials();">
-						Refresh
-					</button>
-				</div>
-			</div>
-		</div>
-		
-		<div class="section" ng-show="refreshing_potentials">
-			<div class="flex justify-center align-center">
+			<div class="flex-col">
 				
-				<div class="item">
-					<i class="fa fa-spinner rotating"></i>
+				<div class="pb-none flex align-center">
+					
+					<div class="item ggrow">
+						<span class="color-normal">{{potentials.length}} potentials</span>
+					</div>
+					
+					<div class="item">
+						<a ng-click="refresh_potentials();">Refresh</a>
+					</div>
+					
 				</div>
 				
 				<div class="item">
-					<span class="color-normal">Refreshing... </span>
+					<hr>
 				</div>
 				
-			</div>
-		</div>
-		
-		<div class="section" ng-hide="refreshing_potentials">
-			
-			<div class="item pb-none">
-				<span class="color-normal">{{potentials.length}} potentials</span>
-			</div>
-			
-			<div class="item">
-				<hr>
-			</div>
+				<div class="flex align-center" ng-show="refreshing_potentials">
+					
+					<div class="item">
+						<i class="fa fa-spinner rotating"></i>
+					</div>
+					
+					<div class="item">
+						<span class="color-normal">Refreshing... </span>
+					</div>
+					
+				</div>
+
+				<div ng-hide="refreshing_potentials">
 			
 			<div class="item" ng-repeat="potential in potentials">
 				<div class="item bg-block">
@@ -163,6 +162,9 @@
 			
 		</div>
 
+			</div>
+		</div>
+		
 	</div>
 	
 {% endverbatim %}
