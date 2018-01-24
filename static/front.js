@@ -3682,6 +3682,12 @@ angular.module('FrontModule.controllers').controller('AdmCityCtrl', function($sc
 });
 angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', function($scope, $window, API, UtilsService) {
 	
+	$scope.exclude_by_name = function(name) {
+		
+		var data = { 'name':name};
+		API.sendRequest('/api/adm/potential/exclude', 'POST', {}, data);
+	}
+	
 	/* Potential management */
 	
 	$scope.refresh_missions = function(potential) {
