@@ -28,7 +28,7 @@
 			
 			<div class="flex-col">
 				
-				<div class="item flex">
+				<div class="item flex mt-big">
 					<span class="mr-small flag-icon flag-icon-{{city.region.country.code}}" style="line-height: inherit;"></span>
 					<a class="mr-small" href="/world/{{city.region.country.name}}">{{city.region.country.name}}</a>
 					<span class="mr-small color-dark">></span>
@@ -37,18 +37,14 @@
 				
 				<span class="item text-big color-light">{{city.name}}</span>
 				
+				<span class="item color-dark">{{mosaics.length}} mosaics</span>
+				
 			</div>
 			
 		</div>
 		
 		<div class="section">
 			
-			<span class="item pb-none color-normal">{{mosaics.length}} mosaics</span>
-		
-			<div class="item">
-				<hr>
-			</div>
-		
 			<div class="flex wrap">
 				<div class="width-6 width-xl-4" ng-repeat="mosaic in mosaics" style="padding: .75rem .375rem;">
 					<a class="item link-block flex-col" href="/mosaic/{{mosaic.ref}}" target="_blank" style="height:100%;">
