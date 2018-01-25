@@ -26,15 +26,16 @@
 		
 		<div class="section">
 			
-			<div class="item flex-col justify-center align-center">
+			<div class="item flex-col">
 				
-				<span class="text-big color-light text-center">{{city.name}}</span>
-				
-				<div class="flex justify-center align-center">
+				<div class="flex">
 					<span class="mr-small flag-icon flag-icon-{{city.region.country.code}}" style="line-height: inherit;"></span>
 					<a class="mr-big" href="/world/{{city.region.country.name}}">{{city.region.country.name}}</a>
+					<span class="mr-big color-dark">></span>
 					<a href="/world/{{city.region.country.name}}/{{city.region.name}}">{{city.region.name}}</a>
 				</div>
+				
+				<span class="text-big color-light">{{city.name}}</span>
 				
 			</div>
 			
