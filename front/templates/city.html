@@ -49,10 +49,20 @@
 			</div>
 		
 			<div class="flex wrap">
-				<div class="width-12 width-xl-6 item" ng-repeat="mosaic in mosaics">
-					<a class="item link-block flex" href="/mosaic/{{mosaic.ref}}" target="_blank">
+				<div class="width-6 width-xl-4 item" ng-repeat="mosaic in mosaics">
+					<a class="item link-block flex-col" href="/mosaic/{{mosaic.ref}}" target="_blank">
 						
-	    				<div class="item flex justify-center align-start pl-xl-none" style="width:125px; max-width:125px; max-height:92px; overflow-y:auto;">
+	    				<div class="item grow">
+	    					
+	    					<span class="text-medium color-light block">{{mosaic.title}}</span>
+	
+	    					<span class="block text-small color-dark">
+								{{mosaic.missions.length}} missions
+	    					</span>
+	    					
+	    				</div>
+	    				
+	    				<div class="item flex justify-center align-start pl-xl-none">
 	    					
 							<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
 								
@@ -64,16 +74,6 @@
 					            </div>
 					            
 				            </div>
-	    					
-	    				</div>
-	    				
-	    				<div class="item grow" style="max-height:92px;">
-	    					
-	    					<span class="text-medium color-light block">{{mosaic.title}}</span>
-	
-	    					<span class="block text-small color-dark">
-								{{mosaic.missions.length}} missions
-	    					</span>
 	    					
 	    				</div>
 	    				
