@@ -49,7 +49,7 @@
 			</div>
 		
 			<div class="flex wrap">
-				<div class="width-6 width-xl-4 item" ng-repeat="mosaic in mosaics">
+				<div class="width-6 width-xl-4" ng-repeat="mosaic in mosaics" style="padding: .75rem .375rem;">
 					<a class="item link-block flex-col" href="/mosaic/{{mosaic.ref}}" target="_blank" style="height:100%;">
 						
 	    				<div class="item grow">
@@ -62,7 +62,7 @@
 	    					
 	    				</div>
 	    				
-	    				<div class="item grow flex justify-center align-start pl-xl-none">
+	    				<div class="item flex justify-center align-start pl-xl-none">
 	    					
 							<div class="flex wrap shrink justify-center" style="padding-right:calc(2*(6 - {{mosaic.cols}}) / 2 * 16.666667%);">
 								
