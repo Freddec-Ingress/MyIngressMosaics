@@ -78,11 +78,22 @@
 					
 				</div>
 				
-				<div class="flex wrap" ng-show="mosaics.length > 0">
-					<div class="width-12 width-xl-6 item" ng-repeat="mosaic in mosaics">
-						<a class="item link-block flex" href="/mosaic/{{mosaic.ref}}" target="_blank">
+				<div class="item mt-big flex wrap" ng-show="mosaics.length > 0">
+					<div class="width-6 width-xl-4" ng-repeat="mosaic in mosaics" style="padding: .75rem .375rem;">
+						<a class="item link-block flex-col" href="/mosaic/{{mosaic.ref}}" target="_blank" style="height:100%;">
 							
-		    				<div class="item flex" style="width:125px; max-width:125px; max-height:92px; overflow-y:auto;">
+		    				<div class="item grow">
+		    					
+		    					<span class="text-medium color-light block">{{mosaic.title}}</span>
+		
+		    					<div class="text-small color-dark">
+									<span class=" mr-small flag-icon flag-icon-{{mosaic.city.region.country.code}}"></span>
+									<span>{{mosaic.city.name}}</span>
+		    					</div>
+		    					
+		    				</div>
+		    				
+		    				<div class="item">
 		    					
 								<div class="flex wrap shrink" style="padding-right:calc((6 - {{mosaic.cols}}) * 16.666667%);">
 									
@@ -97,21 +108,10 @@
 		    					
 		    				</div>
 		    				
-		    				<div class="item grow" style="max-height:92px;">
-		    					
-		    					<span class="text-medium color-light block">{{mosaic.title}}</span>
-		
-		    					<div class="text-small color-dark">
-									<span class=" mr-small flag-icon flag-icon-{{mosaic.city.region.country.code}}"></span>
-									<span>{{mosaic.city.name}}</span>
-		    					</div>
-		    					
-		    				</div>
-		    				
-	 		   			</a>
+		 	   			</a>
 					</div>
 				</div>
-				
+
 			</div>
 			
 			<div ng-show="current_tab=='mission'">
