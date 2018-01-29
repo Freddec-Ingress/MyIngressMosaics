@@ -3196,12 +3196,12 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 											}
 											
 											var contentString = '' +
-												'<a class="flex-col" target="_blank" href="/mosaic/' + mosaic.ref + '" >' +
-													'<div class="ml-normal flex-col" style="flex-shrink:1;">' + 
-														'<span class="color-black text-medium mb-small text-bold" style="word-break: break-all;">' + mosaic.title + '</span>' + 
-														'<span class="color-grey">' + mosaic.missions.length + ' missions</span>' + 
+												'<a class="flex-col" target="_blank" style="width:200px; min-width:200px; max-width:200px;" href="/mosaic/' + mosaic.ref + '" >' +
+													'<div class="flex-col" style="flex-shrink:1;">' + 
+														'<span class="color-black text-medium text-bold" style="word-break: break-all;">' + mosaic.title + '</span>' + 
+														'<span class="color-grey mb-small">' + mosaic.missions.length + ' missions</span>' + 
 													'</div>' + 
-													'<div style="width:125px; min-width:125px; max-width:125px; max-height:102px; overflow-y:auto;">' +
+													'<div style="max-height:300px; overflow-y:auto;">' +
 														'<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - ' + mosaic.cols + ') / 2 * 16.666667%);">' +
 															offset_string +
 															missions_string + 
