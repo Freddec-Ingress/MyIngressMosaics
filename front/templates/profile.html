@@ -50,7 +50,7 @@
 				</div>
 				
 				<div class="item grow flex-col">
-					<span class="pb-none text-medium color-light">{{user.name}}</span>
+					<span class="pb-none text-big color-light">{{user.name}}</span>
 					<span ng-show="user.faction == 'E'" class="color-enlightened">Enlightened</span>
 					<span ng-show="user.faction == 'R'" class="color-resistant">Resistant</span>
 					<span ng-show="!user.faction" class="color-muted">Not defined</span>
@@ -337,7 +337,7 @@
 
 				</div>
 				
-				<div class="flex wrap" ng-show="todo.complete > 0">
+				<div class="flex wrap" ng-show="complete.length > 0">
 					<div class="width-6 width-xl-4" ng-repeat="mosaic in complete" style="padding: .75rem .375rem;">
 						<a class="item link-block flex-col" href="/mosaic/{{mosaic.ref}}" target="_blank" style="height:100%;">
 							
