@@ -26,14 +26,14 @@
 		
 		<div class="section">
 			
-			<div class="item flex-col justify-center align-center">
-				
-				<span class="text-big color-light text-center">{{region.name}}</span>
+			<div class="item flex-col">
 				
 	    		<div class="flex justify-center align-center">
 					<span class="mr-small flag-icon flag-icon-{{region.country.code}}" style="line-height: inherit;"></span>
 					<a class="mr-big" href="/world/{{region.country.name}}">{{region.country.name}}</a>
 	    		</div>
+				
+				<span class="mt-big text-big color-light text-center">{{region.name}}</span>
 	    		
 			</div>
 			
@@ -47,9 +47,9 @@
 				<hr>
 			</div>
 			
-			<div class="flex width-12">
+			<div class="flex">
 				
-				<div class="grow flex wrap">
+				<div class="grow flex width-12 wrap">
 
 					<div class="item" ng-repeat="index in indexes track by $index" ng-show="index.cities.length > 0">
 						<a class="badge item" ng-click="setCurrentIndex(index);" ng-class="{'transparent color-link': current_index!=index}">
