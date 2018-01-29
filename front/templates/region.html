@@ -47,9 +47,9 @@
 				<hr>
 			</div>
 			
-			<div class="flex">
+			<div class="flex width-12">
 				
-				<div class="grow flex shrink" style="overflow-x:auto;">
+				<div class="grow flex wrap">
 
 					<div class="item" ng-repeat="index in indexes track by $index" ng-show="index.cities.length > 0">
 						<a class="badge item" ng-click="setCurrentIndex(index);" ng-class="{'transparent color-link': current_index!=index}">
