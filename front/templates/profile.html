@@ -108,7 +108,7 @@
 				</div>
 				
 				<div class="tab" ng-click="current_tab='complete'" ng-class="{'active':current_tab=='complete'}">
-					<span>Completed ({{complete.length}})</span>
+					<span>Done ({{complete.length}})</span>
 				</div>
 			
 			</div>
@@ -134,13 +134,22 @@
 					
 				</div>
 				
-				<div ng-show="mosaics.length > 0">
-					
-					<div class="item">
-		    			<div class="group-list">
-		    			<div class="group-list-item flex align-center pl-xl-none pr-xl-none" ng-repeat="mosaic in mosaics">
+				<div class="flex wrap" ng-show="mosaics.length > 0">
+					<div class="width-6 width-xl-4" ng-repeat="mosaic in mosaics" style="padding: .75rem .375rem;">
+						<a class="item link-block flex-col" href="/mosaic/{{mosaic.ref}}" target="_blank" style="height:100%;">
+							
+		    				<div class="item grow">
+		    					
+		    					<span class="text-medium color-light block">{{mosaic.title}}</span>
 		
-		    				<a class="item flex" href="/mosaic/{{mosaic.ref}}" target="blank" style="width:125px; max-width:125px; max-height:102px; overflow-y:auto;" ng-class="{'pt-none pb-none pr-none':mosaic.missions.length > 30}">
+		    					<div class="text-small color-dark">
+									<span class=" mr-small flag-icon flag-icon-{{mosaic.city.region.country.code}}"></span>
+									<span>{{mosaic.city.name}}</span>
+		    					</div>
+		    					
+		    				</div>
+		    				
+		    				<div class="item">
 		    					
 								<div class="flex wrap shrink" style="padding-right:calc((6 - {{mosaic.cols}}) * 16.666667%);">
 									
@@ -153,30 +162,10 @@
 						            
 					            </div>
 		    					
-		    				</a>
-		    				
-		    				<div class="item grow">
-		    					
-		    					<div class="flex align-center">
-		    						<a class="text-medium color-light block" href="/mosaic/{{mosaic.ref}}" target="blank">{{mosaic.title}}</a>
-									<span class="ml-normal color-muted">{{mosaic.missions.length}}</span>
-								</div>
-		
-								<div class="flex mt-small">
-									<flag class="mr-small" country="mosaic.city.region.country.name"></flag>
-									<a href="/world/{{mosaic.city.region.country.name}}/{{mosaic.city.region.name}}/{{mosaic.city.name}}" target="blank">{{mosaic.city.name}}</a>
-								</div>
-							
 		    				</div>
 		    				
-							<a class="item pr-xl-none" href="/mosaic/{{mosaic.ref}}" target="blank">
-								<i class="fa fa-chevron-right text-small color-normal"></i>
-							</a>
-		    				
-		    			</div>
+		 	   			</a>
 					</div>
-					</div>
-					
 				</div>
 				
 			</div>
@@ -252,13 +241,22 @@
 
 				</div>
 				
-				<div ng-show="like.length > 0">
-					
-					<div class="item">
-		    			<div class="group-list">
-		    			<div class="group-list-item flex align-center pl-xl-none pr-xl-none" ng-repeat="mosaic in like">
+				<div class="flex wrap" ng-show="like.length > 0">
+					<div class="width-6 width-xl-4" ng-repeat="mosaic in like" style="padding: .75rem .375rem;">
+						<a class="item link-block flex-col" href="/mosaic/{{mosaic.ref}}" target="_blank" style="height:100%;">
+							
+		    				<div class="item grow">
+		    					
+		    					<span class="text-medium color-light block">{{mosaic.title}}</span>
 		
-		    				<a class="item flex justify-center pl-xl-none" href="/mosaic/{{mosaic.ref}}" target="blank" style="width:125px; max-width:125px; max-height:102px; overflow-y:auto;" ng-class="{'pt-none pb-none pr-none':mosaic.missions.length > 30}">
+		    					<div class="text-small color-dark">
+									<span class=" mr-small flag-icon flag-icon-{{mosaic.city.region.country.code}}"></span>
+									<span>{{mosaic.city.name}}</span>
+		    					</div>
+		    					
+		    				</div>
+		    				
+		    				<div class="item">
 		    					
 								<div class="flex wrap shrink" style="padding-right:calc((6 - {{mosaic.cols}}) * 16.666667%);">
 									
@@ -271,32 +269,12 @@
 						            
 					            </div>
 		    					
-		    				</a>
-		    				
-		    				<div class="item grow">
-		    					
-		    					<div class="flex align-center">
-		    						<a class="text-medium color-light block" href="/mosaic/{{mosaic.ref}}" target="blank">{{mosaic.title}}</a>
-									<span class="ml-normal color-muted">{{mosaic.missions.length}}</span>
-								</div>
-		
-								<div class="flex mt-small">
-									<flag class="mr-small" country="mosaic.city.region.country.name"></flag>
-									<a href="/world/{{mosaic.city.region.country.name}}/{{mosaic.city.region.name}}/{{mosaic.city.name}}" target="blank">{{mosaic.city.name}}</a>
-								</div>
-							
 		    				</div>
 		    				
-							<a class="item pr-xl-none" href="/mosaic/{{mosaic.ref}}" target="blank">
-								<i class="fa fa-chevron-right text-small color-normal"></i>
-							</a>
-		    				
-		    			</div>
+		 	   			</a>
 					</div>
-					</div>
-					
 				</div>
-				
+
 			</div>
 
 			<div ng-show="current_tab=='todo'">
@@ -311,13 +289,22 @@
 
 				</div>
 				
-				<div ng-show="todo.length > 0">
-					
-					<div class="item">
-		    			<div class="group-list">
-		    			<div class="group-list-item flex align-center pl-xl-none pr-xl-none" ng-repeat="mosaic in todo">
+				<div class="flex wrap" ng-show="todo.length > 0">
+					<div class="width-6 width-xl-4" ng-repeat="mosaic in todo" style="padding: .75rem .375rem;">
+						<a class="item link-block flex-col" href="/mosaic/{{mosaic.ref}}" target="_blank" style="height:100%;">
+							
+		    				<div class="item grow">
+		    					
+		    					<span class="text-medium color-light block">{{mosaic.title}}</span>
 		
-		    				<a class="item flex justify-center pl-xl-none" href="/mosaic/{{mosaic.ref}}" target="blank" style="width:125px; max-width:125px; max-height:102px; overflow-y:auto;" ng-class="{'pt-none pb-none pr-none':mosaic.missions.length > 30}">
+		    					<div class="text-small color-dark">
+									<span class=" mr-small flag-icon flag-icon-{{mosaic.city.region.country.code}}"></span>
+									<span>{{mosaic.city.name}}</span>
+		    					</div>
+		    					
+		    				</div>
+		    				
+		    				<div class="item">
 		    					
 								<div class="flex wrap shrink" style="padding-right:calc((6 - {{mosaic.cols}}) * 16.666667%);">
 									
@@ -330,32 +317,12 @@
 						            
 					            </div>
 		    					
-		    				</a>
-		    				
-		    				<div class="item grow">
-		    					
-		    					<div class="flex align-center">
-		    						<a class="text-medium color-light block" href="/mosaic/{{mosaic.ref}}" target="blank">{{mosaic.title}}</a>
-									<span class="ml-normal color-muted">{{mosaic.missions.length}}</span>
-								</div>
-		
-								<div class="flex mt-small">
-									<flag class="mr-small" country="mosaic.city.region.country.name"></flag>
-									<a href="/world/{{mosaic.city.region.country.name}}/{{mosaic.city.region.name}}/{{mosaic.city.name}}" target="blank">{{mosaic.city.name}}</a>
-								</div>
-							
 		    				</div>
 		    				
-							<a class="item pr-xl-none" href="/mosaic/{{mosaic.ref}}" target="blank">
-								<i class="fa fa-chevron-right text-small color-normal"></i>
-							</a>
-		    				
-		    			</div>
+		 	   			</a>
 					</div>
-					</div>
-					
 				</div>
-				
+
 			</div>
 			
 			<div ng-show="current_tab=='complete'">
@@ -364,19 +331,28 @@
 					
 					<div class="item flex justify-center">
 						<div class="item">
-							<span class="color-dark">No mosaic completed</span>
+							<span class="color-dark">No mosaic done</span>
 						</div>
 					</div>
 
 				</div>
 				
-				<div ng-show="complete.length > 0">
-					
-					<div class="item">
-		    			<div class="group-list">
-		    			<div class="group-list-item flex align-center pl-xl-none pr-xl-none" ng-repeat="mosaic in complete">
+				<div class="flex wrap" ng-show="todo.complete > 0">
+					<div class="width-6 width-xl-4" ng-repeat="mosaic in complete" style="padding: .75rem .375rem;">
+						<a class="item link-block flex-col" href="/mosaic/{{mosaic.ref}}" target="_blank" style="height:100%;">
+							
+		    				<div class="item grow">
+		    					
+		    					<span class="text-medium color-light block">{{mosaic.title}}</span>
 		
-		    				<a class="item flex justify-center pl-xl-none" href="/mosaic/{{mosaic.ref}}" target="blank" style="width:125px; max-width:125px; max-height:102px; overflow-y:auto;" ng-class="{'pt-none pb-none pr-none':mosaic.missions.length > 30}">
+		    					<div class="text-small color-dark">
+									<span class=" mr-small flag-icon flag-icon-{{mosaic.city.region.country.code}}"></span>
+									<span>{{mosaic.city.name}}</span>
+		    					</div>
+		    					
+		    				</div>
+		    				
+		    				<div class="item">
 		    					
 								<div class="flex wrap shrink" style="padding-right:calc((6 - {{mosaic.cols}}) * 16.666667%);">
 									
@@ -389,30 +365,10 @@
 						            
 					            </div>
 		    					
-		    				</a>
-		    				
-		    				<div class="item grow">
-		    					
-		    					<div class="flex align-center">
-		    						<a class="text-medium color-light block" href="/mosaic/{{mosaic.ref}}" target="blank">{{mosaic.title}}</a>
-									<span class="ml-normal color-muted">{{mosaic.missions.length}}</span>
-								</div>
-		
-								<div class="flex mt-small">
-									<flag class="mr-small" country="mosaic.city.region.country.name"></flag>
-									<a href="/world/{{mosaic.city.region.country.name}}/{{mosaic.city.region.name}}/{{mosaic.city.name}}" target="blank">{{mosaic.city.name}}</a>
-								</div>
-							
 		    				</div>
 		    				
-							<a class="item pr-xl-none" href="/mosaic/{{mosaic.ref}}" target="blank">
-								<i class="fa fa-chevron-right text-small color-normal"></i>
-							</a>
-		    				
-		    			</div>
+		 	   			</a>
 					</div>
-					</div>
-					
 				</div>
 				
 			</div>
