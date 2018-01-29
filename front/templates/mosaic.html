@@ -206,6 +206,23 @@
 		</div>
 		
 		<div class="section">
+			
+			<div class="flex align-center">
+				
+				<div class="item">
+					<span class="mr-small flag-icon flag-icon-{{mosaic.city.region.country.code}}"></span>
+					<a class="mr-small" href="/world/{{mosaic.city.region.country.name}}">{{mosaic.city.region.country.name}}</a>
+					<span class="mr-small color-dark">></span>
+					<a class="mr-small" href="/world/{{mosaic.city.region.country.name}}/{{mosaic.city.region.name}}">{{mosaic.city.region.name}}</a>
+					<span class="mr-small color-dark">></span>
+					<a class="mr-small" href="/world/{{mosaic.city.region.country.name}}/{{mosaic.city.region.name}}/{{mosaic.city.name}}">{{mosaic.city.name}}</a>
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		<div class="section">
 		
 			<div class="text-center">
 				<span class="text-big color-light">
@@ -213,125 +230,115 @@
 				</span>
 			</div>
 			
-			<div class="item flex justify-center">
+		</div>
+		
+		<div class="section">
+			<div class="flex">
 				
-				<div class="flex justify-center" style="width:100%; max-width:420px;">
-					
-					<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
+				<div class="flex-col width-12 width-xl-8">
+					<div class="item flex justify-center">
 						
-			            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-			            </div>
-			            
-			            <a ng-repeat="m in mosaic.missions | reverse" ng-click="displayMissionDetails(m);" class="block mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-			                <img src="/static/img/mask.png" style="background-image:url({{m.image}}=s100);" />
-			                <div style="position:absolute;bottom:0;right:0;font-size:8px;">{{m.order}}</div>
-			            </a>
-			            
-		            </div>
+						<div class="flex justify-center" style="width:100%; max-width:420px;">
+							
+							<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%);">
+								
+					            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+					            </div>
+					            
+					            <a ng-repeat="m in mosaic.missions | reverse" ng-click="displayMissionDetails(m);" class="block mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+					                <img src="/static/img/mask.png" style="background-image:url({{m.image}}=s100);" />
+					                <div style="position:absolute;bottom:0;right:0;font-size:8px;">{{m.order}}</div>
+					            </a>
+					            
+				            </div>
+							
+						</div>
+						
+					</div>
 					
-				</div>
-				
-			</div>
-			
-			<div class="item flex justify-center">
-				
-				<div class="item">
-					<div class="badge flex justify-center align-center" ng-click="toggle_link(user, 'like');" style="width:75px;">
-						<span class="item" ng-class="{'color-dark':!mosaic.is_like, 'color-light':mosaic.is_like}">{{mosaic.likers}}</span>
-						<span class="item" ng-class="{'color-dark':!mosaic.is_like, 'color-light':mosaic.is_like}">Like</span>
+					<div class="item flex justify-center">
+						
+						<div class="item">
+							<div class="badge flex justify-center align-center" ng-click="toggle_link(user, 'like');" style="width:75px;">
+								<span class="item" ng-class="{'color-dark':!mosaic.is_like, 'color-light':mosaic.is_like}">{{mosaic.likers}}</span>
+								<span class="item" ng-class="{'color-dark':!mosaic.is_like, 'color-light':mosaic.is_like}">Like</span>
+							</div>
+						</div>
+						
+						<div class="item">
+							<div class="badge flex justify-center align-center" ng-click="toggle_link(user, 'todo');" style="width:75px;">
+								<span class="item" ng-class="{'color-dark':!mosaic.is_todo, 'color-light':mosaic.is_todo}">{{mosaic.todoers}}</span>
+								<span class="item" ng-class="{'color-dark':!mosaic.is_todo, 'color-light':mosaic.is_todo}">To do</span>
+							</div>
+						</div>
+						
+						<div class="item">
+							<div class="badge flex justify-center align-center" ng-click="toggle_link(user, 'complete');" style="width:75px;">
+								<span class="item" ng-class="{'color-dark':!mosaic.is_complete, 'color-light':mosaic.is_complete}">{{mosaic.completers}}</span>
+								<span class="item" ng-class="{'color-dark':!mosaic.is_complete, 'color-light':mosaic.is_complete}">Done</span>
+							</div>
+						</div>
+						
 					</div>
 				</div>
-				
-				<div class="item">
-					<div class="badge flex justify-center align-center" ng-click="toggle_link(user, 'todo');" style="width:75px;">
-						<span class="item" ng-class="{'color-dark':!mosaic.is_todo, 'color-light':mosaic.is_todo}">{{mosaic.todoers}}</span>
-						<span class="item" ng-class="{'color-dark':!mosaic.is_todo, 'color-light':mosaic.is_todo}">To do</span>
-					</div>
-				</div>
-				
-				<div class="item">
-					<div class="badge flex justify-center align-center" ng-click="toggle_link(user, 'complete');" style="width:75px;">
-						<span class="item" ng-class="{'color-dark':!mosaic.is_complete, 'color-light':mosaic.is_complete}">{{mosaic.completers}}</span>
-						<span class="item" ng-class="{'color-dark':!mosaic.is_complete, 'color-light':mosaic.is_complete}">Done</span>
-					</div>
-				</div>
-				
-			</div>
-			
-			<div class="flex">
-				
-				<div class="item">
-					<span class="color-muted">Details</span>
-				</div>
-				
-			</div>
-			
-			<div class="flex ml-big align-center">
-				
-				<div class="item">
-					<span class="flag-icon flag-icon-{{mosaic.city.region.country.code}}"></span>
-				</div>
-				
-				<div class="item">
-					<a href="/world/{{mosaic.city.region.country.name}}">{{mosaic.city.region.country.name}}</a>
-				</div>
-				
-				<div class="item">
-					<a href="/world/{{mosaic.city.region.country.name}}/{{mosaic.city.region.name}}">{{mosaic.city.region.name}}</a>
-				</div>
-				
-				<div class="item">
-					<a href="/world/{{mosaic.city.region.country.name}}/{{mosaic.city.region.name}}/{{mosaic.city.name}}">{{mosaic.city.name}}</a>
-				</div>
-				
-			</div>
-			
-			<div class="flex ml-big">
-				
-				<div class="item">
-					<span>{{mosaic.missions.length}} missions</span>
-				</div>
-			
-			</div>
-			
-			<div class="flex ml-big">
-				
-				<div class="item ">
-					{{mosaic.portals}} waypoints
-				</div>
-				
-				<div class="item ">
-					{{mosaic.uniques}} uniques
-				</div>
-				
-			</div>
-			
-			<div class="flex ml-big">
 					
-				<div class="item" ng-show="mosaic.type=='sequence'">
-					<span>{{mosaic.distance | number:2}} km</span>
+				<div class="flex-co lwidth-12 width-xl-4">
+					<div class="flex">
+						
+						<div class="item">
+							<span class="color-muted">Details</span>
+						</div>
+						
+					</div>
+					
+					<div class="flex ml-big">
+						
+						<div class="item">
+							<span>{{mosaic.missions.length}} missions</span>
+						</div>
+					
+					</div>
+					
+					<div class="flex ml-big">
+						
+						<div class="item ">
+							{{mosaic.portals}} waypoints
+						</div>
+						
+						<div class="item ">
+							{{mosaic.uniques}} uniques
+						</div>
+						
+					</div>
+					
+					<div class="flex ml-big">
+							
+						<div class="item" ng-show="mosaic.type=='sequence'">
+							<span>{{mosaic.distance | number:2}} km</span>
+						</div>
+						
+					</div>
+					
+					<div class="flex">
+						
+						<div class="item">
+							<span class="color-muted">Creators</span>
+						</div>
+						
+					</div>
+					
+					<div class="flex wrap ml-big">
+						
+						<div class="item" ng-repeat="creator in mosaic.creators">
+							<a href="/creator/{{creator.name}}/" ng-class="{'color-enlightened': creator.faction == 'E', 'color-resistant': creator.faction == 'R'}">
+								{{creator.name}}
+							</a>
+						</div>
+						
+					</div>
 				</div>
-				
-			</div>
-			
-			<div class="flex">
-				
-				<div class="item">
-					<span class="color-muted">Creators</span>
-				</div>
-				
-			</div>
-			
-			<div class="flex wrap ml-big">
-				
-				<div class="item" ng-repeat="creator in mosaic.creators">
-					<a href="/creator/{{creator.name}}/" ng-class="{'color-enlightened': creator.faction == 'E', 'color-resistant': creator.faction == 'R'}">
-						{{creator.name}}
-					</a>
-				</div>
-				
-			</div>
 
+			</div>
 		</div>
 		
 		<div class="section">
