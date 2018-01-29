@@ -140,9 +140,9 @@
 		    			<div class="group-list">
 		    			<div class="group-list-item flex align-center pl-xl-none pr-xl-none" ng-repeat="mosaic in mosaics">
 		
-		    				<a class="item flex justify-center pl-xl-none" href="/mosaic/{{mosaic.ref}}" target="blank" style="width:125px; max-width:125px; max-height:102px; overflow-y:auto;" ng-class="{'pt-none pb-none pr-none':mosaic.missions.length > 30}">
+		    				<a class="item flex" href="/mosaic/{{mosaic.ref}}" target="blank" style="width:125px; max-width:125px; max-height:102px; overflow-y:auto;" ng-class="{'pt-none pb-none pr-none':mosaic.missions.length > 30}">
 		    					
-								<div class="flex wrap shrink justify-center" style="padding-right:calc((6 - {{mosaic.cols}}) * 16.666667%);">
+								<div class="flex wrap shrink" style="padding-right:calc((6 - {{mosaic.cols}}) * 16.666667%);">
 									
 						            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
 						            </div>
@@ -260,7 +260,7 @@
 		
 		    				<a class="item flex justify-center pl-xl-none" href="/mosaic/{{mosaic.ref}}" target="blank" style="width:125px; max-width:125px; max-height:102px; overflow-y:auto;" ng-class="{'pt-none pb-none pr-none':mosaic.missions.length > 30}">
 		    					
-								<div class="flex wrap shrink justify-center" style="padding-right:calc((6 - {{mosaic.cols}}) * 16.666667%);">
+								<div class="flex wrap shrink" style="padding-right:calc((6 - {{mosaic.cols}}) * 16.666667%);">
 									
 						            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
 						            </div>
@@ -319,7 +319,7 @@
 		
 		    				<a class="item flex justify-center pl-xl-none" href="/mosaic/{{mosaic.ref}}" target="blank" style="width:125px; max-width:125px; max-height:102px; overflow-y:auto;" ng-class="{'pt-none pb-none pr-none':mosaic.missions.length > 30}">
 		    					
-								<div class="flex wrap shrink justify-center" style="padding-right:calc((6 - {{mosaic.cols}}) * 16.666667%);">
+								<div class="flex wrap shrink" style="padding-right:calc((6 - {{mosaic.cols}}) * 16.666667%);">
 									
 						            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
 						            </div>
@@ -378,7 +378,7 @@
 		
 		    				<a class="item flex justify-center pl-xl-none" href="/mosaic/{{mosaic.ref}}" target="blank" style="width:125px; max-width:125px; max-height:102px; overflow-y:auto;" ng-class="{'pt-none pb-none pr-none':mosaic.missions.length > 30}">
 		    					
-								<div class="flex wrap shrink justify-center" style="padding-right:calc((6 - {{mosaic.cols}}) * 16.666667%);">
+								<div class="flex wrap shrink" style="padding-right:calc((6 - {{mosaic.cols}}) * 16.666667%);">
 									
 						            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
 						            </div>
