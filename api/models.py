@@ -40,7 +40,7 @@ class Profile(models.Model):
 	# Admin displaying
 	
 	def __str__(self):
-		return 'Profil: ' + self.user.username + ' - ' + str(self.user.mosaics.count())
+		return 'Profil: ' + self.user.username + ' - ' + str(self.user.mosaics.count()) + ' - ' + str(self.user.links.count())
 	   
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
