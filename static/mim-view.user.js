@@ -105,7 +105,7 @@ function wrapper(plugin_info) {
             var value = readCookie('auto_registration');
             if (value === 'false') window.plugin.mim_view.auto_registration = false;
 
-            updateCookie('auto_registration', auto_registration);
+            updateCookie('auto_registration', window.plugin.mim_view.auto_registration);
 
             $('#toolbox').append('<a tabindex="0" onclick="plugin.mim_view.open();">MIM View</a>');
 
@@ -149,16 +149,6 @@ function wrapper(plugin_info) {
             '';
 
             $('<style>').prop('type', 'text/css').html(css_string).appendTo('head');
-            
-    		if (window.useAndroidPanes()) {
-    		    
-    			this.mobilePane = document.createElement('div');
-    			this.mobilePane.className = 'mim-view-pane';
-    			
-    			var button = this.mobilePane.appendChild(document.createElement('button'));
-    			button.textContent = 'MIM View';
-    			button.addEventListener('click', function() { this.open(); }.bind(this), false);
-    		}
         },
 
         // Opening function
