@@ -3,7 +3,7 @@
 // @name           IITC plugin: MIM View
 // @category       Info
 // @author         Freddec ingress
-// @version        0.1
+// @version        0.2
 // @description    MIM View. Register missions to MIM site and display mosaics.
 // @namespace      https://www.myingressmosaics.com
 // @include        https://*.ingress.com/intel*
