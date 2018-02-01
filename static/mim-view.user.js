@@ -1,19 +1,23 @@
 // ==UserScript==
-// @id           myingressmosaics@freddec
-// @name         IITC plugin: MIM View
-// @updateURL    https://www.myingressmosaics.com/static/mim.view.user.js
-// @downloadURL  https://www.myingressmosaics.com/static/mim.view.user.js
-// @version      0.1
-// @description  Registering missions to MIM site. Showing mission paths on the map.
-// @include      https://*.ingress.com/intel*
-// @include      http://*.ingress.com/intel*
-// @match        https://*.ingress.com/intel*
-// @match        http://*.ingress.com/intel*
-// @include      https://*.ingress.com/mission/*
-// @include      http://*.ingress.com/mission/*
-// @match        https://*.ingress.com/mission/*
-// @match        http://*.ingress.com/mission/*
-// @grant        none
+// @id             iitc-plugin-myingressmosaics@freddec
+// @name           IITC plugin: MIM View
+// @category       Info
+// @author         Freddec ingress
+// @version        0.1
+// @description    MIM View. Register missions to MIM site and display mosaics.
+// @namespace      https://www.myingressmosaics.com
+// @include        https://*.ingress.com/intel*
+// @include        http://*.ingress.com/intel*
+// @match          https://*.ingress.com/intel*
+// @match          http://*.ingress.com/intel*
+// @include        https://*.ingress.com/mission/*
+// @include        http://*.ingress.com/mission/*
+// @match          https://*.ingress.com/mission/*
+// @match          http://*.ingress.com/mission/*
+// @downloadURL    https://www.myingressmosaics.com/static/mim-view.user.js
+// @updateURL      https://www.myingressmosaics.com/static/mim-view.user.js
+// @supportURL     https://plus.google.com/communities/104595846633880114608
+// @grant          none
 // ==/UserScript==
 
 function wrapper(plugin_info) {
