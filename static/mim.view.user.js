@@ -1,12 +1,10 @@
 // ==UserScript==
+// @id           myingressmosaics@freddec
 // @name         IITC plugin: MIM View
-// @category     Info
-// @namespace    https://www.myingressmosaics.com
 // @updateURL    https://www.myingressmosaics.com/static/mim.view.user.js
 // @downloadURL  https://www.myingressmosaics.com/static/mim.view.user.js
 // @version      0.1
 // @description  Registering missions to MIM site. Showing mission paths on the map.
-// @author       Freddec Ingress
 // @include      https://*.ingress.com/intel*
 // @include      http://*.ingress.com/intel*
 // @match        https://*.ingress.com/intel*
