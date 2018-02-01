@@ -149,6 +149,16 @@ function wrapper(plugin_info) {
             '';
 
             $('<style>').prop('type', 'text/css').html(css_string).appendTo('head');
+            
+    		if (window.useAndroidPanes()) {
+    		    
+    			this.mobilePane = document.createElement('div');
+    			this.mobilePane.className = 'mim-view-pane';
+    			
+    			var button = this.mobilePane.appendChild(document.createElement('button'));
+    			button.textContent = 'MIM View';
+    			button.addEventListener('click', function() { this.open(); }.bind(this), false);
+    		}
         },
 
         // Opening function
