@@ -154,20 +154,20 @@
 			<div class="row">
 				
 				<div class="item grow">
-					<select class="control" ng-model="city_id">
-						<option ng-repeat="city in cities" value="{{city.id}}">{{city.name}}</value>
+					<select class="control" ng-model="teleport_city_id">
+						<option ng-repeat="teleport_city in cities" value="{{teleport_city.id}}">{{teleport_city.name}}</value>
 					</select>
 				</div>
 				
 				<div class="item grow">
-					<select class="control" ng-model="region_id">
-						<option ng-repeat="region in regions" value="{{region.id}}">{{region.name}}</value>
+					<select class="control" ng-model="teleport_region_id">
+						<option ng-repeat="teleport_region in regions" value="{{teleport_region.id}}">{{teleport_region.name}}</value>
 					</select>
 				</div>
 				
 				<div class="item">
-					<button class="btn" ng-click="teleportCity(region_id, city_id);">
-						Merge
+					<button class="btn" ng-click="teleportCity(teleport_region_id, teleport_city_id);">
+						Teleport
 					</button>
 				</div>
 				
