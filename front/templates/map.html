@@ -25,7 +25,7 @@
 		
 		<div class="modal-container" ng-show="mosaic_list">
 			<div class="modal-box">
-				<div class="modal-content">
+				<div class="modal-content item">
 					
 					<div class="flex">
 						
@@ -39,6 +39,39 @@
 						
 					</div>
 					
+					<div class="item mt-big flex wrap">
+						<div class="width-6 width-xl-4" ng-repeat="mosaic in mosaics" style="padding: .75rem .375rem;">
+							<a class="item link-block flex-col" href="/mosaic/{{mosaic.ref}}" target="_blank" style="height:100%;">
+								
+			    				<div class="item">
+			    					
+			    					<span class="text-medium color-light block">{{mosaic.title}}</span>
+			
+			    					<span class="block text-small color-muted">
+										{{mosaic.missions.length}} missions
+			    					</span>
+			    					
+			    				</div>
+			    				
+			    				<div class="item grow">
+			    					
+									<div class="flex wrap shrink" style="padding-right:calc((6 - {{mosaic.cols}}) * 16.666667%);">
+										
+							            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+							            </div>
+							            
+							            <div ng-repeat="m in mosaic.missions | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+							                <img src="/static/img/mask.png" style="background-image:url({{m.image}}=s100);" />
+							            </div>
+							            
+						            </div>
+			    					
+			    				</div>
+			    				
+			 	   			</a>
+						</div>
+					</div>
+		
 				</div>
 			</div>
 		</div>
