@@ -14,6 +14,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 		var startZoom = 15;
 		
 		var style = [{featureType:"all",elementType:"all",stylers:[{visibility:"on"},{hue:"#131c1c"},{saturation:"-50"},{invert_lightness:!0}]},{featureType:"water",elementType:"all",stylers:[{visibility:"on"},{hue:"#005eff"},{invert_lightness:!0}]},{featureType:"poi",stylers:[{visibility:"off"}]},{featureType:"transit",elementType:"all",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels.icon",stylers:[{invert_lightness:!0}]}];
+		var styledMapType = new google.maps.StyledMapType(style, {name: 'Ingress Intel'});
 		
 		function geolocate() {
 		
@@ -95,7 +96,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 				
 				map = new google.maps.Map(document.getElementById('map'), {
 					
-					styles: style,
+					gestureHandling: 'greedy', 
 					zoomControl: true,
 					streetViewControl: true,
 					disableDefaultUI: true,
@@ -108,6 +109,9 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 					center: {lat: startLat, lng: startLng},
 					zoom: startZoom
 		        });
+		        
+		        map.mapTypes.set('Ingress Intel', styledMapType);
+		        map.setMapTypeId('Ingress Intel');
 		        
 				var imageMe = {
 				    scaledSize: new google.maps.Size(25, 25),
