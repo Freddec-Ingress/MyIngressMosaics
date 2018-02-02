@@ -1687,3 +1687,18 @@ def city_delete(request):
 	item.delete()
 	
 	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def city_teleport(request):
+	
+	region = Region.objects.get(pk=request.data['region_id'])
+	
+	city = City.objects.get(pk=request.data['city_id'])
+	city.region = region
+	city.save()
+	
+	return Response(None, status=status.HTTP_200_OK)

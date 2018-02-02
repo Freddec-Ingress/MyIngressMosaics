@@ -147,6 +147,34 @@
 			
 		</div>
 		
+		<div class="mt-normal p-normal pr-xl-none pl-xl-none" ng-show="cities.length > 0">
+			
+			<span class="block">Teleportation</span>
+			
+			<div class="row">
+				
+				<div class="item grow">
+					<select class="control" ng-model="city_id">
+						<option ng-repeat="city in cities" value="{{city.id}}">{{city.name}}</value>
+					</select>
+				</div>
+				
+				<div class="item grow">
+					<select class="control" ng-model="region_id">
+						<option ng-repeat="region in regions" value="{{region.id}}">{{region.name}}</value>
+					</select>
+				</div>
+				
+				<div class="item">
+					<button class="btn" ng-click="teleportCity(region_id, city_id);">
+						Merge
+					</button>
+				</div>
+				
+			</div>
+			
+		</div>
+		
 	</div>
 	
 {% endverbatim %}

@@ -3678,6 +3678,15 @@ angular.module('FrontModule.controllers').controller('AdmCityCtrl', function($sc
         });
 	}
 	
+	$scope.teleportCity = function(region_id, city_id) {
+	    
+        var data = { 'region_id':region_id, 'city_id':city_id };
+        API.sendRequest('/api/city/teleport/', 'POST', {}, data).then(function(response) {
+            
+            $scope.refreshRegion();
+        });
+	}
+	
 	/* Page loading */
 	
     var input = document.getElementById('city_input');
