@@ -34,19 +34,14 @@
 	    		</div>
 				
 				<span class="mt-big text-big color-light">{{region.name}}</span>
-	    		
+				<span class="color-dark">{{region.mosaic_count}} mosaics</span>
+
 			</div>
 			
 		</div>
 		
 		<div class="section">
     		
-    		<span class="item pb-none color-normal">{{city_count}} cities with mosaics</span>
-    		
-			<div class="item">
-				<hr>
-			</div>
-			
 			<div class="flex">
 				
 				<div class="grow flex width-12 wrap">
@@ -65,10 +60,10 @@
 
 		<div class="section" ng-repeat="city in current_index.cities | reverse">
 			
-			<div class="item pb-none color-normal">
+			<div class="item flex-col pb-none color-normal">
 				<a class="mr-normal" href="/world/{{region.country.name}}/{{region.name}}/{{city.name}}">{{city.name}}</a>
 				<span class="color-dark mr-normal" ng-show="city.locale">{{city.locale}}</span>
-				<span class="color-muted">{{city.mosaics.length}}</span>
+				<span class="text-small color-muted">{{city.mosaics.length}} mosaics</span>
 			</div>
 			
 			<div class="item">
