@@ -26,39 +26,25 @@
 
 		<div class="section">
 			
-			<div class="item flex-col justify-center align-center">
+			<div class="item flex-col">
    			
-	   			<span class="text-big color-light text-center">{{country.name}}</span>
-				
-	    		<div class="flex justify-center align-center">
-					<span class="color-normal">{{count}} mosaics</a>
-	    		</div>
-    			
+	   			<span class="text-big color-light">{{country.name}}</span>
+				<span class="color-dark">{{count}} mosaics</span>
+
 			</div>
 			
 		</div>
 		
 		<div class="section">
 			
-			<span class="item pb-none color-normal">{{regions.length}} regions with mosaics</span>
-		
-			<div class="item">
-				<hr>
-			</div>
-		
 			<div class="flex wrap">
 				<div class="width-12 width-xl-4 item" ng-repeat="region in regions">
-					<a class="item link-block flex align-center" href="/world/{{country.name}}/{{region.name}}">
+					<a class="item link-block flex-col" href="/world/{{country.name}}/{{region.name}}" style="height:100%;">
 					
-						<div class="item grow">
-							<span class="block color-light text-medium">{{region.name}}</span>
-							<span class="block color-dark text-small" ng-show="region.locale">{{region.locale}}</span>
-						</div>
-		
-						<div class="item flex-col align-center justify-center">
-							<span class="color-normal">{{region.mosaics|number}}</span>
-						</div>
-						
+						<span class="color-light text-medium">{{region.name}}</span>
+						<span class="color-dark text-small" ng-show="region.locale">{{region.locale}}</span>
+						<span class="color-normal pt-normal">{{region.mosaics|number}} mosaics</span>
+
 					</a>
 				</div>
 			</div>
