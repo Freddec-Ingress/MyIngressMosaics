@@ -23,6 +23,26 @@
 	
 	<div class="container" ng-class="{'active':loaded}" style="flex:1 1 100%; max-width:100%">
 		
+		<div class="modal-container" ng-show="mosaic_list">
+			<div class="modal-box">
+				<div class="modal-content">
+					
+					<div class="flex">
+						
+						<span class="item grow">
+							List of mosaics displayed on the map
+						</span>
+						
+						<span class="item close" ng-click="closeMosaicList();">
+							<i class="fa fa-times"></i>
+						</span>
+						
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
 		<div class="item pb-none flex justify-center">
 			
 			<form class="grow flex align-center" style="z-index:5;max-width:720px;">
@@ -61,7 +81,9 @@
 			</div>
 			
 			<div ng-show="!flag_no_mosaic && !flag_loading" class="item">
-				{{mosaics.length}} mosaics
+				<a ng-click="openMosaicList();">
+					{{mosaics.length}} mosaics
+				</a>
 			</div>
 			
 		</div>

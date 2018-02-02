@@ -3017,6 +3017,13 @@ angular.module('FrontModule.controllers').controller('NewLoginCtrl', function($s
 });
 angular.module('FrontModule.controllers').controller('NewMapCtrl', function($scope, $window, $compile, API) {
 	
+	/* Mosaic list management */
+	
+	$scope.mosaic_list = false;
+	
+	$scope.openMosaicList = function() { $scope.mosaic_list = true; }
+	$scope.closeMosaicList = function() { $scope.mosaic_list = false; }
+	
 	/* Map management */
 
 	$scope.mosaics = [];
