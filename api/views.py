@@ -150,18 +150,18 @@ def user_google(request):
 	email = userInfo['email']
 	
 	try:
-		user = User.objects.get(username=name, email=email)
+		user = User.objects.get((Q(username=name) | Q(username=userInfo['name'])) & Q(email=email))
 	
 	except User.DoesNotExist:
 	
 		try:
 			user = User.objects.create_user(name, email, 'password')
-			user.first_name = name
-		
+
 		except:
-			user = User.objects.create_user(userInfo['name'], email, 'password')
-			user.first_name = userInfo['name']
+			name = userInfo['name']
+			user = User.objects.create_user(name, email, 'password')
 			
+		user.first_name = name
 		user.last_name = userInfo['family_name']
 		user.save()
 		
