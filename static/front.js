@@ -3112,6 +3112,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 				
 				map = new google.maps.Map(document.getElementById('map'), {
 					
+					styles: style,
 					zoomControl: true,
 					streetViewControl: true,
 					disableDefaultUI: true,
@@ -3120,11 +3121,6 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 					mapTypeControlOptions: {
 						style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
 	                    mapTypeIds: [google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN, 'Ingress Intel'],
-					},
-					styledmaptype:{
-						id: 'Ingress Intel',
-						options: { name: 'Ingress Intel' },
-						styles: style
 					},
 					center: {lat: startLat, lng: startLng},
 					zoom: startZoom
