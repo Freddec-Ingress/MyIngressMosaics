@@ -3112,7 +3112,12 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 					
 					styles : style,
 					zoomControl: true,
+					streetViewControl: true,
 					disableDefaultUI: true,
+					mapTypeControl: true,
+					mapTypeControlOptions: {
+						style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+					},
 					center: {lat: startLat, lng: startLng},
 					zoom: startZoom
 		        });
