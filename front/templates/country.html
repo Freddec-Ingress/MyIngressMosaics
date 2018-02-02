@@ -28,7 +28,11 @@
 			
 			<div class="item flex-col">
    			
-	   			<span class="text-big color-light">{{country.name}}</span>
+	   			<div>
+	   				<span class="flag-icon flag-icon-{{country.code}}" style="width:1.5rem; line-height:2rem;"></span>
+		   			<span class="text-big color-light">{{country.name}}</span>
+		   		</div>
+		   		
 				<span class="color-dark">{{count}} mosaics</span>
 
 			</div>
@@ -38,7 +42,7 @@
 		<div class="section">
 			
 			<div class="flex wrap">
-				<div class="width-12 width-xl-4 item" ng-repeat="region in regions">
+				<div class="width-6 width-xl-4 item" ng-repeat="region in regions">
 					<a class="item link-block flex-col" href="/world/{{country.name}}/{{region.name}}" style="height:100%;">
 					
 						<span class="color-light text-medium">{{region.name}}</span>
