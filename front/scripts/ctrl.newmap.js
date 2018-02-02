@@ -91,15 +91,23 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 				var startLat = position.coords.latitude;
 				var startLng = position.coords.longitude;
 				
+				var mapType = 'Ingress Intel';
+				
 				map = new google.maps.Map(document.getElementById('map'), {
 					
-					styles : style,
 					zoomControl: true,
 					streetViewControl: true,
 					disableDefaultUI: true,
+					mapTypeId: mapType,
 					mapTypeControl: true,
 					mapTypeControlOptions: {
-						style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+						style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+	                    mapTypeIds: [google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN, 'Ingress Intel'],
+					},
+					styledmaptype:{
+						id: 'Ingress Intel',
+						options: { name: 'Ingress Intel' },
+						styles: style
 					},
 					center: {lat: startLat, lng: startLng},
 					zoom: startZoom
