@@ -154,8 +154,14 @@ def user_google(request):
 	
 	except User.DoesNotExist:
 	
-		user = User.objects.create_user(name, email, 'password')
-		user.first_name = name
+		try:
+			user = User.objects.create_user(name, email, 'password')
+			user.first_name = name
+		
+		except:
+			user = User.objects.create_user(userInfo['name'], email, 'password')
+			user.first_name = userInfo['name']
+			
 		user.last_name = userInfo['family_name']
 		user.save()
 		
