@@ -961,7 +961,7 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 	
 		city_data = { 'name':city_obj.name, 'locale':city_obj.locale, 'mosaics': [] }
 		
-		mosaics = city_obj.mosaics.all().annotate(Count('missions')).order_by('missions__count', 'title')
+		mosaics = city_obj.mosaics.all().annotate(Count('missions')).order_by('-missions__count', 'title')
 		for mosaic_obj in mosaics:
 			
 			mosaic_data = mosaic_obj.overviewSerialize()

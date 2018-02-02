@@ -2917,8 +2917,8 @@ angular.module('FrontModule.controllers').controller('NewSearchCtrl', function($
 			
 			$scope.mosaics.sort(function(a, b) {
 				
-				if (a.missions.length > b.missions.length) return 1;
-				if (a.missions.length < b.missions.length) return -1;
+				if (a.missions.length > b.missions.length) return -1;
+				if (a.missions.length < b.missions.length) return 1;
 				
 				return 0;
 			});
@@ -3491,8 +3491,8 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 			
 			$scope.mosaics.sort(function(a, b) {
 				
-				if (a.missions.length > b.missions.length) return 1;
-				if (a.missions.length < b.missions.length) return -1;
+				if (a.missions.length > b.missions.length) return -1;
+				if (a.missions.length < b.missions.length) return 1;
 				
 				return 0;
 			});
