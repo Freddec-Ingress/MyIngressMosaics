@@ -3,7 +3,7 @@
 // @name           IITC plugin: MIM View
 // @category       Info
 // @author         Freddec ingress
-// @version        0.2
+// @version        0.3
 // @description    MIM View. Register missions to MIM site and display mosaics.
 // @namespace      https://www.myingressmosaics.com
 // @include        https://*.ingress.com/intel*
@@ -124,11 +124,11 @@ function wrapper(plugin_info) {
 
                 '.grow { flex-grow:1; }' +
 
-                '.inner { padding:.375rem; }' +
+                '.inner { padding:.25rem; }' +
 
                 '.no-padding-bottom { padding-bottom:0!important; }' +
 
-                '.outer { margin:.375rem; }' +
+                '.outer { margin:.125rem; }' +
 
                 '.bg-dark { background-color:rgba(0, 0, 0, 0.3); }' +
 
@@ -142,22 +142,29 @@ function wrapper(plugin_info) {
                 '.c-warning { color:#ffc107; }' +
                 '.c-secondary { color:#6c757d; }' +
 
-                '.btn { padding:.375rem!important; border-radius:.375rem; cursor:pointer; text-align:center; background-color:rgba(8, 48, 78, 0.9); }' +
+                '.btn { padding:.125rem .25rem!important; border-radius:.375rem; cursor:pointer; text-align:center; background-color:rgba(8, 48, 78, 0.9); font-size:12px; font-family: "Roboto", "Helvetica Neue", Helvetica, sans-serif; }' +
                 '.btn:disabled { color:#6c757d!important; border-color:#6c757d!important; }' +
 
                 '.btn-secondary { border-color:#6c757d!important; color:#bbbbbb!important; }' +
             '';
 
             $('<style>').prop('type', 'text/css').html(css_string).appendTo('head');
+
+            window.addHook('mapDataRefreshStart', this.refresh.bind(this));
+        },
+
+        // Refreshing function
+        refresh: function() {
+
+            var bounds = window.map.getBounds();
+            window.plugin.mim_view.loadMissions(bounds);
         },
 
         // Opening function
         open: function() {
 
             window.plugin.mim_view.showDialog();
-
-            var bounds = window.map.getBounds();
-            window.plugin.mim_view.loadMissions(bounds);
+            window.plugin.mim_view.refresh();
         },
 
         // Loading missions function
@@ -207,7 +214,7 @@ function wrapper(plugin_info) {
 
                     block_refresh.hide();
 
-                    block_list = document.getElementById('mim-view-list');
+                    var temp = [];
 
                     response.data.forEach(function(mission) {
 
@@ -223,12 +230,12 @@ function wrapper(plugin_info) {
 
                                 case 'completed':
                                     m_data.mosaic_ref = mission.mosaicref;
-                                    m_data.mim_status = 'Registered with mosaic';
+                                    m_data.mim_status = 'In Mosaic';
                                     break;
 
                                 case 'incomplete':
                                     m_data.mosaic_ref = mission.mosaicref;
-                                    m_data.mim_status = 'Registered with incomplete mosaic';
+                                    m_data.mim_status = 'In Incomplete';
                                     break;
 
                                 case 'registered':
@@ -236,9 +243,22 @@ function wrapper(plugin_info) {
                                     m_data.mim_status = 'Registered';
                                     break;
                             }
-                        }
 
-                        block_list.appendChild(window.plugin.mim_view.renderMission(m_data));
+                            temp.push(m_data);
+                        }
+                    });
+
+                    temp.sort(function(a, b) {
+                        if (a.name > b.name) return 1;
+                        if (a.name < b.name) return -1;
+                        return 0;
+                    });
+
+                    block_list.empty();
+
+                    var obj_block_list = document.getElementById('mim-view-list');
+                    temp.forEach(function(mission) {
+                        obj_block_list.appendChild(window.plugin.mim_view.renderMission(mission));
                     });
 
                     if (window.plugin.mim_view.auto_registration) window.plugin.mim_view.registerAllMissions();
@@ -255,10 +275,7 @@ function wrapper(plugin_info) {
                 title: 'MIM View',
                 width: '300px',
                 height: 'auto',
-                buttons: [{text:'Refresh', classes: { 'ui-button': 'btn' }, click:function() {
-                    var bounds = window.map.getBounds();
-                    window.plugin.mim_view.loadMissions(bounds);
-                }}],
+                buttons: null,
             });
         },
 
@@ -269,10 +286,10 @@ function wrapper(plugin_info) {
             container.id = 'mim-view';
 
             var block1 = container.appendChild(document.createElement('div'));
-            block1.className = 'flex-row inner no-padding-bottom';
+            block1.className = 'flex-row align-center inner';
 
             var item_auto_register = block1.appendChild(document.createElement('div'));
-            item_auto_register.className = 'inner grow';
+            item_auto_register.className = 'flex-row align-center inner grow';
 
             var m_check = item_auto_register.appendChild(document.createElement('input'));
             m_check.id = 'auto-reg-check';
@@ -326,57 +343,63 @@ function wrapper(plugin_info) {
             var block2 = container.appendChild(document.createElement('div'));
             block2.className = 'flex-col inner grow';
 
-            var m_title = block2.appendChild(document.createElement('span'));
-            m_title.className = 'text-big';
+            var line1 = block2.appendChild(document.createElement('div'));
+            line1.className = 'flex-row';
+
+            var m_title = line1.appendChild(document.createElement('span'));
             m_title.textContent = mission.title;
 
-            var m_status = block2.appendChild(document.createElement('span'));
+            var line2 = block2.appendChild(document.createElement('div'));
+            line2.className = 'flex-row align-center';
+            line2.style.margin = '5px 0 0 0';
+
+            var m_status = line2.appendChild(document.createElement('span'));
             m_status.id = 'mim_status_' + mission.guid;
-            m_status.className = 'text-small';
+            m_status.className = 'grow text-small';
             m_status.textContent = mission.mim_status;
 
             switch (mission.mim_status) {
 
                 case 'Registered': m_status.className += ' c-secondary'; break;
                 case 'Not Registered': m_status.className += ' c-danger'; break;
-                case 'Registered with mosaic': m_status.className += ' c-success'; break;
-                case 'Registered with incomplete mosaic': m_status.className += ' c-warning'; break;
+                case 'In Mosaic': m_status.className += ' c-success'; break;
+                case 'In Incomplete': m_status.className += ' c-warning'; break;
             }
-
-            var block3 = container.appendChild(document.createElement('div'));
-            block3.className = 'flex-col justify-center align-stretch inner';
-            block3.style.width = '65px';
 
             switch (mission.mim_status) {
 
                 case 'Registered':
-                    var m_button = block3.appendChild(document.createElement('button'));
+                    var m_button = line2.appendChild(document.createElement('button'));
                     m_button.id = 'mim_btn_' + mission.guid;
                     m_button.textContent += 'Update';
+                    m_button.style.width = '65px';
                     m_button.className = 'btn btn-secondary';
                     m_button.addEventListener('click', function() {window.plugin.mim_view.updateMission(mission);});
                     break;
 
                 case 'Not Registered':
-                    var m_button = block3.appendChild(document.createElement('button'));
+                    var m_button = line2.appendChild(document.createElement('button'));
                     m_button.id = 'mim_btn_' + mission.guid;
                     m_button.textContent += 'Register';
+                    m_button.style.width = '65px';
                     m_button.className = 'btn';
                     m_button.addEventListener('click', function() {window.plugin.mim_view.registerMission(mission);});
                     break;
 
-                case 'Registered with mosaic':
-                    var m_link = block3.appendChild(document.createElement('a'));
+                case 'In Mosaic':
+                    var m_link = line2.appendChild(document.createElement('a'));
                     m_link.textContent += 'MIM Link';
                     m_link.className = 'btn';
+                    m_link.style.width = '57px';
                     m_link.href = 'https://www.myingressmosaics.com/mosaic/' + mission.mosaic_ref;
                     m_link.target = '_blank';
                     break;
 
-                case 'Registered with incomplete mosaic':
-                    var m_link = block3.appendChild(document.createElement('a'));
+                case 'In Incomplete':
+                    var m_link = line2.appendChild(document.createElement('a'));
                     m_link.textContent += 'MIM Link';
                     m_link.className = 'btn';
+                    m_link.style.width = '57px';
                     m_link.href = 'https://www.myingressmosaics.com/mosaic/' + mission.mosaic_ref;
                     m_link.target = '_blank';
                     break;
@@ -389,7 +412,7 @@ function wrapper(plugin_info) {
 
             var m_status = document.getElementById('mim_status_' + mission.guid);
             m_status.textContent = 'Refreshing...';
-            m_status.className = 'text-small c-warning';
+            m_status.className = 'grow text-small c-warning';
 
             var m_button = document.getElementById('mim_btn_' + mission.guid);
             m_button.disabled = true;
@@ -402,7 +425,7 @@ function wrapper(plugin_info) {
                 window.plugin.mim_view.sendMIMRequest('ext_register/', response.result, function(response) {
 
                     m_status.textContent = 'Updated';
-                    m_status.className = 'text-small c-secondary';
+                    m_status.className = 'grow text-small c-secondary';
 
                     m_button.disabled = false;
                 });
@@ -413,7 +436,7 @@ function wrapper(plugin_info) {
 
             var m_status = document.getElementById('mim_status_' + mission.guid);
             m_status.textContent = 'Refreshing...';
-            m_status.className = 'text-small c-warning';
+            m_status.className = 'grow text-small c-warning';
 
             var m_button = document.getElementById('mim_btn_' + mission.guid);
             m_button.disabled = true;
@@ -426,7 +449,7 @@ function wrapper(plugin_info) {
                 window.plugin.mim_view.sendMIMRequest('ext_register/', response.result, function(response) {
 
                     m_status.textContent = 'Registered';
-                    m_status.className = 'text-small c-secondary';
+                    m_status.className = 'grow text-small c-secondary';
 
                     m_button.disabled = false;
                     m_button.textContent = 'Update';
