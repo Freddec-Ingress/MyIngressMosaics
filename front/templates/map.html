@@ -39,7 +39,7 @@
 						
 					</div>
 					
-					<div class="flex" style="max-height:100%;">
+					<div class="flex-col grow" style="height:auto; overflow-y:auto;">
 						<div class="flex wrap" style="overflow-y:auto;">
 						<div class="width-6 width-xl-4" ng-repeat="mosaic in mosaics" style="padding: .75rem .375rem;">
 							<a class="item link-block flex-col" href="/mosaic/{{mosaic.ref}}" target="_blank" style="height:100%;">
@@ -116,7 +116,7 @@
 			</div>
 			
 			<div ng-show="!flag_no_mosaic && !flag_loading">
-				<a class="flex" ng-click="openMosaicList();">
+				<a class="flex align-center" ng-click="openMosaicList();">
 					<i class="item fa fa-list-alt"></i>
 					<span class="item">{{mosaics.length}} mosaics</span>
 				</a>
