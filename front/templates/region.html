@@ -61,15 +61,13 @@
 		<div class="section" ng-repeat="city in current_index.cities | reverse">
 			
 			<div class="item flex-col pb-none color-normal">
-				<a class="mr-normal" href="/world/{{region.country.name}}/{{region.name}}/{{city.name}}">{{city.name}}</a>
-				<span class="color-dark mr-normal" ng-show="city.locale">{{city.locale}}</span>
+				<div>
+					<a class="text-medium mr-normal" href="/world/{{region.country.name}}/{{region.name}}/{{city.name}}">{{city.name}}</a>
+					<span class="color-dark" ng-show="city.locale">{{city.locale}}</span>
+				</div>
 				<span class="text-small color-muted">{{city.mosaics.length}} mosaics</span>
 			</div>
-			
-			<div class="item">
-				<hr>
-			</div>
-			
+
 			<div class="flex wrap">
 				<div class="width-6 width-xl-4" ng-repeat="mosaic in city.mosaics" style="padding: .75rem .375rem;">
 					<a class="item link-block flex-col" href="/mosaic/{{mosaic.ref}}" target="_blank" style="height:100%;">
