@@ -46,8 +46,13 @@
 					<a class="item link-block flex-col" href="/world/{{country.name}}/{{region.name}}" style="height:100%;">
 					
 						<span class="color-light text-medium">{{region.name}}</span>
-						<span class="color-dark text-small" ng-show="region.locale">{{region.locale}}</span>
-						<span class="color-normal pt-normal">{{region.mosaics|number}} mosaics</span>
+						
+						<div class="flex align-center">
+							<div class="grow">
+								<span class="color-dark text-small" ng-show="region.locale">{{region.locale}}</span>
+							</div>
+							<span class="color-normal pt-normal">{{region.mosaics|number}}</span>
+						</div>
 
 					</a>
 				</div>
