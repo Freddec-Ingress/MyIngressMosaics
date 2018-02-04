@@ -256,12 +256,28 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 			
 			$scope.offset = new Array(temp);
 			
+			$scope.mosaic.real_portals = 0;
+			
+			var temp = [];
+			
 			var index = 0;
 			for (var mission of $scope.mosaic.missions) {
 				
 				index += 1;
 				mission.order = index;
+				
+				for (var portal of mission.portals) {
+					if (portal.type == 'portal') {
+						portals += 1;
+						
+						if (temp.indexOf(portal.guid) == -1) {
+							temp.push(portal.guid);
+						}
+					}
+				}
 			}
+			
+			$scope.mosaic.uniques = temp.length;
 			
 			$scope.initMap();
 			
