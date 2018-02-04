@@ -268,7 +268,7 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 				
 				for (var portal of mission.portals) {
 					if (portal.type == 'portal') {
-						portals += 1;
+						$scope.mosaic.real_portals += 1;
 						
 						if (temp.indexOf(portal.guid) == -1) {
 							temp.push(portal.guid);
