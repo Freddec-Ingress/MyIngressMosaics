@@ -150,27 +150,33 @@ def user_google(request):
 	email = userInfo['email']
 	
 	try:
-		user = User.objects.get((Q(username=name) | Q(username=userInfo['name'])) & Q(email=email))
-	
+		user = User.objects.get(username=name, email=email)
+		
 	except User.DoesNotExist:
-	
+		
+		name = userInfo['name']
+		
 		try:
-			user = User.objects.create_user(name, email, 'password')
-
-		except:
-			name = userInfo['name']
-			user = User.objects.create_user(name, email, 'password')
+			user = User.objects.get(username=name, email=email)
+	
+		except User.DoesNotExist:
+		
+			try:
+				user = User.objects.create_user(name, email, 'password')
+	
+			except:
+				user = User.objects.create_user(name, email, 'password')
+				
+			user.first_name = name
+			user.last_name = userInfo['family_name']
+			user.save()
 			
-		user.first_name = name
-		user.last_name = userInfo['family_name']
-		user.save()
-		
-		user.profile.family_name = userInfo['family_name']
-		user.profile.picture = userInfo['picture']
-		user.profile.locale = userInfo['locale']
-		user.profile.save()
-		
-		Token.objects.get_or_create(user=user)
+			user.profile.family_name = userInfo['family_name']
+			user.profile.picture = userInfo['picture']
+			user.profile.locale = userInfo['locale']
+			user.profile.save()
+			
+			Token.objects.get_or_create(user=user)
 	
 	user = authenticate(username=name, password='password')
 

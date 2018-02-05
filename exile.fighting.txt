@@ -1,0 +1,21 @@
+Pour chaque flotte en combat { // fleet in fight.fleets
+    Calcul des cibles adverses {
+        Pour chaque type de vaisseau { // ship_type in data.ship_types
+            Pour chaque flotte adverse { // ennemy in fleet.ennemies
+                on compte le nombre de vaisseaux // fleet.targets.add(ennemy, ship_type, ennemy.ships[ship_type].count)
+            }
+        }
+    }
+}
+
+Tant qu'il reste au moins 2 flottes en combat ou que le nombre de rounds est inférieur à 100 { // fight.fighting_fleets.length > 1 or fight.rounds < 100
+    Pour chaque flotte en combat { // fleet in fight.fighting_fleets
+        Calcul du tir {
+            Pour chaque type de vaisseau de la flotte en combat { // ship in fleet.ships
+                on calcul le tir // shot = weapon * fire * ship.count
+            }
+        }
+        Répartition des dégats {}
+    }
+    Mise à jour des flottes en combat {}
+}
