@@ -146,25 +146,26 @@ def user_google(request):
 	userInfo = response.json()
 	print(userInfo)
 	
-	name = userInfo['given_name']
 	email = userInfo['email']
 	
 	try:
+		name = userInfo['given_name']
 		user = User.objects.get(username=name, email=email)
 		
 	except User.DoesNotExist:
 		
-		name = userInfo['name']
-		
 		try:
+			name = userInfo['name']
 			user = User.objects.get(username=name, email=email)
 	
 		except User.DoesNotExist:
 		
 			try:
+				name = userInfo['given_name']
 				user = User.objects.create_user(name, email, 'password')
 	
 			except:
+				name = userInfo['name']
 				user = User.objects.create_user(name, email, 'password')
 				
 			user.first_name = name
