@@ -3796,9 +3796,9 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 	
 						$scope.$apply();
 					}
-					
-					potential.refreshing_missions = false;
 				}
+				
+				potential.refreshing_missions = false;
 			});
 		});
 		
