@@ -1380,6 +1380,12 @@ def potential_detect(request):
 				'name': item[fieldname],
 				'count': item['count'],
 				'creator': item['creator'],
+				
+				'default':None,
+				
+				'city':None,
+				'region': None,
+				'country': None,
 			}
 			
 			data.append(obj)
