@@ -2867,6 +2867,14 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 				}
 			}
 
+			country_names.sort(function(a, b) {
+				
+				if (a > b) return 1;
+				if (a < b) return -1;
+				
+				return 0;
+			});
+
 			$scope.countries = [];
 			
 			for (var item of country_names) {
