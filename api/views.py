@@ -1353,7 +1353,7 @@ def potential_getAll(request):
 	potentials = Potential.objects.all()
 	for potential in potentials:
 		
-		count = Mission.objects.filter(mosaic__isnull=True, validated=True, name=potential.title).count()
+		count = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=True, name=potential.title).count()
 		if count < 1:
 		
 			potential.delete()
