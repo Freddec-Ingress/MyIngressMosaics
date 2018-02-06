@@ -1355,13 +1355,13 @@ def potential_getAll(request):
 		
 		count = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=True, name=potential.title).count()
 		if count < 1:
-		
 			potential.delete()
 		
 		else:
 			
 			if not potential.country:
 				potential.country = potential.city.region.country
+				potential.save()
 
 	countries = Country.objects.all().order_by('name')
 	for country in countries:
