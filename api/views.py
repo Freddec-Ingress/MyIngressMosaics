@@ -1362,7 +1362,7 @@ def potential_getAll(request):
 			
 			for potential in country.potentials.order_by('city', 'count', 'title'):
 				
-				obj.append({
+				obj['potentials'].append({
 					'city': potential.city.serialize(),
 					'title': potential.title,
 					'count': potential.count,
