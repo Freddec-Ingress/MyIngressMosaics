@@ -1360,11 +1360,22 @@ def potential_getAll(request):
 		
 		else:
 			
-			obj = {
-				'city': potential.city.serialize(),
-				'title': potential.title,
-				'count': potential.count,
-			}
+			if not potential.country:
+				potential.country = potential.city.region.country
+
+	countries = Country.objects.all().order_by('name')
+	for country in countries:
+		if country.potentials.count() > 0:
+			
+			obj = { 'name':country.name, 'potentials':[], 'open':true, }
+			
+			for potential in country.potentials.order_by('city', 'count', 'title'):
+				
+				obj.append({
+					'city': potential.city.serialize(),
+					'title': potential.title,
+					'count': potential.count,
+				})
 			
 			data.append(obj)
 
