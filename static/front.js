@@ -3793,12 +3793,12 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 						if (admin2) potential.default += ', ' + admin2;
 						if (admin1) potential.default += ', ' + admin1;
 						if (country) potential.default += ', ' + country;
+			
+						potential.refreshing_missions = false;
 	
 						$scope.$apply();
 					}
 				}
-				
-				potential.refreshing_missions = false;
 			});
 		});
 		
