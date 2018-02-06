@@ -173,10 +173,10 @@
 
 				<div class="section" ng-if="!refreshing && !missions">
 					
-					<div ng-if="potential_state=='searching'" class="item flex justify-center align-center">
+					<div ng-if="potential_state=='searching'" class="item flex align-center">
 						
 						<i class="item fa fa-spinner rotating"></i>
-						<span class="item">Detecting potential mosaics...</span>
+						<span class="item color-dark">Detecting potential mosaics...</span>
 
 					</div>
 
@@ -204,7 +204,7 @@
 								
 								<div class="flex wrap" ng-show="country.open">
 									<div class="width-12 width-xl-4 item" ng-repeat="potential in country.potentials">
-										<a class="item link-block flex-col" href="/registration/{{potential.title}}">
+										<a class="item link-block flex-col pt-none pb-none" href="/registration/{{potential.title}}">
 											
 											<div class="flex-col">
 												
