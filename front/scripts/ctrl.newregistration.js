@@ -297,6 +297,8 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 			$scope.region_name = $scope.potential.city.region.name;
 			$scope.country_name = $scope.potential.city.region.country.name;
 			
+			$scope.mosaic_city = $scope.city_name + ', ' + $scope.region_name + ', ' + $scope.country_name;
+			
 		} else {
 			
 			$scope.city_name = '';
