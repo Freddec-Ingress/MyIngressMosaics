@@ -1109,6 +1109,9 @@ def data_newSearchForMissions(request):
 
 	results = Potential.objects.filter(title=request.data['text'])
 	if (results.count() > 0):
+		
+		potential = results[0]
+		
 		data['potential'] = {
 			'city': potential.city.serialize(),
 			'title': potential.title,
