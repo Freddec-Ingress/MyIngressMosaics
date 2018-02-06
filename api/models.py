@@ -766,6 +766,7 @@ class Potential(models.Model):
 	count = models.IntegerField()
 	
 	city = models.ForeignKey(City, related_name='potentials')
+	country = models.ForeignKey(Country, related_name='potentials', null=True, blank=True)
 	
 	# Admin displaying
 	def __str__(self):
