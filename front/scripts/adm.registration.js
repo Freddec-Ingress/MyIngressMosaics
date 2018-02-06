@@ -2,8 +2,8 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 	
 	$scope.exclude_by_name = function(name) {
 		
-		var data = { 'name':name};
-		API.sendRequest('/api/adm/potential/exclude', 'POST', {}, data);
+		var data = { 'name':name };
+		API.sendRequest('/api/potential/exclude/', 'POST', {}, data);
 	}
 	
 	/* Potential management */
@@ -36,9 +36,6 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		
 		var index = potential.missions.indexOf(mission);
 		potential.missions.splice(index, 1);
-		
-		var data = { 'ref':mission.ref};
-		API.sendRequest('/api/adm/mission/exclude', 'POST', {}, data);
 	}
 	
 	$scope.exclude = function(potential) {
@@ -46,8 +43,8 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		var index = $scope.potentials.indexOf(potential);
 		$scope.potentials.splice(index, 1);
 		
-		var data = { 'name':potential.name};
-		API.sendRequest('/api/adm/potential/exclude', 'POST', {}, data);
+		var data = { 'name':potential.name };
+		API.sendRequest('/api/potential/exclude/', 'POST', {}, data);
 	}
 
 	$scope.rename = function(potential, new_name) {
@@ -56,7 +53,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		for (var mission of potential.missions) refs.push(mission.ref);
 		
 		var data = { 'refs':refs, 'new_name':new_name };
-		API.sendRequest('/api/adm/potential/rename', 'POST', {}, data).then(function(response) {
+		API.sendRequest('/api/potential/rename/', 'POST', {}, data).then(function(response) {
 			
 			potential.name = new_name;
 			
@@ -73,12 +70,10 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		for (var mission of potential.missions) refs.push(mission.ref);
 		
 		var data = { 'refs':refs, 'new_name':new_name };
-		API.sendRequest('/api/adm/potential/rename', 'POST', {}, data).then(function(response) {
+		API.sendRequest('/api/potential/rename/', 'POST', {}, data).then(function(response) {
 			
-			potential.name = new_name;
-			
-			var data = { 'refs':refs};
-			API.sendRequest('/api/adm/potential/validate', 'POST', {}, data);
+			var data = { 'refs':refs };
+			API.sendRequest('/api/potential/validate/', 'POST', {}, data);
 		});
 	}
 	
@@ -94,7 +89,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		
 		$scope.potentials = [];
 		
-		API.sendRequest('/api/potentials/tovalidate/', 'POST').then(function(response) {
+		API.sendRequest('/api/potential/detect/', 'POST').then(function(response) {
 		
 			$scope.potentials = response;
 			

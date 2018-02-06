@@ -191,16 +191,25 @@
 							
 							<div class="flex wrap">
 								<div class="width-12 width-xl-4 item" ng-repeat="potential in potentials">
-									<a class="item link-block flex align-center" href="/registration/{{potential.name}}">
+									<a class="item link-block flex-col" href="/registration/{{potential.title}}">
 										
-										<div class="item grow ellipsis">
-											<span>{{potential.name}}</span>
+										<div class="flex align-center">
+											
+											<div class="item grow ellipsis">
+												<span>{{potential.title}}</span>
+											</div>
+											
+											<div class="item">
+												<span class="text-small color-dark">{{potential.count}}</span>
+											</div>
+											
 										</div>
 										
-										<div class="item">
-											<span class="text-small color-dark">{{potential.count}}</span>
-										</div>
-										
+				    					<div class="text-small color-dark">
+											<span class=" mr-small flag-icon flag-icon-{{potential.city.region.country.code}}"></span>
+											<span>{{potential.city.name}}</span>
+				    					</div>
+				    					
 									</a>
 								</div>
 							</div>

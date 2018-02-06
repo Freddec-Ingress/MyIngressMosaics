@@ -41,7 +41,6 @@ urlpatterns = [
 	url(r'^mission/details/',		mission_details),
 	url(r'^mission/delete/',		mission_delete),
 	url(r'^mission/order/',			mission_order),
-	url(r'^mission/exclude/',		mission_exclude),
 	url(r'^missions/byname/',		data_missionsByName),
 
 	url(r'^new_missions/',			data_newSearchForMissions),
@@ -78,19 +77,13 @@ urlpatterns = [
 	url(r'^comment/add/',			comment_add),
 	url(r'^comment/update/',		comment_update),
 	url(r'^comment/delete/',		comment_delete),
-	
-	url(r'^potentials/tovalidate/',		data_getPotentialsToValidate),
-	url(r'^potentials/',		data_getPotentials),
-	url(r'^potential/name/',		data_getPotentialMissionByName),
 
-	url(r'^opportunities/',		data_getOpportunities),
-	
+	url(r'^potentials/',				potential_getAll),
+	url(r'^potential/detect/',			potential_detect),
+	url(r'^potential/rename/',			potential_rename),
+	url(r'^potential/exclude/',			potential_exclude),
+	url(r'^potential/validate/',		potential_validate),
+
 	url(r'^adm/city/rename',				adm_renameCity),
 	url(r'^adm/region/rename',				adm_renameRegion),
-	url(r'^adm/mission/exclude',				adm_excludeMission),
-	url(r'^adm/potential/exclude',				adm_excludePotential),
-	url(r'^adm/potential/validate',				adm_validatePotential),
-	url(r'^adm/potential/rename',				adm_renamePotential),
-
-	url(r'^event/',				event_view),
 ]

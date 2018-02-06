@@ -1330,27 +1330,34 @@ def adm_renameRegion(request):
 
 
 
+
+
+
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
-def data_getPotentials(request):
+def potential_getAll(request):
 	
 	data = []
-	
-	from django.db.models import Count
-	
-	fieldname = 'name'
-	results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=True).order_by(fieldname).values(fieldname).annotate(count=Count(fieldname)).order_by('-count', 'name')
-	for item in results:
-		if item['count'] >= 3:
+
+	potentials = Potential.object.all()
+	for potential in potentials:
+		
+		count = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=True, name=potential.title).count()
+		if count < 1:
+		
+			potential.delete()
+		
+		else:
 			
 			obj = {
-				'name': item[fieldname],
-				'count': item['count'],
+				'city': potential.city.serialize(),
+				'title': potential.title,
+				'count': potential.count,
 			}
 			
 			data.append(obj)
-	
+
 	return Response(data, status=status.HTTP_200_OK)
 
 
@@ -1358,7 +1365,13 @@ def data_getPotentials(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
-def data_getPotentialsToValidate(request):
+def potential_detect(request):
+	
+	results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=True)
+	for item in results:
+		
+		item.validated=False
+		item.save()
 	
 	data = []
 	
@@ -1371,8 +1384,8 @@ def data_getPotentialsToValidate(request):
 			
 			obj = {
 				'name': item[fieldname],
-				'creator': item['creator'],
 				'count': item['count'],
+				'creator': item['creator'],
 			}
 			
 			data.append(obj)
@@ -1384,50 +1397,14 @@ def data_getPotentialsToValidate(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
-def data_getPotentialMissionByName(request):
+def potential_rename(request):
 	
-	data = None
-
-	results = Mission.objects.filter(mosaic__isnull=True, registerer=request.user, admin=True, name=request.data['name'])
-	if (results.count() > 0):
+	results = Mission.objects.filter(ref__in=request.data['refs'])
+	for item in results:
 		
-		data = []
+		item.name = request.data['new_name']
+		item.save()
 		
-		for item in results:
-			data.append(item.overviewSerialize())
-				
-	return Response(data, status=status.HTTP_200_OK)
-
-
-
-#---------------------------------------------------------------------------------------------------
-@api_view(['POST'])
-@permission_classes((IsAuthenticated, ))
-def data_getOpportunities(request):
-	
-	data = []
-	
-	currentArray = []
-
-	for item in currentArray:
-		
-		results = Mosaic.objects.filter(title__icontains=item['name'])
-		if results.count() < 1:
-			data.append(item)
-	
-	return Response(data, status=status.HTTP_200_OK)
-
-
-
-#---------------------------------------------------------------------------------------------------
-@api_view(['POST'])
-@permission_classes((IsAuthenticated, ))
-def adm_excludeMission(request):
-	
-	mission = Mission.objects.get(ref=request.data['ref'])
-	mission.admin = False
-	mission.save()
-	
 	return Response(None, status=status.HTTP_200_OK)
 
 
@@ -1435,7 +1412,7 @@ def adm_excludeMission(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
-def adm_excludePotential(request):
+def potential_exclude(request):
 	
 	results = Mission.objects.filter(mosaic__isnull=True, name=request.data['name'])
 	for item in results:
@@ -1450,7 +1427,7 @@ def adm_excludePotential(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
-def adm_validatePotential(request):
+def potential_validate(request):
 	
 	results = Mission.objects.filter(ref__in=request.data['refs'])
 	for item in results:
@@ -1458,43 +1435,34 @@ def adm_validatePotential(request):
 		item.validated = True
 		item.save()
 	
-	return Response(None, status=status.HTTP_200_OK)
-
-
-
-#---------------------------------------------------------------------------------------------------
-@api_view(['POST'])
-@permission_classes((IsAuthenticated, ))
-def adm_renamePotential(request):
-	
-	results = Mission.objects.filter(ref__in=request.data['refs'])
-	for item in results:
-		
-		item.name = request.data['new_name']
-		item.save()
-		
-	return Response(None, status=status.HTTP_200_OK)
-
-
-
-#---------------------------------------------------------------------------------------------------
-@api_view(['POST'])
-@permission_classes((AllowAny, ))
-def event_view(request):
-	
-	data = { 'cities':[], }
-	
-	results = Mosaic.objects.filter(tags__icontains=request.data['event'])
+	results = Country.objects.filter(name=request.data['country'])
 	if results.count() > 0:
+		country = results[0]
+	else:
+		country = Country(name=request.data['country'])
+		country.save()
 		
-		obj = { 'mosaics':[], }
-		data['cities'].append(obj)
+	results = Region.objects.filter(country=country, name=request.data['region'])
+	if results.count() > 0:
+		region = results[0]
+	else:
+		region = Region(country=country, name=request.data['region'])
+		region.save()
+		
+	results = City.objects.filter(region=region, name=request.data['city'])
+	if results.count() > 0:
+		city = results[0]
+	else:
+		city = City(region=region, name=request.data['city'])
+		city.save()
+		
+	potential = Potential(title=results[0].name, count=results.count(), city=city)
+	potential.save()
 	
-		for item in data['cities']:
-			for mosaic in results:
-				item['mosaics'].append(mosaic.overviewSerialize())
-	
-	return Response(data, status=status.HTTP_200_OK)
+	return Response(None, status=status.HTTP_200_OK)
+
+
+
 
 
 
