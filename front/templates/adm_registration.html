@@ -145,13 +145,13 @@
 									</div>
 								</div>
 												
-								<div class="flex">
+								<div class="flex align-center">
 
-									<div class="item grow">
+									<div class="item">
 										<span class="color-dark">{{potential.default}}</span>
 									</div>
 									
-									<div class="item flex-col">
+									<div class="item grow flex-col">
 										<input id="city_input_{{$index}}" type="text" class="control" placeholder="City name" />
 									</div>
 								
@@ -176,7 +176,7 @@
 									</div>
 									
 									<div class="item">
-										<button class="btn" ng-click="validate(potential, new_name);" ng-disabled="!potential.new_name || !potential.city || !potential.region || !potential.country">
+										<button class="btn" ng-click="validate(potential, new_name);" ng-disabled="!potential.name || !potential.city || !potential.region || !potential.country">
 											Validate
 										</button>
 									</div>
