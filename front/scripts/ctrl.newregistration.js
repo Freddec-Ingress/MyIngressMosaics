@@ -463,6 +463,20 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		API.sendRequest('/api/potentials/', 'POST').then(function(response) {
 
 			$scope.potentials = response;
+			
+			$scope.potentials.sort(function(a, b) {
+				
+				if (a.city.region.country.name > b.city.region.country.name) return 1;
+				if (a.city.region.country.name < b.city.region.country.name) return -1;
+				
+				if (a.city.name > b.city.name) return 1;
+				if (a.city.name < b.city.name) return -1;
+				
+				if (a.count > b.count) return -1;
+				if (a.count < b.count) return 1;
+				
+				return 0;
+			});
 
 			$scope.potential_state = 'list';
 		});
