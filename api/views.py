@@ -1367,6 +1367,11 @@ def potential_getAll(request):
 @permission_classes((IsAuthenticated, ))
 def potential_detect(request):
 
+	results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=True)
+	for item in results:
+		item.validated = False
+		item.save()
+
 	data = []
 	
 	from django.db.models import Count

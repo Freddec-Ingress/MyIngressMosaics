@@ -3882,7 +3882,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		var data = { 'refs':refs, 'new_name':new_name };
 		API.sendRequest('/api/potential/rename/', 'POST', {}, data).then(function(response) {
 			
-			var data = { 'refs':refs };
+			var data = { 'refs':refs, 'country':potential.country, 'region':potential.region, 'city':potential.city,  };
 			API.sendRequest('/api/potential/validate/', 'POST', {}, data);
 		});
 	}
