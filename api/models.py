@@ -755,3 +755,18 @@ class Link(models.Model):
 	def __str__(self):
 
 		return self.user.username + ' ' + self.type + ' ' + self.mosaic.title
+
+
+
+@python_2_unicode_compatible
+class Potential(models.Model):
+	
+	title = models.CharField(max_length=256)
+
+	count = models.IntegerField()
+	
+	city = models.ForeignKey(City, related_name='potentials')
+	
+	# Admin displaying
+	def __str__(self):
+		return self.title + ' - ' + str(self.count)
