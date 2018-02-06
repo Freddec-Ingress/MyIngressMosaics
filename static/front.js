@@ -3879,12 +3879,8 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		var refs = [];
 		for (var mission of potential.missions) refs.push(mission.ref);
 		
-		var data = { 'refs':refs, 'new_name':new_name };
-		API.sendRequest('/api/potential/rename/', 'POST', {}, data).then(function(response) {
-			
-			var data = { 'refs':refs, 'country':potential.country, 'region':potential.region, 'city':potential.city,  };
-			API.sendRequest('/api/potential/validate/', 'POST', {}, data);
-		});
+		var data = { 'refs':refs, 'title':new_name, 'country':potential.country, 'region':potential.region, 'city':potential.city  };
+		API.sendRequest('/api/potential/validate/', 'POST', {}, data);
 	}
 	
 	/* Page loading */

@@ -1340,7 +1340,7 @@ def potential_getAll(request):
 	
 	data = []
 
-	potentials = Potential.objects.all()
+	potentials = Potential.objects.all().order_by('city.region.country.name', 'city.name', '-count')
 	for potential in potentials:
 		
 		count = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=True, name=potential.title).count()
@@ -1434,9 +1434,10 @@ def potential_exclude(request):
 @permission_classes((IsAuthenticated, ))
 def potential_validate(request):
 	
-	results = Mission.objects.filter(ref__in=request.data['refs'])
-	for item in results:
+	missions = Mission.objects.filter(ref__in=request.data['refs'])
+	for item in missions:
 
+		item.name = request.data['title']
 		item.validated = True
 		item.save()
 	
@@ -1461,7 +1462,7 @@ def potential_validate(request):
 		city = City(region=region, name=request.data['city'])
 		city.save()
 		
-	potential = Potential(title=results[0].name, count=results.count(), city=city)
+	potential = Potential(title=results[0].name, count=missions.count(), city=city)
 	potential.save()
 	
 	return Response(None, status=status.HTTP_200_OK)
