@@ -2880,22 +2880,41 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		$scope.potential_state = 'searching';
 		
 		API.sendRequest('/api/potentials/', 'POST').then(function(response) {
-
-			$scope.potentials = response;
 			
-			$scope.potentials.sort(function(a, b) {
+			var country_names = [];
+			
+			for (var item of response) {
 				
-				if (a.city.region.country.name > b.city.region.country.name) return 1;
-				if (a.city.region.country.name < b.city.region.country.name) return -1;
+				if (country_names.indexOf(item.city.region.country.name) == -1) {
+					country_names.push(item.city.region.country.name);
+				}
+			}
+
+			$scope.countries = [];
+			
+			for (var item of country_names) {
 				
-				if (a.city.name > b.city.name) return 1;
-				if (a.city.name < b.city.name) return -1;
+				var country = { name:item, potentials:[], }
 				
-				if (a.count > b.count) return -1;
-				if (a.count < b.count) return 1;
+				for (var potential of response) {
+					if (potential.city.region.country.name == item) {
+						country.potentials.push(potential);
+					}
+				}
 				
-				return 0;
-			});
+				country.potentials.sort(function(a, b) {
+					
+					if (a.city.name > b.city.name) return 1;
+					if (a.city.name < b.city.name) return -1;
+					
+					if (a.count > b.count) return -1;
+					if (a.count < b.count) return 1;
+					
+					return 0;
+				});
+				
+				$scope.countries.push(country);
+			}
 
 			$scope.potential_state = 'list';
 		});

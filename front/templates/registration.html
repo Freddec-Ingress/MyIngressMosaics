@@ -182,36 +182,47 @@
 
 					<div ng-if="potential_state=='list'">
 						
-						<div ng-if="potentials.length > 0">
+						<div ng-if="countries.length > 0">
 							
 							<div class="item">
 								<span class="block color-normal mb-small">{{potentials.length}} potential mosaics</span>
 								<span class="block color-dark">Only potential mosaics validated by MIM team are displayed here. Feel free to register any mosaic you want. To register another mosaic, just search missions with form above.</span>
 							</div>
 							
-							<div class="flex wrap">
-								<div class="width-12 width-xl-4 item" ng-repeat="potential in potentials">
-									<a class="item link-block flex-col" href="/registration/{{potential.title}}">
-										
-										<div class="flex align-center">
-											
-											<div class="item grow ellipsis">
-												<span>{{potential.title}}</span>
-											</div>
-											
-											<div class="item">
-												<span class="text-small color-dark">{{potential.count}}</span>
-											</div>
-											
-										</div>
-										
-				    					<div class="text-small color-dark">
-											<span class=" mr-small flag-icon flag-icon-{{potential.city.region.country.code}}"></span>
-											<span>{{potential.city.name}}</span>
-				    					</div>
-				    					
-									</a>
+							<div class="mt-big flex-col" ng-repeat="country in countries">
+							
+								<div class="flex">
+									
+									<div class="item">
+										<span class="c-normal">{{country.name}}</span>
+									</div>
+									
 								</div>
+							
+								<div class="flex wrap">
+									<div class="width-12 width-xl-4 item" ng-repeat="potential in potentials">
+										<a class="item link-block flex-col" href="/registration/{{potential.title}}">
+											
+											<div class="flex align-center">
+												
+												<div class="item grow flex-col">
+													<span>{{potential.title}}</span>
+							    					<div class="text-small">
+														<span class="mr-small flag-icon flag-icon-{{potential.city.region.country.code}}"></span>
+														<span>{{potential.city.name}}</span>
+							    					</div>
+												</div>
+												
+												<div class="item">
+													<span class="text-small color-dark">{{potential.count}}</span>
+												</div>
+												
+											</div>
+					    					
+										</a>
+									</div>
+								</div>
+							
 							</div>
 						
 						</div>
