@@ -411,6 +411,10 @@ def mosaic_create(request):
 	
 	mosaic.computeInternalData()
 	
+	results = Potential.objects.filter(title=request.data['title'], city = city)
+	if results.count() > 0:
+		results[0].delete()
+	
 	return Response(mosaic.ref, status=status.HTTP_200_OK)
 
 	
@@ -1350,24 +1354,11 @@ def potential_getAll(request):
 	
 	data = []
 
-	potentials = Potential.objects.all()
-	for potential in potentials:
-		
-		count = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=True, name=potential.title).count()
-		if count < 1:
-			potential.delete()
-		
-		else:
-			
-			if not potential.country:
-				potential.country = potential.city.region.country
-				potential.save()
-
 	countries = Country.objects.all().order_by('name')
 	for country in countries:
 		if country.potentials.count() > 0:
 			
-			obj = { 'name':country.name, 'potentials':[], 'open':true, }
+			obj = { 'name':country.name, 'potentials':[], 'open':True, }
 			
 			for potential in country.potentials.order_by('city', 'count', 'title'):
 				
@@ -1478,7 +1469,7 @@ def potential_validate(request):
 		city = City(region=region, name=request.data['city'])
 		city.save()
 		
-	potential = Potential(title=request.data['title'], count=missions.count(), city=city)
+	potential = Potential(title=request.data['title'], count=missions.count(), city=city, country=country)
 	potential.save()
 	
 	return Response(None, status=status.HTTP_200_OK)
