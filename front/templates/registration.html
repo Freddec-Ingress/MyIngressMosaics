@@ -185,7 +185,7 @@
 						<div ng-if="countries.length > 0">
 							
 							<div class="item">
-								<span class="block color-normal mb-small">Potential mosaics</span>
+								<span class="block color-normal mb-small">{{potentials_count}} potential mosaics</span>
 								<span class="block color-dark">Only potential mosaics validated by MIM team are displayed here. Feel free to register any mosaic you want. To register another mosaic, just search missions with form above.</span>
 							</div>
 							
@@ -194,12 +194,15 @@
 								<div class="flex">
 									
 									<div class="item">
+										<a ng-show="!country.open" ng-click="country.open=true;"><i class="fa fa-plus-square"></i></a>
+										<a ng-show="country.open" ng-click="country.open=false;"><i class="fa fa-minus-square"></i></a>
 										<span class="c-normal">{{country.name}}</span>
+										<span class="ml-normal badge">{{country.potentials.length}}</span>
 									</div>
 									
 								</div>
-							
-								<div class="flex wrap">
+								
+								<div class="flex wrap" ng-show="country.open">
 									<div class="width-12 width-xl-4 item" ng-repeat="potential in country.potentials">
 										<a class="item link-block flex-col" href="/registration/{{potential.title}}">
 											

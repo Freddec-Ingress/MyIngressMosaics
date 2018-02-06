@@ -2858,6 +2858,8 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		
 		API.sendRequest('/api/potentials/', 'POST').then(function(response) {
 			
+			$scope.potentials_count = response.length;
+			
 			response.sort(function(a, b) {
 				
 				if (a.city.region.country.name > b.city.region.country.name) return 1;
@@ -2883,7 +2885,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 					
 					country_names.push(item.city.region.country.name);
 					
-					var new_country = { name:item.city.region.country.name, potentials:[], }
+					var new_country = { name:item.city.region.country.name, potentials:[], open:true, }
 					$scope.countries.push(new_country);
 					cur_country = new_country;
 				}
