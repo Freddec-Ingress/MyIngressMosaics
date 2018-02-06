@@ -203,17 +203,17 @@
 									<div class="width-12 width-xl-4 item" ng-repeat="potential in country.potentials">
 										<a class="item link-block flex-col" href="/registration/{{potential.title}}">
 											
-											<div class="flex align-center">
+											<div class="flex-col align-center">
 												
 												<div class="item grow shrink flex-col">
 													<span>{{potential.title}}</span>
-							    					<div class="text-small mt-small">
-														<span class="mr-small flag-icon flag-icon-{{potential.city.region.country.code}}"></span>
-														<span class="c-normal">{{potential.city.name}}</span>
-							    					</div>
 												</div>
 												
-												<div class="item">
+												<div class="item flex">
+							    					<div class="text-small grow">
+														<span class="mr-small flag-icon flag-icon-{{potential.city.region.country.code}}"></span>
+														<span class="color-normal">{{potential.city.name}}</span>
+							    					</div>
 													<span class="text-small color-dark">{{potential.count}}</span>
 												</div>
 												
