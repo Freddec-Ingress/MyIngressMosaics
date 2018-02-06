@@ -439,49 +439,38 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		
 		API.sendRequest('/api/potentials/', 'POST').then(function(response) {
 			
+			response.sort(function(a, b) {
+				
+				if (a.city.region.country.name > b.city.region.country.name) return 1;
+				if (a.city.region.country.name < b.city.region.country.name) return -1;
+				
+				if (a.city.name > b.city.name) return 1;
+				if (a.city.name < b.city.name) return -1;
+				
+				if (a.count > b.count) return -1;
+				if (a.count < b.count) return 1;
+				
+				return 0;
+			});
+			
 			var country_names = [];
+			var cur_country = null;
+
+			$scope.countries = [];
 			
 			for (var item of response) {
 				
 				if (country_names.indexOf(item.city.region.country.name) == -1) {
+					
 					country_names.push(item.city.region.country.name);
+					
+					var new_country = { name:item.city.region.country.name, potentials:[], }
+					cur_country = new_country;
 				}
+				
+				if (cur_country) cur_country.potentials.push(item);
 			}
-
-			country_names.sort(function(a, b) {
-				
-				if (a > b) return 1;
-				if (a < b) return -1;
-				
-				return 0;
-			});
-
-			$scope.countries = [];
 			
-			for (var item of country_names) {
-				
-				var country = { name:item, potentials:[], }
-				
-				for (var potential of response) {
-					if (potential.city.region.country.name == item) {
-						country.potentials.push(potential);
-					}
-				}
-				
-				country.potentials.sort(function(a, b) {
-					
-					if (a.city.name > b.city.name) return 1;
-					if (a.city.name < b.city.name) return -1;
-					
-					if (a.count > b.count) return -1;
-					if (a.count < b.count) return 1;
-					
-					return 0;
-				});
-				
-				$scope.countries.push(country);
-			}
-
 			$scope.potential_state = 'list';
 		});
 	}
