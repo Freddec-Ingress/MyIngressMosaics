@@ -54,6 +54,9 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 					}
 				}
 			}
+			
+			$scope.potential = response.potential;
+			if ($scope.potential) $scope.mosaic_name =$scope.potential.title;
 
 			$scope.refreshing = false;
 		});
@@ -283,51 +286,23 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		
 		$scope.$apply();
 	});
-    
-	$scope.computeMosaicName = function() {
-		
-		$scope.mosaic_name = '';
-		
-		var mosaic_name = $scope.selected[0].title;
-		mosaic_name = mosaic_name.replace(/0|1|2|3|4|5|6|7|8|9|#/g, '');
-		mosaic_name = mosaic_name.replace(/０|１|２|３|４|５|６|７|８|９/g, '');
-		mosaic_name = mosaic_name.replace(/①|②|③|④|⑤|⑥/g, '');
-		mosaic_name = mosaic_name.replace('.', '');
-		mosaic_name = mosaic_name.replace('(', '');
-		mosaic_name = mosaic_name.replace(')', '');
-		mosaic_name = mosaic_name.replace('（', '');
-		mosaic_name = mosaic_name.replace('）', '');
-		mosaic_name = mosaic_name.replace('/', '');
-		mosaic_name = mosaic_name.replace('[', '');
-		mosaic_name = mosaic_name.replace(']', '');
-		mosaic_name = mosaic_name.replace('【', '');
-		mosaic_name = mosaic_name.replace('】', '');
-		mosaic_name = mosaic_name.replace('-', '');
-		mosaic_name = mosaic_name.replace('-', '');
-		mosaic_name = mosaic_name.replace('－', '');
-		mosaic_name = mosaic_name.replace('_', '');
-		mosaic_name = mosaic_name.replace(':', '');
-		mosaic_name = mosaic_name.replace('of ', '');
-		mosaic_name = mosaic_name.replace(' of', '');
-		mosaic_name = mosaic_name.replace('part ', '');
-		mosaic_name = mosaic_name.replace(' part', '');
-		mosaic_name = mosaic_name.replace('Part ', '');
-		mosaic_name = mosaic_name.replace(' Part', '');
-		mosaic_name = mosaic_name.replace('  ', ' ');
-		mosaic_name = mosaic_name.replace('  ', ' ');
-		mosaic_name = mosaic_name.replace('　', ' ');
-		mosaic_name = mosaic_name.trim();
-		
-		$scope.mosaic_name = mosaic_name;
-	}
 
 	$scope.computeDefault = function() {
 		
 		$scope.default = '';
 	
-		$scope.city_name = '';
-		$scope.region_name = '';
-		$scope.country_name = '';
+		if ($scope.potential) {
+			
+			$scope.city_name = $scope.potential.city.name;
+			$scope.region_name = $scope.potential.city.region.name;
+			$scope.country_name = $scope.potential.city.region.country.name;
+			
+		} else {
+			
+			$scope.city_name = '';
+			$scope.region_name = '';
+			$scope.country_name = '';
+		}
 		
 		var geocoder = new google.maps.Geocoder();
 		

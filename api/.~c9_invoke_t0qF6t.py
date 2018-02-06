@@ -1097,24 +1097,17 @@ def data_searchForMissions(request):
 @permission_classes((AllowAny, ))
 def data_newSearchForMissions(request):
 	
-	data = {
-		'missions': [],
-		'potential': None,
-	}
-	
 	results = Mission.objects.filter(mosaic__isnull=True).filter(Q(name__icontains=request.data['text']) | Q(title__icontains=request.data['text']) | Q(creator__icontains=request.data['text']))
 	if (results.count() > 0):
+	
+		data = { 'missions': [], }
 		for item in results:
 			data['missions'].append(item.overviewSerialize())
-
-	results = Potential.objects.filter(title=request.data['text'])
-	if (results.count() > 0):
-		data['potential'] = {
-			'city': potential.city.serialize(),
-			'title': potential.title,
-			'count': potential.count,
-		}
-	
+			
+	else:
+		
+		data = { 'missions': None, }
+		
 	return Response(data, status=status.HTTP_200_OK)
     
     
