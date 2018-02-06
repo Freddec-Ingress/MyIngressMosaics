@@ -2884,6 +2884,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 					country_names.push(item.city.region.country.name);
 					
 					var new_country = { name:item.city.region.country.name, potentials:[], }
+					$scope.countries.push(new_country);
 					cur_country = new_country;
 				}
 				
