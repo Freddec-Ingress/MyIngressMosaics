@@ -1340,7 +1340,7 @@ def potential_getAll(request):
 	
 	data = []
 
-	potentials = Potential.objects.all().order_by('city.region.country.name', 'city.name', '-count')
+	potentials = Potential.objects.all()
 	for potential in potentials:
 		
 		count = Mission.objects.filter(mosaic__isnull=True, validated=True, name=potential.title).count()
@@ -1366,11 +1366,6 @@ def potential_getAll(request):
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
 def potential_detect(request):
-
-	results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=True)
-	for item in results:
-		item.validated = False
-		item.save()
 
 	data = []
 	
