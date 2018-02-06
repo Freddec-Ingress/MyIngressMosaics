@@ -108,6 +108,8 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 					potential.region = potential.country;
 				}
 				
+				console.log(potential);
+				
 				$scope.$apply();
 			});
 		}
