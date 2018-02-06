@@ -1340,7 +1340,7 @@ def potential_getAll(request):
 	
 	data = []
 
-	potentials = Potential.object.all()
+	potentials = Potential.objects.all()
 	for potential in potentials:
 		
 		count = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=True, name=potential.title).count()
