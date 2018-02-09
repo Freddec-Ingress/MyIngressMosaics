@@ -1,21 +1,80 @@
-Pour chaque flotte en combat { // fleet in fight.fleets
-    Calcul des cibles adverses {
-        Pour chaque type de vaisseau { // ship_type in data.ship_types
-            Pour chaque flotte adverse { // ennemy in fleet.ennemies
-                on compte le nombre de vaisseaux // fleet.targets.add(ennemy, ship_type, ennemy.ships[ship_type].count)
-            }
-        }
-    }
-}
+/******************************************************************************/
+/* DATA MODEL                                                                 */
+/******************************************************************************/
 
-Tant qu'il reste au moins 2 flottes en combat ou que le nombre de rounds est inférieur à 100 { // fight.fighting_fleets.length > 1 or fight.rounds < 100
-    Pour chaque flotte en combat { // fleet in fight.fighting_fleets
-        Calcul du tir {
-            Pour chaque type de vaisseau de la flotte en combat { // ship in fleet.ships
-                on calcul le tir // shot = weapon * fire * ship.count
-            }
-        }
-        Répartition des dégats {}
-    }
-    Mise à jour des flottes en combat {}
-}
+Planet . galaxy . sector . number
+
+Fight . datetime . galaxy . sector . number
+    -> Opponents . name . alliance_tag . is_winner
+        -> Fleets . name . stance . shield_coeff . handling_coeff . tracking_coeff . damage_coeff
+            -> Ships . type . count . lost . remaining
+                -> Kill . type . count
+
+Report . datetime . type
+    <- Fight
+
+
+
+/******************************************************************************/
+/* FIGHT MANAGEMENT                                                           */
+/******************************************************************************/
+
+//------------------------------------------------------------------------------
+func fightInit(planet):
+    
+    fight = new Fight
+    
+    fight.datetime = Now()
+    
+    fight.galaxy = planet.galaxy
+    fight.galaxy = planet.sector
+    fight.galaxy = planet.number
+    
+    fleets = planetGetOrbitingFleets(planet)
+    
+    for fleet in fleets:
+        fightAddFleet(fight, fleet)
+        
+    fightComputeEnnemies(fight)
+    
+    while fightGetRoundCount(fight) < 100 and fightGetFightingFleets(fight) > 1:
+        fightDoRound(fight)
+        
+    figthEndBattle(fight)
+    
+    report = new Report
+    
+    reportAttachFight(report, fight)
+
+
+
+//------------------------------------------------------------------------------
+func fightDoRound(fight):
+
+    for opponent in fight.opponents:
+        for fleet in opponent.fleets:
+            for ship in fleet.ship:
+            
+                shot_count = ship.remaining * shipData[ship.type].canon
+                shot_damage = shipData[ship.type].damage * fleet.damage_coeff
+                
+                for type in shipData[ship.type].preferences:
+                    ennemies = fightGetEnnemyShips(ship, type)
+                    
+                    if ennemies.length > 1:
+                        for ennemy in ennemies:
+                            touched = Max(ennemy.remaining, shot_count * ennemy.percent) * shipData[ennemy.type].handling_coeff * ennemy.fleet.handling_coeff * shipData[ship.type].tracking_coeff * fleet.tracking_coeff
+                            
+                            damage_to_kill = shipData[ennemy.type].sheild * ennemy.fleet.shield_coeff
+                            killed = Max(Abs(shot_damage / damage_to_kill), touched)
+                            
+                            ennemy.round_lost = killed
+                            fightAddKill(ship, ennemy.type, killed)
+                        
+                        break
+                        
+    for opponent in fight.opponents:
+        for fleet in opponent.fleets:
+            for ship in fleet.ship:
+                
+                ship.remaining -= ship.round_lost

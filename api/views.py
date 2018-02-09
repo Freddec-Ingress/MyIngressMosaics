@@ -1362,13 +1362,20 @@ def potential_getAll(request):
 			
 			for potential in country.potentials.order_by('city__name', '-count', 'title'):
 				
-				obj['potentials'].append({
-					'city': potential.city.serialize(),
-					'title': potential.title,
-					'count': potential.count,
-				})
+				results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=True, name=potential.title)
+				if results.count() > 0:
+				
+					obj['potentials'].append({
+						'city': potential.city.serialize(),
+						'title': potential.title,
+						'count': potential.count,
+					})
+					
+				else:
+					potential.delete()
 			
-			data.append(obj)
+			if len(obj['potentials']) > 0:
+				data.append(obj)
 
 	return Response(data, status=status.HTTP_200_OK)
 
