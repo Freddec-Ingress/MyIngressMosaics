@@ -1356,13 +1356,15 @@ def potential_getAll(request):
 
 	countries = Country.objects.all().order_by('name')
 	for country in countries:
-		if country.potentials.count() > 0:
+		potentials_results = country.potentials.order_by('city__name', '-count', 'title')
+		
+		if potentials_results.count() > 0:
 			
 			obj = { 'name':country.name, 'potentials':[], 'open':False, }
 			
-			for potential in country.potentials.order_by('city__name', '-count', 'title'):
+			for potential in potentials_results:
 				
-				#results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=True, name=potential.title)
+				results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=True, name=potential.title)
 				#if results.count() > 0:
 				
 					obj['potentials'].append({
