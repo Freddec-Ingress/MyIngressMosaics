@@ -81,6 +81,7 @@ urlpatterns = [
 	url(r'^potentials/',				potential_getAll),
 	url(r'^potential/detect/',			potential_detect),
 	url(r'^potential/rename/',			potential_rename),
+	url(r'^potential/delete/',			potential_delete),
 	url(r'^potential/exclude/',			potential_exclude),
 	url(r'^potential/validate/',		potential_validate),
 

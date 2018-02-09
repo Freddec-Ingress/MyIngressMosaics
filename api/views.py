@@ -1427,6 +1427,17 @@ def potential_rename(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
+def potential_delete(request):
+
+	potential = Potential.objects.filter(title=request.data['title'], city__name=request.data['city_name'], country__name=request.data['country_name'])
+	if potential.count() > 0:
+		potential[0].delete()
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
 def potential_exclude(request):
 	
 	results = Mission.objects.filter(mosaic__isnull=True, name=request.data['name'])
