@@ -86,33 +86,33 @@
 					<div class="width-6 width-xl-4" ng-repeat="mosaic in mosaics" style="padding: .75rem .375rem;">
 						<a class="item link-block flex-col" href="/mosaic/{{mosaic.ref}}" target="_blank" style="height:100%;">
 							
-		    				<div class="item">
-		    					
-		    					<span class="text-medium color-light block">{{mosaic.title}}</span>
+							<div class="item">
+								
+								<span class="text-medium color-light block">{{mosaic.title}}</span>
 		
-		    					<div class="text-small color-dark">
+								<div class="text-small color-dark">
 									<span class=" mr-small flag-icon flag-icon-{{mosaic.city.region.country.code}}"></span>
 									<span>{{mosaic.city.name}}</span>
-		    					</div>
-		    					
-		    				</div>
-		    				
-		    				<div class="item grow">
-		    					
+								</div>
+								
+							</div>
+							
+							<div class="item grow">
+								
 								<div class="flex wrap shrink" style="padding-right:calc((6 - {{mosaic.cols}}) * 16.666667%);">
 									
-						            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-						            </div>
-						            
-						            <div ng-repeat="m in mosaic.missions | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-						                <img src="/static/img/mask.png" style="background-image:url({{m.image}}=s100);" />
-						            </div>
-						            
-					            </div>
-		    					
-		    				</div>
-		    				
-		 	   			</a>
+									<div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+									</div>
+									
+									<div ng-repeat="m in mosaic.missions | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+										<img src="/static/img/mask.png" style="background-image:url({{m.image}}=s100);" />
+									</div>
+									
+								</div>
+								
+							</div>
+							
+						</a>
 					</div>
 				</div>
 
@@ -137,15 +137,15 @@
 									</div>
 									
 									<div class="item flex">
-				    					<div class="text-small grow">
+										<div class="text-small grow">
 											<span class="mr-small flag-icon flag-icon-{{potential.city.region.country.code}}"></span>
 											<span class="color-dark">{{potential.city.name}}</span>
-				    					</div>
+										</div>
 										<span class="text-small color-normal">{{potential.count}}</span>
 									</div>
 									
 								</div>
-		    					
+								
 							</a>
 						</div>
 					</div>
@@ -169,28 +169,28 @@
 					<div class="width-12 width-xl-6 item" ng-repeat="mission in missions">
 						<div class="item bg-block flex align-center">
 						
-			                <div class="item">
-			        			<img src="/static/img/mask.png" style="width:26px; background-color:#000000; background-image:url({{mission.image}}=s25); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
-	                    	</div>
-	                    	
-	                    	<div class="item grow ellipsis" title="{{mission.desc}}">
-	                    		
-	                    		<div class="ellipsis">
-		                    		<span class="text-medium color-light">{{mission.title}}</span>
-	                    		</div>
-	                    		
-	                    		<div class="text-small">
-		                    		<a href="/search/{{mission.creator}}" ng-class="{'color-enlightened': mission.faction == 'E', 'color-resistant': mission.faction == 'R'}">{{mission.creator}}</a>
-	                    		</div>
-	                    		
-	                    	</div>
+							<div class="item">
+								<img src="/static/img/mask.png" style="width:26px; background-color:#000000; background-image:url({{mission.image}}=s25); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />
+							</div>
+							
+							<div class="item grow ellipsis" title="{{mission.desc}}">
+								
+								<div class="ellipsis">
+									<span class="text-medium color-light">{{mission.title}}</span>
+								</div>
+								
+								<div class="text-small">
+									<a href="/search/{{mission.creator}}" ng-class="{'color-enlightened': mission.faction == 'E', 'color-resistant': mission.faction == 'R'}">{{mission.creator}}</a>
+								</div>
+								
+							</div>
 
-	                    	<div class="item">
-                                <a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=19&pll={{mission.startLat}},{{mission.startLng}}" target="_blank">
-                                    <i class="fa fa-external-link"></i>
-                                </a>
-	                    	</div>
-			                    	
+							<div class="item">
+								<a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=19&pll={{mission.startLat}},{{mission.startLng}}" target="_blank">
+									<i class="fa fa-external-link"></i>
+								</a>
+							</div>
+									
 						</div>
 					</div>
 					
