@@ -46,7 +46,7 @@
 
 			</form>
 			
-			<div class="flex align-center justify-center mt-big" ng-show="flag_searching">
+			<div class="flex align-center mt-big" ng-show="flag_searching">
 				
 				<div class="item">
 					<i class="fa fa-spinner rotating"></i>
@@ -58,7 +58,7 @@
 				
 			</div>
 			
-			<div class="flex align-center justify-center mt-big" ng-show="flag_city_unknown">
+			<div class="flex align-center mt-big" ng-show="flag_city_unknown">
 				
 		    	<div class="item">
 		    		<span class="color-danger">City unknown</span>
@@ -66,14 +66,14 @@
 		    	
 			</div>
 			
-			<div class="flex-col align-center justify-center mt-big" ng-show="city && mosaics.length < 1">
+			<div class="flex-col mt-big" ng-show="city && mosaics.length < 1">
 				
 		    	<div class="item">
 		    		<span class="color-danger">No mosaic registered</span>
 		    	</div>
 		    	
 		    	<div class="item">
-		    		<a href="/registration">Send a request or Be the first to register mosaic for this city</a>
+		    		<a href="/registration">Be the first to register mosaic for this city</a>
 		    	</div>
 	
 			</div>

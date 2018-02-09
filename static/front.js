@@ -3429,9 +3429,10 @@ angular.module('FrontModule.controllers').controller('NewWorldCtrl', function($s
         		API.sendRequest('/api/city/' + country_name + '/' + region_name + '/' + city_name + '/', 'GET').then(function(response) {
         		
         			$scope.city = response.city;
-        			$scope.mosaics = response.mosaics;
+         			$scope.potentials = response.potentials;
+       				$scope.mosaics = response.mosaics;
         			
-        			if ($scope.mosaics && $scope.mosaics.length > 0) {
+        			if (($scope.mosaics && $scope.mosaics.length > 0) || ($scope.potentials && $scope.potentials.length > 0)) {
 						$window.location.href = '/world/' + country_name + '/' + region_name + '/' + city_name;
         			}
 
