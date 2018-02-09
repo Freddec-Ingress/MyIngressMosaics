@@ -970,13 +970,19 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 	
 	for city_obj in region_obj.cities.all():
 	
-		city_data = { 'name':city_obj.name, 'locale':city_obj.locale, 'mosaics': [] }
+		city_data = { 'name':city_obj.name, 'locale':city_obj.locale, 'mosaics': [], 'potentials': [] }
 		
 		mosaics = city_obj.mosaics.all().annotate(Count('missions')).order_by('-missions__count', 'title')
 		for mosaic_obj in mosaics:
 			
 			mosaic_data = mosaic_obj.overviewSerialize()
 			city_data['mosaics'].append(mosaic_data);
+		
+		potentials = city_obj.potentials.all().order_by('-count', 'title')
+		for potential_obj in potentials:
+			
+			potential_data = potential_obj.overviewSerialize()
+			city_data['potentials'].append(potential_data);
 			
 		first_letter = city_data['name'].upper()[0]
 		for index in data['index_data']:

@@ -65,9 +65,36 @@
 					<a class="text-medium mr-normal" href="/world/{{region.country.name}}/{{region.name}}/{{city.name}}">{{city.name}}</a>
 					<span class="color-dark" ng-show="city.locale">{{city.locale}}</span>
 				</div>
-				<span class="text-small color-muted">{{city.mosaics.length}} mosaics</span>
+				<div>
+					<span class="text-small color-muted">{{city.mosaics.length}} mosaics</span>
+					<span class="text-small color-muted" ng-show="city.potentials.length > 0">&middot; {{city.potentials.length}} potentials</span>
+				</div>
 			</div>
 
+			<div class="flex wrap">
+				<div class="width-12 width-xl-4 item" ng-repeat="potential in city.potentials">
+					<a class="item link-block flex-col pt-none pb-none" href="/registration/{{potential.title}}">
+						
+						<div class="flex-col">
+							
+							<div class="item grow flex-col pb-none">
+								<span class="ellipsis">{{potential.title}}</span>
+							</div>
+							
+							<div class="item flex">
+								<div class="text-small grow">
+									<span class="mr-small flag-icon flag-icon-{{potential.city.region.country.code}}"></span>
+									<span class="color-dark">{{potential.city.name}}</span>
+								</div>
+								<span class="text-small color-normal">{{potential.count}}</span>
+							</div>
+							
+						</div>
+						
+					</a>
+				</div>
+			</div>
+			
 			<div class="flex wrap">
 				<div class="width-6 width-xl-4" ng-repeat="mosaic in city.mosaics" style="padding: .75rem .375rem;">
 					<a class="item link-block flex-col" href="/mosaic/{{mosaic.ref}}" target="_blank" style="height:100%;">
