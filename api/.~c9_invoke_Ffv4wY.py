@@ -1372,7 +1372,7 @@ def potential_getAll(request):
 					})
 					
 				#else:
-				#	potential.delete()
+					potential.delete()
 			
 			if len(obj['potentials']) > 0:
 				data.append(obj)
