@@ -126,30 +126,30 @@
 						<span class="color-dark">No potential</span>
 					</div>
 					
-					<div class="flex wrap" ng-show="potentials.length > 0">
-						<div class="width-12 width-xl-4 item" ng-repeat="potential in potentials">
-							<a class="item link-block flex-col pt-none pb-none" href="/registration/{{potential.title}}">
+				</div>
+					
+				<div class="flex wrap" ng-show="potentials.length > 0">
+					<div class="width-12 width-xl-4 item" ng-repeat="potential in potentials">
+						<a class="item link-block flex-col pt-none pb-none" href="/registration/{{potential.title}}">
+							
+							<div class="flex-col">
 								
-								<div class="flex-col">
-									
-									<div class="item grow flex-col pb-none">
-										<span class="ellipsis">{{potential.title}}</span>
-									</div>
-									
-									<div class="item flex">
-										<div class="text-small grow">
-											<span class="mr-small flag-icon flag-icon-{{potential.city.region.country.code}}"></span>
-											<span class="color-dark">{{potential.city.name}}</span>
-										</div>
-										<span class="text-small color-normal">{{potential.count}}</span>
-									</div>
-									
+								<div class="item grow flex-col pb-none">
+									<span class="ellipsis">{{potential.title}}</span>
 								</div>
 								
-							</a>
-						</div>
+								<div class="item flex">
+									<div class="text-small grow">
+										<span class="mr-small flag-icon flag-icon-{{potential.city.region.country.code}}"></span>
+										<span class="color-dark">{{potential.city.name}}</span>
+									</div>
+									<span class="text-small color-normal">{{potential.count}}</span>
+								</div>
+								
+							</div>
+							
+						</a>
 					</div>
-					
 				</div>
 				
 			</div>
