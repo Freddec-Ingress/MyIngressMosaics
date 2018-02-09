@@ -2785,7 +2785,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		
 		if ($scope.potential) {
 			
-			var data = { 'title':$scope.potential.title, 'city_name':$scope.potential.city.name, 'country_name':$scope.potential.country.name, }
+			var data = { 'title':$scope.potential.title, 'city_name':$scope.potential.city.name, 'country_name':$scope.potential.city.region.country.name, };
 			API.sendRequest('/api/potential/delete/', 'POST', {}, data);
 			$scope.potential = null;
 		}
