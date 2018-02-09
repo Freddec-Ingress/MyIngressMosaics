@@ -1364,17 +1364,11 @@ def potential_getAll(request):
 			
 			for potential in potentials_results:
 				
-				results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=True, name=potential.title)
-				if results.count() > 0:
-				
-					obj['potentials'].append({
-						'city': potential.city.serialize(),
-						'title': potential.title,
-						'count': potential.count,
-					})
-					
-				#else:
-				#	potential.delete()
+				obj['potentials'].append({
+					'city': potential.city.serialize(),
+					'title': potential.title,
+					'count': potential.count,
+				})
 			
 			if len(obj['potentials']) > 0:
 				data.append(obj)
