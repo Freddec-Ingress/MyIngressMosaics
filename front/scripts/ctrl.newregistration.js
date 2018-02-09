@@ -364,6 +364,13 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 			$scope.region_name = $scope.country_name;
 		}
 		
+		if ($scope.potential) {
+			
+			var data = { 'title':$scope.potential.title, 'city_name':$scope.potential.city.name, 'country_name':$scope.potential.country.name, }
+			API.sendRequest('/api/potential/delete/', 'POST', {}, data);
+			$scope.potential = null;
+		}
+		
 		var data = {
 			'country': $scope.country_name,
 			'region': $scope.region_name,
@@ -416,13 +423,6 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 			
 			$scope.refreshMissions();
 		});
-		
-		if ($scope.potential) {
-			
-			var data = { 'title':$scope.potential.title, 'city_name':$scope.potential.city.name, 'country_name':$scope.potential.country.name, }
-			API.sendRequest('/api/potential/delete/', 'POST', {}, data);
-			$scope.potential = null;
-		}
 	}
 	
 	/* Page loading */

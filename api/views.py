@@ -1116,11 +1116,15 @@ def data_newSearchForMissions(request):
 		
 		potential = results[0]
 		
-		data['potential'] = {
-			'city': potential.city.serialize(),
-			'title': potential.title,
-			'count': potential.count,
-		}
+		if len(data['missions']) > 0:
+			data['potential'] = {
+				'city': potential.city.serialize(),
+				'title': potential.title,
+				'count': potential.count,
+			}
+			
+		else:
+			potential.delete()
 	
 	return Response(data, status=status.HTTP_200_OK)
     
