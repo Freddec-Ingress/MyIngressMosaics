@@ -7,7 +7,17 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 		API.sendRequest('/api/city/' + country_name + '/' + region_name + '/' + city_name + '/', 'GET').then(function(response) {
 			
 			$scope.city = response.city;
+			$scope.potentials = response.potentials;
 			$scope.mosaics = response.mosaics;
+			
+			$scope.potentials.sort(function(a, b) {
+				
+				if (a.count > b.count) return -1;
+				if (a.count < b.count) return 1;
+				
+				return 0;
+			});
+			
 			
 			$scope.mosaics.sort(function(a, b) {
 				

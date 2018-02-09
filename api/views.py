@@ -995,6 +995,7 @@ def data_getMosaicsOfCity(request, country, region, name):
 	
 	data = {
 		'city': {},
+		'potentials': [],
 		'mosaics': [],
 	}
 			
@@ -1020,7 +1021,16 @@ def data_getMosaicsOfCity(request, country, region, name):
 						mosaic = item.overviewSerialize()
 						data['mosaics'].append(mosaic)
 						
-	if len(data['mosaics']) < 1 and not request.user.is_superuser:
+				results = Potential.objects.filter(city=city).order_by('title')
+				if results.count() > 0:
+					
+					for item in results:
+						
+						potential = item.overviewSerialize()
+						data['potentials'].append(potential)
+				
+						
+	if len(data['mosaics']) < 1 and len(data['potentials']) < 1 and not request.user.is_superuser:
 		search = Search(city=name, region=region, country=country)
 		search.save()
 	
