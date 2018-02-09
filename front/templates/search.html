@@ -59,11 +59,15 @@
 			<div class="tab-row mt-big">
 			
 				<div class="tab" ng-click="current_tab='mosaic'" ng-class="{'active':current_tab=='mosaic'}">
-					Mosaics ({{mosaics.length}})
+					Mosaics <span class="ml-normal badge">{{mosaics.length}}</span>
+				</div>
+				
+				<div class="tab" ng-click="current_tab='potential'" ng-class="{'active':current_tab=='potential'}">
+					Potentials <span class="ml-normal badge">{{potentials.length}}</span>
 				</div>
 				
 				<div class="tab" ng-click="current_tab='mission'" ng-class="{'active':current_tab=='mission'}">
-					Missions ({{missions.length}})
+					Missions <span class="ml-normal badge">{{missions.length}}</span>
 				</div>
 
 			</div>
@@ -112,6 +116,42 @@
 					</div>
 				</div>
 
+			</div>
+			
+			<div ng-show="current_tab=='mosaic'">
+				
+				<div class="item" ng-show="potentials.length < 1">
+					
+					<div class="item bg-block">
+						<span class="color-dark">No potential</span>
+					</div>
+					
+					<div class="flex wrap" ng-show="potentials.length > 0">
+						<div class="width-12 width-xl-4 item" ng-repeat="potential in potentials">
+							<a class="item link-block flex-col pt-none pb-none" href="/registration/{{potential.title}}">
+								
+								<div class="flex-col">
+									
+									<div class="item grow flex-col pb-none">
+										<span class="ellipsis">{{potential.title}}</span>
+									</div>
+									
+									<div class="item flex">
+				    					<div class="text-small grow">
+											<span class="mr-small flag-icon flag-icon-{{potential.city.region.country.code}}"></span>
+											<span class="color-dark">{{potential.city.name}}</span>
+				    					</div>
+										<span class="text-small color-normal">{{potential.count}}</span>
+									</div>
+									
+								</div>
+		    					
+							</a>
+						</div>
+					</div>
+					
+				</div>
+				
 			</div>
 			
 			<div ng-show="current_tab=='mission'">

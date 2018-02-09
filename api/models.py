@@ -771,3 +771,14 @@ class Potential(models.Model):
 	# Admin displaying
 	def __str__(self):
 		return self.title + ' - ' + str(self.count)
+
+	def overviewSerialize(self):
+		
+		data = {
+			'title': self.title,
+			'count': self.count,
+			'city': self.city.serialize(),
+		}
+		
+		return data
+		

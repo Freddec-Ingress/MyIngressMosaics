@@ -1137,6 +1137,7 @@ def data_searchForMosaics(request):
 	
 	data = {
 		'mosaics': [],
+		'potentials': [],
 		'missions': [],
 	}
 	
@@ -1170,6 +1171,29 @@ def data_searchForMosaics(request):
 		for item in temp:
 			data['mosaics'].append(item.overviewSerialize())
 	
+	potential_array = []
+		
+	# Title search
+	
+	results = Potential.objects.filter(title__icontains=request.data['text'])
+	if (results.count() > 0):
+		for potential in results:
+			potential_array.append(potential)
+		
+	# City search
+	
+	results = Potential.objects.filter(city__name__icontains=request.data['text'])
+	if (results.count() > 0):
+		for potential in results:
+			potential_array.append(potential)
+	
+	if (len(potential_array) > 0):
+		
+		temp = list(set(potential_array))[:25]
+		
+		for item in temp:
+			data['potential'].append(item.overviewSerialize())
+	
 	mission_array = []
 	
 	# Creator search
@@ -1181,14 +1205,14 @@ def data_searchForMosaics(request):
 		
 	# Title search
 	
-	results = Mission.objects.filter(mosaic__isnull=True, title__icontains=request.data['text'])
+	results = Mission.objects.filter(mosaic__isnull=True, title__icontains=request.data['text'], validated=False)
 	if (results.count() > 0):
 		for mission in results:
 			mission_array.append(mission)
 		
 	# Name search
 	
-	results = Mission.objects.filter(mosaic__isnull=True, name__icontains=request.data['text'])
+	results = Mission.objects.filter(mosaic__isnull=True, name__icontains=request.data['text'], validated=False)
 	if (results.count() > 0):
 		for mission in results:
 			mission_array.append(mission)

@@ -15,6 +15,8 @@ angular.module('FrontModule.controllers').controller('NewSearchCtrl', function($
 	/* Search management */
 	
 	$scope.mosaics = null;
+	$scope.potentials = null;
+	$scope.missions = null;
 	
 	$scope.searching = false;
 
@@ -27,6 +29,8 @@ angular.module('FrontModule.controllers').controller('NewSearchCtrl', function($
 		$scope.searching = true;
 		
 		$scope.mosaics = null;
+		$scope.potentials = null;
+		$scope.missions = null;
 		
 		var data = { 'text':text };
 		API.sendRequest('/api/search/', 'POST', {}, data).then(function(response) {
@@ -52,6 +56,16 @@ angular.module('FrontModule.controllers').controller('NewSearchCtrl', function($
 				mosaic.offset = new Array(temp);
 			}
 
+			$scope.potentials = response.potentials;
+
+			$scope.potentials.sort(function(a, b) {
+				
+				if (a.count > b.count) return -1;
+				if (a.count < b.count) return 1;
+				
+				return 0;
+			});
+			
 			$scope.missions = response.missions;
 			
 			$scope.missions.sort(function(a, b) {
@@ -63,6 +77,15 @@ angular.module('FrontModule.controllers').controller('NewSearchCtrl', function($
 			});
 			
 			$scope.current_tab = 'mosaic';
+			if ($scope.mosaics.length < 1) {
+				$scope.current_tab = 'potential';
+				if ($scope.potentials.length < 1) {
+					$scope.current_tab = 'mission';
+					if ($scope.missions.length < 1) {
+						$scope.current_tab = 'mosaic';
+					}
+				}
+			}
 			
 			$scope.searching = false;
 		});
