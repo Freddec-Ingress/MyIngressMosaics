@@ -52,7 +52,8 @@
 								<div class="grow">
 									<span class="color-dark text-small" ng-show="region.locale">{{region.locale}}</span>
 								</div>
-								<span class="color-normal">{{region.mosaics|number}}</span>
+								<span ng-show="region.mosaics > 0" class="color-normal" ng-class="{'pr-small':region.mosaics > 0 && region.potentials > 0}">{{region.mosaics|number}}</span>
+								<span ng-show="region.potentials > 0" class="color-dark">{{region.potentials|number}}</span>
 							</div>
 						</div>
 
