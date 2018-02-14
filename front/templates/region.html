@@ -66,8 +66,9 @@
 					<span class="color-dark" ng-show="city.locale">{{city.locale}}</span>
 				</div>
 				<div>
-					<span class="text-small color-muted">{{city.mosaics.length}} mosaics</span>
-					<span class="text-small color-muted" ng-show="city.potentials.length > 0">&middot; {{city.potentials.length}} potentials</span>
+					<span class="text-small color-muted" ng-show="city.mosaics.length > 0">{{city.mosaics.length}} mosaics</span>
+					<span class="text-small color-muted" ng-show="city.mosaics.length > 0 && city.potentials.length > 0">&middot;</span>
+					<span class="text-small color-muted" ng-show="city.potentials.length > 0">{{city.potentials.length}} potentials</span>
 				</div>
 			</div>
 
