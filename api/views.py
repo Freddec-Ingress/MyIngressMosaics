@@ -862,16 +862,17 @@ def data_getMosaicsByRegion(request, name):
 			'count': 0,
 			'country': country.serialize(),
 			'regions': [],
-			'countries': [],
 		}
 		
 		for item in results:
 			
 			mosaic_count = Mosaic.objects.filter(city__region=item).count()
+			potential_count = Potential.objects.filter(city__region=item).count()
 			
-			if mosaic_count > 0:
+			if mosaic_count > 0 or potential_count > 0:
 				region = {
-					'mosaics': Mosaic.objects.filter(city__region=item).count(),
+					'mosaics': mosaic_count,
+					'potentials': potential_count,
 					'name': item.name,
 					'locale': item.locale,
 					'id': item.pk,
@@ -882,7 +883,6 @@ def data_getMosaicsByRegion(request, name):
 		data['count'] = Mosaic.objects.filter(city__region__country__name=name).count()
 	
 	return Response(data, status=status.HTTP_200_OK)
-	
 
 
 #---------------------------------------------------------------------------------------------------
