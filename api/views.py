@@ -1732,7 +1732,11 @@ def city_move(request):
 	for item in src.mosaics.all():
 		item.city = dest
 		item.save()
-
+	
+	for item in src.potentials.all():
+		item.city = dest
+		item.save()
+	
 	src.delete()
 	
 	return Response(None, status=status.HTTP_200_OK)
