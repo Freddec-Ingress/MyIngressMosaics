@@ -1484,6 +1484,19 @@ def potential_delete(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
+def potential_delete_title(request):
+
+	potential = Potential.objects.filter(title=request.data['title'])
+	if potential.count() > 0:
+		potential[0].delete()
+	
+	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
 def potential_exclude(request):
 	
 	results = Mission.objects.filter(mosaic__isnull=True, name=request.data['name'])

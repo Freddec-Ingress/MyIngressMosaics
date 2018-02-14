@@ -3750,7 +3750,13 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		var data = { 'name':name };
 		API.sendRequest('/api/potential/exclude/', 'POST', {}, data);
 	}
-	
+
+	$scope.delete_potential = function(name) {
+		
+		var data = { 'title':name };
+		API.sendRequest('/api/potential/deletetitle/', 'POST', {}, data);
+	}
+
 	/* Potential management */
 	
 	$scope.refresh_missions = function(potential) {
