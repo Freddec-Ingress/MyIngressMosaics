@@ -2995,11 +2995,6 @@ angular.module('FrontModule.controllers').controller('NewCountryCtrl', function(
 				return b.mosaics - a.mosaics;
 			});
 			
-			$scope.countries = response.countries;
-			$scope.countries.sort(function(a, b) {
-				return b.mosaics - a.mosaics;
-			});
-			
 			$scope.loaded = true;
 		});
 	}
