@@ -1188,6 +1188,13 @@ def data_searchForMosaics(request):
 			data['mosaics'].append(item.overviewSerialize())
 	
 	potential_array = []
+	
+	# Creator search
+	
+	results = Potential.objects.filter(creator__icontains=request.data['text'])
+	if (results.count() > 0):
+		for potential in results:
+			potential_array.append(potential)
 		
 	# Title search
 	
@@ -1514,8 +1521,15 @@ def potential_exclude(request):
 @permission_classes((IsAuthenticated, ))
 def potential_validate(request):
 	
+	creator = None
+	faction = None
+	
 	missions = Mission.objects.filter(ref__in=request.data['refs'])
 	for item in missions:
+
+		if not creator and not faction:
+			creator = item.creator
+			faction = item.faction
 
 		item.name = request.data['title']
 		item.validated = True
@@ -1542,7 +1556,7 @@ def potential_validate(request):
 		city = City(region=region, name=request.data['city'])
 		city.save()
 		
-	potential = Potential(title=request.data['title'], count=missions.count(), city=city, country=country)
+	potential = Potential(title=request.data['title'], count=missions.count(), city=city, country=country, creator=creator, faction=faction)
 	potential.save()
 	
 	return Response(None, status=status.HTTP_200_OK)

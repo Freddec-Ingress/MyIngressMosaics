@@ -768,6 +768,9 @@ class Potential(models.Model):
 	city = models.ForeignKey(City, related_name='potentials')
 	country = models.ForeignKey(Country, related_name='potentials', null=True, blank=True)
 	
+	creator = models.CharField(max_length=32, null=True, blank=True)
+	faction = models.CharField(max_length=32, null=True, blank=True)
+	
 	# Admin displaying
 	def __str__(self):
 		return self.title + ' - ' + str(self.count)
