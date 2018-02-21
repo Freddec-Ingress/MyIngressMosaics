@@ -3984,7 +3984,7 @@ angular.module('FrontModule.controllers').controller('AdmMosaicCtrl', function($
 	
 	$scope.editMosaic = function(mosaic) {
 	    
-	    var data = { 'ref':mosaic.ref, 'city':$scope.city_name, 'region':$scope.region_name, 'country':$scope.country_name, 'type':mosaic.type, 'cols':mosaic.cols, 'title':mosaic.title }
+	    var data = { 'ref':mosaic.ref, 'city_name':$scope.city_name, 'region_name':$scope.region_name, 'country_name':$scope.country_name, 'type':mosaic.type, 'cols':mosaic.cols, 'title':mosaic.title }
 		API.sendRequest('/api/mosaic/edit/', 'POST', {}, data).then(function(response) {
             
             $scope.mosaic = response;
