@@ -3946,6 +3946,15 @@ angular.module('FrontModule.controllers').controller('AdmMosaicCtrl', function($
         });
 	}
 	
+	$scope.editMosaic = function(mosaic) {
+	    
+	    var data = { 'ref':mosaic.ref, 'city':mosaic.city, 'type':mosaic.type, 'cols':mosaic.cols, 'title':mosaic.title }
+		API.sendRequest('/api/mosaic/edit/', 'POST', {}, data).then(function(response) {
+            
+            $scope.mosaic = response;
+        });
+	}
+	
 	/* Page loading */
 	
 	$scope.loading = false;
