@@ -22,7 +22,7 @@ angular.module('FrontModule.controllers').controller('AdmMissionCtrl', function(
 	    
 	    $scope.loading = true;
         
-	    var data = { 'ref':$scope.mission.ref, 'name':$scope.mission.name, 'order':$scope.mission.order };
+	    var data = { 'ref':$scope.mission.ref, 'title':$scope.mission.title, 'order':$scope.mission.order };
 		API.sendRequest('/api/mission/update/', 'POST', {}, data).then(function(response) {
             
             $scope.mission = response.mission;
