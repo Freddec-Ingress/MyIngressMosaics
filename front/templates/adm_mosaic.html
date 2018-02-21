@@ -46,7 +46,13 @@
 		
 		<div class="mt-normal p-normal pr-xl-none pl-xl-none" ng-show="mosaic">
 			
-			<span class="block">Edit this mosaic</span>
+			<span class="block mb-small">Edit this mosaic</span>
+			
+			<span class="block mb-small">Title</span>
+			<input class="control" ng-model="mosaic.title" />
+			
+			<span class="block mb-small">City ({{city_name}}, {{region_name}}, {{country_name}})</span>
+			<input id="city_input" class="control" />
 			
 			<div class="row">
 				
@@ -57,6 +63,10 @@
 				</div>
 				
 			</div>
+			
+		</div>
+		
+		<div class="mt-normal p-normal pr-xl-none pl-xl-none" ng-show="mosaic">
 			
 			<span class="block">Delete this mosaic</span>
 			
