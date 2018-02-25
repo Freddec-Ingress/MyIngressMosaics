@@ -65,11 +65,11 @@ urlpatterns = [
 	url(r'^city/teleport/',			city_teleport),
 
 	url(r'^world/',					data_getMosaicsByCountry),
-	url(r'^country/(?P<name>[\w \-,.\']+)/$',				data_getMosaicsByRegion),
-	url(r'^region/(?P<country>[\w \-,.\']+)/(?P<name>[\w \-,.\']+)/$',				data_getMosaicsByCity),
-	url(r'^new_region/(?P<country_name>[\w \-,.\']+)/(?P<region_name>[\w \-,.\']+)/$',				newdata_getMosaicsByCity),
-	url(r'^city/(?P<country>[\w \-,.\']+)/(?P<region>[\w \-,.\']+)/(?P<name>[\w \-,.\']+)/$',				data_getMosaicsOfCity),
-	url(r'^creator/(?P<name>[\w \-,.\']+)/$',				data_getMosaicsByCreator),
+	url(r'^country/(?P<name>[\w|\W \(\)\-,.\']+)/$',				data_getMosaicsByRegion),
+	url(r'^region/(?P<country>[\w|\W \(\)\-,.\']+)/(?P<name>[\w \-,.\']+)/$',				data_getMosaicsByCity),
+	url(r'^new_region/(?P<country_name>[\w|\W \(\)\-,.\']+)/(?P<region_name>[\w \-,.\']+)/$',				newdata_getMosaicsByCity),
+	url(r'^city/(?P<country>[\w|\W \(\)\-,.\']+)/(?P<region>[\w \-,.\']+)/(?P<name>[\w \-,.\']+)/$',				data_getMosaicsOfCity),
+	url(r'^creator/(?P<name>[\w|\W \(\)\-,.\']+)/$',				data_getMosaicsByCreator),
 	
 	url(r'^map/mosaic/',			map_getMosaicOverview),
 	url(r'^map/',					map_getMosaics),
