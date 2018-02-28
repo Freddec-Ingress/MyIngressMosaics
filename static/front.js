@@ -3507,8 +3507,8 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 			
 		$scope.potentials.sort(function(a, b) {
 			
-			if (a.title > b.title) return -1;
-			if (a.title < b.title) return 1;
+			if (a.title > b.title) return 1;
+			if (a.title < b.title) return -1;
 			
 			return 0;
 		});
@@ -3532,6 +3532,9 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 			if (a.count > b.count) return -1;
 			if (a.count < b.count) return 1;
 			
+			if (a.title > b.title) return 1;
+			if (a.title < b.title) return -1;
+			
 			return 0;
 		});
 		
@@ -3540,6 +3543,9 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 			
 			if (a.missions.length > b.missions.length) return -1;
 			if (a.missions.length < b.missions.length) return 1;
+			
+			if (a.title > b.title) return 1;
+			if (a.title < b.title) return -1;
 			
 			return 0;
 		});
