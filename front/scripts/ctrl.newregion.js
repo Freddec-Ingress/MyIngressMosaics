@@ -4,9 +4,9 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 	
 	$scope.sortByName = function(city) {
 		
-		$scope.city.sorting = 'by_name';
+		city.sorting = 'by_name';
 			
-		$scope.city.potentials.sort(function(a, b) {
+		city.potentials.sort(function(a, b) {
 			
 			if (a.title > b.title) return 1;
 			if (a.title < b.title) return -1;
@@ -15,7 +15,7 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 		});
 		
 		
-		$scope.city.mosaics.sort(function(a, b) {
+		city.mosaics.sort(function(a, b) {
 			
 			if (a.title > b.title) return 1;
 			if (a.title < b.title) return -1;
@@ -26,9 +26,9 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 	
 	$scope.sortByMissionCount = function(city) {
 		
-		$scope.city.sorting = 'by_mission_count';
+		city.sorting = 'by_mission_count';
 			
-		$scope.city.potentials.sort(function(a, b) {
+		city.potentials.sort(function(a, b) {
 			
 			if (a.count > b.count) return -1;
 			if (a.count < b.count) return 1;
@@ -40,7 +40,7 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 		});
 		
 		
-		$scope.city.mosaics.sort(function(a, b) {
+		city.mosaics.sort(function(a, b) {
 			
 			if (a.missions.length > b.missions.length) return -1;
 			if (a.missions.length < b.missions.length) return 1;
@@ -54,9 +54,9 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 	
 	$scope.sortByDate = function(city) {
 		
-		$scope.city.sorting = 'by_date';
+		city.sorting = 'by_date';
 			
-		$scope.city.potentials.sort(function(a, b) {
+		city.potentials.sort(function(a, b) {
 			
 			if (a.id > b.id) return -1;
 			if (a.id < b.id) return 1;
@@ -65,7 +65,7 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 		});
 		
 		
-		$scope.city.mosaics.sort(function(a, b) {
+		city.mosaics.sort(function(a, b) {
 			
 			if (a.id > b.id) return -1;
 			if (a.id < b.id) return 1;
