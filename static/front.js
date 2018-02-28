@@ -3441,6 +3441,80 @@ angular.module('FrontModule.controllers').controller('NewWorldCtrl', function($s
 });
 angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($scope, $window, API) {
 	
+	/* Sorting */
+	
+	$scope.sortByName = function(city) {
+		
+		$scope.city.sorting = 'by_name';
+			
+		$scope.city.potentials.sort(function(a, b) {
+			
+			if (a.title > b.title) return 1;
+			if (a.title < b.title) return -1;
+			
+			return 0;
+		});
+		
+		
+		$scope.city.mosaics.sort(function(a, b) {
+			
+			if (a.title > b.title) return 1;
+			if (a.title < b.title) return -1;
+			
+			return 0;
+		});
+	}
+	
+	$scope.sortByMissionCount = function(city) {
+		
+		$scope.city.sorting = 'by_mission_count';
+			
+		$scope.city.potentials.sort(function(a, b) {
+			
+			if (a.count > b.count) return -1;
+			if (a.count < b.count) return 1;
+			
+			if (a.title > b.title) return 1;
+			if (a.title < b.title) return -1;
+			
+			return 0;
+		});
+		
+		
+		$scope.city.mosaics.sort(function(a, b) {
+			
+			if (a.missions.length > b.missions.length) return -1;
+			if (a.missions.length < b.missions.length) return 1;
+			
+			if (a.title > b.title) return 1;
+			if (a.title < b.title) return -1;
+			
+			return 0;
+		});
+	}
+	
+	$scope.sortByDate = function(city) {
+		
+		$scope.city.sorting = 'by_date';
+			
+		$scope.city.potentials.sort(function(a, b) {
+			
+			if (a.id > b.id) return -1;
+			if (a.id < b.id) return 1;
+			
+			return 0;
+		});
+		
+		
+		$scope.city.mosaics.sort(function(a, b) {
+			
+			if (a.id > b.id) return -1;
+			if (a.id < b.id) return 1;
+			
+			return 0;
+		});
+	}
+	
 	/* Index management */
 	
 	$scope.indexes = [];

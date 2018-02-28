@@ -72,6 +72,28 @@
 				</div>
 			</div>
 			
+			<div class="item flex wrap">
+				
+				<div class="item">
+					<div class="item badge badge-link" ng-click="sortByMissionCount(city);">
+						By mission count
+					</div>
+				</div>
+				
+				<div class="item">
+					<div class="item badge badge-link" ng-click="sortByDate(city);">
+						Most Recent
+					</div>
+				</div>
+				
+				<div class="item">
+					<div class="item badge badge-link" ng-click="sortByName(city);">
+						Alphabetical
+					</div>
+				</div>
+				
+			</div>
+			
 			<div class="flex wrap">
 				<div class="width-12 width-xl-4 item" ng-repeat="potential in city.potentials">
 					<a class="item link-block flex-col pt-none pb-none" href="/registration/{{potential.title}}">
