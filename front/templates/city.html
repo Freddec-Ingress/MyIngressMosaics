@@ -47,6 +47,28 @@
 			
 		</div>
 		
+		<div class="item mt-big flex wrap">
+			
+			<div class="item">
+				<div class="badge" ng-click="sortByMissionCount();">
+					By mission count
+				</div>
+			</div>
+			
+			<div class="item">
+				<div class="badge" ng-click="sortByDate();">
+					Most Recent
+				</div>
+			</div>
+			
+			<div class="item">
+				<div class="badge" ng-click="sortByName();">
+					Alphabetical
+				</div>
+			</div>
+			
+		</div>
+		
 		<div class="item mt-big flex wrap" ng-show="potentials.length > 0">
 			<div class="width-12 width-xl-4 item" ng-repeat="potential in potentials">
 				<a class="item link-block flex-col pt-none pb-none" href="/registration/{{potential.title}}">

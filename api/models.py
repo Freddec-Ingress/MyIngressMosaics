@@ -345,6 +345,7 @@ class Mosaic(models.Model):
 		
 		data = {
 			
+			'id': self.pk,
 			'ref': self.ref,
 			'cols': self.cols,
 			'type': self.type,
@@ -778,6 +779,8 @@ class Potential(models.Model):
 	def overviewSerialize(self):
 		
 		data = {
+			
+			'id': self.pk,
 			'title': self.title,
 			'count': self.count,
 			'city': self.city.serialize(),
