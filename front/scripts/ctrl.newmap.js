@@ -195,10 +195,10 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 									var data = {'sLat':south, 'sLng':west, 'nLat':north, 'nLng':east};
 									API.sendRequest('/api/map/', 'POST', {}, data).then(function(response) {
 										
+										tilesProcessed.push(tile_id);
+										tilesToBeProcessed.splice(tilesToBeProcessed.indexOf(tile_id), 1);
+										
 										if (response) {
-											
-											tilesProcessed.push(tile_id);
-											tilesToBeProcessed.splice(tilesToBeProcessed.indexOf(tile_id), 1);
 											
 											$scope.mosaics.concat(response);
 											
@@ -272,9 +272,9 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 													markerArray.push(marker);
 												}
 											}
-											
-											if (tilesToBeProcessed.length < 1) $scope.flag_loading = false;
 										}
+										
+										if (tilesToBeProcessed.length < 1) $scope.flag_loading = false;
 									});
 				                }
 				            }
