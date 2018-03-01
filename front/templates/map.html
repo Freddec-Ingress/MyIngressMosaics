@@ -120,10 +120,13 @@
 			</div>
 			
 			<div ng-show="mosaics.length > 0 && !flag_loading && !flag_zoom_in">
-				<a class="flex align-center" ng-click="openMosaicList();">
+				<a class="flex align-center" ng-click="openMosaicList();" ng-show="mosaics.length < 26">
 					<i class="item fa fa-list-alt"></i>
 					<span class="item">{{mosaics.length}} mosaics</span>
 				</a>
+				<div class="flex align-center" ng-show="mosaics.length > 25">
+					<span class="item">{{mosaics.length}} mosaics</span>
+				</div>
 			</div>
 			
 		</div>

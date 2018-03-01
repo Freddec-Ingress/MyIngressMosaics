@@ -195,6 +195,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 				            for (var y = yStart; y <= yEnd; y++) {
 								
 								$scope.curTileProcessed += 1;
+								$scope.$apply();
 								
 								var tile_id = x + '_' + y;
 				                if (tilesProcessed.indexOf(tile_id) == -1 && tilesToBeProcessed.indexOf(tile_id) == -1) {
