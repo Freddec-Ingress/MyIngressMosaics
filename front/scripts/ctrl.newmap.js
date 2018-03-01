@@ -153,9 +153,9 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 				
 				var tilesPerEdgeArray = [80,320,1000,2000,2000,4000,8000,16000,16000,32000];
 				
+				var loadedMosaics = [];
+				
 				map.addListener('idle', function(e) {
-					
-					$scope.mosaics = [];
 					
 					$scope.flag_loading = true;
 					$scope.flag_no_mosaic = false;
@@ -200,7 +200,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 										
 										if (response) {
 											
-											$scope.mosaics.concat(response);
+											loadedMosaics.concat(response);
 											
 											for (var item of response) {
 											
@@ -274,7 +274,17 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 											}
 										}
 										
-										if (tilesToBeProcessed.length < 1) $scope.flag_loading = false;
+										if (tilesToBeProcessed.length < 1) {
+					
+											$scope.mosaics = [];
+											for (var mosaic of loadedMosaics) {
+												if (mosaic.startLat >= North_Lat && mosaic.startLat <= South_Lat && mosaic.startLng >= North_Lng && mosaic.startLng <= South_Lng) {
+												 	$scope.mosaics.push(mosaic);
+												}
+											}
+
+											$scope.flag_loading = false;
+										}
 									});
 				                }
 				            }

@@ -106,8 +106,12 @@
 		
 		<div class="item flex justify-center align-center">
 			
-			<div ng-show="flag_no_mosaic" class="item">
+			<div ng-show="mosaics.length < 1 && !flag_loading" class="item">
 				<span class="color-normal">No mosaic. Please try to zoom out.</span>
+			</div>
+			
+			<div ng-show="flag_zoom_in && !flag_loading" class="item">
+				<span class="color-normal">Current map is too larger to be scanned. Please try to zoom in.</span>
 			</div>
 			
 			<div ng-show="flag_loading" class="flex align-center justify-center">
