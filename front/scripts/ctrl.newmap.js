@@ -186,7 +186,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 			                    var west = tileToLng(x, tilesPerEdge);
 			                    var east = tileToLng(x + 1, tilesPerEdge);
 			                    
-								var data = {'sLat':west, 'sLng':east, 'nLat':north, 'nLng':south};
+								var data = {'sLat':east, 'sLng':south, 'nLat':west, 'nLng':north};
 								API.sendRequest('/api/map/', 'POST', {}, data).then(function(response) {
 									
 									if (response) {
