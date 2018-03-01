@@ -159,6 +159,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 					
 					$scope.flag_loading = true;
 					$scope.flag_no_mosaic = false;
+					$scope.flag_zoom_in = false;
 					
 					var bds = map.getBounds();
 					
@@ -183,7 +184,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 								
 								var tile_id = x + '_' + y;
 				                if (tilesProcessed.indexOf(tile_id) == -1 && tilesToBeProcessed.indexOf(tile_id) == -1) {
-								
+									
 									tilesToBeProcessed.push(tile_id);
 								
 				                    var south = tileToLat(y + 1, tilesPerEdge);
@@ -197,6 +198,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 										if (response) {
 											
 											tilesProcessed.push(tile_id);
+											tilesToBeProcessed.splice(tilesToBeProcessed.indexOf(tile_id), 1);
 											
 											$scope.mosaics.concat(response);
 											
@@ -277,6 +279,9 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 				                }
 				            }
 				        }
+					}
+					else {
+						$scope.flag_zoom_in = true;
 					}
 				});
 		
