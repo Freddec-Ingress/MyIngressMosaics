@@ -3240,6 +3240,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 										if (response) {
 											
 											loadedMosaics.concat(response);
+											console.log('loaded mosaics count: ' + loadedMosaics.length);
 											
 											for (var item of response) {
 											
@@ -3333,6 +3334,8 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 					else {
 						$scope.flag_zoom_in = true;
 					}
+					
+					console.log('flag zoom in:' + $scope.flag_zoom_in);
 				});
 		
 		    	document.getElementById('submit').addEventListener('click', function() {
