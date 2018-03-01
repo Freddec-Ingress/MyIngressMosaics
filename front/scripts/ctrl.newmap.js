@@ -198,7 +198,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 											
 											tilesProcessed.push(tile_id);
 											
-											$scope.mosaics.append(response);
+											$scope.mosaics.concat(response);
 											
 											for (var item of response) {
 											
