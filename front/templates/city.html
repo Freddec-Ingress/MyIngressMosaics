@@ -47,22 +47,22 @@
 			
 		</div>
 		
-		<div class="item mt-big flex wrap">
+		<div class="item mt-big flex wrap" ng-show="(potentials.length + mosaics.length) > 2">
 			
 			<div class="item">
-				<a class="item badge badge-link" ng-click="sortByMissionCount();">
+				<a class="text-small" ng-click="sortByMissionCount();" ng-class="{'active': city.sorting=='by_mission_count'}">
 					By mission count
 				</a>
 			</div>
 			
 			<div class="item">
-				<a class="item badge badge-link" ng-click="sortByDate();">
+				<a class="text-small" ng-click="sortByDate();" ng-class="{'active': city.sorting=='by_date'}">
 					Most Recent
 				</a>
 			</div>
 			
 			<div class="item">
-				<a class="item badge badge-link" ng-click="sortByName();">
+				<a class="text-small" ng-click="sortByName();" ng-class="{'active': city.sorting=='by_name'}">
 					Alphabetical
 				</a>
 			</div>
