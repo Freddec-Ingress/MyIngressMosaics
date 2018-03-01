@@ -3351,6 +3351,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 						$scope.flag_zoom_in = true;
 					}
 					
+					$scope.$apply();
 					console.log('flag zoom in:' + $scope.flag_zoom_in);
 				});
 		
