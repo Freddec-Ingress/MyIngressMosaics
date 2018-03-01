@@ -204,7 +204,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 										
 										if (response) {
 											
-											loadedMosaics.concat(response);
+											loadedMosaics = loadedMosaics.concat(response);
 											console.log('loaded mosaics count: ' + loadedMosaics.length);
 											
 											for (var item of response) {
