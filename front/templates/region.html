@@ -47,7 +47,7 @@
 				<div class="grow flex width-12 wrap">
 
 					<div class="item flex justify-center" ng-repeat="index in indexes track by $index" ng-show="index.cities.length > 0" style="width:40px;">
-						<a class="badge badge-link item text-center" ng-click="setCurrentIndex(index);" ng-class="{'transparent color-link': current_index!=index}" style="width:100%;">
+						<a class="badge badge-link item text-center" ng-click="setCurrentIndex(index);" ng-class="{'active': current_index==index}" style="width:100%;">
 							{{index.letter}}
 						</a>
 					</div>

@@ -108,6 +108,10 @@ ul > li { list-style:none; }
 	font-size: 13px;
 	cursor: pointer;
 }
+
+.badge-link.active {
+	color:#fff;
+}
 .modal-container {
 	z-index:10;
 	padding:20px;

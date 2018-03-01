@@ -10,3 +10,7 @@
 	font-size: 13px;
 	cursor: pointer;
 }
+
+.badge-link.active {
+	color:#fff;
+}
