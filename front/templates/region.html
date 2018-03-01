@@ -72,7 +72,7 @@
 				</div>
 			</div>
 			
-			<div class="flex wrap">
+			<div class="flex wrap" ng-show="(city.potentials.length + city.mosaics.length) > 2">
 				
 				<div class="item">
 					<a class="text-small" ng-click="sortByMissionCount(city);" ng-class="{'active': city.sorting=='by_mission_count'}">
@@ -119,7 +119,7 @@
 			</div>
 			
 			<div class="flex wrap">
-				<div class="width-6 width-xl-4" ng-repeat="mosaic in city.mosaics" style="padding: .75rem .375rem;">
+				<div class="width-6 width-xl-4" ng-repeat="mosaic in city.mosaics" style="padding: .75rem .375rem;" ng-class="">
 					<a class="item link-block flex-col" href="/mosaic/{{mosaic.ref}}" target="_blank" style="height:100%;">
 						
 	    				<div class="item">

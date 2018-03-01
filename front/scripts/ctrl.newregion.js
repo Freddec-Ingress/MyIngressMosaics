@@ -111,6 +111,7 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 						
 						mosaic.offset = new Array(temp);
 					}
+					$scope.sortByMissionCount(city);
 				}
 				
 				index.cities.sort(function(a, b) {
