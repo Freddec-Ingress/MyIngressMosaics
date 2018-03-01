@@ -3239,7 +3239,11 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 										
 										if (response) {
 											
-											loadedMosaics = loadedMosaics.concat(response);
+											for (var mosaic of response) {
+												if (loadedMosaics.indexOf(mosaic) == -1) {
+													loadedMosaics.push(mosaic);
+												}
+											}
 											console.log('loaded mosaics count: ' + loadedMosaics.length);
 											
 											for (var item of response) {
@@ -3333,6 +3337,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 				        }
 					}
 					else {
+						$scope.flag_loading = false;
 						$scope.flag_zoom_in = true;
 					}
 					

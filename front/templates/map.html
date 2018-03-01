@@ -110,7 +110,7 @@
 				<span class="color-normal">No mosaic. Please try to zoom out.</span>
 			</div>
 			
-			<div ng-show="flag_zoom_in && !flag_loading" class="item">
+			<div ng-show="flag_zoom_in" class="item">
 				<span class="color-normal">Current map is too larger to be scanned. Please try to zoom in.</span>
 			</div>
 			
@@ -119,7 +119,7 @@
 				<span class="item">Loading data...</span>
 			</div>
 			
-			<div ng-show="mosaics.length > 0 && !flag_loading">
+			<div ng-show="mosaics.length > 0 && !flag_loading && !flag_zoom_in">
 				<a class="flex align-center" ng-click="openMosaicList();">
 					<i class="item fa fa-list-alt"></i>
 					<span class="item">{{mosaics.length}} mosaics</span>
