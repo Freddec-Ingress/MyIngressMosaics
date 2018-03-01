@@ -3050,6 +3050,9 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 	$scope.flag_no_mosaic = false;
 	$scope.flag_zoom_in = false;
 
+	$scope.curTileCount = 0;
+    $scope.curTileProcessed = 0;
+				    
 	$scope.initMap = function() {
 		
 		var map = null;
@@ -3193,6 +3196,9 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 				
 				map.addListener('idle', function(e) {
 					
+					$scope.curTileCount = 0;
+				    $scope.curTileProcessed = 0;
+				        
 					$scope.flag_loading = true;
 					$scope.flag_no_mosaic = false;
 					$scope.flag_zoom_in = false;
@@ -3218,8 +3224,12 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 				        var yStart = Math.floor((1 - Math.log(Math.tan(North_Lat * Math.PI / 180) + 1 / Math.cos(North_Lat * Math.PI / 180)) / Math.PI) / 2 * tilesPerEdge);
 				        var yEnd = Math.floor((1 - Math.log(Math.tan(South_Lat * Math.PI / 180) + 1 / Math.cos(South_Lat * Math.PI / 180)) / Math.PI) / 2 * tilesPerEdge);
 				        
+				        $scope.curTileCount = (xEnd - xStart) * (yEnd - yStart);
+				        
 				        for (var x = xStart; x <= xEnd; x++) {
 				            for (var y = yStart; y <= yEnd; y++) {
+								
+								$scope.curTileProcessed += 1;
 								
 								var tile_id = x + '_' + y;
 				                if (tilesProcessed.indexOf(tile_id) == -1 && tilesToBeProcessed.indexOf(tile_id) == -1) {
@@ -3240,7 +3250,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 										if (response) {
 											
 											for (var mosaic of response) {
-												if (loadedMosaics.indexOf(mosaic) == -1) {
+												if (loadedMosaics.findIndex(function(element, index, array) { return element.ref == mosaic.ref; }) == -1) {
 													loadedMosaics.push(mosaic);
 												}
 											}
