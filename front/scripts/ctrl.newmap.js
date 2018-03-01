@@ -283,9 +283,10 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 					
 											$scope.mosaics = [];
 											for (var mosaic of loadedMosaics) {
-												console.log('mosaic start point: (' + mosaic.startLat + ',' + mosaic.startLng + ')')
-												if (mosaic.startLat >= North_Lat && mosaic.startLat <= South_Lat && mosaic.startLng >= North_Lng && mosaic.startLng <= South_Lng) {
+												console.log('mosaic start point: (' + mosaic.startLat + ',' + mosaic.startLng + ')');
+												if (mosaic.startLat >= South_Lat && mosaic.startLat <= North_Lat && mosaic.startLng >= South_Lng && mosaic.startLng <= North_Lng) {
 												 	$scope.mosaics.push(mosaic);
+													console.log('mosaic displayed');
 												}
 											}
 
