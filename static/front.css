@@ -43,6 +43,7 @@ body {
 
 a { cursor: pointer; color: #ebbc4a; text-decoration: none; }
 a:hover, a:focus, .hover:hover { color: inherit; cursor: pointer; text-decoration: inherit; }
+a.active { color: #fff; }
 
 
 

@@ -75,19 +75,19 @@
 			<div class="flex wrap">
 				
 				<div class="item">
-					<a class="item badge badge-link" ng-click="sortByMissionCount(city);">
+					<a class="text-small" ng-click="sortByMissionCount(city);" ng-class="{'active': city.sorting=='by_mission_count'}">
 						By mission count
 					</a>
 				</div>
 				
 				<div class="item">
-					<a class="item badge badge-link" ng-click="sortByDate(city);">
+					<a class="text-small" ng-click="sortByDate(city);" ng-class="{'active': city.sorting=='by_date'}">
 						Most Recent
 					</a>
 				</div>
 				
 				<div class="item">
-					<a class="item badge badge-link" ng-click="sortByName(city);">
+					<a class="text-small" ng-click="sortByName(city);" ng-class="{'active': city.sorting=='by_name'}">
 						Alphabetical
 					</a>
 				</div>
