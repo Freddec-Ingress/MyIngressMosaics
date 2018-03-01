@@ -355,10 +355,13 @@ class Mosaic(models.Model):
 			'startLat': self.startLat,
 			'startLng': self.startLng,
 			
-			'city': self.city.serialize(),
+			'city': None,
 
 			'missions': [],
 		}
+		
+		if self.city:
+			data['city'] = self.city.serialize()
 		
 		for item in self.missions.all().order_by('order'):
 			

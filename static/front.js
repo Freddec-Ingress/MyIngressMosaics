@@ -3200,7 +3200,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 					var North_Lat = bds.getNorthEast().lat();
 					var North_Lng = bds.getNorthEast().lng();
 					
-					var tilesPerEdge = 32000;
+					var tilesPerEdge = 2000;
 			
 			        var xStart = Math.floor((South_Lng + 180) / 360 * tilesPerEdge);
 			        var xEnd = Math.floor((North_Lng + 180) / 360 * tilesPerEdge);
