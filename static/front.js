@@ -3048,6 +3048,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 
 	$scope.flag_loading = true;
 	$scope.flag_no_mosaic = false;
+	$scope.flag_zoom_in = false;
 
 	$scope.initMap = function() {
 		
@@ -3203,7 +3204,10 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 					var North_Lat = bds.getNorthEast().lat();
 					var North_Lng = bds.getNorthEast().lng();
 					
+					console.log('bounds: (' + North_Lat + ',' + North_Lng + ')(' + South_Lat + ',' + South_Lng + ')')
+					
 					var zoom = map.getZoom();
+					console.log('zoom: ' + zoom)
 					if (zoom > 10) {
 						
 						var tilesPerEdge = tilesPerEdgeArray[zoom-10];
@@ -3313,6 +3317,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 					
 											$scope.mosaics = [];
 											for (var mosaic of loadedMosaics) {
+												console.log('mosaic start point: (' + mosaic.startLat + ',' + mosaic.startLng + ')')
 												if (mosaic.startLat >= North_Lat && mosaic.startLat <= South_Lat && mosaic.startLng >= North_Lng && mosaic.startLng <= South_Lng) {
 												 	$scope.mosaics.push(mosaic);
 												}

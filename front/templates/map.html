@@ -119,7 +119,7 @@
 				<span class="item">Loading data...</span>
 			</div>
 			
-			<div ng-show="!flag_no_mosaic && !flag_loading">
+			<div ng-show="mosaics.length > 0 && !flag_loading">
 				<a class="flex align-center" ng-click="openMosaicList();">
 					<i class="item fa fa-list-alt"></i>
 					<span class="item">{{mosaics.length}} mosaics</span>
