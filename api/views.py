@@ -1793,9 +1793,19 @@ def telegram_updates(request):
 	response_url = 'https://api.telegram.org/bot539679576:AAFC6QR0d8aTKd5sckEWWEFfwsNq5W5Rar0/sendMessage'
 	response_txt = ''
 	
+	print(request.data['message']['text'])
+	
 	# City command
 	if '/city ' in request.data['message']['text']:
-		response_txt = 'city command'
+		city_query = request.data['message']['text'].replace('/city ', '')
+		results = City.objects.filter(name__iexact=city_query)
+		if results.count() > 0:
+			city_data = results[0]
+			response_txt += '<div><span>' + city_data.name + ', ' + city_data.region.name + ', ' + city_data.country.name + '</span></div>'
+			response_txt += '<div><span>' + city_data.mosaics.count() + ' mosaics</span></div>'
+			response_txt += '<div><a href="https://www.myingressmosaics.com/world/' + city_data.country.name + '/' + city_data.region.name + '/' + city_data.name + '">MIM link</a></div>'
+		else:
+			response_txt = 'No city found (' + city_query + ')'
 	
 	# Mosaic command
 	elif '/mosaic ' in request.data['message']['text']:
