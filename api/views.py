@@ -1792,15 +1792,14 @@ def telegram_updates(request):
 	
 	response_url = 'https://api.telegram.org/bot539679576:AAFC6QR0d8aTKd5sckEWWEFfwsNq5W5Rar0/sendMessage'
 	response_txt = ''
-	
-	print(request.data['message']['text'])
-	
+
 	# City command
 	if '/city ' in request.data['message']['text']:
 		city_query = request.data['message']['text'].replace('/city ', '')
 		print(city_query)
 		results = City.objects.filter(name__iexact=city_query)
-		print(str(results.count()))
+		response_txt = str(results.count())
+		print(response_txt)
 #		if results.count() > 0:
 #			city_data = results[0]
 #			response_txt += '<div><span>' + city_data.name + ', ' + city_data.region.name + ', ' + city_data.country.name + '</span></div>'
