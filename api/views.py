@@ -1793,8 +1793,26 @@ def telegram_updates(request):
 	response_url = 'https://api.telegram.org/bot539679576:AAFC6QR0d8aTKd5sckEWWEFfwsNq5W5Rar0/sendMessage'
 	response_txt = ''
 
+	# Inline query
+	if request.data['inline_query']:
+		query = request.data['inline_query']['query']
+		if query:
+			
+			results = City.objects.filter(name__iexact=query)
+			if results.count() > 0:
+				city_data = results[0]
+				response_txt += '<b>' + city_data.name + ', ' + city_data.region.name + ', ' + city_data.region.country.name + '</b>\r\n'
+				response_txt += str(city_data.mosaics.all().count()) + ' mosaics\r\n'
+				response_txt += '<a href="https://www.myingressmosaics.com/world/' + city_data.region.country.name + '/' + city_data.region.name + '/' + city_data.name + '">MIM link</a>'
+			
+			else:
+				response_txt = 'Nothing found'
+				
+		else:
+			response_txt = 'Find MIM Link to mosaics, cities or creators by typing name'
+		
 	# City command
-	if '/city ' in request.data['message']['text']:
+	elif '/city ' in request.data['message']['text']:
 		city_query = request.data['message']['text'].replace('/city ', '')
 		results = City.objects.filter(name__iexact=city_query)
 		if results.count() > 0:
