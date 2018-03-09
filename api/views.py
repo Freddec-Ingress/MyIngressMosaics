@@ -1144,9 +1144,9 @@ def data_newSearchForMissions(request):
 			potential.delete()
 	
 	return Response(data, status=status.HTTP_200_OK)
-    
-    
-    
+	
+	
+	
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((AllowAny, ))
@@ -1873,6 +1873,6 @@ def telegram_updates(request):
 		print(response)
 	
 	except Exception as e:
-	    print '%s (%s)' % (e.message, type(e))
+		print('%s (%s)' % (e.message, type(e)))
 	
 	return Response(None, status=status.HTTP_200_OK)
