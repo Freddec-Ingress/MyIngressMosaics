@@ -1795,13 +1795,14 @@ def telegram_updates(request):
 
 	try:
 		# Inline query
-		if request.data['inline_query']:
+		if 'inline_query' in request.data:
 			print('##### TELEGRAM INLINE QUERY #####')
 			print(request.data['inline_query'])
 			query = request.data['inline_query']['query']
 			if query:
 				
 				results = City.objects.filter(name__iexact=query)
+				print(str(results.count()))
 				if results.count() > 0:
 					city_data = results[0]
 					print(request.data['inline_query']['id'])
