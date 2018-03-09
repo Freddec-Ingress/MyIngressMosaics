@@ -88,4 +88,6 @@ urlpatterns = [
 
 	url(r'^adm/city/rename',				adm_renameCity),
 	url(r'^adm/region/rename',				adm_renameRegion),
+
+	url(r'^telegram/539679576:AAFC6QR0d8aTKd5sckEWWEFfwsNq5W5Rar0', telegram_updates),
 ]
