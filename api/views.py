@@ -1796,7 +1796,6 @@ def telegram_updates(request):
 	# City command
 	if '/city ' in request.data['message']['text']:
 		city_query = request.data['message']['text'].replace('/city ', '')
-		print(city_query)
 		results = City.objects.filter(name__iexact=city_query)
 		if results.count() > 0:
 			response_txt = '<div><span>Got it!</span></div>'
@@ -1807,6 +1806,7 @@ def telegram_updates(request):
 #			print(response_txt)
 		else:
 			response_txt = 'No city found (' + city_query + ')'
+		print(response_txt)
 	
 	# Mosaic command
 	elif '/mosaic ' in request.data['message']['text']:
