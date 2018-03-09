@@ -1790,7 +1790,14 @@ def city_teleport(request):
 @permission_classes((AllowAny, ))
 def telegram_updates(request):
 	
-	print(request.data['message'])
+	MSG_URL = 'https://api.telegram.org/bot539679576:AAFC6QR0d8aTKd5sckEWWEFfwsNq5W5Rar0/sendMessage'
 	
-	data = { 'msg': 'coucou', }
-	return Response(data, status=status.HTTP_200_OK)
+	params = {
+		'chat_id': request.data['message']['chat']['id'],
+		'text': 'coucou',
+		'parse_mode': 'HTML',
+	}
+	
+	response = requests.post(MSG_URL, data=params)
+	
+	return Response(None, status=status.HTTP_200_OK)
