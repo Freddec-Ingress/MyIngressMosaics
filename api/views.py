@@ -1795,6 +1795,7 @@ def telegram_updates(request):
 
 	# Inline query
 	if request.data['inline_query']:
+		print('##### TELEGRAM INLINE QUERY #####')
 		query = request.data['inline_query']['query']
 		print(query)
 		if query:
