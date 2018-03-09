@@ -1870,6 +1870,6 @@ def telegram_updates(request):
 		print(response)
 	
 	except Exception as e:
-		print(e)
+		print 
 	
 	return Response(None, status=status.HTTP_200_OK)
