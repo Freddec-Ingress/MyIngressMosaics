@@ -1790,7 +1790,7 @@ def city_teleport(request):
 @permission_classes((AllowAny, ))
 def telegram_updates(request):
 	
-	print request.data['message']
+	print(request.data['message'])
 	
 	data = { 'msg': 'coucou', }
 	return Response(data, status=status.HTTP_200_OK)
