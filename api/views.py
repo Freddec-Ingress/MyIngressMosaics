@@ -1786,9 +1786,13 @@ def city_teleport(request):
 
 
 #---------------------------------------------------------------------------------------------------
+import telepot
+from telepot.namedtuple import InlineQueryResultArticle, InputTextMessageContent
 @api_view(['POST'])
 @permission_classes((AllowAny, ))
 def telegram_updates(request):
+	
+	bot = telepot.Bot('539679576:AAFC6QR0d8aTKd5sckEWWEFfwsNq5W5Rar0')
 	
 	response_url = 'https://api.telegram.org/bot539679576:AAFC6QR0d8aTKd5sckEWWEFfwsNq5W5Rar0/sendMessage'
 	response_txt = ''
@@ -1798,17 +1802,28 @@ def telegram_updates(request):
 		# Inline query
 		if 'inline_query' in request.data:
 			
-			print('##### TELEGRAM INLINE QUERY #####')
-			print('inline_query: ' + request.data['inline_query'])
+			query_id = request.data['inline_query']['id']
+			query_string = request.data['inline_query']['query']
 
-			query = request.data['inline_query']['query']
-			print('query: ' + query)
+			results = Mosaic.objects.filter(title__icontains=query_string)
+			print(str(results.count()))
 			
-			results = City.objects.filter(name__iexact=query)
-			print('results count: ' + str(results.count()))
+			articles = []
 			
-			
-			
+			if results.count() > 0:
+				for item in results:
+				
+					article = InlineQueryResultArticle(
+							id=item.ref,
+							title=item.title,
+							input_message_content=InputTextMessageContent(
+								message_text=item.title
+							)
+						)
+					articles.append(article)
+				
+			response = bot.answerInlineQuery(query_id, articles)
+
 			return Response(None, status=status.HTTP_200_OK)
 			
 		# City command
