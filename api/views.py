@@ -1803,8 +1803,9 @@ def telegram_updates(request):
 			results = City.objects.filter(name__iexact=query)
 			if results.count() > 0:
 				city_data = results[0]
+				print(request.data['inline_query']['id'])
 				result = {
-					'id':request.data['inline_query']['id'],
+					#'id':request.data['inline_query']['id'],
 					#'type':'article',
 					#'title':city_data.name + ', ' + city_data.region.name + ', ' + city_data.region.country.name,
 					#'input_message_content': {
@@ -1860,6 +1861,7 @@ def telegram_updates(request):
 		'chat_id': request.data['message']['chat']['id'],
 		'text': response_txt,
 		'parse_mode': 'HTML',
+		'disable_web_page_preview': True,
 	}
 	
 	print(response_txt)
