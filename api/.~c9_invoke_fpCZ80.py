@@ -1800,7 +1800,7 @@ def telegram_updates(request):
 		if results.count() > 0:
 			response_txt = '<div><span>Got it!</span></div>'
 			city_data = results[0]
-			response_txt += '<div><span>' + city_data.name + ', ' + city_data.region.name + ', ' + city_data.country.name + '</span></div>'
+			response_txt += '<div><span>' + city_data.name + ', ' + city_data.region.name + ', ' + city_data.region.country.name + '</span></div>'
 #			response_txt += '<div><span>' + str(city_data.mosaics.count()) + ' mosaics</span></div>'
 #			response_txt += '<div><a href="https://www.myingressmosaics.com/world/' + city_data.country.name + '/' + city_data.region.name + '/' + city_data.name + '">MIM link</a></div>'
 #			print(response_txt)
