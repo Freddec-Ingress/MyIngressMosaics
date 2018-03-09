@@ -1812,7 +1812,6 @@ def telegram_updates(request):
 					}
 				}
 				print(result)
-				
 			else:
 				result = None
 				
