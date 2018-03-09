@@ -1805,12 +1805,12 @@ def telegram_updates(request):
 				city_data = results[0]
 				result = {
 					'id':request.data['inline_query']['id'],
-					'type':'article',
-					'title':city_data.name + ', ' + city_data.region.name + ', ' + city_data.region.country.name,
-					'input_message_content': {
-						'message_text':'<a href="https://www.myingressmosaics.com/world/' + city_data.region.country.name + '/' + city_data.region.name + '/' + city_data.name + '">MIM link</a>',
-						'parse_mode':'HTML',
-					}
+					#'type':'article',
+					#'title':city_data.name + ', ' + city_data.region.name + ', ' + city_data.region.country.name,
+					#'input_message_content': {
+					#	'message_text':'<a href="https://www.myingressmosaics.com/world/' + city_data.region.country.name + '/' + city_data.region.name + '/' + city_data.name + '">MIM link</a>',
+					#	'parse_mode':'HTML',
+					#}
 				}
 				print(result)
 				
