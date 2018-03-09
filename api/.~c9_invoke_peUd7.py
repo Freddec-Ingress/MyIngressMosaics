@@ -1799,8 +1799,8 @@ def telegram_updates(request):
 		results = City.objects.filter(name__iexact=city_query)
 		if results.count() > 0:
 			city_data = results[0]
-			response_txt += '<b>' + city_data.name + ', ' + city_data.region.name + ', ' + city_data.region.country.name + '</b>'
-			#response_txt += '<div><span>' + str(city_data.mosaics.all().count()) + ' mosaics</span></div>'
+			response_txt += '<b>' + city_data.name + ', ' + city_data.region.name + ', ' + city_data.region.country.name + '</b>\r\n'
+			response_txt += str(city_data.mosaics.all().count()) + ' mosaics'
 			#response_txt += '<div><a href="https://www.myingressmosaics.com/world/' + city_data.region.country.name + '/' + city_data.region.name + '/' + city_data.name + '">MIM link</a></div>'
 		else:
 			response_txt = 'No city found (' + city_query + ')'
