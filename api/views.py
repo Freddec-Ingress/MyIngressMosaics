@@ -18,6 +18,7 @@ from .models import *
 
 from django.conf import settings
 from django.http import HttpResponse
+from django.core.mail import send_mail
 
 from django.db.models import Q
 from django.db.models import Count
@@ -424,6 +425,24 @@ def mosaic_create(request):
 	results = Potential.objects.filter(title=request.data['title'], city = city)
 	if results.count() > 0:
 		results[0].delete()
+	
+	country_notifiers = Notif.objects.filter(country=country, region__isnull=True, city__isnull=True).values_list('user__email')
+	region_notifiers = Notif.objects.filter(country=country, region=region, city__isnull=True).values_list('user__email')
+	city_notifiers = Notif.objects.filter(country=country, region=region, city=city).values_list('user__email')
+	
+	receivers = country_notifiers + region_notifiers + city_notifiers
+	receivers = set(receivers)
+	receivers = list(receivers)
+
+	if len(receivers) > 0:
+
+		send_mail(
+			'[MIM] New Mosaic Registered',
+	    	'Hello Agent,',
+	    	'admin@myingressmosaics.com',
+	    	receivers,
+	    	fail_silently=False,
+	    )
 	
 	return Response(mosaic.ref, status=status.HTTP_200_OK)
 

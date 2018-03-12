@@ -50,9 +50,6 @@ def notif_create(request):
 		new_notif = Notif(user=request.user, country=country_data, region=region_data, city=city_data)
 		new_notif.save()
 	
-	from django.core.mail import send_mail
-	send_mail('Subject here', 'Here is the message.', 'admin@myingressmosaics.com', ['freddec.ingress@gmail.com'], fail_silently=False)
-	
 	return Response(None, status=status.HTTP_200_OK)
 
 
