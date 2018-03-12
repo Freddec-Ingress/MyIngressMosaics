@@ -1,5 +1,14 @@
 angular.module('FrontModule.controllers').controller('NewProfileCtrl', function($scope, $window, $http, $cookies, $auth, API) {
 	
+	$scope.unotify = function(notif) {
+		
+		var index = $scope.notif.indexOf(notif);
+		$scope.notif.splice(index, 1);
+		
+		var data = { 'country_name':notif.country_name, 'region_name':notif.region_name, 'city_name':notif.city_name }
+		API.sendRequest('/api/notif/delete', 'POST', {}, data);
+	}
+	
 	/* User management */
 	
 	$scope.edit = function(newFaction) {
