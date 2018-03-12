@@ -26,7 +26,7 @@ angular.module('FrontModule.controllers').controller('NewCountryCtrl', function(
 			
 			$scope.count = response.count;
 			$scope.country = response.country;
-			$scope.notified = false;
+			$scope.notified = response.notified;
 			
 			$scope.regions = response.regions;
 			$scope.regions.sort(function(a, b) {

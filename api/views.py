@@ -863,6 +863,7 @@ def data_getMosaicsByRegion(request, name):
 			'count': 0,
 			'country': country.serialize(),
 			'regions': [],
+			'notified': False,
 		}
 		
 		for item in results:

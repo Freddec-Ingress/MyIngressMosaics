@@ -36,8 +36,8 @@
 		   		<div class="flex align-center">
 					<span class="color-dark pr-small">{{count}} mosaics</span>
 					<span ng-show="user.authenticated" class="color-dark pr-small">&middot;</span>
-					<a class="color-link" ng-show="user.authenticated && !followed" ng-click="notify();">To be notified</a>
-					<a class="color-light" ng-show="user.authenticated && followed" ng-click="unnotify();">Notified</a>
+					<a class="color-link" ng-show="user.authenticated && !notified" ng-click="notify();">To be notified</a>
+					<a class="color-light" ng-show="user.authenticated && notified" ng-click="unnotify();">Notified</a>
 				</div>
 
 			</div>
