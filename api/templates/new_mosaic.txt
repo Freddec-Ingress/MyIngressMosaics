@@ -1,6 +1,6 @@
-Hello agent,
+Hello Agent,
 
-A new mosaic has been registered in one of your followed areas:
+A new mosaic has been registered in one of your followed areas.
 
 Click on following link to see details:
 
