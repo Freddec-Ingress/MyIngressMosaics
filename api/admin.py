@@ -19,3 +19,7 @@ admin.site.register(Search)
 admin.site.register(Link)
 admin.site.register(Potential)
 admin.site.register(Notif)
+
+admin.site.register(IMCountry)
+admin.site.register(IMRegion)
+admin.site.register(IMCity)

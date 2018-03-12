@@ -813,3 +813,43 @@ class Notif(models.Model):
 		if self.country: text += self.country.__str__()
 
 		return self.user.username + ' -> ' + text
+
+
+
+@python_2_unicode_compatible
+class IMCountry(models.Model):
+	
+	name = models.CharField(max_length=128)
+	count = models.IntegerField()
+	
+	# Admin displaying
+	def __str__(self):
+		return self.name
+
+
+
+@python_2_unicode_compatible
+class IMRegion(models.Model):
+
+	country = models.ForeignKey(IMCountry, related_name='regions')
+	
+	name = models.CharField(max_length=128)
+	count = models.IntegerField()
+	
+	# Admin displaying
+	def __str__(self):
+		return self.name
+
+
+
+@python_2_unicode_compatible
+class IMCity(models.Model):
+
+	region = models.ForeignKey(IMRegion, related_name='cities')
+	
+	name = models.CharField(max_length=128)
+	count = models.IntegerField()
+	
+	# Admin displaying
+	def __str__(self):
+		return self.name
