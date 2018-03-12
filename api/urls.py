@@ -5,6 +5,7 @@ from django.conf.urls import url, include
 
 from .notif import *
 from .views import *
+from .im import *
 
 
 
@@ -94,4 +95,8 @@ urlpatterns = [
 	
 	url(r'^notif/create', notif_create),
 	url(r'^notif/delete', notif_delete),
+	
+	url(r'^im/country', im_country),
+	url(r'^im/region', im_region),
+	url(r'^im/city', im_city),
 ]
