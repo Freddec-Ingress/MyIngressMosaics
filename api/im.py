@@ -84,7 +84,7 @@ def im_city(request):
 			
 			region_data = region_data[0]
 			
-			city_data = IMCity.objects.filter(country=country_data, region=region_data, name=city_name)
+			city_data = IMCity.objects.filter(region=region_data, name=city_name)
 			if city_data.count() > 0:
 			
 				city_data = city_data[0]
@@ -93,7 +93,7 @@ def im_city(request):
 				
 			else:
 				
-				city_data = IMCity(country=country_data, region=region_data, name=city_name, count=mosaic_count)
+				city_data = IMCity(region=region_data, name=city_name, count=mosaic_count)
 				city_data.save()
 			
 	return Response(None, status=status.HTTP_200_OK)
