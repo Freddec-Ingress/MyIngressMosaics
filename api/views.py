@@ -434,6 +434,8 @@ def mosaic_create(request):
 	receivers = set(receivers)
 	receivers = list(receivers)
 
+	print(receivers)
+	
 	if len(receivers) > 0:
 
 		send_mail(
