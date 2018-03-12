@@ -16,8 +16,12 @@ from .models import *
 def notif_create(request):
 	
 	country_name = request.data['country_name']
-	region_name = request.data['region_name']
-	city_name = request.data['city_name']
+	
+	region_name = None
+	if 'region_name' in request.data: region_name = request.data['region_name']
+	
+	city_name = None
+	if 'city_name' in request.data: city_name = request.data['city_name']
 	
 	# Retrieve data
 	country_data = None
@@ -56,8 +60,12 @@ def notif_create(request):
 def notif_delete(request):
 	
 	country_name = request.data['country_name']
-	region_name = request.data['region_name']
-	city_name = request.data['city_name']
+	
+	region_name = None
+	if 'region_name' in request.data: region_name = request.data['region_name']
+	
+	city_name = None
+	if 'city_name' in request.data: city_name = request.data['city_name']
 
 	# Retrieve data
 	country_data = None
