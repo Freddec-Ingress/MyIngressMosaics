@@ -440,15 +440,15 @@ def mosaic_create(request):
 	receivers = list(receivers)
 	print(receivers)
 	
-	#if len(receivers) > 0:
-
-	#	send_mail(
-	#		'[MIM] New Mosaic Registered',
-	#    	'Hello Agent,',
-	#    	'admin@myingressmosaics.com',
-	#    	receivers,
-	#    	fail_silently=False,
-	#    )
+	if len(receivers) > 0:
+	
+		send_mail(
+			'[MIM] New Mosaic Registered',
+	    	'Hello Agent,',
+	    	'admin@myingressmosaics.com',
+	    	receivers,
+	    	fail_silently=False,
+	    )
 	
 	return Response(mosaic.ref, status=status.HTTP_200_OK)
 
