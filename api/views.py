@@ -430,7 +430,10 @@ def mosaic_create(request):
 	region_notifiers = Notif.objects.filter(country=country, region=region, city__isnull=True).values_list('user__email')
 	city_notifiers = Notif.objects.filter(country=country, region=region, city=city).values_list('user__email')
 	
-	receivers = list(list(country_notifiers) + list(region_notifiers) + list(city_notifiers))
+	receivers = []
+	for item in country_notifiers: receivers.append(item)
+	for item in region_notifiers: receivers.append(item)
+	for item in city_notifiers: receivers.append(item)
 	print(receivers)
 	receivers = set(receivers)
 	print(receivers)
