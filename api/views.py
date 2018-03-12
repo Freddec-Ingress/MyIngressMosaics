@@ -434,21 +434,21 @@ def mosaic_create(request):
 	for item in country_notifiers: receivers.append(item[0])
 	for item in region_notifiers: receivers.append(item[0])
 	for item in city_notifiers: receivers.append(item[0])
-	print(receivers)
 	receivers = set(receivers)
-	print(receivers)
 	receivers = list(receivers)
-	print(receivers)
-	
+
 	if len(receivers) > 0:
-	
-		send_mail(
-			'[MIM] New Mosaic Registered',
-	    	'Hello Agent,',
-	    	'admin@myingressmosaics.com',
-	    	receivers,
-	    	fail_silently=False,
-	    )
+		
+		msg_plain = render_to_string('templates/new_mosaic.txt', { 'ref':mosaic.ref })
+		
+		for receiver in receivers:
+			send_mail(
+				'[MIM] New Mosaic Registered',
+		    	msg_plain,
+		    	'admin@myingressmosaics.com',
+		    	[receiver],
+		    	fail_silently=False,
+		    )
 	
 	return Response(mosaic.ref, status=status.HTTP_200_OK)
 

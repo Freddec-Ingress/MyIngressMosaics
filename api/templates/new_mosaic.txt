@@ -1,0 +1,12 @@
+Hello agent,
+
+A new mosaic has been registered in one of your followed areas.
+
+Click on following link to see details:
+https://www.myingressmosaics.com/mosaic/{{ref}}
+
+Enjoy!
+
+See you,
+MIM Team
+https://www.myingressmosaics.com
