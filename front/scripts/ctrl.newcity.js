@@ -70,6 +70,34 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 		});
 	}
 	
+	$scope.sortByUniques = function() {
+		
+		$scope.sorting = 'by_uniques';
+			
+		$scope.potentials.sort(function(a, b) {
+			
+			if (a.count > b.count) return -1;
+			if (a.count < b.count) return 1;
+			
+			if (a.title > b.title) return 1;
+			if (a.title < b.title) return -1;
+			
+			return 0;
+		});
+		
+		
+		$scope.mosaics.sort(function(a, b) {
+			
+			if (a.uniques > b.uniques) return -1;
+			if (a.uniques < b.uniques) return 1;
+			
+			if (a.title > b.title) return 1;
+			if (a.title < b.title) return -1;
+			
+			return 0;
+		});
+	}
+	
 	$scope.sortByDate = function() {
 		
 		$scope.sorting = 'by_date';
@@ -102,7 +130,7 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 			$scope.potentials = response.potentials;
 			$scope.mosaics = response.mosaics;
 			$scope.notified = response.notified;
-			
+
 			for (var mosaic of $scope.mosaics) {
 				
 				var temp = 0;
