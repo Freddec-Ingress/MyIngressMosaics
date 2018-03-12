@@ -1041,7 +1041,7 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 				break
 		
 	if request.user.is_authenticated:
-		notif_results = Notif.objects.filter(user=request.user, country=region.country, region=region, city__isnull=True)
+		notif_results = Notif.objects.filter(user=request.user, country=region_obj.country, region=region_obj, city__isnull=True)
 		if notif_results.count() > 0:
 			data['notified'] = True
 
