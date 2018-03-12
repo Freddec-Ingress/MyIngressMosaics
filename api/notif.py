@@ -35,7 +35,7 @@ def notif_create(request):
 			region_data = Region.objects.get(country=country_data, name=region_name)
 	
 			if city_name:
-				city_data = City.objects.get(country=country_data, region=region_data, name=city_name)
+				city_data = City.objects.get(region=region_data, name=city_name)
 			
 	# Check if same notification already exists
 	already_existing = False
@@ -79,7 +79,7 @@ def notif_delete(request):
 			region_data = Region.objects.get(country=country_data, name=region_name)
 	
 			if city_name:
-				city_data = City.objects.get(country=country_data, region=region_data, name=city_name)
+				city_data = City.objects.get(region=region_data, name=city_name)
 				
 	# Delete existing notification
 	results = Notif.objects.filter(user=request.user, country=country_data, region=region_data, city=city_data)
