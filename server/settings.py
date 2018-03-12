@@ -186,8 +186,11 @@ LOGGING = {
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_PORT = 587
+
 EMAIL_HOST = 'ssl0.ovh.net'
 EMAIL_HOST_USER = 'admin@myingressmosaics.com'
 EMAIL_HOST_PASSWORD = 'freddec@2012'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = False
+
+EMAIL_USE_TLS = True
