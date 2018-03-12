@@ -34,7 +34,13 @@
 	    		</div>
 				
 				<span class="mt-big text-big color-light">{{region.name}}</span>
-				<span class="color-dark">{{region.mosaic_count}} mosaics</span>
+				
+				<div class="flex align-center">
+					<span class="color-dark">{{region.mosaic_count}} mosaics</span>
+					<span ng-show="user.authenticated" class="color-dark pr-small">&middot;</span>
+					<a class="color-link" ng-show="user.authenticated && !notified" ng-click="notify();">To be notified</a>
+					<a class="color-normal" ng-show="user.authenticated && notified" ng-click="unnotify();">Notified</a>
+	    		</div>
 
 			</div>
 			

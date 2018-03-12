@@ -3547,6 +3547,24 @@ angular.module('FrontModule.controllers').controller('NewWorldCtrl', function($s
 });
 angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($scope, $window, API) {
 	
+	/* Notification management */
+	
+	$scope.notify = function() {
+		
+		$scope.notified = true;
+		
+		var data = { 'country_name':$scope.region.country.name, 'region_name':$scope.region.name }
+		API.sendRequest('/api/notif/create', 'POST', {}, data);
+	}
+	
+	$scope.unnotify = function() {
+		
+		$scope.notified = false;
+		
+		var data = { 'country_name':$scope.region.country.name, 'region_name':$scope.region.name }
+		API.sendRequest('/api/notif/delete', 'POST', {}, data);
+	}
+	
 	/* Sorting */
 	
 	$scope.sortByName = function(city) {
@@ -3640,6 +3658,7 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 
 			$scope.region = response.region_data;
 			$scope.indexes = response.index_data;
+			$scope.notified = response.notified;
 			
 			$scope.city_count = 0;
 			
@@ -3679,6 +3698,24 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 	}
 });
 angular.module('FrontModule.controllers').controller('NewCityCtrl', function($scope, $window, API) {
+	
+	/* Notification management */
+	
+	$scope.notify = function() {
+		
+		$scope.notified = true;
+		
+		var data = { 'country_name':$scope.city.region.country.name, 'region_name':$scope.city.region.name, 'city_name':$scope.city.name }
+		API.sendRequest('/api/notif/create', 'POST', {}, data);
+	}
+	
+	$scope.unnotify = function() {
+		
+		$scope.notified = false;
+		
+		var data = { 'country_name':$scope.city.region.country.name, 'region_name':$scope.city.region.name, 'city_name':$scope.city.name }
+		API.sendRequest('/api/notif/delete', 'POST', {}, data);
+	}
 	
 	/* Sorting */
 	
@@ -3763,6 +3800,7 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 			$scope.city = response.city;
 			$scope.potentials = response.potentials;
 			$scope.mosaics = response.mosaics;
+			$scope.notified = response.notified;
 			
 			for (var mosaic of $scope.mosaics) {
 				

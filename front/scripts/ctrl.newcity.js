@@ -1,5 +1,23 @@
 angular.module('FrontModule.controllers').controller('NewCityCtrl', function($scope, $window, API) {
 	
+	/* Notification management */
+	
+	$scope.notify = function() {
+		
+		$scope.notified = true;
+		
+		var data = { 'country_name':$scope.city.region.country.name, 'region_name':$scope.city.region.name, 'city_name':$scope.city.name }
+		API.sendRequest('/api/notif/create', 'POST', {}, data);
+	}
+	
+	$scope.unnotify = function() {
+		
+		$scope.notified = false;
+		
+		var data = { 'country_name':$scope.city.region.country.name, 'region_name':$scope.city.region.name, 'city_name':$scope.city.name }
+		API.sendRequest('/api/notif/delete', 'POST', {}, data);
+	}
+	
 	/* Sorting */
 	
 	$scope.sortByName = function() {
@@ -83,6 +101,7 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 			$scope.city = response.city;
 			$scope.potentials = response.potentials;
 			$scope.mosaics = response.mosaics;
+			$scope.notified = response.notified;
 			
 			for (var mosaic of $scope.mosaics) {
 				

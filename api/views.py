@@ -440,7 +440,7 @@ def mosaic_create(request):
 
 	if len(receivers) > 0:
 		
-		msg_plain = render_to_string('new_mosaic.txt', { 'ref':mosaic.ref })
+		msg_plain = render_to_string('new_mosaic.txt', { 'ref':mosaic.ref, 'name':mosaic.title, 'count':len(mosaic.missions.length), 'country':country.name, 'region':region.name, 'city':city.name })
 		
 		for receiver in receivers:
 			send_mail(
@@ -946,6 +946,7 @@ def data_getMosaicsByCity(request, country, name):
 			'country': country.serialize(),
 			'region': region.serialize(),
 			'cities': [],
+			'notified': False,
 		}
 		
 		for item in results:
@@ -960,6 +961,11 @@ def data_getMosaicsByCity(request, country, name):
 			data['cities'].append(city)
 	
 		data['count'] = Mosaic.objects.filter(city__region=region).count()
+		
+		if request.user.is_authenticated:
+			notif_results = Notif.objects.filter(user=request.user, country=country, region=region, city__isnull=True)
+			if notif_results.count() > 0:
+				data['notified'] = True
 		
 	return Response(data, status=status.HTTP_200_OK)
 	
@@ -1000,6 +1006,7 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 			{'letter':'Y', 'cities': []},
 			{'letter':'Z', 'cities': []},
 		],
+		'notified': False,
 	}
 	
 	# Region data
@@ -1032,6 +1039,11 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 			if index['letter'] == first_letter:
 				index['cities'].append(city_data);
 				break
+		
+	if request.user.is_authenticated:
+		notif_results = Notif.objects.filter(user=request.user, country=region.country, region=region, city__isnull=True)
+		if notif_results.count() > 0:
+			data['notified'] = True
 
 	return Response(data, status=status.HTTP_200_OK)
 
@@ -1046,6 +1058,7 @@ def data_getMosaicsOfCity(request, country, region, name):
 		'city': {},
 		'potentials': [],
 		'mosaics': [],
+		'notified': False,
 	}
 			
 	results = Country.objects.filter(name=country)
@@ -1082,6 +1095,11 @@ def data_getMosaicsOfCity(request, country, region, name):
 	if len(data['mosaics']) < 1 and len(data['potentials']) < 1 and not request.user.is_superuser:
 		search = Search(city=name, region=region, country=country)
 		search.save()
+		
+	if request.user.is_authenticated:
+		notif_results = Notif.objects.filter(user=request.user, country=city.region.country, region=city.region, city=city)
+		if notif_results.count() > 0:
+			data['notified'] = True
 	
 	return Response(data, status=status.HTTP_200_OK)
 

@@ -1,8 +1,11 @@
 Hello agent,
 
-A new mosaic has been registered in one of your followed areas.
+A new mosaic has been registered in one of your followed areas:
 
 Click on following link to see details:
+
+{{name}} - {{count}} missions
+{{country}} > {{region}} > {{city}}
 https://www.myingressmosaics.com/mosaic/{{ref}}
 
 Enjoy!

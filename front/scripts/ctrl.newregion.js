@@ -1,5 +1,23 @@
 angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($scope, $window, API) {
 	
+	/* Notification management */
+	
+	$scope.notify = function() {
+		
+		$scope.notified = true;
+		
+		var data = { 'country_name':$scope.region.country.name, 'region_name':$scope.region.name }
+		API.sendRequest('/api/notif/create', 'POST', {}, data);
+	}
+	
+	$scope.unnotify = function() {
+		
+		$scope.notified = false;
+		
+		var data = { 'country_name':$scope.region.country.name, 'region_name':$scope.region.name }
+		API.sendRequest('/api/notif/delete', 'POST', {}, data);
+	}
+	
 	/* Sorting */
 	
 	$scope.sortByName = function(city) {
@@ -93,6 +111,7 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 
 			$scope.region = response.region_data;
 			$scope.indexes = response.index_data;
+			$scope.notified = response.notified;
 			
 			$scope.city_count = 0;
 			
