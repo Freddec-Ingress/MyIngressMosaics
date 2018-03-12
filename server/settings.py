@@ -12,6 +12,7 @@ CORS_ORIGIN_WHITELIST = (
     'myingressmosaics.com',
     'myingressmosaics-freddec.c9users.io',
     'www.ingress.com',
+    'ingressmosaik.com',
 )
 
 SECURE_SSL_REDIRECT = True
