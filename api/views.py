@@ -248,6 +248,7 @@ def user_getDetails(request):
 		'like': [],
 		'todo': [],
 		'complete': [],
+		'notif': [],
 	}
 	
 	if not request.user.is_anonymous:
@@ -286,6 +287,13 @@ def user_getDetails(request):
 				
 				mosaic = item.mosaic.overviewSerialize()
 				data['complete'].append(mosaic)
+		
+		results = Notif.objects.filter(user=request.user)
+		if results.count() > 0:
+			for item in results:
+				
+				notif = { 'country_name':item.country.name, 'region_name':item.region.name, 'city_name':item.city.name }
+				data['notif'].append(notif)
 	
 	return Response(data, status=status.HTTP_200_OK)
 

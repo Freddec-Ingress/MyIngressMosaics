@@ -32,6 +32,7 @@ angular.module('FrontModule.controllers').controller('NewProfileCtrl', function(
 		$scope.like = response.like;
 		$scope.todo = response.todo;
 		$scope.complete = response.complete;
+		$scope.notif = response.notif;
 		
 		$scope.loaded = true;
 	});
