@@ -70,6 +70,34 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 		});
 	}
 	
+	$scope.sortByUniques = function(city) {
+		
+		city.sorting = 'by_uniques';
+			
+		city.potentials.sort(function(a, b) {
+			
+			if (a.count > b.count) return -1;
+			if (a.count < b.count) return 1;
+			
+			if (a.title > b.title) return 1;
+			if (a.title < b.title) return -1;
+			
+			return 0;
+		});
+		
+		
+		city.mosaics.sort(function(a, b) {
+			
+			if (a.uniques > b.uniques) return -1;
+			if (a.uniques < b.uniques) return 1;
+			
+			if (a.title > b.title) return 1;
+			if (a.title < b.title) return -1;
+			
+			return 0;
+		});
+	}
+	
 	$scope.sortByDate = function(city) {
 		
 		city.sorting = 'by_date';

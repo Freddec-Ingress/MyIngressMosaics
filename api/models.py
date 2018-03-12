@@ -354,6 +354,7 @@ class Mosaic(models.Model):
 			'has_fake': False,
 			'startLat': self.startLat,
 			'startLng': self.startLng,
+			'uniques': self.uniques,
 			
 			'city': None,
 
