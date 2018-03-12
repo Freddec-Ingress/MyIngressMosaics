@@ -790,4 +790,25 @@ class Potential(models.Model):
 		}
 		
 		return data
-		
+
+
+
+@python_2_unicode_compatible
+class Notif(models.Model):
+	
+	user = models.ForeignKey(User, related_name='notifications')
+
+	city = models.ForeignKey(City, null=True, blank=True, related_name='watchers')
+	region = models.ForeignKey(Region, null=True, blank=True, related_name='watchers')
+	country = models.ForeignKey(Country, null=True, blank=True, related_name='watchers')
+	
+	# Admin displayings
+	
+	def __str__(self):
+
+		text = ''
+		if self.city: text += self.city.__str__()
+		if self.region: text += self.region.__str__()
+		if self.country: text += self.country.__str__()
+
+		return self.user.username + ' -> ' + text

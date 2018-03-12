@@ -3,6 +3,7 @@
 
 from django.conf.urls import url, include
 
+from .notif import *
 from .views import *
 
 
@@ -90,4 +91,7 @@ urlpatterns = [
 	url(r'^adm/region/rename',				adm_renameRegion),
 
 	url(r'^telegram/539679576:AAFC6QR0d8aTKd5sckEWWEFfwsNq5W5Rar0', telegram_updates),
+	
+	url(r'^notif/create', notif_create),
+	url(r'^notif/delete', notif_delete),
 ]
