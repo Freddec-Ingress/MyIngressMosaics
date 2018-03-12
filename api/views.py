@@ -883,6 +883,11 @@ def data_getMosaicsByRegion(request, name):
 				data['regions'].append(region)
 		
 		data['count'] = Mosaic.objects.filter(city__region__country__name=name).count()
+		
+		if request.user.is_authenticated:
+			notif_results = Notif.objects.filter(user=request.user, country=country, region__isnull=True, city__isnull=True)
+			if notif_results.count() > 0:
+				data['notified'] = True
 	
 	return Response(data, status=status.HTTP_200_OK)
 
