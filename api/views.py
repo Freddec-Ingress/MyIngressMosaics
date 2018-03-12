@@ -440,7 +440,7 @@ def mosaic_create(request):
 
 	if len(receivers) > 0:
 		
-		msg_plain = render_to_string('templates/new_mosaic.txt', { 'ref':mosaic.ref })
+		msg_plain = render_to_string('new_mosaic.txt', { 'ref':mosaic.ref })
 		
 		for receiver in receivers:
 			send_mail(
