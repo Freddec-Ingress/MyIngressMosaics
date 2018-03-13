@@ -35,7 +35,7 @@
 					</div>
 					
 					<div class="item">
-						<span class="c-normal">{{country.name}}</span>
+						<span class="color-normal">{{country.name}}</span>
 					</div>
 					
 					<div class="item">
@@ -43,9 +43,9 @@
 					</div>
 					
 					<div class="item">
-						<span class="c-dark">{{country.count}}</span>
-						<span class="c-dark">/</span>
-						<span ng-class="{'c-danger':country.compare_count<1, 'c-dark':country.compare_count>0}">{{country.compare_count}}</span>
+						<span class="text-small color-dark">{{country.count}}</span>
+						<span class="text-small color-dark">/</span>
+						<span class="text-small" ng-class="{'color-danger':country.compare_count<1, 'color-dark':country.compare_count>0}">{{country.compare_count}}</span>
 					</div>
 					
 				</div>
