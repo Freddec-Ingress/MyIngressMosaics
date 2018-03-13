@@ -7,7 +7,7 @@ Click on following link to see details:
 
 {{name}} - {{count}} missions
 {{country}} > {{region}} > {{city}}
-https://www.myingressmosaics.com/registration/{{name}}
+https://www.myingressmosaics.com/registration/{{url}}
 
 Enjoy!
 
