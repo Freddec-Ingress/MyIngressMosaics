@@ -21,14 +21,23 @@ def adm_compare(request):
 	for item in results:
 		
 		compare_count = 0
-		compare = Country.objects.filter(name=item.name)
-		if compare.count() > 0:
-			compare = compare[0]
-			compare_count = Mosaic.objects.filter(city__region__country=compare).count()
+		if not item.compare_name:
+			compare = Country.objects.filter(name=item.name)
+			if compare.count() > 0:
+				compare = compare[0]
+				item.compare_name = compare.name
+				item.save()
+				compare_count = Mosaic.objects.filter(city__region__country=compare).count()
+		else:
+			compare = Country.objects.filter(name=item.compare_name)
+			if compare.count() > 0:
+				compare = compare[0]
+				compare_count = Mosaic.objects.filter(city__region__country=compare).count()
 		
 		country = {
 			'name': item.name,
-			'diff': item.count - compare_count,
+			'count': item.count,
+			'compare_count': compare_count,
 		}
 		
 		data['countries'].append(country)

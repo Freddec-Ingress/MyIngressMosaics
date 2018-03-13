@@ -4386,6 +4386,12 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
 	    
 	    $scope.countries = response.countries;
 	    
+	    for (var country of $scope.countries) {
+	    	
+	    	country.open = false;
+	    	country.diff = country.count - country.compare_count;
+	    }
+	    
 		$scope.countries.sort(function(a, b) {
 			
 			if (a.diff > b.diff) return -1;

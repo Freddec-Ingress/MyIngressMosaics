@@ -820,6 +820,8 @@ class Notif(models.Model):
 class IMCountry(models.Model):
 	
 	name = models.CharField(max_length=128)
+	compare_name = models.CharField(max_length=128)
+	
 	count = models.IntegerField()
 	
 	# Admin displaying
@@ -834,6 +836,8 @@ class IMRegion(models.Model):
 	country = models.ForeignKey(IMCountry, related_name='regions')
 	
 	name = models.CharField(max_length=128)
+	compare_name = models.CharField(max_length=128)
+	
 	count = models.IntegerField()
 	
 	# Admin displaying
@@ -848,6 +852,8 @@ class IMCity(models.Model):
 	region = models.ForeignKey(IMRegion, related_name='cities')
 	
 	name = models.CharField(max_length=128)
+	compare_name = models.CharField(max_length=128)
+	
 	count = models.IntegerField()
 	
 	# Admin displaying
