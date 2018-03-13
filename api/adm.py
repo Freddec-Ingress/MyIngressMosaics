@@ -38,7 +38,7 @@ def adm_compare(request):
 			'id':imc_item.pk,
 			'name':imc_item.name,
 			'count':imc_item.count,
-			'compare_name':c_compare.name,
+			'compare_name':imc_item.compare.name,
 			'compare_count':c_compare_count,
 			'regions':[]
 		}
@@ -65,7 +65,7 @@ def adm_compare(request):
 					'id':imr_item.pk,
 					'name':imr_item.name,
 					'count':imr_item.count,
-					'compare_name':r_compare.name,
+					'compare_name':imr_item.compare.name,
 					'compare_count':r_compare_count,
 					'cities':[]
 				}
@@ -94,7 +94,7 @@ def adm_compare(request):
 							'id':imv_item.pk,
 							'name':imv_item.name,
 							'count':imv_item.count,
-							'compare_name':v_compare.name,
+							'compare_name':imv_item.compare.name,
 							'compare_count':v_compare_count,
 							'cities':[]
 						}
