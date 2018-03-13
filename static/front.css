@@ -272,6 +272,7 @@ ul > li { list-style:none; }
 .color-warning { color:yellow; }
 .color-resistant { color:#00c2ff; }
 .color-enlightened { color:#28f428; }
+.color-success { color:#4CAF50; }
 
 .bgcolor-highlight { background-color: #0c2424; }
 
