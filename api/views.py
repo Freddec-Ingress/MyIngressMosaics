@@ -1620,6 +1620,30 @@ def potential_validate(request):
 	potential = Potential(title=request.data['title'], count=missions.count(), city=city, country=country, creator=creator, faction=faction)
 	potential.save()
 	
+	country_notifiers = Notif.objects.filter(country=country, region__isnull=True, city__isnull=True).values_list('user__email')
+	region_notifiers = Notif.objects.filter(country=country, region=region, city__isnull=True).values_list('user__email')
+	city_notifiers = Notif.objects.filter(country=country, region=region, city=city).values_list('user__email')
+	
+	receivers = []
+	for item in country_notifiers: receivers.append(item[0])
+	for item in region_notifiers: receivers.append(item[0])
+	for item in city_notifiers: receivers.append(item[0])
+	receivers = set(receivers)
+	receivers = list(receivers)
+
+	if len(receivers) > 0:
+		
+		msg_plain = render_to_string('new_potential.txt', { 'name':potential.title, 'count':potential.count, 'country':country.name, 'region':region.name, 'city':city.name })
+		
+		for receiver in receivers:
+			send_mail(
+				'[MIM] New Potential Detected',
+		    	msg_plain,
+		    	'admin@myingressmosaics.com',
+		    	[receiver],
+		    	fail_silently=False,
+		    )
+
 	return Response(None, status=status.HTTP_200_OK)
 
 

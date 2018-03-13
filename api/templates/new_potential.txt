@@ -1,0 +1,16 @@
+Hello Agent,
+
+A new potential has been deteceted in one of your followed areas.
+Feel free to register it as mosaic.
+
+Click on following link to see details:
+
+{{name}} - {{count}} missions
+{{country}} > {{region}} > {{city}}
+https://www.myingressmosaics.com/registration/{{name}}
+
+Enjoy!
+
+See you,
+MIM Team
+https://www.myingressmosaics.com
