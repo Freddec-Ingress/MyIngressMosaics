@@ -29,7 +29,7 @@
 				
 				<div class="flex">
 					
-					<div class="item">
+					<div class="item" ng-show="country.regions.length > 0">
 						<a ng-show="!country.open" ng-click="country.open=true;"><i class="fa fa-plus-square text-small"></i></a>
 						<a ng-show="country.open" ng-click="country.open=false;"><i class="fa fa-minus-square text-small"></i></a>
 					</div>
@@ -46,6 +46,37 @@
 						<span class="text-small color-dark">{{country.count}}</span>
 						<span class="text-small color-dark">/</span>
 						<span class="text-small" ng-class="{'color-danger':country.compare_count<1, 'color-dark':country.compare_count>0}">{{country.compare_count}}</span>
+					</div>
+					
+				</div>
+				
+				<div class="flex-col" ng-show="country.open">
+					
+					<div class="mb-medium flex-col" ng-repeat="region in country.regions">
+				
+						<div class="flex">
+							
+							<div class="item" ng-show="region.cities.length > 0">
+								<a ng-show="!region.open" ng-click="region.open=true;"><i class="fa fa-plus-square text-small"></i></a>
+								<a ng-show="region.open" ng-click="region.open=false;"><i class="fa fa-minus-square text-small"></i></a>
+							</div>
+							
+							<div class="item">
+								<span class="color-normal">{{region.name}}</span>
+							</div>
+							
+							<div class="item">
+								<span class="badge">{{region.diff}}</span>
+							</div>
+							
+							<div class="item">
+								<span class="text-small color-dark">{{region.count}}</span>
+								<span class="text-small color-dark">/</span>
+								<span class="text-small" ng-class="{'color-danger':region.compare_count<1, 'color-dark':region.compare_count>0}">{{region.compare_count}}</span>
+							</div>
+							
+						</div>
+				
 					</div>
 					
 				</div>
