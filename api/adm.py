@@ -28,11 +28,13 @@ def adm_compare(request):
 				imc_item.compare_name = c_compare.name
 				imc_item.save()
 				c_compare_count = Mosaic.objects.filter(city__region__country=c_compare).count()
+				c_compare_count += Potential.objects.filter(city__region__country=c_compare).count()
 		else:
 			c_compare = Country.objects.filter(name=imc_item.compare_name)
 			if c_compare.count() > 0:
 				c_compare = c_compare[0]
 				c_compare_count = Mosaic.objects.filter(city__region__country=c_compare).count()
+				c_compare_count += Potential.objects.filter(city__region__country=c_compare).count()
 		
 		country = {
 			'id':imc_item.pk,
@@ -55,11 +57,13 @@ def adm_compare(request):
 						imr_item.compare_name = r_compare.name
 						imr_item.save()
 						r_compare_count = Mosaic.objects.filter(city__region=r_compare).count()
+						r_compare_count += Potential.objects.filter(city__region=r_compare).count()
 				else:
 					r_compare = Region.objects.filter(country=c_compare, name=imr_item.compare_name)
 					if r_compare.count() > 0:
 						r_compare = r_compare[0]
 						r_compare_count = Mosaic.objects.filter(city__region=r_compare).count()
+						r_compare_count += Potential.objects.filter(city__region=r_compare).count()
 				
 				region = {
 					'id':imr_item.pk,
@@ -84,11 +88,13 @@ def adm_compare(request):
 								imv_item.compare_name = v_compare.name
 								imv_item.save()
 								v_compare_count = Mosaic.objects.filter(city=v_compare).count()
+								v_compare_count += Potential.objects.filter(city=v_compare).count()
 						else:
 							v_compare = City.objects.filter(region=r_compare, name=imv_item.compare_name)
 							if v_compare.count() > 0:
 								v_compare = v_compare[0]
 								v_compare_count = Mosaic.objects.filter(city=v_compare).count()
+								v_compare_count += Potential.objects.filter(city=v_compare).count()
 						
 						city = {
 							'id':imv_item.pk,
