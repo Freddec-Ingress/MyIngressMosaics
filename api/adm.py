@@ -35,8 +35,10 @@ def adm_compare(request):
 				c_compare_count = Mosaic.objects.filter(city__region__country=c_compare).count()
 		
 		country = {
+			'id':imc_item.pk,
 			'name':imc_item.name,
 			'count':imc_item.count,
+			'compare_name':c_compare.name,
 			'compare_count':c_compare_count,
 			'regions':[]
 		}
@@ -60,8 +62,10 @@ def adm_compare(request):
 						r_compare_count = Mosaic.objects.filter(city__region=r_compare).count()
 				
 				region = {
+					'id':imr_item.pk,
 					'name':imr_item.name,
 					'count':imr_item.count,
+					'compare_name':r_compare.name,
 					'compare_count':r_compare_count,
 					'cities':[]
 				}
@@ -87,8 +91,10 @@ def adm_compare(request):
 								v_compare_count = Mosaic.objects.filter(city=v_compare).count()
 						
 						city = {
+							'id':imv_item.pk,
 							'name':imv_item.name,
 							'count':imv_item.count,
+							'compare_name':v_compare.name,
 							'compare_count':v_compare_count,
 							'cities':[]
 						}
