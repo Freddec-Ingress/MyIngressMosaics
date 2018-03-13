@@ -1633,7 +1633,7 @@ def potential_validate(request):
 
 	if len(receivers) > 0:
 		
-		msg_plain = render_to_string('new_potential.txt', { 'name':potential.title, 'count':potential.count, 'country':country.name, 'region':region.name, 'city':city.name })
+		msg_plain = render_to_string('new_potential.txt', { 'url':potential.title.replace(' ', '%20'), 'name':potential.title, 'count':potential.count, 'country':country.name, 'region':region.name, 'city':city.name })
 		
 		for receiver in receivers:
 			send_mail(
