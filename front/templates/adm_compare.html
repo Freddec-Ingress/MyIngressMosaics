@@ -24,6 +24,28 @@
 	<div class="container" ng-class="{'active':loaded}">
 		
 		<div class="section">
+			
+			<div class="mb-big flex-col" ng-repeat="country in countries">
+				
+				<div class="flex">
+					
+					<div class="item">
+						<a ng-show="!country.open" ng-click="country.open=true;"><i class="fa fa-plus-square text-small"></i></a>
+						<a ng-show="country.open" ng-click="country.open=false;"><i class="fa fa-minus-square text-small"></i></a>
+					</div>
+					
+					<div class="item">
+						<span class="c-normal">{{country.name}}</span>
+					</div>
+					
+					<div class="item">
+						<span class="badge">{{country.diff}}</span>
+					</div>
+					
+				</div>
+				
+			</div>
+				
     	</div>
     	
 	</div>
