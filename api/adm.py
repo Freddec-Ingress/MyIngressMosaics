@@ -41,57 +41,59 @@ def adm_compare(request):
 			'regions':[]
 		}
 		
-		imr_results = c_compare.regions.all()
-		for imr_item in imr_results:
-		
-			r_compare_count = 0
-			if not imr_item.compare_name:
-				r_compare = Region.objects.filter(country=c_compare, name=imr_item.name)
-				if r_compare.count() > 0:
-					r_compare = r_compare[0]
-					imr_item.compare_name = r_compare.name
-					imr_item.save()
-					r_compare_count = Mosaic.objects.filter(city__region=r_compare).count()
-			else:
-				r_compare = Region.objects.filter(country=c_compare, name=imr_item.compare_name)
-				if r_compare.count() > 0:
-					r_compare = r_compare[0]
-					r_compare_count = Mosaic.objects.filter(city__region=r_compare).count()
+		if c_compare_count > 0:
+			imr_results = c_compare.regions.all()
+			for imr_item in imr_results:
 			
-			region = {
-				'name':imr_item.name,
-				'count':imr_item.count,
-				'compare_count':r_compare_count,
-				'cities':[]
-			}
-			
-			country['regions'].append(region)
-			
-			imv_results = r_compare.cities.all()
-			for imv_item in imv_results:
-			
-				v_compare_count = 0
-				if not imv_item.compare_name:
-					v_compare = City.objects.filter(region=c_compare, name=imv_item.name)
-					if v_compare.count() > 0:
-						v_compare = v_compare[0]
-						imv_item.compare_name = v_compare.name
-						imv_item.save()
-						v_compare_count = Mosaic.objects.filter(city=v_compare).count()
+				r_compare_count = 0
+				if not imr_item.compare_name:
+					r_compare = Region.objects.filter(country=c_compare, name=imr_item.name)
+					if r_compare.count() > 0:
+						r_compare = r_compare[0]
+						imr_item.compare_name = r_compare.name
+						imr_item.save()
+						r_compare_count = Mosaic.objects.filter(city__region=r_compare).count()
 				else:
-					v_compare = City.objects.filter(region=v_compare, name=imv_item.compare_name)
-					if v_compare.count() > 0:
-						v_compare = v_compare[0]
-						v_compare_count = Mosaic.objects.filter(city=v_compare).count()
+					r_compare = Region.objects.filter(country=c_compare, name=imr_item.compare_name)
+					if r_compare.count() > 0:
+						r_compare = r_compare[0]
+						r_compare_count = Mosaic.objects.filter(city__region=r_compare).count()
 				
-				city = {
-					'name':imv_item.name,
-					'count':imv_item.count,
-					'compare_count':v_compare_count,
+				region = {
+					'name':imr_item.name,
+					'count':imr_item.count,
+					'compare_count':r_compare_count,
 					'cities':[]
 				}
 				
-				region['cities'].append(city)
+				country['regions'].append(region)
+				
+				if r_compare_count > 0:
+					imv_results = r_compare.cities.all()
+					for imv_item in imv_results:
+					
+						v_compare_count = 0
+						if not imv_item.compare_name:
+							v_compare = City.objects.filter(region=c_compare, name=imv_item.name)
+							if v_compare.count() > 0:
+								v_compare = v_compare[0]
+								imv_item.compare_name = v_compare.name
+								imv_item.save()
+								v_compare_count = Mosaic.objects.filter(city=v_compare).count()
+						else:
+							v_compare = City.objects.filter(region=v_compare, name=imv_item.compare_name)
+							if v_compare.count() > 0:
+								v_compare = v_compare[0]
+								v_compare_count = Mosaic.objects.filter(city=v_compare).count()
+						
+						city = {
+							'name':imv_item.name,
+							'count':imv_item.count,
+							'compare_count':v_compare_count,
+							'cities':[]
+						}
+						
+						region['cities'].append(city)
 		
 		data['countries'].append(country)
 	
