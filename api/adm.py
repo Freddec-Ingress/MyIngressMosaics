@@ -42,7 +42,7 @@ def adm_compare(request):
 		}
 		
 		if c_compare_count > 0:
-			imr_results = c_compare.regions.all()
+			imr_results = imc_item.regions.all()
 			for imr_item in imr_results:
 			
 				r_compare_count = 0
@@ -69,7 +69,7 @@ def adm_compare(request):
 				country['regions'].append(region)
 				
 				if r_compare_count > 0:
-					imv_results = r_compare.cities.all()
+					imv_results = imr_item.cities.all()
 					for imv_item in imv_results:
 					
 						v_compare_count = 0
