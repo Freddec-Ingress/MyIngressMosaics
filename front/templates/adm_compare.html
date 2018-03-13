@@ -42,6 +42,12 @@
 						<span class="badge">{{country.diff}}</span>
 					</div>
 					
+					<div class="item">
+						<span class="c-dark">{{country.count}}</span>
+						<span class="c-dark">/</span>
+						<span ng-class="{'c-danger':country.compare_count<1, 'c-dark':country.compare_count>0}">{{country.compare_count}}</span>
+					</div>
+					
 				</div>
 				
 			</div>
