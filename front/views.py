@@ -229,3 +229,10 @@ def adm_mission(request):
 	
 	context = {}
 	return render(request, 'adm_mission.html', context)
+
+
+
+def adm_compare(request):
+	
+	context = {}
+	return render(request, 'adm_compare.html', context)

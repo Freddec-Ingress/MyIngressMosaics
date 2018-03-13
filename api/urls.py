@@ -6,6 +6,7 @@ from django.conf.urls import url, include
 from .notif import *
 from .views import *
 from .im import *
+from .adm import *
 
 
 
@@ -88,6 +89,7 @@ urlpatterns = [
 	url(r'^potential/exclude/',			potential_exclude),
 	url(r'^potential/validate/',		potential_validate),
 
+	url(r'^adm/compare',					adm_compare),
 	url(r'^adm/city/rename',				adm_renameCity),
 	url(r'^adm/region/rename',				adm_renameRegion),
 
