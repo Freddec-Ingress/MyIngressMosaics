@@ -74,14 +74,14 @@ def adm_compare(request):
 					
 						v_compare_count = 0
 						if not imv_item.compare_name:
-							v_compare = City.objects.filter(region=c_compare, name=imv_item.name)
+							v_compare = City.objects.filter(region=r_compare, name=imv_item.name)
 							if v_compare.count() > 0:
 								v_compare = v_compare[0]
 								imv_item.compare_name = v_compare.name
 								imv_item.save()
 								v_compare_count = Mosaic.objects.filter(city=v_compare).count()
 						else:
-							v_compare = City.objects.filter(region=v_compare, name=imv_item.compare_name)
+							v_compare = City.objects.filter(region=r_compare, name=imv_item.compare_name)
 							if v_compare.count() > 0:
 								v_compare = v_compare[0]
 								v_compare_count = Mosaic.objects.filter(city=v_compare).count()
