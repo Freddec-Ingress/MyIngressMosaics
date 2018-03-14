@@ -24,66 +24,71 @@
 	
 	<div class="container" ng-class="{'active':loaded}">
 		
-		<div class="section flex">
+		<div class="section">
 			
-			<div class="item flex">
-				<span class="flag-icon flag-icon-{{city.region.country.code}}"></span>
-			</div>
-			
-			<div class="item flex">
-				<a href="/world/{{city.region.country.name}}">{{city.region.country.name}}</a>
-			</div>
-			
-			<div class="item flex">
-				<span class="color-dark">></span>
-			</div>
-			
-			<div class="item flex">
-				<a href="/world/{{city.region.country.name}}/{{city.region.name}}">{{city.region.name}}</a>
-			</div>
-			
-		</div>
-		
-		<div class="section flex">
+			<div class="flex align-center">
 				
-				<div class="item flex-col mt-big">
-					<span class="text-big color-light">{{city.name}}</span>
-					<div>
-						<span class="color-dark pr-small">{{mosaics.length}} mosaics</span>
-						<span class="color-dark pr-small" ng-show="potentials.length > 0">&middot;</span>
-						<span class="color-dark pr-small" ng-show="potentials.length > 0">{{potentials.length}} potentials</span>
-						<span ng-show="user.authenticated" class="color-dark pr-small">&middot;</span>
-						<a class="color-link" ng-show="user.authenticated && !notified" ng-click="notify();">To be notified</a>
-						<a class="color-normal" ng-show="user.authenticated && notified" ng-click="unnotify();">Notified</a>
-					</div>
+				<div class="item flex">
+					<span class="flag-icon flag-icon-{{city.region.country.code}}"></span>
 				</div>
+				
+				<div class="item flex">
+					<a href="/world/{{city.region.country.name}}">{{city.region.country.name}}</a>
+				</div>
+				
+				<div class="item flex">
+					<span class="color-dark">></span>
+				</div>
+				
+				<div class="item flex">
+					<a href="/world/{{city.region.country.name}}/{{city.region.name}}">{{city.region.name}}</a>
+				</div>
+				
+			</div>
 			
 		</div>
 		
-		<div class="item flex wrap" ng-show="(potentials.length + mosaics.length) > 2">
-			
-			<div class="item">
-				<a class="text-small" ng-click="sortByMissionCount();" ng-class="{'active': sorting=='by_mission_count'}">
-					By mission count
-				</a>
+		<div class="section">
+				
+			<div class="item flex">
+				<span class="text-big color-light">{{city.name}}</span>
 			</div>
 			
-			<div class="item">
-				<a class="text-small" ng-click="sortByDate();" ng-class="{'active': sorting=='by_date'}">
-					Most Recent
-				</a>
+			<div class="item flex">
+				<a class="color-link" ng-show="user.authenticated && !notified" ng-click="notify();">To be notified</a>
+				<a class="color-normal" ng-show="user.authenticated && notified" ng-click="unnotify();">Notified</a>
 			</div>
+		
+		</div>
+		
+		<div class="section" ng-show="(potentials.length + mosaics.length) > 2">
 			
-			<div class="item">
-				<a class="text-small" ng-click="sortByName();" ng-class="{'active': sorting=='by_name'}">
-					Alphabetical
-				</a>
-			</div>
-			
-			<div class="item">
-				<a class="text-small" ng-click="sortByUniques();" ng-class="{'active': sorting=='by_uniques'}">
-					By uniques
-				</a>
+			<div class="flex wrap">
+				
+				<div class="item">
+					<a class="text-small" ng-click="sortByMissionCount();" ng-class="{'active': sorting=='by_mission_count'}">
+						By mission count
+					</a>
+				</div>
+				
+				<div class="item">
+					<a class="text-small" ng-click="sortByDate();" ng-class="{'active': sorting=='by_date'}">
+						Most Recent
+					</a>
+				</div>
+				
+				<div class="item">
+					<a class="text-small" ng-click="sortByName();" ng-class="{'active': sorting=='by_name'}">
+						Alphabetical
+					</a>
+				</div>
+				
+				<div class="item">
+					<a class="text-small" ng-click="sortByUniques();" ng-class="{'active': sorting=='by_uniques'}">
+						By uniques
+					</a>
+				</div>
+				
 			</div>
 			
 		</div>
