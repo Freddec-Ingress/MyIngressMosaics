@@ -98,11 +98,17 @@
 			
 			<div class="flex wrap">
 				<div class="item width-12 width-xl-4" ng-repeat="potential in potentials">
-					<a class="item link-block flex-col" href="/registration/{{potential.title}}">
+					<a class="item link-block flex align-center" href="/registration/{{potential.title}}">
+						
 						<div class="item flex-col">
 							<span class="text-medium color-light ellipsis" title="{{potential.title}}">{{potential.title}}</span>
 							<span class="text-small color-muted">{{potential.count}} missions</span>
 						</div>
+						
+						<div class="item">
+							<i class="fa fa-chevron"></i>
+						</div>
+						
 					</a>
 				</div>
 			</div>
@@ -125,7 +131,7 @@
 	    				</div>
 	    				
 	    				<div class="item grow">
-							<div class="flex wrap shrink" style="padding-right:calc((6 - {{mosaic.cols}}) * 16.666667%);">
+							<div class="flex wrap shrink" style="max-width:200px; padding-right:calc((6 - {{mosaic.cols}}) * 16.666667%);">
 								
 					            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
 					            </div>
