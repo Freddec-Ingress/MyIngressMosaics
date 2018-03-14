@@ -32,11 +32,11 @@
 			<div class="flex align-center">
 				
 				<div class="item flex">
-					<span class="flag-icon flag-icon-{{city.region.country.code}}"></span>
+					<span class="flag-icon flag-icon-{{country_code}}"></span>
 				</div>
 				
 				<div class="item flex">
-					<a href="/world/{{city.region.country.name}}">{{city.region.country.name}}</a>
+					<a href="/world/{{country_name}}">{{country_name}}</a>
 				</div>
 				
 				<div class="item flex">
@@ -44,7 +44,7 @@
 				</div>
 				
 				<div class="item flex">
-					<a href="/world/{{city.region.country.name}}/{{city.region.name}}">{{city.region.name}}</a>
+					<a href="/world/{{country_name}}/{{region_name}}">{{region_name}}</a>
 				</div>
 				
 			</div>
@@ -54,7 +54,7 @@
 		<div class="section">
 				
 			<div class="item flex-col">
-				<span class="text-big color-light">{{city.name}}</span>
+				<span class="text-big color-light">{{city_name}}</span>
 				<a class="color-link" ng-show="user.authenticated && !notified" ng-click="notify();">To be notified</a>
 				<a class="color-normal" ng-show="user.authenticated && notified" ng-click="unnotify();">Notified</a>
 			</div>
@@ -186,6 +186,8 @@
 			
 			city_name:'{{city_label}}',
 			region_name:'{{region_label}}',
+			
+			country_code:'',
 			country_name:'{{country_label}}',
 			
 			sorting:'by_mission_count',
