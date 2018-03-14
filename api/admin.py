@@ -11,6 +11,7 @@ from .models import *
 class MissionAdmin(admin.ModelAdmin):
 
 	search_fields = ('title', 'creator', 'mosaic__title', )
+	raw_id_fields = ('mosaic', )
 
 
 
