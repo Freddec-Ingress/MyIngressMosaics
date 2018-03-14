@@ -447,8 +447,6 @@ def getDistanceFromLatLng(lat1, lng1, lat2, lng2):
 @python_2_unicode_compatible
 class Mission(models.Model):
 
-	search_fields = ('title', 'creator', )
-
 	data = models.TextField()
 
 	ref = models.CharField(max_length=64, null=True, blank=True, unique=True)
