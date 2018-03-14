@@ -24,16 +24,27 @@
 	
 	<div class="container" ng-class="{'active':loaded}">
 		
-		<div class="item">
+		<div class="section flex">
 			
-			<div class="flex-col">
-				
-				<div class="item flex mt-big">
-					<span class="mr-small flag-icon flag-icon-{{city.region.country.code}}" style="line-height: inherit;"></span>
-					<a class="mr-small" href="/world/{{city.region.country.name}}">{{city.region.country.name}}</a>
-					<span class="mr-small color-dark">></span>
-					<a href="/world/{{city.region.country.name}}/{{city.region.name}}">{{city.region.name}}</a>
-				</div>
+			<div class="item flex">
+				<span class="flag-icon flag-icon-{{city.region.country.code}}"></span>
+			</div>
+			
+			<div class="item flex">
+				<a href="/world/{{city.region.country.name}}">{{city.region.country.name}}</a>
+			</div>
+			
+			<div class="item flex">
+				<span class="color-dark">></span>
+			</div>
+			
+			<div class="item flex">
+				<a href="/world/{{city.region.country.name}}/{{city.region.name}}">{{city.region.name}}</a>
+			</div>
+			
+		</div>
+		
+		<div class="section flex">
 				
 				<div class="item flex-col mt-big">
 					<span class="text-big color-light">{{city.name}}</span>
