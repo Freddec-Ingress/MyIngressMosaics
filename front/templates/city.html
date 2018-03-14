@@ -50,11 +50,8 @@
 		
 		<div class="section">
 				
-			<div class="item flex">
+			<div class="item flex-col">
 				<span class="text-big color-light">{{city.name}}</span>
-			</div>
-			
-			<div class="item flex">
 				<a class="color-link" ng-show="user.authenticated && !notified" ng-click="notify();">To be notified</a>
 				<a class="color-normal" ng-show="user.authenticated && notified" ng-click="unnotify();">Notified</a>
 			</div>
@@ -93,15 +90,16 @@
 			
 		</div>
 		
-		<div class="item flex-col mt-big" ng-show="potentials.length > 0">
-			<span class="color-dark pr-small">{{potentials.length}} potentials</span>
-		</div>
-		<div class="item flex wrap" ng-show="potentials.length > 0">
-			<div class="width-12 width-xl-4 item" ng-repeat="potential in potentials">
-				<a class="item link-block flex-col pt-none pb-none" href="/registration/{{potential.title}}">
-					
-					<div class="flex-col">
-						
+		<div class="section" ng-show="potentials.length > 0">
+			
+			<div class="item flex">
+				<span class="color-dark">{{potentials.length}} potentials</span>
+			</div>
+			
+			<div class="flex wrap">
+				<div class="item width-12 width-xl-4" ng-repeat="potential in potentials">
+					<a class="item link-block flex-col" href="/registration/{{potential.title}}">
+
 						<div class="item grow flex-col pb-none">
 							<span class="ellipsis">{{potential.title}}</span>
 						</div>
@@ -113,11 +111,11 @@
 							</div>
 							<span class="text-small color-normal">{{potential.count}}</span>
 						</div>
-						
-					</div>
-					
-				</a>
+
+					</a>
+				</div>
 			</div>
+			
 		</div>
 		
 		<div class="item mt-big flex wrap">
