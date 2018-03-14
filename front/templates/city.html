@@ -16,27 +16,25 @@
 {% endblock %}
 
 {% block content %}
-<div id="content" ng-controller="NewCityCtrl" ng-init="loadCity('{{country_name}}', '{{region_name}}', '{{city_name}}');">
+<div id="content">
 
-{% verbatim %}
-
-	<div id="loading" ng-hide="loaded">
+	<div id="loading" v-show="!loaded">
 		<i class="item fa fa-spinner rotating"></i>
 		<span class="item">Loading page...</span>
 	</div>
 	
-	<div class="container" ng-class="{'active':loaded}">
+	<div class="container" v-bind:class="{'active':loaded}">
 		
 		<div class="section">
 			
 			<div class="flex align-center">
 				
 				<div class="item flex">
-					<span class="flag-icon flag-icon-{{city.region.country.code}}"></span>
+					<span class="flag-icon flag-icon-{{country_code}}"></span>
 				</div>
 				
 				<div class="item flex">
-					<a href="/world/{{country_name}}">{{city.region.country.name}}</a>
+					<a href="/world/{{country_label}}">{{country_label}}</a>
 				</div>
 				
 				<div class="item flex">
@@ -44,7 +42,7 @@
 				</div>
 				
 				<div class="item flex">
-					<a href="/world/{{city.region.country.name}}/{{city.region.name}}">{{city.region.name}}</a>
+					<a href="/world/{{country_label}}/{{region_label}}">{{region_label}}</a>
 				</div>
 				
 			</div>
@@ -54,14 +52,16 @@
 		<div class="section">
 				
 			<div class="item flex-col">
-				<span class="text-big color-light">{{city.name}}</span>
-				<a class="color-link" ng-show="user.authenticated && !notified" ng-click="notify();">To be notified</a>
-				<a class="color-normal" ng-show="user.authenticated && notified" ng-click="unnotify();">Notified</a>
+				<span class="text-big color-light">{{city_label}}</span>
+				<a class="color-link" v-show="authenticated && !notified" ng-click="notify();">To be notified</a>
+				<a class="color-normal" v-show="authenticated && notified" ng-click="unnotify();">Notified</a>
 			</div>
 		
 		</div>
+<!--
+{% verbatim %}
 		
-		<div class="section" ng-show="(potentials.length + mosaics.length) > 2">
+		<div class="section" v-show="(potentials.length + mosaics.length) > 2">
 			
 			<div class="flex wrap">
 				
@@ -164,7 +164,7 @@
 			</div>
 			
 		</div>
-
+-->
 	</div>
 	
 {% endverbatim %}
@@ -173,9 +173,6 @@
 {% endblock %}
 
 {% block script %}
-<script src="/static/front.js"></script>
-
-<!--
 <script>
 	var app = new Vue({
 		el:'#content',
@@ -184,6 +181,7 @@
 			
 			loaded:false,
 			notified:false,
+			authenticated:{{user.is_authenticated}},
 			
 			city_name:'{{city_label}}',
 			region_name:'{{region_label}}',
@@ -201,14 +199,14 @@
 			
 			var self = this;
 			
-			axios.get('/api/city/{{country_name}}/{{region_name}}/{{city_name}}')
+			axios.get('/api/city/{{country_name}}/{{region_name}}/{{city_name}}/')
 				.then(function(response) {
 					
-					self.notified = response.notified;
+					self.notified = response.data.notified;
 					
-					self.mosaics = response.mosaics;
-					self.potentials = response.potentials;
-					
+					self.mosaics = response.data.mosaics;
+					self.potentials = response.data.potentials;
+
 					for (var mosaic of self.mosaics) {
 						
 						var temp = 0;
@@ -346,6 +344,5 @@
 	var token = window.localStorage.getItem('satellizer_token');
 	axios.defaults.headers.common['authorization'] = 'Token ' + token;
 </script>
--->
 
 {% endblock %}
