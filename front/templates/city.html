@@ -99,19 +99,10 @@
 			<div class="flex wrap">
 				<div class="item width-12 width-xl-4" ng-repeat="potential in potentials">
 					<a class="item link-block flex-col" href="/registration/{{potential.title}}">
-
-						<div class="item grow flex-col pb-none">
-							<span class="ellipsis">{{potential.title}}</span>
+						<div class="item flex-col ">
+							<span class="color-light ellipsis">{{potential.title}}</span>
+							<span class="text-small color-muted">{{potential.count}} missions</span>
 						</div>
-						
-						<div class="item flex">
-							<div class="text-small grow">
-								<span class="mr-small flag-icon flag-icon-{{potential.city.region.country.code}}"></span>
-								<span class="color-dark">{{potential.city.name}}</span>
-							</div>
-							<span class="text-small color-normal">{{potential.count}}</span>
-						</div>
-
 					</a>
 				</div>
 			</div>
@@ -119,7 +110,7 @@
 		</div>
 		
 		<div class="item mt-big flex wrap">
-			<div class="width-6 width-xl-4" ng-repeat="mosaic in mosaics" style="padding: .75rem .375rem;">
+			<div class="width-12 width-xl-4" ng-repeat="mosaic in mosaics" style="padding: .75rem .375rem;">
 				<a class="item link-block flex-col" href="/mosaic/{{mosaic.ref}}" target="_blank" style="height:100%;">
 					
     				<div class="item">
