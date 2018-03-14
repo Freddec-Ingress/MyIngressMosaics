@@ -123,9 +123,9 @@
 			
 			<div class="flex wrap">
 				<div class="item width-12 width-xl-4 flex-col" ng-repeat="mosaic in mosaics">
-					<div class="link-block flex-col">
+					<div class="item link-block flex-col">
 						
-						<a class="item flex" href="/mosaic/{{mosaic.ref}}" target="_blank">
+						<a class="flex" href="/mosaic/{{mosaic.ref}}" target="_blank">
 							
 		    				<div class="item width-11 flex-col">
 		    					<span class="text-medium color-light ellipsis" title="{{mosaic.title}}">{{mosaic.title}}</span>
@@ -138,7 +138,7 @@
 		    				
 		 	   			</a>
 		    			
-		    			<div class="item">
+		    			<div class="item pt-none">
 		    				<a ng-show="!mosaic.preview" ng-click="mosaic.preview=true;">Preview</a>
 		    				<a ng-show="mosaic.preview" ng-click="mosaic.preview=false;">Close</a>
 		    			</div>
