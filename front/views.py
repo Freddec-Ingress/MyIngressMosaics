@@ -157,7 +157,31 @@ def map(request, location = ''):
 
 def world(request):
 	
-	context = {}
+	context = {
+		'mosaic_count':0,
+		'country_count':0,
+		
+		'countries':[],
+	}
+	
+	for country in Country.objects.all():
+		
+		context['country_count'] += 1
+		
+		mosaic_count = Mosaic.objects.filter(city__region__country=country).count()
+		context['mosaic_count'] += mosaic_count
+		
+		country_data = {
+			'name':country.name,
+			'code':country.code,
+			'locale':country.locale,
+			'mosaic_count':mosaic_count,
+		}
+		
+		context['countries'].append(country_data)
+	
+	context['countries'].sort(key=lambda x: x['mosaic_count'], reverse=True)
+	
 	return render(request, 'world.html', context)
 
 
