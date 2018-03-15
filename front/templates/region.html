@@ -113,43 +113,44 @@
 	
 			<div class="section" ng-repeat="city in cities" ng-if="city.name[0]==current_index;">
 				
-				<div class="item flex-col pb-none color-normal">
-					<div>
+				<div class="flex">
+					
+					<div class="item">
 						<a class="text-medium mr-normal" href="/world/{{region.country_name}}/{{region.name}}/{{city.name}}">{{city.name}}</a>
-						<span class="color-dark" ng-show="city.locale">{{city.locale}}</span>
 					</div>
-					<div>
-						<span class="text-small color-muted" ng-show="city.mosaic_count > 0">{{city.mosaic_count}} mosaics</span>
-						<span class="text-small color-muted" ng-show="city.mosaic_count > 0 && city.potential_count > 0">&middot;</span>
-						<span class="text-small color-muted" ng-show="city.potential_count > 0">{{city.potential_count}} potentials</span>
+					
+					<div class="item" ng-if="city.locale">
+						<span class="color-dark">{{city.locale}}</span>
 					</div>
+					
 				</div>
 				
-				<div class="flex wrap">
-					<div class="width-12 width-xl-4 item" ng-repeat="potential in potentials" ng-if="potential.city.name==city.name;">
-						<a class="item link-block flex-col pt-none pb-none" href="/registration/{{potential.title}}">
+				<div class="item flex" ng-if="city.potential_count > 0">
+					<span class="text-small color-muted">{{city.potential_count}} potentials</span>
+				</div>
+				
+				<div class="flex wrap" ng-if="city.potential_count > 0">
+					<div class="item width-12 width-xl-4" ng-repeat="potential in potentials">
+						<a class="item link-block flex align-center" href="/registration/{{potential.title}}">
 							
-							<div class="flex-col">
-								
-								<div class="item grow flex-col pb-none">
-									<span class="ellipsis">{{potential.title}}</span>
-								</div>
-								
-								<div class="item flex">
-									<div class="text-small grow">
-										<span class="mr-small flag-icon flag-icon-{{potential.city.region.country.code}}"></span>
-										<span class="color-dark">{{potential.city.name}}</span>
-									</div>
-									<span class="text-small color-normal">{{potential.count}}</span>
-								</div>
-								
+							<div class="item width-11 flex-col">
+								<span class="text-medium color-light ellipsis" title="{{potential.title}}">{{potential.title}}</span>
+								<span class="text-small color-muted">{{potential.count}} missions</span>
+							</div>
+							
+							<div class="item width-1 text-center">
+								<i class="fa fa-angle-right"></i>
 							</div>
 							
 						</a>
 					</div>
 				</div>
 				
-				<div class="flex wrap">
+				<div class="item flex" ng-if="city.mosaic_count > 0">
+					<span class="text-small color-muted">{{city.mosaic_count}} mosaics</span>
+				</div>
+				
+				<div class="flex wrap" ng-if="city.mosaic_count > 0">
 					<div class="item width-12 width-xl-4 flex-col" ng-repeat="mosaic in mosaics" ng-if="mosaic.city.name==city.name;">
 						<div class="item link-block flex-col">
 							
