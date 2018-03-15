@@ -14,7 +14,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="NewCountryCtrl" ng-init="init('{{country.name}}', {{country.notified}});">
+	<div id="content" ng-controller="NewCountryCtrl" ng-init="init('{{country.name}}', '{{country.notified}}');">
 
 	<div class="container active">
 
@@ -28,14 +28,18 @@
 		   		</div>
 		   		
 		   		<div class="flex align-center">
-					{% if country.potential_count %}<span class="color-dark pr-small">{{country.potential_count}} mosaics</span>{% endif %}
-					{% if country.potential_count > 0 and country.mosaic_count > 0 %}<span class="color-dark pr-small">&middot;</span>{% endif %}
-					{% if country.mosaic_count %}<span class="color-dark pr-small">{{country.mosaic_count}} mosaics</span>{% endif %}
-					{% if user.is_authenticated %}<span class="color-dark pr-small">&middot;</span>{% endif %}
-					{% if user.is_authenticated and not country.notified %}<a class="color-link" ng-click="notify();">To be notified</a>{% endif %}
-					{% if user.is_authenticated and country.notified %}<a class="color-normal" ng-click="unnotify();">Notified</a>{% endif %}
+					{% if country.potential_count %}<span class="color-normal pr-small">{{country.potential_count}} mosaics</span>{% endif %}
+					{% if country.potential_count > 0 and country.mosaic_count > 0 %}<span class="color-normal pr-small">&middot;</span>{% endif %}
+					{% if country.mosaic_count %}<span class="color-normal pr-small">{{country.mosaic_count}} mosaics</span>{% endif %}
+					<span class="color-normal pr-small">&middot;</span>
+					{% if not country.notified %}<a class="color-link" ng-click="notify();">To be notified</a>{% endif %}
+					{% if country.notified %}<a class="color-normal" ng-click="unnotify();">Notified</a>{% endif %}
 				</div>
 
+				<div class="flex align-center hidden" ng-if="need_signin">
+					<span class="color-danger">You must be signed in to be notified.</span>
+				</div>
+			
 			</div>
 			
 		</div>

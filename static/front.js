@@ -2979,14 +2979,20 @@ angular.module('FrontModule.controllers').controller('NewSearchCtrl', function($
 	
 	$scope.loaded = true;
 });
-angular.module('FrontModule.controllers').controller('NewCountryCtrl', function($scope, $window, API) {
+angular.module('FrontModule.controllers').controller('NewCountryCtrl', function($rootScope, $scope, $window, API) {
 
 	$scope.notify = function() {
 		
-		$scope.notified = true;
+		if ($rootScope.user.name) {
 		
-		var data = { 'country_name':$scope.country_name }
-		API.sendRequest('/api/notif/create', 'POST', {}, data);
+			$scope.notified = true;
+			
+			var data = { 'country_name':$scope.country_name }
+			API.sendRequest('/api/notif/create', 'POST', {}, data);
+		}
+		else {
+			$scope.need_signin = true;
+		}
 	}
 	
 	$scope.unnotify = function() {
@@ -3000,7 +3006,13 @@ angular.module('FrontModule.controllers').controller('NewCountryCtrl', function(
 	$scope.init = function(country_name, notified) {
 		
 		$scope.country_name = country_name;
-		$scope.notified = notified;
+		
+		if (notified=='False') $scope.notified = false;
+		if (notified=='True') $scope.notified = true;
+		
+		$scope.need_signin = false;
+    
+	    $('.hidden').each(function() { $(this).removeClass('hidden'); })
 	}
 });
 angular.module('FrontModule.controllers').controller('NewLoginCtrl', function($scope, $window, $auth, $cookies, API) {

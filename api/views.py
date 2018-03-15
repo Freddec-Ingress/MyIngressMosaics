@@ -923,10 +923,9 @@ def data_getMosaicsByRegion(request, name):
 		
 		data['count'] = Mosaic.objects.filter(city__region__country__name=name).count()
 		
-		if request.user.is_authenticated:
-			notif_results = Notif.objects.filter(user=request.user, country=country, region__isnull=True, city__isnull=True)
-			if notif_results.count() > 0:
-				data['notified'] = True
+		notif_results = Notif.objects.filter(user=request.user, country=country, region__isnull=True, city__isnull=True)
+		if notif_results.count() > 0:
+			data['notified'] = True
 	
 	return Response(data, status=status.HTTP_200_OK)
 
@@ -965,10 +964,9 @@ def data_getMosaicsByCity(request, country, name):
 	
 		data['count'] = Mosaic.objects.filter(city__region=region).count()
 		
-		if request.user.is_authenticated:
-			notif_results = Notif.objects.filter(user=request.user, country=country, region=region, city__isnull=True)
-			if notif_results.count() > 0:
-				data['notified'] = True
+		notif_results = Notif.objects.filter(user=request.user, country=country, region=region, city__isnull=True)
+		if notif_results.count() > 0:
+			data['notified'] = True
 		
 	return Response(data, status=status.HTTP_200_OK)
 	
@@ -1112,10 +1110,9 @@ def data_getMosaicsOfCity(request, country, region, name):
 		search = Search(city=name, region=region, country=country)
 		search.save()
 		
-	if request.user.is_authenticated:
-		notif_results = Notif.objects.filter(user=request.user, country=city.region.country, region=city.region, city=city)
-		if notif_results.count() > 0:
-			data['notified'] = True
+	notif_results = Notif.objects.filter(user=request.user, country=city.region.country, region=city.region, city=city)
+	if notif_results.count() > 0:
+		data['notified'] = True
 	
 	return Response(data, status=status.HTTP_200_OK)
 
