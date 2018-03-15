@@ -23,7 +23,7 @@
 				
 				<div class="flex-col item">
 					<span class="text-big color-light">Ingress Mosaics, Banners and Mission series</span>
-					<span class="text-normal color-normal">{{mosaic_count|intcomma}} registered mosaics by agents for agents</span>
+					<span class="text-normal color-normal">{{mosaic_count}} registered mosaics by agents for agents</span>
 				</div>
 				
 			</div>
@@ -107,7 +107,7 @@
 									</div>
 					
 									<div class="flex align-center">
-										<span class="text-small color-normal">{{country.mosaic_count}}</span>
+										{% if region.mosaic_count %}<span class="text-small color-normal">{{country.mosaic_count}}</span>{% endif %}
 										{% if country.potential_count %}<span class="ml-small text-small color-link">+{{country.potential_count|intcomma}}</span>{% endif %}
 									</div>
 									

@@ -207,7 +207,36 @@ def region(request, country, region):
 	
 def country(request, country):
 	
-	context = { 'country':country }
+	country_obj = Country.objects.get(name=country)
+	
+	context = {
+		'country':{
+			'name':country_obj.name,
+			'code':country_obj.code,
+			'notified':False,
+			'mosaic_count':0,
+			'potential_count':0,
+		},
+		
+		'regions':[],
+	}
+	
+	for region in country_obj.regions.all():
+		
+		region_data = {
+			'name':region.name,
+			'locale':region.locale,
+			'mosaic_count':Mosaic.objects.filter(city__region=region).count(),
+			'potential_count':Potential.objects.filter(city__region=region).count(),
+		}
+		
+		context['regions'].append(region_data)
+		
+		context['country']['mosaic_count'] += region_data['mosaic_count']
+		context['country']['potential_count'] += region_data['potential_count']
+	
+	context['regions'].sort(key=lambda x: x['mosaic_count'], reverse=True)
+	
 	return render(request, 'country.html', context)
 	
 	

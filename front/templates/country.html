@@ -2,27 +2,21 @@
 
 {% block extra-head %}
 
-	<title>MIM - {{country}}</title>
+	<title>MIM - {{country.name}}</title>
 
-	<meta property="og:url" content="https://www.myingressmosaics.com/world/{{country}}">
+	<meta property="og:url" content="https://www.myingressmosaics.com/world/{{country.name}}">
 	<meta property="og:type" content="article">
-	<meta property="og:title" content="MIM - {{country}}">
-	<meta property="og:headline" content="MIM - {{country}}">
-	<meta property="og:description" content="Ingress mosaics in {{country}}">
+	<meta property="og:title" content="MIM - {{country.name}}">
+	<meta property="og:headline" content="MIM - {{country.name}}">
+	<meta property="og:description" content="Ingress mosaics in {{country.name}}">
 
 {% endblock %}
 
 {% block content %}
-<div id="content" ng-controller="NewCountryCtrl" ng-init="loadCountry('{{country}}');">
 
-{% verbatim %}
+	<div id="content" ng-controller="NewCountryCtrl" ng-init="init('{{country.name}}', {{country.notified}});">
 
-	<div id="loading" ng-hide="loaded">
-		<i class="item fa fa-spinner rotating"></i>
-		<span class="item">Loading page...</span>
-	</div>
-	
-	<div class="container" ng-class="{'active':loaded}">
+	<div class="container active">
 
 		<div class="section">
 			
@@ -34,10 +28,12 @@
 		   		</div>
 		   		
 		   		<div class="flex align-center">
-					<span class="color-dark pr-small">{{count}} mosaics</span>
-					<span ng-show="user.authenticated" class="color-dark pr-small">&middot;</span>
-					<a class="color-link" ng-show="user.authenticated && !notified" ng-click="notify();">To be notified</a>
-					<a class="color-normal" ng-show="user.authenticated && notified" ng-click="unnotify();">Notified</a>
+					{% if country.potential_count %}<span class="color-dark pr-small">{{country.potential_count}} mosaics</span>{% endif %}
+					{% if country.potential_count > 0 and country.mosaic_count > 0 %}<span class="color-dark pr-small">&middot;</span>{% endif %}
+					{% if country.mosaic_count %}<span class="color-dark pr-small">{{country.mosaic_count}} mosaics</span>{% endif %}
+					{% if user.is_authenticated %}<span class="color-dark pr-small">&middot;</span>{% endif %}
+					{% if user.is_authenticated and not country.notified %}<a class="color-link" ng-click="notify();">To be notified</a>{% endif %}
+					{% if user.is_authenticated and country.notified %}<a class="color-normal" ng-click="unnotify();">Notified</a>{% endif %}
 				</div>
 
 			</div>
@@ -47,36 +43,44 @@
 		<div class="section">
 			
 			<div class="flex wrap">
-				<div class="width-12 width-xl-4 item" ng-repeat="region in regions">
-					<a class="item link-block flex-col" href="/world/{{country.name}}/{{region.name}}" style="height:100%;">
+				{% for region in regions %}
+				<div class="width-12 width-xl-4 item">
+					<a class="item link-block flex-col" href="/world/{{country.name}}/{{region.name}}">
 					
 						<div class="item">
+							
 							<span class="color-light text-medium">{{region.name}}</span>
 							
 							<div class="flex align-center">
+								
 								<div class="grow">
-									<span class="color-dark text-small" ng-show="region.locale">{{region.locale}}</span>
+									<span class="color-dark text-small">{{region.locale}}</span>
 								</div>
-								<span ng-show="region.mosaics > 0" class="color-normal" ng-class="{'pr-small':region.mosaics > 0 && region.potentials > 0}">{{region.mosaics|number}}</span>
-								<span ng-show="region.potentials > 0" class="text-small color-link">+{{region.potentials|number}}</span>
+				
+								<div class="flex align-center">
+									{% if region.mosaic_count %}<span class="text-small color-normal">{{region.mosaic_count}}</span>{% endif %}
+									{% if region.potential_count %}<span class="ml-small text-small color-link">+{{region.potential_count}}</span>{% endif %}
+								</div>
+								
 							</div>
+							
 						</div>
 
 					</a>
 				</div>
+				{% endfor %}
 			</div>
 			
 		</div>
 		
 	</div>
-	
-{% endverbatim %}
 
 </div>
+
 {% endblock %}
 
 {% block script %}
-<script src="/static/front.js"></script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuXb2ncs76tO-2SN8hvkE5Zt4VwtPoNcM&language=en&libraries=places"></script>
+	<script src="/static/front.js"></script>
+
 {% endblock %}
