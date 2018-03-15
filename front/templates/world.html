@@ -100,7 +100,7 @@
 						<a class="item link-block flex" href="/world/{{country.name}}">
 						
 							<div class="item">
-								<span class="flag-icon flag-icon-{{country.code}}"></span>
+								<span class="flag-icon flag-icon-{{country.code}}" style="width:1.5rem; line-height:2rem;"></span>
 							</div>
 								
 							<div class="item grow">
@@ -116,12 +116,12 @@
 								<div class="flex align-center">
 									
 									<div class="grow">
-										<span class="block color-dark text-small">{{country.locale}}</span>
+										<span class="color-dark text-small">{{country.locale}}</span>
 									</div>
 					
-									<div class="flex">
-										<span class="color-normal">{{country.mosaic_count|intcomma}}</span>
-										{% if country.potential_count %}<span class="text-small color-link">+{{country.potential_count|intcomma}}</span>{% endif %}
+									<div class="flex align-center">
+										<span class="text-small color-normal">{{country.mosaic_count|intcomma}}</span>
+										{% if country.potential_count %}<span class="ml-small text-small color-link">+{{country.potential_count|intcomma}}</span>{% endif %}
 									</div>
 									
 								</div>
