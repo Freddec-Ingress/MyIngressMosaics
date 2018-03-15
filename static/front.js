@@ -3011,9 +3011,9 @@ angular.module('FrontModule.controllers').controller('NewCountryCtrl', function(
 		if (notified=='True') $scope.notified = true;
 		
 		$scope.need_signin = false;
-    
-	    $('.hidden').each(function() { $(this).removeClass('hidden'); })
 	}
+    
+	$('.hidden').each(function() { $(this).removeClass('hidden'); })
 });
 angular.module('FrontModule.controllers').controller('NewLoginCtrl', function($scope, $window, $auth, $cookies, API) {
 	
