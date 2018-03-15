@@ -165,8 +165,10 @@ def world(request):
 def city(request, country, region, city):
 	
 	obj_country = Country.objects.get(name=country)
+	
+	authenticated = str(request.user.is_authenticated()).lower()
 
-	context = { 'country_code':obj_country.code, 'country_label':country, 'region_label':region, 'city_label':city, 'country_name':re.escape(country), 'region_name':re.escape(region), 'city_name':re.escape(city) }
+	context = { 'authenticated':authenticated, 'country_code':obj_country.code, 'country_label':country, 'region_label':region, 'city_label':city, 'country_name':re.escape(country), 'region_name':re.escape(region), 'city_name':re.escape(city) }
 	return render(request, 'city.html', context)
 
 

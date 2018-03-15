@@ -10,31 +10,30 @@
 	<meta property="og:headline" content="MIM - {{country_label}}, {{region_label}}, {{city_label}}">
 	<meta property="og:description" content="Ingress mosaics in {{city_label}}, {{region_label}}, {{country_label}}">
 
-	<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-	
 {% endblock %}
 
 {% block content %}
-<div id="content">
+<div id="content" ng-controller="NewCityCtrl" ng-init="loadCity('{{country_name}}', '{{region_name}}', '{{city_name}}');">
 
-	<div id="loading" v-show="!loaded">
+{% verbatim %}
+
+	<div id="loading" ng-hide="loaded">
 		<i class="item fa fa-spinner rotating"></i>
 		<span class="item">Loading page...</span>
 	</div>
 	
-	<div class="container" v-bind:class="{'active':loaded}">
+	<div class="container" ng-class="{'active':loaded}">
 		
 		<div class="section">
 			
 			<div class="flex align-center">
 				
 				<div class="item flex">
-					<span class="flag-icon flag-icon-{{country_code}}"></span>
+					<span class="flag-icon flag-icon-{{city.region.country.code}}"></span>
 				</div>
 				
 				<div class="item flex">
-					<a href="/world/{{country_label}}">{{country_label}}</a>
+					<a href="/world/{{country_name}}">{{city.region.country.name}}</a>
 				</div>
 				
 				<div class="item flex">
@@ -42,7 +41,7 @@
 				</div>
 				
 				<div class="item flex">
-					<a href="/world/{{country_label}}/{{region_label}}">{{region_label}}</a>
+					<a href="/world/{{city.region.country.name}}/{{city.region.name}}">{{city.region.name}}</a>
 				</div>
 				
 			</div>
@@ -52,16 +51,14 @@
 		<div class="section">
 				
 			<div class="item flex-col">
-				<span class="text-big color-light">{{city_label}}</span>
-				<a class="color-link" v-show="authenticated && !notified" ng-click="notify();">To be notified</a>
-				<a class="color-normal" v-show="authenticated && notified" ng-click="unnotify();">Notified</a>
+				<span class="text-big color-light">{{city.name}}</span>
+				<a class="color-link" ng-show="user.authenticated && !notified" ng-click="notify();">To be notified</a>
+				<a class="color-normal" ng-show="user.authenticated && notified" ng-click="unnotify();">Notified</a>
 			</div>
 		
 		</div>
-<!--
-{% verbatim %}
 		
-		<div class="section" v-show="(potentials.length + mosaics.length) > 2">
+		<div class="section" ng-show="(potentials.length + mosaics.length) > 2">
 			
 			<div class="flex wrap">
 				
@@ -164,7 +161,7 @@
 			</div>
 			
 		</div>
--->
+
 	</div>
 	
 {% endverbatim %}
@@ -173,176 +170,5 @@
 {% endblock %}
 
 {% block script %}
-<script>
-	var app = new Vue({
-		el:'#content',
-		
-		data:{
-			
-			loaded:false,
-			notified:false,
-			authenticated:{{user.is_authenticated}},
-			
-			city_name:'{{city_label}}',
-			region_name:'{{region_label}}',
-			
-			country_code:'',
-			country_name:'{{country_label}}',
-			
-			sorting:'by_mission_count',
-			
-			mosaics:[],
-			potentials:[],
-		},
-		
-		created: function () {
-			
-			var self = this;
-			
-			axios.get('/api/city/{{country_name}}/{{region_name}}/{{city_name}}/')
-				.then(function(response) {
-					
-					self.notified = response.data.notified;
-					
-					self.mosaics = response.data.mosaics;
-					self.potentials = response.data.potentials;
-
-					for (var mosaic of self.mosaics) {
-						
-						var temp = 0;
-						if (mosaic.missions.length > mosaic.cols) {
-							temp = mosaic.cols - mosaic.missions.length % mosaic.cols;
-							if (temp < 0 || temp > (mosaic.cols - 1)) temp = 0;
-						}
-						
-						mosaic.offset = new Array(temp);
-					}
-					
-					self.sortByMissionCount();
-					
-					self.loaded = true;
-				});
-		},
-		
-		methods:{
-			
-			notify:function() {
-				
-				this.notified = true;
-				
-				var data = { 'country_name':this.country_name, 'region_name':this.region_name, 'city_name':this.city_name }
-				axios.post('/api/notif/create', data);
-			},
-			
-			unnotify:function() {
-				
-				this.notified = false;
-				
-				var data = { 'country_name':this.country_name, 'region_name':this.region_name, 'city_name':this.city_name }
-				axios.post('/api/notif/delete', data);
-			},
-			
-			sortByDate:function() {
-		
-				this.sorting = 'by_date';
-					
-				this.potentials.sort(function(a, b) {
-					
-					if (a.id > b.id) return -1;
-					if (a.id < b.id) return 1;
-					
-					return 0;
-				});
-				
-				
-				this.mosaics.sort(function(a, b) {
-					
-					if (a.id > b.id) return -1;
-					if (a.id < b.id) return 1;
-					
-					return 0;
-				});
-			},
-			
-			sortByName:function() {
-				
-				this.sorting = 'by_name';
-					
-				this.potentials.sort(function(a, b) {
-					
-					if (a.title > b.title) return 1;
-					if (a.title < b.title) return -1;
-					
-					return 0;
-				});
-				
-				this.mosaics.sort(function(a, b) {
-					
-					if (a.title > b.title) return 1;
-					if (a.title < b.title) return -1;
-					
-					return 0;
-				});
-			},
-			
-			sortByUniques:function() {
-				
-				this.sorting = 'by_uniques';
-					
-				this.potentials.sort(function(a, b) {
-					
-					if (a.count > b.count) return -1;
-					if (a.count < b.count) return 1;
-					
-					if (a.title > b.title) return 1;
-					if (a.title < b.title) return -1;
-					
-					return 0;
-				});
-				
-				this.mosaics.sort(function(a, b) {
-					
-					if (a.uniques > b.uniques) return -1;
-					if (a.uniques < b.uniques) return 1;
-					
-					if (a.title > b.title) return 1;
-					if (a.title < b.title) return -1;
-					
-					return 0;
-				});
-			},
-			
-			sortByMissionCount:function() {
-				
-				this.sorting = 'by_mission_count';
-					
-				this.potentials.sort(function(a, b) {
-					
-					if (a.count > b.count) return -1;
-					if (a.count < b.count) return 1;
-					
-					if (a.title > b.title) return 1;
-					if (a.title < b.title) return -1;
-					
-					return 0;
-				});
-				
-				this.mosaics.sort(function(a, b) {
-					
-					if (a.missions.length > b.missions.length) return -1;
-					if (a.missions.length < b.missions.length) return 1;
-					
-					if (a.title > b.title) return 1;
-					if (a.title < b.title) return -1;
-					
-					return 0;
-				});
-			},
-		},
-	});
-	
-	var token = window.localStorage.getItem('satellizer_token');
-	axios.defaults.headers.common['authorization'] = 'Token ' + token;
-</script>
-
+<script src="/static/front.js"></script>
 {% endblock %}
