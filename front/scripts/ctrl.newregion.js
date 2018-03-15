@@ -20,33 +20,11 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 	
 	/* Sorting */
 	
-	$scope.sortByName = function(city) {
+	$scope.sortByLocation = function() {
 		
-		city.sorting = 'by_name';
-			
-		city.potentials.sort(function(a, b) {
-			
-			if (a.title > b.title) return 1;
-			if (a.title < b.title) return -1;
-			
-			return 0;
-		});
+		$scope.sorting = 'by_location';
 		
-		
-		city.mosaics.sort(function(a, b) {
-			
-			if (a.title > b.title) return 1;
-			if (a.title < b.title) return -1;
-			
-			return 0;
-		});
-	}
-	
-	$scope.sortByMissionCount = function(city) {
-		
-		city.sorting = 'by_mission_count';
-			
-		city.potentials.sort(function(a, b) {
+		$scope.potentials.sort(function(a, b) {
 			
 			if (a.count > b.count) return -1;
 			if (a.count < b.count) return 1;
@@ -57,8 +35,7 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 			return 0;
 		});
 		
-		
-		city.mosaics.sort(function(a, b) {
+		$scope.mosaics.sort(function(a, b) {
 			
 			if (a.missions.length > b.missions.length) return -1;
 			if (a.missions.length < b.missions.length) return 1;
@@ -70,11 +47,33 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 		});
 	}
 	
-	$scope.sortByUniques = function(city) {
+	$scope.sortByName = function() {
 		
-		city.sorting = 'by_uniques';
+		$scope.sorting = 'by_name';
 			
-		city.potentials.sort(function(a, b) {
+		$scope.potentials.sort(function(a, b) {
+			
+			if (a.title > b.title) return 1;
+			if (a.title < b.title) return -1;
+			
+			return 0;
+		});
+		
+		
+		$scope.mosaics.sort(function(a, b) {
+			
+			if (a.title > b.title) return 1;
+			if (a.title < b.title) return -1;
+			
+			return 0;
+		});
+	}
+	
+	$scope.sortByUniques = function() {
+		
+		$scope.sorting = 'by_uniques';
+			
+		$scope.potentials.sort(function(a, b) {
 			
 			if (a.count > b.count) return -1;
 			if (a.count < b.count) return 1;
@@ -86,7 +85,7 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 		});
 		
 		
-		city.mosaics.sort(function(a, b) {
+		$scope.mosaics.sort(function(a, b) {
 			
 			if (a.uniques > b.uniques) return -1;
 			if (a.uniques < b.uniques) return 1;
@@ -98,11 +97,11 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 		});
 	}
 	
-	$scope.sortByDate = function(city) {
+	$scope.sortByDate = function() {
 		
-		city.sorting = 'by_date';
+		$scope.sorting = 'by_date';
 			
-		city.potentials.sort(function(a, b) {
+		$scope.potentials.sort(function(a, b) {
 			
 			if (a.id > b.id) return -1;
 			if (a.id < b.id) return 1;
@@ -111,7 +110,7 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 		});
 		
 		
-		city.mosaics.sort(function(a, b) {
+		$scope.mosaics.sort(function(a, b) {
 			
 			if (a.id > b.id) return -1;
 			if (a.id < b.id) return 1;
@@ -158,6 +157,8 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 			}
 
 			$scope.current_index = $scope.location_indexes[0];
+
+			$scope.sortByLocation();
 
 			$scope.loaded = true;
 		});
