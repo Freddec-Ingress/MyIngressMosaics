@@ -221,9 +221,10 @@ def country(request, country):
 		'regions':[],
 	}
 	
-	notif_results = Notif.objects.filter(user=request.user, country=country_obj, region__isnull=True, city__isnull=True)
-	if notif_results.count() > 0:
-		context['country']['notified'] = True
+	if not request.user.is_anonymous():
+		notif_results = Notif.objects.filter(user=request.user, country=country_obj, region__isnull=True, city__isnull=True)
+		if notif_results.count() > 0:
+			context['country']['notified'] = True
 			
 	for region in country_obj.regions.all():
 		
