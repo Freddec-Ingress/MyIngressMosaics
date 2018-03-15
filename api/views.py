@@ -1019,7 +1019,6 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 		location_index = city_obj.name[0]
 		if location_index not in data['location_indexes']:
 			data['location_indexes'].append(location_index)
-			data['location_indexes'].sort()
 		
 		# Mosaics data
 		mosaics = city_obj.mosaics.all()
@@ -1041,6 +1040,8 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 			city_data['potential_count'] += 1
 			data['region']['potential_count'] += 1
 			
+	data['location_indexes'].sort()
+	
 	return Response(data, status=status.HTTP_200_OK)
 
 
