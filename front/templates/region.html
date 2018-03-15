@@ -130,7 +130,7 @@
 				</div>
 				
 				<div class="flex wrap" ng-if="city.potential_count > 0">
-					<div class="item width-12 width-xl-4" ng-repeat="potential in potentials">
+					<div class="item width-12 width-xl-4" ng-repeat="potential in potentials" ng-if="potential.city.name==city.name;">
 						<a class="item link-block flex align-center" href="/registration/{{potential.title}}">
 							
 							<div class="item width-11 flex-col">
