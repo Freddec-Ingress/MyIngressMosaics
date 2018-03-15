@@ -50,7 +50,7 @@
 		
 					</form>
 					
-					<div class="flex align-center hidden" ng-if="flag_searching">
+					<div class="flex align-center hidden" ng-show="flag_searching">
 						
 						<div class="item">
 							<i class="color-dark fa fa-spinner rotating"></i>
@@ -62,7 +62,7 @@
 						
 					</div>
 					
-					<div class="flex hidden" ng-if="flag_city_unknown">
+					<div class="flex hidden" ng-show="flag_city_unknown">
 						
 				    	<div class="item">
 				    		<span class="color-danger">City unknown</span>
@@ -70,7 +70,7 @@
 				    	
 					</div>
 					
-					<div class="flex-col hidden" ng-if="city && mosaics.length < 1 && potentials.length < 1">
+					<div class="flex-col hidden" ng-show="city && mosaics.length < 1 && potentials.length < 1">
 						
 				    	<div class="item">
 				    		<span class="color-danger">No mosaic registered</span>
