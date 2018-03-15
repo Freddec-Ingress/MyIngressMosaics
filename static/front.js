@@ -3551,17 +3551,17 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 	
 	$scope.notify = function() {
 		
-		$scope.notified = true;
+		$scope.region.notified = true;
 		
-		var data = { 'country_name':$scope.region.country.name, 'region_name':$scope.region.name }
+		var data = { 'country_name':$scope.region.country_name, 'region_name':$scope.region.name }
 		API.sendRequest('/api/notif/create', 'POST', {}, data);
 	}
 	
 	$scope.unnotify = function() {
 		
-		$scope.notified = false;
+		$scope.region.notified = false;
 		
-		var data = { 'country_name':$scope.region.country.name, 'region_name':$scope.region.name }
+		var data = { 'country_name':$scope.region.country_name, 'region_name':$scope.region.name }
 		API.sendRequest('/api/notif/delete', 'POST', {}, data);
 	}
 	
@@ -3684,43 +3684,28 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 		
 		API.sendRequest('/api/new_region/' + country_name + '/' + region_name + '/', 'GET').then(function(response) {
 
-			$scope.region = response.region_data;
-			$scope.indexes = response.index_data;
-			$scope.notified = response.notified;
+			$scope.region = response.region;
 			
-			$scope.city_count = 0;
+			$scope.cities = response.cities;
+			$scope.mosaics = response.mosaics;
+			$scope.potentials = response.potentials;
 			
-			/* Index & Offset */
-			
-			for (var index of $scope.indexes) {
+			$scope.location_indexes = response.location_indexes;
+
+			/* Mosaic offset */
+			for (var mosaic of $scope.mosaics) {
 				
-				for (var city of index.cities) {
-					for (var mosaic of city.mosaics) {
-						
-						var temp = 0;
-						if (mosaic.missions.length > mosaic.cols) {
-							temp = mosaic.cols - mosaic.missions.length % mosaic.cols;
-							if (temp < 0 || temp > (mosaic.cols - 1)) temp = 0;
-						}
-						
-						mosaic.offset = new Array(temp);
-					}
-					$scope.sortByMissionCount(city);
+				var temp = 0;
+				if (mosaic.missions.length > mosaic.cols) {
+					temp = mosaic.cols - mosaic.missions.length % mosaic.cols;
+					if (temp < 0 || temp > (mosaic.cols - 1)) temp = 0;
 				}
 				
-				index.cities.sort(function(a, b) {
-					
-					if (a.name > b.name) return -1;
-					if (a.name < b.name) return 1;
-					
-					return 0;
-				});
-				
-				if (!$scope.current_index && index.cities.length > 0) $scope.current_index = index;
-				
-				$scope.city_count += index.cities.length;
+				mosaic.offset = new Array(temp);
 			}
-			
+
+			$scope.current_index = $scope.location_indexes[0];
+
 			$scope.loaded = true;
 		});
 	}

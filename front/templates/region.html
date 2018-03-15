@@ -29,11 +29,11 @@
 			<div class="flex align-center">
 				
 	    		<div class="item flex">
-					<span class="flag-icon flag-icon-{{region.country.code}}"></span>
+					<span class="flag-icon flag-icon-{{region.country_code}}"></span>
 	    		</div>
 	    		
 	    		<div class="item flex">
-					<a href="/world/{{region.country.name}}">{{region.country.name}}</a>
+					<a href="/world/{{region.country_name}}">{{region.country_name}}</a>
 	    		</div>
 	    		
 			</div>
@@ -51,8 +51,8 @@
 					<span ng-show="region.potential_count && region.mosaic_count" class="color-dark pr-small">&middot;</span>
 					<span ng-show="region.potential_count" class="color-dark pr-small">{{region.potential_count}} potentials</span>
 					<span ng-show="user.authenticated" class="color-dark pr-small">&middot;</span>
-					<a class="color-link" ng-show="user.authenticated && !notified" ng-click="notify();">To be notified</a>
-					<a class="color-normal" ng-show="user.authenticated && notified" ng-click="unnotify();">Notified</a>
+					<a class="color-link" ng-show="user.authenticated && !region.notified" ng-click="notify();">To be notified</a>
+					<a class="color-normal" ng-show="user.authenticated && region.notified" ng-click="unnotify();">Notified</a>
 	    		</div>
 	    		
 			</div>
@@ -65,9 +65,9 @@
 				
 				<div class="grow flex width-12 wrap">
 
-					<div class="item flex justify-center" ng-repeat="index in indexes track by $index" ng-show="index.cities.length > 0" style="width:40px;">
+					<div class="item flex justify-center" ng-repeat="index in location_indexes track by $index" style="width:40px;">
 						<a class="badge badge-link item text-center" ng-click="setCurrentIndex(index);" ng-class="{'active': current_index==index}" style="width:100%;">
-							{{index.letter}}
+							{{index}}
 						</a>
 					</div>
 					
@@ -77,50 +77,22 @@
 			
 		</div>
 
-		<div class="section" ng-repeat="city in current_index.cities | reverse">
+		<div class="section" ng-repeat="city in cities" ng-if="city.name[0]==current_index;">
 			
 			<div class="item flex-col pb-none color-normal">
 				<div>
-					<a class="text-medium mr-normal" href="/world/{{region.country.name}}/{{region.name}}/{{city.name}}">{{city.name}}</a>
+					<a class="text-medium mr-normal" href="/world/{{region.country_name}}/{{region.name}}/{{city.name}}">{{city.name}}</a>
 					<span class="color-dark" ng-show="city.locale">{{city.locale}}</span>
 				</div>
 				<div>
-					<span class="text-small color-muted" ng-show="city.mosaics.length > 0">{{city.mosaics.length}} mosaics</span>
-					<span class="text-small color-muted" ng-show="city.mosaics.length > 0 && city.potentials.length > 0">&middot;</span>
-					<span class="text-small color-muted" ng-show="city.potentials.length > 0">{{city.potentials.length}} potentials</span>
+					<span class="text-small color-muted" ng-show="city.mosaic_count > 0">{{city.mosaic_count}} mosaics</span>
+					<span class="text-small color-muted" ng-show="city.mosaic_count > 0 && city.potential_count > 0">&middot;</span>
+					<span class="text-small color-muted" ng-show="city.potential_count > 0">{{city.potential_count}} potentials</span>
 				</div>
-			</div>
-			
-			<div class="flex wrap" ng-show="(city.potentials.length + city.mosaics.length) > 2">
-				
-				<div class="item">
-					<a class="text-small" ng-click="sortByMissionCount(city);" ng-class="{'active': city.sorting=='by_mission_count'}">
-						By mission count
-					</a>
-				</div>
-				
-				<div class="item">
-					<a class="text-small" ng-click="sortByDate(city);" ng-class="{'active': city.sorting=='by_date'}">
-						Most Recent
-					</a>
-				</div>
-				
-				<div class="item">
-					<a class="text-small" ng-click="sortByName(city);" ng-class="{'active': city.sorting=='by_name'}">
-						Alphabetical
-					</a>
-				</div>
-				
-				<div class="item">
-					<a class="text-small" ng-click="sortByUniques(city);" ng-class="{'active': city.sorting=='by_uniques'}">
-						By uniques
-					</a>
-				</div>
-				
 			</div>
 			
 			<div class="flex wrap">
-				<div class="width-12 width-xl-4 item" ng-repeat="potential in city.potentials">
+				<div class="width-12 width-xl-4 item" ng-repeat="potential in potentials" ng-if="potential.city.name==city.name;">
 					<a class="item link-block flex-col pt-none pb-none" href="/registration/{{potential.title}}">
 						
 						<div class="flex-col">
@@ -144,7 +116,7 @@
 			</div>
 			
 			<div class="flex wrap">
-				<div class="item width-12 width-xl-4 flex-col" ng-repeat="mosaic in city.mosaics">
+				<div class="item width-12 width-xl-4 flex-col" ng-repeat="mosaic in mosaics" ng-if="mosaic.city.name==city.name;">
 					<div class="item link-block flex-col">
 						
 						<a class="flex align-center" href="/mosaic/{{mosaic.ref}}" target="_blank">

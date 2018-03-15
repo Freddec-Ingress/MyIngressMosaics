@@ -977,75 +977,68 @@ def data_getMosaicsByCity(request, country, name):
 def newdata_getMosaicsByCity(request, country_name, region_name):
 	
 	data = {
-		'region_data': None,
-		'index_data': [
-			{'letter':'A', 'cities': []},
-			{'letter':'B', 'cities': []},
-			{'letter':'C', 'cities': []},
-			{'letter':'D', 'cities': []},
-			{'letter':'E', 'cities': []},
-			{'letter':'F', 'cities': []},
-			{'letter':'G', 'cities': []},
-			{'letter':'H', 'cities': []},
-			{'letter':'I', 'cities': []},
-			{'letter':'J', 'cities': []},
-			{'letter':'K', 'cities': []},
-			{'letter':'L', 'cities': []},
-			{'letter':'M', 'cities': []},
-			{'letter':'N', 'cities': []},
-			{'letter':'O', 'cities': []},
-			{'letter':'P', 'cities': []},
-			{'letter':'Q', 'cities': []},
-			{'letter':'R', 'cities': []},
-			{'letter':'S', 'cities': []},
-			{'letter':'T', 'cities': []},
-			{'letter':'U', 'cities': []},
-			{'letter':'V', 'cities': []},
-			{'letter':'W', 'cities': []},
-			{'letter':'X', 'cities': []},
-			{'letter':'Y', 'cities': []},
-			{'letter':'Z', 'cities': []},
-		],
-		'notified': False,
+		'region': None,
+		
+		'cities': [],
+		'mosaics': [],
+		'potentials': [],
+		
+		'location_indexes': [],
 	}
 	
 	# Region data
-	
 	region_obj = Region.objects.get(country__name=country_name, name=region_name)
-	region_data = region_obj.serialize()
-	region_data['mosaic_count'] = Mosaic.objects.filter(city__region=region_obj).count()
-	region_data['potential_count'] = Potential.objects.filter(city__region=region_obj).count()
-	data['region_data'] = region_data
 	
-	# List of city data
+	data['region'] = {
+		'country_code':region_obj.country.code,
+		'country_name':region_obj.country.name,
+		'name':region_obj.name,
+		'mosaic_count':Mosaic.objects.filter(city__region=region_obj).count(),
+		'potential_count':Potential.objects.filter(city__region=region_obj).count(),
+		'notified':False,
+	}
 	
+	if request.user.is_authenticated:
+		notif_results = Notif.objects.filter(user=request.user, country=region_obj.country, region=region_obj, city__isnull=True)
+		if notif_results.count() > 0:
+			data['region'].notified = True
+
+	# Cities data
 	for city_obj in region_obj.cities.all():
 	
-		city_data = { 'name':city_obj.name, 'locale':city_obj.locale, 'mosaics': [], 'potentials': [] }
+		city_data = {
+			'name':city_obj.name,
+			'locale':city_obj.locale,
+			'mosaic_count': 0,
+			'potential_count': 0,
+		}
 		
+		data['cities'].append(city_data)
+
+		# Locations indexes data
+		location_index = city_obj.name[0]
+		if location_index not in data['location_indexes']:
+			data['location_indexes'].append(location_index)
+			data['location_indexes'].sort()
+		
+		# Mosaics data
 		mosaics = city_obj.mosaics.all().annotate(Count('missions')).order_by('-missions__count', 'title')
 		for mosaic_obj in mosaics:
-			
-			mosaic_data = mosaic_obj.overviewSerialize()
-			city_data['mosaics'].append(mosaic_data);
 		
+			mosaic_data = mosaic_obj.overviewSerialize()
+			data['mosaics'].append(mosaic_data);
+			
+			city_data['mosaic_count'] += 1
+		
+		# Potentials data
 		potentials = city_obj.potentials.all().order_by('-count', 'title')
 		for potential_obj in potentials:
 			
 			potential_data = potential_obj.overviewSerialize()
-			city_data['potentials'].append(potential_data);
+			data['potentials'].append(potential_data);
 			
-		first_letter = city_data['name'].upper()[0]
-		for index in data['index_data']:
-			if index['letter'] == first_letter:
-				index['cities'].append(city_data);
-				break
-		
-	if request.user.is_authenticated:
-		notif_results = Notif.objects.filter(user=request.user, country=region_obj.country, region=region_obj, city__isnull=True)
-		if notif_results.count() > 0:
-			data['notified'] = True
-
+			city_data['potential_count'] += 1
+			
 	return Response(data, status=status.HTTP_200_OK)
 
 
