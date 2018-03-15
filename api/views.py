@@ -1038,7 +1038,7 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 			
 			data['mosaics'].append(mosaic_data)
 			
-			for mission_obj in mosaic_obj.missions.all():
+			for mission_obj in mosaic_obj.missions.all().order_by('-order'):
 				mosaic_data['images'].append(mission_obj.image)
 				mosaic_data['mission_count'] += 1
 			
