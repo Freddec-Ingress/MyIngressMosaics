@@ -91,7 +91,7 @@
 			
 		</div>
 		
-		<div ng-show="sorting=='by_location'">
+		<div ng-if="sorting=='by_location'">
 			
 			<div class="section">
 	    		
@@ -111,7 +111,7 @@
 				
 			</div>
 	
-			<div class="section" ng-repeat="city in cities" ng-show="city.name[0]==current_index;">
+			<div class="section" ng-repeat="city in cities" ng-if="city.name[0]==current_index;">
 				
 				<div class="item flex-col pb-none color-normal">
 					<div>
@@ -126,7 +126,7 @@
 				</div>
 				
 				<div class="flex wrap">
-					<div class="width-12 width-xl-4 item" ng-repeat="potential in potentials" ng-show="potential.city.name==city.name;">
+					<div class="width-12 width-xl-4 item" ng-repeat="potential in potentials" ng-if="potential.city.name==city.name;">
 						<a class="item link-block flex-col pt-none pb-none" href="/registration/{{potential.title}}">
 							
 							<div class="flex-col">
@@ -150,7 +150,7 @@
 				</div>
 				
 				<div class="flex wrap">
-					<div class="item width-12 width-xl-4 flex-col" ng-repeat="mosaic in mosaics" ng-show="mosaic.city.name==city.name;">
+					<div class="item width-12 width-xl-4 flex-col" ng-repeat="mosaic in mosaics" ng-if="mosaic.city.name==city.name;">
 						<div class="item link-block flex-col">
 							
 							<a class="flex align-center" href="/mosaic/{{mosaic.ref}}" target="_blank">
@@ -192,7 +192,7 @@
 			
 		</div>
 		
-		<div ng-show="sorting=='by_date'">
+		<div ng-if="sorting=='by_date'">
 			
 			<div class="section">
 				<div class="flex wrap">
@@ -237,7 +237,7 @@
 			
 		</div>
 		
-		<div ng-show="sorting=='by_name'">
+		<div ng-if="sorting=='by_name'">
 			
 			<div class="section">
 				<div class="flex wrap">
@@ -282,7 +282,7 @@
 			
 		</div>
 		
-		<div ng-show="sorting=='by_uniques'">
+		<div ng-if="sorting=='by_uniques'">
 			
 			<div class="section">
 				<div class="flex wrap">
