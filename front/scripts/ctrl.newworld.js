@@ -60,4 +60,6 @@ angular.module('FrontModule.controllers').controller('NewWorldCtrl', function($s
     		});
     	}
     });
+    
+    $('.hidden').each(function() { $(this).removeClass('hidden'); })
 });

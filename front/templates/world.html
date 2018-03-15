@@ -21,15 +21,9 @@
 			
 			<div class="section">
 				
-				<div class="flex-col">
-					
-					<div class="item">
-						<span class="text-big color-light">Ingress Mosaics, Banners and Mission series</span>
-					</div>
-					
-					<div class="item">
-						<span class="text-normal color-normal">{{mosaic_count|intcomma}} registered mosaics by agents for agents</span>
-					</div>
+				<div class="flex-col item">
+					<span class="text-big color-light">Ingress Mosaics, Banners and Mission series</span>
+					<span class="text-normal color-normal">{{mosaic_count|intcomma}} registered mosaics by agents for agents</span>
 				</div>
 				
 			</div>
@@ -38,19 +32,12 @@
 				
 				<div class="flex-col">
 		    	
-			    	<div class="item">
+			     	<form class="item flex-col">
 			    		<span class="color-normal">Search for a city</span>
-			    	</div>
-			    	
-			     	<form class="self-stretch flex-col">
-			     		
-						<div class="item">
-							<input id="city_input" type="text" class="control" placeholder="City name" ng-model="searchtext" />
-						</div>
-		
+						<input id="city_input" type="text" class="control" placeholder="City name" ng-model="searchtext" />
 					</form>
 					
-					<div class="flex align-center ng-hide" ng-show="flag_searching">
+					<div class="flex align-center hidden" ng-show="flag_searching">
 						
 						<div class="item">
 							<i class="color-dark fa fa-spinner rotating"></i>
@@ -62,7 +49,7 @@
 						
 					</div>
 					
-					<div class="flex ng-hide" ng-show="flag_city_unknown">
+					<div class="flex hidden" ng-show="flag_city_unknown">
 						
 				    	<div class="item">
 				    		<span class="color-danger">City unknown</span>
@@ -70,7 +57,7 @@
 				    	
 					</div>
 					
-					<div class="flex-col ng-hide" ng-show="city && mosaics.length < 1 && potentials.length < 1">
+					<div class="flex-col hidden" ng-show="city && mosaics.length < 1 && potentials.length < 1">
 						
 				    	<div class="item">
 				    		<span class="color-danger">No mosaic registered</span>
@@ -99,7 +86,7 @@
 					<div class="width-12 width-xl-4 item">
 						<a class="item link-block flex" href="/world/{{country.name}}">
 						
-							<div class="item">
+							<div class="item flex">
 								<span class="flag-icon flag-icon-{{country.code}}" style="width:1.5rem; line-height:2rem;"></span>
 							</div>
 								
@@ -120,7 +107,7 @@
 									</div>
 					
 									<div class="flex align-center">
-										<span class="text-small color-normal">{{country.mosaic_count|intcomma}}</span>
+										<span class="text-small color-normal">{{country.mosaic_count}}</span>
 										{% if country.potential_count %}<span class="ml-small text-small color-link">+{{country.potential_count|intcomma}}</span>{% endif %}
 									</div>
 									

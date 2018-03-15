@@ -3530,6 +3530,8 @@ angular.module('FrontModule.controllers').controller('NewWorldCtrl', function($s
     		});
     	}
     });
+    
+    $('.hidden').each(function() { $(this).removeClass('hidden'); })
 });
 angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($scope, $window, API) {
 	
