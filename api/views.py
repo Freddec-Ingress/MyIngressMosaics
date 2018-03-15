@@ -1014,6 +1014,7 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 	region_obj = Region.objects.get(country__name=country_name, name=region_name)
 	region_data = region_obj.serialize()
 	region_data['mosaic_count'] = Mosaic.objects.filter(city__region=region_obj).count()
+	region_data['potential_count'] = Potential.objects.filter(city__region=region_obj).count()
 	data['region_data'] = region_data
 	
 	# List of city data

@@ -26,22 +26,35 @@
 		
 		<div class="section">
 			
-			<div class="item flex-col">
+			<div class="flex align-center">
 				
-	    		<div class="flex">
-					<span class="mr-small flag-icon flag-icon-{{region.country.code}}" style="line-height: inherit;"></span>
-					<a class="mr-big" href="/world/{{region.country.name}}">{{region.country.name}}</a>
+	    		<div class="item flex">
+					<span class="flag-icon flag-icon-{{region.country.code}}"></span>
 	    		</div>
+	    		
+	    		<div class="item flex">
+					<a href="/world/{{region.country.name}}">{{region.country.name}}</a>
+	    		</div>
+	    		
+			</div>
+			
+		</div>
+		
+		<div class="section">
 				
-				<span class="mt-big text-big color-light">{{region.name}}</span>
+			<div class="item flex-col">
+			
+				<span class="text-big color-light">{{region.name}}</span>
 				
 				<div class="flex align-center">
-					<span class="color-dark pr-small">{{region.mosaic_count}} mosaics</span>
+					<span ng-show="region.mosaic_count" class="color-dark pr-small">{{region.mosaic_count}} mosaics</span>
+					<span ng-show="region.potential_count && region.mosaic_count" class="color-dark pr-small">&middot;</span>
+					<span ng-show="region.potential_count" class="color-dark pr-small">{{region.potential_count}} potentials</span>
 					<span ng-show="user.authenticated" class="color-dark pr-small">&middot;</span>
 					<a class="color-link" ng-show="user.authenticated && !notified" ng-click="notify();">To be notified</a>
 					<a class="color-normal" ng-show="user.authenticated && notified" ng-click="unnotify();">Notified</a>
 	    		</div>
-
+	    		
 			</div>
 			
 		</div>
