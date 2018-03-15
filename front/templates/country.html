@@ -32,8 +32,8 @@
 					{% if country.potential_count > 0 and country.mosaic_count > 0 %}<span class="color-normal pr-small">&middot;</span>{% endif %}
 					{% if country.mosaic_count %}<span class="color-normal pr-small">{{country.mosaic_count}} mosaics</span>{% endif %}
 					<span class="color-normal pr-small">&middot;</span>
-					<a class="color-link" ng-show="!notified" ng-click="notify();">To be notified</a>
-					<a class="color-normal" ng-show="notified" ng-click="unnotify();">Notified</a>
+					<a class="color-link hidden" ng-show="!notified" ng-click="notify();">To be notified</a>
+					<a class="color-normal hidden" ng-show="notified" ng-click="unnotify();">Notified</a>
 				</div>
 
 				<div class="mt-small flex-col hidden" ng-show="need_signin">
