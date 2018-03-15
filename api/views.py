@@ -1025,9 +1025,25 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 		for mosaic_obj in mosaics:
 		
 			mosaic_data = mosaic_obj.overviewSerialize()
-			data['mosaics'].append(mosaic_data);
+			mosaic_data = {
+				'ref':mosaic_obj.ref,
+				'cols':mosaic_obj.cols,
+				'title':mosaic_obj.title,
+				'uniques':mosaic_obj.uniques,
+				'city_name':mosaic_obj.city.name,
+				'mission_count':0,
+				
+				'images':[],
+			}
+			
+			data['mosaics'].append(mosaic_data)
+			
+			for mission_obj in mosaic_obj.missions.all():
+				mosaic_data['images'].append(mission_obj.image)
+				mosaic_data['mission_count'] += 1
 			
 			city_data['mosaic_count'] += 1
+			
 			data['region']['mosaic_count'] += 1
 		
 		# Potentials data
@@ -1035,9 +1051,10 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 		for potential_obj in potentials:
 			
 			potential_data = potential_obj.overviewSerialize()
-			data['potentials'].append(potential_data);
+			data['potentials'].append(potential_data)
 			
 			city_data['potential_count'] += 1
+			
 			data['region']['potential_count'] += 1
 			
 	data['location_indexes'].sort()

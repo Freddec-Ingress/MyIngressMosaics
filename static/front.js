@@ -3584,8 +3584,8 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 		
 		$scope.mosaics.sort(function(a, b) {
 			
-			if (a.missions.length > b.missions.length) return -1;
-			if (a.missions.length < b.missions.length) return 1;
+			if (a.mission_count > b.mission_count) return -1;
+			if (a.mission_count < b.mission_count) return 1;
 			
 			if (a.title > b.title) return 1;
 			if (a.title < b.title) return -1;
@@ -3695,8 +3695,8 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 			for (var mosaic of $scope.mosaics) {
 				
 				var temp = 0;
-				if (mosaic.missions.length > mosaic.cols) {
-					temp = mosaic.cols - mosaic.missions.length % mosaic.cols;
+				if (mosaic.mission_count > mosaic.cols) {
+					temp = mosaic.cols - mosaic.mission_count % mosaic.cols;
 					if (temp < 0 || temp > (mosaic.cols - 1)) temp = 0;
 				}
 				
