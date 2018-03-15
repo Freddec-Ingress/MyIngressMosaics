@@ -176,6 +176,7 @@ def world(request):
 			'code':country.code,
 			'locale':country.locale,
 			'mosaic_count':mosaic_count,
+			'potential_count':Potential.objects.filter(city__region__country=country).count(),
 		}
 		
 		context['countries'].append(country_data)
