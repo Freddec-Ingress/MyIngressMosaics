@@ -1,4 +1,4 @@
-angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', function($scope, $window, $location, toastr, API, UtilsService, $auth, UserService) {
+angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', function($scope, $window, $location, API, UtilsService, $auth, UserService) {
 	
 	$scope.signin = UserService.signin;
 	
@@ -106,22 +106,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 			}
 		}
 	}
-	
-	$scope.sendRequest = function() {
-		
-		if (!$scope.requestText) return;
-		
-		if ($scope.requestText.length < 3) return;
-		
-		var data = { 'text':$scope.requestText };
-		API.sendRequest('/api/new_missions/', 'POST', {}, data).then(function(response) {
 
-			$scope.requestText = '';
-			
-			toastr.success('Request sent!');
-		});
-	}
-	
 	/* Step #2 management */
 	
 	$scope.columns = '6';

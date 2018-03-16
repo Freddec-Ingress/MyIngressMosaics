@@ -1,14 +1,10 @@
-angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($scope, $window, toastr, API) {
+angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($scope, $window, API) {
 
 	/* Link management */
 
 	$scope.toggle_link = function(user, type) {
 		
-		if (!user.authenticated) {
-			toastr.error('To perform this action, please sign in first on profile page.', {allowHtml: true});
-		}
-		else {
-			
+
 			switch (type) {
 				
 				case 'like':
@@ -65,7 +61,6 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 					}
 					break;
 			}
-		}
 	}
 
 	/* Mission details displaying */
@@ -100,11 +95,6 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 	
 	$scope.saveComment = function(user, comment) {
 		
-		if (!user.authenticated) {
-			toastr.error('To perform this action you must be signed in! <a class="ml-small" href="/login" target="blank">Sign in</a>', {allowHtml: true});
-		}
-		else {
-			
 			if (!comment.text) return;
 			
 			if (!comment.id) {
@@ -124,22 +114,15 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 					$scope.closeCommentEdit();
 				});
 			}
-		}
 	}
 	
 	$scope.deleteComment = function(user, index, comment) {
-		
-		if (!user.authenticated) {
-			toastr.error('To perform this action you must be signed in! <a class="ml-small" href="/login" target="blank">Sign in</a>', {allowHtml: true});
-		}
-		else {
 		
 			var data = {'id':comment.id}
 			API.sendRequest('/api/comment/delete/', 'POST', {}, data).then(function(response) {
 				
 				$scope.mosaic.comments.splice(index, 1);
 			});
-		}
 	}
 	
 	/* Map management */

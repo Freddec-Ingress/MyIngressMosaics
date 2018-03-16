@@ -1,4 +1,4 @@
-angular.module('FrontModule.controllers').controller('NewProfileCtrl', function($scope, $window, $http, $cookies, $auth, API, UserService) {
+angular.module('FrontModule.controllers').controller('NewProfileCtrl', function($scope, $window, $http, $auth, API, UserService) {
 	
 	$scope.signin = UserService.signin;
 	
@@ -22,8 +22,7 @@ angular.module('FrontModule.controllers').controller('NewProfileCtrl', function(
 	$scope.logout = function() {
 	    
 		delete $http.defaults.headers.common.Authorization;
-    	delete $cookies.token;
-		
+
 		$auth.removeToken();
 
 		API.sendRequest('/api/user/logout/', 'POST').then(function(response) {

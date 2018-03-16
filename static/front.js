@@ -1022,17 +1022,13 @@ angular.module('FrontModule.directives').directive('flag', function() {
 
 angular.module('FrontModule.controllers', [])
 
-angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($scope, $window, toastr, API) {
+angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($scope, $window, API) {
 
 	/* Link management */
 
 	$scope.toggle_link = function(user, type) {
 		
-		if (!user.authenticated) {
-			toastr.error('To perform this action, please sign in first on profile page.', {allowHtml: true});
-		}
-		else {
-			
+
 			switch (type) {
 				
 				case 'like':
@@ -1089,7 +1085,6 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 					}
 					break;
 			}
-		}
 	}
 
 	/* Mission details displaying */
@@ -1124,11 +1119,6 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 	
 	$scope.saveComment = function(user, comment) {
 		
-		if (!user.authenticated) {
-			toastr.error('To perform this action you must be signed in! <a class="ml-small" href="/login" target="blank">Sign in</a>', {allowHtml: true});
-		}
-		else {
-			
 			if (!comment.text) return;
 			
 			if (!comment.id) {
@@ -1148,22 +1138,15 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 					$scope.closeCommentEdit();
 				});
 			}
-		}
 	}
 	
 	$scope.deleteComment = function(user, index, comment) {
-		
-		if (!user.authenticated) {
-			toastr.error('To perform this action you must be signed in! <a class="ml-small" href="/login" target="blank">Sign in</a>', {allowHtml: true});
-		}
-		else {
 		
 			var data = {'id':comment.id}
 			API.sendRequest('/api/comment/delete/', 'POST', {}, data).then(function(response) {
 				
 				$scope.mosaic.comments.splice(index, 1);
 			});
-		}
 	}
 	
 	/* Map management */
@@ -1309,7 +1292,7 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 		});
 	}
 });
-angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', function($scope, $window, $location, toastr, API, UtilsService, $auth, UserService) {
+angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', function($scope, $window, $location, API, UtilsService, $auth, UserService) {
 	
 	$scope.signin = UserService.signin;
 	
@@ -1417,22 +1400,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 			}
 		}
 	}
-	
-	$scope.sendRequest = function() {
-		
-		if (!$scope.requestText) return;
-		
-		if ($scope.requestText.length < 3) return;
-		
-		var data = { 'text':$scope.requestText };
-		API.sendRequest('/api/new_missions/', 'POST', {}, data).then(function(response) {
 
-			$scope.requestText = '';
-			
-			toastr.success('Request sent!');
-		});
-	}
-	
 	/* Step #2 management */
 	
 	$scope.columns = '6';
@@ -2259,7 +2227,7 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 	
 	$scope.loaded = true;
 });
-angular.module('FrontModule.controllers').controller('NewProfileCtrl', function($scope, $window, $http, $cookies, $auth, API, UserService) {
+angular.module('FrontModule.controllers').controller('NewProfileCtrl', function($scope, $window, $http, $auth, API, UserService) {
 	
 	$scope.signin = UserService.signin;
 	
@@ -2283,8 +2251,7 @@ angular.module('FrontModule.controllers').controller('NewProfileCtrl', function(
 	$scope.logout = function() {
 	    
 		delete $http.defaults.headers.common.Authorization;
-    	delete $cookies.token;
-		
+
 		$auth.removeToken();
 
 		API.sendRequest('/api/user/logout/', 'POST').then(function(response) {
