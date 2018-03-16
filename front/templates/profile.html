@@ -21,9 +21,9 @@
 		<span class="item">Loading page...</span>
 	</div>
 	
-	<div class="container" ng-class="{'active':loaded && user}">
+	<div class="container" ng-class="{'active':loaded}">
 		
-		<div ng-if="!user.authenticated">
+		<div ng-if="!authenticated">
 			
 		    <div class="mt-big item flex-col justify-center align-center">
 		    	
@@ -41,7 +41,7 @@
 			
 		</div>
 		
-		<div ng-if="user.authenticated">
+		<div ng-if="authenticated">
 			
 			<div class="mt-big item flex align-center">
 				

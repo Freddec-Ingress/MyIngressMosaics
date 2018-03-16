@@ -34,7 +34,7 @@ angular.module('FrontModule.controllers').controller('NewProfileCtrl', function(
 	
 	$scope.current_tab = 'mosaic';
 	
-	UserService.loadUser($scope.user);
+	$scope.authenticated = $auth.isAuthenticated();
 	
 	API.sendRequest('/api/user/details/', 'POST').then(function(response) {
 		

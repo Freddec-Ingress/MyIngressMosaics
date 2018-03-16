@@ -1,4 +1,4 @@
-angular.module('FrontModule.controllers').controller('NewCountryCtrl', function($rootScope, $scope, $window, API, UserService) {
+angular.module('FrontModule.controllers').controller('NewCountryCtrl', function($rootScope, $scope, $window, API, $auth) {
 
 	$scope.notify = function() {
 		
@@ -22,7 +22,7 @@ angular.module('FrontModule.controllers').controller('NewCountryCtrl', function(
 		API.sendRequest('/api/notif/delete', 'POST', {}, data);
 	}
 	
-	UserService.loadUser($scope.user);
+	$scope.authenticated = $auth.isAuthenticated();
 
 	$scope.init = function(country_name, notified) {
 		

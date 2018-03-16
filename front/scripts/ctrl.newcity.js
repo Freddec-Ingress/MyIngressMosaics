@@ -1,4 +1,4 @@
-angular.module('FrontModule.controllers').controller('NewCityCtrl', function($scope, $window, API, UserService) {
+angular.module('FrontModule.controllers').controller('NewCityCtrl', function($scope, $window, API, $auth) {
 	
 	/* Notification management */
 	
@@ -122,7 +122,7 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 	
 	/* Page loading */
 	
-	UserService.loadUser($scope.user);
+	$scope.authenticated = $auth.isAuthenticated();
 	
 	$scope.loadCity = function(country_name, region_name, city_name) {
 		

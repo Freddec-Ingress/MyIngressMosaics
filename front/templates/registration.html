@@ -92,9 +92,9 @@
 			</div>
 		</div>
 		
-		<div class="grow flex-col" ng-show="user && current_step == 1 && !creating">
+		<div class="grow flex-col" ng-show="current_step == 1 && !creating">
 			
-			<div ng-if="!user.authenticated" class="self-center">
+			<div ng-if="!authenticated" class="self-center">
 			    
 			    <div class="mt-big item flex-col justify-center align-center">
 			    	
@@ -112,7 +112,7 @@
 				
 			</div>			
 			
-			<div class="flex-col" ng-if="user.authenticated">
+			<div class="flex-col" ng-if="authenticated">
 				
 				<div class="section">
 					

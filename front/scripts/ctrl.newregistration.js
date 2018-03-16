@@ -1,4 +1,4 @@
-angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', function($scope, $window, $location, toastr, API, UtilsService, UserService) {
+angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', function($scope, $window, $location, toastr, API, UtilsService, $auth) {
 	
 	/* Tab management */
 	
@@ -427,13 +427,13 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	
 	/* Page loading */
 	
-	UserService.loadUser($scope.user);
+	$scope.authenticated = $auth.isAuthenticated();
 
 	$scope.init = function(text) {
 	
 		$scope.open_step(1);
 		
-		$scope.refreshMissions(text);
+		if ($scope.authenticated) $scope.refreshMissions(text);
 		
 		$scope.loaded = true;
 	}

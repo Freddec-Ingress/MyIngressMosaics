@@ -1,9 +1,7 @@
-angular.module('FrontModule.controllers').controller('NewCreatorCtrl', function($scope, $window, API, UserService) {
+angular.module('FrontModule.controllers').controller('NewCreatorCtrl', function($scope, $window, API) {
 	
 	/* Page loading */
-	
-	UserService.loadUser($scope.user);
-	
+
 	$scope.load = function(name) {
 		
 		API.sendRequest('/api/creator/' + name + '/', 'GET').then(function(response) {

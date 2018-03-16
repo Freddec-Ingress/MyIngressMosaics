@@ -534,48 +534,6 @@ angular.module('FrontModule.services').service('UserService', function(API, $aut
 	
 	var service = {
 		
-		loadUser: function(user) {
-
-			API.sendRequest('/api/user/', 'GET').then(function(response) {
-				
-				if (response) {
-					
-					user = {
-						name: response.name,
-						faction: response.faction,
-						picture: response.picture,
-						superuser: response.superuser,
-						authenticated: $auth.isAuthenticated(),
-					}
-				}
-				else {
-					
-					user = {
-						name: null,
-						faction: null,
-						superuser: false,
-						authenticated: false,
-					}
-				}
-
-			}, function(response) {
-				
-				delete $http.defaults.headers.common.Authorization;
-		    	delete $cookies.token;
-				
-				$auth.removeToken();
-		
-				API.sendRequest('/api/user/logout/', 'POST');
-				
-				user = {
-					name: null,
-					faction: null,
-					superuser: false,
-					authenticated: false,
-				}
-			});
-		},
-		
 		signin: function(provider, next) {
 				
 			$auth.authenticate(provider).then(function(response) {

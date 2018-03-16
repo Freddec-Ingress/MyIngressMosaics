@@ -1,4 +1,4 @@
-angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($scope, $window, API, UserService) {
+angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($scope, $window, API, $auth) {
 	
 	/* Notification management */
 	
@@ -131,9 +131,9 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 	}
 	
 	/* Page loading */
-	
-	UserService.loadUser($scope.user);
-	
+
+	$scope.authenticated = $auth.isAuthenticated();
+
 	$scope.loadRegion = function(country_name, region_name) {
 		
 		API.sendRequest('/api/new_region/' + country_name + '/' + region_name + '/', 'GET').then(function(response) {

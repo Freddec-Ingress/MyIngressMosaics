@@ -888,48 +888,6 @@ angular.module('FrontModule.services').service('UserService', function(API, $aut
 	
 	var service = {
 		
-		loadUser: function(user) {
-
-			API.sendRequest('/api/user/', 'GET').then(function(response) {
-				
-				if (response) {
-					
-					user = {
-						name: response.name,
-						faction: response.faction,
-						picture: response.picture,
-						superuser: response.superuser,
-						authenticated: $auth.isAuthenticated(),
-					}
-				}
-				else {
-					
-					user = {
-						name: null,
-						faction: null,
-						superuser: false,
-						authenticated: false,
-					}
-				}
-
-			}, function(response) {
-				
-				delete $http.defaults.headers.common.Authorization;
-		    	delete $cookies.token;
-				
-				$auth.removeToken();
-		
-				API.sendRequest('/api/user/logout/', 'POST');
-				
-				user = {
-					name: null,
-					faction: null,
-					superuser: false,
-					authenticated: false,
-				}
-			});
-		},
-		
 		signin: function(provider, next) {
 				
 			$auth.authenticate(provider).then(function(response) {
@@ -1356,7 +1314,7 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 		});
 	}
 });
-angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', function($scope, $window, $location, toastr, API, UtilsService, UserService) {
+angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', function($scope, $window, $location, toastr, API, UtilsService, $auth) {
 	
 	/* Tab management */
 	
@@ -1785,13 +1743,13 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	
 	/* Page loading */
 	
-	UserService.loadUser($scope.user);
+	$scope.authenticated = $auth.isAuthenticated();
 
 	$scope.init = function(text) {
 	
 		$scope.open_step(1);
 		
-		$scope.refreshMissions(text);
+		if ($scope.authenticated) $scope.refreshMissions(text);
 		
 		$scope.loaded = true;
 	}
@@ -1920,7 +1878,7 @@ angular.module('FrontModule.controllers').controller('NewSearchCtrl', function($
 	
 	$scope.loaded = true;
 });
-angular.module('FrontModule.controllers').controller('NewCountryCtrl', function($rootScope, $scope, $window, API, UserService) {
+angular.module('FrontModule.controllers').controller('NewCountryCtrl', function($rootScope, $scope, $window, API, $auth) {
 
 	$scope.notify = function() {
 		
@@ -1944,7 +1902,7 @@ angular.module('FrontModule.controllers').controller('NewCountryCtrl', function(
 		API.sendRequest('/api/notif/delete', 'POST', {}, data);
 	}
 	
-	UserService.loadUser($scope.user);
+	$scope.authenticated = $auth.isAuthenticated();
 
 	$scope.init = function(country_name, notified) {
 		
@@ -2337,7 +2295,7 @@ angular.module('FrontModule.controllers').controller('NewProfileCtrl', function(
 	
 	$scope.current_tab = 'mosaic';
 	
-	UserService.loadUser($scope.user);
+	$scope.authenticated = $auth.isAuthenticated();
 	
 	API.sendRequest('/api/user/details/', 'POST').then(function(response) {
 		
@@ -2416,7 +2374,7 @@ angular.module('FrontModule.controllers').controller('NewWorldCtrl', function($s
     
     $('.hidden').each(function() { $(this).removeClass('hidden'); })
 });
-angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($scope, $window, API, UserService) {
+angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($scope, $window, API, $auth) {
 	
 	/* Notification management */
 	
@@ -2549,9 +2507,9 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 	}
 	
 	/* Page loading */
-	
-	UserService.loadUser($scope.user);
-	
+
+	$scope.authenticated = $auth.isAuthenticated();
+
 	$scope.loadRegion = function(country_name, region_name) {
 		
 		API.sendRequest('/api/new_region/' + country_name + '/' + region_name + '/', 'GET').then(function(response) {
@@ -2584,7 +2542,7 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 		});
 	}
 });
-angular.module('FrontModule.controllers').controller('NewCityCtrl', function($scope, $window, API, UserService) {
+angular.module('FrontModule.controllers').controller('NewCityCtrl', function($scope, $window, API, $auth) {
 	
 	/* Notification management */
 	
@@ -2708,7 +2666,7 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 	
 	/* Page loading */
 	
-	UserService.loadUser($scope.user);
+	$scope.authenticated = $auth.isAuthenticated();
 	
 	$scope.loadCity = function(country_name, region_name, city_name) {
 		
@@ -2737,12 +2695,10 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 	}
 
 });
-angular.module('FrontModule.controllers').controller('NewCreatorCtrl', function($scope, $window, API, UserService) {
+angular.module('FrontModule.controllers').controller('NewCreatorCtrl', function($scope, $window, API) {
 	
 	/* Page loading */
-	
-	UserService.loadUser($scope.user);
-	
+
 	$scope.load = function(name) {
 		
 		API.sendRequest('/api/creator/' + name + '/', 'GET').then(function(response) {
