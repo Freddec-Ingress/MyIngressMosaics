@@ -25,7 +25,7 @@
 		
 		<div class="section">
 			
-			<div class="mb-big flex-col" ng-repeat="country in countries">
+			<div class="flex-col" ng-repeat="country in countries">
 				
 				<div class="flex align-item">
 					
@@ -35,7 +35,7 @@
 					</div>
 					
 					<div class="item">
-						<span class="text-medium color-light">{{country.name}}</span>
+						<span class="text-normal color-light">{{country.name}}</span>
 					</div>
 					
 					<a class="item" href="https://www.myingressmosaics.com/admin/api/imcountry/{{country.id}}/change/" target="_blank">
@@ -60,7 +60,7 @@
 				
 				<div class="flex-col" ng-show="country.open" style="margin-left:35px;">
 					
-					<div class="mb-big flex-col" ng-repeat="region in country.regions">
+					<div class="flex-col" ng-repeat="region in country.regions">
 				
 						<div class="flex align-center">
 							
@@ -70,7 +70,7 @@
 							</div>
 							
 							<div class="item">
-								<span class="text-medium color-normal">{{region.name}}</span>
+								<span class="text-normal color-normal">{{region.name}}</span>
 							</div>
 							
 							<a class="item" href="https://www.myingressmosaics.com/admin/api/imregion/{{region.id}}/change/" target="_blank">
@@ -96,21 +96,21 @@
 						
 						<div class="flex-col" ng-show="region.open" style="margin-left:35px;">
 							
-							<div class="mb-medium flex-col" ng-repeat="mosaic in region.mosaics">
+							<div class="flex-col" ng-repeat="mosaic in region.mosaics">
 						
 								<div class="flex align-center">
 									
-									<div class="item width-8">
+									<div class="item width-4">
 										<span class="color-dark">{{mosaic.city_name}}</span>
 									</div>
+									
+									<a class="item width-1" href="https://www.myingressmosaics.com/admin/api/immosaic/{{mosaic.id}}/change/" target="_blank">
+										<i class="fa fa-lock text-small"></i>
+									</a>
 									
 									<div class="item">
 										<span class="color-normal">{{mosaic.name}}</span>
 									</div>
-									
-									<a class="item" href="https://www.myingressmosaics.com/admin/api/immosaic/{{mosaic.id}}/change/" target="_blank">
-										<i class="fa fa-lock text-small"></i>
-									</a>
 									
 								</div>
 						
