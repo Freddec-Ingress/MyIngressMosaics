@@ -27,7 +27,7 @@
 			
 			<div class="mb-big flex-col" ng-repeat="country in countries">
 				
-				<div class="flex">
+				<div class="flex align-item">
 					
 					<div class="item" ng-show="country.regions.length > 0">
 						<a ng-show="!country.open" ng-click="country.open=true;"><i class="fa fa-plus-square text-small"></i></a>
@@ -35,7 +35,7 @@
 					</div>
 					
 					<div class="item">
-						<span class="color-normal">{{country.name}}</span>
+						<span class="text-medium color-light">{{country.name}}</span>
 					</div>
 					
 					<a class="item" href="https://www.myingressmosaics.com/admin/api/imcountry/{{country.id}}/change/" target="_blank">
@@ -62,7 +62,7 @@
 					
 					<div class="mb-big flex-col" ng-repeat="region in country.regions">
 				
-						<div class="flex">
+						<div class="flex align-center">
 							
 							<div class="item" ng-show="region.mosaics.length > 0">
 								<a ng-show="!region.open" ng-click="region.open=true;"><i class="fa fa-plus-square text-small"></i></a>
@@ -70,7 +70,7 @@
 							</div>
 							
 							<div class="item">
-								<span class="color-normal">{{region.name}}</span>
+								<span class="text-medium color-normal">{{region.name}}</span>
 							</div>
 							
 							<a class="item" href="https://www.myingressmosaics.com/admin/api/imregion/{{region.id}}/change/" target="_blank">
@@ -94,14 +94,14 @@
 						</div>
 						
 						
-						<div class="flex wrap" ng-show="region.open" style="margin-left:35px;">
+						<div class="flex-col" ng-show="region.open" style="margin-left:35px;">
 							
 							<div class="mb-medium flex-col" ng-repeat="mosaic in region.mosaics">
 						
-								<div class="flex">
+								<div class="flex align-center">
 									
-									<div class="item">
-										<span class="color-normal">{{mosaic.city_name}}</span>
+									<div class="item width-8">
+										<span class="color-dark">{{mosaic.city_name}}</span>
 									</div>
 									
 									<div class="item">
