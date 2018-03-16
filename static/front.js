@@ -2561,6 +2561,8 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 			$scope.loaded = true;
 		});
 	}
+    
+	$('.hidden').each(function() { $(this).removeClass('hidden'); })
 });
 angular.module('FrontModule.controllers').controller('NewCityCtrl', function($scope, $window, API, $auth, UserService) {
 	
@@ -2722,7 +2724,8 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 			$scope.loaded = true;
 		});
 	}
-
+    
+	$('.hidden').each(function() { $(this).removeClass('hidden'); })
 });
 angular.module('FrontModule.controllers').controller('NewCreatorCtrl', function($scope, $window, API) {
 	

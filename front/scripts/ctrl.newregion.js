@@ -174,4 +174,6 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 			$scope.loaded = true;
 		});
 	}
+    
+	$('.hidden').each(function() { $(this).removeClass('hidden'); })
 });

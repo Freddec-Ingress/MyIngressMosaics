@@ -158,5 +158,6 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 			$scope.loaded = true;
 		});
 	}
-
+    
+	$('.hidden').each(function() { $(this).removeClass('hidden'); })
 });
