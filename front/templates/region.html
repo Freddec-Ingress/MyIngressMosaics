@@ -47,12 +47,12 @@
 				<span class="text-big color-light">{{region.name}}</span>
 				
 				<div class="flex align-center">
-					<span ng-show="region.potential_count" class="color-dark pr-small">{{region.potential_count}} potentials</span>
-					<span ng-show="region.potential_count && region.mosaic_count" class="color-dark pr-small">&middot;</span>
-					<span ng-show="region.mosaic_count" class="color-dark pr-small">{{region.mosaic_count}} mosaics</span>
+					{% if region.potential_count %}<span class="color-normal pr-small">{{region.potential_count}} potentials</span>{% endif %}
+					{% if region.potential_count > 0 and region.mosaic_count > 0 %}<span class="color-normal pr-small">&middot;</span>{% endif %}
+					{% if region.mosaic_count %}<span class="color-normal pr-small">{{region.mosaic_count}} mosaics</span>{% endif %}
 					<span ng-show="authenticated" class="color-dark pr-small">&middot;</span>
-					<a class="color-link" ng-show="authenticated && !region.notified" ng-click="notify();">To be notified</a>
-					<a class="color-normal" ng-show="authenticated && region.notified" ng-click="unnotify();">Notified</a>
+					<a class="color-link" ng-show="!region.notified" ng-click="notify();">To be notified</a>
+					<a class="color-normal" ng-show="region.notified" ng-click="unnotify();">Notified</a>
 	    		</div>
 	    		
 			</div>

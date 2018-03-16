@@ -6,10 +6,17 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 	
 	$scope.notify = function() {
 		
-		$scope.notified = true;
+		if ($scope.authenticated) {
 		
-		var data = { 'country_name':$scope.city.region.country.name, 'region_name':$scope.city.region.name, 'city_name':$scope.city.name }
-		API.sendRequest('/api/notif/create', 'POST', {}, data);
+			$scope.notified = true;
+			
+			var data = { 'country_name':$scope.city.region.country.name, 'region_name':$scope.city.region.name, 'city_name':$scope.city.name }
+			API.sendRequest('/api/notif/create', 'POST', {}, data);
+		}
+		else {
+			
+			$scope.need_signin = true;
+		}
 	}
 	
 	$scope.unnotify = function() {
