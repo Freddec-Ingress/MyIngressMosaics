@@ -874,6 +874,8 @@ class IMMosaic(models.Model):
 	name = models.CharField(max_length=128)
 	count = models.IntegerField()
 	
+	dead = models.BooleanField(default=False)
+	
 	# Admin displaying
 	def __str__(self):
 		return self.name
