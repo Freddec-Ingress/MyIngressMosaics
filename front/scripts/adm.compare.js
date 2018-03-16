@@ -15,16 +15,10 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
 		    	region.open = false;
 		    	region.diff = region.count - region.compare_count;
 		    	
-		    	for (var city of region.cities) {
-	    		
-			    	city.open = false;
-			    	city.diff = city.count - city.compare_count;
-		    	}
-		    	
-				region.cities.sort(function(a, b) {
+				region.mosaics.sort(function(a, b) {
 					
-					if (a.diff > b.diff) return -1;
-					if (a.diff < b.diff) return 1;
+					if (a.city_name > b.city_name) return -1;
+					if (a.city_name < b.city_name) return 1;
 					
 					if (a.name > b.name) return 1;
 					if (a.name < b.name) return -1;

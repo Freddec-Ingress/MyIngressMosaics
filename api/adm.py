@@ -71,41 +71,38 @@ def adm_compare(request):
 					'count':imr_item.count,
 					'compare_name':imr_item.compare_name,
 					'compare_count':r_compare_count,
-					'cities':[]
+					'mosaics':[]
 				}
 				
 				country['regions'].append(region)
 				
 				if r_compare_count > 0:
-					imv_results = imr_item.cities.all()
-					for imv_item in imv_results:
+					imm_results = IMMosaic.objects.filter(country_name=imc_item.name, region_name=imr_item.name)
+					for imm_item in imm_results:
 					
-						v_compare_count = 0
-						if not imv_item.compare_name:
-							v_compare = City.objects.filter(region=r_compare, name=imv_item.name)
-							if v_compare.count() > 0:
-								v_compare = v_compare[0]
-								imv_item.compare_name = v_compare.name
-								imv_item.save()
-								v_compare_count = Mosaic.objects.filter(city=v_compare).count()
-								v_compare_count += Potential.objects.filter(city=v_compare).count()
+						to_add = False
+						if not imm_item.compare_name:
+							m_compare = Mosaic.objects.filter(city__region=r_compare, name=imm_item.name)
+							if m_compare.count() > 0:
+								imm_item.compare_name = m_compare.name
+								imm_item.save()
+								to_add = True
 						else:
-							v_compare = City.objects.filter(region=r_compare, name=imv_item.compare_name)
-							if v_compare.count() > 0:
-								v_compare = v_compare[0]
-								v_compare_count = Mosaic.objects.filter(city=v_compare).count()
-								v_compare_count += Potential.objects.filter(city=v_compare).count()
+							m_compare = Mosaic.objects.filter(city__region=r_compare, name=imm_item.compare_name)
+							if m_compare.count() > 0:
+								to_add = True
 						
-						city = {
-							'id':imv_item.pk,
-							'name':imv_item.name,
-							'count':imv_item.count,
-							'compare_name':imv_item.compare_name,
-							'compare_count':v_compare_count,
-							'cities':[]
-						}
-						
-						region['cities'].append(city)
+						if to_add:
+							mosaic = {
+								'id':imm_item.pk,
+								'name':imm_item.name,
+								'count':imm_item.count,
+								'country_name':imm_item.country_name,
+								'region_name':imm_item.region_name,
+								'city_name':imm_item.city_name,
+							}
+							
+							region['mosaics'].append(mosaic)
 		
 		data['countries'].append(country)
 	

@@ -96,30 +96,20 @@
 						
 						<div class="flex wrap" ng-show="region.open" style="margin-left:35px;">
 							
-							<div class="mb-medium flex-col width-4" ng-repeat="city in region.cities">
+							<div class="mb-medium flex-col" ng-repeat="mosaic in region.mosaics">
 						
 								<div class="flex">
 									
 									<div class="item">
-										<span class="color-normal">{{city.name}}</span>
+										<span class="color-normal">{{mosaic.city_name}}</span>
 									</div>
 									
-									<a class="item" href="https://www.myingressmosaics.com/admin/api/imcity/{{city.id}}/change/" target="_blank">
+									<div class="item">
+										<span class="color-normal">{{mosaic.name}}</span>
+									</div>
+									
+									<a class="item" href="https://www.myingressmosaics.com/admin/api/immosaic/{{mosaic.id}}/change/" target="_blank">
 										<i class="fa fa-lock text-small"></i>
-									</a>
-									
-									<div class="item">
-										<span class="badge" ng-class="{'color-success':city.diff<1, 'color-danger':city.diff>0}">{{city.diff}}</span>
-									</div>
-									
-									<div class="item">
-										<span class="text-small color-dark">{{city.count}}</span>
-										<span class="text-small color-dark">/</span>
-										<span class="text-small" ng-class="{'color-danger':city.compare_count<1, 'color-dark':city.compare_count>0}">{{city.compare_count}}</span>
-									</div>
-									
-									<a class="item" href="https://www.myingressmosaics.com/world/{{country.compare_name}}/{{region.compare_name}}/{{city.compare_name}}" target="_blank">
-										<i class="fa fa-external-link text-small"></i>
 									</a>
 									
 								</div>
