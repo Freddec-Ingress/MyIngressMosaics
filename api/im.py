@@ -109,7 +109,7 @@ def im_mosaic(request):
 	region_name = request.data['region_name']
 	city_name = request.data['city_name']
 	
-	mosaic_name = int(request.data['mosaic_name'])
+	mosaic_name = request.data['mosaic_name']
 	mission_count = int(request.data['mission_count'])
 	
 	mosaic_data = IMMosaic.objects.filter(country_name=country_name, region_name=region_name, city_name=city_name, name=mosaic_name)
