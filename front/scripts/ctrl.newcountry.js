@@ -1,4 +1,4 @@
-angular.module('FrontModule.controllers').controller('NewCountryCtrl', function($rootScope, $scope, $window, API) {
+angular.module('FrontModule.controllers').controller('NewCountryCtrl', function($rootScope, $scope, $window, API, UserService) {
 
 	$scope.notify = function() {
 		
@@ -21,6 +21,8 @@ angular.module('FrontModule.controllers').controller('NewCountryCtrl', function(
 		var data = { 'country_name':$scope.country_name }
 		API.sendRequest('/api/notif/delete', 'POST', {}, data);
 	}
+	
+	UserService.loadUser($scope.user);
 
 	$scope.init = function(country_name, notified) {
 		

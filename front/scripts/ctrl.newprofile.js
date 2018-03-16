@@ -1,4 +1,4 @@
-angular.module('FrontModule.controllers').controller('NewProfileCtrl', function($scope, $window, $http, $cookies, $auth, API) {
+angular.module('FrontModule.controllers').controller('NewProfileCtrl', function($scope, $window, $http, $cookies, $auth, API, UserService) {
 	
 	$scope.unotify = function(notif) {
 		
@@ -33,6 +33,8 @@ angular.module('FrontModule.controllers').controller('NewProfileCtrl', function(
 	/* Page loading */
 	
 	$scope.current_tab = 'mosaic';
+	
+	UserService.loadUser($scope.user);
 	
 	API.sendRequest('/api/user/details/', 'POST').then(function(response) {
 		

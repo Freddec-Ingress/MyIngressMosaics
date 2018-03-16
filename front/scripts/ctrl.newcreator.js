@@ -1,6 +1,8 @@
-angular.module('FrontModule.controllers').controller('NewCreatorCtrl', function($scope, $window, API) {
+angular.module('FrontModule.controllers').controller('NewCreatorCtrl', function($scope, $window, API, UserService) {
 	
 	/* Page loading */
+	
+	UserService.loadUser($scope.user);
 	
 	$scope.load = function(name) {
 		

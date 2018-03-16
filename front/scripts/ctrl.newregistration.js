@@ -1,4 +1,4 @@
-angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', function($scope, $window, $location, toastr, API, UtilsService) {
+angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', function($scope, $window, $location, toastr, API, UtilsService, UserService) {
 	
 	/* Tab management */
 	
@@ -426,6 +426,8 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	}
 	
 	/* Page loading */
+	
+	UserService.loadUser($scope.user);
 
 	$scope.init = function(text) {
 	

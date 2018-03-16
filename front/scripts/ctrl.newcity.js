@@ -1,4 +1,4 @@
-angular.module('FrontModule.controllers').controller('NewCityCtrl', function($scope, $window, API) {
+angular.module('FrontModule.controllers').controller('NewCityCtrl', function($scope, $window, API, UserService) {
 	
 	/* Notification management */
 	
@@ -122,6 +122,8 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 	
 	/* Page loading */
 	
+	UserService.loadUser($scope.user);
+	
 	$scope.loadCity = function(country_name, region_name, city_name) {
 		
 		API.sendRequest('/api/city/' + country_name + '/' + region_name + '/' + city_name + '/', 'GET').then(function(response) {
@@ -147,4 +149,5 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 			$scope.loaded = true;
 		});
 	}
+
 });

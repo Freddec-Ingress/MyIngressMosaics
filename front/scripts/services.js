@@ -529,3 +529,64 @@ angular.module('FrontModule.services').service('UtilsService', function() {
 	
 	return service;
 });
+
+angular.module('FrontModule.services').service('UserService', function(API, $auth, $http, $cookies, $window) {
+	
+	var service = {
+		
+		loadUser: function(user) {
+
+			API.sendRequest('/api/user/', 'GET').then(function(response) {
+				
+				if (response) {
+					
+					user = {
+						name: response.name,
+						faction: response.faction,
+						picture: response.picture,
+						superuser: response.superuser,
+						authenticated: $auth.isAuthenticated(),
+					}
+				}
+				else {
+					
+					user = {
+						name: null,
+						faction: null,
+						superuser: false,
+						authenticated: false,
+					}
+				}
+
+			}, function(response) {
+				
+				delete $http.defaults.headers.common.Authorization;
+		    	delete $cookies.token;
+				
+				$auth.removeToken();
+		
+				API.sendRequest('/api/user/logout/', 'POST');
+				
+				user = {
+					name: null,
+					faction: null,
+					superuser: false,
+					authenticated: false,
+				}
+			});
+		},
+		
+		signin: function(provider, next) {
+				
+			$auth.authenticate(provider).then(function(response) {
+				
+				$auth.setToken(response.data.token);
+				$cookies.token = response.data.token;
+				
+				$window.location.href = next;
+			});
+		},
+	}
+	
+	return service;
+});
