@@ -38,6 +38,10 @@ angular.module('FrontModule.controllers').controller('NewProfileCtrl', function(
 	
 	API.sendRequest('/api/user/details/', 'POST').then(function(response) {
 		
+		$scope.name = response.name;
+		$scope.faction = response.faction;
+		$scope.picture = response.picture;
+		$scope.superuser = response.superuser;
 		$scope.mosaics = response.mosaics;
 		$scope.missions = response.missions;
 		$scope.like = response.like;

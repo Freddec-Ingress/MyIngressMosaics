@@ -46,14 +46,14 @@
 			<div class="mt-big item flex align-center">
 				
 				<div class="item flex align-center">
-					<img src="{{user.picture}}" width="40px" height="40px" />
+					<img src="{{picture}}" width="40px" height="40px" />
 				</div>
 				
 				<div class="item grow flex-col">
-					<span class="pb-none text-big color-light">{{user.name}}</span>
-					<span ng-show="user.faction == 'E'" class="color-enlightened">Enlightened</span>
-					<span ng-show="user.faction == 'R'" class="color-resistant">Resistant</span>
-					<span ng-show="!user.faction" class="color-muted">Not defined</span>
+					<span class="pb-none text-big color-light">{{name}}</span>
+					<span ng-show="faction == 'E'" class="color-enlightened">Enlightened</span>
+					<span ng-show="faction == 'R'" class="color-resistant">Resistant</span>
+					<span ng-show="!faction" class="color-muted">Not defined</span>
 				</div>
 				
 			    <div class="item flex justify-center">

@@ -191,49 +191,6 @@ def user_google(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((AllowAny, ))
-def user_login(request):
-	
-	user = authenticate(username=request.data['username'], password=request.data['password'])
-	if user is None:
-		return Response('error_USER_UNKNOWN', status=status.HTTP_400_BAD_REQUEST)
-	
-	login(request, user)
-	
-	return Response(UserTokenSerializer(user).data, status=status.HTTP_200_OK)
-
-
-
-#---------------------------------------------------------------------------------------------------
-@api_view(['POST'])
-@permission_classes((AllowAny, ))
-def user_register(request):
-	
-	if request.data['password1'] != request.data['password2']:
-		return Response('error_PASSWORDS_NOT_EQUAL', status=status.HTTP_400_BAD_REQUEST)
-
-	try:
-	
-		user = get_user_model().objects.create_user(request.data['username'], request.data['email'], request.data['password1'])
-		
-	except IntegrityError:
-		
-		results = get_user_model().objects.filter(username=request.data['username'])
-		if results.count() > 0:
-			return Response('error_USERNAME_ALREADY_EXISTS', status=status.HTTP_400_BAD_REQUEST)
-		
-		return Response('error_INTEGRITY_ERROR', status=status.HTTP_400_BAD_REQUEST)
-	
-	token = Token.objects.create(user=user)
-	
-	authenticate(username=request.data['username'], password=request.data['password1'])
-	
-	return Response(UserTokenSerializer(user).data, status=status.HTTP_201_CREATED)
-
-
-
-#---------------------------------------------------------------------------------------------------
-@api_view(['POST'])
-@permission_classes((AllowAny, ))
 def user_logout(request):
 	
 	logout(request)
@@ -248,6 +205,10 @@ def user_logout(request):
 def user_getDetails(request):
 	
 	data = {
+		'name': request.user.username,
+		'faction': None,
+		'picture': None,
+		'superuser': request.user.is_superuser,
 		'mosaics': [],
 		'missions': [],
 		'like': [],
@@ -257,6 +218,9 @@ def user_getDetails(request):
 	}
 	
 	if not request.user.is_anonymous:
+		
+		data['faction'] = request.user.profile.faction
+		data['picture'] = request.user.profile.picture
 		
 		results = Mosaic.objects.filter(creators__contains=request.user.username)
 		if results.count() > 0:
@@ -301,26 +265,6 @@ def user_getDetails(request):
 				if item.region: notif['region_name'] = item.region.name
 				if item.city: notif['city_name'] = item.city.name
 				data['notif'].append(notif)
-	
-	return Response(data, status=status.HTTP_200_OK)
-
-
-
-#---------------------------------------------------------------------------------------------------
-@api_view(['GET'])
-@permission_classes((AllowAny, ))
-def user_getProfile(request):
-	
-	data = {
-		'name': request.user.username,
-		'faction': None,
-		'picture': None,
-		'superuser': request.user.is_superuser,
-	}
-	
-	if not request.user.is_anonymous and request.user.profile:
-		data['faction'] = request.user.profile.faction
-		data['picture'] = request.user.profile.picture
 	
 	return Response(data, status=status.HTTP_200_OK)
 
