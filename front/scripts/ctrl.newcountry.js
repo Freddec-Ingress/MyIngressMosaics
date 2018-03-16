@@ -1,10 +1,10 @@
-angular.module('FrontModule.controllers').controller('NewCountryCtrl', function($rootScope, $scope, $window, API, $auth, UserService) {
+angular.module('FrontModule.controllers').controller('NewCountryCtrl', function($scope, $window, API, $auth, UserService) {
 	
 	$scope.signin = UserService.signin;
 
 	$scope.notify = function() {
 		
-		if ($rootScope.user.name) {
+		if ($scope.authenticated) {
 		
 			$scope.notified = true;
 			
@@ -12,6 +12,7 @@ angular.module('FrontModule.controllers').controller('NewCountryCtrl', function(
 			API.sendRequest('/api/notif/create', 'POST', {}, data);
 		}
 		else {
+			
 			$scope.need_signin = true;
 		}
 	}
