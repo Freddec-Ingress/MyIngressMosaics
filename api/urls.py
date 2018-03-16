@@ -19,12 +19,9 @@ urlpatterns = [
 	
 	url(r'^user/google/',			user_google),
 	url(r'^user/edit/',				user_edit),
-	url(r'^user/register/',			user_register),
 	url(r'^user/logout/',			user_logout),
-	url(r'^user/login/',			user_login),
 	url(r'^user/details/',			user_getDetails),
-	url(r'^user/',					user_getProfile),
-	
+
 	url(r'^mosaic/missions/',		mosaic_searchForMissions),
 	url(r'^mosaic/reorder/',		mosaic_reorder),
 	url(r'^mosaic/delete/',			mosaic_delete),
