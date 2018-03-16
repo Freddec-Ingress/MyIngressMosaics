@@ -77,7 +77,7 @@ def adm_compare(request):
 				country['regions'].append(region)
 				
 				if r_compare_count > 0:
-					imm_results = IMMosaic.objects.filter(country_name=imc_item.name, region_name=imr_item.name)
+					imm_results = IMMosaic.objects.filter(country_name=imc_item.name, region_name=imr_item.name, dead=False, excluded=False)
 					for imm_item in imm_results:
 					
 						to_add = True
