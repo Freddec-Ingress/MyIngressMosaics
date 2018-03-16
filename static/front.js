@@ -3202,13 +3202,21 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
 	    
 	    for (var country of $scope.countries) {
 	    	
+	    	country.displayed = false;
 	    	country.open = false;
-	    	country.diff = country.count - country.compare_count;
+	    	country.diff = country.compare_count - country.count;
 	    	
 	    	for (var region of country.regions) {
 	    		
+	    		region.displayed = false;
 		    	region.open = false;
-		    	region.diff = region.count - region.compare_count;
+		    	region.diff = region.compare_count - region.count;
+		    	
+		    	if (region.mosaics.length > 0) {
+		    		
+		    		country.displayed = true;
+		    		region.displayed = true;
+		    	}
 		    	
 				region.mosaics.sort(function(a, b) {
 					
