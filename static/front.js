@@ -3262,12 +3262,6 @@ angular.module('FrontModule', ['satellizer',
 /* Config */
 
 angular.module('FrontModule').config(function($authProvider) {
-	
-	$authProvider.facebook({
-		
-		url: '/login/social/token_user/facebook',
-		clientId: '237811833398918',
-	});
 
 	$authProvider.google({
 		
