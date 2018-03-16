@@ -100,5 +100,7 @@ urlpatterns = [
 	url(r'^im/city', im_city),
 	
 	url(r'^im/mosaic/edit', im_mosaic_edit),
+	url(r'^im/mosaic/die', im_mosaic_die),
+	url(r'^im/mosaic/exclude', im_mosaic_exclude),
 	url(r'^im/mosaic', im_mosaic),
 ]

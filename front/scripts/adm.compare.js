@@ -9,6 +9,24 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
     	});
     }
     
+    $scope.dieMosaic = function(region, index, id) {
+    	
+    	var data = { 'id':id, }
+    	API.sendRequest('/api/im/mosaic/die', 'POST', {}, data).then(function(response) {
+    		
+    		region.mosaics.splice(index, 1);
+    	});
+    }
+    
+    $scope.excludeMosaic = function(region, index, id) {
+    	
+    	var data = { 'id':id, }
+    	API.sendRequest('/api/im/mosaic/exclude', 'POST', {}, data).then(function(response) {
+    		
+    		region.mosaics.splice(index, 1);
+    	});
+    }
+    
 	/* Page loading */
 	API.sendRequest('/api/adm/compare/', 'POST').then(function(response) {
 	    

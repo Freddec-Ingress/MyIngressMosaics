@@ -875,6 +875,7 @@ class IMMosaic(models.Model):
 	count = models.IntegerField()
 	
 	dead = models.BooleanField(default=False)
+	excluded = models.BooleanField(default=False)
 	
 	# Admin displaying
 	def __str__(self):

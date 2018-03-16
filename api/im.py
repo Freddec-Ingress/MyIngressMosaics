@@ -133,3 +133,31 @@ def im_mosaic_edit(request):
 	mosaic_data.save()
 	
 	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((AllowAny, ))
+def im_mosaic_die(request):
+	
+	mosaic_data = IMMosaic.objects.get(pk=request.data['id'])
+	
+	mosaic_data.dead = True
+	mosaic_data.save()
+	
+	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((AllowAny, ))
+def im_mosaic_exclude(request):
+	
+	mosaic_data = IMMosaic.objects.get(pk=request.data['id'])
+	
+	mosaic_data.excluded = True
+	mosaic_data.save()
+	
+	return Response(None, status=status.HTTP_200_OK)
