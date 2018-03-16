@@ -1,4 +1,4 @@
-angular.module('FrontModule', ['satellizer', 'ngCookies', 'toastr',
+angular.module('FrontModule', ['satellizer',
 							   'FrontModule.services', 'FrontModule.controllers', 'FrontModule.directives', ]);
 
 
@@ -6,12 +6,6 @@ angular.module('FrontModule', ['satellizer', 'ngCookies', 'toastr',
 /* Config */
 
 angular.module('FrontModule').config(function($authProvider) {
-	
-	$authProvider.facebook({
-		
-		url: '/login/social/token_user/facebook',
-		clientId: '237811833398918',
-	});
 
 	$authProvider.google({
 		
@@ -21,26 +15,4 @@ angular.module('FrontModule').config(function($authProvider) {
 
 	$authProvider.authToken = 'Token';
 	$authProvider.tokenType = 'Token';
-});
-
-
-
-/* Running */
-
-angular.module('FrontModule').run(['$locale', function($locale) {
-	
-	$locale.NUMBER_FORMATS.GROUP_SEP = ' ';
-	$locale.NUMBER_FORMATS.DECIMAL_SEP = '.';
-}]);
-
-
-
-/* Filter */
-
-angular.module('FrontModule').filter('reverse', function() {
-	
-	return function(items) {
-		if (!items) return;
-		return items.slice().reverse();
-	};
 });

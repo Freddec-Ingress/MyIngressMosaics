@@ -9,7 +9,6 @@ module.exports = function(grunt) {
 				src: [
 					'vendor/flag-icon-css/css/flag-icon.min.css',
 					'vendor/font-awesome/css/font-awesome.min.css',
-					'vendor/angular-toastr/css/angular-toastr.min.css',
 
 					'front/css/html.css',
 					'front/css/tabs.css',
@@ -27,10 +26,7 @@ module.exports = function(grunt) {
 					'vendor/jquery/js/jquery.min.js',
 					'vendor/angular/js/angular.min.js',
 					'vendor/satellizer/js/satellizer.min.js',
-					'vendor/angular-cookies/js/angular-cookies.min.js',
-					'vendor/angular-toastr/js/angular-toastr.min.js',
-					'vendor/angular-toastr/js/angular-toastr.tpls.min.js',
-					
+
 					'front/scripts/services.js',
 					'front/scripts/directives.js',
 					'front/scripts/controllers.js',

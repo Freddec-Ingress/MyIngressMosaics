@@ -1,16 +1,24 @@
 angular.module('FrontModule.services', [])
 
-angular.module('FrontModule.services').service('API', function($q, $http, $cookies) {
+angular.module('FrontModule.services').service('API', function($q, $http, $auth) {
+	
+	function getCookie(name) {
+		
+		var value = '; ' + document.cookie;
+		var parts = value.split('; ' + name + '=');
+		if (parts.length == 2) return parts.pop().split(';').shift();
+	}
 	
 	var service = {
 		
 		sendRequest: function(url, method, params, data) {
 			
-			if ($cookies.token) { $http.defaults.headers.common.Authorization = 'Token ' + $cookies.token; }
+			var token = $auth.getToken();
+			if (token) $http.defaults.headers.common.Authorization = 'Token ' + $auth.getToken();
 			
 			var deferred = $q.defer();
 			
-			$http({url: url, withCredentials: false, method: method, headers: {'X-CSRFToken': $cookies['csrftoken']}, params: params, data: data})
+			$http({url: url, withCredentials: false, method: method, headers: {'X-CSRFToken': getCookie('csrftoken')}, params: params, data: data})
 				.then(function successCallback(response) {
 					
 					deferred.resolve(response.data, response.status);
@@ -530,7 +538,7 @@ angular.module('FrontModule.services').service('UtilsService', function() {
 	return service;
 });
 
-angular.module('FrontModule.services').service('UserService', function(API, $auth, $http, $cookies, $window) {
+angular.module('FrontModule.services').service('UserService', function(API, $auth, $http, $window) {
 	
 	var service = {
 		
@@ -539,8 +547,6 @@ angular.module('FrontModule.services').service('UserService', function(API, $aut
 			$auth.authenticate(provider).then(function(response) {
 				
 				$auth.setToken(response.data.token);
-				$cookies.token = response.data.token;
-				
 				$window.location.href = next;
 			});
 		},
