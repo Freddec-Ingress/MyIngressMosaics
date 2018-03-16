@@ -8,13 +8,13 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
 	    for (var country of $scope.countries) {
 	    	
 	    	country.displayed = false;
-	    	country.open = false;
+	    	country.open = true;
 	    	country.diff = country.compare_count - country.count;
 	    	
 	    	for (var region of country.regions) {
 	    		
 	    		region.displayed = false;
-		    	region.open = false;
+		    	region.open = true;
 		    	region.diff = region.compare_count - region.count;
 		    	
 		    	if (region.mosaics.length > 0) {
