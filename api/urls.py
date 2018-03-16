@@ -98,4 +98,5 @@ urlpatterns = [
 	url(r'^im/country', im_country),
 	url(r'^im/region', im_region),
 	url(r'^im/city', im_city),
+	url(r'^im/mosaic', im_mosaic),
 ]
