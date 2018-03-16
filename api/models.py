@@ -859,3 +859,21 @@ class IMCity(models.Model):
 	# Admin displaying
 	def __str__(self):
 		return self.name
+
+
+
+@python_2_unicode_compatible
+class IMMosaic(models.Model):
+
+	country_name = models.CharField(max_length=128)
+	region_name = models.CharField(max_length=128)
+	city_name = models.CharField(max_length=128)
+
+	compare_name = models.CharField(max_length=128)
+	
+	name = models.CharField(max_length=128)
+	count = models.IntegerField()
+	
+	# Admin displaying
+	def __str__(self):
+		return self.name
