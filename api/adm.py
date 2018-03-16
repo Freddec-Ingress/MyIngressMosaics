@@ -85,7 +85,7 @@ def adm_compare(request):
 							m_compare = Mosaic.objects.filter(city__region=r_compare, title=imm_item.name)
 							if m_compare.count() > 0:
 								m_compare = m_compare[0]
-								imm_item.compare_name = m_compare.name
+								imm_item.compare_name = m_compare.title
 								imm_item.save()
 								to_add = True
 						else:
