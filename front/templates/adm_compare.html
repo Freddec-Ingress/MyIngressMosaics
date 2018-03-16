@@ -91,13 +91,19 @@
 									<div class="item width-4">
 										<span class="color-dark">{{mosaic.city_name}}</span>
 									</div>
-									
-									<a class="item" href="https://www.myingressmosaics.com/admin/api/immosaic/{{mosaic.id}}/change/" target="_blank">
-										<i class="fa fa-lock text-small"></i>
-									</a>
-									
-									<div class="item">
+
+									<div class="item width-4">
 										<span class="color-normal">{{mosaic.name}}</span>
+									</div>
+
+									<div class="item width-3">
+										<input class="control" ng-model="compare_name" />
+									</div>
+
+									<div class="item width-1">
+										<button class="btn" type="submit" ng-click="editMosaic(region, $index, mosaic.id, compare_name);">
+											<i class="fa fa-save"></i>
+										</button>
 									</div>
 									
 								</div>

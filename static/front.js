@@ -3195,6 +3195,15 @@ angular.module('FrontModule.controllers').controller('AdmMissionCtrl', function(
 });
 angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function($scope, API) {
     
+    $scope.editMosaic = function(region, index, id, compare_name) {
+    	
+    	var data = { 'id':id, 'compare_name':compare_name }
+    	API.sendRequest('/api/im/mosaic/edit', 'POST', {}, data).then(function(response) {
+    		
+    		region.mosaics.splice(index, 1);
+    	});
+    }
+    
 	/* Page loading */
 	API.sendRequest('/api/adm/compare/', 'POST').then(function(response) {
 	    
