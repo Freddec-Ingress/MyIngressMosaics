@@ -1,4 +1,6 @@
-angular.module('FrontModule.controllers').controller('NewCountryCtrl', function($rootScope, $scope, $window, API, $auth) {
+angular.module('FrontModule.controllers').controller('NewCountryCtrl', function($rootScope, $scope, $window, API, $auth, UserService) {
+	
+	$scope.signin = UserService.signin;
 
 	$scope.notify = function() {
 		

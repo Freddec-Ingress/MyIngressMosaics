@@ -38,7 +38,7 @@
 
 				<div class="mt-small flex-col hidden" ng-show="need_signin">
 					<span class="color-danger">You must be signed in to be notified.</span>
-					<a href="/profile">Sign in</a>
+					<a ng-click="signin('google', '/world/{{country.name}}');">Sign in</a>
 				</div>
 			
 			</div>

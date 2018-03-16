@@ -1,5 +1,7 @@
 angular.module('FrontModule.controllers').controller('NewProfileCtrl', function($scope, $window, $http, $cookies, $auth, API, UserService) {
 	
+	$scope.signin = UserService.signin;
+	
 	$scope.unotify = function(notif) {
 		
 		var index = $scope.notif.indexOf(notif);

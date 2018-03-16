@@ -1,4 +1,6 @@
-angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($scope, $window, API, $auth) {
+angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($scope, $window, API, $auth, UserService) {
+	
+	$scope.signin = UserService.signin;
 	
 	/* Notification management */
 	

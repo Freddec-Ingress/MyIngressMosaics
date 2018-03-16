@@ -1314,7 +1314,9 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 		});
 	}
 });
-angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', function($scope, $window, $location, toastr, API, UtilsService, $auth) {
+angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', function($scope, $window, $location, toastr, API, UtilsService, $auth, UserService) {
+	
+	$scope.signin = UserService.signin;
 	
 	/* Tab management */
 	
@@ -1878,7 +1880,9 @@ angular.module('FrontModule.controllers').controller('NewSearchCtrl', function($
 	
 	$scope.loaded = true;
 });
-angular.module('FrontModule.controllers').controller('NewCountryCtrl', function($rootScope, $scope, $window, API, $auth) {
+angular.module('FrontModule.controllers').controller('NewCountryCtrl', function($rootScope, $scope, $window, API, $auth, UserService) {
+	
+	$scope.signin = UserService.signin;
 
 	$scope.notify = function() {
 		
@@ -2261,6 +2265,8 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 });
 angular.module('FrontModule.controllers').controller('NewProfileCtrl', function($scope, $window, $http, $cookies, $auth, API, UserService) {
 	
+	$scope.signin = UserService.signin;
+	
 	$scope.unotify = function(notif) {
 		
 		var index = $scope.notif.indexOf(notif);
@@ -2378,7 +2384,9 @@ angular.module('FrontModule.controllers').controller('NewWorldCtrl', function($s
     
     $('.hidden').each(function() { $(this).removeClass('hidden'); })
 });
-angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($scope, $window, API, $auth) {
+angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($scope, $window, API, $auth, UserService) {
+	
+	$scope.signin = UserService.signin;
 	
 	/* Notification management */
 	
@@ -2546,7 +2554,9 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 		});
 	}
 });
-angular.module('FrontModule.controllers').controller('NewCityCtrl', function($scope, $window, API, $auth) {
+angular.module('FrontModule.controllers').controller('NewCityCtrl', function($scope, $window, API, $auth, UserService) {
+	
+	$scope.signin = UserService.signin;
 	
 	/* Notification management */
 	

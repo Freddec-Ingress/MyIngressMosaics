@@ -1,4 +1,6 @@
-angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', function($scope, $window, $location, toastr, API, UtilsService, $auth) {
+angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', function($scope, $window, $location, toastr, API, UtilsService, $auth, UserService) {
+	
+	$scope.signin = UserService.signin;
 	
 	/* Tab management */
 	
