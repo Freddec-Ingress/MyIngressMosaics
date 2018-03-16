@@ -64,7 +64,7 @@
 				
 			</div>
 
-			<div ng-if="!user.faction" class="mt-big item flex-col">
+			<div ng-if="!faction" class="mt-big item flex-col">
 				
 				<div class="item pb-none">
 					<span class="color-normal">Please specify your faction</span>
@@ -80,7 +80,7 @@
 					</div>
 					
 					<div class="item">
-						<button class="btn" ng-click="edit(newfaction); user.faction=newfaction;">
+						<button class="btn" ng-click="edit(newfaction); faction=newfaction;">
 							Save
 						</button>
 					</div>
