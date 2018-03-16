@@ -88,11 +88,23 @@ def adm_compare(request):
 								imm_item.compare_name = m_compare.title
 								imm_item.save()
 								to_add = False
+							else:
+								m_compare = Potential.objects.filter(city__region=r_compare, name__iexact=imm_item.name)
+								if m_compare.count() > 0:
+									m_compare = m_compare[0]
+									imm_item.compare_name = m_compare.name
+									imm_item.save()
+									to_add = False
 						else:
 							m_compare = Mosaic.objects.filter(city__region=r_compare, title__iexact=imm_item.compare_name)
 							if m_compare.count() > 0:
 								m_compare = m_compare[0]
 								to_add = False
+							else:
+								m_compare = Potential.objects.filter(city__region=r_compare, name__iexact=imm_item.compare_name)
+								if m_compare.count() > 0:
+									m_compare = m_compare[0]
+									to_add = False
 						
 						if to_add:
 							mosaic = {
