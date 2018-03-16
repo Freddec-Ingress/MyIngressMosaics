@@ -56,6 +56,11 @@
 				<a class="color-normal" ng-show="notified" ng-click="unnotify();">Notified</a>
 			</div>
 		
+			<div class="mt-small flex-col hidden" ng-show="need_signin">
+				<span class="color-danger">You must be signed in to be notified.</span>
+				<a ng-click="signin('google', '/world/{{country.name}}');">Sign in</a>
+				
+			</div>
 		</div>
 		
 		<div class="section" ng-show="(potentials.length + mosaics.length) > 2">
