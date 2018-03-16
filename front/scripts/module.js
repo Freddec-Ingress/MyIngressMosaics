@@ -6,6 +6,12 @@ angular.module('FrontModule', ['satellizer',
 /* Config */
 
 angular.module('FrontModule').config(function($authProvider) {
+	
+	$authProvider.facebook({
+		
+		url: '/login/social/token_user/facebook',
+		clientId: '237811833398918',
+	});
 
 	$authProvider.google({
 		
@@ -15,4 +21,16 @@ angular.module('FrontModule').config(function($authProvider) {
 
 	$authProvider.authToken = 'Token';
 	$authProvider.tokenType = 'Token';
+});
+
+
+
+/* Filter */
+
+angular.module('FrontModule').filter('reverse', function() {
+	
+	return function(items) {
+		if (!items) return;
+		return items.slice().reverse();
+	};
 });
