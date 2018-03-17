@@ -496,37 +496,38 @@ class Mission(models.Model):
 		
 		jsondata = json.loads(self.data)
 		
-		for portal in jsondata[9]:
+		if len(jsondata) > 9:
+			for portal in jsondata[9]:
 			
-			lat = 0.0
-			lng = 0.0
-			
-			type = None
-			
-			if portal[5]:
+				lat = 0.0
+				lng = 0.0
 				
-				if portal[5][0] == 'f':
-					lat = portal[5][1] / 1000000.0
-					lng = portal[5][2] / 1000000.0
+				type = None
+				
+				if portal[5]:
 					
-					type = 'viewpoint'
-				
-				if portal[5][0] == 'p':
-					lat = portal[5][2] / 1000000.0
-					lng = portal[5][3] / 1000000.0
+					if portal[5][0] == 'f':
+						lat = portal[5][1] / 1000000.0
+						lng = portal[5][2] / 1000000.0
+						
+						type = 'viewpoint'
 					
-					type = 'portal'
-				
-			pData = {
-				'guid': portal[1],
-				'lat': lat,
-				'lng': lng,
-				'type': type,
-				'title': portal[2],
-				'action': portal[4],
-			}
-
-			data.append(pData)
+					if portal[5][0] == 'p':
+						lat = portal[5][2] / 1000000.0
+						lng = portal[5][3] / 1000000.0
+						
+						type = 'portal'
+					
+				pData = {
+					'guid': portal[1],
+					'lat': lat,
+					'lng': lng,
+					'type': type,
+					'title': portal[2],
+					'action': portal[4],
+				}
+	
+				data.append(pData)
 			
 		return data
 
