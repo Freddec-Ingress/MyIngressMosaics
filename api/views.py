@@ -978,6 +978,7 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 				'uniques':mosaic_obj.uniques,
 				'city_name':mosaic_obj.city.name,
 				'mission_count':0,
+				'has_unavailable_portals':False,
 				
 				'images':[],
 			}
@@ -988,6 +989,12 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 				mosaic_data['images'].append(mission_obj.image)
 				mosaic_data['mission_count'] += 1
 			
+				pdata = mission_obj.getPortalsData()
+				for portal in pdata:
+					if portal['title'] == 'Unavailable':
+						mosaic_data['has_unavailable_portals'] = True
+						break
+						
 			city_data['mosaic_count'] += 1
 			
 			data['region']['mosaic_count'] += 1
