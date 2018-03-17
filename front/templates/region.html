@@ -131,7 +131,7 @@
 				</div>
 				
 				<div class="item flex" ng-if="city.potential_count > 0">
-					<span class="text-small color-muted">{{city.potential_count}} potentials</span>
+					<span class="color-dark">{{city.potential_count}} potentials</span>
 				</div>
 				
 				<div class="flex wrap" ng-if="city.potential_count > 0">
@@ -152,7 +152,7 @@
 				</div>
 				
 				<div class="item flex" ng-if="city.mosaic_count > 0">
-					<span class="text-small color-muted">{{city.mosaic_count}} mosaics</span>
+					<span class="color-dark">{{city.mosaic_count}} mosaics</span>
 				</div>
 				
 				<div class="flex wrap" ng-if="city.mosaic_count > 0">
@@ -162,7 +162,10 @@
 							<a class="flex align-center" href="/mosaic/{{mosaic.ref}}" target="_blank">
 								
 			    				<div class="item width-11 flex-col">
-			    					<span class="text-medium color-light ellipsis" title="{{mosaic.title}}">{{mosaic.title}}</span>
+			    					<div class="flex">
+										<i class="mr-small fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals"></i>
+				    					<span class="text-medium color-light ellipsis" title="{{mosaic.title}}">{{mosaic.title}}</span>
+			    					</div>
 			    					<span class="text-small color-muted">{{mosaic.mission_count}} missions &middot; {{mosaic.uniques}} uniques</span>
 			    				</div>
 								

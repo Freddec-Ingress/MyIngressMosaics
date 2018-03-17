@@ -355,7 +355,6 @@ class Mosaic(models.Model):
 			'startLat': self.startLat,
 			'startLng': self.startLng,
 			'uniques': self.uniques,
-			'has_unavailable_portals': False,
 			
 			'city': None,
 
@@ -372,11 +371,6 @@ class Mosaic(models.Model):
 			
 			mission_data = item.imgSerialize()
 			data['missions'].append(mission_data)
-			
-			for portal in mission_data['portals']:
-				if portal['title'] == 'Unavailable':
-					mission_data['has_unavailable_portals'] = True
-					data['has_unavailable_portals'] = True
 			
 		return data
 	
