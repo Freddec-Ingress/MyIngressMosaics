@@ -397,6 +397,7 @@ class Mosaic(models.Model):
 			'has_fake': False,
 			'is_loved': False,
 			'is_completed': False,
+			'has_unavailable_portals': False,
 			
 			'creators': [],
 			'missions': [],
@@ -411,6 +412,7 @@ class Mosaic(models.Model):
 				data['has_fake'] = True
 			
 			mData = item.detailsSerialize()
+			mData['has_unavailable_portals'] = False
 			data['missions'].append(mData)
 			
 			cData = {
@@ -419,6 +421,11 @@ class Mosaic(models.Model):
 			}
 			
 			creators.append(cData)
+			
+			for portal in mData['portals']:
+				if portal['title'] == 'Unavailable':
+					mData['has_unavailable_portals'] = True
+					data['has_unavailable_portals'] = True
 
 		data['creators'] = [dict(t) for t in set([tuple(d.items()) for d in creators])]
 		
