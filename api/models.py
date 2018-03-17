@@ -374,7 +374,7 @@ class Mosaic(models.Model):
 			data['missions'].append(mission_data)
 			
 			mdata = item.getPortalsData()
-			for portal in mdata['portals']:
+			for portal in mdata:
 				if portal['title'] == 'Unavailable':
 					data['has_unavailable_portals'] = True
 			
