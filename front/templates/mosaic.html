@@ -224,10 +224,13 @@
 		
 		<div class="section">
 		
-			<div class="item flex">
-				<span class="text-big color-light">
-					{{mosaic.title}}
-				</span>
+			<div class="flex align-center">
+				<div class="item">
+					<span class="text-big color-light">{{mosaic.title}}</span>
+				</div>
+				<div class="item" ng-show="mosaic.has_unavailable_portals">
+					<i class="fa fa-exclamation-triangle text-danger" title="Some portals are unavailable!"></i>
+				</div>
 			</div>
 			
 		</div>
