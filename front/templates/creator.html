@@ -66,7 +66,10 @@
 							
 		    				<div class="item">
 		    					
-		    					<span class="text-medium color-light block ellipsis" title="{{mosaic.title}}">{{mosaic.title}}</span>
+		    					<div class="flex align-center">
+									<i class="mr-normal text-small fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals"></i>
+		    						<span class="text-medium color-light block ellipsis" title="{{mosaic.title}}">{{mosaic.title}}</span>
+								</div>
 		
 		    					<div class="text-small color-dark">
 									<span class=" mr-small flag-icon flag-icon-{{mosaic.city.region.country.code}}"></span>
