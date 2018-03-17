@@ -373,9 +373,9 @@ class Mosaic(models.Model):
 			mission_data = item.imgSerialize()
 			data['missions'].append(mission_data)
 			
-			for portal in mission_data['portals']:
+			mdata = item.getPortalsData()
+			for portal in mdata['portals']:
 				if portal['title'] == 'Unavailable':
-					mission_data['has_unavailable_portals'] = True
 					data['has_unavailable_portals'] = True
 			
 		return data
