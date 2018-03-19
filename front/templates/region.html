@@ -69,25 +69,25 @@
 			<div class="flex wrap">
 				
 				<div class="item">
-					<a class="text-small" ng-click="sortByLocation();" ng-class="{'active': sorting=='by_location'}">
+					<a ng-click="sortByLocation();" ng-class="{'active': sorting=='by_location'}">
 						By location
 					</a>
 				</div>
 				
 				<div class="item">
-					<a class="text-small" ng-click="sortByDate();" ng-class="{'active': sorting=='by_date'}">
+					<a ng-click="sortByDate();" ng-class="{'active': sorting=='by_date'}">
 						Most Recent
 					</a>
 				</div>
 				
 				<div class="item">
-					<a class="text-small" ng-click="sortByName();" ng-class="{'active': sorting=='by_name'}">
+					<a ng-click="sortByName();" ng-class="{'active': sorting=='by_name'}">
 						Alphabetical
 					</a>
 				</div>
 				
 				<div class="item">
-					<a class="text-small" ng-click="sortByUniques();" ng-class="{'active': sorting=='by_uniques'}">
+					<a ng-click="sortByUniques();" ng-class="{'active': sorting=='by_uniques'}">
 						By uniques
 					</a>
 				</div>
@@ -211,6 +211,7 @@
 							<a class="flex align-center" href="/mosaic/{{mosaic.ref}}" target="_blank">
 								
 			    				<div class="item width-11 flex-col">
+									<i class="mr-normal text-small fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals"></i>
 			    					<span class="text-medium color-light ellipsis" title="{{mosaic.title}}">{{mosaic.title}}</span>
 			    					<span class="text-small color-muted">{{mosaic.mission_count}} missions &middot; {{mosaic.uniques}} uniques</span>
 			    				</div>
@@ -256,6 +257,7 @@
 							<a class="flex align-center" href="/mosaic/{{mosaic.ref}}" target="_blank">
 								
 			    				<div class="item width-11 flex-col">
+									<i class="mr-normal text-small fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals"></i>
 			    					<span class="text-medium color-light ellipsis" title="{{mosaic.title}}">{{mosaic.title}}</span>
 			    					<span class="text-small color-muted">{{mosaic.mission_count}} missions &middot; {{mosaic.uniques}} uniques</span>
 			    				</div>
@@ -301,6 +303,7 @@
 							<a class="flex align-center" href="/mosaic/{{mosaic.ref}}" target="_blank">
 								
 			    				<div class="item width-11 flex-col">
+									<i class="mr-normal text-small fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals"></i>
 			    					<span class="text-medium color-light ellipsis" title="{{mosaic.title}}">{{mosaic.title}}</span>
 			    					<span class="text-small color-muted">{{mosaic.mission_count}} missions &middot; {{mosaic.uniques}} uniques</span>
 			    				</div>
