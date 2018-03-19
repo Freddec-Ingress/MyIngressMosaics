@@ -28,7 +28,7 @@ body {
 	padding-top:60px;
     text-align:left;
     background-color:black;
-    display:flex;
+    display:flex; flex-direction:column; flex:1;
     -webkit-font-smoothing:antialiased;
 }
 
