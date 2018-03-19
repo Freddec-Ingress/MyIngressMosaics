@@ -264,6 +264,13 @@
 			 	   			</a>
 			    			
 			    			<div class="item pt-none">
+			    				<a class="flex" href="/world/{{mosaic.city.region.country_name}}/{{mosaic.city.region.name}}/{{mosaic.city.name}}">
+									<span class="mr-small flag-icon flag-icon-{{mosaic.city.region.country.code}}"></span>
+									<span>{{mosaic.city.name}}</span>
+			    				</a>
+			    			</div>
+			    			
+			    			<div class="item pt-none">
 			    				<a ng-show="!mosaic.preview" ng-click="mosaic.preview=true;">Preview</a>
 			    				<a ng-show="mosaic.preview" ng-click="mosaic.preview=false;">Close</a>
 			    			</div>
