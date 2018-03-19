@@ -70,19 +70,19 @@
 				
 				<div class="item">
 					<a ng-click="sortByLocation();" ng-class="{'active': sorting=='by_location'}">
-						By location
+						By city
 					</a>
 				</div>
 				
 				<div class="item">
 					<a ng-click="sortByDate();" ng-class="{'active': sorting=='by_date'}">
-						Most Recent
+						By date
 					</a>
 				</div>
 				
 				<div class="item">
 					<a ng-click="sortByName();" ng-class="{'active': sorting=='by_name'}">
-						Alphabetical
+						By name
 					</a>
 				</div>
 				
@@ -255,17 +255,14 @@
 						<div class="item link-block flex-col">
 							
 							<a class="flex align-center" href="/mosaic/{{mosaic.ref}}" target="_blank">
-								
 			    				<div class="item width-11 flex-col">
-									<i class="mr-normal text-small fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals"></i>
-			    					<span class="text-medium color-light ellipsis" title="{{mosaic.title}}">{{mosaic.title}}</span>
+			    					<div class="flex">
+										<i class="mr-normal text-small fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals"></i>
+			    						<span class="mr-normal grow text-medium color-light ellipsis" title="{{mosaic.title}}">{{mosaic.title}}</span>
+			    						<i class="fa fa-angle-right"></i>
+			    					</div>
 			    					<span class="text-small color-muted">{{mosaic.mission_count}} missions &middot; {{mosaic.uniques}} uniques</span>
 			    				</div>
-								
-								<div class="item width-1 text-center">
-									<i class="fa fa-angle-right"></i>
-								</div>
-			    				
 			 	   			</a>
 			    			
 			    			<div class="item pt-none">
