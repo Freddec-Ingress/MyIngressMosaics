@@ -26,13 +26,10 @@
 		
 		<div class="section">
 			
-			<div class="flex align-center">
+			<div class="flex">
 				
 	    		<div class="item flex">
-					<span class="flag-icon flag-icon-{{region.country_code}}"></span>
-	    		</div>
-	    		
-	    		<div class="item flex">
+					<span class="mr-small flag-icon flag-icon-{{region.country_code}}"></span>
 					<a href="/world/{{region.country_name}}">{{region.country_name}}</a>
 	    		</div>
 	    		
@@ -46,7 +43,7 @@
 			
 				<span class="text-big color-light">{{region.name}}</span>
 				
-				<div class="flex align-center">
+				<div class="flex">
 					<span ng-show="region.potential_count" class="color-dark pr-small">{{region.potential_count}} potentials</span>
 					<span ng-show="region.potential_count && region.mosaic_count" class="color-dark pr-small">&middot;</span>
 					<span ng-show="region.mosaic_count" class="color-dark pr-small">{{region.mosaic_count}} mosaics</span>
@@ -264,9 +261,9 @@
 			 	   			</a>
 			    			
 			    			<div class="item pt-none">
-			    				<a class="flex" href="/world/{{mosaic.city.region.country_name}}/{{mosaic.city.region.name}}/{{mosaic.city.name}}">
-									<span class="mr-small flag-icon flag-icon-{{mosaic.city.region.country.code}}"></span>
-									<span>{{mosaic.city.name}}</span>
+			    				<a class="flex" href="/world/{{region.country_name}}/{{region.name}}/{{mosaic.city_name}}">
+									<span class="mr-small flag-icon flag-icon-{{region.country_code}}"></span>
+									<span>{{mosaic.city_name}}</span>
 			    				</a>
 			    			</div>
 			    			
