@@ -254,15 +254,13 @@
 					<div class="item width-12 width-xl-4 flex-col" ng-repeat="mosaic in mosaics">
 						<div class="item link-block flex-col">
 							
-							<a class="flex align-center" href="/mosaic/{{mosaic.ref}}" target="_blank">
-			    				<div class="item width-11 flex-col">
-			    					<div class="flex">
-										<i class="mr-normal text-small fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals"></i>
-			    						<span class="mr-normal grow text-medium color-light ellipsis" title="{{mosaic.title}}">{{mosaic.title}}</span>
-			    						<i class="fa fa-angle-right"></i>
-			    					</div>
-			    					<span class="text-small color-muted">{{mosaic.mission_count}} missions &middot; {{mosaic.uniques}} uniques</span>
-			    				</div>
+							<a class="item flex-col" href="/mosaic/{{mosaic.ref}}" target="_blank">
+		    					<div class="flex align-center">
+									<i class="mr-normal text-small fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals"></i>
+		    						<span class="mr-normal grow text-medium color-light ellipsis" title="{{mosaic.title}}">{{mosaic.title}}</span>
+		    						<i class="fa fa-angle-right"></i>
+		    					</div>
+		    					<span class="text-small color-muted">{{mosaic.mission_count}} missions &middot; {{mosaic.uniques}} uniques</span>
 			 	   			</a>
 			    			
 			    			<div class="item pt-none">
