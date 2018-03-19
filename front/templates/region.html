@@ -251,10 +251,10 @@
 			
 			<div class="section">
 				<div class="flex wrap">
-					<div class="item width-12 width-xl-4 flex-col" ng-repeat="mosaic in mosaics">
-						<div class="item link-block flex-col">
+					<div class="item width-xl-4" ng-repeat="mosaic in mosaics">
+						<div class="item link-block">
 							
-							<a class="item flex-col" href="/mosaic/{{mosaic.ref}}" target="_blank">
+							<a class="item" href="/mosaic/{{mosaic.ref}}" target="_blank" style="display:block;">
 		    					<div class="flex align-center">
 									<i class="mr-normal text-small fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals"></i>
 		    						<span class="mr-normal grow text-medium color-light ellipsis" title="{{mosaic.title}}">{{mosaic.title}}</span>
