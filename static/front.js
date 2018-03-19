@@ -2489,6 +2489,8 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 	}
 	
 	/* Page loading */
+	
+	$scope.current_tab = 'mosaics';
 
 	$scope.authenticated = $auth.isAuthenticated();
 
@@ -2772,8 +2774,6 @@ angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($
 	}
 	
 	/* Page loading */
-	
-	$scope.current_tab = 'mosaics';
 	
 	API.sendRequest('/api/country/list/', 'POST').then(function(response) {
     

@@ -140,6 +140,8 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 	}
 	
 	/* Page loading */
+	
+	$scope.current_tab = 'mosaics';
 
 	$scope.authenticated = $auth.isAuthenticated();
 

@@ -62,8 +62,6 @@ angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($
 	
 	/* Page loading */
 	
-	$scope.current_tab = 'mosaics';
-	
 	API.sendRequest('/api/country/list/', 'POST').then(function(response) {
     
         $scope.countries = response.countries;
