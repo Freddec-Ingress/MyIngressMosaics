@@ -17,7 +17,7 @@
 
 {% verbatim %}
 
-	<div id="loading" ng-hide="loaded">
+	<div id="loading" ng-hide="loaded" class="section">
 		<i class="item fa fa-spinner rotating"></i>
 		<span class="item">Loading page...</span>
 	</div>
@@ -59,6 +59,17 @@
 	    		
 			</div>
 			
+		</div>
+		
+		<div class="section">
+			<div class="tab-row mt-big">
+			
+				<div class="tab" ng-click="current_tab='mosaics'" ng-class="{'active':current_tab=='mosaics'}">
+					Mosaics
+					<span class="ml-normal badge">{{region.mosaic_count}}</span>
+				</div>
+				
+			</div>
 		</div>
 		
 		<div class="section" ng-show="(potentials.length + mosaics.length) > 2">
