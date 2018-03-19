@@ -233,8 +233,8 @@
 						            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
 						            </div>
 						            
-						            <div ng-repeat="m in mosaic.missions | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-						                <img src="/static/img/mask.png" style="background-image:url({{m.image}}=s25);" />
+						            <div ng-repeat="m in mosaic.images" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+						                <img src="/static/img/mask.png" style="background-image:url({{m}}=s25);" />
 						            </div>
 						            
 					            </div>
@@ -251,7 +251,7 @@
 			
 			<div class="section">
 				<div class="flex wrap">
-					<div class="item width-xl-4" ng-repeat="mosaic in mosaics">
+					<div class="item width-12 width-xl-4" ng-repeat="mosaic in mosaics">
 						<div class="item link-block">
 							
 							<a class="item" href="/mosaic/{{mosaic.ref}}" target="_blank" style="display:block;">
@@ -274,8 +274,8 @@
 						            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
 						            </div>
 						            
-						            <div ng-repeat="m in mosaic.missions | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-						                <img src="/static/img/mask.png" style="background-image:url({{m.image}}=s25);" />
+						            <div ng-repeat="m in mosaic.images" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+						                <img src="/static/img/mask.png" style="background-image:url({{m}}=s25);" />
 						            </div>
 						            
 					            </div>
@@ -320,8 +320,8 @@
 						            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
 						            </div>
 						            
-						            <div ng-repeat="m in mosaic.missions | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-						                <img src="/static/img/mask.png" style="background-image:url({{m.image}}=s25);" />
+						            <div ng-repeat="m in mosaic.images" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+						                <img src="/static/img/mask.png" style="background-image:url({{m}}=s25);" />
 						            </div>
 						            
 					            </div>
