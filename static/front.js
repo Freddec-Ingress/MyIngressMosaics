@@ -2425,6 +2425,10 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 			
 			return 0;
 		});
+		
+		for (var mosaic of $scope.mosaics) {
+			mosaic.index_uniques = Math.floor(mosaic.uniques / 100);
+		}
 	}
 	
 	$scope.sortByDate = function() {
