@@ -115,7 +115,7 @@
 					<div class="flex">
 						<div class="grow flex width-12 wrap">
 							<div class="item flex justify-center" ng-repeat="index in location_indexes track by $index" style="width:40px;">
-								<a class="badge badge-link item text-center" ng-click="setCurrentIndex(index);" ng-class="{'active': current_index==index}" style="width:100%;">
+								<a class="badge badge-link item text-center" ng-click="setCurrentLocationIndex(index);" ng-class="{'active': current_index==index}" style="width:100%;">
 									{{index}}
 								</a>
 							</div>
@@ -134,7 +134,7 @@
 										<span class="mr-normal grow text-medium color-light ellipsis" title="{{mosaic.title}}">{{mosaic.title}}</span>
 										<i class="fa fa-angle-right"></i>
 									</div>
-									<span class="text-small color-muted">{{mosaic.mission_count}} missions &middot; {{mosaic.uniques}} uniques</span>
+									<span class="text-small color-dark">{{mosaic.mission_count}} missions &middot; {{mosaic.uniques}} uniques</span>
 								</a>
 								
 								<div class="item pt-none">
@@ -177,7 +177,7 @@
 										<span class="mr-normal grow text-medium color-light ellipsis" title="{{mosaic.title}}">{{mosaic.title}}</span>
 										<i class="fa fa-angle-right"></i>
 									</div>
-									<span class="text-small color-muted">{{mosaic.mission_count}} missions &middot; {{mosaic.uniques}} uniques</span>
+									<span class="text-small color-dark">{{mosaic.mission_count}} missions &middot; {{mosaic.uniques}} uniques</span>
 								</a>
 								
 								<div class="item pt-none">
@@ -220,7 +220,7 @@
 										<span class="mr-normal grow text-medium color-light ellipsis" title="{{mosaic.title}}">{{mosaic.title}}</span>
 										<i class="fa fa-angle-right"></i>
 									</div>
-									<span class="text-small color-muted">{{mosaic.mission_count}} missions &middot; {{mosaic.uniques}} uniques</span>
+									<span class="text-small color-dark">{{mosaic.mission_count}} missions &middot; {{mosaic.uniques}} uniques</span>
 								</a>
 								
 								<div class="item pt-none">
@@ -263,7 +263,7 @@
 										<span class="mr-normal grow text-medium color-light ellipsis" title="{{mosaic.title}}">{{mosaic.title}}</span>
 										<i class="fa fa-angle-right"></i>
 									</div>
-									<span class="text-small color-muted">{{mosaic.mission_count}} missions &middot; {{mosaic.uniques}} uniques</span>
+									<span class="text-small color-dark">{{mosaic.mission_count}} missions &middot; {{mosaic.uniques}} uniques</span>
 								</a>
 								
 								<div class="item pt-none">
@@ -307,7 +307,7 @@
 										<span class="mr-normal grow text-medium color-light ellipsis" title="{{potential.title}}">{{potential.title}}</span>
 										<i class="fa fa-angle-right"></i>
 									</div>
-									<span class="text-small color-muted">{{potential.count}} missions</span>
+									<span class="text-small color-dark">{{potential.count}} missions</span>
 								</a>
 								
 								<div class="item pt-none">

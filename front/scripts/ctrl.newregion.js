@@ -132,11 +132,11 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 	
 	$scope.indexes = [];
 	
-	$scope.current_index = null;
+	$scope.current_location_index = null;
 	
-	$scope.setCurrentIndex = function(index) {
+	$scope.setCurrentLocationIndex = function(index) {
 		
-		$scope.current_index = index;
+		$scope.current_location_index = index;
 	}
 	
 	/* Page loading */
@@ -169,7 +169,7 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 				mosaic.offset = new Array(temp);
 			}
 
-			$scope.current_index = $scope.location_indexes[0];
+			$scope.current_location_index = $scope.location_indexes[0];
 
 			$scope.sortByLocation();
 
