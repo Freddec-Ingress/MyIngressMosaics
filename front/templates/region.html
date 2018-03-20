@@ -109,7 +109,7 @@
 				
 			</div>
 			
-			<div ng-if="sorting=='by_location'">
+			<div ng-if="sorting=='by_location'" class="flex-col">
 				
 				<div class="section">
 					<div class="flex">
@@ -164,7 +164,7 @@
 				
 			</div>
 			
-			<div ng-if="sorting=='by_date'">
+			<div ng-if="sorting=='by_date'" class="flex-col">
 				
 				<div class="section">
 					<div class="flex wrap">
@@ -250,7 +250,7 @@
 				
 			</div>
 			
-			<div ng-if="sorting=='by_uniques'">
+			<div ng-if="sorting=='by_uniques'" class="flex-col">
 				
 				<div class="section">
 					<div class="flex wrap">
@@ -292,6 +292,35 @@
 				</div>
 				
 			</div>
+			
+		</div>
+		
+		<div ng-show="current_tab=='potentials'">
+				
+				<div class="section">
+					<div class="flex wrap">
+						<div class="item width-12 width-xl-4" ng-repeat="potential in potentials track by $index">
+							<div class="item link-block">
+								
+								<a class="item" href="/registration/{{potential.title}}" target="_blank" style="display:block;">
+									<div class="flex align-center">
+										<span class="mr-normal grow text-medium color-light ellipsis" title="{{potential.title}}">{{potential.title}}</span>
+										<i class="fa fa-angle-right"></i>
+									</div>
+									<span class="text-small color-muted">{{potential.count}} missions</span>
+								</a>
+								
+								<div class="item pt-none">
+									<a class="flex" href="/world/{{potential.city.region.country.name}}/{{potential.city.region.name}}/{{potential.city.name}}">
+										<span class="mr-small flag-icon flag-icon-{{potential.city.region.country.code}}"></span>
+										<span>{{potential.city.name}}</span>
+									</a>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
 			
 		</div>
 		
