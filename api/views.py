@@ -1003,7 +1003,8 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 			data['region']['mosaic_count'] += 1
 		
 		# Date indexes data
-		data['date_indexes'] = [range(1, int(data['region']['mosaic_count'] / 25) + 1)]
+		for index in range(1, int(data['region']['mosaic_count'] / 25) + 1):
+			data['date_indexes'].append(index)
 		
 		# Potentials data
 		potentials = city_obj.potentials.all()
