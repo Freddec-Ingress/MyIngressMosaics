@@ -2350,6 +2350,10 @@ angular.module('FrontModule.controllers').controller('NewWorldCtrl', function($s
 angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($scope, $window, API, $auth, UserService) {
 	
 	$scope.signin = UserService.signin;
+
+	$scope.authenticated = $auth.isAuthenticated();
+    
+	$('.hidden').each(function() { $(this).removeClass('hidden'); })
 	
 	/* Notification management */
 	
@@ -2381,18 +2385,7 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 	$scope.sortByLocation = function() {
 		
 		$scope.sorting = 'by_location';
-		
-		$scope.potentials.sort(function(a, b) {
-			
-			if (a.count > b.count) return -1;
-			if (a.count < b.count) return 1;
-			
-			if (a.title > b.title) return 1;
-			if (a.title < b.title) return -1;
-			
-			return 0;
-		});
-		
+
 		$scope.mosaics.sort(function(a, b) {
 			
 			if (a.mission_count > b.mission_count) return -1;
@@ -2408,16 +2401,7 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 	$scope.sortByName = function() {
 		
 		$scope.sorting = 'by_name';
-			
-		$scope.potentials.sort(function(a, b) {
-			
-			if (a.title > b.title) return 1;
-			if (a.title < b.title) return -1;
-			
-			return 0;
-		});
-		
-		
+
 		$scope.mosaics.sort(function(a, b) {
 			
 			if (a.title > b.title) return 1;
@@ -2430,19 +2414,7 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 	$scope.sortByUniques = function() {
 		
 		$scope.sorting = 'by_uniques';
-			
-		$scope.potentials.sort(function(a, b) {
-			
-			if (a.count > b.count) return -1;
-			if (a.count < b.count) return 1;
-			
-			if (a.title > b.title) return 1;
-			if (a.title < b.title) return -1;
-			
-			return 0;
-		});
-		
-		
+
 		$scope.mosaics.sort(function(a, b) {
 			
 			if (a.uniques > b.uniques) return -1;
@@ -2458,16 +2430,7 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 	$scope.sortByDate = function() {
 		
 		$scope.sorting = 'by_date';
-			
-		$scope.potentials.sort(function(a, b) {
-			
-			if (a.id > b.id) return -1;
-			if (a.id < b.id) return 1;
-			
-			return 0;
-		});
-		
-		
+
 		$scope.mosaics.sort(function(a, b) {
 			
 			if (a.id > b.id) return -1;
@@ -2477,22 +2440,39 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 		});
 	}
 	
+	$scope.sortByMissions = function() {
+		
+		$scope.sorting = 'by_missions';
+
+		$scope.mosaics.sort(function(a, b) {
+			
+			if (a.mission_count > b.mission_count) return -1;
+			if (a.mission_count < b.mission_count) return 1;
+			
+			if (a.title > b.title) return 1;
+			if (a.title < b.title) return -1;
+			
+			return 0;
+		});
+	}
+	
 	/* Index management */
-	
-	$scope.indexes = [];
-	
+
+	$scope.current_date_index = null;
+	$scope.current_name_index = null;
+	$scope.current_uniques_index = null;
+	$scope.current_missions_index = null;
 	$scope.current_location_index = null;
 	
-	$scope.setCurrentLocationIndex = function(index) {
-		
-		$scope.current_location_index = index;
-	}
+	$scope.setCurrentDateIndex = function(index) { $scope.current_date_index = index; }
+	$scope.setCurrentNameIndex = function(index) { $scope.current_name_index = index; }
+	$scope.setCurrentUniquesIndex = function(index) { $scope.current_uniques_index = index; }
+	$scope.setCurrentMissionsIndex = function(index) { $scope.current_missions_index = index; }
+	$scope.setCurrentLocationIndex = function(index) { $scope.current_location_index = index; }
 	
 	/* Page loading */
 	
 	$scope.current_tab = 'mosaics';
-
-	$scope.authenticated = $auth.isAuthenticated();
 
 	$scope.loadRegion = function(country_name, region_name) {
 		
@@ -2504,6 +2484,10 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 			$scope.mosaics = response.mosaics;
 			$scope.potentials = response.potentials;
 			
+			$scope.date_indexes = response.date_indexes;
+			$scope.name_indexes = response.name_indexes;
+			$scope.uniques_indexes = response.uniques_indexes;
+			$scope.missions_indexes = response.missions_indexes;
 			$scope.location_indexes = response.location_indexes;
 
 			/* Mosaic offset */
@@ -2518,15 +2502,17 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 				mosaic.offset = new Array(temp);
 			}
 
+			$scope.current_date_index = $scope.date_indexes[0];
+			$scope.current_name_index = $scope.name_indexes[0];
+			$scope.current_uniques_index = $scope.uniques_indexes[0];
+			$scope.current_missions_index = $scope.missions_indexes[0];
 			$scope.current_location_index = $scope.location_indexes[0];
-
+			
 			$scope.sortByLocation();
 
 			$scope.loaded = true;
 		});
 	}
-    
-	$('.hidden').each(function() { $(this).removeClass('hidden'); })
 });
 angular.module('FrontModule.controllers').controller('NewCityCtrl', function($scope, $window, API, $auth, UserService) {
 	
