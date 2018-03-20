@@ -88,8 +88,14 @@
 					</div>
 					
 					<div class="item">
-						<a ng-click="sortByDate();" ng-class="{'active': sorting=='by_date'}">
-							By date
+						<a ng-click="sortByUniques();" ng-class="{'active': sorting=='by_uniques'}">
+							By missions
+						</a>
+					</div>
+					
+					<div class="item">
+						<a ng-click="sortByUniques();" ng-class="{'active': sorting=='by_uniques'}">
+							By uniques
 						</a>
 					</div>
 					
@@ -100,8 +106,8 @@
 					</div>
 					
 					<div class="item">
-						<a ng-click="sortByUniques();" ng-class="{'active': sorting=='by_uniques'}">
-							By uniques
+						<a ng-click="sortByDate();" ng-class="{'active': sorting=='by_date'}">
+							By date
 						</a>
 					</div>
 					
@@ -251,6 +257,49 @@
 			</div>
 			
 			<div ng-if="sorting=='by_uniques'" class="flex-col">
+				
+				<div class="section">
+					<div class="flex wrap">
+						<div class="item width-12 width-xl-4" ng-repeat="mosaic in mosaics track by $index">
+							<div class="item link-block">
+								
+								<a class="item" href="/mosaic/{{mosaic.ref}}" target="_blank" style="display:block;">
+									<div class="flex align-center">
+										<i class="mr-normal text-small fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals"></i>
+										<span class="mr-normal grow text-medium color-light ellipsis" title="{{mosaic.title}}">{{mosaic.title}}</span>
+										<i class="fa fa-angle-right"></i>
+									</div>
+									<span class="text-small color-dark">{{mosaic.mission_count}} missions &middot; {{mosaic.uniques}} uniques</span>
+								</a>
+								
+								<div class="item pt-none">
+									<a class="flex" href="/world/{{region.country_name}}/{{region.name}}/{{mosaic.city_name}}">
+										<span class="mr-small flag-icon flag-icon-{{region.country_code}}"></span>
+										<span>{{mosaic.city_name}}</span>
+									</a>
+								</div>
+
+								<a class="item" href="/mosaic/{{mosaic.ref}}" target="_blank" style="display:block;">
+									<div class="flex wrap shrink" style="max-width:200px; padding-right:calc((6 - {{mosaic.cols}}) * 16.666667%);">
+										
+										<div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+										</div>
+										
+										<div ng-repeat="m in mosaic.images track by $index" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
+											<img src="/static/img/mask.png" style="background-image:url({{m}}=s25);" />
+										</div>
+										
+									</div>
+								</a>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div ng-if="sorting=='by_missions'" class="flex-col">
 				
 				<div class="section">
 					<div class="flex wrap">
