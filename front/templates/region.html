@@ -283,8 +283,20 @@
 			<div ng-if="sorting=='by_uniques'" class="flex-col">
 				
 				<div class="section">
+					<div class="flex">
+						<div class="grow flex width-12 wrap">
+							<div class="item flex justify-center" ng-repeat="index in uniques_indexes track by $index" style="width:80px;">
+								<a class="badge badge-link item text-center" ng-click="setCurrentUniquesIndex(index);" ng-class="{'active': current_uniques_index==index}" style="width:100%;">
+									{{index*100}} - {{(index+1)*100}}
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="section">
 					<div class="flex wrap">
-						<div class="item width-12 width-xl-4" ng-repeat="mosaic in mosaics track by $index">
+						<div class="item width-12 width-xl-4" ng-repeat="mosaic in mosaics track by $index" ng-if="mosaic.index_uniques==current_uniques_index;">
 							<div class="item link-block">
 								
 								<a class="item" href="/mosaic/{{mosaic.ref}}" target="_blank" style="display:block;">
