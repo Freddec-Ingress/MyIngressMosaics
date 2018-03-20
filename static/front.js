@@ -3245,14 +3245,11 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
 		    	
 				region.mosaics.sort(function(a, b) {
 					
-					if (a.city_name > b.city_name) return 1;
-					if (a.city_name < b.city_name) return -1;
+					if (a.name > b.name) return 1;
+					if (a.name < b.name) return -1;
 					
 					if (a.count > b.count) return -1;
 					if (a.count < b.count) return 1;
-					
-					if (a.name > b.name) return 1;
-					if (a.name < b.name) return -1;
 					
 					return 0;
 				});
