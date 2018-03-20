@@ -1001,10 +1001,11 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 			city_data['mosaic_count'] += 1
 			
 			data['region']['mosaic_count'] += 1
-		
-		# Date indexes data
-		for index in range(1, int(data['region']['mosaic_count'] / 25) + 1):
-			data['date_indexes'].append(index)
+	
+			# Name indexes data
+			name_index = mosaic_obj.name[0]
+			if name_index not in data['name_indexes']:
+				data['name_indexes'].append(name_index)
 		
 		# Potentials data
 		potentials = city_obj.potentials.all()
@@ -1017,8 +1018,13 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 			
 			data['region']['potential_count'] += 1
 			
+	# Location indexes data
 	data['location_indexes'].sort()
 	
+	# Date indexes data
+	for index in range(1, int(data['region']['mosaic_count'] / 25) + 1):
+		data['date_indexes'].append(index)
+		
 	return Response(data, status=status.HTTP_200_OK)
 
 
