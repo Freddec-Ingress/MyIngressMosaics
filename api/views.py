@@ -934,6 +934,7 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 		'name_indexes': [],
 		'uniques_indexes': [],
 		'location_indexes': [],
+		'missions_indexes': [],
 	}
 	
 	# Region data
@@ -1006,6 +1007,16 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 			name_index = mosaic_obj.title[0]
 			if name_index not in data['name_indexes']:
 				data['name_indexes'].append(name_index)
+	
+			# Uniques indexes data
+			uniques_index = int(mosaic_obj.uniques / 100)
+			if uniques_index not in data['uniques_indexes']:
+				data['uniques_indexes'].append(uniques_index)
+	
+			# Missions indexes data
+			missions_index = mosaic_data['mission_count']
+			if missions_index not in data['missions_indexes']:
+				data['missions_indexes'].append(missions_index)
 		
 		# Potentials data
 		potentials = city_obj.potentials.all()
@@ -1024,7 +1035,16 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 	# Date indexes data
 	for index in range(1, int(data['region']['mosaic_count'] / 25) + 1):
 		data['date_indexes'].append(index)
-		
+			
+	# Name indexes data
+	data['name_indexes'].sort()
+			
+	# Uniques indexes data
+	data['uniques_indexes'].sort()
+			
+	# Missions indexes data
+	data['missions_indexes'].sort()
+	
 	return Response(data, status=status.HTTP_200_OK)
 
 
