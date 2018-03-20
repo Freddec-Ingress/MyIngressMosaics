@@ -285,7 +285,7 @@
 				<div class="section">
 					<div class="flex">
 						<div class="grow flex width-12 wrap">
-							<div class="item flex justify-center" ng-repeat="index in uniques_indexes track by $index" style="width:80px;">
+							<div class="item flex justify-center" ng-repeat="index in uniques_indexes track by $index" style="width:100px;">
 								<a class="badge badge-link item text-center" ng-click="setCurrentUniquesIndex(index);" ng-class="{'active': current_uniques_index==index}" style="width:100%;">
 									{{index*100}} - {{(index+1)*100}}
 								</a>
@@ -340,7 +340,7 @@
 				<div class="section">
 					<div class="flex">
 						<div class="grow flex width-12 wrap">
-							<div class="item flex justify-center" ng-repeat="index in missions_indexes track by $index" style="width:40px;">
+							<div class="item flex justify-center" ng-repeat="index in missions_indexes track by $index" style="width:50px;">
 								<a class="badge badge-link item text-center" ng-click="setCurrentMissionsIndex(index);" ng-class="{'active': current_missions_index==index}" style="width:100%;">
 									{{index}}
 								</a>

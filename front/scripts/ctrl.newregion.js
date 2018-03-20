@@ -68,8 +68,8 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 
 		$scope.mosaics.sort(function(a, b) {
 			
-			if (a.uniques > b.uniques) return -1;
-			if (a.uniques < b.uniques) return 1;
+			if (a.uniques > b.uniques) return 1;
+			if (a.uniques < b.uniques) return -1;
 			
 			if (a.title > b.title) return 1;
 			if (a.title < b.title) return -1;
