@@ -983,7 +983,7 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 				'city_name':mosaic_obj.city.name,
 				'mission_count':0,
 				'has_unavailable_portals':False,
-				
+
 				'images':[],
 			}
 			

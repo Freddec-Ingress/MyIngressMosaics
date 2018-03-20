@@ -89,6 +89,12 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 			
 			return 0;
 		});
+		
+		var index = 0;
+		for (var mosaic of $scope.mosaics) {
+			mosaic.index_date = Math.floor(index / 25) + 1;
+			index += 1;
+		}
 	}
 	
 	$scope.sortByMissions = function() {

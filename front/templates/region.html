@@ -175,7 +175,7 @@
 				<div class="section">
 					<div class="flex">
 						<div class="grow flex width-12 wrap">
-							<div class="item flex justify-center" ng-repeat="index in date_indexes track by $index" style="width:100px;">
+							<div class="item flex justify-center" ng-repeat="index in date_indexes track by $index" style="width:80px;">
 								<a class="badge badge-link item text-center" ng-click="setCurrentDateIndex(index);" ng-class="{'active': current_date_index==index}" style="width:100%;">
 									Page {{index}}
 								</a>
@@ -186,7 +186,7 @@
 				
 				<div class="section">
 					<div class="flex wrap">
-						<div class="item width-12 width-xl-4" ng-repeat="mosaic in mosaics track by $index" ng-if="Math.floor($index/25) + 1==current_date_index;">
+						<div class="item width-12 width-xl-4" ng-repeat="mosaic in mosaics track by $index" ng-if="mosaic.index_date==current_date_index;">
 							<div class="item link-block">
 								
 								<a class="item" href="/mosaic/{{mosaic.ref}}" target="_blank" style="display:block;">
