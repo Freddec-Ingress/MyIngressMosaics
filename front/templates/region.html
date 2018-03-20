@@ -115,7 +115,7 @@
 					<div class="flex">
 						<div class="grow flex width-12 wrap">
 							<div class="item flex justify-center" ng-repeat="index in location_indexes track by $index" style="width:40px;">
-								<a class="badge badge-link item text-center" ng-click="setCurrentLocationIndex(index);" ng-class="{'active': current_index==index}" style="width:100%;">
+								<a class="badge badge-link item text-center" ng-click="setCurrentLocationIndex(index);" ng-class="{'active': current_location_index==index}" style="width:100%;">
 									{{index}}
 								</a>
 							</div>
@@ -123,7 +123,7 @@
 					</div>
 				</div>
 				
-				<div class="section" ng-repeat="city in cities" ng-if="city.name[0]==current_index;">
+				<div class="section" ng-repeat="city in cities" ng-if="city.name[0]==current_location_index;">
 					<div class="flex wrap">
 						<div class="item width-12 width-xl-4 flex-col" ng-repeat="mosaic in mosaics track by $index" ng-if="mosaic.city_name==city.name;">
 							<div class="item link-block">

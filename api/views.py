@@ -930,6 +930,9 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 		'mosaics': [],
 		'potentials': [],
 		
+		'date_indexes': [],
+		'name_indexes': [],
+		'uniques_indexes': [],
 		'location_indexes': [],
 	}
 	

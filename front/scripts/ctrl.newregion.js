@@ -129,9 +129,7 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 	}
 	
 	/* Index management */
-	
-	$scope.indexes = [];
-	
+
 	$scope.current_location_index = null;
 	
 	$scope.setCurrentLocationIndex = function(index) {
