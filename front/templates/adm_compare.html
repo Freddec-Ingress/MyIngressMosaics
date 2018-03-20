@@ -82,28 +82,24 @@
 						</div>
 						
 						
-						<div class="flex-col" ng-show="region.open" style="margin-left:35px;">
+						<div class="flex wrap" ng-show="region.open" style="margin-left:35px;">
 							
-							<div class="flex-col" ng-repeat="mosaic in region.mosaics">
+							<div class="flex-col width-4" ng-repeat="mosaic in region.mosaics">
 						
 								<div class="flex align-center">
 									
 									<div class="item width-3">
 										<span class="color-dark">{{mosaic.city_name}}</span>
 									</div>
+									
+								</div>
+								<div class="flex align-center">
 
 									<div class="item width-4">
 										<span class="color-normal">{{mosaic.name}}</span>
 									</div>
 
-									<div class="width-3">
-										<input class="control" ng-model="compare_name" style="min-height: 30px;" />
-									</div>
-
 									<div class="width-2 flex justify-center">
-										<button class="btn" type="submit" style="padding: 0 10px; min-height: 30px;" ng-click="editMosaic(region, $index, mosaic.id, compare_name);">
-											<i class="fa fa-save"></i>
-										</button>
 										<button class="btn" type="submit" style="padding: 0 10px; min-height: 30px;" ng-click="excludeMosaic(region, $index, mosaic.id);">
 											<i class="fa fa-eye-slash"></i>
 										</button>
