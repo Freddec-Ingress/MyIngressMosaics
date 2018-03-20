@@ -84,7 +84,7 @@
 						
 						<div class="flex wrap" ng-show="region.open" style="margin-left:35px;">
 							
-							<div class="flex-col width-6" ng-repeat="mosaic in region.mosaics">
+							<div class="flex-col width-6 item link-block" ng-repeat="mosaic in region.mosaics">
 						
 								<div class="flex align-center">
 
@@ -100,10 +100,10 @@
 									</div>
 
 									<div class="flex justify-center">
-										<button class="btn" type="submit" style="padding: 0 10px; min-height: 30px;" ng-click="excludeMosaic(region, $index, mosaic.id);">
+										<button class="btn text-center" type="submit" style="padding:0; min-height:25px; width:25px;" ng-click="excludeMosaic(region, $index, mosaic.id);">
 											<i class="fa fa-eye-slash"></i>
 										</button>
-										<button class="btn btn-danger" type="submit" style="padding: 0 10px; min-height: 30px;" ng-click="dieMosaic(region, $index, mosaic.id);">
+										<button class="btn btn-danger text-center" type="submit" style="padding:0; min-height:25px; width:25px;" ng-click="dieMosaic(region, $index, mosaic.id);">
 											<i class="fa fa-trash"></i>
 										</button>
 									</div>
