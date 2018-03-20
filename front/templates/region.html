@@ -143,13 +143,8 @@
 										<span>{{mosaic.city_name}}</span>
 									</a>
 								</div>
-								
-								<div class="item pt-none">
-									<a ng-show="!mosaic.preview" ng-click="mosaic.preview=true;">Preview</a>
-									<a ng-show="mosaic.preview" ng-click="mosaic.preview=false;">Close</a>
-								</div>
-								
-								<div class="item" ng-show="mosaic.preview">
+
+								<a class="item" href="/mosaic/{{mosaic.ref}}" target="_blank" style="display:block;">
 									<div class="flex wrap shrink" style="max-width:200px; padding-right:calc((6 - {{mosaic.cols}}) * 16.666667%);">
 										
 										<div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
@@ -160,7 +155,7 @@
 										</div>
 										
 									</div>
-								</div>
+								</a>
 								
 							</div>
 						</div>

@@ -391,7 +391,7 @@ def mosaic_create(request):
 		
 		for receiver in receivers:
 			send_mail(
-				'[MIM] New Mosaic Registered',
+				'[MIM] New Mosaic Registered - ' + mosaic.title,
 		    	msg_plain,
 		    	'admin@myingressmosaics.com',
 		    	[receiver],
@@ -1603,7 +1603,7 @@ def potential_validate(request):
 		
 		for receiver in receivers:
 			send_mail(
-				'[MIM] New Potential Detected',
+				'[MIM] New Potential Detected - ' + potential.title,
 		    	msg_plain,
 		    	'admin@myingressmosaics.com',
 		    	[receiver],
