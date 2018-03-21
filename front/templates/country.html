@@ -16,71 +16,72 @@
 
 	<div id="content" ng-controller="NewCountryCtrl" ng-init="init('{{country.name}}', '{{country.notified}}');">
 
-	<div class="container active">
-
-		<div class="section">
-			
-			<div class="item flex-col">
-   			
-	   			<div class="flex align-center">
-	   				<span class="flag-icon flag-icon-{{country.code}} mr-normal" style="width:1.5rem; line-height:1.5rem;"></span>
-		   			<span class="text-big color-light">{{country.name}}</span>
-		   		</div>
-		   		
-		   		<div class="flex align-center">
-					{% if country.potential_count %}<span class="color-normal pr-small">{{country.potential_count}} potentials</span>{% endif %}
-					{% if country.potential_count > 0 and country.mosaic_count > 0 %}<span class="color-normal pr-small">&middot;</span>{% endif %}
-					{% if country.mosaic_count %}<span class="color-normal pr-small">{{country.mosaic_count}} mosaics</span>{% endif %}
-					<span class="color-normal pr-small">&middot;</span>
-					<a class="color-link hidden" ng-show="!notified" ng-click="notify();">To be notified</a>
-					<a class="color-normal hidden" ng-show="notified" ng-click="unnotify();">Notified</a>
+		<div class="container active">
+	
+			<div class="section">
+				
+				<div class="item flex-col">
+	   			
+		   			<div class="flex align-center">
+		   				<span class="flag-icon flag-icon-{{country.code}} mr-normal" style="width:1.5rem; line-height:1.5rem;"></span>
+			   			<span class="text-big color-light">{{country.name}}</span>
+			   		</div>
+			   		
+			   		<div class="flex align-center">
+						<a class="color-link hidden" ng-show="!notified" ng-click="notify();">To be notified</a>
+						<a class="color-normal hidden" ng-show="notified" ng-click="unnotify();">Notified</a>
+					</div>
+	
+					<div class="mt-small flex-col hidden" ng-show="need_signin">
+						<span class="color-danger">You must be signed in to be notified.</span>
+						<a ng-click="signin('google', '/world/{{country.name}}');">Sign in</a>
+					</div>
+				
 				</div>
-
-				<div class="mt-small flex-col hidden" ng-show="need_signin">
-					<span class="color-danger">You must be signed in to be notified.</span>
-					<a ng-click="signin('google', '/world/{{country.name}}');">Sign in</a>
-				</div>
-			
+				
 			</div>
 			
-		</div>
-		
-		<div class="section">
-			
-			<div class="flex wrap">
-				{% for region in regions %}
-				<div class="width-12 width-xl-4 item">
-					<a class="item link-block flex-col" href="/world/{{country.name}}/{{region.name}}">
-					
-						<div class="item">
-							
-							<span class="color-light text-medium">{{region.name}}</span>
-							
-							<div class="flex align-center">
-								
-								<div class="grow">
-									<span class="color-dark text-small">{{region.locale}}</span>
-								</div>
+			<div class="section">
 				
+				<div class="flex wrap">
+					{% for region in regions %}
+					<div class="width-12 width-xl-4 item">
+						<a class="item link-block flex-col" href="/world/{{country.name}}/{{region.name}}">
+						
+							<div class="item">
+								
 								<div class="flex align-center">
-									{% if region.mosaic_count %}<span class="text-small color-normal">{{region.mosaic_count}}</span>{% endif %}
-									{% if region.potential_count %}<span class="ml-small text-small color-link">+{{region.potential_count}}</span>{% endif %}
+									
+									<span class="grow mr-normal color-light text-medium ellipsis">{{region.name}}</span>
+									<i class="fa fa-angle-right"></i>
+									
+								</div>
+								
+								<div class="flex align-center">
+									
+									<div class="grow">
+										<span class="color-dark text-small">{{region.locale}}</span>
+									</div>
+					
+									<div class="flex align-center">
+										{% if region.mosaic_count %}<span class="text-small color-normal">{{region.mosaic_count}}</span>{% endif %}
+										{% if region.potential_count %}<span class="ml-small text-small color-link">+{{region.potential_count}}</span>{% endif %}
+									</div>
+									
 								</div>
 								
 							</div>
-							
-						</div>
-
-					</a>
+	
+						</a>
+					</div>
+					{% endfor %}
 				</div>
-				{% endfor %}
+				
 			</div>
 			
 		</div>
-		
+	
 	</div>
-
-</div>
 
 {% endblock %}
 
