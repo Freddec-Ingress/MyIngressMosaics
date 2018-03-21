@@ -22,9 +22,12 @@ def adm_compare(request):
 	
 	results = Mission.objects.filter(ref__icontains='Unavailable')
 	for item in results:
-		mosaic_ref = item.mosaic.ref
-		if mosaic_ref not in data['fakes']:
-			data['fakes'].append(mosaic_ref)
+		if item.mosaic:
+			mosaic_ref = item.mosaic.ref
+			if mosaic_ref not in data['fakes']:
+				data['fakes'].append(mosaic_ref)
+		else:
+			item.delete()
 	
 	imc_results = IMCountry.objects.all()
 	for imc_item in imc_results:
