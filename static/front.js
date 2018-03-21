@@ -2574,7 +2574,7 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 	
 	$scope.sortByMissions = function() {
 		
-		$scope.sorting = 'by_mission_count';
+		$scope.sorting = 'by_missions';
 			
 		$scope.mosaics.sort(function(a, b) {
 			
@@ -2602,6 +2602,10 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 			
 			return 0;
 		});
+		
+		for (var mosaic of $scope.mosaics) {
+			mosaic.index_uniques = Math.floor(mosaic.uniques / 100);
+		}
 	}
 	
 	$scope.sortByDate = function() {
