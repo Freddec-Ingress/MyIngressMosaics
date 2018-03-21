@@ -25,6 +25,20 @@
 		
 		<div class="section">
 			
+			<div class="flex wrap">
+				
+				<div class="flex-col width-6 item" ng-repeat="fake in fakes">
+					<div class="flex-col item link-block">
+						<a href="/mosaic/{{fake}}">{{fake}}</a>
+					</div>
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		<div class="section">
+			
 			<div class="flex-col" ng-repeat="country in countries" ng-if="country.displayed">
 				
 				<div class="flex align-item">
@@ -80,7 +94,6 @@
 							</a>
 							
 						</div>
-						
 						
 						<div class="flex wrap" ng-show="region.open" style="margin-left:35px;">
 							

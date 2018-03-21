@@ -15,7 +15,16 @@ from .models import *
 @permission_classes((IsAuthenticated, ))
 def adm_compare(request):
 	
-	data = { 'countries':[] }
+	data = { 
+		'fakes':[],
+		'countries':[],
+	}
+	
+	results = Missions.objects.filter(ref__icontains='Unavailable')
+	for item in results:
+		mosaic_ref = item.mosaic.ref
+		if mosaic_ref not in data['fakes']:
+			data['fakes'].append()mosaic_ref
 	
 	imc_results = IMCountry.objects.all()
 	for imc_item in imc_results:

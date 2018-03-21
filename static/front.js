@@ -3216,6 +3216,7 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
 	/* Page loading */
 	API.sendRequest('/api/adm/compare/', 'POST').then(function(response) {
 	    
+	    $scope.fakes = response.fakes;
 	    $scope.countries = response.countries;
 	    
 	    for (var country of $scope.countries) {
