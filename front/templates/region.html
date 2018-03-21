@@ -53,7 +53,7 @@
 	
 					<div class="mt-small flex-col hidden" ng-show="need_signin">
 						<span class="color-danger">You must be signed in to be notified.</span>
-						<a ng-click="signin('google', '/world/{{country.name}}');">Sign in</a>
+						<a ng-click="signin('google', '/world/{{region.country_name}}/{{region.name}}');">Sign in</a>
 					</div>
 					
 				</div>
@@ -397,30 +397,30 @@
 			
 			<div ng-show="current_tab=='potentials'">
 					
-					<div class="section">
-						<div class="flex wrap">
-							<div class="item width-12 width-xl-4" ng-repeat="potential in potentials track by $index">
-								<div class="item link-block">
-									
-									<a class="item" href="/registration/{{potential.title}}" target="_blank" style="display:block;">
-										<div class="flex align-center">
-											<span class="mr-normal grow text-medium color-light ellipsis" title="{{potential.title}}">{{potential.title}}</span>
-											<i class="fa fa-angle-right"></i>
-										</div>
-										<span class="text-small color-dark">{{potential.count}} missions</span>
-									</a>
-									
-									<div class="item pt-none">
-										<a class="flex" href="/world/{{potential.city.region.country.name}}/{{potential.city.region.name}}/{{potential.city.name}}">
-											<span class="mr-small flag-icon flag-icon-{{potential.city.region.country.code}}"></span>
-											<span>{{potential.city.name}}</span>
-										</a>
+				<div class="section">
+					<div class="flex wrap">
+						<div class="item width-12 width-xl-4" ng-repeat="potential in potentials track by $index">
+							<div class="item link-block">
+								
+								<a class="item" href="/registration/{{potential.title}}" target="_blank" style="display:block;">
+									<div class="flex align-center">
+										<span class="mr-normal grow text-medium color-light ellipsis" title="{{potential.title}}">{{potential.title}}</span>
+										<i class="fa fa-angle-right"></i>
 									</div>
-									
+									<span class="text-small color-dark">{{potential.count}} missions</span>
+								</a>
+								
+								<div class="item pt-none">
+									<a class="flex" href="/world/{{potential.city.region.country.name}}/{{potential.city.region.name}}/{{potential.city.name}}">
+										<span class="mr-small flag-icon flag-icon-{{potential.city.region.country.code}}"></span>
+										<span>{{potential.city.name}}</span>
+									</a>
 								</div>
+								
 							</div>
 						</div>
 					</div>
+				</div>
 				
 			</div>
 			

@@ -1052,53 +1052,104 @@ def newdata_getMosaicsByCity(request, country_name, region_name):
 #---------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes((AllowAny, ))
-def data_getMosaicsOfCity(request, country, region, name):
+def data_getMosaicsOfCity(request, country_name, region_name, city_name):
 	
 	data = {
-		'city': {},
-		'potentials': [],
-		'mosaics': [],
-		'notified': False,
-	}
-			
-	results = Country.objects.filter(name=country)
-	if results.count() > 0:
-		country = results[0]
-	
-		results = Region.objects.filter(country=country, name=region)
-		if results.count() > 0:
-			region = results[0]
+		'city': None,
 		
-			results = City.objects.filter(region=region, name=name)
-			if results.count() > 0:
-				city = results[0]
-				
-				data['city'] = city.serialize()
-				
-				results = Mosaic.objects.filter(city=city).order_by('title')
-				if results.count() > 0:
+		'mosaics': [],
+		'potentials': [],
+		
+		'date_indexes': [],
+		'name_indexes': [],
+		'uniques_indexes': [],
+		'missions_indexes': [],
+	}
+	
+	# City data
+	city_obj = City.objects.get(region__country__name=country_name, region__name=region_name, name=city_name)
+	
+	data['city'] = {
+		'country_code':city_obj.region.country.code,
+		'country_name':city_obj.region.country.name,
+		'region_name':city_obj.region.name,
+		'name':city_obj.name,
+		'mosaic_count':0,
+		'potential_count':0,
+		'notified':False,
+	}
+	
+	if not request.user.is_anonymous():
+		notif_results = Notif.objects.filter(user=request.user, country=city_obj.region.country, region=city_obj.region, city=city_obj)
+		if notif_results.count() > 0:
+			data['city']['notified'] = True
+
+	# Mosaics data
+	mosaics = city_obj.mosaics.all()
+	for mosaic_obj in mosaics:
+	
+		mosaic_data = {
+			'ref':mosaic_obj.ref,
+			'cols':mosaic_obj.cols,
+			'title':mosaic_obj.title,
+			'uniques':mosaic_obj.uniques,
+			'city_name':mosaic_obj.city.name,
+			'mission_count':0,
+			'has_unavailable_portals':False,
+
+			'images':[],
+		}
+		
+		data['mosaics'].append(mosaic_data)
+		
+		for mission_obj in mosaic_obj.missions.all().order_by('-order'):
+			mosaic_data['images'].append(mission_obj.image)
+			mosaic_data['mission_count'] += 1
+		
+			pdata = mission_obj.getPortalsData()
+			for portal in pdata:
+				if portal['title'] == 'Unavailable':
+					mosaic_data['has_unavailable_portals'] = True
+					break
 					
-					for item in results:
-						
-						mosaic = item.overviewSerialize()
-						data['mosaics'].append(mosaic)
-						
-				results = Potential.objects.filter(city=city).order_by('title')
-				if results.count() > 0:
-					
-					for item in results:
-						
-						potential = item.overviewSerialize()
-						data['potentials'].append(potential)
-				
-				if not request.user.is_anonymous():
-					notif_results = Notif.objects.filter(user=request.user, country=city.region.country, region=city.region, city=city)
-					if notif_results.count() > 0:
-						data['notified'] = True
-						
-	if len(data['mosaics']) < 1 and len(data['potentials']) < 1 and not request.user.is_superuser:
-		search = Search(city=name, region=region, country=country)
-		search.save()
+		data['city']['mosaic_count'] += 1
+
+		# Name indexes data
+		name_index = mosaic_obj.title[0]
+		if name_index not in data['name_indexes']:
+			data['name_indexes'].append(name_index)
+
+		# Uniques indexes data
+		uniques_index = int(mosaic_obj.uniques / 100)
+		if uniques_index not in data['uniques_indexes']:
+			data['uniques_indexes'].append(uniques_index)
+
+		# Missions indexes data
+		missions_index = mosaic_data['mission_count']
+		if missions_index not in data['missions_indexes']:
+			data['missions_indexes'].append(missions_index)
+	
+	# Potentials data
+	potentials = city_obj.potentials.all()
+	for potential_obj in potentials:
+		
+		potential_data = potential_obj.overviewSerialize()
+		data['potentials'].append(potential_data)
+		
+		data['city']['potential_count'] += 1
+	
+	# Date indexes data
+	for index in range(1, int(data['city']['mosaic_count'] / 25) + 1):
+		data['date_indexes'].append(index)
+	
+	# Name indexes data
+	data['name_indexes'].sort()
+			
+	# Uniques indexes data
+	data['uniques_indexes'].sort()
+			
+	# Missions indexes data
+	data['missions_indexes'].sort()
 	
 	return Response(data, status=status.HTTP_200_OK)
 
