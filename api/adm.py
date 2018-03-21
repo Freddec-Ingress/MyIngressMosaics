@@ -24,7 +24,7 @@ def adm_compare(request):
 	for item in results:
 		mosaic_ref = item.mosaic.ref
 		if mosaic_ref not in data['fakes']:
-			data['fakes'].append()mosaic_ref
+			data['fakes'].append(mosaic_ref)
 	
 	imc_results = IMCountry.objects.all()
 	for imc_item in imc_results:
