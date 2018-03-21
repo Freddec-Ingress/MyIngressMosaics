@@ -2670,7 +2670,7 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 			$scope.current_uniques_index = $scope.uniques_indexes[0];
 			$scope.current_missions_index = $scope.missions_indexes[0];
 
-			$scope.sortByMissionCount();
+			$scope.sortByMissions();
 			
 			$scope.loaded = true;
 		});
