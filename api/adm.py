@@ -20,7 +20,7 @@ def adm_compare(request):
 		'countries':[],
 	}
 	
-	results = Missions.objects.filter(ref__icontains='Unavailable')
+	results = Mission.objects.filter(ref__icontains='Unavailable')
 	for item in results:
 		mosaic_ref = item.mosaic.ref
 		if mosaic_ref not in data['fakes']:
