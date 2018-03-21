@@ -75,12 +75,6 @@
 			
 			<div class="section">
 				
-				<div class="flex">
-					<div class="item">
-						<span class="color-normal">{{country_count}} countries with mosaics</span>
-					</div>
-				</div>
-	
 				<div class="flex wrap">
 					{% for country in countries %}
 					<div class="width-12 width-xl-4 item">
@@ -94,9 +88,11 @@
 								
 								<div class="flex">
 									
-									<div class="grow">
+									<div class="grow mr-normal">
 										<span class="color-light text-medium">{{country.name}}</span>
 									</div>
+									
+									<i class="fa fa-angle-right"></i>
 									
 								</div>
 								
