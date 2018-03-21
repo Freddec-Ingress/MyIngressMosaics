@@ -2538,7 +2538,7 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 		
 		if ($scope.authenticated) {
 		
-			$scope.notified = true;
+			$scope.city.notified = true;
 			
 			var data = { 'country_name':$scope.city.country_name, 'region_name':$scope.city.region_name, 'city_name':$scope.city.name }
 			API.sendRequest('/api/notif/create', 'POST', {}, data);
@@ -2551,7 +2551,7 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 	
 	$scope.unnotify = function() {
 		
-		$scope.notified = false;
+		$scope.city.notified = false;
 		
 		var data = { 'country_name':$scope.city.country_name, 'region_name':$scope.city.region_name, 'city_name':$scope.city.name }
 		API.sendRequest('/api/notif/delete', 'POST', {}, data);
