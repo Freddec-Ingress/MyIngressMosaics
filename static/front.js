@@ -2657,8 +2657,8 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 			for (var mosaic of $scope.mosaics) {
 				
 				var temp = 0;
-				if (mosaic.missions.length > mosaic.cols) {
-					temp = mosaic.cols - mosaic.missions.length % mosaic.cols;
+				if (mosaic.mission_count > mosaic.cols) {
+					temp = mosaic.cols - mosaic.mission_count % mosaic.cols;
 					if (temp < 0 || temp > (mosaic.cols - 1)) temp = 0;
 				}
 				
