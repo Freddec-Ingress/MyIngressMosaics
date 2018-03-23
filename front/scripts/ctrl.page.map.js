@@ -258,7 +258,7 @@ angular.module('FrontModule.controllers').controller('MapPageCtrl', function($sc
 																
 																missions_string +=
 														            '<div class="mission-vignet" style="flex:0 0 calc(100% / ' + mosaic.column_count + ');">' +
-														                '<img src="/static/img/mask.png" style="z-index:auto; background-image:url(' + mission.image + '=s100);" />' +
+														                '<img src="/static/img/mask.png" style="z-index:auto; background-image:url(' + mission + '=s100);" />' +
 														            '</div>';
 															}
 															
