@@ -96,7 +96,7 @@
 							
 							<div class="flex" style="width:100%;">
 								
-								<div class="flex wrap grow" style="padding-right:calc((6 - {{mosaic.cols}}) * 16.666667%);">
+								<div class="flex wrap grow" style="padding-right:calc((6 - {{mosaic.column_count}}) * 16.666667%);">
 									
 						            <div ng-repeat="mission in offset track by $index" style="flex:0 0 16.666667%;">
 						            </div>
@@ -155,9 +155,9 @@
 						
 						<div class="flex">
 							
-							<span class="item">{{mosaic.waypoints}} waypoints</span>
-							<span class="item">{{mosaic.portals}} portals</span>
-							<span class="item">{{mosaic.uniques}} uniques</span>
+							<span class="item">{{mosaic.waypoint_count}} waypoints</span>
+							<span class="item">{{mosaic.portal_count}} portals</span>
+							<span class="item">{{mosaic.unique_count}} uniques</span>
 							
 						</div>
 
