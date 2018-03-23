@@ -102,7 +102,7 @@ angular.module('FrontModule.directives').directive('mission', function() {
 					'<div class="item grow ellipsis">' +
 						
 						'<div class="ellipsis">' +
-							'<span class="text-medium color-light" title="[[mission.desc]]">[[mission.title]]</span>' +
+							'<span class="text-medium color-light" title="[[mission.title]]">[[mission.title]]</span>' +
 						'</div>' +
 						
 						'<div class="text-small">' +
