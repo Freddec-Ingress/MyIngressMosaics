@@ -19,6 +19,9 @@ def map_getMosaics(request):
 	
 	results = Mosaic.objects.filter(startLat__gte=request.data['sLat'], startLng__gte=request.data['sLng']).filter(startLat__lte=request.data['nLat'], startLng__lte=request.data['nLng'])
 	for mosaic_obj in results:
-		data.append(mosaic_obj.getOverviewData())
+		mosaic_data = mosaic_obj.getOverviewData()
+		mosaic_data['startLat'] = mosaic_obj.startLat
+		mosaic_data['startLng'] = mosaic_obj.startLng
+		data.append()
 
 	return Response(data, status=status.HTTP_200_OK)
