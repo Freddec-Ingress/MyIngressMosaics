@@ -22,6 +22,8 @@ def map_getMosaics(request):
 		
 		mosaic_data = {
 			
+			'ref': mosaic_obj.ref,
+			
 			'startLat': mosaic_obj.startLat,
 			'startLng': mosaic_obj.startLng,
 		}
