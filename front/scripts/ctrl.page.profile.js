@@ -6,6 +6,8 @@ angular.module('FrontModule.controllers').controller('ProfilePageCtrl', function
     
 	$('.hidden').each(function() { $(this).removeClass('hidden'); })
 	
+	/* Notification management */
+	
 	$scope.unotify = function(notif) {
 		
 		var index = $scope.notif.indexOf(notif);
@@ -35,25 +37,19 @@ angular.module('FrontModule.controllers').controller('ProfilePageCtrl', function
 		});
 	}
 	
-	/* Page loading */
+	/* Tab management */
 	
 	$scope.current_tab = 'mosaic';
 	
-	$scope.authenticated = $auth.isAuthenticated();
+	/* Page loading */
 	
-	API.sendRequest('/api/user/details/', 'POST').then(function(response) {
+	$scope.init = function(likes, todos, notifs, mosaics, missions, completes) {
 		
-		$scope.name = response.name;
-		$scope.faction = response.faction;
-		$scope.picture = response.picture;
-		$scope.superuser = response.superuser;
-		$scope.mosaics = response.mosaics;
-		$scope.missions = response.missions;
-		$scope.like = response.like;
-		$scope.todo = response.todo;
-		$scope.complete = response.complete;
-		$scope.notif = response.notif;
-		
-		$scope.loaded = true;
-	});
+		$scope.likes = likes;
+		$scope.todos = todos;
+		$scope.notifs = notifs;
+		$scope.mosaics = mosaics;
+		$scope.missions = missions;
+		$scope.completes = completes;
+	}
 });
