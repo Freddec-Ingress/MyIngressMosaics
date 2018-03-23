@@ -957,7 +957,7 @@ angular.module('FrontModule.directives').directive('potential', function() {
 		scope: { potential: '=' },
 		
 		template: '' +
-			'<div class="item width-12 width-xl-4" ng-repeat="potential in potentials track by $index">' +
+			'<div class="item width-12 width-xl-4">' +
 				'<div class="item link-block">' +
 					
 					'<a class="item" href="/registration/[[potential.title]]" target="_blank" style="display:block;">' +
