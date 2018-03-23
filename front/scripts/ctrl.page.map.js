@@ -242,22 +242,22 @@ angular.module('FrontModule.controllers').controller('MapPageCtrl', function($sc
 															var offset_string = '';
 															
 															var temp = 0;
-															if (mosaic.missions.length > mosaic.cols) {
-																temp = mosaic.cols - mosaic.missions.length % mosaic.cols;
-																if (temp < 0 || temp > (mosaic.cols - 1)) temp = 0;
+															if (mosaic.images.length > mosaic.column_count) {
+																temp = mosaic.cols - mosaic.images.length % mosaic.cols;
+																if (temp < 0 || temp > (mosaic.column_count - 1)) temp = 0;
 															}
 															
 															for (var i = 0; i < temp; i++) {
-																offset_string += '<div style="flex:0 0 calc(100% / ' + mosaic.cols + ');"></div>';
+																offset_string += '<div style="flex:0 0 calc(100% / ' + mosaic.column_count + ');"></div>';
 															}
 															
 															var missions_string = '';
 															
-															var missions_array = mosaic.missions.slice();
+															var missions_array = mosaic.images.slice();
 															for (var mission of missions_array.reverse()) {
 																
 																missions_string +=
-														            '<div class="mission-vignet" style="flex:0 0 calc(100% / ' + mosaic.cols + ');">' +
+														            '<div class="mission-vignet" style="flex:0 0 calc(100% / ' + mosaic.column_count + ');">' +
 														                '<img src="/static/img/mask.png" style="z-index:auto; background-image:url(' + mission.image + '=s100);" />' +
 														            '</div>';
 															}
@@ -266,10 +266,10 @@ angular.module('FrontModule.controllers').controller('MapPageCtrl', function($sc
 																'<a class="flex-col" target="_blank" style="width:200px; min-width:200px; max-width:200px;" href="/mosaic/' + mosaic.ref + '" >' +
 																	'<div class="flex-col" style="flex-shrink:1;">' + 
 																		'<span class="color-black text-medium text-bold" style="word-break: break-all;">' + mosaic.title + '</span>' + 
-																		'<span class="color-grey mb-small">' + mosaic.missions.length + ' missions</span>' + 
+																		'<span class="color-grey mb-small">' + mosaic.images.length + ' missions</span>' + 
 																	'</div>' + 
 																	'<div style="max-height:300px; overflow-y:auto;">' +
-																		'<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - ' + mosaic.cols + ') / 2 * 16.666667%);">' +
+																		'<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - ' + mosaic.column_count + ') / 2 * 16.666667%);">' +
 																			offset_string +
 																			missions_string + 
 																		'</div>' +

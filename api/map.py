@@ -19,27 +19,6 @@ def map_getMosaics(request):
 	
 	results = Mosaic.objects.filter(startLat__gte=request.data['sLat'], startLng__gte=request.data['sLng']).filter(startLat__lte=request.data['nLat'], startLng__lte=request.data['nLng'])
 	for mosaic_obj in results:
-		
-		mosaic_data = {
-			
-			'ref': mosaic_obj.ref,
-			
-			'startLat': mosaic_obj.startLat,
-			'startLng': mosaic_obj.startLng,
-		}
-		
-		data.append(mosaic_data)
+		data.append(mosaic_obj.getOverviewData())
 
-	return Response(data, status=status.HTTP_200_OK)
-
-
-
-#---------------------------------------------------------------------------------------------------
-@api_view(['POST'])
-@permission_classes((AllowAny, ))
-def map_getMosaicOverview(request):
-	
-	mosaic_obj = Mosaic.objects.get(ref=request.data['ref'])
-	data = mosaic_obj.getOverviewData()
-	
 	return Response(data, status=status.HTTP_200_OK)

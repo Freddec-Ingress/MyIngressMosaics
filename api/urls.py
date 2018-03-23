@@ -36,7 +36,6 @@ urlpatterns = [
 	url(r'^search/missions/', search_missions),
 	url(r'^search/', search_mosaics),
 	
-	url(r'^map/mosaic/', map_getMosaicOverview),
 	url(r'^map/', map_getMosaics),
 
 	url(r'^comment/create/', comment_create),
