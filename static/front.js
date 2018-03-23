@@ -2255,6 +2255,8 @@ angular.module('FrontModule.controllers').controller('ProfilePageCtrl', function
 		$scope.mosaics = mosaics;
 		$scope.missions = missions;
 		$scope.completes = completes;
+		
+		$scope.loaded = true;
 	}
 });
 angular.module('FrontModule.controllers').controller('WorldPageCtrl', function($scope, $window, API) {
