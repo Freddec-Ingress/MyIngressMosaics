@@ -2115,7 +2115,7 @@ angular.module('FrontModule.controllers').controller('MapPageCtrl', function($sc
 															var missions_string = '';
 															
 															var missions_array = mosaic.images.slice();
-															for (var mission of missions_array.reverse()) {
+															for (var mission of missions_array) {
 																
 																missions_string +=
 														            '<div class="mission-vignet" style="flex:0 0 calc(100% / ' + mosaic.column_count + ');">' +
