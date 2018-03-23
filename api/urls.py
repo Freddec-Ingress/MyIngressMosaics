@@ -4,7 +4,6 @@
 from django.conf.urls import url, include
 
 from .im import *
-from .adm import *
 from .ext import *
 from .map import *
 from .user import *
