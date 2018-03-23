@@ -22,6 +22,6 @@ def map_getMosaics(request):
 		mosaic_data = mosaic_obj.getOverviewData()
 		mosaic_data['startLat'] = mosaic_obj.startLat
 		mosaic_data['startLng'] = mosaic_obj.startLng
-		data.append()
+		data.append(mosaic_data)
 
 	return Response(data, status=status.HTTP_200_OK)
