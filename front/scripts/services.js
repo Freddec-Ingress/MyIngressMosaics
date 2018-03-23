@@ -41,6 +41,23 @@ angular.module('FrontModule.services').service('API', function($q, $http, $auth)
 	return service;
 });
 
+angular.module('FrontModule.services').service('UserService', function(API, $auth, $http, $window) {
+	
+	var service = {
+		
+		signin: function(provider, next) {
+				
+			$auth.authenticate(provider).then(function(response) {
+				
+				$auth.setToken(response.data.token);
+				$window.location.href = next;
+			});
+		},
+	}
+	
+	return service;
+});
+
 angular.module('FrontModule.services').service('UtilsService', function() {
 	
 	var service = {
@@ -532,23 +549,6 @@ angular.module('FrontModule.services').service('UtilsService', function() {
 				if (mosaic.city && mosaic.city.substring(mosaic.city.length-5, mosaic.city.length) == '-mura') mosaic.city = mosaic.city.substring(0, mosaic.city.length-5);
 				if (mosaic.city && mosaic.city.substring(mosaic.city.length-6, mosaic.city.length) == '-machi') mosaic.city = mosaic.city.substring(0, mosaic.city.length-6);
 			}
-		},
-	}
-	
-	return service;
-});
-
-angular.module('FrontModule.services').service('UserService', function(API, $auth, $http, $window) {
-	
-	var service = {
-		
-		signin: function(provider, next) {
-				
-			$auth.authenticate(provider).then(function(response) {
-				
-				$auth.setToken(response.data.token);
-				$window.location.href = next;
-			});
 		},
 	}
 	

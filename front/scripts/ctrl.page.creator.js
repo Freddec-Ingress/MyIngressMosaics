@@ -1,4 +1,4 @@
-angular.module('FrontModule.controllers').controller('NewCreatorCtrl', function($scope, $window, API) {
+angular.module('FrontModule.controllers').controller('CreatorPageCtrl', function($scope, $window, API) {
 	
 	/* Page loading */
 

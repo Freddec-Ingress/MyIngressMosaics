@@ -384,6 +384,23 @@ angular.module('FrontModule.services').service('API', function($q, $http, $auth)
 	return service;
 });
 
+angular.module('FrontModule.services').service('UserService', function(API, $auth, $http, $window) {
+	
+	var service = {
+		
+		signin: function(provider, next) {
+				
+			$auth.authenticate(provider).then(function(response) {
+				
+				$auth.setToken(response.data.token);
+				$window.location.href = next;
+			});
+		},
+	}
+	
+	return service;
+});
+
 angular.module('FrontModule.services').service('UtilsService', function() {
 	
 	var service = {
@@ -880,26 +897,9 @@ angular.module('FrontModule.services').service('UtilsService', function() {
 	
 	return service;
 });
-
-angular.module('FrontModule.services').service('UserService', function(API, $auth, $http, $window) {
-	
-	var service = {
-		
-		signin: function(provider, next) {
-				
-			$auth.authenticate(provider).then(function(response) {
-				
-				$auth.setToken(response.data.token);
-				$window.location.href = next;
-			});
-		},
-	}
-	
-	return service;
-});
 angular.module('FrontModule.directives', [])
 
-angular.module('FrontModule.directives').directive('mosaicVignet', function() {
+angular.module('FrontModule.directives').directive('mosaic', function() {
 	
 	return {
 		
@@ -909,126 +909,134 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 		scope: { mosaic: '=' },
 		
 		template: '' +
-			'<a class="btn-primary btn-block ta-center ttrans-normal" href="/mosaic/{{mosaic.ref}}">' +
-				
-			'	<div class="item" style="margin-bottom:.25rem; display:flex; justify-content:center; background:#0b0c0d; height:105px; overflow-y:hidden; padding:.25rem;" ng-class="{\'scrollbar valign-start\': mosaic.missions.length > 24, \'valign-center\': mosaic.missions.length <= 24}">' +
+			'<div class="item width-12 width-xl-4 flex-col">' +
+				'<div class="item link-block">' +
 					
-			'		<div class="row" style="align-items:center; justify-content:center; padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%); width:100%;">' +
-			'            <div ng-repeat="m in mosaic.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.cols}});">' +
-			'                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />' +
-			'           </div>' +
-			'		</div>' +
+					'<a class="item" href="/mosaic/[[mosaic.ref]]" target="_blank" style="display:block;">' +
+						'<div class="flex align-center">' +
+							'<i class="mr-normal text-small fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals"></i>' +
+							'<span class="mr-normal grow text-medium color-light ellipsis" title="[[mosaic.title]]">[[mosaic.title]]</span>' +
+							'<i class="fa fa-angle-right"></i>' +
+						'</div>' +
+						'<span class="text-small color-dark">[[mosaic.images.length]] missions &middot; [[mosaic.unique_count]] uniques</span>' +
+					'</a>' +
 					
-			'	</div>' +
-				
-	        '   <div class="ellipsis" style="margin-bottom:.25rem;">' +
-	        '		<i ng-if="mosaic.has_fake" class="fa fa-warning c-warning" style="padding-right:.5rem;"></i>{{mosaic.title}}' +
-	        '	</div>' +
-	        '   <div class="c-lighter ellipsis">' +
-	        '       <flag country="mosaic.city.region.country.name"></flag>' +
-	        '    	{{mosaic.city.region.country.name}}' +
-	        '   </div>' +
-	        '   <div class="c-lighter">{{mosaic.missions.length}} <i class="fa fa-th"></i> <span class="text-separator">&middot;</span> <span ng-if="mosaic.type == \'sequence\'">{{mosaic.distance | number:2}} km</span><span ng-if="mosaic.type == \'serie\'">serie</span><span ng-show="mosaic.type != \'serie\' && mosaic.distance > 10.0" class="text-separator">&middot;</span><i ng-show="mosaic.type != \'serie\' && mosaic.distance > 10.0 && mosaic.distance < 30.0" class="fa fa-bicycle"></i><i ng-show="mosaic.type != \'serie\' && mosaic.distance > 30.0" class="fa fa-car"></i></div>' +
-				
-			'</a>' +
+					'<div class="item pt-none">' +
+						'<a class="flex" href="/world/[[mosaic.country_name]]/[[mosaic.region_name]]/[[mosaic.city_name]]">' +
+							'<span class="mr-small flag-icon flag-icon-[[mosaic.country_code]]"></span>' +
+							'<span>[[mosaic.city_name]]</span>' +
+						'</a>' +
+					'</div>' +
+
+					'<a class="item" href="/mosaic/[[mosaic.ref]]" target="_blank" style="display:block;">' +
+						'<div class="flex wrap shrink" style="max-width:150px; padding-right:calc((6 - [[mosaic.cols]]) * 25px);">' +
+							
+							'<div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / [[mosaic.cols]]);">' +
+							'</div>' +
+							
+							'<div ng-repeat="m in mosaic.images track by $index" class="mission-vignet" style="max-width:25px; flex:0 0 calc(100% / [[mosaic.cols]]);">' +
+								'<img src="/static/img/mask.png" style="width:25px; background-image:url([[m]]=s25);" />' +
+							'</div>' +
+							
+						'</div>' +
+					'</a>' +
+					
+				'</div>' +
+			'</div>' +
 		'',
 	};
 });
 
-angular.module('FrontModule.directives').directive('flag', function() {
+angular.module('FrontModule.directives').directive('potential', function() {
 	
 	return {
 		
 		replace: true,
 		restrict: 'E',
 		
-		scope: { country: '=' },
+		scope: { potential: '=' },
 		
 		template: '' +
-	        '       <span class="flag-icon" ng-class="{' +
-	        '       		\'flag-icon-fr\': country == \'France\',' +
-	        '       		\'flag-icon-gb\': country == \'United Kingdom\',' +
-	        '       		\'flag-icon-my\': country == \'Malaysia\',' +
-	        '       		\'flag-icon-sg\': country == \'Singapore\',' +
-	        '       		\'flag-icon-us\': country == \'United States\',' +
-	        '       		\'flag-icon-mx\': country == \'Mexico\',' +
-	        '       		\'flag-icon-nz\': country == \'New Zealand\',' +
-	        '       		\'flag-icon-mv\': country == \'Maldives\',' +
-	        '       		\'flag-icon-do\': country == \'Dominican Republic\',' +
-	        '       		\'flag-icon-au\': country == \'Australia\',' +
-	        '       		\'flag-icon-hu\': country == \'Hungary\',' +
-	        '       		\'flag-icon-lk\': country == \'Sri Lanka\',' +
-	        '       		\'flag-icon-id\': country == \'Indonesia\',' +
-	        '       		\'flag-icon-de\': country == \'Germany\',' +
-	        '       		\'flag-icon-pl\': country == \'Poland\',' +
-		    '       		\'flag-icon-ru\': country == \'Russia\',' +
-		    '       		\'flag-icon-hk\': country == \'Hong Kong\',' +
-		    '       		\'flag-icon-mu\': country == \'Mauritius\',' +
-		    '       		\'flag-icon-th\': country == \'Thailand\',' +
-		    '       		\'flag-icon-cz\': country == \'Czechia\',' +
-		    '       		\'flag-icon-cn\': country == \'China\',' +
-		    '       		\'flag-icon-es\': country == \'Spain\',' +
-		    '       		\'flag-icon-ch\': country == \'Switzerland\',' +
-		    '       		\'flag-icon-ca\': country == \'Canada\',' +
-		    '       		\'flag-icon-at\': country == \'Austria\',' +
-		    '       		\'flag-icon-is\': country == \'Iceland\',' +
-		    '       		\'flag-icon-za\': country == \'South Africa\',' +
-		    '       		\'flag-icon-ad\': country == \'Andorra\',' +
-		    '       		\'flag-icon-it\': country == \'Italy\',' +
-		    '       		\'flag-icon-il\': country == \'Israel\',' +
-		    '       		\'flag-icon-pt\': country == \'Portugal\',' +
-		    '       		\'flag-icon-ie\': country == \'Ireland\',' +
-		    '       		\'flag-icon-gr\': country == \'Greece\',' +
-		    '       		\'flag-icon-tr\': country == \'Turkey\',' +
-		    '       		\'flag-icon-jp\': country == \'Japan\',' +
-		    '       		\'flag-icon-dk\': country == \'Denmark\',' +
-		    '       		\'flag-icon-se\': country == \'Sweden\',' +
-		    '       		\'flag-icon-no\': country == \'Norway\',' +
-		    '       		\'flag-icon-fi\': country == \'Finland\',' +
-		    '       		\'flag-icon-lv\': country == \'Latvia\',' +
-		    '       		\'flag-icon-ee\': country == \'Estonia\',' +
-		    '       		\'flag-icon-lt\': country == \'Lithuania\',' +
-		    '       		\'flag-icon-sk\': country == \'Slovakia\',' +
-		    '       		\'flag-icon-hr\': country == \'Croatia\',' +
-		    '       		\'flag-icon-ar\': country == \'Argentina\',' +
-		    '       		\'flag-icon-uy\': country == \'Uruguay\',' +
-		    '       		\'flag-icon-tw\': country == \'Taiwan\',' +
-		    '       		\'flag-icon-in\': country == \'India\',' +
-		    '       		\'flag-icon-nl\': country == \'Netherlands\',' +
-		    '       		\'flag-icon-eg\': country == \'Egypt\',' +
-		    '       		\'flag-icon-be\': country == \'Belgium\',' +
-		    '       		\'flag-icon-ph\': country == \'Philippines\',' +
-		    '       		\'flag-icon-pa\': country == \'Panama\',' +
-		    '       		\'flag-icon-br\': country == \'Brazil\',' +
-		    '       		\'flag-icon-lu\': country == \'Luxembourg\',' +
-		    '       		\'flag-icon-kr\': country == \'South Korea\',' +
-		    '       		\'flag-icon-cl\': country == \'Chile\',' +
-		    '       		\'flag-icon-bg\': country == \'Bulgaria\',' +
-		    '       		\'flag-icon-np\': country == \'Nepal\',' +
-		    '       		\'flag-icon-nc\': country == \'New Caledonia\',' +
-		    '       		\'flag-icon-pk\': country == \'Pakistan\',' +
-		    '       		\'flag-icon-ro\': country == \'Romania\',' +
-		    '       		\'flag-icon-ua\': country == \'Ukraine\',' +
-		    '       		\'flag-icon-vn\': country == \'Vietnam\',' +
-		    '       		\'flag-icon-bn\': country == \'Brunei\',' +
-		    '       		\'flag-icon-pe\': country == \'Peru\',' +
-		    '       		\'flag-icon-rs\': country == \'Serbia\',' +
-		    '       		\'flag-icon-mo\': country == \'Macau\',' +
-		    '       		\'flag-icon-by\': country == \'Belarus\',' +
-	        '        	}"></span>' +
+			'<div class="item width-12 width-xl-4" ng-repeat="potential in potentials track by $index">' +
+				'<div class="item link-block">' +
+					
+					'<a class="item" href="/registration/[[potential.title]]" target="_blank" style="display:block;">' +
+						'<div class="flex align-center">' +
+							'<span class="mr-normal grow text-medium color-light ellipsis" title="[[potential.title]]">[[potential.title]]</span>' +
+							'<i class="fa fa-angle-right"></i>' +
+						'</div>' +
+						'<span class="text-small color-dark">[[potential.count]] missions</span>' +
+					'</a>' +
+					
+					'<div class="item pt-none">' +
+						'<a class="flex" href="/world/[[potential.city.region.country.name]]/[[potential.city.region.name]]/[[potential.city.name]]">' +
+							'<span class="mr-small flag-icon flag-icon-[[potential.city.region.country.code]]"></span>' +
+							'<span>[[potential.city.name]]</span>' +
+						'</a>' +
+					'</div>' +
+					
+				'</div>' +
+			'</div>' +
 		'',
 	};
 });
 
+angular.module('FrontModule.directives').directive('mission', function() {
+	
+	return {
+		
+		replace: true,
+		restrict: 'E',
+		
+		scope: { mission: '=' },
+		
+		template: '' +
+			'<div class="width-12 width-xl-6 item">' +
+				'<div class="item bg-block flex align-center">' +
+				
+					'<div class="item">' +
+						'<img src="/static/img/mask.png" style="width:26px; background-color:#000000; background-image:url([[mission.image]]=s25); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />' +
+					'</div>' +
+					
+					'<div class="item grow ellipsis">' +
+						
+						'<div class="ellipsis">' +
+							'<span class="text-medium color-light" title="[[mission.desc]]">[[mission.title]]</span>' +
+						'</div>' +
+						
+						'<div class="text-small">' +
+							'<a href="/search/[[mission.creator]]" ng-class="{\'color-enlightened\': mission.faction == \'E\', \'color-resistant\': mission.faction == \'R\'}">[[mission.creator]]</a>' +
+						'</div>' +
+						
+					'</div>' +
+
+					'<div class="item">' +
+						'<a href="https://www.ingress.com/intel?ll=[[mission.startLat]],[[mission.startLng]]&z=19&pll=[[mission.startLat]],[[mission.startLng]]" target="_blank">' +
+							'<i class="fa fa-external-link"></i>' +
+						'</a>' +
+					'</div>' +
+							
+				'</div>' +
+			'</div>' +
+		'',
+	};
+});
 angular.module('FrontModule.controllers', [])
 
-angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($scope, $window, API) {
+angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function($scope, $window, API, UserService, $auth) {
+	
+	$scope.signin = UserService.signin;
+
+	$scope.authenticated = $auth.isAuthenticated();
+    
+	$('.hidden').each(function() { $(this).removeClass('hidden'); })
 
 	/* Link management */
 
-	$scope.toggle_link = function(user, type) {
-		
+	$scope.toggle_link = function(type) {
 
+		if ($scope.authenticated) {
+			
 			switch (type) {
 				
 				case 'like':
@@ -1085,31 +1093,29 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 					}
 					break;
 			}
+		}
+		else {
+			
+			$scope.link_need_signin = true;
+		}
 	}
 
-	/* Mission details displaying */
-
-	$scope.mission_selected = null;
-
-	$scope.displayMissionDetails = function(mission) {
-		
-		$scope.mission_selected = mission;
-	}
-
-	$scope.closeMissionDetails = function() {
-		
-		$scope.mission_selected = null;
-	}
-	
 	/* Comment edit displaying */
 	
 	$scope.comment_selected = null;
 	
 	$scope.displayCommentEdit = function(comment) {
 		
-		if (!comment) comment = { 'text':null }
-		
-		$scope.comment_selected = comment;
+		if ($scope.authenticated) {
+			
+			if (!comment) comment = { 'text':null }
+			
+			$scope.comment_selected = comment;
+		}
+		else {
+			
+			$scope.comment_need_signin = true;
+		}
 	}
 
 	$scope.closeCommentEdit = function() {
@@ -1149,9 +1155,11 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 			});
 	}
 	
-	/* Map management */
+	/* Tab management */
 	
 	$scope.current_tab = 'roadmap';
+	
+	/* Page loading */
 	
 	var mapInitiated = false;
 	
@@ -1183,9 +1191,7 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 		};
 
 		var index = 1;
-		for (var m of $scope.mosaic.missions) {
-		
-			if (m.ref.indexOf('Unavailable') !== -1) continue;
+		for (var m of $scope.missions) {
 		
 			var roadmapCoordinates= [];
 		
@@ -1229,72 +1235,41 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 				position: {lat: m.startLat, lng: m.startLng},
 	        });
 	        
-	        google.maps.event.addListener(startMarker, 'click', (function(marker, mission) {
-	        	
-	        	return function () {
-	        		$scope.displayMissionDetails(mission);
-	        	};
-										
-			})(startMarker, m));
-	        
 	        var mlatLng = new google.maps.LatLng(m.startLat, m.startLng);
 	        latlngbounds.extend(mlatLng);
 	        
 	        index += 1;
 		}
 	        
-		map.setCenter(latlngbounds.getCenter());
 		map.fitBounds(latlngbounds); 
 	}
 	
-	/* Page loading */
-	
-	$scope.load_mosaic = function(ref) {
+	$scope.init = function(mosaic, missions, comments) {
+
+		$scope.mosaic = mosaic;
+		$scope.missions = missions;
+		$scope.comments = comments;
 		
-		API.sendRequest('/api/mosaic/' + ref + '/', 'GET').then(function(response) {
+		var temp = 0;
+		if ($scope.missions.length > $scope.mosaic.cols) {
+			temp = $scope.mosaic.cols - $scope.missions.length % $scope.mosaic.cols;
+			if (temp < 0 || temp > ($scope.mosaic.cols - 1)) temp = 0;
+		}
 		
-			$scope.mosaic = response;
-			
-			var temp = 0;
-			if ($scope.mosaic.missions.length > $scope.mosaic.cols) {
-				temp = $scope.mosaic.cols - $scope.mosaic.missions.length % $scope.mosaic.cols;
-				if (temp < 0 || temp > ($scope.mosaic.cols - 1)) temp = 0;
-			}
-			
-			$scope.offset = new Array(temp);
-			
-			$scope.mosaic.real_portals = 0;
-			
-			var temp = [];
-			
-			var index = 0;
-			for (var mission of $scope.mosaic.missions) {
-				
-				index += 1;
-				mission.order = index;
-				
-				for (var portal of mission.portals) {
-					if (portal.type == 'portal') {
-						$scope.mosaic.real_portals += 1;
-						
-						if (temp.indexOf(portal.guid) == -1) {
-							temp.push(portal.guid);
-						}
-					}
-				}
-			}
-			
-			$scope.mosaic.uniques = temp.length;
-			
-			$scope.initMap();
-			
-			$scope.loaded = true;
-		});
+		$scope.offset = new Array(temp);
+
+		$scope.initMap();
+		
+		$scope.loaded = true;
 	}
 });
-angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', function($scope, $window, $location, API, UtilsService, $auth, UserService) {
+angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', function($scope, $window, $location, API, $auth, UserService, UtilsService) {
 	
 	$scope.signin = UserService.signin;
+
+	$scope.authenticated = $auth.isAuthenticated();
+    
+	$('.hidden').each(function() { $(this).removeClass('hidden'); })
 	
 	/* Tab management */
 	
@@ -1335,13 +1310,11 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		$scope.refreshing = true;
 		
 		var data = { 'text':text };
-		API.sendRequest('/api/new_missions/', 'POST', {}, data).then(function(response) {
+		API.sendRequest('/api/search/missions/', 'POST', {}, data).then(function(response) {
 			
 			$scope.missions = response.missions;
 			if (!$scope.missions) $scope.missions = [];
 
-			$scope.missions.sort(UtilsService.sortMissionsByCreatorTitleAsc);
-			
 			for (var mission of $scope.missions) {
 				for (var select of $scope.selected) {
 					if (mission.ref == select.ref) {
@@ -1409,21 +1382,6 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	
 	$scope.mission_selected = null;
 
-	$scope.addFake = function(fakeorder) {
-		
-		var mission = {
-			'ref': 'Unavailable',
-			'order': fakeorder,
-			'title': 'Fake mission',
-		}
-		
-		$scope.selected.push(mission);
-		
-		$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
-		
-		$scope.computeOffset();
-	}
-	
 	$scope.computeOffset = function() {
 		
 		var temp = 0;
@@ -1434,27 +1392,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		
 		$scope.offset = new Array(temp);
 	}
-	
-	$scope.displayOrder = function(mission) {
-		
-		$scope.mission_selected = mission;
-	}
 
-	$scope.closeOrder = function() {
-		
-		$scope.mission_selected = null;
-	}
-	
-	$scope.saveOrder = function(order) {
-		
-		if (!order) return;
-		
-		$scope.mission_selected.order = order;
-		$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
-		
-		$scope.closeOrder();
-	}
-	
 	$scope.retireMission = function(mission) {
 		
 		mission.selected = false;
@@ -1707,8 +1645,6 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	}
 	
 	/* Page loading */
-	
-	$scope.authenticated = $auth.isAuthenticated();
 
 	$scope.init = function(text) {
 	
@@ -1744,7 +1680,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		API.sendRequest('/api/adm/potential/exclude', 'POST', {}, data);
 	}
 });
-angular.module('FrontModule.controllers').controller('NewSearchCtrl', function($scope, $window, API) {
+angular.module('FrontModule.controllers').controller('SearchPageCtrl', function($scope, $window, API) {
 	
 	/* Init management */
 	
@@ -1794,8 +1730,8 @@ angular.module('FrontModule.controllers').controller('NewSearchCtrl', function($
 			for (var mosaic of $scope.mosaics) {
 				
 				var temp = 0;
-				if (mosaic.missions.length > mosaic.cols) {
-					temp = mosaic.cols - mosaic.missions.length % mosaic.cols;
+				if (mosaic.images.length > mosaic.cols) {
+					temp = mosaic.cols - mosaic.images.length % mosaic.cols;
 					if (temp < 0 || temp > (mosaic.cols - 1)) temp = 0;
 				}
 				
@@ -1843,17 +1779,23 @@ angular.module('FrontModule.controllers').controller('NewSearchCtrl', function($
 	
 	$scope.loaded = true;
 });
-angular.module('FrontModule.controllers').controller('NewCountryCtrl', function($scope, $window, API, $auth, UserService) {
+angular.module('FrontModule.controllers').controller('CountryPageCtrl', function($scope, $window, API, $auth, UserService) {
 	
 	$scope.signin = UserService.signin;
+
+	$scope.authenticated = $auth.isAuthenticated();
+    
+	$('.hidden').each(function() { $(this).removeClass('hidden'); })
+	
+	/* Notification management */
 
 	$scope.notify = function() {
 		
 		if ($scope.authenticated) {
 		
-			$scope.notified = true;
+			$scope.country.notified = true;
 			
-			var data = { 'country_name':$scope.country_name }
+			var data = { 'country_name':$scope.country.name }
 			API.sendRequest('/api/notif/create', 'POST', {}, data);
 		}
 		else {
@@ -1864,27 +1806,60 @@ angular.module('FrontModule.controllers').controller('NewCountryCtrl', function(
 	
 	$scope.unnotify = function() {
 		
-		$scope.notified = false;
+		$scope.country.notified = false;
 		
-		var data = { 'country_name':$scope.country_name }
+		var data = { 'country_name':$scope.country.name }
 		API.sendRequest('/api/notif/delete', 'POST', {}, data);
 	}
 	
-	$scope.authenticated = $auth.isAuthenticated();
+	/* Tab management */
 
-	$scope.init = function(country_name, notified) {
+	$scope.current_tab = 'regions';
+	
+	/* Regions sorting */
+	
+	$scope.sortRegionsByMosaics = function() {
 		
-		$scope.country_name = country_name;
-		
-		if (notified=='False') $scope.notified = false;
-		if (notified=='True') $scope.notified = true;
-		
-		$scope.need_signin = false;
+		$scope.regions_sorting = 'by_mosaics';
+
+		$scope.regions.sort(function(a, b) {
+			
+			if (a.mosaic_count > b.mosaic_count) return -1;
+			if (a.mosaic_count < b.mosaic_count) return 1;
+			
+			if (a.name > b.name) return 1;
+			if (a.name < b.name) return -1;
+			
+			return 0;
+		});
 	}
-    
-	$('.hidden').each(function() { $(this).removeClass('hidden'); })
+	
+	$scope.sortRegionsByName = function() {
+		
+		$scope.regions_sorting = 'by_name';
+
+		$scope.regions.sort(function(a, b) {
+			
+			if (a.name > b.name) return 1;
+			if (a.name < b.name) return -1;
+			
+			return 0;
+		});
+	}
+	
+	/* Page loading */
+
+	$scope.init = function(country, regions) {
+		
+		$scope.country = country;
+		$scope.regions = regions;
+		
+		$scope.sortRegionsByMosaics();
+    	
+    	$scope.loaded = true;
+	}
 });
-angular.module('FrontModule.controllers').controller('NewMapCtrl', function($scope, $window, $compile, API) {
+angular.module('FrontModule.controllers').controller('MapPageCtrl', function($scope, $window, $compile, API) {
 	
 	/* Mosaic list management */
 	
@@ -2227,9 +2202,13 @@ angular.module('FrontModule.controllers').controller('NewMapCtrl', function($sco
 	
 	$scope.loaded = true;
 });
-angular.module('FrontModule.controllers').controller('NewProfileCtrl', function($scope, $window, $http, $auth, API, UserService) {
+angular.module('FrontModule.controllers').controller('ProfilePageCtrl', function($scope, $window, $http, $auth, API, UserService) {
 	
 	$scope.signin = UserService.signin;
+
+	$scope.authenticated = $auth.isAuthenticated();
+    
+	$('.hidden').each(function() { $(this).removeClass('hidden'); })
 	
 	$scope.unotify = function(notif) {
 		
@@ -2282,72 +2261,106 @@ angular.module('FrontModule.controllers').controller('NewProfileCtrl', function(
 		$scope.loaded = true;
 	});
 });
-angular.module('FrontModule.controllers').controller('NewWorldCtrl', function($scope, $window, API) {
+angular.module('FrontModule.controllers').controller('WorldPageCtrl', function($scope, $window, API) {
+    
+    $('.hidden').each(function() { $(this).removeClass('hidden'); })
 	
-    var input = document.getElementById('city_input');
-    var options = {
-		types: ['(cities)'],
-	};
-	
+    /* Autocomplete management */
+    
+    var input = document.getElementById('city_autocomplete');
+    var options = { types: ['(cities)'], };
     var autocomplete = new google.maps.places.Autocomplete(input, options);
 
     autocomplete.addListener('place_changed', function() {
     	
-     	$scope.flag_searching = true;
-     	
-       	$scope.flag_city_unknown = false;
-    	
-    	$scope.city = null;
-    	$scope.mosaics = null;
-    	
-    	var country_name = null;
-    	var region_name = null;
+       	$scope.f_city_unknown = false;
+		$scope.f_city_nomosaic = false;
+     	$scope.f_city_searching = true;
+		
     	var city_name = null;
+    	var region_name = null;
+    	var country_name = null;
     	
     	var place = autocomplete.getPlace();
     	for (var i = 0; i < place.address_components.length; i++) {
     		
     		var addressType = place.address_components[i].types[0];
     		if (addressType == 'country') country_name = place.address_components[i]['long_name'];
+    		if (addressType == 'locality') city_name = place.address_components[i]['long_name'];
     		if (addressType == 'administrative_area_level_1') region_name = place.address_components[i]['long_name'];
     		if (addressType == 'administrative_area_level_2' && !region_name) region_name = place.address_components[i]['long_name'];
-    		if (addressType == 'locality') city_name = place.address_components[i]['long_name'];
     	}
     	
-    	console.log(place.address_components);
-    	
-     	console.log(country_name);
-    	console.log(region_name);
-    	console.log(city_name);
-        
 		if (!region_name) region_name = country_name;
 		
     	if (!country_name || !region_name || !city_name) {
     		
-    		$scope.flag_city_unknown = true;
-    		
-    		$scope.flag_searching = false;
+    		$scope.f_city_unknown = true;
+    		$scope.f_city_searching = false;
     	}
     	else {
     		
     		API.sendRequest('/api/city/' + country_name + '/' + region_name + '/' + city_name + '/', 'GET').then(function(response) {
     		
-    			$scope.city = response.city;
-     			$scope.potentials = response.potentials;
-   				$scope.mosaics = response.mosaics;
+				$window.location.href = '/world/' + country_name + '/' + region_name + '/' + city_name;
+				
+				$scope.f_city_searching = false;
+    		
     			
-    			if (($scope.mosaics && $scope.mosaics.length > 0) || ($scope.potentials && $scope.potentials.length > 0)) {
-					$window.location.href = '/world/' + country_name + '/' + region_name + '/' + city_name;
-    			}
-
-				$scope.flag_searching = false;
+    		}, function(response) {
+    			
+    			$scope.f_city_nomosaic = true;
     		});
     	}
     });
+	
+	/* Tab management */
+
+	$scope.current_tab = 'countries';
+	
+	/* Countries sorting */
+	
+	$scope.sortCountriesByMosaics = function() {
+		
+		$scope.countries_sorting = 'by_mosaics';
+
+		$scope.countries.sort(function(a, b) {
+			
+			if (a.mosaic_count > b.mosaic_count) return -1;
+			if (a.mosaic_count < b.mosaic_count) return 1;
+			
+			if (a.name > b.name) return 1;
+			if (a.name < b.name) return -1;
+			
+			return 0;
+		});
+	}
+	
+	$scope.sortCountriesByName = function() {
+		
+		$scope.countries_sorting = 'by_name';
+
+		$scope.countries.sort(function(a, b) {
+			
+			if (a.name > b.name) return 1;
+			if (a.name < b.name) return -1;
+			
+			return 0;
+		});
+	}
     
-    $('.hidden').each(function() { $(this).removeClass('hidden'); })
+    /* Page loading */
+    
+    $scope.init = function(countries) {
+    	
+    	$scope.countries = countries;
+    	
+    	$scope.sortCountriesByMosaics();
+    	
+    	$scope.loaded = true;
+    }
 });
-angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($scope, $window, API, $auth, UserService) {
+angular.module('FrontModule.controllers').controller('RegionPageCtrl', function($scope, $window, API, $auth, UserService) {
 	
 	$scope.signin = UserService.signin;
 
@@ -2380,11 +2393,15 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 		API.sendRequest('/api/notif/delete', 'POST', {}, data);
 	}
 	
-	/* Sorting */
+	/* Tab management */
 	
-	$scope.sortByLocation = function() {
+	$scope.current_tab = 'mosaics';
+	
+	/* Mosaics sorting */
+	
+	$scope.sortMosaicsByLocation = function() {
 		
-		$scope.sorting = 'by_location';
+		$scope.mosaics_sorting = 'by_location';
 
 		$scope.mosaics.sort(function(a, b) {
 			
@@ -2398,9 +2415,9 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 		});
 	}
 	
-	$scope.sortByName = function() {
+	$scope.sortMosaicsByName = function() {
 		
-		$scope.sorting = 'by_name';
+		$scope.mosaics_sorting = 'by_name';
 
 		$scope.mosaics.sort(function(a, b) {
 			
@@ -2411,14 +2428,14 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 		});
 	}
 	
-	$scope.sortByUniques = function() {
+	$scope.sortMosaicsByUniques = function() {
 		
-		$scope.sorting = 'by_uniques';
+		$scope.mosaics_sorting = 'by_uniques';
 
 		$scope.mosaics.sort(function(a, b) {
 			
-			if (a.uniques > b.uniques) return 1;
-			if (a.uniques < b.uniques) return -1;
+			if (a.unique_count > b.unique_count) return 1;
+			if (a.unique_count < b.unique_count) return -1;
 			
 			if (a.title > b.title) return 1;
 			if (a.title < b.title) return -1;
@@ -2427,13 +2444,13 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 		});
 		
 		for (var mosaic of $scope.mosaics) {
-			mosaic.index_uniques = Math.floor(mosaic.uniques / 100);
+			mosaic.index_uniques = Math.floor(mosaic.unique_count / 100);
 		}
 	}
 	
-	$scope.sortByDate = function() {
+	$scope.sortMosaicsByDate = function() {
 		
-		$scope.sorting = 'by_date';
+		$scope.mosaics_sorting = 'by_date';
 
 		$scope.mosaics.sort(function(a, b) {
 			
@@ -2450,14 +2467,14 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 		}
 	}
 	
-	$scope.sortByMissions = function() {
+	$scope.sortMosaicsByMissions = function() {
 		
-		$scope.sorting = 'by_missions';
+		$scope.mosaics_sorting = 'by_missions';
 
 		$scope.mosaics.sort(function(a, b) {
 			
-			if (a.mission_count > b.mission_count) return -1;
-			if (a.mission_count < b.mission_count) return 1;
+			if (a.images.length > b.images.length) return -1;
+			if (a.images.length < b.images.length) return 1;
 			
 			if (a.title > b.title) return 1;
 			if (a.title < b.title) return -1;
@@ -2468,63 +2485,57 @@ angular.module('FrontModule.controllers').controller('NewRegionCtrl', function($
 	
 	/* Index management */
 
-	$scope.current_date_index = null;
-	$scope.current_name_index = null;
-	$scope.current_uniques_index = null;
-	$scope.current_missions_index = null;
-	$scope.current_location_index = null;
+	$scope.current_mosaics_date_index = null;
+	$scope.current_mosaics_name_index = null;
+	$scope.current_mosaics_uniques_index = null;
+	$scope.current_mosaics_missions_index = null;
+	$scope.current_mosaics_location_index = null;
 	
-	$scope.setCurrentDateIndex = function(index) { $scope.current_date_index = index; }
-	$scope.setCurrentNameIndex = function(index) { $scope.current_name_index = index; }
-	$scope.setCurrentUniquesIndex = function(index) { $scope.current_uniques_index = index; }
-	$scope.setCurrentMissionsIndex = function(index) { $scope.current_missions_index = index; }
-	$scope.setCurrentLocationIndex = function(index) { $scope.current_location_index = index; }
+	$scope.setCurrentMosaicsDateIndex = function(index) { $scope.current_mosaics_date_index = index; }
+	$scope.setCurrentMosaicsNameIndex = function(index) { $scope.current_mosaics_name_index = index; }
+	$scope.setCurrentMosaicsUniquesIndex = function(index) { $scope.current_mosaics_uniques_index = index; }
+	$scope.setCurrentMosaicsMissionsIndex = function(index) { $scope.current_mosaics_missions_index = index; }
+	$scope.setCurrentMosaicsLocationIndex = function(index) { $scope.current_mosaics_location_index = index; }
 	
 	/* Page loading */
-	
-	$scope.current_tab = 'mosaics';
 
-	$scope.loadRegion = function(country_name, region_name) {
+	$scope.init = function(region, cities, mosaics, potentials, mosaics_date_indexes, mosaics_name_indexes, mosaics_uniques_indexes, mosaics_missions_indexes, mosaics_location_indexes) {
 		
-		API.sendRequest('/api/new_region/' + country_name + '/' + region_name + '/', 'GET').then(function(response) {
+		$scope.region = region;
+		
+		$scope.cities = cities;
+		$scope.mosaics = mosaics;
+		$scope.potentials = potentials;
+		
+		$scope.mosaics_date_indexes = mosaics_date_indexes;
+		$scope.mosaics_name_indexes = mosaics_name_indexes;
+		$scope.mosaics_uniques_indexes = mosaics_uniques_indexes;
+		$scope.mosaics_missions_indexes = mosaics_missions_indexes;
+		$scope.mosaics_location_indexes = mosaics_location_indexes;
 
-			$scope.region = response.region;
+		for (var mosaic of $scope.mosaics) {
 			
-			$scope.cities = response.cities;
-			$scope.mosaics = response.mosaics;
-			$scope.potentials = response.potentials;
-			
-			$scope.date_indexes = response.date_indexes;
-			$scope.name_indexes = response.name_indexes;
-			$scope.uniques_indexes = response.uniques_indexes;
-			$scope.missions_indexes = response.missions_indexes;
-			$scope.location_indexes = response.location_indexes;
-
-			/* Mosaic offset */
-			for (var mosaic of $scope.mosaics) {
-				
-				var temp = 0;
-				if (mosaic.mission_count > mosaic.cols) {
-					temp = mosaic.cols - mosaic.mission_count % mosaic.cols;
-					if (temp < 0 || temp > (mosaic.cols - 1)) temp = 0;
-				}
-				
-				mosaic.offset = new Array(temp);
+			var temp = 0;
+			if (mosaic.mission_count > mosaic.cols) {
+				temp = mosaic.cols - mosaic.mission_count % mosaic.cols;
+				if (temp < 0 || temp > (mosaic.cols - 1)) temp = 0;
 			}
-
-			$scope.current_date_index = $scope.date_indexes[0];
-			$scope.current_name_index = $scope.name_indexes[0];
-			$scope.current_uniques_index = $scope.uniques_indexes[0];
-			$scope.current_missions_index = $scope.missions_indexes[0];
-			$scope.current_location_index = $scope.location_indexes[0];
 			
-			$scope.sortByLocation();
+			mosaic.offset = new Array(temp);
+		}
 
-			$scope.loaded = true;
-		});
+		$scope.current_mosaics_date_index = $scope.mosaics_date_indexes[0];
+		$scope.current_mosaics_name_index = $scope.mosaics_name_indexes[0];
+		$scope.current_mosaics_uniques_index = $scope.mosaics_uniques_indexes[0];
+		$scope.current_mosaics_missions_index = $scope.mosaics_missions_indexes[0];
+		$scope.current_mosaics_location_index = $scope.mosaics_location_indexes[0];
+		
+		$scope.sortMosaicsByLocation();
+		
+		$scope.loaded = true;
 	}
 });
-angular.module('FrontModule.controllers').controller('NewCityCtrl', function($scope, $window, API, $auth, UserService) {
+angular.module('FrontModule.controllers').controller('CityPageCtrl', function($scope, $window, API, $auth, UserService) {
 	
 	$scope.signin = UserService.signin;
 
@@ -2557,45 +2568,33 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 		API.sendRequest('/api/notif/delete', 'POST', {}, data);
 	}
 	
+	/* Tab management */
+	
+	$scope.current_tab = 'mosaics';
+	
 	/* Sorting */
 	
-	$scope.sortByName = function() {
+	$scope.sortMosaicsByName = function() {
 		
-		$scope.sorting = 'by_name';
-			
-		$scope.mosaics.sort(function(a, b) {
-			
-			if (a.title > b.title) return 1;
-			if (a.title < b.title) return -1;
-			
-			return 0;
-		});
-	}
-	
-	$scope.sortByMissions = function() {
-		
-		$scope.sorting = 'by_missions';
-			
-		$scope.mosaics.sort(function(a, b) {
-			
-			if (a.mission_count > b.mission_count) return -1;
-			if (a.mission_count < b.mission_count) return 1;
-			
-			if (a.title > b.title) return 1;
-			if (a.title < b.title) return -1;
-			
-			return 0;
-		});
-	}
-	
-	$scope.sortByUniques = function() {
-		
-		$scope.sorting = 'by_uniques';
+		$scope.mosaics_sorting = 'by_name';
 
 		$scope.mosaics.sort(function(a, b) {
 			
-			if (a.uniques > b.uniques) return -1;
-			if (a.uniques < b.uniques) return 1;
+			if (a.title > b.title) return 1;
+			if (a.title < b.title) return -1;
+			
+			return 0;
+		});
+	}
+	
+	$scope.sortMosaicsByUniques = function() {
+		
+		$scope.mosaics_sorting = 'by_uniques';
+
+		$scope.mosaics.sort(function(a, b) {
+			
+			if (a.unique_count > b.unique_count) return 1;
+			if (a.unique_count < b.unique_count) return -1;
 			
 			if (a.title > b.title) return 1;
 			if (a.title < b.title) return -1;
@@ -2604,13 +2603,13 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 		});
 		
 		for (var mosaic of $scope.mosaics) {
-			mosaic.index_uniques = Math.floor(mosaic.uniques / 100);
+			mosaic.index_uniques = Math.floor(mosaic.unique_count / 100);
 		}
 	}
 	
-	$scope.sortByDate = function() {
+	$scope.sortMosaicsByDate = function() {
 		
-		$scope.sorting = 'by_date';
+		$scope.mosaics_sorting = 'by_date';
 
 		$scope.mosaics.sort(function(a, b) {
 			
@@ -2627,60 +2626,70 @@ angular.module('FrontModule.controllers').controller('NewCityCtrl', function($sc
 		}
 	}
 	
-	/* Index management */
-
-	$scope.current_date_index = null;
-	$scope.current_name_index = null;
-	$scope.current_uniques_index = null;
-	$scope.current_missions_index = null;
-
-	$scope.setCurrentDateIndex = function(index) { $scope.current_date_index = index; }
-	$scope.setCurrentNameIndex = function(index) { $scope.current_name_index = index; }
-	$scope.setCurrentUniquesIndex = function(index) { $scope.current_uniques_index = index; }
-	$scope.setCurrentMissionsIndex = function(index) { $scope.current_missions_index = index; }
-
-	/* Page loading */
-	
-	$scope.current_tab = 'mosaics';
-	
-	$scope.loadCity = function(country_name, region_name, city_name) {
+	$scope.sortMosaicsByMissions = function() {
 		
-		API.sendRequest('/api/city/' + country_name + '/' + region_name + '/' + city_name + '/', 'GET').then(function(response) {
-			
-			$scope.city = response.city;
-			
-			$scope.mosaics = response.mosaics;
-			$scope.potentials = response.potentials;
-			
-			$scope.date_indexes = response.date_indexes;
-			$scope.name_indexes = response.name_indexes;
-			$scope.uniques_indexes = response.uniques_indexes;
-			$scope.missions_indexes = response.missions_indexes;
+		$scope.mosaics_sorting = 'by_missions';
 
-			/* Mosaic offset */
-			for (var mosaic of $scope.mosaics) {
-				
-				var temp = 0;
-				if (mosaic.mission_count > mosaic.cols) {
-					temp = mosaic.cols - mosaic.mission_count % mosaic.cols;
-					if (temp < 0 || temp > (mosaic.cols - 1)) temp = 0;
-				}
-				
-				mosaic.offset = new Array(temp);
-			}
-
-			$scope.current_date_index = $scope.date_indexes[0];
-			$scope.current_name_index = $scope.name_indexes[0];
-			$scope.current_uniques_index = $scope.uniques_indexes[0];
-			$scope.current_missions_index = $scope.missions_indexes[0];
-
-			$scope.sortByMissions();
+		$scope.mosaics.sort(function(a, b) {
 			
-			$scope.loaded = true;
+			if (a.images.length > b.images.length) return -1;
+			if (a.images.length < b.images.length) return 1;
+			
+			if (a.title > b.title) return 1;
+			if (a.title < b.title) return -1;
+			
+			return 0;
 		});
 	}
+	
+	/* Index management */
+
+	$scope.current_mosaics_date_index = null;
+	$scope.current_mosaics_name_index = null;
+	$scope.current_mosaics_uniques_index = null;
+	$scope.current_mosaics_missions_index = null;
+
+	$scope.setCurrentMosaicsDateIndex = function(index) { $scope.current_mosaics_date_index = index; }
+	$scope.setCurrentMosaicsNameIndex = function(index) { $scope.current_mosaics_name_index = index; }
+	$scope.setCurrentMosaicsUniquesIndex = function(index) { $scope.current_mosaics_uniques_index = index; }
+	$scope.setCurrentMosaicsMissionsIndex = function(index) { $scope.current_mosaics_missions_index = index; }
+
+	/* Page loading */
+
+	$scope.init = function(city, mosaics, potentials, mosaics_date_indexes, mosaics_name_indexes, mosaics_uniques_indexes, mosaics_missions_indexes) {
+
+		$scope.city = city;
+		
+		$scope.mosaics = mosaics;
+		$scope.potentials = potentials;
+		
+		$scope.mosaics_date_indexes = mosaics_date_indexes;
+		$scope.mosaics_name_indexes = mosaics_name_indexes;
+		$scope.mosaics_uniques_indexes = mosaics_uniques_indexes;
+		$scope.mosaics_missions_indexes = mosaics_missions_indexes;
+
+		for (var mosaic of $scope.mosaics) {
+			
+			var temp = 0;
+			if (mosaic.mission_count > mosaic.cols) {
+				temp = mosaic.cols - mosaic.mission_count % mosaic.cols;
+				if (temp < 0 || temp > (mosaic.cols - 1)) temp = 0;
+			}
+			
+			mosaic.offset = new Array(temp);
+		}
+
+		$scope.current_mosaics_date_index = $scope.mosaics_date_indexes[0];
+		$scope.current_mosaics_name_index = $scope.mosaics_name_indexes[0];
+		$scope.current_mosaics_uniques_index = $scope.mosaics_uniques_indexes[0];
+		$scope.current_mosaics_missions_index = $scope.mosaics_missions_indexes[0];
+
+		$scope.sortMosaicsByMissions();
+		
+		$scope.loaded = true;
+	}
 });
-angular.module('FrontModule.controllers').controller('NewCreatorCtrl', function($scope, $window, API) {
+angular.module('FrontModule.controllers').controller('CreatorPageCtrl', function($scope, $window, API) {
 	
 	/* Page loading */
 
@@ -2699,183 +2708,6 @@ angular.module('FrontModule.controllers').controller('NewCreatorCtrl', function(
 			$scope.loaded = true;
 		});
 	}
-});
-angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($scope, API) {
-	
-	/* Country management */
-	
-	var selected_country_id = null;
-	
-	$scope.selectCountry = function(country_id) {
-	    
-	    selected_country_id = country_id;
-	    
-        $scope.regions = [];
-        
-        var data = { 'country_id':country_id };
-        API.sendRequest('/api/region/list/', 'POST', {}, data).then(function(response) {
-            
-            $scope.regions = response.regions;
-        });
-	}
-	
-	$scope.refreshCountry = function() {
-	    
-	    $scope.selectCountry(selected_country_id);
-	}
-	
-	/* Region management */
-	
-	$scope.createRegion = function(country_id, name, locale) {
-	    
-        var data = { 'country_id':country_id, 'name':name, 'locale':locale };
-        API.sendRequest('/api/region/create/', 'POST', {}, data).then(function(response) {
-            
-            $scope.refreshCountry();
-        });
-	}
-	
-	$scope.mergeRegions = function(src_id, dest_id) {
-	    
-        var data = { 'src_id':src_id, 'dest_id':dest_id };
-        API.sendRequest('/api/region/move/', 'POST', {}, data).then(function(response) {
-            
-            $scope.refreshCountry();
-        });
-	}
-	
-	$scope.updateRegion = function(region_id, new_name, new_locale) {
-	    
-        var data = { 'id':region_id, 'new_name':new_name, 'new_locale':new_locale };
-        API.sendRequest('/api/region/update/', 'POST', {}, data).then(function(response) {
-            
-            $scope.refreshCountry();
-        });
-	}
-	
-	$scope.deleteRegion = function(region_id) {
-	    
-        var data = { 'id':region_id };
-        API.sendRequest('/api/region/delete/', 'POST', {}, data).then(function(response) {
-            
-            $scope.refreshCountry();
-        });
-	}
-	
-	/* Page loading */
-	
-	API.sendRequest('/api/country/list/', 'POST').then(function(response) {
-    
-        $scope.countries = response.countries;
-        
-    	$scope.loaded = true;
-	});
-});
-angular.module('FrontModule.controllers').controller('AdmCityCtrl', function($scope, API) {
-	
-	/* Country management */
-	
-	$scope.selectCountry = function(country_id) {
-	    
-        $scope.regions = [];
-        
-        var data = { 'country_id':country_id };
-        API.sendRequest('/api/region/list/', 'POST', {}, data).then(function(response) {
-            
-            $scope.regions = response.regions;
-        });
-	}
-	
-	/* Region management */
-	
-	var selected_region_id = null;
-	
-	$scope.selectRegion = function(region_id) {
-	    
-	    selected_region_id = region_id;
-	    
-        $scope.cities = [];
-        
-        var data = { 'region_id':region_id };
-        API.sendRequest('/api/city/list/', 'POST', {}, data).then(function(response) {
-            
-            $scope.cities = response.cities;
-        });
-	}
-	
-	$scope.refreshRegion = function() {
-	    
-	    $scope.selectRegion(selected_region_id);
-	}
-	
-	/* City management */
-	
-	$scope.createCity = function(region_id, name, locale) {
-	    
-        var data = { 'region_id':region_id, 'name':name, 'locale':locale };
-        API.sendRequest('/api/city/create/', 'POST', {}, data).then(function(response) {
-            
-            $scope.refreshRegion();
-        });
-	}
-	
-	$scope.mergeCities = function(src_id, dest_id) {
-	    
-        var data = { 'src_id':src_id, 'dest_id':dest_id };
-        API.sendRequest('/api/city/move/', 'POST', {}, data).then(function(response) {
-            
-            $scope.refreshRegion();
-        });
-	}
-	
-	$scope.updateCity = function(city_id, new_name, new_locale) {
-	    
-        var data = { 'id':city_id, 'new_name':new_name, 'new_locale':new_locale };
-        API.sendRequest('/api/city/update/', 'POST', {}, data).then(function(response) {
-            
-            $scope.refreshRegion();
-        });
-	}
-	
-	$scope.deleteCity = function(city_id) {
-	    
-        var data = { 'id':city_id };
-        API.sendRequest('/api/city/delete/', 'POST', {}, data).then(function(response) {
-            
-            $scope.refreshRegion();
-        });
-	}
-	
-	$scope.teleportCity = function(region_id, city_id) {
-	    
-        var data = { 'region_id':region_id, 'city_id':city_id };
-        API.sendRequest('/api/city/teleport/', 'POST', {}, data).then(function(response) {
-            
-            $scope.refreshRegion();
-        });
-	}
-	
-	/* Page loading */
-	
-    var input = document.getElementById('city_input');
-    var options = {
-		types: ['(cities)'],
-	};
-	
-    var autocomplete = new google.maps.places.Autocomplete(input, options);
-        
-    autocomplete.addListener('place_changed', function() {
-    	
-    	var place = autocomplete.getPlace();
-    	console.log(place.address_components);
-	});
-	
-	API.sendRequest('/api/country/list/', 'POST').then(function(response) {
-    
-        $scope.countries = response.countries;
-        
-    	$scope.loaded = true;
-	});
 });
 angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', function($scope, $window, API, UtilsService) {
 	
@@ -3061,129 +2893,6 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		});
 	}
 });
-angular.module('FrontModule.controllers').controller('AdmMosaicCtrl', function($scope, API) {
-    
-    var inputCity = document.getElementById('city_input');
-    var options = {
-		types: ['(cities)'],
-	};
-	
-    var autocomplete = new google.maps.places.Autocomplete(inputCity, options);
-
-    autocomplete.addListener('place_changed', function() {
-    	
-		$scope.city_name = '';
-		$scope.region_name = '';
-		$scope.country_name = '';
-    	
-    	var place = autocomplete.getPlace();
-    	for (var i = 0; i < place.address_components.length; i++) {
-    		
-    		var addressType = place.address_components[i].types[0];
-    		if (addressType == 'country') $scope.country_name = place.address_components[i]['long_name'];
-    		if (addressType == 'locality') $scope.city_name = place.address_components[i]['long_name'];
-    		if (addressType == 'administrative_area_level_1') $scope.region_name = place.address_components[i]['long_name'];
-    		if (addressType == 'administrative_area_level_2' && !$scope.region_name) $scope.region_name = place.address_components[i]['long_name'];
-     		if (addressType == 'administrative_area_level_3' && !$scope.city_name) $scope.city_name = place.address_components[i]['long_name'];
-   		}
-
-		if ($scope.region_name == '' || !$scope.region_name) {
-			$scope.region_name = $scope.country_name;
-		}
-		
-		$scope.$apply();
-	});
-	
-	/* Mosaic management */
-	
-	$scope.selectMosaic = function(mosaic_ref) {
-	    
-	    $scope.loading = true;
-	    
-		API.sendRequest('/api/mosaic/' + mosaic_ref + '/', 'GET').then(function(response) {
-            
-            $scope.mosaic = response;
-            
-			$scope.city_name = $scope.mosaic.city.name;
-			$scope.region_name = $scope.mosaic.city.region.name;
-			$scope.country_name = $scope.mosaic.city.region.country.name;
-			
-            $scope.loading = false;
-        });
-	}
-	
-	$scope.deleteMosaic = function(mosaic) {
-	    
-	    var data = { 'ref':mosaic.ref }
-		API.sendRequest('/api/mosaic/delete/', 'POST', {}, data).then(function(response) {
-            
-            $scope.mosaic = null;
-        });
-	}
-	
-	$scope.editMosaic = function(mosaic) {
-	    
-	    var data = { 'ref':mosaic.ref, 'city_name':$scope.city_name, 'region_name':$scope.region_name, 'country_name':$scope.country_name, 'type':mosaic.type, 'cols':mosaic.cols, 'title':mosaic.title }
-		API.sendRequest('/api/mosaic/edit/', 'POST', {}, data).then(function(response) {
-            
-            $scope.mosaic = response;
-        });
-	}
-	
-	/* Page loading */
-	
-	$scope.loading = false;
-	$scope.mosaic_ref = '';
-	
-	$scope.init = function(mosaic_ref) {
-
-		if (mosaic_ref) {
-			
-			$scope.mosaic_ref = mosaic_ref;
-			$scope.selectMosaic(mosaic_ref);
-		}
-		
-	    $scope.loaded = true;
-	}
-});
-angular.module('FrontModule.controllers').controller('AdmMissionCtrl', function($scope, API) {
-    
-	/* Mission management */
-	
-	$scope.loading = false;
-	
-	$scope.selectMission = function(mission_ref) {
-	    
-	    $scope.loading = true;
-	    
-	    $scope.mission = null;
-	    
-	    var data = { 'ref':mission_ref };
-		API.sendRequest('/api/mission/details/', 'POST', {}, data).then(function(response) {
-            
-            $scope.mission = response.mission;
-            $scope.loading = false;
-        });
-	}
-	
-	$scope.updateMission = function() {
-	    
-	    $scope.loading = true;
-        
-	    var data = { 'ref':$scope.mission.ref, 'title':$scope.mission.title, 'order':$scope.mission.order };
-		API.sendRequest('/api/mission/update/', 'POST', {}, data).then(function(response) {
-            
-            $scope.mission = response.mission;
-            $scope.loading = false;
-        });
-	}
-	
-	/* Page loading */
-	
-	$scope.mission = null;
-	
-    $scope.loaded = true;
-});
 angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function($scope, API) {
     
     $scope.editMosaic = function(region, index, id, compare_name) {
@@ -3282,8 +2991,11 @@ angular.module('FrontModule', ['satellizer',
 
 /* Config */
 
-angular.module('FrontModule').config(function($authProvider) {
+angular.module('FrontModule').config(function($interpolateProvider, $authProvider) {
 
+    $interpolateProvider.startSymbol('[[');
+    $interpolateProvider.endSymbol(']]');
+    
 	$authProvider.google({
 		
 		url: '/api/user/google/',

@@ -1,10 +1,17 @@
-angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($scope, $window, API) {
+angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function($scope, $window, API, UserService, $auth) {
+	
+	$scope.signin = UserService.signin;
+
+	$scope.authenticated = $auth.isAuthenticated();
+    
+	$('.hidden').each(function() { $(this).removeClass('hidden'); })
 
 	/* Link management */
 
-	$scope.toggle_link = function(user, type) {
-		
+	$scope.toggle_link = function(type) {
 
+		if ($scope.authenticated) {
+			
 			switch (type) {
 				
 				case 'like':
@@ -61,31 +68,29 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 					}
 					break;
 			}
+		}
+		else {
+			
+			$scope.link_need_signin = true;
+		}
 	}
 
-	/* Mission details displaying */
-
-	$scope.mission_selected = null;
-
-	$scope.displayMissionDetails = function(mission) {
-		
-		$scope.mission_selected = mission;
-	}
-
-	$scope.closeMissionDetails = function() {
-		
-		$scope.mission_selected = null;
-	}
-	
 	/* Comment edit displaying */
 	
 	$scope.comment_selected = null;
 	
 	$scope.displayCommentEdit = function(comment) {
 		
-		if (!comment) comment = { 'text':null }
-		
-		$scope.comment_selected = comment;
+		if ($scope.authenticated) {
+			
+			if (!comment) comment = { 'text':null }
+			
+			$scope.comment_selected = comment;
+		}
+		else {
+			
+			$scope.comment_need_signin = true;
+		}
 	}
 
 	$scope.closeCommentEdit = function() {
@@ -125,9 +130,11 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 			});
 	}
 	
-	/* Map management */
+	/* Tab management */
 	
 	$scope.current_tab = 'roadmap';
+	
+	/* Page loading */
 	
 	var mapInitiated = false;
 	
@@ -159,9 +166,7 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 		};
 
 		var index = 1;
-		for (var m of $scope.mosaic.missions) {
-		
-			if (m.ref.indexOf('Unavailable') !== -1) continue;
+		for (var m of $scope.missions) {
 		
 			var roadmapCoordinates= [];
 		
@@ -205,66 +210,31 @@ angular.module('FrontModule.controllers').controller('NewMosaicCtrl', function($
 				position: {lat: m.startLat, lng: m.startLng},
 	        });
 	        
-	        google.maps.event.addListener(startMarker, 'click', (function(marker, mission) {
-	        	
-	        	return function () {
-	        		$scope.displayMissionDetails(mission);
-	        	};
-										
-			})(startMarker, m));
-	        
 	        var mlatLng = new google.maps.LatLng(m.startLat, m.startLng);
 	        latlngbounds.extend(mlatLng);
 	        
 	        index += 1;
 		}
 	        
-		map.setCenter(latlngbounds.getCenter());
 		map.fitBounds(latlngbounds); 
 	}
 	
-	/* Page loading */
-	
-	$scope.load_mosaic = function(ref) {
+	$scope.init = function(mosaic, missions, comments) {
+
+		$scope.mosaic = mosaic;
+		$scope.missions = missions;
+		$scope.comments = comments;
 		
-		API.sendRequest('/api/mosaic/' + ref + '/', 'GET').then(function(response) {
+		var temp = 0;
+		if ($scope.missions.length > $scope.mosaic.cols) {
+			temp = $scope.mosaic.cols - $scope.missions.length % $scope.mosaic.cols;
+			if (temp < 0 || temp > ($scope.mosaic.cols - 1)) temp = 0;
+		}
 		
-			$scope.mosaic = response;
-			
-			var temp = 0;
-			if ($scope.mosaic.missions.length > $scope.mosaic.cols) {
-				temp = $scope.mosaic.cols - $scope.mosaic.missions.length % $scope.mosaic.cols;
-				if (temp < 0 || temp > ($scope.mosaic.cols - 1)) temp = 0;
-			}
-			
-			$scope.offset = new Array(temp);
-			
-			$scope.mosaic.real_portals = 0;
-			
-			var temp = [];
-			
-			var index = 0;
-			for (var mission of $scope.mosaic.missions) {
-				
-				index += 1;
-				mission.order = index;
-				
-				for (var portal of mission.portals) {
-					if (portal.type == 'portal') {
-						$scope.mosaic.real_portals += 1;
-						
-						if (temp.indexOf(portal.guid) == -1) {
-							temp.push(portal.guid);
-						}
-					}
-				}
-			}
-			
-			$scope.mosaic.uniques = temp.length;
-			
-			$scope.initMap();
-			
-			$scope.loaded = true;
-		});
+		$scope.offset = new Array(temp);
+
+		$scope.initMap();
+		
+		$scope.loaded = true;
 	}
 });

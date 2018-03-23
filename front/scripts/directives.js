@@ -1,6 +1,6 @@
 angular.module('FrontModule.directives', [])
 
-angular.module('FrontModule.directives').directive('mosaicVignet', function() {
+angular.module('FrontModule.directives').directive('mosaic', function() {
 	
 	return {
 		
@@ -10,113 +10,115 @@ angular.module('FrontModule.directives').directive('mosaicVignet', function() {
 		scope: { mosaic: '=' },
 		
 		template: '' +
-			'<a class="btn-primary btn-block ta-center ttrans-normal" href="/mosaic/{{mosaic.ref}}">' +
-				
-			'	<div class="item" style="margin-bottom:.25rem; display:flex; justify-content:center; background:#0b0c0d; height:105px; overflow-y:hidden; padding:.25rem;" ng-class="{\'scrollbar valign-start\': mosaic.missions.length > 24, \'valign-center\': mosaic.missions.length <= 24}">' +
+			'<div class="item width-12 width-xl-4 flex-col">' +
+				'<div class="item link-block">' +
 					
-			'		<div class="row" style="align-items:center; justify-content:center; padding:0 calc((6 - {{mosaic.cols}}) / 2 * 16.666667%); width:100%;">' +
-			'            <div ng-repeat="m in mosaic.missions | reverse" style="flex:0 0 calc(100% / {{mosaic.cols}});">' +
-			'                <img src="/static/img/mask.png" style="width:100%; background-color:#000000; background-image:url({{m.image}}=s100); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />' +
-			'           </div>' +
-			'		</div>' +
+					'<a class="item" href="/mosaic/[[mosaic.ref]]" target="_blank" style="display:block;">' +
+						'<div class="flex align-center">' +
+							'<i class="mr-normal text-small fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals"></i>' +
+							'<span class="mr-normal grow text-medium color-light ellipsis" title="[[mosaic.title]]">[[mosaic.title]]</span>' +
+							'<i class="fa fa-angle-right"></i>' +
+						'</div>' +
+						'<span class="text-small color-dark">[[mosaic.images.length]] missions &middot; [[mosaic.unique_count]] uniques</span>' +
+					'</a>' +
 					
-			'	</div>' +
-				
-	        '   <div class="ellipsis" style="margin-bottom:.25rem;">' +
-	        '		<i ng-if="mosaic.has_fake" class="fa fa-warning c-warning" style="padding-right:.5rem;"></i>{{mosaic.title}}' +
-	        '	</div>' +
-	        '   <div class="c-lighter ellipsis">' +
-	        '       <flag country="mosaic.city.region.country.name"></flag>' +
-	        '    	{{mosaic.city.region.country.name}}' +
-	        '   </div>' +
-	        '   <div class="c-lighter">{{mosaic.missions.length}} <i class="fa fa-th"></i> <span class="text-separator">&middot;</span> <span ng-if="mosaic.type == \'sequence\'">{{mosaic.distance | number:2}} km</span><span ng-if="mosaic.type == \'serie\'">serie</span><span ng-show="mosaic.type != \'serie\' && mosaic.distance > 10.0" class="text-separator">&middot;</span><i ng-show="mosaic.type != \'serie\' && mosaic.distance > 10.0 && mosaic.distance < 30.0" class="fa fa-bicycle"></i><i ng-show="mosaic.type != \'serie\' && mosaic.distance > 30.0" class="fa fa-car"></i></div>' +
-				
-			'</a>' +
+					'<div class="item pt-none">' +
+						'<a class="flex" href="/world/[[mosaic.country_name]]/[[mosaic.region_name]]/[[mosaic.city_name]]">' +
+							'<span class="mr-small flag-icon flag-icon-[[mosaic.country_code]]"></span>' +
+							'<span>[[mosaic.city_name]]</span>' +
+						'</a>' +
+					'</div>' +
+
+					'<a class="item" href="/mosaic/[[mosaic.ref]]" target="_blank" style="display:block;">' +
+						'<div class="flex wrap shrink" style="max-width:150px; padding-right:calc((6 - [[mosaic.cols]]) * 25px);">' +
+							
+							'<div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / [[mosaic.cols]]);">' +
+							'</div>' +
+							
+							'<div ng-repeat="m in mosaic.images track by $index" class="mission-vignet" style="max-width:25px; flex:0 0 calc(100% / [[mosaic.cols]]);">' +
+								'<img src="/static/img/mask.png" style="width:25px; background-image:url([[m]]=s25);" />' +
+							'</div>' +
+							
+						'</div>' +
+					'</a>' +
+					
+				'</div>' +
+			'</div>' +
 		'',
 	};
 });
 
-angular.module('FrontModule.directives').directive('flag', function() {
+angular.module('FrontModule.directives').directive('potential', function() {
 	
 	return {
 		
 		replace: true,
 		restrict: 'E',
 		
-		scope: { country: '=' },
+		scope: { potential: '=' },
 		
 		template: '' +
-	        '       <span class="flag-icon" ng-class="{' +
-	        '       		\'flag-icon-fr\': country == \'France\',' +
-	        '       		\'flag-icon-gb\': country == \'United Kingdom\',' +
-	        '       		\'flag-icon-my\': country == \'Malaysia\',' +
-	        '       		\'flag-icon-sg\': country == \'Singapore\',' +
-	        '       		\'flag-icon-us\': country == \'United States\',' +
-	        '       		\'flag-icon-mx\': country == \'Mexico\',' +
-	        '       		\'flag-icon-nz\': country == \'New Zealand\',' +
-	        '       		\'flag-icon-mv\': country == \'Maldives\',' +
-	        '       		\'flag-icon-do\': country == \'Dominican Republic\',' +
-	        '       		\'flag-icon-au\': country == \'Australia\',' +
-	        '       		\'flag-icon-hu\': country == \'Hungary\',' +
-	        '       		\'flag-icon-lk\': country == \'Sri Lanka\',' +
-	        '       		\'flag-icon-id\': country == \'Indonesia\',' +
-	        '       		\'flag-icon-de\': country == \'Germany\',' +
-	        '       		\'flag-icon-pl\': country == \'Poland\',' +
-		    '       		\'flag-icon-ru\': country == \'Russia\',' +
-		    '       		\'flag-icon-hk\': country == \'Hong Kong\',' +
-		    '       		\'flag-icon-mu\': country == \'Mauritius\',' +
-		    '       		\'flag-icon-th\': country == \'Thailand\',' +
-		    '       		\'flag-icon-cz\': country == \'Czechia\',' +
-		    '       		\'flag-icon-cn\': country == \'China\',' +
-		    '       		\'flag-icon-es\': country == \'Spain\',' +
-		    '       		\'flag-icon-ch\': country == \'Switzerland\',' +
-		    '       		\'flag-icon-ca\': country == \'Canada\',' +
-		    '       		\'flag-icon-at\': country == \'Austria\',' +
-		    '       		\'flag-icon-is\': country == \'Iceland\',' +
-		    '       		\'flag-icon-za\': country == \'South Africa\',' +
-		    '       		\'flag-icon-ad\': country == \'Andorra\',' +
-		    '       		\'flag-icon-it\': country == \'Italy\',' +
-		    '       		\'flag-icon-il\': country == \'Israel\',' +
-		    '       		\'flag-icon-pt\': country == \'Portugal\',' +
-		    '       		\'flag-icon-ie\': country == \'Ireland\',' +
-		    '       		\'flag-icon-gr\': country == \'Greece\',' +
-		    '       		\'flag-icon-tr\': country == \'Turkey\',' +
-		    '       		\'flag-icon-jp\': country == \'Japan\',' +
-		    '       		\'flag-icon-dk\': country == \'Denmark\',' +
-		    '       		\'flag-icon-se\': country == \'Sweden\',' +
-		    '       		\'flag-icon-no\': country == \'Norway\',' +
-		    '       		\'flag-icon-fi\': country == \'Finland\',' +
-		    '       		\'flag-icon-lv\': country == \'Latvia\',' +
-		    '       		\'flag-icon-ee\': country == \'Estonia\',' +
-		    '       		\'flag-icon-lt\': country == \'Lithuania\',' +
-		    '       		\'flag-icon-sk\': country == \'Slovakia\',' +
-		    '       		\'flag-icon-hr\': country == \'Croatia\',' +
-		    '       		\'flag-icon-ar\': country == \'Argentina\',' +
-		    '       		\'flag-icon-uy\': country == \'Uruguay\',' +
-		    '       		\'flag-icon-tw\': country == \'Taiwan\',' +
-		    '       		\'flag-icon-in\': country == \'India\',' +
-		    '       		\'flag-icon-nl\': country == \'Netherlands\',' +
-		    '       		\'flag-icon-eg\': country == \'Egypt\',' +
-		    '       		\'flag-icon-be\': country == \'Belgium\',' +
-		    '       		\'flag-icon-ph\': country == \'Philippines\',' +
-		    '       		\'flag-icon-pa\': country == \'Panama\',' +
-		    '       		\'flag-icon-br\': country == \'Brazil\',' +
-		    '       		\'flag-icon-lu\': country == \'Luxembourg\',' +
-		    '       		\'flag-icon-kr\': country == \'South Korea\',' +
-		    '       		\'flag-icon-cl\': country == \'Chile\',' +
-		    '       		\'flag-icon-bg\': country == \'Bulgaria\',' +
-		    '       		\'flag-icon-np\': country == \'Nepal\',' +
-		    '       		\'flag-icon-nc\': country == \'New Caledonia\',' +
-		    '       		\'flag-icon-pk\': country == \'Pakistan\',' +
-		    '       		\'flag-icon-ro\': country == \'Romania\',' +
-		    '       		\'flag-icon-ua\': country == \'Ukraine\',' +
-		    '       		\'flag-icon-vn\': country == \'Vietnam\',' +
-		    '       		\'flag-icon-bn\': country == \'Brunei\',' +
-		    '       		\'flag-icon-pe\': country == \'Peru\',' +
-		    '       		\'flag-icon-rs\': country == \'Serbia\',' +
-		    '       		\'flag-icon-mo\': country == \'Macau\',' +
-		    '       		\'flag-icon-by\': country == \'Belarus\',' +
-	        '        	}"></span>' +
+			'<div class="item width-12 width-xl-4" ng-repeat="potential in potentials track by $index">' +
+				'<div class="item link-block">' +
+					
+					'<a class="item" href="/registration/[[potential.title]]" target="_blank" style="display:block;">' +
+						'<div class="flex align-center">' +
+							'<span class="mr-normal grow text-medium color-light ellipsis" title="[[potential.title]]">[[potential.title]]</span>' +
+							'<i class="fa fa-angle-right"></i>' +
+						'</div>' +
+						'<span class="text-small color-dark">[[potential.count]] missions</span>' +
+					'</a>' +
+					
+					'<div class="item pt-none">' +
+						'<a class="flex" href="/world/[[potential.city.region.country.name]]/[[potential.city.region.name]]/[[potential.city.name]]">' +
+							'<span class="mr-small flag-icon flag-icon-[[potential.city.region.country.code]]"></span>' +
+							'<span>[[potential.city.name]]</span>' +
+						'</a>' +
+					'</div>' +
+					
+				'</div>' +
+			'</div>' +
+		'',
+	};
+});
+
+angular.module('FrontModule.directives').directive('mission', function() {
+	
+	return {
+		
+		replace: true,
+		restrict: 'E',
+		
+		scope: { mission: '=' },
+		
+		template: '' +
+			'<div class="width-12 width-xl-6 item">' +
+				'<div class="item bg-block flex align-center">' +
+				
+					'<div class="item">' +
+						'<img src="/static/img/mask.png" style="width:26px; background-color:#000000; background-image:url([[mission.image]]=s25); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />' +
+					'</div>' +
+					
+					'<div class="item grow ellipsis">' +
+						
+						'<div class="ellipsis">' +
+							'<span class="text-medium color-light" title="[[mission.desc]]">[[mission.title]]</span>' +
+						'</div>' +
+						
+						'<div class="text-small">' +
+							'<a href="/search/[[mission.creator]]" ng-class="{\'color-enlightened\': mission.faction == \'E\', \'color-resistant\': mission.faction == \'R\'}">[[mission.creator]]</a>' +
+						'</div>' +
+						
+					'</div>' +
+
+					'<div class="item">' +
+						'<a href="https://www.ingress.com/intel?ll=[[mission.startLat]],[[mission.startLng]]&z=19&pll=[[mission.startLat]],[[mission.startLng]]" target="_blank">' +
+							'<i class="fa fa-external-link"></i>' +
+						'</a>' +
+					'</div>' +
+							
+				'</div>' +
+			'</div>' +
 		'',
 	};
 });

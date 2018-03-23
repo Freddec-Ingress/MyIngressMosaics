@@ -5,8 +5,11 @@ angular.module('FrontModule', ['satellizer',
 
 /* Config */
 
-angular.module('FrontModule').config(function($authProvider) {
+angular.module('FrontModule').config(function($interpolateProvider, $authProvider) {
 
+    $interpolateProvider.startSymbol('[[');
+    $interpolateProvider.endSymbol(']]');
+    
 	$authProvider.google({
 		
 		url: '/api/user/google/',

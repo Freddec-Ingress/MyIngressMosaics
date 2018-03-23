@@ -15,9 +15,16 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="NewWorldCtrl">
+	<div id="content" ng-controller="WorldPageCtrl" ng-init="init({{countries}});">
 	
-		<div class="container active">
+		<div id="loading" ng-hide="loaded" class="section">
+			<div class="item flex justify-center align-center">
+				<i class="fa fa-spinner rotating"></i>
+				<span class="ml-small">Loading page...</span>
+			</div>
+		</div>
+		
+		<div class="container" ng-class="{'active':loaded}">
 			
 			<div class="section">
 				
@@ -33,23 +40,20 @@
 				<div class="flex-col">
 		    	
 			     	<form class="item flex-col">
-			    		<span class="color-normal">Search for a city</span>
-						<input id="city_input" type="text" class="control" placeholder="City name" ng-model="searchtext" />
+			    		<span class="mb-small color-normal">Search for a city</span>
+						<input id="city_autocomplete" type="text" class="control" placeholder="City name" ng-model="searchtext" />
 					</form>
 					
-					<div class="flex align-center hidden" ng-show="flag_searching">
+					<div class="flex align-center hidden" ng-show="f_city_searching">
 						
 						<div class="item">
-							<i class="color-dark fa fa-spinner rotating"></i>
-						</div>
-						
-						<div class="item">
-							<span class="color-dark">Searching...</span>
+							<i class="color-normal fa fa-spinner rotating"></i>
+							<span class="ml-small color-normal">Searching...</span>
 						</div>
 						
 					</div>
 					
-					<div class="flex hidden" ng-show="flag_city_unknown">
+					<div class="flex hidden" ng-show="f_city_unknown">
 						
 				    	<div class="item">
 				    		<span class="color-danger">City unknown</span>
@@ -57,14 +61,14 @@
 				    	
 					</div>
 					
-					<div class="flex-col hidden" ng-show="city && mosaics.length < 1 && potentials.length < 1">
+					<div class="flex-col hidden" ng-show="f_city_nomosaic">
 						
 				    	<div class="item">
-				    		<span class="color-danger">No mosaic registered</span>
+				    		<span class="color-danger">No registered mosaic</span>
 				    	</div>
 				    	
 				    	<div class="item">
-				    		<a href="/registration">Be the first to register mosaic for this city</a>
+				    		<a href="/registration">Be the first to register a mosaic for this city</a>
 				    	</div>
 			
 					</div>
@@ -75,47 +79,76 @@
 			
 			<div class="section">
 				
-				<div class="flex wrap">
-					{% for country in countries %}
-					<div class="width-12 width-xl-4 item">
-						<a class="item link-block flex" href="/world/{{country.name}}">
-						
-							<div class="item flex">
-								<span class="flag-icon flag-icon-{{country.code}}" style="width:1.5rem; line-height:2rem;"></span>
-							</div>
-								
-							<div class="item grow">
-								
-								<div class="flex">
-									
-									<div class="grow mr-normal">
-										<span class="color-light text-medium">{{country.name}}</span>
-									</div>
-									
-									<i class="fa fa-angle-right"></i>
-									
-								</div>
-								
-								<div class="flex align-center">
-									
-									<div class="grow">
-										<span class="color-dark text-small">{{country.locale}}</span>
-									</div>
-					
-									<div class="flex align-center">
-										{% if country.mosaic_count %}<span class="text-small color-normal">{{country.mosaic_count}}</span>{% endif %}
-										{% if country.potential_count %}<span class="ml-small text-small color-link">+{{country.potential_count|intcomma}}</span>{% endif %}
-									</div>
-									
-								</div>
-								
-							</div>
-							
-						</a>
+				<div class="tab-row">
+				
+					<div class="tab" ng-click="current_tab='countries'" ng-class="{'active':current_tab=='countries'}">
+						Countries
+						<span class="ml-normal badge">{{country_count}}</span>
 					</div>
-					{% endfor %}
+					
 				</div>
-	
+				
+			</div>
+			
+			<div ng-if="current_tab=='countries'">
+				
+				<div class="section">
+					
+					<div class="flex wrap">
+						
+						<div class="item">
+							<a ng-click="sortCountriesByMosaics();" ng-class="{'active': countries_sorting=='by_mosaics'}">
+								By mosaics
+							</a>
+						</div>
+						
+						<div class="item">
+							<a ng-click="sortCountriesByName();" ng-class="{'active': countries_sorting=='by_name'}">
+								By name
+							</a>
+						</div>
+
+					</div>
+					
+				</div>
+
+				<div class="section">
+				
+					<div class="flex wrap">
+						<div class="width-12 width-xl-4 item" ng-repeat="country in countries">
+							<a class="item link-block flex" href="/world/[[country.name]]">
+							
+								<div class="item flex">
+									<span class="flag-icon flag-icon-[[country.code]]" style="width:1.5rem; line-height:2rem;"></span>
+								</div>
+									
+								<div class="item grow">
+									
+									<div class="flex">
+										
+										<span class="grow mr-normal color-light text-medium ellipsis">[[country.name]]</span>
+										<i class="fa fa-angle-right"></i>
+										
+									</div>
+									
+									<div class="flex text-small">
+										
+										<span class="color-dark">[[country.locale]]</span>
+										<span class="ml-small color-dark">&middot;</span>
+										<span class="ml-small color-normal" ng-if="country.mosaic_count">[[country.mosaic_count]]</span>
+										<span class="ml-small color-light" ng-if="country.potential_count">+[[country.potential_count]]</span>
+										<span class="ml-small color-dark" ng-if="country.mosaic_count">mosaics</span>
+					
+									</div>
+									
+								</div>
+								
+							</a>
+						</div>
+					</div>
+					
+				</div>
+			
 			</div>
 			
 		</div>

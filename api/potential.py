@@ -1,0 +1,103 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+
+from .models import *
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def potential_update(request):
+	
+	results = Mission.objects.filter(ref__in=request.data['refs'])
+	for mission_obj in results:
+		
+		mission_obj.name = request.data['new_name']
+		mission_obj.save()
+		
+	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def potential_exclude(request):
+	
+	results = Mission.objects.filter(ref__in=request.data['refs'])
+	for mission_obj in results:
+		
+		mission_obj.admin = False
+		mission_obj.save()
+
+	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def potential_create(request):
+	
+	results = Mission.objects.filter(ref__in=request.data['refs'])
+	for mission_obj in results:
+
+		mission_obj.name = request.data['title']
+		mission_obj.validated = True
+		mission_obj.save()
+	
+	results = Country.objects.filter(name=request.data['country'])
+	if results.count() > 0:
+		country_obj = results[0]
+	else:
+		country_obj = Country(name=request.data['country'])
+		country_obj.save()
+		
+	results = Region.objects.filter(country=country_obj, name=request.data['region'])
+	if results.count() > 0:
+		region_obj = results[0]
+	else:
+		region_obj = Region(country=country_obj, name=request.data['region'])
+		region_obj.save()
+		
+	results = City.objects.filter(region=region_obj, name=request.data['city'])
+	if results.count() > 0:
+		city_obj = results[0]
+	else:
+		city_obj = City(region=region_obj, name=request.data['city'])
+		city_obj.save()
+		
+	potential_obj = Potential(title=request.data['title'], count=missions.count(), city=city_obj, country=country_obj)
+	potential_obj.save()
+	
+	city_notifiers = Notif.objects.filter(country=country_obj, region=region_obj, city=city_obj).values_list('user__email')
+	region_notifiers = Notif.objects.filter(country=country_obj, region=region_obj, city__isnull=True).values_list('user__email')
+	country_notifiers = Notif.objects.filter(country=country_obj, region__isnull=True, city__isnull=True).values_list('user__email')
+	
+	receivers = []
+	for item in country_notifiers: receivers.append(item[0])
+	for item in region_notifiers: receivers.append(item[0])
+	for item in city_notifiers: receivers.append(item[0])
+	receivers = set(receivers)
+	receivers = list(receivers)
+
+	if len(receivers) > 0:
+		
+		msg_plain = render_to_string('new_potential.txt', { 'url':potential_obj.title.replace(' ', '%20'), 'name':potential_obj.title, 'count':potential_obj.count, 'country':country_obj.name, 'region':region_obj.name, 'city':city_obj.name })
+		
+		for receiver in receivers:
+			send_mail(
+				'[MIM] New Potential Detected - ' + potential_obj.title,
+		    	msg_plain,
+		    	'admin@myingressmosaics.com',
+		    	[receiver],
+		    	fail_silently=False,
+		    )
+
+	return Response(None, status=status.HTTP_200_OK)

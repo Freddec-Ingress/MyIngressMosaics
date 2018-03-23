@@ -1,4 +1,4 @@
-angular.module('FrontModule.controllers').controller('NewSearchCtrl', function($scope, $window, API) {
+angular.module('FrontModule.controllers').controller('SearchPageCtrl', function($scope, $window, API) {
 	
 	/* Init management */
 	
@@ -48,8 +48,8 @@ angular.module('FrontModule.controllers').controller('NewSearchCtrl', function($
 			for (var mosaic of $scope.mosaics) {
 				
 				var temp = 0;
-				if (mosaic.missions.length > mosaic.cols) {
-					temp = mosaic.cols - mosaic.missions.length % mosaic.cols;
+				if (mosaic.images.length > mosaic.cols) {
+					temp = mosaic.cols - mosaic.images.length % mosaic.cols;
 					if (temp < 0 || temp > (mosaic.cols - 1)) temp = 0;
 				}
 				

@@ -2,22 +2,20 @@
 
 {% block extra-head %}
 
-	<title>MIM - {{regionlabel}}, {{country}}</title>
+	<title>MIM - {{region.name}}, {{region.country_name}}</title>
 
-	<meta property="og:url" content="https://www.myingressmosaics.com/world/{{country}}/{{regionlabel}}">
+	<meta property="og:url" content="https://www.myingressmosaics.com/world/{{region.country_name}}/{{region.name}}">
 	<meta property="og:type" content="article">
-	<meta property="og:title" content="MIM - {{regionlabel}}, {{country}}">
-	<meta property="og:headline" content="MIM - {{regionlabel}}, {{country}}">
-	<meta property="og:description" content="Ingress mosaics in {{regionlabel}}, {{country}}">
+	<meta property="og:title" content="MIM - {{region.name}}, {{region.country_name}}">
+	<meta property="og:headline" content="MIM - {{region.name}}, {{region.country_name}}">
+	<meta property="og:description" content="Ingress mosaics in {{region.name}}, {{region.country_name}}">
 
 {% endblock %}
 
 {% block content %}
 
-	<div id="content" ng-controller="NewRegionCtrl" ng-init="loadRegion('{{country}}', '{{region}}');">
+	<div id="content" ng-controller="RegionPageCtrl" ng-init="init({{region}}, {{cities}}, {{mosaics}}, {{potentials}}, {{mosaics_date_indexes}}, {{mosaics_name_indexes}}, {{mosaics_uniques_indexes}}, {{mosaics_missions_indexes}}, {{mosaics_location_indexes}});">
 
-	{% verbatim %}
-	
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
 				<i class="fa fa-spinner rotating"></i>
@@ -52,7 +50,7 @@
 					</div>
 	
 					<div class="mt-small flex-col hidden" ng-show="need_signin">
-						<span class="color-danger">You must be signed in to be notified.</span>
+						<span class="mb-small color-danger">You must be signed in to be notified.</span>
 						<a ng-click="signin('google', '/world/{{region.country_name}}/{{region.name}}');">Sign in</a>
 					</div>
 					
@@ -66,12 +64,12 @@
 				
 					<div class="tab" ng-click="current_tab='mosaics'" ng-class="{'active':current_tab=='mosaics'}">
 						Mosaics
-						<span class="ml-normal badge">{{region.mosaic_count}}</span>
+						<span class="ml-normal badge">{{mosaic_count}}</span>
 					</div>
 				
 					<div class="tab" ng-click="current_tab='potentials'" ng-class="{'active':current_tab=='potentials'}">
 						Potentials
-						<span class="ml-normal badge">{{region.potential_count}}</span>
+						<span class="ml-normal badge">{{potential_count}}</span>
 					</div>
 					
 				</div>
@@ -85,31 +83,31 @@
 					<div class="flex wrap">
 						
 						<div class="item">
-							<a ng-click="sortByLocation();" ng-class="{'active': sorting=='by_location'}">
+							<a ng-click="sortMosaicsByLocation();" ng-class="{'active': mosaics_sorting=='by_location'}">
 								By city
 							</a>
 						</div>
 						
 						<div class="item">
-							<a ng-click="sortByMissions();" ng-class="{'active': sorting=='by_missions'}">
+							<a ng-click="sortMosaicsByMissions();" ng-class="{'active': mosaics_sorting=='by_missions'}">
 								By missions
 							</a>
 						</div>
 						
 						<div class="item">
-							<a ng-click="sortByUniques();" ng-class="{'active': sorting=='by_uniques'}">
+							<a ng-click="sortMosaicsByUniques();" ng-class="{'active': mosaics_sorting=='by_uniques'}">
 								By uniques
 							</a>
 						</div>
 						
 						<div class="item">
-							<a ng-click="sortByName();" ng-class="{'active': sorting=='by_name'}">
+							<a ng-click="sortMosaicsByName();" ng-class="{'active': mosaics_sorting=='by_name'}">
 								By name
 							</a>
 						</div>
 						
 						<div class="item">
-							<a ng-click="sortByDate();" ng-class="{'active': sorting=='by_date'}">
+							<a ng-click="sortMosaicsByDate();" ng-class="{'active': mosaics_sorting=='by_date'}">
 								By date
 							</a>
 						</div>
@@ -118,69 +116,36 @@
 					
 				</div>
 				
-				<div ng-if="sorting=='by_location'" class="flex-col">
+				<div ng-if="mosaics_sorting=='by_location'" class="flex-col">
 					
 					<div class="section">
 						<div class="flex">
 							<div class="grow flex width-12 wrap">
-								<div class="item flex justify-center" ng-repeat="index in location_indexes track by $index" style="width:40px;">
-									<a class="badge badge-link item text-center" ng-click="setCurrentLocationIndex(index);" ng-class="{'active': current_location_index==index}" style="width:100%;">
-										{{index}}
+								<div class="item flex justify-center" ng-repeat="index in mosaics_location_indexes track by $index" style="width:40px;">
+									<a class="badge badge-link item text-center" ng-click="setCurrentMosaicsLocationIndex(index);" ng-class="{'active': current_mosaics_location_index==index}" style="width:100%;">
+										[[index]]
 									</a>
 								</div>
 							</div>
 						</div>
 					</div>
 					
-					<div class="section" ng-repeat="city in cities" ng-if="city.name[0]==current_location_index;">
+					<div class="section" ng-repeat="city in cities" ng-if="city.name[0]==current_mosaics_location_index;">
 						<div class="flex wrap">
-							<div class="item width-12 width-xl-4 flex-col" ng-repeat="mosaic in mosaics track by $index" ng-if="mosaic.city_name==city.name;">
-								<div class="item link-block">
-									
-									<a class="item" href="/mosaic/{{mosaic.ref}}" target="_blank" style="display:block;">
-										<div class="flex align-center">
-											<i class="mr-normal text-small fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals"></i>
-											<span class="mr-normal grow text-medium color-light ellipsis" title="{{mosaic.title}}">{{mosaic.title}}</span>
-											<i class="fa fa-angle-right"></i>
-										</div>
-										<span class="text-small color-dark">{{mosaic.mission_count}} missions &middot; {{mosaic.uniques}} uniques</span>
-									</a>
-									
-									<div class="item pt-none">
-										<a class="flex" href="/world/{{mosaic.country_name}}/{{mosaic.region_name}}/{{mosaic.city_name}}">
-											<span class="mr-small flag-icon flag-icon-{{mosaic.country_code}}"></span>
-											<span>{{mosaic.city_name}}</span>
-										</a>
-									</div>
-	
-									<a class="item" href="/mosaic/{{mosaic.ref}}" target="_blank" style="display:block;">
-										<div class="flex wrap shrink" style="max-width:150px; padding-right:calc((6 - {{mosaic.cols}}) * 25px);">
-											
-											<div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-											</div>
-											
-											<div ng-repeat="m in mosaic.images track by $index" class="mission-vignet" style="max-width:25px; flex:0 0 calc(100% / {{mosaic.cols}});">
-												<img src="/static/img/mask.png" style="width:25px; background-image:url({{m}}=s25);" />
-											</div>
-											
-										</div>
-									</a>
-									
-								</div>
-							</div>
+							<mosaic ng-repeat="mosaic in mosaics track by $index" ng-if="mosaic.city_name==city.name;" mosaic="mosaic"></mosaic>
 						</div>
 					</div>
 					
 				</div>
 				
-				<div ng-if="sorting=='by_date'" class="flex-col">
+				<div ng-if="mosaics_sorting=='by_date'" class="flex-col">
 					
 					<div class="section">
 						<div class="flex">
 							<div class="grow flex width-12 wrap">
-								<div class="item flex justify-center" ng-repeat="index in date_indexes track by $index" style="width:80px;">
-									<a class="badge badge-link item text-center" ng-click="setCurrentDateIndex(index);" ng-class="{'active': current_date_index==index}" style="width:100%;">
-										Page {{index}}
+								<div class="item flex justify-center" ng-repeat="index in mosaics_date_indexes track by $index" style="width:80px;">
+									<a class="badge badge-link item text-center" ng-click="setCurrentMosaicsDateIndex(index);" ng-class="{'active': current_mosaics_date_index==index}" style="width:100%;">
+										Page [[index]]
 									</a>
 								</div>
 							</div>
@@ -189,53 +154,42 @@
 					
 					<div class="section">
 						<div class="flex wrap">
-							<div class="item width-12 width-xl-4" ng-repeat="mosaic in mosaics track by $index" ng-if="mosaic.index_date==current_date_index;">
-								<div class="item link-block">
-									
-									<a class="item" href="/mosaic/{{mosaic.ref}}" target="_blank" style="display:block;">
-										<div class="flex align-center">
-											<i class="mr-normal text-small fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals"></i>
-											<span class="mr-normal grow text-medium color-light ellipsis" title="{{mosaic.title}}">{{mosaic.title}}</span>
-											<i class="fa fa-angle-right"></i>
-										</div>
-										<span class="text-small color-dark">{{mosaic.mission_count}} missions &middot; {{mosaic.uniques}} uniques</span>
+							<mosaic ng-repeat="mosaic in mosaics track by $index" ng-if="mosaic.index_date==current_mosaics_date_index;" mosaic="mosaic"></mosaic>
+						</div>
+					</div>
+
+				</div>
+				
+				<div ng-if="mosaics_sorting=='by_name'" class="flex-col">
+					
+					<div class="section">
+						<div class="flex">
+							<div class="grow flex width-12 wrap">
+								<div class="item flex justify-center" ng-repeat="index in mosaics_name_indexes track by $index" style="width:40px;">
+									<a class="badge badge-link item text-center" ng-click="setCurrentMosaicsNameIndex(index);" ng-class="{'active': current_mosaics_name_index==index}" style="width:100%;">
+										[[index]]
 									</a>
-									
-									<div class="item pt-none">
-										<a class="flex" href="/world/{{mosaic.country_name}}/{{mosaic.region_name}}/{{mosaic.city_name}}">
-											<span class="mr-small flag-icon flag-icon-{{mosaic.country_code}}"></span>
-											<span>{{mosaic.city_name}}</span>
-										</a>
-									</div>
-	
-									<a class="item" href="/mosaic/{{mosaic.ref}}" target="_blank" style="display:block;">
-										<div class="flex wrap shrink" style="max-width:150px; padding-right:calc((6 - {{mosaic.cols}}) * 25px);">
-											
-											<div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-											</div>
-											
-											<div ng-repeat="m in mosaic.images track by $index" class="mission-vignet" style="max-width:25px; flex:0 0 calc(100% / {{mosaic.cols}});">
-												<img src="/static/img/mask.png" style="width:25px; background-image:url({{m}}=s25);" />
-											</div>
-											
-										</div>
-									</a>
-									
 								</div>
 							</div>
+						</div>
+					</div>
+					
+					<div class="section">
+						<div class="flex wrap">
+							<mosaic ng-repeat="mosaic in mosaics track by $index" ng-if="mosaic.title[0]==current_mosaics_name_index;" mosaic="mosaic"></mosaic>
 						</div>
 					</div>
 					
 				</div>
 				
-				<div ng-if="sorting=='by_name'" class="flex-col">
+				<div ng-if="mosaics_sorting=='by_uniques'" class="flex-col">
 					
 					<div class="section">
 						<div class="flex">
 							<div class="grow flex width-12 wrap">
-								<div class="item flex justify-center" ng-repeat="index in name_indexes track by $index" style="width:40px;">
-									<a class="badge badge-link item text-center" ng-click="setCurrentNameIndex(index);" ng-class="{'active': current_name_index==index}" style="width:100%;">
-										{{index}}
+								<div class="item flex justify-center" ng-repeat="index in mosaics_uniques_indexes track by $index" style="width:100px;">
+									<a class="badge badge-link item text-center" ng-click="setCurrentMosaicsUniquesIndex(index);" ng-class="{'active': current_mosaics_uniques_index==index}" style="width:100%;">
+										[[index*100]] - [[(index+1)*100]]
 									</a>
 								</div>
 							</div>
@@ -244,53 +198,20 @@
 					
 					<div class="section">
 						<div class="flex wrap">
-							<div class="item width-12 width-xl-4" ng-repeat="mosaic in mosaics track by $index" ng-if="mosaic.title[0]==current_name_index;">
-								<div class="item link-block">
-									
-									<a class="item" href="/mosaic/{{mosaic.ref}}" target="_blank" style="display:block;">
-										<div class="flex align-center">
-											<i class="mr-normal text-small fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals"></i>
-											<span class="mr-normal grow text-medium color-light ellipsis" title="{{mosaic.title}}">{{mosaic.title}}</span>
-											<i class="fa fa-angle-right"></i>
-										</div>
-										<span class="text-small color-dark">{{mosaic.mission_count}} missions &middot; {{mosaic.uniques}} uniques</span>
-									</a>
-									
-									<div class="item pt-none">
-										<a class="flex" href="/world/{{mosaic.country_name}}/{{mosaic.region_name}}/{{mosaic.city_name}}">
-											<span class="mr-small flag-icon flag-icon-{{mosaic.country_code}}"></span>
-											<span>{{mosaic.city_name}}</span>
-										</a>
-									</div>
-	
-									<a class="item" href="/mosaic/{{mosaic.ref}}" target="_blank" style="display:block;">
-										<div class="flex wrap shrink" style="max-width:150px; padding-right:calc((6 - {{mosaic.cols}}) * 25px);">
-											
-											<div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-											</div>
-											
-											<div ng-repeat="m in mosaic.images track by $index" class="mission-vignet" style="max-width:25px; flex:0 0 calc(100% / {{mosaic.cols}});">
-												<img src="/static/img/mask.png" style="width:25px; background-image:url({{m}}=s25);" />
-											</div>
-											
-										</div>
-									</a>
-									
-								</div>
-							</div>
+							<mosaic ng-repeat="mosaic in mosaics track by $index" ng-if="mosaic.index_uniques==current_mosaics_uniques_index;" mosaic="mosaic"></mosaic>
 						</div>
 					</div>
 					
 				</div>
 				
-				<div ng-if="sorting=='by_uniques'" class="flex-col">
+				<div ng-if="mosaics_sorting=='by_missions'" class="flex-col">
 					
 					<div class="section">
 						<div class="flex">
 							<div class="grow flex width-12 wrap">
-								<div class="item flex justify-center" ng-repeat="index in uniques_indexes track by $index" style="width:100px;">
-									<a class="badge badge-link item text-center" ng-click="setCurrentUniquesIndex(index);" ng-class="{'active': current_uniques_index==index}" style="width:100%;">
-										{{index*100}} - {{(index+1)*100}}
+								<div class="item flex justify-center" ng-repeat="index in mosaics_missions_indexes track by $index" style="width:50px;">
+									<a class="badge badge-link item text-center" ng-click="setMosaicsCurrentMissionsIndex(index);" ng-class="{'active': current_mosaics_missions_index==index}" style="width:100%;">
+										[[index]]
 									</a>
 								</div>
 							</div>
@@ -299,95 +220,7 @@
 					
 					<div class="section">
 						<div class="flex wrap">
-							<div class="item width-12 width-xl-4" ng-repeat="mosaic in mosaics track by $index" ng-if="mosaic.index_uniques==current_uniques_index;">
-								<div class="item link-block">
-									
-									<a class="item" href="/mosaic/{{mosaic.ref}}" target="_blank" style="display:block;">
-										<div class="flex align-center">
-											<i class="mr-normal text-small fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals"></i>
-											<span class="mr-normal grow text-medium color-light ellipsis" title="{{mosaic.title}}">{{mosaic.title}}</span>
-											<i class="fa fa-angle-right"></i>
-										</div>
-										<span class="text-small color-dark">{{mosaic.mission_count}} missions &middot; {{mosaic.uniques}} uniques</span>
-									</a>
-									
-									<div class="item pt-none">
-										<a class="flex" href="/world/{{mosaic.country_name}}/{{mosaic.region_name}}/{{mosaic.city_name}}">
-											<span class="mr-small flag-icon flag-icon-{{mosaic.country_code}}"></span>
-											<span>{{mosaic.city_name}}</span>
-										</a>
-									</div>
-	
-									<a class="item" href="/mosaic/{{mosaic.ref}}" target="_blank" style="display:block;">
-										<div class="flex wrap shrink" style="max-width:150px; padding-right:calc((6 - {{mosaic.cols}}) * 25px);">
-											
-											<div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-											</div>
-											
-											<div ng-repeat="m in mosaic.images track by $index" class="mission-vignet" style="max-width:25px; flex:0 0 calc(100% / {{mosaic.cols}});">
-												<img src="/static/img/mask.png" style="width:25px; background-image:url({{m}}=s25);" />
-											</div>
-											
-										</div>
-									</a>
-									
-								</div>
-							</div>
-						</div>
-					</div>
-					
-				</div>
-				
-				<div ng-if="sorting=='by_missions'" class="flex-col">
-					
-					<div class="section">
-						<div class="flex">
-							<div class="grow flex width-12 wrap">
-								<div class="item flex justify-center" ng-repeat="index in missions_indexes track by $index" style="width:50px;">
-									<a class="badge badge-link item text-center" ng-click="setCurrentMissionsIndex(index);" ng-class="{'active': current_missions_index==index}" style="width:100%;">
-										{{index}}
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="section">
-						<div class="flex wrap">
-							<div class="item width-12 width-xl-4" ng-repeat="mosaic in mosaics track by $index" ng-if="mosaic.mission_count==current_missions_index;">
-								<div class="item link-block">
-									
-									<a class="item" href="/mosaic/{{mosaic.ref}}" target="_blank" style="display:block;">
-										<div class="flex align-center">
-											<i class="mr-normal text-small fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals"></i>
-											<span class="mr-normal grow text-medium color-light ellipsis" title="{{mosaic.title}}">{{mosaic.title}}</span>
-											<i class="fa fa-angle-right"></i>
-										</div>
-										<span class="text-small color-dark">{{mosaic.mission_count}} missions &middot; {{mosaic.uniques}} uniques</span>
-									</a>
-									
-									<div class="item pt-none">
-										<a class="flex" href="/world/{{mosaic.country_name}}/{{mosaic.region_name}}/{{mosaic.city_name}}">
-											<span class="mr-small flag-icon flag-icon-{{mosaic.country_code}}"></span>
-											<span>{{mosaic.city_name}}</span>
-										</a>
-									</div>
-	
-									<a class="item" href="/mosaic/{{mosaic.ref}}" target="_blank" style="display:block;">
-										<div class="flex wrap shrink" style="max-width:150px; padding-right:calc((6 - {{mosaic.cols}}) * 25px);">
-											
-											<div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-											</div>
-											
-											<div ng-repeat="m in mosaic.images track by $index" class="mission-vignet" style="max-width:25px; flex:0 0 calc(100% / {{mosaic.cols}});">
-												<img src="/static/img/mask.png" style="width:25px; background-image:url({{m}}=s25);" />
-											</div>
-											
-										</div>
-									</a>
-									
-								</div>
-							</div>
+							<mosaic ng-repeat="mosaic in mosaics track by $index" ng-if="mosaic.images.length==current_mosaics_missions_index;" mosaic="mosaic"></mosaic>
 						</div>
 					</div>
 					
@@ -399,34 +232,13 @@
 					
 				<div class="section">
 					<div class="flex wrap">
-						<div class="item width-12 width-xl-4" ng-repeat="potential in potentials track by $index">
-							<div class="item link-block">
-								
-								<a class="item" href="/registration/{{potential.title}}" target="_blank" style="display:block;">
-									<div class="flex align-center">
-										<span class="mr-normal grow text-medium color-light ellipsis" title="{{potential.title}}">{{potential.title}}</span>
-										<i class="fa fa-angle-right"></i>
-									</div>
-									<span class="text-small color-dark">{{potential.count}} missions</span>
-								</a>
-								
-								<div class="item pt-none">
-									<a class="flex" href="/world/{{potential.city.region.country.name}}/{{potential.city.region.name}}/{{potential.city.name}}">
-										<span class="mr-small flag-icon flag-icon-{{potential.city.region.country.code}}"></span>
-										<span>{{potential.city.name}}</span>
-									</a>
-								</div>
-								
-							</div>
-						</div>
+						<potential ng-repeat="potential in potentials track by $index" potential="potential"></potential>
 					</div>
 				</div>
 				
 			</div>
 			
 		</div>
-		
-	{% endverbatim %}
 	
 	</div>
 

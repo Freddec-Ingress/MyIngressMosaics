@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import re
 import json
 
 from math import *
-
 from datetime import datetime
 
 from django.db import models
@@ -15,27 +13,28 @@ from django.dispatch import receiver
 
 from django.contrib.auth.models import User
 
+from django.utils.crypto import get_random_string
 from django.utils.encoding import python_2_unicode_compatible
 
-import math, os
-import urllib, io
-
-from operator import itemgetter, attrgetter, methodcaller
-
-from PIL import Image, ImageDraw, ImageFont
 
 
+#---------------------------------------------------------------------------------------------------
+def _createRef():
+	return get_random_string(32)
 
+
+	
 #---------------------------------------------------------------------------------------------------
 @python_2_unicode_compatible
 class Profile(models.Model):
 
 	user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
 
-	faction = models.CharField(max_length=4, null=True, blank=True)
-	family_name = models.CharField(max_length=64, null=True, blank=True)
-	picture = models.CharField(max_length=512, null=True, blank=True)
 	locale = models.CharField(max_length=4, null=True, blank=True)
+	faction = models.CharField(max_length=4, null=True, blank=True)
+	picture = models.CharField(max_length=512, null=True, blank=True)
+	
+	family_name = models.CharField(max_length=64, null=True, blank=True)
 	
 	# Admin displaying
 	
@@ -66,20 +65,6 @@ class Country(models.Model):
 	def __str__(self):
 		return self.name
 		
-	# Serialization
-	
-	def serialize(self):
-		
-		data = {
-			
-			'id': self.pk,
-			'code': self.code,
-			'name': self.name,
-			'locale': self.locale,
-		}
-		
-		return data
-
 
 
 #---------------------------------------------------------------------------------------------------
@@ -95,22 +80,6 @@ class Region(models.Model):
 	
 	def __str__(self):
 		return self.name
-		
-	# Serialization
-	
-	def serialize(self):
-		
-		data = {
-
-			'country': self.country.serialize(),
-			
-			'id': self.pk,
-			'name': self.name,
-			'locale': self.locale,
-			'city_count': self.cities.all().count(),
-		}
-		
-		return data
 
 
 
@@ -127,137 +96,48 @@ class City(models.Model):
 	
 	def __str__(self):
 		return self.name
-		
-	# Serialization
-	
-	def serialize(self):
-		
-		data = {
-
-			'region': self.region.serialize(),
-
-			'id': self.pk,
-			'name': self.name,
-			'locale': self.locale,
-			'mosaic_count': self.mosaics.all().count(),
-		}
-		
-		return data
 
 
 
 #---------------------------------------------------------------------------------------------------
-from django.utils.crypto import get_random_string
-
-def _createRef():
-	return get_random_string(32)
-	
 @python_2_unicode_compatible
 class Mosaic(models.Model):
 
+	city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True, related_name='mosaics')
+	
 	ref = models.CharField(max_length=32, default=_createRef, unique=True)
-	cols = models.IntegerField(default=6)
-	type = models.CharField(max_length=64, default='sequence')
-	tags =  models.TextField(null=True, blank=True)
+	
 	title = models.CharField(max_length=256)
-	status = models.CharField(max_length=64, default='active')
-	preview = models.CharField(max_length=1024, null=True, blank=True)
-	portals = models.IntegerField(null=True, blank=True)
-	uniques = models.IntegerField(null=True, blank=True)
+	column_count = models.IntegerField(default=6)
+
 	startLat = models.FloatField(null=True, blank=True)
 	startLng = models.FloatField(null=True, blank=True)
+
 	distance = models.FloatField(null=True, blank=True)
+
 	creators = models.CharField(max_length=512, null=True, blank=True)
+
 	registerer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='mosaics')
 	register_date = models.DateField(default=datetime.now)
 	
-	city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True, related_name='mosaics')
-	
-	lovers = models.ManyToManyField(User, blank=True, related_name='mosaics_loved')
-	completers = models.ManyToManyField(User, blank=True, related_name='mosaics_completed')
+	unique_count = models.IntegerField(null=True, blank=True)
+	portal_count = models.IntegerField(null=True, blank=True)
+	waypoint_count = models.IntegerField(null=True, blank=True)
 	
 	# Admin displaying
 	
 	def __str__(self):
 		return self.title + ' - ' + str(self.missions.count())
-		
-	# Generate preview
 	
-	def generatePreview(self):
-		
-		mosaic = self
-		
-		mcount = mosaic.missions.count()
-		
-		mosaic_rows = int(math.ceil(mcount / mosaic.cols))
-		
-		img_height = 32 + 20 + (100 * mosaic_rows)
-		if (img_height < 352):
-			img_height = 352
-		
-		image = Image.new('RGBA', (632, img_height), (0, 77, 64))
 	
-		draw = ImageDraw.Draw(image)
-		draw.rectangle(((8, 8), (624, img_height - 52 + 24)), fill = 'black')
-		
-		fontfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/fonts/coda-regular.ttf').read())
-		
-		font = ImageFont.truetype(fontfile, 15)
-		draw.text((16, img_height - 25), 'MIM - MyIngressMosaics.com', fill=(255, 255, 255), font=font)
-		
-		realx = 0
-		if mcount < mosaic.cols:
-			realx = mcount * 100
-		else:
-			realx = mosaic.cols * 100
-		
-		realy = mosaic_rows * 100
-		
-		paddingX = 16 + (600 - realx) / 2
-		
-		if mosaic_rows < 4:
-			paddingY = 16 + (300 - realy) / 2
-		else:
-			paddingY = 16
-	
-		maskfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/img/mask.png').read())
-		maskimg = Image.open(maskfile)
-			
-		for m in mosaic.missions.all():
-	
-			if 'Unavailable' not in m.ref:
-				file = io.BytesIO(urllib.request.urlopen(m.image + '=s100').read())
-				mimg = Image.open(file)
-				
-			order = mcount - m.order
-			
-			y = int(order / mosaic.cols)
-			x = int(order - (y * mosaic.cols))
-			
-			xoffset = paddingX + (x * 100)
-			yoffset = paddingY + (y * 100)
-			
-			if 'Unavailable' not in m.ref:
-				image.paste(mimg, (int(xoffset), int(yoffset)));
-				
-			image.paste(maskimg, (int(xoffset), int(yoffset)), maskimg);
-	
-		imgByteArr = io.BytesIO()
-		image.save(imgByteArr, format='PNG')
-		imgByteArr = imgByteArr.getvalue()
-	
-		from django.core.files.storage import default_storage
-#		name = '' + self.ref + '.png'
-#		file = default_storage.save(name, imgByteArr)
-		
-		return default_storage.location
 	
 	# Internal data computing
-
+	
 	def computeInternalData(self):
 	
-		self.portals = 0
-		self.uniques = 0
+		self.waypoint_count = 0
+		self.portal_count = 0
+		self.unique_count = 0
 		self.startLat = 0.0
 		self.startLng = 0.0
 		self.distance = 0.0
@@ -302,143 +182,41 @@ class Mosaic(models.Model):
 					self.distance += getDistanceFromLatLng(pData1['lat'], pData1['lng'], pData2['lat'], pData2['lng'])
 					
 		self.save()
-
-	# Mini serialization
 	
-	def miniSerialize(self):
+	
+	
+	# Get overview data
+	
+	def getOverviewData(self):
 		
-		data = {
+		mosaic_data = {
 			
-			'id': self.pk,
-			'ref': self.ref,
-			'cols': self.cols,
-			'name': self.title,
-			'type': self.type,
-			'city': { 'name': self.city.name },
+			'ref':self.ref,
+			'title':self.title,
 			
-			'missions': [],
-		}
+			'column_count':self.column_count,
+			'unique_count':self.unique_count,
 			
-		for mission in self.missions.all().order_by('order'):
+			'city_name':self.city.name,
+			'region_name':self.city.region.name,
+			'country_code':self.city.region.country.code,
+			'country_name':self.city.region.country.name,
 			
-			mission_data = { 'image':mission.image }
-			data['missions'].append(mission_data)
-			
-		return data
+			'has_unavailable_portals':False,
 
-	# Map serialization
-	
-	def mapSerialize(self):
-		
-		data = {
-			
-			'ref': self.ref,
-			'startLat': self.startLat,
-			'startLng': self.startLng,
-		}
-			
-		return data
-	
-	# Overview serialization
-	
-	def overviewSerialize(self):
-		
-		data = {
-			
-			'id': self.pk,
-			'ref': self.ref,
-			'cols': self.cols,
-			'type': self.type,
-			'title': self.title,
-			'distance': self.distance,
-			'has_fake': False,
-			'startLat': self.startLat,
-			'startLng': self.startLng,
-			'uniques': self.uniques,
-			'has_unavailable_portals': False,
-			
-			'city': None,
-
-			'missions': [],
+			'images':[],
 		}
 		
-		if self.city:
-			data['city'] = self.city.serialize()
-		
-		for item in self.missions.all().order_by('order'):
-			
-			if 'Unavailable' in item.ref:
-				data['has_fake'] = True
-			
-			mission_data = item.imgSerialize()
-			data['missions'].append(mission_data)
-			
-			mdata = item.getPortalsData()
-			for portal in mdata:
-				if portal['title'] == 'Unavailable':
-					data['has_unavailable_portals'] = True
-			
-		return data
-	
-	# Details serialization
-		
-	def detailsSerialize(self):
+		for mission_obj in self.missions.all().order_by('-order'):
+			mosaic_data['images'].append(str(mission_obj.image))
 
-		data = {
-			
-			'ref': self.ref,
-			'cols': self.cols,
-			'type': self.type,
-			'city': self.city.serialize(),
-			'title': self.title,
-			'likers': self.links.filter(type='like').count(),
-			'portals': self.portals,
-			'uniques': self.uniques,
-			'distance': self.distance,
-			'startLat': self.startLat,
-			'startLng': self.startLng,
-			'completers': self.links.filter(type='complete').count(),
-			'todoers': self.links.filter(type='todo').count(),
-			
-			'has_fake': False,
-			'is_loved': False,
-			'is_completed': False,
-			'has_unavailable_portals': False,
-			
-			'creators': [],
-			'missions': [],
-			'comments': [],
-		}
-
-		creators = []
-
-		for item in self.missions.all().order_by('order'):
-			
-			if 'Unavailable' in item.ref:
-				data['has_fake'] = True
-			
-			mData = item.detailsSerialize()
-			mData['has_unavailable_portals'] = False
-			data['missions'].append(mData)
-			
-			cData = {
-				'name': mData['creator'],
-				'faction': mData['faction'],
-			}
-			
-			creators.append(cData)
-			
-			for portal in mData['portals']:
-				if portal['title'] == 'Unavailable':
-					mData['has_unavailable_portals'] = True
-					data['has_unavailable_portals'] = True
-
-		data['creators'] = [dict(t) for t in set([tuple(d.items()) for d in creators])]
+			portals_data = mission_obj.getPortalsData()
+			for portal_data in portals_data:
+				if portal_data['title'] == 'Unavailable':
+					mosaic_data['has_unavailable_portals'] = True
+					break
 		
-		for item in Comment.objects.filter(mosaic=self).order_by('-update_date'):
-			data['comments'].append(item.serialize())
-		
-		return data
+		return mosaic_data
 
 
 
@@ -457,28 +235,36 @@ def getDistanceFromLatLng(lat1, lng1, lat2, lng2):
 	
 	return d
 
+
+
+#---------------------------------------------------------------------------------------------------
 @python_2_unicode_compatible
 class Mission(models.Model):
+	
+	mosaic = models.ForeignKey('Mosaic', on_delete=models.SET_NULL, null=True, blank=True, related_name='missions')
+
+	ref = models.CharField(max_length=64, null=True, blank=True, unique=True)
 
 	data = models.TextField()
 
-	ref = models.CharField(max_length=64, null=True, blank=True, unique=True)
+	name = models.CharField(max_length=256, null=True, blank=True)
 	desc =  models.TextField(null=True, blank=True)
 	order = models.IntegerField(null=True, blank=True)
-	name = models.CharField(max_length=256, null=True, blank=True)
 	title = models.CharField(max_length=256, null=True, blank=True)
 	image = models.CharField(max_length=256, null=True, blank=True)
+
 	creator = models.CharField(max_length=32, null=True, blank=True)
 	faction = models.CharField(max_length=32, null=True, blank=True)
+
 	startLat = models.FloatField(null=True, blank=True)
 	startLng = models.FloatField(null=True, blank=True)
+
 	distance = models.FloatField(null=True, blank=True)
-	registerer = models.TextField(null=True, blank=True)
-	
+
 	admin = models.BooleanField(default=True)
 	validated = models.BooleanField(default=False)
-	
-	mosaic = models.ForeignKey('Mosaic', on_delete=models.SET_NULL, null=True, blank=True, related_name='missions')
+
+	registerer = models.TextField(null=True, blank=True)
 	
 	# Admin displaying
 	
@@ -487,6 +273,8 @@ class Mission(models.Model):
 			return self.title
 		else:
 			return ''
+
+
 
 	# Portals data
 	
@@ -530,6 +318,8 @@ class Mission(models.Model):
 				data.append(pData)
 			
 		return data
+
+
 
 	# Internal data computing
 
@@ -620,42 +410,16 @@ class Mission(models.Model):
 			self.registerer = jsondata[11]
 				
 		self.save()
+	
+	
+	
+	# Get overview data
+	
+	def getOverviewData(self):
 		
-	# Image serialization
-
-	def imgSerialize(self):
-		
-		data = {
+		mission_data = {
 			
-			'image': self.image,
-		}
-		
-		return data
-
-	# Map serialization
-
-	def mapSerialize(self):
-		
-		data = {
-			
-			'ref': self.ref,
-			'startLat': self.startLat,
-			'startLng': self.startLng,
-		}
-		
-		return data
-
-	# Overview serialization
-
-	def overviewSerialize(self):
-		
-		data = {
-			
-			'ref': self.ref,
-			'desc': self.desc,
-			'order': self.order,
 			'title': self.title,
-			'name': self.name,
 			'image': self.image,
 			'creator': self.creator,
 			'faction': self.faction,
@@ -663,36 +427,11 @@ class Mission(models.Model):
 			'startLng': self.startLng,
 		}
 		
-		return data
+		return mission_data
+	
+	
 
-	# Details serialization
-
-	def detailsSerialize(self):
-		
-		data = {
-			
-			'ref': self.ref,
-			'desc': self.desc,
-			'image': self.image,
-			'order': self.order,
-			'title': self.title,
-			'name': self.name,
-			'creator': self.creator,
-			'faction': self.faction,
-			'startLat': self.startLat,
-			'startLng': self.startLng,
-			'distance': self.distance,
-			
-			'portals': [],
-		}
-		
-		if 'Unavailable' not in self.ref:
-			data['portals'] = self.getPortalsData()
-		
-		return data
-
-
-
+#---------------------------------------------------------------------------------------------------
 @python_2_unicode_compatible
 class Comment(models.Model):
 	
@@ -700,6 +439,7 @@ class Comment(models.Model):
 	mosaic = models.ForeignKey('Mosaic', on_delete=models.SET_NULL, null=True, blank=True, related_name='comments')
 
 	text = models.TextField()
+	
 	create_date = models.DateField(default=datetime.now)
 	update_date = models.DateField(default=datetime.now)
 	
@@ -714,30 +454,9 @@ class Comment(models.Model):
 			text += self.mosaic.title
 		return text
 		
-	# Serialization
-	
-	def serialize(self):
-		
-		username = 'unknown'
-		if self.user:
-			text = self.user.username
-		
-		faction = 'unknown'
-		if self.user:
-			text = self.user.profile.faction
-			
-		data = {
-			
-			'id': self.pk,
-			'username': username,
-			'faction': faction,
-			'text': self.text,
-		}
-			
-		return data
 
 
-
+#---------------------------------------------------------------------------------------------------
 @python_2_unicode_compatible
 class Search(models.Model):
 	
@@ -761,6 +480,7 @@ class Search(models.Model):
 
 
 
+#---------------------------------------------------------------------------------------------------
 @python_2_unicode_compatible
 class Link(models.Model):
 	
@@ -777,37 +497,42 @@ class Link(models.Model):
 
 
 
+#---------------------------------------------------------------------------------------------------
 @python_2_unicode_compatible
 class Potential(models.Model):
-	
-	title = models.CharField(max_length=256)
-
-	count = models.IntegerField()
 	
 	city = models.ForeignKey(City, related_name='potentials')
 	country = models.ForeignKey(Country, related_name='potentials', null=True, blank=True)
 	
-	creator = models.CharField(max_length=32, null=True, blank=True)
-	faction = models.CharField(max_length=32, null=True, blank=True)
-	
+	title = models.CharField(max_length=256)
+	mission_count = models.IntegerField()
+
 	# Admin displaying
+	
 	def __str__(self):
 		return self.title + ' - ' + str(self.count)
-
-	def overviewSerialize(self):
+	
+	
+	
+	# Get overview data
+	
+	def getOverviewData(self):
 		
-		data = {
+		potential_data = {
 			
-			'id': self.pk,
-			'title': self.title,
-			'count': self.count,
-			'city': self.city.serialize(),
+			'name': self.title,
+			'mission_count': self.count,
+			
+			'city_name': self.city.name,
+			'country_name': self.country.name,
+			'country_code': self.country.code,
 		}
 		
-		return data
+		return potential_data
 
 
 
+#---------------------------------------------------------------------------------------------------
 @python_2_unicode_compatible
 class Notif(models.Model):
 	
@@ -830,6 +555,7 @@ class Notif(models.Model):
 
 
 
+#---------------------------------------------------------------------------------------------------
 @python_2_unicode_compatible
 class IMCountry(models.Model):
 	
@@ -839,11 +565,13 @@ class IMCountry(models.Model):
 	count = models.IntegerField()
 	
 	# Admin displaying
+	
 	def __str__(self):
 		return self.name
 
 
 
+#---------------------------------------------------------------------------------------------------
 @python_2_unicode_compatible
 class IMRegion(models.Model):
 
@@ -855,11 +583,13 @@ class IMRegion(models.Model):
 	count = models.IntegerField()
 	
 	# Admin displaying
+	
 	def __str__(self):
 		return self.name
 
 
 
+#---------------------------------------------------------------------------------------------------
 @python_2_unicode_compatible
 class IMCity(models.Model):
 
@@ -871,19 +601,19 @@ class IMCity(models.Model):
 	count = models.IntegerField()
 	
 	# Admin displaying
+	
 	def __str__(self):
 		return self.name
 
 
 
+#---------------------------------------------------------------------------------------------------
 @python_2_unicode_compatible
 class IMMosaic(models.Model):
 
 	country_name = models.CharField(max_length=128)
 	region_name = models.CharField(max_length=128)
 	city_name = models.CharField(max_length=128)
-
-	compare_name = models.CharField(max_length=128)
 	
 	name = models.CharField(max_length=128)
 	count = models.IntegerField()
@@ -892,5 +622,6 @@ class IMMosaic(models.Model):
 	excluded = models.BooleanField(default=False)
 	
 	# Admin displaying
+	
 	def __str__(self):
 		return self.name

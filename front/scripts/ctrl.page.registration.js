@@ -1,6 +1,10 @@
-angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', function($scope, $window, $location, API, UtilsService, $auth, UserService) {
+angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', function($scope, $window, $location, API, $auth, UserService, UtilsService) {
 	
 	$scope.signin = UserService.signin;
+
+	$scope.authenticated = $auth.isAuthenticated();
+    
+	$('.hidden').each(function() { $(this).removeClass('hidden'); })
 	
 	/* Tab management */
 	
@@ -41,13 +45,11 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		$scope.refreshing = true;
 		
 		var data = { 'text':text };
-		API.sendRequest('/api/new_missions/', 'POST', {}, data).then(function(response) {
+		API.sendRequest('/api/search/missions/', 'POST', {}, data).then(function(response) {
 			
 			$scope.missions = response.missions;
 			if (!$scope.missions) $scope.missions = [];
 
-			$scope.missions.sort(UtilsService.sortMissionsByCreatorTitleAsc);
-			
 			for (var mission of $scope.missions) {
 				for (var select of $scope.selected) {
 					if (mission.ref == select.ref) {
@@ -115,21 +117,6 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	
 	$scope.mission_selected = null;
 
-	$scope.addFake = function(fakeorder) {
-		
-		var mission = {
-			'ref': 'Unavailable',
-			'order': fakeorder,
-			'title': 'Fake mission',
-		}
-		
-		$scope.selected.push(mission);
-		
-		$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
-		
-		$scope.computeOffset();
-	}
-	
 	$scope.computeOffset = function() {
 		
 		var temp = 0;
@@ -140,27 +127,7 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 		
 		$scope.offset = new Array(temp);
 	}
-	
-	$scope.displayOrder = function(mission) {
-		
-		$scope.mission_selected = mission;
-	}
 
-	$scope.closeOrder = function() {
-		
-		$scope.mission_selected = null;
-	}
-	
-	$scope.saveOrder = function(order) {
-		
-		if (!order) return;
-		
-		$scope.mission_selected.order = order;
-		$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
-		
-		$scope.closeOrder();
-	}
-	
 	$scope.retireMission = function(mission) {
 		
 		mission.selected = false;
@@ -413,8 +380,6 @@ angular.module('FrontModule.controllers').controller('NewRegistrationCtrl', func
 	}
 	
 	/* Page loading */
-	
-	$scope.authenticated = $auth.isAuthenticated();
 
 	$scope.init = function(text) {
 	

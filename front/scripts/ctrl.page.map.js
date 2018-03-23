@@ -1,4 +1,4 @@
-angular.module('FrontModule.controllers').controller('NewMapCtrl', function($scope, $window, $compile, API) {
+angular.module('FrontModule.controllers').controller('MapPageCtrl', function($scope, $window, $compile, API) {
 	
 	/* Mosaic list management */
 	

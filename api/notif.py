@@ -24,31 +24,34 @@ def notif_create(request):
 	if 'city_name' in request.data: city_name = request.data['city_name']
 	
 	# Retrieve data
-	country_data = None
-	region_data = None
-	city_data = None
+	
+	city_obj = None
+	region_obj = None
+	country_obj = None
 	
 	if country_name:
-		country_data = Country.objects.get(name=country_name)
+		country_obj = Country.objects.get(name=country_name)
 		
 		if region_name:
-			region_data = Region.objects.get(country=country_data, name=region_name)
+			region_obj = Region.objects.get(country=country_obj, name=region_name)
 	
 			if city_name:
-				city_data = City.objects.get(region=region_data, name=city_name)
+				city_obj = City.objects.get(region=region_obj, name=city_name)
 			
 	# Check if same notification already exists
+	
 	already_existing = False
 	
-	results = Notif.objects.filter(user=request.user, country=country_data, region=region_data, city=city_data)
+	results = Notif.objects.filter(user=request.user, country=country_obj, region=region_obj, city=city_data)
 	if results.count() > 0:
 		already_existing = True
 	
 	# Create new notification
+	
 	if not already_existing:
 		
-		new_notif = Notif(user=request.user, country=country_data, region=region_data, city=city_data)
-		new_notif.save()
+		notif_obj = Notif(user=request.user, country=country_obj, region=region_obj, city=city_obj)
+		notif_obj.save()
 	
 	return Response(None, status=status.HTTP_200_OK)
 
@@ -68,24 +71,23 @@ def notif_delete(request):
 	if 'city_name' in request.data: city_name = request.data['city_name']
 
 	# Retrieve data
-	country_data = None
-	region_data = None
-	city_data = None
+	
+	city_obj = None
+	region_obj = None
+	country_obj = None
 	
 	if country_name:
-		country_data = Country.objects.get(name=country_name)
+		country_obj = Country.objects.get(name=country_name)
 		
 		if region_name:
-			region_data = Region.objects.get(country=country_data, name=region_name)
+			region_obj = Region.objects.get(country=country_obj, name=region_name)
 	
 			if city_name:
-				city_data = City.objects.get(region=region_data, name=city_name)
+				city_obj = City.objects.get(region=region_obj, name=city_name)
 				
 	# Delete existing notification
-	results = Notif.objects.filter(user=request.user, country=country_data, region=region_data, city=city_data)
-	if results.count() > 0:
-		
-		existing_notif = results[0]
-		existing_notif.delete()
+	
+	notif_obj = Notif.objects.get(user=request.user, country=country_obj, region=region_obj, city=city_obj)
+	notif_obj.delete()
 	
 	return Response(None, status=status.HTTP_200_OK)

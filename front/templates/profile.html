@@ -12,59 +12,52 @@
 {% endblock %}
 
 {% block content %}
-<div id="content" ng-controller="NewProfileCtrl">
 
-{% verbatim %}
-
-	<div id="loading" ng-hide="loaded">
-		<i class="item fa fa-spinner rotating"></i>
-		<span class="item">Loading page...</span>
-	</div>
+	<div id="content" ng-controller="ProfilePageCtrl" ng-init="init();">
 	
-	<div class="container" ng-class="{'active':loaded}">
-		
-		<div ng-if="!authenticated">
-			
-		    <div class="mt-big item flex-col justify-center align-center">
-		    	
-			    <div class="item">
-				    <span class="color-normal">To access to profile page, please sign in</span>
-			    </div>
-				
-		    	<div class="item">
-		    		<a class="btn" ng-click="signin('google', '/profile');">
-		    			Sign in
-		    		</a>
-		    	</div>
-
+		<div id="loading" ng-hide="loaded" class="section">
+			<div class="item flex justify-center align-center">
+				<i class="fa fa-spinner rotating"></i>
+				<span class="ml-small">Loading page...</span>
 			</div>
-			
 		</div>
 		
-		<div ng-if="authenticated">
+		<div class="container" ng-class="{'active':loaded}" ng-if="!authenticated">
 			
-			<div class="mt-big item flex align-center">
-				
-				<div class="item flex align-center">
-					<img src="{{picture}}" width="40px" height="40px" />
+		    <div class="section">
+		    	
+		    	<div class="item flex-col">
+					<span class="mb-small color-danger">You must be signed in to access this page.</span>
+					<a ng-click="signin('google', '/profile');">Sign in</a>
 				</div>
 				
-				<div class="item grow flex-col">
-					<span class="pb-none text-big color-light">{{name}}</span>
-					<span ng-show="faction == 'E'" class="color-enlightened">Enlightened</span>
-					<span ng-show="faction == 'R'" class="color-resistant">Resistant</span>
-					<span ng-show="!faction" class="color-muted">Not defined</span>
-				</div>
+			</div>
 				
-			    <div class="item flex justify-center">
-					<button class="btn btn-danger" ng-click="logout();">
-					    Sign out
-					</button>
+		</div>
+
+		<div class="container" ng-class="{'active':loaded}" ng-if="authenticated">
+
+			<div class="section">
+				
+				<div class="flex align-center">
+					
+					<div class="flex align-center">
+						<img class="item" src="{{picture}}" width="40px" height="40px" />
+					</div>
+					
+					<div class="item flex-col">
+						<span class="text-big color-light">{{name}}</span>
+						<span ng-show="faction == 'E'" class="color-enlightened">Enlightened</span>
+						<span ng-show="faction == 'R'" class="color-resistant">Resistant</span>
+						<span ng-show="!faction" class="color-muted">Not defined</span>
+						<a class="mt-small" ng-click="logout();">Sign out</a>
+					</div>
+
 				</div>
 				
 			</div>
 
-			<div ng-if="!faction" class="mt-big item flex-col">
+			<div ng-if="!faction" class="section">
 				
 				<div class="item pb-none">
 					<span class="color-normal">Please specify your faction</span>
@@ -89,77 +82,47 @@
 				
 			</div>
 		
-			<div class="mt-big tab-row">
-			
-				<div class="tab" ng-click="current_tab='mosaic'" ng-class="{'active':current_tab=='mosaic'}">
-					<span>Mosaics <span class="ml-normal badge">{{mosaics.length}}</span></span>
-				</div>
+			<div class="section">
+				<div class="tab-row">
 				
-				<div class="tab" ng-click="current_tab='mission'" ng-class="{'active':current_tab=='mission'}">
-					<span>Missions <span class="ml-normal badge">{{missions.length}}</span></span>
-				</div>
+					<div class="tab" ng-click="current_tab='mosaics'" ng-class="{'active':current_tab=='mosaics'}">
+						Mosaics
+						<span class="ml-normal badge">{{mosaic_count}}</span>
+					</div>
+					
+					<div class="tab" ng-click="current_tab='missions'" ng-class="{'active':current_tab=='missions'}">
+						Missions
+						<span class="ml-normal badge">{{mission_count}}</span>
+					</div>
+					
+					<div class="tab" ng-click="current_tab='likes'" ng-class="{'active':current_tab=='likes'}">
+						Like
+						<span class="ml-normal badge">{{like_count}}</span>
+					</div>
+					
+					<div class="tab" ng-click="current_tab='todos'" ng-class="{'active':current_tab=='todos'}">
+						To do
+						<span class="ml-normal badge">{{todo_count}}</span>
+					</div>
+					
+					<div class="tab" ng-click="current_tab='completes'" ng-class="{'active':current_tab=='completes'}">
+						Done
+						<span class="ml-normal badge">{{complete_count}}</span>
+					</div>
+					
+					<div class="tab" ng-click="current_tab='notifs'" ng-class="{'active':current_tab=='notifs'}">
+						Notifications
+						<span class="ml-normal badge">{{notif_count}}</span>
+					</div>
 				
-				<div class="tab" ng-click="current_tab='like'" ng-class="{'active':current_tab=='like'}">
-					<span>Like <span class="ml-normal badge">{{like.length}}</span></span>
 				</div>
-				
-				<div class="tab" ng-click="current_tab='todo'" ng-class="{'active':current_tab=='todo'}">
-					<span>To do <span class="ml-normal badge">{{todo.length}}</span></span>
-				</div>
-				
-				<div class="tab" ng-click="current_tab='complete'" ng-class="{'active':current_tab=='complete'}">
-					<span>Done <span class="ml-normal badge">{{complete.length}}</span></span>
-				</div>
-				
-				<div class="tab" ng-click="current_tab='notif'" ng-class="{'active':current_tab=='notif'}">
-					<span>Notifications <span class="ml-normal badge">{{notif.length}}</span></span>
-				</div>
-			
 			</div>
 			
 			<div ng-show="current_tab=='mosaic'">
 				
-				<div ng-show="mosaics.length < 1">
-					
-					<div class="item flex justify-center">
-						<div class="item">
-							<span class="color-dark">No registered mosaic</span>
-						</div>
-					</div>
-
-				</div>
-				
-				<div class="flex wrap" ng-show="mosaics.length > 0">
-					<div class="width-6 width-xl-4" ng-repeat="mosaic in mosaics | reverse" style="padding: .75rem .375rem;">
-						<a class="item link-block flex-col" href="/mosaic/{{mosaic.ref}}" target="_blank" style="height:100%;">
-							
-		    				<div class="item">
-		    					
-		    					<span class="text-medium color-light block">{{mosaic.title}}</span>
-		
-		    					<div class="text-small color-dark">
-									<span class=" mr-small flag-icon flag-icon-{{mosaic.city.region.country.code}}"></span>
-									<span>{{mosaic.city.name}}</span>
-		    					</div>
-		    					
-		    				</div>
-		    				
-		    				<div class="item grow">
-		    					
-								<div class="flex wrap shrink" style="padding-right:calc((6 - {{mosaic.cols}}) * 16.666667%);">
-									
-						            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-						            </div>
-						            
-						            <div ng-repeat="m in mosaic.missions | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-						                <img src="/static/img/mask.png" style="background-image:url({{m.image}}=s100);" />
-						            </div>
-						            
-					            </div>
-		    					
-		    				</div>
-		    				
-		 	   			</a>
+				<div class="section">
+					<div class="flex wrap">
+						<mosaic ng-repeat="mosaic in mosaics track by $index" mosaic="mosaic"></mosaic>
 					</div>
 				</div>
 				
@@ -167,97 +130,19 @@
 			
 			<div ng-show="current_tab=='mission'">
 				
-				<div ng-show="missions.length < 1">
-					
-					<div class="item flex justify-center">
-						<div class="item">
-							<span class="color-dark">No registered mission</span>
-						</div>
+				<div class="section">
+					<div class="flex wrap">
+						<potential ng-repeat="mission in missions track by $index" mission="mission"></potential>
 					</div>
-
-				</div>
-				
-				<div ng-show="missions.length > 0">
-					
-					<div class="item">
-						<div class="group-list">
-			    			<div class="group-list-item flex align-center pl-xl-none pr-xl-none" ng-repeat="mission in missions | reverse">
-							
-								<div class="item flex">
-									<img src="{{mission.image}}" width="40px" height="40px" />
-								</div>
-							
-								<div class="item grow">
-									<span class="block text-medium color-light">{{mission.title}}</span>
-									<span class="block" ng-class="{'color-enlightened':mission.faction=='E', 'color-resistant':mission.faction=='R'}">{{mission.creator}}</span>
-								</div>
-							
-								<div class="item">
-			                        <a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=17&pll={{mission.startLat}},{{mission.startLng}}" target="blank">
-			                            <i class="fa fa-external-link"></i>
-			                        </a>
-								</div>
-								
-							</div>
-						</div>
-					</div>
-					
-					<div class="item flex justify-center">
-						<div class="item">
-							<a class="btn" href="/registration/{{user.name}}">
-								<i class="fa fa-plus-square"></i>
-								<span class="ml-normal">Register mosaic</span>
-							</a>
-						</div>
-					</div>
-					
 				</div>
 				
 			</div>
 
 			<div ng-show="current_tab=='like'">
 				
-				<div ng-show="like.length < 1">
-					
-					<div class="item flex justify-center">
-						<div class="item">
-							<span class="color-dark">No liked mosaic</span>
-						</div>
-					</div>
-
-				</div>
-				
-				<div class="flex wrap" ng-show="like.length > 0">
-					<div class="width-6 width-xl-4" ng-repeat="mosaic in like | reverse" style="padding: .75rem .375rem;">
-						<a class="item link-block flex-col" href="/mosaic/{{mosaic.ref}}" target="_blank" style="height:100%;">
-							
-		    				<div class="item">
-		    					
-		    					<span class="text-medium color-light block">{{mosaic.title}}</span>
-		
-		    					<div class="text-small color-dark">
-									<span class=" mr-small flag-icon flag-icon-{{mosaic.city.region.country.code}}"></span>
-									<span>{{mosaic.city.name}}</span>
-		    					</div>
-		    					
-		    				</div>
-		    				
-		    				<div class="item grow">
-		    					
-								<div class="flex wrap shrink" style="padding-right:calc((6 - {{mosaic.cols}}) * 16.666667%);">
-									
-						            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-						            </div>
-						            
-						            <div ng-repeat="m in mosaic.missions | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-						                <img src="/static/img/mask.png" style="background-image:url({{m.image}}=s100);" />
-						            </div>
-						            
-					            </div>
-		    					
-		    				</div>
-		    				
-		 	   			</a>
+				<div class="section">
+					<div class="flex wrap">
+						<mosaic ng-repeat="mosaic in likes track by $index" mosaic="mosaic"></mosaic>
 					</div>
 				</div>
 
@@ -265,47 +150,9 @@
 
 			<div ng-show="current_tab=='todo'">
 				
-				<div ng-show="todo.length < 1">
-					
-					<div class="item flex justify-center">
-						<div class="item">
-							<span class="color-dark">No mosaic to do</span>
-						</div>
-					</div>
-
-				</div>
-				
-				<div class="flex wrap" ng-show="todo.length > 0">
-					<div class="width-6 width-xl-4" ng-repeat="mosaic in todo | reverse" style="padding: .75rem .375rem;">
-						<a class="item link-block flex-col" href="/mosaic/{{mosaic.ref}}" target="_blank" style="height:100%;">
-							
-		    				<div class="item">
-		    					
-		    					<span class="text-medium color-light block">{{mosaic.title}}</span>
-		
-		    					<div class="text-small color-dark">
-									<span class=" mr-small flag-icon flag-icon-{{mosaic.city.region.country.code}}"></span>
-									<span>{{mosaic.city.name}}</span>
-		    					</div>
-		    					
-		    				</div>
-		    				
-		    				<div class="item grow">
-		    					
-								<div class="flex wrap shrink" style="padding-right:calc((6 - {{mosaic.cols}}) * 16.666667%);">
-									
-						            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-						            </div>
-						            
-						            <div ng-repeat="m in mosaic.missions | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-						                <img src="/static/img/mask.png" style="background-image:url({{m.image}}=s100);" />
-						            </div>
-						            
-					            </div>
-		    					
-		    				</div>
-		    				
-		 	   			</a>
+				<div class="section">
+					<div class="flex wrap">
+						<mosaic ng-repeat="mosaic in todos track by $index" mosaic="mosaic"></mosaic>
 					</div>
 				</div>
 
@@ -313,47 +160,9 @@
 			
 			<div ng-show="current_tab=='complete'">
 				
-				<div ng-show="complete.length < 1">
-					
-					<div class="item flex justify-center">
-						<div class="item">
-							<span class="color-dark">No mosaic done</span>
-						</div>
-					</div>
-
-				</div>
-				
-				<div class="flex wrap" ng-show="complete.length > 0">
-					<div class="width-6 width-xl-4" ng-repeat="mosaic in complete | reverse" style="padding: .75rem .375rem;">
-						<a class="item link-block flex-col" href="/mosaic/{{mosaic.ref}}" target="_blank" style="height:100%;">
-							
-		    				<div class="item">
-		    					
-		    					<span class="text-medium color-light block">{{mosaic.title}}</span>
-		
-		    					<div class="text-small color-dark">
-									<span class=" mr-small flag-icon flag-icon-{{mosaic.city.region.country.code}}"></span>
-									<span>{{mosaic.city.name}}</span>
-		    					</div>
-		    					
-		    				</div>
-		    				
-		    				<div class="item grow">
-		    					
-								<div class="flex wrap shrink" style="padding-right:calc((6 - {{mosaic.cols}}) * 16.666667%);">
-									
-						            <div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-						            </div>
-						            
-						            <div ng-repeat="m in mosaic.missions | reverse" class="mission-vignet" style="flex:0 0 calc(100% / {{mosaic.cols}});">
-						                <img src="/static/img/mask.png" style="background-image:url({{m.image}}=s100);" />
-						            </div>
-						            
-					            </div>
-		    					
-		    				</div>
-		    				
-		 	   			</a>
+				<div class="section">
+					<div class="flex wrap">
+						<mosaic ng-repeat="mosaic in completes track by $index" mosaic="mosaic"></mosaic>
 					</div>
 				</div>
 				
@@ -361,49 +170,38 @@
 			
 			<div ng-show="current_tab=='notif'">
 				
-				<div ng-show="notif.length < 1">
-					
-					<div class="item flex justify-center">
-						<div class="item">
-							<span class="color-dark">No notification</span>
-						</div>
-					</div>
-
-				</div>
-				
-				<div class="flex wrap" ng-show="notif.length > 0">
-					<div class="width-6 width-xl-4" ng-repeat="n in notif" style="padding: .75rem .375rem;">
-						<div class="link-block flex" style="height:100%;">
-							
-							<div class="item grow">
-								<span ng-show="n.city_name">{{n.city_name}}, </span>
-								<span ng-show="n.region_name">{{n.region_name}}, </span>
-								<span ng-show="n.country_name">{{n.country_name}}</span>
+				<div class="section">
+					<div class="flex wrap">
+						<div class="width-6 width-xl-4" ng-repeat="n in notifs" style="padding: .75rem .375rem;">
+							<div class="link-block flex" style="height:100%;">
+								
+								<div class="item grow">
+									<span ng-show="n.city_name">[[n.city_name]], </span>
+									<span ng-show="n.region_name">[[n.region_name]], </span>
+									<span ng-show="n.country_name">[[n.country_name]]</span>
+								</div>
+								
+								<div class="item">
+									<a class="" ng-click="unotify(n);">
+										<i class="fa fa-times"></i>
+									</a>
+								</div>
+								
 							</div>
-							
-							<div class="item">
-								<a class="" ng-click="unotify(n);">
-									<i class="fa fa-times"></i>
-								</a>
-							</div>
-							
 						</div>
 					</div>
 				</div>
 							
 			</div>
-			
+
 		</div>
 		
 	</div>
-	
-{% endverbatim %}
 
-</div>
 {% endblock %}
 
 {% block script %}
-<script src="/static/front.js"></script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuXb2ncs76tO-2SN8hvkE5Zt4VwtPoNcM&language=en&libraries=places"></script>
+	<script src="/static/front.js"></script>
+	
 {% endblock %}

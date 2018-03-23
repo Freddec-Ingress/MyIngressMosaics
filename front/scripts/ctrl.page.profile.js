@@ -1,6 +1,10 @@
-angular.module('FrontModule.controllers').controller('NewProfileCtrl', function($scope, $window, $http, $auth, API, UserService) {
+angular.module('FrontModule.controllers').controller('ProfilePageCtrl', function($scope, $window, $http, $auth, API, UserService) {
 	
 	$scope.signin = UserService.signin;
+
+	$scope.authenticated = $auth.isAuthenticated();
+    
+	$('.hidden').each(function() { $(this).removeClass('hidden'); })
 	
 	$scope.unotify = function(notif) {
 		
