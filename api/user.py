@@ -80,12 +80,12 @@ def user_google(request):
 			user.profile.locale = userInfo['locale']
 			user.profile.save()
 			
-			Token.objects.get_or_create(user=user)
-	
 	user = authenticate(username=name, password='password')
 	login(request, user)
 	
-	return Response(UserTokenSerializer(user).data, status=status.HTTP_200_OK)
+	token, created = Token.objects.get_or_create(user=user)
+
+	return Response({ 'data': { 'token':token.key, }}, status=status.HTTP_200_OK)
 
 
 
