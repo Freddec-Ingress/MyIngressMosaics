@@ -2703,18 +2703,6 @@ angular.module('FrontModule.controllers').controller('CreatorPageCtrl', function
 });
 angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', function($scope, $window, API, UtilsService) {
 	
-	$scope.exclude_by_name = function(name) {
-		
-		var data = { 'name':name };
-		API.sendRequest('/api/potential/exclude/', 'POST', {}, data);
-	}
-
-	$scope.delete_potential = function(name) {
-		
-		var data = { 'title':name };
-		API.sendRequest('/api/potential/deletetitle/', 'POST', {}, data);
-	}
-
 	/* Potential management */
 	
 	$scope.refresh_missions = function(potential) {
@@ -2867,22 +2855,11 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 	
 	/* Page loading */
 	
-	$scope.loaded = true;
+	$scope.init = function(potentials) {
+
+		$scope.potentials = potentials;
 	
-	$scope.refreshing_potentials = false;
-	
-	$scope.refresh_potentials = function() {
-		
-		$scope.refreshing_potentials = true;
-		
-		$scope.potentials = [];
-		
-		API.sendRequest('/api/potential/detect/', 'POST').then(function(response) {
-		
-			$scope.potentials = response;
-			
-			$scope.refreshing_potentials = false;
-		});
+		$scope.loaded = true;
 	}
 });
 angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function($scope, API) {

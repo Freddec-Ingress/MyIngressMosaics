@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load jsonify %}
+
 {% block extra-head %}
 
 	<title>MIM - Administration</title>
@@ -12,83 +14,40 @@
 {% endblock %}
 
 {% block content %}
-<div id="content" ng-controller="AdmRegistationCtrl">
 
-{% verbatim %}
-
-	<div id="loading" ng-hide="loaded">
-		<i class="item fa fa-spinner rotating"></i>
-		<span class="item">Loading page...</span>
-	</div>
+	<div id="content" ng-controller="AdmRegistationCtrl" ng-init="init({{potentials|jsonify}});">
 	
-	<div class="container" ng-class="{'active':loaded}" ng-init="refresh_potentials();">
-		
-		<div class="section">
-			<div class="flex align-center">
-				
-				<div class="item grow">
-					<input type="text" class="control" ng-model="name_to_exclude" />
-				</div>
-				
-				<div class="item">
-					<button class="btn btn-danger" ng-click="delete_potential(name_to_exclude);">
-						Delete
-					</button>
-				</div>
-				
-				<div class="item">
-					<button class="btn btn-danger" ng-click="exclude_by_name(name_to_exclude);">
-						Exclude
-					</button>
-				</div>
-				
+		<div id="loading" ng-hide="loaded" class="section">
+			<div class="item flex justify-center align-center">
+				<i class="fa fa-spinner rotating"></i>
+				<span class="ml-small">Loading page...</span>
 			</div>
 		</div>
 		
-		<div class="section">
-			<div class="flex-col">
-				
-				<div class="pb-none flex align-center">
-					
-					<div class="item grow">
-						<span class="color-normal">{{potentials.length}} potentials</span>
-					</div>
-					
-					<div class="item">
-						<a ng-click="refresh_potentials();">Refresh</a>
-					</div>
-					
-				</div>
-				
-				<div class="item">
-					<hr>
-				</div>
-				
-				<div class="flex align-center" ng-show="refreshing_potentials">
-					
-					<div class="item">
-						<i class="fa fa-spinner rotating"></i>
-					</div>
-					
-					<div class="item">
-						<span class="color-normal">Refreshing... </span>
-					</div>
-					
-				</div>
-
-				<div ng-hide="refreshing_potentials">
+		<div class="container" ng-class="{'active':loaded}">
 			
+			<div class="section">
+				<div class="flex-col">
+					
+					<div class="pb-none flex align-center">
+						
+						<div class="item grow">
+							<span class="color-normal">[[potentials.length]] potentials</span>
+						</div>
+
+					</div>
+
 					<div class="item" ng-repeat="potential in potentials">
 						<div class="item bg-block">
 							
 							<div class="flex align-center">
 								
 								<div class="item grow">
-									<span class="color-light" ng-class="{'color-danger':potential.count!=6&&potential.count!=12&&potential.count!=18&&potential.count!=24&&potential.count!=30&&potential.count!=36&&potential.count!=42&&potential.count!=48&&potential.count!=54}">{{potential.name}}</span>
+									<span class="color-light" ng-class="{'color-danger':potential.count!=6&&potential.count!=12&&potential.count!=18&&potential.count!=24&&potential.count!=30&&potential.count!=36&&potential.count!=42&&potential.count!=48&&potential.count!=54}">[[potential.name]]</span>
 								</div>
 								
 								<div class="item" ng-hide="potential.refreshing_missions || potential.missions">
-									<a href="https://www.myingressmosaics.com/registration/{{potential.creator}}" target="_blank">{{potential.creator}}</a>
+									<a href="https://www.myingressmosaics.com/registration/[[potential.creator]]" target="_blank">[[potential.creator]]</a>
 								</div>
 								
 								<div class="item" ng-hide="potential.refreshing_missions || potential.missions">
@@ -120,7 +79,7 @@
 							<div class="flex-col" ng-hide="potential.refreshing_missions || !potential.missions">
 								
 								<div class="item pb-none">
-									<span class="color-dark">{{potential.missions.length}} missions</span>
+									<span class="color-dark">[[potential.missions.length]] missions</span>
 								</div>
 								
 								<div class="item pt-none">
@@ -134,15 +93,15 @@
 											</div>
 											
 											<div class="item grow">
-												<span class="color-normal">{{mission.title}}</span>
+												<span class="color-normal">[[mission.title]]</span>
 											</div>
 											
 											<div class="item">
-												<a href="https://www.myingressmosaics.com/registration/{{mission.creator}}" target="_blank">{{mission.creator}}</a>
+												<a href="https://www.myingressmosaics.com/registration/[[mission.creator]]" target="_blank">[[mission.creator]]</a>
 											</div>
 											
 											<div class="item">
-				                                <a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=19&pll={{mission.startLat}},{{mission.startLng}}" target="blank">
+				                                <a href="https://www.ingress.com/intel?ll=[[mission.startLat]],[[mission.startLng]]&z=19&pll=[[mission.startLat]],[[mission.startLng]]" target="blank">
 				                                    <i class="fa fa-external-link"></i>
 				                                </a>
 											</div>
@@ -154,11 +113,11 @@
 								<div class="flex align-center">
 
 									<div class="item">
-										<span class="color-dark">{{potential.default}}</span>
+										<span class="color-dark">[[potential.default]]</span>
 									</div>
 									
 									<div class="item grow flex-col">
-										<input id="city_input_{{$index}}" type="text" class="control" placeholder="City name" />
+										<input id="city_input_[[$index]]" type="text" class="control" placeholder="City name" />
 									</div>
 								
 								</div>
@@ -193,21 +152,19 @@
 							
 						</div>
 					</div>
-			
+
 				</div>
-
 			</div>
+			
 		</div>
-		
-	</div>
 	
-{% endverbatim %}
+	</div>
 
-</div>
 {% endblock %}
 
 {% block script %}
-<script src="/static/front.js"></script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuXb2ncs76tO-2SN8hvkE5Zt4VwtPoNcM&language=en&libraries=places"></script>
+	<script src="/static/front.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuXb2ncs76tO-2SN8hvkE5Zt4VwtPoNcM&language=en&libraries=places"></script>
+
 {% endblock %}

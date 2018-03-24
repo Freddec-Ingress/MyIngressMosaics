@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+from django.db.models import Count
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -836,29 +837,28 @@ def adm_compare(request):
 
 
 
-def potential_detect(request):
+#---------------------------------------------------------------------------------------------------
+def adm_registration(request):
 
-	data = []
-	
-	from django.db.models import Count
+	context = {
+		
+		'potentials':[],
+	}
 	
 	fieldname = 'name'
 	results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=False).order_by(fieldname).values(fieldname, 'creator').annotate(count=Count(fieldname)).order_by('creator', '-count', 'name')
 	for item in results:
-		if item['count'] >= 6:
+		if item['count'] >= 3:
 			
 			obj = {
-				'name': item[fieldname],
-				'count': item['count'],
-				'creator': item['creator'],
-				
-				'default':None,
+				'name':item[fieldname],
+				'count':item['count'],
 				
 				'city':None,
-				'region': None,
-				'country': None,
+				'region':None,
+				'country':None,
 			}
 			
-			data.append(obj)
+			context['potentials'].append(obj)
 	
-	return Response(data, status=status.HTTP_200_OK)
+	return render(request, 'adm_registration.html', context)

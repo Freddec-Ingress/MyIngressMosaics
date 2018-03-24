@@ -35,5 +35,8 @@ urlpatterns = [
 	
 	url(r'^creator/(?P<creator_name>[\w \-,.\']+)', views.creator),
 	
+	url(r'^adm_compare', views.adm_compare),
+	url(r'^adm_registration', views.adm_registration),
+	
 	url(r'^.*', views.world),
 ]
