@@ -75,4 +75,4 @@ def mosaic_create(request):
 		    	fail_silently=False,
 		    )
 	
-	return Response(None, status=status.HTTP_200_OK)
+	return Response(mosaic_obj.ref, status=status.HTTP_200_OK)
