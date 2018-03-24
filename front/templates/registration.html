@@ -127,28 +127,28 @@
 							<div class="item">
 								<a ng-show="!country.open" ng-click="country.open=true;"><i class="fa fa-plus-square text-small"></i></a>
 								<a ng-show="country.open" ng-click="country.open=false;"><i class="fa fa-minus-square text-small"></i></a>
-								<span class="ml-normal c-normal">{{country.name}}</span>
-								<span class="ml-normal badge">{{country.potentials.length}}</span>
+								<span class="ml-normal c-normal">[[country.name]]</span>
+								<span class="ml-normal badge">[[country.potentials.length]]</span>
 							</div>
 							
 						</div>
 						
 						<div class="flex wrap" ng-show="country.open">
 							<div class="width-12 width-xl-4 item" ng-repeat="potential in country.potentials">
-								<a class="item link-block flex-col pt-none pb-none" href="/registration/{{potential.title}}">
+								<a class="item link-block flex-col pt-none pb-none" href="/registration/[[potential.title]]">
 									
 									<div class="flex-col">
 										
 										<div class="item grow flex-col pb-none">
-											<span class="ellipsis">{{potential.title}}</span>
+											<span class="ellipsis">[[potential.title]]</span>
 										</div>
 										
 										<div class="item flex">
 					    					<div class="text-small grow">
-												<span class="mr-small flag-icon flag-icon-{{potential.city.region.country.code}}"></span>
-												<span class="color-dark">{{potential.city.name}}</span>
+												<span class="mr-small flag-icon flag-icon-[[potential.city.region.country.code]]"></span>
+												<span class="color-dark">[[potential.city.name]]</span>
 					    					</div>
-											<span class="text-small color-normal">{{potential.count}}</span>
+											<span class="text-small color-normal">[[potential.count]]</span>
 										</div>
 										
 									</div>
@@ -227,7 +227,7 @@
 								<div class="item self-center">
 									<button class="btn" ng-class="{'disabled':selected.length < 3}" ng-click="open_step(2);" ng-disabled="selected.length < 3">
 										<div class="row">
-											<span class="item">({{selected.length}}) Next</span>
+											<span class="item">([[selected.length]]) Next</span>
 											<i class="item fa fa-angle-double-right"></i>
 										</div>
 									</button>
@@ -290,14 +290,14 @@
 						<div class="flex justify-center">
 							<div class="item flex justify-center" style="width:100%; max-width:420px;">
 								
-								<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - {{columns}}) / 2 * 16.666667%);">
+								<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - [[columns]]) / 2 * 16.666667%);">
 									
-						            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / {{columns}});">
+						            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / [[columns]]);">
 						            </div>
 						            
-						            <a ng-repeat="m in selected | reverse" class="mission-vignet block" style="flex:0 0 calc(100% / {{columns}});" ng-click="displayOrder(m);">
-						                <img src="/static/img/mask.png" style="background-image:url({{m.image}}=s100);" />
-						            	<div style="position:absolute;bottom:0;right:0;font-size:8px;">{{m.order}}</div>
+						            <a ng-repeat="m in selected | reverse" class="mission-vignet block" style="flex:0 0 calc(100% / [[columns]]);" ng-click="displayOrder(m);">
+						                <img src="/static/img/mask.png" style="background-image:url([[m.image]]=s100);" />
+						            	<div style="position:absolute;bottom:0;right:0;font-size:8px;">[[m.order]]</div>
 						            </a>
 						            
 					            </div>
@@ -312,7 +312,7 @@
 							</div>
 							
 							<div class="item grow">
-								<span class="color-light block" title="{{mission.desc}}">{{mission.title}}</span>
+								<span class="color-light block" title="[[mission.desc]]">[[mission.title]]</span>
 							</div>
 							
 							<div class="item">
@@ -322,7 +322,7 @@
 							</div>
 							
 							<div class="item">
-		                        <a href="https://www.ingress.com/intel?ll={{mission.startLat}},{{mission.startLng}}&z=19&pll={{mission.startLat}},{{mission.startLng}}" target="_blank">
+		                        <a href="https://www.ingress.com/intel?ll=[[mission.startLat]],[[mission.startLng]]&z=19&pll=[[mission.startLat]],[[mission.startLng]]" target="_blank">
 					            	<i class="fa fa-external-link"></i>
 			            		</a>
 							</div>
@@ -384,7 +384,7 @@
 						
 						<div class="flex" ng-repeat="mission in selected | limitTo:3">
 							<div class="item color-dark">
-								{{mission.title}}
+								[[mission.title]]
 							</div>
 						</div>
 						
@@ -404,7 +404,7 @@
 					</div>
 					
 					<div class="item grow ml-big">
-						<span class="color-dark">{{default}}</span>
+						<span class="color-dark">[[default]]</span>
 					</div>
 				
 				</div>
@@ -450,27 +450,27 @@
 					<div class="flex-col align-center">
 						
 						<div class="item">
-							<span class="text-big color-light">{{mosaic_name}}</span>
+							<span class="text-big color-light">[[mosaic_name]]</span>
 						</div>
 						
 						<div class="flex">
 							
 							<div class="item">
-								<span class="color-normal">{{country_name}}</span>
+								<span class="color-normal">[[country_name]]</span>
 							</div>
 							
 							<div class="item">
-								<span class="color-normal">{{region_name}}</span>
+								<span class="color-normal">[[region_name]]</span>
 							</div>
 							
 							<div class="item">
-								<span class="color-normal">{{city_name}}</span>
+								<span class="color-normal">[[city_name]]</span>
 							</div>
 							
 						</div>
 						
 						<div class="item">
-							<span class="color-dark">{{selected.length}} missions</span>
+							<span class="color-dark">[[selected.length]] missions</span>
 						</div>
 	
 					</div>
@@ -479,14 +479,14 @@
 		
 						<div class="flex justify-center" style="width:100%; max-width:420px;">
 							
-							<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - {{columns}}) / 2 * 16.666667%);">
+							<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - [[columns]]) / 2 * 16.666667%);">
 								
-					            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / {{columns}});">
+					            <div ng-repeat="m in offset track by $index" style="flex:0 0 calc(100% / [[columns]]);">
 					            </div>
 					            
-					            <div ng-repeat="m in selected | reverse" class="mission-vignet block" style="flex:0 0 calc(100% / {{columns}});">
-					                <img src="/static/img/mask.png" style="background-image:url({{m.image}}=s100);" />
-					            	<div class="color-dark" style="position:absolute;bottom:0;right:0;font-size:8px;">{{m.order}}</div>
+					            <div ng-repeat="m in selected | reverse" class="mission-vignet block" style="flex:0 0 calc(100% / [[columns]]);">
+					                <img src="/static/img/mask.png" style="background-image:url([[m.image]]=s100);" />
+					            	<div class="color-dark" style="position:absolute;bottom:0;right:0;font-size:8px;">[[m.order]]</div>
 					            </div>
 					            
 				            </div>
