@@ -10,8 +10,8 @@ angular.module('FrontModule.controllers').controller('ProfilePageCtrl', function
 	
 	$scope.unotify = function(notif) {
 		
-		var index = $scope.notif.indexOf(notif);
-		$scope.notif.splice(index, 1);
+		var index = $scope.notifs.indexOf(notif);
+		$scope.notifs.splice(index, 1);
 		
 		var data = { 'country_name':notif.country_name, 'region_name':notif.region_name, 'city_name':notif.city_name }
 		API.sendRequest('/api/notif/delete/', 'POST', {}, data);
