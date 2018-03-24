@@ -65,12 +65,12 @@
 				<div class="flex">
 					
 					<div class="item flex">
-						<span class="mr-small flag-icon flag-icon-{{mosaic.country_code}}"></span>
-						<a class="mr-normal" href="/world/{{mosaic.country_name}}">{{mosaic.country_name}}</a>
+						<span class="mr-small flag-icon flag-icon-[[mosaic.country_code]]"></span>
+						<a class="mr-normal" href="/world/[[mosaic.country_name]]">[[mosaic.country_name]]</a>
 						<span class="mr-normal color-dark">></span>
-						<a class="mr-normal" href="/world/{{mosaic.country_name}}/{{mosaic.region_name}}">{{mosaic.region_name}}</a>
+						<a class="mr-normal" href="/world/[[mosaic.country_name]]/[[mosaic.region_name]]">[[mosaic.region_name]]</a>
 						<span class="mr-normal color-dark">></span>
-						<a class="mr-normal" href="/world/{{mosaic.country_name}}/{{mosaic.region_name}}/{{mosaic.city_name}}">{{mosaic.city_name}}</a>
+						<a class="mr-normal" href="/world/[[mosaic.country_name]]/[[mosaic.region_name]]/[[mosaic.city_name]]">[[mosaic.city_name]]</a>
 					</div>
 					
 				</div>
@@ -81,7 +81,7 @@
 			
 				<div class="flex align-center">
 					<div class="item">
-						<span class="text-big color-light">{{mosaic.title}}</span>
+						<span class="text-big color-light">[[mosaic.title]]</span>
 					</div>
 					<div class="item" ng-show="mosaic.has_unavailable_portals">
 						<i class="fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!"></i>
@@ -96,7 +96,7 @@
 							
 							<div class="flex" style="width:100%;">
 								
-								<div class="flex wrap grow" style="width:100%; padding-right:calc((6 - {{mosaic.column_count}}) * 16.666667%);">
+								<div class="flex wrap grow" style="width:100%; padding-right:calc((6 - [[mosaic.column_count]]) * 16.666667%);">
 									
 						            <div ng-repeat="mission in offset track by $index" style="flex:0 0 16.666667%;">
 						            </div>
@@ -139,7 +139,7 @@
 						
 						<div class="item flex-col hidden" ng-show="link_need_signin">
 							<span class="mb-small color-danger">You must be signed in to do this action.</span>
-							<a ng-click="signin('google', '/mosaic/{{mosaic.ref}}');">Sign in</a>
+							<a ng-click="signin('google', '/mosaic/[[mosaic.ref]]');">Sign in</a>
 						</div>
 						
 					</div>
@@ -148,16 +148,16 @@
 
 						<div class="flex">
 							
-							<span class="item">{{mission_count}} missions</span>
-							<span class="item">{{mosaic.distance}} km</span>
+							<span class="item">[[mission_count]] missions</span>
+							<span class="item">[[mosaic.distance]] km</span>
 
 						</div>
 						
 						<div class="flex">
 							
-							<span class="item">{{mosaic.waypoint_count}} waypoints</span>
-							<span class="item">{{mosaic.portal_count}} portals</span>
-							<span class="item">{{mosaic.unique_count}} uniques</span>
+							<span class="item">[[mosaic.waypoint_count]] waypoints</span>
+							<span class="item">[[mosaic.portal_count]] portals</span>
+							<span class="item">[[mosaic.unique_count]] uniques</span>
 							
 						</div>
 
@@ -165,8 +165,8 @@
 							
 							{% for creator in creators %}
 							<div class="item">
-								<a href="/creator/{{creator.name}}/" class="{% if creator.faction == 'E' %}color-enlightened{% endif %}{% if creator.faction == 'R' %}color-resistant{% endif %}">
-									{{creator.name}}
+								<a href="/creator/[[creator.name]]/" class="{% if creator.faction == 'E' %}color-enlightened{% endif %}{% if creator.faction == 'R' %}color-resistant{% endif %}">
+									[[creator.name]]
 								</a>
 							</div>
 							{% endfor %}
@@ -188,13 +188,13 @@
 					
 					<div class="tab" ng-click="current_tab='missions'" ng-class="{'active':current_tab=='missions'}">
 						Missions
-						<span class="ml-normal badge">{{mission_count}}</span>
+						<span class="ml-normal badge">[[mission_count]]</span>
 						<i class="ml-normal fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals"></i>
 					</div>
 					
 					<div class="tab" ng-click="current_tab='comments'" ng-class="{'active':current_tab=='comments'}">
 						Comments
-						<span class="ml-normal badge">{{comment_count}}</span>
+						<span class="ml-normal badge">[[comment_count]]</span>
 					</div>
 					
 				</div>
@@ -325,7 +325,7 @@
 						
 						<div class="item pt-none flex-col hidden" ng-show="comment_need_signin">
 							<span class="mb-small color-danger">You must be signed in to post comment.</span>
-							<a ng-click="signin('google', '/mosaic/{{mosaic.ref}}');">Sign in</a>
+							<a ng-click="signin('google', '/mosaic/[[mosaic.ref]]');">Sign in</a>
 						</div>
 						
 					</div>
