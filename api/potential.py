@@ -120,6 +120,9 @@ def potential_refresh(request):
 		mission_data = {
 			
 			'title':mission_obj.title,
+			
+			'startLat':mission_obj.startLat,
+			'startLng':mission_obj.startLng,
 		}
 		
 		data['missions'].append(mission_data)
