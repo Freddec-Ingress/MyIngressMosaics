@@ -185,6 +185,10 @@ def mosaic(request, ref):
 					
 					mission_data['portals'].append(portal_data)
 					
+					if portal_data['title'] == 'Unavailable':
+						context['mosaic']['has_unavailable_portals'] = True
+						mission_data['has_unavailable_portals'] = True
+					
 	# Comments data
 	
 	for comment_obj in mosaic_obj.comments.all().order_by('-create_date'):
@@ -306,14 +310,14 @@ def profile(request):
 		# Todos data
 		
 		results = Link.objects.filter(user=request.user, type='todo')
-		for mosaic_obj in results:
-			context['todos'].append(mosaic_obj.getOverviewData())
+		for link_obj in results:
+			context['todos'].append(link_obj.mosaic.getOverviewData())
 		
 		# Completes data
 		
 		results = Link.objects.filter(user=request.user, type='complete')
-		for mosaic_obj in results:
-			context['completes'].append(mosaic_obj.getOverviewData())
+		for link_obj in results:
+			context['completes'].append(link_obj.mosaic.getOverviewData())
 		
 		# Notifs data
 		
