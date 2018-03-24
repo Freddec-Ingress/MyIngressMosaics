@@ -37,8 +37,6 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 		$scope.missions = null;
 		
 		if (!text || text.length < 3) {
-			
-			$scope.get_potentials();
 			return;
 		}
 
@@ -381,37 +379,14 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 	
 	/* Page loading */
 
-	$scope.init = function(text) {
+	$scope.init = function(text, countries) {
+	
+		$scope.countries = countries;
 	
 		$scope.open_step(1);
 		
 		if ($scope.authenticated) $scope.refreshMissions(text);
 		
 		$scope.loaded = true;
-	}
-
-	/* Potentials management */
-	
-	$scope.potential_state = 'init';
-	
-	$scope.get_potentials = function() {
-		
-		$scope.potential_state = 'searching';
-		
-		API.sendRequest('/api/potentials/', 'POST').then(function(response) {
-			
-			$scope.countries = response;
-			
-			$scope.potential_state = 'list';
-		});
-	}
-	
-	$scope.exclude = function(potential) {
-		
-		var index = $scope.potentials.indexOf(potential);
-		$scope.potentials.splice(index, 1);
-		
-		var data = { 'name':potential.name};
-		API.sendRequest('/api/adm/potential/exclude', 'POST', {}, data);
 	}
 });

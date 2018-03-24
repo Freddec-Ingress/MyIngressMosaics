@@ -15,76 +15,76 @@
 {% endblock %}
 
 {% block content %}
-<div id="content" ng-controller="CreatorPageCtrl" ng-init="init('{{name}}', '{{faction}}', {{mosaics|jsonify}}, {{missions|jsonify}});">
 
-{% verbatim %}
-
-	<div id="loading" ng-hide="loaded">
-		<i class="item fa fa-spinner rotating"></i>
-		<span class="item">Loading page...</span>
-	</div>
+	<div id="content" ng-controller="CreatorPageCtrl" ng-init="init('{{name}}', '{{faction}}', {{mosaics|jsonify}}, {{missions|jsonify}});">
 	
-	<div class="container" ng-class="{'active':loaded}">
-	    
-	    <div class="section">
-	        
-	        <div class="flex">
-	        	
-		        <div class="item">
-		            <span class="text-big" ng-class="{'color-enlightened': faction == 'E', 'color-resistant': faction == 'R'}">[[name]]</span>
-	            </div>
-	            
-            </div>
-            
-	    </div>
-	    
-		<div class="section">
-			
-			<div class="tab-row">
-			
-				<div class="tab" ng-click="current_tab='mosaics'" ng-class="{'active':current_tab=='mosaics'}">
-					Mosaics
-					<span class="ml-normal badge">[[mosaics.length]]</span>
-				</div>
-				
-				<div class="tab" ng-click="current_tab='missions'" ng-class="{'active':current_tab=='missions'}">
-					Missions
-					<span class="ml-normal badge">[[missions.length]]</span>
-				</div>
-
+		<div id="loading" ng-hide="loaded" class="section">
+			<div class="item flex justify-center align-center">
+				<i class="fa fa-spinner rotating"></i>
+				<span class="ml-small">Loading page...</span>
 			</div>
-			
-	    </div>
-	    
-		<div ng-show="current_tab=='mosaics'">
-			
-			<div class="section">
-				<div class="flex wrap">
-					<mosaic ng-repeat="mosaic in mosaics track by $index" mosaic="mosaic"></mosaic>
-				</div>
-			</div>
-			
 		</div>
 		
-		<div ng-show="current_tab=='missions'">
-			
+		<div class="container" ng-class="{'active':loaded}">
+		    
+		    <div class="section">
+		        
+		        <div class="flex">
+		        	
+			        <div class="item">
+			            <span class="text-big" ng-class="{'color-enlightened': faction == 'E', 'color-resistant': faction == 'R'}">[[name]]</span>
+		            </div>
+		            
+	            </div>
+	            
+		    </div>
+		    
 			<div class="section">
-				<div class="flex wrap">
-					<mission ng-repeat="mission in missions track by $index" mission="mission"></mission>
+				
+				<div class="tab-row">
+				
+					<div class="tab" ng-click="current_tab='mosaics'" ng-class="{'active':current_tab=='mosaics'}">
+						Mosaics
+						<span class="ml-normal badge">[[mosaics.length]]</span>
+					</div>
+					
+					<div class="tab" ng-click="current_tab='missions'" ng-class="{'active':current_tab=='missions'}">
+						Missions
+						<span class="ml-normal badge">[[missions.length]]</span>
+					</div>
+	
 				</div>
+				
+		    </div>
+		    
+			<div ng-show="current_tab=='mosaics'">
+				
+				<div class="section">
+					<div class="flex wrap">
+						<mosaic ng-repeat="mosaic in mosaics track by $index" mosaic="mosaic"></mosaic>
+					</div>
+				</div>
+				
 			</div>
 			
-		</div>
-
-	</div>
+			<div ng-show="current_tab=='missions'">
+				
+				<div class="section">
+					<div class="flex wrap">
+						<mission ng-repeat="mission in missions track by $index" mission="mission"></mission>
+					</div>
+				</div>
+				
+			</div>
 	
-{% endverbatim %}
+		</div>
+		
+	</div>
 
-</div>
 {% endblock %}
 
 {% block script %}
-<script src="/static/front.js"></script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuXb2ncs76tO-2SN8hvkE5Zt4VwtPoNcM&language=en&libraries=places"></script>
+	<script src="/static/front.js"></script>
+	
 {% endblock %}
