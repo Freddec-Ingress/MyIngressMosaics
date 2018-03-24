@@ -2128,7 +2128,7 @@ angular.module('FrontModule.controllers').controller('MapPageCtrl', function($sc
 															var contentString = '' +
 																'<a class="flex-col" target="_blank" style="width:200px; min-width:200px; max-width:200px;" href="/mosaic/' + mosaic.ref + '" >' +
 																	'<div class="flex-col" style="flex-shrink:1;">' + 
-																		'<span class="color-black text-medium text-bold" style="word-break: break-all;">' + mosaic.title + '</span>' + 
+																		'<span class="color-black text-medium text-bold ellipsis" style="word-break: break-all;" title="' + mosaic.title + '">' + mosaic.title + '</span>' + 
 																		'<span class="color-grey text-small">' + mosaic.images.length + ' missions &middot; ' + mosaic.unique_count + ' uniques</span>' + 
 																		'<span class="color-link text-small mb-small">See details</span>' + 
 																	'</div>' + 
