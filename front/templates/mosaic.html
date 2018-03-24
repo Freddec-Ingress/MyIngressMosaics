@@ -14,7 +14,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="MosaicPageCtrl" ng-init="init({{data}});">
+	<div id="content" ng-controller="MosaicPageCtrl" ng-init="init({{mosaic}}, {{missions}}, {{comments}});">
 	
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
