@@ -164,16 +164,13 @@
 						</div>
 
 						<div class="flex wrap">
-							
-							{% for creator in creators %}
-							<div class="item">
-								<a href="/creator/[[creator.name]]/" class="{% if creator.faction == 'E' %}color-enlightened{% endif %}{% if creator.faction == 'R' %}color-resistant{% endif %}">
+							<div class="item" ng-repeat="creator in mosaic.creators">
+								<a href="/creator/[[creator.name]]/" ng-class="{'color-enlightened':creator.faction == 'E', 'color-resistant':creator.faction == 'R'}">
 									[[creator.name]]
 								</a>
 							</div>
-							{% endfor %}
-							
 						</div>
+						
 					</div>
 
 				</div>
