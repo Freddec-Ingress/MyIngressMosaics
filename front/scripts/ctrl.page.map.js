@@ -258,7 +258,7 @@ angular.module('FrontModule.controllers').controller('MapPageCtrl', function($sc
 																
 																missions_string +=
 														            '<div class="mission-vignet" style="flex:0 0 calc(100% / ' + mosaic.column_count + ');">' +
-														                '<img src="/static/img/mask.png" style="z-index:auto; background-image:url(' + mission + '=s100);" />' +
+														                '<img src="/static/img/mask.png" style="z-index:auto; background-image:url(' + mission + '=s25);" />' +
 														            '</div>';
 															}
 															
@@ -266,9 +266,10 @@ angular.module('FrontModule.controllers').controller('MapPageCtrl', function($sc
 																'<a class="flex-col" target="_blank" style="width:200px; min-width:200px; max-width:200px;" href="/mosaic/' + mosaic.ref + '" >' +
 																	'<div class="flex-col" style="flex-shrink:1;">' + 
 																		'<span class="color-black text-medium text-bold" style="word-break: break-all;">' + mosaic.title + '</span>' + 
-																		'<span class="color-grey mb-small">' + mosaic.images.length + ' missions</span>' + 
+																		'<span class="color-grey text-small mb-small">' + mosaic.images.length + ' missions &middot; ' + mosaic.unique_count + ' uniques</span>' + 
+																		'<span class="color-link text-small mb-small">See details</span>' + 
 																	'</div>' + 
-																	'<div style="max-height:300px; overflow-y:auto;">' +
+																	'<div style="max-height:400px; overflow-y:auto;">' +
 																		'<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - ' + mosaic.column_count + ') / 2 * 16.666667%);">' +
 																			offset_string +
 																			missions_string + 
