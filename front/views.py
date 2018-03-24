@@ -707,13 +707,13 @@ def creator(request, creator_name):
 
 	# Mosaics data
 	
-	results = Mosaic.objects.filter(creators__contains=name).order_by('city__name', 'title')
+	results = Mosaic.objects.filter(creators__contains=creator_name).order_by('city__name', 'title')
 	for mosaic_obj in results:
 		context['mosaics'].append(mosaic_obj.getOverviewData())
 
 	# Missions data
 
-	results = Mission.objects.filter(mosaic__isnull=True, creator=name).order_by('title')
+	results = Mission.objects.filter(mosaic__isnull=True, creator=creator_name).order_by('title')
 	for mission_obj in results:
 		context['missions'].append(mission_obj.getOverviewData())
 	
