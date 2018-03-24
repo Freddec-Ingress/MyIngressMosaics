@@ -20,7 +20,7 @@ def link_create(request):
 	results = mosaic_obj.links.filter(user=request.user, type=request.data['type'])
 	if results.count() < 1:
 		
-		link_obj = Link(mosaic=mosaic, user=request.user, type=request.data['type'])
+		link_obj = Link(mosaic=mosaic_obj, user=request.user, type=request.data['type'])
 		link_obj.save()
 	
 	return Response(None, status=status.HTTP_200_OK)
