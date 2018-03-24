@@ -85,7 +85,7 @@ def user_google(request):
 	
 	token, created = Token.objects.get_or_create(user=user)
 
-	return Response({ 'data': { 'token':token.key, }}, status=status.HTTP_200_OK)
+	return Response({ 'token':token.key, }, status=status.HTTP_200_OK)
 
 
 

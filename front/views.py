@@ -282,7 +282,7 @@ def profile(request):
 	if not request.user.is_anonymous():
 		
 		context['name'] = str(request.user.username),
-		context['faction'] = str(request.user.profile.faction),
+		context['faction'] = str(request.user.profile.faction[0]),
 		context['picture'] = str(request.user.profile.picture),
 		
 		# Mosaics data
