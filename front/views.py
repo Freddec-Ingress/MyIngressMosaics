@@ -701,9 +701,9 @@ def creator(request, creator_name):
 	
 	# Creator data
 	
-	result = Mission.objects.filter(creator=name)
-	if result.count() > 0:
-		data['faction'] = result[0].faction
+	results = Mission.objects.filter(creator=creator_name)
+	if results.count() > 0:
+		data['faction'] = results[0].faction
 
 	# Mosaics data
 	
