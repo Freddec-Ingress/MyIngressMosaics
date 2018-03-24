@@ -41,7 +41,7 @@ angular.module('FrontModule.controllers').controller('ProfilePageCtrl', function
 	
 	/* Tab management */
 	
-	$scope.current_tab = 'mosaic';
+	$scope.current_tab = 'mosaics';
 	
 	/* Page loading */
 	
