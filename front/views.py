@@ -1,11 +1,23 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+from django import template
 from django.http import HttpResponse
+from django.utils import json
 from django.shortcuts import render
+from django.utils.safestring import mark_safe
 
 from api.models import *
 
+register = template.Library()
+
+
+
+#---------------------------------------------------------------------------------------------------
+@register.filter
+def jsonify(o):
+    return mark_safe(json.dumps(o))
+    
 
 
 #---------------------------------------------------------------------------------------------------
@@ -204,12 +216,7 @@ def mosaic(request, ref):
 		context['comments'].append(comment_data)
 	
 	context['comment_count'] = len(context['comments'])
-	context['comments'] = json.dumps(context['comments'])
-	
 	context['mission_count'] = len(context['missions'])
-	context['missions'] = json.dumps(context['missions'])
-	
-	context['mosaic'] = json.dumps(context['mosaic'])
 	
 	return render(request, 'mosaic.html', context)
 	

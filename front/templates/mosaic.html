@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
+{% load jsonify %}
+
 {% block extra-head %}
 
-	<title>MIM - {{mosaic.title | safe}}</title>
+	<title>MIM - {{mosaic.title}}</title>
 	
 	<meta property="og:url" content="https://www.myingressmosaics.com/mosaic/{{mosaic.ref}}" />
 	<meta property="og:type" content="article" />
@@ -14,7 +16,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="MosaicPageCtrl" ng-init="init({{mosaic}}, {{missions}}, {{comments}});">
+	<div id="content" ng-controller="MosaicPageCtrl" ng-init="init({{mosaic|jsonify}}, {{missions|jsonify}}, {{comments|jsonify}});">
 	
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
