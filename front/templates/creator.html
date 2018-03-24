@@ -56,30 +56,26 @@
 			
 	    </div>
 	    
-		<div class="section">
+		<div ng-show="current_tab=='mosaics'">
 			
-			<div ng-show="current_tab=='mosaics'">
-				
-				<div class="section">
-					<div class="flex wrap">
-						<mosaic ng-repeat="mosaic in mosaics track by $index" mosaic="mosaic"></mosaic>
-					</div>
+			<div class="section">
+				<div class="flex wrap">
+					<mosaic ng-repeat="mosaic in mosaics track by $index" mosaic="mosaic"></mosaic>
 				</div>
-				
-			</div>
-			
-			<div ng-show="current_tab=='missions'">
-				
-				<div class="section">
-					<div class="flex wrap">
-						<mission ng-repeat="mission in missions track by $index" mission="mission"></mission>
-					</div>
-				</div>
-				
 			</div>
 			
 		</div>
+		
+		<div ng-show="current_tab=='missions'">
 			
+			<div class="section">
+				<div class="flex wrap">
+					<mission ng-repeat="mission in missions track by $index" mission="mission"></mission>
+				</div>
+			</div>
+			
+		</div>
+
 	</div>
 	
 {% endverbatim %}
