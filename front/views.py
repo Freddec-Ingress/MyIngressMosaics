@@ -203,7 +203,14 @@ def mosaic(request, ref):
 		
 		context['comments'].append(comment_data)
 	
-	context = json.dumps(context)
+	context['comment_count'] = len(context['comments'])
+	context['comments'] = json.dumps(context['comments'])
+	
+	context['mission_count'] = len(context['missions'])
+	context['missions'] = json.dumps(context['missions'])
+	
+	context['mosaic'] = json.dumps(context['mosaic'])
+	
 	return render(request, 'mosaic.html', context)
 	
 	
