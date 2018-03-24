@@ -2,7 +2,7 @@
 
 {% block extra-head %}
 
-	<title>MIM - {{data.mosaic.title}}</title>
+	<title>MIM - {{mosaic.title | safe}}</title>
 	
 	<meta property="og:url" content="https://www.myingressmosaics.com/mosaic/{{mosaic.ref}}" />
 	<meta property="og:type" content="article" />
