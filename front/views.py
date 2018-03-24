@@ -3,7 +3,6 @@
 
 from django import template
 from django.http import HttpResponse
-from django.utils import json
 from django.shortcuts import render
 from django.utils.safestring import mark_safe
 
