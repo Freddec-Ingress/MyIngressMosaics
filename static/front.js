@@ -2715,8 +2715,9 @@ angular.module('FrontModule.controllers').controller('CreatorPageCtrl', function
         
 	/* Page loading */
 
-	$scope.init = function(faction, mosaics, missions) {
+	$scope.init = function(name, faction, mosaics, missions) {
 		
+		$scope.name = name;
 		$scope.faction = faction;
 		
 		$scope.mosaics = mosaics;

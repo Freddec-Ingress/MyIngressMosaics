@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block content %}
-<div id="content" ng-controller="CreatorPageCtrl" ng-init="init({{faction}}, {{mosaics|jsonify}}, {{missions|jsonify}});">
+<div id="content" ng-controller="CreatorPageCtrl" ng-init="init({{name}}, {{faction}}, {{mosaics|jsonify}}, {{missions|jsonify}});">
 
 {% verbatim %}
 
@@ -31,7 +31,7 @@
 	        <div class="flex">
 	        	
 		        <div class="item">
-		            <span class="text-big" ng-class="{'color-enlightened': faction == 'E', 'color-resistant': faction == 'R'}">{{name}}</span>
+		            <span class="text-big" ng-class="{'color-enlightened': faction == 'E', 'color-resistant': faction == 'R'}">[[name]]</span>
 	            </div>
 	            
             </div>
@@ -42,12 +42,12 @@
 			
 			<div class="tab-row">
 			
-				<div class="tab" ng-click="current_tab='mosaic'" ng-class="{'active':current_tab=='mosaic'}">
+				<div class="tab" ng-click="current_tab='mosaics'" ng-class="{'active':current_tab=='mosaics'}">
 					Mosaics
 					<span class="ml-normal badge">[[mosaics.length]]</span>
 				</div>
 				
-				<div class="tab" ng-click="current_tab='mission'" ng-class="{'active':current_tab=='mission'}">
+				<div class="tab" ng-click="current_tab='missions'" ng-class="{'active':current_tab=='missions'}">
 					Missions
 					<span class="ml-normal badge">[[missions.length]]</span>
 				</div>
