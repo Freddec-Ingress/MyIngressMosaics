@@ -40,7 +40,7 @@ def mosaic_create(request):
 	
 	for item in request.data['missions']:
 		mission_obj = Mission.objects.filter(ref=item['ref'])
-		mission_obj.mosaic = mosaic
+		mission_obj.mosaic = mosaic_obj
 		mission_obj.order = item['order']
 		mission_obj.save()
 	
