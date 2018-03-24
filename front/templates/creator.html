@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block content %}
-<div id="content" ng-controller="CreatorPageCtrl" ng-init="init({{name}}, {{faction}}, {{mosaics|jsonify}}, {{missions|jsonify}});">
+<div id="content" ng-controller="CreatorPageCtrl" ng-init="init('{{name}}', '{{faction}}', {{mosaics|jsonify}}, {{missions|jsonify}});">
 
 {% verbatim %}
 
@@ -54,6 +54,10 @@
 
 			</div>
 			
+	    </div>
+	    
+		<div class="section">
+			
 			<div ng-show="current_tab=='mosaics'">
 				
 				<div class="section">
@@ -68,7 +72,7 @@
 				
 				<div class="section">
 					<div class="flex wrap">
-						<potential ng-repeat="mission in missions track by $index" mission="mission"></potential>
+						<mission ng-repeat="mission in missions track by $index" mission="mission"></mission>
 					</div>
 				</div>
 				
