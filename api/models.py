@@ -191,6 +191,8 @@ class Mosaic(models.Model):
 		
 		mosaic_data = {
 			
+			'id':self.pk,
+			
 			'ref':self.ref,
 			'title':self.title,
 			
