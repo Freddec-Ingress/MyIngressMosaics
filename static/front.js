@@ -2725,6 +2725,8 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 			
 			potential.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
 			
+			potential.refreshing_missions = false;
+			
 			var geocoder = new google.maps.Geocoder();
 			
 			var latlng = {
@@ -2763,8 +2765,6 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 						if (admin2) potential.default += ', ' + admin2;
 						if (admin1) potential.default += ', ' + admin1;
 						if (country) potential.default += ', ' + country;
-			
-						potential.refreshing_missions = false;
 	
 						$scope.$apply();
 					}

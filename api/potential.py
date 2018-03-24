@@ -114,7 +114,7 @@ def potential_refresh(request):
 		'missions':[],
 	}
 	
-	results = Mission.objects.filter(name__icontains=request.data['text'])
+	results = Mission.objects.filter(name__icontains=request.data['text'], mosaic__isnull=True, admin=True, validated=False)
 	for mission_obj in results:
 		
 		mission_data = {
