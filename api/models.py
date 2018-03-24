@@ -143,32 +143,20 @@ class Mosaic(models.Model):
 		self.distance = 0.0
 		self.creators = ''
 		
-		portals = []
-		missions = []
-		
+		index = 0;
 		for item in self.missions.all().order_by('order'):
+			
+			if index == 0:
+				self.startLat = item.startLat
+				self.startLng = item.startLng
+			
+			index += 1
+			
 			if item.creator not in self.creators:
 				self.creators += '|' + item.creator + '|'
-
-		for i in range(0, len(missions) - 1):
 			
-			mData1 = missions[i]
-			mData2 = missions[i+1]
-			
-			if mData1['startLat'] != 0.0 and mData1['startLng'] != 0.0 and self.startLat == 0.0 and self.startLng == 0.0:
-				self.startLat = mData1['startLat']
-				self.startLng = mData1['startLng']
-				
-			self.distance += mData1['distance']
-			
-			if i < len(missions) - 2:
-				
-				pData1 = mData1['portals'][len(mData1['portals']) - 1]
-				pData2 = mData2['portals'][0]
-				
-				if pData1['lat'] != 0.0 and pData1['lng'] != 0.0 and pData2['lat'] != 0.0 and pData2['lng'] != 0.0:
-					self.distance += getDistanceFromLatLng(pData1['lat'], pData1['lng'], pData2['lat'], pData2['lng'])
-					
+			self.distance += item.distance
+		
 		self.save()
 	
 	
