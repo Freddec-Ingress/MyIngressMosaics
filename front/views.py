@@ -300,8 +300,8 @@ def profile(request):
 		# Likes data
 				
 		results = Link.objects.filter(user=request.user, type='like')
-		for mosaic_obj in results:
-			context['likes'].append(mosaic_obj.getOverviewData())
+		for link_obj in results:
+			context['likes'].append(link_obj.mosaic.getOverviewData())
 		
 		# Todos data
 		
