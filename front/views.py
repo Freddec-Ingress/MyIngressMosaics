@@ -183,11 +183,11 @@ def mosaic(request, ref):
 						'action':portal[4],
 					}
 					
-					mission_data['portals'].append(portal_data)
-					
 					if portal_data['title'] == 'Unavailable':
 						context['mosaic']['has_unavailable_portals'] = True
 						mission_data['has_unavailable_portals'] = True
+					
+					mission_data['portals'].append(portal_data)
 					
 	# Comments data
 	
