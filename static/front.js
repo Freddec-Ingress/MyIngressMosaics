@@ -1244,11 +1244,11 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 		map.fitBounds(latlngbounds); 
 	}
 	
-	$scope.init = function(mosaic, missions, comments) {
+	$scope.init = function(data) {
 
-		$scope.mosaic = mosaic;
-		$scope.missions = missions;
-		$scope.comments = comments;
+		$scope.mosaic = data.mosaic;
+		$scope.missions = data.missions;
+		$scope.comments = data.comments;
 		
 		var temp = 0;
 		if ($scope.missions.length > $scope.mosaic.cols) {
