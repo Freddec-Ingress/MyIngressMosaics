@@ -45,6 +45,7 @@ urlpatterns = [
 	url(r'^potential/create/', potential_create),
 	url(r'^potential/update/', potential_update),
 	url(r'^potential/exclude/', potential_exclude),
+	url(r'^potential/refresh/', potential_refresh),
 	
 	url(r'^telegram/539679576:AAFC6QR0d8aTKd5sckEWWEFfwsNq5W5Rar0', telegram_updates),
 	

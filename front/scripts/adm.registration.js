@@ -9,7 +9,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		potential.missions = [];
 		
 		var data = { 'text':potential.name };
-		API.sendRequest('/api/new_missions/', 'POST', {}, data).then(function(response) {
+		API.sendRequest('/api/potential/refresh/', 'POST', {}, data).then(function(response) {
 			
 			potential.missions = response.missions;
 			

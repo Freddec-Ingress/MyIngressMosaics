@@ -101,3 +101,28 @@ def potential_create(request):
 		    )
 
 	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def potential_refresh(request):
+	
+	data = {
+		
+		'missions':[],
+	}
+	
+	results = Mission.objects.filter(name__icontains=request.data['text'])
+	for mission_obj in results:
+		
+		mission_data = {
+			
+			'title':mission_obj.title,
+		}
+		
+		data['missions'].append(mission_data)
+	
+	return Response(data, status=status.HTTP_200_OK)
+	
