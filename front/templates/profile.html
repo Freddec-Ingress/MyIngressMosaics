@@ -13,7 +13,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="ProfilePageCtrl" ng-init="init('{{faction}}', {{likes}}, {{todos}}, {{notifs}}, {{mosaics}}, {{missions}}, {{completes}});">
+	<div id="content" ng-controller="ProfilePageCtrl" ng-init="init('{{faction[0]}}', {{likes}}, {{todos}}, {{notifs}}, {{mosaics}}, {{missions}}, {{completes}});">
 	
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
