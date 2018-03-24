@@ -36,7 +36,7 @@ def mosaic_create(request):
 		city_obj = City(region=region_obj, name=request.data['city'])
 		city_obj.save()
 		
-	mosaic_obj = Mosaic(registerer=request.user, cols=int(request.data['columns']), city=city_obj, title=request.data['title'])
+	mosaic_obj = Mosaic(registerer=request.user, column_count=int(request.data['columns']), city=city_obj, title=request.data['title'])
 	
 	for item in request.data['missions']:
 		mission_obj = Mission.objects.filter(ref=item['ref'])
