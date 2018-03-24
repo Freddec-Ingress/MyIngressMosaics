@@ -111,6 +111,7 @@ angular.module('FrontModule.controllers').controller('MapPageCtrl', function($sc
 					zoomControl: true,
 					streetViewControl: true,
 					disableDefaultUI: true,
+					fullscreenControl: true,
 					mapTypeId: mapType,
 					mapTypeControl: true,
 					mapTypeControlOptions: {
