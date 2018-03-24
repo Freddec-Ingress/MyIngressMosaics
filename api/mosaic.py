@@ -39,7 +39,7 @@ def mosaic_create(request):
 	mosaic_obj = Mosaic(registerer=request.user, column_count=int(request.data['columns']), city=city_obj, title=request.data['title'])
 	
 	for item in request.data['missions']:
-		mission_obj = Mission.objects.filter(ref=item['ref'])
+		mission_obj = Mission.objects.get(ref=item['ref'])
 		mission_obj.mosaic = mosaic_obj
 		mission_obj.order = item['order']
 		mission_obj.save()
