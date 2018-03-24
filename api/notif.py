@@ -42,7 +42,7 @@ def notif_create(request):
 	
 	already_existing = False
 	
-	results = Notif.objects.filter(user=request.user, country=country_obj, region=region_obj, city=city_data)
+	results = Notif.objects.filter(user=request.user, country=country_obj, region=region_obj, city=city_obj)
 	if results.count() > 0:
 		already_existing = True
 	
