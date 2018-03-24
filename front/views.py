@@ -164,12 +164,12 @@ def mosaic(request, ref):
 		if len(jsondata) > 9:
 			for portal in jsondata[9]:
 			
-				context['mosaic']['waypoint_count'] += 1
-				
 				lat = 0.0
 				lng = 0.0
 				
 				if portal[5]:
+					
+					context['mosaic']['waypoint_count'] += 1
 					
 					if portal[5][0] == 'f':
 						lat = portal[5][1] / 1000000.0
