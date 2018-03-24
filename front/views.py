@@ -1,22 +1,11 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from django import template
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.utils.safestring import mark_safe
 
 from api.models import *
 
-register = template.Library()
-
-
-
-#---------------------------------------------------------------------------------------------------
-@register.filter
-def jsonify(o):
-    return mark_safe(json.dumps(o))
-    
 
 
 #---------------------------------------------------------------------------------------------------
@@ -100,9 +89,9 @@ def mosaic(request, ref):
 		'title':str(mosaic_obj.title),
 
 		'column_count':mosaic_obj.column_count,
-		'portal_count': mosaic_obj.portal_count,
-		'unique_count': mosaic_obj.unique_count,
-		'waypoint_count': mosaic_obj.waypoint_count,
+		'portal_count':0,
+		'unique_count':0,
+		'waypoint_count':0,
 		
 		'distance': mosaic_obj.distance,
 		
@@ -134,7 +123,7 @@ def mosaic(request, ref):
 
 		if Link.objects.filter(mosaic=mosaic_obj, user=request.user, type='complete').count() > 0:
 			context['mosaic']['is_complete'] = True
-			
+	
 	# Missions data
 	
 	for mission_obj in mosaic_obj.missions.all().order_by('order'):
@@ -168,11 +157,15 @@ def mosaic(request, ref):
 			
 		# Portals data
 		
+		temp_portal_data = []
+		
 		jsondata = json.loads(mission_obj.data)
 		
 		if len(jsondata) > 9:
 			for portal in jsondata[9]:
 			
+				context['mosaic']['waypoint_count'] += 1
+				
 				lat = 0.0
 				lng = 0.0
 				
@@ -185,6 +178,14 @@ def mosaic(request, ref):
 					if portal[5][0] == 'p':
 						lat = portal[5][2] / 1000000.0
 						lng = portal[5][3] / 1000000.0
+			
+						context['mosaic']['portal_count'] += 1
+						
+						temp_portal = { 'lat':lat, 'lng':lng, }
+						if temp_portal not in temp_portal_data:
+							temp_portal_data.append(temp_portal)
+							
+							context['mosaic']['unique_count'] += 1
 						
 				portal_data = {
 					
@@ -199,7 +200,11 @@ def mosaic(request, ref):
 					mission_data['has_unavailable_portals'] = True
 				
 				mission_data['portals'].append(portal_data)
-					
+	
+	if context['mosaic']['unique_count'] != mosaic_obj.unique_count:
+		mosaic_obj.unique_count = context['mosaic']['unique_count']
+		mosaic_obj.save()
+	
 	# Comments data
 	
 	for comment_obj in mosaic_obj.comments.all().order_by('-create_date'):
