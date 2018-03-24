@@ -11,7 +11,7 @@ angular.module('FrontModule.directives').directive('mosaic', function() {
 		
 		template: '' +
 			'<div class="item width-12 width-xl-4 flex-col">' +
-				'<div class="item link-block">' +
+				'<div class="item link-block" style="height:100%">' +
 					
 					'<a class="item" href="/mosaic/[[mosaic.ref]]" target="_blank" style="display:block;">' +
 						'<div class="flex align-center">' +
@@ -19,7 +19,7 @@ angular.module('FrontModule.directives').directive('mosaic', function() {
 							'<span class="mr-normal grow text-medium color-light ellipsis" title="[[mosaic.title]]">[[mosaic.title]]</span>' +
 							'<i class="fa fa-angle-right"></i>' +
 						'</div>' +
-						'<span class="text-small color-dark">[[mosaic.images.length]] missions &middot; [[mosaic.unique_count]] uniques</span>' +
+						'<span class="text-small color-dark"><span class="color-normal">[[mosaic.images.length]]</span> missions &middot; <span class="color-normal">[[mosaic.unique_count]]</span> uniques</span>' +
 					'</a>' +
 					
 					'<div class="item pt-none">' +

@@ -59,8 +59,8 @@ angular.module('FrontModule.controllers').controller('CityPageCtrl', function($s
 			if (a.unique_count > b.unique_count) return 1;
 			if (a.unique_count < b.unique_count) return -1;
 			
-			if (a.title > b.title) return 1;
-			if (a.title < b.title) return -1;
+			if (a.images.length > b.images.length) return 1;
+			if (a.images.length < b.images.length) return -1;
 			
 			return 0;
 		});
