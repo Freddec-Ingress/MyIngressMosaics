@@ -119,7 +119,9 @@ def potential_refresh(request):
 		
 		mission_data = {
 			
+			'ref':mission_obj.ref,
 			'title':mission_obj.title,
+			'creator':mission_obj.creator,
 			
 			'startLat':mission_obj.startLat,
 			'startLng':mission_obj.startLng,
