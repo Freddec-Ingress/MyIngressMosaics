@@ -1064,14 +1064,14 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 						$scope.mosaic.todoers += 1;
 						
 						var data = { 'ref':$scope.mosaic.ref, 'type':type };
-			    		API.sendRequest('/api/mosaic/link/', 'POST', {}, data);
+			    		API.sendRequest('/api/link/create/', 'POST', {}, data);
 					}
 					else {
 						
 						$scope.mosaic.todoers -= 1;
 						
 						var data = { 'ref':$scope.mosaic.ref, 'type':type };
-			    		API.sendRequest('/api/mosaic/unlink/', 'POST', {}, data);
+			    		API.sendRequest('/api/link/delete/', 'POST', {}, data);
 					}
 					break;
 				
@@ -1082,14 +1082,14 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 						$scope.mosaic.completers += 1;
 						
 						var data = { 'ref':$scope.mosaic.ref, 'type':type };
-			    		API.sendRequest('/api/mosaic/link/', 'POST', {}, data);
+			    		API.sendRequest('/api/link/create/', 'POST', {}, data);
 					}
 					else {
 						
 						$scope.mosaic.completers -= 1;
 						
 						var data = { 'ref':$scope.mosaic.ref, 'type':type };
-			    		API.sendRequest('/api/mosaic/unlink/', 'POST', {}, data);
+			    		API.sendRequest('/api/link/delete/', 'POST', {}, data);
 					}
 					break;
 			}

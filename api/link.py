@@ -34,7 +34,7 @@ def link_delete(request):
 	
 	mosaic_obj = Mosaic.objects.get(ref=request.data['ref'])
 		
-	results = mosaic.links.filter(user=request.user, type=request.data['type'])
+	results = mosaic_obj.links.filter(user=request.user, type=request.data['type'])
 	if results.count() > 0:
 		
 		link_obj = result[0]
