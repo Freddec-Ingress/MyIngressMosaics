@@ -392,6 +392,8 @@ angular.module('FrontModule.services').service('UserService', function(API, $aut
 				
 			$auth.authenticate(provider).then(function(response) {
 				
+				console.log(response);
+				console.log(response.data);
 				$auth.setToken(response.data.token);
 				$window.location.href = next;
 			});
