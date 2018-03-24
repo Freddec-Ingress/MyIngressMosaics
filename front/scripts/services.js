@@ -52,7 +52,6 @@ angular.module('FrontModule.services').service('UserService', function(API, $aut
 				console.log(response);
 				console.log(response.data);
 				$auth.setToken(response.data.token);
-				$window.location.href = next;
 			});
 		},
 	}
