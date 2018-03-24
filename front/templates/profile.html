@@ -13,7 +13,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="ProfilePageCtrl" ng-init="init({{likes}}, {{todos}}, {{notifs}}, {{mosaics}}, {{missions}}, {{completes}});">
+	<div id="content" ng-controller="ProfilePageCtrl" ng-init="init({{faction}}, {{likes}}, {{todos}}, {{notifs}}, {{mosaics}}, {{missions}}, {{completes}});">
 	
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
@@ -47,9 +47,9 @@
 					
 					<div class="item flex-col">
 						<span class="text-big color-light">{{name}}</span>
-						<span ng-show="{{faction}} == 'E'" class="color-enlightened">Enlightened</span>
-						<span ng-show="{{faction}} == 'R'" class="color-resistant">Resistant</span>
-						<span ng-show="!{{faction}}" class="color-muted">Not defined</span>
+						<span ng-show="faction == 'E'" class="color-enlightened">Enlightened</span>
+						<span ng-show="faction == 'R'" class="color-resistant">Resistant</span>
+						<span ng-show="!faction" class="color-muted">Not defined</span>
 						<a class="mt-small" ng-click="logout();">Sign out</a>
 					</div>
 

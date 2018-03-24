@@ -21,6 +21,8 @@ angular.module('FrontModule.controllers').controller('ProfilePageCtrl', function
 	
 	$scope.edit = function(newFaction) {
 
+		$scope.faction = newFaction;
+
 		var data = { 'faction':newFaction };
 		API.sendRequest('/api/user/edit/', 'POST', {}, data);
 	}
@@ -43,7 +45,9 @@ angular.module('FrontModule.controllers').controller('ProfilePageCtrl', function
 	
 	/* Page loading */
 	
-	$scope.init = function(likes, todos, notifs, mosaics, missions, completes) {
+	$scope.init = function(faction, likes, todos, notifs, mosaics, missions, completes) {
+		
+		$scope.faction = faction;
 		
 		$scope.likes = likes;
 		$scope.todos = todos;
