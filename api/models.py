@@ -147,21 +147,9 @@ class Mosaic(models.Model):
 		missions = []
 		
 		for item in self.missions.all().order_by('order'):
-			
-			if 'Unavailable' not in item.ref:
-				mData = item.detailsSerialize()
-				
-				missions.append(mData)
-	
-				self.portals += len(mData['portals'])
-				
-				portals += mData['portals']
-				
-				if mData['creator'] not in self.creators:
-					self.creators += '|' + mData['creator'] + '|'
+			if item.creator not in self.creators:
+				self.creators += '|' + item.creator + '|'
 
-		self.uniques = len([dict(t) for t in set([tuple(d.items()) for d in portals])])
-		
 		for i in range(0, len(missions) - 1):
 			
 			mData1 = missions[i]
