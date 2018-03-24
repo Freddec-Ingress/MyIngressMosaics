@@ -150,7 +150,7 @@
 
 						<div class="flex">
 							
-							<span class="item">[[mission_count]] missions</span>
+							<span class="item">[[missions.length]] missions</span>
 							<span class="item">[[mosaic.distance]] km</span>
 
 						</div>
@@ -190,13 +190,13 @@
 					
 					<div class="tab" ng-click="current_tab='missions'" ng-class="{'active':current_tab=='missions'}">
 						Missions
-						<span class="ml-normal badge">[[mission_count]]</span>
+						<span class="ml-normal badge">[[missions.length]]</span>
 						<i class="ml-normal fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals"></i>
 					</div>
 					
 					<div class="tab" ng-click="current_tab='comments'" ng-class="{'active':current_tab=='comments'}">
 						Comments
-						<span class="ml-normal badge">[[comment_count]]</span>
+						<span class="ml-normal badge">[[comments.length]]</span>
 					</div>
 					
 				</div>

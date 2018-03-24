@@ -225,10 +225,12 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 		$scope.missions = missions;
 		$scope.comments = comments;
 		
+		$scope.mosaic.distance = Number(($scope.mosaic.distance).toFixed(2));
+		
 		var temp = 0;
-		if ($scope.missions.length > $scope.mosaic.cols) {
-			temp = $scope.mosaic.cols - $scope.missions.length % $scope.mosaic.cols;
-			if (temp < 0 || temp > ($scope.mosaic.cols - 1)) temp = 0;
+		if ($scope.missions.length > $scope.mosaic.column_count) {
+			temp = $scope.mosaic.column_count - $scope.missions.length % $scope.mosaic.column_count;
+			if (temp < 0 || temp > ($scope.mosaic.column_count - 1)) temp = 0;
 		}
 		
 		$scope.offset = new Array(temp);
