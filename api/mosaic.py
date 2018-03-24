@@ -47,7 +47,7 @@ def mosaic_create(request):
 	
 	mosaic_obj.computeInternalData()
 	
-	results = Potential.objects.filter(title=request.data['title'], city=city)
+	results = Potential.objects.filter(title=request.data['title'], city=city_obj)
 	if results.count() > 0:
 		results[0].delete()
 	
