@@ -1796,7 +1796,7 @@ angular.module('FrontModule.controllers').controller('CountryPageCtrl', function
 			$scope.country.notified = true;
 			
 			var data = { 'country_name':$scope.country.name }
-			API.sendRequest('/api/notif/create', 'POST', {}, data);
+			API.sendRequest('/api/notif/create/', 'POST', {}, data);
 		}
 		else {
 			
@@ -1809,7 +1809,7 @@ angular.module('FrontModule.controllers').controller('CountryPageCtrl', function
 		$scope.country.notified = false;
 		
 		var data = { 'country_name':$scope.country.name }
-		API.sendRequest('/api/notif/delete', 'POST', {}, data);
+		API.sendRequest('/api/notif/delete/', 'POST', {}, data);
 	}
 	
 	/* Tab management */
@@ -2218,7 +2218,7 @@ angular.module('FrontModule.controllers').controller('ProfilePageCtrl', function
 		$scope.notif.splice(index, 1);
 		
 		var data = { 'country_name':notif.country_name, 'region_name':notif.region_name, 'city_name':notif.city_name }
-		API.sendRequest('/api/notif/delete', 'POST', {}, data);
+		API.sendRequest('/api/notif/delete/', 'POST', {}, data);
 	}
 	
 	/* User management */
@@ -2379,7 +2379,7 @@ angular.module('FrontModule.controllers').controller('RegionPageCtrl', function(
 			$scope.region.notified = true;
 			
 			var data = { 'country_name':$scope.region.country_name, 'region_name':$scope.region.name }
-			API.sendRequest('/api/notif/create', 'POST', {}, data);
+			API.sendRequest('/api/notif/create/', 'POST', {}, data);
 		}
 		else {
 			
@@ -2392,7 +2392,7 @@ angular.module('FrontModule.controllers').controller('RegionPageCtrl', function(
 		$scope.region.notified = false;
 		
 		var data = { 'country_name':$scope.region.country_name, 'region_name':$scope.region.name }
-		API.sendRequest('/api/notif/delete', 'POST', {}, data);
+		API.sendRequest('/api/notif/delete/', 'POST', {}, data);
 	}
 	
 	/* Tab management */
@@ -2554,7 +2554,7 @@ angular.module('FrontModule.controllers').controller('CityPageCtrl', function($s
 			$scope.city.notified = true;
 			
 			var data = { 'country_name':$scope.city.country_name, 'region_name':$scope.city.region_name, 'city_name':$scope.city.name }
-			API.sendRequest('/api/notif/create', 'POST', {}, data);
+			API.sendRequest('/api/notif/create/', 'POST', {}, data);
 		}
 		else {
 			
@@ -2567,7 +2567,7 @@ angular.module('FrontModule.controllers').controller('CityPageCtrl', function($s
 		$scope.city.notified = false;
 		
 		var data = { 'country_name':$scope.city.country_name, 'region_name':$scope.city.region_name, 'city_name':$scope.city.name }
-		API.sendRequest('/api/notif/delete', 'POST', {}, data);
+		API.sendRequest('/api/notif/delete/', 'POST', {}, data);
 	}
 	
 	/* Tab management */

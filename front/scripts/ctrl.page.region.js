@@ -15,7 +15,7 @@ angular.module('FrontModule.controllers').controller('RegionPageCtrl', function(
 			$scope.region.notified = true;
 			
 			var data = { 'country_name':$scope.region.country_name, 'region_name':$scope.region.name }
-			API.sendRequest('/api/notif/create', 'POST', {}, data);
+			API.sendRequest('/api/notif/create/', 'POST', {}, data);
 		}
 		else {
 			
@@ -28,7 +28,7 @@ angular.module('FrontModule.controllers').controller('RegionPageCtrl', function(
 		$scope.region.notified = false;
 		
 		var data = { 'country_name':$scope.region.country_name, 'region_name':$scope.region.name }
-		API.sendRequest('/api/notif/delete', 'POST', {}, data);
+		API.sendRequest('/api/notif/delete/', 'POST', {}, data);
 	}
 	
 	/* Tab management */

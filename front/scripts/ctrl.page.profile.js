@@ -14,7 +14,7 @@ angular.module('FrontModule.controllers').controller('ProfilePageCtrl', function
 		$scope.notif.splice(index, 1);
 		
 		var data = { 'country_name':notif.country_name, 'region_name':notif.region_name, 'city_name':notif.city_name }
-		API.sendRequest('/api/notif/delete', 'POST', {}, data);
+		API.sendRequest('/api/notif/delete/', 'POST', {}, data);
 	}
 	
 	/* User management */
