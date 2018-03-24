@@ -258,28 +258,32 @@ def search(request, search_string = ''):
 #---------------------------------------------------------------------------------------------------
 def profile(request):
 	
+	context = {
+		
+		'name':None,
+		'faction':None,
+		'picture':None,
+		
+		'like_count':0,
+		'todo_count':0,
+		'notif_count':0,
+		'mosaic_count':0,
+		'mission_count':0,
+		'complete_count':0,
+		
+		'likes':[],
+		'todos':[],
+		'notifs':[],
+		'mosaics':[],
+		'missions':[],
+		'completes':[],
+	}
+		
 	if not request.user.is_anonymous():
 		
-		context = {
-			
-			'name':request.user.username,
-			'faction':request.user.profile.faction,
-			'picture':request.user.profile.picture,
-			
-			'like_count':0,
-			'todo_count':0,
-			'notif_count':0,
-			'mosaic_count':0,
-			'mission_count':0,
-			'complete_count':0,
-			
-			'likes':[],
-			'todos':[],
-			'notifs':[],
-			'mosaics':[],
-			'missions':[],
-			'completes':[],
-		}
+		context['name'] = request.user.username,
+		context['faction'] = request.user.profile.faction,
+		context['picture'] = request.user.profile.picture,
 		
 		# Mosaics data
 		
@@ -341,10 +345,7 @@ def profile(request):
 		context['mosaics'] = json.dumps(context['mosaics'])
 		context['missions'] = json.dumps(context['missions'])
 		context['completes'] = json.dumps(context['completes'])
-			
-	else:
-		context = {}
-	
+
 	return render(request, 'profile.html', context)
 
 	
