@@ -1,20 +1,16 @@
 angular.module('FrontModule.controllers').controller('CreatorPageCtrl', function($scope, $window, API) {
 	
+	/* Tab management */
+
+    $scope.current_tab = 'mosaics';
+        
 	/* Page loading */
 
-	$scope.load = function(name) {
+	$scope.init = function(mosaics, missions) {
 		
-		API.sendRequest('/api/creator/' + name + '/', 'GET').then(function(response) {
-			
-			$scope.name = response.name;
-			$scope.faction = response.faction;
-			
-			$scope.mosaics = response.mosaics;
-			$scope.missions = response.missions;
+		$scope.mosaics = mosaics;
+		$scope.missions = missions;
 
-            $scope.current_tab = 'mosaic';
-
-			$scope.loaded = true;
-		});
+		$scope.loaded = true;
 	}
 });

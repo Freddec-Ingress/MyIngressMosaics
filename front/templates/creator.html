@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load jsonify %}
+
 {% block extra-head %}
 
 	<title>MIM - {{name}}</title>
@@ -13,7 +15,7 @@
 {% endblock %}
 
 {% block content %}
-<div id="content" ng-controller="CreatorPageCtrl" ng-init="load('{{name}}');">
+<div id="content" ng-controller="CreatorPageCtrl" ng-init="init({{mosaics|jsonify}}, {{missions|jsonify}});">
 
 {% verbatim %}
 
@@ -137,16 +139,6 @@
 	                    	</div>
 			                    	
 						</div>
-					</div>
-					
-				</div>
-				
-				<div class="flex" ng-show="missions.length > 0">
-					
-					<div class="item">
-						<a class="btn" href="/registration/{{name}}" target="_blank">
-							Register a mosaic
-						</a>
 					</div>
 					
 				</div>
