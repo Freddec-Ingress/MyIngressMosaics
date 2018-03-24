@@ -31,9 +31,12 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 				lng: parseFloat(potential.missions[0].startLng),
 			};
 			
+			console.log('geocode ...');
 			geocoder.geocode({'location': latlng}, function(results, status) {
 				
 				if (status == 'OK') {
+
+					console.log('geocode OK');
 					
 					var components = null;
 					if (results[0]) components = results[0].address_components;
