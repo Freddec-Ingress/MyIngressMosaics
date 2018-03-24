@@ -175,19 +175,19 @@ def mosaic(request, ref):
 						lat = portal[5][2] / 1000000.0
 						lng = portal[5][3] / 1000000.0
 						
-					portal_data = {
-						
-						'lat':lat,
-						'lng':lng,
-						'title':portal[2],
-						'action':portal[4],
-					}
+				portal_data = {
 					
-					if portal_data['title'] == 'Unavailable':
-						context['mosaic']['has_unavailable_portals'] = True
-						mission_data['has_unavailable_portals'] = True
-					
-					mission_data['portals'].append(portal_data)
+					'lat':lat,
+					'lng':lng,
+					'title':portal[2],
+					'action':portal[4],
+				}
+				
+				if portal_data['title'] == 'Unavailable':
+					context['mosaic']['has_unavailable_portals'] = True
+					mission_data['has_unavailable_portals'] = True
+				
+				mission_data['portals'].append(portal_data)
 					
 	# Comments data
 	
