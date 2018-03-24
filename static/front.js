@@ -1176,7 +1176,7 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 		var map = new google.maps.Map(document.getElementById('map'), {
 			
 			zoom: 8,
-			styles: style,
+			gestureHandling: 'greedy', 
 			zoomControl: true,
 			disableDefaultUI: true,
 			fullscreenControl: true,
