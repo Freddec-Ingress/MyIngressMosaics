@@ -37,6 +37,7 @@ def mosaic_create(request):
 		city_obj.save()
 		
 	mosaic_obj = Mosaic(registerer=request.user, column_count=int(request.data['columns']), city=city_obj, title=request.data['title'])
+	mosaic_obj.save()
 	
 	for item in request.data['missions']:
 		mission_obj = Mission.objects.get(ref=item['ref'])
