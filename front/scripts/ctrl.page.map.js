@@ -243,7 +243,7 @@ angular.module('FrontModule.controllers').controller('MapPageCtrl', function($sc
 															
 															var temp = 0;
 															if (mosaic.images.length > mosaic.column_count) {
-																temp = mosaic.cols - mosaic.images.length % mosaic.cols;
+																temp = mosaic.column_count - mosaic.images.length % mosaic.column_count;
 																if (temp < 0 || temp > (mosaic.column_count - 1)) temp = 0;
 															}
 															
@@ -266,11 +266,11 @@ angular.module('FrontModule.controllers').controller('MapPageCtrl', function($sc
 																'<a class="flex-col" target="_blank" style="width:200px; min-width:200px; max-width:200px;" href="/mosaic/' + mosaic.ref + '" >' +
 																	'<div class="flex-col" style="flex-shrink:1;">' + 
 																		'<span class="color-black text-medium text-bold" style="word-break: break-all;">' + mosaic.title + '</span>' + 
-																		'<span class="color-grey text-small mb-small">' + mosaic.images.length + ' missions &middot; ' + mosaic.unique_count + ' uniques</span>' + 
+																		'<span class="color-grey text-small">' + mosaic.images.length + ' missions &middot; ' + mosaic.unique_count + ' uniques</span>' + 
 																		'<span class="color-link text-small mb-small">See details</span>' + 
 																	'</div>' + 
 																	'<div style="max-height:400px; overflow-y:auto;">' +
-																		'<div class="flex wrap shrink justify-center" style="padding:0 calc((6 - ' + mosaic.column_count + ') / 2 * 16.666667%);">' +
+																		'<div class="flex wrap shrink" style="padding:0 calc((6 - ' + mosaic.column_count + ') / 2 * 16.666667%);">' +
 																			offset_string +
 																			missions_string + 
 																		'</div>' +
