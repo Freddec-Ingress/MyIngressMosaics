@@ -17,10 +17,10 @@ urlpatterns = [
 
 	url(r'^mosaic/(?P<ref>\w+)', views.mosaic),
 	
-	url(r'^registration/(?P<searchstring>[^/]+)', views.registration),
+	url(r'^registration/(?P<search_string>[^/]+)', views.registration),
 	url(r'^registration', views.registration),
 	
-	url(r'^search/(?P<searchstring>[\w \-,]+)',	views.search),
+	url(r'^search/(?P<search_string>[\w \-,]+)',	views.search),
 	url(r'^search', views.search),
 	
 	url(r'^profile', views.profile),
