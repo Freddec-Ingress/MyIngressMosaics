@@ -61,7 +61,7 @@ angular.module('FrontModule.directives').directive('potential', function() {
 			'<div class="item width-12 width-xl-4">' +
 				'<div class="item link-block">' +
 					
-					'<a class="item" href="/registration/[[potential.title]]" target="_blank" style="display:block;">' +
+					'<a class="item" href="/registration/[[potential.title]]" style="display:block;">' +
 						'<div class="flex align-center">' +
 							'<span class="mr-normal grow text-medium color-light ellipsis" title="[[potential.title]]">[[potential.title]]</span>' +
 							'<i class="fa fa-angle-right"></i>' +
