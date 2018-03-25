@@ -73,7 +73,7 @@ def potential_create(request):
 		city_obj = City(region=region_obj, name=request.data['city'])
 		city_obj.save()
 		
-	potential_obj = Potential(title=request.data['title'], count=missions.count(), city=city_obj, country=country_obj)
+	potential_obj = Potential(title=request.data['title'], count=len(request.data['refs']), city=city_obj, country=country_obj)
 	potential_obj.save()
 	
 	city_notifiers = Notif.objects.filter(country=country_obj, region=region_obj, city=city_obj).values_list('user__email')
