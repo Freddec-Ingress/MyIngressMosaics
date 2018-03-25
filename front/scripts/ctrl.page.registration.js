@@ -388,7 +388,6 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 		if ($scope.authenticated && text) {
 			
 			$scope.refreshMissions(text);
-			$scope.selectAll();
 		}
 		
 		$scope.loaded = true;
