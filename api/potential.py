@@ -45,13 +45,6 @@ def potential_exclude(request):
 @permission_classes((IsAuthenticated, ))
 def potential_create(request):
 	
-	results = Mission.objects.filter(ref__in=request.data['refs'])
-	for mission_obj in results:
-
-		mission_obj.name = request.data['title']
-		mission_obj.validated = True
-		mission_obj.save()
-	
 	results = Country.objects.filter(name=request.data['country'])
 	if results.count() > 0:
 		country_obj = results[0]
@@ -75,6 +68,13 @@ def potential_create(request):
 		
 	potential_obj = Potential(title=request.data['title'], count=len(request.data['refs']), city=city_obj, country=country_obj)
 	potential_obj.save()
+	
+	results = Mission.objects.filter(ref__in=request.data['refs'])
+	for mission_obj in results:
+
+		mission_obj.name = request.data['title']
+		mission_obj.validated = True
+		mission_obj.save()
 	
 	city_notifiers = Notif.objects.filter(country=country_obj, region=region_obj, city=city_obj).values_list('user__email')
 	region_notifiers = Notif.objects.filter(country=country_obj, region=region_obj, city__isnull=True).values_list('user__email')
