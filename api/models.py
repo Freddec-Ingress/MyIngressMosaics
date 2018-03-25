@@ -501,10 +501,11 @@ class Potential(models.Model):
 		
 		potential_data = {
 			
-			'name': self.title,
+			'title': self.title,
 			'mission_count': self.mission_count,
 			
 			'city_name': self.city.name,
+			'region_name': self.city.region.name,
 			'country_name': self.country.name,
 			'country_code': self.country.code,
 		}

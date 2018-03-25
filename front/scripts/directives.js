@@ -70,9 +70,9 @@ angular.module('FrontModule.directives').directive('potential', function() {
 					'</a>' +
 					
 					'<div class="item pt-none">' +
-						'<a class="flex" href="/world/[[potential.city.region.country.name]]/[[potential.city.region.name]]/[[potential.city.name]]">' +
-							'<span class="mr-small flag-icon flag-icon-[[potential.city.region.country.code]]"></span>' +
-							'<span>[[potential.city.name]]</span>' +
+						'<a class="flex" href="/world/[[potential.country_name]]/[[potential.region_name]]/[[potential.city_name]]">' +
+							'<span class="mr-small flag-icon flag-icon-[[potential.country_code]]"></span>' +
+							'<span>[[potential.city_name]]</span>' +
 						'</a>' +
 					'</div>' +
 					
