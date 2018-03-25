@@ -1005,7 +1005,7 @@ angular.module('FrontModule.directives').directive('mission', function() {
 						'</div>' +
 						
 						'<div class="text-small">' +
-							'<a href="/search/[[mission.creator]]" ng-class="{\'color-enlightened\': mission.faction == \'E\', \'color-resistant\': mission.faction == \'R\'}">[[mission.creator]]</a>' +
+							'<span ng-class="{\'color-enlightened\': mission.faction == \'E\', \'color-resistant\': mission.faction == \'R\'}">[[mission.creator]]</span>' +
 						'</div>' +
 						
 					'</div>' +
