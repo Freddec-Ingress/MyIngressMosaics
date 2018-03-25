@@ -1664,7 +1664,11 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 	
 		$scope.open_step(1);
 		
-		if ($scope.authenticated) $scope.refreshMissions(text);
+		if ($scope.authenticated && text) {
+			
+			$scope.refreshMissions(text);
+			$scope.selectAll();
+		}
 		
 		$scope.loaded = true;
 	}
