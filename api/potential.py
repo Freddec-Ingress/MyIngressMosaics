@@ -121,6 +121,7 @@ def potential_refresh(request):
 			
 			'ref':mission_obj.ref,
 			'title':mission_obj.title,
+			'image':mission_obj.image,
 			'creator':mission_obj.creator,
 			
 			'startLat':mission_obj.startLat,
