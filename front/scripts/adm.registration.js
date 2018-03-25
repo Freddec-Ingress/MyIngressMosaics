@@ -123,7 +123,10 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		var index = $scope.potentials.indexOf(potential);
 		$scope.potentials.splice(index, 1);
 		
-		var data = { 'name':potential.name };
+		var refs = [];
+		for (var mission of potential.missions) refs.push(mission.ref);
+		
+		var data = { 'refs':refs };
 		API.sendRequest('/api/potential/exclude/', 'POST', {}, data);
 	}
 
@@ -133,7 +136,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		for (var mission of potential.missions) refs.push(mission.ref);
 		
 		var data = { 'refs':refs, 'new_name':new_name };
-		API.sendRequest('/api/potential/rename/', 'POST', {}, data).then(function(response) {
+		API.sendRequest('/api/potential/update/', 'POST', {}, data).then(function(response) {
 			
 			potential.name = new_name;
 			
