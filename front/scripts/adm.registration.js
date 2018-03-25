@@ -153,7 +153,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		for (var mission of potential.missions) refs.push(mission.ref);
 		
 		var data = { 'refs':refs, 'title':new_name, 'country':potential.country, 'region':potential.region, 'city':potential.city  };
-		API.sendRequest('/api/potential/validate/', 'POST', {}, data);
+		API.sendRequest('/api/potential/create/', 'POST', {}, data);
 	}
 	
 	/* Page loading */
