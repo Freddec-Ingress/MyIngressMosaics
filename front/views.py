@@ -241,7 +241,7 @@ def registration(request, search_string = ''):
 	countries = Country.objects.all().order_by('name')
 	for country in countries:
 		
-		potentials_results = country.potentials.order_by('city__name', '-count', 'title')
+		potentials_results = country.potentials.order_by('city__name', '-mission_count', 'title')
 		if potentials_results.count() > 0:
 			
 			country_data = {

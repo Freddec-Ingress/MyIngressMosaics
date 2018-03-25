@@ -965,7 +965,7 @@ angular.module('FrontModule.directives').directive('potential', function() {
 							'<span class="mr-normal grow text-medium color-light ellipsis" title="[[potential.title]]">[[potential.title]]</span>' +
 							'<i class="fa fa-angle-right"></i>' +
 						'</div>' +
-						'<span class="text-small color-dark">[[potential.count]] missions</span>' +
+						'<span class="text-small color-dark">[[potential.mission_count]] missions</span>' +
 					'</a>' +
 					
 					'<div class="item pt-none">' +

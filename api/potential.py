@@ -66,7 +66,7 @@ def potential_create(request):
 		city_obj = City(region=region_obj, name=request.data['city'])
 		city_obj.save()
 		
-	potential_obj = Potential(title=request.data['title'], count=len(request.data['refs']), city=city_obj, country=country_obj)
+	potential_obj = Potential(title=request.data['title'], mission_count=len(request.data['refs']), city=city_obj, country=country_obj)
 	potential_obj.save()
 	
 	results = Mission.objects.filter(ref__in=request.data['refs'])
