@@ -1,17 +1,5 @@
 angular.module('FrontModule.controllers').controller('SearchPageCtrl', function($scope, $window, API) {
 	
-	/* Init management */
-	
-	$scope.searchtext = null;
-	
-	$scope.init = function(text) {
-		
-		if (!text) return;
-		
-		$scope.searchtext = text;
-		$scope.search(text);
-	}
-	
 	/* Search management */
 	
 	$scope.mosaics = null;

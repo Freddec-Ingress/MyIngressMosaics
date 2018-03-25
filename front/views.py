@@ -263,12 +263,9 @@ def registration(request, search_string = ''):
 	
 	
 #---------------------------------------------------------------------------------------------------
-def search(request, search_string = ''):
+def search(request):
 	
-	context = {
-		'search_string':search_string
-	}
-	
+	context = {}
 	return render(request, 'search.html', context)
 
 	
