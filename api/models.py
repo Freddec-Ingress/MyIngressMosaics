@@ -491,7 +491,7 @@ class Potential(models.Model):
 	# Admin displaying
 	
 	def __str__(self):
-		return self.title + ' - ' + str(self.count)
+		return self.title + ' - ' + str(self.mission_count)
 	
 	
 	
@@ -502,7 +502,7 @@ class Potential(models.Model):
 		potential_data = {
 			
 			'name': self.title,
-			'mission_count': self.count,
+			'mission_count': self.mission_count,
 			
 			'city_name': self.city.name,
 			'country_name': self.country.name,
