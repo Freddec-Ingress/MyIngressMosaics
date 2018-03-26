@@ -2849,7 +2849,9 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 	$scope.clipboardCopy = function(potential) {
 		
 		var index = $scope.potentials.indexOf(potential);
-		var element = document.getElementById('potential_default_' + index.toString());
+		var elementName = 'potential_default_' + index.toString();
+		console.log(elementName);
+		var element = document.getElementById(elementName);
 		element.focus();
 		element.select();	
 		
