@@ -1309,7 +1309,7 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 	$scope.searchText = '';
 	$scope.requestText = '';
 	
-	$scope.refreshMissions = function(text) {
+	$scope.refreshMissions = function(text, select_all=false) {
 		
 		$scope.searchText = text;
 		
@@ -1340,6 +1340,8 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 			if ($scope.potential) $scope.mosaic_name =$scope.potential.title;
 
 			$scope.refreshing = false;
+			
+			if (select_all) $scope.selectAll();
 		});
 	}
 
@@ -1666,7 +1668,7 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 		
 		if ($scope.authenticated && text) {
 			
-			$scope.refreshMissions(text);
+			$scope.refreshMissions(text, true);
 		}
 		
 		$scope.loaded = true;
