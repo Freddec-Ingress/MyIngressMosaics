@@ -929,12 +929,12 @@ angular.module('FrontModule.directives').directive('mosaic', function() {
 					'</div>' +
 
 					'<a class="item" href="/mosaic/[[mosaic.ref]]" target="_blank" style="display:block;">' +
-						'<div class="flex wrap shrink" style="max-width:150px; padding-right:calc((6 - [[mosaic.cols]]) * 25px);">' +
+						'<div class="flex wrap shrink" style="max-width:150px; padding-right:calc((6 - [[mosaic.column_count]]) * 25px);">' +
 							
-							'<div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / [[mosaic.cols]]);">' +
+							'<div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / [[mosaic.column_count]]);">' +
 							'</div>' +
 							
-							'<div ng-repeat="m in mosaic.images track by $index" class="mission-vignet" style="max-width:25px; flex:0 0 calc(100% / [[mosaic.cols]]);">' +
+							'<div ng-repeat="m in mosaic.images track by $index" class="mission-vignet" style="max-width:25px; flex:0 0 calc(100% / [[mosaic.column_count]]);">' +
 								'<img src="/static/img/mask.png" style="width:25px; background-image:url([[m]]=s25);" />' +
 							'</div>' +
 							
