@@ -103,7 +103,7 @@
 						            <div ng-repeat="mission in offset track by $index" style="flex:0 0 16.666667%;">
 						            </div>
 						            
-						            <div ng-repeat="mission in missions | reverse track by $index" class="block mission-vignet" style="flex:0 0 (100% / [[mosaic.column_count]]);">
+						            <div ng-repeat="mission in missions | reverse track by $index" class="block mission-vignet" style="flex:0 0 calc(100% / [[mosaic.column_count]]);">
 						                <img src="/static/img/mask.png" style="background-image:url([[mission.image]]=s100);" />
 						                <div class="color-dark" style="position:absolute;bottom:0;right:0;font-size:8px;">[[missions.length - $index]]</div>
 						            </div>
