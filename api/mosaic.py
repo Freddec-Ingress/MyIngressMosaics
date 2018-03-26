@@ -67,7 +67,7 @@ def mosaic_create(request):
 
 	if len(receivers) > 0:
 		
-		msg_plain = render_to_string('new_mosaic.txt', { 'ref':mosaic_obj.ref, 'name':mosaic_obj.title, 'count':mosaic_obj.missions.all().count(), 'country':country.name, 'region':region.name, 'city':city.name })
+		msg_plain = render_to_string('new_mosaic.txt', { 'ref':mosaic_obj.ref, 'name':mosaic_obj.title, 'count':mosaic_obj.missions.all().count(), 'country':country_obj.name, 'region':region_obj.name, 'city':city_obj.name })
 		
 		for receiver in receivers:
 			send_mail(
