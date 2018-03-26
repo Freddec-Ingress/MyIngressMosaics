@@ -2849,6 +2849,11 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 	$scope.clipboardCopy = function(potential) {
 		
 		var index = $scope.potentials.indexOf(potential);
+		var inputCity = $('#city_input_' + index);
+		inputCity.prop('value', potential.default);
+		inputCity.focus();
+/*		
+		var index = $scope.potentials.indexOf(potential);
 		var elementName = '#potential_default_' + index.toString();
 		
 		var element = $(elementName);
@@ -2862,7 +2867,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		document.execCommand('copy');
 		
 		$input.remove();
-	}
+*/	}
 	
 	/* Page loading */
 	
