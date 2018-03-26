@@ -156,9 +156,13 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		API.sendRequest('/api/potential/create/', 'POST', {}, data);
 	}
 	
-	$scope.clipboardCopy = function(text) {
+	$scope.clipboardCopy = function(id) {
 		
-		document.execCommand(text);
+		var element = document.querySelector('#' + id);
+		element.focus();
+		element.select();	
+		
+		document.execCommand('copy');
 	}
 	
 	/* Page loading */
