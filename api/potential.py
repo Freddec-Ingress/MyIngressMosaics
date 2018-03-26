@@ -92,7 +92,7 @@ def potential_create(request):
 
 	if len(receivers) > 0:
 		
-		msg_plain = render_to_string('new_potential.txt', { 'url':potential_obj.title.replace(' ', '%20'), 'name':potential_obj.title, 'count':potential_obj.count, 'country':country_obj.name, 'region':region_obj.name, 'city':city_obj.name })
+		msg_plain = render_to_string('new_potential.txt', { 'url':potential_obj.title.replace(' ', '%20'), 'name':potential_obj.title, 'count':potential_obj.mission_count, 'country':country_obj.name, 'region':region_obj.name, 'city':city_obj.name })
 		
 		for receiver in receivers:
 			send_mail(
