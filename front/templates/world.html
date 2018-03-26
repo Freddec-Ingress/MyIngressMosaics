@@ -21,7 +21,7 @@
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
 				<i class="fa fa-spinner rotating"></i>
-				<span class="ml-small">Loading page...</span>
+				<span class="ml-small">{% trans "Loading page..." %}</span>
 			</div>
 		</div>
 		
@@ -31,7 +31,7 @@
 				
 				<div class="flex-col item">
 					<span class="text-big color-light">Ingress Mosaics, Banners and Mission series</span>
-					<span class="text-normal color-normal">{{mosaic_count|intcomma}} registered mosaics by agents for agents</span>
+					<span class="text-normal color-normal">{% blocktrans with count=mosaic_count|intcomma %}{{count}} registered mosaics by agents for agents{% endblocktrans %}</span>
 				</div>
 				
 			</div>
