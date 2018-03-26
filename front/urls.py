@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from django.http import HttpResponse
 from django.conf.urls import url
-from django.contrib.sitemaps.views import sitemap
 
 from front import views
 
@@ -12,9 +10,6 @@ from front import views
 #---------------------------------------------------------------------------------------------------
 urlpatterns = [
 	
-	url(r'^robots.txt$', lambda r: HttpResponse('User-agent: *\nDisallow: /admin/\nDisallow: /api/', content_type='text/plain')),
-	url(r'^sitemap.xml$', views.sitemap),
-
 	url(r'^mosaic/(?P<ref>\w+)', views.mosaic),
 	
 	url(r'^registration/(?P<search_string>[^/]+)', views.registration),
