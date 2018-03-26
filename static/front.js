@@ -2850,6 +2850,11 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		API.sendRequest('/api/potential/create/', 'POST', {}, data);
 	}
 	
+	$scope.clipboardCopy = function(text) {
+		
+		document.execCommand(text);
+	}
+	
 	/* Page loading */
 	
 	$scope.init = function(potentials) {
