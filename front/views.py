@@ -86,6 +86,7 @@ def mosaic(request, ref):
 	
 	context['mosaic'] = {
 		
+		'id':mosaic_obj.pk,
 		'ref':str(mosaic_obj.ref),
 		'title':str(mosaic_obj.title),
 
