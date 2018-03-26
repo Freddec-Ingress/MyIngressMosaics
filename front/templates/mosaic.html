@@ -82,6 +82,11 @@
 			<div class="section">
 			
 				<div class="flex align-center">
+					{% if request.user.is_superuser %}
+					<div class="item">
+						<a href="/admin/api/mosaic/[[mosaic.id]]/change/" target="_blank"><i class="fa fa-lock"></i></a>
+					</div>
+					{% endif %}
 					<div class="item">
 						<span class="text-big color-light">[[mosaic.title]]</span>
 					</div>
