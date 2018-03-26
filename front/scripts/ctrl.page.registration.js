@@ -307,7 +307,7 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 	
 	$scope.clipboardCopy = function() {
 		
-		var input = $('#mosaic_default');
+		var input = $('#city_input');
 		input.prop('value', $scope.default);
 		input.focus();
 	}
