@@ -158,22 +158,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		var inputCity = $('#city_input_' + index);
 		inputCity.prop('value', potential.default);
 		inputCity.focus();
-/*		
-		var index = $scope.potentials.indexOf(potential);
-		var elementName = '#potential_default_' + index.toString();
-		
-		var element = $(elementName);
-		
-		var $input = $('<input type=text class="hidden">');
-		$input.prop('value', potential.default);
-		$input.insertAfter(element);
-		$input.focus();
-		$input.select();	
-		
-		document.execCommand('copy');
-		
-		$input.remove();
-*/	}
+	}
 	
 	/* Page loading */
 	

@@ -357,8 +357,9 @@
 						Suggestion
 					</div>
 					
-					<div class="item pt-none grow ml-big">
-						<span class="color-dark">[[default]]</span>
+					<div class="flex item pt-none grow ml-big">
+						<a ng-click="clipboardCopy();"><i class="fa fa-copy mr-small"></i></a>
+						<span id="mosaic_default" class="color-dark">[[default]]</span>
 					</div>
 				
 				</div>
@@ -407,6 +408,30 @@
 							<span class="text-big color-light">[[mosaic_name]]</span>
 						</div>
 	
+						<div class="flex">
+							
+							<div class="item">
+								<span class="color-normal">[[country_name]]</span>
+							</div>
+							
+							<div class="item">
+								<span class="color-dark">></span>
+							</div>
+							
+							<div class="item">
+								<span class="color-normal">[[region_name]]</span>
+							</div>
+							
+							<div class="item">
+								<span class="color-dark">></span>
+							</div>
+							
+							<div class="item">
+								<span class="color-normal">[[city_name]]</span>
+							</div>
+							
+						</div>
+						
 					</div>
 					
 					<div class="flex wrap">
@@ -432,30 +457,6 @@
 						</div>
 						
 						<div class="flex-col width-12 width-xl-5">
-							
-							<div class="flex">
-								
-								<div class="item">
-									<span class="color-normal">[[country_name]]</span>
-								</div>
-								
-								<div class="item">
-									<span class="color-dark">></span>
-								</div>
-								
-								<div class="item">
-									<span class="color-normal">[[region_name]]</span>
-								</div>
-								
-								<div class="item">
-									<span class="color-dark">></span>
-								</div>
-								
-								<div class="item">
-									<span class="color-normal">[[city_name]]</span>
-								</div>
-								
-							</div>
 							
 							<div class="item">
 								<span class="color-dark">[[selected.length]] missions</span>

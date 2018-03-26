@@ -304,6 +304,13 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 			}
 		});
 	}
+	
+	$scope.clipboardCopy = function() {
+		
+		var input = $('#mosaic_default');
+		input.prop('value', $scope.default);
+		input.focus();
+	}
 
 	/* Step #4 management */
 	
