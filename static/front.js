@@ -2698,6 +2698,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 	
 	$scope.refresh_missions = function(potential) {
 		
+		potential.open = true;
 		potential.refreshing_missions = true;
 		
 		potential.missions = [];
@@ -2725,13 +2726,10 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 				lng: parseFloat(potential.missions[0].startLng),
 			};
 			
-			console.log('geocode ...');
 			geocoder.geocode({'location': latlng}, function(results, status) {
 				
 				if (status == 'OK') {
 
-					console.log('geocode OK');
-					
 					var components = null;
 					if (results[0]) components = results[0].address_components;
 					if (results[1]) components = results[1].address_components;
@@ -2798,9 +2796,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 					
 					potential.region = potential.country;
 				}
-				
-				console.log(potential);
-				
+
 				$scope.$apply();
 			});
 		}
@@ -2850,9 +2846,10 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		API.sendRequest('/api/potential/create/', 'POST', {}, data);
 	}
 	
-	$scope.clipboardCopy = function(id) {
+	$scope.clipboardCopy = function(potential) {
 		
-		var element = document.querySelector('#' + id);
+		var index = $scope.potentials.indexOf(potential);
+		var element = document.getElementById('potential_default_' + index);
 		element.focus();
 		element.select();	
 		

@@ -43,8 +43,8 @@
 							<div class="flex align-center">
 								
 								<div class="item grow">
-									<a ng-show="!potential.open" ng-click="potential.missions && potential.open=true;"><i class="fa fa-plus-square text-small"></i></a>
-									<a ng-show="potential.open" ng-click="potential.missions && potential.open=false;"><i class="fa fa-minus-square text-small"></i></a>
+									<a ng-show="!potential.open" ng-click="potential.missions & potential.open=true;"><i class="fa fa-plus-square text-small mr-small"></i></a>
+									<a ng-show="potential.open" ng-click="potential.missions & potential.open=false;"><i class="fa fa-minus-square text-small mr-small"></i></a>
 									<span class="color-light" ng-class="{'color-danger':potential.count!=6&&potential.count!=12&&potential.count!=18&&potential.count!=24&&potential.count!=30&&potential.count!=36&&potential.count!=42&&potential.count!=48&&potential.count!=54}">[[potential.name]]</span>
 								</div>
 								
@@ -70,7 +70,7 @@
 								
 							</div>
 							
-							<div class="flex-col" ng-hide="potential.refreshing_missions || !potential.missions">
+							<div class="flex-col" ng-hide="potential.refreshing_missions || !potential.missions" ng-show="potential.open">
 								
 								<div class="item pb-none">
 									<span class="color-dark">[[potential.missions.length]] missions</span>
@@ -107,7 +107,7 @@
 								<div class="flex-col">
 
 									<div class="item pb-none">
-										<a ng-click="clipboardCopy('potential_default_[[$index]]');"><i class="fa fa-copy mr-small"></i></a>
+										<a ng-click="clipboardCopy(potential);"><i class="fa fa-copy mr-small"></i></a>
 										<span id="potential_default_[[$index]]" class="color-dark">[[potential.default]]</span>
 									</div>
 									
