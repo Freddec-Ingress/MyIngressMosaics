@@ -607,3 +607,24 @@ class IMMosaic(models.Model):
 	
 	def __str__(self):
 		return self.name
+
+
+
+#---------------------------------------------------------------------------------------------------
+@python_2_unicode_compatible
+class Waiting(models.Model):
+	
+	city = models.ForeignKey(City, related_name='waitings')
+	region = models.ForeignKey(Region, related_name='waitings')
+	country = models.ForeignKey(Country, related_name='waitings')
+	
+	title = models.CharField(max_length=256)
+	
+	mission_refs = models.TextField()
+	mission_count = models.IntegerField()
+	mission_missing = models.TextField()
+	
+	# Admin displaying
+	
+	def __str__(self):
+		return self.title + ' - ' + str(self.mission_count)
