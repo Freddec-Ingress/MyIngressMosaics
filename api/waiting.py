@@ -36,6 +36,13 @@ def waiting_create(request):
 		city_obj = City(region=region_obj, name=request.data['city_name'])
 		city_obj.save()
 	
+	results = Mission.objects.filter(ref__in=request.data['refs'])
+	for mission_obj in results:
+		
+		mission_obj.admin = False
+		mission_obj.name = request.data['title']
+		mission_obj.save()
+		
 	mission_refs = ''
 	for item in request.data['mission_refs']:
 		mission_refs += '|' + item
