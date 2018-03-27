@@ -168,10 +168,10 @@ def mosaic(request, ref):
 			
 				lat = 0.0
 				lng = 0.0
+					
+				context['mosaic']['waypoint_count'] += 1
 				
 				if portal[5]:
-					
-					context['mosaic']['waypoint_count'] += 1
 					
 					if portal[5][0] == 'f':
 						lat = portal[5][1] / 1000000.0
