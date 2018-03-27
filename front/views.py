@@ -159,7 +159,7 @@ def mosaic(request, ref):
 			
 		# Portals data
 		
-		temp_portal_data = []
+		temp_portal_data = ''
 		
 		jsondata = json.loads(mission_obj.data)
 		
@@ -184,8 +184,7 @@ def mosaic(request, ref):
 						context['mosaic']['portal_count'] += 1
 						
 						if portal[1] not in temp_portal_data:
-							temp_portal_data.append(portal[1])
-							
+							temp_portal_data += portal[1] + ';'
 							context['mosaic']['unique_count'] += 1
 						
 				portal_data = {
