@@ -165,6 +165,24 @@
 									
 								</div>
 								
+								<div class="flex" style="border-top:1px solid #174540;">
+									
+									<div class="item grow">
+										<input type="text" class="control" placeholder="Mission count" ng-model="mission_count" />
+									</div>
+									
+									<div class="item grow">
+										<input type="text" class="control" placeholder="Missing missions" ng-model="mission_missings" />
+									</div>
+									
+									<div class="item">
+										<button class="btn btn-danger" ng-click="waitingCreate(potential, new_name, mission_count, mission_missings);">
+											Waiting
+										</button>
+									</div>
+									
+								</div>
+								
 							</div>
 							
 						</div>

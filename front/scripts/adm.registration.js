@@ -148,7 +148,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		var refs = [];
 		for (var mission of potential.missions) refs.push(mission.ref);
 		
-		var data = { 'refs':refs, 'title':new_name, 'country':potential.country, 'region':potential.region, 'city':potential.city  };
+		var data = { 'refs':refs, 'title':new_name, 'country':potential.country, 'region':potential.region, 'city':potential.city };
 		API.sendRequest('/api/potential/create/', 'POST', {}, data);
 	}
 	
@@ -158,6 +158,30 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		var inputCity = $('#city_input_' + index);
 		inputCity.prop('value', potential.default);
 		inputCity.focus();
+	}
+	
+	/* Waiting management */
+	
+	$scope.waitingCreate = function(potential, title, mission_count, mission_missings) {
+		
+		var index = $scope.potentials.indexOf(potential);
+		$scope.potentials.splice(index, 1);
+		
+		var refs = [];
+		for (var mission of potential.missions) refs.push(mission.ref);
+		
+		var missings = mission_missings.split(',');
+		
+		var data = {
+			'country_name':potential.country.name,
+			'region_name':potential.region.name,
+			'city_name':potential.city.name,
+			'title':title,
+			'mission_count':mission_count,
+			'mission_refs':refs,
+			'mission_missing':missings,
+		};
+		API.sendRequest('/api/waiting/create/', 'POST', {}, data);
 	}
 	
 	/* Page loading */

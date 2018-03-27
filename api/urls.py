@@ -11,6 +11,7 @@ from .link import *
 from .notif import *
 from .search import *
 from .mosaic import *
+from .waiting import *
 from .comment import *
 from .telegram import *
 from .potential import *
@@ -58,4 +59,6 @@ urlpatterns = [
 	url(r'^im/country/', im_country),
 	url(r'^im/mosaic/die/', im_mosaic_die),
 	url(r'^im/mosaic/exclude/', im_mosaic_exclude),
+	
+	url(r'^waiting/create/', waiting_create),
 ]
