@@ -199,7 +199,7 @@ def mosaic(request, ref):
 				
 				mission_data['portals'].append(portal_data)
 	
-#	context['mosaic']['unique_count'] = set(temp_portal_data)
+	context['mosaic']['unique_count'] = len([dict(t) for t in set([tuple(d.items()) for d in temp_portal_data])])
 	if context['mosaic']['unique_count'] != mosaic_obj.unique_count:
 		mosaic_obj.unique_count = context['mosaic']['unique_count']
 		mosaic_obj.save()
