@@ -183,7 +183,15 @@ def mosaic(request, ref):
 			
 						context['mosaic']['portal_count'] += 1
 						
-						temp_portal_data.append({ 'lat':lat, 'lng':lng, 'title':portal[2] })
+						temp_portal = { 'ref':portal[1] }
+						to_add = True
+						for item in temp_portal_data:
+							if item['ref'] == temp_portal['ref']:
+								to_add = False
+								break
+						if to_add:
+							temp_portal_data.append(temp_portal)
+							context['mosaic']['unique_count'] += 1
 
 				portal_data = {
 					
@@ -198,8 +206,7 @@ def mosaic(request, ref):
 					mission_data['has_unavailable_portals'] = True
 				
 				mission_data['portals'].append(portal_data)
-	
-	context['mosaic']['unique_count'] = len(set([tuple(d.items()) for d in temp_portal_data]))
+
 	if context['mosaic']['unique_count'] != mosaic_obj.unique_count:
 		mosaic_obj.unique_count = context['mosaic']['unique_count']
 		mosaic_obj.save()

@@ -9,9 +9,9 @@
 	
 	<meta property="og:url" content="https://www.myingressmosaics.com/mosaic/{{mosaic.ref}}" />
 	<meta property="og:type" content="article" />
-	<meta property="og:title" content="MIM - {{data.mosaic.title}}">
-	<meta property="og:headline" content="MIM - {{data.mosaic.title}}" />
-	<meta property="og:description" content="{{data.mission_count}} missions &middot; {{data.mosaic.unique_count}} uniques" />
+	<meta property="og:title" content="MIM - {{mosaic.title}}">
+	<meta property="og:headline" content="MIM - {{mosaic.title}}" />
+	<meta property="og:description" content="{{missions|length}} missions &middot; {{mosaic.unique_count}} uniques" />
 
 {% endblock %}
 
