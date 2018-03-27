@@ -37,11 +37,11 @@ def waiting_create(request):
 		city_obj.save()
 	
 	mission_refs = ''
-	for item in request.data['mission_refs']
+	for item in request.data['mission_refs']:
     	mission_refs += '|' + item
 	
 	mission_missing = ''
-	for item in request.data['mission_missing']
+	for item in request.data['mission_missing']:
     	mission_missing += '|' + item
 	
 	waiting_obj = Waiting(country=country_obj, region=region_obj, city=city_obj, title=request.data['title'], mission_refs=mission_refs, mission_count=request.data['mission_count'], mission_missing=mission_missing)
