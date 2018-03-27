@@ -199,8 +199,6 @@ def mosaic(request, ref):
 				if portal_data['title'] == 'Unavailable':
 					context['mosaic']['has_unavailable_portals'] = True
 					mission_data['has_unavailable_portals'] = True
-				
-				mission_data['portals'].append(portal_data)
 
 				to_add = True
 				for mission_data in context['missions']:
@@ -210,6 +208,8 @@ def mosaic(request, ref):
 							break
 				if to_add:
 					context['mosaic']['unique_count'] += 1
+				
+				mission_data['portals'].append(portal_data)
 
 	if context['mosaic']['unique_count'] != mosaic_obj.unique_count:
 		mosaic_obj.unique_count = context['mosaic']['unique_count']
