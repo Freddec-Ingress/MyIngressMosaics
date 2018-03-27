@@ -176,7 +176,7 @@
 									</div>
 									
 									<div class="item">
-										<button class="btn btn-danger" ng-click="waitingCreate(potential, new_name, mission_count, mission_missings);">
+										<button class="btn btn-danger" ng-click="waitingCreate(potential, new_name, mission_count, mission_missings);" ng-disabled="!mission_missings || !mission_count || !potential.name || !potential.city || !potential.region || !potential.country">
 											Waiting
 										</button>
 									</div>
