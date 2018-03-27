@@ -20,7 +20,7 @@
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
 				<i class="fa fa-spinner rotating"></i>
-				<span class="ml-small">Loading page...</span>
+				<span class="ml-small">{% trans "Loading page..." %}</span>
 			</div>
 		</div>
 		
@@ -29,13 +29,13 @@
 			<div class="section">
 				
 				<div class="item pb-none">
-					<span class="color-normal">Search for mosaics</span>
+					<span class="color-normal">{% trans "Search for mosaics" %}</span>
 				</div>
 				
 				<form class="self-stretch flex">
 					
 					<div class="item grow">
-						<input class="control" placeholder="Mosaic name or creator" ng-model="searchtext" />
+						<input class="control" placeholder="{% trans "Mosaic name or creator" %}" ng-model="searchtext" />
 					</div>
 					
 					<div class="item">
@@ -48,7 +48,7 @@
 				
 				<div class="flex align-center" ng-show="searching">
 					<i class="item fa fa-spinner rotating"></i>
-					<span class="item">Searching...</span>
+					<span class="item">{% trans "Searching..." %}</span>
 				</div>
 				
 			</div>
@@ -58,15 +58,15 @@
 				<div class="tab-row">
 				
 					<div class="tab" ng-click="current_tab='mosaic'" ng-class="{'active':current_tab=='mosaic'}">
-						Mosaics <span class="ml-normal badge">[[mosaics.length]]</span>
+						{% trans "Mosaics" %} <span class="ml-normal badge">[[mosaics.length]]</span>
 					</div>
 					
 					<div class="tab" ng-click="current_tab='potential'" ng-class="{'active':current_tab=='potential'}">
-						Potentials <span class="ml-normal badge">[[potentials.length]]</span>
+						{% trans "Potentials" %} <span class="ml-normal badge">[[potentials.length]]</span>
 					</div>
 					
 					<div class="tab" ng-click="current_tab='mission'" ng-class="{'active':current_tab=='mission'}">
-						Missions <span class="ml-normal badge">[[missions.length]]</span>
+						{% trans "Missions" %} <span class="ml-normal badge">[[missions.length]]</span>
 					</div>
 	
 				</div>

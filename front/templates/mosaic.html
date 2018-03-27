@@ -22,7 +22,7 @@
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
 				<i class="fa fa-spinner rotating"></i>
-				<span class="ml-small">Loading page...</span>
+				<span class="ml-small">{% trans "Loading page..." %}</span>
 			</div>
 		</div>
 		
@@ -35,7 +35,7 @@
 					<div class="modal-header">
 						
 						<span class="title">
-							Comment
+							{% trans "Comment" %}
 						</span>
 						
 						<span class="close" ng-click="closeCommentEdit();">
@@ -53,7 +53,7 @@
 		            	
 		            	<div>
 		            		<button class="btn" ng-click="saveComment(user, comment_selected);">
-		            			Save
+		            			{% trans "Save" %}
 		            		</button>
 		            	</div>
 						
@@ -87,7 +87,7 @@
 						<span class="text-big color-light">[[mosaic.title]]</span>
 					</div>
 					<div class="item" ng-show="mosaic.has_unavailable_portals">
-						<i class="fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!"></i>
+						<i class="fa fa-exclamation-triangle color-danger" title="{% trans "Some portals are unavailable!" %}"></i>
 					</div>
 				</div>
 				
@@ -120,29 +120,29 @@
 							<div class="item">
 								<div class="badge badge-link flex justify-center align-center" ng-click="toggle_link('like');" style="width:75px;">
 									<span class="item" ng-class="{'color-dark':!mosaic.is_like, 'color-normal':mosaic.likers>0, 'color-light':mosaic.is_like}">[[mosaic.likers]]</span>
-									<span class="item" ng-class="{'color-dark':!mosaic.is_like, 'color-normal':mosaic.likers>0, 'color-light':mosaic.is_like}">Like</span>
+									<span class="item" ng-class="{'color-dark':!mosaic.is_like, 'color-normal':mosaic.likers>0, 'color-light':mosaic.is_like}">{% trans "Like" %}</span>
 								</div>
 							</div>
 							
 							<div class="item">
 								<div class="badge badge-link flex justify-center align-center" ng-click="toggle_link('todo');" style="width:75px;">
 									<span class="item" ng-class="{'color-dark':!mosaic.is_todo, 'color-normal':mosaic.todoers>0, 'color-light':mosaic.is_todo}">[[mosaic.todoers]]</span>
-									<span class="item" ng-class="{'color-dark':!mosaic.is_todo, 'color-normal':mosaic.todoers>0, 'color-light':mosaic.is_todo}">To do</span>
+									<span class="item" ng-class="{'color-dark':!mosaic.is_todo, 'color-normal':mosaic.todoers>0, 'color-light':mosaic.is_todo}">{% trans "To do" %}</span>
 								</div>
 							</div>
 							
 							<div class="item">
 								<div class="badge badge-link flex justify-center align-center" ng-click="toggle_link('complete');" style="width:75px;">
 									<span class="item" ng-class="{'color-dark':!mosaic.is_complete, 'color-normal':mosaic.completers>0, 'color-light':mosaic.is_complete}">[[mosaic.completers]]</span>
-									<span class="item" ng-class="{'color-dark':!mosaic.is_complete, 'color-normal':mosaic.completers>0, 'color-light':mosaic.is_complete}">Done</span>
+									<span class="item" ng-class="{'color-dark':!mosaic.is_complete, 'color-normal':mosaic.completers>0, 'color-light':mosaic.is_complete}">{% trans "Done" %}</span>
 								</div>
 							</div>
 							
 						</div>
 						
 						<div class="item flex-col hidden" ng-show="link_need_signin">
-							<span class="mb-small color-danger">You must be signed in to do this action.</span>
-							<a ng-click="signin('google', '/mosaic/[[mosaic.ref]]');">Sign in</a>
+							<span class="mb-small color-danger">{% trans "You must be signed in to do this action." %}</span>
+							<a ng-click="signin('google', '/mosaic/[[mosaic.ref]]');">{% trans "Sign in" %}</a>
 						</div>
 						
 					</div>
@@ -151,16 +151,16 @@
 
 						<div class="flex">
 							
-							<span class="item">[[missions.length]] missions</span>
+							<span class="item">[[missions.length]] {% trans "missions" %}</span>
 							<span class="item">[[mosaic.distance]] km</span>
 
 						</div>
 						
 						<div class="flex">
 							
-							<span class="item">[[mosaic.waypoint_count]] waypoints</span>
-							<span class="item">[[mosaic.portal_count]] portals</span>
-							<span class="item">[[mosaic.unique_count]] uniques</span>
+							<span class="item">[[mosaic.waypoint_count]] {% trans "waypoints" %}</span>
+							<span class="item">[[mosaic.portal_count]] {% trans "portals" %}</span>
+							<span class="item">[[mosaic.unique_count]] {% trans "uniques" %}</span>
 							
 						</div>
 
@@ -183,17 +183,17 @@
 				<div class="tab-row mt-big">
 				
 					<div class="tab" ng-click="current_tab='roadmap'" ng-class="{'active':current_tab=='roadmap'}">
-						Roadmap
+						{% trans "Roadmap" %}
 					</div>
 					
 					<div class="tab" ng-click="current_tab='missions'" ng-class="{'active':current_tab=='missions'}">
-						Missions
+						{% trans "Missions" %}
 						<span class="ml-normal badge">[[missions.length]]</span>
 						<i class="ml-normal fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals"></i>
 					</div>
 					
 					<div class="tab" ng-click="current_tab='comments'" ng-class="{'active':current_tab=='comments'}">
-						Comments
+						{% trans "Comments" %}
 						<span class="ml-normal badge">[[comments.length]]</span>
 					</div>
 					
@@ -237,11 +237,11 @@
 							<div class="item flex wrap" ng-show="mission.open">
 								<span class="color-normal" ng-repeat="portal in mission.portals">
 									<span class="color-muted text-small mr-small text-right" style="display:inline-block;">[[$index+1]]</span>
-									<span class="mr-big color-danger" ng-show="portal.title=='Unavailable'">Unavailable</span>
-									<span class="mr-big" ng-show="portal.title!='Unavailable' && portal.action==1">Hack</span>
-									<span class="mr-big" ng-show="portal.title!='Unavailable' && portal.action==2">Capture</span>
-									<span class="mr-big" ng-show="portal.title!='Unavailable' && portal.action==7">View</span>
-									<span class="mr-big" ng-show="portal.title!='Unavailable' && portal.action==8">Passphrase</span>
+									<span class="mr-big color-danger" ng-show="portal.title=='Unavailable'">{% trans "Unavailable" %}</span>
+									<span class="mr-big" ng-show="portal.title!='Unavailable' && portal.action==1">{% trans "Hack" %}</span>
+									<span class="mr-big" ng-show="portal.title!='Unavailable' && portal.action==2">{% trans "Capture" %}</span>
+									<span class="mr-big" ng-show="portal.title!='Unavailable' && portal.action==7">{% trans "View" %}</span>
+									<span class="mr-big" ng-show="portal.title!='Unavailable' && portal.action==8">{% trans "Passphrase" %}</span>
 								</span>
 							</div>
 							
@@ -300,13 +300,13 @@
 									
 									<div class="item">
 										<a ng-click="displayCommentEdit(comment);">
-											Edit
+											{% trans "Edit" %}
 										</a>
 									</div>
 									
 									<div class="item">
 										<a ng-click="deleteComment(user, $index, comment);">
-											Delete
+											{% trans "Delete" %}
 										</a>
 									</div>
 									
@@ -320,12 +320,12 @@
 					<div class="flex-col">
 						
 						<div class="item">
-							<a ng-click="displayCommentEdit();">Post a comment </a>
+							<a ng-click="displayCommentEdit();">{% trans "Post a comment" %}</a>
 						</div>
 						
 						<div class="item pt-none flex-col hidden" ng-show="comment_need_signin">
-							<span class="mb-small color-danger">You must be signed in to post comment.</span>
-							<a ng-click="signin('google', '/mosaic/[[mosaic.ref]]');">Sign in</a>
+							<span class="mb-small color-danger">{% trans "You must be signed in to post comment." %}</span>
+							<a ng-click="signin('google', '/mosaic/[[mosaic.ref]]');">{% trans "Sign in" %}</a>
 						</div>
 						
 					</div>

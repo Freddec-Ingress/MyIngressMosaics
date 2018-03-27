@@ -22,7 +22,7 @@
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
 				<i class="fa fa-spinner rotating"></i>
-				<span class="ml-small">Loading page...</span>
+				<span class="ml-small">{% trans "Loading page..." %}</span>
 			</div>
 		</div>
 		
@@ -45,12 +45,12 @@
 				<div class="tab-row">
 				
 					<div class="tab" ng-click="current_tab='mosaics'" ng-class="{'active':current_tab=='mosaics'}">
-						Mosaics
+						{% trans "Mosaics" %}
 						<span class="ml-normal badge">[[mosaics.length]]</span>
 					</div>
 					
 					<div class="tab" ng-click="current_tab='missions'" ng-class="{'active':current_tab=='missions'}">
-						Missions
+						{% trans "Missions" %}
 						<span class="ml-normal badge">[[missions.length]]</span>
 					</div>
 	

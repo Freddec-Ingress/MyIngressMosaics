@@ -21,7 +21,7 @@
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
 				<i class="fa fa-spinner rotating"></i>
-				<span class="ml-small">Loading page...</span>
+				<span class="ml-small">{% trans "Loading page..." %}</span>
 			</div>
 		</div>
 		
@@ -37,13 +37,13 @@
 					</div>
 					
 					<div class="flex align-center">
-						<a class="color-link hidden" ng-show="!country.notified" ng-click="notify();">To be notified</a>
-						<a class="color-normal hidden" ng-show="country.notified" ng-click="unnotify();">Notified</a>
+						<a class="color-link hidden" ng-show="!country.notified" ng-click="notify();">{% trans "To be notified" %}</a>
+						<a class="color-normal hidden" ng-show="country.notified" ng-click="unnotify();">{% trans "Notified" %}</a>
 					</div>
 	
 					<div class="mt-small flex-col hidden" ng-show="need_signin">
-						<span class="color-danger mb-small">You must be signed in to be notified.</span>
-						<a ng-click="signin('google', '/world/{{country.name}}');">Sign in</a>
+						<span class="color-danger mb-small">{% trans "You must be signed in to be notified." %}</span>
+						<a ng-click="signin('google', '/world/{{country.name}}');">{% trans "Sign in" %}</a>
 					</div>
 				
 				</div>
@@ -55,7 +55,7 @@
 				<div class="tab-row">
 				
 					<div class="tab" ng-click="current_tab='regions'" ng-class="{'active':current_tab=='regions'}">
-						Regions
+						{% trans "Regions" %}
 						<span class="ml-normal badge">{{region_count}}</span>
 					</div>
 					
@@ -71,13 +71,13 @@
 						
 						<div class="item">
 							<a ng-click="sortRegionsByMosaics();" ng-class="{'active': regions_sorting=='by_mosaics'}">
-								By mosaics
+								{% trans "By mosaics" %}
 							</a>
 						</div>
 						
 						<div class="item">
 							<a ng-click="sortRegionsByName();" ng-class="{'active': regions_sorting=='by_name'}">
-								By name
+								{% trans "By name" %}
 							</a>
 						</div>
 

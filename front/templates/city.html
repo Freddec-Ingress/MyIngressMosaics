@@ -21,7 +21,7 @@
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
 				<i class="fa fa-spinner rotating"></i>
-				<span class="ml-small">Loading page...</span>
+				<span class="ml-small">{% trans "Loading page..." %}</span>
 			</div>
 		</div>
 		
@@ -49,13 +49,13 @@
 					<span class="text-big color-light">{{city.name}}</span>
 					
 					<div class="flex">
-						<a class="color-link" ng-show="!city.notified" ng-click="notify();">To be notified</a>
-						<a class="color-normal" ng-show="city.notified" ng-click="unnotify();">Notified</a>
+						<a class="color-link" ng-show="!city.notified" ng-click="notify();">{% trans "To be notified" %}</a>
+						<a class="color-normal" ng-show="city.notified" ng-click="unnotify();">{% trans "Notified" %}</a>
 					</div>
 	
 					<div class="mt-small flex-col hidden" ng-show="need_signin">
-						<span class="color-danger">You must be signed in to be notified.</span>
-						<a ng-click="signin('google', '/world/{{city.country_name}}/{{city.region_name}}/{{city.name}}');">Sign in</a>
+						<span class="color-danger">{% trans "You must be signed in to be notified." %}</span>
+						<a ng-click="signin('google', '/world/{{city.country_name}}/{{city.region_name}}/{{city.name}}');">{% trans "Sign in" %}</a>
 					</div>
 					
 				</div>
@@ -67,12 +67,12 @@
 				<div class="tab-row">
 				
 					<div class="tab" ng-click="current_tab='mosaics'" ng-class="{'active':current_tab=='mosaics'}">
-						Mosaics
+						{% trans "Mosaics" %}
 						<span class="ml-normal badge">{{mosaic_count}}</span>
 					</div>
 				
 					<div class="tab" ng-click="current_tab='potentials'" ng-class="{'active':current_tab=='potentials'}">
-						Potentials
+						{% trans "Potentials" %}
 						<span class="ml-normal badge">{{potential_count}}</span>
 					</div>
 					
@@ -88,25 +88,25 @@
 						
 						<div class="item">
 							<a ng-click="sortMosaicsByMissions();" ng-class="{'active': mosaics_sorting=='by_missions'}">
-								By missions
+								{% trans "By missions" %}
 							</a>
 						</div>
 						
 						<div class="item">
 							<a ng-click="sortMosaicsByUniques();" ng-class="{'active': mosaics_sorting=='by_uniques'}">
-								By uniques
+								{% trans "By uniques" %}
 							</a>
 						</div>
 						
 						<div class="item">
 							<a ng-click="sortMosaicsByName();" ng-class="{'active': mosaics_sorting=='by_name'}">
-								By name
+								{% trans "By name" %}
 							</a>
 						</div>
 						
 						<div class="item">
 							<a ng-click="sortMosaicsByDate();" ng-class="{'active': mosaics_sorting=='by_date'}">
-								By date
+								{% trans "By date" %}
 							</a>
 						</div>
 						
@@ -121,7 +121,7 @@
 							<div class="grow flex width-12 wrap">
 								<div class="item flex justify-center" ng-repeat="index in mosaics_date_indexes track by $index" style="width:80px;">
 									<a class="badge badge-link item text-center" ng-click="setCurrentMosaicsDateIndex(index);" ng-class="{'active': current_mosaics_date_index==index}" style="width:100%;">
-										Page [[index]]
+										{% trans "Page" %} [[index]]
 									</a>
 								</div>
 							</div>

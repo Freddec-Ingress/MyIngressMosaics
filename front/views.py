@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from django.db.models import Count
 from django.http import HttpResponse
+from django.db.models import Count
 from django.shortcuts import render
+from django.utils.translation import gettext as _
 
 from api.models import *
 
@@ -679,6 +680,7 @@ def world(request):
 			
 			'name':country.name,
 			'code':country.code,
+			'label':_(country.name),
 			'locale':country.locale,
 			'mosaic_count':Mosaic.objects.filter(city__region__country=country).count(),
 			'potential_count':Potential.objects.filter(city__region__country=country).count(),

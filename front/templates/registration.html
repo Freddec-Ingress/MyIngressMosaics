@@ -20,7 +20,7 @@
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
 				<i class="fa fa-spinner rotating"></i>
-				<span class="ml-small">Loading page...</span>
+				<span class="ml-small">{% trans "Loading page..." %}</span>
 			</div>
 		</div>
 		
@@ -29,7 +29,7 @@
 			<div id="loading" ng-show="creating" class="section">
 				<div class="item flex justify-center align-center">
 					<i class="fa fa-spinner rotating"></i>
-					<span class="ml-small">Creating mosaic...</span>
+					<span class="ml-small">{% trans "Creating mosaic..." %}</span>
 				</div>
 			</div>
 			
@@ -38,8 +38,8 @@
 			    <div class="section">
 			    	
 			    	<div class="item flex-col">
-						<span class="mb-small color-danger">You must be signed in to access this page.</span>
-						<a ng-click="signin('google', '/registration');">Sign in</a>
+						<span class="mb-small color-danger">{% trans "You must be signed in to access this page." %}</span>
+						<a ng-click="signin('google', '/registration');">{% trans "Sign in" %}</a>
 					</div>
 					
 				</div>
@@ -51,13 +51,13 @@
 				<div class="section">
 					
 					<div class="item pb-none">
-						<span class="color-normal">Search for registered missions</span>
+						<span class="color-normal">{% trans "Search for registered missions" %}</span>
 					</div>
 					
 					<form class="flex">
 						
 						<div class="item grow">
-							<input class="control" placeholder="Mission name, creator" ng-model="searchText" />
+							<input class="control" placeholder="{% trans "Mission name, creator" %}" ng-model="searchText" />
 						</div>
 						
 						<div class="item">
@@ -70,7 +70,7 @@
 					
 					<div class="flex align-center" ng-if="refreshing">
 						<i class="item fa fa-spinner rotating"></i>
-						<span class="item">Searching...</span>
+						<span class="item">{% trans "Searching..." %}</span>
 					</div>
 					
 				</div>
@@ -78,7 +78,7 @@
 				<div ng-if="!refreshing && missions && missions.length < 1">
 					
 					<div class="item">
-						<span class="item color-dark">No mission</span>
+						<span class="item color-dark">{% trans "No mission" %}</span>
 					</div>
 					
 				</div>
@@ -86,7 +86,7 @@
 				<div class="section" ng-if="!refreshing && (!missions || missions.length < 1)">
 					
 					<div class="item pb-none">
-						<span class="color-normal">To register missions</span>
+						<span class="color-normal">{% trans "To register missions" %}</span>
 					</div>
 					
 					<div class="flex wrap">
@@ -112,14 +112,14 @@
 				<div class="section" ng-if="!refreshing && (!missions || missions.length < 1)">
 					
 					<div class="item flex-col">
-						<span class="color-normal mb-small">Potential mosaics</span>
-						<span class="color-dark">Only potential mosaics validated by MIM team are displayed here.</span>
-						<span class="color-dark">Feel free to register any mosaic you want.</span>
-						<span class="color-dark">To register mosaic not listed here, just search missions with form above.</span>
+						<span class="color-normal mb-small">{% trans "Potential mosaics" %}</span>
+						<span class="color-dark">{% trans "Only potential mosaics validated by MIM team are displayed here." %}</span>
+						<span class="color-dark">{% trans "Feel free to register any mosaic you want." %}</span>
+						<span class="color-dark">{% trans "To register mosaic not listed here, just search missions with form above." %}</span>
 					</div>
 					
 					<div class="item flex-col" ng-if="!countries || countries.length < 1">
-						<span class="color-muted">No potential mosaic for the moment. Please retry later ;)</span>
+						<span class="color-muted">{% trans "No potential mosaic for the moment. Please retry later ;)" %}</span>
 					</div>
 					
 					<div class="flex-col mb-normal" ng-repeat="country in countries">
@@ -146,7 +146,7 @@
 				<div class="section" ng-if="!refreshing && missions && missions.length > 0" style="margin-bottom:55px;">
 					
 					<div class="item pb-none">
-						<span class="color-normal">[[missions.length]] missions</span>
+						<span class="color-normal">[[missions.length]] {% trans "missions" %}</span>
 					</div>
 					
 					<div class="flex wrap">
@@ -165,11 +165,11 @@
 								<div class="grow flex align-center">
 									
 									<a class="item" ng-click="selectAll();">
-										Select All
+										{% trans "Select All" %}
 									</a>
 									
 									<a class="item" ng-click="unselectAll();">
-										Unselect All
+										{% trans "Unselect All" %}
 									</a>
 		
 									<span class="ml-normal badge">[[selected.length]]</span>
@@ -179,7 +179,7 @@
 								<div class="item self-center">
 									<button class="btn" ng-class="{'disabled':selected.length < 3}" ng-click="open_step(2);" ng-disabled="selected.length < 3">
 										<div class="row">
-											Next
+											{% trans "Next" %}
 											<i class="ml-normal fa fa-angle-double-right"></i>
 										</div>
 									</button>
@@ -201,7 +201,7 @@
 					<div class="flex align-center">
 		
 						<div class="item">
-							Columns
+							{% trans "Columns" %}
 						</div>
 						
 						<div class="item" style="min-width: 65px; max-width: 65px;">
@@ -220,19 +220,19 @@
 					<div class="flex">
 						
 						<div class="item text-center">
-							<a ng-click="reorderAsc();">Reorder</a>
+							<a ng-click="reorderAsc();">{% trans "Reorder" %}</a>
 						</div>
 						
 						<div class="item text-center">
-							<a ng-click="reorderDesc();">Reverse</a>
+							<a ng-click="reorderDesc();">{% trans "Reverse" %}</a>
 						</div>
 						
 						<div class="item text-center">
-							<a ng-click="reorderAlphaMosaic();">By name</a>
+							<a ng-click="reorderAlphaMosaic();">{% trans "By name" %}</a>
 						</div>
 						
 						<div class="item text-center">
-							<a ng-click="reorderByEnd();">By end</a>
+							<a ng-click="reorderByEnd();">{% trans "By end" %}</a>
 						</div>
 						
 					</div>
@@ -302,7 +302,7 @@
 								<button class="btn" ng-click="open_step(1);">
 									<div class="row">
 										<i class="item fa fa-angle-double-left"></i>
-										<span class="item">Back</span>
+										<span class="item">{% trans "Back" %}</span>
 									</div>
 								</button>
 							</div>
@@ -310,7 +310,7 @@
 							<div class="item self-center">
 								<button class="btn" ng-click="reorderAsc(); open_step(3);">
 									<div class="row">
-										<span class="item">Next</span>
+										<span class="item">{% trans "Next" %}</span>
 										<i class="item fa fa-angle-double-right"></i>
 									</div>
 								</button>
@@ -328,12 +328,12 @@
 				<div class="section">
 						
 					<div class="item flex-col">
-						<span class="mb-small">Mosaic name</span>
+						<span class="mb-small">{% trans "Mosaic name" %}</span>
 						<input id="name_input" type="text" class="control" ng-model="mosaic_name" />
 					</div>
 				
 					<div class="item pt-none color-muted">
-						Suggestion
+						{% trans "Suggestion" %}
 					</div>
 							
 					<div class="flex-col ml-big">
@@ -352,11 +352,11 @@
 				
 					<div class="item flex-col">
 						<span class="mb-small">City</span>
-						<input id="city_input" type="text" class="control" placeholder="City name" ng-model="mosaic_city" />
+						<input id="city_input" type="text" class="control" placeholder="{% trans "City name" %}" ng-model="mosaic_city" />
 					</div>
 				
 					<div class="item pt-none color-muted">
-						Suggestion
+						{% trans "Suggestion" %}
 					</div>
 					
 					<div class="flex item pt-none grow ml-big">
@@ -379,7 +379,7 @@
 								<button class="btn" ng-click="open_step(2);">
 									<div class="row">
 										<i class="item fa fa-angle-double-left"></i>
-										<span class="item">Back</span>
+										<span class="item">{% trans "Back" %}</span>
 									</div>
 								</button>
 							</div>
@@ -387,7 +387,7 @@
 							<div class="item self-center">
 								<button class="btn" ng-click="open_step(4);" ng-disabled="!mosaic_name || !country_name || !city_name">
 									<div class="row">
-										<span class="item">Next</span>
+										<span class="item">{% trans "Next" %}</span>
 										<i class="item fa fa-angle-double-right"></i>
 									</div>
 								</button>
@@ -479,7 +479,7 @@
 								<button class="btn" ng-click="open_step(3);">
 									<div class="row">
 										<i class="item fa fa-angle-double-left"></i>
-										<span class="item">Back</span>
+										<span class="item">{% trans "Back" %}</span>
 									</div>
 								</button>
 							</div>
@@ -487,7 +487,7 @@
 							<div class="item self-center">
 								<button class="btn btn-danger" ng-click="createMosaic();">
 									<div class="row">
-										<span class="item">Validate</span>
+										<span class="item">{% trans "Validate" %}</span>
 									</div>
 								</button>
 							</div>

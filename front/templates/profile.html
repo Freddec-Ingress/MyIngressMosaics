@@ -20,7 +20,7 @@
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
 				<i class="fa fa-spinner rotating"></i>
-				<span class="ml-small">Loading page...</span>
+				<span class="ml-small">{% trans "Loading page..." %}</span>
 			</div>
 		</div>
 		
@@ -29,8 +29,8 @@
 		    <div class="section">
 		    	
 		    	<div class="item flex-col">
-					<span class="mb-small color-danger">You must be signed in to access this page.</span>
-					<a ng-click="signin('google', '/profile');">Sign in</a>
+					<span class="mb-small color-danger">{% trans "You must be signed in to access this page." %}</span>
+					<a ng-click="signin('google', '/profile');">{% trans "Sign in" %}</a>
 				</div>
 				
 			</div>
@@ -49,10 +49,10 @@
 					
 					<div class="item flex-col">
 						<span class="text-big color-light">{{name.0}}</span>
-						<span ng-show="faction == 'E'" class="color-enlightened">Enlightened</span>
-						<span ng-show="faction == 'R'" class="color-resistant">Resistant</span>
-						<span ng-show="!faction" class="color-muted">Not defined</span>
-						<a class="mt-small" ng-click="logout();">Sign out</a>
+						<span ng-show="faction == 'E'" class="color-enlightened">{% trans "Enlightened" %}</span>
+						<span ng-show="faction == 'R'" class="color-resistant">{% trans "Resistant" %}</span>
+						<span ng-show="!faction" class="color-muted">{% trans "Not defined" %}</span>
+						<a class="mt-small" ng-click="logout();">{% trans "Sign out" %}</a>
 					</div>
 
 				</div>
@@ -62,21 +62,21 @@
 			<div ng-if="!faction" class="section">
 				
 				<div class="item pb-none">
-					<span class="color-normal">Please specify your faction</span>
+					<span class="color-normal">{% trans "Please specify your faction" %}</span>
 				</div>
 					
 				<div class="flex">
 					
 					<div class="item grow">
 						<select class="control" ng-model="newfaction">
-							<option value="E">Enlightened</option>
-							<option value="R">Resistant</option>
+							<option value="E">{% trans "Enlightened" %}</option>
+							<option value="R">{% trans "Resistant" %}</option>
 						</select>
 					</div>
 					
 					<div class="item">
 						<button class="btn" ng-click="edit(newfaction); faction=newfaction;">
-							Save
+							{% trans "Save" %}
 						</button>
 					</div>
 					
@@ -88,32 +88,32 @@
 				<div class="tab-row">
 				
 					<div class="tab" ng-click="current_tab='mosaics'" ng-class="{'active':current_tab=='mosaics'}">
-						Mosaics
+						{% trans "Mosaics" %}
 						<span class="ml-normal badge">{{mosaic_count}}</span>
 					</div>
 					
 					<div class="tab" ng-click="current_tab='missions'" ng-class="{'active':current_tab=='missions'}">
-						Missions
+						{% trans "Missions" %}
 						<span class="ml-normal badge">{{mission_count}}</span>
 					</div>
 					
 					<div class="tab" ng-click="current_tab='likes'" ng-class="{'active':current_tab=='likes'}">
-						Like
+						{% trans "Like" %}
 						<span class="ml-normal badge">{{like_count}}</span>
 					</div>
 					
 					<div class="tab" ng-click="current_tab='todos'" ng-class="{'active':current_tab=='todos'}">
-						To do
+						{% trans "To do" %}
 						<span class="ml-normal badge">{{todo_count}}</span>
 					</div>
 					
 					<div class="tab" ng-click="current_tab='completes'" ng-class="{'active':current_tab=='completes'}">
-						Done
+						{% trans "Done" %}
 						<span class="ml-normal badge">{{complete_count}}</span>
 					</div>
 					
 					<div class="tab" ng-click="current_tab='notifs'" ng-class="{'active':current_tab=='notifs'}">
-						Notifications
+						{% trans "Notifications" %}
 						<span class="ml-normal badge">{{notif_count}}</span>
 					</div>
 				

@@ -41,15 +41,15 @@
 				<div class="flex-col">
 		    	
 			     	<form class="item flex-col">
-			    		<span class="mb-small color-normal">Search for a city</span>
-						<input id="city_autocomplete" type="text" class="control" placeholder="City name" ng-model="searchtext" />
+			    		<span class="mb-small color-normal">{% trans "Search for a city" %}</span>
+						<input id="city_autocomplete" type="text" class="control" placeholder="{% trans "City name" %}" ng-model="searchtext" />
 					</form>
 					
 					<div class="flex align-center hidden" ng-show="f_city_searching">
 						
 						<div class="item">
 							<i class="color-normal fa fa-spinner rotating"></i>
-							<span class="ml-small color-normal">Searching...</span>
+							<span class="ml-small color-normal">{% trans "Searching..." %}</span>
 						</div>
 						
 					</div>
@@ -57,7 +57,7 @@
 					<div class="flex hidden" ng-show="f_city_unknown">
 						
 				    	<div class="item">
-				    		<span class="color-danger">City unknown</span>
+				    		<span class="color-danger">{% trans "City unknown" %}</span>
 				    	</div>
 				    	
 					</div>
@@ -65,11 +65,11 @@
 					<div class="flex-col hidden" ng-show="f_city_nomosaic">
 						
 				    	<div class="item">
-				    		<span class="color-danger">No registered mosaic</span>
+				    		<span class="color-danger">{% trans "No registered mosaic" %}</span>
 				    	</div>
 				    	
 				    	<div class="item">
-				    		<a href="/registration">Be the first to register a mosaic for this city</a>
+				    		<a href="/registration">{% trans "Be the first to register a mosaic for this city" %}</a>
 				    	</div>
 			
 					</div>
@@ -83,7 +83,7 @@
 				<div class="tab-row">
 				
 					<div class="tab" ng-click="current_tab='countries'" ng-class="{'active':current_tab=='countries'}">
-						Countries
+						{% trans "Countries" %}
 						<span class="ml-normal badge">{{country_count}}</span>
 					</div>
 					
@@ -99,13 +99,13 @@
 						
 						<div class="item">
 							<a ng-click="sortCountriesByMosaics();" ng-class="{'active': countries_sorting=='by_mosaics'}">
-								By mosaics
+								{% trans "By mosaics" %}
 							</a>
 						</div>
 						
 						<div class="item">
 							<a ng-click="sortCountriesByName();" ng-class="{'active': countries_sorting=='by_name'}">
-								By name
+								{% trans "By name" %}
 							</a>
 						</div>
 
@@ -127,7 +127,7 @@
 									
 									<div class="flex">
 										
-										<span class="grow mr-normal color-light text-medium ellipsis">[[country.name]]</span>
+										<span class="grow mr-normal color-light text-medium ellipsis">[[country.label]]</span>
 										<i class="fa fa-angle-right"></i>
 										
 									</div>
