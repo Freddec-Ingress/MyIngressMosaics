@@ -168,6 +168,8 @@ def mosaic(request, ref):
 			
 				lat = 0.0
 				lng = 0.0
+				
+				type = 'portal'
 					
 				context['mosaic']['waypoint_count'] += 1
 				
@@ -176,6 +178,8 @@ def mosaic(request, ref):
 					if portal[5][0] == 'f':
 						lat = portal[5][1] / 1000000.0
 						lng = portal[5][2] / 1000000.0
+						
+						type = 'viewpoint'
 
 					if portal[5][0] == 'p':
 						lat = portal[5][2] / 1000000.0
@@ -183,20 +187,11 @@ def mosaic(request, ref):
 			
 						context['mosaic']['portal_count'] += 1
 						
-						temp_portal = { 'ref':portal[1] }
-						to_add = True
-						for item in temp_portal_data:
-							if item['ref'] == temp_portal['ref']:
-								to_add = False
-								break
-						if to_add:
-							temp_portal_data.append(temp_portal)
-							context['mosaic']['unique_count'] += 1
-
 				portal_data = {
 					
 					'lat':lat,
 					'lng':lng,
+					'type':type,
 					'title':portal[2],
 					'action':portal[4],
 				}
@@ -206,6 +201,15 @@ def mosaic(request, ref):
 					mission_data['has_unavailable_portals'] = True
 				
 				mission_data['portals'].append(portal_data)
+
+				to_add = True
+				for mission_data in context['missions']:
+					for comp_portal_data in mission_data['portals']:
+						if comp_portal_data == portal_data:
+							to_add = False
+							break
+				if to_add:
+					context['mosaic']['unique_count'] += 1
 
 	if context['mosaic']['unique_count'] != mosaic_obj.unique_count:
 		mosaic_obj.unique_count = context['mosaic']['unique_count']
