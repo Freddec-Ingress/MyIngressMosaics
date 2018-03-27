@@ -183,9 +183,8 @@ def mosaic(request, ref):
 			
 						context['mosaic']['portal_count'] += 1
 						
-						temp_portal = { 'lat':lat, 'lng':lng, }
-						if temp_portal not in temp_portal_data:
-							temp_portal_data.append(temp_portal)
+						if portal[1] not in temp_portal_data:
+							temp_portal_data.append(portal[1])
 							
 							context['mosaic']['unique_count'] += 1
 						
