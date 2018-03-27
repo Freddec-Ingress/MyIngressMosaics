@@ -36,7 +36,7 @@ def waiting_create(request):
 		city_obj = City(region=region_obj, name=request.data['city_name'])
 		city_obj.save()
 	
-	results = Mission.objects.filter(ref__in=request.data['refs'])
+	results = Mission.objects.filter(ref__in=request.data['mission_refs'])
 	for mission_obj in results:
 		
 		mission_obj.admin = False
