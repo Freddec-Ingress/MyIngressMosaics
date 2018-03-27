@@ -31,7 +31,7 @@ def search_missions(request):
 	
 	# Potential data
 	
-	results = Potential.objects.filter(title=request.data['title'])
+	results = Potential.objects.filter(title=request.data['text'])
 	if results.count() > 0:
 		potential_obj = results[0]
 		data['potential'] = potential_obj.getOverviewData()
