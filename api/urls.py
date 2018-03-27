@@ -43,6 +43,7 @@ urlpatterns = [
 	url(r'^comment/delete/', comment_delete),
 
 	url(r'^potential/create/', potential_create),
+	url(r'^potential/delete/', potential_delete),
 	url(r'^potential/update/', potential_update),
 	url(r'^potential/exclude/', potential_exclude),
 	url(r'^potential/refresh/', potential_refresh),

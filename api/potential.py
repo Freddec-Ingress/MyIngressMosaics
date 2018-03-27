@@ -110,6 +110,20 @@ def potential_create(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
+def potential_delete(request):
+
+	results = Potential.objects.filter(title=request.data['title'], city__name=request.data['city_name'], country__name=request.data['country_name'])
+	if results.count() > 0:
+		potential_obj = results[0]
+		potential_obj.delete()
+	
+	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
 def potential_refresh(request):
 	
 	data = {

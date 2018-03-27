@@ -20,6 +20,7 @@ def search_missions(request):
 	data = {
 
 		'missions':[],
+		'potential':None,
 	}
 	
 	# Missions data
@@ -27,6 +28,13 @@ def search_missions(request):
 	results = Mission.objects.filter(mosaic__isnull=True).filter(Q(name__icontains=request.data['text']) | Q(title__icontains=request.data['text']) | Q(creator__icontains=request.data['text']))
 	for mission_obj in results:
 		data['missions'].append(mission_obj.getOverviewData())
+	
+	# Potential data
+	
+	results = Potential.objects.filter(title=request.data['title'])
+	if results.count() > 0:
+		potential_obj = results[0]
+		data['potential'] = potential_obj.getOverviewData()
 	
 	return Response(data, status=status.HTTP_200_OK)
 	

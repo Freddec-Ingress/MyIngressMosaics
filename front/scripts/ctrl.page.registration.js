@@ -247,9 +247,9 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 	
 		if ($scope.potential) {
 			
-			$scope.city_name = $scope.potential.city.name;
-			$scope.region_name = $scope.potential.city.region.name;
-			$scope.country_name = $scope.potential.city.region.country.name;
+			$scope.city_name = $scope.potential.city_name;
+			$scope.region_name = $scope.potential.region_name;
+			$scope.country_name = $scope.potential.country_name;
 			
 			$scope.mosaic_city = $scope.city_name + ', ' + $scope.region_name + ', ' + $scope.country_name;
 			
@@ -327,7 +327,7 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 		
 		if ($scope.potential) {
 			
-			var data = { 'title':$scope.potential.title, 'city_name':$scope.potential.city.name, 'country_name':$scope.potential.city.region.country.name, };
+			var data = { 'title':$scope.potential.title, 'city_name':$scope.potential.city_name, 'country_name':$scope.potential.country_name, };
 			API.sendRequest('/api/potential/delete/', 'POST', {}, data);
 			$scope.potential = null;
 		}
