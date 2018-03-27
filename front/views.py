@@ -183,7 +183,7 @@ def mosaic(request, ref):
 			
 						context['mosaic']['portal_count'] += 1
 						
-						temp_portal_data.append(portal[1])
+						temp_portal_data.append({ 'lat':lat, 'lng':lng, 'title':portal[2] })
 
 				portal_data = {
 					
