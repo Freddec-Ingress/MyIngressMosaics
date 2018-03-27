@@ -159,7 +159,7 @@ def mosaic(request, ref):
 			
 		# Portals data
 		
-		temp_portal_data = ''
+		temp_portal_data = []
 		
 		jsondata = json.loads(mission_obj.data)
 		
@@ -183,10 +183,8 @@ def mosaic(request, ref):
 			
 						context['mosaic']['portal_count'] += 1
 						
-						if portal[1] not in temp_portal_data:
-							temp_portal_data += portal[1] + ';'
-							context['mosaic']['unique_count'] += 1
-						
+						temp_portal_data.append(portal[1])
+
 				portal_data = {
 					
 					'lat':lat,
@@ -201,6 +199,7 @@ def mosaic(request, ref):
 				
 				mission_data['portals'].append(portal_data)
 	
+	context['mosaic']['unique_count'] = len(set(temp_portal_data))
 	if context['mosaic']['unique_count'] != mosaic_obj.unique_count:
 		mosaic_obj.unique_count = context['mosaic']['unique_count']
 		mosaic_obj.save()
