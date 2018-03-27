@@ -173,9 +173,9 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		var missings = mission_missings.split(',');
 		
 		var data = {
-			'country_name':potential.country.name,
-			'region_name':potential.region.name,
-			'city_name':potential.city.name,
+			'country_name':potential.country,
+			'region_name':potential.region,
+			'city_name':potential.city,
 			'title':title,
 			'mission_count':mission_count,
 			'mission_refs':refs,
