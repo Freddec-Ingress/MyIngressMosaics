@@ -30,8 +30,35 @@
 					<div class="tab" ng-click="current_tab='region'" ng-class="{'active':current_tab=='region'}">
 						Region
 					</div>
+				
+					<div class="tab" ng-click="current_tab='misc'" ng-class="{'active':current_tab=='misc'}">
+						Misc
+					</div>
 					
 				</div>
+			</div>
+			
+			<div ng-show="current_tab=='region'">
+			</div>
+			
+			<div ng-show="current_tab=='misc'">
+				
+				<div class="section">
+					<div class="flex align-center">
+						
+						<div class="item">
+							<button class="btn" ng-click="generatePreviews();" ng-disabled="preview_generating">
+								Generate previews
+							</button>
+						</div>
+						
+						<div class="item" ng-show="preview_generating">
+							<span class="color-normal">[[preview_current_count]]/[[preview_total_count]] mosaics</span>
+						</div>
+						
+					</div>
+				</div>
+				
 			</div>
 			
 		</div>

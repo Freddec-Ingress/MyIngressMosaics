@@ -8,9 +8,6 @@ from django.utils.translation import gettext as _
 
 from api.models import *
 
-import cloudinary
-import cloudinary.uploader
-
 
 
 #---------------------------------------------------------------------------------------------------
@@ -117,10 +114,7 @@ def preview(request, ref):
 
 	mosaic_obj = Mosaic.objects.get(ref=ref)
 	imgByteArr = mosaic_obj.generatePreview(100)
-	
-	response = cloudinary.uploader.upload(imgByteArr, public_id=ref)
-	print(response)
-	
+
 	return HttpResponse(imgByteArr, content_type='image/png')
 
 

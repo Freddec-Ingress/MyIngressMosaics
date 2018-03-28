@@ -30,6 +30,8 @@ urlpatterns = [
 	url(r'^user/logout/', user_logout),
 
 	url(r'^mosaic/create/', mosaic_create),
+	url(r'^mosaic/getall/', mosaic_getall),
+	url(r'^mosaic/generate/', mosaic_generate),
 	
 	url(r'^link/create/', link_create),
 	url(r'^link/delete/', link_delete),
