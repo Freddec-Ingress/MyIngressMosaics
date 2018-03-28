@@ -1,15 +1,12 @@
 {% extends 'base.html' %}
 
-{% load i18n %}
-{% load jsonify %}
-
 {% block extra-head %}
 
 	<title>MIM - Administration</title>
 
 	<meta property="og:url" content="https://www.myingressmosaics.com">
-	<meta property="og:type" content="website">
-	<meta property="og:title" content="MyIngressMosaics">
+	<meta property="og:title" content="MIM - Administration">
+	<meta property="og:headline" content="MIM - Administration">
 	<meta property="og:description" content="Ingress Mosaics, Banners and Mission series">
 
 {% endblock %}
@@ -28,7 +25,12 @@
 		<div class="container" ng-class="{'active':loaded}">
 			
 			<div class="section">
-				<div class="flex">
+				<div class="tab-row">
+				
+					<div class="tab" ng-click="current_tab='region'" ng-class="{'active':current_tab=='region'}">
+						Region
+					</div>
+					
 				</div>
 			</div>
 			
