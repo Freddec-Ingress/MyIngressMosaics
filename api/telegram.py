@@ -41,7 +41,7 @@ def telegram_updates(request):
 					id=mosaic_obj.ref,
 					title=mosaic_obj.title,
 					input_message_content=InputTextMessageContent(
-						message_text='location: ' + mosaic_obj.country_name + ' > ' + mosaic_obj.region_name + ' > ' + mosaic_obj.city_name + ' &middot; ' + str(mosaic_obj.missions.all().count()) + ' missions &middot; ' + str(mosaic_obj.unique_count) + ' uniques',
+						message_text='location: ' + mosaic_obj.city.region.country.name + ' > ' + mosaic_obj.city.region.name + ' > ' + mosaic_obj.city.name + ' &middot; ' + str(mosaic_obj.missions.all().count()) + ' missions &middot; ' + str(mosaic_obj.unique_count) + ' uniques',
 						disable_web_page_preview=True
 					)
 				)
