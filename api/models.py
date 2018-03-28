@@ -140,6 +140,9 @@ class Mosaic(models.Model):
 	portal_count = models.IntegerField(null=True, blank=True)
 	waypoint_count = models.IntegerField(null=True, blank=True)
 	
+	big_preview_url = models.CharField(max_length=256, null=True, blank=True)
+	small_preview_url = models.CharField(max_length=256, null=True, blank=True)
+	
 	# Admin displaying
 	
 	def __str__(self):
