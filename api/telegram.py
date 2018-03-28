@@ -52,22 +52,4 @@ def telegram_updates(request):
 			
 		bot.answerInlineQuery(query_id, articles)
 		
-		return Response(None, status=status.HTTP_200_OK)
-		
-	# Unknown command
-	
-	else:
-		response_txt = 'Unknown command... sorry.'
-	
-	# Send response
-	
-	params = {
-		'chat_id': request.data['message']['chat']['id'],
-		'text': response_txt,
-		'parse_mode': 'HTML',
-		'disable_web_page_preview': True,
-	}
-	
-	requests.post(response_url, data=params)
-
 	return Response(None, status=status.HTTP_200_OK)
