@@ -42,6 +42,7 @@ module.exports = function(grunt) {
 					'front/scripts/ctrl.page.creator.js',
 					'front/scripts/adm.registration.js',
 					'front/scripts/adm.compare.js',
+					'front/scripts/adm.checks.js',
 					'front/scripts/module.js',
 				],
 				dest: 'static/front.js'

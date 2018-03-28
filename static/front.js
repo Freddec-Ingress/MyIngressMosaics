@@ -2987,6 +2987,16 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
         $scope.loaded = true;
 	});
 });
+angular.module('FrontModule.controllers').controller('AdmChecksCtrl', function($scope, API) {
+	
+	/* Tab management */
+	
+	$scope.current_tab = 'region';
+	
+	/* Page loading */
+	
+	$scope.loaded = true;
+});
 angular.module('FrontModule', ['satellizer',
 							   'FrontModule.services', 'FrontModule.controllers', 'FrontModule.directives', ]);
 

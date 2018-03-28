@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import requests
+
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
@@ -39,7 +41,8 @@ def telegram_updates(request):
 					id=item.ref,
 					title=item.title,
 					input_message_content=InputTextMessageContent(
-						message_text=item.title
+						message_text='location: ' + mosaic.country_name + ' > ' + mosaic.region_name + ' > ' + mosaic.city_name + ' &middot; ' + str(mosaic.missions.all().count()) + ' missions &middot; ' + str(mosaic.unique_count) + ' uniques',
+						disable_web_page_preview=True
 					)
 				)
 				
