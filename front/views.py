@@ -123,25 +123,13 @@ def preview(request, ref):
 	
 	mission_count = len(mosaic_data['images'])
 	
+	img_width = 50 * mosaic_data['column_count']
+	
 	row_count = int(math.ceil(mission_count / mosaic_data['column_count']))
-	img_height = 100 * row_count
+	img_height = 50 * row_count
 			
-	image = Image.new('RGBA', (600, img_height), (0, 0, 0))
+	image = Image.new('RGBA', (img_width, img_height), (0, 0, 0))
 	
-	realx = 0
-	if mission_count < mosaic_data['column_count']:
-		realx = mission_count * 50
-	else:
-		realx = mosaic_data['column_count'] * 50
-	
-	realy = row_count * 50
-	
-	paddingX = 16 + (600 - realx) / 2
-	if row_count < 4:
-		paddingY = 16 + (300 - realy) / 2
-	else:
-		paddingY = 16
-			
 	maskfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/img/mask.png').read())
 	maskimg = Image.open(maskfile)
 	
@@ -160,8 +148,8 @@ def preview(request, ref):
 		y = int(order / mosaic_data['column_count'])
 		x = int(order - (y * mosaic_data['column_count']))
 		
-		xoffset = paddingX + (x * 50)
-		yoffset = paddingY + (y * 50)
+		xoffset = x * 50
+		yoffset = y * 50
 		
 		image.paste(mimg, (int(xoffset), int(yoffset)));
 		image.paste(maskimg, (int(xoffset), int(yoffset)), maskimg);
