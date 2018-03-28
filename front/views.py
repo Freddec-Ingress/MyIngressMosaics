@@ -23,32 +23,32 @@ def sitemap(request):
     
 	text += '<url>'
 	text += '	<loc>https://www.myingressmosaics.com</loc><changefreq>daily</changefreq>'
-	text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/" />
-	text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/" />
+	text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/" />'
+	text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/" />'
 	text += '</url>'
     
 	text += '<url>'
 	text += '	<loc>https://www.myingressmosaics.com/map</loc><changefreq>daily</changefreq>'
-	text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/map" />
-	text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/map" />
+	text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/map" />'
+	text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/map" />'
 	text += '</url>'
     
 	text += '<url>'
 	text += '	<loc>https://www.myingressmosaics.com/search</loc><changefreq>daily</changefreq>'
-	text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/search" />
-	text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/search" />
+	text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/search" />'
+	text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/search" />'
 	text += '</url>'
     
 	text += '<url>'
 	text += '	<loc>https://www.myingressmosaics.com/profile</loc><changefreq>daily</changefreq>'
-	text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/profile" />
-	text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/profile" />
+	text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/profile" />'
+	text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/profile" />'
 	text += '</url>'
     
 	text += '<url>'
 	text += '	<loc>https://www.myingressmosaics.com/registration</loc><changefreq>daily</changefreq>'
-	text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/registration" />
-	text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/registration" />
+	text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/registration" />'
+	text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/registration" />'
 	text += '</url>'
 	
     # Mosaic URLs
@@ -57,8 +57,8 @@ def sitemap(request):
 	for mosaic in mosaics:
 		text += '<url>'
 		text += '	<loc>https://www.myingressmosaics.com/mosaic/' + mosaic.ref + '</loc><changefreq>monthly</changefreq></url>'
-		text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/mosaic/' + mosaic.ref + '" />
-		text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/mosaic/' + mosaic.ref + '" />
+		text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/mosaic/' + mosaic.ref + '" />'
+		text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/mosaic/' + mosaic.ref + '" />'
 		text += '</url>'
 
 	# Country URLs
@@ -67,8 +67,8 @@ def sitemap(request):
 	for country in countries:
 		text += '<url>'
 		text += '	<loc>https://www.myingressmosaics.com/world/' + country.name + '</loc><changefreq>daily</changefreq></url>'
-		text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/world/' + country.name + '" />
-		text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/world/' + country.name + '" />
+		text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/world/' + country.name + '" />'
+		text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/world/' + country.name + '" />'
 		text += '</url>'
 
 	# Region URLs
@@ -77,8 +77,8 @@ def sitemap(request):
 	for region in regions:
 		text += '<url>'
 		text += '	<loc>https://www.myingressmosaics.com/world/' + region.country.name + '/' + region.name + '</loc><changefreq>daily</changefreq></url>'
-		text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/world/' + region.country.name + '/' + region.name + '" />
-		text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/world/' + region.country.name + '/' + region.name + '" />
+		text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/world/' + region.country.name + '/' + region.name + '" />'
+		text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/world/' + region.country.name + '/' + region.name + '" />'
 		text += '</url>'
 
 	# City URLs
@@ -87,8 +87,8 @@ def sitemap(request):
 	for city in cities:
 		text += '<url>'
 		text += '	<loc>https://www.myingressmosaics.com/world/' + city.region.country.name + '/' + city.region.name + '/' + city.name + '</loc><changefreq>daily</changefreq></url>'
-		text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/world/' + city.region.country.name + '/' + city.region.name + '/' + city.name + '" />
-		text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/world/' + city.region.country.name + '/' + city.region.name + '/' + city.name + '" />
+		text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/world/' + city.region.country.name + '/' + city.region.name + '/' + city.name + '" />'
+		text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/world/' + city.region.country.name + '/' + city.region.name + '/' + city.name + '" />'
 		text += '</url>'
 	
 	# Creator URLs
@@ -98,8 +98,8 @@ def sitemap(request):
 		if creator['creator']:
 			text += '<url>'
 			text += '	<loc>https://www.myingressmosaics.com/creator/' + creator['creator'] + '</loc><changefreq>daily</changefreq></url>'
-			text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/creator/' + creator['creator'] + '" />
-			text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/creator/' + creator['creator'] + '" />
+			text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/creator/' + creator['creator'] + '" />'
+			text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/creator/' + creator['creator'] + '" />'
 			text += '</url>'
 			
 	text += '</urlset>'
