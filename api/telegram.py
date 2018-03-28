@@ -27,7 +27,7 @@ def telegram_updates(request):
 
 		articles = []
 
-		results = Mosaic.objects.filter(title__icontains=query_string).limit(25)
+		results = Mosaic.objects.filter(title__icontains=query_string)[:25]
 		for mosaic_obj in results:
 		
 			article = InlineQueryResultArticle(
