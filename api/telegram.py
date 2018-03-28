@@ -39,7 +39,9 @@ def telegram_updates(request):
 		
 			article = InlineQueryResultArticle(
 					id=mosaic_obj.ref,
+					url='https://www.myingressmosaics.com/mosaic/' + mosaic_obj.ref
 					title=mosaic_obj.title,
+					description='location: ' + mosaic_obj.city.region.country.name + ' > ' + mosaic_obj.city.region.name + ' > ' + mosaic_obj.city.name + '\r\n' + str(mosaic_obj.missions.all().count()) + ' missions > ' + str(mosaic_obj.unique_count) + ' uniques'
 					input_message_content=InputTextMessageContent(
 						message_text='location: ' + mosaic_obj.city.region.country.name + ' > ' + mosaic_obj.city.region.name + ' > ' + mosaic_obj.city.name + ' &middot; ' + str(mosaic_obj.missions.all().count()) + ' missions &middot; ' + str(mosaic_obj.unique_count) + ' uniques',
 						disable_web_page_preview=True
