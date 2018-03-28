@@ -29,6 +29,7 @@ urlpatterns = [
 	
 	url(r'^creator/(?P<creator_name>[\w \-,.\']+)', views.creator),
 	
+	url(r'^adm/checks', views.adm_checks),
 	url(r'^adm/compare', views.adm_compare),
 	url(r'^adm/registration', views.adm_registration),
 	

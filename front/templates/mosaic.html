@@ -4,6 +4,9 @@
 {% load jsonify %}
 
 {% block extra-head %}
+	
+	<link rel="alternate" href="https://www.myingressmosaics.com/en/mosaic/{{mosaic.ref}}" hreflang="en"/>
+	<link rel="alternate" href="https://www.myingressmosaics.com/fr/mosaic/{{mosaic.ref}}" hreflang="fr"/>
 
 	<title>MIM - {{mosaic.title}}</title>
 	

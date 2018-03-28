@@ -870,3 +870,11 @@ def adm_registration(request):
 			context['potentials'].append(obj)
 	
 	return render(request, 'adm_registration.html', context)
+
+
+
+#---------------------------------------------------------------------------------------------------
+def adm_checks(request):
+
+	context = { }
+	return render(request, 'adm_checks.html', context)

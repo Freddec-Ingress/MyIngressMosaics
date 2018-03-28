@@ -3,9 +3,12 @@
 {% load i18n %}
 
 {% block extra-head %}
+	
+	<link rel="alternate" href="https://www.myingressmosaics.com/en/world/{{city.country_name}}/{{city.region_name}}/{{city.name}}" hreflang="en"/>
+	<link rel="alternate" href="https://www.myingressmosaics.com/fr/world/{{city.country_name}}/{{city.region_name}}/{{city.name}}" hreflang="fr"/>
 
 	<title>MIM - {{city.name}}, {{city.region_name}}, {{city.country_name}}</title>
-
+	
 	<meta property="og:url" content="https://www.myingressmosaics.com/world/{{city.country_name}}/{{city.region_name}}/{{city.name}}">
 	<meta property="og:type" content="article">
 	<meta property="og:title" content="MIM - {{city.name}}, {{city.region_name}}, {{city.country_name}}">

@@ -3,6 +3,9 @@
 {% load i18n %}
 
 {% block extra-head %}
+	
+	<link rel="alternate" href="https://www.myingressmosaics.com/en/world/{{region.country_name}}/{{region.name}}" hreflang="en"/>
+	<link rel="alternate" href="https://www.myingressmosaics.com/fr/world/{{region.country_name}}/{{region.name}}" hreflang="fr"/>
 
 	<title>MIM - {{region.name}}, {{region.country_name}}</title>
 
