@@ -39,10 +39,10 @@ def telegram_updates(request):
 					thumb_url=preview_url, 
 					input_message_content=InputTextMessageContent(
 						message_text='' +
-							'<b>' + mosaic_obj.title + '</b><br>' +
-							mosaic_obj.city.region.country.name + ', ' + mosaic_obj.city.region.name + ', ' + mosaic_obj.city.name + '<br>' +
-							str(mosaic_obj.missions.all().count()) + ' missions<br>' +
-							'<a href="https://www.myingressmosaics.com/mosaic/' + mosaic_obj.ref + '">MIM Link</a><br>' +
+							'<b>' + mosaic_obj.title + '</b>' +
+							mosaic_obj.city.region.country.name + ', ' + mosaic_obj.city.region.name + ', ' + mosaic_obj.city.name + '' +
+							str(mosaic_obj.missions.all().count()) + ' missions' +
+							'<a href="https://www.myingressmosaics.com/mosaic/' + mosaic_obj.ref + '">MIM Link</a>' +
 							'<img src="' + preview_url + '">' +
 						'',
 						parse_mode='HTML'
