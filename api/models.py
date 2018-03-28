@@ -242,7 +242,7 @@ class Mosaic(models.Model):
 		
 		for image_url in mosaic_data['images']:
 	
-			file = io.BytesIO(urllib.request.urlopen(image_url + '=s90').read())
+			file = io.BytesIO(urllib.request.urlopen(image_url + '=s' + str(int(0.9 * dim))).read())
 			mimg = Image.open(file)
 				
 			order += 1 

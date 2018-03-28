@@ -114,16 +114,14 @@ def mosaic_generate(request):
 
 	mosaic_obj = Mosaic.objects.get(ref=request.data['ref'])
 	
-	if not mosaic_obj.big_preview_url:
-		imgByteArr = mosaic_obj.generatePreview(100)
-		response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_100')
-		mosaic_obj.big_preview_url = response['url']
-		mosaic_obj.save()
-		
-	if not mosaic_obj.small_preview_url:
-		imgByteArr = mosaic_obj.generatePreview(25)
-		response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_25')
-		mosaic_obj.small_preview_url = response['url']
-		mosaic_obj.save()
+	imgByteArr = mosaic_obj.generatePreview(100)
+	response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_100')
+	mosaic_obj.big_preview_url = response['url']
+	mosaic_obj.save()
+	
+	imgByteArr = mosaic_obj.generatePreview(25)
+	response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_25')
+	mosaic_obj.small_preview_url = response['url']
+	mosaic_obj.save()
 	
 	return Response(None, status=status.HTTP_200_OK)
