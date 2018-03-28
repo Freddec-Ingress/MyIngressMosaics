@@ -10,6 +10,7 @@ from front import views
 #---------------------------------------------------------------------------------------------------
 urlpatterns = [
 	
+	url(r'^preview/(?P<ref>\w+)', views.preview),
 	url(r'^mosaic/(?P<ref>\w+)', views.mosaic),
 	
 	url(r'^registration/(?P<search_string>[^/]+)', views.registration),

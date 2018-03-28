@@ -110,6 +110,15 @@ def sitemap(request):
 
 
 #---------------------------------------------------------------------------------------------------
+def preview(request, ref):
+
+	mosaic_obj = Mosaic.objects.get(ref=ref)
+	
+	return render(request, 'mosaic.html', context)
+
+
+
+#---------------------------------------------------------------------------------------------------
 def mosaic(request, ref):
 
 	context = {
