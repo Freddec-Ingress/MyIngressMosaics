@@ -28,6 +28,15 @@
 		<div class="container" ng-class="{'active':loaded}">
 			
 			<div class="section">
+				{% for country in countries %}
+				<div class="flex-col">
+					<span class="color-normal">msgid "{{country.name}}"</span>
+					<span class="color-normal">msgstr ""</span>
+				</div>
+				{% endfor %}
+			</div>
+			
+			<div class="section">
 				<div class="flex-col">
 					
 					<div class="pb-none flex align-center">
