@@ -12,7 +12,7 @@ from django.utils.translation import gettext as _
 
 from api.models import *
 
-from PIL import Image, ImageDraw
+from PIL import Image
 
 
 
@@ -124,22 +124,17 @@ def preview(request, ref):
 	mission_count = len(mosaic_data['images'])
 	
 	row_count = int(math.ceil(mission_count / mosaic_data['column_count']))
-	img_height = 32 + 20 + (100 * row_count)
-	if (img_height < 352):
-		img_height = 352
+	img_height = 100 * row_count
 			
-	image = Image.new('RGBA', (632, img_height), (0, 77, 64))
+	image = Image.new('RGBA', (600, img_height), (0, 0, 0))
 	
-	draw = ImageDraw.Draw(image)
-	draw.rectangle(((8, 8), (624, img_height - 52 + 24)), fill='black')
-		
 	realx = 0
 	if mission_count < mosaic_data['column_count']:
-		realx = mission_count * 100
+		realx = mission_count * 50
 	else:
-		realx = mosaic_data['column_count'] * 100
+		realx = mosaic_data['column_count'] * 50
 	
-	realy = row_count * 100
+	realy = row_count * 50
 	
 	paddingX = 16 + (600 - realx) / 2
 	if row_count < 4:
@@ -155,7 +150,7 @@ def preview(request, ref):
 	
 	order = -1
 	
-	for image_url in reversed(mosaic_data['images']):
+	for image_url in mosaic_data['images']:
 
 		file = io.BytesIO(urllib.request.urlopen(image_url + '=s50').read())
 		mimg = Image.open(file)
