@@ -118,21 +118,21 @@
 						<div class="flex">
 							
 							<div class="item">
-								<div class="badge badge-link flex justify-center align-center" ng-click="toggle_link('like');" style="width:75px;">
+								<div class="badge badge-link flex justify-center align-center" ng-click="toggle_link('like');" style="width:100px;">
 									<span class="item" ng-class="{'color-dark':!mosaic.is_like, 'color-normal':mosaic.likers>0, 'color-light':mosaic.is_like}">[[mosaic.likers]]</span>
 									<span class="item" ng-class="{'color-dark':!mosaic.is_like, 'color-normal':mosaic.likers>0, 'color-light':mosaic.is_like}">{% trans "Like" %}</span>
 								</div>
 							</div>
 							
 							<div class="item">
-								<div class="badge badge-link flex justify-center align-center" ng-click="toggle_link('todo');" style="width:75px;">
+								<div class="badge badge-link flex justify-center align-center" ng-click="toggle_link('todo');" style="width:100px;">
 									<span class="item" ng-class="{'color-dark':!mosaic.is_todo, 'color-normal':mosaic.todoers>0, 'color-light':mosaic.is_todo}">[[mosaic.todoers]]</span>
 									<span class="item" ng-class="{'color-dark':!mosaic.is_todo, 'color-normal':mosaic.todoers>0, 'color-light':mosaic.is_todo}">{% trans "To do" %}</span>
 								</div>
 							</div>
 							
 							<div class="item">
-								<div class="badge badge-link flex justify-center align-center" ng-click="toggle_link('complete');" style="width:75px;">
+								<div class="badge badge-link flex justify-center align-center" ng-click="toggle_link('complete');" style="width:100px;">
 									<span class="item" ng-class="{'color-dark':!mosaic.is_complete, 'color-normal':mosaic.completers>0, 'color-light':mosaic.is_complete}">[[mosaic.completers]]</span>
 									<span class="item" ng-class="{'color-dark':!mosaic.is_complete, 'color-normal':mosaic.completers>0, 'color-light':mosaic.is_complete}">{% trans "Done" %}</span>
 								</div>
