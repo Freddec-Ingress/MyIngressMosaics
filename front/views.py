@@ -140,7 +140,7 @@ def preview(request, ref):
 	
 	for image_url in mosaic_data['images']:
 
-		file = io.BytesIO(urllib.request.urlopen(image_url + '=s50').read())
+		file = io.BytesIO(urllib.request.urlopen(image_url + '=s90').read())
 		mimg = Image.open(file)
 			
 		order += 1 
@@ -152,7 +152,7 @@ def preview(request, ref):
 		yoffset = y * 100
 		
 		image.paste(mimg, (int(xoffset), int(yoffset)));
-		image.paste(maskimg, (int(xoffset), int(yoffset)), maskimg);
+		image.paste(maskimg, (int(xoffset+5), int(yoffset+5)), maskimg);
 			
 	imgByteArr = io.BytesIO()
 	image.save(imgByteArr, format='PNG')
