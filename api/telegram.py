@@ -40,8 +40,8 @@ def telegram_updates(request):
 					input_message_content=InputTextMessageContent(
 						message_text='' +
 							'<b>' + mosaic_obj.title + '</b><br>' +
-							+ mosaic_obj.city.region.country.name + ', ' + mosaic_obj.city.region.name + ', ' + mosaic_obj.city.name + '<br>' +
-							+ str(mosaic_obj.missions.all().count()) + ' missions<br>' +
+							mosaic_obj.city.region.country.name + ', ' + mosaic_obj.city.region.name + ', ' + mosaic_obj.city.name + '<br>' +
+							str(mosaic_obj.missions.all().count()) + ' missions<br>' +
 							'<a href="https://www.myingressmosaics.com/mosaic/' + mosaic_obj.ref + '">MIM Link</a><br>' +
 							'<img src="' + preview_url + '">' +
 						'',
