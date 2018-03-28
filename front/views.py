@@ -55,33 +55,53 @@ def sitemap(request):
     
 	mosaics = Mosaic.objects.all()
 	for mosaic in mosaics:
-		text += '<url><loc>https://www.myingressmosaics.com/mosaic/' + mosaic.ref + '</loc><changefreq>monthly</changefreq></url>'
-     
+		text += '<url>'
+		text += '	<loc>https://www.myingressmosaics.com/mosaic/' + mosaic.ref + '</loc><changefreq>monthly</changefreq></url>'
+		text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/mosaic/' + mosaic.ref + '" />
+		text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/mosaic/' + mosaic.ref + '" />
+		text += '</url>'
+
 	# Country URLs
 	
 	countries = Country.objects.all()
 	for country in countries:
-		text += '<url><loc>https://www.myingressmosaics.com/world/' + country.name + '</loc><changefreq>daily</changefreq></url>'
-     
+		text += '<url>'
+		text += '	<loc>https://www.myingressmosaics.com/world/' + country.name + '</loc><changefreq>daily</changefreq></url>'
+		text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/world/' + country.name + '" />
+		text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/world/' + country.name + '" />
+		text += '</url>'
+
 	# Region URLs
 	
 	regions = Region.objects.all()
 	for region in regions:
-		text += '<url><loc>https://www.myingressmosaics.com/world/' + region.country.name + '/' + region.name + '</loc><changefreq>daily</changefreq></url>'
-      
+		text += '<url>'
+		text += '	<loc>https://www.myingressmosaics.com/world/' + region.country.name + '/' + region.name + '</loc><changefreq>daily</changefreq></url>'
+		text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/world/' + region.country.name + '/' + region.name + '" />
+		text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/world/' + region.country.name + '/' + region.name + '" />
+		text += '</url>'
+
 	# City URLs
 	
 	cities = City.objects.all()
 	for city in cities:
-		text += '<url><loc>https://www.myingressmosaics.com/world/' + city.region.country.name + '/' + city.region.name + '/' + city.name + '</loc><changefreq>daily</changefreq></url>'
-       
+		text += '<url>'
+		text += '	<loc>https://www.myingressmosaics.com/world/' + city.region.country.name + '/' + city.region.name + '/' + city.name + '</loc><changefreq>daily</changefreq></url>'
+		text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/world/' + city.region.country.name + '/' + city.region.name + '/' + city.name + '" />
+		text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/world/' + city.region.country.name + '/' + city.region.name + '/' + city.name + '" />
+		text += '</url>'
+	
 	# Creator URLs
 	
 	creators = Mission.objects.order_by('creator').values('creator').distinct()
 	for creator in creators:
 		if creator['creator']:
-			text += '<url><loc>https://www.myingressmosaics.com/creator/' + creator['creator'] + '/' + '</loc><changefreq>daily</changefreq></url>'
-	
+			text += '<url>'
+			text += '	<loc>https://www.myingressmosaics.com/creator/' + creator['creator'] + '</loc><changefreq>daily</changefreq></url>'
+			text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/creator/' + creator['creator'] + '" />
+			text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/creator/' + creator['creator'] + '" />
+			text += '</url>'
+			
 	text += '</urlset>'
     
 	response = HttpResponse(text, content_type = 'text/plain')
