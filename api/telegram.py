@@ -43,7 +43,7 @@ def telegram_updates(request):
 					description=mosaic_obj.city.region.country.name + ' > ' + mosaic_obj.city.region.name + ' > ' + mosaic_obj.city.name,
 					thumb_width=0,
 					input_message_content=InputTextMessageContent(
-						message_text='<a href="https://www.myingressmosaics.com/fr/mosaic/' + mosaic_obj.ref + '">' + MIM Link + '</a>',
+						message_text='<a href="https://www.myingressmosaics.com/fr/mosaic/' + mosaic_obj.ref + '">MIM Link</a>',
 						parse_mode='HTML'
 					)
 				)
