@@ -17,18 +17,40 @@ def sitemap(request):
 	text += '<?xml version="1.0" encoding="UTF-8"?>'
 	text += '<urlset'
 	text += '	xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"'
-	text += '	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"'
-	text += '	xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">'
-    
+	text += '	xmlns:xhtml="http://www.w3.org/1999/xhtml"'
+	
     # Static URLs
     
-	text += '<url><loc>https://www.myingressmosaics.com</loc><changefreq>daily</changefreq></url>'
-	text += '<url><loc>https://www.myingressmosaics.com/map</loc><changefreq>daily</changefreq></url>'
-	text += '<url><loc>https://www.myingressmosaics.com/world</loc><changefreq>daily</changefreq></url>'
-	text += '<url><loc>https://www.myingressmosaics.com/search</loc><changefreq>daily</changefreq></url>'
-	text += '<url><loc>https://www.myingressmosaics.com/profile</loc><changefreq>daily</changefreq></url>'
-	text += '<url><loc>https://www.myingressmosaics.com/registration</loc><changefreq>daily</changefreq></url>'
+	text += '<url>'
+	text += '	<loc>https://www.myingressmosaics.com</loc><changefreq>daily</changefreq>'
+	text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/" />
+	text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/" />
+	text += '</url>'
     
+	text += '<url>'
+	text += '	<loc>https://www.myingressmosaics.com/map</loc><changefreq>daily</changefreq>'
+	text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/map" />
+	text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/map" />
+	text += '</url>'
+    
+	text += '<url>'
+	text += '	<loc>https://www.myingressmosaics.com/search</loc><changefreq>daily</changefreq>'
+	text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/search" />
+	text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/search" />
+	text += '</url>'
+    
+	text += '<url>'
+	text += '	<loc>https://www.myingressmosaics.com/profile</loc><changefreq>daily</changefreq>'
+	text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/profile" />
+	text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/profile" />
+	text += '</url>'
+    
+	text += '<url>'
+	text += '	<loc>https://www.myingressmosaics.com/registration</loc><changefreq>daily</changefreq>'
+	text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/registration" />
+	text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/registration" />
+	text += '</url>'
+	
     # Mosaic URLs
     
 	mosaics = Mosaic.objects.all()
