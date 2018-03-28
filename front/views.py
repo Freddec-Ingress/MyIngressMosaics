@@ -9,6 +9,7 @@ from django.utils.translation import gettext as _
 from api.models import *
 
 import cloudinary
+import cloudinary.uploader
 
 
 
