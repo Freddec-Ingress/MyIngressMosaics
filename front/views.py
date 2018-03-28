@@ -149,8 +149,9 @@ def preview(request, ref):
 			
 	maskfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/img/mask.png').read())
 	maskimg = Image.open(maskfile)
-		
-	order = 0
+	maskimg.thumbnail(50, 50, Image.ANTIALIAS)
+	
+	order = -1
 	
 	for image_url in reversed(mosaic_data['images']):
 
@@ -162,8 +163,8 @@ def preview(request, ref):
 		y = int(order / mosaic_data['column_count'])
 		x = int(order - (y * mosaic_data['column_count']))
 		
-		xoffset = paddingX + (x * 100)
-		yoffset = paddingY + (y * 100)
+		xoffset = paddingX + (x * 50)
+		yoffset = paddingY + (y * 50)
 		
 		image.paste(mimg, (int(xoffset), int(yoffset)));
 		image.paste(maskimg, (int(xoffset), int(yoffset)), maskimg);
