@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-27 14:30+0000\n"
+"POT-Creation-Date: 2018-03-28 07:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,370 +16,368 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: templates/base.html:32
+#: templates/base.html:35
 msgid "Home"
-msgstr "Accueil"
+msgstr ""
 
-#: templates/base.html:37
+#: templates/base.html:40
 msgid "Search"
-msgstr "Rechercher"
+msgstr ""
 
-#: templates/base.html:42
+#: templates/base.html:45
 msgid "Map"
-msgstr "Carte"
+msgstr ""
 
-#: templates/base.html:47
+#: templates/base.html:50
 msgid "Hunt"
-msgstr "Chasse"
+msgstr ""
 
-#: templates/base.html:52
+#: templates/base.html:55
 msgid "Profile"
-msgstr "Profil"
+msgstr ""
 
 #: templates/city.html:24 templates/country.html:24 templates/creator.html:25
 #: templates/map.html:23 templates/mosaic.html:25 templates/profile.html:23
 #: templates/region.html:24 templates/registration.html:23
 #: templates/search.html:23 templates/world.html:24
 msgid "Loading page..."
-msgstr "Chargement ..."
+msgstr ""
 
 #: templates/city.html:52 templates/country.html:40 templates/region.html:50
 msgid "To be notified"
-msgstr "Etre notifé"
+msgstr ""
 
 #: templates/city.html:53 templates/country.html:41 templates/region.html:51
 msgid "Notified"
-msgstr "Notifié"
+msgstr ""
 
 #: templates/city.html:57 templates/country.html:45 templates/region.html:55
 msgid "You must be signed in to be notified."
-msgstr "Vous devez être connecté pour être notifié"
+msgstr ""
 
 #: templates/city.html:58 templates/country.html:46 templates/mosaic.html:145
 #: templates/mosaic.html:328 templates/profile.html:33
 #: templates/region.html:56 templates/registration.html:42
 msgid "Sign in"
-msgstr "Se connecter"
+msgstr ""
 
 #: templates/city.html:70 templates/creator.html:48 templates/profile.html:91
 #: templates/region.html:68 templates/search.html:61
 msgid "Mosaics"
-msgstr "Fresques"
+msgstr ""
 
 #: templates/city.html:75 templates/region.html:73 templates/search.html:65
 msgid "Potentials"
-msgstr "Potentiels"
+msgstr ""
 
 #: templates/city.html:91 templates/region.html:95
 msgid "By missions"
-msgstr "Par missions"
+msgstr ""
 
 #: templates/city.html:97 templates/region.html:101
 msgid "By uniques"
-msgstr "Par uniques"
+msgstr ""
 
 #: templates/city.html:103 templates/country.html:80 templates/region.html:107
 #: templates/registration.html:231 templates/world.html:108
 msgid "By name"
-msgstr "Par nom"
+msgstr ""
 
 #: templates/city.html:109 templates/region.html:113
 msgid "By date"
-msgstr "Par date"
+msgstr ""
 
 #: templates/city.html:124 templates/region.html:150
 msgid "Page"
-msgstr "Page"
+msgstr ""
 
 #: templates/country.html:58
 msgid "Regions"
-msgstr "Régions"
+msgstr ""
 
 #: templates/country.html:74 templates/world.html:102
 msgid "By mosaics"
-msgstr "Par fresques"
+msgstr ""
 
 #: templates/creator.html:53 templates/mosaic.html:190
 #: templates/profile.html:96 templates/search.html:69
 msgid "Missions"
-msgstr "Missions"
+msgstr ""
 
 #: templates/map.html:34
 msgid "Enter location"
-msgstr "Saisir une lieu"
+msgstr ""
 
 #: templates/map.html:39
 msgid "Go"
-msgstr "Go"
+msgstr ""
 
 #: templates/map.html:58
 msgid "No mosaic. Please try to zoom out."
-msgstr "Aucune fresque. Essayez de dézoomer svp."
+msgstr ""
 
 #: templates/map.html:62
 msgid "Current map is too larger to be scanned. Please try to zoom in."
-msgstr "La carte est trop large pour être scannée. Essayez de zoomer svp."
+msgstr ""
 
 #: templates/map.html:67
-#, fuzzy
-#| msgid "Loading page..."
 msgid "Loading data..."
-msgstr "Chargement ..."
+msgstr ""
 
 #: templates/map.html:72
 msgid "mosaics"
-msgstr "fresques"
+msgstr ""
 
 #: templates/mosaic.html:38
 msgid "Comment"
-msgstr "Commentaire"
+msgstr ""
 
 #: templates/mosaic.html:56 templates/profile.html:79
 msgid "Save"
-msgstr "Enregistrer"
+msgstr ""
 
 #: templates/mosaic.html:90
 msgid "Some portals are unavailable!"
-msgstr "Des portails ne sont pas accessibles!"
+msgstr ""
 
 #: templates/mosaic.html:123 templates/profile.html:101
 msgid "Like"
-msgstr "Like"
+msgstr ""
 
 #: templates/mosaic.html:130 templates/profile.html:106
 msgid "To do"
-msgstr "A faire"
+msgstr ""
 
 #: templates/mosaic.html:137 templates/profile.html:111
 msgid "Done"
-msgstr "Complété"
+msgstr ""
 
 #: templates/mosaic.html:144
 msgid "You must be signed in to do this action."
-msgstr "Vous devez être connecter pour réaliser cette action."
+msgstr ""
 
 #: templates/mosaic.html:154 templates/registration.html:149
 msgid "missions"
-msgstr "missions"
+msgstr ""
 
 #: templates/mosaic.html:161
 msgid "waypoints"
-msgstr "points de passage"
+msgstr ""
 
 #: templates/mosaic.html:162
 msgid "portals"
-msgstr "portails"
+msgstr ""
 
 #: templates/mosaic.html:163
 msgid "uniques"
-msgstr "uniques"
+msgstr ""
 
 #: templates/mosaic.html:186
 msgid "Roadmap"
-msgstr "Itinéraire"
+msgstr ""
 
 #: templates/mosaic.html:196
 msgid "Comments"
-msgstr "Commentaires"
+msgstr ""
 
 #: templates/mosaic.html:240
 msgid "Unavailable"
-msgstr "Unavailable"
+msgstr ""
 
 #: templates/mosaic.html:241
 msgid "Hack"
-msgstr "Hack"
+msgstr ""
 
 #: templates/mosaic.html:242
 msgid "Capture"
-msgstr "Capture"
+msgstr ""
 
 #: templates/mosaic.html:243
 msgid "View"
-msgstr "View"
+msgstr ""
 
 #: templates/mosaic.html:244
 msgid "Passphrase"
-msgstr "Passphrase"
+msgstr ""
 
 #: templates/mosaic.html:303
 msgid "Edit"
-msgstr "Modifier"
+msgstr ""
 
 #: templates/mosaic.html:309
 msgid "Delete"
-msgstr "Supprimer"
+msgstr ""
 
 #: templates/mosaic.html:323
 msgid "Post a comment"
-msgstr "Poster un commentaire"
+msgstr ""
 
 #: templates/mosaic.html:327
 msgid "You must be signed in to post comment."
-msgstr "Vous devez être connecté pour poster un commentaire."
+msgstr ""
 
 #: templates/profile.html:32 templates/registration.html:41
 msgid "You must be signed in to access this page."
-msgstr "Vous devez être connecté pour accéder à cette page."
+msgstr ""
 
 #: templates/profile.html:52 templates/profile.html:72
 msgid "Enlightened"
-msgstr "Enlightened"
+msgstr ""
 
 #: templates/profile.html:53 templates/profile.html:73
 msgid "Resistant"
-msgstr "Resistant"
+msgstr ""
 
 #: templates/profile.html:54
 msgid "Not defined"
-msgstr "Non définie"
+msgstr ""
 
 #: templates/profile.html:55
 msgid "Sign out"
-msgstr "Se déconnecter"
+msgstr ""
 
 #: templates/profile.html:65
 msgid "Please specify your faction"
-msgstr "Spécifier votre faction svp"
+msgstr ""
 
 #: templates/profile.html:116
 msgid "Notifications"
-msgstr "Notifications"
+msgstr ""
 
 #: templates/region.html:89
 msgid "By city"
-msgstr "Par ville"
+msgstr ""
 
 #: templates/registration.html:32
 msgid "Creating mosaic..."
-msgstr "Création de fresque ..."
+msgstr ""
 
 #: templates/registration.html:54
 msgid "Search for registered missions"
-msgstr "Rechercher des missions enregistrées"
+msgstr ""
 
 #: templates/registration.html:60
 msgid "Mission name, creator"
-msgstr "Nom de mission, créateur"
+msgstr ""
 
 #: templates/registration.html:73 templates/search.html:51
 #: templates/world.html:52
 msgid "Searching..."
-msgstr "Recherche ..."
+msgstr ""
 
 #: templates/registration.html:81
 msgid "No mission"
-msgstr "Aucune mission"
+msgstr ""
 
 #: templates/registration.html:89
 msgid "To register missions"
-msgstr "Pour enregistrer des missions"
+msgstr ""
 
 #: templates/registration.html:115
 msgid "Potential mosaics"
-msgstr "Fresques potentielles"
+msgstr ""
 
 #: templates/registration.html:116
 msgid "Only potential mosaics validated by MIM team are displayed here."
-msgstr "Seules les fresques potentielles validées pour l'équipe MIM sont affichées ici."
+msgstr ""
 
 #: templates/registration.html:117
 msgid "Feel free to register any mosaic you want."
-msgstr "N'hesitez pas à enregistrer n'importe quelle fesque que vous souhaitez."
+msgstr ""
 
 #: templates/registration.html:118
 msgid ""
 "To register mosaic not listed here, just search missions with form above."
-msgstr "Pour enregistrer une fresque non affichée ici, il faut juste rechercher les missions avec le formulaire ci-dessus."
+msgstr ""
 
 #: templates/registration.html:122
 msgid "No potential mosaic for the moment. Please retry later ;)"
-msgstr "Aucune fresque potentielle pour le moment. Essayez plus tard svp ;)"
+msgstr ""
 
 #: templates/registration.html:168
 msgid "Select All"
-msgstr "Tout selectionner"
+msgstr ""
 
 #: templates/registration.html:172
 msgid "Unselect All"
-msgstr "Tout déselectionner"
+msgstr ""
 
 #: templates/registration.html:182 templates/registration.html:313
 #: templates/registration.html:390
 msgid "Next"
-msgstr "Suivant"
+msgstr ""
 
 #: templates/registration.html:204
 msgid "Columns"
-msgstr "Colonnes"
+msgstr ""
 
 #: templates/registration.html:223
 msgid "Reorder"
-msgstr "Réordonner"
+msgstr ""
 
 #: templates/registration.html:227
 msgid "Reverse"
-msgstr "Inverser"
+msgstr ""
 
 #: templates/registration.html:235
 msgid "By end"
-msgstr "Par la fin"
+msgstr ""
 
 #: templates/registration.html:305 templates/registration.html:382
 #: templates/registration.html:482
 msgid "Back"
-msgstr "Retour"
+msgstr ""
 
 #: templates/registration.html:331
 msgid "Mosaic name"
-msgstr "Nom de la fresque"
+msgstr ""
 
 #: templates/registration.html:336 templates/registration.html:359
 msgid "Suggestion"
-msgstr "Suggestion"
+msgstr ""
 
 #: templates/registration.html:355 templates/world.html:45
 msgid "City name"
-msgstr "Nom de la ville"
+msgstr ""
 
 #: templates/registration.html:490
 msgid "Validate"
-msgstr "Valider"
+msgstr ""
 
 #: templates/search.html:32
 msgid "Search for mosaics"
-msgstr "Rechercher des fresques"
+msgstr ""
 
 #: templates/search.html:38
 msgid "Mosaic name or creator"
-msgstr "Nom de la fresque ou nom du créateur"
+msgstr ""
 
 #: templates/world.html:34
 #, python-format
 msgid "%(count)s registered mosaics by agents for agents"
-msgstr "%(count)s fresques enregistrées par les agents pour les agents"
+msgstr ""
 
 #: templates/world.html:44
 msgid "Search for a city"
-msgstr "Rechercher une ville"
+msgstr ""
 
 #: templates/world.html:60
 msgid "City unknown"
-msgstr "Ville inconnue"
+msgstr ""
 
 #: templates/world.html:68
 msgid "No registered mosaic"
-msgstr "Aucune fresque enregistrée"
+msgstr ""
 
 #: templates/world.html:72
 msgid "Be the first to register a mosaic for this city"
-msgstr "Soyez le premier à enregistrer une fresque pour cette ville"
+msgstr ""
 
 #: templates/world.html:86
 msgid "Countries"
-msgstr "Pays"
+msgstr ""
 
 msgid "France"
 msgstr ""

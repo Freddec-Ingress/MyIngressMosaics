@@ -851,7 +851,6 @@ def adm_registration(request):
 	context = {
 		
 		'potentials':[],
-		'countries':[],
 	}
 	
 	fieldname = 'name'
@@ -869,14 +868,5 @@ def adm_registration(request):
 			}
 			
 			context['potentials'].append(obj)
-	
-	results = Country.objects.all()
-	for country_obj in results:
-		
-		country_data = {
-			'name':country_obj.name,
-		}
-		
-		context['countries'].append(country_data)
 	
 	return render(request, 'adm_registration.html', context)

@@ -377,3 +377,246 @@ msgstr ""
 #: templates/world.html:86
 msgid "Countries"
 msgstr ""
+
+msgid "France"
+msgstr ""
+
+msgid "Pakistan"
+msgstr ""
+
+msgid "New Caledonia"
+msgstr ""
+
+msgid "Nepal"
+msgstr ""
+
+msgid "Bulgaria"
+msgstr ""
+
+msgid "Chile"
+msgstr ""
+
+msgid "Ukraine"
+msgstr ""
+
+msgid "Vietnam"
+msgstr ""
+
+msgid "Brunei"
+msgstr ""
+
+msgid "Peru"
+msgstr ""
+
+msgid "Serbia"
+msgstr ""
+
+msgid "Macau"
+msgstr ""
+
+msgid "Belarus"
+msgstr ""
+
+msgid "Paraguay"
+msgstr ""
+
+msgid "United Kingdom"
+msgstr ""
+
+msgid "Bolivia"
+msgstr ""
+
+msgid "Ecuador"
+msgstr ""
+
+msgid "Estonia"
+msgstr ""
+
+msgid "Latvia"
+msgstr ""
+
+msgid "Colombia"
+msgstr ""
+
+msgid "Kazakhstan"
+msgstr ""
+
+msgid "United Arab Emirates"
+msgstr ""
+
+msgid "Morocco"
+msgstr ""
+
+msgid "Slovenia"
+msgstr ""
+
+msgid "Macedonia (FYROM)"
+msgstr ""
+
+msgid "Armenia"
+msgstr ""
+
+msgid "Costa Rica"
+msgstr ""
+
+msgid "Thailand"
+msgstr ""
+
+msgid "Turkey"
+msgstr ""
+
+msgid "Germany"
+msgstr ""
+
+msgid "Singapore"
+msgstr ""
+
+msgid "France"
+msgstr ""
+
+msgid "Japan"
+msgstr ""
+
+msgid "Malaysia"
+msgstr ""
+
+msgid "Uruguay"
+msgstr ""
+
+msgid "Spain"
+msgstr ""
+
+msgid "Ireland"
+msgstr ""
+
+msgid "Denmark"
+msgstr ""
+
+msgid "Russia"
+msgstr ""
+
+msgid "Hong Kong"
+msgstr ""
+
+msgid "Lithuania"
+msgstr ""
+
+msgid "Iceland"
+msgstr ""
+
+msgid "Portugal"
+msgstr ""
+
+msgid "Netherlands"
+msgstr ""
+
+msgid "Dominican Republic"
+msgstr ""
+
+msgid "Egypt"
+msgstr ""
+
+msgid "Canada"
+msgstr ""
+
+msgid "China"
+msgstr ""
+
+msgid "Austria"
+msgstr ""
+
+msgid "Maldives"
+msgstr ""
+
+msgid "Panama"
+msgstr ""
+
+msgid "Australia"
+msgstr ""
+
+msgid "South Africa"
+msgstr ""
+
+msgid "United States"
+msgstr ""
+
+msgid "Mauritius"
+msgstr ""
+
+msgid "Poland"
+msgstr ""
+
+msgid "Slovakia"
+msgstr ""
+
+msgid "Argentina"
+msgstr ""
+
+msgid "Croatia"
+msgstr ""
+
+msgid "Sweden"
+msgstr ""
+
+msgid "Italy"
+msgstr ""
+
+msgid "Czechia"
+msgstr ""
+
+msgid "Greece"
+msgstr ""
+
+msgid "India"
+msgstr ""
+
+msgid "Philippines"
+msgstr ""
+
+msgid "Israel"
+msgstr ""
+
+msgid "Andorra"
+msgstr ""
+
+msgid "Switzerland"
+msgstr ""
+
+msgid "New Zealand"
+msgstr ""
+
+msgid "Hungary"
+msgstr ""
+
+msgid "Indonesia"
+msgstr ""
+
+msgid "Belgium"
+msgstr ""
+
+msgid "Mexico"
+msgstr ""
+
+msgid "Finland"
+msgstr ""
+
+msgid "Taiwan"
+msgstr ""
+
+msgid "Sri Lanka"
+msgstr ""
+
+msgid "Norway"
+msgstr ""
+
+msgid "Brazil"
+msgstr ""
+
+msgid "Luxembourg"
+msgstr ""
+
+msgid "South Korea"
+msgstr ""
+
+msgid "Romania"
+msgstr ""
