@@ -1,12 +1,18 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import io
+import math
+import urllib
+
 from django.http import HttpResponse
 from django.db.models import Count
 from django.shortcuts import render
 from django.utils.translation import gettext as _
 
 from api.models import *
+
+from PIL import Image, ImageDraw
 
 
 
@@ -113,8 +119,60 @@ def sitemap(request):
 def preview(request, ref):
 
 	mosaic_obj = Mosaic.objects.get(ref=ref)
+	mosaic_data = mosaic_obj.getOverviewData()
 	
-	return render(request, 'mosaic.html', context)
+	mission_count = len(mosaic_data['images'])
+	
+	row_count = int(math.ceil(mission_count / mosaic_data['column_count']))
+	img_height = 32 + 20 + (100 * row_count)
+	if (img_height < 352):
+		img_height = 352
+			
+	image = Image.new('RGBA', (632, img_height), (0, 77, 64))
+	
+	draw = ImageDraw.Draw(image)
+	draw.rectangle(((8, 8), (624, img_height - 52 + 24)), fill='black')
+		
+	realx = 0
+	if mission_count < mosaic_data['column_count']:
+		realx = mission_count * 100
+	else:
+		realx = mosaic_data['column_count'] * 100
+	
+	realy = row_count * 100
+	
+	paddingX = 16 + (600 - realx) / 2
+	if row_count < 4:
+		paddingY = 16 + (300 - realy) / 2
+	else:
+		paddingY = 16
+			
+	maskfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/img/mask.png').read())
+	maskimg = Image.open(maskfile)
+		
+	order = 0
+	
+	for image_url in reversed(mosaic_data['images']):
+
+		file = io.BytesIO(urllib.request.urlopen(image_url + '=s50').read())
+		mimg = Image.open(file)
+			
+		order += 1 
+		
+		y = int(order / mosaic_data['column_count'])
+		x = int(order - (y * mosaic_data['column_count']))
+		
+		xoffset = paddingX + (x * 100)
+		yoffset = paddingY + (y * 100)
+		
+		image.paste(mimg, (int(xoffset), int(yoffset)));
+		image.paste(maskimg, (int(xoffset), int(yoffset)), maskimg);
+			
+	imgByteArr = io.BytesIO()
+	image.save(imgByteArr, format='PNG')
+	imgByteArr = imgByteArr.getvalue()
+	
+	return HttpResponse(imgByteArr, content_type='image/png')
 
 
 
