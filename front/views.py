@@ -151,8 +151,8 @@ def preview(request, ref):
 		xoffset = x * 100
 		yoffset = y * 100
 		
-		image.paste(mimg, (int(xoffset), int(yoffset)));
-		image.paste(maskimg, (int(xoffset+5), int(yoffset+5)), maskimg);
+		image.paste(mimg, (int(xoffset+5), int(yoffset+5)));
+		image.paste(maskimg, (int(xoffset), int(yoffset)), maskimg);
 			
 	imgByteArr = io.BytesIO()
 	image.save(imgByteArr, format='PNG')
