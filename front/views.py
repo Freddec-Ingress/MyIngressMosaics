@@ -149,7 +149,9 @@ def preview(request, ref):
 			
 	maskfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/img/mask.png').read())
 	maskimg = Image.open(maskfile)
-	maskimg.thumbnail(50, 50, Image.ANTIALIAS)
+	
+	size = 50, 50
+	maskimg.thumbnail(size, Image.ANTIALIAS)
 	
 	order = -1
 	
