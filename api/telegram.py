@@ -20,13 +20,6 @@ from .models import *
 @permission_classes((AllowAny, ))
 def telegram_updates(request):
 	
-	bot = telepot.Bot('539679576:AAFC6QR0d8aTKd5sckEWWEFfwsNq5W5Rar0')
-	
-	response_url = 'https://api.telegram.org/bot539679576:AAFC6QR0d8aTKd5sckEWWEFfwsNq5W5Rar0/sendMessage'
-	response_txt = ''
-
-	# Inline query
-	
 	if 'inline_query' in request.data:
 		
 		query_id = request.data['inline_query']['id']
@@ -34,20 +27,23 @@ def telegram_updates(request):
 
 		articles = []
 
-		results = Mosaic.objects.filter(title__icontains=query_string)
+		results = Mosaic.objects.filter(title__icontains=query_string).limit(25)
 		for mosaic_obj in results:
 		
 			article = InlineQueryResultArticle(
 					id=mosaic_obj.ref,
 					title=mosaic_obj.title,
+					description=mosaic_obj.city.region.country.name + ', ' + mosaic_obj.city.region.name + ', ' + mosaic_obj.city.name + ', ' + str(mosaic_obj.missions.all().count()) + ' missions',
+					thumb_url='https://www.myingressmosaics.com/preview/' + mosaic_obj.ref, 
 					input_message_content=InputTextMessageContent(
-						message_text='<a href="https://www.myingressmosaics.com/fr/mosaic/' + mosaic_obj.ref + '">MIM Link</a>',
+						message_text='<a href="https://www.myingressmosaics.com/mosaic/' + mosaic_obj.ref + '">MIM Link</a>',
 						parse_mode='HTML'
 					)
 				)
 				
 			articles.append(article)
 			
+		bot = telepot.Bot('539679576:AAFC6QR0d8aTKd5sckEWWEFfwsNq5W5Rar0')
 		bot.answerInlineQuery(query_id, articles)
 		
 	return Response(None, status=status.HTTP_200_OK)
