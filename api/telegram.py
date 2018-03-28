@@ -27,7 +27,7 @@ def telegram_updates(request):
 
 		articles = []
 
-		results = Mosaic.objects.filter(title__icontains=query_string)[:25]
+		results = Mosaic.objects.filter(title__icontains=query_string)[:5]
 		for mosaic_obj in results:
 		
 			article = InlineQueryResultArticle(
@@ -36,7 +36,13 @@ def telegram_updates(request):
 					description=mosaic_obj.city.region.country.name + ', ' + mosaic_obj.city.region.name + ', ' + mosaic_obj.city.name + ', ' + str(mosaic_obj.missions.all().count()) + ' missions',
 					thumb_url='https://www.myingressmosaics.com/preview/' + mosaic_obj.ref, 
 					input_message_content=InputTextMessageContent(
-						message_text='<a href="https://www.myingressmosaics.com/mosaic/' + mosaic_obj.ref + '">MIM Link</a>',
+						message_text='' +
+							'<div>' + mosaic_obj.title + '</div>' +
+							'<div>' + mosaic_obj.city.region.country.name + ', ' + mosaic_obj.city.region.name + ', ' + mosaic_obj.city.name + '</div>' +
+							'<div>' + str(mosaic_obj.missions.all().count()) + ' missions</div>' +
+							'<div><a href="https://www.myingressmosaics.com/mosaic/' + mosaic_obj.ref + '">MIM Link</div>' +
+							'<img src="https://www.myingressmosaics.com/preview/' + mosaic_obj.ref + '">' +
+						'',
 						parse_mode='HTML'
 					)
 				)
