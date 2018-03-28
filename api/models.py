@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import io
+import math
 import json
+import urllib
 
 from math import *
 from datetime import datetime
@@ -15,6 +18,19 @@ from django.contrib.auth.models import User
 
 from django.utils.crypto import get_random_string
 from django.utils.encoding import python_2_unicode_compatible
+
+from PIL import Image
+
+import cloudinary
+
+
+
+#---------------------------------------------------------------------------------------------------
+cloudinary.config( 
+	api_key='686619554325313', 
+	api_secret='G8-FUHb3j3Zq5mIiK_1wQwGo8lg',
+	cloud_name='freddec',
+)
 
 
 
@@ -195,6 +211,55 @@ class Mosaic(models.Model):
 					break
 		
 		return mosaic_data
+	
+	
+	
+	# Generate preview
+	
+	def generatePreview(self, dim):
+		
+		mosaic_data = self.getOverviewData()
+		
+		mission_count = len(mosaic_data['images'])
+		
+		img_width = dim * mosaic_data['column_count']
+		
+		row_count = int(math.ceil(mission_count / mosaic_data['column_count']))
+		img_height = dim * row_count
+				
+		image = Image.new('RGBA', (img_width, img_height), (0, 0, 0))
+		
+		maskfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/img/mask.png').read())
+		maskimg = Image.open(maskfile)
+		
+		size = dim, dim
+		maskimg.thumbnail(size, Image.ANTIALIAS)
+		
+		order = -1
+		
+		for image_url in mosaic_data['images']:
+	
+			file = io.BytesIO(urllib.request.urlopen(image_url + '=s90').read())
+			mimg = Image.open(file)
+				
+			order += 1 
+			
+			y = int(order / mosaic_data['column_count'])
+			x = int(order - (y * mosaic_data['column_count']))
+			
+			xoffset = x * dim
+			yoffset = y * dim
+			
+			padding = int(dim * 0.1 / 2)
+			
+			image.paste(mimg, (int(xoffset+padding), int(yoffset+padding)));
+			image.paste(maskimg, (int(xoffset), int(yoffset)), maskimg);
+				
+		imgByteArr = io.BytesIO()
+		image.save(imgByteArr, format='PNG')
+		imgByteArr = imgByteArr.getvalue()
+
+		return imgByteArr
 
 
 

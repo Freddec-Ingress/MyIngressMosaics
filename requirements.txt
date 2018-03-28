@@ -13,3 +13,5 @@ Pillow==2.3.0
 boto3==1.4.7
 google-cloud==0.27.0
 telepot==12.6
+six==1.11.0
+cloudinary==1.11.0

@@ -1,10 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import io
-import math
-import urllib
-
 from django.http import HttpResponse
 from django.db.models import Count
 from django.shortcuts import render
@@ -12,7 +8,7 @@ from django.utils.translation import gettext as _
 
 from api.models import *
 
-from PIL import Image
+import cloudinary
 
 
 
@@ -119,44 +115,10 @@ def sitemap(request):
 def preview(request, ref):
 
 	mosaic_obj = Mosaic.objects.get(ref=ref)
-	mosaic_data = mosaic_obj.getOverviewData()
+	imgByteArr = mosaic_obj.generatePreview(100)
 	
-	mission_count = len(mosaic_data['images'])
-	
-	img_width = 100 * mosaic_data['column_count']
-	
-	row_count = int(math.ceil(mission_count / mosaic_data['column_count']))
-	img_height = 100 * row_count
-			
-	image = Image.new('RGBA', (img_width, img_height), (0, 0, 0))
-	
-	maskfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/img/mask.png').read())
-	maskimg = Image.open(maskfile)
-	
-	size = 100, 100
-	maskimg.thumbnail(size, Image.ANTIALIAS)
-	
-	order = -1
-	
-	for image_url in mosaic_data['images']:
-
-		file = io.BytesIO(urllib.request.urlopen(image_url + '=s90').read())
-		mimg = Image.open(file)
-			
-		order += 1 
-		
-		y = int(order / mosaic_data['column_count'])
-		x = int(order - (y * mosaic_data['column_count']))
-		
-		xoffset = x * 100
-		yoffset = y * 100
-		
-		image.paste(mimg, (int(xoffset+5), int(yoffset+5)));
-		image.paste(maskimg, (int(xoffset), int(yoffset)), maskimg);
-			
-	imgByteArr = io.BytesIO()
-	image.save(imgByteArr, format='PNG')
-	imgByteArr = imgByteArr.getvalue()
+	response = cloudinary.uploader.upload(imgByteArr, public_id=ref)
+	print(response)
 	
 	return HttpResponse(imgByteArr, content_type='image/png')
 

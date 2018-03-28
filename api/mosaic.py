@@ -53,7 +53,7 @@ def mosaic_create(request):
 	results = Potential.objects.filter(title=request.data['title'], city=city_obj)
 	if results.count() > 0:
 		results[0].delete()
-	
+		
 	country_notifiers = Notif.objects.filter(country=country_obj, region__isnull=True, city__isnull=True).values_list('user__email')
 	region_notifiers = Notif.objects.filter(country=country_obj, region=region_obj, city__isnull=True).values_list('user__email')
 	city_notifiers = Notif.objects.filter(country=country_obj, region=region_obj, city=city_obj).values_list('user__email')
