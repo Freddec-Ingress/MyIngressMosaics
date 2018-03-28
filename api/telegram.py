@@ -35,13 +35,13 @@ def telegram_updates(request):
 		articles = []
 
 		results = Mosaic.objects.filter(title__icontains=query_string)
-		for item in results:
+		for mosaic_obj in results:
 		
 			article = InlineQueryResultArticle(
-					id=item.ref,
-					title=item.title,
+					id=mosaic_obj.ref,
+					title=mosaic_obj.title,
 					input_message_content=InputTextMessageContent(
-						message_text='location: ' + mosaic.country_name + ' > ' + mosaic.region_name + ' > ' + mosaic.city_name + ' &middot; ' + str(mosaic.missions.all().count()) + ' missions &middot; ' + str(mosaic.unique_count) + ' uniques',
+						message_text='location: ' + mosaic_obj.country_name + ' > ' + mosaic_obj.region_name + ' > ' + mosaic_obj.city_name + ' &middot; ' + str(mosaic_obj.missions.all().count()) + ' missions &middot; ' + str(mosaic_obj.unique_count) + ' uniques',
 						disable_web_page_preview=True
 					)
 				)
