@@ -37,10 +37,10 @@ def telegram_updates(request):
 					thumb_url='https://www.myingressmosaics.com/preview/' + mosaic_obj.ref, 
 					input_message_content=InputTextMessageContent(
 						message_text='' +
-							'<div>' + mosaic_obj.title + '</div>' +
-							'<div>' + mosaic_obj.city.region.country.name + ', ' + mosaic_obj.city.region.name + ', ' + mosaic_obj.city.name + '</div>' +
-							'<div>' + str(mosaic_obj.missions.all().count()) + ' missions</div>' +
-							'<div><a href="https://www.myingressmosaics.com/mosaic/' + mosaic_obj.ref + '">MIM Link</div>' +
+							'<b>' + mosaic_obj.title + '</b><br>' +
+							+ mosaic_obj.city.region.country.name + ', ' + mosaic_obj.city.region.name + ', ' + mosaic_obj.city.name + '<br>' +
+							+ str(mosaic_obj.missions.all().count()) + ' missions<br>' +
+							'<a href="https://www.myingressmosaics.com/mosaic/' + mosaic_obj.ref + '">MIM Link</a><br>' +
 							'<img src="https://www.myingressmosaics.com/preview/' + mosaic_obj.ref + '">' +
 						'',
 						parse_mode='HTML'
