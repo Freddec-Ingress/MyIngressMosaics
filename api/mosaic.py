@@ -4,7 +4,7 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
@@ -122,8 +122,8 @@ def mosaic_getall(request):
 
 
 #---------------------------------------------------------------------------------------------------
-@api_view(['POST'])
-@permission_classes((IsAuthenticated, ))
+@api_view(['GET'])
+@permission_classes((AllowAny, ))
 def mosaic_generate(request):
 
 	global maskimg_100
