@@ -22,6 +22,17 @@ angular.module('FrontModule.controllers').controller('AdmChecksCtrl', function($
 			else {
 				$scope.preview_generating = false;
 			}
+			
+		}, function(response) {
+			
+			$scope.preview_current_count += 1;
+			
+			if ($scope.preview_current_count < $scope.preview_total_count) {
+				previewCall();
+			}
+			else {
+				$scope.preview_generating = false;
+			}
 		});
 	}
 	
