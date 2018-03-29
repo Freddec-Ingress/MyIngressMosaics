@@ -242,6 +242,7 @@ def mosaic(request, ref):
 						
 				portal_data = {
 					
+					'ref':portal[1],
 					'lat':lat,
 					'lng':lng,
 					'type':type,
@@ -256,7 +257,7 @@ def mosaic(request, ref):
 				to_add = True
 				for mission_data in context['missions']:
 					for comp_portal_data in mission_data['portals']:
-						if portal_data['type'] == 'viewpoint' or comp_portal_data['title'] == portal_data['title']:
+						if portal_data['type'] == 'viewpoint' or comp_portal_data['ref'] == portal_data['ref']:
 							to_add = False
 							break
 				if to_add:
