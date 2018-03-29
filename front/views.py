@@ -8,6 +8,8 @@ from django.utils.translation import gettext as _
 
 from api.models import *
 
+from api.tasks import *
+
 
 
 #---------------------------------------------------------------------------------------------------
@@ -744,6 +746,8 @@ def world(request):
 		
 	context['country_count'] = len(context['countries'])
 	context['countries'] = json.dumps(context['countries'])
+	
+	generate_previews()
 	
 	return render(request, 'world.html', context)
 
