@@ -2989,47 +2989,6 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
 });
 angular.module('FrontModule.controllers').controller('AdmChecksCtrl', function($scope, API) {
 	
-	/* Preview management */
-	
-	$scope.preview_generating = false;
-	
-	$scope.preview_total_count = 0;
-	$scope.preview_current_count = 0;
-	
-	var previewCall = function() {
-		
-		API.sendRequest('/api/mosaic/generate/', 'GET').then(function(response) {
-			
-			$scope.preview_current_count += 1;
-			
-			if ($scope.preview_current_count < $scope.preview_total_count) {
-				previewCall();
-			}
-			else {
-				$scope.preview_generating = false;
-			}
-			
-		}, function(response) {
-			
-			$scope.preview_current_count += 1;
-			
-			if ($scope.preview_current_count < $scope.preview_total_count) {
-				previewCall();
-			}
-			else {
-				$scope.preview_generating = false;
-			}
-		});
-	}
-	
-	$scope.generatePreviews = function() {
-		
-		$scope.preview_total_count = 0;
-		$scope.preview_current_count = 0;
-		
-		previewCall();
-	}
-	
 	/* Tab management */
 	
 	$scope.current_tab = 'region';
@@ -3053,7 +3012,8 @@ angular.module('FrontModule').config(function($interpolateProvider, $authProvide
 	$authProvider.google({
 		
 		url: '/api/user/google/',
-		clientId: '404579985700-eig13jlsdvbe6bhmtsis46tsn7nij4ju.apps.googleusercontent.com'
+		clientId: '404579985700-eig13jlsdvbe6bhmtsis46tsn7nij4ju.apps.googleusercontent.com',
+		redirectUri: window.location.origin + '/api/user/redirect/',
 	});
 
 	$authProvider.authToken = 'Token';

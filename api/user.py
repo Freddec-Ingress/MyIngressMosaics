@@ -90,6 +90,15 @@ def user_google(request):
 
 
 #---------------------------------------------------------------------------------------------------
+@api_view(['GET'])
+@permission_classes((AllowAny, ))
+def user_redirect(request):
+	
+	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((AllowAny, ))
 def user_logout(request):

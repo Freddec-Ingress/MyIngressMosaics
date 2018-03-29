@@ -13,7 +13,8 @@ angular.module('FrontModule').config(function($interpolateProvider, $authProvide
 	$authProvider.google({
 		
 		url: '/api/user/google/',
-		clientId: '404579985700-eig13jlsdvbe6bhmtsis46tsn7nij4ju.apps.googleusercontent.com'
+		clientId: '404579985700-eig13jlsdvbe6bhmtsis46tsn7nij4ju.apps.googleusercontent.com',
+		redirectUri: window.location.origin + '/api/user/redirect/',
 	});
 
 	$authProvider.authToken = 'Token';
