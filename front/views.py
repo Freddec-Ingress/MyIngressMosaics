@@ -256,7 +256,7 @@ def mosaic(request, ref):
 				to_add = True
 				for mission_data in context['missions']:
 					for comp_portal_data in mission_data['portals']:
-						if comp_portal_data['title'] == portal_data['title']:
+						if portal_data['title'] == 'portal' and comp_portal_data['title'] == portal_data['title']:
 							to_add = False
 							break
 				if to_add:
