@@ -57,12 +57,26 @@ def mosaic_create(request):
 	if results.count() > 0:
 		results[0].delete()
 	
-	imgByteArr = mosaic_obj.generatePreview(100)
+	global maskimg_100
+	if not maskimg_100:
+		maskfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/img/mask.png').read())
+		maskimg_100 = Image.open(maskfile)
+		size = 100, 100
+		maskimg_100.thumbnail(size, Image.ANTIALIAS)
+	
+	global maskimg_25
+	if not maskimg_25:
+		maskfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/img/mask.png').read())
+		maskimg_25 = Image.open(maskfile)
+		size = 25, 25
+		maskimg_25.thumbnail(size, Image.ANTIALIAS)
+			
+	imgByteArr = mosaic_obj.generatePreview(100, maskimg_100)
 	response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_100')
 	mosaic_obj.big_preview_url = response['url']
 	mosaic_obj.save()
 	
-	imgByteArr = mosaic_obj.generatePreview(25)
+	imgByteArr = mosaic_obj.generatePreview(25, maskimg_25)
 	response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_25')
 	mosaic_obj.small_preview_url = response['url']
 	mosaic_obj.save()
@@ -112,18 +126,31 @@ def mosaic_getall(request):
 @permission_classes((IsAuthenticated, ))
 def mosaic_generate(request):
 
-	mosaic_obj = Mosaic.objects.get(ref=request.data['ref'])
+	global maskimg_100
+	if not maskimg_100:
+		maskfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/img/mask.png').read())
+		maskimg_100 = Image.open(maskfile)
+		size = 100, 100
+		maskimg_100.thumbnail(size, Image.ANTIALIAS)
 	
-	if not mosaic_obj.big_preview_url:
-		imgByteArr = mosaic_obj.generatePreview(100)
+	global maskimg_25
+	if not maskimg_25:
+		maskfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/img/mask.png').read())
+		maskimg_25 = Image.open(maskfile)
+		size = 25, 25
+		maskimg_25.thumbnail(size, Image.ANTIALIAS)
+		
+	results = Mosaic.objects.all()
+	for mosaic_obj in results:
+	
+		imgByteArr = mosaic_obj.generatePreview(100, maskimg_100)
 		response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_100')
 		mosaic_obj.big_preview_url = response['url']
-		mosaic_obj.save()
 	
-	if not mosaic_obj.small_preview_url:
-		imgByteArr = mosaic_obj.generatePreview(25)
+		imgByteArr = mosaic_obj.generatePreview(25, maskimg_25)
 		response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_25')
 		mosaic_obj.small_preview_url = response['url']
+		
 		mosaic_obj.save()
 	
 	return Response(None, status=status.HTTP_200_OK)

@@ -26,7 +26,8 @@ import cloudinary
 
 
 #---------------------------------------------------------------------------------------------------
-maskimg = None
+maskimg_25 = None
+maskimg_100 = None
 
 
 
@@ -224,7 +225,7 @@ class Mosaic(models.Model):
 	
 	# Generate preview
 	
-	def generatePreview(self, dim):
+	def generatePreview(self, dim, maskimg):
 		
 		mosaic_data = self.getOverviewData()
 		
@@ -236,15 +237,7 @@ class Mosaic(models.Model):
 		img_height = dim * row_count
 				
 		image = Image.new('RGBA', (img_width, img_height), (0, 0, 0))
-		
-		global maskimg
-		if not maskimg:
-			maskfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/img/mask.png').read())
-			maskimg = Image.open(maskfile)
-
-		size = dim, dim
-		maskimg.thumbnail(size, Image.ANTIALIAS)
-		
+			
 		order = -1
 		
 		for image_url in mosaic_data['images']:
