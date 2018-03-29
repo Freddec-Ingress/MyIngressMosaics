@@ -26,6 +26,12 @@ import cloudinary
 
 
 #---------------------------------------------------------------------------------------------------
+maskfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/img/mask.png').read())
+maskimg = Image.open(maskfile)
+
+
+
+#---------------------------------------------------------------------------------------------------
 cloudinary.config( 
 	api_key='686619554325313', 
 	api_secret='G8-FUHb3j3Zq5mIiK_1wQwGo8lg',
@@ -231,9 +237,6 @@ class Mosaic(models.Model):
 		img_height = dim * row_count
 				
 		image = Image.new('RGBA', (img_width, img_height), (0, 0, 0))
-		
-		maskfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/img/mask.png').read())
-		maskimg = Image.open(maskfile)
 		
 		size = dim, dim
 		maskimg.thumbnail(size, Image.ANTIALIAS)
