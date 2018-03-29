@@ -140,7 +140,7 @@ def mosaic_generate(request):
 		size = 25, 25
 		maskimg_25.thumbnail(size, Image.ANTIALIAS)
 		
-	results = Mosaic.objects.all()
+	results = Mosaic.objects.filter(big_preview_url__isnull=False, small_preview_url__isnull=False)
 	for mosaic_obj in results:
 		mosaic_obj.big_preview_url = None
 		mosaic_obj.small_preview_url = None
