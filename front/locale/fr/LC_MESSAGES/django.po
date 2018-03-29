@@ -47,11 +47,11 @@ msgstr "Chargement ..."
 
 #: templates/city.html:52 templates/country.html:40 templates/region.html:50
 msgid "To be notified"
-msgstr "Etre notifé"
+msgstr "Suivre"
 
 #: templates/city.html:53 templates/country.html:41 templates/region.html:51
 msgid "Notified"
-msgstr "Notifié"
+msgstr "Suivi"
 
 #: templates/city.html:57 templates/country.html:45 templates/region.html:55
 msgid "You must be signed in to be notified."
@@ -146,7 +146,7 @@ msgstr "Des portails ne sont pas accessibles!"
 
 #: templates/mosaic.html:123 templates/profile.html:101
 msgid "Like"
-msgstr "Like"
+msgstr "J'aime"
 
 #: templates/mosaic.html:130 templates/profile.html:106
 msgid "To do"
@@ -154,7 +154,7 @@ msgstr "A faire"
 
 #: templates/mosaic.html:137 templates/profile.html:111
 msgid "Done"
-msgstr "Complété"
+msgstr "Réalisé"
 
 #: templates/mosaic.html:144
 msgid "You must be signed in to do this action."
@@ -166,7 +166,7 @@ msgstr "missions"
 
 #: templates/mosaic.html:161
 msgid "waypoints"
-msgstr "points de passage"
+msgstr "passages"
 
 #: templates/mosaic.html:162
 msgid "portals"
@@ -254,7 +254,7 @@ msgstr "Par ville"
 
 #: templates/registration.html:32
 msgid "Creating mosaic..."
-msgstr "Création de fresque ..."
+msgstr "Création de la fresque ..."
 
 #: templates/registration.html:54
 msgid "Search for registered missions"
@@ -380,9 +380,6 @@ msgstr "Soyez le premier à enregistrer une fresque pour cette ville"
 #: templates/world.html:86
 msgid "Countries"
 msgstr "Pays"
-
-msgid "France"
-msgstr ""
 
 msgid "Pakistan"
 msgstr ""

@@ -379,9 +379,6 @@ msgstr ""
 msgid "Countries"
 msgstr ""
 
-msgid "France"
-msgstr ""
-
 msgid "Pakistan"
 msgstr ""
 
