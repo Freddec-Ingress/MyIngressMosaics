@@ -19,7 +19,7 @@ from .models import *
 
 #---------------------------------------------------------------------------------------------------
 ACCESS_TOKEN_URL = 'https://accounts.google.com/o/oauth2/token'
-REDIRECT_URL = 'https://www.myingressmosaics.com'
+REDIRECT_URL = 'https://www.myingressmosaics.com/api/user/redirect/'
 USER_INFO_URL = 'https://www.googleapis.com/oauth2/v2/userinfo'
 
 @api_view(['POST'])
