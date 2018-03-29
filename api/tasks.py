@@ -26,16 +26,17 @@ def generate_previews():
 		maskimg_25.thumbnail(size, Image.ANTIALIAS)
 		
 	results = Mosaic.objects.filter(big_preview_url__isnull=True, small_preview_url__isnull=True).order_by('pk')
-	mosaic_obj = results[0]
-
-	imgByteArr = mosaic_obj.generatePreview(100, maskimg_100)
-	response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_100')
-	mosaic_obj.big_preview_url = response['url']
-
-	imgByteArr = mosaic_obj.generatePreview(25, maskimg_25)
-	response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_25')
-	mosaic_obj.small_preview_url = response['url']
+	if results.count() > 0:
+		mosaic_obj = results[0]
 	
-	mosaic_obj.save()
+		imgByteArr = mosaic_obj.generatePreview(100, maskimg_100)
+		response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_100')
+		mosaic_obj.big_preview_url = response['url']
 	
-	generate_previews()
+		imgByteArr = mosaic_obj.generatePreview(25, maskimg_25)
+		response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_25')
+		mosaic_obj.small_preview_url = response['url']
+		
+		mosaic_obj.save()
+		
+		generate_previews()

@@ -47,13 +47,11 @@
 					<div class="flex align-center">
 						
 						<div class="item">
-							<button class="btn" ng-click="generatePreviews();" ng-disabled="preview_generating">
-								Generate previews
-							</button>
+							<span class="colo-dark">Number of mosaics without preview</span>
 						</div>
-						
-						<div class="item" ng-show="preview_generating">
-							<span class="color-normal">[[preview_current_count]]/[[preview_total_count]] mosaics</span>
+
+						<div class="item">
+							<span class="colo-normal">{{mosaic_without_preview_count}}</span>
 						</div>
 						
 					</div>
