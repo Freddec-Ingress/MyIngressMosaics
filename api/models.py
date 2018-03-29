@@ -26,8 +26,7 @@ import cloudinary
 
 
 #---------------------------------------------------------------------------------------------------
-maskfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/img/mask.png').read())
-maskimg = Image.open(maskfile)
+maskimg = None
 
 
 
@@ -238,6 +237,10 @@ class Mosaic(models.Model):
 				
 		image = Image.new('RGBA', (img_width, img_height), (0, 0, 0))
 		
+		if not maskimg:
+			maskfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/img/mask.png').read())
+			maskimg = Image.open(maskfile)
+
 		size = dim, dim
 		maskimg.thumbnail(size, Image.ANTIALIAS)
 		
