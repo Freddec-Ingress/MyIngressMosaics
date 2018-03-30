@@ -8,7 +8,6 @@ from .ext import *
 from .map import *
 from .user import *
 from .link import *
-from .task import *
 from .notif import *
 from .search import *
 from .mosaic import *
