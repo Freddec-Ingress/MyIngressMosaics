@@ -249,7 +249,7 @@ class Mosaic(models.Model):
 		
 		for image_url in mosaic_data['images']:
 	
-			file = io.BytesIO(urllib.request.urlopen(image_url + '=s' + str(int(dim))).read())
+			file = io.BytesIO(urllib.request.urlopen(image_url + '=s' + str(int(dim * 0.9))).read())
 			mimg = Image.open(file)
 				
 			order += 1 
@@ -260,7 +260,7 @@ class Mosaic(models.Model):
 			xoffset = x * dim
 			yoffset = y * dim
 			
-			padding = 0
+			padding = int(0.1 * dim / 2)
 			
 			image.paste(mimg, (int(xoffset+padding), int(yoffset+padding)));
 			image.paste(maskimg, (int(xoffset), int(yoffset)), maskimg);
