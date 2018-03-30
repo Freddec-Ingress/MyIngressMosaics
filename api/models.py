@@ -232,6 +232,8 @@ class Mosaic(models.Model):
 		mosaic_data = self.getOverviewData()
 		
 		mission_count = len(mosaic_data['images'])
+		if mission_count < 1:
+			return None
 		
 		img_width = dim * mosaic_data['column_count']
 		

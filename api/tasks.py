@@ -34,12 +34,14 @@ def generate_previews():
 		mosaic_obj = results[0]
 	
 		imgByteArr = mosaic_obj.generatePreview(100, maskimg_100)
-		response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_100')
-		mosaic_obj.big_preview_url = response['url']
+		if imgByteArr:
+			response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_100')
+			mosaic_obj.big_preview_url = response['url']
 	
 		imgByteArr = mosaic_obj.generatePreview(25, maskimg_25)
-		response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_25')
-		mosaic_obj.small_preview_url = response['url']
+		if imgByteArr:
+			response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_25')
+			mosaic_obj.small_preview_url = response['url']
 		
 		mosaic_obj.save()
 		
