@@ -944,6 +944,25 @@ angular.module('FrontModule.directives').directive('mosaic', function() {
 				'</div>' +
 			'</div>' +
 		'',
+		
+		link: function(scope, element, attrs) {
+			
+			function loadImg(changes) {
+				
+				changes.forEach(change => {
+                    if (change.intersectionRatio > 0) {
+                        change.target.src = attrs['img-src'];
+                    }
+                })
+    		}
+    		
+			const observer = new IntersectionObserver(loadImg);
+			
+			
+			
+			const img = angular.element(element)[0];
+			console.log(img);
+		},
 	};
 });
 
@@ -1021,6 +1040,7 @@ angular.module('FrontModule.directives').directive('mission', function() {
 		'',
 	};
 });
+
 angular.module('FrontModule.controllers', [])
 
 angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function($scope, $window, API, UserService, $auth) {

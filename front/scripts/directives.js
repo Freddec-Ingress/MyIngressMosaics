@@ -45,6 +45,25 @@ angular.module('FrontModule.directives').directive('mosaic', function() {
 				'</div>' +
 			'</div>' +
 		'',
+		
+		link: function(scope, element, attrs) {
+			
+			function loadImg(changes) {
+				
+				changes.forEach(change => {
+                    if (change.intersectionRatio > 0) {
+                        change.target.src = attrs['img-src'];
+                    }
+                })
+    		}
+    		
+			const observer = new IntersectionObserver(loadImg);
+			
+			
+			
+			const img = angular.element(element)[0];
+			console.log(img);
+		},
 	};
 });
 
