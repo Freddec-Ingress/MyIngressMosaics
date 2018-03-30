@@ -16,11 +16,18 @@ class MissionAdmin(admin.ModelAdmin):
 
 
 #---------------------------------------------------------------------------------------------------
+class MosaicAdmin(admin.ModelAdmin):
+
+	search_fields = ('title', )
+
+
+
+#---------------------------------------------------------------------------------------------------
 admin.site.register(Profile)
 admin.site.register(Country)
 admin.site.register(Region)
 admin.site.register(City)
-admin.site.register(Mosaic)
+admin.site.register(Mosaic, MosaicAdmin)
 admin.site.register(Mission, MissionAdmin)
 admin.site.register(Comment)
 admin.site.register(Search)
