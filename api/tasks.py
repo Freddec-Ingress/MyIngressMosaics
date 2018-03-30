@@ -5,6 +5,8 @@ from .models import *
 import cloudinary
 import cloudinary.uploader
 
+from urllib.request import Request
+
 
 
 #-------------------------------------------------------------------------------
@@ -13,14 +15,16 @@ def generate_previews():
 
 	global maskimg_100
 	if not maskimg_100:
-		maskfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/img/mask.png', headers={'User-Agent': 'Mozilla/5.0'}).read())
+		req = Request('https://www.myingressmosaics.com/static/img/mask.png', headers={'User-Agent': 'Mozilla/5.0'})
+		maskfile = io.BytesIO(urllib.request.urlopen(req).read())
 		maskimg_100 = Image.open(maskfile)
 		size = 100, 100
 		maskimg_100.thumbnail(size, Image.ANTIALIAS)
 	
 	global maskimg_25
 	if not maskimg_25:
-		maskfile = io.BytesIO(urllib.request.urlopen('https://www.myingressmosaics.com/static/img/mask.png', headers={'User-Agent': 'Mozilla/5.0'}).read())
+		req = Request('https://www.myingressmosaics.com/static/img/mask.png', headers={'User-Agent': 'Mozilla/5.0'})
+		maskfile = io.BytesIO(urllib.request.urlopen(req).read())
 		maskimg_25 = Image.open(maskfile)
 		size = 25, 25
 		maskimg_25.thumbnail(size, Image.ANTIALIAS)
