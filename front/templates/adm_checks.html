@@ -27,12 +27,12 @@
 			<div class="section">
 				<div class="tab-row">
 				
-					<div class="tab" ng-click="current_tab='region'" ng-class="{'active':current_tab=='region'}">
-						Region
-					</div>
-				
 					<div class="tab" ng-click="current_tab='misc'" ng-class="{'active':current_tab=='misc'}">
 						Misc
+					</div>
+				
+					<div class="tab" ng-click="current_tab='region'" ng-class="{'active':current_tab=='region'}">
+						Region
 					</div>
 					
 				</div>
@@ -47,11 +47,11 @@
 					<div class="flex align-center">
 						
 						<div class="item">
-							<span class="colo-dark">Number of mosaics without preview</span>
+							<span class="color-dark">Number of mosaics without preview</span>
 						</div>
 
 						<div class="item">
-							<span class="colo-normal">{{mosaic_without_preview_count}}</span>
+							<span class="color-normal">{{mosaic_without_preview_count}}</span>
 						</div>
 						
 					</div>

@@ -2,7 +2,7 @@ angular.module('FrontModule.controllers').controller('AdmChecksCtrl', function($
 	
 	/* Tab management */
 	
-	$scope.current_tab = 'region';
+	$scope.current_tab = 'misc';
 	
 	/* Page loading */
 	
