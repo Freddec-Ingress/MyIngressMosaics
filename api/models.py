@@ -226,9 +226,7 @@ class Mosaic(models.Model):
 	# Generate preview
 	
 	def generatePreview(self, dim, maskimg):
-		
-		print('GENERATE PREVIEW: ' + self.title)
-		
+
 		mosaic_data = self.getOverviewData()
 		
 		mission_count = len(mosaic_data['images'])
@@ -241,10 +239,7 @@ class Mosaic(models.Model):
 		img_height = dim * row_count
 				
 		image = Image.new('RGBA', (img_width, img_height), (0, 0, 0))
-		
-		print('\tpreview size: ' + str(img_width) + ',' + str(img_height))
-		print('\tcolumn count: ' + str(mosaic_data['column_count']))
-		
+
 		order = -1
 		
 		for image_url in mosaic_data['images']:
