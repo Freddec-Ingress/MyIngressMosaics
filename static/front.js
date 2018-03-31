@@ -3006,9 +3006,11 @@ angular.module('FrontModule.controllers').controller('AdmChecksCtrl', function($
 	
 	function generatePreview() {
 		
-		if $scope.refs_without_preview.length < 1:
+		if ($scope.refs_without_preview.length < 1) {
+			
 			$scope.preview_generation = false;
 			return
+		}
 		
 		var ref = $scope.refs_without_preview[0];
 		
