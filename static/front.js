@@ -2941,6 +2941,11 @@ angular.module('FrontModule.controllers').controller('AdmChecksCtrl', function($
 			
 			$scope.refs_without_preview.splice(0, 1);
 			generatePreview();
+			
+		}, function() {
+			
+			$scope.refs_without_preview.splice(0, 1);
+			generatePreview();
 		});
 	}
 	

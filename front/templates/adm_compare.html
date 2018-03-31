@@ -25,31 +25,39 @@
 		<div class="container" ng-class="{'active':loaded}">
 			
 			<div class="section">
-				<div class="flex wrap">
-					
-					<div class="item" ng-repeat="city in cities">
-						<div class="bg-block">
+				<div class="item" ng-repeat="city in cities">
+					<div class="bg-block">
+						
+						<div class="flex">
 							
-							<div class="flex">
+							<div class="item">
+								<a ng-show="!city.open" ng-click="city.open=true;"><i class="fa fa-plus-square text-small"></i></a>
+								<a ng-show="city.open" ng-click="city.open=false;"><i class="fa fa-minus-square text-small"></i></a>
+							</div>
+							
+							<div class="item">
+								<span class="color-light">[[city.name]]</span>
+							</div>
+							
+							<div class="item">
+								<span class="color-normal">[[city.mosaic_count]]</span>
+							</div>
+							
+						</div>
+						
+						<div ng-show="city.open">
+							
+							<div class="flex" ng-repeat="mosaic in city.mosaics">
 								
 								<div class="item">
-									<a ng-show="!city.open" ng-click="city.open=true;"><i class="fa fa-plus-square text-small"></i></a>
-									<a ng-show="city.open" ng-click="city.open=false;"><i class="fa fa-minus-square text-small"></i></a>
-								</div>
-								
-								<div class="item">
-									<span class="color-light">[[city.name]]</span>
-								</div>
-								
-								<div class="item">
-									<span class="color-normal">[[city.mosaic_count]]</span>
+									<span class="color-light">[[mosaic.name]]</span>
 								</div>
 								
 							</div>
 							
 						</div>
+						
 					</div>
-					
 				</div>
 			</div>
 		
