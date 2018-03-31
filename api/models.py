@@ -232,7 +232,7 @@ class Mosaic(models.Model):
 		missions = self.missions.all()
 
 		mission_count = missions.count()
-		if mission_count < 1 or mission_count > 78:
+		if mission_count < 1 or mission_count > 42:
 			return None
 		
 		img_width = dim * self.column_count

@@ -12,140 +12,25 @@
 {% endblock %}
 
 {% block content %}
-<div id="content" ng-controller="AdmCompareCtrl">
 
-{% verbatim %}
-
-	<div id="loading" ng-hide="loaded">
-		<i class="item fa fa-spinner rotating"></i>
-		<span class="item">Loading page...</span>
-	</div>
+	<div id="content" ng-controller="AdmCompareCtrl" ng-init="init({{cities}});">
 	
-	<div class="container" ng-class="{'active':loaded}">
-		
-		<div class="section">
-			
-			<div class="flex wrap">
-				
-				<div class="flex-col width-6 item" ng-repeat="fake in fakes">
-					<div class="flex-col item link-block">
-						<a href="/mosaic/{{fake}}" target="_blank">{{fake}}</a>
-					</div>
-				</div>
-				
-			</div>
-			
+		<div id="loading" ng-hide="loaded">
+			<i class="item fa fa-spinner rotating"></i>
+			<span class="item">Loading page...</span>
 		</div>
 		
-		<div class="section">
+		<div class="container" ng-class="{'active':loaded}">
 			
-			<div class="flex-col" ng-repeat="country in countries" ng-if="country.displayed">
-				
-				<div class="flex align-item">
-					
-					<div class="item" ng-show="country.regions.length > 0">
-						<a ng-show="!country.open" ng-click="country.open=true;"><i class="fa fa-plus-square text-small"></i></a>
-						<a ng-show="country.open" ng-click="country.open=false;"><i class="fa fa-minus-square text-small"></i></a>
-					</div>
-					
-					<div class="item">
-						<span class="text-normal color-light">{{country.name}}</span>
-					</div>
-					
-					<a class="item" href="https://www.myingressmosaics.com/admin/api/imcountry/{{country.id}}/change/" target="_blank">
-						<i class="fa fa-lock text-small"></i>
-					</a>
-					
-					<div class="item">
-						<span class="badge" ng-class="{'color-success':country.diff>-1, 'color-danger':country.diff<0}">{{country.diff}}</span>
-					</div>
-
-					<a class="item" href="https://www.myingressmosaics.com/world/{{country.compare_name}}" target="_blank">
-						<i class="fa fa-external-link text-small"></i>
-					</a>
-					
-				</div>
-				
-				<div class="flex-col" ng-show="country.open" style="margin-left:35px;">
-					
-					<div class="flex-col" ng-repeat="region in country.regions" ng-if="region.displayed">
-				
-						<div class="flex align-center">
-							
-							<div class="item" ng-show="region.mosaics.length > 0">
-								<a ng-show="!region.open" ng-click="region.open=true;"><i class="fa fa-plus-square text-small"></i></a>
-								<a ng-show="region.open" ng-click="region.open=false;"><i class="fa fa-minus-square text-small"></i></a>
-							</div>
-							
-							<div class="item">
-								<span class="text-normal color-normal">{{region.name}}</span>
-							</div>
-							
-							<a class="item" href="https://www.myingressmosaics.com/admin/api/imregion/{{region.id}}/change/" target="_blank">
-								<i class="fa fa-lock text-small"></i>
-							</a>
-							
-							<div class="item">
-								<span class="badge" ng-class="{'color-success':region.diff>-1, 'color-danger':region.diff<0}">{{region.diff}}</span>
-							</div>
-
-							<a class="item" href="https://www.myingressmosaics.com/world/{{country.compare_name}}/{{region.compare_name}}" target="_blank">
-								<i class="fa fa-external-link text-small"></i>
-							</a>
-							
-						</div>
-						
-						<div class="flex wrap" ng-show="region.open" style="margin-left:35px;">
-							
-							<div class="flex-col width-6 item" ng-repeat="mosaic in region.mosaics">
-								<div class="flex-col item link-block">
-							
-									<div class="flex align-center">
 	
-										<div class="">
-											<span class="text-small color-normal">{{mosaic.name}}</span>
-										</div>
-										
-									</div>
-									<div class="flex align-center">
-										
-										<div class="grow">
-											<span class="text-small color-dark">{{mosaic.city_name}}</span>
-										</div>
+		</div>
 	
-										<div class="flex justify-center">
-											<button class="btn text-center" type="submit" style="padding:0; min-height:25px; width:25px;" ng-click="excludeMosaic(region, $index, mosaic.id);">
-												<i class="fa fa-eye-slash"></i>
-											</button>
-											<button class="btn btn-danger text-center" type="submit" style="padding:0; min-height:25px; width:25px;" ng-click="dieMosaic(region, $index, mosaic.id);">
-												<i class="fa fa-trash"></i>
-											</button>
-										</div>
-										
-									</div>
-							
-								</div>
-							</div>
-							
-						</div>
-							
-					</div>
-					
-				</div>
-				
-			</div>
-				
-    	</div>
-    	
 	</div>
 	
-{% endverbatim %}
-
-</div>
 {% endblock %}
 
 {% block script %}
-<script src="/static/front.js"></script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuXb2ncs76tO-2SN8hvkE5Zt4VwtPoNcM&language=en&libraries=places"></script>
+	<script src="/static/front.js"></script>
+	
 {% endblock %}
