@@ -952,7 +952,7 @@ def adm_registration(request):
 #---------------------------------------------------------------------------------------------------
 def adm_checks(request):
 
-	mosaic_without_preview_count = Mosaic.objects.filter(big_preview_url__isnull=True, small_preview_url__isnull=True).count()
+	refs_without_preview = Mosaic.objects.filter(small_preview_url__isnull=True).values_list('ref', flat=True)
 	
-	context = { 'mosaic_without_preview_count':mosaic_without_preview_count, }
+	context = { 'refs_without_preview':refs_without_preview, }
 	return render(request, 'adm_checks.html', context)

@@ -13,7 +13,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="AdmChecksCtrl">
+	<div id="content" ng-controller="AdmChecksCtrl" ng-init="init({{refs_without_preview}});">
 		
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
@@ -51,7 +51,13 @@
 						</div>
 
 						<div class="item">
-							<span class="color-normal">{{mosaic_without_preview_count}}</span>
+							<span class="color-normal">[[refs_without_preview.length]]</span>
+						</div>
+
+						<div class="item">
+							<button class="btn" ng-click="startPreviewGeneration();" ng-disabled="preview_generation">
+								Generate previews
+							</button>
 						</div>
 						
 					</div>

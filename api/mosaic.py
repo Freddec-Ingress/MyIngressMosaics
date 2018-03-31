@@ -89,3 +89,19 @@ def mosaic_create(request):
 		    )
 	
 	return Response(mosaic_obj.ref, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def mosaic_preview_generate(request):
+
+	mosaic_obj = Mosaic.objects.get(ref=request.data['ref'])
+	
+	imgByteArr = mosaic_obj.generatePreview(25)
+	response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_25')
+	mosaic_obj.small_preview_url = response['url']
+	mosaic_obj.save()
+	
+	return Response(None, status=status.HTTP_200_OK)
