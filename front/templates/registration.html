@@ -19,7 +19,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="RegistrationPageCtrl" ng-init="init('{{search_string}}', {{countries}});">
+	<div id="content" ng-controller="RegistrationPageCtrl" ng-init="init('{{search_string|escape}}', {{countries}});">
 	
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
