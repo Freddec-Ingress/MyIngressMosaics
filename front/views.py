@@ -122,7 +122,7 @@ def preview(request, ref):
 
 	if not mosaic_obj.big_preview_url:
 		
-		imgByteArr = mosaic_obj.generatePreview(100, maskimg_100)
+		imgByteArr = mosaic_obj.generatePreview(100)
 		response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_100')
 		mosaic_obj.big_preview_url = response['url']
 		
