@@ -6,7 +6,6 @@ import io
 from django.http import HttpResponse
 from django.db.models import Count
 from django.shortcuts import render
-from django.utils.html import escape
 from django.utils.translation import gettext as _
 
 from api.models import *
@@ -319,7 +318,7 @@ def registration(request, search_string = ''):
 	
 	context = {
 		
-		'search_string':escape(search_string),
+		'search_string':search_string.replace('\'', '\\\''),
 		
 		'potential_count':0,
 		'countries': [],
