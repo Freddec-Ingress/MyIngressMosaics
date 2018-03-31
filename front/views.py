@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import io
+
 from django.http import HttpResponse
 from django.db.models import Count
 from django.shortcuts import render
@@ -8,9 +10,9 @@ from django.utils.translation import gettext as _
 
 from api.models import *
 
-from api.tasks import *
-
 from urllib.request import Request
+
+from PIL import Image
 
 
 
@@ -23,40 +25,40 @@ def sitemap(request):
 	text += '	xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"'
 	text += '	xmlns:xhtml="http://www.w3.org/1999/xhtml"'
 	
-    # Static URLs
-    
+	# Static URLs
+	
 	text += '<url>'
 	text += '	<loc>https://www.myingressmosaics.com</loc><changefreq>daily</changefreq>'
 	text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/" />'
 	text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/" />'
 	text += '</url>'
-    
+	
 	text += '<url>'
 	text += '	<loc>https://www.myingressmosaics.com/map</loc><changefreq>daily</changefreq>'
 	text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/map" />'
 	text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/map" />'
 	text += '</url>'
-    
+	
 	text += '<url>'
 	text += '	<loc>https://www.myingressmosaics.com/search</loc><changefreq>daily</changefreq>'
 	text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/search" />'
 	text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/search" />'
 	text += '</url>'
-    
+	
 	text += '<url>'
 	text += '	<loc>https://www.myingressmosaics.com/profile</loc><changefreq>daily</changefreq>'
 	text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/profile" />'
 	text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/profile" />'
 	text += '</url>'
-    
+	
 	text += '<url>'
 	text += '	<loc>https://www.myingressmosaics.com/registration</loc><changefreq>daily</changefreq>'
 	text += '	<xhtml:link rel="alternate" hreflang="en" href="https://www.myingressmosaics.com/en/registration" />'
 	text += '	<xhtml:link rel="alternate" hreflang="fr" href="https://www.myingressmosaics.com/fr/registration" />'
 	text += '</url>'
 	
-    # Mosaic URLs
-    
+	# Mosaic URLs
+	
 	mosaics = Mosaic.objects.all()
 	for mosaic in mosaics:
 		text += '<url>'
@@ -107,7 +109,7 @@ def sitemap(request):
 			text += '</url>'
 			
 	text += '</urlset>'
-    
+	
 	response = HttpResponse(text, content_type = 'text/plain')
 	return response
 
@@ -118,19 +120,23 @@ def preview(request, ref):
 
 	mosaic_obj = Mosaic.objects.get(ref=ref)
 
-	global maskimg_100
-	if not maskimg_100:
-		req = Request('https://www.myingressmosaics.com/static/img/mask.png', headers={'User-Agent': 'Mozilla/5.0'})
-		maskfile = io.BytesIO(urllib.request.urlopen(req).read())
-		maskimg_100 = Image.open(maskfile)
-		size = 100, 100
-		maskimg_100.thumbnail(size, Image.ANTIALIAS)
-
-	imgByteArr = mosaic_obj.generatePreview(100, maskimg_100)
-	response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_100')
-	mosaic_obj.big_preview_url = response['url']
-	
-	mosaic_obj.save()
+	if not mosaic_obj.big_preview_url:
+		
+		imgByteArr = mosaic_obj.generatePreview(100, maskimg_100)
+		response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_100')
+		mosaic_obj.big_preview_url = response['url']
+		
+		mosaic_obj.save()
+		
+	else:
+		
+		req = Request(mosaic_obj.big_preview_url, headers={'User-Agent': 'Mozilla/5.0'})
+		file = io.BytesIO(urllib.request.urlopen(req).read())
+		img = Image.open(file)
+		
+		imgByteArr = io.BytesIO()
+		image.save(imgByteArr, format='PNG')
+		imgByteArr = imgByteArr.getvalue()
 	
 	return HttpResponse(imgByteArr, content_type='image/png')
 
@@ -761,9 +767,7 @@ def world(request):
 		
 	context['country_count'] = len(context['countries'])
 	context['countries'] = json.dumps(context['countries'])
-	
-	generate_previews()
-	
+
 	return render(request, 'world.html', context)
 
 

@@ -26,12 +26,6 @@ import cloudinary
 
 
 #---------------------------------------------------------------------------------------------------
-maskimg_25 = None
-maskimg_100 = None
-
-
-
-#---------------------------------------------------------------------------------------------------
 cloudinary.config( 
 	api_key='686619554325313', 
 	api_secret='G8-FUHb3j3Zq5mIiK_1wQwGo8lg',
@@ -225,32 +219,38 @@ class Mosaic(models.Model):
 	
 	# Generate preview
 	
-	def generatePreview(self, dim, maskimg):
+	def generatePreview(self, dim):
 
-		mosaic_data = self.getOverviewData()
+		req = Request('https://www.myingressmosaics.com/static/img/mask.png', headers={'User-Agent': 'Mozilla/5.0'})
+		maskfile = io.BytesIO(urllib.request.urlopen(req).read())
+		maskimg = Image.open(maskfile)
+		size = dim, dim
+		maskimg.thumbnail(size, Image.ANTIALIAS)
 		
-		mission_count = len(mosaic_data['images'])
+		missions = self.missions.all()
+
+		mission_count = missions.count()
 		if mission_count < 1:
 			return None
 		
-		img_width = dim * mosaic_data['column_count']
+		img_width = dim * self.column_count
 		
-		row_count = int(math.ceil(mission_count / mosaic_data['column_count']))
+		row_count = int(math.ceil(mission_count / self.column_count))
 		img_height = dim * row_count
 				
 		image = Image.new('RGBA', (img_width, img_height), (0, 0, 0))
 
 		order = -1
 		
-		for image_url in mosaic_data['images']:
+		for mission in missions:
 	
-			file = io.BytesIO(urllib.request.urlopen(image_url + '=s' + str(int(dim * 0.9))).read())
+			file = io.BytesIO(urllib.request.urlopen(mission.image + '=s' + str(int(dim * 0.9))).read())
 			mimg = Image.open(file)
 				
 			order += 1 
 			
-			y = int(order / mosaic_data['column_count'])
-			x = int(order - (y * mosaic_data['column_count']))
+			y = int(order / self.column_count)
+			x = int(order - (y * self.column_count))
 			
 			xoffset = x * dim
 			yoffset = y * dim

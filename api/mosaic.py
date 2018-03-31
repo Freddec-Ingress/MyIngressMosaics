@@ -59,27 +59,7 @@ def mosaic_create(request):
 	if results.count() > 0:
 		results[0].delete()
 	
-	global maskimg_100
-	if not maskimg_100:
-		req = Request('https://www.myingressmosaics.com/static/img/mask.png', headers={'User-Agent': 'Mozilla/5.0'})
-		maskfile = io.BytesIO(urllib.request.urlopen(req).read())
-		maskimg_100 = Image.open(maskfile)
-		size = 100, 100
-		maskimg_100.thumbnail(size, Image.ANTIALIAS)
-	
-	global maskimg_25
-	if not maskimg_25:
-		req = Request('https://www.myingressmosaics.com/static/img/mask.png', headers={'User-Agent': 'Mozilla/5.0'})
-		maskfile = io.BytesIO(urllib.request.urlopen(req).read())
-		maskimg_25 = Image.open(maskfile)
-		size = 25, 25
-		maskimg_25.thumbnail(size, Image.ANTIALIAS)
-			
-	imgByteArr = mosaic_obj.generatePreview(100, maskimg_100)
-	response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_100')
-	mosaic_obj.big_preview_url = response['url']
-
-	imgByteArr = mosaic_obj.generatePreview(25, maskimg_25)
+	imgByteArr = mosaic_obj.generatePreview(25)
 	response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_25')
 	mosaic_obj.small_preview_url = response['url']
 	mosaic_obj.save()
