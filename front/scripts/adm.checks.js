@@ -34,6 +34,8 @@ angular.module('FrontModule.controllers').controller('AdmChecksCtrl', function($
 	
 	/* Page loading */
 	
+	$scope.refs_without_preview = [];
+	
 	$scope.init = function(refs_without_preview) {
 		
 		$scope.refs_without_preview = refs_without_preview;
