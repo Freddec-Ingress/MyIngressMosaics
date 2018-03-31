@@ -104,4 +104,6 @@ def mosaic_preview_generate(request):
 	mosaic_obj.small_preview_url = response['url']
 	mosaic_obj.save()
 	
+	print(mosaic_obj.small_preview_url)
+	
 	return Response(None, status=status.HTTP_200_OK)

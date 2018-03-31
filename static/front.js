@@ -2999,17 +2999,13 @@ angular.module('FrontModule.controllers').controller('AdmChecksCtrl', function($
 	$scope.preview_generation = false;
 	
 	$scope.startPreviewGeneration = function() {
-		
-		console.log('startPreviewGeneration');
-		
+
 		$scope.preview_generation = true;
 		generatePreview();
 	}
 	
 	function generatePreview() {
-		
-		console.log('generatePreview');
-		
+
 		if ($scope.refs_without_preview.length < 1) {
 			
 			$scope.preview_generation = false;
@@ -3017,6 +3013,8 @@ angular.module('FrontModule.controllers').controller('AdmChecksCtrl', function($
 		}
 		
 		var ref = $scope.refs_without_preview[0];
+		
+		console.log(ref);
 		
 		var data = { 'ref':ref };
 		API.sendRequest('/api/mosaic/preview/generate/', 'POST', {}, data).then(function() {
@@ -3031,9 +3029,7 @@ angular.module('FrontModule.controllers').controller('AdmChecksCtrl', function($
 	$scope.refs_without_preview = [];
 	
 	$scope.init = function(refs_without_preview) {
-		
-		console.log('init');
-		
+
 		$scope.refs_without_preview = refs_without_preview;
 		
 		$scope.loaded = true;
