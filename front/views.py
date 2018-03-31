@@ -827,7 +827,7 @@ def adm_compare(request):
 		
 		data['cities'].append(imcity_data)
 	
-	return Response(data, status=status.HTTP_200_OK)
+	return render(request, 'adm_compare.html', data)
 
 
 
