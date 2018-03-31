@@ -244,7 +244,25 @@ class Mosaic(models.Model):
 
 		order = -1
 		
-		for mission in missions:
+		temp = 0;
+		if mission_count > self.column_count:
+			temp = (self.column_count - mission_count) % self.column_count;
+			if temp < 0 or temp > (self.column_count - 1):
+				temp = 0;
+		
+		for i in range(0, temp):
+				
+			order += 1 
+		
+			y = int(order / self.column_count)
+			x = int(order - (y * self.column_count))
+			
+			xoffset = x * dim
+			yoffset = y * dim
+			
+			image.paste(maskimg, (int(xoffset), int(yoffset)), maskimg);
+			
+		for mission in reversed(missions):
 	
 			file = io.BytesIO(urllib.request.urlopen(mission.image + '=s' + str(int(dim * 0.9))).read())
 			mimg = Image.open(file)
