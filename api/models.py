@@ -6,6 +6,8 @@ import math
 import json
 import urllib
 
+from urllib.request import Request
+
 from math import *
 from datetime import datetime
 
