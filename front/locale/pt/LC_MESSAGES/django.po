@@ -20,601 +20,602 @@ msgstr ""
 
 #: templates/base.html:35
 msgid "Home"
-msgstr ""
+msgstr "Início"
 
 #: templates/base.html:40
 msgid "Search"
-msgstr ""
+msgstr "Procurar"
 
 #: templates/base.html:45
 msgid "Map"
-msgstr ""
+msgstr "Mapa"
 
 #: templates/base.html:50
 msgid "Hunt"
-msgstr ""
+msgstr "Caça"
 
 #: templates/base.html:55
 msgid "Profile"
-msgstr ""
+msgstr "Perfil"
 
 #: templates/city.html:24 templates/country.html:24 templates/creator.html:25
 #: templates/map.html:23 templates/mosaic.html:25 templates/profile.html:23
 #: templates/region.html:24 templates/registration.html:23
 #: templates/search.html:23 templates/world.html:24
 msgid "Loading page..."
-msgstr ""
+msgstr "A carregar..."
 
 #: templates/city.html:52 templates/country.html:40 templates/region.html:50
 msgid "To be notified"
-msgstr ""
+msgstr "Para ser notificado"
 
 #: templates/city.html:53 templates/country.html:41 templates/region.html:51
 msgid "Notified"
-msgstr ""
+msgstr "Notificado"
 
 #: templates/city.html:57 templates/country.html:45 templates/region.html:55
 msgid "You must be signed in to be notified."
-msgstr ""
+msgstr "Tem que ter sessão iniciada para ser notificado"
 
 #: templates/city.html:58 templates/country.html:46 templates/mosaic.html:145
 #: templates/mosaic.html:328 templates/profile.html:33
 #: templates/region.html:56 templates/registration.html:42
 msgid "Sign in"
-msgstr ""
+msgstr "Iniciar Sessão"
 
 #: templates/city.html:70 templates/creator.html:48 templates/profile.html:91
 #: templates/region.html:68 templates/search.html:61
 msgid "Mosaics"
-msgstr ""
+msgstr "Mosaicos"
 
 #: templates/city.html:75 templates/region.html:73 templates/search.html:65
 msgid "Potentials"
-msgstr ""
+msgstr "Potenciais"
 
 #: templates/city.html:91 templates/region.html:95
 msgid "By missions"
-msgstr ""
+msgstr "Por missões"
 
 #: templates/city.html:97 templates/region.html:101
 msgid "By uniques"
-msgstr ""
+msgstr "Por únicos"
 
 #: templates/city.html:103 templates/country.html:80 templates/region.html:107
 #: templates/registration.html:231 templates/world.html:108
 msgid "By name"
-msgstr ""
+msgstr "Por nome"
 
 #: templates/city.html:109 templates/region.html:113
 msgid "By date"
-msgstr ""
+msgstr "Por Data"
 
 #: templates/city.html:124 templates/region.html:150
 msgid "Page"
-msgstr ""
+msgstr "Página"
 
 #: templates/country.html:58
 msgid "Regions"
-msgstr ""
+msgstr "Regiões"
 
 #: templates/country.html:74 templates/world.html:102
 msgid "By mosaics"
-msgstr ""
+msgstr "Por mosaicos"
 
 #: templates/creator.html:53 templates/mosaic.html:190
 #: templates/profile.html:96 templates/search.html:69
 msgid "Missions"
-msgstr ""
+msgstr "Missões"
 
 #: templates/map.html:34
 msgid "Enter location"
-msgstr ""
+msgstr "Inserir Localização"
 
 #: templates/map.html:39
 msgid "Go"
-msgstr ""
+msgstr "Ir"
 
 #: templates/map.html:58
 msgid "No mosaic. Please try to zoom out."
-msgstr ""
+msgstr "Não há mosaicos. Tente um zoom menor"
 
 #: templates/map.html:62
 msgid "Current map is too larger to be scanned. Please try to zoom in."
-msgstr ""
+msgstr "O mapa actual é demasiado grande para ser verificado. Tente um zoom maior."
 
 #: templates/map.html:67
 msgid "Loading data..."
-msgstr ""
+msgstr "A carregar..."
 
 #: templates/map.html:72
 msgid "mosaics"
-msgstr ""
+msgstr "mosaicos"
 
 #: templates/mosaic.html:38
 msgid "Comment"
-msgstr ""
+msgstr "Comentar"
 
 #: templates/mosaic.html:56 templates/profile.html:79
 msgid "Save"
-msgstr ""
+msgstr "Gravar"
 
 #: templates/mosaic.html:90
 msgid "Some portals are unavailable!"
-msgstr ""
+msgstr "Alguns portais estão indisponíveis"
 
 #: templates/mosaic.html:123 templates/profile.html:101
 msgid "Like"
-msgstr ""
+msgstr "Gostar"
 
 #: templates/mosaic.html:130 templates/profile.html:106
 msgid "To do"
-msgstr ""
+msgstr "Para fazer"
 
 #: templates/mosaic.html:137 templates/profile.html:111
 msgid "Done"
-msgstr ""
+msgstr "Feito"
 
 #: templates/mosaic.html:144
 msgid "You must be signed in to do this action."
-msgstr ""
+msgstr "Tem que ter sessão iniciada para esta acção."
 
 #: templates/mosaic.html:154 templates/registration.html:149
 msgid "missions"
-msgstr ""
+msgstr "missões"
 
 #: templates/mosaic.html:161
 msgid "waypoints"
-msgstr ""
+msgstr "ponto de passagem"
 
 #: templates/mosaic.html:162
 msgid "portals"
-msgstr ""
+msgstr "portais"
 
 #: templates/mosaic.html:163
 msgid "uniques"
-msgstr ""
+msgstr "únicos"
 
 #: templates/mosaic.html:186
 msgid "Roadmap"
-msgstr ""
+msgstr "Roteiro/Percurso"
 
 #: templates/mosaic.html:196
 msgid "Comments"
-msgstr ""
+msgstr "Comentários"
 
 #: templates/mosaic.html:240
 msgid "Unavailable"
-msgstr ""
+msgstr "Indisponível"
 
 #: templates/mosaic.html:241
 msgid "Hack"
-msgstr ""
+msgstr "Hack"
 
 #: templates/mosaic.html:242
 msgid "Capture"
-msgstr ""
+msgstr "Capturar"
 
 #: templates/mosaic.html:243
 msgid "View"
-msgstr ""
+msgstr "Ver"
 
 #: templates/mosaic.html:244
 msgid "Passphrase"
-msgstr ""
+msgstr "Pergunta passe"
 
 #: templates/mosaic.html:303
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 #: templates/mosaic.html:309
 msgid "Delete"
-msgstr ""
+msgstr "Apagar"
 
 #: templates/mosaic.html:323
 msgid "Post a comment"
-msgstr ""
+msgstr "Submeter um comentário"
 
 #: templates/mosaic.html:327
 msgid "You must be signed in to post comment."
-msgstr ""
+msgstr "Tem que ter sessão iniciada para submeter um comentário"
 
 #: templates/profile.html:32 templates/registration.html:41
 msgid "You must be signed in to access this page."
-msgstr ""
+msgstr "Tem que ter sessão iniciada para aceder a esta página"
 
 #: templates/profile.html:52 templates/profile.html:72
 msgid "Enlightened"
-msgstr ""
+msgstr "Iluminados"
 
 #: templates/profile.html:53 templates/profile.html:73
 msgid "Resistant"
-msgstr ""
+msgstr "Resistência"
 
 #: templates/profile.html:54
 msgid "Not defined"
-msgstr ""
+msgstr "Não definido"
 
 #: templates/profile.html:55
 msgid "Sign out"
-msgstr ""
+msgstr "Terminar sessão"
 
 #: templates/profile.html:65
 msgid "Please specify your faction"
-msgstr ""
+msgstr "Por favor indique a sua facção"
 
 #: templates/profile.html:116
 msgid "Notifications"
-msgstr ""
+msgstr "Notificações"
 
 #: templates/region.html:89
 msgid "By city"
-msgstr ""
+msgstr "Por cidade"
 
 #: templates/registration.html:32
 msgid "Creating mosaic..."
-msgstr ""
+msgstr "A criar o mosaico..."
 
 #: templates/registration.html:54
 msgid "Search for registered missions"
-msgstr ""
+msgstr "Procurar missões registadas"
 
 #: templates/registration.html:60
 msgid "Mission name, creator"
-msgstr ""
+msgstr "Nome da missão, autor"
 
 #: templates/registration.html:73 templates/search.html:51
 #: templates/world.html:52
 msgid "Searching..."
-msgstr ""
+msgstr "A procurar..."
 
 #: templates/registration.html:81
 msgid "No mission"
-msgstr ""
+msgstr "Não há missões"
 
 #: templates/registration.html:89
 msgid "To register missions"
-msgstr ""
+msgstr "Para registar missões"
 
 #: templates/registration.html:115
 msgid "Potential mosaics"
-msgstr ""
+msgstr "Mosaicos potenciais"
 
 #: templates/registration.html:116
 msgid "Only potential mosaics validated by MIM team are displayed here."
-msgstr ""
+msgstr "Apenas os mosaicos potenciais validados pela equipa do MIM são mostrados aqui."
 
 #: templates/registration.html:117
 msgid "Feel free to register any mosaic you want."
-msgstr ""
+msgstr "Pode registar qualquer mosaico que pretenda."
 
 #: templates/registration.html:118
 msgid ""
 "To register mosaic not listed here, just search missions with form above."
 msgstr ""
+"Para registar mosaicos não listados aqui, procure missões com o formulário acima."
 
 #: templates/registration.html:122
 msgid "No potential mosaic for the moment. Please retry later ;)"
-msgstr ""
+msgstr "Não há potenciais mosaicos de momento. Tente mais tarde."
 
 #: templates/registration.html:168
 msgid "Select All"
-msgstr ""
+msgstr "Seleccionar tudo"
 
 #: templates/registration.html:172
 msgid "Unselect All"
-msgstr ""
+msgstr "Desseleccionar tudo"
 
 #: templates/registration.html:182 templates/registration.html:313
 #: templates/registration.html:390
 msgid "Next"
-msgstr ""
+msgstr "Próximo"
 
 #: templates/registration.html:204
 msgid "Columns"
-msgstr ""
+msgstr "Colunas"
 
 #: templates/registration.html:223
 msgid "Reorder"
-msgstr ""
+msgstr "Reordenar"
 
 #: templates/registration.html:227
 msgid "Reverse"
-msgstr ""
+msgstr "Inverter"
 
 #: templates/registration.html:235
 msgid "By end"
-msgstr ""
+msgstr "Por final"
 
 #: templates/registration.html:305 templates/registration.html:382
 #: templates/registration.html:482
 msgid "Back"
-msgstr ""
+msgstr "Voltar"
 
 #: templates/registration.html:331
 msgid "Mosaic name"
-msgstr ""
+msgstr "Nome do mosaico"
 
 #: templates/registration.html:336 templates/registration.html:359
 msgid "Suggestion"
-msgstr ""
+msgstr "Sugestão"
 
 #: templates/registration.html:355 templates/world.html:45
 msgid "City name"
-msgstr ""
+msgstr "Nome da cidade"
 
 #: templates/registration.html:490
 msgid "Validate"
-msgstr ""
+msgstr "Validar"
 
 #: templates/search.html:32
 msgid "Search for mosaics"
-msgstr ""
+msgstr "Procurar mosaicos"
 
 #: templates/search.html:38
 msgid "Mosaic name or creator"
-msgstr ""
+msgstr "Nome do mosaico ou autor"
 
 #: templates/world.html:34
 #, python-format
 msgid "%(count)s registered mosaics by agents for agents"
-msgstr ""
+msgstr "%(count)s mosaicos registados por agentes para agentes"
 
 #: templates/world.html:44
 msgid "Search for a city"
-msgstr ""
+msgstr "Procurar uma cidade"
 
 #: templates/world.html:60
 msgid "City unknown"
-msgstr ""
+msgstr "Cidade desconhecida"
 
 #: templates/world.html:68
 msgid "No registered mosaic"
-msgstr ""
+msgstr "Não há mosaicos registados"
 
 #: templates/world.html:72
 msgid "Be the first to register a mosaic for this city"
-msgstr ""
+msgstr "Seja o primeiro a registar um mosaico nesta cidade"
 
 #: templates/world.html:86
 msgid "Countries"
-msgstr ""
+msgstr "Países"
 
 msgid "Pakistan"
-msgstr ""
+msgstr "Paquistão"
 
 msgid "New Caledonia"
-msgstr ""
+msgstr "Nova Caledónia"
 
 msgid "Nepal"
-msgstr ""
+msgstr "Nepal"
 
 msgid "Bulgaria"
-msgstr ""
+msgstr "Bulgaria"
 
 msgid "Chile"
-msgstr ""
+msgstr "Chile"
 
 msgid "Ukraine"
-msgstr ""
+msgstr "Ucrânia"
 
 msgid "Vietnam"
-msgstr ""
+msgstr "Vietname"
 
 msgid "Brunei"
-msgstr ""
+msgstr "Brunei"
 
 msgid "Peru"
-msgstr ""
+msgstr "Perú"
 
 msgid "Serbia"
-msgstr ""
+msgstr "Sérvia"
 
 msgid "Macau"
-msgstr ""
+msgstr "Macau"
 
 msgid "Belarus"
-msgstr ""
+msgstr "Bielorússia"
 
 msgid "Paraguay"
-msgstr ""
+msgstr "Paraguai"
 
 msgid "United Kingdom"
-msgstr ""
+msgstr "Reino Unido"
 
 msgid "Bolivia"
-msgstr ""
+msgstr "Bolívia"
 
 msgid "Ecuador"
-msgstr ""
+msgstr "Equador"
 
 msgid "Estonia"
-msgstr ""
+msgstr "Estónia"
 
 msgid "Latvia"
-msgstr ""
+msgstr "Letónia"
 
 msgid "Colombia"
-msgstr ""
+msgstr "Colombia"
 
 msgid "Kazakhstan"
-msgstr ""
+msgstr "Cazaquistão"
 
 msgid "United Arab Emirates"
-msgstr ""
+msgstr "Emirados Árabes Unidos"
 
 msgid "Morocco"
-msgstr ""
+msgstr "Marrocos"
 
 msgid "Slovenia"
-msgstr ""
+msgstr "Eslovénia"
 
 msgid "Macedonia (FYROM)"
-msgstr ""
+msgstr "Macedónia"
 
 msgid "Armenia"
-msgstr ""
+msgstr "Arménia"
 
 msgid "Costa Rica"
-msgstr ""
+msgstr "Costa Rica"
 
 msgid "Thailand"
-msgstr ""
+msgstr "Tailândia"
 
 msgid "Turkey"
-msgstr ""
+msgstr "Turquia"
 
 msgid "Germany"
-msgstr ""
+msgstr "Alemanha"
 
 msgid "Singapore"
-msgstr ""
+msgstr "Singapura"
 
 msgid "France"
-msgstr ""
+msgstr "França"
 
 msgid "Japan"
-msgstr ""
+msgstr "Japão"
 
 msgid "Malaysia"
-msgstr ""
+msgstr "Malásia"
 
 msgid "Uruguay"
-msgstr ""
+msgstr "Uruguai"
 
 msgid "Spain"
-msgstr ""
+msgstr "Espanha"
 
 msgid "Ireland"
-msgstr ""
+msgstr "Irlanda"
 
 msgid "Denmark"
-msgstr ""
+msgstr "Dinamarca"
 
 msgid "Russia"
-msgstr ""
+msgstr "Rússia"
 
 msgid "Hong Kong"
-msgstr ""
+msgstr "Hong Kong"
 
 msgid "Lithuania"
-msgstr ""
+msgstr "Lituânia"
 
 msgid "Iceland"
-msgstr ""
+msgstr "Islândia"
 
 msgid "Portugal"
-msgstr ""
+msgstr "Portugal"
 
 msgid "Netherlands"
-msgstr ""
+msgstr "Holanda"
 
 msgid "Dominican Republic"
-msgstr ""
+msgstr "República Dominicana"
 
 msgid "Egypt"
-msgstr ""
+msgstr "Egipto"
 
 msgid "Canada"
-msgstr ""
+msgstr "Canadá"
 
 msgid "China"
-msgstr ""
+msgstr "China"
 
 msgid "Austria"
-msgstr ""
+msgstr "Áustria"
 
 msgid "Maldives"
-msgstr ""
+msgstr "Maldivas"
 
 msgid "Panama"
-msgstr ""
+msgstr "Panamá"
 
 msgid "Australia"
-msgstr ""
+msgstr "Austrália"
 
 msgid "South Africa"
-msgstr ""
+msgstr "África do Sul"
 
 msgid "United States"
-msgstr ""
+msgstr "Estados Unidos da América"
 
 msgid "Mauritius"
-msgstr ""
+msgstr "Maurícia"
 
 msgid "Poland"
-msgstr ""
+msgstr "Polónia"
 
 msgid "Slovakia"
-msgstr ""
+msgstr "Eslováquia"
 
 msgid "Argentina"
-msgstr ""
+msgstr "Argentina"
 
 msgid "Croatia"
-msgstr ""
+msgstr "Croácia"
 
 msgid "Sweden"
-msgstr ""
+msgstr "Suécia"
 
 msgid "Italy"
-msgstr ""
+msgstr "Itália"
 
 msgid "Czechia"
-msgstr ""
+msgstr "República Checa"
 
 msgid "Greece"
-msgstr ""
+msgstr "Grécia"
 
 msgid "India"
-msgstr ""
+msgstr "Índia"
 
 msgid "Philippines"
-msgstr ""
+msgstr "Filipinas"
 
 msgid "Israel"
-msgstr ""
+msgstr "Israel"
 
 msgid "Andorra"
-msgstr ""
+msgstr "Andorra"
 
 msgid "Switzerland"
-msgstr ""
+msgstr "Suiça"
 
 msgid "New Zealand"
-msgstr ""
+msgstr "Nova Zelândia"
 
 msgid "Hungary"
-msgstr ""
+msgstr "Hungria"
 
 msgid "Indonesia"
-msgstr ""
+msgstr "Indonésia"
 
 msgid "Belgium"
-msgstr ""
+msgstr "Bélgica"
 
 msgid "Mexico"
-msgstr ""
+msgstr "México"
 
 msgid "Finland"
-msgstr ""
+msgstr "Finlândia"
 
 msgid "Taiwan"
-msgstr ""
+msgstr "Taiwan"
 
 msgid "Sri Lanka"
-msgstr ""
+msgstr "Sri Lanka"
 
 msgid "Norway"
-msgstr ""
+msgstr "Noruega"
 
 msgid "Brazil"
-msgstr ""
+msgstr "Brasil"
 
 msgid "Luxembourg"
-msgstr ""
+msgstr "Luxemburgo"
 
 msgid "South Korea"
-msgstr ""
+msgstr "Coreia do Sul"
 
 msgid "Romania"
-msgstr ""
+msgstr "Roménia"
