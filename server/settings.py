@@ -5,12 +5,13 @@ SECRET_KEY = 'kax0(s#e6r)q$ut!&uwmtbps3zf0-ijg^l@vkhi+ji(in-b_qs'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.myingressmosaics.com', 'myingressmosaics.com', 'myingressmosaics-freddec.c9users.io', 'www.ingress.com', 'ingressmosaik.com']
+ALLOWED_HOSTS = ['www.myingressmosaics.com', 'myingressmosaics.com', 'myingressmosaics-freddec.c9users.io', 'ingress.com', 'www.ingress.com', 'ingressmosaik.com']
 
 CORS_ORIGIN_WHITELIST = (
     'www.myingressmosaics.com',
     'myingressmosaics.com',
     'myingressmosaics-freddec.c9users.io',
+    'ingress.com',
     'www.ingress.com',
     'ingressmosaik.com',
 )
