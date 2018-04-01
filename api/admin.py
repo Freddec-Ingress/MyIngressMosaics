@@ -10,7 +10,7 @@ from .models import *
 #---------------------------------------------------------------------------------------------------
 class MissionAdmin(admin.ModelAdmin):
 
-	search_fields = ('title', 'creator', 'mosaic__title', )
+	search_fields = ('ref', 'title', 'creator', 'mosaic__title', )
 	raw_id_fields = ('mosaic', )
 
 
@@ -18,7 +18,7 @@ class MissionAdmin(admin.ModelAdmin):
 #---------------------------------------------------------------------------------------------------
 class MosaicAdmin(admin.ModelAdmin):
 
-	search_fields = ('title', )
+	search_fields = ('ref', 'title', )
 
 
 
