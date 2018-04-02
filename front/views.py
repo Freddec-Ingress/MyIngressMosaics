@@ -797,8 +797,8 @@ def adm_compare(request):
 		'cities':[],
 	}
 	
-	results = IMCity.objects.all()
-	for imcity_obj in results:
+	imcity_results = IMCity.objects.all()
+	for imcity_obj in imcity_results:
 		
 		imcity_data = {
 			
@@ -807,7 +807,21 @@ def adm_compare(request):
 			'country_name':imcity_obj.region.country.name,
 			
 			'mosaic_count':imcity_obj.count,
+			
+			'mosaics':[],
 		}
+		
+		immosaic_results = IMMosaic.objects.filter(country_name=imcity_obj.region.country.name, region_name=imcity_obj.region.name, city_name=imcity_obj.name)
+		for immosaic_obj in immosaic_results:
+			
+			immosaic_data = {
+				
+				'name':immosaic_obj.name,
+				'dead':immosaic_obj.dead,
+				'excluded':immosaic_obj.excluded,
+			}
+			
+			imcity_data['mosaics'].append(immosaic_data)
 		
 		data['cities'].append(imcity_data)
 	

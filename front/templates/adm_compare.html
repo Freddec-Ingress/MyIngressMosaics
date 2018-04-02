@@ -35,22 +35,29 @@
 								<a ng-show="city.open" ng-click="city.open=false;"><i class="fa fa-minus-square text-small"></i></a>
 							</div>
 							
-							<div class="item">
+							<div class="item grow">
 								<span class="color-light">[[city.name]]</span>
 							</div>
 							
 							<div class="item">
-								<span class="color-normal">[[city.mosaic_count]]</span>
+								<span class="color-normal">[[city.mosaics.length]]</span>
 							</div>
 							
 						</div>
 						
 						<div ng-show="city.open">
 							
-							<div class="flex" ng-repeat="mosaic in city.mosaics">
+							<div class="flex text-small" ng-repeat="mosaic in city.mosaics">
 								
 								<div class="item">
 									<span class="color-light">[[mosaic.name]]</span>
+								</div>
+								
+								<div class="item">
+									<span ng-show="mosaic.dead" class="color-dark">dead</span>
+									<span ng-show="mosaic.excluded" class="color-muted">excluded</span>
+									<span ng-show="mosaic.registered" class="color-success">registered</span>
+									<span ng-show="mosaic.notregistered" class="color-danger">not registered</span>
 								</div>
 								
 							</div>
