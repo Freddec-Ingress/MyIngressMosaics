@@ -21,6 +21,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='waiting',
             name='ref',
-            field=models.CharField(default=api.models._createRef, max_length=32, unique=True),
+            field=models.CharField(default=api.models._createRef, max_length=32),
         ),
     ]
