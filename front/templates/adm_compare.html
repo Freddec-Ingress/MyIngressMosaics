@@ -30,7 +30,7 @@
 				<div class="item" ng-repeat="city in cities">
 					<div class="bg-block">
 						
-						<div class="flex">
+						<div class="flex align-center">
 							
 							<div class="item">
 								<a ng-show="!city.open" ng-click="city.open=true;"><i class="fa fa-plus-square text-small"></i></a>
@@ -63,18 +63,18 @@
 						
 						<div ng-show="city.open">
 							
-							<div class="flex text-small" ng-repeat="mosaic in city.mosaics" style="border-top:1px solid #000;">
+							<div class="flex align-center text-small" ng-repeat="mosaic in city.mosaics" style="border-top:1px solid #000;">
 								
 								<div class="item">
 									<a href="/search/[[mosaic.name]]" target="_blank"><i class="fa fa-external-link text-small"></i></a>
 								</div>
 								
 								<div class="item">
-									<span class="color-normal">[[mosaic.name]]</span>
+									<span class="color-dark">[[mosaic.count]]</span>
 								</div>
 								
 								<div class="item grow">
-									<span class="color-dark">[[mosaic.count]]</span>
+									<span class="color-normal">[[mosaic.name]]</span>
 								</div>
 								
 								<div class="item">
@@ -89,11 +89,11 @@
 								</div>
 								
 								<div class="item" ng-show="mosaic.notregistered">
-									<a ng-click="">registered</a>
+									<a ng-click="">excluded</a>
 								</div>
 								
 								<div class="item" ng-show="mosaic.notregistered">
-									<a ng-click="">excluded</a>
+									<a ng-click="">registered</a>
 								</div>
 								
 							</div>
