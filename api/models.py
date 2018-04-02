@@ -204,10 +204,14 @@ class Mosaic(models.Model):
 				
 							self.portal_count += 1
 							
+						else:
+							
+							type = 'viewpoint'
+							
 					to_add = True
 					for mission_data in missions:
 						for comp_portal_data in mission_data['portals']:
-							if portal_data['type'] == 'viewpoint' or comp_portal_data['ref'] == portal[1]:
+							if type != 'portal' or comp_portal_data['ref'] == portal[1]:
 								to_add = False
 								break
 					if to_add:
