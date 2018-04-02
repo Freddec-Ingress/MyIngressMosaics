@@ -45,8 +45,12 @@
 								<span class="color-dark">[[city.region_name]]</span>
 							</div>
 							
-							<div class="item grow">
+							<div class="item">
 								<span class="color-dark">[[city.country_name]]</span>
+							</div>
+							
+							<div class="item grow">
+								<a href="/world/[[city.country_name]]/[[city.region_name]]/[[city.name]]" target="_blank"><i class="fa fa-external-link text-small"></i></a>
 							</div>
 							
 							<div class="item">
@@ -59,10 +63,18 @@
 						
 						<div ng-show="city.open">
 							
-							<div class="flex text-small" ng-repeat="mosaic in city.mosaics">
+							<div class="flex text-small" ng-repeat="mosaic in city.mosaics" style="border-top:1px solid #000;">
+								
+								<div class="item">
+									<a href="/search/[[mosaic.name]]" target="_blank"><i class="fa fa-external-link text-small"></i></a>
+								</div>
+								
+								<div class="item">
+									<span class="color-normal">[[mosaic.name]]</span>
+								</div>
 								
 								<div class="item grow">
-									<span class="color-normal">[[mosaic.name]]</span>
+									<span class="color-dark">[[mosaic.count]]</span>
 								</div>
 								
 								<div class="item">
@@ -70,6 +82,18 @@
 									<span ng-show="mosaic.excluded" class="color-muted">excluded</span>
 									<span ng-show="mosaic.registered" class="color-success">registered</span>
 									<span ng-show="mosaic.notregistered" class="color-danger">not registered</span>
+								</div>
+								
+								<div class="item" ng-show="mosaic.notregistered">
+									<a ng-click="">dead</a>
+								</div>
+								
+								<div class="item" ng-show="mosaic.notregistered">
+									<a ng-click="">registered</a>
+								</div>
+								
+								<div class="item" ng-show="mosaic.notregistered">
+									<a ng-click="">excluded</a>
 								</div>
 								
 							</div>

@@ -818,6 +818,8 @@ def adm_compare(request):
 			immosaic_data = {
 				
 				'name':immosaic_obj.name,
+				'count':immosaic_obj.count,
+				
 				'dead':immosaic_obj.dead,
 				'excluded':immosaic_obj.excluded,
 				'registered':False,
