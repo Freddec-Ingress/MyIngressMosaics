@@ -852,7 +852,7 @@ def adm_checks(request):
 		refs_without_preview.append(item)
 	
 	refs_without_mission_count = []
-	results = Mosaic.objects.filter(mission_count__isnull=True).values_list('ref', flat=True)
+	results = Mosaic.objects.filter(unique_count__isnull=True).values_list('ref', flat=True)
 	for item in results:
 		refs_without_mission_count.append(item)
 		
