@@ -718,6 +718,7 @@ class IMMosaic(models.Model):
 	
 	dead = models.BooleanField(default=False)
 	excluded = models.BooleanField(default=False)
+	registered = models.BooleanField(default=False)
 	
 	# Admin displaying
 	

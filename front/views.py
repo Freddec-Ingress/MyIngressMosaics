@@ -822,18 +822,24 @@ def adm_compare(request):
 				
 				'dead':immosaic_obj.dead,
 				'excluded':immosaic_obj.excluded,
-				'registered':False,
+				'registered':immosaic_obj.registered,
 				'notregistered':False,
 			}
 			
 			imcity_data['mosaics'].append(immosaic_data)
 			
-			if not immosaic_obj.dead and not immosaic_obj.excluded:
+			if not immosaic_obj.dead and not immosaic_obj.excluded and not immosaic_obj.registered:
 				
 				mimmosaic_results = Mosaic.objects.filter(title=immosaic_obj.name, city__name=imcity_obj.name, city__region__name=imcity_obj.region.name, city__region__country__name=imcity_obj.region.country.name)
 				if mimmosaic_results.count() > 0:
+					
 					immosaic_data['registered'] = True
+					
+					immosaic_obj.registered = True
+					immosaic_obj.save()
+					
 				else:
+					
 					immosaic_data['notregistered'] = True
 					imcity_data['notregistered_count'] += 1
 			
