@@ -382,241 +382,241 @@ msgid "Countries"
 msgstr "Pays"
 
 msgid "Pakistan"
-msgstr ""
+msgstr "Pakistan"
 
 msgid "New Caledonia"
-msgstr ""
+msgstr "Nouvelle Calédonie"
 
 msgid "Nepal"
-msgstr ""
+msgstr "Népal"
 
 msgid "Bulgaria"
-msgstr ""
+msgstr "Bulgarie"
 
 msgid "Chile"
-msgstr ""
+msgstr "Chili"
 
 msgid "Ukraine"
-msgstr ""
+msgstr "Ukraine"
 
 msgid "Vietnam"
-msgstr ""
+msgstr "Vietnam"
 
 msgid "Brunei"
-msgstr ""
+msgstr "Brunei"
 
 msgid "Peru"
-msgstr ""
+msgstr "Pérou"
 
 msgid "Serbia"
-msgstr ""
+msgstr "Serbie"
 
 msgid "Macau"
-msgstr ""
+msgstr "Macau"
 
 msgid "Belarus"
-msgstr ""
+msgstr "Belarus"
 
 msgid "Paraguay"
-msgstr ""
+msgstr "Paraguay"
 
 msgid "United Kingdom"
-msgstr ""
+msgstr "Royaume Uni"
 
 msgid "Bolivia"
-msgstr ""
+msgstr "Bolivie"
 
 msgid "Ecuador"
-msgstr ""
+msgstr "Equateur"
 
 msgid "Estonia"
-msgstr ""
+msgstr "Estonie"
 
 msgid "Latvia"
-msgstr ""
+msgstr "Lituanie"
 
 msgid "Colombia"
-msgstr ""
+msgstr "Colombie"
 
 msgid "Kazakhstan"
-msgstr ""
+msgstr "Kazakhstan"
 
 msgid "United Arab Emirates"
-msgstr ""
+msgstr "Emirats Arabes Unis"
 
 msgid "Morocco"
-msgstr ""
+msgstr "Maroc"
 
 msgid "Slovenia"
-msgstr ""
+msgstr "Slovénie"
 
 msgid "Macedonia (FYROM)"
-msgstr ""
+msgstr "Macédoine"
 
 msgid "Armenia"
-msgstr ""
+msgstr "Arménie"
 
 msgid "Costa Rica"
-msgstr ""
+msgstr "Costa Rica"
 
 msgid "Thailand"
-msgstr ""
+msgstr "Thailand"
 
 msgid "Turkey"
-msgstr ""
+msgstr "Turquie"
 
 msgid "Germany"
-msgstr ""
+msgstr "Allemagne"
 
 msgid "Singapore"
-msgstr ""
+msgstr "Singapore"
 
 msgid "France"
-msgstr ""
+msgstr "France"
 
 msgid "Japan"
-msgstr ""
+msgstr "Japon"
 
 msgid "Malaysia"
-msgstr ""
+msgstr "Malaisie"
 
 msgid "Uruguay"
-msgstr ""
+msgstr "Uruguay"
 
 msgid "Spain"
-msgstr ""
+msgstr "Espagne"
 
 msgid "Ireland"
-msgstr ""
+msgstr "Ireland"
 
 msgid "Denmark"
-msgstr ""
+msgstr "Danemark"
 
 msgid "Russia"
-msgstr ""
+msgstr "Russie"
 
 msgid "Hong Kong"
-msgstr ""
+msgstr "Hong Kong"
 
 msgid "Lithuania"
-msgstr ""
+msgstr "Lituanie"
 
 msgid "Iceland"
-msgstr ""
+msgstr "Islande"
 
 msgid "Portugal"
-msgstr ""
+msgstr "Portugal"
 
 msgid "Netherlands"
-msgstr ""
+msgstr "Pays Bas"
 
 msgid "Dominican Republic"
-msgstr ""
+msgstr "République Dominicaine"
 
 msgid "Egypt"
-msgstr ""
+msgstr "Egypte"
 
 msgid "Canada"
-msgstr ""
+msgstr "Canada"
 
 msgid "China"
-msgstr ""
+msgstr "Chine"
 
 msgid "Austria"
-msgstr ""
+msgstr "Autriche"
 
 msgid "Maldives"
-msgstr ""
+msgstr "Maldives"
 
 msgid "Panama"
-msgstr ""
+msgstr "Panama"
 
 msgid "Australia"
-msgstr ""
+msgstr "Australie"
 
 msgid "South Africa"
-msgstr ""
+msgstr "Afrique du Sud"
 
 msgid "United States"
-msgstr ""
+msgstr "Etats Unis"
 
 msgid "Mauritius"
-msgstr ""
+msgstr "Ile Maurice"
 
 msgid "Poland"
-msgstr ""
+msgstr "Pologne"
 
 msgid "Slovakia"
-msgstr ""
+msgstr "Slovaquie"
 
 msgid "Argentina"
-msgstr ""
+msgstr "Argentine"
 
 msgid "Croatia"
-msgstr ""
+msgstr "Croatie"
 
 msgid "Sweden"
-msgstr ""
+msgstr "Suède"
 
 msgid "Italy"
-msgstr ""
+msgstr "Italie"
 
 msgid "Czechia"
-msgstr ""
+msgstr "Tchéquie"
 
 msgid "Greece"
-msgstr ""
+msgstr "Grèce"
 
 msgid "India"
-msgstr ""
+msgstr "Inde"
 
 msgid "Philippines"
-msgstr ""
+msgstr "Philippines"
 
 msgid "Israel"
-msgstr ""
+msgstr "Israel"
 
 msgid "Andorra"
-msgstr ""
+msgstr "Andorre"
 
 msgid "Switzerland"
-msgstr ""
+msgstr "Suisse"
 
 msgid "New Zealand"
-msgstr ""
+msgstr "Nouvelle Zélande"
 
 msgid "Hungary"
-msgstr ""
+msgstr "Hongrie"
 
 msgid "Indonesia"
-msgstr ""
+msgstr "Indonésie"
 
 msgid "Belgium"
-msgstr ""
+msgstr "Belgique"
 
 msgid "Mexico"
-msgstr ""
+msgstr "Mexique"
 
 msgid "Finland"
-msgstr ""
+msgstr "Finlande"
 
 msgid "Taiwan"
-msgstr ""
+msgstr "Taiwan"
 
 msgid "Sri Lanka"
-msgstr ""
+msgstr "Sri Lanka"
 
 msgid "Norway"
-msgstr ""
+msgstr "Norvège"
 
 msgid "Brazil"
-msgstr ""
+msgstr "Brésil"
 
 msgid "Luxembourg"
-msgstr ""
+msgstr "Luxembourg"
 
 msgid "South Korea"
-msgstr ""
+msgstr "Corée du Sud"
 
 msgid "Romania"
-msgstr ""
+msgstr "Roumanie"
