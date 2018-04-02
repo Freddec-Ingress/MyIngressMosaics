@@ -31,6 +31,7 @@ urlpatterns = [
 	url(r'^user/redirect/', user_redirect),
 
 	url(r'^mosaic/create/', mosaic_create),
+	url(r'^mosaic/compute/', mosaic_compute),
 	url(r'^mosaic/preview/generate/', mosaic_preview_generate),
 
 	url(r'^link/create/', link_create),

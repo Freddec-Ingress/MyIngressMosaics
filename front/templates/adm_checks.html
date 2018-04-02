@@ -13,7 +13,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="AdmChecksCtrl" ng-init="init({{refs_without_preview}});">
+	<div id="content" ng-controller="AdmChecksCtrl" ng-init="init({{refs_without_preview}}, {{refs_without_mission_count}});">
 		
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">

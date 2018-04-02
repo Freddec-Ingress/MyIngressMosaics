@@ -106,3 +106,15 @@ def mosaic_preview_generate(request):
 		mosaic_obj.save()
 
 	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def mosaic_compute(request):
+
+	mosaic_obj = Mosaic.objects.get(ref=request.data['ref'])
+	mosaic_obj.computeInternalData()
+
+	return Response(None, status=status.HTTP_200_OK)

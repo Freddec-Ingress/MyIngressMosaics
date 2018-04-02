@@ -867,5 +867,10 @@ def adm_checks(request):
 	for item in results:
 		refs_without_preview.append(item)
 	
-	context = { 'refs_without_preview':refs_without_preview, }
+	refs_without_mission_count = []
+	results = Mosaic.objects.filter(mission_count=0).values_list('ref', flat=True)
+	for item in results:
+		refs_without_mission_count.append(item)
+		
+	context = { 'refs_without_preview':refs_without_preview, 'refs_without_mission_count':refs_without_mission_count, }
 	return render(request, 'adm_checks.html', context)
