@@ -922,10 +922,10 @@ angular.module('FrontModule.directives').directive('mosaic', function() {
 					'</a>' +
 					
 					'<div class="item pt-none">' +
-						'<a class="flex" href="/world/[[mosaic.country_name]]/[[mosaic.region_name]]/[[mosaic.city_name]]">' +
+						'<div class="flex">' +
 							'<span class="mr-small flag-icon flag-icon-[[mosaic.country_code]]"></span>' +
-							'<span>[[mosaic.city_name]]</span>' +
-						'</a>' +
+							'<a href="/world/[[mosaic.country_name]]/[[mosaic.region_name]]/[[mosaic.city_name]]">[[mosaic.city_name]]</a>' +
+						'</div>' +
 					'</div>' +
 
 					'<a class="item" href="/mosaic/[[mosaic.ref]]" target="_blank" style="display:block;">' +
