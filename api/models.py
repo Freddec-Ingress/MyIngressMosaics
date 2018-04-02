@@ -113,7 +113,7 @@ class City(models.Model):
 	# Admin displaying
 	
 	def __str__(self):
-		return self.name
+		return self.name + ',' + self.region.name + ',' + self.region.country.name
 
 
 
