@@ -196,19 +196,19 @@ class Mosaic(models.Model):
 						else:
 							type = 'viewpoint'
 					
-					if type == 'portal':
-						
-						self.portal_count += 1
+						if type == 'portal':
 							
-						to_add = True
-						for mission_data in missions:
-							for comp_portal_data in mission_data['portals']:
-								if comp_portal_data['guid'] == portal[1]:
-									to_add = False
-									break
+							self.portal_count += 1
 								
-						if to_add:
-							self.unique_count += 1
+							to_add = True
+							for mission_data in missions:
+								for comp_portal_data in mission_data['portals']:
+									if comp_portal_data['guid'] == portal[1]:
+										to_add = False
+										break
+									
+							if to_add:
+								self.unique_count += 1
 						
 			missions.append({ 'portals':item.getPortalsData() })
 			
