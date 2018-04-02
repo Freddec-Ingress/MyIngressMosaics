@@ -918,7 +918,7 @@ angular.module('FrontModule.directives').directive('mosaic', function() {
 							'<span class="mr-normal grow text-medium color-light ellipsis" title="[[mosaic.title]]">[[mosaic.title]]</span>' +
 							'<i class="fa fa-angle-right"></i>' +
 						'</div>' +
-						'<span class="text-small color-dark"><span class="color-normal">[[mosaic.images.length]]</span> missions &middot; <span class="color-normal">[[mosaic.unique_count]]</span> uniques</span>' +
+						'<span class="text-small color-dark"><span class="color-normal">[[mosaic.mission_count]]</span> missions &middot; <span class="color-normal">[[mosaic.unique_count]]</span> uniques</span>' +
 					'</a>' +
 					
 					'<div class="item pt-none">' +

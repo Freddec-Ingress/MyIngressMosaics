@@ -167,9 +167,10 @@ def mosaic(request, ref):
 		'title':str(mosaic_obj.title),
 
 		'column_count':mosaic_obj.column_count,
-		'portal_count':0,
-		'unique_count':0,
-		'waypoint_count':0,
+		'portal_count':mosaic_obj.portal_count,
+		'unique_count':mosaic_obj.unique_count,
+		'mission_count':mosaic_obj.mission_count,
+		'waypoint_count':mosaic_obj.waypoint_count,
 		
 		'distance': mosaic_obj.distance,
 		
@@ -246,9 +247,7 @@ def mosaic(request, ref):
 				lng = 0.0
 				
 				type = 'portal'
-					
-				context['mosaic']['waypoint_count'] += 1
-				
+
 				if portal[5]:
 					
 					if portal[5][0] == 'f':
@@ -260,9 +259,7 @@ def mosaic(request, ref):
 					if portal[5][0] == 'p':
 						lat = portal[5][2] / 1000000.0
 						lng = portal[5][3] / 1000000.0
-			
-						context['mosaic']['portal_count'] += 1
-						
+
 				portal_data = {
 					
 					'ref':portal[1],
@@ -277,21 +274,8 @@ def mosaic(request, ref):
 					context['mosaic']['has_unavailable_portals'] = True
 					mission_data['has_unavailable_portals'] = True
 
-				to_add = True
-				for mission_data in context['missions']:
-					for comp_portal_data in mission_data['portals']:
-						if portal_data['type'] == 'viewpoint' or comp_portal_data['ref'] == portal_data['ref']:
-							to_add = False
-							break
-				if to_add:
-					context['mosaic']['unique_count'] += 1
-				
 				mission_data['portals'].append(portal_data)
 
-	if context['mosaic']['unique_count'] != mosaic_obj.unique_count:
-		mosaic_obj.unique_count = context['mosaic']['unique_count']
-		mosaic_obj.save()
-	
 	# Comments data
 	
 	for comment_obj in mosaic_obj.comments.all().order_by('-create_date'):
@@ -524,7 +508,7 @@ def city(request, country_name, region_name, city_name):
 
 		# Missions indexes data
 		
-		missions_index = len(mosaic_data['images'])
+		missions_index = mosaic_data.mission_count
 		if missions_index not in data['mosaics_missions_indexes']:
 			data['mosaics_missions_indexes'].append(missions_index)
 	
@@ -647,7 +631,7 @@ def region(request, country_name, region_name):
 	
 			# Missions indexes data
 			
-			missions_index = len(mosaic_data['images'])
+			missions_index = mosaic_data.mission_count
 			if missions_index not in data['mosaics_missions_indexes']:
 				data['mosaics_missions_indexes'].append(missions_index)
 		
