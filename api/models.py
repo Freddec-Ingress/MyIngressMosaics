@@ -6,7 +6,7 @@ import math
 import json
 import urllib
 
-from urllib.request import Request
+from urllib2 import Request
 
 from math import *
 from datetime import datetime
@@ -140,6 +140,7 @@ class Mosaic(models.Model):
 	
 	unique_count = models.IntegerField(null=True, blank=True)
 	portal_count = models.IntegerField(null=True, blank=True)
+	mission_count = models.IntegerField(null=True, blank=True)
 	waypoint_count = models.IntegerField(null=True, blank=True)
 	
 	big_preview_url = models.CharField(max_length=256, null=True, blank=True)
@@ -157,6 +158,7 @@ class Mosaic(models.Model):
 	def computeInternalData(self):
 	
 		self.waypoint_count = 0
+		self.mission_count = 0
 		self.portal_count = 0
 		self.unique_count = 0
 		self.startLat = 0.0
@@ -164,10 +166,16 @@ class Mosaic(models.Model):
 		self.distance = 0.0
 		self.creators = ''
 		
+		missions = []
+		
 		index = 0;
 		for item in self.missions.all().order_by('order'):
 			
-			if index == 0:
+			self.mission_count += 1
+			
+			missions.append({ 'portals':item.getPortalsData() })
+			
+			if self.startLat == 0.0 and self.startLng == 0.0 and item.startLat != 0.0 and item.startLng != 0.0:
 				self.startLat = item.startLat
 				self.startLng = item.startLng
 			
@@ -177,6 +185,33 @@ class Mosaic(models.Model):
 				self.creators += '|' + item.creator + '|'
 			
 			self.distance += item.distance
+		
+			jsondata = json.loads(item.data)
+			
+			if len(jsondata) > 9:
+				for portal in jsondata[9]:
+			
+					type = 'portal'
+						
+					self.waypoint_count += 1
+					
+					if portal[5]:
+						
+						if portal[5][0] == 'p':
+							
+							lat = portal[5][2] / 1000000.0
+							lng = portal[5][3] / 1000000.0
+				
+							self.portal_count += 1
+							
+					to_add = True
+					for mission_data in missions:
+						for comp_portal_data in mission_data['portals']:
+							if portal_data['type'] == 'viewpoint' or comp_portal_data['ref'] == portal[1]:
+								to_add = False
+								break
+					if to_add:
+						self.unique_count += 1
 		
 		self.save()
 	
@@ -195,6 +230,7 @@ class Mosaic(models.Model):
 			
 			'column_count':self.column_count,
 			'unique_count':self.unique_count,
+			'mission_count':self.mission_count,
 			
 			'city_name':self.city.name,
 			'region_name':self.city.region.name,
@@ -251,17 +287,8 @@ class Mosaic(models.Model):
 				temp = 0;
 		
 		for i in range(0, temp):
-				
-			order += 1 
+			order += 1
 		
-			y = int(order / self.column_count)
-			x = int(order - (y * self.column_count))
-			
-			xoffset = x * dim
-			yoffset = y * dim
-			
-			image.paste(maskimg, (int(xoffset), int(yoffset)), maskimg);
-			
 		for mission in reversed(missions):
 	
 			file = io.BytesIO(urllib.request.urlopen(mission.image + '=s' + str(int(dim * 0.9))).read())
@@ -703,6 +730,8 @@ class IMMosaic(models.Model):
 #---------------------------------------------------------------------------------------------------
 @python_2_unicode_compatible
 class Waiting(models.Model):
+	
+	ref = models.CharField(max_length=32, default=_createRef, unique=True)
 	
 	city = models.ForeignKey(City, related_name='waitings')
 	region = models.ForeignKey(Region, related_name='waitings')
