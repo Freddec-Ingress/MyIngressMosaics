@@ -44,6 +44,7 @@
 			<div ng-show="current_tab=='misc'">
 				
 				<div class="section">
+					
 					<div class="flex align-center">
 						
 						<div class="item">
@@ -61,6 +62,25 @@
 						</div>
 						
 					</div>
+					
+					<div class="flex align-center">
+						
+						<div class="item">
+							<span class="color-dark">Number of mosaics without mission count</span>
+						</div>
+
+						<div class="item">
+							<span class="color-normal">[[refs_without_mission_count.length]]</span>
+						</div>
+
+						<div class="item">
+							<button class="btn" ng-click="startComputing();" ng-disabled="computing">
+								Compute
+							</button>
+						</div>
+						
+					</div>
+					
 				</div>
 				
 			</div>
