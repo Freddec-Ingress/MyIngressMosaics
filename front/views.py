@@ -819,9 +819,15 @@ def adm_compare(request):
 				'name':immosaic_obj.name,
 				'dead':immosaic_obj.dead,
 				'excluded':immosaic_obj.excluded,
+				'registered':False,
+				'notregistered':True,
 			}
 			
 			imcity_data['mosaics'].append(immosaic_data)
+			
+			mimmosaic_results = Mosaic.objects.filter(title=immosaic_obj.name, city__name=imcity_obj.name, city__region__name=imcity_obj.region.name, city__region__country__name=imcity_obj.region.country.name)
+			if mimmosaic_results.count() > 0:
+				immosaic_data['registered'] = True
 		
 		data['cities'].append(imcity_data)
 	

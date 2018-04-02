@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load jsonify %}
+
 {% block extra-head %}
 
 	<title>MIM - Administration</title>
@@ -13,7 +15,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="AdmCompareCtrl" ng-init="init({{cities}});">
+	<div id="content" ng-controller="AdmCompareCtrl" ng-init="init({{cities|jsonify}});">
 	
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
@@ -35,8 +37,16 @@
 								<a ng-show="city.open" ng-click="city.open=false;"><i class="fa fa-minus-square text-small"></i></a>
 							</div>
 							
-							<div class="item grow">
+							<div class="item">
 								<span class="color-light">[[city.name]]</span>
+							</div>
+							
+							<div class="item">
+								<span class="color-dark">[[city.region_name]]</span>
+							</div>
+							
+							<div class="item grow">
+								<span class="color-dark">[[city.country_name]]</span>
 							</div>
 							
 							<div class="item">
@@ -50,7 +60,7 @@
 							<div class="flex text-small" ng-repeat="mosaic in city.mosaics">
 								
 								<div class="item">
-									<span class="color-light">[[mosaic.name]]</span>
+									<span class="color-normal">[[mosaic.name]]</span>
 								</div>
 								
 								<div class="item">
