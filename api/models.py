@@ -168,19 +168,14 @@ class Mosaic(models.Model):
 		
 		missions = []
 		
-		index = 0;
 		for item in self.missions.all().order_by('order'):
 			
 			self.mission_count += 1
 			
-			missions.append({ 'portals':item.getPortalsData() })
-			
 			if self.startLat == 0.0 and self.startLng == 0.0 and item.startLat != 0.0 and item.startLng != 0.0:
 				self.startLat = item.startLat
 				self.startLng = item.startLng
-			
-			index += 1
-			
+
 			if item.creator not in self.creators:
 				self.creators += '|' + item.creator + '|'
 			
@@ -191,32 +186,32 @@ class Mosaic(models.Model):
 			if len(jsondata) > 9:
 				for portal in jsondata[9]:
 			
-					type = 'portal'
-						
 					self.waypoint_count += 1
 					
 					if portal[5]:
 						
 						if portal[5][0] == 'p':
-							
-							lat = portal[5][2] / 1000000.0
-							lng = portal[5][3] / 1000000.0
-				
-							self.portal_count += 1
+							type = 'portal'
 							
 						else:
-							
 							type = 'viewpoint'
+					
+					if type == 'portal':
+						
+						self.portal_count += 1
 							
-					to_add = True
-					for mission_data in missions:
-						for comp_portal_data in mission_data['portals']:
-							if type != 'portal' or comp_portal_data['guid'] == portal[1]:
-								to_add = False
-								break
-					if to_add:
-						self.unique_count += 1
-		
+						to_add = True
+						for mission_data in missions:
+							for comp_portal_data in mission_data['portals']:
+								if comp_portal_data['guid'] == portal[1]:
+									to_add = False
+									break
+								
+						if to_add:
+							self.unique_count += 1
+						
+			missions.append({ 'portals':item.getPortalsData() })
+			
 		self.save()
 	
 	

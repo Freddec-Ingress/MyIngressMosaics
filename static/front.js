@@ -1663,6 +1663,48 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 			$scope.creating = false;
 			
 			$scope.refreshMissions();
+			
+		}, function(response) {
+
+			for (var mission of $scope.selected) {
+				
+				var index = -1;
+				for (var test of $scope.missions) {
+					
+					index += 1;
+					if (test.ref == mission.ref) break;
+				}
+				
+				if (index != -1) $scope.missions.splice(index, 1);
+			}
+			
+			if ($scope.missions.length < 1) $scope.missions = null;
+			
+			$scope.selected = [];
+			
+			$scope.columns = '6';
+			
+			$scope.offset = [];
+			
+			$scope.mission_selected = null;
+			
+			$scope.mosaic_name = '';
+			$scope.mosaic_type = 'sequence';
+			
+			$scope.city_name = '';
+			$scope.region_name = '';
+			$scope.country_name = '';
+		
+			$('#city_input').val('');
+			
+			$window.open('https://www.myingressmosaics.com/mosaic/' + response);
+			$window.location.href = '/registration';
+			
+			$scope.open_step(1);
+			
+			$scope.creating = false;
+			
+			$scope.refreshMissions();
 		});
 	}
 	
