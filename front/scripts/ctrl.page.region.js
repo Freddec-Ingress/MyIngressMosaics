@@ -154,9 +154,9 @@ angular.module('FrontModule.controllers').controller('RegionPageCtrl', function(
 		for (var mosaic of $scope.mosaics) {
 			
 			var temp = 0;
-			if (mosaic.mission_count > mosaic.cols) {
-				temp = mosaic.cols - mosaic.mission_count % mosaic.cols;
-				if (temp < 0 || temp > (mosaic.cols - 1)) temp = 0;
+			if (mosaic.mission_count > mosaic.column_count) {
+				temp = mosaic.column_count - mosaic.mission_count % mosaic.column_count;
+				if (temp < 0 || temp > (mosaic.column_count - 1)) temp = 0;
 			}
 			
 			mosaic.offset = new Array(temp);

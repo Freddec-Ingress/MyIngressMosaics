@@ -27,8 +27,8 @@ angular.module('FrontModule.controllers').controller('SearchPageCtrl', function(
 			
 			$scope.mosaics.sort(function(a, b) {
 				
-				if (a.images.length > b.images.length) return -1;
-				if (a.images.length < b.images.length) return 1;
+				if (a.mission_count > b.mission_count) return -1;
+				if (a.mission_count < b.mission_count) return 1;
 				
 				return 0;
 			});
@@ -36,8 +36,8 @@ angular.module('FrontModule.controllers').controller('SearchPageCtrl', function(
 			for (var mosaic of $scope.mosaics) {
 				
 				var temp = 0;
-				if (mosaic.images.length > mosaic.cols) {
-					temp = mosaic.column_count - mosaic.images.length % mosaic.column_count;
+				if (mosaic.mission_count > mosaic.column_count) {
+					temp = mosaic.column_count - mosaic.mission_count % mosaic.column_count;
 					if (temp < 0 || temp > (mosaic.column_count - 1)) temp = 0;
 				}
 				

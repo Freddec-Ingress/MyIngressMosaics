@@ -1753,8 +1753,8 @@ angular.module('FrontModule.controllers').controller('SearchPageCtrl', function(
 			
 			$scope.mosaics.sort(function(a, b) {
 				
-				if (a.images.length > b.images.length) return -1;
-				if (a.images.length < b.images.length) return 1;
+				if (a.mission_count > b.mission_count) return -1;
+				if (a.mission_count < b.mission_count) return 1;
 				
 				return 0;
 			});
@@ -1762,8 +1762,8 @@ angular.module('FrontModule.controllers').controller('SearchPageCtrl', function(
 			for (var mosaic of $scope.mosaics) {
 				
 				var temp = 0;
-				if (mosaic.images.length > mosaic.cols) {
-					temp = mosaic.column_count - mosaic.images.length % mosaic.column_count;
+				if (mosaic.mission_count > mosaic.column_count) {
+					temp = mosaic.column_count - mosaic.mission_count % mosaic.column_count;
 					if (temp < 0 || temp > (mosaic.column_count - 1)) temp = 0;
 				}
 				
@@ -2299,6 +2299,50 @@ angular.module('FrontModule.controllers').controller('ProfilePageCtrl', function
 		$scope.missions = missions;
 		$scope.completes = completes;
 		
+		for (var mosaic of $scope.likes) {
+			
+			var temp = 0;
+			if (mosaic.mission_count > mosaic.column_count) {
+				temp = mosaic.column_count - mosaic.mission_count % mosaic.column_count;
+				if (temp < 0 || temp > (mosaic.column_count - 1)) temp = 0;
+			}
+			
+			mosaic.offset = new Array(temp);
+		}
+		
+		for (var mosaic of $scope.todos) {
+			
+			var temp = 0;
+			if (mosaic.mission_count > mosaic.column_count) {
+				temp = mosaic.column_count - mosaic.mission_count % mosaic.column_count;
+				if (temp < 0 || temp > (mosaic.column_count - 1)) temp = 0;
+			}
+			
+			mosaic.offset = new Array(temp);
+		}
+		
+		for (var mosaic of $scope.mosaics) {
+			
+			var temp = 0;
+			if (mosaic.mission_count > mosaic.column_count) {
+				temp = mosaic.column_count - mosaic.mission_count % mosaic.column_count;
+				if (temp < 0 || temp > (mosaic.column_count - 1)) temp = 0;
+			}
+			
+			mosaic.offset = new Array(temp);
+		}
+		
+		for (var mosaic of $scope.completes) {
+			
+			var temp = 0;
+			if (mosaic.mission_count > mosaic.column_count) {
+				temp = mosaic.column_count - mosaic.mission_count % mosaic.column_count;
+				if (temp < 0 || temp > (mosaic.column_count - 1)) temp = 0;
+			}
+			
+			mosaic.offset = new Array(temp);
+		}
+		
 		$scope.loaded = true;
 	}
 });
@@ -2557,9 +2601,9 @@ angular.module('FrontModule.controllers').controller('RegionPageCtrl', function(
 		for (var mosaic of $scope.mosaics) {
 			
 			var temp = 0;
-			if (mosaic.mission_count > mosaic.cols) {
-				temp = mosaic.cols - mosaic.mission_count % mosaic.cols;
-				if (temp < 0 || temp > (mosaic.cols - 1)) temp = 0;
+			if (mosaic.mission_count > mosaic.column_count) {
+				temp = mosaic.column_count - mosaic.mission_count % mosaic.column_count;
+				if (temp < 0 || temp > (mosaic.column_count - 1)) temp = 0;
 			}
 			
 			mosaic.offset = new Array(temp);
@@ -2712,9 +2756,9 @@ angular.module('FrontModule.controllers').controller('CityPageCtrl', function($s
 		for (var mosaic of $scope.mosaics) {
 			
 			var temp = 0;
-			if (mosaic.mission_count > mosaic.cols) {
-				temp = mosaic.cols - mosaic.mission_count % mosaic.cols;
-				if (temp < 0 || temp > (mosaic.cols - 1)) temp = 0;
+			if (mosaic.mission_count > mosaic.column_count) {
+				temp = mosaic.column_count - mosaic.mission_count % mosaic.column_count;
+				if (temp < 0 || temp > (mosaic.column_count - 1)) temp = 0;
 			}
 			
 			mosaic.offset = new Array(temp);
