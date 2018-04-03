@@ -147,3 +147,16 @@ def im_mosaic_exclude(request):
 	mosaic_obj.save()
 	
 	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((AllowAny, ))
+def im_mosaic_register(request):
+	
+	mosaic_obj = IMMosaic.objects.get(pk=request.data['id'])
+	mosaic_obj.registered = True
+	mosaic_obj.save()
+	
+	return Response(None, status=status.HTTP_200_OK)

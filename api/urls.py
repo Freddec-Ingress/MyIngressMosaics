@@ -62,6 +62,7 @@ urlpatterns = [
 	url(r'^im/country/', im_country),
 	url(r'^im/mosaic/die/', im_mosaic_die),
 	url(r'^im/mosaic/exclude/', im_mosaic_exclude),
+	url(r'^im/mosaic/register/', im_mosaic_register),
 	
 	url(r'^waiting/create/', waiting_create),
 ]

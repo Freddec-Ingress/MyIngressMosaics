@@ -817,7 +817,7 @@ def adm_compare(request):
 			
 			immosaic_data = {
 				
-				'id':immosaic_obj.pk,
+				'id'
 				
 				'name':immosaic_obj.name,
 				'count':immosaic_obj.count,
