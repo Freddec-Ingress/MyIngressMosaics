@@ -8,6 +8,7 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
     	API.sendRequest('/api/im/mosaic/die/', 'POST', {}, data);
     	
     	mosaic.dead = true;
+    	mosaic.notregistered_count -= 1;
     	mosaic.notregistered = false;
     }
      
@@ -17,6 +18,7 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
     	API.sendRequest('/api/im/mosaic/exclude/', 'POST', {}, data);
     	
     	mosaic.excluded = true;
+    	mosaic.notregistered_count -= 1;
     	mosaic.notregistered = false;
     }
     
@@ -26,6 +28,7 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
     	API.sendRequest('/api/im/mosaic/register/', 'POST', {}, data);
     	
     	mosaic.registered = true;
+    	mosaic.notregistered_count -= 1;
     	mosaic.notregistered = false;
     }
    
