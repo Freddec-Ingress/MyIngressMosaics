@@ -2992,34 +2992,37 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
     
 	/* Mosaic management */
     
-    $scope.die = function(mosaic) {
+    $scope.die = function(mosaic, city) {
     	
     	var data = { 'id':mosaic.id, }
     	API.sendRequest('/api/im/mosaic/die/', 'POST', {}, data);
     	
     	mosaic.dead = true;
-    	mosaic.notregistered_count -= 1;
     	mosaic.notregistered = false;
+    	
+    	city.notregistered_count -= 1;
     }
      
-    $scope.exclude = function(mosaic) {
+    $scope.exclude = function(mosaic, city) {
     	
     	var data = { 'id':mosaic.id, }
     	API.sendRequest('/api/im/mosaic/exclude/', 'POST', {}, data);
     	
     	mosaic.excluded = true;
-    	mosaic.notregistered_count -= 1;
     	mosaic.notregistered = false;
+    	
+    	city.notregistered_count -= 1;
     }
     
-    $scope.register = function(mosaic) {
+    $scope.register = function(mosaic, city) {
     	
     	var data = { 'id':mosaic.id, }
     	API.sendRequest('/api/im/mosaic/register/', 'POST', {}, data);
     	
     	mosaic.registered = true;
-    	mosaic.notregistered_count -= 1;
     	mosaic.notregistered = false;
+    	
+    	city.notregistered_count -= 1;
     }
    
 	/* Page loading */
