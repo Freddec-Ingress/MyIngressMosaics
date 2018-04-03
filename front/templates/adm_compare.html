@@ -27,7 +27,7 @@
 		<div class="container" ng-class="{'active':loaded}">
 			
 			<div class="section">
-				<div class="item" ng-repeat="city in cities">
+				<div class="item" ng-repeat="city in cities" ng-if="city.notregistered_count > 0">
 					<div class="bg-block">
 						
 						<div class="flex align-center">
@@ -63,7 +63,7 @@
 						
 						<div ng-show="city.open">
 							
-							<div class="flex align-center text-small" ng-repeat="mosaic in city.mosaics" style="border-top:1px solid #000;">
+							<div class="flex align-center text-small" ng-repeat="mosaic in city.mosaics" style="border-top:1px solid #000;" ng-show="mosaic.notregistered">
 								
 								<div class="item">
 									<a href="/search/[[mosaic.name]]" target="_blank"><i class="fa fa-external-link text-small"></i></a>
