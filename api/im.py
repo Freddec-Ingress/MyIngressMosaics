@@ -95,7 +95,7 @@ def im_city(request):
 				
 			else:
 				
-				city_obj = IMCity(region=region_data, name=city_name, count=mosaic_count)
+				city_obj = IMCity(region=region_obj, name=city_name, count=mosaic_count)
 				city_obj.save()
 			
 	return Response(None, status=status.HTTP_200_OK)
