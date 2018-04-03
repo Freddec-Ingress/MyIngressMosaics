@@ -333,9 +333,9 @@ def registration(request, search_string = ''):
 	
 	
 #---------------------------------------------------------------------------------------------------
-def search(request):
+def search(request, search_string = ''):
 	
-	context = {}
+	context = { 'search_string':search_string.replace('\'', '\\\''), }
 	return render(request, 'search.html', context)
 
 	

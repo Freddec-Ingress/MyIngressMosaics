@@ -83,5 +83,10 @@ angular.module('FrontModule.controllers').controller('SearchPageCtrl', function(
 	
 	$scope.current_tab = 'mosaic';
 	
-	$scope.loaded = true;
+	$scope.init = function(text) {
+	
+		$scope.search(text);
+
+		$scope.loaded = true;
+	}
 });

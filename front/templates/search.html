@@ -19,7 +19,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="SearchPageCtrl">
+	<div id="content" ng-controller="SearchPageCtrl" ng-init="init('{{search_string|escape}}');">
 	
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
@@ -39,7 +39,7 @@
 				<form class="self-stretch flex">
 					
 					<div class="item grow">
-						<input class="control" placeholder="{% trans "Mosaic name or creator" %}" ng-model="searchtext" />
+						<input class="control" placeholder="{% trans "Mosaic name or creator" %}" ng-model="searchtext" value="{{search_string|escape}}" />
 					</div>
 					
 					<div class="item">
