@@ -39,7 +39,7 @@
 				<form class="self-stretch flex">
 					
 					<div class="item grow">
-						<input class="control" placeholder="{% trans "Mosaic name or creator" %}" ng-model="searchtext" value="{{search_string|escape}}" />
+						<input class="control" placeholder="{% trans "Mosaic name or creator" %}" ng-model="searchtext" ng-init="searchtext='{{search_string|escape}}'" />
 					</div>
 					
 					<div class="item">
