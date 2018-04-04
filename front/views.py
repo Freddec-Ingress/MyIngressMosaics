@@ -801,58 +801,24 @@ def adm_compare(request):
 	imcountry_results = IMCountry.objects.all()
 	for imcountry_obj in imcountry_results:
 		
-		if not imcountry_obj.compare_name:
-			
-			region_results = Country.objects.filter(name=imcountry_obj.name)
-			
-			if region_results.count() > 0:
-				
-				mimcountry_obj = region_results[0]
-				
-				imcountry_obj.compare_name = imcountry_obj.name
-				imcountry_obj.save()
-			
-		else:
-			
-			mimcountry_obj = Country.objects.filter(name=imcountry_obj.compare_name)
-			mimcountry_obj = mimcountry_obj[0]
-		
 		imcountry_data = {
 			
 			'id':imcountry_obj.pk,
 			'name':imcountry_obj.name,
 			'count':imcountry_obj.count,
 			
-			'compare_name':imcountry_obj.compare_name,
 			'compare_count':0,
 			
 			'diff':0,
-			'notregistered':0,
-			
+
 			'regions':[],
 		}
 		
-		imcountry_data['compare_count'] = Mosaic.objects.filter(city__region__country__name=imcountry_obj.compare_name).count()
+		imcountry_data['compare_count'] = IMMosaic.objects.filter(country__name=imcountry_obj.name).count()
 		imcountry_data['diff'] = imcountry_data['compare_count'] - imcountry_data['count']
 
 		imregion_results = imcountry_obj.regions.all()
 		for imregion_obj in imregion_results:
-			
-			if not imregion_obj.compare_name:
-				
-				region_results = Region.objects.filter(country=mimcountry_obj, name=imregion_obj.name)
-				
-				if region_results.count() > 0:
-					
-					mimregion_obj = region_results[0]
-					
-					imregion_obj.compare_name = imregion_obj.name
-					imregion_obj.save()
-				
-			else:
-				
-				mimregion_obj = Region.objects.filter(country=mimcountry_obj, name=imregion_obj.compare_name)
-				mimregion_obj = mimregion_obj[0]
 			
 			imregion_data = {
 				
@@ -860,87 +826,33 @@ def adm_compare(request):
 				'name':imregion_obj.name,
 				'count':imregion_obj.count,
 				
-				'compare_name':imregion_obj.compare_name,
 				'compare_count':0,
 				
 				'diff':0,
-				'notregistered':0,
-				
+
 				'cities':[],
 			}
 			
-			imregion_data['compare_count'] = Mosaic.objects.filter(city__region__country__name=imcountry_obj.compare_name, city__region__name=imregion_obj.compare_name).count()
+			imregion_data['compare_count'] = IMMosaic.objects.filter(country__name=imcountry_obj.name, region__name=imregion_obj.name).count()
 			imregion_data['diff'] = imregion_data['compare_count'] - imregion_data['count']
 
 			imcity_results = imregion_obj.cities.all()
 			for imcity_obj in imcity_results:
 				
-				if not imcity_obj.compare_name:
-					
-					city_results = City.objects.filter(region=mimregion_obj, name=imcity_obj.name)
-					
-					if city_results.count() > 0:
-						
-						mimcity_obj = city_results[0]
-						
-						imcity_obj.compare_name = imcity_obj.name
-						imcity_obj.save()
-					
-				else:
-					
-					mimcity_obj = City.objects.filter(region=mimregion_obj, name=imcity_obj.compare_name)
-					mimcity_obj = mimcity_obj[0]
-					
 				imcity_data = {
 					
 					'id':imcity_obj.pk,
 					'name':imcity_obj.name,
 					'count':imcity_obj.count,
 					
-					'compare_name':imcity_obj.compare_name,
 					'compare_count':0,
 					
 					'diff':0,
-					'notregistered':0,
-					
-					'mosaics':[],
 				}
 				
-				imcity_data['compare_count'] = Mosaic.objects.filter(city__region__country__name=imcountry_obj.compare_name, city__region__name=imregion_obj.compare_name, city__name=imcity_obj.compare_name).count()
+				imcity_data['compare_count'] = IMMosaic.objects.filter(country__name=imcountry_obj.name, region__name=imregion_obj.name, city__name=imcity_obj.name).count()
 				imcity_data['diff'] = imcity_data['compare_count'] - imcity_data['count']
-
-				immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name, city_name=imcity_obj.name).order_by('-count')
-				for immosaic_obj in immosaic_results:
-					
-					if not immosaic_obj.dead and not immosaic_obj.excluded and not immosaic_obj.registered:
-						
-						mosaic_results = Mosaic.objects.filter(city__region=mimregion_obj, title__iexact=immosaic_obj.name)
-						
-						if mosaic_results.count() > 0:
-
-							immosaic_obj.registered = True
-							immosaic_obj.save()
-					
-					immosaic_data = {
-						
-						'id':immosaic_obj.pk,
-						'name':immosaic_obj.name,
-						'count':immosaic_obj.count,
-						
-						'dead':immosaic_obj.dead,
-						'excluded':immosaic_obj.excluded,
-						'registered':immosaic_obj.registered,
-					}
-					
-					if not immosaic_obj.dead and not immosaic_obj.excluded and not immosaic_obj.registered:
-						imcity_data['notregistered'] += 1
-						imregion_data['notregistered'] += 1
-						imcountry_data['notregistered'] += 1
-					
-					imcity_data['mosaics'].append(immosaic_data)
 				
-				imregion_data['cities'].append(imcity_data)
-			
 			imcountry_data['regions'].append(imregion_data)
 		
 		data['countries'].append(imcountry_data)

@@ -35,38 +35,13 @@
 							<a ng-show="!country.open" ng-click="country.open=true;"><i class="fa fa-plus-square text-small"></i></a>
 							<a ng-show="country.open" ng-click="country.open=false;"><i class="fa fa-minus-square text-small"></i></a>
 						</div>
-						
-						<div class="item">
-							<span class="color-muted">IM</span>
-						</div>
-						
+
 						<div class="item">
 							<span class="color-light">[[country.name]]</span>
 						</div>
 
-						<div class="item">
-							<span class="color-muted">vs</span>
-						</div>
-						
-						<div class="item">
-							<span class="color-muted">MIM</span>
-						</div>
-						
-						<div class="item">
-							<span ng-show="country.compare_name" class="color-light">[[country.compare_name]]</span>
-							<span ng-show="!country.compare_name" class="color-danger">not specified</span>
-						</div>
-						
-						<div class="item" ng-show="!country.compare_name">
-							<a href="/admin/api/imcountry/[[country.id]]/change/" target="blank"><i class="fa fa-external-link"></i></a>
-						</div>
-
 						<div class="item grow">
 							<span class="color-normal">[[country.diff]]</span>
-						</div>
-
-						<div class="item">
-							<span class="color-normal">[[country.notregistered]]</span>
 						</div>
 
 					</div>
@@ -81,40 +56,15 @@
 									<a ng-show="!region.open" ng-click="region.open=true;"><i class="fa fa-plus-square text-small"></i></a>
 									<a ng-show="region.open" ng-click="region.open=false;"><i class="fa fa-minus-square text-small"></i></a>
 								</div>
-								
-								<div class="item">
-									<span class="color-muted">IM</span>
-								</div>
-								
+
 								<div class="item">
 									<span class="color-light">[[region.name]]</span>
 								</div>
 
-								<div class="item">
-									<span class="color-muted">vs</span>
-								</div>
-								
-								<div class="item">
-									<span class="color-muted">MIM</span>
-								</div>
-								
-								<div class="item">
-									<span ng-show="region.compare_name" class="color-light">[[region.compare_name]]</span>
-									<span ng-show="!region.compare_name" class="color-danger">MIM not specified</span>
-								</div>
-								
-								<div class="item" ng-show="!region.compare_name" >
-									<a href="/admin/api/imregion/[[region.id]]/change/" target="blank"><i class="fa fa-external-link"></i></a>
-								</div>
-		
 								<div class="item grow">
 									<span class="color-normal">[[region.diff]]</span>
 								</div>
-		
-								<div class="item">
-									<span class="color-normal">[[region.notregistered]]</span>
-								</div>
-						
+
 							</div>
 						
 							<div ng-show="region.open" style="margin-left:15px;">
@@ -122,74 +72,17 @@
 								<div class="flex-col bg-block mb-small" ng-repeat="city in region.cities">
 									
 									<div class="flex align-center text-small">
-
-										<div class="item">
-											<span class="color-muted">IM</span>
-										</div>
 										
 										<div class="item">
 											<span class="color-light">[[city.name]]</span>
 										</div>
-										
-										<div class="item">
-											<span class="color-muted">vs</span>
-										</div>
-										
-										<div class="item">
-											<span class="color-muted">MIM</span>
-										</div>
-										
-										<div class="item">
-											<span ng-show="city.compare_name" class="color-light">[[city.compare_name]]</span>
-											<span ng-show="!city.compare_name" class="color-danger">not specified</span>
-										</div>
-										
-										<div class="item" ng-show="!city.compare_name">
-											<a href="/admin/api/imcity/[[city.id]]/change/" target="blank"><i class="fa fa-external-link"></i></a>
-										</div>
-				
+
 										<div class="item grow">
 											<span class="color-normal">[[city.diff]]</span>
 										</div>
-				
-										<div class="item">
-											<span class="color-normal">[[city.notregistered]]</span>
-										</div>
-								
+
 									</div>
 	
-									<div class="flex-col" ng-repeat="mosaic in city.mosaics" style="border-top:1px solid #000;" ng-if="!mosaic.dead && !mosaic.excluded && !mosaic.registered">
-										
-										<div class="flex align-center text-small" style="margin-left:15px;">
-											
-											<div class="item">
-												<span class="color-dark">[[mosaic.count]]</span>
-											</div>
-									
-											<div class="item grow">
-												<span class="color-light">[[mosaic.name]]</span>
-											</div>
-									
-											<div class="item">
-												<a href="/search/[[mosaic.name]]" target="blank"><i class="fa fa-search"></i></a>
-											</div>
-											
-											<div class="item">
-												<a ng-click="die(mosaic, city, region, country);">die</a>
-											</div>
-											
-											<div class="item">
-												<a ng-click="exclude(mosaic, city, region, country);">exclude</a>
-											</div>
-											
-											<div class="item">
-												<a ng-click="register(mosaic, city, region, country);">register</a>
-											</div>
-											
-										</div>
-											
-									</div>
-
 								</div>
 								
 							</div>
