@@ -814,7 +814,8 @@ def adm_compare(request):
 			
 		else:
 			
-			mimcountry_obj = Country.objects.get(name=imcountry_obj.compare_name)
+			mimcountry_obj = Country.objects.filter(name=imcountry_obj.compare_name)
+			mimcountry_obj = mimcountry_obj[0]
 		
 		imcountry_data = {
 			
@@ -849,7 +850,8 @@ def adm_compare(request):
 				
 			else:
 				
-				mimregion_obj = Region.objects.get(country=mimcountry_obj, name=imregion_obj.compare_name)
+				mimregion_obj = Region.objects.filter(country=mimcountry_obj, name=imregion_obj.compare_name)
+				mimregion_obj = mimregion_obj[0]
 			
 			imregion_data = {
 				
@@ -884,7 +886,8 @@ def adm_compare(request):
 					
 				else:
 					
-					mimcity_obj = City.objects.get(region=mimregion_obj, name=imcity_obj.compare_name)
+					mimcity_obj = City.objects.filter(region=mimregion_obj, name=imcity_obj.compare_name)
+					mimcity_obj = mimcity_obj[0]
 					
 				imcity_data = {
 					
