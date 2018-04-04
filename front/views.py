@@ -853,6 +853,8 @@ def adm_compare(request):
 				imcity_data['compare_count'] = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name, city_name=imcity_obj.name).count()
 				imcity_data['diff'] = imcity_data['compare_count'] - imcity_data['count']
 				
+				imregion_data['cities'].append(imcity_data)
+				
 			imcountry_data['regions'].append(imregion_data)
 		
 		data['countries'].append(imcountry_data)

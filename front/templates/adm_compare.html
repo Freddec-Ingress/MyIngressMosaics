@@ -36,12 +36,12 @@
 							<a ng-show="country.open" ng-click="country.open=false;"><i class="fa fa-minus-square text-small"></i></a>
 						</div>
 
-						<div class="item">
+						<div class="item grow">
 							<span class="color-light">[[country.name]]</span>
 						</div>
 
-						<div class="item grow">
-							<span class="color-normal">[[country.diff]]</span>
+						<div class="item">
+							<span class="color-normal" ng-class="{'color-danger':country.diff<0, 'color-success':country.diff>0}">[[country.diff]]</span>
 						</div>
 
 					</div>
@@ -57,12 +57,12 @@
 									<a ng-show="region.open" ng-click="region.open=false;"><i class="fa fa-minus-square text-small"></i></a>
 								</div>
 
-								<div class="item">
+								<div class="item grow">
 									<span class="color-light">[[region.name]]</span>
 								</div>
 
-								<div class="item grow">
-									<span class="color-normal">[[region.diff]]</span>
+								<div class="item">
+									<span class="color-normal" ng-class="{'color-danger':region.diff<0, 'color-success':region.diff>0}">[[region.diff]]</span>
 								</div>
 
 							</div>
@@ -78,7 +78,7 @@
 										</div>
 
 										<div class="item grow">
-											<span class="color-normal">[[city.diff]]</span>
+											<span class="color-normal" ng-class="{'color-danger':city.diff<0, 'color-success':city.diff>0}">[[city.diff]]</span>
 										</div>
 
 									</div>
