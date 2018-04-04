@@ -3000,9 +3000,9 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
     	mosaic.dead = true;
     	mosaic.notregistered = false;
     	
-    	city.diff -= 1;
-    	region.diff -= 1;
-    	country.diff -= 1;
+    	city.notregistered -= 1;
+    	region.notregistered -= 1;
+    	country.notregistered -= 1;
     }
      
     $scope.exclude = function(mosaic, city, region, country) {
@@ -3013,9 +3013,9 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
     	mosaic.excluded = true;
     	mosaic.notregistered = false;
     	
-    	city.diff -= 1;
-    	region.diff -= 1;
-    	country.diff -= 1;
+    	city.notregistered -= 1;
+    	region.notregistered -= 1;
+    	country.notregistered -= 1;
     }
     
     $scope.register = function(mosaic, city, region, country) {
@@ -3026,9 +3026,9 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
     	mosaic.registered = true;
     	mosaic.notregistered = false;
     	
-    	city.diff -= 1;
-    	region.diff -= 1;
-    	country.diff -= 1;
+    	city.notregistered -= 1;
+    	region.notregistered -= 1;
+    	country.notregistered -= 1;
     }
    
 	/* Page loading */
