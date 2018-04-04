@@ -127,7 +127,7 @@
 						
 							<div ng-show="region.open" style="margin-left:15px;">
 								
-								<div class="flex-col bg-block mb-small" ng-repeat="city in region.cities">
+								<div class="flex-col bg-block mb-small" ng-repeat="city in region.cities" ng-if="city.diff>0">
 									
 									<div class="flex align-center text-small">
 								
@@ -142,10 +142,6 @@
 										
 										<div class="item">
 											<span class="color-light">[[city.name]]</span>
-										</div>
-										
-										<div class="item">
-											<span class="color-dark">[[city.count]]</span>
 										</div>
 										
 										<div class="item">
@@ -164,60 +160,45 @@
 										<div class="item" ng-show="!city.compare_name">
 											<a href="/admin/api/imcity/[[city.id]]/change/" target="blank"><i class="fa fa-external-link"></i></a>
 										</div>
-										
-										<div class="item grow" ng-show="city.compare_name">
-											<span class="color-dark">[[city.compare_count]]</span>
-										</div>
-										
+
 										<div class="item" ng-show="city.compare_name">
 											<span ng-class="{'color-success':city.diff>-1, 'color-danger':city.diff<0}">[[city.diff]]</span>
 										</div>
 								
 									</div>
 	
-									<div ng-show="city.open" style="margin-left:15px;">
+									<div class="flex-col" ng-repeat="mosaic in city.mosaics" style="border-top:1px solid #000;" ng-if="!mosaic.dead && !mosaic.excluded && !mosaic.registered">
 										
-										<div class="flex-col" ng-repeat="mosaic in city.mosaics" style="border-top:1px solid #000;">
+										<div class="flex align-center text-small" style="margin-left:15px;">
 											
-											<div class="flex align-center text-small">
-												
-												<div class="item">
-													<span class="color-dark">[[mosaic.count]]</span>
-												</div>
-										
-												<div class="item grow">
-													<span class="color-light">[[mosaic.name]]</span>
-												</div>
-										
-												<div class="item" ng-show="!mosaic.dead && !mosaic.excluded && !mosaic.registered">
-													<a href="/search/[[mosaic.name]]" target="blank"><i class="fa fa-search"></i></a>
-												</div>
-												
-												<div class="item">
-													<span ng-show="mosaic.dead" class="color-dark">dead</span>
-													<span ng-show="mosaic.excluded" class="color-muted">excluded</span>
-													<span ng-show="mosaic.registered" class="color-success">registered</span>
-													<span ng-show="!mosaic.dead && !mosaic.excluded && !mosaic.registered" class="color-danger">not registered</span>
-												</div>
-												
-												<div class="item" ng-show="!mosaic.dead && !mosaic.excluded && !mosaic.registered">
-													<a ng-click="die(mosaic, city);">die</a>
-												</div>
-												
-												<div class="item" ng-show="!mosaic.dead && !mosaic.excluded && !mosaic.registered">
-													<a ng-click="exclude(mosaic, city);">exclude</a>
-												</div>
-												
-												<div class="item" ng-show="!mosaic.dead && !mosaic.excluded && !mosaic.registered">
-													<a ng-click="register(mosaic, city);">register</a>
-												</div>
-												
+											<div class="item">
+												<span class="color-dark">[[mosaic.count]]</span>
 											</div>
-												
+									
+											<div class="item grow">
+												<span class="color-light">[[mosaic.name]]</span>
+											</div>
+									
+											<div class="item">
+												<a href="/search/[[mosaic.name]]" target="blank"><i class="fa fa-search"></i></a>
+											</div>
+											
+											<div class="item">
+												<a ng-click="die(mosaic, city);">die</a>
+											</div>
+											
+											<div class="item">
+												<a ng-click="exclude(mosaic, city);">exclude</a>
+											</div>
+											
+											<div class="item">
+												<a ng-click="register(mosaic, city);">register</a>
+											</div>
+											
 										</div>
-										
+											
 									</div>
-							
+
 								</div>
 								
 							</div>

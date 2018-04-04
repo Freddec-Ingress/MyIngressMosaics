@@ -832,8 +832,7 @@ def adm_compare(request):
 		}
 		
 		imcountry_data['compare_count'] = Mosaic.objects.filter(city__region__country__name=imcountry_obj.compare_name).count()
-		imcountry_data['diff'] = imcountry_data['compare_count'] - imcountry_data['count']
-			
+
 		imregion_results = imcountry_obj.regions.all()
 		for imregion_obj in imregion_results:
 			
@@ -868,8 +867,7 @@ def adm_compare(request):
 			}
 			
 			imregion_data['compare_count'] = Mosaic.objects.filter(city__region__country__name=imcountry_obj.compare_name, city__region__name=imregion_obj.compare_name).count()
-			imregion_data['diff'] = imregion_data['compare_count'] - imregion_data['count']
-			
+
 			imcity_results = imregion_obj.cities.all()
 			for imcity_obj in imcity_results:
 				
@@ -904,8 +902,7 @@ def adm_compare(request):
 				}
 				
 				imcity_data['compare_count'] = Mosaic.objects.filter(city__region__country__name=imcountry_obj.compare_name, city__region__name=imregion_obj.compare_name, city__name=imcity_obj.compare_name).count()
-				imcity_data['diff'] = imcity_data['compare_count'] - imcity_data['count']
-				
+
 				immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name, city_name=imcity_obj.name).order_by('-count')
 				for immosaic_obj in immosaic_results:
 					
@@ -919,6 +916,11 @@ def adm_compare(request):
 						'excluded':immosaic_obj.excluded,
 						'registered':immosaic_obj.registered,
 					}
+					
+					if not immosaic_obj.dead and not immosaic_obj.excluded and not immosaic_obj.registered:
+						imcity_data['diff'] += 1
+						imregion_data['diff'] += 1
+						imcountry_data['diff'] += 1
 					
 					imcity_data['mosaics'].append(immosaic_data)
 				
