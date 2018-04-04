@@ -29,7 +29,7 @@
 			<div class="section" ng-repeat="country in countries">
 				<div class="item">
 					
-					<div class="flex align-center bg-block">
+					<div class="flex align-center bg-block mb-small">
 						
 						<div class="item">
 							<a ng-show="!country.open" ng-click="country.open=true;"><i class="fa fa-plus-square text-small"></i></a>
@@ -57,7 +57,7 @@
 						</div>
 						
 						<div class="item">
-							<span class="color-normal">[[country.diff]]</span>
+							<span ng-class="{'color-success':country.diff>-1, 'color-danger':country.diff<0}">[[country.diff]]</span>
 						</div>
 
 					</div>
@@ -66,7 +66,7 @@
 						
 						<div class="flex-col" ng-repeat="region in country.regions">
 							
-							<div class="flex align-center text-small bg-block">
+							<div class="flex align-center text-small bg-block mb-small">
 						
 								<div class="item">
 									<a ng-show="!region.open" ng-click="region.open=true;"><i class="fa fa-plus-square text-small"></i></a>
@@ -94,91 +94,91 @@
 								</div>
 								
 								<div class="item">
-									<span class="color-normal">[[region.diff]]</span>
+									<span ng-class="{'color-success':region.diff>-1, 'color-danger':region.diff<0}">[[region.diff]]</span>
 								</div>
 						
 							</div>
-								
-						</div>
 						
-						<div ng-show="region.open" style="margin-left:15px;">
-							
-							<div class="flex-col" ng-repeat="city in region.cities">
+							<div ng-show="region.open" style="margin-left:15px;">
 								
-								<div class="flex align-center text-small bg-block">
-							
-									<div class="item">
-										<a ng-show="!city.open" ng-click="city.open=true;"><i class="fa fa-plus-square text-small"></i></a>
-										<a ng-show="city.open" ng-click="city.open=false;"><i class="fa fa-minus-square text-small"></i></a>
-									</div>
+								<div class="flex-col bg-block" ng-repeat="city in region.cities">
 									
-									<div class="item">
-										<span class="color-light">[[city.name]]</span>
-									</div>
-									
-									<div class="item">
-										<span class="color-dark">[[city.count]]</span>
-									</div>
-									
-									<div class="item">
-										<span class="color-muted">vs</span>
-									</div>
-									
-									<div class="item">
-										<span class="color-light">[[city.compare_name]]</span>
-									</div>
-									
-									<div class="item grow">
-										<span class="color-dark">[[city.compare_count]]</span>
-									</div>
-									
-									<div class="item">
-										<span class="color-normal">[[city.diff]]</span>
-									</div>
-							
-								</div>
-									
-							</div>
-							
-							<div ng-show="city.open" style="margin-left:15px;">
-								
-								<div class="flex-col" ng-repeat="mosaic in city.mosaics">
-									
-									<div class="flex align-center text-small bg-block">
+									<div class="flex align-center text-small">
 								
 										<div class="item">
-											<span class="color-light">[[mosaic.name]]</span>
+											<a ng-show="!city.open" ng-click="city.open=true;"><i class="fa fa-plus-square text-small"></i></a>
+											<a ng-show="city.open" ng-click="city.open=false;"><i class="fa fa-minus-square text-small"></i></a>
 										</div>
 										
 										<div class="item">
-											<span class="color-dark">[[mosaic.count]]</span>
+											<span class="color-light">[[city.name]]</span>
+										</div>
+										
+										<div class="item">
+											<span class="color-dark">[[city.count]]</span>
+										</div>
+										
+										<div class="item">
+											<span class="color-muted">vs</span>
+										</div>
+										
+										<div class="item">
+											<span class="color-light">[[city.compare_name]]</span>
 										</div>
 										
 										<div class="item grow">
-											<span ng-show="mosaic.dead" class="color-dark">dead</span>
-											<span ng-show="mosaic.excluded" class="color-muted">excluded</span>
-											<span ng-show="mosaic.registered" class="color-success">registered</span>
-											<span ng-show="!mosaic.dead && !mosaic.excluded && !mosaic.registered" class="color-danger">not registered</span>
+											<span class="color-dark">[[city.compare_count]]</span>
 										</div>
 										
-										<div class="item" ng-show="!mosaic.dead && !mosaic.excluded && !mosaic.registered">
-											<a ng-click="die(mosaic, city);">die</span>
+										<div class="item">
+											<span ng-class="{'color-success':city.diff>-1, 'color-danger':city.diff<0}">[[city.diff]]</span>
 										</div>
+								
+									</div>
+	
+									<div ng-show="city.open" style="margin-left:15px;">
 										
-										<div class="item" ng-show="!mosaic.dead && !mosaic.excluded && !mosaic.registered">
-											<a ng-click="exclude(mosaic, city);">exclude</span>
-										</div>
+										<div class="flex-col" ng-repeat="mosaic in city.mosaics">
+											
+											<div class="flex align-center text-small bg-block">
 										
-										<div class="item" ng-show="!mosaic.dead && !mosaic.excluded && !mosaic.registered">
-											<a ng-click="register(mosaic, city);">register</span>
+												<div class="item">
+													<span class="color-light">[[mosaic.name]]</span>
+												</div>
+												
+												<div class="item">
+													<span class="color-dark">[[mosaic.count]]</span>
+												</div>
+												
+												<div class="item grow">
+													<span ng-show="mosaic.dead" class="color-dark">dead</span>
+													<span ng-show="mosaic.excluded" class="color-muted">excluded</span>
+													<span ng-show="mosaic.registered" class="color-success">registered</span>
+													<span ng-show="!mosaic.dead && !mosaic.excluded && !mosaic.registered" class="color-danger">not registered</span>
+												</div>
+												
+												<div class="item" ng-show="!mosaic.dead && !mosaic.excluded && !mosaic.registered">
+													<a ng-click="die(mosaic, city);">die</a>
+												</div>
+												
+												<div class="item" ng-show="!mosaic.dead && !mosaic.excluded && !mosaic.registered">
+													<a ng-click="exclude(mosaic, city);">exclude</a>
+												</div>
+												
+												<div class="item" ng-show="!mosaic.dead && !mosaic.excluded && !mosaic.registered">
+													<a ng-click="register(mosaic, city);">register</a>
+												</div>
+												
+											</div>
+												
 										</div>
 										
 									</div>
-										
+							
 								</div>
 								
 							</div>
-						
+								
 						</div>
 					
 					</div>
