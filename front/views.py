@@ -906,6 +906,15 @@ def adm_compare(request):
 				immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name, city_name=imcity_obj.name).order_by('-count')
 				for immosaic_obj in immosaic_results:
 					
+					if not immosaic_obj.dead and not immosaic_obj.excluded and not immosaic_obj.registered:
+						
+						mosaic_results = Mosaic.objects.filter(city=mimcity_obj, title=immosaic_obj.name)
+						
+						if mosaic_results.count() > 0:
+
+							immosaic_obj.registered = True
+							immosaic_obj.save()
+					
 					immosaic_data = {
 						
 						'id':immosaic_obj.pk,
