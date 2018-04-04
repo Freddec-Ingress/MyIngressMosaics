@@ -43,8 +43,8 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
 		
 		$scope.countries.sort(function(a, b) {
 			
-			if (a.diff > b.diff) return -1;
-			if (a.diff < b.diff) return 1;
+			if (a.diff > b.diff) return 1;
+			if (a.diff < b.diff) return -1;
 			
 			if (a.name > b.name) return 1;
 			if (a.name < b.name) return -1;
