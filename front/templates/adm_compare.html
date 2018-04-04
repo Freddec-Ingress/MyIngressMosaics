@@ -38,6 +38,9 @@
 						
 						<div class="item">
 							<span class="color-muted">IM</span>
+						</div>
+						
+						<div class="item">
 							<span class="color-light">[[country.name]]</span>
 						</div>
 						
@@ -51,16 +54,22 @@
 						
 						<div class="item">
 							<span class="color-muted">MIM</span>
-							<span ng-show="country.compare_name" class="color-light">[[country.compare_name]]</span>
-							<span ng-show="!country.compare_name" class="color-danger">not specified</span>
-							<a href="/admin/api/imcountry/[[country.id]]/change/" target="blank"><i class="fa fa-external-link"></i></a>
-						</div>
-						
-						<div class="item grow">
-							<span class="color-dark">[[country.compare_count]]</span>
 						</div>
 						
 						<div class="item">
+							<span ng-show="country.compare_name" class="color-light">[[country.compare_name]]</span>
+							<span ng-show="!country.compare_name" class="color-danger">not specified</span>
+						</div>
+						
+						<div class="item" ng-show="!country.compare_name">
+							<a href="/admin/api/imcountry/[[country.id]]/change/" target="blank"><i class="fa fa-external-link"></i></a>
+						</div>
+						
+						<div class="item grow" ng-show="country.compare_name">
+							<span class="color-dark">[[country.compare_count]]</span>
+						</div>
+						
+						<div class="item" ng-show="country.compare_name">
 							<span ng-class="{'color-success':country.diff>-1, 'color-danger':country.diff<0}">[[country.diff]]</span>
 						</div>
 
@@ -78,6 +87,10 @@
 								</div>
 								
 								<div class="item">
+									<span class="color-muted">IM</span>
+								</div>
+								
+								<div class="item">
 									<span class="color-light">[[region.name]]</span>
 								</div>
 								
@@ -90,16 +103,23 @@
 								</div>
 								
 								<div class="item">
-									<span ng-show="region.compare_name" class="color-light">[[region.compare_name]]</span>
-									<span ng-show="!region.compare_name" class="color-danger">MIM not specified</span>
-									<a href="/admin/api/imregion/[[region.id]]/change/" target="blank"><i class="fa fa-external-link"></i></a>
-								</div>
-								
-								<div class="item grow">
-									<span class="color-dark">[[region.compare_count]]</span>
+									<span class="color-muted">MIM</span>
 								</div>
 								
 								<div class="item">
+									<span ng-show="region.compare_name" class="color-light">[[region.compare_name]]</span>
+									<span ng-show="!region.compare_name" class="color-danger">MIM not specified</span>
+								</div>
+								
+								<div class="item" ng-show="!region.compare_name" >
+									<a href="/admin/api/imregion/[[region.id]]/change/" target="blank"><i class="fa fa-external-link"></i></a>
+								</div>
+								
+								<div class="item grow" ng-show="region.compare_name">
+									<span class="color-dark">[[region.compare_count]]</span>
+								</div>
+								
+								<div class="item" ng-show="region.compare_name">
 									<span ng-class="{'color-success':region.diff>-1, 'color-danger':region.diff<0}">[[region.diff]]</span>
 								</div>
 						
@@ -131,14 +151,17 @@
 										<div class="item">
 											<span ng-show="city.compare_name" class="color-light">[[city.compare_name]]</span>
 											<span ng-show="!city.compare_name" class="color-danger">MIM not specified</span>
+										</div>
+										
+										<div class="item" ng-show="!city.compare_name">
 											<a href="/admin/api/imcity/[[city.id]]/change/" target="blank"><i class="fa fa-external-link"></i></a>
 										</div>
 										
-										<div class="item grow">
+										<div class="item grow" ng-show="city.compare_name">
 											<span class="color-dark">[[city.compare_count]]</span>
 										</div>
 										
-										<div class="item">
+										<div class="item" ng-show="city.compare_name">
 											<span ng-class="{'color-success':city.diff>-1, 'color-danger':city.diff<0}">[[city.diff]]</span>
 										</div>
 								
