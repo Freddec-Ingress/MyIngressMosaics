@@ -3037,9 +3037,10 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
    
 	/* Page loading */
 	
-	$scope.init = function(countries) {
+	$scope.init = function(countries, mosaics) {
 		
 		$scope.countries = countries;
+		$scope.mosaics = mosaics;
 		
 		$scope.countries.sort(function(a, b) {
 

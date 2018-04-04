@@ -15,7 +15,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="AdmCompareCtrl" ng-init="init({{countries|jsonify}});">
+	<div id="content" ng-controller="AdmCompareCtrl" ng-init="init({{countries|jsonify}}, {{mosaics|jsonify}});">
 	
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
