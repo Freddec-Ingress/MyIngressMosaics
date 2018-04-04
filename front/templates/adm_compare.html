@@ -29,7 +29,7 @@
 			<div class="section" ng-repeat="country in countries">
 				<div class="item">
 					
-					<div class="flex align-center bg-block mb-small">
+					<div class="flex align-center text-small bg-block mb-small">
 						
 						<div class="item" ng-show="country.regions.length>0">
 							<a ng-show="!country.open" ng-click="country.open=true;"><i class="fa fa-plus-square text-small"></i></a>
@@ -37,7 +37,7 @@
 						</div>
 						
 						<div class="item">
-							<span class="color-light">[[country.name]]</span>
+							<span class="color-light">IM [[country.name]]</span>
 						</div>
 						
 						<div class="item">
@@ -49,7 +49,8 @@
 						</div>
 						
 						<div class="item">
-							<span class="color-light">[[country.compare_name]]</span>
+							<span ng-show="country.compare_name" class="color-light">MIM [[country.compare_name]]</span>
+							<span ng-show="!country.compare_name" class="color-danger">MIM not specified</span>
 						</div>
 						
 						<div class="item grow">
@@ -86,7 +87,8 @@
 								</div>
 								
 								<div class="item">
-									<span class="color-light">[[region.compare_name]]</span>
+									<span ng-show="!region.compare_name" class="color-light">[[region.compare_name]]</span>
+									<span ng-show="!region.compare_name" class="color-danger">MIM not specified</span>
 								</div>
 								
 								<div class="item grow">
@@ -138,19 +140,19 @@
 	
 									<div ng-show="city.open" style="margin-left:15px;">
 										
-										<div class="flex-col" ng-repeat="mosaic in city.mosaics">
+										<div class="flex-col" ng-repeat="mosaic in city.mosaics" style="border-top:1px solid #000;">
 											
-											<div class="flex align-center text-small bg-block">
-										
-												<div class="item">
-													<span class="color-light">[[mosaic.name]]</span>
-												</div>
+											<div class="flex align-center text-small">
 												
 												<div class="item">
 													<span class="color-dark">[[mosaic.count]]</span>
 												</div>
-												
+										
 												<div class="item grow">
+													<span class="color-light">[[mosaic.name]]</span>
+												</div>
+												
+												<div class="item">
 													<span ng-show="mosaic.dead" class="color-dark">dead</span>
 													<span ng-show="mosaic.excluded" class="color-muted">excluded</span>
 													<span ng-show="mosaic.registered" class="color-success">registered</span>
