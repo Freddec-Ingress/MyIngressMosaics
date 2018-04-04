@@ -189,8 +189,8 @@
 													<span class="color-light">[[mosaic.name]]</span>
 												</div>
 										
-												<div class="item">
-													<a href="/searcg/[[mosaic.name]]" target="blank"><i class="fa fa-search"></i></a>
+												<div class="item" ng-show="!mosaic.dead && !mosaic.excluded && !mosaic.registered">
+													<a href="/search/[[mosaic.name]]" target="blank"><i class="fa fa-search"></i></a>
 												</div>
 												
 												<div class="item">
