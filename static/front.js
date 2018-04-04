@@ -3059,20 +3059,6 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
 				
 				return 0;
 			});
-		
-			for (var region of country.regions) {
-			
-				region.cities.sort(function(a, b) {
-
-					if (a.diff > b.diff) return 1;
-					if (a.diff < b.diff) return -1;
-					
-					if (a.name > b.name) return 1;
-					if (a.name < b.name) return -1;
-					
-					return 0;
-				});
-			}
 		}
 		
 		$scope.mosaics.sort(function(a, b) {
