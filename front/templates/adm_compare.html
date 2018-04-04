@@ -41,7 +41,7 @@
 						</div>
 
 						<div class="item">
-							<span class="color-normal" ng-class="{'color-danger':country.diff<0, 'color-success':country.diff>0}">[[country.diff]]</span>
+							<span ng-class="{'color-danger':city.diff<0, 'color-success':city.diff>-1}">[[city.diff]]</span>
 						</div>
 
 					</div>
@@ -62,7 +62,7 @@
 								</div>
 
 								<div class="item">
-									<span class="color-normal" ng-class="{'color-danger':region.diff<0, 'color-success':region.diff>0}">[[region.diff]]</span>
+									<span ng-class="{'color-danger':city.diff<0, 'color-success':city.diff>-1}">[[city.diff]]</span>
 								</div>
 
 							</div>
@@ -73,12 +73,12 @@
 									
 									<div class="flex align-center text-small">
 										
-										<div class="item">
+										<div class="item grow">
 											<span class="color-light">[[city.name]]</span>
 										</div>
 
-										<div class="item grow">
-											<span class="color-normal" ng-class="{'color-danger':city.diff<0, 'color-success':city.diff>0}">[[city.diff]]</span>
+										<div class="item">
+											<span ng-class="{'color-danger':city.diff<0, 'color-success':city.diff>-1}">[[city.diff]]</span>
 										</div>
 
 									</div>
