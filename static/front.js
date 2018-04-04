@@ -3027,14 +3027,14 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
    
 	/* Page loading */
 	
-	$scope.init = function(cities) {
+	$scope.init = function(countries) {
 		
-		$scope.cities = cities;
+		$scope.countries = countries;
 		
-		$scope.cities.sort(function(a, b) {
+		$scope.countries.sort(function(a, b) {
 			
-			if (a.notregistered_count > b.notregistered_count) return -1;
-			if (a.notregistered_count < b.notregistered_count) return 1;
+			if (a.diff > b.diff) return -1;
+			if (a.diff < b.diff) return 1;
 			
 			if (a.name > b.name) return 1;
 			if (a.name < b.name) return -1;

@@ -27,75 +27,36 @@
 		<div class="container" ng-class="{'active':loaded}">
 			
 			<div class="section">
-				<div class="item" ng-repeat="city in cities" ng-if="city.notregistered_count > 0">
+				<div class="item" ng-repeat="country in countries">
 					<div class="bg-block">
 						
 						<div class="flex align-center">
 							
 							<div class="item">
-								<a ng-show="!city.open" ng-click="city.open=true;"><i class="fa fa-plus-square text-small"></i></a>
-								<a ng-show="city.open" ng-click="city.open=false;"><i class="fa fa-minus-square text-small"></i></a>
+								<a ng-show="!country.open" ng-click="country.open=true;"><i class="fa fa-plus-square text-small"></i></a>
+								<a ng-show="country.open" ng-click="country.open=false;"><i class="fa fa-minus-square text-small"></i></a>
 							</div>
 							
 							<div class="item">
-								<span class="color-light">[[city.name]]</span>
+								<span class="color-light">[[country.name]]</span>
 							</div>
 							
 							<div class="item">
-								<span class="color-dark">[[city.region_name]]</span>
+								<span class="color-dark">[[country.count]]</span>
 							</div>
 							
 							<div class="item">
 								<span class="color-dark">[[city.country_name]]</span>
 							</div>
 							
-							<div class="item grow">
-								<a href="/world/[[city.country_name]]/[[city.region_name]]/[[city.name]]" target="_blank"><i class="fa fa-external-link text-small"></i></a>
-							</div>
-							
-							<div class="item">
-								<span class="color-danger">[[city.notregistered_count]]</span>
-								<span class="color-dark"> / </span>
-								<span class="color-normal">[[city.mosaics.length]]</span>
-							</div>
-							
+
 						</div>
 						
-						<div ng-show="city.open">
+						<div ng-show="country.open">
 							
-							<div class="flex align-center text-small" ng-repeat="mosaic in city.mosaics" style="border-top:1px solid #000;" ng-show="mosaic.notregistered">
+							<div class="flex align-center text-small" ng-repeat="region in country.regions">
 								
-								<div class="item">
-									<a href="/search/[[mosaic.name]]" target="blank"><i class="fa fa-external-link text-small"></i></a>
-								</div>
-								
-								<div class="item">
-									<span class="color-dark">[[mosaic.count]]</span>
-								</div>
-								
-								<div class="item grow">
-									<span class="color-normal">[[mosaic.name]]</span>
-								</div>
-								
-								<div class="item">
-									<span ng-show="mosaic.dead" class="color-dark">dead</span>
-									<span ng-show="mosaic.excluded" class="color-muted">excluded</span>
-									<span ng-show="mosaic.registered" class="color-success">registered</span>
-									<span ng-show="mosaic.notregistered" class="color-danger">not registered</span>
-								</div>
-								
-								<div class="item" ng-show="mosaic.notregistered">
-									<a ng-click="die(mosaic, city);">dead</a>
-								</div>
-								
-								<div class="item" ng-show="mosaic.notregistered">
-									<a ng-click="exclude(mosaic, city);">excluded</a>
-								</div>
-								
-								<div class="item" ng-show="mosaic.notregistered">
-									<a ng-click="register(mosaic, city);">registered</a>
-								</div>
-								
+
 							</div>
 							
 						</div>
