@@ -6,43 +6,28 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
     
 	/* Mosaic management */
     
-    $scope.die = function(mosaic, city, region, country) {
+    $scope.die = function(mosaic) {
     	
     	var data = { 'id':mosaic.id, }
     	API.sendRequest('/api/im/mosaic/die/', 'POST', {}, data);
     	
     	mosaic.dead = true;
-    	mosaic.notregistered = false;
-    	
-    	city.notregistered -= 1;
-    	region.notregistered -= 1;
-    	country.notregistered -= 1;
     }
      
-    $scope.exclude = function(mosaic, city, region, country) {
+    $scope.exclude = function(mosaic) {
     	
     	var data = { 'id':mosaic.id, }
     	API.sendRequest('/api/im/mosaic/exclude/', 'POST', {}, data);
     	
     	mosaic.excluded = true;
-    	mosaic.notregistered = false;
-    	
-    	city.notregistered -= 1;
-    	region.notregistered -= 1;
-    	country.notregistered -= 1;
     }
     
-    $scope.register = function(mosaic, city, region, country) {
+    $scope.register = function(mosaic) {
     	
     	var data = { 'id':mosaic.id, }
     	API.sendRequest('/api/im/mosaic/register/', 'POST', {}, data);
     	
     	mosaic.registered = true;
-    	mosaic.notregistered = false;
-    	
-    	city.notregistered -= 1;
-    	region.notregistered -= 1;
-    	country.notregistered -= 1;
     }
    
 	/* Page loading */
