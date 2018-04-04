@@ -26,9 +26,9 @@
 		
 		<div class="container" ng-class="{'active':loaded}">
 			
-			<div class="section" ng-repeat="country in countries">
-				<div class="item">
-					
+			<div class="section">
+				<div class="item" ng-repeat="country in countries">
+
 					<div class="flex align-center text-small bg-block mb-small">
 						
 						<div class="item" ng-show="country.regions.length>0">
@@ -37,7 +37,8 @@
 						</div>
 						
 						<div class="item">
-							<span class="color-light">IM [[country.name]]</span>
+							<span class="color-muted">IM</span>
+							<span class="color-light">[[country.name]]</span>
 						</div>
 						
 						<div class="item">
@@ -49,8 +50,10 @@
 						</div>
 						
 						<div class="item">
-							<span ng-show="country.compare_name" class="color-light">MIM [[country.compare_name]]</span>
-							<span ng-show="!country.compare_name" class="color-danger">MIM not specified</span>
+							<span class="color-muted">MIM</span>
+							<span ng-show="country.compare_name" class="color-light">[[country.compare_name]]</span>
+							<span ng-show="!country.compare_name" class="color-danger">not specified</span>
+							<a href="/admin/api/imcountry/[[country.id]]/change/" target="blank"><i class="fa fa-external-link"></i></a>
 						</div>
 						
 						<div class="item grow">
@@ -87,8 +90,9 @@
 								</div>
 								
 								<div class="item">
-									<span ng-show="!region.compare_name" class="color-light">[[region.compare_name]]</span>
+									<span ng-show="region.compare_name" class="color-light">[[region.compare_name]]</span>
 									<span ng-show="!region.compare_name" class="color-danger">MIM not specified</span>
+									<a href="/admin/api/imregion/[[region.id]]/change/" target="blank"><i class="fa fa-external-link"></i></a>
 								</div>
 								
 								<div class="item grow">
@@ -105,7 +109,7 @@
 								
 								<div class="flex-col bg-block" ng-repeat="city in region.cities">
 									
-									<div class="flex align-center text-small">
+									<div class="flex align-center text-small mb-small">
 								
 										<div class="item" ng-show="city.mosaics.length>0">
 											<a ng-show="!city.open" ng-click="city.open=true;"><i class="fa fa-plus-square text-small"></i></a>
@@ -125,7 +129,9 @@
 										</div>
 										
 										<div class="item">
-											<span class="color-light">[[city.compare_name]]</span>
+											<span ng-show="city.compare_name" class="color-light">[[city.compare_name]]</span>
+											<span ng-show="!city.compare_name" class="color-danger">MIM not specified</span>
+											<a href="/admin/api/imcity/[[city.id]]/change/" target="blank"><i class="fa fa-external-link"></i></a>
 										</div>
 										
 										<div class="item grow">

@@ -803,6 +803,7 @@ def adm_compare(request):
 		
 		imcountry_data = {
 			
+			'id':imcountry_obj.pk,
 			'name':imcountry_obj.name,
 			'count':imcountry_obj.count,
 			
@@ -822,6 +823,7 @@ def adm_compare(request):
 			
 			imregion_data = {
 				
+				'id':imregion_obj.pk,
 				'name':imregion_obj.name,
 				'count':imregion_obj.count,
 				
@@ -841,6 +843,7 @@ def adm_compare(request):
 				
 				imcity_data = {
 					
+					'id':imcity_obj.pk,
 					'name':imcity_obj.name,
 					'count':imcity_obj.count,
 					
@@ -860,6 +863,7 @@ def adm_compare(request):
 					
 					immosaic_data = {
 						
+						'id':immosaic_obj.pk,
 						'name':immosaic_obj.name,
 						'count':immosaic_obj.count,
 						
