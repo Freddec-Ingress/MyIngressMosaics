@@ -27,7 +27,7 @@
 		<div class="container" ng-class="{'active':loaded}">
 			
 			<div class="section">
-				<div class="item" ng-repeat="country in countries">
+				<div class="item" ng-repeat="country in countries" ng-if="country.diff>0">
 
 					<div class="flex align-center text-small bg-block mb-small">
 						
@@ -77,7 +77,7 @@
 					
 					<div ng-show="country.open" style="margin-left:15px;">
 						
-						<div class="flex-col" ng-repeat="region in country.regions">
+						<div class="flex-col" ng-repeat="region in country.regions" ng-if="region.diff>0">
 							
 							<div class="flex align-center text-small bg-block mb-small">
 						

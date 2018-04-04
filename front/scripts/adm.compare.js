@@ -52,8 +52,8 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
 			if (a.regions.length > 0 && b.regions.length < 1) return -1;
 			if (a.regions.length < 1 && b.regions.length > 0) return 1;
 			
-			if (a.diff > b.diff) return 1;
-			if (a.diff < b.diff) return -1;
+			if (a.diff > b.diff) return -1;
+			if (a.diff < b.diff) return 1;
 			
 			if (a.name > b.name) return 1;
 			if (a.name < b.name) return -1;
@@ -68,8 +68,8 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
 				if (a.cities.length > 0 && b.cities.length < 1) return -1;
 				if (a.cities.length < 1 && b.cities.length > 0) return 1;
 				
-				if (a.diff > b.diff) return 1;
-				if (a.diff < b.diff) return -1;
+				if (a.diff > b.diff) return -1;
+				if (a.diff < b.diff) return 1;
 				
 				if (a.name > b.name) return 1;
 				if (a.name < b.name) return -1;
@@ -84,8 +84,8 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
 					if (a.mosaics.length > 0 && b.mosaics.length < 1) return -1;
 					if (a.mosaics.length < 1 && b.mosaics.length > 0) return 1;
 					
-					if (a.diff > b.diff) return 1;
-					if (a.diff < b.diff) return -1;
+					if (a.diff > b.diff) return -1;
+					if (a.diff < b.diff) return 1;
 					
 					if (a.name > b.name) return 1;
 					if (a.name < b.name) return -1;
