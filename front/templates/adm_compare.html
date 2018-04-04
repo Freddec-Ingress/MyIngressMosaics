@@ -31,7 +31,7 @@
 					
 					<div class="flex align-center bg-block mb-small">
 						
-						<div class="item">
+						<div class="item" ng-show="country.regions.length>0">
 							<a ng-show="!country.open" ng-click="country.open=true;"><i class="fa fa-plus-square text-small"></i></a>
 							<a ng-show="country.open" ng-click="country.open=false;"><i class="fa fa-minus-square text-small"></i></a>
 						</div>
@@ -68,7 +68,7 @@
 							
 							<div class="flex align-center text-small bg-block mb-small">
 						
-								<div class="item">
+								<div class="item" ng-show="region.cities.length>0">
 									<a ng-show="!region.open" ng-click="region.open=true;"><i class="fa fa-plus-square text-small"></i></a>
 									<a ng-show="region.open" ng-click="region.open=false;"><i class="fa fa-minus-square text-small"></i></a>
 								</div>
@@ -105,7 +105,7 @@
 									
 									<div class="flex align-center text-small">
 								
-										<div class="item">
+										<div class="item" ng-show="city.mosaics.length>0">
 											<a ng-show="!city.open" ng-click="city.open=true;"><i class="fa fa-plus-square text-small"></i></a>
 											<a ng-show="city.open" ng-click="city.open=false;"><i class="fa fa-minus-square text-small"></i></a>
 										</div>

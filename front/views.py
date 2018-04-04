@@ -855,7 +855,7 @@ def adm_compare(request):
 				imcity_data['compare_count'] = Mosaic.objects.filter(city__region__country__name=imcountry_obj.compare_name, city__region__name=imregion_obj.compare_name, city__name=imcity_obj.compare_name).count()
 				imcity_data['diff'] = imcity_data['compare_count'] - imcity_data['count']
 				
-				immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name, city_name=imcity_obj.name)
+				immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name, city_name=imcity_obj.name).order_by('-count')
 				for immosaic_obj in immosaic_results:
 					
 					immosaic_data = {
