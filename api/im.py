@@ -22,7 +22,7 @@ def im_country(request):
 	if results.count() > 0:
 		
 		country_obj = results[0]
-		country_obj.mosaic_count = mosaic_count
+		country_obj.count = mosaic_count
 		country_obj.save()
 		
 	else:
@@ -53,7 +53,7 @@ def im_region(request):
 		if results.count() > 0:
 		
 			region_obj = results[0]
-			region_obj.mosaic_count = mosaic_count
+			region_obj.count = mosaic_count
 			region_obj.save()
 			
 		else:
@@ -90,7 +90,7 @@ def im_city(request):
 			if results.count() > 0:
 			
 				city_obj = results[0]
-				city_obj.mosaic_count = mosaic_count
+				city_obj.count = mosaic_count
 				city_obj.save()
 				
 			else:
