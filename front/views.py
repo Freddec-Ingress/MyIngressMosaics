@@ -801,6 +801,21 @@ def adm_compare(request):
 	imcountry_results = IMCountry.objects.all()
 	for imcountry_obj in imcountry_results:
 		
+		if not imcountry_obj.compare_name:
+			
+			region_results = Country.objects.filter(name=imcountry_obj.name)
+			
+			if region_results.count() > 0:
+				
+				mimcountry_obj = region_results[0]
+				
+				imcountry_obj.compare_name = imcountry_obj.name
+				imcountry_obj.save()
+			
+		else:
+			
+			mimcountry_obj = Country.objects.get(name=imcountry_obj.compare_name)
+		
 		imcountry_data = {
 			
 			'id':imcountry_obj.pk,
@@ -820,6 +835,21 @@ def adm_compare(request):
 			
 		imregion_results = imcountry_obj.regions.all()
 		for imregion_obj in imregion_results:
+			
+			if not imregion_obj.compare_name:
+				
+				region_results = Region.objects.filter(country=mimcountry_obj, name=imregion_obj.name)
+				
+				if region_results.count() > 0:
+					
+					mimregion_obj = region_results[0]
+					
+					imregion_obj.compare_name = imregion_obj.name
+					imregion_obj.save()
+				
+			else:
+				
+				mimregion_obj = Region.objects.get(country=mimcountry_obj, name=imregion_obj.compare_name)
 			
 			imregion_data = {
 				
@@ -841,6 +871,21 @@ def adm_compare(request):
 			imcity_results = imregion_obj.cities.all()
 			for imcity_obj in imcity_results:
 				
+				if not imcity_obj.compare_name:
+					
+					city_results = City.objects.filter(region=mimregion_obj, name=imcity_obj.name)
+					
+					if city_results.count() > 0:
+						
+						mimcity_obj = city_results[0]
+						
+						imcity_obj.compare_name = imcity_obj.name
+						imcity_obj.save()
+					
+				else:
+					
+					mimcity_obj = City.objects.get(region=mimregion_obj, name=imcity_obj.compare_name)
+					
 				imcity_data = {
 					
 					'id':imcity_obj.pk,
