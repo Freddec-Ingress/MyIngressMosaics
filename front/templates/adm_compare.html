@@ -64,45 +64,27 @@
 						
 						<div ng-show="country.open" style="margin-left:20px;">
 							
-							<div class="flex-col" ng-repeat="region in country.regions">
+							<div class="flex wrap" ng-repeat="region in country.regions">
 								
-								<div class="flex align-center text-small bg-block mb-small">
-							
-									<div class="item" ng-show="region.cities.length>0">
-										<a ng-show="!region.open" ng-click="region.open=true;"><i class="fa fa-plus-square text-small"></i></a>
-										<a ng-show="region.open" ng-click="region.open=false;"><i class="fa fa-minus-square text-small"></i></a>
-									</div>
-	
-									<div class="item grow">
-										<span class="color-light">[[region.name]]</span>
-									</div>
-	
-									<div class="item">
-										<span ng-class="{'color-danger':region.diff<0, 'color-success':region.diff>-1}">[[region.diff]]</span>
-									</div>
-	
-								</div>
-							
-								<div class="flex wrap" ng-show="region.open" style="margin-left:20px;">
-									
-									<div class="flex-col width-4" ng-repeat="city in region.cities">
-										
-										<div class="flex mb-small ml-small bg-block align-center text-small">
-											
-											<div class="item grow">
-												<span class="color-light">[[city.name]]</span>
-											</div>
-	
-											<div class="item">
-												<span ng-class="{'color-danger':city.diff<0, 'color-success':city.diff>-1}">[[city.diff]]</span>
-											</div>
-	
+								<div class="width-4">
+									<div class="flex align-center text-small bg-block mb-small">
+								
+										<div class="item" ng-show="region.cities.length>0">
+											<a ng-show="!region.open" ng-click="region.open=true;"><i class="fa fa-plus-square text-small"></i></a>
+											<a ng-show="region.open" ng-click="region.open=false;"><i class="fa fa-minus-square text-small"></i></a>
+										</div>
+		
+										<div class="item grow">
+											<span class="color-light">[[region.name]]</span>
+										</div>
+		
+										<div class="item">
+											<span ng-class="{'color-danger':region.diff<0, 'color-success':region.diff>-1}">[[region.diff]]</span>
 										</div>
 		
 									</div>
-									
 								</div>
-									
+
 							</div>
 						
 						</div>
