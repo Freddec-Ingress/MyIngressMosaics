@@ -2,7 +2,7 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
     
 	/* Mosaic management */
     
-    $scope.die = function(mosaic, city) {
+    $scope.die = function(mosaic, city, region, country) {
     	
     	var data = { 'id':mosaic.id, }
     	API.sendRequest('/api/im/mosaic/die/', 'POST', {}, data);
@@ -10,10 +10,12 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
     	mosaic.dead = true;
     	mosaic.notregistered = false;
     	
-    	city.notregistered_count -= 1;
+    	city.diff -= 1;
+    	region.diff -= 1;
+    	country.diff -= 1;
     }
      
-    $scope.exclude = function(mosaic, city) {
+    $scope.exclude = function(mosaic, city, region, country) {
     	
     	var data = { 'id':mosaic.id, }
     	API.sendRequest('/api/im/mosaic/exclude/', 'POST', {}, data);
@@ -21,10 +23,12 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
     	mosaic.excluded = true;
     	mosaic.notregistered = false;
     	
-    	city.notregistered_count -= 1;
+    	city.diff -= 1;
+    	region.diff -= 1;
+    	country.diff -= 1;
     }
     
-    $scope.register = function(mosaic, city) {
+    $scope.register = function(mosaic, city, region, country) {
     	
     	var data = { 'id':mosaic.id, }
     	API.sendRequest('/api/im/mosaic/register/', 'POST', {}, data);
@@ -32,7 +36,9 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
     	mosaic.registered = true;
     	mosaic.notregistered = false;
     	
-    	city.notregistered_count -= 1;
+    	city.diff -= 1;
+    	region.diff -= 1;
+    	country.diff -= 1;
     }
    
 	/* Page loading */

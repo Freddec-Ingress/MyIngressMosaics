@@ -130,12 +130,7 @@
 								<div class="flex-col bg-block mb-small" ng-repeat="city in region.cities" ng-if="city.diff>0">
 									
 									<div class="flex align-center text-small">
-								
-										<div class="item" ng-show="city.mosaics.length>0">
-											<a ng-show="!city.open" ng-click="city.open=true;"><i class="fa fa-plus-square text-small"></i></a>
-											<a ng-show="city.open" ng-click="city.open=false;"><i class="fa fa-minus-square text-small"></i></a>
-										</div>
-										
+
 										<div class="item">
 											<span class="color-muted">IM</span>
 										</div>
@@ -152,7 +147,7 @@
 											<span class="color-muted">MIM</span>
 										</div>
 										
-										<div class="item">
+										<div class="item grow">
 											<span ng-show="city.compare_name" class="color-light">[[city.compare_name]]</span>
 											<span ng-show="!city.compare_name" class="color-danger">not specified</span>
 										</div>
@@ -184,15 +179,15 @@
 											</div>
 											
 											<div class="item">
-												<a ng-click="die(mosaic, city);">die</a>
+												<a ng-click="die(mosaic, city, region, country);">die</a>
 											</div>
 											
 											<div class="item">
-												<a ng-click="exclude(mosaic, city);">exclude</a>
+												<a ng-click="exclude(mosaic, city, region, country);">exclude</a>
 											</div>
 											
 											<div class="item">
-												<a ng-click="register(mosaic, city);">register</a>
+												<a ng-click="register(mosaic, city, region, country);">register</a>
 											</div>
 											
 										</div>
