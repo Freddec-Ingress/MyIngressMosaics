@@ -2990,6 +2990,10 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 });
 angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function($scope, API) {
     
+	/* Tab management */
+    
+    $scope.current_tab = 'locations';
+    
 	/* Mosaic management */
     
     $scope.die = function(mosaic, city, region, country) {

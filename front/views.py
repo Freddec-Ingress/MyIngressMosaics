@@ -795,6 +795,7 @@ def adm_compare(request):
 	
 	data = {
 		
+		'mosaics':[],
 		'countries':[],
 	}
 	
@@ -858,6 +859,22 @@ def adm_compare(request):
 			imcountry_data['regions'].append(imregion_data)
 		
 		data['countries'].append(imcountry_data)
+	
+	immosaic_results = IMMosaic.objects.filter(dead=False, excluded=False, registered=False)
+	for immosaic_obj in immosaic_results:
+		
+		immosaic_data = {
+			
+			'id':immosaic_obj.pk,
+			'name':immosaic_obj.name,
+			'count':immosaic_obj.count,
+			
+			'city_name':immosaic_obj.city_name,
+			'region_name':immosaic_obj.region_name,
+			'country_name':immosaic_obj.country_name,
+		}
+		
+		data['mosaics'].append(immosaic_data)
 
 	return render(request, 'adm_compare.html', data)
 
