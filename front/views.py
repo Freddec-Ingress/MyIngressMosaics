@@ -914,7 +914,7 @@ def adm_compare(request):
 					
 					if not immosaic_obj.dead and not immosaic_obj.excluded and not immosaic_obj.registered:
 						
-						mosaic_results = Mosaic.objects.filter(city__region=mimregion_obj, title=immosaic_obj.name)
+						mosaic_results = Mosaic.objects.filter(city__region=mimregion_obj, title__iexact=immosaic_obj.name)
 						
 						if mosaic_results.count() > 0:
 
