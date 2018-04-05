@@ -845,7 +845,7 @@ def adm_compare(request):
 		imregion_obj = imcity_obj.region
 		imcountry_obj = imcity_obj.region.country
 		
-		city_results = City.objects.filter(region__country__name__iexact=imcountry_obj.compare_name, region__name__iexact=imregion_obj.compare_name, name__iexact=imcity_obj.compare_name)
+		city_results = City.objects.filter(name__iexact=imcity_obj.compare_name)
 		if city_results.count() < 1:
 			
 			imcity_data = {
