@@ -77,5 +77,36 @@ def search_mosaics(request):
 		search.save()
 			
 	return Response(data, status=status.HTTP_200_OK)
-
-
+	
+	
+	
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((AllowAny, ))
+def search_city(request):
+	
+	data = {
+		
+		'city':None,
+	}
+	
+	results = City.objects.filter(name=request.data['name'], region__name=request.data['region_name'], region__country__name=request.data['country_name'])
+	if results.count() > 0:
+		
+		city_obj = results[0]
+		
+		city_data = {
+			
+			'name':city_obj.name,
+			'region_name':city_obj.region.name,
+			'country_name':city_obj.region.country.name,
+		}
+		
+		data['city'] = city_data
+		
+	else:
+		
+		search_obj = Search(city=request.data['name'], region=request.data['region_name'], country=request.data['country_name'])
+		search_obj.save()
+	
+	return Response(data, status=status.HTTP_200_OK)

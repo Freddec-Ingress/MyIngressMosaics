@@ -38,6 +38,7 @@ urlpatterns = [
 	url(r'^link/delete/', link_delete),
 
 	url(r'^search/missions/', search_missions),
+	url(r'^search/city/', search_city),
 	url(r'^search/', search_mosaics),
 	
 	url(r'^map/', map_getMosaics),

@@ -2385,16 +2385,25 @@ angular.module('FrontModule.controllers').controller('WorldPageCtrl', function($
     	}
     	else {
     		
-    		API.sendRequest('/api/city/' + country_name + '/' + region_name + '/' + city_name + '/', 'GET').then(function(response) {
+    		var data = { 'name':city_name, 'region_name':region_name, 'country_name':country_name };
+    		API.sendRequest('/api/search/city/', 'POST', {}, data).then(function(response) {
     		
-				$window.location.href = '/world/' + country_name + '/' + region_name + '/' + city_name;
-				
+    			if (response.city) {
+    				
+					$window.location.href = '/world/' + country_name + '/' + region_name + '/' + city_name;
+    			}
+    			else {
+    				
+    				$scope.f_city_nomosaic = true;
+    			}
+    		
 				$scope.f_city_searching = false;
     		
     			
     		}, function(response) {
     			
     			$scope.f_city_nomosaic = true;
+    			$scope.f_city_searching = false;
     		});
     	}
     });

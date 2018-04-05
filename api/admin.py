@@ -19,6 +19,7 @@ class MissionAdmin(admin.ModelAdmin):
 class MosaicAdmin(admin.ModelAdmin):
 
 	search_fields = ('ref', 'title', )
+	raw_id_fields = ('city', )
 
 
 
