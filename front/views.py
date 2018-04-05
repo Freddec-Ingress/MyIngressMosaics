@@ -843,7 +843,8 @@ def adm_compare(request):
 	for immosaic_obj in immosaic_results:
 		
 		imcountry_obj = IMCountry.objects.get(name=immosaic_obj.country_name)
-		imregion_obj = IMRegion.objects.get(name=immosaic_obj.region_name)
+		imregion_obj = IMRegion.objects.get(country=imcountry_obj, name=immosaic_obj.region_name)
+		imcity_obj = IMCity.objects.get(region=imregion_obj, name=immosaic_obj.city_name)
 		
 		mosaic_results = Mosaic.objects.filter(city__region__country__name=imcountry_obj.compare_name, city__region__name=imregion_obj.compare_name, title__iexact=immosaic_obj.name)
 		if mosaic_results.count() > 0:
@@ -860,8 +861,8 @@ def adm_compare(request):
 				'count':immosaic_obj.count,
 				
 				'city_name':immosaic_obj.city_name,
-				'region_name':immosaic_obj.region_name,
-				'country_name':immosaic_obj.country_name,
+				'region_name':imregion_obj.compare_name,
+				'country_name':imcountry_obj.compare_name,
 			}
 			
 			data['mosaics'].append(immosaic_data)

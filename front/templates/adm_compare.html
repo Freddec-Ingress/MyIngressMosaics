@@ -52,8 +52,11 @@
 								<a ng-show="country.open" ng-click="country.open=false;"><i class="fa fa-minus-square text-small"></i></a>
 							</div>
 	
-							<div class="item grow">
+							<div class="item">
 								<span class="color-light">[[country.name]]</span>
+							</div>
+	
+							<div class="item grow">
 								<a href="/admin/api/imcountry/[[country.id]]/change/" target="blank"> <i class="fa fa-lock"></i></a>
 							</div>
 	
@@ -74,8 +77,11 @@
 										<a ng-show="region.open" ng-click="region.open=false;"><i class="fa fa-minus-square text-small"></i></a>
 									</div>
 	
-									<div class="item grow">
+									<div class="item">
 										<span class="color-light">[[region.name]]</span>
+									</div>
+	
+									<div class="item grow">
 										<a href="/admin/api/imregion/[[region.id]]/change/" target="blank"> <i class="fa fa-lock"></i></a>
 									</div>
 	
