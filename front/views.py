@@ -873,12 +873,16 @@ def adm_compare(request):
 #---------------------------------------------------------------------------------------------------
 def adm_registration(request):
 
-	results = Mosaic.objects.all()
+	results = Mosaic.objects.filter(big_preview_url__isnull=False)
 	for item in results:
 		item.big_preview_url = None
-		item.small_preview_url = None
 		item.save()
 
+	results = Mosaic.objects.filter(small_preview_url__isnull=False)
+	for item in results:
+		item.small_preview_url = None
+		item.save()
+		
 	context = {
 		
 		'potentials':[],
