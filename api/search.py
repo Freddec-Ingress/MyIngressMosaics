@@ -106,7 +106,8 @@ def search_city(request):
 		
 	else:
 		
-		search_obj = Search(city=request.data['name'], region=request.data['region_name'], country=request.data['country_name'])
-		search_obj.save()
+		if not request.user.is_superuser:
+			search_obj = Search(city=request.data['name'], region=request.data['region_name'], country=request.data['country_name'])
+			search_obj.save()
 	
 	return Response(data, status=status.HTTP_200_OK)
