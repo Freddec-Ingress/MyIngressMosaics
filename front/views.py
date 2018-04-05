@@ -839,7 +839,7 @@ def adm_compare(request):
 		
 		data['countries'].append(imcountry_data)
 	
-	imcity_results = IMCity.objects.all()
+	imcity_results = IMCity.objects.filter(done=False)
 	for imcity_obj in imcity_results:
 		
 		imregion_obj = imcity_obj.region
@@ -859,6 +859,11 @@ def adm_compare(request):
 			}
 			
 			data['cities'].append(imcity_data)
+			
+		else:
+			
+			imcity_obj.done = True
+			imcity_obj.save()
 
 	return render(request, 'adm_compare.html', data)
 

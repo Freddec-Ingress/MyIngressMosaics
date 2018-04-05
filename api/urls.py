@@ -57,7 +57,7 @@ urlpatterns = [
 	url(r'^notif/create/', notif_create),
 	url(r'^notif/delete/', notif_delete),
 	
-	url(r'^im/city/', im_city),
+	url(r'^im/city/done/', im_city_done),
 	url(r'^im/region/', im_region),
 	url(r'^im/country/', im_country),
 	url(r'^im/mosaic/die/', im_mosaic_die),

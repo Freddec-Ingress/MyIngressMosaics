@@ -2994,6 +2994,17 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
     
     $scope.current_tab = 'locations';
     
+	/* City management */
+    
+    $scope.done = function(city) {
+    	
+    	var data = { 'id':city.id, }
+    	API.sendRequest('/api/im/city/done/', 'POST', {}, data);
+    	
+		var index = $scope.cities.indexOf(city);
+		$scope.cities.splice(index, 1);
+    }
+    
 	/* Mosaic management */
     
     $scope.die = function(mosaic) {

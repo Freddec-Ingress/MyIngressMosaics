@@ -105,6 +105,19 @@ def im_city(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((AllowAny, ))
+def im_city_done(request):
+	
+	city_obj = IMCity.objects.get(pk=request.data['id'])
+	city_obj.done = True
+	city_obj.save()
+	
+	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((AllowAny, ))
 def im_mosaic(request):
 	
 	city_name = request.data['city_name']

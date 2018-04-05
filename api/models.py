@@ -698,6 +698,8 @@ class IMCity(models.Model):
 	
 	count = models.IntegerField()
 	
+	done = models.BooleanField(default=False)
+	
 	# Admin displaying
 	
 	def __str__(self):
