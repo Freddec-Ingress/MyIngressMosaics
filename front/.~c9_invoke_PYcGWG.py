@@ -795,7 +795,7 @@ def adm_compare(request):
 	
 	data = {
 		
-		'cities':[],
+		'mosaics':[],
 		'countries':[],
 	}
 	
@@ -840,25 +840,31 @@ def adm_compare(request):
 		data['countries'].append(imcountry_data)
 	
 	imcity_results = IMMosaic.objects.filter(dead=False, excluded=False, registered=False)
-	for imcity_obj in imcity_results:
+	for immosaic_obj in immosaic_results:
 		
-		imregion_obj = imcity_obj.region
-		imcountry_obj = imcity_obj.region.country
+		imcountry_obj = IMCountry.objects.get(name=immosaic_obj.country_name)
+		imregion_obj = IMRegion.objects.get(country=imcountry_obj, name=immosaic_obj.region_name)
+
+		mosaic_results = Mosaic.objects.filter(city__region__country__name=imcountry_obj.compare_name, city__region__name=imregion_obj.compare_name, title__iexact=immosaic_obj.name)
+		if mosaic_results.count() > 0:
 		
-		city_results = City.objects.filter(city__region__country__name__iexact=imcountry_obj.compare_name, city__region__name__iexact=imregion_obj.compare_name, title__iexact=imcity_obj.compare_name)
-		if city_results.count() < 1:
+			immosaic_obj.registered = True
+			immosaic_obj.save()
 			
-			imcity_obj = {
+		else:
+			
+			immosaic_data = {
 				
 				'id':immosaic_obj.pk,
 				'name':immosaic_obj.name,
 				'count':immosaic_obj.count,
 				
+				'city_name':immosaic_obj.city_name,
 				'region_name':imregion_obj.compare_name,
 				'country_name':imcountry_obj.compare_name,
 			}
 			
-			data['cities'].append(imcity_data)
+			data['mosaics'].append(immosaic_data)
 
 	return render(request, 'adm_compare.html', data)
 

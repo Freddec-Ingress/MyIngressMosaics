@@ -3031,10 +3031,10 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
    
 	/* Page loading */
 	
-	$scope.init = function(countries, mosaics) {
+	$scope.init = function(countries, cities) {
 		
 		$scope.countries = countries;
-		$scope.mosaics = mosaics;
+		$scope.cities = cities;
 		
 		$scope.countries.sort(function(a, b) {
 
@@ -3061,7 +3061,7 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
 			});
 		}
 		
-		$scope.mosaics.sort(function(a, b) {
+		$scope.cities.sort(function(a, b) {
 
 			if (a.country_name > b.country_name) return 1;
 			if (a.country_name < b.country_name) return -1;
@@ -3069,8 +3069,8 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
 			if (a.region_name > b.region_name) return 1;
 			if (a.region_name < b.region_name) return -1;
 
-			if (a.city_name > b.city_name) return 1;
-			if (a.city_name < b.city_name) return -1;
+			if (a.name > b.name) return 1;
+			if (a.name < b.name) return -1;
 			
 			return 0;
 		});
