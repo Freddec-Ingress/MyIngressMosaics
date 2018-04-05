@@ -60,9 +60,10 @@ def mosaic_create(request):
 		results[0].delete()
 	
 	imgByteArr = mosaic_obj.generatePreview(25)
-	response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_25')
-	mosaic_obj.small_preview_url = response['url']
-	mosaic_obj.save()
+	if imgByteArr:
+		response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_25')
+		mosaic_obj.small_preview_url = response['url']
+		mosaic_obj.save()
 	
 	country_notifiers = Notif.objects.filter(country=country_obj, region__isnull=True, city__isnull=True).values_list('user__email')
 	region_notifiers = Notif.objects.filter(country=country_obj, region=region_obj, city__isnull=True).values_list('user__email')
