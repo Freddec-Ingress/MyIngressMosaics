@@ -839,7 +839,7 @@ def adm_compare(request):
 		
 		data['countries'].append(imcountry_data)
 	
-	imcity_results = IMMosaic.objects.filter(dead=False, excluded=False, registered=False)
+	imcity_results = IMCity.objects.all()
 	for imcity_obj in imcity_results:
 		
 		imregion_obj = imcity_obj.region
