@@ -2,7 +2,7 @@ angular.module('FrontModule.controllers').controller('AdmChecksCtrl', function($
 	
 	/* Tab management */
 	
-	$scope.current_tab = 'misc';
+	$scope.current_tab = 'mosaic';
 	
 	/* Preview management */
 	
@@ -74,10 +74,12 @@ angular.module('FrontModule.controllers').controller('AdmChecksCtrl', function($
 	
 	$scope.refs_without_preview = [];
 	
-	$scope.init = function(refs_without_preview, refs_without_mission_count) {
+	$scope.init = function(refs_without_preview, refs_without_mission_count, regionsids_without_locale) {
 
 		$scope.refs_without_preview = refs_without_preview;
 		$scope.refs_without_mission_count = refs_without_mission_count;
+		
+		$scope.regionsids_without_locale = regionsids_without_locale;
 		
 		$scope.loaded = true;
 	}

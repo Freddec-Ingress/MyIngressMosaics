@@ -910,5 +910,10 @@ def adm_checks(request):
 	for item in results:
 		refs_without_mission_count.append(item)
 		
-	context = { 'refs_without_preview':refs_without_preview, 'refs_without_mission_count':refs_without_mission_count, }
+	regionsids_without_locale = []
+	results = Region.objects.filter(locale__isnull=True).values_list('id', flat=True)
+	for item in results:
+		regionsids_without_locale.append(item)
+		
+	context = { 'refs_without_preview':refs_without_preview, 'refs_without_mission_count':refs_without_mission_count, 'regionsids_without_locale':regionsids_without_locale }
 	return render(request, 'adm_checks.html', context)

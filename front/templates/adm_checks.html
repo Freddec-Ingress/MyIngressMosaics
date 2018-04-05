@@ -13,7 +13,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="AdmChecksCtrl" ng-init="init({{refs_without_preview}}, {{refs_without_mission_count}});">
+	<div id="content" ng-controller="AdmChecksCtrl" ng-init="init({{refs_without_preview}}, {{refs_without_mission_count}}, {{regionsids_without_locale}});">
 		
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
@@ -27,8 +27,8 @@
 			<div class="section">
 				<div class="tab-row">
 				
-					<div class="tab" ng-click="current_tab='misc'" ng-class="{'active':current_tab=='misc'}">
-						Misc
+					<div class="tab" ng-click="current_tab='mosaic'" ng-class="{'active':current_tab=='mosaic'}">
+						Mosaic
 					</div>
 				
 					<div class="tab" ng-click="current_tab='region'" ng-class="{'active':current_tab=='region'}">
@@ -38,45 +38,72 @@
 				</div>
 			</div>
 			
-			<div ng-show="current_tab=='region'">
-			</div>
-			
-			<div ng-show="current_tab=='misc'">
+			<div ng-show="current_tab=='mosaic'">
 				
 				<div class="section">
 					
-					<div class="flex align-center">
+					<div class="flex item text-small">
 						
-						<div class="item">
-							<span class="color-dark">Number of mosaics without preview</span>
-						</div>
-
-						<div class="item">
-							<span class="color-normal">[[refs_without_preview.length]]</span>
-						</div>
-
-						<div class="item">
-							<button class="btn" ng-click="startPreviewGeneration();" ng-disabled="preview_generation">
-								Generate previews
-							</button>
+						<div class="flex align-center bg-block">
+							
+							<div class="item">
+								<span class="color-dark">Number of mosaics without small preview</span>
+							</div>
+	
+							<div class="item grow">
+								<span class="color-normal">[[refs_without_preview.length]]</span>
+							</div>
+	
+							<div class="item">
+								<a ng-click="startPreviewGeneration();" ng-hide="preview_generation">Generate</a>
+								<span class="color-light" ng-show="preview_generation">Generating...</span>
+							</div>
+							
 						</div>
 						
 					</div>
 					
-					<div class="flex align-center">
+					<div class="flex item text-small">
+					
+						<div class="flex align-center bg-block">
+							
+							<div class="item">
+								<span class="color-dark">Number of mosaics without mission count</span>
+							</div>
+	
+							<div class="item">
+								<span class="color-normal">[[refs_without_mission_count.length]]</span>
+							</div>
+	
+							<div class="item">
+								<a ng-click="startComputing();" ng-hide="computing">Compute</a>
+								<span class="color-light" ng-show="computing">Computing...</span>
+							</div>
+							
+						</div>
 						
-						<div class="item">
-							<span class="color-dark">Number of mosaics without mission count</span>
-						</div>
-
-						<div class="item">
-							<span class="color-normal">[[refs_without_mission_count.length]]</span>
-						</div>
-
-						<div class="item">
-							<button class="btn" ng-click="startComputing();" ng-disabled="computing">
-								Compute
-							</button>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+			<div ng-show="current_tab=='region'">
+				
+				<div class="section">
+					
+					<div class="flex item text-small">
+						
+						<div class="flex align-center bg-block">
+							
+							<div class="item">
+								<span class="color-dark">Number of regions without locale</span>
+							</div>
+	
+							<div class="item grow">
+								<span class="color-normal">[[regionsids_without_locale.length]]</span>
+							</div>
+							
 						</div>
 						
 					</div>
