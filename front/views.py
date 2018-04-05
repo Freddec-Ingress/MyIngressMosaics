@@ -848,11 +848,11 @@ def adm_compare(request):
 		city_results = City.objects.filter(region__country__name__iexact=imcountry_obj.compare_name, region__name__iexact=imregion_obj.compare_name, name__iexact=imcity_obj.compare_name)
 		if city_results.count() < 1:
 			
-			imcity_obj = {
+			imcity_data = {
 				
-				'id':immosaic_obj.pk,
-				'name':immosaic_obj.name,
-				'count':immosaic_obj.count,
+				'id':imcity_obj.pk,
+				'name':imcity_obj.name,
+				'count':imcity_obj.count,
 				
 				'region_name':imregion_obj.compare_name,
 				'country_name':imcountry_obj.compare_name,
