@@ -62,12 +62,21 @@
 	
 							<div class="item">
 								<span class="color-muted">IM Count</span>
+							</div>
+	
+							<div class="item">
 								<span class="color-normal">[[country.count]]</span>
 							</div>
 	
 							<div class="item">
 								<span class="color-muted">Internal Count</span>
+							</div>
+	
+							<div class="item">
 								<span class="color-normal">[[country.compare_count]]</span>
+							</div>
+	
+							<div class="item">
 								<span ng-class="{'color-danger':country.diff<0, 'color-success':country.diff>-1}">[[country.diff]]</span>
 							</div>
 	
@@ -94,12 +103,21 @@
 			
 									<div class="item">
 										<span class="color-muted">IM Count</span>
+									</div>
+			
+									<div class="item">
 										<span class="color-normal">[[region.count]]</span>
 									</div>
 			
 									<div class="item">
 										<span class="color-muted">Internal Count</span>
+									</div>
+			
+									<div class="item">
 										<span class="color-normal">[[region.compare_count]]</span>
+									</div>
+			
+									<div class="item">
 										<span ng-class="{'color-danger':region.diff<0, 'color-success':region.diff>-1}">[[region.diff]]</span>
 									</div>
 	
@@ -111,11 +129,6 @@
 										
 										<div class="flex align-center text-small bg-block mb-small">
 									
-											<div class="item" ng-show="city.mosaics.length>0">
-												<a ng-show="!city.open" ng-click="city.open=true;"><i class="fa fa-plus-square text-small"></i></a>
-												<a ng-show="city.open" ng-click="city.open=false;"><i class="fa fa-minus-square text-small"></i></a>
-											</div>
-			
 											<div class="item">
 												<span class="color-light">[[city.name]]</span>
 											</div>
@@ -126,20 +139,29 @@
 					
 											<div class="item">
 												<span class="color-muted">IM Count</span>
+											</div>
+					
+											<div class="item">
 												<span class="color-normal">[[city.count]]</span>
 											</div>
 					
 											<div class="item">
 												<span class="color-muted">Internal Count</span>
+											</div>
+					
+											<div class="item">
 												<span class="color-normal">[[city.compare_count]]</span>
+											</div>
+					
+											<div class="item">
 												<span ng-class="{'color-danger':city.diff<0, 'color-success':city.diff>-1}">[[city.diff]]</span>
 											</div>
 			
 										</div>
 								
-										<div class="bg-block" ng-show="city.open" style="margin-left:20px;">
+										<div class="bg-block" style="margin-left:20px;">
 											
-											<div class="width-12" ng-repeat="mosaic in city.mosaics" style="border-top:1px solid #000;">
+											<div class="flex text-small" ng-repeat="mosaic in city.mosaics" style="border-top:1px solid #000;">
 			
 												<div class="item">
 													<span class="color-dark">[[mosaic.count]]</span>
