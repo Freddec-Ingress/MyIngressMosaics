@@ -870,41 +870,14 @@ def adm_compare(request):
 						'dead':immosaic_obj.dead,
 					}
 					
-					imcity_data['compare_count'] = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name, city_name=imcity_obj.name).count()
-					imcity_data['diff'] = imcity_data['compare_count'] - imcity_data['count']
-
+					imcity_data['mosaics'].append(immosaic_data)
+					
 				imregion_data['cities'].append(imcity_data)
 
 			imcountry_data['regions'].append(imregion_data)
 		
 		data['countries'].append(imcountry_data)
 	
-	imcity_results = IMCity.objects.filter(done=False)
-	for imcity_obj in imcity_results:
-		
-		imregion_obj = imcity_obj.region
-		imcountry_obj = imcity_obj.region.country
-		
-		city_results = City.objects.filter(name__iexact=imcity_obj.name)
-		if city_results.count() < 1:
-			
-			imcity_data = {
-				
-				'id':imcity_obj.pk,
-				'name':imcity_obj.name,
-				'count':imcity_obj.count,
-				
-				'region_name':imregion_obj.compare_name,
-				'country_name':imcountry_obj.compare_name,
-			}
-			
-			data['cities'].append(imcity_data)
-			
-		else:
-			
-			imcity_obj.done = True
-			imcity_obj.save()
-
 	return render(request, 'adm_compare.html', data)
 
 
