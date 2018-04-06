@@ -3056,45 +3056,6 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
 		$scope.countries = countries;
 		$scope.cities = cities;
 		
-		$scope.countries.sort(function(a, b) {
-
-			if (a.diff > b.diff) return 1;
-			if (a.diff < b.diff) return -1;
-			
-			if (a.name > b.name) return 1;
-			if (a.name < b.name) return -1;
-			
-			return 0;
-		});
-		
-		for (var country of $scope.countries) {
-		
-			country.regions.sort(function(a, b) {
-
-				if (a.diff > b.diff) return 1;
-				if (a.diff < b.diff) return -1;
-				
-				if (a.name > b.name) return 1;
-				if (a.name < b.name) return -1;
-				
-				return 0;
-			});
-		}
-		
-		$scope.cities.sort(function(a, b) {
-
-			if (a.country_name > b.country_name) return 1;
-			if (a.country_name < b.country_name) return -1;
-
-			if (a.region_name > b.region_name) return 1;
-			if (a.region_name < b.region_name) return -1;
-
-			if (a.name > b.name) return 1;
-			if (a.name < b.name) return -1;
-			
-			return 0;
-		});
-		
         $scope.loaded = true;
 	};
 });
