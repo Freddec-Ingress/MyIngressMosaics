@@ -153,7 +153,7 @@
 									<div class="bg-block mb-small" style="margin-left:20px;">
 										
 										{% for mosaic in city.mosaics %}
-										<div class="flex text-small" style="border-top:1px solid #000;" ng-model="mosaic_{{mosaic.id}}" ng-init="mosaic_{{mosaic.id}}={{mosaic}};">
+										<div class="flex text-small" style="border-top:1px solid #000;" ng-model="mosaic_{{mosaic.id}}" ng-init="mosaic_{{mosaic.id}}={{mosaic|jsonify}};">
 		
 											<div class="item width-1">
 												<span class="color-dark">{{mosaic.count}}</span>
