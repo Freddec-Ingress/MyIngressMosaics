@@ -15,7 +15,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="AdmCompareCtrl" ng-init="init({{countries|jsonify}}, {{cities|jsonify}});">
+	<div id="content" ng-controller="AdmCompareCtrl">
 	
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
@@ -27,221 +27,181 @@
 		<div class="container" ng-class="{'active':loaded}">
 			
 			<div class="section">
-				<div class="tab-row">
-				
-					<div class="tab" ng-click="current_tab='locations'" ng-class="{'active':current_tab=='locations'}">
-						Locations
-					</div>
-				
-					<div class="tab" ng-click="current_tab='cities'" ng-class="{'active':current_tab=='cities'}">
-						Cities
-					</div>
-				
-				</div>
-			</div>
-			
-			<div ng-show="current_tab=='locations'">
-				
-				<div class="section">
-					<div class="item" ng-repeat="country in countries">
-	
-						<div class="flex align-center text-small bg-block mb-small">
-							
-							<div class="item" ng-show="country.regions.length>0">
-								<a ng-show="!country.open" ng-click="country.open=true;"><i class="fa fa-plus-square text-small"></i></a>
-								<a ng-show="country.open" ng-click="country.open=false;"><i class="fa fa-minus-square text-small"></i></a>
-							</div>
-	
-							<div class="item">
-								<span class="color-light">[[country.name]]</span>
-							</div>
-	
-							<div class="item grow">
-								<a href="/admin/api/imcountry/[[country.id]]/change/" target="blank"><i class="fa fa-lock"></i></a>
-							</div>
-	
-							<div class="item">
-								<span class="color-muted">IM Count</span>
-							</div>
-	
-							<div class="item">
-								<span class="color-normal">[[country.count]]</span>
-							</div>
-	
-							<div class="item">
-								<span class="color-muted">Internal Count</span>
-							</div>
-	
-							<div class="item">
-								<span class="color-normal">[[country.compare_count]]</span>
-							</div>
-	
-							<div class="item">
-								<span ng-class="{'color-danger':country.diff<0, 'color-success':country.diff>-1}">[[country.diff]]</span>
-							</div>
-	
+				{% for country in countries %}
+				<div class="item" ng-init="country={{country|jsonify}}">
+					
+					<div class="flex align-center text-small bg-block mb-small">
+						
+						{% if country.regions %}
+						<div class="item" >
+							<a ng-show="!country.open" ng-click="country.open=true;"><i class="fa fa-plus-square text-small"></i></a>
+							<a ng-show="country.open" ng-click="country.open=false;"><i class="fa fa-minus-square text-small"></i></a>
 						</div>
-						
-						<div ng-show="country.open" style="margin-left:20px;">
-							
-							<div class="width-12" ng-repeat="region in country.regions">
-								
-								<div class="flex align-center text-small bg-block mb-small">
-							
-									<div class="item" ng-show="region.cities.length>0">
-										<a ng-show="!region.open" ng-click="region.open=true;"><i class="fa fa-plus-square text-small"></i></a>
-										<a ng-show="region.open" ng-click="region.open=false;"><i class="fa fa-minus-square text-small"></i></a>
-									</div>
-	
-									<div class="item">
-										<span class="color-light">[[region.name]]</span>
-									</div>
-	
-									<div class="item grow">
-										<a href="/admin/api/imregion/[[region.id]]/change/" target="blank"><i class="fa fa-lock"></i></a>
-									</div>
-			
-									<div class="item">
-										<span class="color-muted">IM Count</span>
-									</div>
-			
-									<div class="item">
-										<span class="color-normal">[[region.count]]</span>
-									</div>
-			
-									<div class="item">
-										<span class="color-muted">Internal Count</span>
-									</div>
-			
-									<div class="item">
-										<span class="color-normal">[[region.compare_count]]</span>
-									</div>
-			
-									<div class="item">
-										<span ng-class="{'color-danger':region.diff<0, 'color-success':region.diff>-1}">[[region.diff]]</span>
-									</div>
-	
-								</div>
-						
-								<div ng-show="region.open" style="margin-left:20px;">
-									
-									<div class="width-12" ng-repeat="city in region.cities">
-										
-										<div class="flex align-center text-small bg-block mb-small">
-									
-											<div class="item">
-												<span class="color-light">[[city.name]]</span>
-											</div>
-			
-											<div class="item grow">
-												<a href="/admin/api/imcity/[[city.id]]/change/" target="blank"><i class="fa fa-lock"></i></a>
-											</div>
-					
-											<div class="item">
-												<span class="color-muted">IM Count</span>
-											</div>
-					
-											<div class="item">
-												<span class="color-normal">[[city.count]]</span>
-											</div>
-					
-											<div class="item">
-												<span class="color-muted">Internal Count</span>
-											</div>
-					
-											<div class="item">
-												<span class="color-normal">[[city.compare_count]]</span>
-											</div>
-					
-											<div class="item">
-												<span ng-class="{'color-danger':city.diff<0, 'color-success':city.diff>-1}">[[city.diff]]</span>
-											</div>
-			
-										</div>
-								
-										<div class="bg-block" style="margin-left:20px;">
-											
-											<div class="flex text-small" ng-repeat="mosaic in city.mosaics" style="border-top:1px solid #000;">
-			
-												<div class="item">
-													<span class="color-dark">[[mosaic.count]]</span>
-												</div>
-			
-												<div class="item grow">
-													<span class="color-normal">[[mosaic.name]]</span>
-												</div>
-			
-												<div class="item" ng-show="!mosaic.dead && !mosaic.excluded && !mosaic.registered">
-													<a href="/search/[[mosaic.name]]" target="blank"><i class="fa fa-search"></i></a>
-												</div>
-			
-												<div class="item" ng-show="!mosaic.dead && !mosaic.excluded && !mosaic.registered">
-													<a ng-click="die(mosaic);">die</i></a>
-												</div>
-			
-												<div class="item" ng-show="!mosaic.dead && !mosaic.excluded && !mosaic.registered">
-													<a ng-click="exclude(mosaic);">exclude</i></a>
-												</div>
-			
-												<div class="item" ng-show="!mosaic.dead && !mosaic.excluded && !mosaic.registered">
-													<a ng-click="register(mosaic);">register</i></a>
-												</div>
-			
-												<div class="item" ng-show="mosaic.dead">
-													<span class="color-muted">dead</span>
-												</div>
-			
-												<div class="item" ng-show="mosaic.excluded">
-													<span class="color-dark">excluded</span>
-												</div>
-			
-												<div class="item" ng-show="mosaic.dead">
-													<span class="color-success">registered</span>
-												</div>
-												
-											</div>
-											
-										</div>
-										
-									</div>
+						{% endif %}
 
-								</div>
-								
-							</div>
-						
+						<div class="item">
+							<span class="color-light">{{country.name}}</span>
 						</div>
-						
+
+						<div class="item grow">
+							<a href="/admin/api/imcountry/{{country.id}}/change/" target="blank"><i class="fa fa-lock"></i></a>
+						</div>
+
+						<div class="item width-2">
+							<span class="color-muted">IM Count</span>
+						</div>
+
+						<div class="item width-1">
+							<span class="color-normal">{{country.count}}</span>
+						</div>
+
+						<div class="item width-2">
+							<span class="color-muted">Internal Count</span>
+						</div>
+
+						<div class="item width-1">
+							<span class="color-normal">{{country.compare_count}}</span>
+						</div>
+
+						<div class="item width-1">
+							<span ng-class="{'color-danger':country.diff<0, 'color-success':country.diff>-1}" ng-init="country.diff={{country.diff}}">{{country.diff}}</span>
+						</div>
+
 					</div>
-				</div>
-			
-			</div>
-			
-			<div ng-show="current_tab=='cities'">
-			
-				<div class="section">
-					<div class="item" ng-repeat="city in cities">
+					
+					<div ng-show="country.open" style="margin-left:20px;">
 						
-						<div class="text-small bg-block mb-small">
+						<div class="width-12" ng-repeat="region in country.regions">
 							
-							<div class="flex align-center">
-								
-								<div class="item grow">
-									<span class="color-normal">[[city.name]], [[city.region_name]], [[city.country_name]]</span>
+							<div class="flex align-center text-small bg-block mb-small">
+						
+								<div class="item" ng-show="region.cities.length>0">
+									<a ng-show="!region.open" ng-click="region.open=true;"><i class="fa fa-plus-square text-small"></i></a>
+									<a ng-show="region.open" ng-click="region.open=false;"><i class="fa fa-minus-square text-small"></i></a>
 								</div>
 
 								<div class="item">
-									<a ng-click="done(city);"><i class="fa fa-times"></i></a>
+									<span class="color-light">[[region.name]]</span>
 								</div>
-								
-							</div>
-						
-						</div>
-						
-					</div>
-				</div>
-				
-			</div>
 
+								<div class="item grow">
+									<a href="/admin/api/imregion/[[region.id]]/change/" target="blank"><i class="fa fa-lock"></i></a>
+								</div>
+		
+								<div class="item width-2">
+									<span class="color-muted">IM Count</span>
+								</div>
+		
+								<div class="item width-1">
+									<span class="color-normal">[[region.count]]</span>
+								</div>
+		
+								<div class="item width-2">
+									<span class="color-muted">Internal Count</span>
+								</div>
+		
+								<div class="item width-1">
+									<span class="color-normal">[[region.compare_count]]</span>
+								</div>
+		
+								<div class="item width-1">
+									<span ng-class="{'color-danger':region.diff<0, 'color-success':region.diff>-1}">[[region.diff]]</span>
+								</div>
+
+							</div>
+					
+							<div ng-show="region.open" style="margin-left:20px;">
+								
+								<div class="width-12" ng-repeat="city in region.cities">
+									
+									<div class="flex align-center text-small bg-block mb-small">
+								
+										<div class="item">
+											<span class="color-light">[[city.name]]</span>
+										</div>
+		
+										<div class="item grow">
+											<a href="/admin/api/imcity/[[city.id]]/change/" target="blank"><i class="fa fa-lock"></i></a>
+										</div>
+				
+										<div class="item width-2">
+											<span class="color-muted">IM Count</span>
+										</div>
+				
+										<div class="item width-1">
+											<span class="color-normal">[[city.count]]</span>
+										</div>
+				
+										<div class="item width-2">
+											<span class="color-muted">Internal Count</span>
+										</div>
+				
+										<div class="item width-1">
+											<span class="color-normal">[[city.compare_count]]</span>
+										</div>
+				
+										<div class="item width-1">
+											<span ng-class="{'color-danger':city.diff<0, 'color-success':city.diff>-1}">[[city.diff]]</span>
+										</div>
+		
+									</div>
+							
+									<div class="bg-block mb-small" style="margin-left:20px;">
+										
+										<div class="flex text-small" ng-repeat="mosaic in city.mosaics" style="border-top:1px solid #000;">
+		
+											<div class="item width-1">
+												<span class="color-dark">[[mosaic.count]]</span>
+											</div>
+		
+											<div class="item grow">
+												<span class="color-normal">[[mosaic.name]]</span>
+											</div>
+		
+											<div class="item" ng-show="!mosaic.dead && !mosaic.excluded && !mosaic.registered">
+												<a href="/search/[[mosaic.name]]" target="blank"><i class="fa fa-search"></i></a>
+											</div>
+		
+											<div class="item" ng-show="!mosaic.dead && !mosaic.excluded && !mosaic.registered">
+												<a ng-click="die(mosaic);">die</i></a>
+											</div>
+		
+											<div class="item" ng-show="!mosaic.dead && !mosaic.excluded && !mosaic.registered">
+												<a ng-click="exclude(mosaic);">exclude</i></a>
+											</div>
+		
+											<div class="item" ng-show="!mosaic.dead && !mosaic.excluded && !mosaic.registered">
+												<a ng-click="register(mosaic);">register</i></a>
+											</div>
+		
+											<div class="item" ng-show="mosaic.dead">
+												<span class="color-muted">dead</span>
+											</div>
+		
+											<div class="item" ng-show="mosaic.excluded">
+												<span class="color-dark">excluded</span>
+											</div>
+		
+											<div class="item" ng-show="mosaic.registered">
+												<span class="color-success">registered</span>
+											</div>
+											
+										</div>
+										
+									</div>
+									
+								</div>
+
+							</div>
+							
+						</div>
+					
+					</div>
+					
+				</div>
+				{% endfor %}
+			</div>
+			
 		</div>
 	
 	</div>

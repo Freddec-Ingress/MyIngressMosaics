@@ -2999,10 +2999,6 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 });
 angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function($scope, API) {
     
-	/* Tab management */
-    
-    $scope.current_tab = 'locations';
-    
 	/* City management */
     
     $scope.done = function(city) {
@@ -3051,13 +3047,7 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
    
 	/* Page loading */
 	
-	$scope.init = function(countries, cities) {
-		
-		$scope.countries = countries;
-		$scope.cities = cities;
-		
-        $scope.loaded = true;
-	};
+    $scope.loaded = true;
 });
 angular.module('FrontModule.controllers').controller('AdmChecksCtrl', function($scope, API) {
 	
