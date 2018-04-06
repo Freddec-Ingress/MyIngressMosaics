@@ -28,7 +28,7 @@
 			
 			<div class="section">
 				{% for country in countries %}
-				<div class="item" ng-init="country={{country|jsonify}}">
+				<div class="item">
 					
 					<div class="flex align-center text-small bg-block mb-small">
 						
@@ -71,7 +71,8 @@
 					
 					<div ng-show="country.open" style="margin-left:20px;">
 						
-						<div class="width-12" ng-repeat="region in country.regions">
+						{% for region in country.regions %}
+						<div class="width-12">
 							
 							<div class="flex align-center text-small bg-block mb-small">
 						
@@ -195,6 +196,7 @@
 							</div>
 							
 						</div>
+						{% endfor %}
 					
 					</div>
 					
