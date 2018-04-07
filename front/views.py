@@ -851,7 +851,7 @@ def adm_compare(request):
 					'dead':immosaic_obj.dead,
 				}
 				
-				imregion_data['mosaics'].append(imcity_data)
+				imregion_data['mosaics'].append(immosaic_data)
 
 			imcountry_data['regions'].append(imregion_data)
 		
