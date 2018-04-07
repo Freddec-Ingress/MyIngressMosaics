@@ -76,7 +76,7 @@
 							
 							<div class="flex align-center text-small bg-block mb-small">
 						
-								{% if region.cities %}
+								{% if region.mosaics %}
 								<div class="item">
 									<a ng-show="!region_{{region.id}}.open" ng-click="region_{{region.id}}.open=true;"><i class="fa fa-plus-square text-small"></i></a>
 									<a ng-show="region_{{region.id}}.open" ng-click="region_{{region.id}}.open=false;"><i class="fa fa-minus-square text-small"></i></a>
@@ -153,15 +153,15 @@
 									<div class="item" ng-show="mosaic_{{mosaic.id}}.registered">
 										<span class="color-success">registered</span>
 									</div>
-
+									
 								</div>
 								{% endfor %}
-
+								
 							</div>
 							
 						</div>
 						{% endfor %}
-					
+						
 					</div>
 					
 				</div>
