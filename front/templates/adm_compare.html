@@ -115,7 +115,7 @@
 					
 							<div class="bg-block mb-small" ng-show="region_{{region.id}}.open" style="margin-left:20px;">
 								
-								{% for mosaic in city.mosaics %}
+								{% for mosaic in region.mosaics %}
 								<div class="flex text-small" style="border-top:1px solid #000;" ng-model="mosaic_{{mosaic.id}}" ng-init="mosaic_{{mosaic.id}}={{mosaic|jsonify}};">
 
 									<div class="item width-1">
