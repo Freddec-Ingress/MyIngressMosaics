@@ -831,48 +831,27 @@ def adm_compare(request):
 				
 				'diff':0,
 
-				'cities':[],
+				'mosaics':[],
 			}
 			
 			imregion_data['compare_count'] = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name).count()
 			imregion_data['diff'] = imregion_data['compare_count'] - imregion_data['count']
 
-			imcity_results = imregion_obj.cities.all().order_by('-count')
-			for imcity_obj in imcity_results:
+			immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name, dead=False, excluded=False, registered=False).order_by('-count', 'name')
+			for immosaic_obj in immosaic_results:
 				
-				imcity_data = {
+				immosaic_data = {
 					
-					'id':imcity_obj.pk,
-					'name':imcity_obj.name,
-					'count':imcity_obj.count,
+					'id':immosaic_obj.pk,
+					'name':immosaic_obj.name,
+					'count':immosaic_obj.count,
 					
-					'compare_count':0,
-					
-					'diff':0,
-					
-					'mosaics':[],
+					'registered':immosaic_obj.registered,
+					'excluded':immosaic_obj.excluded,
+					'dead':immosaic_obj.dead,
 				}
 				
-				imcity_data['compare_count'] = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name, city_name=imcity_obj.name).count()
-				imcity_data['diff'] = imcity_data['compare_count'] - imcity_data['count']
-	
-				immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name, city_name=imcity_obj.name).order_by('-count')
-				for immosaic_obj in immosaic_results:
-					
-					immosaic_data = {
-						
-						'id':immosaic_obj.pk,
-						'name':immosaic_obj.name,
-						'count':immosaic_obj.count,
-						
-						'registered':immosaic_obj.registered,
-						'excluded':immosaic_obj.excluded,
-						'dead':immosaic_obj.dead,
-					}
-					
-					imcity_data['mosaics'].append(immosaic_data)
-					
-				imregion_data['cities'].append(imcity_data)
+				imregion_data['mosaics'].append(imcity_data)
 
 			imcountry_data['regions'].append(imregion_data)
 		

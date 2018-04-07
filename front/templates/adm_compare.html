@@ -113,89 +113,47 @@
 
 							</div>
 					
-							<div ng-show="region_{{region.id}}.open" style="margin-left:20px;">
+							<div class="bg-block mb-small" ng-show="region_{{region.id}}.open" style="margin-left:20px;">
 								
-								{% for city in region.cities %}
-								<div class="width-12">
-									
-									<div class="flex align-center text-small bg-block mb-small">
-								
-										<div class="item">
-											<span class="color-light">{{city.name}}</span>
-										</div>
-		
-										<div class="item grow">
-											<a href="/admin/api/imcity/{{city.id}}/change/" target="blank"><i class="fa fa-lock"></i></a>
-										</div>
-				
-										<div class="item width-2 text-right">
-											<span class="color-muted">IM Count</span>
-										</div>
-				
-										<div class="item width-1 text-right">
-											<span class="color-normal">{{city.count}}</span>
-										</div>
-				
-										<div class="item width-2 text-right">
-											<span class="color-muted">Internal Count</span>
-										</div>
-				
-										<div class="item width-1 text-right">
-											<span class="color-normal">{{city.compare_count}}</span>
-										</div>
-				
-										<div class="item width-1 text-right">
-											<span ng-class="{'color-danger':city_diff_{{city.id}}<0, 'color-success':city_diff_{{city.id}}>-1}" ng-model="city_diff_{{city.id}}" ng-init="city_diff_{{city.id}}={{city.diff}}">{{city.diff}}</span>
-										</div>
-		
+								{% for mosaic in city.mosaics %}
+								<div class="flex text-small" style="border-top:1px solid #000;" ng-model="mosaic_{{mosaic.id}}" ng-init="mosaic_{{mosaic.id}}={{mosaic|jsonify}};">
+
+									<div class="item width-1">
+										<span class="color-dark">{{mosaic.count}}</span>
 									</div>
-							
-									<div class="bg-block mb-small" style="margin-left:20px;">
-										
-										{% for mosaic in city.mosaics %}
-										<div class="flex text-small" style="border-top:1px solid #000;" ng-model="mosaic_{{mosaic.id}}" ng-init="mosaic_{{mosaic.id}}={{mosaic|jsonify}};">
-		
-											<div class="item width-1">
-												<span class="color-dark">{{mosaic.count}}</span>
-											</div>
-		
-											<div class="item grow">
-												<span class="color-normal">{{mosaic.name}}</span>
-											</div>
-											
-											<div class="item" ng-show="!mosaic_{{mosaic.id}}.dead && !mosaic_{{mosaic.id}}.excluded && !mosaic_{{mosaic.id}}.registered">
-												<a href="/search/{{mosaic.name}}" target="blank"><i class="fa fa-search"></i></a>
-											</div>
-		
-											<div class="item" ng-show="!mosaic_{{mosaic.id}}.dead && !mosaic_{{mosaic.id}}.excluded && !mosaic_{{mosaic.id}}.registered">
-												<a ng-click="die(mosaic_{{mosaic.id}});">die</i></a>
-											</div>
-		
-											<div class="item" ng-show="!mosaic_{{mosaic.id}}.dead && !mosaic_{{mosaic.id}}.excluded && !mosaic_{{mosaic.id}}.registered">
-												<a ng-click="exclude(mosaic_{{mosaic.id}});">exclude</i></a>
-											</div>
-		
-											<div class="item" ng-show="!mosaic_{{mosaic.id}}.dead && !mosaic_{{mosaic.id}}.excluded && !mosaic_{{mosaic.id}}.registered">
-												<a ng-click="register(mosaic_{{mosaic.id}});">register</i></a>
-											</div>
 
-											<div class="item" ng-show="mosaic_{{mosaic.id}}.dead">
-												<span class="color-muted">dead</span>
-											</div>
-
-											<div class="item" ng-show="mosaic_{{mosaic.id}}.excluded">
-												<span class="color-dark">excluded</span>
-											</div>
-
-											<div class="item" ng-show="mosaic_{{mosaic.id}}.registered">
-												<span class="color-success">registered</span>
-											</div>
-
-										</div>
-										{% endfor %}
-										
+									<div class="item grow">
+										<span class="color-normal">{{mosaic.name}}</span>
 									</div>
 									
+									<div class="item" ng-show="!mosaic_{{mosaic.id}}.dead && !mosaic_{{mosaic.id}}.excluded && !mosaic_{{mosaic.id}}.registered">
+										<a href="/search/{{mosaic.name}}" target="blank"><i class="fa fa-search"></i></a>
+									</div>
+
+									<div class="item" ng-show="!mosaic_{{mosaic.id}}.dead && !mosaic_{{mosaic.id}}.excluded && !mosaic_{{mosaic.id}}.registered">
+										<a ng-click="die(mosaic_{{mosaic.id}});">die</i></a>
+									</div>
+
+									<div class="item" ng-show="!mosaic_{{mosaic.id}}.dead && !mosaic_{{mosaic.id}}.excluded && !mosaic_{{mosaic.id}}.registered">
+										<a ng-click="exclude(mosaic_{{mosaic.id}});">exclude</i></a>
+									</div>
+
+									<div class="item" ng-show="!mosaic_{{mosaic.id}}.dead && !mosaic_{{mosaic.id}}.excluded && !mosaic_{{mosaic.id}}.registered">
+										<a ng-click="register(mosaic_{{mosaic.id}});">register</i></a>
+									</div>
+
+									<div class="item" ng-show="mosaic_{{mosaic.id}}.dead">
+										<span class="color-muted">dead</span>
+									</div>
+
+									<div class="item" ng-show="mosaic_{{mosaic.id}}.excluded">
+										<span class="color-dark">excluded</span>
+									</div>
+
+									<div class="item" ng-show="mosaic_{{mosaic.id}}.registered">
+										<span class="color-success">registered</span>
+									</div>
+
 								</div>
 								{% endfor %}
 
