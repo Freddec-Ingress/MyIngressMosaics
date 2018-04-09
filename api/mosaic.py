@@ -133,6 +133,7 @@ def mosaic_compute(request):
 def mosaic_addtag(request):
 
 	mosaic_obj = Mosaic.objects.get(ref=request.data['ref'])
+	if not mosaic_obj.tags: mosaic_obj.tags = ''
 	mosaic_obj.tags += request.data['tag'] + '|'
 	mosaic_obj.save()
 
