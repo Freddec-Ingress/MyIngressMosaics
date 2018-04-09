@@ -3073,6 +3073,12 @@ angular.module('FrontModule.controllers').controller('AdmChecksCtrl', function($
 		});
 	}
 	
+	$scope.exitTag = function(mosaic) {
+		
+		var index = $scope.mosaics_to_tag.indexOf(mosaic);
+		$scope.mosaics_to_tag.splice(index, 1);
+	}
+	
 	/* Preview management */
 	
 	$scope.preview_generation = false;
