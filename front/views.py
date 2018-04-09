@@ -343,9 +343,12 @@ def search(request, search_string = ''):
 #---------------------------------------------------------------------------------------------------
 def tag(request, tag):
 	
+	tag_label = tag
+	if tag_label == 'MPEarthDay': tag_label = 'MP Earth Day'
+	
 	data = {
 		
-		'tag':'#'+tag,
+		'tag':'#'+tag_label,
 		'mosaics':[],
 	}
 	
