@@ -56,9 +56,9 @@
 				<div class="flex">
 					<div class="grow flex width-12 wrap">
 						<div class="item flex justify-center" ng-repeat="index in indexes_by_country track by $index" style="width:40px;">
-							<a class="badge badge-link item text-center" ng-click="setByCountryIndex(index);" ng-class="{'active': current_by_country_index==index}" style="width:100%;">
+							<a class="flex align-center badge badge-link item text-center" ng-click="setByCountryIndex(index);" ng-class="{'active': current_by_country_index==index}" style="width:100%;">
 								<span class="flag-icon flag-icon-[[index.code]]"></span>
-								[[index.code]]
+								[[index.name]]
 							</a>
 						</div>
 					</div>

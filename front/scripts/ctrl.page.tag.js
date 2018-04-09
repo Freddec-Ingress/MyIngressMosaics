@@ -39,8 +39,8 @@ angular.module('FrontModule.controllers').controller('TagPageCtrl', function($sc
 				
 				index_by_country = {
 					
-					'code':mosaic.country_code.toUpperCase(),
-					'name':mosaic.country_name,
+					'code':mosaic.country_code,
+					'name':mosaic.country_code.toUpperCase(),
 					
 					'mosaics':[],
 				}
@@ -58,8 +58,8 @@ angular.module('FrontModule.controllers').controller('TagPageCtrl', function($sc
 		
 		$scope.indexes_by_country.sort(function(a, b) {
 			
-			if (a.name > b.name) return -1;
-			if (a.name < b.name) return 1;
+			if (a.name > b.name) return 1;
+			if (a.name < b.name) return -1;
 			
 			return 0;
 		});
