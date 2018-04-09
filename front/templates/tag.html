@@ -41,8 +41,46 @@
 				
 			</div>
 			
+			<div class="section">
+				
+				<div class="flex wrap">
+					
+					<div class="item">
+						<a ng-click="sortMosaicsByDate();" ng-class="{'active': mosaics_sorting=='by_date'}">
+							{% trans "By date" %}
+						</a>
+					</div>
+
+					<div class="item">
+						<a ng-click="sortMosaicsByMissions();" ng-class="{'active': mosaics_sorting=='by_missions'}">
+							{% trans "By missions" %}
+						</a>
+					</div>
+					
+				</div>
+				
+			</div>
 			
+			<div ng-if="mosaics_sorting=='by_date'" class="flex-col">
+				
+				<div class="section">
+					<div class="flex wrap">
+						<mosaic ng-repeat="mosaic in mosaics_by_date track by $index" mosaic="mosaic"></mosaic>
+					</div>
+				</div>
+				
+			</div>
 			
+			<div ng-if="mosaics_sorting=='by_missions'" class="flex-col">
+				
+				<div class="section">
+					<div class="flex wrap">
+						<mosaic ng-repeat="mosaic in mosaics_by_missions track by $index" mosaic="mosaic"></mosaic>
+					</div>
+				</div>
+				
+			</div>
+	
 		</div>
 
 	</div>
