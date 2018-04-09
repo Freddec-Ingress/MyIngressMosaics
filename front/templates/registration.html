@@ -378,14 +378,32 @@
 						
 						<div class="flex align-center">
 							
-							<div class="flex align-center" ng-click="addTag('#MissionDay'); tag_mission_day=true;" ng-model="tag_mission_day" ng-show="!tag_mission_day">
-								<input type="checkbox" class="mr-small" ng-checked="tag_mission_day">
-								<label class="color-dark">#MissionDay</label>
+							<div class="width-6 width-xl-4">
+								
+								<div class="flex align-center" ng-click="addTag('#MissionDay'); tag_mission_day=true;" ng-model="tag_mission_day" ng-show="!tag_mission_day">
+									<input type="checkbox" class="mr-small" ng-checked="tag_mission_day">
+									<label class="color-dark">#MissionDay</label>
+								</div>
+								
+								<div class="flex align-center" ng-click="removeTag('#MissionDay'); tag_mission_day=false;" ng-model="tag_mission_day" ng-show="tag_mission_day">
+									<input type="checkbox" class="mr-small" ng-checked="tag_mission_day">
+									<label class="color-dark">#MissionDay</label>
+								</div>
+								
 							</div>
 							
-							<div class="flex align-center" ng-click="removeTag('#MissionDay'); tag_mission_day=false;" ng-model="tag_mission_day" ng-show="tag_mission_day">
-								<input type="checkbox" class="mr-small" ng-checked="tag_mission_day">
-								<label class="color-dark">#MissionDay</label>
+							<div class="width-6 width-xl-4">
+								
+								<div class="flex align-center" ng-click="addTag('#MP Earth Day'); tag_earth_day=true;" ng-model="tag_earth_day" ng-show="!tag_earth_day">
+									<input type="checkbox" class="mr-small" ng-checked="tag_earth_day">
+									<label class="color-dark">#MP Earth Day</label>
+								</div>
+								
+								<div class="flex align-center" ng-click="removeTag('#MP Earth Day'); tag_earth_day=false;" ng-model="tag_earth_day" ng-show="tag_earth_day">
+									<input type="checkbox" class="mr-small" ng-checked="tag_earth_day">
+									<label class="color-dark">#MP Earth Day</label>
+								</div>
+								
 							</div>
 							
 						</div>
