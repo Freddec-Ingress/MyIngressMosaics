@@ -345,6 +345,7 @@ def tag(request, tag):
 	
 	data = {
 		
+		'tag':'#'+tag,
 		'mosaics':[],
 	}
 	
