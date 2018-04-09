@@ -2834,8 +2834,8 @@ angular.module('FrontModule.controllers').controller('TagPageCtrl', function($sc
 		
 		$scope.mosaics_by_date.sort(function(a, b) {
 			
-			if (a.id > b.id) return -1;
-			if (a.id < b.id) return 1;
+			if (a.id > b.id) return 1;
+			if (a.id < b.id) return -1;
 			
 			return 0;
 		});
