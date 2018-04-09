@@ -202,6 +202,7 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 	
 	$scope.mosaic_name = '';
 	$scope.mosaic_type = 'sequence';
+	$scope.mosaic_tags = '';
 	
 	$scope.default = '';
 	
@@ -340,6 +341,7 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 			'type': $scope.mosaic_type,
 			'title': $scope.mosaic_name,
 			'missions': $scope.selected,
+			'tags':$scope.mosaic_tags,
 		};
 		
 		API.sendRequest('/api/mosaic/create/', 'POST', {}, data).then(function(response) {
@@ -368,6 +370,7 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 			
 			$scope.mosaic_name = '';
 			$scope.mosaic_type = 'sequence';
+			$scope.mosaic_tags = '';
 			
 			$scope.city_name = '';
 			$scope.region_name = '';
@@ -410,6 +413,7 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 			
 			$scope.mosaic_name = '';
 			$scope.mosaic_type = 'sequence';
+			$scope.mosaic_tags = '';
 			
 			$scope.city_name = '';
 			$scope.region_name = '';
