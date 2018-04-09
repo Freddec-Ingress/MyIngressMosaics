@@ -44,7 +44,7 @@
 			<div class="section">
 				<div class="tab-row">
 				
-					<div class="tab" class="active">
+					<div class="tab active">
 						{% trans "Mosaics" %}
 						<span class="ml-normal badge">{{mosaics|length}}</span>
 					</div>
@@ -63,6 +63,12 @@
 					</div>
 
 					<div class="item">
+						<a ng-click="mosaics_sorting='by_country';" ng-class="{'active': mosaics_sorting=='by_country'}">
+							{% trans "By country" %}
+						</a>
+					</div>
+
+					<div class="item">
 						<a ng-click="mosaics_sorting='by_missions';" ng-class="{'active': mosaics_sorting=='by_missions'}">
 							{% trans "By missions" %}
 						</a>
@@ -77,6 +83,28 @@
 				<div class="section">
 					<div class="flex wrap">
 						<mosaic ng-repeat="mosaic in mosaics_by_date track by $index" mosaic="mosaic"></mosaic>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div ng-if="mosaics_sorting=='by_country'" class="flex-col">
+				
+				<div class="section">
+					<div class="flex">
+						<div class="grow flex width-12 wrap">
+							<div class="item flex justify-center" ng-repeat="index in indexes_by_country track by $index" style="width:40px;">
+								<a class="badge badge-link item text-center" ng-click="mosaics_by_country=index.mosaics;" ng-class="{'active': current_by_country_index==index}" style="width:100%;">
+									[[index.code]]
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="section">
+					<div class="flex wrap">
+						<mosaic ng-repeat="mosaic in mosaics_by_country track by $index" mosaic="mosaic"></mosaic>
 					</div>
 				</div>
 				
