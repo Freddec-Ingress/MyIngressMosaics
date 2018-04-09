@@ -4,7 +4,7 @@ angular.module('FrontModule.controllers').controller('TagPageCtrl', function($sc
 	
 	$scope.init = function(mosaics) {
 	
-		$scope.mosaics_sorting=='by_date'
+		$scope.mosaics_sorting ='by_date';
 	
 		$scope.mosaics_by_date = mosaics;
 		$scope.mosaics_by_missions = mosaics;
