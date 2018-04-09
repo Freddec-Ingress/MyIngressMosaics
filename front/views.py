@@ -344,11 +344,19 @@ def search(request, search_string = ''):
 def tag(request, tag):
 	
 	tag_label = tag
-	if tag_label == 'MPEarthDay': tag_label = 'MP Earth Day'
+	gplus_url = None
+	tg_url = None
+	
+	if tag_label == 'MPEarthDay':
+		tag_label = 'MP Earth Day'
+		gplus_url = 'https://plus.google.com/u/0/communities/118304848067634671252'
+		tg_url = 'https://t.me/joinchat/AAAAAEBA_kyuwtdtNT0ACQ'
 	
 	data = {
 		
 		'tag':'#'+tag_label,
+		'gplus_url':gplus_url,
+		'tg_url':tg_url,
 		'mosaics':[],
 	}
 	

@@ -37,6 +37,11 @@
 				
 					<span class="text-big color-light">{{tag}}</span>
 					
+					<div class="flex align-center">
+						{% if gplus_url %}<a class="mr-normal" href="{{gplus_url}}" target="_blank">{% trans "G+ Community" %}</a>{% endif %}
+						{% if tg_url %}<a class="mr-normal" href="{{tg_url}}" target="_blank">{% trans "TG Channel" %}</a>{% endif %}
+					</div>
+					
 				</div>
 				
 			</div>
