@@ -94,7 +94,7 @@
 					<div class="flex">
 						<div class="grow flex width-12 wrap">
 							<div class="item flex justify-center" ng-repeat="index in indexes_by_country track by $index" style="width:40px;">
-								<a class="badge badge-link item text-center" ng-click="mosaics_by_country=index.mosaics;" ng-class="{'active': current_by_country_index==index}" style="width:100%;">
+								<a class="badge badge-link item text-center" ng-click="current_by_country_index=index; mosaics_by_country=index.mosaics;" ng-class="{'active': current_by_country_index==index}" style="width:100%;">
 									[[index.code]]
 								</a>
 							</div>

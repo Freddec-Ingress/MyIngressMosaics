@@ -2872,6 +2872,7 @@ angular.module('FrontModule.controllers').controller('TagPageCtrl', function($sc
 					'mosaics':[],
 				}
 				
+				country_code_array.push(country_code);
 				$scope.indexes_by_country.push(index_by_country);
 			}
 			else {
