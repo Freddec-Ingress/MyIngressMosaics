@@ -908,7 +908,7 @@ def adm_checks(request):
 		regionsids_without_locale.append(item)
 		
 	mosaics_to_tag = []
-	results = Mosaic.objects.filter(name__icontains='MD ').values_list('ref', flat=True)
+	results = Mosaic.objects.filter(title__icontains='MD ').values_list('ref', flat=True)
 	for item in results:
 		mosaics_to_tag.append(item)
 	
