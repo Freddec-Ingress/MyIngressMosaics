@@ -1,5 +1,17 @@
 angular.module('FrontModule.controllers').controller('TagPageCtrl', function($scope, $window, API) {
 	
+	/* Index management */
+	
+	$scope.indexes_by_country = []
+	$scope.mosaics_by_country = null;
+	$scope.current_by_country_index = null;
+	
+	$scope.setByCountryIndex = function(index) {
+		
+		$scope.mosaics_by_country = index.mosaics;
+		$scope.current_by_country_index = index;
+	}
+	
 	/* Page loading */
 	
 	$scope.init = function(mosaics) {
