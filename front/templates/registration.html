@@ -352,6 +352,30 @@
 				
 				</div>
 				
+				<div class="section">
+						
+					<div class="item flex-col">
+						
+						<span class="mb-small">{% trans "Tag(s)" %}</span>
+						
+						<div class="flex">
+							
+							<div class="flex" ng-click="addTag('#MissionDay'); tag_mission_day=true;" ng-model="tag_mission_day" ng-show="!tag_mission_day">
+								<input type="checkbox" class="form-check-input">
+								<label class="form-check-label" for="exampleCheck1">#MissionDay</label>
+							</div>
+							
+							<div class="flex" ng-click="removeTag('#MissionDay'); tag_mission_day=false;" ng-model="tag_mission_day" ng-show="tag_mission_day">
+								<input type="checkbox" class="form-check-input" checked>
+								<label class="form-check-label" for="exampleCheck1">#MissionDay</label>
+							</div>
+							
+						</div>
+						
+					</div>
+				
+				</div>
+				
 				<div class="section" style="margin-bottom:55px;">
 				
 					<div class="item flex-col">
