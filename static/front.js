@@ -3069,7 +3069,8 @@ angular.module('FrontModule.controllers').controller('AdmChecksCtrl', function($
 		var data = { 'ref':mosaic.ref, 'tag':tag };
 		API.sendRequest('/api/mosaic/tag/add/', 'POST', {}, data).then(function() {
 			
-			$scope.mosaics_to_tag.splice(0, 1);
+			var index = $scope.mosaics_to_tag.indexOf(mosaic);
+			$scope.mosaics_to_tag.splice(index, 1);
 		});
 	}
 	
