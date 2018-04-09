@@ -57,7 +57,7 @@
 				
 			</div>
 			
-			<div class="section" ng-show="!searching && mosaics.length < 1 && potentials.length < 1 && missions.length < 1">
+			<div class="section" ng-show="!searching && !mosaics.length && !potentials.length && !missions.length">
 				
 				<div class="item">
 					<span class="color-normal">{% trans "Dedicated pages" %}</span>
@@ -66,7 +66,9 @@
 				<div class="flex align-center">
 					
 					<div class="item">
-						<a href="/tag/MissionDay">#MissionDay</a>
+						<div class="item bg-block">
+							<a href="/tag/MissionDay">#MissionDay</a>
+						</div>
 					</div>
 					
 				</div>
