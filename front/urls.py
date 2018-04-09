@@ -16,6 +16,8 @@ urlpatterns = [
 	url(r'^registration/(?P<search_string>[^/]+)', views.registration),
 	url(r'^registration', views.registration),
 	
+	url(r'^tag/(?P<tag>[^/]+)', views.tag),
+	
 	url(r'^search/(?P<search_string>[^/]+)', views.search),
 	url(r'^search', views.search),
 	

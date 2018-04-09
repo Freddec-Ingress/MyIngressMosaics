@@ -337,8 +337,24 @@ def search(request, search_string = ''):
 	
 	context = { 'search_string':search_string.replace('\'', '\\\''), }
 	return render(request, 'search.html', context)
-
 	
+	
+	
+#---------------------------------------------------------------------------------------------------
+def tag(request, tag):
+	
+	data = {
+		
+		'mosaics':[],
+	}
+	
+	mosaic_results = Mosaic.objects.filter(tags__icontains='#'+tag+'|')
+	for mosaic_obj in mosaic_results:
+		data['mosaics'].append(mosaic_obj.getOverviewData())
+	
+	return render(request, 'tag.html', data)
+
+
 	
 #---------------------------------------------------------------------------------------------------
 def profile(request):

@@ -2821,6 +2821,17 @@ angular.module('FrontModule.controllers').controller('CreatorPageCtrl', function
 		$scope.loaded = true;
 	}
 });
+angular.module('FrontModule.controllers').controller('SearchPageCtrl', function($scope, $window, API) {
+	
+	/* Page loading */
+	
+	$scope.init = function(mosaics) {
+	
+		$scope.mosaics = mosaics;
+
+		$scope.loaded = true;
+	}
+});
 angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', function($scope, $window, API, UtilsService) {
 	
 	/* Potential management */

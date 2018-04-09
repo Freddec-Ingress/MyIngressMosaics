@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load jsonify %}
+
+{% block extra-head %}
+	
+	<link rel="alternate" href="https://www.myingressmosaics.com/en/tag/{{tag}}" hreflang="en"/>
+	<link rel="alternate" href="https://www.myingressmosaics.com/fr/tag/{{tag}}" hreflang="fr"/>
+
+	<title>MIM - {{tag}}</title>
+	
+	<meta property="og:url" content="https://www.myingressmosaics.com/tag/{{tag}}">
+	<meta property="og:image" content="https://www.myingressmosaics.com/static/img/logo.jpg">
+	<meta property="og:title" content="MIM - {{tag}}">
+	<meta property="og:headline" content="MIM - {{tag}}">
+	<meta property="og:description" content="Ingress Mosaics related to {{tag}}">
+
+{% endblock %}
+
+{% block content %}
+
+	<div id="content" ng-controller="TagPageCtrl" ng-init="init({{mosaics|jsonify}});">
+		
+		<div id="loading" ng-hide="loaded" class="section">
+			<div class="item flex justify-center align-center">
+				<i class="fa fa-spinner rotating"></i>
+				<span class="ml-small">{% trans "Loading page..." %}</span>
+			</div>
+		</div>
+		
+		<div class="container" ng-class="{'active':loaded}">
+			
+			
+			
+		</div>
+
+	</div>
+
+{% endblock %}
+
+{% block script %}
+
+	<script src="/static/front.js"></script>
+	
+{% endblock %}
