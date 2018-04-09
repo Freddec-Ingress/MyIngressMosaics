@@ -18,9 +18,6 @@ angular.module('FrontModule.controllers').controller('TagPageCtrl', function($sc
 	
 		mosaics.sort(function(a, b) {
 			
-			if (a.mission_count > b.mission_count) return -1;
-			if (a.mission_count < b.mission_count) return 1;
-			
 			if (a.title > b.title) return 1;
 			if (a.title < b.title) return -1;
 			
@@ -42,7 +39,7 @@ angular.module('FrontModule.controllers').controller('TagPageCtrl', function($sc
 				
 				index_by_country = {
 					
-					'code':mosaic.country_code,
+					'code':mosaic.country_code.toUpperCase(),
 					'name':mosaic.country_name,
 					
 					'mosaics':[],
@@ -58,6 +55,14 @@ angular.module('FrontModule.controllers').controller('TagPageCtrl', function($sc
 			
 			index_by_country.mosaics.push(mosaic);
 		}
+		
+		$scope.indexes_by_country.sort(function(a, b) {
+			
+			if (a.name > b.name) return -1;
+			if (a.name < b.name) return 1;
+			
+			return 0;
+		});
 		
 		$scope.current_by_country_index = $scope.indexes_by_country[0];
 		$scope.mosaics_by_country = $scope.current_by_country_index.mosaics;
