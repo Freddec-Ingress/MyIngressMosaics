@@ -907,5 +907,10 @@ def adm_checks(request):
 	for item in results:
 		regionsids_without_locale.append(item)
 		
-	context = { 'refs_without_preview':refs_without_preview, 'refs_without_mission_count':refs_without_mission_count, 'regionsids_without_locale':regionsids_without_locale }
+	mosaics_to_tag = []
+	results = Mosaic.objects.filter(locale__isnull=True).values_list('ref', flat=True)
+	for item in results:
+		mosaics_to_tag.append(item)
+	
+	context = { 'refs_without_preview':refs_without_preview, 'refs_without_mission_count':refs_without_mission_count, 'regionsids_without_locale':regionsids_without_locale, 'mosaics_to_tag':mosaics_to_tag }
 	return render(request, 'adm_checks.html', context)

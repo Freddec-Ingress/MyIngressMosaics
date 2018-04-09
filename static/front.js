@@ -3062,6 +3062,17 @@ angular.module('FrontModule.controllers').controller('AdmChecksCtrl', function($
 	
 	$scope.current_tab = 'mosaic';
 	
+	/* Tag management */
+	
+	$scope.addTag = function(tag) {
+		
+		var data = { 'ref':ref, 'tag':tag };
+		API.sendRequest('/api/mosaic/tag/add/', 'POST', {}, data).then(function() {
+			
+			$scope.mosaics_to_tag.splice(0, 1);
+		});
+	}
+	
 	/* Preview management */
 	
 	$scope.preview_generation = false;
@@ -3132,12 +3143,14 @@ angular.module('FrontModule.controllers').controller('AdmChecksCtrl', function($
 	
 	$scope.refs_without_preview = [];
 	
-	$scope.init = function(refs_without_preview, refs_without_mission_count, regionsids_without_locale) {
+	$scope.init = function(refs_without_preview, refs_without_mission_count, regionsids_without_locale, mosaics_to_tag) {
 
 		$scope.refs_without_preview = refs_without_preview;
 		$scope.refs_without_mission_count = refs_without_mission_count;
 		
 		$scope.regionsids_without_locale = regionsids_without_locale;
+		
+		$scope.mosaics_to_tag = mosaics_to_tag;
 		
 		$scope.loaded = true;
 	}

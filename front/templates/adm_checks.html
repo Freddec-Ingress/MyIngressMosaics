@@ -13,7 +13,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="AdmChecksCtrl" ng-init="init({{refs_without_preview}}, {{refs_without_mission_count}}, {{regionsids_without_locale}});">
+	<div id="content" ng-controller="AdmChecksCtrl" ng-init="init({{refs_without_preview}}, {{refs_without_mission_count}}, {{regionsids_without_locale}}, {{mosaics_to_tag}});">
 		
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
@@ -33,6 +33,10 @@
 				
 					<div class="tab" ng-click="current_tab='region'" ng-class="{'active':current_tab=='region'}">
 						Region
+					</div>
+				
+					<div class="tab" ng-click="current_tab='tag'" ng-class="{'active':current_tab=='tag'}">
+						Tag
 					</div>
 					
 				</div>
@@ -106,6 +110,24 @@
 							
 						</div>
 						
+					</div>
+					
+				</div>
+				
+			</div>
+			
+			<div ng-show="current_tab=='tag'">
+				
+				<div class="section">
+					
+					<div class="flex align-center bg-block mb-small" ng-repeat="mosaic in mosaics_to_tag">
+						
+						<div class="grow">
+							<span class="color-normal">[[mosaic.name]]</span>
+						</div>
+						
+						<a ng-click="addTag('#MissionDay');">Add tag</a>
+
 					</div>
 					
 				</div>

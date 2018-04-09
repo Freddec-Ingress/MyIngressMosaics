@@ -33,6 +33,7 @@ urlpatterns = [
 	url(r'^mosaic/create/', mosaic_create),
 	url(r'^mosaic/compute/', mosaic_compute),
 	url(r'^mosaic/preview/generate/', mosaic_preview_generate),
+	url(r'^mosaic/tag/add/', mosaic_addtag),
 
 	url(r'^link/create/', link_create),
 	url(r'^link/delete/', link_delete),
