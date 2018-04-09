@@ -146,6 +146,8 @@ class Mosaic(models.Model):
 	big_preview_url = models.CharField(max_length=256, null=True, blank=True)
 	small_preview_url = models.CharField(max_length=256, null=True, blank=True)
 	
+	tags =  models.TextField(null=True, blank=True)
+	
 	# Admin displaying
 	
 	def __str__(self):
