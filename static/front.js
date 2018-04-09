@@ -1592,7 +1592,18 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 		input.prop('value', $scope.default);
 		input.focus();
 	}
-
+	
+	$scope.addTag = function(tag) {
+		
+		$scope.mosaic_tags += tag + '|';
+	}
+	
+	$scope.removeTag = function(tag) {
+		
+		var str = tag + '|';
+		$scope.mosaic_tags.replace(str, '');
+	}
+	
 	/* Step #4 management */
 	
 	$scope.creating = false;
