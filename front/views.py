@@ -928,7 +928,7 @@ def adm_checks(request):
 		regionsids_without_locale.append(item)
 		
 	mosaics_to_tag = []
-	results = Mosaic.objects.filter(title__icontains='#MPEarthDay').exclude(tags__icontains='#MPEarthDay')
+	results = Mosaic.objects.filter(title__icontains='Earth day').exclude(tags__icontains='#MPEarthDay')
 	for item in results:
 		mosaics_to_tag.append({ 'ref':item.ref, 'title':item.title })
 	
