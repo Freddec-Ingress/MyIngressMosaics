@@ -3064,9 +3064,9 @@ angular.module('FrontModule.controllers').controller('AdmChecksCtrl', function($
 	
 	/* Tag management */
 	
-	$scope.addTag = function(tag) {
+	$scope.addTag = function(mosaic, tag) {
 		
-		var data = { 'ref':ref, 'tag':tag };
+		var data = { 'ref':mosaic.ref, 'tag':tag };
 		API.sendRequest('/api/mosaic/tag/add/', 'POST', {}, data).then(function() {
 			
 			$scope.mosaics_to_tag.splice(0, 1);
