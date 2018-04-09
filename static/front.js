@@ -1595,7 +1595,11 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 	
 	$scope.addTag = function(tag) {
 		
-		$scope.mosaic_tags += tag + '|';
+		var str = tag + '|';
+		if ($scope.mosaic_tags.indexOf(str) == -1) {
+			
+			$scope.mosaic_tags += tag + '|';
+		}
 	}
 	
 	$scope.removeTag = function(tag) {
