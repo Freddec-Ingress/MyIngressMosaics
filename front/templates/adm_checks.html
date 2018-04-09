@@ -120,14 +120,18 @@
 				
 				<div class="section">
 					
-					<div class="flex align-center bg-block mb-small text-small" ng-repeat="mosaic in mosaics_to_tag">
-						
-						<div class="grow">
-							<span class="color-normal">[[mosaic.title]]</span>
+					<div class="flex item text-small" ng-repeat="mosaic in mosaics_to_tag">
+						<div class="flex align-center">
+							
+							<div class="item grow">
+								<span class="color-normal">[[mosaic.title]]</span>
+							</div>
+							
+							<div class="item">
+								<a ng-click="addTag('#MissionDay');">Add tag</a>
+							</div>
+	
 						</div>
-						
-						<a ng-click="addTag('#MissionDay');">Add tag</a>
-
 					</div>
 					
 				</div>
