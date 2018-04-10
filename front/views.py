@@ -866,7 +866,7 @@ def adm_compare(request):
 			imregion_data['compare_count'] = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name).count()
 			imregion_data['diff'] = imregion_data['compare_count'] - imregion_data['count']
 
-			immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name, dead=False, excluded=False, registered=False).order_by('-count', 'name')
+			immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name, dead=False, excluded=False, registered=False).order_by('name')
 			for immosaic_obj in immosaic_results:
 				
 				mosaic_results = Mosaic.objects.filter(city__region__country__name=imcountry_obj.name, city__region__name=imregion_obj.name, title__iexact=immosaic_obj.name)
