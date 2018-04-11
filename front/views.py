@@ -908,7 +908,7 @@ def adm_compare(request):
 
 			if imregion_obj.update_date:
 				
-				date_compare = imregion_obj.update_date + timedelta(hours=1)
+				date_compare = imregion_obj.update_date - timedelta(hours=1)
 				immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name).filter(Q(update_date__isnull=True) | Q(update_date__lte=date_compare)).order_by('name')
 				for immosaic_obj in immosaic_results:
 					
