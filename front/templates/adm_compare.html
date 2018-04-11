@@ -109,7 +109,7 @@
 									</div>
 	
 									<div class="item grow">
-										<span class="color-dark">{{region.update_date}}</span>
+										<span class="color-dark">{{mosaic.update_date}}</span>
 									</div>
 									
 									<div class="item" ng-hide="mosaic_{{mosaic.id}}.deleted">
@@ -130,8 +130,12 @@
 										<span class="color-dark">{{mosaic.count}}</span>
 									</div>
 
-									<div class="item grow">
+									<div class="item">
 										<span class="color-normal">{{mosaic.name}}</span>
+									</div>
+	
+									<div class="item grow">
+										<span class="color-dark">{{mosaic.update_date}}</span>
 									</div>
 									
 									<div class="item" ng-show="!mosaic_{{mosaic.id}}.dead && !mosaic_{{mosaic.id}}.excluded && !mosaic_{{mosaic.id}}.registered">
