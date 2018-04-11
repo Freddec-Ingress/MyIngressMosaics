@@ -43,6 +43,10 @@
 							<span class="color-light">{{country.name}}</span>
 						</div>
 
+						<div class="item">
+							<span class="color-dark">{{country.update_date}}</span>
+						</div>
+
 						<div class="item text-right">
 							<span class="color-muted">Count</span>
 						</div>
@@ -74,11 +78,11 @@
 								</div>
 								{% endif %}
 								
-								<div class="item">
+								<div class="item grow">
 									<span class="color-light">{{region.name}}</span>
 								</div>
 
-								<div class="item grow">
+								<div class="item">
 									<span class="color-dark">{{region.update_date}}</span>
 								</div>
 
@@ -104,11 +108,11 @@
 								{% for mosaic in region.extras %}
 								<div class="flex text-small" style="border-top:1px solid #000;" ng-model="mosaic_{{mosaic.id}}" ng-init="mosaic_{{mosaic.id}}={{mosaic|jsonify}};">
 									
-									<div class="item">
+									<div class="item grow">
 										<span class="color-danger">{{mosaic.name}}</span>
 									</div>
 	
-									<div class="item grow">
+									<div class="item">
 										<span class="color-dark">{{mosaic.update_date}}</span>
 									</div>
 									
@@ -130,11 +134,11 @@
 										<span class="color-dark">{{mosaic.count}}</span>
 									</div>
 
-									<div class="item">
+									<div class="item grow">
 										<span class="color-normal">{{mosaic.name}}</span>
 									</div>
 	
-									<div class="item grow">
+									<div class="item">
 										<span class="color-dark">{{mosaic.update_date}}</span>
 									</div>
 									

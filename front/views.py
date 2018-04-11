@@ -835,7 +835,7 @@ def adm_compare(request):
 	for imcountry_obj in imcountry_results:
 		
 		imcountry_data_date = imcountry_obj.update_date
-		if imcountry_data_date: imcountry_data_date = imcountry_data_date.strftime('%m/%d/%Y')
+		if imcountry_data_date: imcountry_data_date = imcountry_data_date.strftime('%m.%d.%Y')
 		
 		imcountry_data = {
 			
@@ -858,7 +858,7 @@ def adm_compare(request):
 		for imregion_obj in imregion_results:
 			
 			imregion_data_date = imregion_obj.update_date
-			if imregion_data_date: imregion_data_date = imregion_data_date.strftime('%m/%d/%Y')
+			if imregion_data_date: imregion_data_date = imregion_data_date.strftime('%m.%d.%Y')
 			
 			imregion_data = {
 				
@@ -890,7 +890,7 @@ def adm_compare(request):
 				else:
 					
 					immosaic_data_date = immosaic_obj.update_date
-					if immosaic_data_date: immosaic_data_date = immosaic_data_date.strftime('%m/%d/%Y')
+					if immosaic_data_date: immosaic_data_date = immosaic_data_date.strftime('%m.%d.%Y')
 					
 					immosaic_data = {
 						
@@ -913,7 +913,7 @@ def adm_compare(request):
 				for immosaic_obj in immosaic_results:
 					
 					immosaic_data_date = immosaic_obj.update_date
-					if immosaic_data_date: immosaic_data_date = immosaic_data_date.strftime('%m/%d/%Y')
+					if immosaic_data_date: immosaic_data_date = immosaic_data_date.strftime('%m.%d.%Y')
 					
 					immosaic_data = {
 						
