@@ -43,16 +43,19 @@
 							<span class="color-light">{{country.name}}</span>
 						</div>
 
-						<div class="item width-2 text-right">
+						<div class="item text-right">
 							<span class="color-muted">Count</span>
 						</div>
 
-						<div class="item width-1 text-right">
+						<div class="item text-right">
 							<span class="color-normal">{{country.count}} / {{country.compare_count}}</span>
 						</div>
 
-						<div class="item width-1 text-right">
-							<span ng-class="{'color-danger':country_diff_{{country.id}}<0, 'color-success':country_diff_{{country.id}}>-1}" ng-model="country_diff_{{country.id}}" ng-init="country_diff_{{country.id}}={{country.diff}}">{{country.diff}}</span>
+						<div class="item text-right">
+							<span ng-class="{'color-danger':country_diff_{{country.id}}<0, 'color-success':country_diff_{{country.id}}>-1}" ng-model="country_diff_{{country.id}}" ng-init="country_diff_{{country.id}}={{country.diff}}">
+								<span ng-show="country_diff_{{country.id}}>0">+</span>
+								{{country.diff}}
+							</span>
 						</div>
 
 					</div>
@@ -71,20 +74,23 @@
 								</div>
 								{% endif %}
 								
-								<div class="item">
+								<div class="item grow">
 									<span class="color-light">{{region.name}}</span>
 								</div>
 
-								<div class="item width-2 text-right">
+								<div class="item text-right">
 									<span class="color-muted">Count</span>
 								</div>
 		
-								<div class="item width-1 text-right">
+								<div class="item text-right">
 									<span class="color-normal">{{region.count}} / {{region.compare_count}}</span>
 								</div>
 		
-								<div class="item width-1 text-right">
-									<span ng-class="{'color-danger':region_diff_{{region.id}}<0, 'color-success':region_diff_{{region.id}}>-1}" ng-model="region_diff_{{region.id}}" ng-init="region_diff_{{region.id}}={{region.diff}}">{{region.diff}}</span>
+								<div class="item text-right">
+									<span ng-class="{'color-danger':region_diff_{{region.id}}<0, 'color-success':region_diff_{{region.id}}>-1}" ng-model="region_diff_{{region.id}}" ng-init="region_diff_{{region.id}}={{region.diff}}">
+										<span ng-show="region_diff_{{region.id}}>0">+</span>
+										{{region.diff}}
+									</span>
 								</div>
 
 							</div>

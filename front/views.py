@@ -3,7 +3,10 @@
 
 import io
 
+from datetime import datetime, timedelta
+
 from django.http import HttpResponse
+from django.db.models import Q
 from django.db.models import Count
 from django.shortcuts import render
 from django.utils.translation import gettext as _
@@ -860,6 +863,7 @@ def adm_compare(request):
 				
 				'diff':0,
 
+				'extras':[],
 				'mosaics':[],
 			}
 			
@@ -890,6 +894,20 @@ def adm_compare(request):
 					
 					imregion_data['mosaics'].append(immosaic_data)
 
+			if imregion_obj.update_date:
+				
+				date_compare = imregion_obj.update_date + timedelta(hours=1)
+				immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name).filter(Q(update_date__isnull=True) | Q(update_date__lte=date_compare)).order_by('name')
+				for immosaic_obj in immosaic_results:
+					
+					immosaic_data = {
+						
+						'id':immosaic_obj.pk,
+						'name':immosaic_obj.name,
+					}
+					
+					imregion_data['extras'].append(immosaic_data)
+					
 			imcountry_data['regions'].append(imregion_data)
 		
 		data['countries'].append(imcountry_data)
