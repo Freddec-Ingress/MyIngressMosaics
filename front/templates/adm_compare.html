@@ -55,7 +55,7 @@
 							<span class="color-normal">{{country.count}} / {{country.compare_count}}</span>
 						</div>
 
-						<div class="item text-right" style="width:35px;">
+						<div class="item text-right" style="width:45px;">
 							<span ng-class="{'color-danger':country_diff_{{country.id}}<0, 'color-success':country_diff_{{country.id}}>-1}" ng-model="country_diff_{{country.id}}" ng-init="country_diff_{{country.id}}={{country.diff}}">
 								<span ng-show="country_diff_{{country.id}}>0">+</span>
 								{{country.diff}}
@@ -94,7 +94,7 @@
 									<span class="color-normal">{{region.count}} / {{region.compare_count}}</span>
 								</div>
 		
-								<div class="item text-right" style="width:35px;">
+								<div class="item text-right" style="width:45px;">
 									<span ng-class="{'color-danger':region_diff_{{region.id}}<0, 'color-success':region_diff_{{region.id}}>-1}" ng-model="region_diff_{{region.id}}" ng-init="region_diff_{{region.id}}={{region.diff}}">
 										<span ng-show="region_diff_{{region.id}}>0">+</span>
 										{{region.diff}}
@@ -130,7 +130,7 @@
 								{% for mosaic in region.mosaics %}
 								<div class="flex text-small" style="border-top:1px solid #000;" ng-model="mosaic_{{mosaic.id}}" ng-init="mosaic_{{mosaic.id}}={{mosaic|jsonify}};">
 
-									<div class="item width-1">
+									<div class="item" style="width:35px;">
 										<span class="color-dark">{{mosaic.count}}</span>
 									</div>
 
@@ -140,6 +140,10 @@
 	
 									<div class="item">
 										<span class="color-dark">{{mosaic.update_date}}</span>
+									</div>
+									
+									<div class="item" ng-show="!mosaic_{{mosaic.id}}.dead && !mosaic_{{mosaic.id}}.excluded && !mosaic_{{mosaic.id}}.registered">
+										<a href="/search/{{mosaic.name}}" target="_blank"><i class="fa fa-search"></i></a>
 									</div>
 									
 									<div class="item" ng-show="!mosaic_{{mosaic.id}}.dead && !mosaic_{{mosaic.id}}.excluded && !mosaic_{{mosaic.id}}.registered">
