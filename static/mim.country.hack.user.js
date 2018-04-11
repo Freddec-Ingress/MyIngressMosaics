@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name           IM Country Hacking plugin
+// @name           IM Countries & Regions Hacking plugin
 // @version        1.0.0
-// @include        https://ingressmosaik.com
-// @match          https://ingressmosaik.com
-// @downloadURL    https://www.myingressmosaics.com/static/front/mim.country.hack.user.js
+// @include        https://ingressmosaik.com/*/*
+// @match          https://ingressmosaik.com/*/*
+// @downloadURL    https://www.myingressmosaics.com/static/front/mim.recent.hack.user.js
 // @grant          none
 // ==/UserScript==
 
@@ -50,13 +50,27 @@ function init() {
     $('#land a div').each(function() {
 
         var country_name = $(this).clone().children().remove().end().text().trim();
-        console.log(country_name);
 
         var mosaic_count = $(this).children('span').first().text().trim();
-        console.log(mosaic_count);
 
         var data = { 'country_name':country_name, 'mosaic_count':mosaic_count };
-        callMIMAPI('im/country', data);
+        console.log(data);
+        callMIMAPI('im/country/', data);
+    });
+
+    var text = $('.container-fluid .col-xs-12:nth-child(3)').children('.panel-heading-1').text().trim().split('|');
+
+    var country_name = text[1].trim();
+
+    $('#bund a div').each(function() {
+
+        var region_name = $(this).clone().children().remove().end().text().trim();
+
+        var mosaic_count = $(this).children('span').first().text().trim();
+
+        var data = { 'country_name':country_name, 'region_name':region_name, 'mosaic_count':mosaic_count };
+        console.log(data);
+        callMIMAPI('im/region/', data);
     });
 }
 
