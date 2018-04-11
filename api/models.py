@@ -664,6 +664,8 @@ class IMCountry(models.Model):
 	
 	count = models.IntegerField()
 	
+	update_date = models.DateField(blank=True, null=True)
+	
 	# Admin displaying
 	
 	def __str__(self):
@@ -681,6 +683,8 @@ class IMRegion(models.Model):
 	compare_name = models.CharField(max_length=128)
 	
 	count = models.IntegerField()
+	
+	update_date = models.DateField(blank=True, null=True)
 	
 	# Admin displaying
 	
@@ -701,6 +705,8 @@ class IMCity(models.Model):
 	count = models.IntegerField()
 	
 	done = models.BooleanField(default=False)
+	
+	update_date = models.DateField(blank=True, null=True)
 	
 	# Admin displaying
 	
@@ -723,6 +729,8 @@ class IMMosaic(models.Model):
 	dead = models.BooleanField(default=False)
 	excluded = models.BooleanField(default=False)
 	registered = models.BooleanField(default=False)
+	
+	update_date = models.DateField(blank=True, null=True)
 	
 	# Admin displaying
 	

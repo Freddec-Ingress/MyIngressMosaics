@@ -43,10 +43,6 @@
 							<span class="color-light">{{country.name}}</span>
 						</div>
 
-						<div class="item grow">
-							<a href="/admin/api/imcountry/{{country.id}}/change/" target="blank"><i class="fa fa-lock"></i></a>
-						</div>
-
 						<div class="item width-2 text-right">
 							<span class="color-muted">IM Count</span>
 						</div>
@@ -87,10 +83,6 @@
 									<span class="color-light">{{region.name}}</span>
 								</div>
 
-								<div class="item grow">
-									<a href="/admin/api/imregion/{{region.id}}/change/" target="blank"><i class="fa fa-lock"></i></a>
-								</div>
-		
 								<div class="item width-2 text-right">
 									<span class="color-muted">IM Count</span>
 								</div>
@@ -126,10 +118,6 @@
 										<span class="color-normal">{{mosaic.name}}</span>
 									</div>
 									
-									<div class="item" ng-show="!mosaic_{{mosaic.id}}.dead && !mosaic_{{mosaic.id}}.excluded && !mosaic_{{mosaic.id}}.registered">
-										<a href="/search/{{mosaic.name}}" target="blank"><i class="fa fa-search"></i></a>
-									</div>
-
 									<div class="item" ng-show="!mosaic_{{mosaic.id}}.dead && !mosaic_{{mosaic.id}}.excluded && !mosaic_{{mosaic.id}}.registered">
 										<a ng-click="die(mosaic_{{mosaic.id}});">die</i></a>
 									</div>
