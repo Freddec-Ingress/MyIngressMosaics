@@ -25,13 +25,13 @@ def im_country(request):
 		
 		country_obj = results[0]
 		country_obj.count = mosaic_count
-		country_obj.update_date = datetime.now
+		country_obj.update_date = datetime.now()
 		country_obj.save()
 		
 	else:
 		
 		country_obj = IMCountry(name=country_name, count=mosaic_count)
-		country_obj.update_date = datetime.now
+		country_obj.update_date = datetime.now()
 		country_obj.save()
 	
 	return Response(None, status=status.HTTP_200_OK)
@@ -58,13 +58,13 @@ def im_region(request):
 		
 			region_obj = results[0]
 			region_obj.count = mosaic_count
-			region_obj.update_date = datetime.now
+			region_obj.update_date = datetime.now()
 			region_obj.save()
 			
 		else:
 			
 			region_obj = IMRegion(country=country_obj, name=region_name, count=mosaic_count)
-			region_obj.update_date = datetime.now
+			region_obj.update_date = datetime.now()
 			region_obj.save()
 		
 	return Response(None, status=status.HTTP_200_OK)
@@ -97,13 +97,13 @@ def im_city(request):
 			
 				city_obj = results[0]
 				city_obj.count = mosaic_count
-				city_obj.update_date = datetime.now
+				city_obj.update_date = datetime.now()
 				city_obj.save()
 				
 			else:
 				
 				city_obj = IMCity(region=region_obj, name=city_name, count=mosaic_count)
-				city_obj.update_date = datetime.now
+				city_obj.update_date = datetime.now()
 				city_obj.save()
 			
 	return Response(None, status=status.HTTP_200_OK)
@@ -139,13 +139,13 @@ def im_mosaic(request):
 	if results.count() < 1:
 	
 		mosaic_obj = IMMosaic(country_name=country_name, region_name=region_name, city_name=city_name, name=mosaic_name, count=mission_count)
-		mosaic_obj.update_date = datetime.now
+		mosaic_obj.update_date = datetime.now()
 		mosaic_obj.save()
 		
 	else:
 		
 		mosaic_obj = results[0]
-		mosaic_obj.update_date = datetime.now
+		mosaic_obj.update_date = datetime.now()
 		mosaic_obj.save()
 			
 	return Response(None, status=status.HTTP_200_OK)

@@ -39,24 +39,16 @@
 						</div>
 						{% endif %}
 
-						<div class="item">
+						<div class="item grow">
 							<span class="color-light">{{country.name}}</span>
 						</div>
 
 						<div class="item width-2 text-right">
-							<span class="color-muted">IM Count</span>
+							<span class="color-muted">Count</span>
 						</div>
 
 						<div class="item width-1 text-right">
-							<span class="color-normal">{{country.count}}</span>
-						</div>
-
-						<div class="item width-2 text-right">
-							<span class="color-muted">Internal Count</span>
-						</div>
-
-						<div class="item width-1 text-right">
-							<span class="color-normal">{{country.compare_count}}</span>
+							<span class="color-normal">{{country.count}} / {{country.compare_count}}</span>
 						</div>
 
 						<div class="item width-1 text-right">
@@ -84,19 +76,11 @@
 								</div>
 
 								<div class="item width-2 text-right">
-									<span class="color-muted">IM Count</span>
+									<span class="color-muted">Count</span>
 								</div>
 		
 								<div class="item width-1 text-right">
-									<span class="color-normal">{{region.count}}</span>
-								</div>
-		
-								<div class="item width-2 text-right">
-									<span class="color-muted">Internal Count</span>
-								</div>
-		
-								<div class="item width-1 text-right">
-									<span class="color-normal">{{region.compare_count}}</span>
+									<span class="color-normal">{{region.count}} / {{region.compare_count}}</span>
 								</div>
 		
 								<div class="item width-1 text-right">
