@@ -839,7 +839,7 @@ def adm_compare(request):
 			'id':imcountry_obj.pk,
 			'name':imcountry_obj.name,
 			'count':imcountry_obj.count,
-			'update_date':imcountry_obj.update_date,
+			'update_date':imcountry_obj.update_date.strftime('%m/%d/%Y'),
 			
 			'compare_count':0,
 			
@@ -859,7 +859,7 @@ def adm_compare(request):
 				'id':imregion_obj.pk,
 				'name':imregion_obj.name,
 				'count':imregion_obj.count,
-				'update_date':imregion_obj.update_date,
+				'update_date':imregion_obj.update_date.strftime('%m/%d/%Y'),
 				
 				'compare_count':0,
 				
@@ -888,7 +888,7 @@ def adm_compare(request):
 						'id':immosaic_obj.pk,
 						'name':immosaic_obj.name,
 						'count':immosaic_obj.count,
-						'update_date':immosaic_obj.update_date,
+						'update_date':immosaic_obj.update_date.strftime('%m/%d/%Y'),
 						
 						'registered':immosaic_obj.registered,
 						'excluded':immosaic_obj.excluded,
@@ -907,7 +907,7 @@ def adm_compare(request):
 						
 						'id':immosaic_obj.pk,
 						'name':immosaic_obj.name,
-						'update_date':immosaic_obj.update_date,
+						'update_date':immosaic_obj.update_date.strftime('%m/%d/%Y'),
 					}
 					
 					imregion_data['extras'].append(immosaic_data)
