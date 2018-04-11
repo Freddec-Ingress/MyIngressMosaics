@@ -33,7 +33,15 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
     	
     	mosaic.registered = true;
     }
-   
+     
+    $scope.delete = function(mosaic) {
+    	
+    	var data = { 'id':mosaic.id, }
+    	API.sendRequest('/api/im/mosaic/delete/', 'POST', {}, data);
+    	
+    	mosaic.deleted = true;
+    }
+  
 	/* Page loading */
 	
     $scope.loaded = true;

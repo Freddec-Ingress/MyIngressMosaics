@@ -67,7 +67,7 @@
 							
 							<div class="flex align-center text-small bg-block mb-small">
 						
-								{% if region.mosaics %}
+								{% if region.mosaics or region.extras %}
 								<div class="item">
 									<a ng-show="!region_{{region.id}}.open" ng-click="region_{{region.id}}.open=true;"><i class="fa fa-plus-square text-small"></i></a>
 									<a ng-show="region_{{region.id}}.open" ng-click="region_{{region.id}}.open=false;"><i class="fa fa-minus-square text-small"></i></a>
@@ -96,6 +96,24 @@
 							</div>
 					
 							<div class="bg-block mb-small" ng-show="region_{{region.id}}.open" style="margin-left:20px;">
+								
+								{% for mosaic in region.extras %}
+								<div class="flex text-small" style="border-top:1px solid #000;" ng-model="mosaic_{{mosaic.id}}" ng-init="mosaic_{{mosaic.id}}={{mosaic|jsonify}};">
+									
+									<div class="item grow">
+										<span class="color-danger">{{mosaic.name}}</span>
+									</div>
+									
+									<div class="item" ng-hide="mosaic_{{mosaic.id}}.deleted">
+										<a ng-click="delete(mosaic_{{mosaic.id}});">delete</i></a>
+									</div>
+									
+									<div class="item" ng-show="mosaic_{{mosaic.id}}.deleted">
+										<span class="color-muted">deleted</span>
+									</div>
+									
+								</div>
+								{% endfor %}
 								
 								{% for mosaic in region.mosaics %}
 								<div class="flex text-small" style="border-top:1px solid #000;" ng-model="mosaic_{{mosaic.id}}" ng-init="mosaic_{{mosaic.id}}={{mosaic|jsonify}};">
