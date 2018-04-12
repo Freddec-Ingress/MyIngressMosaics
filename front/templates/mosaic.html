@@ -5,9 +5,11 @@
 
 {% block extra-head %}
 	
-	<link rel="alternate" href="https://www.myingressmosaics.com/en/mosaic/{{mosaic.ref}}" hreflang="en"/>
-	<link rel="alternate" href="https://www.myingressmosaics.com/fr/mosaic/{{mosaic.ref}}" hreflang="fr"/>
-	<link rel="alternate" href="https://www.myingressmosaics.com/pt/mosaic/{{mosaic.ref}}" hreflang="pt"/>
+	<link rel="canonical" href="https://www.myingressmosaics.com/mosaic/{{mosaic.ref}}" />
+	
+	<link rel="alternate" href="https://www.myingressmosaics.com/en/mosaic/{{mosaic.ref}}" hreflang="en" />
+	<link rel="alternate" href="https://www.myingressmosaics.com/fr/mosaic/{{mosaic.ref}}" hreflang="fr" />
+	<link rel="alternate" href="https://www.myingressmosaics.com/pt/mosaic/{{mosaic.ref}}" hreflang="pt" />
 
 	<title>MIM - {{mosaic.title}}</title>
 	

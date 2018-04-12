@@ -4,9 +4,11 @@
 
 {% block extra-head %}
 	
-	<link rel="alternate" href="https://www.myingressmosaics.com/en/world/{{city.country_name}}/{{city.region_name}}/{{city.name}}" hreflang="en"/>
-	<link rel="alternate" href="https://www.myingressmosaics.com/fr/world/{{city.country_name}}/{{city.region_name}}/{{city.name}}" hreflang="fr"/>
-	<link rel="alternate" href="https://www.myingressmosaics.com/pt/world/{{city.country_name}}/{{city.region_name}}/{{city.name}}" hreflang="pt"/>
+	<link rel="canonical" href="https://www.myingressmosaics.com/world/{{city.country_name}}/{{city.region_name}}/{{city.name}}" />
+	
+	<link rel="alternate" href="https://www.myingressmosaics.com/en/world/{{city.country_name}}/{{city.region_name}}/{{city.name}}" hreflang="en" />
+	<link rel="alternate" href="https://www.myingressmosaics.com/fr/world/{{city.country_name}}/{{city.region_name}}/{{city.name}}" hreflang="fr" />
+	<link rel="alternate" href="https://www.myingressmosaics.com/pt/world/{{city.country_name}}/{{city.region_name}}/{{city.name}}" hreflang="pt" />
 
 	<title>MIM - {{city.name}}, {{city.region_name}}, {{city.country_name}}</title>
 	
