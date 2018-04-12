@@ -92,7 +92,7 @@ def sitemap(request):
 
 	# City URLs
 	
-	cities = City.objects.all()
+	cities = City.objects.filter(region__isnull=False)
 	for city in cities:
 		text += '<url>'
 		text += '	<loc>https://www.myingressmosaics.com/world/' + city.region.country.name + '/' + city.region.name + '/' + city.name + '</loc><changefreq>daily</changefreq></url>'
