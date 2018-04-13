@@ -222,6 +222,10 @@ class Mosaic(models.Model):
 	
 	def getOverviewData(self):
 		
+		if not self.city:
+			self.delete()
+			return None
+		
 		mosaic_data = {
 			
 			'id':self.pk,
