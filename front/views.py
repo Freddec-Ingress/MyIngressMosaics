@@ -873,6 +873,17 @@ def creator(request, creator_name):
 
 
 #---------------------------------------------------------------------------------------------------
+def adm_city(request):
+	
+	data = {
+		
+	}
+	
+	return render(request, 'adm_city.html', data)
+
+
+
+#---------------------------------------------------------------------------------------------------
 def adm_compare(request):
 	
 	data = {
@@ -1007,31 +1018,3 @@ def adm_registration(request):
 			context['potentials'].append(obj)
 	
 	return render(request, 'adm_registration.html', context)
-
-
-
-#---------------------------------------------------------------------------------------------------
-def adm_checks(request):
-
-	refs_without_preview = []
-	results = Mosaic.objects.filter(small_preview_url__isnull=True).values_list('ref', flat=True)
-	for item in results:
-		refs_without_preview.append(item)
-	
-	refs_without_mission_count = []
-	results = Mosaic.objects.filter(unique_count=0).values_list('ref', flat=True)
-	for item in results:
-		refs_without_mission_count.append(item)
-		
-	regionsids_without_locale = []
-	results = Region.objects.filter(locale__isnull=True).values_list('id', flat=True)
-	for item in results:
-		regionsids_without_locale.append(item)
-		
-	mosaics_to_tag = []
-	results = Mosaic.objects.filter(title__icontains='#MP2018EarthDay').exclude(tags__icontains='#MPEarthDay')
-	for item in results:
-		mosaics_to_tag.append({ 'ref':item.ref, 'title':item.title })
-	
-	context = { 'refs_without_preview':refs_without_preview, 'refs_without_mission_count':refs_without_mission_count, 'regionsids_without_locale':regionsids_without_locale, 'mosaics_to_tag':mosaics_to_tag }
-	return render(request, 'adm_checks.html', context)
