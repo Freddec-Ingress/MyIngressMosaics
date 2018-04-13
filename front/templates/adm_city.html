@@ -103,14 +103,30 @@
 								<span class="color-normal">[[city.name]]</span>
 							</div>
 							
-							<div class="item">
-								<select class="control" ng-model="[[city.id]]_merge_city_id">
-									<option ng-repeat="merge_city in cities" value="[[merge_city.id]]">[[merge_city.name]]</option>
+						</div>
+					</div>
+					
+					<div class="item flex-col" ng-show="cities.length > 0">
+						<span class="mb-small color-normal">Merge 2 cities</span>
+					</div>
+					
+					<div class="item" ng-show="cities.length > 0">
+						<div class="bg-block flex align-center text-small pl-small pr-small">
+							
+							<div class="item flex-col">
+								<select class="control" ng-model="merge_src_city_id">
+									<option ng-repeat="city in cities" value="[[city.id]]">[[city.name]]</option>
 								</select>
 							</div>
 							
-							<div class="item">
-								<a ng-click="merge(city.id, [[city.id]]_merge_city_id)">
+							<div class="item flex-col">
+								<select class="control" ng-model="merge_dst_city_id">
+									<option ng-repeat="city in cities" value="[[city.id]]">[[city.name]]</option>
+								</select>
+							</div>
+							
+							<div class="item flex-col">
+								<a ng-click="merge(merge_src_city_id, merge_dst_city_id)">
 									Merge
 								</a>
 							</div>
