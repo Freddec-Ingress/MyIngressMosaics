@@ -65,7 +65,7 @@
 						</select>
 					</div>
 					
-					<div class="item flex-col" ng-show="country_changing">
+					<div class="item flex" ng-show="country_changing">
 						<i class="color-normal fa fa-spinner rotating"></i>
 						<span class="ml-small color-normal">Refreshing...</span>
 					</div>
@@ -73,11 +73,11 @@
 					<div class="item flex-col" ng-show="regions.length > 0">
 						<span class="mb-small color-normal">Region</span>
 						<select class="control" ng-model="current_region_id" ng-change="changeCurrentRegion(current_region_id)">
-							<option ng-repeat="region in regions" value="[[region]]">[[region.name]]</option>
+							<option ng-repeat="region in regions" value="[[region.id]]">[[region.name]]</option>
 						</select>
 					</div>
 					
-					<div class="item flex-col" ng-show="region_changing">
+					<div class="item flex" ng-show="region_changing">
 						<i class="color-normal fa fa-spinner rotating"></i>
 						<span class="ml-small color-normal">Refreshing...</span>
 					</div>
