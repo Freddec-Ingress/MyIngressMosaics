@@ -50,6 +50,7 @@ admin.site.register(Link)
 admin.site.register(Potential)
 admin.site.register(Notif)
 admin.site.register(Waiting)
+admin.site.register(Tag)
 
 admin.site.register(IMCountry)
 admin.site.register(IMRegion)
