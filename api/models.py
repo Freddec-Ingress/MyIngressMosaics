@@ -769,6 +769,11 @@ class Tag(models.Model):
 	label = models.CharField(max_length=256)
 	value = models.CharField(max_length=256)
 	
+	desc = models.TextField()
+	
+	tg_url = models.CharField(max_length=256)
+	gplus_url = models.CharField(max_length=256)
+
 	# Admin displaying
 	
 	def __str__(self):
