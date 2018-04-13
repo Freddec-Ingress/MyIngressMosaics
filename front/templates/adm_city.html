@@ -37,7 +37,7 @@
 					
 					{% for city in city_doublons %}
 					<div class="item">
-						<div class="bg-block flex align-center">
+						<div class="bg-block flex align-center text-small pl-small pr-small">
 							
 							<div class="item">
 								<span class="color-light">{{city.name}}</span>
@@ -60,7 +60,7 @@
 					
 					<div class="item flex-col">
 						<span class="mb-small color-normal">Country</span>
-						<select class="control" ng-model="current_country_id" ng-change="changeCurrentCountry(current_country_id);">
+						<select class="control" ng-model="current_country_id" ng-change="changeCurrentCountry(current_country_id)">
 							<option ng-repeat="country in countries" value="[[country.id]]">[[country.name]]</option>
 						</select>
 					</div>
