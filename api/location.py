@@ -16,6 +16,33 @@ from .models import *
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
+def city_list(request):
+	
+	data = {
+		
+		'cities':[],
+	}
+	
+	# Cities data
+	
+	city_results = City.objects.filter(region__id=request.data['region_id']).order_by('name')
+	for city_obj in city_results:
+		
+		city_data = {
+			
+			'id':city_obj.pk,
+			'name':city_obj.name,
+		}
+		
+		data['cities'].append(city_data)
+	
+	return Response(data, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
 def region_list(request):
 	
 	data = {
