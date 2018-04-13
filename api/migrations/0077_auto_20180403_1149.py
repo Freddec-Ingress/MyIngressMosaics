@@ -16,16 +16,16 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='tag',
             name='desc',
-            field=models.TextField()
+            field=models.TextField(blank=True, null=True)
         ),
         migrations.AddField(
             model_name='tag',
             name='tg_url',
-            field=models.CharField(max_length=256)
+            field=models.CharField(max_length=256, blank=True, null=True)
         ),
         migrations.AddField(
             model_name='tag',
             name='gplus_url',
-            field=models.CharField(max_length=256)
+            field=models.CharField(max_length=256, blank=True, null=True)
         ),
     ]
