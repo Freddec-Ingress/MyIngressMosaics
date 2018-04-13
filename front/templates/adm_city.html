@@ -31,12 +31,18 @@
 				
 				<div class="flex-col">
 					
+					<div class="item">
+						<span class="color-normal">Doublon of city</span>
+					</div>
+					
 					{% for city in city_doublons %}
 					<div class="item">
 						<div class="bg-block flex align-center">
 							
 							<div class="item">
-								<span class="color-light">[[city.name]]</span>
+								<span class="color-light">{{city.name}}</span>
+								<span class="color-light">, {{city.region_name}}</span>
+								<span class="color-light">, {{city.country_name}}</span>
 							</div>
 							
 						</div>

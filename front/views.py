@@ -880,12 +880,14 @@ def adm_city(request):
 		'city_doublons':[],
 	}
 	
-	city_results = City.objects.values('name', 'region__name').annotate(count=Count('pk')).filter(count__gt=1)
+	city_results = City.objects.values('name', 'region__name', 'region__country__name').annotate(count=Count('pk')).filter(count__gt=1)
 	for city_obj in city_results:
 		
 		city_data = {
 			
 			'name':city_obj['name'], 
+			'region_name':city_obj['region__name'], 
+			'country_name':city_obj['region__country__name'], 
 		}
 		
 		data['city_doublons'].append(city_data)
