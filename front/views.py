@@ -895,27 +895,25 @@ def adm_compare(request):
 					}
 					
 					imregion_data['mosaics'].append(immosaic_data)
-'''
+
 			if imregion_obj.update_date:
 				
 				date_compare = imregion_obj.update_date - timedelta(hours=1)
-				immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name, update_date__isnull=False).order_by('name')
+				immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name, update_date__isnull=True).order_by('name')
 				for immosaic_obj in immosaic_results:
 					
-					if immosaic_obj.update_date < date_compare:
+					immosaic_data_date = immosaic_obj.update_date
+					if immosaic_data_date: immosaic_data_date = immosaic_data_date.strftime('%m.%d.%Y')
+					
+					immosaic_data = {
 						
-						immosaic_data_date = immosaic_obj.update_date
-						if immosaic_data_date: immosaic_data_date = immosaic_data_date.strftime('%m.%d.%Y')
-						
-						immosaic_data = {
-							
-							'id':immosaic_obj.pk,
-							'name':immosaic_obj.name,
-							'update_date':immosaic_data_date,
-						}
-						
-						imregion_data['extras'].append(immosaic_data)
-'''					
+						'id':immosaic_obj.pk,
+						'name':immosaic_obj.name,
+						'update_date':immosaic_data_date,
+					}
+					
+					imregion_data['extras'].append(immosaic_data)
+
 			imcountry_data['regions'].append(imregion_data)
 		
 		data['countries'].append(imcountry_data)
