@@ -27,8 +27,25 @@
 		<div class="container" ng-class="{'active':loaded}">
 			
 			<div class="section">
-    		</div>
-    		
+				
+				<div class="flex-col">
+					
+					<div class="item flex-col">
+						<span class="mb-small color-normal">Country</span>
+						<select ng-model="current_country_id" ng-change="changeCurrentCountry(current_country_id);">
+							<option ng-repeat="country in countries" value="[[country.id]]">[[country.name]]</option>
+						</select>
+					</div>
+					
+					<div class="item flex-col" ng-show="country_changing">
+						<i class="color-normal fa fa-spinner rotating"></i>
+						<span class="ml-small color-normal">Refreshing...</span>
+					</div>
+					
+				</div>
+				
+			</div>
+			
 		</div>
 	
 	</div>
