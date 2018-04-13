@@ -384,9 +384,9 @@ def search(request, search_string = ''):
 #---------------------------------------------------------------------------------------------------
 def tag(request, tag):
 	
-	mosaic_results = Mosaic.objects.filter(title__icontains='HNY2018')
+	mosaic_results = Mosaic.objects.filter(title__icontains='DOG2018')
 	for mosaic_obj in mosaic_results:
-		mosaic_obj.tags = 'MPHNY2018|'
+		mosaic_obj.tags = 'MPDOG2018|'
 		mosaic_obj.save()
 	
 	tag_obj = Tag.objects.get(value=tag)
