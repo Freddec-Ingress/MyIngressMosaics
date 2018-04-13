@@ -99,13 +99,13 @@
 								<span class="color-dark">[[city.id]]</span>
 							</div>
 							
-							<div class="item">
+							<div class="item grow">
 								<span class="color-normal">[[city.name]]</span>
 							</div>
 							
 							<div class="item">
 								<select class="control" ng-model="[[city.id]]_merge_city_id">
-									<option ng-repeat="city in cities" value="[[city.id]]">[[city.name]]</option>
+									<option ng-repeat="merge_city in cities" value="[[merge_city.id]]">[[merge_city.name]]</option>
 								</select>
 							</div>
 							
