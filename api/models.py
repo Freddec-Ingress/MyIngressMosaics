@@ -769,10 +769,10 @@ class Tag(models.Model):
 	label = models.CharField(max_length=256)
 	value = models.CharField(max_length=256)
 	
-	desc = models.TextField()
+	desc = models.TextField(blank=True, null=True)
 	
-	tg_url = models.CharField(max_length=256)
-	gplus_url = models.CharField(max_length=256)
+	tg_url = models.CharField(max_length=256, blank=True, null=True)
+	gplus_url = models.CharField(max_length=256, blank=True, null=True)
 
 	# Admin displaying
 	
