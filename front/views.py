@@ -354,7 +354,7 @@ def search(request, search_string = ''):
 			
 			'label':tag_obj.label,
 			'value':tag_obj.value,
-			'count':Mosaic.objects.filter(tags__contains=tag_obj.value+'|').count(),
+			'count':Mosaic.objects.filter(tags__icontains=tag_obj.value+'|').count(),
 		}
 		
 		context['tags'].append(tag_data)
@@ -366,28 +366,26 @@ def search(request, search_string = ''):
 #---------------------------------------------------------------------------------------------------
 def tag(request, tag):
 	
-	tag_label = tag
-	gplus_url = None
-	tg_url = None
+	tag_obj = Tag.objects.get(value=tag)
 	
-	if tag_label == 'MPEarthDay':
-		tag_label = 'MP Earth Day'
-		gplus_url = 'https://plus.google.com/u/0/communities/118304848067634671252'
-		tg_url = 'https://t.me/joinchat/AAAAAEBA_kyuwtdtNT0ACQ'
-	
-	data = {
+	tag_data = {
 		
-		'tag':'#'+tag_label,
-		'gplus_url':gplus_url,
-		'tg_url':tg_url,
+		'label':tag_obj.label,
+		'value':tag_obj.value,
+		
+		'desc':tag_obj.desc,
+		
+		'tg_url':tag_obj.tg_url,
+		'gplus_url':tag_obj.gplus_url,
+		
 		'mosaics':[],
 	}
 	
-	mosaic_results = Mosaic.objects.filter(tags__icontains='#'+tag+'|')
+	mosaic_results = Mosaic.objects.filter(tags__icontains=tag_obj.value+'|')
 	for mosaic_obj in mosaic_results:
-		data['mosaics'].append(mosaic_obj.getOverviewData())
+		tag_data['mosaics'].append(mosaic_obj.getOverviewData())
 	
-	return render(request, 'tag.html', data)
+	return render(request, 'tag.html', tag_data)
 
 
 	
