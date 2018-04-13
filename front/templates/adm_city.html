@@ -90,11 +90,29 @@
 						<div class="bg-block flex align-center text-small pl-small pr-small">
 							
 							<div class="item">
+								<a href="/admin/api/city/[[city.id]]/change" target="blank">
+									<i class="fa fa-lock"></i>
+								</a>
+							</div>
+							
+							<div class="item">
 								<span class="color-dark">[[city.id]]</span>
 							</div>
 							
 							<div class="item">
 								<span class="color-normal">[[city.name]]</span>
+							</div>
+							
+							<div class="item">
+								<select class="control" ng-model="[[city.id]]_merge_city_id">
+									<option ng-repeat="city in cities" value="[[city.id]]">[[city.name]]</option>
+								</select>
+							</div>
+							
+							<div class="item">
+								<a ng-click="merge(city.id, [[city.id]]_merge_city_id)">
+									Merge
+								</a>
 							</div>
 							
 						</div>
