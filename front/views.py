@@ -340,7 +340,25 @@ def registration(request, search_string = ''):
 #---------------------------------------------------------------------------------------------------
 def search(request, search_string = ''):
 	
-	context = { 'search_string':search_string.replace('\'', '\\\''), }
+	context = {
+		
+		'search_string':search_string.replace('\'', '\\\''),
+		
+		'tags':[],
+	}
+
+	tag_results = Tag.objects.all().order_by('-pk')
+	for tag_obj in tag_results:
+
+		tag_data = {
+			
+			'label':tag_obj.label,
+			'value':tag_obj.value,
+			'count':Mosaic.objects.filter(tags__icontains==tag_obj.value+'|').count(),
+		}
+		
+		context['tags'].append(tag_data)
+	
 	return render(request, 'search.html', context)
 	
 	

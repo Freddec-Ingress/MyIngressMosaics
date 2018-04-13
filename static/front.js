@@ -1829,7 +1829,9 @@ angular.module('FrontModule.controllers').controller('SearchPageCtrl', function(
 	
 	$scope.current_tab = 'mosaic';
 	
-	$scope.init = function(text) {
+	$scope.init = function(text, tags) {
+	
+		$scope.tags = tags;
 	
 		$scope.search(text);
 

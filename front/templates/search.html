@@ -22,7 +22,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="SearchPageCtrl" ng-init="init('{{search_string|escape}}');">
+	<div id="content" ng-controller="SearchPageCtrl" ng-init="init('{{search_string|escape}}', {{tags}});">
 	
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
@@ -68,18 +68,15 @@
 				
 				<div class="flex align-center">
 					
-					<div class="item width-6 width-xl-4">
+					<div class="item width-6 width-xl-4" ng-repeat="tag in tags track by $index">
 						<div class="item bg-block">
-							<a class="width-12" href="/tag/MissionDay">#MissionDay</a>
+							<a class="width-12" href="/tag/[[tag.value]]">
+								<span class="grow"></span>[[tag.label]]</span>
+								<span class="badge">[[tag.count]]</span>
+							</a>
 						</div>
 					</div>
-					
-					<div class="item width-6 width-xl-4">
-						<div class="item bg-block">
-							<a class="width-12" href="/tag/MPEarthDay">#MP Earth Day</a>
-						</div>
-					</div>
-					
+
 				</div>
 				
 			</div>
