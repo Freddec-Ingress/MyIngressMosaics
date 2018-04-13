@@ -23,7 +23,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="WorldPageCtrl" ng-init="init({{countries}});">
+	<div id="content" ng-controller="WorldPageCtrl" ng-init="init({{countries}}, {{tags}});">
 	
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
@@ -107,7 +107,7 @@
 					<div class="item width-12 width-xl-4" ng-repeat="tag in tags track by $index" ng-show="tag.count > 0">
 						<div class="item bg-block">
 							<a class="flex align-center" href="/tag/[[tag.value]]">
-								<span class="grow">[[tag.label]]</span>
+								<span class="grow color-light">[[tag.label]]</span>
 								<span class="badge">[[tag.count]]</span>
 							</a>
 						</div>

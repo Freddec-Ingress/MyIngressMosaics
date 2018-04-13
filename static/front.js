@@ -2467,8 +2467,9 @@ angular.module('FrontModule.controllers').controller('WorldPageCtrl', function($
     
     /* Page loading */
     
-    $scope.init = function(countries) {
+    $scope.init = function(countries, tags) {
     	
+    	$scope.tags = tags;
     	$scope.countries = countries;
     	
     	$scope.sortCountriesByMosaics();
