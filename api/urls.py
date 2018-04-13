@@ -72,5 +72,6 @@ urlpatterns = [
 	
 	url(r'^waiting/create/', waiting_create),
 	
+	url(r'^location/region/list/', region_list),
 	url(r'^location/country/list/', country_list),
 ]

@@ -3164,6 +3164,21 @@ angular.module('FrontModule.controllers').controller('AdmCityCtrl', function($sc
 	
 	$scope.regions = [];
 	
+	$scope.changeCurrentRegion = function(id) {
+		
+		$scope.cities = [];
+		
+		$scope.region_changing = true;
+		
+		var data = { 'region_id':id, };
+		API.sendRequest('/api/location/city/list/', 'POST', {}, data).then(function(response) {
+
+			$scope.cities = response.cities;
+
+			$scope.region_changing = false;
+		});
+	}
+	
 	/* Country management */
 
 	$scope.countries = [];
@@ -3176,7 +3191,7 @@ angular.module('FrontModule.controllers').controller('AdmCityCtrl', function($sc
 		$scope.country_changing = true;
 		
 		var data = { 'country_id':id, };
-		API.sendRequest('/api/location/country/list/', 'POST', {}, data).then(function(response) {
+		API.sendRequest('/api/location/region/list/', 'POST', {}, data).then(function(response) {
 
 			$scope.regions = response.regions;
 

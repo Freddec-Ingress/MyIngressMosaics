@@ -70,6 +70,36 @@
 						<span class="ml-small color-normal">Refreshing...</span>
 					</div>
 					
+					<div class="item flex-col" ng-show="regions.length > 0">
+						<span class="mb-small color-normal">Region</span>
+						<select class="control" ng-model="current_region_id" ng-change="changeCurrentRegion(current_region_id)">
+							<option ng-repeat="region in regions" value="[[region]]">[[region.name]]</option>
+						</select>
+					</div>
+					
+					<div class="item flex-col" ng-show="region_changing">
+						<i class="color-normal fa fa-spinner rotating"></i>
+						<span class="ml-small color-normal">Refreshing...</span>
+					</div>
+					
+					<div class="item flex-col" ng-show="cities.length > 0">
+						<span class="mb-small color-normal">Cities</span>
+					</div>
+					
+					<div class="item" ng-repeat="city in cities">
+						<div class="bg-block flex align-center text-small pl-small pr-small">
+							
+							<div class="item">
+								<span class="color-dark">[[city.id]]</span>
+							</div>
+							
+							<div class="item">
+								<span class="color-normal">[[city.name]]</span>
+							</div>
+							
+						</div>
+					</div>
+					
 				</div>
 				
 			</div>
