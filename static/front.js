@@ -3155,10 +3155,19 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
     $scope.loaded = true;
 });
 angular.module('FrontModule.controllers').controller('AdmCityCtrl', function($scope, API) {
+
+	/* Country management */
+
+	$scope.countries = [];
   
 	/* Page loading */
 	
-    $scope.loaded = true;
+	API.sendRequest('/api/location/country/list/', 'POST', {}, null).then(function(response) {
+	
+		$scope.countries = response.countries;
+	
+		$scope.loaded = true;
+	});
 });
 angular.module('FrontModule', ['satellizer',
 							   'FrontModule.services', 'FrontModule.controllers', 'FrontModule.directives', ]);

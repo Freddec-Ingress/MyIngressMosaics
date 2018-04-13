@@ -13,6 +13,7 @@ from .search import *
 from .mosaic import *
 from .waiting import *
 from .comment import *
+from .location import *
 from .telegram import *
 from .potential import *
 
@@ -59,10 +60,10 @@ urlpatterns = [
 	url(r'^notif/create/', notif_create),
 	url(r'^notif/delete/', notif_delete),
 	
-	url(r'^im/city/done/', im_city_done),
 	url(r'^im/city/', im_city),
 	url(r'^im/region/', im_region),
 	url(r'^im/country/', im_country),
+	
 	url(r'^im/mosaic/die/', im_mosaic_die),
 	url(r'^im/mosaic/exclude/', im_mosaic_exclude),
 	url(r'^im/mosaic/register/', im_mosaic_register),
@@ -70,4 +71,6 @@ urlpatterns = [
 	url(r'^im/mosaic/', im_mosaic),
 	
 	url(r'^waiting/create/', waiting_create),
+	
+	url(r'^location/country/list/', country_list),
 ]
