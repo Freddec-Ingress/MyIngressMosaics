@@ -299,6 +299,7 @@ def registration(request, search_string = ''):
 		
 		'potential_count':0,
 		'countries': [],
+		'tags':[],
 	}
 
 	countries = Country.objects.all().order_by('name')
@@ -321,6 +322,17 @@ def registration(request, search_string = ''):
 			context['potential_count'] += len(country_data['potentials'])
 			context['countries'].append(country_data)
 
+	tag_results = Tag.objects.filter(active=True).order_by('-pk')
+	for tag_obj in tag_results:
+
+		tag_data = {
+			
+			'label':tag_obj.label,
+			'value':tag_obj.value,
+		}
+		
+		context['tags'].append(tag_data)
+	
 	return render(request, 'registration.html', context)
 	
 	

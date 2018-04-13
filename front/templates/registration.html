@@ -22,7 +22,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="RegistrationPageCtrl" ng-init="init('{{search_string|escape}}', {{countries}});">
+	<div id="content" ng-controller="RegistrationPageCtrl" ng-init="init('{{search_string|escape}}', {{countries}}, {{tags}});">
 	
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
@@ -381,30 +381,16 @@
 						
 						<div class="flex align-center">
 							
-							<div class="width-6 width-xl-4">
+							<div class="width-6 width-xl-4" ng-repeat="tag in tags track by $index">
 								
-								<div class="flex align-center" ng-click="addTag('#MissionDay'); tag_mission_day=true;" ng-model="tag_mission_day" ng-show="!tag_mission_day">
-									<input type="checkbox" class="mr-small" ng-checked="tag_mission_day">
-									<label class="color-dark">#MissionDay</label>
+								<div class="flex align-center" ng-click="addTag(tag.value); tag_[[$index]]=true;" ng-model="tag_[[$index]]" ng-show="!tag_[[$index]]">
+									<input type="checkbox" class="mr-small" ng-checked="tag_[[$index]]">
+									<label class="color-dark">[[tag.label]]</label>
 								</div>
 								
-								<div class="flex align-center" ng-click="removeTag('#MissionDay'); tag_mission_day=false;" ng-model="tag_mission_day" ng-show="tag_mission_day">
-									<input type="checkbox" class="mr-small" ng-checked="tag_mission_day">
-									<label class="color-dark">#MissionDay</label>
-								</div>
-								
-							</div>
-							
-							<div class="width-6 width-xl-4">
-								
-								<div class="flex align-center" ng-click="addTag('#MPEarthDay'); tag_earth_day=true;" ng-model="tag_earth_day" ng-show="!tag_earth_day">
-									<input type="checkbox" class="mr-small" ng-checked="tag_earth_day">
-									<label class="color-dark">#MP Earth Day</label>
-								</div>
-								
-								<div class="flex align-center" ng-click="removeTag('#MPEarthDay'); tag_earth_day=false;" ng-model="tag_earth_day" ng-show="tag_earth_day">
-									<input type="checkbox" class="mr-small" ng-checked="tag_earth_day">
-									<label class="color-dark">#MP Earth Day</label>
+								<div class="flex align-center" ng-click="removeTag(tag.value); tag_[[$index]]=false;" ng-model="tag_[[$index]]" ng-show="tag_[[$index]]">
+									<input type="checkbox" class="mr-small" ng-checked="tag_[[$index]]">
+									<label class="color-dark">[[tag.label]]</label>
 								</div>
 								
 							</div>

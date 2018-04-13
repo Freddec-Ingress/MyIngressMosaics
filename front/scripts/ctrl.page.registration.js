@@ -449,8 +449,9 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 	
 	/* Page loading */
 
-	$scope.init = function(text, countries) {
+	$scope.init = function(text, countries, tags) {
 	
+		$scope.tags = tags;
 		$scope.countries = countries;
 	
 		$scope.open_step(1);
