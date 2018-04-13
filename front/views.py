@@ -365,12 +365,12 @@ def search(request, search_string = ''):
 	
 #---------------------------------------------------------------------------------------------------
 def tag(request, tag):
-	
+'''	
 	mosaic_results = Mosaic.objects.filter(tags__icontains='MPEarthDay')
 	for mosaic_obj in mosaic_results:
 		mosaic_obj.tags = 'MPEarthDay2018|'
 		mosaic_obj.save()
-	
+'''	
 	tag_obj = Tag.objects.get(value=tag)
 	
 	tag_data = {
