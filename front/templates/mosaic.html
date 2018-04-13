@@ -173,6 +173,14 @@
 						</div>
 
 						<div class="flex wrap">
+							<div class="item" ng-repeat="tag in mosaic.tags">
+								<a href="/tag/[[tag.value]]/">
+									[[tag.label]]
+								</a>
+							</div>
+						</div>
+						
+						<div class="flex wrap">
 							<div class="item" ng-repeat="creator in mosaic.creators">
 								<a href="/creator/[[creator.name]]/" ng-class="{'color-enlightened':creator.faction == 'E', 'color-resistant':creator.faction == 'R'}">
 									[[creator.name]]

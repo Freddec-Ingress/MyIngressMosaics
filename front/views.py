@@ -182,6 +182,7 @@ def mosaic(request, ref):
 		
 		'has_unavailable_portals':False,
 		
+		'tags': [],
 		'creators': [],
 	}
 
@@ -282,6 +283,23 @@ def mosaic(request, ref):
 		}
 		
 		context['comments'].append(comment_data)
+	
+	# Tags data
+	
+	if mosaic_obj.tags:
+		
+		tag_results = Tag.objects.all().order_by('-pk')
+		for tag_obj in tag_results:
+			
+			if tag_obj.value in mosaic_obj.tags:
+			
+				tag_data = {
+					
+					'value':tag_obj.value,
+					'label':tag_obj.label,
+				}
+				
+				context['mosaic']['tags'].append(tag_data)
 	
 	context['comment_count'] = len(context['comments'])
 	context['mission_count'] = len(context['missions'])
