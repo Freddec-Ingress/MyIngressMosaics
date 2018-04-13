@@ -895,7 +895,7 @@ def adm_compare(request):
 					}
 					
 					imregion_data['mosaics'].append(immosaic_data)
-
+'''
 			if imregion_obj.update_date:
 				
 				date_compare = imregion_obj.update_date - timedelta(hours=1)
@@ -915,7 +915,7 @@ def adm_compare(request):
 						}
 						
 						imregion_data['extras'].append(immosaic_data)
-					
+'''					
 			imcountry_data['regions'].append(imregion_data)
 		
 		data['countries'].append(imcountry_data)
