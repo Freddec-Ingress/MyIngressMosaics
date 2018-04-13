@@ -354,7 +354,7 @@ def search(request, search_string = ''):
 			
 			'label':tag_obj.label,
 			'value':tag_obj.value,
-			'count':Mosaic.objects.filter(tags__icontains==tag_obj.value+'|').count(),
+			'count':Mosaic.objects.filter(tags__contains=tag_obj.value+'|').count(),
 		}
 		
 		context['tags'].append(tag_data)
