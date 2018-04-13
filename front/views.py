@@ -384,9 +384,9 @@ def search(request, search_string = ''):
 #---------------------------------------------------------------------------------------------------
 def tag(request, tag):
 	
-	mosaic_results = Mosaic.objects.filter(title__icontains='UnityGAmes')
+	mosaic_results = Mosaic.objects.filter(title__icontains='Luminescent')
 	for mosaic_obj in mosaic_results:
-		mosaic_obj.tags = 'MPUnityGames2018|'
+		mosaic_obj.tags = 'MagnusReawakensLuminescentHeart|'
 		mosaic_obj.save()
 	
 	tag_obj = Tag.objects.get(value=tag)
