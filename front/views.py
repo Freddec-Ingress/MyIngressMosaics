@@ -399,7 +399,7 @@ def tag(request, tag):
 		'mosaics':[],
 	}
 	
-	mosaic_results = Mosaic.objects.filter(tags__icontains=tag_obj.value+'|')
+	mosaic_results = Mosaic.objects.filter(tags__icontains=tag_obj.value+'|').order_by('city__name', 'title')
 	for mosaic_obj in mosaic_results:
 		tag_data['mosaics'].append(mosaic_obj.getOverviewData())
 	

@@ -57,13 +57,27 @@ angular.module('FrontModule.controllers').controller('TagPageCtrl', function($sc
 		}
 		
 		$scope.indexes_by_country.sort(function(a, b) {
-			
+
 			if (a.name > b.name) return 1;
 			if (a.name < b.name) return -1;
 			
 			return 0;
 		});
-		
+
+		for (var index of $scope.indexes_by_country) {
+			
+			index.mosaics.sort(function(a, b) {
+	
+				if (a.city_name > b.city_name) return 1;
+				if (a.city_name < b.city_name) return -1;
+					
+				if (a.name > b.name) return 1;
+				if (a.name < b.name) return -1;
+				
+				return 0;
+			});
+		}
+
 		$scope.current_by_country_index = $scope.indexes_by_country[0];
 		$scope.mosaics_by_country = $scope.current_by_country_index.mosaics;
 		
