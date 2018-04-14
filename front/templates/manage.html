@@ -149,13 +149,29 @@
 			<div ng-show="current_tab=='missions'">
 				
 				<div class="section">
-					<div class="flex">
+					<div class="flex-col">
 						
 						<div class="item" ng-repeat="mission in missions track by $index">
-							<div class="bg-block flex">
+							<div class="bg-block flex pl-small pr-small">
 								
 								<div class="item">
-									<span class="color-muted">#[[$index]]</span>
+									<input type="text" class="control" ng-model="neworder" ng-init="neworder=mission.order;" />
+								</div>
+								
+								<div class="item">
+									<a ng-click="">
+										Save
+									</a>
+								</div>
+								
+								<div class="item">
+									<span class="color-normal">[[mission.name]]</span>
+								</div>
+								
+								<div class="item">
+									<a ng-click="">
+										Remove
+									</a>
 								</div>
 								
 							</div>
