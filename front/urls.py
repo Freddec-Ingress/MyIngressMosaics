@@ -12,6 +12,7 @@ urlpatterns = [
 	
 	url(r'^preview/(?P<ref>\w+)', views.preview),
 	url(r'^mosaic/(?P<ref>\w+)', views.mosaic),
+	url(r'^manage/(?P<ref>\w+)', views.manage),
 	
 	url(r'^registration/(?P<search_string>[^/]+)', views.registration),
 	url(r'^registration', views.registration),

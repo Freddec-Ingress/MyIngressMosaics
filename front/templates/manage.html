@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block extra-head %}
+	
+	<link rel="canonical" href="https://www.myingressmosaics.com/manage/{{mosaic.ref}}" />
+	
+	<link rel="alternate" href="https://www.myingressmosaics.com/en/manage/{{mosaic.ref}}" hreflang="en" />
+	<link rel="alternate" href="https://www.myingressmosaics.com/fr/manage/{{mosaic.ref}}" hreflang="fr" />
+	<link rel="alternate" href="https://www.myingressmosaics.com/pt/manage/{{mosaic.ref}}" hreflang="pt" />
+
+	<title>MIM - {{mosaic.title}}</title>
+	
+	<meta property="og:url" content="https://www.myingressmosaics.com/manage/{{mosaic.ref}}" />
+	<meta property="og:image" content="https://www.myingressmosaics.com/preview/{{mosaic.ref}}">
+	<meta property="og:title" content="MIM - {{mosaic.title}}">
+	<meta property="og:headline" content="MIM - {{mosaic.title}}" />
+	<meta property="og:description" content="{{mosaic.country_name}} > {{mosaic.region_name}} > {{mosaic.city_name}} &middot; {{missions|length}} missions &middot; {{mosaic.unique_count}} uniques" />
+
+	<meta name="description" content="{{mosaic.country_name}} > {{mosaic.region_name}} > {{mosaic.city_name}} &middot; {{missions|length}} missions &middot; {{mosaic.unique_count}} uniques" />
+
+{% endblock %}
+
+{% block content %}
+
+	<div id="content" ng-controller="ManagePageCtrl">
+	
+		<div id="loading" ng-hide="loaded" class="section">
+			<div class="item flex justify-center align-center">
+				<i class="fa fa-spinner rotating"></i>
+				<span class="ml-small">{% trans "Loading page..." %}</span>
+			</div>
+		</div>
+		
+		{% if not_allowed %}
+		<div class="container" ng-class="{'active':loaded}">
+			
+		    <div class="section">
+		    	
+		    	<div class="item flex-col">
+					<span class="mb-small color-danger">{% trans "You are not allowed to access this page." %}</span>
+				</div>
+				
+			</div>
+			
+		</div>
+		{% endif %}
+		
+		{% if not not_allowed %}
+		<div class="container" ng-class="{'active':loaded}">
+		</div>
+		{% endif %}
+		
+	</div>
+
+{% endblock %}
+
+{% block script %}
+
+	<script src="/static/front.js"></script>
+	
+{% endblock %}

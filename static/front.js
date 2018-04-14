@@ -2923,6 +2923,15 @@ angular.module('FrontModule.controllers').controller('TagPageCtrl', function($sc
 		$scope.loaded = true;
 	}
 });
+angular.module('FrontModule.controllers').controller('ManagePageCtrl', function($scope, API) {
+	
+	$scope.init = function(mosaic, missions) {
+
+		$scope.mosaic = mosaic;
+		
+		$scope.loaded = true;
+	}
+});
 angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', function($scope, $window, API, UtilsService) {
 	
 	/* Potential management */

@@ -305,6 +305,39 @@ def mosaic(request, ref):
 	context['mission_count'] = len(context['missions'])
 	
 	return render(request, 'mosaic.html', context)
+
+
+
+#---------------------------------------------------------------------------------------------------
+def manage(request, ref):
+
+	data = {
+		
+		'not_allowed':True,
+		
+		'mosaic':None,
+	}
+
+	authorized = False
+
+	# Mosaic data
+	
+	mosaic_obj = Mosaic.objects.get(ref=ref)
+	
+	context['mosaic'] = {
+		
+		'id':mosaic_obj.pk,
+		'title':mosaic_obj.title,
+		
+		'creators':[],
+	}
+	
+	# Authorization
+	
+	if request.user.is_superuser or authorized:
+		data['not_allowed'] = False
+	
+	return render(request, 'manage.html', data)
 	
 	
 	
