@@ -2297,7 +2297,10 @@ angular.module('FrontModule.controllers').controller('ProfilePageCtrl', function
 		$scope.agent_name = newAgentName;
 
 		var data = { 'name':newAgentName };
-		API.sendRequest('/api/user/editagentname/', 'POST', {}, data);
+		API.sendRequest('/api/user/editagentname/', 'POST', {}, data).then(function(response) {
+			
+			$window.location.href = '/profile';
+		});
 	}
 	
 	$scope.logout = function() {
