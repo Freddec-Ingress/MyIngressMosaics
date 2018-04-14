@@ -534,7 +534,7 @@ def city(request, country_name, region_name, city_name):
 	
 	# City data
 	
-	city_obj = City.objects.filter(region__country__name=country_name, region__name=region_name, name=city_name)
+	city_obj = City.objects.filter(name=city_name).filter(Q(region__name=region_name) | Q(region__locale=region_name)).filter(Q(region__country__name=country_name) | Q(region__country__locale=country_name))
 	city_obj = city_obj[0]
 	
 	data['city'] = {
