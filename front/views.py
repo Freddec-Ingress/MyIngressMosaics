@@ -439,6 +439,8 @@ def profile(request):
 		context['picture'] = str(request.user.profile.picture),
 		context['agent_name'] = str(request.user.profile.agent_name),
 		
+		print(request.user.profile.agent_name)
+		
 		# Mosaics data
 		
 		if request.user.profile.agent_name:
