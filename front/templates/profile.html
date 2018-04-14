@@ -22,7 +22,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="ProfilePageCtrl" ng-init="init('{{faction.0}}', {{likes}}, {{todos}}, {{notifs}}, {{mosaics}}, {{missions}}, {{completes}});">
+	<div id="content" ng-controller="ProfilePageCtrl" ng-init="init('{{faction.0}}', '{{agent_name}}', {{likes}}, {{todos}}, {{notifs}}, {{mosaics}}, {{missions}}, {{completes}});">
 	
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
@@ -55,11 +55,20 @@
 					</div>
 					
 					<div class="item flex-col">
+						
 						<span class="text-big color-light">{{name.0}}</span>
-						<span ng-show="faction == 'E'" class="color-enlightened">{% trans "Enlightened" %}</span>
-						<span ng-show="faction == 'R'" class="color-resistant">{% trans "Resistant" %}</span>
-						<span ng-show="!faction" class="color-muted">{% trans "Not defined" %}</span>
+						
+						<div class="flex">
+							<span ng-show="!agent_name" class="color-muted">{% trans "Not defined" %}</span>
+							<span ng-show="agent_name" class="color-normal">[[agent_name]]</span>
+							<span class="ml-small mr-small color-dark">&middot;</span>
+							<span ng-show="faction == 'E'" class="color-enlightened">{% trans "Enlightened" %}</span>
+							<span ng-show="faction == 'R'" class="color-resistant">{% trans "Resistant" %}</span>
+							<span ng-show="!faction" class="color-muted">{% trans "Not defined" %}</span>
+						</div>
+						
 						<a class="mt-small" ng-click="logout();">{% trans "Sign out" %}</a>
+						
 					</div>
 
 				</div>
@@ -129,6 +138,28 @@
 			
 			<div ng-show="current_tab=='mosaics'">
 				
+				<div ng-if="!agent_name" class="section">
+					
+					<div class="item pb-none">
+						<span class="color-normal">{% trans "Please specify your Ingress agent name" %}</span>
+					</div>
+						
+					<div class="flex">
+						
+						<div class="item grow">
+							<input class="control" ng-model="newagentname" ng-init="newagentname='{{name.0}}';" />
+						</div>
+						
+						<div class="item">
+							<button class="btn" ng-click="editAgentName(newagentname); agent_name=newagentname;">
+								{% trans "Save" %}
+							</button>
+						</div>
+						
+					</div>
+					
+				</div>
+			
 				<div class="section">
 					<div class="flex wrap">
 						<mosaic ng-repeat="mosaic in mosaics track by $index" mosaic="mosaic"></mosaic>

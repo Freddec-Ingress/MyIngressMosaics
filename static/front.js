@@ -2292,6 +2292,14 @@ angular.module('FrontModule.controllers').controller('ProfilePageCtrl', function
 		API.sendRequest('/api/user/edit/', 'POST', {}, data);
 	}
 	
+	$scope.editAgentName = function(newAgentName) {
+
+		$scope.agent_name = newAgentName;
+
+		var data = { 'name':newAgentName };
+		API.sendRequest('/api/user/editagentname/', 'POST', {}, data);
+	}
+	
 	$scope.logout = function() {
 	    
 		delete $http.defaults.headers.common.Authorization;
@@ -2310,9 +2318,10 @@ angular.module('FrontModule.controllers').controller('ProfilePageCtrl', function
 	
 	/* Page loading */
 	
-	$scope.init = function(faction, likes, todos, notifs, mosaics, missions, completes) {
+	$scope.init = function(faction, agent_name, likes, todos, notifs, mosaics, missions, completes) {
 		
 		$scope.faction = faction;
+		$scope.agent_name = agent_name;
 		
 		$scope.likes = likes;
 		$scope.todos = todos;

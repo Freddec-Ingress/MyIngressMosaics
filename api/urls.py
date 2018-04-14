@@ -30,6 +30,7 @@ urlpatterns = [
 	url(r'^user/google/', user_google),
 	url(r'^user/logout/', user_logout),
 	url(r'^user/redirect/', user_redirect),
+	url(r'^user/editagentname/', user_editagentname),
 
 	url(r'^mosaic/create/', mosaic_create),
 	url(r'^mosaic/compute/', mosaic_compute),

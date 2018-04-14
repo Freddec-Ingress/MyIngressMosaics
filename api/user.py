@@ -118,3 +118,15 @@ def user_edit(request):
 	request.user.profile.save()
 	
 	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def user_editagentname(request):
+	
+	request.user.profile.agent_name = request.data['name']
+	request.user.profile.save()
+	
+	return Response(None, status=status.HTTP_200_OK)
