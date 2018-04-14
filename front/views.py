@@ -880,7 +880,7 @@ def adm_city(request):
 		'city_doublons':[],
 	}
 	
-	city_results = City.objects.values('name', 'region__name', 'region__country__name').annotate(count=Count('pk')).filter(count__gt=1)
+	city_results = City.objects.orber_by('region__country__name', 'region__name', 'name').values('name', 'region__name', 'region__country__name').annotate(count=Count('pk')).filter(count__gt=1)
 	for city_obj in city_results:
 		
 		city_data = {
@@ -893,6 +893,29 @@ def adm_city(request):
 		data['city_doublons'].append(city_data)
 	
 	return render(request, 'adm_city.html', data)
+
+
+
+#---------------------------------------------------------------------------------------------------
+def adm_region(request):
+	
+	data = {
+		
+		'region_locales':[],
+	}
+	
+	region_results = Region.objects.filter(locale__isnull=True).orber_by('country__name', 'name')
+	for region_obj in region_results:
+		
+		region_data = {
+			
+			'name':region_obj.name, 
+			'country_name':region_obj.country.name, 
+		}
+		
+		data['region_locales'].append(region_data)
+	
+	return render(request, 'adm_region.html', data)
 
 
 
