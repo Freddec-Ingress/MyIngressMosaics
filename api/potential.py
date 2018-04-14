@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 
+from django.db.models import Q
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
@@ -48,21 +49,21 @@ def potential_exclude(request):
 @permission_classes((IsAuthenticated, ))
 def potential_create(request):
 	
-	results = Country.objects.filter(name=request.data['country'])
+	results = Country.objects.filter(Q(name__iexact=request.data['country']) | Q(locale__iexact=request.data['country']))
 	if results.count() > 0:
 		country_obj = results[0]
 	else:
 		country_obj = Country(name=request.data['country'])
 		country_obj.save()
 		
-	results = Region.objects.filter(country=country_obj, name=request.data['region'])
+	results = Region.objects.filter(country=country_obj).filter(Q(name__iexact=request.data['region']) | Q(locale__iexact=request.data['region']))
 	if results.count() > 0:
 		region_obj = results[0]
 	else:
 		region_obj = Region(country=country_obj, name=request.data['region'])
 		region_obj.save()
 		
-	results = City.objects.filter(region=region_obj, name=request.data['city'])
+	results = City.objects.filter(region=region_obj).filter(Q(name__iexact=request.data['city']) | Q(locale__iexact=request.data['city']))
 	if results.count() > 0:
 		city_obj = results[0]
 	else:

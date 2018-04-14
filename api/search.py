@@ -90,7 +90,7 @@ def search_city(request):
 		'city':None,
 	}
 	
-	results = City.objects.filter(name=request.data['name'], region__name=request.data['region_name'], region__country__name=request.data['country_name'])
+	results = City.objects.filter(name=request.data['name']).filter(Q(region__name=request.data['region_name']) | Q(region__locale=request.data['region_name'])).filter(Q(region__country__name=request.data['country_name']) | Q(region__country__locale=request.data['country_name']))
 	if results.count() > 0:
 		
 		city_obj = results[0]
