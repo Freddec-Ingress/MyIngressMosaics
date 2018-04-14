@@ -55,14 +55,14 @@
 			
 				<div class="flex-col">
 					
-					<div class="item">
+					<div class="item pb-none">
 						<a href="/mosaic/[[mosaic.ref]]">
-							<i class="fa fa-arrow"></i>
+							<i class="fa fa-long-arrow-alt-left"></i>
 							{% trans "Back" %}
 						</a>
 					</div>
 					
-					<div class="item">
+					<div class="item pt-none">
 						<span class="text-big color-light">[[mosaic.title]]</span>
 					</div>
 					
@@ -99,13 +99,13 @@
 				<div class="section">
 					<div class="flex-col">
 						
-						<div class="item">
+						<div class="item pb-none">
 							<span class="mb-small color-normal">{% trans "Rename" %}</span>
 						</div>
 						
 						<div class="flex">
 							
-							<div class="item">
+							<div class="item grow">
 								<input type="text" class="control" ng-model="newname" ng-init="newname=mosaic.title;" />
 							</div>
 							
