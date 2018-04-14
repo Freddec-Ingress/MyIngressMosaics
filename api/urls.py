@@ -26,11 +26,11 @@ urlpatterns = [
 	url(r'^ext_bounds/', ext_checkBounds),
 	url(r'^ext_register/', ext_registerMission),
 	
+	url(r'^user/editagentname/', user_editagentname),
 	url(r'^user/edit/', user_edit),
 	url(r'^user/google/', user_google),
 	url(r'^user/logout/', user_logout),
 	url(r'^user/redirect/', user_redirect),
-	url(r'^user/editagentname/', user_editagentname),
 
 	url(r'^mosaic/create/', mosaic_create),
 	url(r'^mosaic/compute/', mosaic_compute),
