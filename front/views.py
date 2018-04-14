@@ -333,6 +333,19 @@ def manage(request, ref):
 		'creators':[],
 	}
 	
+	# Missions data
+	
+	for mission_obj in mosaic_obj.missions.all().order_by('order'):
+
+		mission_data = {
+			
+			'id':mission_obj.pk,
+			'title':mission_obj.title,
+			'order':mission_obj.order, 
+		}
+		
+		data['missions'].append(mission_data)
+		
 	# Authorization
 	
 	if request.user.is_superuser or authorized:
