@@ -324,7 +324,7 @@ def manage(request, ref):
 	
 	mosaic_obj = Mosaic.objects.get(ref=ref)
 	
-	context['mosaic'] = {
+	data['mosaic'] = {
 		
 		'id':mosaic_obj.pk,
 		'title':mosaic_obj.title,
