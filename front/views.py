@@ -316,6 +316,7 @@ def manage(request, ref):
 		'not_allowed':True,
 		
 		'mosaic':None,
+		'missions':[],
 	}
 
 	authorized = False

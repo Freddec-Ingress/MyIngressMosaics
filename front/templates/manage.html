@@ -24,7 +24,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="ManagePageCtrl">
+	<div id="content" ng-controller="ManagePageCtrl" ng-init="{{mosaic|jsonify}}, {{missions|jsonify}}">
 	
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
@@ -49,6 +49,77 @@
 		
 		{% if not not_allowed %}
 		<div class="container" ng-class="{'active':loaded}">
+			
+			<div class="section">
+			
+				<div class="flex align-center">
+					<div class="item">
+						<span class="text-big color-light">[[mosaic.title]]</span>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div class="section">
+				
+				<div class="tab-row mt-big">
+				
+					<div class="tab" ng-click="current_tab='details'" ng-class="{'active':current_tab=='details'}">
+						{% trans "Details" %}
+					</div>
+				
+					<div class="tab" ng-click="current_tab='missions'" ng-class="{'active':current_tab=='missions'}">
+						{% trans "Missions" %}
+					</div>
+				
+					<div class="tab" ng-click="current_tab='adding'" ng-class="{'active':current_tab=='adding'}">
+						{% trans "Adding" %}
+					</div>
+				
+					<div class="tab" ng-click="current_tab='deleting'" ng-class="{'active':current_tab=='deleting'}">
+						{% trans "Deletion" %}
+					</div>
+					
+				</div>
+				
+			</div>
+			
+			<div ng-show="current_tab=='details'">
+				
+				<div class="section">
+					<div class="flex">
+					</div>
+				</div>
+				
+			</div>
+			
+			<div ng-show="current_tab=='missions'">
+				
+				<div class="section">
+					<div class="flex">
+					</div>
+				</div>
+				
+			</div>
+			
+			<div ng-show="current_tab=='adding'">
+				
+				<div class="section">
+					<div class="flex">
+					</div>
+				</div>
+				
+			</div>
+			
+			<div ng-show="current_tab=='deleting'">
+				
+				<div class="section">
+					<div class="flex">
+					</div>
+				</div>
+				
+			</div>
+			
 		</div>
 		{% endif %}
 		
