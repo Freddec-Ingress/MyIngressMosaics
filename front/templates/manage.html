@@ -37,9 +37,9 @@
 		{% if not_allowed %}
 		<div class="container" ng-class="{'active':loaded}">
 			
-		    <div class="section">
-		    	
-		    	<div class="item flex-col">
+			<div class="section">
+				
+				<div class="item flex-col">
 					<span class="mb-small color-danger">{% trans "You are not allowed to access this page." %}</span>
 				</div>
 				
@@ -53,17 +53,26 @@
 			
 			<div class="section">
 			
-				<div class="flex align-center">
+				<div class="flex-col">
+					
+					<div class="item">
+						<a href="/mosaic/[[mosaic.ref]]">
+							<i class="fa fa-arrow"></i>
+							{% trans "Back" %}
+						</a>
+					</div>
+					
 					<div class="item">
 						<span class="text-big color-light">[[mosaic.title]]</span>
 					</div>
+					
 				</div>
 				
 			</div>
 			
 			<div class="section">
 				
-				<div class="tab-row mt-big">
+				<div class="tab-row">
 				
 					<div class="tab" ng-click="current_tab='details'" ng-class="{'active':current_tab=='details'}">
 						{% trans "Details" %}
@@ -88,7 +97,26 @@
 			<div ng-show="current_tab=='details'">
 				
 				<div class="section">
-					<div class="flex">
+					<div class="flex-col">
+						
+						<div class="item">
+							<span class="mb-small color-normal">{% trans "Rename" %}</span>
+						</div>
+						
+						<div class="flex">
+							
+							<div class="item">
+								<input type="text" class="control" ng-model="newname" ng-init="newname=mosaic.title;" />
+							</div>
+							
+							<div class="item">
+								<button class="btn" type="submit" ng-click="rename(newname);">
+									{% trans "Save" %}
+								</button>
+							</div>
+							
+						</div>
+						
 					</div>
 				</div>
 				

@@ -340,6 +340,7 @@ def manage(request, ref):
 		mission_data = {
 			
 			'id':mission_obj.pk,
+			'ref':mission_obj.ref,
 			'title':mission_obj.title,
 			'order':mission_obj.order, 
 		}
