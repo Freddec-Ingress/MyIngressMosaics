@@ -25,7 +25,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="ManagePageCtrl" ng-init="{{mosaic|jsonify}}, {{missions|jsonify}}">
+	<div id="content" ng-controller="ManagePageCtrl" ng-init="init({{mosaic|jsonify}}, {{missions|jsonify}});">
 	
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
