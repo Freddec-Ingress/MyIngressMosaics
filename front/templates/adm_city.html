@@ -113,13 +113,13 @@
 					<div class="item" ng-show="cities.length > 0">
 						<div class="bg-block flex align-center text-small pl-small pr-small">
 							
-							<div class="item flex-col">
+							<div class="item grow flex-col">
 								<select class="control" ng-model="merge_src_city_id">
 									<option ng-repeat="city in cities" value="[[city.id]]">[[city.name]]</option>
 								</select>
 							</div>
 							
-							<div class="item flex-col">
+							<div class="item grow flex-col">
 								<select class="control" ng-model="merge_dst_city_id">
 									<option ng-repeat="city in cities" value="[[city.id]]">[[city.name]]</option>
 								</select>

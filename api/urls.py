@@ -73,6 +73,8 @@ urlpatterns = [
 	url(r'^waiting/create/', waiting_create),
 	
 	url(r'^location/city/list/', city_list),
+	url(r'^location/city/merge/', city_merge),
+	
 	url(r'^location/region/list/', region_list),
 	url(r'^location/country/list/', country_list),
 ]

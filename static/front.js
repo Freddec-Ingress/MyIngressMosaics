@@ -3160,6 +3160,22 @@ angular.module('FrontModule.controllers').controller('AdmCityCtrl', function($sc
 	
 	$scope.cities = [];
 
+	$scope.merge = function(src_city_id, dst_city_id) {
+		
+		var data = { 'src_city_id':src_city_id, 'dst_city_id':dst_city_id, };
+		API.sendRequest('/api/location/city/merge/', 'POST', {}, data).then(function(response) {
+			
+			var index = 0;
+			for (var city of $scope.cities) {
+				
+				if (city.id == src_city_id) break;
+				index += 1;
+			}
+			
+			$scope.cities.splice(index, 1);
+		});
+	}
+	
 	/* Region management */
 	
 	$scope.regions = [];

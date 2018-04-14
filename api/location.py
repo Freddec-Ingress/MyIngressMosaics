@@ -43,6 +43,25 @@ def city_list(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
+def city_merge(request):
+	
+	src_city_obj = City.objects.get(id=request.data['src_city_id'])
+	dst_city_obj = City.objects.get(id=request.data['dst_city_id'])
+	
+	for mosaic_obj in src_city_obj.mosaics.all():
+		mosaic_obj.city = dst_city_obj
+		mosaic_obj.save()
+
+	if src_city_obj.mosaics.all().count() < 1:
+		src_city_obj.delete()
+	
+	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
 def region_list(request):
 	
 	data = {
