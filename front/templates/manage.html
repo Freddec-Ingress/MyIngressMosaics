@@ -152,7 +152,7 @@
 					<div class="flex-col">
 						
 						<div class="item" ng-repeat="mission in missions track by $index">
-							<div class="bg-block flex pl-small pr-small">
+							<div class="bg-block flex align-center pl-small pr-small">
 								
 								<div class="item">
 									<input type="text" class="control" ng-model="neworder" ng-init="neworder=mission.order;" />
@@ -164,8 +164,8 @@
 									</a>
 								</div>
 								
-								<div class="item">
-									<span class="color-normal">[[mission.name]]</span>
+								<div class="item grow">
+									<span class="color-normal">[[mission.title]]</span>
 								</div>
 								
 								<div class="item">
