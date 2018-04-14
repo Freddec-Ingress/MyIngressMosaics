@@ -59,8 +59,8 @@
 						<span class="text-big color-light">{{name.0}}</span>
 						
 						<div class="flex">
-							<span ng-show="agent_name=='None'" class="color-muted">{% trans "Not defined" %}</span>
-							<span ng-show="agent_name!='None'" class="color-normal">[[agent_name]]</span>
+							<span ng-show="!agent_name" class="color-muted">{% trans "Not defined" %}</span>
+							<span ng-show="agent_name'" class="color-normal">[[agent_name]]</span>
 							<span class="ml-small mr-small color-dark">&middot;</span>
 							<span ng-show="faction == 'E'" class="color-enlightened">{% trans "Enlightened" %}</span>
 							<span ng-show="faction == 'R'" class="color-resistant">{% trans "Resistant" %}</span>
@@ -138,7 +138,7 @@
 			
 			<div ng-show="current_tab=='mosaics'">
 				
-				<div ng-if="agent_name=='None'" class="section">
+				<div ng-if="!agent_name" class="section">
 					
 					<div class="item pb-none">
 						<span class="color-normal">{% trans "Please specify your Ingress agent name" %}</span>

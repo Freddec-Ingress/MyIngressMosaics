@@ -128,7 +128,5 @@ def user_editagentname(request):
 	
 	request.user.profile.agent_name = request.data['name']
 	request.user.profile.save()
-	
-	print(request.user.profile.agent_name)
-	
+
 	return Response(None, status=status.HTTP_200_OK)
