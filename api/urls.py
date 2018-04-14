@@ -76,5 +76,7 @@ urlpatterns = [
 	url(r'^location/city/merge/', city_merge),
 	
 	url(r'^location/region/list/', region_list),
+	url(r'^location/region/merge/', region_merge),
+	
 	url(r'^location/country/list/', country_list),
 ]

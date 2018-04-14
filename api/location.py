@@ -89,6 +89,25 @@ def region_list(request):
 #---------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
+def region_merge(request):
+	
+	src_region_obj = Region.objects.get(id=request.data['src_region_id'])
+	dst_region_obj = Region.objects.get(id=request.data['dst_region_id'])
+	
+	for city_obj in src_region_obj.cities.all():
+		city_obj.city = dst_region_obj
+		city_obj.save()
+	
+	if src_region_obj.cities.all().count() < 1:
+		src_region_obj.delete()
+	
+	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
 def country_list(request):
 	
 	data = {
