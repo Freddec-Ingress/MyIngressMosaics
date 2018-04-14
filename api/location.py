@@ -95,7 +95,7 @@ def region_merge(request):
 	dst_region_obj = Region.objects.get(id=request.data['dst_region_id'])
 	
 	for city_obj in src_region_obj.cities.all():
-		city_obj.city = dst_region_obj
+		city_obj.region = dst_region_obj
 		city_obj.save()
 	
 	if src_region_obj.cities.all().count() < 1:
