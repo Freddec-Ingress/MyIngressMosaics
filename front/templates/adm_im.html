@@ -26,37 +26,27 @@
 		
 		<div class="container" ng-class="{'active':loaded}">
 			
+			{% for country in countries %}
 			<div class="section">
 				
 				<div class="flex-col">
 					
 					<div class="item flex-col">
-						<span class="mb-small color-normal">Country</span>
-						<select class="control" ng-model="current_country" ng-change="changeCurrentCountry(current_country)">
-							<option ng-repeat="country in countries" value="[[country]]">[[country.name]]</option>
-						</select>
+						<span class="mb-small color-normal">{{country.name}}</span>
 					</div>
 					
-					<div class="item flex align-center" ng-show="country_changing">
-						<i class="color-normal fa fa-spinner rotating"></i>
-						<span class="ml-small color-normal">Refreshing...</span>
-					</div>
-					
-					<div class="item flex-col" ng-show="regions.length > 0">
-						<span class="mb-small color-normal">Regions</span>
-						<select class="control" ng-model="current_region" ng-change="changeCurrentRegion(current_region)">
-							<option ng-repeat="region in regions" value="[[region]]">[[region.name]]</option>
-						</select>
-					</div>
-					
-					<div class="item flex align-center" ng-show="region_changing">
-						<i class="color-normal fa fa-spinner rotating"></i>
-						<span class="ml-small color-normal">Refreshing...</span>
+					<div class="item flex-col">
+						<div class="bg-color item flex-col">
+							{% for city in country.cities %}
+							<span class="mb-small color-normal">{{city.name}}, {{city.region_name}}, {{city.country_name}}</span>
+							{% endfor %}
+						</div>
 					</div>
 					
 				</div>
 				
 			</div>
+			{% endfor %}
 			
 		</div>
 	

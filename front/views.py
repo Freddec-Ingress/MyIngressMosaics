@@ -932,7 +932,7 @@ def adm_im(request):
 		'countries':[],
 	}
 	
-	imcountry_results = IMCountry.objects.all().order_by('name')
+	imcountry_results = IMCountry.objects.all().order_by('-count')
 	for imcountry_obj in imcountry_results:
 		
 		imcountry_data = {
@@ -940,34 +940,24 @@ def adm_im(request):
 			'id':imcountry_obj.pk,
 			'name':imcountry_obj.name,
 			
-			'regions':[],
+			'cities':[],
 		}
 		
-		imregion_results = imcountry_obj.regions.all().order_by('name')
-		for imregion_obj in imregion_results:
+		immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, dead=False, excluded=False, registered=False)
+		for immosaic_obj in immosaic_results:
 			
-			imregion_data = {
+			city_data = {
 				
-				'id':imregion_obj.pk,
-				'name':imregion_obj.name,
-			
-				'cities':[],
+				'name':immosaic_obj.city_name,
+				'region_name':immosaic_obj.region_name,
+				'country_name':immosaic_obj.country_name,
 			}
-
-			imcity_results = imregion_obj.cities.all().order_by('name')
-			for imcity_obj in imcity_results:
-				
-				imcity_data = {
-					
-					'id':imcity_obj.pk,
-					'name':imcity_obj.name,
-				}
-				
-				imregion_data['cities'].append(imcity_data)
-				
-			imcountry_data['regions'].append(imregion_data)
+		
+			imcountry_data['cities'].append(city_data)
 			
-		data['countries'].append(imcountry_data)
+		imcountry_data['cities'] = list(set(imcountry_data['cities']))
+		if len(imcountry_data['cities']) > 0:
+			data['countries'].append(imcountry_data)
 		
 	return render(request, 'adm_im.html', data)
 
