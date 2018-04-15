@@ -26,7 +26,37 @@
 		
 		<div class="container" ng-class="{'active':loaded}">
 			
-			
+			<div class="section">
+				
+				<div class="flex-col">
+					
+					<div class="item flex-col">
+						<span class="mb-small color-normal">Country</span>
+						<select class="control" ng-model="current_country" ng-change="changeCurrentCountry(current_country)">
+							<option ng-repeat="country in countries" value="[[country]]">[[country.name]]</option>
+						</select>
+					</div>
+					
+					<div class="item flex" ng-show="country_changing">
+						<i class="color-normal fa fa-spinner rotating"></i>
+						<span class="ml-small color-normal">Refreshing...</span>
+					</div>
+					
+					<div class="item flex-col" ng-show="regions.length > 0">
+						<span class="mb-small color-normal">Regions</span>
+						<select class="control" ng-model="current_region" ng-change="changeCurrentRegion(current_region)">
+							<option ng-repeat="region in regions" value="[[region]]">[[region.name]]</option>
+						</select>
+					</div>
+					
+					<div class="item flex" ng-show="region_changing">
+						<i class="color-normal fa fa-spinner rotating"></i>
+						<span class="ml-small color-normal">Refreshing...</span>
+					</div>
+					
+				</div>
+				
+			</div>
 			
 		</div>
 	
