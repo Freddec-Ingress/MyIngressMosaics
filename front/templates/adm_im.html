@@ -31,13 +31,13 @@
 				
 				<div class="flex-col">
 					
-					<div class="item flex-col pb-none">
-						<a ng-click="clipboardCopy();"><i class="fa fa-copy mr-normal"></i></a>
+					<div class="item flex pb-none">
+						<a ng-click="clipboardCopy({{forloop.counter0}});"><i class="fa fa-copy mr-normal"></i></a>
 						<span class="mb-small color-normal">{{country.name}}</span>
 					</div>
 					
 					<div class="item flex-col pt-none">
-						<div class="bg-color item flex-col pr-none pl-none text-small" id="country_input_{{forloop.counter0}}">
+						<div class="bg-block item flex-col pr-small pl-small text-small" id="country_input_{{forloop.counter0}}">
 							{% for city in country.cities %}
 							<span class="mb-small color-dark">{{city.name}}, {{city.region_name}}, {{city.country_name}}</span>
 							{% endfor %}

@@ -1,8 +1,7 @@
 angular.module('FrontModule.controllers').controller('AdmImCtrl', function($scope, API) {
 
-	$scope.clipboardCopy = function(country) {
+	$scope.clipboardCopy = function(index) {
 		
-		var index = $scope.countries.indexOf(country);
 		var input_country = $('#country_input_' + index);
 		
 		input_country.select();
