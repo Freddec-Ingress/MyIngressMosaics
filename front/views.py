@@ -955,7 +955,7 @@ def adm_im(request):
 		
 			imcountry_data['cities'].append(city_data)
 			
-		imcountry_data['cities'] = list(set(imcountry_data['cities']))
+		imcountry_data['cities'] = [dict(t) for t in set([tuple(d.items()) for d in imcountry_data['cities']])]
 		if len(imcountry_data['cities']) > 0:
 			data['countries'].append(imcountry_data)
 		
