@@ -8,10 +8,14 @@ angular.module('FrontModule.controllers').controller('AdmImCtrl', function($scop
 
 	$scope.changeCurrentCountry = function(country) {
 	
+		console.log(country);
+	
+		$scope.country_changing = true;
+		
 		$scope.cities = [];
 		$scope.regions = country.regions;
 		
-		$scope.country_changing = true;
+		$scope.country_changing = false;
 	}
 
 	/* Page loading */
