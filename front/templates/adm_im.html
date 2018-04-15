@@ -15,7 +15,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="AdmImCtrl" ng-init="init({{countries|jsonify}});">
+	<div id="content" ng-controller="AdmImCtrl">
 	
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
@@ -32,14 +32,13 @@
 				<div class="flex-col">
 					
 					<div class="item flex pb-none">
-						<a ng-click="clipboardCopy({{forloop.counter0}});"><i class="fa fa-copy mr-normal"></i></a>
 						<span class="mb-small color-normal">{{country.name}}</span>
 					</div>
 					
 					<div class="item flex-col pt-none">
-						<div class="bg-block item flex-col pr-small pl-small text-small" id="country_input_{{forloop.counter0}}">
+						<div class="bg-block item flex-col text-small" id="country_input_{{forloop.counter0}}">
 							{% for city in country.cities %}
-							<span class="mb-small color-dark">{{city.name}}, {{city.region_name}}, {{city.country_name}}</span>
+							<span class="mb-small color-dark pr-small pl-small">{{city.name}}, {{city.region_name}}, {{city.country_name}}</span>
 							{% endfor %}
 						</div>
 					</div>
