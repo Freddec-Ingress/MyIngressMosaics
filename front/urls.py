@@ -34,6 +34,7 @@ urlpatterns = [
 	
 	url(r'^creator/(?P<creator_name>[\w \-,.\']+)', views.creator),
 	
+	url(r'^adm/im', views.adm_im),
 	url(r'^adm/city', views.adm_city),
 	url(r'^adm/region', views.adm_region),
 	url(r'^adm/compare', views.adm_compare),

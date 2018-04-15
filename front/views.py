@@ -925,6 +925,55 @@ def creator(request, creator_name):
 
 
 #---------------------------------------------------------------------------------------------------
+def adm_im(request):
+	
+	data = {
+		
+		'countries':[],
+	}
+	
+	imcountry_results = IMCountry.objects.all().order_by('name')
+	for imcountry_obj in imcountry_results:
+		
+		imcountry_data = {
+			
+			'id':imcountry_obj.pk,
+			'name':imcountry_obj.name,
+			
+			'regions':[],
+		}
+		
+		imregion_results = imcountry_obj.regions.all().order_by('name')
+		for imregion_obj in imregion_results:
+			
+			imregion_data = {
+				
+				'id':imregion_obj.pk,
+				'name':imregion_obj.name,
+			
+				'cities':[],
+			}
+
+			imcity_results = imregion_obj.cities.all().order_by('name')
+			for imcity_obj in imcity_results:
+				
+				imcity_data = {
+					
+					'id':imcity_obj.pk,
+					'name':imcity_obj.name,
+				}
+				
+				imregion_data['regions'].append(imcity_data)
+				
+			imcountry_data['regions'].append(imregion_data)
+			
+		data['countries'].append(imcountry_data)
+		
+	return render(request, 'adm_im.html', data)
+
+	
+	
+#---------------------------------------------------------------------------------------------------
 def adm_city(request):
 	
 	data = {
