@@ -1,4 +1,4 @@
-angular.module('FrontModule.controllers').controller('AdmRegionCtrl', function($scope, API) {
+angular.module('FrontModule.controllers').controller('AdmImCtrl', function($scope, API) {
 
 	/* Page loading */
 	
