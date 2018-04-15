@@ -11,5 +11,10 @@ angular.module('FrontModule.controllers').controller('AdmImCtrl', function($scop
 	
 	/* Page loading */
 	
-	$scope.loaded = true;
+	$scope.init = function(countries) {
+		
+		$scope.countries = countries;
+		
+		$scope.loaded = true;
+	}
 });
