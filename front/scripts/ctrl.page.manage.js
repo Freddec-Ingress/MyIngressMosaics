@@ -75,6 +75,19 @@ angular.module('FrontModule.controllers').controller('ManagePageCtrl', function(
 		});
 	}
 	
+	$scope.ownermsg = function(newtext) {
+		
+		$scope.updating = true;
+		
+		var data = { 'ref':$scope.mosaic.ref, 'text':newtext }
+		API.sendRequest('/api/mosaic/ownermsg/', 'POST', {}, data).then(function(response) {
+			
+			$scope.mosaic.owner_msg = newtext;
+			
+			$scope.updating = false;
+		});
+	}
+	
 	/* Mission management */
 	
 	$scope.orderChange = function() {

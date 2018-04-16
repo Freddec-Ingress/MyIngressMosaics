@@ -144,6 +144,31 @@
 					</div>
 				</div>
 				
+				<div class="section">
+					<div class="flex-col">
+						
+						<div class="item pb-none">
+							<span class="mb-small color-normal">{% trans "Owner message" %}</span>
+						</div>
+						
+						<div class="flex">
+							
+							<div class="item grow">
+								<textarea class="control" ng-model="newtext" ng-init="newtext=mosaic.owner_msg;">
+								</textarea>
+							</div>
+							
+							<div class="item">
+								<button class="btn" type="submit" ng-click="ownermsg(newtext);" ng-disabled="updating">
+									{% trans "Save" %}
+								</button>
+							</div>
+							
+						</div>
+						
+					</div>
+				</div>
+				
 			</div>
 			
 			<div ng-show="current_tab=='missions'">
