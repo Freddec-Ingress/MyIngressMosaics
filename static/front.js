@@ -2963,7 +2963,7 @@ angular.module('FrontModule.controllers').controller('ManagePageCtrl', function(
 		
 		$scope.updating = true;
 		
-		var data = { 'ref':$scope.mosaic.ref }
+		var data = { 'ref':$scope.mosaic.ref, 'newname':newname }
 		API.sendRequest('/api/mosaic/rename/', 'POST', {}, data).then(function(response) {
 			
 			$scope.mosaic.title = newname;

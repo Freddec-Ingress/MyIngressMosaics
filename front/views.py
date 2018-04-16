@@ -318,9 +318,7 @@ def manage(request, ref):
 		'mosaic':None,
 		'missions':[],
 	}
-
-	authorized = False
-
+	
 	# Mosaic data
 	
 	mosaic_obj = Mosaic.objects.get(ref=ref)
@@ -331,7 +329,9 @@ def manage(request, ref):
 		'ref':mosaic_obj.ref,
 		'title':mosaic_obj.title,
 		
-		'creators':[],
+		'city_name':mosaic_obj.city.name,
+		'region_name':mosaic_obj.city.region.name,
+		'country_name':mosaic_obj.city.region.country.name,
 	}
 	
 	# Missions data
@@ -350,7 +350,7 @@ def manage(request, ref):
 		
 	# Authorization
 	
-	if request.user.is_superuser or authorized:
+	if request.user.is_superuser or (request.user.profile.agent_name and request.user.profile.agent_name in mosaic_obj.creators):
 		data['not_allowed'] = False
 	
 	return render(request, 'manage.html', data)
