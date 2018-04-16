@@ -119,7 +119,7 @@
 					
 				</div>
 				
-				<div class="flex align-center" ng-if="mosaic.owner_msg">
+				<div class="flex align-center" ng-if="mosaic.owner_msg && mosaic.owner_msg!='None'">
 					<div class="item flex-col">
 						<span class="color-dark mb-small">{% trans "Creator message" %}</span>
 						<span class="color-normal">[[mosaic.owner_msg]]</span>
