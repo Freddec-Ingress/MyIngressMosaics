@@ -914,7 +914,8 @@ angular.module('FrontModule.directives').directive('mosaic', function() {
 					
 					'<a class="item" href="/mosaic/[[mosaic.ref]]" target="_blank" style="display:block;">' +
 						'<div class="flex align-center">' +
-							'<i class="mr-normal text-small fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals"></i>' +
+							'<i class="mr-normal text-small fa fa-exclamation-triangle color-muted" title="Mosaic not available anymore!" ng-show="mosaic.is_obsolete"></i>' +
+							'<i class="mr-normal text-small fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals && !mosaic.is_obsolete"></i>' +
 							'<span class="mr-normal grow text-medium color-light ellipsis" title="[[mosaic.title]]">[[mosaic.title]]</span>' +
 							'<i class="fa fa-angle-right"></i>' +
 						'</div>' +
