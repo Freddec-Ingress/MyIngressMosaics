@@ -149,6 +149,10 @@ class Mosaic(models.Model):
 	
 	tags =  models.TextField(null=True, blank=True)
 	
+	obsolete = models.BooleanField(default=False)
+
+	owner_msg =  models.TextField(null=True, blank=True)
+	
 	# Admin displaying
 	
 	def __str__(self):
@@ -243,6 +247,7 @@ class Mosaic(models.Model):
 			'country_code':self.city.region.country.code,
 			'country_name':self.city.region.country.name,
 			
+			'is_obsolete':self.obsolete,
 			'has_unavailable_portals':False,
 
 			'images':[],

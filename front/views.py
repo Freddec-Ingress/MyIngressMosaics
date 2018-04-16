@@ -158,6 +158,7 @@ def mosaic(request, ref):
 		'id':mosaic_obj.pk,
 		'ref':str(mosaic_obj.ref),
 		'title':str(mosaic_obj.title),
+		'owner_msg':str(mosaic_obj.owner_msg),
 
 		'column_count':mosaic_obj.column_count,
 		'portal_count':mosaic_obj.portal_count,
@@ -180,6 +181,7 @@ def mosaic(request, ref):
 		'todoers': mosaic_obj.links.filter(type='todo').count(),
 		'completers': mosaic_obj.links.filter(type='complete').count(),
 		
+		'is_obsolete':mosaic_obj.obsolete,
 		'has_unavailable_portals':False,
 		
 		'tags': [],

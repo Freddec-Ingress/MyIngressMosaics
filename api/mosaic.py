@@ -253,3 +253,29 @@ def mosaic_delete(request):
 		mosaic_obj.delete()
 
 	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def mosaic_obsolete(request):
+
+	mosaic_obj = Mosaic.objects.get(ref=request.data['ref'])
+	mosaic_obj.obsolete = True
+	mosaic_obj.save()
+
+	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def mosaic_ownermsg(request):
+
+	mosaic_obj = Mosaic.objects.get(ref=request.data['ref'])
+	mosaic_obj.owner_msg = request.data['text']
+	mosaic_obj.save()
+	
+	return Response(None, status=status.HTTP_200_OK)

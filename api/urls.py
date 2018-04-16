@@ -42,6 +42,8 @@ urlpatterns = [
 	url(r'^mosaic/addmission/', mosaic_addmission),
 	url(r'^mosaic/removemission/', mosaic_removemission),
 	url(r'^mosaic/delete/', mosaic_delete),
+	url(r'^mosaic/obsolete/', mosaic_obsolete),
+	url(r'^mosaic/ownermsg/', mosaic_ownermsg),
 	
 	url(r'^link/create/', link_create),
 	url(r'^link/delete/', link_delete),
