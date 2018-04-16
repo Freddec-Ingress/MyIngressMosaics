@@ -11,7 +11,8 @@ textarea.control { padding:8px 10px 0; }
 input[type=text].control { padding:0 10px 0 14px; }
 
 .control-mini {
-    padding:0 10px 0;
+    padding:0!important;
     min-height:24px;
     font-size:11px;
+    text-align:center;
 }

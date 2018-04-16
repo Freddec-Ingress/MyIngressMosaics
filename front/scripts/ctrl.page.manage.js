@@ -77,6 +77,20 @@ angular.module('FrontModule.controllers').controller('ManagePageCtrl', function(
 	
 	/* Mission management */
 	
+	$scope.orderChange = function() {
+		
+		$scope.missions.sort(function(a, b) {
+			
+			if (parseInt(a.neworder) < parseInt(b.neworder))
+				return -1;
+				
+			if (parseInt(a.neworder) > parseInt(b.neworder))
+				return 1;
+			
+			return 0;
+		});
+	}
+	
 	var missions_to_remove = [];
 	var missions_to_reorder = [];
 	

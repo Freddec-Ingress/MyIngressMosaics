@@ -151,23 +151,25 @@
 				<div class="section">
 					<div class="flex-col">
 						
-						<div class="item" ng-repeat="mission in missions track by $index">
-							<div class="bg-block flex align-center pl-small pr-small">
-								
-								<div class="item" style="max-width:50px;min-width:50px;">
-									<input type="text" class="control control-mini" ng-model="mission.neworder" ng-init="mission.neworder=mission.order;" />
+						<div class="item">
+							<div class="bg-block">
+								<div class="flex align-center pl-small pr-small text-small" ng-repeat="mission in missions track by $index" style="border-bottom:1px solid #000;">
+									
+									<div class="item" style="max-width:50px;min-width:50px;">
+										<input type="text" class="control control-mini" ng-change="orderChnage();" ng-model="mission.neworder" ng-init="mission.neworder=mission.order;" />
+									</div>
+									
+									<div class="item grow">
+										<span class="color-normal">[[mission.title]]</span>
+									</div>
+									
+									<div class="item">
+										<a ng-click="mission.toremove=true;">
+											Remove
+										</a>
+									</div>
+									
 								</div>
-								
-								<div class="item grow">
-									<span class="color-normal">[[mission.title]]</span>
-								</div>
-								
-								<div class="item">
-									<a ng-click="mission.toremove=true;">
-										Remove
-									</a>
-								</div>
-								
 							</div>
 						</div>
 						
