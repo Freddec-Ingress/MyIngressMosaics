@@ -1005,20 +1005,32 @@ def adm_region(request):
 	
 	data = {
 		
+		'region_mosaics':[],
 		'region_locales':[],
+		'region_countries':[],
 	}
 	
-	region_results = Region.objects.filter(locale__isnull=True).order_by('country__name', 'name')
+	region_results = Region.objects.all().order_by('country__name', 'name')
 	for region_obj in region_results:
 		
 		region_data = {
 			
-			'name':region_obj.name, 
+			'id':region_obj.id,
+			'name':region_obj.name,
+			
+			'country_id':region_obj.country.id, 
 			'country_name':region_obj.country.name, 
 		}
 		
-		data['region_locales'].append(region_data)
-	
+		if region_obj.cities.all().count() < 1:
+			data['region_mosaics'].append(region_data)
+		
+		if not region_obj.locale:
+			data['region_locales'].append(region_data)
+		
+		if not region_obj.name == region_obj.country.name:
+			data['region_countries'].append(region_data)
+			
 	return render(request, 'adm_region.html', data)
 
 

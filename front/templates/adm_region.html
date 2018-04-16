@@ -26,6 +26,39 @@
 		
 		<div class="container" ng-class="{'active':loaded}">
 			
+			{% if region_mosaics %}
+			<div class="section">
+				
+				<div class="flex-col">
+					
+					<div class="item">
+						<span class="color-normal">Region without mosaic</span>
+					</div>
+					
+					{% for region in region_mosaics %}
+					<div class="item">
+						<div class="bg-block flex align-center text-small pl-small pr-small">
+							
+							<div class="item">
+								<a href="/admin/api/region/[[region.id]]/change" target="blank">
+									<i class="fa fa-lock"></i>
+								</a>
+							</div>
+							
+							<div class="item">
+								<span class="color-light">{{region.name}}</span>
+								<span class="color-light">, {{region.country_name}}</span>
+							</div>
+							
+						</div>
+					</div>
+					{% endfor %}
+					
+				</div>
+				
+			</div>
+			{% endif %}
+			
 			{% if region_locales %}
 			<div class="section">
 				
@@ -38,6 +71,45 @@
 					{% for region in region_locales %}
 					<div class="item">
 						<div class="bg-block flex align-center text-small pl-small pr-small">
+							
+							<div class="item">
+								<a href="/admin/api/region/[[region.id]]/change" target="blank">
+									<i class="fa fa-lock"></i>
+								</a>
+							</div>
+							
+							<div class="item">
+								<span class="color-light">{{region.name}}</span>
+								<span class="color-light">, {{region.country_name}}</span>
+							</div>
+							
+						</div>
+					</div>
+					{% endfor %}
+					
+				</div>
+				
+			</div>
+			{% endif %}
+			
+			{% if region_countries %}
+			<div class="section">
+				
+				<div class="flex-col">
+					
+					<div class="item">
+						<span class="color-normal">Region with same name as country</span>
+					</div>
+					
+					{% for region in region_countries %}
+					<div class="item">
+						<div class="bg-block flex align-center text-small pl-small pr-small">
+							
+							<div class="item">
+								<a href="/admin/api/region/[[region.id]]/change" target="blank">
+									<i class="fa fa-lock"></i>
+								</a>
+							</div>
 							
 							<div class="item">
 								<span class="color-light">{{region.name}}</span>
