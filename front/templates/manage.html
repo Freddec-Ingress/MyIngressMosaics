@@ -153,7 +153,7 @@
 						
 						<div class="item">
 							<div class="bg-block">
-								<div class="flex align-center pl-small pr-small text-small" ng-repeat="mission in missions track by $index" style="border-bottom:1px solid #000;">
+								<div class="flex align-center pl-small pr-small text-small" ng-repeat="mission in missions track by $index" ng-show="mission.toremove==false" style="border-bottom:1px solid #000;">
 									
 									<div class="item" style="max-width:50px;min-width:50px;">
 										<input type="text" class="control control-mini" ng-blur="orderChange();" ng-model="mission.neworder" ng-init="mission.neworder=mission.order;" />

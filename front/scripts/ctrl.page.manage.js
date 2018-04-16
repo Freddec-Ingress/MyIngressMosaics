@@ -182,9 +182,13 @@ angular.module('FrontModule.controllers').controller('ManagePageCtrl', function(
 			'ref':$scope.mosaic.ref,
 			'title':mission.title,
 			'order':UtilsService.getOrderFromMissionName(mission.title),
+			'neworder':UtilsService.getOrderFromMissionName(mission.title),
 		}
 		
 		$scope.missions_to_add.push(mission_data);
+		
+		var index = $scope.search_results.indexOf(mission);
+		$scope.search_results.splice(index, 1);
 	}
 	
 	$scope.remove_mission = function(mission) {
