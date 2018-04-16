@@ -107,7 +107,7 @@ angular.module('FrontModule.controllers').controller('ManagePageCtrl', function(
 			$scope.search_results = response.missions;
 			if (!$scope.search_results) $scope.search_results = [];
 			
-			$scope.refreshing = false;
+			$scope.searching = false;
 		});
 	}
 	
@@ -185,6 +185,21 @@ angular.module('FrontModule.controllers').controller('ManagePageCtrl', function(
 		}
 		
 		$scope.missions_to_add.push(mission_data);
+	}
+	
+	$scope.remove_mission = function(mission) {
+		
+		var index = 0;
+		for (var mission_data of $scope.missions_to_add) {
+			
+			if (mission_data.id == mission.id) {
+				break;
+			}
+			
+			index += 1;
+		}
+		
+		$scope.missions_to_add.splice(index, 1);
 	}
 	
 	function processMissionAdding() {
