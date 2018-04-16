@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-02 12:48+0000\n"
+"POT-Creation-Date: 2018-04-16 14:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,365 +20,470 @@ msgstr ""
 
 #: templates/base.html:37
 msgid "Home"
-msgstr ""
+msgstr "Inicio"
 
-#: templates/base.html:42 templates/search.html:10 templates/search.html:14
-#: templates/search.html:15
+#: templates/base.html:42 templates/search.html:13 templates/search.html:17
+#: templates/search.html:18
 msgid "Search"
-msgstr ""
+msgstr "Buscar"
 
-#: templates/base.html:47 templates/map.html:10 templates/map.html:14
-#: templates/map.html:15
+#: templates/base.html:47 templates/map.html:13 templates/map.html:17
+#: templates/map.html:18
 msgid "Map"
-msgstr ""
+msgstr "Mapa"
 
-#: templates/base.html:52 templates/registration.html:10
-#: templates/registration.html:14 templates/registration.html:15
+#: templates/base.html:52 templates/registration.html:13
+#: templates/registration.html:17 templates/registration.html:18
 msgid "Hunt"
-msgstr ""
+msgstr "Caza"
 
-#: templates/base.html:57 templates/profile.html:10 templates/profile.html:14
-#: templates/profile.html:15
+#: templates/base.html:57 templates/profile.html:13 templates/profile.html:17
+#: templates/profile.html:18
 msgid "Profile"
-msgstr ""
+msgstr "Perfil"
 
-#: templates/city.html:27 templates/country.html:27 templates/creator.html:28
-#: templates/map.html:27 templates/mosaic.html:30 templates/profile.html:27
-#: templates/region.html:27 templates/registration.html:27
-#: templates/search.html:27 templates/world.html:28
+#: templates/city.html:30 templates/country.html:30 templates/creator.html:31
+#: templates/manage.html:33 templates/map.html:30 templates/mosaic.html:33
+#: templates/profile.html:30 templates/region.html:30
+#: templates/registration.html:30 templates/search.html:30
+#: templates/tag.html:31 templates/world.html:31
 msgid "Loading page..."
-msgstr ""
+msgstr "Cargando página.."
 
-#: templates/city.html:55 templates/country.html:43 templates/region.html:53
+#: templates/city.html:58 templates/country.html:46 templates/region.html:56
 msgid "To be notified"
-msgstr ""
+msgstr "Por notificar"
 
-#: templates/city.html:56 templates/country.html:44 templates/region.html:54
+#: templates/city.html:59 templates/country.html:47 templates/region.html:57
 msgid "Notified"
-msgstr ""
+msgstr "Notificado"
 
-#: templates/city.html:60 templates/country.html:48 templates/region.html:58
+#: templates/city.html:63 templates/country.html:51 templates/region.html:61
 msgid "You must be signed in to be notified."
-msgstr ""
+msgstr "Debes haber iniciado sesión para ser notificado."
 
-#: templates/city.html:61 templates/country.html:49 templates/mosaic.html:150
-#: templates/mosaic.html:333 templates/profile.html:37
-#: templates/region.html:59 templates/registration.html:46
+#: templates/city.html:64 templates/country.html:52 templates/mosaic.html:180
+#: templates/mosaic.html:371 templates/profile.html:40
+#: templates/region.html:62 templates/registration.html:49
 msgid "Sign in"
-msgstr ""
+msgstr "Iniciar sesión"
 
-#: templates/city.html:73 templates/creator.html:51 templates/profile.html:95
-#: templates/region.html:71 templates/search.html:65
+#: templates/city.html:76 templates/creator.html:54 templates/profile.html:107
+#: templates/region.html:74 templates/search.html:89 templates/tag.html:62
 msgid "Mosaics"
-msgstr ""
+msgstr "Mosaicos"
 
-#: templates/city.html:78 templates/region.html:76 templates/search.html:69
+#: templates/city.html:81 templates/region.html:79 templates/search.html:93
 msgid "Potentials"
-msgstr ""
+msgstr "Potenciales"
 
-#: templates/city.html:94 templates/region.html:98
+#: templates/city.html:97 templates/region.html:101
 msgid "By missions"
-msgstr ""
+msgstr "Por misiones"
 
-#: templates/city.html:100 templates/region.html:104
+#: templates/city.html:103 templates/region.html:107
 msgid "By uniques"
-msgstr ""
+msgstr "Por únicos"
 
-#: templates/city.html:106 templates/country.html:83 templates/region.html:110
-#: templates/registration.html:235 templates/world.html:123
+#: templates/city.html:109 templates/country.html:86 templates/region.html:113
+#: templates/registration.html:238 templates/world.html:147
 msgid "By name"
-msgstr ""
+msgstr "Por nombre"
 
-#: templates/city.html:112 templates/region.html:116
+#: templates/city.html:115 templates/region.html:119
 msgid "By date"
-msgstr ""
+msgstr "Por fecha"
 
-#: templates/city.html:127 templates/region.html:153
+#: templates/city.html:130 templates/region.html:156
 msgid "Page"
-msgstr ""
+msgstr "Página"
 
-#: templates/country.html:61
+#: templates/country.html:64
 msgid "Regions"
-msgstr ""
+msgstr "Regiones"
 
-#: templates/country.html:77 templates/world.html:117
+#: templates/country.html:80 templates/world.html:141
 msgid "By mosaics"
-msgstr ""
+msgstr "Por mosaicos"
 
-#: templates/creator.html:56 templates/mosaic.html:195
-#: templates/profile.html:100 templates/search.html:73
+#: templates/creator.html:59 templates/manage.html:82
+#: templates/mosaic.html:233 templates/profile.html:112
+#: templates/search.html:97
 msgid "Missions"
+msgstr "Misiones"
+
+#: templates/manage.html:43
+#, fuzzy
+#| msgid "You must be signed in to access this page."
+msgid "You are not allowed to access this page."
+msgstr "Debes haber iniciado sesión para acceder a esta página."
+
+#: templates/manage.html:61 templates/registration.html:312
+#: templates/registration.html:413 templates/registration.html:513
+msgid "Back"
+msgstr "Regresar"
+
+#: templates/manage.html:78
+msgid "Details"
 msgstr ""
 
-#: templates/map.html:38
+#: templates/manage.html:86
+msgid "Adding"
+msgstr ""
+
+#: templates/manage.html:90
+#, fuzzy
+#| msgid "Delete"
+msgid "Deletion"
+msgstr "Borrar"
+
+#: templates/manage.html:103
+#, fuzzy
+#| msgid "By name"
+msgid "Rename"
+msgstr "Por nombre"
+
+#: templates/manage.html:114 templates/manage.html:138
+#: templates/manage.html:164 templates/manage.html:204
+#: templates/manage.html:246 templates/mosaic.html:64
+#: templates/profile.html:95 templates/profile.html:155
+msgid "Save"
+msgstr "Guardar"
+
+#: templates/manage.html:127
+#, fuzzy
+#| msgid "Enter location"
+msgid "Change location"
+msgstr "Ingresa una ubicación"
+
+#: templates/manage.html:151
+msgid "Owner message"
+msgstr ""
+
+#: templates/manage.html:219
+#, fuzzy
+#| msgid "Missions"
+msgid "Missions to add"
+msgstr "Misiones"
+
+#: templates/manage.html:256
+#, fuzzy
+#| msgid "Search for mosaics"
+msgid "Search for missions to add"
+msgstr "Buscar mosaicos"
+
+#: templates/manage.html:262 templates/search.html:45
+msgid "Mosaic name or creator"
+msgstr "Nombre del mosaico o del creador"
+
+#: templates/manage.html:275 templates/registration.html:80
+#: templates/search.html:58 templates/world.html:70
+msgid "Searching..."
+msgstr "Buscando..."
+
+#: templates/manage.html:306
+msgid ""
+"Delete a mosaic is definitive. Mark it as obsolete could be an alternative "
+"to inform agents that it is not online anymore."
+msgstr ""
+
+#: templates/manage.html:311 templates/mosaic.html:352
+msgid "Delete"
+msgstr "Borrar"
+
+#: templates/map.html:41
 msgid "Enter location"
-msgstr ""
+msgstr "Ingresa una ubicación"
 
-#: templates/map.html:43
+#: templates/map.html:46
 msgid "Go"
-msgstr ""
+msgstr "Ir"
 
-#: templates/map.html:62
+#: templates/map.html:65
 msgid "No mosaic. Please try to zoom out."
-msgstr ""
+msgstr "No hay mosaicos. Por favor, intenta alejándote a un plano más general."
 
-#: templates/map.html:66
+#: templates/map.html:69
 msgid "Current map is too larger to be scanned. Please try to zoom in."
 msgstr ""
+"El mapa actual es demasiado amplio para ser escaneado. Por favor, intenta "
+"acercándote a un plano más específico."
 
-#: templates/map.html:71
+#: templates/map.html:74
 msgid "Loading data..."
-msgstr ""
+msgstr "Cargando data..."
 
-#: templates/map.html:76
+#: templates/map.html:79
 msgid "mosaics"
-msgstr ""
+msgstr "mosaicos"
 
-#: templates/mosaic.html:43
+#: templates/mosaic.html:46
 msgid "Comment"
-msgstr ""
+msgstr "Comentario"
 
-#: templates/mosaic.html:61 templates/profile.html:83
-msgid "Save"
-msgstr ""
-
-#: templates/mosaic.html:95
+#: templates/mosaic.html:98
 msgid "Some portals are unavailable!"
+msgstr "¡Algunos portales no están disponibles!"
+
+#: templates/mosaic.html:105
+msgid "Mark as obsolete"
 msgstr ""
 
-#: templates/mosaic.html:128 templates/profile.html:105
+#: templates/mosaic.html:109
+msgid "Not available anymore"
+msgstr ""
+
+#: templates/mosaic.html:117
+msgid "Manage"
+msgstr ""
+
+#: templates/mosaic.html:124
+msgid "Creator message"
+msgstr ""
+
+#: templates/mosaic.html:158 templates/profile.html:117
 msgid "Like"
-msgstr ""
+msgstr "Me gusta"
 
-#: templates/mosaic.html:135 templates/profile.html:110
+#: templates/mosaic.html:165 templates/profile.html:122
 msgid "To do"
-msgstr ""
+msgstr "Por hacer"
 
-#: templates/mosaic.html:142 templates/profile.html:115
+#: templates/mosaic.html:172 templates/profile.html:127
 msgid "Done"
-msgstr ""
+msgstr "Hecho"
 
-#: templates/mosaic.html:149
+#: templates/mosaic.html:179
 msgid "You must be signed in to do this action."
-msgstr ""
+msgstr "Debes haber iniciado sesión para realizar esta acción."
 
-#: templates/mosaic.html:159 templates/registration.html:153
+#: templates/mosaic.html:189 templates/registration.html:156
 msgid "missions"
-msgstr ""
+msgstr "misiones"
 
-#: templates/mosaic.html:166
+#: templates/mosaic.html:196
 msgid "waypoints"
-msgstr ""
+msgstr "waypoints"
 
-#: templates/mosaic.html:167
+#: templates/mosaic.html:197
 msgid "portals"
-msgstr ""
+msgstr "portales"
 
-#: templates/mosaic.html:168
+#: templates/mosaic.html:198
 msgid "uniques"
-msgstr ""
+msgstr "únicos"
 
-#: templates/mosaic.html:191
+#: templates/mosaic.html:229
 msgid "Roadmap"
-msgstr ""
+msgstr "Mapa del camino"
 
-#: templates/mosaic.html:201
+#: templates/mosaic.html:239
 msgid "Comments"
-msgstr ""
+msgstr "Comentarios"
 
-#: templates/mosaic.html:245
+#: templates/mosaic.html:283
 msgid "Unavailable"
-msgstr ""
+msgstr "No disponible"
 
-#: templates/mosaic.html:246
+#: templates/mosaic.html:284
 msgid "Hack"
-msgstr ""
+msgstr "Hackea"
 
-#: templates/mosaic.html:247
+#: templates/mosaic.html:285
 msgid "Capture"
-msgstr ""
+msgstr "Captura"
 
-#: templates/mosaic.html:248
+#: templates/mosaic.html:286
 msgid "View"
-msgstr ""
+msgstr "Vista"
 
-#: templates/mosaic.html:249
+#: templates/mosaic.html:287
 msgid "Passphrase"
-msgstr ""
+msgstr "Palabra clave"
 
-#: templates/mosaic.html:308
+#: templates/mosaic.html:346
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
-#: templates/mosaic.html:314
-msgid "Delete"
-msgstr ""
-
-#: templates/mosaic.html:328
+#: templates/mosaic.html:366
 msgid "Post a comment"
-msgstr ""
+msgstr "Publicar un comentario"
 
-#: templates/mosaic.html:332
+#: templates/mosaic.html:370
 msgid "You must be signed in to post comment."
-msgstr ""
+msgstr "Debes haber iniciado sesión para publicar un comentario."
 
-#: templates/profile.html:36 templates/registration.html:45
+#: templates/profile.html:39 templates/registration.html:48
 msgid "You must be signed in to access this page."
-msgstr ""
+msgstr "Debes haber iniciado sesión para acceder a esta página."
 
-#: templates/profile.html:56 templates/profile.html:76
-msgid "Enlightened"
-msgstr ""
-
-#: templates/profile.html:57 templates/profile.html:77
-msgid "Resistant"
-msgstr ""
-
-#: templates/profile.html:58
+#: templates/profile.html:62 templates/profile.html:67
 msgid "Not defined"
-msgstr ""
+msgstr "No definido"
 
-#: templates/profile.html:59
+#: templates/profile.html:65 templates/profile.html:88
+msgid "Enlightened"
+msgstr "Iluminado"
+
+#: templates/profile.html:66 templates/profile.html:89
+msgid "Resistant"
+msgstr "Resistencia"
+
+#: templates/profile.html:70
 msgid "Sign out"
-msgstr ""
+msgstr "Cerrar sesión"
 
-#: templates/profile.html:69
+#: templates/profile.html:81
 msgid "Please specify your faction"
-msgstr ""
+msgstr "Por favor, especifica tu facción"
 
-#: templates/profile.html:120
+#: templates/profile.html:132
 msgid "Notifications"
-msgstr ""
+msgstr "Notificaciones"
 
-#: templates/region.html:92
+#: templates/profile.html:144
+#, fuzzy
+#| msgid "Please specify your faction"
+msgid "Please specify your Ingress agent name"
+msgstr "Por favor, especifica tu facción"
+
+#: templates/region.html:95
 msgid "By city"
-msgstr ""
+msgstr "Por ciudad"
 
-#: templates/registration.html:36
+#: templates/registration.html:39
 msgid "Creating mosaic..."
-msgstr ""
+msgstr "Creando mosaico..."
 
-#: templates/registration.html:58
+#: templates/registration.html:61
 msgid "Search for registered missions"
-msgstr ""
+msgstr "Buscar misiones registradas"
 
-#: templates/registration.html:64
+#: templates/registration.html:67
 msgid "Mission name, creator"
-msgstr ""
+msgstr "Nombre de la misión, creador"
 
-#: templates/registration.html:77 templates/search.html:55
-#: templates/world.html:67
-msgid "Searching..."
-msgstr ""
-
-#: templates/registration.html:85
+#: templates/registration.html:88
 msgid "No mission"
-msgstr ""
+msgstr "No hay misión"
 
-#: templates/registration.html:93
+#: templates/registration.html:96
 msgid "To register missions"
-msgstr ""
-
-#: templates/registration.html:119
-msgid "Potential mosaics"
-msgstr ""
-
-#: templates/registration.html:120
-msgid "Only potential mosaics validated by MIM team are displayed here."
-msgstr ""
-
-#: templates/registration.html:121
-msgid "Feel free to register any mosaic you want."
-msgstr ""
+msgstr "Para registrar misiones"
 
 #: templates/registration.html:122
+msgid "Potential mosaics"
+msgstr "Potenciales mosaicos"
+
+#: templates/registration.html:123
+msgid "Only potential mosaics validated by MIM team are displayed here."
+msgstr ""
+"Sólo mosaicos potenciales validados por el equipo de MIM son mostrados aquí."
+
+#: templates/registration.html:124
+msgid "Feel free to register any mosaic you want."
+msgstr "Siéntete libre de registrar cualquier mosaico que desees."
+
+#: templates/registration.html:125
 msgid ""
 "To register mosaic not listed here, just search missions with form above."
 msgstr ""
+"Para registrar un mosaico que no esté aquí listado, simplemente busca "
+"misiones con el formulario arriba mostrado."
 
-#: templates/registration.html:126
+#: templates/registration.html:129
 msgid "No potential mosaic for the moment. Please retry later ;)"
 msgstr ""
+"No hay potenciales mosaicos por el momento. Por favor, intenta luego ;)"
 
-#: templates/registration.html:172
+#: templates/registration.html:175
 msgid "Select All"
-msgstr ""
+msgstr "Selecciona todos"
 
-#: templates/registration.html:176
+#: templates/registration.html:179
 msgid "Unselect All"
-msgstr ""
+msgstr "Quitar selección a todos"
 
-#: templates/registration.html:186 templates/registration.html:317
-#: templates/registration.html:394
+#: templates/registration.html:189 templates/registration.html:320
+#: templates/registration.html:421
 msgid "Next"
-msgstr ""
+msgstr "Siguiente"
 
-#: templates/registration.html:208
+#: templates/registration.html:211
 msgid "Columns"
-msgstr ""
+msgstr "Columnas"
 
-#: templates/registration.html:227
+#: templates/registration.html:230
 msgid "Reorder"
-msgstr ""
+msgstr "Reordenar"
 
-#: templates/registration.html:231
+#: templates/registration.html:234
 msgid "Reverse"
-msgstr ""
+msgstr "Revertir"
 
-#: templates/registration.html:239
+#: templates/registration.html:242
 msgid "By end"
-msgstr ""
+msgstr "Desde el final"
 
-#: templates/registration.html:309 templates/registration.html:386
-#: templates/registration.html:486
-msgid "Back"
-msgstr ""
-
-#: templates/registration.html:335
+#: templates/registration.html:338
 msgid "Mosaic name"
-msgstr ""
+msgstr "Nombre del mosaico"
 
-#: templates/registration.html:340 templates/registration.html:363
+#: templates/registration.html:343 templates/registration.html:366
 msgid "Suggestion"
-msgstr ""
+msgstr "Sugerencias"
 
-#: templates/registration.html:359 templates/world.html:60
+#: templates/registration.html:362 templates/world.html:63
 msgid "City name"
+msgstr "Nombre de la ciudad"
+
+#: templates/registration.html:380
+msgid "Tag(s)"
 msgstr ""
 
-#: templates/registration.html:494
+#: templates/registration.html:521
 msgid "Validate"
-msgstr ""
+msgstr "Validar"
 
-#: templates/search.html:36
+#: templates/search.html:39
 msgid "Search for mosaics"
+msgstr "Buscar mosaicos"
+
+#: templates/search.html:66 templates/world.html:102
+msgid "Event/Project dedicated pages"
 msgstr ""
 
-#: templates/search.html:42
-msgid "Mosaic name or creator"
+#: templates/tag.html:44
+#, fuzzy
+#| msgid "Comment"
+msgid "G+ Community"
+msgstr "Comentario"
+
+#: templates/tag.html:45
+msgid "TG Channel"
 msgstr ""
 
-#: templates/world.html:38
+#: templates/world.html:41
 #, python-format
 msgid "%(count)s registered mosaics by agents for agents"
-msgstr ""
+msgstr "%(count)s de mosaicos registrados por agentes para agentes"
 
-#: templates/world.html:59
+#: templates/world.html:62
 msgid "Search for a city"
-msgstr ""
+msgstr "Buscar una ciudad"
 
-#: templates/world.html:75
+#: templates/world.html:78
 msgid "City unknown"
-msgstr ""
+msgstr "Ciudad desconocida"
 
-#: templates/world.html:83
+#: templates/world.html:86
 msgid "No registered mosaic"
-msgstr ""
+msgstr "Mosaico no registrado"
 
-#: templates/world.html:87
+#: templates/world.html:90
 msgid "Be the first to register a mosaic for this city"
-msgstr ""
+msgstr "Sé el primero en registrar un mosaico para esta ciudad"
 
-#: templates/world.html:101
+#: templates/world.html:125
 msgid "Countries"
-msgstr ""
+msgstr "Países"
