@@ -328,6 +328,7 @@ def manage(request, ref):
 	data['mosaic'] = {
 		
 		'id':mosaic_obj.pk,
+		'ref':mosaic_obj.ref,
 		'title':mosaic_obj.title,
 		
 		'creators':[],
