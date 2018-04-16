@@ -129,6 +129,17 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 				$scope.mosaic.comments.splice(index, 1);
 			});
 	}
+
+	/* Mosaic management */
+	
+	$scope.markAsObsolete = function() {
+		
+		var data = { 'ref':$scope.mosaic.ref }
+		API.sendRequest('/api/mosaic/obsolete/', 'POST', {}, data).then(function(response) {
+		
+			$scope.mosaic.is_obsolete = true;
+		});
+	}
 	
 	/* Tab management */
 	

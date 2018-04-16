@@ -186,6 +186,8 @@ def mosaic(request, ref):
 		
 		'tags': [],
 		'creators': [],
+		
+		'is_owned':False,
 	}
 
 	if not request.user.is_anonymous:
@@ -230,6 +232,9 @@ def mosaic(request, ref):
 		if creator_data not in context['mosaic']['creators']:
 			context['mosaic']['creators'].append(creator_data)
 			
+		if not request.user.is_anonymous and request.user.profile.agent_name and mission_obj.creator == request.user.profile.agent_name:
+			context['mosaic']['is_owned'] = True
+			
 		# Portals data
 		
 		temp_portal_data = []
@@ -272,6 +277,9 @@ def mosaic(request, ref):
 
 				mission_data['portals'].append(portal_data)
 
+	if request.user.is_superuser:
+		context['mosaic']['is_owned'] = True
+		
 	# Comments data
 	
 	for comment_obj in mosaic_obj.comments.all().order_by('-create_date'):
