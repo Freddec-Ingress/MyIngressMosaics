@@ -1028,7 +1028,7 @@ def adm_region(request):
 		if not region_obj.locale:
 			data['region_locales'].append(region_data)
 		
-		if not region_obj.name == region_obj.country.name:
+		if region_obj.name == region_obj.country.name:
 			data['region_countries'].append(region_data)
 			
 	return render(request, 'adm_region.html', data)
