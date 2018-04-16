@@ -36,7 +36,13 @@ urlpatterns = [
 	url(r'^mosaic/compute/', mosaic_compute),
 	url(r'^mosaic/preview/generate/', mosaic_preview_generate),
 	url(r'^mosaic/tag/add/', mosaic_addtag),
-
+	url(r'^mosaic/rename/', mosaic_rename),
+	url(r'^mosaic/move/', mosaic_move),
+	url(r'^mosaic/reorder/', mosaic_reorder),
+	url(r'^mosaic/addmission/', mosaic_addmission),
+	url(r'^mosaic/removemission/', mosaic_removemission),
+	url(r'^mosaic/delete/', mosaic_delete),
+	
 	url(r'^link/create/', link_create),
 	url(r'^link/delete/', link_delete),
 
