@@ -343,7 +343,8 @@ def manage(request, ref):
 			'id':mission_obj.pk,
 			'ref':mission_obj.ref,
 			'title':mission_obj.title,
-			'order':mission_obj.order, 
+			'order':mission_obj.order,
+			'toremove':False,
 		}
 		
 		data['missions'].append(mission_data)
