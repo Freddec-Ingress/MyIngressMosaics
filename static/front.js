@@ -3104,7 +3104,7 @@ angular.module('FrontModule.controllers').controller('ManagePageCtrl', function(
 		var mission_data = {
 			
 			'id':mission.id,
-			'ref':mission.ref,
+			'ref':$scope.mosaic.ref,
 			'title':mission.title,
 			'order':UtilsService.getOrderFromMissionName(mission.title),
 		}
