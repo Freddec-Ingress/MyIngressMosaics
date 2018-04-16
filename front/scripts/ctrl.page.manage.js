@@ -178,7 +178,7 @@ angular.module('FrontModule.controllers').controller('ManagePageCtrl', function(
 		
 		var mission_data = {
 			
-			'id':mission.id,
+			'mission_id':mission.id,
 			'ref':$scope.mosaic.ref,
 			'title':mission.title,
 			'order':UtilsService.getOrderFromMissionName(mission.title),
@@ -192,7 +192,7 @@ angular.module('FrontModule.controllers').controller('ManagePageCtrl', function(
 		var index = 0;
 		for (var mission_data of $scope.missions_to_add) {
 			
-			if (mission_data.id == mission.id) {
+			if (mission_data.mission_id == mission.mission_id) {
 				break;
 			}
 			
