@@ -110,7 +110,7 @@
 							</div>
 							
 							<div class="item">
-								<button class="btn" type="submit" ng-click="rename(newname);">
+								<button class="btn" type="submit" ng-click="rename(newname);" ng-disabled="updating">
 									{% trans "Save" %}
 								</button>
 							</div>
@@ -130,11 +130,11 @@
 						<div class="flex">
 							
 							<div class="item grow">
-								<input type="text" class="control" />
+								<input id="city_input" type="text" class="control" value="{{mosaic.city_name}}, {{mosaic.region_name}}, {{mosaic.country_name}}" />
 							</div>
 							
 							<div class="item">
-								<button class="btn" type="submit" ng-click="move();">
+								<button class="btn" type="submit" ng-click="move();" ng-disabled="updating">
 									{% trans "Save" %}
 								</button>
 							</div>
@@ -155,13 +155,7 @@
 							<div class="bg-block flex align-center pl-small pr-small">
 								
 								<div class="item">
-									<input type="text" class="control" ng-model="neworder" ng-init="neworder=mission.order;" />
-								</div>
-								
-								<div class="item">
-									<a ng-click="">
-										Save
-									</a>
+									<input type="text" class="control" ng-model="mission.neworder" ng-init="neworder=mission.order;" />
 								</div>
 								
 								<div class="item grow">
@@ -169,12 +163,18 @@
 								</div>
 								
 								<div class="item">
-									<a ng-click="">
+									<a ng-click="mission.toremove=true;">
 										Remove
 									</a>
 								</div>
 								
 							</div>
+						</div>
+						
+						<div class="item">
+							<button class="btn" type="submit" ng-click="reorder();" ng-disabled="updating">
+								{% trans "Save" %}
+							</button>
 						</div>
 						
 					</div>
@@ -186,7 +186,48 @@
 				
 				<div class="section">
 					<div class="flex">
+						
+						<div class="item">
+							<span class="color-normal">{% trans "Missions to add" %}</span>
+						</div>
+						
+						<div class="item">
+						</div>
+						
+						<div class="item">
+							<button class="btn" type="submit" ng-click="addmissions();" ng-disabled="updating">
+								{% trans "Save" %}
+							</button>
+						</div>
+						
 					</div>
+				</div>
+				
+				<div class="section">
+					
+					<div class="item pb-none">
+						<span class="color-normal">{% trans "Search for missions" %}</span>
+					</div>
+					
+					<form class="self-stretch flex">
+						
+						<div class="item grow">
+							<input class="control" placeholder="{% trans "Mosaic name or creator" %}" ng-model="searchtext" />
+						</div>
+						
+						<div class="item">
+							<button class="btn" type="submit" ng-click="search(searchtext);">
+								<i class="fa fa-search"></i>
+							</button>
+						</div>
+						
+					</form>
+					
+					<div class="flex align-center" ng-show="searching">
+						<i class="item fa fa-spinner rotating"></i>
+						<span class="item">{% trans "Searching..." %}</span>
+					</div>
+					
 				</div>
 				
 			</div>
@@ -195,6 +236,13 @@
 				
 				<div class="section">
 					<div class="flex">
+						
+						<div class="item">
+							<button class="btn btn-danger" type="submit" ng-click="delete();" ng-disabled="updating">
+								{% trans "Delete" %}
+							</button>
+						</div>
+						
 					</div>
 				</div>
 				
@@ -210,5 +258,6 @@
 {% block script %}
 
 	<script src="/static/front.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuXb2ncs76tO-2SN8hvkE5Zt4VwtPoNcM&language=en&libraries=places"></script>
 	
 {% endblock %}

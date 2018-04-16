@@ -164,25 +164,25 @@ def mosaic_move(request):
 	mosaic_obj = Mosaic.objects.get(ref=request.data['ref'])
 	if request.user.is_superuser or (request.user.profile.agent_name and request.user.profile.agent_name in mosaic_obj.creators): 
 
-		results = Country.objects.filter(Q(name__iexact=request.data['country_name']) | Q(locale__iexact=request.data['country_name']))
+		results = Country.objects.filter(Q(name__iexact=request.data['newcountry_name']) | Q(locale__iexact=request.data['newcountry_name']))
 		if results.count() > 0:
 			country_obj = results[0]
 		else:
-			country_obj = Country(name=request.data['country_name'])
+			country_obj = Country(name=request.data['newcountry_name'])
 			country_obj.save()
 			
-		results = Region.objects.filter(country=country_obj).filter(Q(name__iexact=request.data['region_name']) | Q(locale__iexact=request.data['region_name']))
+		results = Region.objects.filter(country=country_obj).filter(Q(name__iexact=request.data['newregion_name']) | Q(locale__iexact=request.data['newregion_name']))
 		if results.count() > 0:
 			region_obj = results[0]
 		else:
-			region_obj = Region(country=country_obj, name=request.data['region_name'])
+			region_obj = Region(country=country_obj, name=request.data['newregion_name'])
 			region_obj.save()
 			
-		results = City.objects.filter(region=region_obj).filter(Q(name__iexact=request.data['city_name']) | Q(locale__iexact=request.data['city_name']))
+		results = City.objects.filter(region=region_obj).filter(Q(name__iexact=request.data['newcity_name']) | Q(locale__iexact=request.data['newcity_name']))
 		if results.count() > 0:
 			city_obj = results[0]
 		else:
-			city_obj = City(region=region_obj, name=request.data['city_name'])
+			city_obj = City(region=region_obj, name=request.data['newcity_name'])
 			city_obj.save()
 
 		mosaic_obj.city = city_obj
