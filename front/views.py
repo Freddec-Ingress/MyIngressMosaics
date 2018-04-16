@@ -1121,21 +1121,22 @@ def adm_compare(request):
 
 			if imregion_obj.update_date:
 				
-				date_compare = imregion_obj.update_date - timedelta(hours=1)
-				immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name, update_date__isnull=True).order_by('name')
+				immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name, update_date__isnull=False).filter(Q(dead=True) | Q(excluded=True) | Q(registered=True)).order_by('name')
 				for immosaic_obj in immosaic_results:
 					
 					immosaic_data_date = immosaic_obj.update_date
 					if immosaic_data_date: immosaic_data_date = immosaic_data_date.strftime('%m.%d.%Y')
 					
-					immosaic_data = {
+					if immosaic_data_date != imregion_data_date:
 						
-						'id':immosaic_obj.pk,
-						'name':immosaic_obj.name,
-						'update_date':immosaic_data_date,
-					}
-					
-					imregion_data['extras'].append(immosaic_data)
+						immosaic_data = {
+							
+							'id':immosaic_obj.pk,
+							'name':immosaic_obj.name,
+							'update_date':immosaic_data_date,
+						}
+						
+						imregion_data['extras'].append(immosaic_data)
 
 			imcountry_data['regions'].append(imregion_data)
 		

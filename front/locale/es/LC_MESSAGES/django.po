@@ -113,8 +113,6 @@ msgid "Missions"
 msgstr "Misiones"
 
 #: templates/manage.html:43
-#, fuzzy
-#| msgid "You must be signed in to access this page."
 msgid "You are not allowed to access this page."
 msgstr "Debes haber iniciado sesión para acceder a esta página."
 
@@ -132,14 +130,10 @@ msgid "Adding"
 msgstr ""
 
 #: templates/manage.html:90
-#, fuzzy
-#| msgid "Delete"
 msgid "Deletion"
 msgstr "Borrar"
 
 #: templates/manage.html:103
-#, fuzzy
-#| msgid "By name"
 msgid "Rename"
 msgstr "Por nombre"
 
@@ -151,8 +145,6 @@ msgid "Save"
 msgstr "Guardar"
 
 #: templates/manage.html:127
-#, fuzzy
-#| msgid "Enter location"
 msgid "Change location"
 msgstr "Ingresa una ubicación"
 
@@ -161,14 +153,10 @@ msgid "Owner message"
 msgstr ""
 
 #: templates/manage.html:219
-#, fuzzy
-#| msgid "Missions"
 msgid "Missions to add"
 msgstr "Misiones"
 
 #: templates/manage.html:256
-#, fuzzy
-#| msgid "Search for mosaics"
 msgid "Search for missions to add"
 msgstr "Buscar mosaicos"
 
@@ -182,9 +170,7 @@ msgid "Searching..."
 msgstr "Buscando..."
 
 #: templates/manage.html:306
-msgid ""
-"Delete a mosaic is definitive. Mark it as obsolete could be an alternative "
-"to inform agents that it is not online anymore."
+msgid "Delete a mosaic is definitive. Mark it as obsolete could be an alternative to inform agents that it is not online anymore."
 msgstr ""
 
 #: templates/manage.html:311 templates/mosaic.html:352
@@ -205,9 +191,7 @@ msgstr "No hay mosaicos. Por favor, intenta alejándote a un plano más general.
 
 #: templates/map.html:69
 msgid "Current map is too larger to be scanned. Please try to zoom in."
-msgstr ""
-"El mapa actual es demasiado amplio para ser escaneado. Por favor, intenta "
-"acercándote a un plano más específico."
+msgstr "El mapa actual es demasiado amplio para ser escaneado. Por favor, intenta acercándote a un plano más específico."
 
 #: templates/map.html:74
 msgid "Loading data..."
@@ -342,8 +326,6 @@ msgid "Notifications"
 msgstr "Notificaciones"
 
 #: templates/profile.html:144
-#, fuzzy
-#| msgid "Please specify your faction"
 msgid "Please specify your Ingress agent name"
 msgstr "Por favor, especifica tu facción"
 
@@ -377,24 +359,19 @@ msgstr "Potenciales mosaicos"
 
 #: templates/registration.html:123
 msgid "Only potential mosaics validated by MIM team are displayed here."
-msgstr ""
-"Sólo mosaicos potenciales validados por el equipo de MIM son mostrados aquí."
+msgstr "Sólo mosaicos potenciales validados por el equipo de MIM son mostrados aquí."
 
 #: templates/registration.html:124
 msgid "Feel free to register any mosaic you want."
 msgstr "Siéntete libre de registrar cualquier mosaico que desees."
 
 #: templates/registration.html:125
-msgid ""
-"To register mosaic not listed here, just search missions with form above."
-msgstr ""
-"Para registrar un mosaico que no esté aquí listado, simplemente busca "
-"misiones con el formulario arriba mostrado."
+msgid "To register mosaic not listed here, just search missions with form above."
+msgstr "Para registrar un mosaico que no esté aquí listado, simplemente busca misiones con el formulario arriba mostrado."
 
 #: templates/registration.html:129
 msgid "No potential mosaic for the moment. Please retry later ;)"
-msgstr ""
-"No hay potenciales mosaicos por el momento. Por favor, intenta luego ;)"
+msgstr "No hay potenciales mosaicos por el momento. Por favor, intenta luego ;)"
 
 #: templates/registration.html:175
 msgid "Select All"
@@ -454,8 +431,6 @@ msgid "Event/Project dedicated pages"
 msgstr ""
 
 #: templates/tag.html:44
-#, fuzzy
-#| msgid "Comment"
 msgid "G+ Community"
 msgstr "Comentario"
 
@@ -487,3 +462,244 @@ msgstr "Sé el primero en registrar un mosaico para esta ciudad"
 #: templates/world.html:125
 msgid "Countries"
 msgstr "Países"
+
+
+msgid "Pakistan"
+msgstr ""
+
+msgid "New Caledonia"
+msgstr ""
+
+msgid "Nepal"
+msgstr ""
+
+msgid "Bulgaria"
+msgstr ""
+
+msgid "Chile"
+msgstr ""
+
+msgid "Ukraine"
+msgstr ""
+
+msgid "Vietnam"
+msgstr ""
+
+msgid "Brunei"
+msgstr ""
+
+msgid "Peru"
+msgstr ""
+
+msgid "Serbia"
+msgstr ""
+
+msgid "Macau"
+msgstr ""
+
+msgid "Belarus"
+msgstr ""
+
+msgid "Paraguay"
+msgstr ""
+
+msgid "United Kingdom"
+msgstr ""
+
+msgid "Bolivia"
+msgstr ""
+
+msgid "Ecuador"
+msgstr ""
+
+msgid "Estonia"
+msgstr ""
+
+msgid "Latvia"
+msgstr ""
+
+msgid "Colombia"
+msgstr ""
+
+msgid "Kazakhstan"
+msgstr ""
+
+msgid "United Arab Emirates"
+msgstr ""
+
+msgid "Morocco"
+msgstr ""
+
+msgid "Slovenia"
+msgstr ""
+
+msgid "Macedonia (FYROM)"
+msgstr ""
+
+msgid "Armenia"
+msgstr ""
+
+msgid "Costa Rica"
+msgstr ""
+
+msgid "Thailand"
+msgstr ""
+
+msgid "Turkey"
+msgstr ""
+
+msgid "Germany"
+msgstr ""
+
+msgid "Singapore"
+msgstr ""
+
+msgid "France"
+msgstr ""
+
+msgid "Japan"
+msgstr ""
+
+msgid "Malaysia"
+msgstr ""
+
+msgid "Uruguay"
+msgstr ""
+
+msgid "Spain"
+msgstr ""
+
+msgid "Ireland"
+msgstr ""
+
+msgid "Denmark"
+msgstr ""
+
+msgid "Russia"
+msgstr ""
+
+msgid "Hong Kong"
+msgstr ""
+
+msgid "Lithuania"
+msgstr ""
+
+msgid "Iceland"
+msgstr ""
+
+msgid "Portugal"
+msgstr ""
+
+msgid "Netherlands"
+msgstr ""
+
+msgid "Dominican Republic"
+msgstr ""
+
+msgid "Egypt"
+msgstr ""
+
+msgid "Canada"
+msgstr ""
+
+msgid "China"
+msgstr ""
+
+msgid "Austria"
+msgstr ""
+
+msgid "Maldives"
+msgstr ""
+
+msgid "Panama"
+msgstr ""
+
+msgid "Australia"
+msgstr ""
+
+msgid "South Africa"
+msgstr ""
+
+msgid "United States"
+msgstr ""
+
+msgid "Mauritius"
+msgstr ""
+
+msgid "Poland"
+msgstr ""
+
+msgid "Slovakia"
+msgstr ""
+
+msgid "Argentina"
+msgstr ""
+
+msgid "Croatia"
+msgstr ""
+
+msgid "Sweden"
+msgstr ""
+
+msgid "Italy"
+msgstr ""
+
+msgid "Czechia"
+msgstr ""
+
+msgid "Greece"
+msgstr ""
+
+msgid "India"
+msgstr ""
+
+msgid "Philippines"
+msgstr ""
+
+msgid "Israel"
+msgstr ""
+
+msgid "Andorra"
+msgstr ""
+
+msgid "Switzerland"
+msgstr ""
+
+msgid "New Zealand"
+msgstr ""
+
+msgid "Hungary"
+msgstr ""
+
+msgid "Indonesia"
+msgstr ""
+
+msgid "Belgium"
+msgstr ""
+
+msgid "Mexico"
+msgstr ""
+
+msgid "Finland"
+msgstr ""
+
+msgid "Taiwan"
+msgstr ""
+
+msgid "Sri Lanka"
+msgstr ""
+
+msgid "Norway"
+msgstr ""
+
+msgid "Brazil"
+msgstr ""
+
+msgid "Luxembourg"
+msgstr ""
+
+msgid "South Korea"
+msgstr ""
+
+msgid "Romania"
+msgstr ""
