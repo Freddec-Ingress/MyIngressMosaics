@@ -330,6 +330,7 @@ def manage(request, ref):
 		'id':mosaic_obj.pk,
 		'ref':mosaic_obj.ref,
 		'title':mosaic_obj.title,
+		'owner_msg':mosaic_obj.owner_msg,
 		
 		'city_name':mosaic_obj.city.name,
 		'region_name':mosaic_obj.city.region.name,
