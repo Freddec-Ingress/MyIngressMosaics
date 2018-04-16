@@ -2923,7 +2923,7 @@ angular.module('FrontModule.controllers').controller('TagPageCtrl', function($sc
 		$scope.loaded = true;
 	}
 });
-angular.module('FrontModule.controllers').controller('ManagePageCtrl', function($scope, API, $window) {
+angular.module('FrontModule.controllers').controller('ManagePageCtrl', function($scope, API, $window, UtilsService) {
 	
     var inputCity = document.getElementById('city_input');
     var options = { types: ['(cities)'], };
@@ -3016,6 +3016,26 @@ angular.module('FrontModule.controllers').controller('ManagePageCtrl', function(
 		});
 	}
 	
+	$scope.search = function(text) {
+		
+		$scope.search_results = null;
+		
+		if (!text || text.length < 3) {
+			return;
+		}
+
+		$scope.searching = true;
+		
+		var data = { 'text':text };
+		API.sendRequest('/api/search/missions/', 'POST', {}, data).then(function(response) {
+			
+			$scope.search_results = response.missions;
+			if (!$scope.search_results) $scope.search_results = [];
+			
+			$scope.refreshing = false;
+		});
+	}
+	
 	var missions_to_remove = [];
 	var missions_to_reorder = [];
 	
@@ -3079,9 +3099,24 @@ angular.module('FrontModule.controllers').controller('ManagePageCtrl', function(
 	
 	$scope.missions_to_add = [];
 	
+	$scope.add_mission = function(mission) {
+		
+		var mission_data = {
+			
+			'id':mission.id,
+			'ref':mission.ref,
+			'title':mission.title,
+			'order':UtilsService.getOrderFromMissionName(mission.title),
+		}
+		
+		$scope.missions_to_add.push(mission_data);
+	}
+	
 	function processMissionAdding() {
 	
 		if ($scope.missions_to_add.length < 1) {
+			
+			$scope.orderChange();
 			
 			var data = { 'ref':$scope.mosaic.ref }
 			API.sendRequest('/api/mosaic/compute/', 'POST', {}, data).then(function(response) {
@@ -3095,6 +3130,8 @@ angular.module('FrontModule.controllers').controller('ManagePageCtrl', function(
 		}
 		
 		API.sendRequest('/api/mosaic/addmission/', 'POST', {}, $scope.missions_to_add[0]).then(function(response) {
+			
+			$scope.missions.push($scope.missions_to_add[0]);
 			
 			$scope.missions_to_add.splice(0, 1);
 			processMissionAdding();
