@@ -100,7 +100,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		
 				if (potential.region == '' || !potential.region) {
 					
-					potential.region = potential.country;
+					potential.region = potential.city;
 				}
 
 				$scope.$apply();

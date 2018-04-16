@@ -24,7 +24,7 @@ angular.module('FrontModule.controllers').controller('ManagePageCtrl', function(
 
 		if ($scope.mosaic.newregion_name == '' || !$scope.mosaic.newregion_name) {
 			
-			$scope.mosaic.newregion_name = $scope.mosaic.newcountry_name;
+			$scope.mosaic.newregion_name = $scope.mosaic.newcity_name;
 		}
 		
 		$scope.$apply();

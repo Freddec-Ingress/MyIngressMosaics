@@ -1528,7 +1528,7 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 
 		if ($scope.region_name == '' || !$scope.region_name) {
 			
-			$scope.region_name = $scope.country_name;
+			$scope.region_name = $scope.city_name;
 		}
 		
 		$scope.$apply();
@@ -2422,7 +2422,7 @@ angular.module('FrontModule.controllers').controller('WorldPageCtrl', function($
     		if (addressType == 'administrative_area_level_2' && !region_name) region_name = place.address_components[i]['long_name'];
     	}
     	
-		if (!region_name) region_name = country_name;
+		if (!region_name) region_name = city_name;
 		
     	if (!country_name || !region_name || !city_name) {
     		
@@ -2961,7 +2961,7 @@ angular.module('FrontModule.controllers').controller('ManagePageCtrl', function(
 
 		if ($scope.mosaic.newregion_name == '' || !$scope.mosaic.newregion_name) {
 			
-			$scope.mosaic.newregion_name = $scope.mosaic.newcountry_name;
+			$scope.mosaic.newregion_name = $scope.mosaic.newcity_name;
 		}
 		
 		$scope.$apply();
@@ -3307,7 +3307,7 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		
 				if (potential.region == '' || !potential.region) {
 					
-					potential.region = potential.country;
+					potential.region = potential.city;
 				}
 
 				$scope.$apply();

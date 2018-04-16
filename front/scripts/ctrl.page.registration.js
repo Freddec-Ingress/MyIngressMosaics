@@ -236,7 +236,7 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 
 		if ($scope.region_name == '' || !$scope.region_name) {
 			
-			$scope.region_name = $scope.country_name;
+			$scope.region_name = $scope.city_name;
 		}
 		
 		$scope.$apply();

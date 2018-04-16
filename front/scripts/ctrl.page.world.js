@@ -28,7 +28,7 @@ angular.module('FrontModule.controllers').controller('WorldPageCtrl', function($
     		if (addressType == 'administrative_area_level_2' && !region_name) region_name = place.address_components[i]['long_name'];
     	}
     	
-		if (!region_name) region_name = country_name;
+		if (!region_name) region_name = city_name;
 		
     	if (!country_name || !region_name || !city_name) {
     		
