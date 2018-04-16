@@ -31,7 +31,7 @@ angular.module('FrontModule.directives').directive('mosaic', function() {
 					'</div>' +
 
 					'<a class="item" href="/mosaic/[[mosaic.ref]]" target="_blank" style="display:block;">' +
-						'<div class="flex wrap shrink" style="max-width:150px; padding-right:calc((6 - [[mosaic.column_count]]) * 25px);">' +
+						'<div class="flex wrap shrink" ng-class="{\'obsolete\':mosaic.is_obsolete}" style="max-width:150px; padding-right:calc((6 - [[mosaic.column_count]]) * 25px);">' +
 							
 							'<div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / [[mosaic.column_count]]);">' +
 							'</div>' +
