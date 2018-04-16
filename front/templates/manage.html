@@ -274,7 +274,11 @@
 			<div ng-show="current_tab=='deleting'">
 				
 				<div class="section">
-					<div class="flex">
+					<div class="flex-col">
+						
+						<div class="item">
+							<span class="color-danger">{% trans "Delete a mosaic is definitive. Mark it as obsolete could be an alternative to inform agents that it is not online anymore." %}</span>
+						</div>
 						
 						<div class="item">
 							<button class="btn btn-danger" type="submit" ng-click="delete();" ng-disabled="updating">

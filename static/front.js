@@ -3129,6 +3129,8 @@ angular.module('FrontModule.controllers').controller('ManagePageCtrl', function(
 		}
 		
 		$scope.missions_to_add.splice(index, 1);
+		
+		$scope.search_results.push(mission);
 	}
 	
 	function processMissionAdding() {
