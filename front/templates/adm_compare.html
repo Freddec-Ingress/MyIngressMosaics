@@ -130,7 +130,7 @@
 								</div>
 								
 								{% for mosaic in region.mosaics %}
-								<div class="flex-col text-small bg-block mb-small" ng-model="mosaic_{{mosaic.id}}" ng-init="mosaic_{{mosaic.id}}={{mosaic|jsonify}};">
+								<div class="flex-col text-small bg-block mb-normal" ng-model="mosaic_{{mosaic.id}}" ng-init="mosaic_{{mosaic.id}}={{mosaic|jsonify}};">
 
 									<div class="flex" style="border-bottom:1px solid #000;">
 										
@@ -234,7 +234,7 @@
 											</div>
 											
 											<div class="item grow flex-col">
-												<input id="city_input_{{forloop.counter0}}" type="text" class="control control-mini text-left" placeholder="City name" />
+												<input id="city_input_{{forloop.counter0}}" type="text" class="control control-mini text-left pl-small" placeholder="City name" />
 											</div>
 										
 										</div>
@@ -242,7 +242,7 @@
 										<div class="flex">
 											
 											<div class="item grow">
-												<input type="text" class="control control-mini text-left" ng-model="mosaic_{{mosaic.id}}_new_name" ng-init="mosaic_{{mosaic.id}}_new_name=mosaic_{{mosaic.id}}.potential.name;" />
+												<input type="text" class="control control-mini text-left pl-small" ng-model="mosaic_{{mosaic.id}}_new_name" ng-init="mosaic_{{mosaic.id}}_new_name=mosaic_{{mosaic.id}}.potential.name;" />
 											</div>
 											
 											<div class="item">
@@ -250,12 +250,8 @@
 													Rename
 												</button>
 											</div>
-											
-										</div>
-										
-										<div class="flex">
-											
-											<div class="item grow">
+
+											<div class="item">
 												<button class="btn btn-mini btn-danger" ng-click="exclude(mosaic_{{mosaic.id}}.potential, mosaic_{{mosaic.id}});">
 													Exclude
 												</button>
