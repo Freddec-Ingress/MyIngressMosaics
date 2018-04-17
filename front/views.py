@@ -1115,6 +1115,16 @@ def adm_compare(request):
 						'registered':immosaic_obj.registered,
 						'excluded':immosaic_obj.excluded,
 						'dead':immosaic_obj.dead,
+						
+						'potential': {
+							
+							'name':immosaic_obj.name,
+							'missions':[],
+
+							'city':None,
+							'region':None,
+							'country':None,
+						},
 					}
 					
 					imregion_data['mosaics'].append(immosaic_data)
