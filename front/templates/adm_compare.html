@@ -181,29 +181,29 @@
 										<div class="flex align-center">
 											
 											<div class="item">
-												<span class="color-dark">[[mosaic.potential.missions.length]] missions</span>
+												<span class="color-dark">[[mosaic_{{mosaic.id}}.potential.missions.length]] missions</span>
 											</div>
 											
-											<div class="item" ng-show="!mosaic.potential.refreshing">
-												<a ng-click="refresh_missions(mosaic.potential, {{forloop.counter0}});">Refresh</a>
+											<div class="item" ng-show="!mosaic_{{mosaic.id}}.potential.refreshing">
+												<a ng-click="refresh_missions(mosaic_{{mosaic.id}}.potential, {{forloop.counter0}});">Refresh</a>
 											</div>
 											
-											<div class="item" ng-show="mosaic.potential.refreshing">
+											<div class="item" ng-show="mosaic_{{mosaic.id}}.potential.refreshing">
 												<i class="fa fa-spinner rotating"></i>
 											</div>
 											
-											<div class="item" ng-show="mosaic.potential.refreshing">
+											<div class="item" ng-show="mosaic_{{mosaic.id}}.potential.refreshing">
 												<span class="color-normal">Refreshing... </span>
 											</div>
 											
 										</div>
 										
-										<div class="item pt-none" ng-hide="mosaic.potential.refreshing">
+										<div class="item pt-none" ng-hide="mosaic_{{mosaic.id}}.potential.refreshing">
 											<div class="group-list" style="max-height:200px; overflow-y:auto;">
-												<div class="group-list-item flex align-center" ng-repeat="mission in mosaic.potential.missions">
+												<div class="group-list-item flex align-center" ng-repeat="mission in mosaic_{{mosaic.id}}.potential.missions">
 													
 													<div class="item">
-						                                <a ng-click="remove_mission(mosaic.potential, mission);">
+						                                <a ng-click="remove_mission(mosaic_{{mosaic.id}}.potential, mission);">
 						                                    <i class="fa fa-times"></i>
 						                                </a>
 													</div>
@@ -229,8 +229,8 @@
 										<div class="flex-col">
 		
 											<div class="item pb-none">
-												<a ng-click="clipboardCopy(mosaic.potential);"><i class="fa fa-copy mr-small"></i></a>
-												<span id="potential_default_{{forloop.counter0}}" class="color-dark">[[mosaic.potential.default]]</span>
+												<a ng-click="clipboardCopy(mosaic_{{mosaic.id}}.potential);"><i class="fa fa-copy mr-small"></i></a>
+												<span id="potential_default_{{forloop.counter0}}" class="color-dark">[[mosaic_{{mosaic.id}}.potential.default]]</span>
 											</div>
 											
 											<div class="item grow flex-col">
@@ -242,11 +242,11 @@
 										<div class="flex">
 											
 											<div class="item grow">
-												<input type="text" class="control" ng-model="new_name" ng-init="new_name=mosaic.potential.name;" />
+												<input type="text" class="control" ng-model="new_name" ng-init="new_name=mosaic_{{mosaic.id}}.potential.name;" />
 											</div>
 											
 											<div class="item">
-												<button class="btn" ng-click="rename(mosaic.potential, new_name);">
+												<button class="btn" ng-click="rename(mosaic_{{mosaic.id}}.potential, new_name);">
 													Rename
 												</button>
 											</div>
