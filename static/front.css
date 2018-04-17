@@ -329,11 +329,11 @@ ul > li { list-style:none; }
 .pr-none { padding-right:0; }
 .pb-none { padding-bottom:0; }
 
-.p-small { padding:5px; }
-.pt-small { padding-top:5px; }
-.pl-small { padding-left:5px; }
-.pr-small { padding-right:5px; }
-.pb-small { padding-bottom:5px; }
+.p-small { padding:5px!important; }
+.pt-small { padding-top:5px!important; }
+.pl-small { padding-left:5px!important; }
+.pr-small { padding-right:5px!important; }
+.pb-small { padding-bottom:5px!important; }
 
 .p-normal { padding:10px; }
 .pt-normal { padding-top:10px; }
