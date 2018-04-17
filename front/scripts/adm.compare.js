@@ -1,13 +1,5 @@
 angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function($scope, API) {
     
-	/* City management */
-    
-    $scope.done = function(city) {
-    	
-    	var data = { 'id':city.id, }
-    	API.sendRequest('/api/im/city/done/', 'POST', {}, data);
-    }
-    
 	/* Mosaic management */
     
     $scope.die = function(mosaic) {
