@@ -132,9 +132,9 @@
 								{% for mosaic in region.mosaics %}
 								<div class="flex-col text-small bg-block mb-small" ng-model="mosaic_{{mosaic.id}}" ng-init="mosaic_{{mosaic.id}}={{mosaic|jsonify}};">
 
-									<div class="flex">
+									<div class="flex" style="border-top:1px solid #000;">
 										
-										<div class="item" style="width:35px;">
+										<div class="item">
 											<span class="color-dark">{{mosaic.count}}</span>
 										</div>
 	
@@ -180,12 +180,12 @@
 										
 										<div class="flex align-center">
 											
-											<div class="item">
-												<span class="color-dark">[[mosaic_{{mosaic.id}}.potential.missions.length]] missions</span>
-											</div>
-											
 											<div class="item" ng-show="!mosaic_{{mosaic.id}}.potential.refreshing">
 												<a ng-click="refresh_missions(mosaic_{{mosaic.id}}.potential, {{forloop.counter0}});">Refresh</a>
+											</div>
+											
+											<div class="item">
+												<span class="color-dark">[[mosaic_{{mosaic.id}}.potential.missions.length]] missions</span>
 											</div>
 											
 											<div class="item" ng-show="mosaic_{{mosaic.id}}.potential.refreshing">
@@ -202,21 +202,21 @@
 											<div class="group-list" style="max-height:200px; overflow-y:auto;">
 												<div class="group-list-item flex align-center" ng-repeat="mission in mosaic_{{mosaic.id}}.potential.missions">
 													
-													<div class="item">
+													<div class="mr-normal">
 						                                <a ng-click="remove_mission(mosaic_{{mosaic.id}}.potential, mission);">
 						                                    <i class="fa fa-times"></i>
 						                                </a>
 													</div>
 													
-													<div class="item grow">
+													<div class="mr-normal grow">
 														<span class="color-normal">[[mission.title]]</span>
 													</div>
 													
-													<div class="item">
+													<div class="mr-normal">
 														<a href="https://www.myingressmosaics.com/registration/[[mission.creator]]" target="_blank">[[mission.creator]]</a>
 													</div>
 													
-													<div class="item">
+													<div class="mr-normal">
 						                                <a href="https://www.ingress.com/intel?ll=[[mission.startLat]],[[mission.startLng]]&z=19&pll=[[mission.startLat]],[[mission.startLng]]" target="blank">
 						                                    <i class="fa fa-external-link"></i>
 						                                </a>
@@ -234,7 +234,7 @@
 											</div>
 											
 											<div class="item grow flex-col">
-												<input id="city_input_{{forloop.counter0}}" type="text" class="control" placeholder="City name" />
+												<input id="city_input_{{forloop.counter0}}" type="text" class="control control-mini text-left" placeholder="City name" />
 											</div>
 										
 										</div>
@@ -242,11 +242,11 @@
 										<div class="flex">
 											
 											<div class="item grow">
-												<input type="text" class="control" ng-model="mosaic_{{mosaic.id}}_new_name" ng-init="mosaic_{{mosaic.id}}_new_name=mosaic_{{mosaic.id}}.potential.name;" />
+												<input type="text" class="control control-mini text-left" ng-model="mosaic_{{mosaic.id}}_new_name" ng-init="mosaic_{{mosaic.id}}_new_name=mosaic_{{mosaic.id}}.potential.name;" />
 											</div>
 											
 											<div class="item">
-												<button class="btn" ng-click="rename(mosaic_{{mosaic.id}}.potential, mosaic_{{mosaic.id}}_new_name);">
+												<button class="btn btn-mini" ng-click="rename(mosaic_{{mosaic.id}}.potential, mosaic_{{mosaic.id}}_new_name);">
 													Rename
 												</button>
 											</div>
@@ -256,13 +256,13 @@
 										<div class="flex">
 											
 											<div class="item grow">
-												<button class="btn btn-danger" ng-click="exclude(mosaic_{{mosaic.id}}.potential);">
+												<button class="btn btn-mini btn-danger" ng-click="exclude(mosaic_{{mosaic.id}}.potential);">
 													Exclude
 												</button>
 											</div>
 											
 											<div class="item">
-												<button class="btn" ng-click="validate(mosaic_{{mosaic.id}}.potential, mosaic_{{mosaic.id}}_new_name);" ng-disabled="!mosaic_{{mosaic.id}}.potential.name || !mosaic_{{mosaic.id}}.potential.city || !mosaic_{{mosaic.id}}.potential.region || !mosaic_{{mosaic.id}}.potential.country">
+												<button class="btn btn-mini" ng-click="validate(mosaic_{{mosaic.id}}.potential, mosaic_{{mosaic.id}}_new_name);" ng-disabled="!mosaic_{{mosaic.id}}.potential.name || !mosaic_{{mosaic.id}}.potential.city || !mosaic_{{mosaic.id}}.potential.region || !mosaic_{{mosaic.id}}.potential.country">
 													Validate
 												</button>
 											</div>
