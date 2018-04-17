@@ -106,6 +106,55 @@ angular.module('FrontModule.controllers').controller('AdmCompareCtrl', function(
 		}
 	}
 	
+	$scope.remove_mission = function(potential, mission) {
+		
+		var index = potential.missions.indexOf(mission);
+		potential.missions.splice(index, 1);
+	}
+	
+	$scope.exclude = function(potential, mosaic) {
+		
+		var refs = [];
+		for (var mission of potential.missions) refs.push(mission.ref);
+		
+		var data = { 'refs':refs };
+		API.sendRequest('/api/potential/exclude/', 'POST', {}, data);
+		
+		$scope.exclude(mosaic);
+	}
+
+	$scope.rename = function(potential, new_name) {
+		
+		var refs = [];
+		for (var mission of potential.missions) refs.push(mission.ref);
+		
+		var data = { 'refs':refs, 'new_name':new_name };
+		API.sendRequest('/api/potential/update/', 'POST', {}, data).then(function(response) {
+			
+			potential.name = new_name;
+			
+			$scope.refresh_missions(potential);
+		});
+	}
+	
+	$scope.validate = function(potential, new_name, mosaic) {
+		
+		var refs = [];
+		for (var mission of potential.missions) refs.push(mission.ref);
+		
+		var data = { 'refs':refs, 'title':new_name, 'country':potential.country, 'region':potential.region, 'city':potential.city };
+		API.sendRequest('/api/potential/create/', 'POST', {}, data);
+		
+		$scope.register(mosaic);
+	}
+	
+	$scope.clipboardCopy = function(potential, index) {
+		
+		var inputCity = $('#city_input_' + index);
+		inputCity.prop('value', potential.default);
+		inputCity.focus();
+	}
+	
 	/* Mosaic management */
     
     $scope.die = function(mosaic) {

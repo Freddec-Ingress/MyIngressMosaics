@@ -132,7 +132,7 @@
 								{% for mosaic in region.mosaics %}
 								<div class="flex-col text-small bg-block mb-small" ng-model="mosaic_{{mosaic.id}}" ng-init="mosaic_{{mosaic.id}}={{mosaic|jsonify}};">
 
-									<div class="flex" style="border-top:1px solid #000;">
+									<div class="flex" style="border-bottom:1px solid #000;">
 										
 										<div class="item">
 											<span class="color-dark">{{mosaic.count}}</span>
@@ -198,7 +198,7 @@
 											
 										</div>
 										
-										<div class="item pt-none" ng-hide="mosaic_{{mosaic.id}}.potential.refreshing">
+										<div class="item pt-none pb-none" ng-hide="mosaic_{{mosaic.id}}.potential.refreshing">
 											<div class="group-list" style="max-height:200px; overflow-y:auto;">
 												<div class="group-list-item flex align-center" ng-repeat="mission in mosaic_{{mosaic.id}}.potential.missions">
 													
@@ -229,7 +229,7 @@
 										<div class="flex-col">
 		
 											<div class="item pb-none">
-												<a ng-click="clipboardCopy(mosaic_{{mosaic.id}}.potential);"><i class="fa fa-copy mr-small"></i></a>
+												<a ng-click="clipboardCopy(mosaic_{{mosaic.id}}.potential, {{forloop.counter0}});"><i class="fa fa-copy mr-small"></i></a>
 												<span id="potential_default_{{forloop.counter0}}" class="color-dark">[[mosaic_{{mosaic.id}}.potential.default]]</span>
 											</div>
 											
@@ -256,13 +256,13 @@
 										<div class="flex">
 											
 											<div class="item grow">
-												<button class="btn btn-mini btn-danger" ng-click="exclude(mosaic_{{mosaic.id}}.potential);">
+												<button class="btn btn-mini btn-danger" ng-click="exclude(mosaic_{{mosaic.id}}.potential, mosaic_{{mosaic.id}});">
 													Exclude
 												</button>
 											</div>
 											
 											<div class="item">
-												<button class="btn btn-mini" ng-click="validate(mosaic_{{mosaic.id}}.potential, mosaic_{{mosaic.id}}_new_name);" ng-disabled="!mosaic_{{mosaic.id}}.potential.name || !mosaic_{{mosaic.id}}.potential.city || !mosaic_{{mosaic.id}}.potential.region || !mosaic_{{mosaic.id}}.potential.country">
+												<button class="btn btn-mini" ng-click="validate(mosaic_{{mosaic.id}}.potential, mosaic_{{mosaic.id}}_new_name, mosaic_{{mosaic.id}});" ng-disabled="!mosaic_{{mosaic.id}}.potential.name || !mosaic_{{mosaic.id}}.potential.city || !mosaic_{{mosaic.id}}.potential.region || !mosaic_{{mosaic.id}}.potential.country">
 													Validate
 												</button>
 											</div>

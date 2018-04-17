@@ -121,7 +121,7 @@
 .text-normal { font-size:13px; }
 .text-medium { font-size:15px; }
 
-.text-left { text-align:left; }
+.text-left { text-align:left!important; }
 .text-right { text-align:right; }
 .text-center { text-align:center; }
 
