@@ -132,21 +132,11 @@ def potential_refresh(request):
 		'missions':[],
 	}
 	
-	results = Mission.objects.filter(name__icontains=request.data['text'], mosaic__isnull=True, admin=True, validated=False)
+	# Missions data
+	
+	results = Mission.objects.filter(mosaic__isnull=True).filter(Q(name__icontains=request.data['text']) | Q(title__icontains=request.data['text']) | Q(creator__icontains=request.data['text']))
 	for mission_obj in results:
-		
-		mission_data = {
-			
-			'ref':mission_obj.ref,
-			'title':mission_obj.title,
-			'image':mission_obj.image,
-			'creator':mission_obj.creator,
-			
-			'startLat':mission_obj.startLat,
-			'startLng':mission_obj.startLng,
-		}
-		
-		data['missions'].append(mission_data)
+		data['missions'].append(mission_obj.getOverviewData())
 	
 	return Response(data, status=status.HTTP_200_OK)
 	
