@@ -242,30 +242,13 @@
 										<div class="flex">
 											
 											<div class="item grow">
-												<input type="text" class="control" ng-model="new_name" ng-init="new_name=mosaic_{{mosaic.id}}.potential.name;" />
+												<input type="text" class="control" ng-model="mosaic_{{mosaic.id}}_new_name" ng-init="mosaic_{{mosaic.id}}_new_name=mosaic_{{mosaic.id}}.potential.name;" />
 											</div>
 											
 											<div class="item">
-												<button class="btn" ng-click="rename(mosaic_{{mosaic.id}}.potential, new_name);">
+												<button class="btn" ng-click="rename(mosaic_{{mosaic.id}}.potential, mosaic_{{mosaic.id}}_new_name);">
 													Rename
 												</button>
-											</div>
-											
-										</div>
-										
-										<div class="item flex">
-											
-											<div class="flex" style="width:420px;">
-												
-												<div class="flex wrap grow" style="width:100%;">
-													
-										            <div ng-repeat="mission in potential.missions | reverse track by $index" class="block mission-vignet" style="flex:0 0 16.666667%;">
-										                <img src="/static/img/mask.png" style="background-image:url([[mission.image]]=s70);" />
-										                <div class="color-dark" style="position:absolute;bottom:0;right:0;font-size:8px;">[[mission.order]]</div>
-										            </div>
-				
-									            </div>
-												
 											</div>
 											
 										</div>
@@ -273,13 +256,13 @@
 										<div class="flex">
 											
 											<div class="item grow">
-												<button class="btn btn-danger" ng-click="exclude(potential);">
+												<button class="btn btn-danger" ng-click="exclude(mosaic_{{mosaic.id}}.potential);">
 													Exclude
 												</button>
 											</div>
 											
 											<div class="item">
-												<button class="btn" ng-click="validate(potential, new_name);" ng-disabled="!potential.name || !potential.city || !potential.region || !potential.country">
+												<button class="btn" ng-click="validate(mosaic_{{mosaic.id}}.potential, mosaic_{{mosaic.id}}_new_name);" ng-disabled="!mosaic_{{mosaic.id}}.potential.name || !mosaic_{{mosaic.id}}.potential.city || !mosaic_{{mosaic.id}}.potential.region || !mosaic_{{mosaic.id}}.potential.country">
 													Validate
 												</button>
 											</div>
@@ -311,5 +294,6 @@
 {% block script %}
 
 	<script src="/static/front.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuXb2ncs76tO-2SN8hvkE5Zt4VwtPoNcM&language=en&libraries=places"></script>
 	
 {% endblock %}
