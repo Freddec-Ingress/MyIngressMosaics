@@ -3353,10 +3353,7 @@ angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', functio
 		var data = { 'refs':refs, 'title':new_name, 'country':$scope.country, 'region':$scope.region, 'city':$scope.city };
 		API.sendRequest('/api/potential/create/', 'POST', {}, data).then(function(response) {
 			
-			$scope.name = '';
-			$scope.missions = [];
-			
-			$scope.rename($scope.name);
+			$window.location.href = '/adm/potential';
 		});
 	}
 	
