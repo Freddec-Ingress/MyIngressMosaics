@@ -42,11 +42,12 @@ module.exports = function(grunt) {
 					'front/scripts/ctrl.page.creator.js',
 					'front/scripts/ctrl.page.tag.js',
 					'front/scripts/ctrl.page.manage.js',
-					'front/scripts/adm.registration.js',
+					'front/scripts/adm.potential.js',
 					'front/scripts/adm.compare.js',
 					'front/scripts/adm.city.js',
 					'front/scripts/adm.region.js',
 					'front/scripts/adm.im.js',
+					'front/scripts/adm.missions.js',
 					'front/scripts/module.js',
 				],
 				dest: 'static/front.js'

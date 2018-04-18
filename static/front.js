@@ -3719,6 +3719,7 @@ angular.module('FrontModule.controllers').controller('AdmImCtrl', function($scop
 
 	$scope.loaded = true;
 });
+
 angular.module('FrontModule', ['satellizer',
 							   'FrontModule.services', 'FrontModule.controllers', 'FrontModule.directives', ]);
 

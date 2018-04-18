@@ -38,7 +38,8 @@ urlpatterns = [
 	url(r'^adm/city', views.adm_city),
 	url(r'^adm/region', views.adm_region),
 	url(r'^adm/compare', views.adm_compare),
-	url(r'^adm/registration', views.adm_registration),
+	url(r'^adm/missions', views.adm_missions),
+	url(r'^adm/potential', views.adm_potential),
 	
 	url(r'^.*', views.world),
 ]
