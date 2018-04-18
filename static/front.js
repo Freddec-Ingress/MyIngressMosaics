@@ -3209,6 +3209,8 @@ angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', functio
 	
 	/* Potential management */
 	
+	$scope.missions = [];
+	
 	$scope.refresh = function() {
 		
 		$scope.refreshing = true;
@@ -3328,6 +3330,8 @@ angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', functio
 	}
 
 	$scope.rename = function(new_name) {
+		
+		$scope.refreshing = true;
 		
 		var refs = [];
 		for (var mission of $scope.missions) refs.push(mission.ref);
