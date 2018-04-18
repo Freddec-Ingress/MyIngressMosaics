@@ -1169,10 +1169,10 @@ def adm_missions(request):
 
 	context = { 'missions':[] }
 	
-	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=True).annotate(num_name=Count('name'))
+	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=True).annotate(num_name=Count('name'))[:5000]
 	for mission_obj in mission_results:
 		
-		if mission_obj.num_name >= 60:
+		if mission_obj.num_name >= 6:
 			mission_data = {
 				
 				'ref':mission_obj.ref,
