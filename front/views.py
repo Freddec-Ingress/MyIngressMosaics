@@ -1169,7 +1169,7 @@ def adm_missions(request):
 
 	context = { 'missions':[] }
 	
-	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=False).order_by('name')[:1000]
+	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=False).order_by('creator', 'name')[:5000]
 	for mission_obj in mission_results:
 		
 		mission_data = {
