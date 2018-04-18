@@ -1169,7 +1169,7 @@ def adm_missions(request):
 
 	context = { 'missions':[] }
 	
-	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=False).order_by('creator', 'name')[:5000]
+	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=True).annotate(num_name=Count('name')).filter(num_name__gte=60)
 	for mission_obj in mission_results:
 		
 		mission_data = {
@@ -1178,7 +1178,7 @@ def adm_missions(request):
 			'name':mission_obj.name,
 			'title':mission_obj.title,
 			'creator':mission_obj.creator,
-			'faction':mission_obj.faction,
+			'excluded':mission_obj.excluded,
 		}
 		
 		context['missions'].append(mission_data)
