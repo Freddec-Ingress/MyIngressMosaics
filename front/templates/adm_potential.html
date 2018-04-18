@@ -29,36 +29,23 @@
 			
 			<div class="section">
 				<div class="flex-col">
-					
-					<div class="pb-none flex align-center">
-						
-						<div class="item grow">
-							<span class="color-normal">[[potentials.length]] detected potentials</span>
-						</div>
-
-					</div>
-
-					<div class="item" ng-repeat="potential in potentials">
-						<div class="item bg-block">
+					<div class="item">
+						<div class="bg-block item">
 							
-							<div class="flex align-center">
+							<div class="flex">
 								
 								<div class="item grow">
-									<a ng-show="potential.missions && !potential.open" ng-click="potential.open=true;"><i class="fa fa-plus-square text-small mr-small"></i></a>
-									<a ng-show="potential.missions && potential.open" ng-click="potential.open=false;"><i class="fa fa-minus-square text-small mr-small"></i></a>
-									<span class="color-light" ng-class="{'color-danger':potential.count!=6&&potential.count!=12&&potential.count!=18&&potential.count!=24&&potential.count!=30&&potential.count!=36&&potential.count!=42&&potential.count!=48&&potential.count!=54}">[[potential.name]]</span>
+									<input type="text" class="control" ng-model="new_name" ng-init="new_name=potential.name;" />
 								</div>
 								
-								<div class="item" ng-hide="potential.refreshing_missions || potential.missions">
-									<a ng-click="refresh_missions(potential);">Open</a>
-								</div>
-								
-								<div class="item" ng-show="potential.refreshing_missions || potential.missions">
-									<a ng-click="refresh_missions(potential);">Refresh</a>
+								<div class="item">
+									<button class="btn" ng-click="rename(potential, new_name);">
+										Refresh
+									</button>
 								</div>
 								
 							</div>
-							
+								
 							<div class="flex align-center" ng-show="potential.refreshing_missions">
 								
 								<div class="item">
@@ -70,8 +57,8 @@
 								</div>
 								
 							</div>
-							
-							<div class="flex-col" ng-hide="potential.refreshing_missions || !potential.missions" ng-show="potential.open">
+								
+							<div class="flex-col" ng-hide="potential.refreshing_missions || !potential.missions">
 								
 								<div class="item pb-none">
 									<span class="color-dark">[[potential.missions.length]] missions</span>
@@ -116,20 +103,6 @@
 										<input id="city_input_[[$index]]" type="text" class="control" placeholder="City name" />
 									</div>
 								
-								</div>
-												
-								<div class="flex">
-									
-									<div class="item grow">
-										<input type="text" class="control" ng-model="new_name" ng-init="new_name=potential.name;" />
-									</div>
-									
-									<div class="item">
-										<button class="btn" ng-click="rename(potential, new_name);">
-											Rename
-										</button>
-									</div>
-									
 								</div>
 								
 								<div class="item flex">
@@ -187,7 +160,6 @@
 							
 						</div>
 					</div>
-
 				</div>
 			</div>
 			
