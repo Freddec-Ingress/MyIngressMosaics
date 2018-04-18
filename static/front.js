@@ -3355,9 +3355,8 @@ angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', functio
 			
 			$scope.name = '';
 			$scope.missions = [];
-			$scope.country = '';
-			$scope.region = '';
-			$scope.city = '';
+			
+			$scope.rename($scope.name);
 		});
 	}
 	
