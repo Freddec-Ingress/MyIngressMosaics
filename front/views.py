@@ -1169,18 +1169,19 @@ def adm_missions(request):
 
 	context = { 'missions':[] }
 	
-	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=True).annotate(num_name=Count('name')).filter(num_name__gte=24)
+	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=True).annotate(num_name=Count('name'))
 	for mission_obj in mission_results:
 		
-		mission_data = {
+		if mission_obj.num_name >= 24:
+			mission_data = {
+				
+				'ref':mission_obj.ref,
+				'name':mission_obj.name,
+				'title':mission_obj.title,
+				'creator':mission_obj.creator,
+				'excluded':mission_obj.excluded,
+			}
 			
-			'ref':mission_obj.ref,
-			'name':mission_obj.name,
-			'title':mission_obj.title,
-			'creator':mission_obj.creator,
-			'excluded':mission_obj.excluded,
-		}
-		
-		context['missions'].append(mission_data)
+			context['missions'].append(mission_data)
 	
 	return render(request, 'adm_missions.html', context)
