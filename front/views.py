@@ -1167,5 +1167,19 @@ def adm_potential(request, search_string = ''):
 #---------------------------------------------------------------------------------------------------
 def adm_missions(request):
 
-	context = { }
+	context = { 'missions':[] }
+	
+	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=False).order_by('name')
+	for mission_obj in mission_results:
+		
+		mission_data = {
+			
+			'name':mission_obj.name,
+			'title':mission_obj.title,
+			'creator':mission_obj.creator,
+			'faction':mission_obj.faction,
+		}
+		
+		context['missions'].append(mission_data)
+	
 	return render(request, 'adm_missions.html', context)

@@ -3689,7 +3689,17 @@ angular.module('FrontModule.controllers').controller('AdmImCtrl', function($scop
 
 	$scope.loaded = true;
 });
-
+angular.module('FrontModule.controllers').controller('AdmMissionsCtrl', function($scope, API) {
+	
+	/* Page loading */
+	
+	$scope.init = function(missions) {
+		
+		$scope.missions = missions;
+		
+    	$scope.loaded = true;
+	}
+});
 angular.module('FrontModule', ['satellizer',
 							   'FrontModule.services', 'FrontModule.controllers', 'FrontModule.directives', ]);
 
