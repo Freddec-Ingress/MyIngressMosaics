@@ -156,7 +156,9 @@ angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', functio
 	
 	/* Page loading */
 	
-	$scope.init = function() {
+	$scope.init = function(text) {
+
+		if (text) $scope.rename(text);
 
 		$scope.loaded = true;
 	}

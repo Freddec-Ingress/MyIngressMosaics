@@ -1157,9 +1157,9 @@ def adm_compare(request):
 
 
 #---------------------------------------------------------------------------------------------------
-def adm_potential(request):
+def adm_potential(request, search_string = ''):
 
-	context = { }
+	context = { 'search_string':search_string.replace('\'', '\\\''), }
 	return render(request, 'adm_potential.html', context)
 
 

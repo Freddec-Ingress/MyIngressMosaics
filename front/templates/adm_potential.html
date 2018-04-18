@@ -16,7 +16,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="AdmPotentialCtrl" ng-init="init();">
+	<div id="content" ng-controller="AdmPotentialCtrl" ng-init="init('{{search_string}}');">
 	
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
