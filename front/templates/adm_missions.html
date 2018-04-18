@@ -28,15 +28,28 @@
 			
 			<div class="section">
 
-				<div class="item pt-none pb-none" ng-repeat="mission in missions track by $index">
-					<div class="flex align-center text-small bg-block">
-						
-						<div class="item">
-							<span class="color-light">[[mission.title]]</span>
+				<div class="item">
+					<div class="bg-block pr-small pl-small">
+						<div ng-repeat="mission in missions track by $index" style="border-bottom:1px solid #000;">
+							<div class="flex align-center text-small">
+								
+								<div class="item grow">
+									<span class="color-light">[[mission.title]]</span>
+								</div>
+								
+								<div class="item">
+									<span class="color-normal">[[mission.creator]]</span>
+								</div>
+								
+								<div class="item">
+									<a ng-click="exclude(mission);">exclude</a>
+								</div>
+								
+							</div>
 						</div>
-						
 					</div>
 				</div>
+				
 			</div>
 			
 		</div>
