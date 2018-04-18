@@ -1169,7 +1169,7 @@ def adm_missions(request):
 
 	context = { 'missions':[] }
 	
-	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=True).annotate(num_name=Count('name')).filter(num_name__gte=60)
+	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=True).annotate(num_name=Count('name')).filter(num_name__gte=24)
 	for mission_obj in mission_results:
 		
 		mission_data = {
