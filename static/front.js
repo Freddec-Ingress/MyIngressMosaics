@@ -3351,7 +3351,14 @@ angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', functio
 		for (var mission of $scope.missions) refs.push(mission.ref);
 		
 		var data = { 'refs':refs, 'title':new_name, 'country':$scope.country, 'region':$scope.region, 'city':$scope.city };
-		API.sendRequest('/api/potential/create/', 'POST', {}, data);
+		API.sendRequest('/api/potential/create/', 'POST', {}, data).then(function(response) {
+			
+			$scope.name = '';
+			$scope.missions = [];
+			$scope.country = '';
+			$scope.region = '';
+			$scope.city = '';
+		});
 	}
 	
 	$scope.clipboardCopy = function() {
