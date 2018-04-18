@@ -144,10 +144,9 @@ angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', functio
 		for (var mission of $scope.missions) refs.push(mission.ref);
 		
 		var data = { 'refs':refs, 'title':new_name, 'country':$scope.country, 'region':$scope.region, 'city':$scope.city };
-		API.sendRequest('/api/potential/create/', 'POST', {}, data).then(function(response) {
+		API.sendRequest('/api/potential/create/', 'POST', {}, data);
 			
-			$window.location.href = '/adm/potential';
-		});
+		$window.location.href = '/adm/potential';
 	}
 	
 	$scope.clipboardCopy = function() {

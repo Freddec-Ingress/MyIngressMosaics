@@ -3351,10 +3351,9 @@ angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', functio
 		for (var mission of $scope.missions) refs.push(mission.ref);
 		
 		var data = { 'refs':refs, 'title':new_name, 'country':$scope.country, 'region':$scope.region, 'city':$scope.city };
-		API.sendRequest('/api/potential/create/', 'POST', {}, data).then(function(response) {
+		API.sendRequest('/api/potential/create/', 'POST', {}, data);
 			
-			$window.location.href = '/adm/potential';
-		});
+		$window.location.href = '/adm/potential';
 	}
 	
 	$scope.clipboardCopy = function() {
@@ -3701,11 +3700,10 @@ angular.module('FrontModule.controllers').controller('AdmMissionsCtrl', function
 		var refs = [mission.ref];
 
 		var data = { 'refs':refs };
-		API.sendRequest('/api/potential/exclude/', 'POST', {}, data).then(function(esponse) {
+		API.sendRequest('/api/potential/exclude/', 'POST', {}, data);
 			
-			var index = $scope.missions.indexOf(mission);
-			$scope.missions.splice(index, 1);
-		});
+		var index = $scope.missions.indexOf(mission);
+		$scope.missions.splice(index, 1);
 	}
 	
 	$scope.remove_creator = function(creator_name) {
@@ -3722,14 +3720,13 @@ angular.module('FrontModule.controllers').controller('AdmMissionsCtrl', function
 		}
 		
 		var data = { 'refs':refs };
-		API.sendRequest('/api/potential/exclude/', 'POST', {}, data).then(function(esponse) {
+		API.sendRequest('/api/potential/exclude/', 'POST', {}, data);
 			
-			for (var mission of missions) {
-				
-				var index = $scope.missions.indexOf(mission);
-				$scope.missions.splice(index, 1);
-			}
-		});
+		for (var mission of missions) {
+			
+			var index = $scope.missions.indexOf(mission);
+			$scope.missions.splice(index, 1);
+		}
 	}
 	
 	/* Page loading */
