@@ -1174,6 +1174,7 @@ def adm_missions(request):
 		
 		mission_data = {
 			
+			'ref':mission_obj.ref,
 			'name':mission_obj.name,
 			'title':mission_obj.title,
 			'creator':mission_obj.creator,
