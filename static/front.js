@@ -3205,38 +3205,37 @@ angular.module('FrontModule.controllers').controller('ManagePageCtrl', function(
 		$scope.loaded = true;
 	}
 });
-angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', function($scope, $window, API, UtilsService) {
+angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', function($scope, $window, API, UtilsService) {
 	
 	/* Potential management */
 	
-	$scope.refresh_missions = function(potential) {
+	$scope.refresh = function() {
 		
-		potential.open = true;
-		potential.refreshing_missions = true;
+		$scope.refreshing = true;
 		
-		potential.missions = [];
+		$scope.missions = [];
 		
-		var data = { 'text':potential.name };
+		var data = { 'text':$scope.name };
 		API.sendRequest('/api/potential/refresh/', 'POST', {}, data).then(function(response) {
 			
-			potential.missions = response.missions;
+			$scope.missions = response.missions;
 			
-			for (var mission of potential.missions) {
+			for (var mission of $scope.missions) {
 				
 				var order = UtilsService.getOrderFromMissionName(mission.title);
-				if (order < 1) order = potential.missions.indexOf(mission) + 1;
+				if (order < 1) order = $scope.missions.indexOf(mission) + 1;
 				mission.order = order;
 			}
 			
-			potential.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
+			$scope.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
 			
-			potential.refreshing_missions = false;
+			$scope.refreshing = false;
 			
 			var geocoder = new google.maps.Geocoder();
 			
 			var latlng = {
-				lat: parseFloat(potential.missions[0].startLat),
-				lng: parseFloat(potential.missions[0].startLng),
+				lat: parseFloat($scope.missions[0].startLat),
+				lng: parseFloat($scope.missions[0].startLng),
 			};
 			
 			geocoder.geocode({'location': latlng}, function(results, status) {
@@ -3264,12 +3263,12 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 							if (item.types[0] == 'administrative_area_level_3') admin3 = item.long_name;
 						}
 						
-						potential.default = '';
-						if (city) potential.default += city;
-						if (admin3) potential.default += ', ' + admin3;
-						if (admin2) potential.default += ', ' + admin2;
-						if (admin1) potential.default += ', ' + admin1;
-						if (country) potential.default += ', ' + country;
+						$scope.default = '';
+						if (city) $scope.default += city;
+						if (admin3) $scope.default += ', ' + admin3;
+						if (admin2) $scope.default += ', ' + admin2;
+						if (admin1) $scope.default += ', ' + admin1;
+						if (country) $scope.default += ', ' + country;
 	
 						$scope.$apply();
 					}
@@ -3277,37 +3276,35 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 			});
 		});
 		
-		var index = $scope.potentials.indexOf(potential);
-		
-		var inputCity = document.getElementById('city_input_' + index);
+		var inputCity = document.getElementById('city_input');
 	    var options = {
 			types: ['(cities)'],
 		};
 		
-		if (!potential.autocomplete) {
+		if (!$scope.autocomplete) {
 			
-		    potential.autocomplete = new google.maps.places.Autocomplete(inputCity, options);
+		    $scope.autocomplete = new google.maps.places.Autocomplete(inputCity, options);
 		        
-		    potential.autocomplete.addListener('place_changed', function() {
+		    $scope.autocomplete.addListener('place_changed', function() {
 		    	
-				potential.city = '';
-				potential.region = '';
-				potential.country = '';
+				$scope.city = '';
+				$scope.region = '';
+				$scope.country = '';
 		    	
-		    	var place = potential.autocomplete.getPlace();
+		    	var place = $scope.autocomplete.getPlace();
 		    	for (var i = 0; i < place.address_components.length; i++) {
 		    		
 		    		var addressType = place.address_components[i].types[0];
-		    		if (addressType == 'country') potential.country = place.address_components[i]['long_name'];
-		    		if (addressType == 'locality') potential.city = place.address_components[i]['long_name'];
-		    		if (addressType == 'administrative_area_level_1') potential.region = place.address_components[i]['long_name'];
-		    		if (addressType == 'administrative_area_level_2' && !potential.region) potential.region = place.address_components[i]['long_name'];
-		     		if (addressType == 'administrative_area_level_3' && !potential.city) potential.city = place.address_components[i]['long_name'];
+		    		if (addressType == 'country') $scope.country = place.address_components[i]['long_name'];
+		    		if (addressType == 'locality') $scope.city = place.address_components[i]['long_name'];
+		    		if (addressType == 'administrative_area_level_1') $scope.region = place.address_components[i]['long_name'];
+		    		if (addressType == 'administrative_area_level_2' && !$scope.region) $scope.region = place.address_components[i]['long_name'];
+		     		if (addressType == 'administrative_area_level_3' && !$scope.city) $scope.city = place.address_components[i]['long_name'];
 		   		}
 		
-				if (potential.region == '' || !potential.region) {
+				if ($scope.region == '' || !$scope.region) {
 					
-					potential.region = potential.city;
+					$scope.region = $scope.city;
 				}
 
 				$scope.$apply();
@@ -3315,88 +3312,55 @@ angular.module('FrontModule.controllers').controller('AdmRegistationCtrl', funct
 		}
 	}
 	
-	$scope.remove_mission = function(potential, mission) {
+	$scope.remove_mission = function(mission) {
 		
-		var index = potential.missions.indexOf(mission);
-		potential.missions.splice(index, 1);
+		var index = $scope.missions.indexOf(mission);
+		$scope.missions.splice(index, 1);
 	}
 	
-	$scope.exclude = function(potential) {
-		
-		var index = $scope.potentials.indexOf(potential);
-		$scope.potentials.splice(index, 1);
+	$scope.exclude = function() {
 		
 		var refs = [];
-		for (var mission of potential.missions) refs.push(mission.ref);
+		for (var mission of $scope.missions) refs.push(mission.ref);
 		
 		var data = { 'refs':refs };
 		API.sendRequest('/api/potential/exclude/', 'POST', {}, data);
 	}
 
-	$scope.rename = function(potential, new_name) {
+	$scope.rename = function(new_name) {
 		
 		var refs = [];
-		for (var mission of potential.missions) refs.push(mission.ref);
+		for (var mission of $scope.missions) refs.push(mission.ref);
 		
 		var data = { 'refs':refs, 'new_name':new_name };
 		API.sendRequest('/api/potential/update/', 'POST', {}, data).then(function(response) {
 			
-			potential.name = new_name;
+			$scope.name = new_name;
 			
-			$scope.refresh_missions(potential);
+			$scope.refresh();
 		});
 	}
 	
-	$scope.validate = function(potential, new_name) {
-		
-		var index = $scope.potentials.indexOf(potential);
-		$scope.potentials.splice(index, 1);
+	$scope.validate = function(new_name) {
 		
 		var refs = [];
-		for (var mission of potential.missions) refs.push(mission.ref);
+		for (var mission of $scope.missions) refs.push(mission.ref);
 		
-		var data = { 'refs':refs, 'title':new_name, 'country':potential.country, 'region':potential.region, 'city':potential.city };
+		var data = { 'refs':refs, 'title':new_name, 'country':$scope.country, 'region':$scope.region, 'city':$scope.city };
 		API.sendRequest('/api/potential/create/', 'POST', {}, data);
 	}
 	
-	$scope.clipboardCopy = function(potential) {
+	$scope.clipboardCopy = function() {
 		
-		var index = $scope.potentials.indexOf(potential);
-		var inputCity = $('#city_input_' + index);
-		inputCity.prop('value', potential.default);
+		var inputCity = $('#city_input');
+		inputCity.prop('value', $scope.default);
 		inputCity.focus();
-	}
-	
-	/* Waiting management */
-	
-	$scope.waitingCreate = function(potential, title, mission_count, mission_missings) {
-		
-		var index = $scope.potentials.indexOf(potential);
-		$scope.potentials.splice(index, 1);
-		
-		var refs = [];
-		for (var mission of potential.missions) refs.push(mission.ref);
-		
-		var missings = mission_missings.split(',');
-		
-		var data = {
-			'country_name':potential.country,
-			'region_name':potential.region,
-			'city_name':potential.city,
-			'title':title,
-			'mission_count':mission_count,
-			'mission_refs':refs,
-			'mission_missing':missings,
-		};
-		API.sendRequest('/api/waiting/create/', 'POST', {}, data);
 	}
 	
 	/* Page loading */
 	
-	$scope.init = function(potentials) {
+	$scope.init = function() {
 
-		$scope.potentials = potentials;
-	
 		$scope.loaded = true;
 	}
 });
