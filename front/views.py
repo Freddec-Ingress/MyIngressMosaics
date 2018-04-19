@@ -1176,11 +1176,8 @@ def adm_missions(request):
 			
 			mission_data = {
 				
-				'ref':None,
 				'name':mission_obj['name'],
-				'title':None,
 				'creator':mission_obj['creator'],
-				'excluded':None,
 				'num_name':mission_obj['num_name'],
 			}
 			
