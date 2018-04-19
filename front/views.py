@@ -1172,16 +1172,18 @@ def adm_missions(request):
 	mission_results = Mission.objects.filter(mosaic__isnull=True, validated=False).values('name').annotate(num_name=Count('name'))[:5000]
 	for mission_obj in mission_results:
 		
-		mission_data = {
+		if mission_obj['num_name'] >= 36:
 			
-			'ref':None,
-			'name':mission_obj['name'],
-			'title':None,
-			'creator':None,
-			'excluded':None,
-			'num_name':mission_obj['num_name'],
-		}
-		
-		context['missions'].append(mission_data)
+			mission_data = {
+				
+				'ref':None,
+				'name':mission_obj['name'],
+				'title':None,
+				'creator':None,
+				'excluded':None,
+				'num_name':mission_obj['num_name'],
+			}
+			
+			context['missions'].append(mission_data)
 	
 	return render(request, 'adm_missions.html', context)
