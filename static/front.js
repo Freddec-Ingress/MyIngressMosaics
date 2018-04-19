@@ -3327,6 +3327,8 @@ angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', functio
 		
 		var data = { 'refs':refs };
 		API.sendRequest('/api/potential/exclude/', 'POST', {}, data);
+			
+		$window.location.href = '/adm/potential';
 	}
 
 	$scope.rename = function(new_name) {
