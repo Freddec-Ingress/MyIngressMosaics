@@ -1328,7 +1328,7 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 		
 		$scope.missions = null;
 		
-		if (!text || text.length < 3) {
+		if (!text || text.length < 2) {
 			return;
 		}
 
