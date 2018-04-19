@@ -134,7 +134,7 @@ def potential_refresh(request):
 	
 	# Missions data
 	
-	results = Mission.objects.filter(mosaic__isnull=True).filter(Q(name__icontains=request.data['text']) | Q(title__icontains=request.data['text']) | Q(creator__icontains=request.data['text']))
+	results = Mission.objects.filter(mosaic__isnull=True, validated=False).filter(Q(name__icontains=request.data['text']) | Q(title__icontains=request.data['text']) | Q(creator__icontains=request.data['text']))
 	for mission_obj in results:
 		data['missions'].append(mission_obj.getOverviewData())
 	
