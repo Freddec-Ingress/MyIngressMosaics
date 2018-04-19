@@ -210,6 +210,7 @@ def mosaic(request, ref):
 			'desc':mission_obj.desc,
 			'title':mission_obj.title,
 			'image':mission_obj.image,
+			'order':mission_obj.order,
 			
 			'has_unavailable_portals':False,
 			
