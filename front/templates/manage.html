@@ -205,10 +205,20 @@
 							</div>
 						</div>
 						
-						<div class="item">
-							<button class="btn" type="submit" ng-click="reorder();" ng-disabled="updating">
-								{% trans "Save" %}
-							</button>
+						<div class="flex align-center">
+							
+							<div class="item">
+								<button class="btn" type="submit" ng-click="reorder();" ng-disabled="updating">
+									{% trans "Save" %}
+								</button>
+							</div>
+							
+							<div class="item">
+								<a ng-click="detect_order_all();">
+									Detect order all
+								</a>
+							</div>
+							
 						</div>
 						
 					</div>

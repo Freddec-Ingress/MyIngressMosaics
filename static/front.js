@@ -3145,6 +3145,12 @@ angular.module('FrontModule.controllers').controller('ManagePageCtrl', function(
 		mission.neworder = UtilsService.getOrderFromMissionName(mission.title);
 	}
 	
+	$scope.detect_order_all = function() {
+		for (var mission of $scope.missions) {
+			mission.neworder = UtilsService.getOrderFromMissionName(mission.title);
+		}
+	}
+	
 	$scope.remove_mission = function(mission) {
 		
 		var index = 0;
