@@ -3141,6 +3141,10 @@ angular.module('FrontModule.controllers').controller('ManagePageCtrl', function(
 		$scope.search_results.splice(index, 1);
 	}
 	
+	$scope.detect_order = function(mission) {
+		mission.neworder = UtilsService.getOrderFromMissionName(mission.title);
+	}
+	
 	$scope.remove_mission = function(mission) {
 		
 		var index = 0;
@@ -3201,12 +3205,6 @@ angular.module('FrontModule.controllers').controller('ManagePageCtrl', function(
 
 		$scope.mosaic = mosaic;
 		$scope.missions = missions;
-		
-		if ($scope.mosaic.ref == '4xOnX7IZ0cSIU18HDAPPeroFk8yzQKRT') {
-			for (var mission of $scope.missions) {
-				mission.neworder = UtilsService.getOrderFromMissionName(mission.title);
-			}
-		}
 		
 		$scope.loaded = true;
 	}
