@@ -1094,7 +1094,7 @@ def adm_compare(request):
 			immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name, dead=False, excluded=False, registered=False).order_by('-count', 'name')
 			for immosaic_obj in immosaic_results:
 				
-				mosaic_results = Mosaic.objects.filter(city__region__country__name=imcountry_obj.name, city__region__name=imregion_obj.name, title__iexact=immosaic_obj.name)
+				mosaic_results = Mosaic.objects.filter(title__iexact=immosaic_obj.name).filter(Q(city__region__country__name=imcountry_obj.name) | Q(city__region__country__name=imcountry_obj.compare_name))
 				if mosaic_results.count() > 0:
 					
 					immosaic_obj.registered=True
