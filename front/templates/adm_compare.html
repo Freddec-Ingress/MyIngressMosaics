@@ -53,9 +53,6 @@
 
 						<div class="item" style="width:75px;">
 							<span class="color-normal">{{country.count}} / {{country.compare_count}}</span>
-						</div>
-
-						<div class="item text-right" style="width:45px;">
 							<span ng-class="{'color-danger':country_diff_{{country.id}}<0, 'color-success':country_diff_{{country.id}}>-1}" ng-model="country_diff_{{country.id}}" ng-init="country_diff_{{country.id}}={{country.diff}}">
 								<span ng-show="country_diff_{{country.id}}>0">+</span>
 								{{country.diff}}
@@ -96,14 +93,6 @@
 										<span ng-show="region_diff_{{region.id}}>0">+</span>
 										{{region.diff}}
 									</span>
-								</div>
-
-								<div class="item text-right">
-									<span class="color-muted">VS</span>
-								</div>
-								
-								<div class="item" style="width:50px;">
-									<span class="color-normal">{{region.vs_count}}</span>
 								</div>
 
 							</div>

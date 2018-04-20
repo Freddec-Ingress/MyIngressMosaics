@@ -1058,8 +1058,7 @@ def adm_compare(request):
 			'update_date':imcountry_data_date,
 			
 			'compare_count':0,
-			'vs_count':Mosaic.objects.filter(city__region__country__name=imcountry_obj.compare_name),
-			
+
 			'diff':0,
 
 			'regions':[],
@@ -1082,8 +1081,7 @@ def adm_compare(request):
 				'update_date':imregion_data_date,
 				
 				'compare_count':0,
-				'vs_count':Mosaic.objects.filter(city__region__country__name=imcountry_obj.compare_name, city__region__name=imregion_obj.compare_name),
-				
+
 				'diff':0,
 
 				'extras':[],
@@ -1117,16 +1115,6 @@ def adm_compare(request):
 						'registered':immosaic_obj.registered,
 						'excluded':immosaic_obj.excluded,
 						'dead':immosaic_obj.dead,
-						
-						'potential': {
-							
-							'name':immosaic_obj.name,
-							'missions':[],
-
-							'city':None,
-							'region':None,
-							'country':None,
-						},
 					}
 					
 					imregion_data['mosaics'].append(immosaic_data)
