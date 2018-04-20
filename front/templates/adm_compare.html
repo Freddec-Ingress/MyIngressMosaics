@@ -147,7 +147,7 @@
 										</div>
 										
 										<div class="item" ng-show="!mosaic_{{mosaic.id}}.dead && !mosaic_{{mosaic.id}}.excluded && !mosaic_{{mosaic.id}}.registered">
-											<a href="/search/{{mosaic.name}}" target="blank"><i class="fa fa-search"></i></a>
+											<a href="/adm/potential/{{mosaic.name}}" target="blank"><i class="fa fa-search"></i></a>
 										</div>
 										
 										<div class="item" ng-show="!mosaic_{{mosaic.id}}.dead && !mosaic_{{mosaic.id}}.excluded && !mosaic_{{mosaic.id}}.registered">
@@ -176,97 +176,6 @@
 										
 									</div>
 
-									<div class="flex-col" ng-show="!mosaic_{{mosaic.id}}.dead && !mosaic_{{mosaic.id}}.excluded && !mosaic_{{mosaic.id}}.registered">
-										
-										<div class="flex align-center">
-											
-											<div class="item" ng-show="!mosaic_{{mosaic.id}}.potential.refreshing">
-												<a ng-click="refresh_missions(mosaic_{{mosaic.id}}.potential, {{forloop.counter0}});">Refresh</a>
-											</div>
-											
-											<div class="item">
-												<span class="color-dark">[[mosaic_{{mosaic.id}}.potential.missions.length]] missions</span>
-											</div>
-											
-											<div class="item" ng-show="mosaic_{{mosaic.id}}.potential.refreshing">
-												<i class="fa fa-spinner rotating"></i>
-											</div>
-											
-											<div class="item" ng-show="mosaic_{{mosaic.id}}.potential.refreshing">
-												<span class="color-normal">Refreshing... </span>
-											</div>
-											
-										</div>
-										
-										<div class="item pt-none pb-none" ng-hide="mosaic_{{mosaic.id}}.potential.refreshing">
-											<div class="group-list" style="max-height:200px; overflow-y:auto;">
-												<div class="group-list-item flex align-center" ng-repeat="mission in mosaic_{{mosaic.id}}.potential.missions">
-													
-													<div class="mr-normal">
-						                                <a ng-click="remove_mission(mosaic_{{mosaic.id}}.potential, mission);">
-						                                    <i class="fa fa-times"></i>
-						                                </a>
-													</div>
-													
-													<div class="mr-normal grow">
-														<span class="color-normal">[[mission.title]]</span>
-													</div>
-													
-													<div class="mr-normal">
-														<a href="https://www.myingressmosaics.com/registration/[[mission.creator]]" target="_blank">[[mission.creator]]</a>
-													</div>
-													
-													<div class="mr-normal">
-						                                <a href="https://www.ingress.com/intel?ll=[[mission.startLat]],[[mission.startLng]]&z=19&pll=[[mission.startLat]],[[mission.startLng]]" target="blank">
-						                                    <i class="fa fa-external-link"></i>
-						                                </a>
-													</div>
-													
-												</div>
-											</div>
-										</div>
-														
-										<div class="flex-col">
-		
-											<div class="item pb-none">
-												<a ng-click="clipboardCopy(mosaic_{{mosaic.id}}.potential, {{forloop.counter0}});"><i class="fa fa-copy mr-small"></i></a>
-												<span id="potential_default_{{forloop.counter0}}" class="color-dark">[[mosaic_{{mosaic.id}}.potential.default]]</span>
-											</div>
-											
-											<div class="item grow flex-col">
-												<input id="city_input_{{forloop.counter0}}" type="text" class="control control-mini text-left" placeholder="City name" style="padding-left:5px!important;" />
-											</div>
-										
-										</div>
-														
-										<div class="flex">
-											
-											<div class="item grow">
-												<input type="text" class="control control-mini text-left" ng-model="mosaic_{{mosaic.id}}_new_name" ng-init="mosaic_{{mosaic.id}}_new_name=mosaic_{{mosaic.id}}.potential.name;" style="padding-left:5px!important;" />
-											</div>
-											
-											<div class="item">
-												<button class="btn btn-mini" ng-click="rename(mosaic_{{mosaic.id}}.potential, mosaic_{{mosaic.id}}_new_name);">
-													Rename
-												</button>
-											</div>
-
-											<div class="item">
-												<button class="btn btn-mini btn-danger" ng-click="exclude(mosaic_{{mosaic.id}}.potential, mosaic_{{mosaic.id}});">
-													Exclude
-												</button>
-											</div>
-											
-											<div class="item">
-												<button class="btn btn-mini" ng-click="validate(mosaic_{{mosaic.id}}.potential, mosaic_{{mosaic.id}}_new_name, mosaic_{{mosaic.id}});" ng-disabled="!mosaic_{{mosaic.id}}.potential.name || !mosaic_{{mosaic.id}}.potential.city || !mosaic_{{mosaic.id}}.potential.region || !mosaic_{{mosaic.id}}.potential.country">
-													Validate
-												</button>
-											</div>
-											
-										</div>
-										
-									</div>
-									
 								</div>
 								{% endfor %}
 								
