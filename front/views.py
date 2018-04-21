@@ -1006,6 +1006,7 @@ def adm_region(request):
 	
 	data = {
 		
+		'region_alone':[],
 		'region_mosaics':[],
 		'region_locales':[],
 		'region_countries':[],
@@ -1022,6 +1023,12 @@ def adm_region(request):
 			'country_id':region_obj.country.id, 
 			'country_name':region_obj.country.name, 
 		}
+		
+		if not region_obj.country:
+			data['region_alone'].append(region_data)
+		else:
+			region_data['country_id'] = region_obj.country.id
+			region_data['country_name'] = region_obj.country.name
 		
 		if region_obj.cities.all().count() < 1:
 			data['region_mosaics'].append(region_data)

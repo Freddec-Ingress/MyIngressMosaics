@@ -26,6 +26,38 @@
 		
 		<div class="container" ng-class="{'active':loaded}">
 			
+			{% if region_alone %}
+			<div class="section">
+				
+				<div class="flex-col">
+					
+					<div class="item">
+						<span class="color-normal">Region without mosaic</span>
+					</div>
+					
+					{% for region in region_alone %}
+					<div class="item">
+						<div class="bg-block flex align-center text-small pl-small pr-small">
+							
+							<div class="item">
+								<a href="/admin/api/region/{{region.id}}/change" target="blank">
+									<i class="fa fa-lock"></i>
+								</a>
+							</div>
+							
+							<div class="item">
+								<span class="color-light">{{region.name}}</span>
+							</div>
+							
+						</div>
+					</div>
+					{% endfor %}
+					
+				</div>
+				
+			</div>
+			{% endif %}
+			
 			{% if region_mosaics %}
 			<div class="section">
 				
