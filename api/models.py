@@ -740,6 +740,7 @@ class IMMosaic(models.Model):
 	dead = models.BooleanField(default=False)
 	excluded = models.BooleanField(default=False)
 	registered = models.BooleanField(default=False)
+	processed = models.BooleanField(default=False)
 	
 	update_date = models.DateField(blank=True, null=True)
 	
