@@ -1200,12 +1200,12 @@ def adm_creators(request):
 	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=False).values('creator').annotate(count=Count('creator')).order_by('-count')[:5000]
 	for mission_obj in mission_results:
 		
-		if mission_obj['num_name'] >= 6:
+		if mission_obj['count'] >= 6:
 			
 			creator_data = {
 				
 				'name':mission_obj['creator'],
-				'num_name':mission_obj['count'],
+				'count':mission_obj['count'],
 			}
 			
 			context['creators'].append(creator_data)
