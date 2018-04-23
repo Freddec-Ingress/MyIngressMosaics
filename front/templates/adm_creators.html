@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load jsonify %}
+
+{% block extra-head %}
+
+	<title>MIM - Administration</title>
+
+	<meta property="og:url" content="https://www.myingressmosaics.com">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="MyIngressMosaics">
+	<meta property="og:description" content="Ingress Mosaics, Banners and Mission series">
+
+{% endblock %}
+
+{% block content %}
+
+	<div id="content">
+
+		<div class="container active">
+			
+			<div class="section">
+
+				<div class="item">
+					<div class="bg-block pr-small pl-small">
+						<div ng-repeat="creator in creators track by $index" style="border-bottom:1px solid #000;">
+							<div class="flex align-center text-small">
+								
+								<div class="item">
+									<span class="color-dark">[[creator.count]]</span>
+								</div>
+								
+								<div class="item grow">
+									<span class="color-light">[[creator.name]]</span>
+								</div>
+								
+								<div class="item">
+									<a href="/adm/potential/[[creator.name]]" target="_blank"><i class="fa fa-external-link"></i></a>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			
+		</div>
+	
+	</div>
+	
+{% endblock %}
+
+{% block script %}
+
+	<script src="/static/front.js"></script>
+
+{% endblock %}
