@@ -23,23 +23,25 @@
 
 				<div class="item">
 					<div class="bg-block pr-small pl-small">
-						<div ng-repeat="creator in creators track by $index" style="border-bottom:1px solid #000;">
+					    {% for creator in creators %}
+						<div style="border-bottom:1px solid #000;">
 							<div class="flex align-center text-small">
 								
 								<div class="item">
-									<span class="color-dark">[[creator.count]]</span>
+									<span class="color-dark">{{creator.count}}</span>
 								</div>
 								
 								<div class="item grow">
-									<span class="color-light">[[creator.name]]</span>
+									<span class="color-light">{{creator.name}}</span>
 								</div>
 								
 								<div class="item">
-									<a href="/adm/potential/[[creator.name]]" target="_blank"><i class="fa fa-external-link"></i></a>
+									<a href="/adm/potential/{{creator.name}}" target="_blank"><i class="fa fa-external-link"></i></a>
 								</div>
 								
 							</div>
 						</div>
+						{% endfor %}
 					</div>
 				</div>
 				
