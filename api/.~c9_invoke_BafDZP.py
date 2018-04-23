@@ -116,7 +116,7 @@ class City(models.Model):
 	def __str__(self):
 		text = self.name + ','
 		if self.region: text += self.region.name + ','
-		if self.region and self.region.countr: text += self.region.country.name
+		if self.region and self.region.country: text += self.region.country.name
 		return text
 
 
