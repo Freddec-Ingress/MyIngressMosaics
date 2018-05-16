@@ -173,25 +173,26 @@
 						<div class="width-12 width-xl-4 item" ng-repeat="country in countries">
 							<a class="link-block flex align-center" href="/world/[[country.name]]">
 							
-								<div class="item width-2 flex-col align-center">
+								<div class="item flex-col align-center">
 									<span class="flag-icon flag-icon-[[country.code]]" style="width:1.3rem; line-height:1.4rem;"></span>
-									<div class="flex">
-										<span class="text-small color-normal" ng-if="country.mosaic_count">[[country.mosaic_count]]</span>
-										<span class="text-small color-light" ng-if="country.potential_count">+[[country.potential_count]]</span>
-									</div>
 								</div>
 									
-								<div class="item width-10">
+								<div class="item grow">
 									
 									<div class="flex align-center">
 										<span class="grow mr-normal color-light text-medium ellipsis">[[country.label]]</span>
-										<i class="fa fa-angle-right"></i>
 									</div>
 									
 									<div class="flex text-small">
 										<span class="color-dark">[[country.locale]]</span>
 									</div>
 									
+								</div>
+									
+								<div class="item">
+									<div class="flex">
+										<span class="badge">[[country.mosaic_count]]</span>
+									</div>
 								</div>
 								
 							</a>
