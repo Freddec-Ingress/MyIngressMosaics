@@ -42,7 +42,7 @@
 						<span class="text-big color-light">{{country.name}}</span>
 					</div>
 					
-					<div class="flex-col align-center">
+					<div class="flex-col">
 						<span class="color-normal">{{country.mosaic_count}} {% trans "mosaics" %}</span>
 						<a class="color-link hidden" ng-show="!country.notified" ng-click="notify();">{% trans "To be notified about new mosaics" %}</a>
 						<a class="color-normal hidden" ng-show="country.notified" ng-click="unnotify();">{% trans "Notified" %}</a>
@@ -76,6 +76,12 @@
 					<div class="flex wrap">
 						
 						<div class="item">
+							<span class="color-muted">
+								{% trans "sort" %}
+							</span>
+						</div>
+						
+						<div class="item">
 							<a ng-click="sortRegionsByMosaics();" ng-class="{'active': regions_sorting=='by_mosaics'}">
 								{% trans "By mosaics" %}
 							</a>
@@ -105,7 +111,6 @@
 									
 									<div class="flex align-center">
 										<span class="grow mr-normal color-light text-medium ellipsis">[[region.name]]</span>
-										<i class="fa fa-angle-right"></i>
 									</div>
 									
 									<div class="flex text-small">
