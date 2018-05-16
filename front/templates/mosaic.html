@@ -234,7 +234,6 @@
 					
 					<div class="tab" ng-click="current_tab='comments'" ng-class="{'active':current_tab=='comments'}">
 						{% trans "Comments" %}
-						<span class="ml-normal badge">[[comments.length]]</span>
 					</div>
 					
 				</div>
@@ -265,9 +264,9 @@
 							<div class="flex align-center">
 								<a class="item" ng-show="!mission.open" ng-click="mission.open=true;"><i class="fa fa-plus-square text-small"></i></a>
 								<a class="item" ng-show="mission.open" ng-click="mission.open=false;"><i class="fa fa-minus-square text-small"></i></a>
-								<span class="item text-normal color-dark">#[[$index+1]].</span>
+								<span class="item text-small color-muted">#[[$index+1]].</span>
 								<i class="item fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mission.has_unavailable_portals"></i>
-								<span class="item text-medium color-light">[[mission.title]]</span>
+								<span class="item text-normal color-light">[[mission.title]]</span>
 							</div>
 							
 							<div class="flex" ng-show="mission.open">
@@ -275,8 +274,9 @@
 							</div>
 							
 							<div class="item flex wrap" ng-show="mission.open">
+								
+								<span class="color-muted mb-small">[[mission.portals.length]] {% trans 'portals' %}</span>
 								<span class="color-normal" ng-repeat="portal in mission.portals">
-									<span class="color-muted text-small mr-small text-right" style="display:inline-block;">[[$index+1]]</span>
 									<span class="mr-big color-danger" ng-show="portal.title=='Unavailable'">{% trans "Unavailable" %}</span>
 									<span class="mr-big" ng-show="portal.title!='Unavailable' && portal.action==1">{% trans "Hack" %}</span>
 									<span class="mr-big" ng-show="portal.title!='Unavailable' && portal.action==2">{% trans "Capture" %}</span>
