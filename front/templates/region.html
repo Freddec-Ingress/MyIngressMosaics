@@ -37,8 +37,11 @@
 					
 				<div class="item flex-col">
 				
-					<span class="text-big color-light">{{region.name}}</span>
-					
+					<div class="flex align-center">
+						<span class="flag-icon flag-icon-{{region.country_code}} mr-normal" style="width:1.5rem; line-height:1.5rem;"></span>
+						<span class="text-big color-light">{{region.name}}</span>
+					</div>
+
 					<div class="flex-col">
 						<span class="color-normal">{{mosaic_count}} {% trans "mosaics" %}</span>
 						<a class="color-link" ng-show="!region.notified" ng-click="notify();">{% trans "To be notified about new mosaics" %}</a>
