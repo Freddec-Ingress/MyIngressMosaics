@@ -10,17 +10,16 @@ angular.module('FrontModule.directives').directive('mosaic', function() {
 		scope: { mosaic: '=' },
 		
 		template: '' +
-			'<div class="item width-12 width-xl-4 flex-col">' +
-				'<div class="item link-block" style="height:100%">' +
+			'<div class="item flex-col">' +
+				'<div class="link-block" style="height:100%">' +
 					
 					'<a class="item" href="/mosaic/[[mosaic.ref]]" target="_blank" style="display:block;">' +
 						'<div class="flex align-center">' +
 							'<i class="mr-normal text-small fa fa-exclamation-triangle color-muted" title="Mosaic not available anymore!" ng-show="mosaic.is_obsolete"></i>' +
 							'<i class="mr-normal text-small fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals && !mosaic.is_obsolete"></i>' +
 							'<span class="mr-normal grow text-medium color-light ellipsis" title="[[mosaic.title]]">[[mosaic.title]]</span>' +
-							'<i class="fa fa-angle-right"></i>' +
 						'</div>' +
-						'<span class="text-small color-dark"><span class="color-normal">[[mosaic.mission_count]]</span> missions &middot; <span class="color-normal">[[mosaic.unique_count]]</span> uniques</span>' +
+						'<span class="text-small color-dark"><span class="color-normal">[[mosaic.mission_count]]</span> missions <span class="pr-small pl-small">&middot;</span> <span class="color-normal">[[mosaic.unique_count]]</span> uniques</span>' +
 					'</a>' +
 					
 					'<div class="item pt-none">' +
