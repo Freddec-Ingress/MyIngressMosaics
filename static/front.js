@@ -2242,6 +2242,12 @@ angular.module('FrontModule.controllers').controller('MapPageCtrl', function($sc
 										}
 									});
 				                }
+				                else {
+				                	
+				                	if (x == xEnd && y == yEnd) {
+				                		$scope.flag_loading = false;
+				                	}
+				                }
 				            }
 				        }
 					}
