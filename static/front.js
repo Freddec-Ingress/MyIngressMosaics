@@ -2942,6 +2942,8 @@ angular.module('FrontModule.controllers').controller('TagPageCtrl', function($sc
 		$scope.current_by_country_index = $scope.indexes_by_country[0];
 		$scope.mosaics_by_country = $scope.current_by_country_index.mosaics;
 		
+		$scope.mosaics_sorting = 'by_country';
+		
 		$scope.loaded = true;
 	}
 });
