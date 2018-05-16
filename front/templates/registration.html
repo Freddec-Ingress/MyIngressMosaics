@@ -378,8 +378,8 @@
 						
 						<span class="mb-small">{% trans "Tag(s)" %}</span>
 						
-						<div class="flex wrap">
-							<div class="mb-small ml-big width-12 width-xl-4" ng-repeat="tag in tags track by $index">
+						<div class="flex wrap ml-big">
+							<div class="mb-small width-12 width-xl-4" ng-repeat="tag in tags track by $index">
 								
 								<div class="flex align-center" ng-click="addTag(tag.value);" ng-show="mosaic_tags.indexOf(tag.value) == -1">
 									<input type="checkbox" class="mr-small">
