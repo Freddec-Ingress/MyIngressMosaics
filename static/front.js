@@ -958,17 +958,16 @@ angular.module('FrontModule.directives').directive('potential', function() {
 		
 		template: '' +
 			'<div class="item width-12 width-xl-4">' +
-				'<div class="item link-block">' +
+				'<div class="link-block">' +
 					
 					'<a class="item" href="/registration/[[potential.title]]" style="display:block;">' +
 						'<div class="flex align-center">' +
 							'<span class="mr-normal grow text-medium color-light ellipsis" title="[[potential.title]]">[[potential.title]]</span>' +
-							'<i class="fa fa-angle-right"></i>' +
 						'</div>' +
 						'<span class="text-small color-dark">[[potential.mission_count]] missions</span>' +
 					'</a>' +
 					
-					'<div class="item pt-none">' +
+					'<div class="item pt-none" style="margin-top:-2px;">' +
 						'<a class="flex" href="/world/[[potential.country_name]]/[[potential.region_name]]/[[potential.city_name]]">' +
 							'<span class="mr-small flag-icon flag-icon-[[potential.country_code]]"></span>' +
 							'<span>[[potential.city_name]]</span>' +
