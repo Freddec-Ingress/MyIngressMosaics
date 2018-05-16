@@ -106,13 +106,13 @@
 				
 				<div class="tab-row">
 				
-					<div class="tab" ng-click="current_tab='projects'" ng-class="{'active':current_tab=='projects'}">
-						{% trans "Events/Projects" %}
-					</div>
-				
 					<div class="tab" ng-click="current_tab='countries'" ng-class="{'active':current_tab=='countries'}">
 						{% trans "Countries" %}
 						<span class="ml-normal badge">{{country_count}}</span>
+					</div>
+				
+					<div class="tab" ng-click="current_tab='projects'" ng-class="{'active':current_tab=='projects'}">
+						{% trans "Events/Projects" %}
 					</div>
 					
 				</div>
@@ -168,7 +168,7 @@
 					
 				</div>
 
-				<div class="item">
+				<div class="item pt-none">
 				
 					<div class="flex wrap">
 						<div class="width-12 width-xl-4 item" ng-repeat="country in countries">
