@@ -1,0 +1,388 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load jsonify %}
+
+{% block extra-head %}
+	
+	<link rel="canonical" href="https://www.myingressmosaics.com/mosaic/{{mosaic.ref}}" />
+	
+	<link rel="alternate" href="https://www.myingressmosaics.com/en/mosaic/{{mosaic.ref}}" hreflang="en" />
+	<link rel="alternate" href="https://www.myingressmosaics.com/fr/mosaic/{{mosaic.ref}}" hreflang="fr" />
+	<link rel="alternate" href="https://www.myingressmosaics.com/pt/mosaic/{{mosaic.ref}}" hreflang="pt" />
+
+	<title>MIM - {{mosaic.title}}</title>
+	
+	<meta property="og:url" content="https://www.myingressmosaics.com/mosaic/{{mosaic.ref}}" />
+	<meta property="og:image" content="https://www.myingressmosaics.com/preview/{{mosaic.ref}}">
+	<meta property="og:title" content="MIM - {{mosaic.title}}">
+	<meta property="og:headline" content="MIM - {{mosaic.title}}" />
+	<meta property="og:description" content="{{mosaic.country_name}} > {{mosaic.region_name}} > {{mosaic.city_name}} &middot; {{missions|length}} missions &middot; {{mosaic.unique_count}} uniques" />
+
+	<meta name="description" content="{{mosaic.country_name}} > {{mosaic.region_name}} > {{mosaic.city_name}} &middot; {{missions|length}} missions &middot; {{mosaic.unique_count}} uniques" />
+
+{% endblock %}
+
+{% block content %}
+
+	<div id="content" ng-controller="MosaicPageCtrl" ng-init="init({{mosaic|jsonify}}, {{missions|jsonify}}, {{comments|jsonify}});">
+	
+		<div id="loading" ng-hide="loaded" class="section">
+			<div class="item flex justify-center align-center">
+				<i class="fa fa-spinner rotating"></i>
+				<span class="ml-small">{% trans "Loading page..." %}</span>
+			</div>
+		</div>
+		
+		<div class="container" ng-class="{'active':loaded}">
+			
+			<div class="modal-container" ng-show="comment_selected">
+				
+				<div class="modal-box">
+					
+					<div class="modal-header">
+						
+						<span class="title">
+							{% trans "Comment" %}
+						</span>
+						
+						<span class="close" ng-click="closeCommentEdit();">
+							<i class="fa fa-times"></i>
+						</span>
+						
+					</div>
+					
+					<div class="modal-content">
+						
+		            	<div class="mb-normal">
+		            		<textarea class="control" rows="5" ng-model="comment_selected.text">
+		            		</textarea>
+		            	</div>
+		            	
+		            	<div>
+		            		<button class="btn" ng-click="saveComment(user, comment_selected);">
+		            			{% trans "Save" %}
+		            		</button>
+		            	</div>
+						
+					</div>
+					
+				</div>
+				
+			</div>
+			
+			<div class="section">
+				
+				<div class="flex">
+					
+					<div class="item flex">
+						<span class="mr-small flag-icon flag-icon-[[mosaic.country_code]]"></span>
+						<a class="mr-normal" href="/world/[[mosaic.country_name]]">[[mosaic.country_name]]</a>
+						<span class="mr-normal color-dark">></span>
+						<a class="mr-normal" href="/world/[[mosaic.country_name]]/[[mosaic.region_name]]">[[mosaic.region_name]]</a>
+						<span class="mr-normal color-dark">></span>
+						<a class="mr-normal" href="/world/[[mosaic.country_name]]/[[mosaic.region_name]]/[[mosaic.city_name]]">[[mosaic.city_name]]</a>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+			<div class="section">
+			
+				<div class="flex align-center">
+					<div class="item">
+						<span class="text-big color-light">[[mosaic.title]]</span>
+					</div>
+				</div>
+				
+				<div class="flex align-center" ng-if="mosaic.owner_msg && mosaic.owner_msg!='None'">
+					<div class="item flex-col">
+						<span class="color-dark mb-small">{% trans "Creator message" %}</span>
+						<span class="color-normal">[[mosaic.owner_msg]]</span>
+					</div>
+				</div>
+				
+				<div class="flex wrap">
+					
+					<div class="flex-col width-12 width-xl-7">
+						
+						<div class="item flex">
+							
+							<div class="flex" style="width:100%;">
+								
+								<div class="flex wrap grow" ng-class="{'obsolete':mosaic.is_obsolete}" style="width:100%; padding-right:calc((6 - [[mosaic.column_count]]) * 16.666667%);">
+									
+						            <div ng-repeat="mission in offset track by $index" style="flex:0 0 calc(100% / [[mosaic.column_count]]);">
+						            </div>
+						            
+						            <div ng-repeat="mission in missions | reverse track by $index" class="block mission-vignet" style="flex:0 0 calc(100% / [[mosaic.column_count]]);">
+						                <img src="/static/img/mask.png" style="background-image:url([[mission.image]]=s100);" />
+						                <div class="color-dark" style="position:absolute;bottom:0;right:0;font-size:8px;">[[missions.order]]</div>
+						            </div>
+
+					            </div>
+								
+							</div>
+							
+						</div>
+						
+						<div class="flex">
+							
+							<div class="item width-4">
+								<div class="badge badge-link flex justify-center align-center" ng-click="toggle_link('like');">
+									<span class="item" ng-class="{'color-dark':!mosaic.is_like, 'color-normal':mosaic.likers>0, 'color-light':mosaic.is_like}">[[mosaic.likers]]</span>
+									<span class="item" ng-class="{'color-dark':!mosaic.is_like, 'color-normal':mosaic.likers>0, 'color-light':mosaic.is_like}">{% trans "Like" %}</span>
+								</div>
+							</div>
+							
+							<div class="item width-4">
+								<div class="badge badge-link flex justify-center align-center" ng-click="toggle_link('todo');">
+									<span class="item" ng-class="{'color-dark':!mosaic.is_todo, 'color-normal':mosaic.todoers>0, 'color-light':mosaic.is_todo}">[[mosaic.todoers]]</span>
+									<span class="item" ng-class="{'color-dark':!mosaic.is_todo, 'color-normal':mosaic.todoers>0, 'color-light':mosaic.is_todo}">{% trans "To do" %}</span>
+								</div>
+							</div>
+							
+							<div class="item width-4">
+								<div class="badge badge-link flex justify-center align-center" ng-click="toggle_link('complete');">
+									<span class="item" ng-class="{'color-dark':!mosaic.is_complete, 'color-normal':mosaic.completers>0, 'color-light':mosaic.is_complete}">[[mosaic.completers]]</span>
+									<span class="item" ng-class="{'color-dark':!mosaic.is_complete, 'color-normal':mosaic.completers>0, 'color-light':mosaic.is_complete}">{% trans "Done" %}</span>
+								</div>
+							</div>
+							
+						</div>
+						
+						<div class="item flex-col hidden" ng-show="link_need_signin">
+							<span class="mb-small color-danger">{% trans "You must be signed in to do this action." %}</span>
+							<a ng-click="signin('google', '/mosaic/[[mosaic.ref]]');">{% trans "Sign in" %}</a>
+						</div>
+						
+					</div>
+						
+					<div class="flex-col width-12 width-xl-5">
+
+						<div class="flex">
+							
+							<span class="item">[[missions.length]] {% trans "missions" %}</span>
+							<span class="item">[[mosaic.distance]] km</span>
+
+						</div>
+						
+						<div class="flex">
+							
+							<span class="item">[[mosaic.waypoint_count]] {% trans "waypoints" %}</span>
+							<span class="item">[[mosaic.portal_count]] {% trans "portals" %}</span>
+							<span class="item">[[mosaic.unique_count]] {% trans "uniques" %}</span>
+							
+						</div>
+
+						<div class="flex wrap">
+							<div class="item" ng-repeat="tag in mosaic.tags">
+								<a href="/tag/[[tag.value]]/">
+									[[tag.label]]
+								</a>
+							</div>
+						</div>
+						
+						<div class="flex wrap">
+							<div class="item" ng-repeat="creator in mosaic.creators">
+								<a href="/creator/[[creator.name]]/" ng-class="{'color-enlightened':creator.faction == 'E', 'color-resistant':creator.faction == 'R'}">
+									[[creator.name]]
+								</a>
+							</div>
+						</div>
+						
+						<div class="flex align-center">
+							
+							<div class="item" ng-if="!mosaic.is_obsolete">
+								<a ng-click="markAsObsolete();">{% trans "Mark as obsolete" %}</a>
+							</div>
+							
+							<div class="item" ng-if="mosaic.is_obsolete">
+								<span class="color-danger">{% trans "Not available anymore" %}</span>
+							</div>
+							
+							<div class="item" ng-if="mosaic.is_owned">
+								<span class="color-dark">&middot;</span>
+							</div>
+							
+							<div class="item" ng-if="mosaic.is_owned">
+								<a href="/manage/[[mosaic.ref]]">{% trans "Manage" %}</a>
+							</div>
+							
+						</div>
+				
+					</div>
+
+				</div>
+				
+			</div>
+			
+			<div class="section">
+				
+				<div class="tab-row mt-big">
+				
+					<div class="tab" ng-click="current_tab='roadmap'" ng-class="{'active':current_tab=='roadmap'}">
+						{% trans "Roadmap" %}
+					</div>
+					
+					<div class="tab" ng-click="current_tab='missions'" ng-class="{'active':current_tab=='missions'}">
+						{% trans "Missions" %}
+						<span class="ml-normal badge">[[missions.length]]</span>
+						<i class="ml-normal fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals"></i>
+					</div>
+					
+					<div class="tab" ng-click="current_tab='comments'" ng-class="{'active':current_tab=='comments'}">
+						{% trans "Comments" %}
+						<span class="ml-normal badge">[[comments.length]]</span>
+					</div>
+					
+				</div>
+				
+			</div>
+				
+			<div ng-show="current_tab=='roadmap'">
+				
+				<div class="section">
+					<div class="flex">
+						
+						<div class="item" style="height:420px;width:100%">
+							<div id="map" style="height:100%;width:100%"></div>
+						</div>
+						
+					</div>
+				</div>
+				
+			</div>
+			
+			<div ng-show="current_tab=='missions'">
+				
+				<div class="section">
+					<div class="flex-col item" ng-repeat="mission in missions track by $index">
+					
+						<div class="item bg-block flex-col">
+							
+							<div class="flex align-center">
+								<a class="item" ng-show="!mission.open" ng-click="mission.open=true;"><i class="fa fa-plus-square text-small"></i></a>
+								<a class="item" ng-show="mission.open" ng-click="mission.open=false;"><i class="fa fa-minus-square text-small"></i></a>
+								<span class="item text-normal color-dark">#[[$index+1]].</span>
+								<i class="item fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mission.has_unavailable_portals"></i>
+								<span class="item text-medium color-light">[[mission.title]]</span>
+							</div>
+							
+							<div class="flex" ng-show="mission.open">
+								<span class="item color-dark">[[mission.desc]]</span>
+							</div>
+							
+							<div class="item flex wrap" ng-show="mission.open">
+								<span class="color-normal" ng-repeat="portal in mission.portals">
+									<span class="color-muted text-small mr-small text-right" style="display:inline-block;">[[$index+1]]</span>
+									<span class="mr-big color-danger" ng-show="portal.title=='Unavailable'">{% trans "Unavailable" %}</span>
+									<span class="mr-big" ng-show="portal.title!='Unavailable' && portal.action==1">{% trans "Hack" %}</span>
+									<span class="mr-big" ng-show="portal.title!='Unavailable' && portal.action==2">{% trans "Capture" %}</span>
+									<span class="mr-big" ng-show="portal.title!='Unavailable' && portal.action==7">{% trans "View" %}</span>
+									<span class="mr-big" ng-show="portal.title!='Unavailable' && portal.action==8">{% trans "Passphrase" %}</span>
+								</span>
+							</div>
+							
+							<div class="flex" ng-show="mission.open">
+								
+								<div class="item">
+			                        <a class="item flex" href="https://www.ingress.com/intel?ll=[[mission.portals[0].lat]],[[mission.portals[0].lng]]&z=17&pll=[[mission.portals[0].lat]],[[mission.portals[0].lng]]" target="_blank">
+			                            <i class="fa fa-fw fa-external-link"></i>
+			                        </a>
+								</div>
+								
+								<div class="item">
+			                        <a class="item flex" href="https://www.google.com/maps/dir//[[mission.portals[0].lat]],[[mission.portals[0].lng]]" target="_blank">
+			                            <i class="fa fa-fw fa-map-marker"></i>
+			                        </a>
+								</div>
+								
+								<div class="item">
+			                        <a class="item flex" href="https://waze.com/ul?ll=[[mission.portals[0].lat]],[[mission.portals[0].lng]]" target="_blank">
+			                            <img src="/static/img/waze.png">
+			                        </a>
+								</div>
+								
+								<div class="item">
+			                        <a class="item flex" href="https://showtheway.io/to/[[mission.portals[0].lat]],[[mission.portals[0].lng]]" target="_blank">
+			                            <img src="/static/img/showtheway.png">
+			                        </a>
+								</div>
+								
+							</div>
+							
+						</div>
+						
+					</div>
+				</div>
+
+			</div>
+
+			<div ng-show="current_tab=='comments'">
+				
+				<div class="section">
+					
+					<div class="flex-col">
+						
+						<div class="item" ng-repeat="comment in comments">
+							<div class="item bg-block">
+								
+								<div class="flex">
+									<div class="item text-left">
+										<span class="block mb-normal" ng-class="{'color-enlightened': comment.user_faction == 'E', 'color-resistant': comment.user_faction == 'R'}">[[comment.user_name]]</span>
+										<span class="color-light">[[comment.text]]</span>
+									</div>
+								</div>
+				
+								<div class="flex" ng-show="comment.username == user.name">
+									
+									<div class="item">
+										<a ng-click="displayCommentEdit(comment);">
+											{% trans "Edit" %}
+										</a>
+									</div>
+									
+									<div class="item">
+										<a ng-click="deleteComment(user, $index, comment);">
+											{% trans "Delete" %}
+										</a>
+									</div>
+									
+								</div>
+								
+							</div>
+						</div>
+						
+					</div>
+					
+					<div class="flex-col">
+						
+						<div class="item">
+							<a ng-click="displayCommentEdit();">{% trans "Post a comment" %}</a>
+						</div>
+						
+						<div class="item pt-none flex-col hidden" ng-show="comment_need_signin">
+							<span class="mb-small color-danger">{% trans "You must be signed in to post comment." %}</span>
+							<a ng-click="signin('google', '/mosaic/[[mosaic.ref]]');">{% trans "Sign in" %}</a>
+						</div>
+						
+					</div>
+					
+				</div>
+
+			</div>
+	
+		</div>
+				
+	</div>
+
+{% endblock %}
+
+{% block script %}
+
+	<script src="/static/front.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuXb2ncs76tO-2SN8hvkE5Zt4VwtPoNcM&language=en&libraries=places"></script>
+	
+{% endblock %}
