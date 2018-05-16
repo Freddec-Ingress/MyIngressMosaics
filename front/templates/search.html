@@ -60,40 +60,19 @@
 				
 			</div>
 			
-			<div class="section" ng-show="!searching && !mosaics.length && !potentials.length && !missions.length">
-				
-				<div class="item">
-					<span class="color-normal">{% trans "Event/Project dedicated pages" %}</span>
-				</div>
-				
-				<div class="flex wrap align-center">
-					
-					<div class="item width-12 width-xl-4" ng-repeat="tag in tags track by $index" ng-show="tag.count > 0">
-						<div class="item bg-block">
-							<a class="flex align-center" href="/tag/[[tag.value]]">
-								<span class="grow color-light">[[tag.label]]</span>
-								<span class="badge">[[tag.count]]</span>
-							</a>
-						</div>
-					</div>
-
-				</div>
-				
-			</div>
-			
 			<div class="section" ng-show="!searching && (mosaics.length > 0 || potentials.length > 0 || missions.length > 0)">
 				
 				<div class="tab-row">
 				
-					<div class="tab" ng-click="current_tab='mosaic'" ng-class="{'active':current_tab=='mosaic'}">
+					<div class="tab" ng-show="mosaics.length > 0" ng-click="current_tab='mosaic'" ng-class="{'active':current_tab=='mosaic'}">
 						{% trans "Mosaics" %} <span class="ml-normal badge">[[mosaics.length]]</span>
 					</div>
 					
-					<div class="tab" ng-click="current_tab='potential'" ng-class="{'active':current_tab=='potential'}">
+					<div class="tab" ng-show="potentials.length > 0" ng-click="current_tab='potential'" ng-class="{'active':current_tab=='potential'}">
 						{% trans "Potentials" %} <span class="ml-normal badge">[[potentials.length]]</span>
 					</div>
 					
-					<div class="tab" ng-click="current_tab='mission'" ng-class="{'active':current_tab=='mission'}">
+					<div class="tab" ng-show="missions.length > 0" ng-click="current_tab='mission'" ng-class="{'active':current_tab=='mission'}">
 						{% trans "Missions" %} <span class="ml-normal badge">[[missions.length]]</span>
 					</div>
 	
@@ -103,7 +82,7 @@
 				
 			<div ng-show="current_tab=='mosaic'">
 				
-				<div class="section">
+				<div class="item">
 					<div class="flex wrap">
 						<mosaic ng-repeat="mosaic in mosaics track by $index" mosaic="mosaic"></mosaic>
 					</div>
@@ -113,7 +92,7 @@
 			
 			<div ng-show="current_tab=='potential'">
 				
-				<div class="section">
+				<div class="item">
 					<div class="flex wrap">
 						<potential ng-repeat="potential in potentials track by $index" potential="potential"></potential>
 					</div>
@@ -123,13 +102,13 @@
 			
 			<div ng-show="current_tab=='mission'">
 				
-				<div class="section">
+				<div class="item">
 					<div class="flex wrap">
 						<mission ng-repeat="mission in missions track by $index" mission="mission"></mission>
 					</div>
 				</div>
 				
-				<div class="section">
+				<div class="item">
 					<div class="flex wrap">
 						<div class="item">
 							<a href="/registration/[[searchtext]]">Register mosaic</a>
