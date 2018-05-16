@@ -43,7 +43,9 @@
 					</div>
 					
 					<div class="flex align-center">
-						<a class="color-link hidden" ng-show="!country.notified" ng-click="notify();">{% trans "To be notified" %}</a>
+						<span class="color-normal">{{mosaic_count}} {% trans "mosaics" %}</span>
+						<span class="color-muted pl-small pr-small">&middot;</span>
+						<a class="color-link hidden" ng-show="!country.notified" ng-click="notify();">{% trans "To be notified about new mosaics" %}</a>
 						<a class="color-normal hidden" ng-show="country.notified" ng-click="unnotify();">{% trans "Notified" %}</a>
 					</div>
 	

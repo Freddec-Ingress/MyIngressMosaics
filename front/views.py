@@ -825,6 +825,8 @@ def country(request, country_name):
 			'name':str(country_obj.name),
 			'code':str(country_obj.code),
 			
+			'mosaic_count':0,
+			
 			'notified':False,
 		},
 		
@@ -849,6 +851,8 @@ def country(request, country_name):
 		}
 		
 		context['regions'].append(region_data)
+		
+		context['country']['mosaic_count'] += region_data['mosaic_count']
 		
 	context['region_count'] = len(context['regions'])
 	context['regions'] = json.dumps(context['regions'])
