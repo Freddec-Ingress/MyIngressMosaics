@@ -41,17 +41,8 @@
 						<span class="text-big color-light">{{region.name}}</span>
 					</div>
 
-					<div class="flex">
-						
-						<div class="item flex">
-							<span class="mr-small flag-icon flag-icon-{{region.country_code}}"></span>
-							<a href="/world/{{region.country_name}}">{{region.country_name}}</a>
-						</div>
-						
-					</div>
-				
 					<div class="flex-col">
-						<span class="color-normal">{{mosaic_count}} {% trans "mosaics" %}</span>
+						<span class="color-normal mb-small">{{mosaic_count}} {% trans "mosaics" %}</span>
 						<a class="color-link" ng-show="!region.notified" ng-click="notify();">{% trans "To be notified about new mosaics" %}</a>
 						<a class="color-normal" ng-show="region.notified" ng-click="unnotify();">{% trans "Notified" %}</a>
 					</div>
@@ -59,6 +50,11 @@
 					<div class="mt-small flex-col hidden" ng-show="need_signin">
 						<span class="mb-small color-danger">{% trans "You must be signed in to be notified." %}</span>
 						<a ng-click="signin('google', '/world/{{region.country_name}}/{{region.name}}');">{% trans "Sign in" %}</a>
+					</div>
+
+					<div class="flex mt-small">
+						<span class="mr-small flag-icon flag-icon-{{region.country_code}}"></span>
+						<a href="/world/{{region.country_name}}">{{region.country_name}}</a>
 					</div>
 					
 				</div>
