@@ -228,9 +228,8 @@
 					</div>
 					
 					<div class="tab" ng-click="current_tab='missions'" ng-class="{'active':current_tab=='missions'}">
-						<i class="ml-normal fa fa-exclamation-triangle color-danger" title="Some portals are unavailable!" ng-show="mosaic.has_unavailable_portals"></i>
+						<i class="mr-small fa fa-exclamation-triangle color-danger" title="{% trans 'Some portals are unavailable!' %}" ng-show="mosaic.has_unavailable_portals"></i>
 						{% trans "Missions" %}
-						<span class="ml-normal badge">[[missions.length]]</span>
 					</div>
 					
 					<div class="tab" ng-click="current_tab='comments'" ng-class="{'active':current_tab=='comments'}">
@@ -244,7 +243,7 @@
 				
 			<div ng-show="current_tab=='roadmap'">
 				
-				<div class="item">
+				<div class="item pt-none">
 					<div class="flex">
 						
 						<div class="item" style="height:420px;width:100%">
@@ -258,10 +257,10 @@
 			
 			<div ng-show="current_tab=='missions'">
 				
-				<div class="item">
+				<div class="item pt-none">
 					<div class="flex-col item" ng-repeat="mission in missions track by $index">
 					
-						<div class="item bg-block flex-col">
+						<div class="bg-block flex-col">
 							
 							<div class="flex align-center">
 								<a class="item" ng-show="!mission.open" ng-click="mission.open=true;"><i class="fa fa-plus-square text-small"></i></a>
