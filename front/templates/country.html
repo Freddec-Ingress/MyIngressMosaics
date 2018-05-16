@@ -102,26 +102,17 @@
 						<div class="width-12 width-xl-4 item" ng-repeat="region in regions">
 							<a class="link-block flex align-center" href="/world/{{country.name}}/[[region.name]]">
 							
-								<div class="item flex-col align-center">
+								<div class="item">
 									<span class="flag-icon flag-icon-{{country.code}}" style="width:1.3rem; line-height:1.4rem;"></span>
 								</div>
 									
-								<div class="item grow">
-									
-									<div class="flex align-center">
-										<span class="grow mr-normal color-light text-medium ellipsis">[[region.name]]</span>
-									</div>
-									
-									<div class="flex text-small">
-										<span class="color-dark">[[region.locale]]</span>
-									</div>
-									
+								<div class="item grow flex-col" style="flex:1; min-width:0;">
+									<span class="color-light text-medium ellipsis">[[region.name]]</span>
+									<span class="color-dark">[[region.locale]]</span>
 								</div>
 									
 								<div class="item">
-									<div class="flex">
-										<span class="badge">[[region.mosaic_count]]</span>
-									</div>
+									<span class="badge">[[region.mosaic_count]]</span>
 								</div>
 								
 							</a>
