@@ -261,7 +261,7 @@
 					
 						<div class="bg-block flex-col">
 							
-							<div class="flex align-center">
+							<div class="flex align-baseline">
 								<a class="item pr-small" ng-show="!mission.open" ng-click="mission.open=true;"><i class="fa fa-plus-square text-small"></i></a>
 								<a class="item pr-small" ng-show="mission.open" ng-click="mission.open=false;"><i class="fa fa-minus-square text-small"></i></a>
 								<span class="item pr-small text-small color-muted">#[[$index+1]].</span>
@@ -270,7 +270,7 @@
 							</div>
 							
 							<div class="flex" ng-show="mission.open">
-								<span class="item color-dark">[[mission.desc]]</span>
+								<span class="item pt-none color-dark">[[mission.desc]]</span>
 							</div>
 							
 							<div class="item flex-col" ng-show="mission.open">
@@ -292,25 +292,25 @@
 							<div class="flex" ng-show="mission.open">
 								
 								<div class="item">
-			                        <a class="item bg-block flex" href="https://www.ingress.com/intel?ll=[[mission.portals[0].lat]],[[mission.portals[0].lng]]&z=17&pll=[[mission.portals[0].lat]],[[mission.portals[0].lng]]" target="_blank">
+			                        <a class="item bg-block flex align-center" style="height:100%;" href="https://www.ingress.com/intel?ll=[[mission.portals[0].lat]],[[mission.portals[0].lng]]&z=17&pll=[[mission.portals[0].lat]],[[mission.portals[0].lng]]" target="_blank">
 			                            <i class="fa fa-fw fa-external-link"></i>
 			                        </a>
 								</div>
 								
 								<div class="item">
-			                        <a class="item bg-block flex" href="https://www.google.com/maps/dir//[[mission.portals[0].lat]],[[mission.portals[0].lng]]" target="_blank">
+			                        <a class="item bg-block flex align-center" style="height:100%;" href="https://www.google.com/maps/dir//[[mission.portals[0].lat]],[[mission.portals[0].lng]]" target="_blank">
 			                            <i class="fa fa-fw fa-map-marker"></i>
 			                        </a>
 								</div>
 								
 								<div class="item">
-			                        <a class="item bg-block flex" href="https://waze.com/ul?ll=[[mission.portals[0].lat]],[[mission.portals[0].lng]]" target="_blank">
+			                        <a class="item bg-block flex align-center" style="height:100%;" href="https://waze.com/ul?ll=[[mission.portals[0].lat]],[[mission.portals[0].lng]]" target="_blank">
 			                            <img src="/static/img/waze.png">
 			                        </a>
 								</div>
 								
 								<div class="item">
-			                        <a class="item bg-block flex" href="https://showtheway.io/to/[[mission.portals[0].lat]],[[mission.portals[0].lng]]" target="_blank">
+			                        <a class="item bg-block flex align-center" style="height:100%;" href="https://showtheway.io/to/[[mission.portals[0].lat]],[[mission.portals[0].lng]]" target="_blank">
 			                            <img src="/static/img/showtheway.png">
 			                        </a>
 								</div>
