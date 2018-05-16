@@ -90,7 +90,7 @@
 			
 			<div ng-show="current_tab=='mosaics'">
 			
-				<div class="section">
+				<div class="item">
 					
 					<div class="flex wrap">
 						
@@ -134,7 +134,7 @@
 			
 				<div ng-if="mosaics_sorting=='by_date'" class="flex-col">
 					
-					<div class="section">
+					<div class="item">
 						<div class="flex">
 							<div class="grow flex width-12 wrap">
 								<div class="item flex justify-center" ng-repeat="index in mosaics_date_indexes track by $index" style="width:80px;">
@@ -146,7 +146,7 @@
 						</div>
 					</div>
 					
-					<div class="section">
+					<div class="item">
 						<div class="flex wrap">
 							<mosaic ng-repeat="mosaic in mosaics track by $index" ng-if="mosaic.index_date==current_mosaics_date_index;" mosaic="mosaic"></mosaic>
 						</div>
@@ -156,7 +156,7 @@
 				
 				<div ng-if="mosaics_sorting=='by_name'" class="flex-col">
 					
-					<div class="section">
+					<div class="item">
 						<div class="flex">
 							<div class="grow flex width-12 wrap">
 								<div class="item flex justify-center" ng-repeat="index in mosaics_name_indexes track by $index" style="width:40px;">
@@ -168,7 +168,7 @@
 						</div>
 					</div>
 					
-					<div class="section">
+					<div class="item">
 						<div class="flex wrap">
 							<mosaic ng-repeat="mosaic in mosaics track by $index" ng-if="mosaic.title[0]==current_mosaics_name_index;" mosaic="mosaic"></mosaic>
 						</div>
@@ -178,7 +178,7 @@
 				
 				<div ng-if="mosaics_sorting=='by_uniques'" class="flex-col">
 					
-					<div class="section">
+					<div class="item">
 						<div class="flex">
 							<div class="grow flex width-12 wrap">
 								<div class="item flex justify-center" ng-repeat="index in mosaics_uniques_indexes track by $index" style="width:100px;">
@@ -190,7 +190,7 @@
 						</div>
 					</div>
 					
-					<div class="section">
+					<div class="item">
 						<div class="flex wrap">
 							<mosaic ng-repeat="mosaic in mosaics track by $index" ng-if="mosaic.index_uniques==current_mosaics_uniques_index;" mosaic="mosaic"></mosaic>
 						</div>
@@ -200,7 +200,7 @@
 				
 				<div ng-if="mosaics_sorting=='by_missions'" class="flex-col">
 					
-					<div class="section">
+					<div class="item">
 						<div class="flex">
 							<div class="grow flex width-12 wrap">
 								<div class="item flex justify-center" ng-repeat="index in mosaics_missions_indexes track by $index" style="width:50px;">
@@ -212,7 +212,7 @@
 						</div>
 					</div>
 					
-					<div class="section">
+					<div class="item">
 						<div class="flex wrap">
 							<mosaic ng-repeat="mosaic in mosaics track by $index" ng-if="mosaic.images.length==current_mosaics_missions_index;" mosaic="mosaic"></mosaic>
 						</div>
@@ -224,7 +224,7 @@
 			
 			<div ng-show="current_tab=='potentials'">
 				
-				<div class="section">
+				<div class="item">
 					<div class="flex wrap">
 						<potential ng-repeat="potential in potentials track by $index" potential="potential"></potential>
 					</div>
