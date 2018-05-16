@@ -145,7 +145,7 @@
 					<div class="item" ng-repeat="city in cities" ng-if="city.name[0]==current_mosaics_location_index;">
 						
 						<div class="flex">
-							<a class="pl-small pb-small" href="/world/[[city.country_name]]/[[city.region_name]]/[[city.name]]">
+							<a class="pl-small pb-small" href="/world/{{region.country_name}}/{{region.name}}/[[city.name]]">
 								[[city.name]]
 							</a>
 						</div>
