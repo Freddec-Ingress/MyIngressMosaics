@@ -11,7 +11,7 @@ angular.module('FrontModule.directives').directive('mosaic', function() {
 		
 		template: '' +
 			'<div class="item flex-col">' +
-				'<div class="link-block" style="height:100%">' +
+				'<div class="link-block" style="height:100%; width:162px;">' +
 					
 					'<a class="item" href="/mosaic/[[mosaic.ref]]" target="_blank" style="display:block;">' +
 						'<div class="flex align-center">' +
