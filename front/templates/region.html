@@ -37,11 +37,11 @@
 				
 				<div class="flex">
 					
-					<div class="item flex">
-						<i class="fa fa-long-arrow-alt-left mr-small"></i>
+					<a href="/world/{{region.country_name}}" class="item flex align-center">
+						<i class="fa fa-long-arrow-left mr-small"></i>
 						<span class="mr-small flag-icon flag-icon-{{region.country_code}}"></span>
-						<a href="/world/{{region.country_name}}">{{region.country_name}}</a>
-					</div>
+						{{region.country_name}}
+					</a>
 					
 				</div>
 				
@@ -54,7 +54,7 @@
 					<span class="text-big color-light">{{region.name}}</span>
 					
 					<div class="flex-col">
-						<span class="color-normal">{{region.mosaic_count}} {% trans "mosaics" %}</span>
+						<span class="color-normal">{{mosaic_count}} {% trans "mosaics" %}</span>
 						<a class="color-link" ng-show="!region.notified" ng-click="notify();">{% trans "To be notified about new mosaics" %}</a>
 						<a class="color-normal" ng-show="region.notified" ng-click="unnotify();">{% trans "Notified" %}</a>
 					</div>
