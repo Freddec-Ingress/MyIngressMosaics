@@ -338,13 +338,13 @@
 						<input id="name_input" type="text" class="control" ng-model="mosaic_name" />
 					</div>
 				
-					<div class="item pt-none color-muted">
+					<div class="item pt-none text-small color-muted">
 						{% trans "Suggestion" %}
 					</div>
 							
 					<div class="flex wrap ml-big">
 						
-						<div class="flex" ng-repeat="mission in selected | limitTo:3">
+						<div class="flex width-12 width-xl-4" ng-repeat="mission in selected | limitTo:3">
 							<div class="item pt-none color-dark">
 								[[mission.title]]
 							</div>
@@ -361,7 +361,7 @@
 						<input id="city_input" type="text" class="control" placeholder="{% trans "City name" %}" ng-model="mosaic_city" />
 					</div>
 				
-					<div class="item pt-none color-muted">
+					<div class="item pt-none text-small color-muted">
 						{% trans "Suggestion" %}
 					</div>
 					
@@ -379,7 +379,7 @@
 						<span class="mb-small">{% trans "Tag(s)" %}</span>
 						
 						<div class="flex wrap">
-							<div class="mb-small ml-big" ng-repeat="tag in tags track by $index">
+							<div class="mb-small ml-big width-12 width-xl-4" ng-repeat="tag in tags track by $index">
 								
 								<div class="flex align-center" ng-click="addTag(tag.value);" ng-show="mosaic_tags.indexOf(tag.value) == -1">
 									<input type="checkbox" class="mr-small">
