@@ -277,7 +277,7 @@
 								
 								<span class="color-muted mb-small text-small">[[mission.portals.length]] {% trans 'portals' %}</span>
 								
-								<div class="flex flex-wrap color-normal">
+								<div class="flex wrap color-normal">
 									<div ng-repeat="portal in mission.portals">
 										<span class="mr-normal color-danger" ng-show="portal.title=='Unavailable'">{% trans "Unavailable" %}</span>
 										<span class="mr-normal" ng-show="portal.title!='Unavailable' && portal.action==1">{% trans "Hack" %}</span>
@@ -326,7 +326,7 @@
 
 			<div ng-show="current_tab=='comments'">
 				
-				<div class="section">
+				<div class="item">
 					
 					<div class="flex-col">
 						
