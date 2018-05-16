@@ -195,7 +195,7 @@
 						
 						<div class="flex align-center">
 							
-							<div class="item" ng-if="!mosaic.is_obsolete">
+							<div class="item" ng-if="!mosaic.is_obsolete && authenticated">
 								<a ng-click="markAsObsolete();">{% trans "Mark as obsolete" %}</a>
 							</div>
 							
@@ -277,13 +277,16 @@
 								
 								<span class="color-muted mb-small text-small">[[mission.portals.length]] {% trans 'portals' %}</span>
 								
-								<span class="flex flex-wrap color-normal" ng-repeat="portal in mission.portals">
-									<span class="mr-normal color-danger" ng-show="portal.title=='Unavailable'">{% trans "Unavailable" %}</span>
-									<span class="mr-normal" ng-show="portal.title!='Unavailable' && portal.action==1">{% trans "Hack" %}</span>
-									<span class="mr-normal" ng-show="portal.title!='Unavailable' && portal.action==2">{% trans "Capture" %}</span>
-									<span class="mr-normal" ng-show="portal.title!='Unavailable' && portal.action==7">{% trans "View" %}</span>
-									<span class="mr-normal" ng-show="portal.title!='Unavailable' && portal.action==8">{% trans "Passphrase" %}</span>
-								</span>
+								<div class="flex flex-wrap color-normal">
+									<div ng-repeat="portal in mission.portals">
+										<span class="mr-normal color-danger" ng-show="portal.title=='Unavailable'">{% trans "Unavailable" %}</span>
+										<span class="mr-normal" ng-show="portal.title!='Unavailable' && portal.action==1">{% trans "Hack" %}</span>
+										<span class="mr-normal" ng-show="portal.title!='Unavailable' && portal.action==2">{% trans "Capture" %}</span>
+										<span class="mr-normal" ng-show="portal.title!='Unavailable' && portal.action==7">{% trans "View" %}</span>
+										<span class="mr-normal" ng-show="portal.title!='Unavailable' && portal.action==8">{% trans "Passphrase" %}</span>
+									</div>
+								</div>
+								
 							</div>
 							
 							<div class="flex" ng-show="mission.open">
