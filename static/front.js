@@ -1610,12 +1610,14 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 			
 			$scope.mosaic_tags += tag + '|';
 		}
+		console.log($scope.mosaic_tags);
 	}
 	
 	$scope.removeTag = function(tag) {
 		
 		var str = tag + '|';
 		$scope.mosaic_tags.replace(str, '');
+		console.log($scope.mosaic_tags);
 	}
 	
 	/* Step #4 management */
