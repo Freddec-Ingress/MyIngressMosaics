@@ -104,28 +104,11 @@
 			
 			<div class="section">
 				
-				<div class="item">
-					<span class="color-normal">{% trans "Event/Project dedicated pages" %}</span>
-				</div>
-				
-				<div class="flex wrap align-center">
-					
-					<div class="item width-12 width-xl-4" ng-repeat="tag in tags track by $index" ng-show="tag.count > 0">
-						<div class="item bg-block">
-							<a class="flex align-center" href="/tag/[[tag.value]]">
-								<span class="grow color-light">[[tag.label]]</span>
-								<span class="badge">[[tag.count]]</span>
-							</a>
-						</div>
-					</div>
-
-				</div>
-				
-			</div>
-			
-			<div class="section">
-				
 				<div class="tab-row">
+				
+					<div class="tab" ng-click="current_tab='projects'" ng-class="{'active':current_tab=='projects'}">
+						{% trans "Events/Projects" %}
+					</div>
 				
 					<div class="tab" ng-click="current_tab='countries'" ng-class="{'active':current_tab=='countries'}">
 						{% trans "Countries" %}
@@ -136,11 +119,38 @@
 				
 			</div>
 			
+			<div ng-if="current_tab=='projects'">
+				
+				<div class="item">
+					
+					<div class="flex wrap align-center">
+						
+						<div class="item width-12 width-xl-4" ng-repeat="tag in tags track by $index" ng-show="tag.count > 0">
+							<div class="item bg-block">
+								<a class="flex align-center" href="/tag/[[tag.value]]">
+									<span class="grow color-light">[[tag.label]]</span>
+									<span class="badge">[[tag.count]]</span>
+								</a>
+							</div>
+						</div>
+	
+					</div>
+				
+				</div>
+				
+			</div>
+			
 			<div ng-if="current_tab=='countries'">
 				
-				<div class="section">
+				<div class="item">
 					
 					<div class="flex wrap">
+						
+						<div class="item">
+							<span class="color-muted">
+								{% trans "sort" %}
+							</span>
+						</div>
 						
 						<div class="item">
 							<a ng-click="sortCountriesByMosaics();" ng-class="{'active': countries_sorting=='by_mosaics'}">
@@ -158,7 +168,7 @@
 					
 				</div>
 
-				<div class="section">
+				<div class="item">
 				
 					<div class="flex wrap">
 						<div class="width-12 width-xl-4 item" ng-repeat="country in countries">
