@@ -42,9 +42,8 @@
 						<span class="text-big color-light">{{country.name}}</span>
 					</div>
 					
-					<div class="flex align-center">
-						<span class="color-normal">{{mosaic_count}} {% trans "mosaics" %}</span>
-						<span class="color-muted pl-small pr-small">&middot;</span>
+					<div class="flex-col align-center">
+						<span class="color-normal">{{country.mosaic_count}} {% trans "mosaics" %}</span>
 						<a class="color-link hidden" ng-show="!country.notified" ng-click="notify();">{% trans "To be notified about new mosaics" %}</a>
 						<a class="color-normal hidden" ng-show="country.notified" ng-click="unnotify();">{% trans "Notified" %}</a>
 					</div>
@@ -64,7 +63,6 @@
 				
 					<div class="tab" ng-click="current_tab='regions'" ng-class="{'active':current_tab=='regions'}">
 						{% trans "Regions" %}
-						<span class="ml-normal badge">{{region_count}}</span>
 					</div>
 					
 				</div>
@@ -73,7 +71,7 @@
 			
 			<div ng-if="current_tab=='regions'">
 				
-				<div class="section">
+				<div class="item">
 					
 					<div class="flex wrap">
 						
@@ -93,21 +91,17 @@
 					
 				</div>
 				
-				<div class="section">
+				<div class="item pt-none">
 					
 					<div class="flex wrap">
 						<div class="width-12 width-xl-4 item" ng-repeat="region in regions">
-							<a class="item link-block flex align-center" href="/world/{{country.name}}/[[region.name]]">
+							<a class="link-block flex align-center" href="/world/{{country.name}}/[[region.name]]">
 							
-								<div class="item width-2 flex-col align-center">
+								<div class="item flex-col align-center">
 									<span class="flag-icon flag-icon-{{country.code}}" style="width:1.3rem; line-height:1.4rem;"></span>
-									<div class="flex">
-										<span class="text-small color-normal" ng-if="region.mosaic_count">[[region.mosaic_count]]</span>
-										<span class="text-small color-light" ng-if="region.potential_count">+[[region.potential_count]]</span>
-									</div>
 								</div>
 									
-								<div class="item width-10">
+								<div class="item grow">
 									
 									<div class="flex align-center">
 										<span class="grow mr-normal color-light text-medium ellipsis">[[region.name]]</span>
@@ -119,7 +113,13 @@
 									</div>
 									
 								</div>
-
+									
+								<div class="item">
+									<div class="flex">
+										<span class="badge">[[region.mosaic_count]]</span>
+									</div>
+								</div>
+								
 							</a>
 						</div>
 					</div>
