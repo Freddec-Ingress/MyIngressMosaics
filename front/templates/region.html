@@ -98,25 +98,25 @@
 								</a>
 							</div>
 							
-							<div class="pb-small pr-small">
+							<div class="pb-small pr-small pl-small">
 								<a ng-click="sortMosaicsByMissions();" ng-class="{'active': mosaics_sorting=='by_missions'}">
 									{% trans "By missions" %}
 								</a>
 							</div>
 							
-							<div class="pb-small pr-small">
+							<div class="pb-small pr-small pl-small">
 								<a ng-click="sortMosaicsByUniques();" ng-class="{'active': mosaics_sorting=='by_uniques'}">
 									{% trans "By uniques" %}
 								</a>
 							</div>
 							
-							<div class="pb-small pr-small">
+							<div class="pb-small pr-small pl-small">
 								<a ng-click="sortMosaicsByName();" ng-class="{'active': mosaics_sorting=='by_name'}">
 									{% trans "By name" %}
 								</a>
 							</div>
 							
-							<div class="pb-small pr-small">
+							<div class="pb-small pr-small pl-small">
 								<a ng-click="sortMosaicsByDate();" ng-class="{'active': mosaics_sorting=='by_date'}">
 									{% trans "By date" %}
 								</a>
@@ -143,9 +143,17 @@
 					</div>
 					
 					<div class="item" ng-repeat="city in cities" ng-if="city.name[0]==current_mosaics_location_index;">
+						
+						<div class="flex">
+							<a class="pb-small" href="/world/[[city.country_name]]/[[city.region_name]]/[[city.name]]">
+								[[city.name]]
+							</a>
+						</div>
+						
 						<div class="flex wrap">
 							<mosaic ng-repeat="mosaic in mosaics track by $index" ng-if="mosaic.city_name==city.name;" mosaic="mosaic"></mosaic>
 						</div>
+						
 					</div>
 					
 				</div>
