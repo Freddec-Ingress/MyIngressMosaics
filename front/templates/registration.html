@@ -171,7 +171,7 @@
 
 								<div class="grow flex-col">
 									
-									<a class="item" ng-click="selectAll();">
+									<a class="item pb-none" ng-click="selectAll();">
 										{% trans "Select All" %}
 									</a>
 									
@@ -185,7 +185,7 @@
 									<button class="btn" ng-class="{'disabled':selected.length < 3}" ng-click="open_step(2);" ng-disabled="selected.length < 3">
 										<div class="row">
 											{% trans "Next" %}
-											<span class="ml-normal badge">[[selected.length]]</span>
+											<span class="ml-small badge">[[selected.length]]</span>
 											<i class="ml-normal fa fa-angle-double-right"></i>
 										</div>
 									</button>
