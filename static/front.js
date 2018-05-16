@@ -991,7 +991,7 @@ angular.module('FrontModule.directives').directive('mission', function() {
 		
 		template: '' +
 			'<div class="width-12 width-xl-6 item">' +
-				'<div class="item bg-block flex align-center">' +
+				'<div class="bg-block flex align-center">' +
 				
 					'<div class="item">' +
 						'<img src="/static/img/mask.png" style="width:26px; background-color:#000000; background-image:url([[mission.image]]=s25); background-size: 95% 95%; background-position: 50% 50%; float:left; background-repeat: no-repeat;" />' +
