@@ -38,6 +38,7 @@
 				<div class="flex">
 					
 					<div class="item flex">
+						<i class="fa fa-long-arrow-alt-left mr-small"></i>
 						<span class="mr-small flag-icon flag-icon-{{region.country_code}}"></span>
 						<a href="/world/{{region.country_name}}">{{region.country_name}}</a>
 					</div>
@@ -52,8 +53,9 @@
 				
 					<span class="text-big color-light">{{region.name}}</span>
 					
-					<div class="flex">
-						<a class="color-link" ng-show="!region.notified" ng-click="notify();">{% trans "To be notified" %}</a>
+					<div class="flex-col">
+						<span class="color-normal">{{region.mosaic_count}} {% trans "mosaics" %}</span>
+						<a class="color-link" ng-show="!region.notified" ng-click="notify();">{% trans "To be notified about new mosaics" %}</a>
 						<a class="color-normal" ng-show="region.notified" ng-click="unnotify();">{% trans "Notified" %}</a>
 					</div>
 	
@@ -72,12 +74,10 @@
 				
 					<div class="tab" ng-click="current_tab='mosaics'" ng-class="{'active':current_tab=='mosaics'}">
 						{% trans "Mosaics" %}
-						<span class="ml-normal badge">{{mosaic_count}}</span>
 					</div>
 				
-					<div class="tab" ng-click="current_tab='potentials'" ng-class="{'active':current_tab=='potentials'}">
+					<div ng-show="potential_count > 0" class="tab" ng-click="current_tab='potentials'" ng-class="{'active':current_tab=='potentials'}">
 						{% trans "Potentials" %}
-						<span class="ml-normal badge">{{potential_count}}</span>
 					</div>
 					
 				</div>
@@ -86,9 +86,15 @@
 			
 			<div ng-show="current_tab=='mosaics'">
 				
-				<div class="section">
+				<div class="item">
 					
 					<div class="flex wrap">
+						
+						<div class="item">
+							<span class="color-muted">
+								{% trans "sort" %}
+							</span>
+						</div>
 						
 						<div class="item">
 							<a ng-click="sortMosaicsByLocation();" ng-class="{'active': mosaics_sorting=='by_location'}">
@@ -126,7 +132,7 @@
 				
 				<div ng-if="mosaics_sorting=='by_location'" class="flex-col">
 					
-					<div class="section">
+					<div class="item">
 						<div class="flex">
 							<div class="grow flex width-12 wrap">
 								<div class="item flex justify-center" ng-repeat="index in mosaics_location_indexes track by $index" style="width:40px;">
@@ -138,7 +144,7 @@
 						</div>
 					</div>
 					
-					<div class="section" ng-repeat="city in cities" ng-if="city.name[0]==current_mosaics_location_index;">
+					<div class="item" ng-repeat="city in cities" ng-if="city.name[0]==current_mosaics_location_index;">
 						<div class="flex wrap">
 							<mosaic ng-repeat="mosaic in mosaics track by $index" ng-if="mosaic.city_name==city.name;" mosaic="mosaic"></mosaic>
 						</div>
@@ -238,7 +244,7 @@
 			
 			<div ng-show="current_tab=='potentials'">
 					
-				<div class="section">
+				<div class="item">
 					<div class="flex wrap">
 						<potential ng-repeat="potential in potentials track by $index" potential="potential"></potential>
 					</div>
