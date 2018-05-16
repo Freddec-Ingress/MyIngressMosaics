@@ -326,7 +326,7 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 	$scope.removeTag = function(tag) {
 		
 		var str = tag + '|';
-		$scope.mosaic_tags.replace(str, '');
+		$scope.mosaic_tags = $scope.mosaic_tags.replace(str, '');
 		console.log($scope.mosaic_tags);
 	}
 	
