@@ -315,7 +315,9 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 	
 	$scope.addTag = function(tag) {
 		
+		console.log('addTag');
 		var str = tag + '|';
+		console.log(str);
 		if ($scope.mosaic_tags.indexOf(str) == -1) {
 			
 			$scope.mosaic_tags += tag + '|';
@@ -325,7 +327,9 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 	
 	$scope.removeTag = function(tag) {
 		
+		console.log('removeTag');
 		var str = tag + '|';
+		console.log(str);
 		$scope.mosaic_tags = $scope.mosaic_tags.replace(str, '');
 		console.log($scope.mosaic_tags);
 	}
