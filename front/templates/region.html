@@ -52,10 +52,11 @@
 						<a ng-click="signin('google', '/world/{{region.country_name}}/{{region.name}}');">{% trans "Sign in" %}</a>
 					</div>
 
-					<div class="flex mt-small">
+					<a href="/world/{{region.country_name}}" class="flex mt-normal">
+						<i class="fa fa-long-arrow-left mr-small"></i>
 						<span class="mr-small flag-icon flag-icon-{{region.country_code}}"></span>
-						<a href="/world/{{region.country_name}}">{{region.country_name}}</a>
-					</div>
+						{{region.country_name}}
+					</a>
 					
 				</div>
 				
