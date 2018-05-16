@@ -92,7 +92,7 @@
 			
 			<div ng-if="mosaics_sorting=='by_country'" class="flex-col">
 				
-				<div class="item">
+				<div class="item pt-none">
 					<div class="flex">
 						<div class="grow flex width-12 wrap">
 							<div class="item flex justify-center width-xl-2 width-4" ng-repeat="index in indexes_by_country track by $index">
@@ -106,7 +106,7 @@
 					</div>
 				</div>
 				
-				<div class="item">
+				<div class="item pt-none">
 					<div class="flex wrap">
 						<mosaic ng-repeat="mosaic in mosaics_by_country track by $index" mosaic="mosaic"></mosaic>
 					</div>
