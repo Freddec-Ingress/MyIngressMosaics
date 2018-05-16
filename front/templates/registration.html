@@ -133,7 +133,7 @@
 					
 						<div class="flex">
 							
-							<div class="item">
+							<div class="item flex">
 								<a ng-show="!country.open" ng-click="country.open=true;"><i class="fa fa-plus-square text-small"></i></a>
 								<a ng-show="country.open" ng-click="country.open=false;"><i class="fa fa-minus-square text-small"></i></a>
 								<span class="ml-normal c-normal">[[country.name]]</span>
@@ -378,18 +378,20 @@
 						
 						<span class="mb-small">{% trans "Tag(s)" %}</span>
 						
-						<div class="mb-small ml-big" ng-repeat="tag in tags track by $index">
-							
-							<div class="flex align-center" ng-click="addTag(tag.value); tag_[[$index]]=true;" ng-model="tag_[[$index]]" ng-show="!tag_[[$index]]">
-								<input type="checkbox" class="mr-small" ng-checked="tag_[[$index]]">
-								<label class="color-dark">[[tag.label]]</label>
+						<div class="flex wrap">
+							<div class="mb-small ml-big" ng-repeat="tag in tags track by $index">
+								
+								<div class="flex align-center" ng-click="addTag(tag.value); tag_[[$index]]=true;" ng-model="tag_[[$index]]" ng-show="!tag_[[$index]]">
+									<input type="checkbox" class="mr-small" ng-checked="tag_[[$index]]">
+									<label class="color-dark">[[tag.label]]</label>
+								</div>
+								
+								<div class="flex align-center" ng-click="removeTag(tag.value); tag_[[$index]]=false;" ng-model="tag_[[$index]]" ng-show="tag_[[$index]]">
+									<input type="checkbox" class="mr-small" ng-checked="tag_[[$index]]">
+									<label class="color-dark">[[tag.label]]</label>
+								</div>
+								
 							</div>
-							
-							<div class="flex align-center" ng-click="removeTag(tag.value); tag_[[$index]]=false;" ng-model="tag_[[$index]]" ng-show="tag_[[$index]]">
-								<input type="checkbox" class="mr-small" ng-checked="tag_[[$index]]">
-								<label class="color-dark">[[tag.label]]</label>
-							</div>
-							
 						</div>
 
 					</div>
