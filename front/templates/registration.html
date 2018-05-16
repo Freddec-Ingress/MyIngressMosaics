@@ -381,13 +381,13 @@
 						<div class="flex wrap">
 							<div class="mb-small ml-big" ng-repeat="tag in tags track by $index">
 								
-								<div class="flex align-center" ng-click="addTag(tag.value); tag_[[$index]]=true;" ng-model="tag_[[$index]]" ng-show="!tag_[[$index]]">
-									<input type="checkbox" class="mr-small" ng-checked="tag_[[$index]]">
+								<div class="flex align-center" ng-click="addTag(tag.value);" ng-show="mosaic_tags.indexOf(tag.value) == -1">
+									<input type="checkbox" class="mr-small">
 									<label class="color-dark">[[tag.label]]</label>
 								</div>
 								
-								<div class="flex align-center" ng-click="removeTag(tag.value); tag_[[$index]]=false;" ng-model="tag_[[$index]]" ng-show="tag_[[$index]]">
-									<input type="checkbox" class="mr-small" ng-checked="tag_[[$index]]">
+								<div class="flex align-center" ng-click="removeTag(tag.value);" ng-show="mosaic_tags.indexOf(tag.value) != -1">
+									<input type="checkbox" class="mr-small" checked>
 									<label class="color-dark">[[tag.label]]</label>
 								</div>
 								
