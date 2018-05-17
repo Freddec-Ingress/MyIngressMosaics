@@ -44,7 +44,7 @@ angular.module('FrontModule.controllers').controller('TagPageCtrl', function($sc
 				
 		var map = new google.maps.Map(document.getElementById('map'), {
 			
-			zoom: 1,
+			zoom: 20,
 			gestureHandling: 'greedy', 
 			zoomControl: true,
 			disableDefaultUI: true,
@@ -55,7 +55,7 @@ angular.module('FrontModule.controllers').controller('TagPageCtrl', function($sc
 				style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
                 mapTypeIds: [google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN, 'Ingress Intel'],
 			},
-			center: {lat:0, lng:0},
+			center: {lat:mosaics[0].startLat, lng:mosaics[0].startLng},
 		});
 		
         map.mapTypes.set('Ingress Intel', styledMapType);
@@ -73,6 +73,8 @@ angular.module('FrontModule.controllers').controller('TagPageCtrl', function($sc
 			pixelOffset: new google.maps.Size(-1, 15)
 		});
 		
+		var latlngbounds = new google.maps.LatLngBounds();
+		
         for (var mosaic of mosaics) {
         	
 			var latLng = new google.maps.LatLng(mosaic.startLat, mosaic.startLng);
@@ -82,6 +84,9 @@ angular.module('FrontModule.controllers').controller('TagPageCtrl', function($sc
 				icon: image,
 			});
 			
+	        var mlatLng = new google.maps.LatLng(mosaic.startLat, mosaic.startLng);
+	        latlngbounds.extend(mlatLng);
+	        
 			google.maps.event.addListener(marker, 'click', (function (marker, mosaic, infowindow) {
 				
 				return function () {
@@ -136,6 +141,8 @@ angular.module('FrontModule.controllers').controller('TagPageCtrl', function($sc
 				
 			})(marker, mosaic, infowindow));
         }
+        
+        map.fitBounds(latlngbounds);
 	}
 	
 	$scope.init = function(mosaics) {

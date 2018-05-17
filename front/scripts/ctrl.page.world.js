@@ -111,6 +111,17 @@ angular.module('FrontModule.controllers').controller('WorldPageCtrl', function($
 			
 			return 0;
 		});
+		
+		$scope.inactive_tags.sort(function(a, b) {
+			
+			if (a.count > b.count) return -1;
+			if (a.count < b.count) return 1;
+			
+			if (a.label > b.label) return 1;
+			if (a.label < b.label) return -1;
+			
+			return 0;
+		});
 	}
 	
 	$scope.sortTagsByName = function() {
@@ -118,6 +129,14 @@ angular.module('FrontModule.controllers').controller('WorldPageCtrl', function($
 		$scope.tags_sorting = 'by_name';
 
 		$scope.tags.sort(function(a, b) {
+			
+			if (a.label > b.label) return 1;
+			if (a.label < b.label) return -1;
+			
+			return 0;
+		});
+
+		$scope.inactive_tags.sort(function(a, b) {
 			
 			if (a.label > b.label) return 1;
 			if (a.label < b.label) return -1;
