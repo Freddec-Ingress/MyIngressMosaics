@@ -875,6 +875,7 @@ def world(request):
 		'countries':[],
 		
 		'tags':[],
+		'inactive_tags':[],
 	}
 	
 	for country in Country.objects.all():
@@ -892,17 +893,21 @@ def world(request):
 		context['countries'].append(country_data)
 		context['mosaic_count'] += country_data['mosaic_count']
 		
-	tag_results = Tag.objects.all().order_by('-pk')
+	tag_results = Tag.objects.all()
 	for tag_obj in tag_results:
 
 		tag_data = {
 			
 			'label':tag_obj.label,
 			'value':tag_obj.value,
+			'active':tag_obj.active,
 			'count':Mosaic.objects.filter(tags__icontains=tag_obj.value+'|').count(),
 		}
 		
-		context['tags'].append(tag_data)
+		if tag_obj.active:
+			context['tags'].append(tag_data)
+		else:
+			context['inactive_tags'].append(tag_data)
 		
 	context['country_count'] = len(context['countries'])
 	context['countries'] = json.dumps(context['countries'])
