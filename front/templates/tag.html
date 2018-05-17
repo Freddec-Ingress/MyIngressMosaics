@@ -38,12 +38,33 @@
 					
 				<div class="item flex-col">
 				
-					<span class="text-big color-light">{{label}}</span>
-					
 					<div class="flex align-center">
-						{% if gplus_url %}<a class="mr-normal" href="{{gplus_url}}" target="_blank">{% trans "Google+" %}</a>{% endif %}
-						{% if tg_url %}<a class="mr-normal" href="{{tg_url}}" target="_blank">{% trans "Telegram" %}</a>{% endif %}
+						
+						{% if image %}
+						<div class="flex-col">
+							<img src="/static/img/{{image}}" />
+						</div>
+						{% endif %}
+						
+						<div class="flex-col">
+					
+							<span class="text-big color-light">{{label}}</span>
+							
+							<div class="flex align-center">
+								{% if website_url %}<a class="mr-normal" href="{{website_url}}" target="_blank">{% trans "Website" %}</a>{% endif %}
+								{% if gplus_url %}<a class="mr-normal" href="{{gplus_url}}" target="_blank">{% trans "Google+" %}</a>{% endif %}
+								{% if tg_url %}<a class="mr-normal" href="{{tg_url}}" target="_blank">{% trans "Telegram" %}</a>{% endif %}
+							</div>
+						
+						</div>
+						
 					</div>
+					
+					{% if not active %}
+					<div class="flex align-center mt-small">
+						<span class="color-danger">{% trans "This project is not active anymore." %}</span>
+					</div>
+					{% endif %}
 					
 					{% if desc %}
 					<div class="flex align-center mt-small">

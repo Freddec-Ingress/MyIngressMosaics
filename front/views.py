@@ -457,6 +457,11 @@ def tag(request, tag):
 		
 		'tg_url':tag_obj.tg_url,
 		'gplus_url':tag_obj.gplus_url,
+		'website_url':tag_obj.gplus_url,
+		
+		'active':tag_obj.active,
+		
+		'image':tag_obj.image,
 		
 		'mosaics':[],
 	}
@@ -901,6 +906,7 @@ def world(request):
 			'label':tag_obj.label,
 			'value':tag_obj.value,
 			'active':tag_obj.active,
+			'image':tag_obj.image,
 			'count':Mosaic.objects.filter(tags__icontains=tag_obj.value+'|').count(),
 		}
 		
