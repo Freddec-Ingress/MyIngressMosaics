@@ -1,4 +1,4 @@
-angular.module('FrontModule.controllers').controller('TagPageCtrl', function($scope, $window, API) {
+angular.module('FrontModule.controllers').controller('TagPageCtrl', function($scope, $window, $compile, API) {
 	
 	/* Tab management */
 	
