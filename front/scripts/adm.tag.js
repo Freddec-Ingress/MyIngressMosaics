@@ -30,6 +30,7 @@ angular.module('FrontModule.controllers').controller('AdmTagCtrl', function($sco
 		var data = { 'text':text };
 		API.sendRequest('/api/search/', 'POST', {}, data).then(function(response) {
 			
+			$scope.mosaics = [];
 			for (var mosaic of response.mosaics) {
 				if (mosaic.tags == '') {
 					$scope.mosaics.push(mosaic);
