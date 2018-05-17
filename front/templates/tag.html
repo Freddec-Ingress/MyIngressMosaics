@@ -58,13 +58,13 @@
 			<div class="section">
 				<div class="tab-row">
 				
+					<div class="tab" ng-click="current_tab='map'" ng-class="{'active':current_tab=='map'}">
+						{% trans "Map" %}
+					</div>
+				
 					<div class="tab" ng-click="current_tab='mosaics'" ng-class="{'active':current_tab=='mosaics'}">
 						{% trans "Mosaics" %}
 						<span class="ml-normal badge">{{mosaics|length}}</span>
-					</div>
-				
-					<div class="tab" ng-click="current_tab='map'" ng-class="{'active':current_tab=='map'}">
-						{% trans "Map" %}
 					</div>
 					
 				</div>

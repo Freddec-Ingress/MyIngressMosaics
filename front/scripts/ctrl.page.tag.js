@@ -2,7 +2,7 @@ angular.module('FrontModule.controllers').controller('TagPageCtrl', function($sc
 	
 	/* Tab management */
 	
-	$scope.current_tab = 'mosaics';
+	$scope.current_tab = 'map';
 	
 	/* Index management */
 	
