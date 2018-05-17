@@ -788,7 +788,10 @@ class Tag(models.Model):
 	
 	tg_url = models.CharField(max_length=256, blank=True, null=True)
 	gplus_url = models.CharField(max_length=256, blank=True, null=True)
+	website_url = models.CharField(max_length=256, blank=True, null=True)
 
+	image = models.CharField(max_length=256, blank=True, null=True)
+	
 	active = models.BooleanField(default=True)
 
 	# Admin displaying
