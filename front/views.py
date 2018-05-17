@@ -1179,7 +1179,10 @@ def adm_potential(request, search_string = ''):
 #---------------------------------------------------------------------------------------------------
 def adm_missions(request):
 
-	context = { 'missions':[] }
+	context = {
+		'tobereviewed_missions':[],
+		'yetreviewed_missions':[],
+	}
 	
 	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=False).values('name', 'creator').annotate(num_name=Count('name')).order_by('-num_name')
 	for mission_obj in mission_results:
@@ -1193,7 +1196,21 @@ def adm_missions(request):
 				'num_name':mission_obj['num_name'],
 			}
 			
-			context['missions'].append(mission_data)
+			context['tobereviewed_missions'].append(mission_data)
+	
+	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=False, validated=False).values('name', 'creator').annotate(num_name=Count('name')).order_by('-num_name')
+	for mission_obj in mission_results:
+		
+		if mission_obj['num_name'] >= 6:
+			
+			mission_data = {
+				
+				'name':mission_obj['name'],
+				'creator':mission_obj['creator'],
+				'num_name':mission_obj['num_name'],
+			}
+			
+			context['yetreviewed_missions'].append(mission_data)
 	
 	return render(request, 'adm_missions.html', context)
 

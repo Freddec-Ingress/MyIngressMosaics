@@ -3887,9 +3887,10 @@ angular.module('FrontModule.controllers').controller('AdmMissionsCtrl', function
 	
 	/* Page loading */
 	
-	$scope.init = function(missions) {
+	$scope.init = function(missions, reviewed) {
 		
 		$scope.missions = missions;
+		$scope.reviewed = reviewed;
 		
     	$scope.loaded = true;
 	}
