@@ -2861,6 +2861,10 @@ angular.module('FrontModule.controllers').controller('CreatorPageCtrl', function
 });
 angular.module('FrontModule.controllers').controller('TagPageCtrl', function($scope, $window, API) {
 	
+	/* Tab management */
+	
+	$scope.current_tab = 'mosaics';
+	
 	/* Index management */
 	
 	$scope.indexes_by_country = []
