@@ -79,8 +79,14 @@
 					<div class="flex wrap pt-small" style="flex:1;">
 						
 						<div class="pb-small pr-small pl-small">
-							<a ng-click="sortMosaicsByCountry();" ng-class="{'active': mosaics_sorting=='by_country'}">
+							<a ng-click="mosaics_sorting='by_country'" ng-class="{'active': mosaics_sorting=='by_country'}">
 								{% trans "By country" %}
+							</a>
+						</div>
+						
+						<div class="pb-small pr-small pl-small">
+							<a ng-click="mosaics_sorting='by_mission'" ng-class="{'active': mosaics_sorting=='by_mission'}">
+								{% trans "By mission" %}
 							</a>
 						</div>
 						
@@ -109,6 +115,28 @@
 				<div class="item pt-none">
 					<div class="flex wrap">
 						<mosaic ng-repeat="mosaic in mosaics_by_country track by $index" mosaic="mosaic"></mosaic>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div ng-if="mosaics_sorting=='by_mission'" class="flex-col">
+				
+				<div class="item pt-none">
+					<div class="flex">
+						<div class="grow flex width-12 wrap">
+							<div class="item flex justify-center width-xl-2 width-4" ng-repeat="index in indexes_by_mission track by $index">
+								<a class="badge badge-link item text-center" ng-click="setByMissionIndex(index);" ng-class="{'active': current_by_mission_index==index}" style="width:100%;">
+									<span class="">[[index.count]]</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="item pt-none">
+					<div class="flex wrap">
+						<mosaic ng-repeat="mosaic in mosaics_by_mission track by $index" mosaic="mosaic"></mosaic>
 					</div>
 				</div>
 				
