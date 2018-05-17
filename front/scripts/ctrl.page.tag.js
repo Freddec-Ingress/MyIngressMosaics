@@ -30,6 +30,38 @@ angular.module('FrontModule.controllers').controller('TagPageCtrl', function($sc
 	
 	/* Page loading */
 	
+	var mapInitiated = false;
+	
+	$scope.initMap = function() {
+		
+		if (mapInitiated) return;
+		mapInitiated = true;
+		
+		var style = [{featureType:"all",elementType:"all",stylers:[{visibility:"on"},{hue:"#131c1c"},{saturation:"-50"},{invert_lightness:!0}]},{featureType:"water",elementType:"all",stylers:[{visibility:"on"},{hue:"#005eff"},{invert_lightness:!0}]},{featureType:"poi",stylers:[{visibility:"off"}]},{featureType:"transit",elementType:"all",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels.icon",stylers:[{invert_lightness:!0}]}];
+		var styledMapType = new google.maps.StyledMapType(style, {name: 'Ingress Intel'});
+		
+		var mapType = 'Ingress Intel';
+				
+		var map = new google.maps.Map(document.getElementById('map'), {
+			
+			zoom: 1,
+			gestureHandling: 'greedy', 
+			zoomControl: true,
+			disableDefaultUI: true,
+			fullscreenControl: true,
+			mapTypeId: mapType,
+			mapTypeControl: true,
+			mapTypeControlOptions: {
+				style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+                mapTypeIds: [google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN, 'Ingress Intel'],
+			},
+			center: {lat:0, lng:0},
+		});
+		
+        map.mapTypes.set('Ingress Intel', styledMapType);
+        map.setMapTypeId('Ingress Intel');
+	}
+	
 	$scope.init = function(mosaics) {
 	
 		$scope.indexes_by_country = []
@@ -140,6 +172,8 @@ angular.module('FrontModule.controllers').controller('TagPageCtrl', function($sc
 		$scope.mosaics_by_mission = $scope.current_by_mission_index.mosaics;
 		
 		$scope.mosaics_sorting = 'by_country';
+		
+		$scope.initMap();
 		
 		$scope.loaded = true;
 	}
