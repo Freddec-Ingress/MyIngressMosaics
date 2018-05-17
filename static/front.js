@@ -3993,7 +3993,7 @@ angular.module('FrontModule.controllers').controller('AdmTagCtrl', function($sco
 			
 			$scope.mosaics = [];
 			for (var mosaic of response.mosaics) {
-				if (mosaic.tags == '') {
+				if (!mosaic.tags || mosaic.tags=='') {
 					$scope.mosaics.push(mosaic);
 				}
 			}
