@@ -1,5 +1,17 @@
 angular.module('FrontModule.controllers').controller('AdmTagCtrl', function($scope, API) {
 	
+	/* Tag management */
+	
+	$scope.addTag = function(tag, mosaic) {
+		
+		var data = { 'ref':mosaic.ref, 'tag':tag };
+		API.sendRequest('/api/mosaic/tag/add/', 'POST', {}, data).then(function(response) {
+			
+			var index = $scope.mosaics.indexOf(mosaic);
+			$scope.mosaics.splice(index, 1);
+		});
+	}
+	
 	/* Search management */
 	
 	$scope.mosaics = null;
@@ -18,7 +30,12 @@ angular.module('FrontModule.controllers').controller('AdmTagCtrl', function($sco
 		var data = { 'text':text };
 		API.sendRequest('/api/search/', 'POST', {}, data).then(function(response) {
 			
-			$scope.mosaics = response.mosaics;
+			for (var mosaic of response.mosaics) {
+				if (mosaic.tags == '') {
+					$scope.mosaics.push(mosaic);
+				}
+			}
+			
 			$scope.searching = false;
 		});
 	}

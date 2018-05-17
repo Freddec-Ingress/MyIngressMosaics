@@ -62,10 +62,24 @@
 			<div class="section" ng-show="!searching && mosaics.length > 0">
 
 				<div class="item" ng-repeat="mosaic in mosaics track by $index">
-					<div class="ng-block" ng-repeat="mosaic in mosaics track by $index">
+					<div class="bg-block">
 						
 						<div class="flex">
-							<span class="text-light">[[mosaic.title]]</span>
+							<span class="color-light">[[mosaic.title]]</span>
+						</div>
+						
+						<div class="flex">
+							
+							<div class="item grow">
+								<input class="control" ng-model="tag" />
+							</div>
+							
+							<div class="item">
+								<button class="btn" type="submit" ng-click="addTag(tag);">
+									Add tag
+								</button>
+							</div>
+							
 						</div>
 						
 					</div>

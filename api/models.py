@@ -253,6 +253,8 @@ class Mosaic(models.Model):
 			'is_obsolete':self.obsolete,
 			'has_unavailable_portals':False,
 
+			'tags':self.tags,
+
 			'images':[],
 		}
 		
