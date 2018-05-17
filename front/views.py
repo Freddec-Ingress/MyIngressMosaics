@@ -457,7 +457,7 @@ def tag(request, tag):
 		
 		'tg_url':tag_obj.tg_url,
 		'gplus_url':tag_obj.gplus_url,
-		'website_url':tag_obj.gplus_url,
+		'website_url':tag_obj.website_url,
 		
 		'active':tag_obj.active,
 		
