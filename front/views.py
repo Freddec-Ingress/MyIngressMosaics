@@ -1246,3 +1246,12 @@ def adm_creators(request):
 			context['creators'].append(creator_data)
 			
 	return render(request, 'adm_creators.html', context)
+
+
+
+#---------------------------------------------------------------------------------------------------
+def adm_tag(request):
+
+	context = { }
+			
+	return render(request, 'adm_tag.html', context)
