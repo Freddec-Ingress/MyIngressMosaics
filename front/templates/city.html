@@ -138,7 +138,7 @@
 						<div class="flex">
 							<div class="grow flex width-12 wrap">
 								<div class="item flex justify-center" ng-repeat="index in mosaics_date_indexes track by $index" style="width:80px;">
-									<a class="badge badge-link item text-center" ng-click="setCurrentMosaicsDateIndex(index);" ng-class="{'active': current_mosaics_date_index==index}" style="width:100%;">
+									<a class="badge badge-link item justify-center" ng-click="setCurrentMosaicsDateIndex(index);" ng-class="{'active': current_mosaics_date_index==index}" style="width:100%;">
 										{% trans "Page" %} [[index]]
 									</a>
 								</div>
@@ -160,7 +160,7 @@
 						<div class="flex">
 							<div class="grow flex width-12 wrap">
 								<div class="item flex justify-center" ng-repeat="index in mosaics_name_indexes track by $index" style="width:40px;">
-									<a class="badge badge-link item text-center" ng-click="setCurrentMosaicsNameIndex(index);" ng-class="{'active': current_mosaics_name_index==index}" style="width:100%;">
+									<a class="badge badge-link item justify-center" ng-click="setCurrentMosaicsNameIndex(index);" ng-class="{'active': current_mosaics_name_index==index}" style="width:100%;">
 										[[index]]
 									</a>
 								</div>
@@ -182,7 +182,7 @@
 						<div class="flex">
 							<div class="grow flex width-12 wrap">
 								<div class="item flex justify-center" ng-repeat="index in mosaics_uniques_indexes track by $index" style="width:100px;">
-									<a class="badge badge-link item text-center" ng-click="setCurrentMosaicsUniquesIndex(index);" ng-class="{'active': current_mosaics_uniques_index==index}" style="width:100%;">
+									<a class="badge badge-link item justify-center" ng-click="setCurrentMosaicsUniquesIndex(index);" ng-class="{'active': current_mosaics_uniques_index==index}" style="width:100%;">
 										[[index*100]] - [[(index+1)*100]]
 									</a>
 								</div>
@@ -204,7 +204,7 @@
 						<div class="flex">
 							<div class="grow flex width-12 wrap">
 								<div class="item flex justify-center" ng-repeat="index in mosaics_missions_indexes track by $index" style="width:50px;">
-									<a class="badge badge-link item text-center" ng-click="setCurrentMosaicsMissionsIndex(index);" ng-class="{'active': current_mosaics_missions_index==index}" style="width:100%;">
+									<a class="badge badge-link item justify-center" ng-click="setCurrentMosaicsMissionsIndex(index);" ng-class="{'active': current_mosaics_missions_index==index}" style="width:100%;">
 										[[index]]
 									</a>
 								</div>

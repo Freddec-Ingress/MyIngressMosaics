@@ -1181,7 +1181,7 @@ def adm_missions(request):
 
 	context = { 'missions':[] }
 	
-	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=False).values('name', 'creator').annotate(num_name=Count('name')).order_by('-num_name')[:5000]
+	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=False).values('name', 'creator').annotate(num_name=Count('name')).order_by('-num_name')
 	for mission_obj in mission_results:
 		
 		if mission_obj['num_name'] >= 6:
