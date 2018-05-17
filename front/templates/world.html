@@ -152,7 +152,10 @@
 						
 						<div class="item width-12 width-xl-4" ng-repeat="tag in tags track by $index" ng-show="tag.count > 0">
 							<a class="item bg-block flex align-center" href="/tag/[[tag.value]]">
-								<div class="flex-col grow" style="flex:1; min-width:0;" title="[[tag.label]]">
+								<div class="flex-col pr-small">
+									<img src="https://www.myingressmosaics.com/static/img/[[tag.image]]" width="40px" style="border-radius:50%;">
+								</div>
+								<div class="flex-col grow pr-small" style="flex:1; min-width:0;" title="[[tag.label]]">
 									<span class="text-medium ellipsis color-light">[[tag.label]]</span>
 									<span class="color-dark text-small">{% trans "Active" %}</span>
 								</div>
@@ -176,7 +179,7 @@
 						
 						<div class="item width-12 width-xl-4" ng-repeat="tag in inactive_tags track by $index" ng-show="tag.count > 0">
 							<a class="item bg-block flex align-center" href="/tag/[[tag.value]]">
-								<div class="flex-col grow" style="flex:1; min-width:0;" title="[[tag.label]]">
+								<div class="flex-col grow pr-small" style="flex:1; min-width:0;" title="[[tag.label]]">
 									<span class="text-medium ellipsis color-light">[[tag.label]]</span>
 									<span class="color-muted text-small">{% trans "Inactive" %}</span>
 								</div>
