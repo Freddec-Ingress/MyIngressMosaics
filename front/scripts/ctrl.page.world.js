@@ -97,10 +97,12 @@ angular.module('FrontModule.controllers').controller('WorldPageCtrl', function($
     
     /* Page loading */
     
-    $scope.init = function(countries, tags) {
+    $scope.init = function(countries, tags, inactive_tags) {
     	
     	$scope.tags = tags;
-    	$scope.countries = countries;
+     	$scope.inactive_tags = inactive_tags;
+     	
+   		$scope.countries = countries;
     	
     	$scope.sortCountriesByMosaics();
     	
