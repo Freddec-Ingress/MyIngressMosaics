@@ -463,7 +463,10 @@ def tag(request, tag):
 	
 	mosaic_results = Mosaic.objects.filter(tags__icontains=tag_obj.value+'|').order_by('city__name', 'title')
 	for mosaic_obj in mosaic_results:
-		tag_data['mosaics'].append(mosaic_obj.getOverviewData())
+		mosaic_data = mosaic_obj.getOverviewData()
+		mosaic_data['startLat'] = mosaic_obj.startLat
+		mosaic_data['startLng'] = mosaic_obj.startLng
+		tag_data['mosaics'].append(mosaic_data)
 	
 	return render(request, 'tag.html', tag_data)
 

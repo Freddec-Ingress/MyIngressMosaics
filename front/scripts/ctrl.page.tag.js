@@ -32,7 +32,7 @@ angular.module('FrontModule.controllers').controller('TagPageCtrl', function($sc
 	
 	var mapInitiated = false;
 	
-	$scope.initMap = function() {
+	$scope.initMap = function(mosaics) {
 		
 		if (mapInitiated) return;
 		mapInitiated = true;
@@ -60,6 +60,23 @@ angular.module('FrontModule.controllers').controller('TagPageCtrl', function($sc
 		
         map.mapTypes.set('Ingress Intel', styledMapType);
         map.setMapTypeId('Ingress Intel');
+        
+		var image = {
+		    scaledSize: new google.maps.Size(25, 25),
+			origin: new google.maps.Point(0, 0),
+			anchor: new google.maps.Point(12, 13),
+			url: 'https://www.myingressmosaics.com/static/img/circle_sgl.png',
+		};
+		
+        for (var mosaic of mosaics) {
+        	
+			var latLng = new google.maps.LatLng(mosaic.startLat, mosaic.startLng);
+			var marker = new google.maps.Marker({
+				position: latLng,
+				map: map,
+				icon: image,
+			});
+        }
 	}
 	
 	$scope.init = function(mosaics) {
@@ -173,7 +190,7 @@ angular.module('FrontModule.controllers').controller('TagPageCtrl', function($sc
 		
 		$scope.mosaics_sorting = 'by_country';
 		
-		$scope.initMap();
+		$scope.initMap(mosaics);
 		
 		$scope.loaded = true;
 	}
