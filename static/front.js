@@ -2498,7 +2498,38 @@ angular.module('FrontModule.controllers').controller('WorldPageCtrl', function($
 			return 0;
 		});
 	}
-    
+ 	
+	/* Tags sorting */
+	
+	$scope.sortTagsByMosaics = function() {
+		
+		$scope.tags_sorting = 'by_mosaics';
+
+		$scope.tags.sort(function(a, b) {
+			
+			if (a.count > b.count) return -1;
+			if (a.count < b.count) return 1;
+			
+			if (a.label > b.label) return 1;
+			if (a.label < b.label) return -1;
+			
+			return 0;
+		});
+	}
+	
+	$scope.sortTagsByName = function() {
+		
+		$scope.tags_sorting = 'by_name';
+
+		$scope.tags.sort(function(a, b) {
+			
+			if (a.label > b.label) return 1;
+			if (a.label < b.label) return -1;
+			
+			return 0;
+		});
+	}
+   
     /* Page loading */
     
     $scope.init = function(countries, tags, inactive_tags) {
@@ -2509,7 +2540,8 @@ angular.module('FrontModule.controllers').controller('WorldPageCtrl', function($
    		$scope.countries = countries;
     	
     	$scope.sortCountriesByMosaics();
-    	
+     	$scope.sortTagsByMosaics();
+   	
     	$scope.loaded = true;
     }
 });

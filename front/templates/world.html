@@ -122,16 +122,42 @@
 				
 				<div class="item">
 					
+					<div class="flex wrap">
+						
+						<div class="item">
+							<span class="color-muted">
+								{% trans "sort" %}
+							</span>
+						</div>
+						
+						<div class="item">
+							<a ng-click="sortTagsByMosaics();" ng-class="{'active': tags_sorting=='by_mosaics'}">
+								{% trans "By mosaics" %}
+							</a>
+						</div>
+						
+						<div class="item">
+							<a ng-click="sortTagsByName();" ng-class="{'active': tags_sorting=='by_name'}">
+								{% trans "By name" %}
+							</a>
+						</div>
+
+					</div>
+					
+				</div>
+				
+				<div class="item">
+					
 					<div class="flex wrap align-center">
 						
 						<div class="item width-12 width-xl-4" ng-repeat="tag in tags track by $index" ng-show="tag.count > 0">
-							<a class="item bg-block flex-col" href="/tag/[[tag.value]]">
-								<div class="flex align-center">
-									<span class="grow color-light">[[tag.label]]</span>
-									<span class="badge">[[tag.count]]</span>
-								</div>
-								<div class="flex align-center">
+							<a class="item bg-block flex align-center" href="/tag/[[tag.value]]">
+								<div class="flex-col grow">
+									<span class="text-medium ellipsis color-light">[[tag.label]]</span>
 									<span class="color-dark text-small">{% trans "Active" %}</span>
+								</div>
+								<div class="flex-col">
+									<span class="badge">[[tag.count]]</span>
 								</div>
 							</a>
 						</div>
@@ -149,12 +175,15 @@
 					<div class="flex wrap align-center">
 						
 						<div class="item width-12 width-xl-4" ng-repeat="tag in inactive_tags track by $index" ng-show="tag.count > 0">
-							<div class="item bg-block">
-								<a class="flex align-center" href="/tag/[[tag.value]]">
-									<span class="grow color-light">[[tag.label]]</span>
+							<a class="item bg-block flex align-center" href="/tag/[[tag.value]]">
+								<div class="flex-col grow">
+									<span class="text-medium ellipsis color-light">[[tag.label]]</span>
+									<span class="color-muted text-small">{% trans "Inactive" %}</span>
+								</div>
+								<div class="flex-col">
 									<span class="badge">[[tag.count]]</span>
-								</a>
-							</div>
+								</div>
+							</a>
 						</div>
 	
 					</div>
