@@ -165,6 +165,14 @@
 									{% endfor %}
 								</div>
 								
+								<div class="item flex-col pt-none">
+									<div class="bg-block item flex-col text-small">
+										{% for city in region.cities %}
+										<span class="mb-small color-dark pr-small pl-small">locationsToBeProcessed.push('{{city.name}}, {{city.region_name}}, {{city.country_name}}');</span>
+										{% endfor %}
+									</div>
+								</div>
+								
 							</div>
 							
 						</div>
