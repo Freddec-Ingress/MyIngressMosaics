@@ -1111,6 +1111,7 @@ def adm_compare(request):
 
 				'extras':[],
 				'mosaics':[],
+				'cities':[],
 			}
 			
 			imregion_data['compare_count'] = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name).count()
@@ -1151,6 +1152,17 @@ def adm_compare(request):
 					}
 					
 					imregion_data['mosaics'].append(immosaic_data)
+					
+					city_data = {
+						
+						'name':immosaic_obj.city_name,
+						'region_name':immosaic_obj.region_name,
+						'country_name':immosaic_obj.country_name,
+					}
+				
+					imregion_data['cities'].append(city_data)
+					
+			imregion_data['cities'] = [dict(t) for t in set([tuple(d.items()) for d in imregion_data['cities']])]
 
 			if imregion_obj.update_date and imregion_data['diff'] > 0:
 				
