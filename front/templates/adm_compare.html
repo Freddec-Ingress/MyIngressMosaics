@@ -113,7 +113,7 @@
 									{% endfor %}
 								</div>
 								
-								<div class="flex-col text-small bg-block mb-normal">
+								<div class="flex-col text-small bg-block mb-small">
 									{% for mosaic in region.mosaics %}
 									<div class="flex-col" ng-model="mosaic_{{mosaic.id}}" ng-init="mosaic_{{mosaic.id}}={{mosaic|jsonify}};">
 	
@@ -165,10 +165,10 @@
 									{% endfor %}
 								</div>
 								
-								<div class="item flex-col pt-none">
+								<div class="item flex-col pt-none pr-none pl-none">
 									<div class="bg-block item flex-col text-small">
 										{% for city in region.cities %}
-										<span class="mb-small color-dark pr-small pl-small">locationsToBeProcessed.push('{{city.name}}, {{city.region_name}}, {{city.country_name}}');</span>
+										<span class="mb-small color-dark">locationsToBeProcessed.push('{{city.name}}, {{city.region_name}}, {{city.country_name}}');</span>
 										{% endfor %}
 									</div>
 								</div>

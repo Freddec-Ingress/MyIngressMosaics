@@ -32,19 +32,19 @@
 					<div class="item">
 						<div class="bg-block item">
 							
-							<div class="flex">
+							<form class="self-stretch flex">
 								
 								<div class="item grow">
 									<input type="text" class="control" ng-model="new_name" ng-init="new_name='{{search_string}}'" />
 								</div>
 								
 								<div class="item">
-									<button class="btn" ng-click="rename(new_name);">
+									<button class="btn" type="submit" ng-click="rename(new_name);">
 										Refresh
 									</button>
 								</div>
 								
-							</div>
+							</form>
 								
 							<div class="flex align-center" ng-show="refreshing">
 								
