@@ -1133,7 +1133,7 @@ def adm_compare(request):
 							immosaic_obj.registered=True
 							immosaic_obj.save()
 					
-				else:
+				if immosaic_obj.registered != True:
 					
 					immosaic_data_date = immosaic_obj.update_date
 					if immosaic_data_date: immosaic_data_date = immosaic_data_date.strftime('%m.%d.%Y')

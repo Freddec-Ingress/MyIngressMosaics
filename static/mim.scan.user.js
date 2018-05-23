@@ -1,7 +1,7 @@
 // ==UserScript==
 // @id             myingressmosaics@freddec
 // @name           MyIngressMosaics Scanning plugin
-// @version        1.0.11
+// @version        1.0.12
 // @include        https://*.ingress.com/intel*
 // @include        http://*.ingress.com/intel*
 // @match          https://*.ingress.com/intel*
@@ -29,23 +29,31 @@ head.innerHTML += '<style>' +
     '	to { transform: rotate(360deg); }' +
     '}' +
     '#header {display:none;}' +
-    '#geotools {right: -2px;}' +
+    '#geotools {top:-35px; right: -1px;}' +
+    '#geolatlng { position:absolute; top:-35px; left: 0px;}' +
+    '#geocode input[type="submit"], #geolatlng input[type="submit"] { font-size:13px; padding-bottom:3px; }' +
+    '#geolatlng input[type="submit"] { margin-left:-1px; }' +
     '#tm_button {display:none;}' +
+    '#address, #latlng { font-size:13px; padding-bottom:3px; width:300px; } ' +
     '#portal_filter_header {display:none;}' +
     '#game_stats {display:none;}' +
     '#tm_zoom {margin-top:10px; font-size:13px;}' +
     '#loading_data_circle {display:none; animation: rotating 2s linear infinite;}' +
     '#loading_msg_text {display:none;}' +
-    '#loading_msg {display:block!important;}' +
-    '#dashboard_container {top:50px!important;}' +
-    '#tm_start {padding: 0 5px; position: absolute; bottom: -45px; right: 0px;}' +
-    '#tm_stop {padding: 0 5px; position: absolute; bottom: -45px; right: 0px; display:none;}' +
+    '#loading_msg {display:block!important; line-height:15px; bottom:-30px; height:20px; }' +
+    '#loading_percent {display:none;}' +
+    '#dashboard_container {top:40px!important; right:350px!important; bottom:35px!important; left:8px!important; }' +
+    '#tm_start {padding: 0 5px; position: absolute; bottom: -30px; right: 0px;}' +
+    '#tm_stop {padding: 0 5px; position: absolute; bottom: -30px; right: 0px; display:none;}' +
     '#tm_view_container {display:none!important;}' +
     '#tm_header {display:none!important; width:310px;}' +
     '#tm_main {display:none!important; width:310px; height:calc(100% - 37px);}' +
     '.tm_list_element + .tm_list_element {border-top: 0; padding:5px 10px;}' +
     '.tm_mission_title {font-size:13px; width: 275px;}' +
-    '.bottom_right_tab_button {width:160px;}' +
+    '.bottom_right_tab_button { width:50px; font-size:12px; height:20px; }' +
+    '#dashboard_console { position: absolute; top:40px!important; right:8px!important; bottom:35px; width:333px; border: 1px solid #4a9299; padding-top:6px; padding-bottom:6px; overflow:auto; }' +
+    '.dashboard_console_item { padding:0px 8px; font-size:11px; }' +
+    '#dashboard_console_clearbtn { position:absolute; right:8px; bottom:6px; }' +
 '</style>';
 
 //--------------------------------------------------------------------------------------------------
@@ -54,15 +62,74 @@ head.innerHTML += '<style>' +
 document.getElementById('dashboard_container').innerHTML +=
     '<div id="tm_zoom"></div>' +
     '<div id="tm_start" class="unselectable bottom_right_tab_button" onclick="expertScanning();">' +
-    '       Start scanning' +
+    '       Start' +
     '</div>';
 
 document.getElementById('dashboard_container').innerHTML +=
     '<div id="tm_stop" class="unselectable bottom_right_tab_button" onclick="stopScanning();">' +
-    '       Stop scanning' +
+    '       Stop' +
     '</div>';
 
 document.getElementById('loading_msg_text').innerHTML = 'Scanning Data...';
+
+document.getElementById('dashboard').innerHTML +=
+    '<div id="dashboard_console"></div>' +
+    '<div id="dashboard_console_clearbtn" class="bottom_right_tab_button" onclick="clearConsole();">Clear</div>' +
+    '';
+
+document.getElementById('dashboard_container').innerHTML +=
+    '<div id="geolatlng">' +
+        '<form onsubmit="goto(); return false;">' +
+          '<input type="text" id="latlng" placeholder="enter lat,lng">' +
+          '<input type="submit" value="Go">' +
+        '</form>' +
+    '</div>' +
+    '';
+
+window.goto = function() {
+
+    var text = document.getElementById('latlng').value;
+    var items = text.split(',');
+
+    var lat = parseFloat(items[0]);
+    var lng = parseFloat(items[1]);
+    window.Map.setCenter(new google.maps.LatLng(lat, lng));
+}
+
+var consoleItemList = [];
+
+function addToConsole(text, registered) {
+
+    consoleItemList.push({'text':text, 'registered':registered});
+    consoleItemList.sort(function(a, b) {
+                          if (a.text > b.text) return -1;
+                          if (a.text < b.text) return 1;
+                          return 0;
+   })
+
+    document.getElementById('dashboard_console').innerHTML = '';
+
+    for (var item of consoleItemList) {
+
+        if (item.registered) {
+            document.getElementById('dashboard_console').innerHTML +=
+                '<div class="dashboard_console_item">' + item.text + '</div>' +
+                '';
+        }
+        else {
+            document.getElementById('dashboard_console').innerHTML +=
+                '<div class="dashboard_console_item" style="color:red;">' + item.text + '</div>' +
+                '';
+        }
+    }
+}
+
+window.clearConsole = function() {
+
+    consoleItemList = [];
+
+    document.getElementById('dashboard_console').innerHTML = '';
+}
 
 //--------------------------------------------------------------------------------------------------
 // Load jQuerys
@@ -216,6 +283,8 @@ function processNextLocation() {
 
     var location = locationsToBeProcessed.slice(0, 1);
 
+    console.clear();
+
     currentLocation = String(location);
     console.log('Location: ' + currentLocation);
 
@@ -224,7 +293,7 @@ function processNextLocation() {
         if (status === 'OK') {
 
             M.setCenter(results[0].geometry.location);
-            M.setZoom(14);
+            M.setZoom(13);
 
             window.startScanning();
         }
@@ -406,7 +475,6 @@ function processNextMission() {
     var mids = missionsToBeProcessed.slice(0, 12);
     for (var mid of mids) {
 
-        var mission_id = missionsToBeProcessed[0];
         if (missionsProcessed.indexOf(mid) == -1 || missionsInProcess.indexOf(mid) == -1) {
 
             missionsInProcess.push(mid);
@@ -419,48 +487,61 @@ function processNextMission() {
 
         callMIMAPI('ext_check', data, function(data, textStatus, jqXHR) {
 
-        for (var item of data.data) {
+            for (var item of data.data) {
 
-            missionsProcessed.push(item.mid);
-            missionsToBeProcessed.splice(0, 1);
+                missionsProcessed.push(item.mid);
 
-            if (item.status == 'notregistered') {
+                var index = missionsToBeProcessed.indexOf(item.mid);
+                missionsToBeProcessed.splice(index, 1);
 
-                data = { guid: mission_id };
-                callIngressAPI('getMissionDetails', data, function(data, textStatus, jqXHR) {
+                index = missionsInProcess.indexOf(item.mid);
+                missionsInProcess.splice(index, 1);
 
-                    if (!data.result) return;
+                if (item.status == 'notregistered') {
 
-                    var requestData = data.result;
-                    data.result.push(username);
-                    callMIMAPI('ext_register', data.result, function(data, textStatus, jqXHR) {
+                    data = { guid: item.mid };
+                    callIngressAPI('getMissionDetails', data, function(data, textStatus, jqXHR) {
 
-                        console.log('\t' + requestData[1]);
+                        if (!data.result) return;
+
+                        var requestData = data.result;
+                        data.result.push(username);
+                        callMIMAPI('ext_register', data.result, function(data, textStatus, jqXHR) {
+
+                            console.log('\r\nNEW\r\n' + requestData[1]);
+                            addToConsole(requestData[1], false);
+
+                            if (requestData[9][0][5]) {
+                                var marker = new google.maps.Marker({
+                                    position: {lat: requestData[9][0][5][2]/1000000.0, lng: requestData[9][0][5][3]/1000000.0},
+                                    map: M,
+                                    icon: mImageEnl,
+                                });
+                            }
+                        });
+
+                    }, function(jqXHR, textStatus, errorThrown) {
+
+                        setTimeout(processNextMission, 1000);
+                    });
+                }
+                else {
+
+                    if (item.status == 'registered' || item.status == 'hidden') {
+
+                        addToConsole(item.name, true);
 
                         var marker = new google.maps.Marker({
-                            position: {lat: requestData[9][0][5][2]/1000000.0, lng: requestData[9][0][5][3]/1000000.0},
+                            position: {lat: item.startLat, lng: item.startLng},
                             map: M,
-                            icon: mImageEnl,
+                            icon: mImageRes,
                         });
-                    });
-
-                }, function(jqXHR, textStatus, errorThrown) {
-
-                    setTimeout(processNextMission, 1000);
-                });
+                    }
+               }
             }
-            else {
 
-                var marker = new google.maps.Marker({
-                    position: {lat: item.startLat, lng: item.startLng},
-                    map: M,
-                    icon: mImageRes,
-                });
-            }
-        }
-
-        processNextMission();
-    });
+            processNextMission();
+        });
     }
 }
 
@@ -598,7 +679,6 @@ function init() {
         $('#tm_stop').show();
 
         $('#loading_msg_text').show();
-        $('#loading_data_circle').show();
 
         processNextTiles();
     };
@@ -626,8 +706,7 @@ function init() {
         $('#tm_stop').hide();
 
         $('#loading_msg_text').hide();
-        $('#loading_data_circle').hide();
-    };
+     };
 
     window.expertScanning = function() {
 
