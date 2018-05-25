@@ -1072,117 +1072,54 @@ def adm_compare(request):
 	imcountry_results = IMCountry.objects.all().order_by('-count')
 	for imcountry_obj in imcountry_results:
 		
-		imcountry_data_date = imcountry_obj.update_date
-		if imcountry_data_date: imcountry_data_date = imcountry_data_date.strftime('%m.%d.%Y')
-		
 		imcountry_data = {
 			
 			'id':imcountry_obj.pk,
 			'name':imcountry_obj.name,
-			'count':imcountry_obj.count,
-			'update_date':imcountry_data_date,
 			
-			'compare_count':0,
-
-			'diff':0,
-
 			'regions':[],
 		}
 		
-		imcountry_data['compare_count'] = IMMosaic.objects.filter(country_name=imcountry_obj.name).count()
-		imcountry_data['diff'] = imcountry_data['compare_count'] - imcountry_data['count']
-
 		imregion_results = imcountry_obj.regions.all().order_by('-count')
 		for imregion_obj in imregion_results:
-			
-			imregion_data_date = imregion_obj.update_date
-			if imregion_data_date: imregion_data_date = imregion_data_date.strftime('%m.%d.%Y')
 			
 			imregion_data = {
 				
 				'id':imregion_obj.pk,
 				'name':imregion_obj.name,
-				'count':imregion_obj.count,
-				'update_date':imregion_data_date,
 				
-				'compare_count':0,
-
-				'diff':0,
-
-				'extras':[],
-				'mosaics':[],
 				'cities':[],
 			}
 			
-			imregion_data['compare_count'] = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name).count()
-			imregion_data['diff'] = imregion_data['compare_count'] - imregion_data['count']
-
-			immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name, dead=False, excluded=False, registered=False).order_by('-count', 'name')
-			for immosaic_obj in immosaic_results:
+			imcity_results = imregion_obj.cities.all().order_by('-count')
+			for imcity_obj in imcity_results:
 				
-				if not immosaic_obj.processed:
-				
-					immosaic_obj.processed = True
-					immosaic_obj.save()
+				imcity_data = {
 					
-					mosaic_results = Mosaic.objects.filter(title__iexact=immosaic_obj.name)
-					if mosaic_results.count() > 0:
-						
-						mosaic_obj = mosaic_results[0]
-						if mosaic_obj.city.region.country.name == immosaic_obj.country_name:
-							
-							immosaic_obj.registered=True
-							immosaic_obj.save()
+					'id':imcity_obj.pk,
+					'name':imcity_obj.name,
 					
-				if immosaic_obj.registered != True:
-					
-					immosaic_data_date = immosaic_obj.update_date
-					if immosaic_data_date: immosaic_data_date = immosaic_data_date.strftime('%m.%d.%Y')
+					'mosaics':[],
+				}
+			
+				immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name, city_name=imcity_obj.name, dead=False, excluded=False, registered=False).order_by('-count', 'name')
+				for immosaic_obj in immosaic_results:
 					
 					immosaic_data = {
 						
 						'id':immosaic_obj.pk,
 						'name':immosaic_obj.name,
 						'count':immosaic_obj.count,
-						'update_date':immosaic_data_date,
-						
+
 						'registered':immosaic_obj.registered,
 						'excluded':immosaic_obj.excluded,
 						'dead':immosaic_obj.dead,
 					}
 					
-					imregion_data['mosaics'].append(immosaic_data)
+					imcity_data['mosaics'].append(immosaic_data)
 					
-					city_data = {
-						
-						'name':immosaic_obj.city_name,
-						'region_name':immosaic_obj.region_name,
-						'country_name':immosaic_obj.country_name,
-					}
+				imregion_data['cities'].append(imcity_data)
 				
-					imregion_data['cities'].append(city_data)
-					
-			imregion_data['cities'] = [dict(t) for t in set([tuple(d.items()) for d in imregion_data['cities']])]
-
-			if imregion_obj.update_date and imregion_data['diff'] > 0:
-				
-				immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name, update_date__isnull=False).filter(Q(dead=True) | Q(excluded=True) | Q(registered=True)).order_by('name')
-				for immosaic_obj in immosaic_results:
-					
-					immosaic_data_date = immosaic_obj.update_date
-					if immosaic_data_date: immosaic_data_date = immosaic_data_date.strftime('%m.%d.%Y')
-					
-					if immosaic_data_date != imregion_data_date:
-						
-						immosaic_data = {
-							
-							'id':immosaic_obj.pk,
-							'name':immosaic_obj.name,
-							'update_date':immosaic_data_date,
-						}
-						
-						imregion_data['extras'].append(immosaic_data)
-
 			imcountry_data['regions'].append(imregion_data)
 		
 		data['countries'].append(imcountry_data)
