@@ -32,40 +32,26 @@
 					
 					<div class="flex align-center text-small bg-block mb-small">
 						
-						{% if country.regions.length > 0 %}
-						<div class="item" >
-							<a ng-show="!country_{{country.id}}.open" ng-click="country_{{country.id}}.open=true;"><i class="fa fa-plus-square text-small"></i></a>
-							<a ng-show="country_{{country.id}}.open" ng-click="country_{{country.id}}.open=false;"><i class="fa fa-minus-square text-small"></i></a>
-						</div>
-						{% endif %}
-
 						<div class="item grow">
 							<span class="color-light">{{country.name}}</span>
 						</div>
 
 					</div>
 					
-					<div ng-show="country_{{country.id}}.open" style="margin-left:20px;">
+					<div style="margin-left:20px;">
 						
 						{% for region in country.regions %}
 						<div class="width-12">
 							
 							<div class="flex align-center text-small bg-block mb-small">
 						
-								{% if region.cities.length > 0 %}
-								<div class="item">
-									<a ng-show="!region_{{region.id}}.open" ng-click="region_{{region.id}}.open=true;"><i class="fa fa-plus-square text-small"></i></a>
-									<a ng-show="region_{{region.id}}.open" ng-click="region_{{region.id}}.open=false;"><i class="fa fa-minus-square text-small"></i></a>
-								</div>
-								{% endif %}
-								
 								<div class="item grow">
 									<span class="color-light">{{region.name}}</span>
 								</div>
 								
 							</div>
 					
-							<div ng-show="region_{{region.id}}.open" style="margin-left:20px;">
+							<div style="margin-left:20px;">
 								
 								{% for city in region.cities %}
 								<div class="width-12">
