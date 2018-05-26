@@ -1114,18 +1114,18 @@ def adm_compare(request):
 						
 					else:
 					'''	
-						immosaic_data = {
-							
-							'id':immosaic_obj.pk,
-							'name':immosaic_obj.name,
-							'count':immosaic_obj.count,
-	
-							'registered':immosaic_obj.registered,
-							'excluded':immosaic_obj.excluded,
-							'dead':immosaic_obj.dead,
-						}
+					immosaic_data = {
 						
-						imcity_data['mosaics'].append(immosaic_data)
+						'id':immosaic_obj.pk,
+						'name':immosaic_obj.name,
+						'count':immosaic_obj.count,
+
+						'registered':immosaic_obj.registered,
+						'excluded':immosaic_obj.excluded,
+						'dead':immosaic_obj.dead,
+					}
+					
+					imcity_data['mosaics'].append(immosaic_data)
 					
 				if len(imcity_data['mosaics']):
 					imregion_data['cities'].append(imcity_data)
