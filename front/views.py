@@ -608,7 +608,7 @@ def city(request, country_name, region_name, city_name):
 	
 	# City data
 	
-	city_obj = City.objects.filter(name=city_name).filter(Q(region__name=region_name) | Q(region__locale=region_name)).filter(Q(region__country__name=country_name) | Q(region__country__locale=country_name))
+	city_obj = City.objects.filter(name__iexact=city_name).filter(Q(region__name__iexact=region_name) | Q(region__locale__iexact=region_name)).filter(Q(region__country__name__iexact=country_name) | Q(region__country__locale__iexact=country_name))
 	city_obj = city_obj[0]
 	
 	data['city'] = {
