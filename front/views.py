@@ -1127,11 +1127,14 @@ def adm_compare(request):
 					
 					imcity_data['mosaics'].append(immosaic_data)
 					
-				imregion_data['cities'].append(imcity_data)
+				if len(imcity_data['mosaics']):
+					imregion_data['cities'].append(imcity_data)
 				
-			imcountry_data['regions'].append(imregion_data)
+			if len(imregion_data['cities']):
+				imcountry_data['regions'].append(imregion_data)
 		
-		data['countries'].append(imcountry_data)
+		if len(imcountry_data['regions']):
+			data['countries'].append(imcountry_data)
 	
 	return render(request, 'adm_compare.html', data)
 

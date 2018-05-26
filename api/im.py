@@ -165,7 +165,7 @@ def im_mosaic(request):
 	mosaic_name = request.data['mosaic_name']
 	mission_count = int(request.data['mission_count'])
 	
-	results = IMMosaic.objects.filter(country_name=country_name, region_name=region_name, city_name=city_name, name=mosaic_name)
+	results = IMMosaic.objects.filter(city=city_obj, name=mosaic_name)
 	if results.count() < 1:
 	
 		mosaic_obj = IMMosaic(country_name=country_name, region_name=region_name, city_name=city_name, name=mosaic_name, count=mission_count)
