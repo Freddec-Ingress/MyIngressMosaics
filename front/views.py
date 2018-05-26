@@ -733,7 +733,7 @@ def region(request, country_name, region_name):
 
 	# Cities data
 	
-	for city_obj in region_obj.cities.all():
+	for city_obj in region_obj.cities.all().order_by('name'):
 	
 		city_data = {
 			

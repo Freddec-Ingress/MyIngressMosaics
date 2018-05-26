@@ -43,6 +43,9 @@ angular.module('FrontModule.controllers').controller('RegionPageCtrl', function(
 
 		$scope.mosaics.sort(function(a, b) {
 			
+			if (a.city_name > b.city_name) return 1;
+			if (a.city_name < b.city_name) return -1;
+			
 			if (a.mission_count > b.mission_count) return -1;
 			if (a.mission_count < b.mission_count) return 1;
 			
