@@ -133,7 +133,7 @@ def im_mosaic(request):
 	country_name = request.data['country_name']
 	
 	results = IMCountry.objects.filter(name=country_name)
-	if results.count() < 1:
+	if results.count() > 0:
 		
 		country_obj = results[0]
 		
