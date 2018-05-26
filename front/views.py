@@ -1102,7 +1102,7 @@ def adm_compare(request):
 					'mosaics':[],
 				}
 			
-				immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name, city_name=imcity_obj.name).exclude(registered=True).exclude(excluded=True).exclude(dead=True).order_by('-count', 'name')
+				immosaic_results = imcity_obj.mosaics.all().exclude(registered=True).exclude(excluded=True).exclude(dead=True).order_by('-count', 'name')
 				for immosaic_obj in immosaic_results:
 					
 					'''
