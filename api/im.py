@@ -132,6 +132,36 @@ def im_mosaic(request):
 	region_name = request.data['region_name']
 	country_name = request.data['country_name']
 	
+	results = IMCountry.objects.filter(name=country_name)
+	if results.count() < 1:
+		
+		country_obj = results[0]
+		
+	else:
+		
+		country_obj = IMCountry(name=country_name, count=0)
+		country_obj.save()
+		
+	results = IMRegion.objects.filter(country=country_obj, name=region_name)
+	if results.count() > 0:
+	
+		region_obj = results[0]
+
+	else:
+		
+		region_obj = IMRegion(country=country_obj, name=region_name, count=0)
+		region_obj.save()
+			
+	results = IMCity.objects.filter(region=region_obj, name=city_name)
+	if results.count() > 0:
+	
+		city_obj = results[0]
+
+	else:
+		
+		city_obj = IMCity(region=region_obj, name=city_name, count=0)
+		city_obj.save()
+				
 	mosaic_name = request.data['mosaic_name']
 	mission_count = int(request.data['mission_count'])
 	
@@ -139,15 +169,8 @@ def im_mosaic(request):
 	if results.count() < 1:
 	
 		mosaic_obj = IMMosaic(country_name=country_name, region_name=region_name, city_name=city_name, name=mosaic_name, count=mission_count)
-		mosaic_obj.update_date = datetime.now()
 		mosaic_obj.save()
-		
-	else:
-		
-		mosaic_obj = results[0]
-		mosaic_obj.update_date = datetime.now()
-		mosaic_obj.save()
-			
+
 	return Response(None, status=status.HTTP_200_OK)
 
 
