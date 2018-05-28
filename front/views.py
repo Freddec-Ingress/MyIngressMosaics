@@ -959,37 +959,31 @@ def creator(request, creator_name):
 #---------------------------------------------------------------------------------------------------
 def adm_im(request):
 	
-	data = {
-		
-		'countries':[],
-	}
+	data = { 'mosaics':[], }
 	
-	imcountry_results = IMCountry.objects.all().order_by('-count')
-	for imcountry_obj in imcountry_results:
+	immosaic_results = IMMosaic.objects.all().exclude(registered=True).exclude(excluded=True).exclude(dead=True).order_by('country_name', 'region_name', 'city_name', '-count', 'name')
+	for immosaic_obj in immosaic_results:
 		
-		imcountry_data = {
+		mosaic_results = Mosaic.objects.filter(Q(city__region__country__name__iexact=immosaic_obj.country_name) | Q(city__region__country__locale__iexact=immosaic_obj.country_name)).filter(Q(city__region__name__iexact=immosaic_obj.region_name) | Q(city__region__locale__iexact=immosaic_obj.region_name)).filter(Q(city__name__iexact=immosaic_obj.city_name) | Q(city__locale__iexact=immosaic_obj.city_name)).filter(title__iexact=immosaic_obj.name)
+		if mosaic_results.count() > 0:
 			
-			'id':imcountry_obj.pk,
-			'name':imcountry_obj.name,
+			immosaic_obj.registered = True
+			immosaic_obj.save()
 			
-			'cities':[],
-		}
-		
-		immosaic_results = IMMosaic.objects.all().exclude(registered=True).exclude(excluded=True).exclude(dead=True).order_by('country_name', 'region_name', 'city_name', '-count', 'name')
-		for immosaic_obj in immosaic_results:
+		else:
 			
-			city_data = {
+			immosaic_data = {
 				
-				'name':immosaic_obj.city_name,
+				'id':immosaic_obj.pk,
+				'name':immosaic_obj.name,
+				'count':immosaic_obj.count,
+
+				'city_name':immosaic_obj.city_name,
 				'region_name':immosaic_obj.region_name,
 				'country_name':immosaic_obj.country_name,
 			}
-		
-			imcountry_data['cities'].append(city_data)
 			
-		imcountry_data['cities'] = [dict(t) for t in set([tuple(d.items()) for d in imcountry_data['cities']])]
-		if len(imcountry_data['cities']) > 0:
-			data['countries'].append(imcountry_data)
+			data['mosaics'].append(immosaic_data)
 		
 	return render(request, 'adm_im.html', data)
 
