@@ -1069,6 +1069,7 @@ def adm_compare(request):
 		'countries':[],
 	}
 	
+	'''
 	imcountry_results = IMCountry.objects.all().order_by('-count')[:1]
 	for imcountry_obj in imcountry_results:
 		
@@ -1133,7 +1134,7 @@ def adm_compare(request):
 		
 		if len(imcountry_data['regions']):
 			data['countries'].append(imcountry_data)
-	
+	'''
 	return render(request, 'adm_compare.html', data)
 
 
