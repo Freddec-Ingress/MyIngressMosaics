@@ -1070,7 +1070,7 @@ def adm_compare(request):
 	}
 	
 	
-	imcountry_results = IMCountry.objects.all().order_by('-count')[:1]
+	imcountry_results = IMCountry.objects.all().order_by('-count')
 	for imcountry_obj in imcountry_results:
 		
 		imcountry_data = {
