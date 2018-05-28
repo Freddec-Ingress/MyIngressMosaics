@@ -31,7 +31,7 @@
 				{% for mosaic in mosaics %}
 				<div class="flex-col" ng-model="mosaic_{{mosaic.id}}" ng-init="mosaic_{{mosaic.id}}={{mosaic|jsonify}};">
 
-					<div class="flex" style="border-bottom:1px solid #000;">
+					<div class="flex text-small" style="border-bottom:1px solid #000;">
 						
 						<div class="item">
 							<span class="color-dark">{{mosaic.count}}</span>

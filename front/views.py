@@ -1154,6 +1154,10 @@ def adm_compare(request):
 				'name':immosaic_obj.name,
 				'count':immosaic_obj.count,
 
+				'city_name':immosaic_obj.city_name,
+				'region_name':immosaic_obj.region_name,
+				'country_name':immosaic_obj.country_name,
+				
 				'registered':immosaic_obj.registered,
 				'excluded':immosaic_obj.excluded,
 				'dead':immosaic_obj.dead,
