@@ -1069,7 +1069,7 @@ def adm_compare(request):
 		'countries':[],
 	}
 	
-	'''
+	
 	imcountry_results = IMCountry.objects.all().order_by('-count')[:1]
 	for imcountry_obj in imcountry_results:
 		
@@ -1080,7 +1080,7 @@ def adm_compare(request):
 			
 			'regions':[],
 		}
-		
+		'''
 		imregion_results = imcountry_obj.regions.all().order_by('-count')
 		for imregion_obj in imregion_results:
 			
@@ -1131,7 +1131,7 @@ def adm_compare(request):
 				
 			if len(imregion_data['cities']):
 				imcountry_data['regions'].append(imregion_data)
-		
+			
 		if len(imcountry_data['regions']):
 			data['countries'].append(imcountry_data)
 	'''
