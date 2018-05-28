@@ -975,7 +975,7 @@ def adm_im(request):
 			'cities':[],
 		}
 		
-		immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, dead=False, excluded=False, registered=False)
+		immosaic_results = IMMosaic.objects.all().exclude(registered=True).exclude(excluded=True).exclude(dead=True).order_by('country_name', 'region_name', 'city_name', '-count', 'name')
 		for immosaic_obj in immosaic_results:
 			
 			city_data = {
