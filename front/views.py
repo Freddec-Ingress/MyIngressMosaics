@@ -1102,7 +1102,7 @@ def adm_compare(request):
 					'mosaics':[],
 				}
 			
-				immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name, city_name=imcity_obj.name).exclude(registered=True).exclude(excluded=True).exclude(dead=True).order_by('-count', 'name')
+				immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name, city_name=imcity_obj.name).exclude(registered=True).exclude(excluded=True).exclude(dead=True).order_by('-count', 'name')[:10]
 				for immosaic_obj in immosaic_results:
 					
 					mosaic_results = Mosaic.objects.filter(Q(city__region__country__name__iexact=imcountry_obj.name) | Q(city__region__country__locale__iexact=imcountry_obj.name)).filter(Q(city__region__name__iexact=imregion_obj.name) | Q(city__region__locale__iexact=imregion_obj.name)).filter(Q(city__name__iexact=imcity_obj.name) | Q(city__locale__iexact=imcity_obj.name)).filter(title__iexact=immosaic_obj.name)
