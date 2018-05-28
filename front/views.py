@@ -1064,79 +1064,8 @@ def adm_region(request):
 #---------------------------------------------------------------------------------------------------
 def adm_compare(request):
 	
-	data = {
-		
-		'mosaics':[],
-	}
+	data = { 'mosaics':[], }
 	
-	'''
-	imcountry_results = IMCountry.objects.all().order_by('-count')[:1]
-	for imcountry_obj in imcountry_results:
-		
-		imcountry_data = {
-			
-			'id':imcountry_obj.pk,
-			'name':imcountry_obj.name,
-			
-			'regions':[],
-		}
-		
-		imregion_results = imcountry_obj.regions.all().order_by('-count')
-		for imregion_obj in imregion_results:
-			
-			imregion_data = {
-				
-				'id':imregion_obj.pk,
-				'name':imregion_obj.name,
-				
-				'cities':[],
-			}
-			
-			imcity_results = imregion_obj.cities.all().order_by('-count')
-			for imcity_obj in imcity_results:
-				
-				imcity_data = {
-					
-					'id':imcity_obj.pk,
-					'name':imcity_obj.name,
-					
-					'mosaics':[],
-				}
-			
-				
-				immosaic_results = IMMosaic.objects.filter(country_name=imcountry_obj.name, region_name=imregion_obj.name, city_name=imcity_obj.name).exclude(registered=True).exclude(excluded=True).exclude(dead=True).order_by('-count', 'name')
-				for immosaic_obj in immosaic_results:
-					
-					mosaic_results = Mosaic.objects.filter(Q(city__region__country__name__iexact=imcountry_obj.name) | Q(city__region__country__locale__iexact=imcountry_obj.name)).filter(Q(city__region__name__iexact=imregion_obj.name) | Q(city__region__locale__iexact=imregion_obj.name)).filter(Q(city__name__iexact=imcity_obj.name) | Q(city__locale__iexact=imcity_obj.name)).filter(title__iexact=immosaic_obj.name)
-					if mosaic_results.count() > 0:
-						
-						immosaic_obj.registered = True
-						immosaic_obj.save()
-						
-					else:
-						immosaic_data = {
-							
-							'id':immosaic_obj.pk,
-							'name':immosaic_obj.name,
-							'count':immosaic_obj.count,
-	
-							'registered':immosaic_obj.registered,
-							'excluded':immosaic_obj.excluded,
-							'dead':immosaic_obj.dead,
-						}
-						
-						imcity_data['mosaics'].append(immosaic_data)
-					
-				if len(imcity_data['mosaics']):
-					imregion_data['cities'].append(imcity_data)
-				
-			if len(imregion_data['cities']):
-				imcountry_data['regions'].append(imregion_data)
-			
-		if len(imcountry_data['regions']):
-			data['countries'].append(imcountry_data)
-		'''
-		
 	immosaic_results = IMMosaic.objects.all().exclude(registered=True).exclude(excluded=True).exclude(dead=True).order_by('country_name', 'region_name', 'city_name', '-count', 'name')
 	for immosaic_obj in immosaic_results:
 		

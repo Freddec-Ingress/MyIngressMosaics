@@ -44,14 +44,6 @@
 						<div class="item grow">
 							<span class="color-dark">{{mosaic.city_name}}, {{mosaic.region_name}}, {{mosaic.country_name}}</span>
 						</div>
-
-						<div class="item" ng-show="!mosaic_{{mosaic.id}}.dead && !mosaic_{{mosaic.id}}.excluded && !mosaic_{{mosaic.id}}.registered">
-							<a href="/search/{{mosaic.name}}" target="blank"><i class="fa fa-search"></i></a>
-						</div>
-
-						<div class="item" ng-show="!mosaic_{{mosaic.id}}.dead && !mosaic_{{mosaic.id}}.excluded && !mosaic_{{mosaic.id}}.registered">
-							<a href="/adm/potential/{{mosaic.name}}" target="blank"><i class="fa fa-plus-square"></i></a>
-						</div>
 						
 						<div class="item" ng-show="!mosaic_{{mosaic.id}}.dead && !mosaic_{{mosaic.id}}.excluded && !mosaic_{{mosaic.id}}.registered">
 							<a ng-click="die(mosaic_{{mosaic.id}});">die</i></a>
