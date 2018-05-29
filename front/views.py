@@ -964,26 +964,18 @@ def adm_im(request):
 	immosaic_results = IMMosaic.objects.all().exclude(registered=True).exclude(excluded=True).exclude(dead=True).order_by('country_name', 'region_name', 'city_name', '-count', 'name')
 	for immosaic_obj in immosaic_results:
 		
-		mosaic_results = Mosaic.objects.filter(Q(city__region__country__name__iexact=immosaic_obj.country_name) | Q(city__region__country__locale__iexact=immosaic_obj.country_name)).filter(Q(city__region__name__iexact=immosaic_obj.region_name) | Q(city__region__locale__iexact=immosaic_obj.region_name)).filter(Q(city__name__iexact=immosaic_obj.city_name) | Q(city__locale__iexact=immosaic_obj.city_name)).filter(title__iexact=immosaic_obj.name)
-		if mosaic_results.count() > 0:
+		immosaic_data = {
 			
-			immosaic_obj.registered = True
-			immosaic_obj.save()
-			
-		else:
-			
-			immosaic_data = {
-				
-				'id':immosaic_obj.pk,
-				'name':immosaic_obj.name,
-				'count':immosaic_obj.count,
+			'id':immosaic_obj.pk,
+			'name':immosaic_obj.name,
+			'count':immosaic_obj.count,
 
-				'city_name':immosaic_obj.city_name,
-				'region_name':immosaic_obj.region_name,
-				'country_name':immosaic_obj.country_name,
-			}
-			
-			data['mosaics'].append(immosaic_data)
+			'city_name':immosaic_obj.city_name,
+			'region_name':immosaic_obj.region_name,
+			'country_name':immosaic_obj.country_name,
+		}
+		
+		data['mosaics'].append(immosaic_data)
 		
 	return render(request, 'adm_im.html', data)
 
