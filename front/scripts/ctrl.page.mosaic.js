@@ -100,36 +100,38 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 	
 	$scope.saveComment = function(user, comment) {
 		
-			if (!comment.text) return;
+		if (!comment.text) return;
+		
+		if (!comment.id) {
 			
-			if (!comment.id) {
-				
-				var data = {'ref':$scope.mosaic.ref, 'text':comment.text}
-				API.sendRequest('/api/comment/create/', 'POST', {}, data).then(function(response) {
-				
-					if (!$scope.mosaic.comments)  $scope.mosaic.comments = [];
-				
-					$scope.mosaic.comments.unshift(response);
-					$scope.closeCommentEdit();
-				});
-			}
-			else {
-				
-				var data = {'id':comment.id, 'text':comment.text}
-				API.sendRequest('/api/comment/update/', 'POST', {}, data).then(function(response) {
-				
-					$scope.closeCommentEdit();
-				});
-			}
+			var data = {'ref':$scope.mosaic.ref, 'text':comment.text}
+			API.sendRequest('/api/comment/create/', 'POST', {}, data).then(function(response) {
+			
+				if (!$scope.mosaic.comments)  $scope.mosaic.comments = [];
+			
+				$scope.mosaic.comments.push(response);
+				$scope.closeCommentEdit();
+			});
+		}
+		else {
+			
+			var data = {'id':comment.id, 'text':comment.text}
+			API.sendRequest('/api/comment/update/', 'POST', {}, data).then(function(response) {
+			
+				$scope.closeCommentEdit();
+			});
+		}
 	}
 	
 	$scope.deleteComment = function(user, index, comment) {
 		
-			var data = {'id':comment.id}
-			API.sendRequest('/api/comment/delete/', 'POST', {}, data).then(function(response) {
-				
-				$scope.mosaic.comments.splice(index, 1);
-			});
+		$scope.mosaic.comments.splice(index, 1);
+			
+		var data = {'id':comment.id}
+		API.sendRequest('/api/comment/delete/', 'POST', {}, data).then(function(response) {
+			
+			$scope.mosaic.comments.splice(index, 1);
+		});
 	}
 
 	/* Mosaic management */
