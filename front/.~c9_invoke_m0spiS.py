@@ -412,17 +412,17 @@ def export(request, ref):
 						lat = portal[5][2] / 1000000.0
 						lng = portal[5][3] / 1000000.0
 
-					if portal_data['title'] == 'Unavailable':
-							actions += 'Unavailable'
+					if portal[2] == 'Unavailable':
+							actions += 'Unavailable\n\r'
 					else:
 						if portal[4]:
-							actions += portal[4]
+							actions += portal[4] + '\n\r'
 
 					if lat and lng:
 						coordinates.append((lng, lat))
 						
-		linestring.extendeddata.newdata('actions', actions)
 		linestring.extendeddata.newdata('mosaic link', 'https://www.myingressmosaics.com/mosaic/' + mosaic_obj.ref)
+		linestring.extendeddata.newdata('actions', actions)
 		
 		linestring.coords = coordinates
 		
