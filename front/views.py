@@ -287,6 +287,7 @@ def mosaic(request, ref):
 
 		comment_data = {
 			
+			'id':comment_obj.id,
 			'text':comment_obj.text,
 
 			'user_name':comment_obj.user.username,

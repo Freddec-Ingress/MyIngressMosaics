@@ -20,7 +20,13 @@ def comment_create(request):
 	comment_obj = Comment(user=request.user, mosaic=mosaic_obj, text=request.data['text'])
 	comment_obj.save()
 
-	return Response(None, status=status.HTTP_200_OK)
+	response_data = {
+		'id':comment_obj.id,
+		'text':comment_obj.text,
+		'user_name':comment_obj.user.username,
+		'user_faction':comment_obj.user.profile.faction,
+	}
+	return Response(response_data, status=status.HTTP_200_OK)
 
 
 
