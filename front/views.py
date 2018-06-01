@@ -374,7 +374,20 @@ def manage(request, ref):
 #---------------------------------------------------------------------------------------------------
 def export(request, ref):
 	
+	mosaic_obj = Mosaic.objects.get(ref=ref)
+	
 	text = ''
+	text += '<?xml version="1.0" encoding="UTF-8"?>'
+	text += '<kml xmlns="http://www.opengis.net/kml/2.2">'
+	text += '	<Document>'
+	text += '		<Folder>'
+	text += '			<name>MIM Mosaics</name>'
+	text += '			<Placemark>'
+	text += '				<name>' + mosaic_obj.title + '</name>'
+	text += '			</Placemark>'
+	text += '		</Folder>'
+	text += '	</Document>'
+	text += '</kml>'
 	
 	response = HttpResponse(text, content_type = 'text/plain')
 	return response
