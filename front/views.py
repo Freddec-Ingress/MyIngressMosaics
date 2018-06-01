@@ -384,7 +384,7 @@ def export(request, ref):
 	for mission_obj in mosaic_obj.missions.all().order_by('order'):
 
 		linestring = folder.newlinestring(name=mission_obj.title)
-		linestring.description = mission_obj.desc
+		linestring.description = '<![CDATA[<img src="' + mission_obj.image + '" height="50" width="auto" /><br><br>' + mission_obj.desc + ']]>'
 		linestring.extendeddata.newdata('image', mission_obj.image)
 		linestring.tessellate = 1
 		
