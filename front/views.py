@@ -415,8 +415,14 @@ def export(request, ref):
 					if portal[2] == 'Unavailable':
 							actions += 'Unavailable\n\r'
 					else:
-						if portal[4]:
-							actions += portal[4] + '\n\r'
+						if portal[4] == 1:
+							actions += 'Hack\n\r'
+						if portal[4] == 2:
+							actions += 'Capture\n\r'
+						if portal[4] == 7:
+							actions += 'View\n\r'
+						if portal[4] == 8:
+							actions += 'Passphrase\n\r'
 
 					if lat and lng:
 						coordinates.append((lng, lat))
