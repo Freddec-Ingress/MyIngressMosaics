@@ -379,9 +379,15 @@ def export(request, ref):
 	
 	kml = simplekml.Kml()
 	
+	folder = kml.newfolder(name=mosaic_obj.title)
+	
 	for mission_obj in mosaic_obj.missions.all().order_by('order'):
 
-		linestring = kml.newlinestring(name=mission_obj.title)
+		linestring = folder.newlinestring(name=mission_obj.title)
+		linestring.description = mission_obj.desc
+		linestring.extendeddata.newdata('image', mission_obj.image)
+		linestring.tessellate = 1
+		
 		coordinates = []
 	
 		jsondata = json.loads(mission_obj.data)
