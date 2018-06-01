@@ -385,8 +385,8 @@ def export(request, ref):
 
 		linestring = folder.newlinestring(name=mission_obj.title)
 		
-		lin.style.linestyle.color = 'ffd18802'
-		lin.style.linestyle.width= 7.5
+		linestring.style.linestyle.color = 'ffd18802'
+		linestring.style.linestyle.width= 7.5
 		
 		linestring.description = '<![CDATA[<img src="' + mission_obj.image + '" height="50" width="auto" />]]>'
 		linestring.extendeddata.newdata('description', mission_obj.desc)
