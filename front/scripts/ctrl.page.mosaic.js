@@ -107,6 +107,8 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 				var data = {'ref':$scope.mosaic.ref, 'text':comment.text}
 				API.sendRequest('/api/comment/add/', 'POST', {}, data).then(function(response) {
 				
+					if (!$scope.mosaic.comments)  $scope.mosaic.comments = [];
+				
 					$scope.mosaic.comments.unshift(response);
 					$scope.closeCommentEdit();
 				});

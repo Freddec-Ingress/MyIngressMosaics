@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
+{% load humanize %}
 
 {% block extra-head %}
 	
@@ -42,7 +43,7 @@
 					</div>
 					
 					<div class="flex-col">
-						<span class="color-normal mb-small">{{country.mosaic_count}} {% trans "mosaics" %}</span>
+						<span class="color-normal mb-small">{{country.mosaic_count|intcomma}} {% trans "mosaics" %}</span>
 						<a class="color-link hidden" ng-show="!country.notified" ng-click="notify();">{% trans "To be notified about new mosaics" %}</a>
 						<a class="color-normal hidden" ng-show="country.notified" ng-click="unnotify();">{% trans "Notified" %}</a>
 					</div>
