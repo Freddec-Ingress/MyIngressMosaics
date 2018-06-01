@@ -382,7 +382,7 @@ def export(request, ref):
 	for mission_obj in mosaic_obj.missions.all().order_by('order'):
 
 		linestring = kml.newlinestring(name=mission_obj.title)
-		linestring.coords = []
+		coordinates = []
 	
 		jsondata = json.loads(mission_obj.data)
 		
@@ -403,7 +403,9 @@ def export(request, ref):
 						lng = portal[5][3] / 1000000.0
 
 					if lat and lng:
-						linestring.coords.append((lat, lng))
+						coordinates.append((lat, lng))
+						
+		linestring.coords = coordinates
 		
 	response = HttpResponse(kml.kml())
 	response['Content-Disposition'] = 'attachment; filename="mim_roadmap.kml"'
