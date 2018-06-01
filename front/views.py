@@ -382,17 +382,23 @@ def export(request, ref):
 	
 	folder = kml.newfolder(name=mosaic_obj.title)
 	
-	sharedstyle = Style()
-	sharedstyle.linestyle.color = 'ffd18802'
-	sharedstyle.linestyle.width = 10
+	normalstyle = Style()
+	normalstyle.linestyle.color = 'ffd18802'
+	normalstyle.linestyle.width = 7.5
 
+	highlightstyle = Style()
+	highlightstyle.linestyle.color = 'ffd18802'
+	highlightstyle.linestyle.width = 10
+	
+	stylemap = StyleMap(normalstyle, highlightstyle)
+	
 	for mission_obj in mosaic_obj.missions.all().order_by('order'):
 
 		linestring = folder.newlinestring(name=mission_obj.title)
 		
-		linestring.style = sharedstyle
+		linestring.stylemap = stylemap
 		
-		linestring.description = '<![CDATA[<img src="' + mission_obj.image + '" height="50" width="auto" /><br>' + mission_obj.desc + ']]>'
+		linestring.description = '<![CDATA[<img src="' + mission_obj.image + '" height="50" width="auto" />' + mission_obj.desc + ']]>'
 
 		actions = ''
 		coordinates = []
@@ -400,7 +406,10 @@ def export(request, ref):
 		jsondata = json.loads(mission_obj.data)
 		
 		if len(jsondata) > 9:
+			index = 0
 			for portal in jsondata[9]:
+			
+				index += 1
 			
 				lat = 0.0
 				lng = 0.0
@@ -415,6 +424,7 @@ def export(request, ref):
 						lat = portal[5][2] / 1000000.0
 						lng = portal[5][3] / 1000000.0
 
+					actions += str(index) + '.'
 					if portal[2] == 'Unavailable':
 							actions += 'Unavailable   '
 					else:
