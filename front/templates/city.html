@@ -43,28 +43,32 @@
 
 					<div class="flex-col">
 						<span class="color-normal mb-small">{{mosaic_count}} {% trans "mosaics" %}</span>
-						<a class="color-link" ng-show="!city.notified" ng-click="notify();">{% trans "To be notified about new mosaics" %}</a>
-						<a class="color-normal" ng-show="city.notified" ng-click="unnotify();">{% trans "Notified" %}</a>
+						<div><a class="color-link" ng-show="!city.notified" ng-click="notify();">{% trans "To be notified about new mosaics" %}</a></div>
+						<div><a class="color-normal" ng-show="city.notified" ng-click="unnotify();">{% trans "Notified" %}</a></div>
 					</div>
 	
 					<div class="mt-small flex-col hidden" ng-show="need_signin">
 						<span class="color-danger">{% trans "You must be signed in to be notified." %}</span>
-						<a ng-click="signin('google', '/world/{{city.country_name}}/{{city.region_name}}/{{city.name}}');">{% trans "Sign in" %}</a>
+						<div><a ng-click="signin('google', '/world/{{city.country_name}}/{{city.region_name}}/{{city.name}}');">{% trans "Sign in" %}</a></div>
 					</div>
 
 					<div class="flex-col">
 						
-						<a href="/world/{{city.country_name}}" class="flex mt-normal">
-							<i class="fa fa-long-arrow-left mr-small" style="align-self:center;"></i>
-							<span class="mr-small flag-icon flag-icon-{{city.country_code}}"></span>
-							{{city.country_name}}
-						</a>
-						
-						<a href="/world/{{city.country_name}}/{{city.region_name}}" class="flex mt-small">
-							<i class="fa fa-long-arrow-left mr-small" style="align-self:center;"></i>
-							<span class="mr-small flag-icon flag-icon-{{city.country_code}}"></span>
-							{{city.region_name}}
-						</a>
+						<div class="flex mt-normal">
+							<a href="/world/{{city.country_name}}" class="flex">
+								<i class="fa fa-long-arrow-left mr-small" style="align-self:center;"></i>
+								<span class="mr-small flag-icon flag-icon-{{city.country_code}}"></span>
+								{{city.country_name}}
+							</a>
+						</div>
+							
+						<div class="flex mt-normal">
+							<a href="/world/{{city.country_name}}/{{city.region_name}}" class="flex">
+								<i class="fa fa-long-arrow-left mr-small" style="align-self:center;"></i>
+								<span class="mr-small flag-icon flag-icon-{{city.country_code}}"></span>
+								{{city.region_name}}
+							</a>
+						</div>
 						
 					</div>
 					
