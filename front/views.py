@@ -368,6 +368,16 @@ def manage(request, ref):
 		data['not_allowed'] = False
 	
 	return render(request, 'manage.html', data)
+
+
+
+#---------------------------------------------------------------------------------------------------
+def export(request, ref):
+	
+	text = ''
+	
+	response = HttpResponse(text, content_type = 'text/plain')
+	return response
 	
 	
 	
