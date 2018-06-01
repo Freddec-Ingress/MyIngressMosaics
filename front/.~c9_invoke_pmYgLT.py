@@ -380,8 +380,6 @@ def export(request, ref):
 	
 	kml = Kml()
 	
-	folder = kml.newfolder(name=mosaic_obj.title)
-	
 	normalstyle = Style()
 	normalstyle.linestyle.color = 'ffd18802'
 	normalstyle.linestyle.width = 7.5
@@ -391,6 +389,8 @@ def export(request, ref):
 	highlightstyle.linestyle.width = 10
 	
 	stylemap = StyleMap(normalstyle, highlightstyle)
+	
+	folder = kml.newfolder(name=mosaic_obj.title)
 	
 	for mission_obj in mosaic_obj.missions.all().order_by('order'):
 
