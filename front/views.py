@@ -403,7 +403,7 @@ def export(request, ref):
 						lng = portal[5][3] / 1000000.0
 
 					if lat and lng:
-						coordinates.append('(' + str(lat) + ',' + str(lng) + '),')
+						coordinates.append((lng, lat))
 						
 		linestring.coords = coordinates
 		
