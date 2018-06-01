@@ -1130,7 +1130,7 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 			if (!comment.id) {
 				
 				var data = {'ref':$scope.mosaic.ref, 'text':comment.text}
-				API.sendRequest('/api/comment/add/', 'POST', {}, data).then(function(response) {
+				API.sendRequest('/api/comment/create/', 'POST', {}, data).then(function(response) {
 				
 					if (!$scope.mosaic.comments)  $scope.mosaic.comments = [];
 				
