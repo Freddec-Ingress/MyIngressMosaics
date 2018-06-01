@@ -107,9 +107,7 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 			var data = {'ref':$scope.mosaic.ref, 'text':comment.text}
 			API.sendRequest('/api/comment/create/', 'POST', {}, data).then(function(response) {
 			
-				if (!$scope.mosaic.comments)  $scope.mosaic.comments = [];
-			
-				$scope.mosaic.comments.push(response);
+				$scope.comments.unshift(response);
 				$scope.closeCommentEdit();
 			});
 		}
@@ -125,12 +123,10 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 	
 	$scope.deleteComment = function(user, index, comment) {
 		
-		$scope.mosaic.comments.splice(index, 1);
-			
 		var data = {'id':comment.id}
 		API.sendRequest('/api/comment/delete/', 'POST', {}, data).then(function(response) {
 			
-			$scope.mosaic.comments.splice(index, 1);
+			$scope.comments.splice(index, 1);
 		});
 	}
 
