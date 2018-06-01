@@ -375,8 +375,36 @@ def manage(request, ref):
 #---------------------------------------------------------------------------------------------------
 def export(request, ref):
 	
+	mosaic_obj = Mosaic.objects.get(ref=ref)
+	
 	kml = simplekml.Kml()
 	
+	for mission_obj in mosaic_obj.missions.all().order_by('order'):
+
+		linestring = kml.newlinestring(name=mission_obj.title)
+		linestring.coords = []
+	
+		jsondata = json.loads(mission_obj.data)
+		
+		if len(jsondata) > 9:
+			for portal in jsondata[9]:
+			
+				lat = 0.0
+				lng = 0.0
+				
+				if portal[5]:
+					
+					if portal[5][0] == 'f':
+						lat = portal[5][1] / 1000000.0
+						lng = portal[5][2] / 1000000.0
+
+					if portal[5][0] == 'p':
+						lat = portal[5][2] / 1000000.0
+						lng = portal[5][3] / 1000000.0
+
+					if lat and lng:
+						linestring.coords.append((lat, lng))
+		
 	response = HttpResponse(kml.kml())
 	response['Content-Disposition'] = 'attachment; filename="mim_roadmap.kml"'
 	response['Content-Type'] = 'application/kml'
