@@ -261,14 +261,13 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 				url: 'https://www.myingressmosaics.com/static/img/circle_sgl.png',
 			};
 			
-			var bds = map.getBounds();
-			console.log('bds: ' + bds)
-			if (bds) {
+			console.log('bds: ' + latlngbounds)
+			if (latlngbounds) {
 				
-				var south = bds.getSouthWest().lat();
-				var west = bds.getSouthWest().lng();
-				var north = bds.getNorthEast().lat();
-				var east = bds.getNorthEast().lng();
+				var south = latlngbounds.getSouthWest().lat();
+				var west = latlngbounds.getSouthWest().lng();
+				var north = latlngbounds.getNorthEast().lat();
+				var east = latlngbounds.getNorthEast().lng();
 				
 				var data = {'sLat':south, 'sLng':west, 'nLat':north, 'nLng':east};
 				API.sendRequest('/api/map/', 'POST', {}, data).then(function(response) {
