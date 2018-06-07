@@ -161,7 +161,6 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 				
 		var map = new google.maps.Map(document.getElementById('map'), {
 			
-			zoom: 8,
 			gestureHandling: 'greedy', 
 			zoomControl: true,
 			disableDefaultUI: true,
@@ -172,7 +171,6 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 				style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
                 mapTypeIds: [google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN, 'Ingress Intel'],
 			},
-			center: {lat:$scope.mosaic.startLat, lng:$scope.mosaic.startLng},
 		});
 		
         map.mapTypes.set('Ingress Intel', styledMapType);
