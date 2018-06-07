@@ -1272,7 +1272,7 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 		
 		var zoom = map.getZoom();
 		console.log('zoom: ' + zoom)
-		if (zoom > 10) {
+		if (zoom > 7) {
 			
 			var image = {
 			    scaledSize: new google.maps.Size(25, 25),
