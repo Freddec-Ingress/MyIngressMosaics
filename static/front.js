@@ -1268,7 +1268,45 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 	        index += 1;
 		}
 	        
-		map.fitBounds(latlngbounds); 
+		map.fitBounds(latlngbounds);
+		
+		var zoom = map.getZoom();
+		console.log('zoom: ' + zoom)
+		if (zoom > 10) {
+			
+			var image = {
+			    scaledSize: new google.maps.Size(25, 25),
+				origin: new google.maps.Point(0, 0),
+				anchor: new google.maps.Point(12, 13),
+				url: 'https://www.myingressmosaics.com/static/img/circle_sgl.png',
+			};
+			
+			var bds = map.getBounds();
+			
+			var south = bds.getSouthWest().lat();
+			var west = bds.getSouthWest().lng();
+			var north = bds.getNorthEast().lat();
+			var east = bds.getNorthEast().lng();
+			
+			var data = {'sLat':south, 'sLng':west, 'nLat':north, 'nLng':east};
+			API.sendRequest('/api/map/', 'POST', {}, data).then(function(response) {
+				if (response) {
+					
+					console.log('loaded mosaics in map: ' + response.length);
+					for (var item of response) {
+						if (item.ref != $scope.mosaic.ref) {
+							
+							var latLng = new google.maps.LatLng(item.startLat, item.startLng);
+							var marker = new google.maps.Marker({
+								position: latLng,
+								map: map,
+								icon: image,
+							});
+						}
+					}
+				}
+			});
+		}
 	}
 	
 	$scope.init = function(mosaic, missions, comments) {
