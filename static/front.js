@@ -1209,7 +1209,7 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 			scaledSize: new google.maps.Size(50, 50),
 			origin: new google.maps.Point(0, 0),
 			anchor: new google.maps.Point(25, 25),
-			labelOrigin: new google.maps.Point(25, 25),
+			labelOrigin: new google.maps.Point(25, 22),
 			url: 'https://www.myingressmosaics.com/static/img/neutral.png',
 		};
 
@@ -1251,15 +1251,14 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 		var index = 1;
 		for (var m of $scope.missions) {
 	        
-			var label = { text:String(index), color:'#FFFFFF', fontFamily:'Coda', fontSize:'1rem', fontWeight:'400', }
+			var label = { text:String(index), color:'#FFFFFF', fontFamily:'Coda', fontSize:'.9rem', fontWeight:'400', }
 
 	        var startMarker = new google.maps.Marker({
 	        	
 				map: map,
 				icon: image,
 				label: label,
-				labelOrigin: new google.maps.Point(0, -2),
-				zIndex: 100,
+				zIndex: 1000,
 				position: {lat: m.startLat, lng: m.startLng},
 	        });
 	        
