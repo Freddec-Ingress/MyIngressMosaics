@@ -257,37 +257,92 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 			var image = {
 			    scaledSize: new google.maps.Size(25, 25),
 				origin: new google.maps.Point(0, 0),
-				anchor: new google.maps.Point(12, 13),
+				anchor: new google.maps.Point(12, 0),
 				url: 'https://www.myingressmosaics.com/static/img/circle_sgl.png',
 			};
 			
-			console.log('bds: ' + latlngbounds)
-			if (latlngbounds) {
-				
-				var south = latlngbounds.getSouthWest().lat();
-				var west = latlngbounds.getSouthWest().lng();
-				var north = latlngbounds.getNorthEast().lat();
-				var east = latlngbounds.getNorthEast().lng();
-				
-				var data = {'sLat':south, 'sLng':west, 'nLat':north, 'nLng':east};
-				API.sendRequest('/api/map/', 'POST', {}, data).then(function(response) {
-					if (response) {
-						
-						console.log('loaded mosaics in map: ' + response.length);
-						for (var item of response) {
-							if (item.ref != $scope.mosaic.ref) {
+			var infowindow = new google.maps.InfoWindow({
+				content: '',
+				pixelOffset: new google.maps.Size(-1, 15)
+			});
+			
+			var south = latlngbounds.getSouthWest().lat();
+			var west = latlngbounds.getSouthWest().lng();
+			var north = latlngbounds.getNorthEast().lat();
+			var east = latlngbounds.getNorthEast().lng();
+			
+			var data = {'sLat':south, 'sLng':west, 'nLat':north, 'nLng':east};
+			API.sendRequest('/api/map/', 'POST', {}, data).then(function(response) {
+				if (response) {
+					
+					console.log('loaded mosaics in map: ' + response.length);
+					for (var item of response) {
+						if (item.ref != $scope.mosaic.ref) {
+							
+							var latLng = new google.maps.LatLng(item.startLat, item.startLng);
+							var marker = new google.maps.Marker({
+								position: latLng,
+								map: map,
+								icon: image,
+							});
+							
+							google.maps.event.addListener(marker, 'click', (function (marker, mosaic, infowindow) {
 								
-								var latLng = new google.maps.LatLng(item.startLat, item.startLng);
-								var marker = new google.maps.Marker({
-									position: latLng,
-									map: map,
-									icon: image,
-								});
-							}
+								return function () {
+									
+									var offset_string = '';
+									
+									var temp = 0;
+									if (mosaic.images.length > mosaic.column_count) {
+										temp = mosaic.column_count - mosaic.images.length % mosaic.column_count;
+										if (temp < 0 || temp > (mosaic.column_count - 1)) temp = 0;
+									}
+									
+									for (var i = 0; i < temp; i++) {
+										offset_string += '<div style="flex:0 0 calc(100% / ' + mosaic.column_count + ');"></div>';
+									}
+									
+									var missions_string = '';
+									
+									var missions_array = mosaic.images.slice();
+									for (var mission of missions_array) {
+										
+										missions_string +=
+								            '<div class="mission-vignet" style="flex:0 0 calc(100% / ' + mosaic.column_count + ');">' +
+								                '<img src="/static/img/mask.png" style="z-index:auto; background-image:url(' + mission + '=s25);" />' +
+								            '</div>';
+									}
+									
+									var contentString = '' +
+										'<a class="flex-col" target="_blank" style="width:200px; min-width:200px; max-width:200px;" href="/mosaic/' + mosaic.ref + '" >' +
+											'<div class="flex-col" style="flex-shrink:1;">' + 
+												'<span class="color-black text-medium text-bold ellipsis" style="word-break: break-all;" title="' + mosaic.title + '">' + mosaic.title + '</span>' + 
+												'<span class="color-grey text-small">' + mosaic.images.length + ' missions &middot; ' + mosaic.unique_count + ' uniques</span>' + 
+												'<span class="color-link text-small mb-small">See details</span>' + 
+											'</div>' + 
+											'<div style="max-height:400px; overflow-y:auto;">' +
+												'<div class="flex wrap shrink" style="padding:0 calc((6 - ' + mosaic.column_count + ') / 2 * 16.666667%);">' +
+													offset_string +
+													missions_string + 
+												'</div>' +
+											'</div>' + 
+										'</a>';
+										'';
+									
+									var contentDiv = angular.element('<div/>');
+									contentDiv.append(contentString);													
+									
+									var compiledContent = $compile(contentDiv)($scope);
+									
+									infowindow.setContent(compiledContent[0]);
+									infowindow.open($scope.map, marker);
+								};
+								
+							})(marker, item, infowindow));
 						}
 					}
-				});
-			}
+				}
+			});
 		}
 	}
 	
