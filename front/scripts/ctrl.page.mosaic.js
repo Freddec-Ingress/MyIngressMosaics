@@ -181,14 +181,13 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 		var latlngbounds = new google.maps.LatLngBounds();
 		
 		var image = {
-			scaledSize: new google.maps.Size(35, 35),
+			scaledSize: new google.maps.Size(50, 50),
 			origin: new google.maps.Point(0, 0),
-			anchor: new google.maps.Point(17, 18),
-			labelOrigin: new google.maps.Point(17, 19),
+			anchor: new google.maps.Point(25, 25),
+			labelOrigin: new google.maps.Point(25, 25),
 			url: 'https://www.myingressmosaics.com/static/img/neutral.png',
 		};
 
-		var index = 1;
 		for (var m of $scope.missions) {
 		
 			var roadmapCoordinates= [];
@@ -222,8 +221,12 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 			});
 	        
 	        roadmap.setMap(map);
+		}
+		
+		var index = 1;
+		for (var m of $scope.missions) {
 	        
-			var label = { text:String(index), color:'#FFFFFF', fontFamily:'Coda', fontSize:'.5rem', fontWeight:'400', }
+			var label = { text:String(index), color:'#FFFFFF', fontFamily:'Coda', fontSize:'1rem', fontWeight:'400', }
 
 	        var startMarker = new google.maps.Marker({
 	        	
