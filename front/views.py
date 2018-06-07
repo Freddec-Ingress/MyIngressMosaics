@@ -190,6 +190,9 @@ def mosaic(request, ref):
 		'creators': [],
 		
 		'is_owned':False,
+		
+		'startLat':mosaic_obj.startLat,
+		'startLng':mosaic_obj.startLng,
 	}
 
 	if not request.user.is_anonymous:

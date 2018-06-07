@@ -1284,6 +1284,7 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 			};
 			
 			var bds = map.getBounds();
+			console.log('bds: ' + bds)
 			if (bds) {
 				
 				var south = bds.getSouthWest().lat();
