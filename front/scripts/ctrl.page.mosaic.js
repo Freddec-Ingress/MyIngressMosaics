@@ -160,6 +160,7 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 		var mapType = 'Ingress Intel';
 				
 		var center = new google.maps.LatLng($scope.mosaic.startLat, $scope.mosaic.startLng);
+		console.log('center: ' + center);
 		
 		var map = new google.maps.Map(document.getElementById('map'), {
 			
@@ -249,6 +250,8 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 		
 		var zoom = map.getZoom();
 		console.log('zoom: ' + zoom)
+		var center = map.getCenter();
+		console.log('center: ' + center)
 		if (zoom > 7) {
 			
 			var image = {
