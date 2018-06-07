@@ -233,6 +233,8 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 				map: map,
 				icon: image,
 				label: label,
+				labelOrigin: new google.maps.Point(0, -2),
+				zIndex: 100,
 				position: {lat: m.startLat, lng: m.startLng},
 	        });
 	        
