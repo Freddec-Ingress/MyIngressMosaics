@@ -1023,7 +1023,7 @@ angular.module('FrontModule.directives').directive('mission', function() {
 
 angular.module('FrontModule.controllers', [])
 
-angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function($scope, $window, API, UserService, $auth) {
+angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function($scope, $window, $compile, API, UserService, $auth) {
 	
 	$scope.signin = UserService.signin;
 
@@ -1282,7 +1282,7 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 			var image = {
 			    scaledSize: new google.maps.Size(25, 25),
 				origin: new google.maps.Point(0, 0),
-				anchor: new google.maps.Point(12, 0),
+				anchor: new google.maps.Point(12, 25),
 				url: 'https://www.myingressmosaics.com/static/img/circle_sgl.png',
 			};
 			
