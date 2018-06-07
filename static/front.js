@@ -1281,30 +1281,32 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 			};
 			
 			var bds = map.getBounds();
-			
-			var south = bds.getSouthWest().lat();
-			var west = bds.getSouthWest().lng();
-			var north = bds.getNorthEast().lat();
-			var east = bds.getNorthEast().lng();
-			
-			var data = {'sLat':south, 'sLng':west, 'nLat':north, 'nLng':east};
-			API.sendRequest('/api/map/', 'POST', {}, data).then(function(response) {
-				if (response) {
-					
-					console.log('loaded mosaics in map: ' + response.length);
-					for (var item of response) {
-						if (item.ref != $scope.mosaic.ref) {
-							
-							var latLng = new google.maps.LatLng(item.startLat, item.startLng);
-							var marker = new google.maps.Marker({
-								position: latLng,
-								map: map,
-								icon: image,
-							});
+			if (bds) {
+				
+				var south = bds.getSouthWest().lat();
+				var west = bds.getSouthWest().lng();
+				var north = bds.getNorthEast().lat();
+				var east = bds.getNorthEast().lng();
+				
+				var data = {'sLat':south, 'sLng':west, 'nLat':north, 'nLng':east};
+				API.sendRequest('/api/map/', 'POST', {}, data).then(function(response) {
+					if (response) {
+						
+						console.log('loaded mosaics in map: ' + response.length);
+						for (var item of response) {
+							if (item.ref != $scope.mosaic.ref) {
+								
+								var latLng = new google.maps.LatLng(item.startLat, item.startLng);
+								var marker = new google.maps.Marker({
+									position: latLng,
+									map: map,
+									icon: image,
+								});
+							}
 						}
 					}
-				}
-			});
+				});
+			}
 		}
 	}
 	
