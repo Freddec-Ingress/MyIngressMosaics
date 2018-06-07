@@ -184,7 +184,7 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 			scaledSize: new google.maps.Size(50, 50),
 			origin: new google.maps.Point(0, 0),
 			anchor: new google.maps.Point(25, 25),
-			labelOrigin: new google.maps.Point(25, 28),
+			labelOrigin: new google.maps.Point(25, 27),
 			url: 'https://www.myingressmosaics.com/static/img/neutral.png',
 		};
 
