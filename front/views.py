@@ -405,15 +405,16 @@ def export(request, ref):
 	
 	for mission_obj in mosaic_obj.missions.all().order_by('order'):
 
-		pnt = folder.newpoint(name='Starting point - '+mission_obj.title)
-		pnt.coords = [(mosaic_obj.startLat, mosaic_obj.startLng)]
-		pnt.description = '<![CDATA[<img src="' + mosaic_obj.big_preview_url + '" height="200" width="auto" />]]>'
+		multipnt = folder.newmultigeometry(name=mission_obj.title)
+		multipnt.description = '<![CDATA[<img src="' + mosaic_obj.big_preview_url + '" height="200" width="auto" />' + mission_obj.desc + ']]>'
+		multipnt.extendeddata.newdata('MIM link', 'https://www.myingressmosaics.com/mosaic/' + mosaic_obj.ref)
+
+		pnt = multipnt.newpoint(name='Starting point')
+		pnt.coords = [(mission_obj.startLat, mission_obj.startLng)]
 		
-		linestring = folder.newlinestring(name=mission_obj.title)
+		linestring = multipnt.newlinestring(name=mission_obj.title)
 		
 		linestring.stylemap = stylemap
-		
-		linestring.description = '<![CDATA[<img src="' + mission_obj.image + '" height="50" width="auto" />' + mission_obj.desc + ']]>'
 
 		actions = ''
 		coordinates = []
@@ -455,10 +456,8 @@ def export(request, ref):
 					if lat and lng:
 						coordinates.append((lng, lat))
 						
-		linestring.extendeddata.newdata('MIM link', 'https://www.myingressmosaics.com/mosaic/' + mosaic_obj.ref)
-		linestring.extendeddata.newdata('actions', actions)
-		
 		linestring.coords = coordinates
+		linestring.extendeddata.newdata('actions', actions)
 		
 	response = HttpResponse(kml.kml())
 	response['Content-Disposition'] = 'attachment; filename="' + mosaic_obj.title + '.kml"'
