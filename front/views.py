@@ -381,6 +381,14 @@ def export(request, ref):
 	
 	mosaic_obj = Mosaic.objects.get(ref=ref)
 	
+	if not mosaic_obj.big_preview_url:
+		
+		imgByteArr = mosaic_obj.generatePreview(100)
+		response = cloudinary.uploader.upload(imgByteArr, public_id=mosaic_obj.ref + '_100')
+		mosaic_obj.big_preview_url = response['url']
+		
+		mosaic_obj.save()
+		
 	kml = Kml()
 	
 	normalstyle = Style()
@@ -394,6 +402,10 @@ def export(request, ref):
 	stylemap = StyleMap(normalstyle, highlightstyle)
 	
 	folder = kml.newfolder(name=mosaic_obj.title)
+	
+	pnt = kml.newpoint(name='Starting point')
+	pnt.coords = [(mosaic_obj.startLat, mosaic_obj.startLng)]
+	pnt.description = '<![CDATA[<img src="' + mosaic_obj.big_preview_url + '" height="200" width="auto" />]]>'
 	
 	for mission_obj in mosaic_obj.missions.all().order_by('order'):
 
@@ -449,7 +461,7 @@ def export(request, ref):
 		linestring.coords = coordinates
 		
 	response = HttpResponse(kml.kml())
-	response['Content-Disposition'] = 'attachment; filename="mim_roadmap.kml"'
+	response['Content-Disposition'] = 'attachment; filename="' + mosaic_obj.title + '.kml"'
 	response['Content-Type'] = 'application/kml'
 	
 	return response	
