@@ -403,12 +403,12 @@ def export(request, ref):
 	
 	folder = kml.newfolder(name=mosaic_obj.title)
 	
-	pnt = kml.newpoint(name='Starting point')
-	pnt.coords = [(mosaic_obj.startLat, mosaic_obj.startLng)]
-	pnt.description = '<![CDATA[<img src="' + mosaic_obj.big_preview_url + '" height="200" width="auto" />]]>'
-	
 	for mission_obj in mosaic_obj.missions.all().order_by('order'):
 
+		pnt = folder.newpoint(name='Starting point - '+mission_obj.title)
+		pnt.coords = [(mosaic_obj.startLat, mosaic_obj.startLng)]
+		pnt.description = '<![CDATA[<img src="' + mosaic_obj.big_preview_url + '" height="200" width="auto" />]]>'
+		
 		linestring = folder.newlinestring(name=mission_obj.title)
 		
 		linestring.stylemap = stylemap
