@@ -400,6 +400,8 @@ def export(request, ref):
 	normalstyle.iconstyle.hotspot.y = 64
 	normalstyle.iconstyle.hotspot.xunits = 'insetPixels'
 	normalstyle.labelstyle.scale = 0
+	normalstyle.linestyle.color = 'ffd18802'
+	normalstyle.linestyle.width = 5
 
 	highlightstyle = Style()
 	highlightstyle.iconstyle.color = 'ffd18802'
