@@ -410,7 +410,8 @@ def export(request, ref):
 		multipnt.extendeddata.newdata('MIM link', 'https://www.myingressmosaics.com/mosaic/' + mosaic_obj.ref)
 
 		pnt = multipnt.newpoint(name='Starting point')
-		pnt.coords = [(mission_obj.startLat, mission_obj.startLng)]
+		pnt.style.iconstyle.scale = 3
+		pnt.style.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/info-i.png'
 		
 		linestring = multipnt.newlinestring(name=mission_obj.title)
 		
@@ -456,8 +457,12 @@ def export(request, ref):
 					if lat and lng:
 						coordinates.append((lng, lat))
 						
+					if lat and lng and index==1:
+						pnt.coords = [(lng, lat)]
+		
 		linestring.coords = coordinates
-		linestring.extendeddata.newdata('actions', actions)
+		
+		multipnt.extendeddata.newdata('actions', actions)
 		
 	response = HttpResponse(kml.kml())
 	response['Content-Disposition'] = 'attachment; filename="' + mosaic_obj.title + '.kml"'
