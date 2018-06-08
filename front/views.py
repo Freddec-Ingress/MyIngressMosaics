@@ -392,12 +392,24 @@ def export(request, ref):
 	kml = Kml()
 	
 	normalstyle = Style()
-	normalstyle.linestyle.color = 'ffd18802'
-	normalstyle.linestyle.width = 7.5
+	normalstyle.iconstyle.color = 'ffd18802'
+	normalstyle.iconstyle.scale = 1
+	normalstyle.iconstyle.icon.href = 'http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+	normalstyle.iconstyle.hotspot.x = 32
+	normalstyle.iconstyle.hotspot.xunits = 'pixels'
+	normalstyle.iconstyle.hotspot.y = 64
+	normalstyle.iconstyle.hotspot.xunits = 'insetPixels'
+	normalstyle.labelstyle.scale = 0
 
 	highlightstyle = Style()
-	highlightstyle.linestyle.color = 'ffd18802'
-	highlightstyle.linestyle.width = 10
+	highlightstyle.iconstyle.color = 'ffd18802'
+	highlightstyle.iconstyle.scale = 1
+	highlightstyle.iconstyle.icon.href = 'http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png'
+	highlightstyle.iconstyle.hotspot.x = 32
+	highlightstyle.iconstyle.hotspot.xunits = 'pixels'
+	highlightstyle.iconstyle.hotspot.y = 64
+	highlightstyle.iconstyle.hotspot.xunits = 'insetPixels'
+	highlightstyle.labelstyle.scale = 1
 	
 	stylemap = StyleMap(normalstyle, highlightstyle)
 	
@@ -406,16 +418,13 @@ def export(request, ref):
 	for mission_obj in mosaic_obj.missions.all().order_by('order'):
 
 		multipnt = folder.newmultigeometry(name=mission_obj.title)
+		multipnt.stylemap = stylemap
 		multipnt.description = '<![CDATA[<img src="' + mosaic_obj.big_preview_url + '" height="200" width="auto" />' + mission_obj.desc + ']]>'
 		multipnt.extendeddata.newdata('MIM link', 'https://www.myingressmosaics.com/mosaic/' + mosaic_obj.ref)
+		
+		pnt = multipnt.newpoint()
 
-		pnt = multipnt.newpoint(name='Starting point')
-		pnt.style.iconstyle.scale = 3
-		pnt.style.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/info-i.png'
-		
 		linestring = multipnt.newlinestring(name=mission_obj.title)
-		
-		linestring.stylemap = stylemap
 
 		actions = ''
 		coordinates = []
