@@ -27,7 +27,20 @@
 		<div class="container" ng-class="{'active':loaded}">
 			
 			<div class="section">
+				<div class="tab-row">
+				
+					<div class="tab" class="active">
+						To be reviewed
+						<span class="ml-normal badge">{{mosaics|length}}</span>
+					</div>
+				
+				</div>
+			</div>
+			
+			<div class="item pt-none">
 
+				<div class="item">
+				<div class="bg-block pr-small pl-small">
 				{% for mosaic in mosaics %}
 				<div class="flex-col" ng-model="mosaic_{{mosaic.id}}" ng-init="mosaic_{{mosaic.id}}={{mosaic|jsonify}};">
 
@@ -73,6 +86,8 @@
 
 				</div>
 				{% endfor %}
+				</div>
+				</div>
 			</div>
 			
 		</div>

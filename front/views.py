@@ -1165,7 +1165,7 @@ def adm_compare(request):
 	
 	data = { 'mosaics':[], }
 	
-	immosaic_results = IMMosaic.objects.all().exclude(registered=True).exclude(excluded=True).exclude(dead=True).order_by('-count', 'name', 'country_name', 'region_name', 'city_name')
+	immosaic_results = IMMosaic.objects.all().exclude(registered=True).exclude(excluded=True).exclude(dead=True).order_by('country_name', 'region_name', 'city_name', '-count', 'name')
 	for immosaic_obj in immosaic_results:
 		
 		mosaic_results = Mosaic.objects.filter(Q(city__region__country__name__iexact=immosaic_obj.country_name) | Q(city__region__country__locale__iexact=immosaic_obj.country_name)).filter(Q(city__region__name__iexact=immosaic_obj.region_name) | Q(city__region__locale__iexact=immosaic_obj.region_name)).filter(Q(city__name__iexact=immosaic_obj.city_name) | Q(city__locale__iexact=immosaic_obj.city_name)).filter(title__iexact=immosaic_obj.name)
