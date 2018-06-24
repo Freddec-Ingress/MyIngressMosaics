@@ -53,3 +53,22 @@ def waiting_create(request):
 	waiting_obj.save()
 	
 	return Response(None, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def waiting_delete(request):
+	
+	waiting_obj = Waiting.objects.get(ref=request.data['ref'])
+	waiting_obj.delete()
+	
+	mission_refs = waiting_obj.mission_refs.split('|')
+	for ref in mission_refs:
+		if ref:
+			
+			mission_object.get(ref=ref)
+			mission_object.delete()
+	
+	return Response(None, status=status.HTTP_200_OK)

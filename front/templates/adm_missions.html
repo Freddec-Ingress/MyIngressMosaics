@@ -115,7 +115,7 @@
 				
 			</div>
 			
-			<div ng-show="current_tab=='excluded'">
+			<div ng-show="current_tab=='waiting'">
 				
 				<div class="item pt-none">
 	
@@ -130,6 +130,10 @@
 									
 									<div class="item grow">
 										<span class="color-light">[[waiting.name]]</span>
+									</div>
+									
+									<div class="item">
+										<a ng-click="delete_waiting(waiting.ref);"><i class="fa fa-trash"></i></a>
 									</div>
 									
 								</div>

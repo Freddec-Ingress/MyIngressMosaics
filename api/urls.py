@@ -80,6 +80,7 @@ urlpatterns = [
 	url(r'^im/mosaic/', im_mosaic),
 	
 	url(r'^waiting/create/', waiting_create),
+	url(r'^waiting/delete/', waiting_delete),
 	
 	url(r'^location/city/list/', city_list),
 	url(r'^location/city/merge/', city_merge),

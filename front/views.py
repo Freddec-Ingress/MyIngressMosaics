@@ -1247,6 +1247,7 @@ def adm_missions(request):
 		
 		waiting_data = {
 			
+			'ref':waiting_obj.ref,
 			'name':waiting_obj.title,
 			'mission_count':waiting_obj.mission_count,
 		}
