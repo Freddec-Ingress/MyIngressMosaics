@@ -75,7 +75,7 @@
 											</div>
 											
 											<div class="item">
-												<input type="text" class="control control-mini" ng-blur="orderChange();" ng-model="mission.neworder" ng-init="mission.neworder=mission.order;" />
+												<input type="text" class="control control-mini" style="width:30px;" ng-blur="orderChange();" ng-model="mission.neworder" ng-init="mission.neworder=mission.order;" />
 											</div>
 											
 											<div class="item grow">
@@ -94,6 +94,14 @@
 											
 										</div>
 									</div>
+								</div>
+								
+								<div class="flex-col">
+
+									<div class="item pb-none">
+										<span class="color-danger">Missing missions: [[missing_missions]]</span>
+									</div>
+									
 								</div>
 								
 								<div class="flex-col">
@@ -140,6 +148,12 @@
 								
 								<div class="flex">
 									
+									<div class="item grow">
+										<button class="btn btn-danger" ng-click="waiting(new_name);" ng-disabled="!mission_count || !missing_missions">
+											Waiting
+										</button>
+									</div>
+									
 									<div class="item">
 										<button class="btn" ng-click="validate(new_name);" ng-disabled="!name || !city || !region || !country">
 											Potential
@@ -147,29 +161,7 @@
 									</div>
 									
 								</div>
-								
-								<hr>
-								
-								<div class="flex-col">
 
-									<div class="item pb-none">
-										<span class="color-dark">Missing missions</span>
-									</div>
-									
-									<div class="item grow flex-col">
-										<input type="text" class="control" ng-model="missing_missions" />
-									</div>
-								
-								</div>
-								
-								<div class="flex">
-									<div class="item grow">
-										<button class="btn btn-danger" ng-click="waiting(new_name);" ng-disabled="!mission_count || !missing_missions">
-											Waiting
-										</button>
-									</div>
-								</div>
-									
 							</div>
 							
 						</div>

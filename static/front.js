@@ -3693,6 +3693,7 @@ angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', functio
 	$scope.range = [];
 	$scope.setRange = function() {
 		
+		$scope.missing_missions = '';
 		$scope.range = [];
 	    for (var i = 0; i < $scope.mission_count; i++) {
 	    	$scope.range.push(i);
@@ -3705,6 +3706,7 @@ angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', functio
 				return mission.image;
 			}
 		}
+		$scope.missing_missions += index + ', ';
 		return null;
 	}
 
