@@ -164,7 +164,7 @@
 								
 								<div class="flex">
 									<div class="item grow">
-										<button class="btn btn-danger" ng-click="waiting(new_name);">
+										<button class="btn btn-danger" ng-click="waiting(new_name);" ng-disabled="!mission_count || !missing_missions">
 											Waiting
 										</button>
 									</div>
