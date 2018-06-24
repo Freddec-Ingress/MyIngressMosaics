@@ -3690,6 +3690,15 @@ angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', functio
 		});
 	}
 
+	$scope.range = [];
+	$scope.setRange = function() {
+		
+		$scope.range = [];
+	    for (var i = 0; i < $scope.mission_count; i++) {
+	    	$scope.range.push(i);
+	    }
+	}
+	
 	$scope.getImage = function(index) {
 		for (var mission of $scope.missions) {
 			if (mission.order == index) {
