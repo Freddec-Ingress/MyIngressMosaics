@@ -34,9 +34,14 @@
 						<span class="ml-normal badge">{{tobereviewed_missions|length}}</span>
 					</div>
 				
+					<div class="tab" ng-click="current_tab='excluded'" ng-class="{'active':current_tab=='excluded'}">
+						Excluded
+						<span class="ml-normal badge">{{yetreviewed_missions|length}}</span>
+					</div>
+				
 					<div class="tab" ng-click="current_tab='waiting'" ng-class="{'active':current_tab=='waiting'}">
 						Waiting
-						<span class="ml-normal badge">{{yetreviewed_missions|length}}</span>
+						<span class="ml-normal badge">{{waitings|length}}</span>
 					</div>
 					
 				</div>
@@ -76,7 +81,7 @@
 				
 			</div>
 			
-			<div ng-show="current_tab=='waiting'">
+			<div ng-show="current_tab=='excluded'">
 				
 				<div class="item pt-none">
 	
@@ -110,6 +115,31 @@
 				
 			</div>
 			
+			<div ng-show="current_tab=='excluded'">
+				
+				<div class="item pt-none">
+	
+					<div class="item">
+						<div class="bg-block pr-small pl-small">
+							<div ng-repeat="waiting in waitings track by $index" style="border-bottom:1px solid #000;">
+								<div class="flex align-center text-small">
+
+									<div class="item">
+										<span class="color-dark">[[waiting.mission_count]]</span>
+									</div>
+									
+									<div class="item grow">
+										<span class="color-light">[[waiting.name]]</span>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
 		</div>
 	
 	</div>

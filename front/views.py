@@ -1211,6 +1211,7 @@ def adm_missions(request):
 	context = {
 		'tobereviewed_missions':[],
 		'yetreviewed_missions':[],
+		'waitings':[],
 	}
 	
 	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=False).values('name', 'creator').annotate(num_name=Count('name')).order_by('-num_name')
@@ -1240,6 +1241,17 @@ def adm_missions(request):
 			}
 			
 			context['yetreviewed_missions'].append(mission_data)
+	
+	waiting_results = Waiting.objects.all().order_by('-mission_count')
+	for waiting_obj in waiting_results:
+		
+		waiting_data = {
+			
+			'name':waiting_obj['name'],
+			'mission_count':waiting_obj['mission_count'],
+		}
+		
+		context['waitings'].append(waiting_data)
 	
 	return render(request, 'adm_missions.html', context)
 
