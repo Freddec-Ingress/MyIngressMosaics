@@ -3677,13 +3677,15 @@ angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', functio
 		$scope.missions.splice(index, 1);
 	}
 	
-	$scope.waiting = function() {
+	$scope.missing_missions = '';
+	$scope.mission_count = '';
+	$scope.waiting = function(new_name) {
 		
 		var refs = [];
 		for (var mission of $scope.missions) refs.push(mission.ref);
 		
-		var data = { 'refs':refs };
-		API.sendRequest('/api/potential/exclude/', 'POST', {}, data);
+		var data = { 'country_name':$scope.country, 'region_name':$scope.region, 'city_name':$scope.city, 'mission_refs':refs, 'title':new_name, 'mission_missing':$scope.missing_missions, 'mission_count':$scope.mission_count };
+		API.sendRequest('/api/waiting/create/', 'POST', {}, data);
 			
 		$window.location.href = '/adm/potential';
 	}

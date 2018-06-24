@@ -145,7 +145,7 @@
 									</div>
 									
 									<div class="item grow flex-col">
-										<input type="text" class="control" />
+										<input type="text" class="control" ng-model="mission_count" />
 									</div>
 								
 								</div>
@@ -157,14 +157,14 @@
 									</div>
 									
 									<div class="item grow flex-col">
-										<input type="text" class="control" />
+										<input type="text" class="control" ng-model="missing_missions" />
 									</div>
 								
 								</div>
 								
 								<div class="flex">
 									<div class="item grow">
-										<button class="btn btn-danger" ng-click="waiting();">
+										<button class="btn btn-danger" ng-click="waiting(new_name);">
 											Waiting
 										</button>
 									</div>
