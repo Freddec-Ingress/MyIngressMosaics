@@ -75,7 +75,7 @@
 											</div>
 											
 											<div class="item">
-												<span class="color-muted">[[$index+1]].</span>
+												<input type="text" class="control control-mini" ng-blur="orderChange();" ng-model="mission.neworder" ng-init="mission.neworder=mission.order;" />
 											</div>
 											
 											<div class="item grow">
@@ -95,7 +95,9 @@
 										</div>
 									</div>
 								</div>
-												
+								
+								<hr>
+								
 								<div class="flex-col">
 
 									<div class="item pb-none">
@@ -135,6 +137,8 @@
 									</div>
 									
 								</div>
+								
+								<hr>
 								
 								<div class="flex">
 									<div class="item grow">
