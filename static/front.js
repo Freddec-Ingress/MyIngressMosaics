@@ -3690,6 +3690,15 @@ angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', functio
 		});
 	}
 
+	$scope.getImage = function(index) {
+		for (var mission of $scope.missions) {
+			if (mission.order == index) {
+				return mission.image;
+			}
+		}
+		return null;
+	}
+
 	$scope.rename = function(new_name) {
 		
 		$scope.refreshing = true;
