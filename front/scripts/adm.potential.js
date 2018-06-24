@@ -113,7 +113,7 @@ angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', functio
 		$scope.missions.splice(index, 1);
 	}
 	
-	$scope.exclude = function() {
+	$scope.waiting = function() {
 		
 		var refs = [];
 		for (var mission of $scope.missions) refs.push(mission.ref);
