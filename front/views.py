@@ -1247,8 +1247,8 @@ def adm_missions(request):
 		
 		waiting_data = {
 			
-			'name':waiting_obj['name'],
-			'mission_count':waiting_obj['mission_count'],
+			'name':waiting_obj.title,
+			'mission_count':waiting_obj.mission_count,
 		}
 		
 		context['waitings'].append(waiting_data)
