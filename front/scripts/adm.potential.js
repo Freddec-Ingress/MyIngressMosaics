@@ -120,7 +120,7 @@ angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', functio
 		var refs = [];
 		for (var mission of $scope.missions) refs.push(mission.ref);
 		
-		var data = { 'country_name':$scope.country, 'region_name':$scope.region, 'city_name':$scope.city, 'mission_refs':refs, 'title':new_name, 'mission_missing':$scope.missing_missions, 'mission_count':$scope.mission_count };
+		var data = { 'country_name':$scope.country, 'region_name':$scope.region, 'city_name':$scope.city, 'mission_refs':refs, 'title':new_name, 'mission_count':$scope.mission_count };
 		API.sendRequest('/api/waiting/create/', 'POST', {}, data).then(function() {
 			$window.location.href = '/adm/potential';
 		});
