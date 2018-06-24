@@ -68,7 +68,7 @@ def waiting_delete(request):
 	for ref in mission_refs:
 		if ref:
 			
-			mission_object.get(ref=ref)
+			mission_object = Mission.objects.get(ref=ref)
 			mission_object.delete()
 	
 	return Response(None, status=status.HTTP_200_OK)
