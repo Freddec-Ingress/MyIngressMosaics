@@ -15,7 +15,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="AdmMissionsCtrl" ng-init="init({{tobereviewed_missions|jsonify}}, {{yetreviewed_missions|jsonify}});">
+	<div id="content" ng-controller="AdmMissionsCtrl" ng-init="init({{tobereviewed_missions|jsonify}}, {{yetreviewed_missions|jsonify}}, {{waitings|jsonify}});">
 	
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">

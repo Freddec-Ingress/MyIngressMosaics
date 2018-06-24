@@ -6,10 +6,11 @@ angular.module('FrontModule.controllers').controller('AdmMissionsCtrl', function
 	
 	/* Page loading */
 	
-	$scope.init = function(missions, reviewed) {
+	$scope.init = function(missions, reviewed, waitings) {
 		
 		$scope.missions = missions;
 		$scope.reviewed = reviewed;
+		$scope.waitings = waitings;
 		
     	$scope.loaded = true;
 	}
