@@ -3706,7 +3706,10 @@ angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', functio
 				return mission.image;
 			}
 		}
-		$scope.missing_missions += index + ', ';
+		var i = $scope.missing_missions.indexOf(index);
+		if (i == -1) {
+			$scope.missing_missions += index + ', ';
+		}
 		return null;
 	}
 
