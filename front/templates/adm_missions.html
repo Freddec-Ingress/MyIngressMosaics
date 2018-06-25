@@ -56,8 +56,12 @@
 							<div ng-repeat="mission in missions track by $index" style="border-bottom:1px solid #000;">
 								<div class="flex align-center text-small">
 									
-									<div class="item">
+									<div class="item" style="width:30px;">
 										<span class="color-dark">[[mission.num_name]]</span>
+									</div>
+									
+									<div class="item" ng-show="mission.adding">
+										<span class="color-success">Adding</span>
 									</div>
 									
 									<div class="item grow">
@@ -90,7 +94,7 @@
 							<div ng-repeat="mission in reviewed track by $index" style="border-bottom:1px solid #000;">
 								<div class="flex align-center text-small">
 									
-									<div class="item">
+									<div class="item" style="width:30px;">
 										<span class="color-dark">[[mission.num_name]]</span>
 									</div>
 									
@@ -124,7 +128,7 @@
 							<div ng-repeat="waiting in waitings track by $index" style="border-bottom:1px solid #000;">
 								<div class="flex align-center text-small">
 
-									<div class="item">
+									<div class="item" style="width:30px;">
 										<span class="color-dark">[[waiting.mission_count]]</span>
 									</div>
 									

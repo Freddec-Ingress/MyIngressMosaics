@@ -1214,35 +1214,9 @@ def adm_missions(request):
 		'waitings':[],
 	}
 	
-	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=False).values('name', 'creator').annotate(num_name=Count('name')).order_by('-num_name')
-	for mission_obj in mission_results:
-		
-		if mission_obj['num_name'] >= 6:
-			
-			mission_data = {
-				
-				'name':mission_obj['name'],
-				'creator':mission_obj['creator'],
-				'num_name':mission_obj['num_name'],
-			}
-			
-			context['tobereviewed_missions'].append(mission_data)
+	waiting_names = ''
 	
-	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=False, validated=False).values('name', 'creator').annotate(num_name=Count('name')).order_by('-num_name')
-	for mission_obj in mission_results:
-		
-		if mission_obj['num_name'] >= 6:
-			
-			mission_data = {
-				
-				'name':mission_obj['name'],
-				'creator':mission_obj['creator'],
-				'num_name':mission_obj['num_name'],
-			}
-			
-			context['yetreviewed_missions'].append(mission_data)
-	
-	waiting_results = Waiting.objects.all().order_by('-mission_count')
+	waiting_results = Waiting.objects.all().order_by('-mission_count', 'title')
 	for waiting_obj in waiting_results:
 		
 		waiting_data = {
@@ -1253,6 +1227,37 @@ def adm_missions(request):
 		}
 		
 		context['waitings'].append(waiting_data)
+		
+		waiting_names += waiting_obj.title + '|'
+		
+	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=False).values('name', 'creator').annotate(num_name=Count('name')).order_by('-num_name', 'name')
+	for mission_obj in mission_results:
+		
+		adding = False
+		if mission_obj['name'] in waiting_names:
+			adding = True
+		
+		mission_data = {
+			
+			'name':mission_obj['name'],
+			'adding':adding,
+			'creator':mission_obj['creator'],
+			'num_name':mission_obj['num_name'],
+		}
+		
+		context['tobereviewed_missions'].append(mission_data)
+	
+	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=False, validated=False).exclude(name__in=waiting_names).values('name', 'creator').annotate(num_name=Count('name')).order_by('-num_name', 'name')
+	for mission_obj in mission_results:
+		
+		mission_data = {
+			
+			'name':mission_obj['name'],
+			'creator':mission_obj['creator'],
+			'num_name':mission_obj['num_name'],
+		}
+		
+		context['yetreviewed_missions'].append(mission_data)
 	
 	return render(request, 'adm_missions.html', context)
 
