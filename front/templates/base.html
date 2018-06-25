@@ -61,7 +61,7 @@
 					</div>
 				</div>
 				
-				<form class="flex grow" ng-model="search_string" action="/search/[[search_string]]">
+				<form class="flex grow" action="[['/search/' + search_string]]">
 					
 					<div class="item grow">
 						<input class="control" ng-model="search_string" />
