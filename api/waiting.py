@@ -36,15 +36,16 @@ def waiting_create(request):
 		city_obj = City(region=region_obj, name=request.data['city_name'])
 		city_obj.save()
 	
-	results = Mission.objects.filter(ref__in=request.data['mission_refs'])
-	for mission_obj in results:
+	mission_refs = ''
+	for data in request.data['missions']:
 		
+		mission_obj = Mission.objects.get(ref=data['ref'])
+
 		mission_obj.admin = False
+		mission_obj.order = data['order']
 		mission_obj.name = request.data['title']
 		mission_obj.save()
-		
-	mission_refs = ''
-	for item in request.data['mission_refs']:
+	
 		mission_refs += '|' + item
 	
 	waiting_obj = Waiting(country=country_obj, region=region_obj, city=city_obj, title=request.data['title'], mission_refs=mission_refs, mission_count=request.data['mission_count'])
