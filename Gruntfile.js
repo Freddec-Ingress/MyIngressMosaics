@@ -26,6 +26,8 @@ module.exports = function(grunt) {
 					'vendor/jquery/js/jquery.min.js',
 					'vendor/angular/js/angular.min.js',
 					'vendor/satellizer/js/satellizer.min.js',
+					'vendor/bootstrap/js/popper.min.js',
+					'vendor/bootstrap/js/bootstrap.min.js',
 
 					'front/scripts/services.js',
 					'front/scripts/directives.js',
