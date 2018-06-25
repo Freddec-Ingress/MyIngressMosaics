@@ -10,8 +10,8 @@ angular.module('FrontModule.directives').directive('mosaic', function() {
 		scope: { mosaic: '=' },
 		
 		template: '' +
-			'<div class="item flex-col">' +
-				'<div class="link-block" style="height:100%; width:224px;">' +
+			'<div class="item flex-col width-12 width-xl-4">' +
+				'<div class="link-block" style="height:100%;">' +
 					
 					'<a class="item" href="/mosaic/[[mosaic.ref]]" target="_blank" style="display:block;">' +
 						'<div class="flex align-center">' +
@@ -29,7 +29,7 @@ angular.module('FrontModule.directives').directive('mosaic', function() {
 						'</div>' +
 					'</div>' +
 
-					'<a class="item" href="/mosaic/[[mosaic.ref]]" target="_blank" style="display:block;">' +
+					'<a class="item" href="/mosaic/[[mosaic.ref]]" target="_blank" style="display:block; width:224px;">' +
 						'<div class="flex wrap shrink" ng-class="{\'obsolete\':mosaic.is_obsolete}" style="max-width:100%; padding-right:calc((6 - [[mosaic.column_count]]) * 35px);">' +
 							
 							'<div ng-repeat="m in mosaic.offset track by $index" style="flex:0 0 calc(100% / [[mosaic.column_count]]);">' +
