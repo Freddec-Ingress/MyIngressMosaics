@@ -1214,7 +1214,7 @@ def adm_missions(request):
 		'waitings':[],
 	}
 	
-	waiting_names = ''
+	waiting_names = []
 	
 	waiting_results = Waiting.objects.all().order_by('-mission_count', 'title')
 	for waiting_obj in waiting_results:
@@ -1228,7 +1228,7 @@ def adm_missions(request):
 		
 		context['waitings'].append(waiting_data)
 		
-		waiting_names += waiting_obj.title + '|'
+		waiting_names.append(waiting_obj.title)
 		
 	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=False).values('name', 'creator').annotate(num_name=Count('name')).order_by('-num_name', 'name')
 	for mission_obj in mission_results:
