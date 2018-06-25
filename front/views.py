@@ -1233,34 +1233,38 @@ def adm_missions(request):
 	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=False).values('name', 'creator').annotate(num_name=Count('name')).order_by('-num_name', 'name')
 	for mission_obj in mission_results:
 		
-		if not mission_obj['name']:
-			mission_obj['name'] = ''
-			
-		adding = False
-		if mission_obj['name'] in waiting_names:
-			adding = True
+		if mission_obj['num_name'] > 2:
 		
-		mission_data = {
+			if not mission_obj['name']:
+				mission_obj['name'] = ''
+				
+			adding = False
+			if mission_obj['name'] in waiting_names:
+				adding = True
 			
-			'name':mission_obj['name'],
-			'adding':adding,
-			'creator':mission_obj['creator'],
-			'num_name':mission_obj['num_name'],
-		}
-		
-		context['tobereviewed_missions'].append(mission_data)
+			mission_data = {
+				
+				'name':mission_obj['name'],
+				'adding':adding,
+				'creator':mission_obj['creator'],
+				'num_name':mission_obj['num_name'],
+			}
+			
+			context['tobereviewed_missions'].append(mission_data)
 	
 	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=False, validated=False).exclude(name__in=waiting_names).values('name', 'creator').annotate(num_name=Count('name')).order_by('-num_name', 'name')
 	for mission_obj in mission_results:
 		
-		mission_data = {
+		if mission_obj['num_name'] > 2:
 			
-			'name':mission_obj['name'],
-			'creator':mission_obj['creator'],
-			'num_name':mission_obj['num_name'],
-		}
-		
-		context['yetreviewed_missions'].append(mission_data)
+			mission_data = {
+				
+				'name':mission_obj['name'],
+				'creator':mission_obj['creator'],
+				'num_name':mission_obj['num_name'],
+			}
+			
+			context['yetreviewed_missions'].append(mission_data)
 	
 	return render(request, 'adm_missions.html', context)
 
