@@ -35,24 +35,6 @@
 			
 			<div class="section">
 				
-				<div class="item pb-none">
-					<span class="color-normal">{% trans "Search for mosaics" %}</span>
-				</div>
-				
-				<form class="self-stretch flex">
-					
-					<div class="item grow">
-						<input class="control" placeholder="{% trans "Mosaic name or creator" %}" ng-model="searchtext" ng-init="searchtext='{{search_string|escape}}'" />
-					</div>
-					
-					<div class="item">
-						<button class="btn" type="submit" ng-click="search(searchtext);">
-							<i class="fa fa-search"></i>
-						</button>
-					</div>
-					
-				</form>
-				
 				<div class="flex align-center" ng-show="searching">
 					<i class="item fa fa-spinner rotating"></i>
 					<span class="item">{% trans "Searching for " %}{{search_string|escape}}...</span>
