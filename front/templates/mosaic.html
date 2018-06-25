@@ -98,7 +98,9 @@
 			
 			<div ng-show="current_tab=='details'">
 				
-				<div class="item flex-col">
+				<div class="item pt-none">
+					
+					<div class="item flex-col">
 					
 					<span class="text-big color-light">[[mosaic.title]]</span>
 
@@ -128,14 +130,14 @@
 					
 				</div>
 					
-				<div class="flex align-center" ng-if="mosaic.owner_msg && mosaic.owner_msg!='None'">
+					<div class="flex align-center" ng-if="mosaic.owner_msg && mosaic.owner_msg!='None'">
 					<div class="item flex-col">
 						<span class="color-dark mb-small">{% trans "Creator message" %}</span>
 						<span class="color-normal">[[mosaic.owner_msg]]</span>
 					</div>
 				</div>
 				
-				<div class="flex wrap">
+					<div class="flex wrap">
 					
 					<div class="flex-col width-12 width-xl-7">
 						
@@ -246,6 +248,8 @@
 				
 					</div>
 
+				</div>
+				
 				</div>
 				
 			</div>
