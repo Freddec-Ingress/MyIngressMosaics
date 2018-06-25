@@ -32,45 +32,46 @@
 		<div id="header">
 			<div class="container active">
 				
-				<div class="flex">
-					<a href="/" class="item">
-						<i class="icon fa fa-home"></i>
-						<span class="text">{% trans "Home" %}</span>
-					</a>
-					
-					<a href="/search" class="item">
-						<i class="icon fa fa-search"></i>
-						<span class="text">{% trans "Search" %}</span>
-					</a>
-					
-					<a href="/map" class="item">
-						<i class="icon fa fa-globe"></i>
-						<span class="text">{% trans "Map" %}</span>
-					</a>
-					
-					<a href="/registration" class="item">
-						<i class="icon fa fa-plus-square"></i>
-						<span class="text">{% trans "Hunt" %}</span>
-					</a>
-					
-					<a href="/profile" class="item">
-						<i class="icon fa fa-user"></i>
-						<span class="text">{% trans "Profile" %}</span>
-					</a>
-				</div>
-			
-				<div class="flex align-center">
-					
-					<div class="item grow">
-						<input class="control" placeholder="{% trans "Mosaic name or creator" %}" ng-model="searchtext" />
-					</div>
-					
-					<div class="item">
-						<a class="btn" href="/search/{{search_string}}">
-							<i class="fa fa-search"></i>
+				<div class="flex-col">
+					<div class="flex">
+						<a href="/" class="item">
+							<i class="icon fa fa-home"></i>
+							<span class="text">{% trans "Home" %}</span>
+						</a>
+						
+						<a href="/search" class="item">
+							<i class="icon fa fa-search"></i>
+							<span class="text">{% trans "Search" %}</span>
+						</a>
+						
+						<a href="/map" class="item">
+							<i class="icon fa fa-globe"></i>
+							<span class="text">{% trans "Map" %}</span>
+						</a>
+						
+						<a href="/registration" class="item">
+							<i class="icon fa fa-plus-square"></i>
+							<span class="text">{% trans "Hunt" %}</span>
+						</a>
+						
+						<a href="/profile" class="item">
+							<i class="icon fa fa-user"></i>
+							<span class="text">{% trans "Profile" %}</span>
 						</a>
 					</div>
-					
+					<div class="flex align-center">
+						
+						<div class="item grow">
+							<input class="control" placeholder="{% trans "Mosaic name or creator" %}" ng-model="searchtext" />
+						</div>
+						
+						<div class="item">
+							<a class="btn" href="/search/{{search_string}}">
+								<i class="fa fa-search"></i>
+							</a>
+						</div>
+						
+					</div>
 				</div>
 				
 			</div>
