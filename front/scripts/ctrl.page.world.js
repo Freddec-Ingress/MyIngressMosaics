@@ -62,7 +62,7 @@ angular.module('FrontModule.controllers').controller('WorldPageCtrl', function($
 	
 	/* Tab management */
 
-	$scope.current_tab = 'countries';
+	$scope.current_tab = 'cities';
 	
 	/* Countries sorting */
 	
