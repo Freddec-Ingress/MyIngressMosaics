@@ -61,15 +61,19 @@
 					</div>
 				</div>
 				
-				<div class="item grow">
-					<input class="control" ng-model="search_string" />
-				</div>
-				
-				<div class="item">
-					<a class="btn" style="width:34px;" href="/search/[[search_string]]">
-						<i class="fa fa-search"></i>
-					</a>
-				</div>
+				<form class="flex grow" action="/search/[[search_string]]">
+					
+					<div class="item grow">
+						<input class="control" ng-model="search_string" />
+					</div>
+					
+					<div class="item">
+						<button class="btn" style="width:34px;">
+							<i class="fa fa-search"></i>
+						</button>
+					</div>
+					
+				</form>
 
 			</div>
 		</div>
