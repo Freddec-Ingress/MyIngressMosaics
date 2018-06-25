@@ -1,31 +1,14 @@
 #header {
 	z-index: 1;
-	min-height:60px;
 	border-bottom:1px solid #489299;
 	background-color:#1b3c39;
-	display:flex; flex-direction:row; justify-content:center;
+	display:block;
 	position:fixed; top:0; right:0; left:0;
 }
 
 #header .container {
 	padding:0;
-	display:flex; flex-direction:row; align-items:stretch; justify-content:center; flex-wrap:nowrap;
-}
-
-#header .item {
-	flex-basis:0; flex-grow:1;
-	color:#5afbea; text-align:center;
-	display:flex; flex-direction:column; align-items:stretch; justify-content:center;
-}
-
-#header .item > .icon {
-	height:25px;
-	font-size:20px;
-}
-
-#header .item > .text {
-	font-size:10px;
-	text-transform:uppercase;
+	display:flex; flex-direction:row; align-items:center; flex-wrap:nowrap;
 }
 
 
