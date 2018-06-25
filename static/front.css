@@ -31,7 +31,7 @@ body {
     color:#5afbea;
     height:100%;
 	margin:0px;
-	padding-top:60px;
+	padding-top:47px;
     text-align:left;
     background-color:black;
     display:flex; flex-direction:column; flex:1;
@@ -482,6 +482,13 @@ input[type=text].control { padding:0 10px 0 14px; }
 .dropdown-menu {
 	position:absolute; top:100%; left:0; z-index:1000;
 	display:none; float:left; min-width:10rem;
-	padding:.5rem 0; margin:.125rem 0 0;
+	padding:0; margin:0;
+	display:flex; flex-direction:column;
+	border-radius:.125rem; border:1px solid #009688;
 }
 .dropdown-menu.show { display:block; }
+
+.dropdown-item {
+	display:flex; flex-direction:row; align-items:center;
+	padding:8px 10px 0; margin:0;
+}
