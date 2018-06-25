@@ -33,36 +33,44 @@
 			<div class="container active">
 				
 				<div class="flex-col grow">
-					<div class="flex">
-						<a href="/" class="item">
-							<i class="icon fa fa-home"></i>
-							<span class="text">{% trans "Home" %}</span>
-						</a>
-						
-						<a href="/search" class="item">
-							<i class="icon fa fa-search"></i>
-							<span class="text">{% trans "Search" %}</span>
-						</a>
-						
-						<a href="/map" class="item">
-							<i class="icon fa fa-globe"></i>
-							<span class="text">{% trans "Map" %}</span>
-						</a>
-						
-						<a href="/registration" class="item">
-							<i class="icon fa fa-plus-square"></i>
-							<span class="text">{% trans "Hunt" %}</span>
-						</a>
-						
-						<a href="/profile" class="item">
-							<i class="icon fa fa-user"></i>
-							<span class="text">{% trans "Profile" %}</span>
-						</a>
-					</div>
 					<div class="flex align-center">
 						
+						<div class="item">
+							<div class="dropdown">
+								<a class="btn dropdown-toggle" style="width:34px;" href data-toggle="dropdown">
+									<i class="fa fa-bars"></i>
+								</a>
+								<div class="dropdown-menu">
+									<a href="/" class="dropdown-item">
+										<i class="icon fa fa-home"></i>
+										<span class="text">{% trans "Home" %}</span>
+									</a>
+									
+									<a href="/search" class="dropdown-item">
+										<i class="icon fa fa-search"></i>
+										<span class="text">{% trans "Search" %}</span>
+									</a>
+									
+									<a href="/map" class="dropdown-item">
+										<i class="icon fa fa-globe"></i>
+										<span class="text">{% trans "Map" %}</span>
+									</a>
+									
+									<a href="/registration" class="dropdown-item">
+										<i class="icon fa fa-plus-square"></i>
+										<span class="text">{% trans "Hunt" %}</span>
+									</a>
+									
+									<a href="/profile" class="dropdown-item">
+										<i class="icon fa fa-user"></i>
+										<span class="text">{% trans "Profile" %}</span>
+									</a>
+								</div>
+							</div>
+						</div>
+						
 						<div class="item grow">
-							<input class="control" placeholder="{% trans "Mosaic name or creator" %}" ng-model="searchtext" />
+							<input class="control" ng-model="searchtext" />
 						</div>
 						
 						<div class="item">
