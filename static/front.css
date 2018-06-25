@@ -483,7 +483,7 @@ input[type=text].control { padding:0 10px 0 14px; }
 	position:absolute; top:100%; left:0; z-index:1000;
 	display:none; flex-direction:column; float:left; min-width:10rem;
 	padding:0; margin:.175rem 0 0 0;
-	border-radius:.125rem; border:1px solid #009688;
+	border-radius:.125rem; border:1px solid #5afbea;
 	background-color:#1f4549;
 }
 .dropdown-menu.show { display:flex; }
