@@ -55,7 +55,7 @@
 				
 				<div class="flex align-center" ng-show="searching">
 					<i class="item fa fa-spinner rotating"></i>
-					<span class="item">{% trans "Searching..." %}</span>
+					<span class="item">{% trans "Searching for " %}{{search_string|escape}}...</span>
 				</div>
 				
 			</div>
@@ -67,6 +67,10 @@
 			</div>
 				
 			<div class="section" ng-show="!searching && (mosaics.length > 0 || potentials.length > 0 || missions.length > 0)">
+				
+				<div class="flex align-center">
+					<span class="item">{% trans "Results for " %}{{search_string|escape}}</span>
+				</div>
 				
 				<div class="tab-row">
 				
