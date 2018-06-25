@@ -18,6 +18,7 @@ module.exports = function(grunt) {
 					'front/css/layout.css',
 					'front/css/button.css',
 					'front/css/form.css',
+					'front/css/dropdown.css',
 				],
 				dest: 'static/front.css'
 			},
