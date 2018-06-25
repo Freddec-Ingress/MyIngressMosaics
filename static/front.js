@@ -1181,7 +1181,7 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 	
 	/* Tab management */
 	
-	$scope.current_tab = 'roadmap';
+	$scope.current_tab = 'details';
 	
 	/* Page loading */
 	

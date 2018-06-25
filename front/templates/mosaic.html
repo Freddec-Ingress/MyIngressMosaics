@@ -72,7 +72,32 @@
 			</div>
 			
 			<div class="section">
+				
+				<div class="tab-row mt-big">
+				
+					<div class="tab" ng-click="current_tab='details'" ng-class="{'active':current_tab=='details'}">
+						{% trans "Details" %}
+					</div>
+					
+					<div class="tab" ng-click="current_tab='roadmap'" ng-class="{'active':current_tab=='roadmap'}">
+						{% trans "Roadmap" %}
+					</div>
+					
+					<div class="tab" ng-click="current_tab='missions'" ng-class="{'active':current_tab=='missions'}">
+						<i class="mr-small fa fa-exclamation-triangle color-danger" title="{% trans 'Some portals are unavailable!' %}" ng-show="mosaic.has_unavailable_portals"></i>
+						{% trans "Missions" %}
+					</div>
+					
+					<div class="tab" ng-click="current_tab='comments'" ng-class="{'active':current_tab=='comments'}">
+						{% trans "Comments" %}
+					</div>
+					
+				</div>
+				
+			</div>
 			
+			<div ng-show="current_tab=='details'">
+				
 				<div class="item flex-col">
 					
 					<span class="text-big color-light">[[mosaic.title]]</span>
@@ -225,27 +250,6 @@
 				
 			</div>
 			
-			<div class="section">
-				
-				<div class="tab-row mt-big">
-				
-					<div class="tab" ng-click="current_tab='roadmap'" ng-class="{'active':current_tab=='roadmap'}">
-						{% trans "Roadmap" %}
-					</div>
-					
-					<div class="tab" ng-click="current_tab='missions'" ng-class="{'active':current_tab=='missions'}">
-						<i class="mr-small fa fa-exclamation-triangle color-danger" title="{% trans 'Some portals are unavailable!' %}" ng-show="mosaic.has_unavailable_portals"></i>
-						{% trans "Missions" %}
-					</div>
-					
-					<div class="tab" ng-click="current_tab='comments'" ng-class="{'active':current_tab=='comments'}">
-						{% trans "Comments" %}
-					</div>
-					
-				</div>
-				
-			</div>
-				
 			<div ng-show="current_tab=='roadmap'">
 				
 				<div class="item pt-none">
