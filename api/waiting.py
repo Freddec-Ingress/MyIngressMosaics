@@ -45,8 +45,8 @@ def waiting_create(request):
 		mission_obj.order = data['order']
 		mission_obj.name = request.data['title']
 		mission_obj.save()
-	
-		mission_refs += '|' + item
+		
+		mission_refs += '|' + data['ref']
 	
 	waiting_obj = Waiting(country=country_obj, region=region_obj, city=city_obj, title=request.data['title'], mission_refs=mission_refs, mission_count=request.data['mission_count'])
 	waiting_obj.save()
