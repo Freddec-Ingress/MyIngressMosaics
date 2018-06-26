@@ -243,7 +243,11 @@ ul > li { list-style:none; }
 
 
 .block { display:block; }
+
 .hidden { display:none; }
+
+@media (min-width:768px) { .hidden-xl { display:none; } }
+@media (max-width:767px) { .hidden-xs { display:none; } }
 
 
 
