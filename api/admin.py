@@ -38,7 +38,14 @@ class RegionAdmin(admin.ModelAdmin):
 
 
 #---------------------------------------------------------------------------------------------------
-admin.site.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+
+	search_fields = ('user__username', )
+
+
+
+#---------------------------------------------------------------------------------------------------
+admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Country)
 admin.site.register(Region, RegionAdmin)
 admin.site.register(City, CityAdmin)
