@@ -42,6 +42,10 @@
 					<div class="tab" ng-click="current_tab='details'" ng-class="{'active':current_tab=='details'}">
 						{% trans "Details" %}
 					</div>
+					
+					<div class="tab" ng-click="current_tab='missions'" ng-class="{'active':current_tab=='missions'}">
+						{% trans "Missions" %}
+					</div>
 
 				</div>
 				
@@ -111,19 +115,65 @@
 								</a>
 							</div>
 						</div>
-						
-						<div class="flex align-center">
- 							<div class="item" >
-								<a href="/waiting/[[waiting.ref]]/manage">{% trans "Manage" %}</a>
-							</div>
-          				</div>
- 					
+					
     				</div>
     				
 				</div>
 				
 			</div>
-
+		    
+			<div ng-show="current_tab=='missions'">
+				
+				<div class="item pt-none">
+				    
+					<div class="item">
+						<div class="bg-block">
+							<div class="flex align-center pl-small pr-small text-small" ng-repeat="mission in missions track by $index" ng-show="mission.toremove==false" style="border-bottom:1px solid #000;">
+								
+								<div class="item" style="max-width:50px;min-width:50px;">
+									<input type="text" class="control control-mini" ng-blur="orderChange();" ng-model="mission.neworder" ng-init="mission.neworder=mission.order;" />
+								</div>
+								
+								<div class="item grow">
+									<span class="color-normal">[[mission.title]]</span>
+								</div>
+								
+								<div class="item">
+									<a ng-click="detect_order(mission);">
+										Detect order
+									</a>
+								</div>
+								
+								<div class="item">
+									<a ng-click="mission.toremove=true;">
+										Remove
+									</a>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+					
+					<div class="flex align-center">
+						
+						<div class="item">
+							<button class="btn" type="submit" ng-click="reorder();" ng-disabled="updating">
+								{% trans "Save" %}
+							</button>
+						</div>
+						
+						<div class="item">
+							<a ng-click="detect_order_all();">
+								Detect order all
+							</a>
+						</div>
+						
+					</div>
+				    
+				</div>
+				
+			</div>
+		    
 		</div>
 				
 	</div>
