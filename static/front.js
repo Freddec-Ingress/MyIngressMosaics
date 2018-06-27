@@ -3587,6 +3587,8 @@ angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function
 
 		$scope.mosaic = mosaic;
 		$scope.missions = missions;
+		
+		$scope.loaded = true;
 	}
 });
 
