@@ -42,11 +42,6 @@
 					<div class="tab" ng-click="current_tab='details'" ng-class="{'active':current_tab=='details'}">
 						{% trans "Details" %}
 					</div>
-					
-					<div class="tab" ng-click="current_tab='missions'" ng-class="{'active':current_tab=='missions'}">
-						<i class="mr-small fa fa-exclamation-triangle color-danger" title="{% trans 'Some missions are missing!' %}"></i>
-						{% trans "Missions" %}
-					</div>
 
 				</div>
 				
@@ -105,31 +100,30 @@
 
 						<div class="flex">
 							
-							<span class="item">[[missions.length]] {% trans "missions" %}</span>
+							<span class="item">[[missions.length]] / [[waiting.mission_count]] {% trans "missions" %}</span>
 
 						</div>
 						
 						<div class="flex wrap">
-							<div class="item" ng-repeat="creator in mosaic.creators">
+							<div class="item" ng-repeat="creator in creators">
 								<a href="/creator/[[creator.name]]/" ng-class="{'color-enlightened':creator.faction == 'E', 'color-resistant':creator.faction == 'R'}">
 									[[creator.name]]
 								</a>
 							</div>
 						</div>
-					
+						
+						<div class="flex align-center">
+ 							<div class="item" >
+								<a href="/waiting/[[waiting.ref]]/manage">{% trans "Manage" %}</a>
+							</div>
+          				</div>
+ 					
     				</div>
     				
 				</div>
 				
 			</div>
-		    
-			<div ng-show="current_tab=='missions'">
-				
-				<div class="item pt-none">
-				</div>
-				
-			</div>
-		    
+
 		</div>
 				
 	</div>
