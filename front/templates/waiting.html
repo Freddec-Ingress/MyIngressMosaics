@@ -86,6 +86,47 @@
     					
     				</div>
     				
+					<div class="flex wrap">
+					
+					    <div class="flex-col width-12 width-xl-7">
+						
+    						<div class="item flex">
+    							
+    							<div class="flex" style="width:100%;">
+    								
+    								<div class="flex wrap grow" style="width:100%;">
+    									
+								        <div ng-repeat="n in range track by $index" class="block mission-vignet" style="flex:0 0 16.666667%;">
+							                <img src="/static/img/mask.png" style="background-image:url([[getImage(waiting.mission_count - $index)]]=s70);" />
+							                <div class="color-dark" style="position:absolute;bottom:0;right:0;font-size:8px;">[[waiting.mission_count - $index]]</div>
+							            </div>
+
+    					            </div>
+    								
+    							</div>
+    							
+    						</div>
+    						
+					    </div>
+						
+					    <div class="flex-col width-12 width-xl-5">
+
+						<div class="flex">
+							
+							<span class="item">[[missions.length]] {% trans "missions" %}</span>
+
+						</div>
+						
+						<div class="flex wrap">
+							<div class="item" ng-repeat="creator in mosaic.creators">
+								<a href="/creator/[[creator.name]]/" ng-class="{'color-enlightened':creator.faction == 'E', 'color-resistant':creator.faction == 'R'}">
+									[[creator.name]]
+								</a>
+							</div>
+						</div>
+					
+    				</div>
+    				
 				</div>
 				
 			</div>
