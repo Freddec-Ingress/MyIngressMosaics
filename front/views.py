@@ -337,6 +337,7 @@ def waiting(request, ref):
 			'city_name': None,
 			'region_name': None,
 			'country_name': None,
+			'country_code': None,
 			'mission_count': None,
 		},
 		
@@ -350,6 +351,7 @@ def waiting(request, ref):
 	context['waiting']['city_name'] = waiting_obj.city.name
 	context['waiting']['region_name'] = waiting_obj.region.name
 	context['waiting']['country_name'] = waiting_obj.country.name
+	context['waiting']['country_code'] = waiting_obj.country.code
 	context['waiting']['mission_count'] = waiting_obj.mission_count
 	
 	mission_ref_array = waiting_obj.mission_refs.split('|')
