@@ -1,0 +1,528 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-26 17:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
+"2:1));\n"
+#: front/templates/base.html:43
+msgid "Home"
+msgstr ""
+
+#: front/templates/base.html:48 front/templates/map.html:13
+#: front/templates/map.html:17 front/templates/map.html:18
+#: front/templates/tag.html:83
+msgid "Map"
+msgstr ""
+
+#: front/templates/base.html:53 front/templates/registration.html:13
+#: front/templates/registration.html:17 front/templates/registration.html:18
+msgid "Hunt"
+msgstr ""
+
+#: front/templates/base.html:58 front/templates/profile.html:13
+#: front/templates/profile.html:17 front/templates/profile.html:18
+msgid "Profile"
+msgstr ""
+
+#: front/templates/city.html:30 front/templates/country.html:31
+#: front/templates/creator.html:31 front/templates/manage.html:33
+#: front/templates/map.html:30 front/templates/mosaic.html:33
+#: front/templates/profile.html:30 front/templates/region.html:30
+#: front/templates/registration.html:30 front/templates/search.html:30
+#: front/templates/tag.html:31 front/templates/world.html:31
+msgid "Loading page..."
+msgstr ""
+
+#: front/templates/city.html:45 front/templates/country.html:46
+#: front/templates/map.html:79 front/templates/region.html:45
+msgid "mosaics"
+msgstr ""
+
+#: front/templates/city.html:46 front/templates/country.html:47
+#: front/templates/region.html:46
+msgid "To be notified about new mosaics"
+msgstr ""
+
+#: front/templates/city.html:47 front/templates/country.html:48
+#: front/templates/region.html:47
+msgid "Notified"
+msgstr ""
+
+#: front/templates/city.html:51 front/templates/country.html:52
+#: front/templates/region.html:51
+msgid "You must be signed in to be notified."
+msgstr ""
+
+#: front/templates/city.html:52 front/templates/country.html:53
+#: front/templates/mosaic.html:191 front/templates/mosaic.html:396
+#: front/templates/profile.html:40 front/templates/region.html:52
+#: front/templates/registration.html:49
+msgid "Sign in"
+msgstr ""
+
+#: front/templates/city.html:84 front/templates/creator.html:54
+#: front/templates/profile.html:107 front/templates/region.html:72
+#: front/templates/search.html:62 front/templates/tag.html:87
+msgid "Mosaics"
+msgstr ""
+
+#: front/templates/city.html:88 front/templates/region.html:76
+#: front/templates/search.html:66
+msgid "Potentials"
+msgstr ""
+
+#: front/templates/city.html:103 front/templates/country.html:80
+#: front/templates/region.html:91 front/templates/tag.html:102
+#: front/templates/world.html:141 front/templates/world.html:218
+msgid "sort"
+msgstr ""
+
+#: front/templates/city.html:111 front/templates/region.html:105
+msgid "By missions"
+msgstr ""
+
+#: front/templates/city.html:117 front/templates/region.html:111
+msgid "By uniques"
+msgstr ""
+
+#: front/templates/city.html:123 front/templates/country.html:92
+#: front/templates/region.html:117 front/templates/registration.html:237
+#: front/templates/world.html:153 front/templates/world.html:230
+msgid "By name"
+msgstr ""
+
+#: front/templates/city.html:129 front/templates/region.html:123
+msgid "By date"
+msgstr ""
+
+#: front/templates/city.html:146 front/templates/region.html:170
+msgid "Page"
+msgstr ""
+
+#: front/templates/country.html:65
+msgid "Regions"
+msgstr ""
+
+#: front/templates/country.html:86 front/templates/world.html:147
+#: front/templates/world.html:224
+msgid "By mosaics"
+msgstr ""
+
+#: front/templates/creator.html:59 front/templates/manage.html:82
+#: front/templates/mosaic.html:88 front/templates/profile.html:112
+#: front/templates/search.html:70
+msgid "Missions"
+msgstr ""
+
+#: front/templates/manage.html:43
+msgid "You are not allowed to access this page."
+msgstr ""
+
+#: front/templates/manage.html:61 front/templates/registration.html:311
+#: front/templates/registration.html:414 front/templates/registration.html:514
+msgid "Back"
+msgstr ""
+
+#: front/templates/manage.html:78 front/templates/mosaic.html:79
+msgid "Details"
+msgstr ""
+
+#: front/templates/manage.html:86
+msgid "Adding"
+msgstr ""
+
+#: front/templates/manage.html:90
+msgid "Deletion"
+msgstr ""
+
+#: front/templates/manage.html:103
+msgid "Rename"
+msgstr ""
+
+#: front/templates/manage.html:114 front/templates/manage.html:138
+#: front/templates/manage.html:164 front/templates/manage.html:212
+#: front/templates/manage.html:262 front/templates/mosaic.html:64
+#: front/templates/profile.html:95 front/templates/profile.html:155
+msgid "Save"
+msgstr ""
+
+#: front/templates/manage.html:127
+msgid "Change location"
+msgstr ""
+
+#: front/templates/manage.html:151
+msgid "Owner message"
+msgstr ""
+
+#: front/templates/manage.html:235
+msgid "Missions to add"
+msgstr ""
+
+#: front/templates/manage.html:272
+msgid "Search for missions to add"
+msgstr ""
+
+#: front/templates/manage.html:278
+msgid "Mosaic name or creator"
+msgstr ""
+
+#: front/templates/manage.html:291 front/templates/registration.html:80
+#: front/templates/world.html:102
+msgid "Searching..."
+msgstr ""
+
+#: front/templates/manage.html:322
+msgid ""
+"Delete a mosaic is definitive. Mark it as obsolete could be an alternative "
+"to inform agents that it is not online anymore."
+msgstr ""
+
+#: front/templates/manage.html:327 front/templates/mosaic.html:377
+msgid "Delete"
+msgstr ""
+
+#: front/templates/map.html:41
+msgid "Enter location"
+msgstr ""
+
+#: front/templates/map.html:46
+msgid "Go"
+msgstr ""
+
+#: front/templates/map.html:65
+msgid "No mosaic. Please try to zoom out."
+msgstr ""
+
+#: front/templates/map.html:69
+msgid "Current map is too larger to be scanned. Please try to zoom in."
+msgstr ""
+
+#: front/templates/map.html:74
+msgid "Loading data..."
+msgstr ""
+
+#: front/templates/mosaic.html:46
+msgid "Comment"
+msgstr ""
+
+#: front/templates/mosaic.html:83
+msgid "Roadmap"
+msgstr ""
+
+#: front/templates/mosaic.html:87
+msgid "Some portals are unavailable!"
+msgstr ""
+
+#: front/templates/mosaic.html:92
+msgid "Comments"
+msgstr ""
+
+#: front/templates/mosaic.html:135
+msgid "Creator message"
+msgstr ""
+
+#: front/templates/mosaic.html:169 front/templates/profile.html:117
+msgid "Like"
+msgstr ""
+
+#: front/templates/mosaic.html:176 front/templates/profile.html:122
+msgid "To do"
+msgstr ""
+
+#: front/templates/mosaic.html:183 front/templates/profile.html:127
+msgid "Done"
+msgstr ""
+
+#: front/templates/mosaic.html:190
+msgid "You must be signed in to do this action."
+msgstr ""
+
+#: front/templates/mosaic.html:200 front/templates/registration.html:156
+msgid "missions"
+msgstr ""
+
+#: front/templates/mosaic.html:207 front/templates/mosaic.html:302
+msgid "waypoints"
+msgstr ""
+
+#: front/templates/mosaic.html:208
+msgid "portals"
+msgstr ""
+
+#: front/templates/mosaic.html:209
+msgid "uniques"
+msgstr ""
+
+#: front/templates/mosaic.html:232
+msgid "Mark as obsolete"
+msgstr ""
+
+#: front/templates/mosaic.html:236
+msgid "Not available anymore"
+msgstr ""
+
+#: front/templates/mosaic.html:244
+msgid "Manage"
+msgstr ""
+
+#: front/templates/mosaic.html:273
+msgid "Download KML file"
+msgstr ""
+
+#: front/templates/mosaic.html:306
+msgid "Unavailable"
+msgstr ""
+
+#: front/templates/mosaic.html:307
+msgid "Hack"
+msgstr ""
+
+#: front/templates/mosaic.html:308
+msgid "Capture"
+msgstr ""
+
+#: front/templates/mosaic.html:309
+msgid "View"
+msgstr ""
+
+#: front/templates/mosaic.html:310
+msgid "Passphrase"
+msgstr ""
+
+#: front/templates/mosaic.html:371
+msgid "Edit"
+msgstr ""
+
+#: front/templates/mosaic.html:391
+msgid "Post a comment"
+msgstr ""
+
+#: front/templates/mosaic.html:395
+msgid "You must be signed in to post comment."
+msgstr ""
+
+#: front/templates/profile.html:39 front/templates/registration.html:48
+msgid "You must be signed in to access this page."
+msgstr ""
+
+#: front/templates/profile.html:62 front/templates/profile.html:67
+msgid "Not defined"
+msgstr ""
+
+#: front/templates/profile.html:65 front/templates/profile.html:88
+msgid "Enlightened"
+msgstr ""
+
+#: front/templates/profile.html:66 front/templates/profile.html:89
+msgid "Resistant"
+msgstr ""
+
+#: front/templates/profile.html:70
+msgid "Sign out"
+msgstr ""
+
+#: front/templates/profile.html:81
+msgid "Please specify your faction"
+msgstr ""
+
+#: front/templates/profile.html:132
+msgid "Notifications"
+msgstr ""
+
+#: front/templates/profile.html:144
+msgid "Please specify your Ingress agent name"
+msgstr ""
+
+#: front/templates/region.html:99
+msgid "By city"
+msgstr ""
+
+#: front/templates/registration.html:39
+msgid "Creating mosaic..."
+msgstr ""
+
+#: front/templates/registration.html:61
+msgid "Search for registered missions"
+msgstr ""
+
+#: front/templates/registration.html:67
+msgid "Mission name, creator"
+msgstr ""
+
+#: front/templates/registration.html:88
+msgid "No mission"
+msgstr ""
+
+#: front/templates/registration.html:96
+msgid "To register missions"
+msgstr ""
+
+#: front/templates/registration.html:122
+msgid "Potential mosaics"
+msgstr ""
+
+#: front/templates/registration.html:123
+msgid "Only potential mosaics validated by MIM team are displayed here."
+msgstr ""
+
+#: front/templates/registration.html:124
+msgid "Feel free to register any mosaic you want."
+msgstr ""
+
+#: front/templates/registration.html:125
+msgid ""
+"To register mosaic not listed here, just search missions with form above."
+msgstr ""
+
+#: front/templates/registration.html:129
+msgid "No potential mosaic for the moment. Please retry later ;)"
+msgstr ""
+
+#: front/templates/registration.html:175
+msgid "Select All"
+msgstr ""
+
+#: front/templates/registration.html:179
+msgid "Unselect All"
+msgstr ""
+
+#: front/templates/registration.html:187 front/templates/registration.html:319
+#: front/templates/registration.html:422
+msgid "Next"
+msgstr ""
+
+#: front/templates/registration.html:210
+msgid "Columns"
+msgstr ""
+
+#: front/templates/registration.html:229
+msgid "Reorder"
+msgstr ""
+
+#: front/templates/registration.html:233
+msgid "Reverse"
+msgstr ""
+
+#: front/templates/registration.html:241
+msgid "By end"
+msgstr ""
+
+#: front/templates/registration.html:337
+msgid "Mosaic name"
+msgstr ""
+
+#: front/templates/registration.html:342 front/templates/registration.html:365
+msgid "Suggestion"
+msgstr ""
+
+#: front/templates/registration.html:361 front/templates/world.html:95
+msgid "City name"
+msgstr ""
+
+#: front/templates/registration.html:379
+msgid "Project"
+msgstr ""
+
+#: front/templates/registration.html:522
+msgid "Validate"
+msgstr ""
+
+#: front/templates/search.html:13 front/templates/search.html:17
+#: front/templates/search.html:18
+msgid "Search"
+msgstr ""
+
+#: front/templates/search.html:40
+msgid "Searching for "
+msgstr ""
+
+#: front/templates/search.html:48
+msgid "No result. Please refine your search."
+msgstr ""
+
+#: front/templates/search.html:55
+msgid "Results for "
+msgstr ""
+
+#: front/templates/tag.html:54
+msgid "Website"
+msgstr ""
+
+#: front/templates/tag.html:55
+msgid "Google+"
+msgstr ""
+
+#: front/templates/tag.html:56
+msgid "Telegram"
+msgstr ""
+
+#: front/templates/tag.html:65
+msgid "This project is not active anymore."
+msgstr ""
+
+#: front/templates/tag.html:110
+msgid "By country"
+msgstr ""
+
+#: front/templates/tag.html:116
+msgid "By mission"
+msgstr ""
+
+#: front/templates/world.html:41
+#, python-format
+msgid "%(count)s registered mosaics"
+msgstr ""
+
+#: front/templates/world.html:72
+msgid "Cities"
+msgstr ""
+
+#: front/templates/world.html:76
+msgid "Countries"
+msgstr ""
+
+#: front/templates/world.html:80
+msgid "Projects"
+msgstr ""
+
+#: front/templates/world.html:94
+msgid "Search for a city"
+msgstr ""
+
+#: front/templates/world.html:110
+msgid "City unknown"
+msgstr ""
+
+#: front/templates/world.html:118
+msgid "No registered mosaic"
+msgstr ""
+
+#: front/templates/world.html:122
+msgid "Be the first to register a mosaic for this city"
+msgstr ""
+
+#: front/templates/world.html:172
+msgid "Active"
+msgstr ""
+
+#: front/templates/world.html:185
+msgid "Following projects are not active anymore"
+msgstr ""
+
+#: front/templates/world.html:196
+msgid "Inactive"
+msgstr ""

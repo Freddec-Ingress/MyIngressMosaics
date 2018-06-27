@@ -3575,6 +3575,21 @@ angular.module('FrontModule.controllers').controller('ManagePageCtrl', function(
 		$scope.loaded = true;
 	}
 });
+angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function($scope) {
+    
+	/* Tab management */
+	
+	$scope.current_tab = 'details';
+    
+	/* Page init */
+	
+	$scope.init = function(mosaic, missions) {
+
+		$scope.mosaic = mosaic;
+		$scope.missions = missions;
+	}
+});
+
 angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', function($scope, $window, API, UtilsService) {
 	
 	/* Potential management */

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load jsonify %}
+
+{% block extra-head %}
+	
+	<link rel="canonical" href="https://www.myingressmosaics.com/waiting/{{waiting.ref}}" />
+	
+	<link rel="alternate" href="https://www.myingressmosaics.com/en/waiting/{{waiting.ref}}" hreflang="en" />
+	<link rel="alternate" href="https://www.myingressmosaics.com/fr/waiting/{{waiting.ref}}" hreflang="fr" />
+	<link rel="alternate" href="https://www.myingressmosaics.com/pt/waiting/{{waiting.ref}}" hreflang="pt" />
+
+	<title>MIM - {{mosaic.title}}</title>
+	
+	<meta property="og:url" content="https://www.myingressmosaics.com/waiting/{{waiting.ref}}" />
+	<meta property="og:title" content="MIM - {{waiting.title}}">
+	<meta property="og:headline" content="MIM - {{waiting.title}}" />
+	<meta property="og:description" content="{{waiting.country_name}} > {{waiting.region_name}} > {{waiting.city_name}} &middot; {{waiting.mission_count}} missions" />
+
+	<meta name="description" content="{{waiting.country_name}} > {{waiting.region_name}} > {{waiting.city_name}} &middot; {{waiting.mission_count}} missions" />
+
+{% endblock %}
+
+{% block content %}
+
+	<div id="content" ng-controller="WaitingPageCtrl" ng-init="init({{waiting|jsonify}}, {{missions|jsonify}});">
+	
+		<div id="loading" ng-hide="loaded" class="section">
+			<div class="item flex justify-center align-center">
+				<i class="fa fa-spinner rotating"></i>
+				<span class="ml-small">{% trans "Loading page..." %}</span>
+			</div>
+		</div>
+		
+		<div class="container" ng-class="{'active':loaded}">
+		    
+		    
+		    
+		</div>
+				
+	</div>
+
+{% endblock %}
+
+{% block script %}
+
+	<script src="/static/front.js"></script>
+
+{% endblock %}

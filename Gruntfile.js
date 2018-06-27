@@ -45,6 +45,7 @@ module.exports = function(grunt) {
 					'front/scripts/ctrl.page.creator.js',
 					'front/scripts/ctrl.page.tag.js',
 					'front/scripts/ctrl.page.manage.js',
+					'front/scripts/ctrl.page.waiting.js',
 					'front/scripts/adm.potential.js',
 					'front/scripts/adm.compare.js',
 					'front/scripts/adm.city.js',

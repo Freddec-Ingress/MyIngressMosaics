@@ -15,7 +15,7 @@ from django.utils.translation import gettext as _
 
 from api.models import *
 
-from urllib.request import Request
+#from urllib.request import Request
 
 from PIL import Image
 
@@ -322,6 +322,16 @@ def mosaic(request, ref):
 	context['mission_count'] = len(context['missions'])
 	
 	return render(request, 'mosaic.html', context)
+	
+	
+	
+#---------------------------------------------------------------------------------------------------
+def waiting(request, ref):
+	
+	context = {
+	}
+	
+	return render(request, 'waiting.html', context)
 
 
 
