@@ -15,7 +15,7 @@ from django.utils.translation import gettext as _
 
 from api.models import *
 
-#from urllib.request import Request
+from urllib.request import Request
 
 from PIL import Image
 

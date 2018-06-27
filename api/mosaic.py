@@ -15,7 +15,7 @@ from .models import *
 import cloudinary
 import cloudinary.uploader
 
-#from urllib.request import Request
+from urllib.request import Request
 
 
 
