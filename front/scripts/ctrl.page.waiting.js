@@ -27,7 +27,7 @@ angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function
 		$scope.missions = missions;
 		
 		$scope.range = [];
-	    for (var i = 0; i < $scope.mission_count; i++) {
+	    for (var i = 0; i < $scope.waiting.mission_count; i++) {
 	    	$scope.range.push(i);
 	    }
 
