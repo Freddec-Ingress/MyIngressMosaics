@@ -329,7 +329,45 @@ def mosaic(request, ref):
 def waiting(request, ref):
 	
 	context = {
+		
+		'waiting': {
+			
+			'ref': None,
+			'title': None,
+			'city_name': None,
+			'region_name': None,
+			'country_name': None,
+			'mission_count': None,
+		},
+		
+		'creators': [],
+		'missions': [],
 	}
+	
+	waiting_obj = Waiting.objects.get(ref=ref)
+	context['waiting']['ref'] = waiting_obj.ref
+	context['waiting']['title'] = waiting_obj.title
+	context['waiting']['city_name'] = waiting_obj.city.name
+	context['waiting']['region_name'] = waiting_obj.region.name
+	context['waiting']['country_name'] = waiting_obj.country.name
+	context['waiting']['mission_count'] = waiting_obj.mission_count
+	
+	mission_ref_array = waiting_obj.mission_refs.split('|')
+	for mission_ref in mission_ref_array:
+		if mission_ref:
+			
+			mission_obj = Mission.objects.get(ref=mission_ref)
+			mission_data = {
+				'ref': mission_obj.ref,
+				'title': mission_obj.title,
+				'order': mission_obj.order,
+				'image': mission_obj.image,
+				'title': mission_obj.title,
+			}
+			context['missions'].append(mission_data)
+			
+			if mission_obj.creator not in context['creators']:
+				context['creators'].append({ 'name':mission_obj.creator, 'faction':mission_obj.faction })
 	
 	return render(request, 'waiting.html', context)
 
