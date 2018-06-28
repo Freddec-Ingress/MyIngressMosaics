@@ -28,7 +28,13 @@ def ext_isMissionRegistered(request):
 			if mission_obj.mosaic:
 				data.append({'mid':item['mid'], 'status':'completed', 'mosaicref':mission_obj.mosaic.ref, 'startLat':mission_obj.startLat, 'startLng':mission_obj.startLng})
 			else:
-				data.append({'mid':item['mid'], 'name':mission_obj.title, 'status':'registered', 'startLat':mission_obj.startLat, 'startLng':mission_obj.startLng})
+				
+				waiting_results = Waiting.objects.filter(mission_refs__icontains=item['mid'])
+				if waiting_results.count() > 0:
+					waiting_obj = waiting_results[0]
+					data.append({'mid':item['mid'], 'name':mission_obj.title, 'status':'incomplete', 'waitingref':waiting_obj.ref, 'startLat':mission_obj.startLat, 'startLng':mission_obj.startLng})
+				else:
+					data.append({'mid':item['mid'], 'name':mission_obj.title, 'status':'registered', 'startLat':mission_obj.startLat, 'startLng':mission_obj.startLng})
 				
 		else:
 			data.append({'mid':item['mid'], 'status':'notregistered'})
