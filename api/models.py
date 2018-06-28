@@ -791,7 +791,7 @@ class Waiting(models.Model):
 			'range':[],
 		}
 		
-		for i in range(self.mission_count+1):
+		for i in range(self.mission_count):
 			data['range'].append({ 'index':i, 'image':None });
 		
 		mission_ref_array = self.mission_refs.split('|')
@@ -801,7 +801,7 @@ class Waiting(models.Model):
 				data['mission_count'] += 1
 				
 				mission_obj = Mission.objects.get(ref=mission_ref)
-				data['range'][mission_obj.order]['image'] = mission_obj.image
+				data['range'][mission_obj.order - 1]['image'] = mission_obj.image
 		
 		return data
 

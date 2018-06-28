@@ -991,7 +991,7 @@ angular.module('FrontModule.directives').directive('waiting', function() {
 					'<a class="item" href="/waiting/[[waiting.ref]]" target="_blank" style="display:block; width:224px;">' +
 						'<div class="flex wrap shrink" style="max-width:100%;">' +
 							
-					        '<div ng-repeat="n in waiting.range track by $index" class="block mission-vignet" style="flex:0 0 16.666667%;">' +
+					        '<div ng-repeat="n in waiting.range|reverse track by $index" class="block mission-vignet" style="flex:0 0 16.666667%;">' +
 				            	'<img src="/static/img/mask.png" style="background-image:url([[n.image]]=s70);" />' +
 				            '</div>' +
 							
