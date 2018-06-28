@@ -21,6 +21,18 @@ angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function
 		}
 	}
 	
+	$scope.reorderAsc = function() {
+		
+		var index = 0;
+		for (var m of $scope.missions) {
+			
+			index += 1;
+			m.order = index;
+		}
+		
+		$scope.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
+	}
+	
 	$scope.reorder = function() {
 		
 		for (var mission of $scope.missions) {
