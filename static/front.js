@@ -3850,7 +3850,7 @@ angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', functio
 		
 		var data = { 'country_name':$scope.country, 'region_name':$scope.region, 'city_name':$scope.city, 'missions':missions, 'title':new_name, 'mission_count':$scope.mission_count };
 		API.sendRequest('/api/waiting/create/', 'POST', {}, data).then(function() {
-			$window.location.href = '/adm/potential';
+			$window.location.href = '/adm/missions';
 		});
 	}
 
@@ -3901,7 +3901,7 @@ angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', functio
 		var data = { 'refs':refs, 'title':new_name, 'country':$scope.country, 'region':$scope.region, 'city':$scope.city };
 		API.sendRequest('/api/potential/create/', 'POST', {}, data);
 			
-		$window.location.href = '/adm/potential';
+		$window.location.href = '/adm/missions';
 	}
 	
 	$scope.clipboardCopy = function() {
