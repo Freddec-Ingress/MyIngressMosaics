@@ -22,9 +22,22 @@ angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function
 	}
 	
 	$scope.reorder = function() {
+		
 		for (var mission of $scope.missions) {
 			API.sendRequest('/api/mission/reorder/', 'POST', {}, mission);
 		}
+		
+		$scope.missions.sort(function(a, b) {
+			
+			if (parseInt(a.order) < parseInt(b.order))
+				return -1;
+				
+			if (parseInt(a.order) > parseInt(b.order))
+				return 1;
+			
+			return 0;
+		});
+		
 		$scope.current_tab = 'details';
 		window.scrollTo(0, 0);
 	}
