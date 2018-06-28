@@ -63,10 +63,10 @@ angular.module('FrontModule.directives').directive('waiting', function() {
 					
 					'<a class="item" href="/waiting/[[waiting.ref]]" target="_blank" style="display:block;">' +
 						'<div class="flex align-center">' +
-							'<i class="mr-normal text-small fa fa-exclamation-triangle color-muted" title="Some missions are missing!"></i>' +
+							'<i class="mr-normal text-small fa fa-exclamation-triangle color-danger" title="Some missions are missing!"></i>' +
 							'<span class="mr-normal grow text-medium color-light ellipsis" title="[[waiting.title]]">[[waiting.title]]</span>' +
 						'</div>' +
-						'<span class="text-small color-dark"><span class="color-normal">[[waiting.mission_count]]</span> missions' +
+						'<span class="text-small color-dark"><span class="color-normal">[[waiting.mission_count]] / [[waiting.total_count]]</span> missions' +
 					'</a>' +
 					
 					'<div class="item pt-none">' +
@@ -81,7 +81,6 @@ angular.module('FrontModule.directives').directive('waiting', function() {
 							
 					        '<div ng-repeat="n in waiting.range track by $index" class="block mission-vignet" style="flex:0 0 16.666667%;">' +
 				            	'<img src="/static/img/mask.png" style="background-image:url([[range.image]]=s70);" />' +
-				                '<div class="color-dark" style="position:absolute;bottom:0;right:0;font-size:8px;">[[waiting.mission_count - $index]]</div>' +
 				            '</div>' +
 							
 						'</div>' +

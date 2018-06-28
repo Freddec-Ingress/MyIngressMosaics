@@ -801,7 +801,7 @@ class Waiting(models.Model):
 				data['mission_count'] += 1
 				
 				mission_obj = Mission.objects.get(ref=mission_ref)
-				data['range'][mission_obj.order] = mission_obj.image
+				data['range'][mission_obj.order]['image'] = mission_obj.image
 		
 		return data
 
