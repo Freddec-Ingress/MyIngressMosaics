@@ -1,5 +1,7 @@
-angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function($scope, API, UtilsService) {
-    
+angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function($scope, $auth, API, UtilsService) {
+ 
+	$scope.authenticated = $auth.isAuthenticated();
+   
 	/* Waiting management */
 	
 	$scope.getImage = function(index) {

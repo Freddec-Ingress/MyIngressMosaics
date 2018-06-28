@@ -43,7 +43,7 @@
 						{% trans "Details" %}
 					</div>
 					
-					<div class="tab" ng-click="current_tab='missions'" ng-class="{'active':current_tab=='missions'}">
+					<div ng-if="authenticated" class="tab" ng-click="current_tab='missions'" ng-class="{'active':current_tab=='missions'}">
 						{% trans "Missions" %}
 					</div>
 
@@ -124,7 +124,7 @@
 		    
 		    </div>
 		    
-			<div ng-show="current_tab=='missions'">
+			<div ng-if="authenticated" ng-show="current_tab=='missions'">
 				
 				<div class="item pt-none">
 				    

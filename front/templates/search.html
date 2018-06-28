@@ -61,6 +61,10 @@
 					<div class="tab" ng-show="mosaics.length > 0" ng-click="current_tab='mosaic'" ng-class="{'active':current_tab=='mosaic'}">
 						{% trans "Mosaics" %} <span class="ml-normal badge">[[mosaics.length]]</span>
 					</div>
+				
+					<div class="tab" ng-show="waitings.length > 0" ng-click="current_tab='waiting'" ng-class="{'active':current_tab=='waiting'}">
+						{% trans "Waitings" %} <span class="ml-normal badge">[[waitings.length]]</span>
+					</div>
 					
 					<div class="tab" ng-show="potentials.length > 0" ng-click="current_tab='potential'" ng-class="{'active':current_tab=='potential'}">
 						{% trans "Potentials" %} <span class="ml-normal badge">[[potentials.length]]</span>
@@ -79,6 +83,16 @@
 				<div class="item">
 					<div class="flex wrap">
 						<mosaic ng-repeat="mosaic in mosaics track by $index" mosaic="mosaic"></mosaic>
+					</div>
+				</div>
+	
+			</div>
+				
+			<div ng-show="current_tab=='waiting'">
+				
+				<div class="item">
+					<div class="flex wrap">
+						<waiting ng-repeat="waiting in waitings track by $index" waiting="waiting"></waiting>
 					</div>
 				</div>
 	

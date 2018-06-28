@@ -48,6 +48,7 @@ def search_mosaics(request):
 	data = {
 		
 		'mosaics':[],
+		'waitings':[],
 		'missions':[],
 		'potentials':[],
 	}
@@ -57,6 +58,12 @@ def search_mosaics(request):
 	results = Mosaic.objects.filter(Q(creators__icontains=request.data['text']) | Q(title__icontains=request.data['text']) | Q(city__name__icontains=request.data['text']))
 	for mosaic_obj in results:
 		data['mosaics'].append(mosaic_obj.getOverviewData())
+	
+	# Waiting data
+	
+	results = Waiting.objects.filter(Q(title__icontains=request.data['text']) | Q(city__name__icontains=request.data['text']))
+	for waiting_obj in results:
+		data['waiting'].append(waiting_obj.getOverviewData())
 	
 	# Potentials data
 	
