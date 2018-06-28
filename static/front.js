@@ -3036,11 +3036,12 @@ angular.module('FrontModule.controllers').controller('CityPageCtrl', function($s
 
 	/* Page loading */
 
-	$scope.init = function(city, mosaics, potentials, mosaics_date_indexes, mosaics_name_indexes, mosaics_uniques_indexes, mosaics_missions_indexes) {
+	$scope.init = function(city, mosaics, waitings, potentials, mosaics_date_indexes, mosaics_name_indexes, mosaics_uniques_indexes, mosaics_missions_indexes) {
 
 		$scope.city = city;
 		
 		$scope.mosaics = mosaics;
+		$scope.waitings = waitings;
 		$scope.potentials = potentials;
 		
 		$scope.mosaics_date_indexes = mosaics_date_indexes;

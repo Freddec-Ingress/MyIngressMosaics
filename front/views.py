@@ -763,6 +763,9 @@ def city(request, country_name, region_name, city_name):
 		'mosaic_count':0,
 		'mosaics':[],
 		
+		'waiting_count':0,
+		'waitings':[],
+		
 		'potential_count':0,
 		'potentials':[],
 		
@@ -819,6 +822,16 @@ def city(request, country_name, region_name, city_name):
 		missions_index = mosaic_data['mission_count']
 		if missions_index not in data['mosaics_missions_indexes']:
 			data['mosaics_missions_indexes'].append(missions_index)
+
+	# Waiting data
+	
+	results = city_obj.waitings.all().order_by('-mission_count')
+	for waiting_obj in results:
+		
+		waiting_data = waiting_obj.getOverviewData()
+		
+		data['waitings'].append(waiting_data)
+		data['waiting_count'] += 1
 	
 	# Potentials data
 	

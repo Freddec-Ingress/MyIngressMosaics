@@ -22,7 +22,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="CityPageCtrl" ng-init="init({{city}}, {{mosaics}}, {{potentials}}, {{mosaics_date_indexes}}, {{mosaics_name_indexes}}, {{mosaics_uniques_indexes}}, {{mosaics_missions_indexes}});">
+	<div id="content" ng-controller="CityPageCtrl" ng-init="init({{city}}, {{mosaics}}, {{waitings}}, {{potentials}}, {{mosaics_date_indexes}}, {{mosaics_name_indexes}}, {{mosaics_uniques_indexes}}, {{mosaics_missions_indexes}});">
 
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
@@ -80,8 +80,12 @@
 				
 				<div class="tab-row">
 				
-					<div class="tab" ng-click="current_tab='mosaics'" ng-class="{'active':current_tab=='mosaics'}">
+					<div ng-show="mosaic_count > 0" class="tab" ng-click="current_tab='mosaics'" ng-class="{'active':current_tab=='mosaics'}">
 						{% trans "Mosaics" %}
+					</div>
+				
+					<div ng-show="waiting_count > 0" class="tab" ng-click="current_tab='waitings'" ng-class="{'active':current_tab=='waitings'}">
+						{% trans "Incompletes" %}
 					</div>
 				
 					<div ng-show="potential_count > 0" class="tab" ng-click="current_tab='potentials'" ng-class="{'active':current_tab=='potentials'}">
