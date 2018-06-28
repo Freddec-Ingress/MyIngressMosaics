@@ -782,13 +782,26 @@ class Waiting(models.Model):
 			'ref':self.ref,
 			'title':self.title,
 			'city_name':self.city.name,
+			'total_count':self.mission_count,
 			'region_name':self.region.name,
 			'country_name':self.country.name,
 			'country_code':self.country.code,
-			'mission_count':self.mission_count,
+			'mission_count':0,
 			
 			'range':[],
 		}
+		
+		for i in range(self.mission_count):
+			data['range'].append({ 'index':i, 'image':None });
+		
+		mission_ref_array = self.mission_refs.split('|')
+		for mission_ref in mission_ref_array:
+			if mission_ref:
+				
+				data['mission_count'] += 1
+				
+				mission_obj = Mission.objects.get(ref=mission_ref)
+				data['range'][mission_obj.order] = mission_obj.image
 		
 		return data
 
