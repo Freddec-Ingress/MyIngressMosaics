@@ -1927,6 +1927,7 @@ angular.module('FrontModule.controllers').controller('SearchPageCtrl', function(
 	/* Search management */
 	
 	$scope.mosaics = null;
+	$scope.waitings = null;
 	$scope.potentials = null;
 	$scope.missions = null;
 	
@@ -1941,6 +1942,7 @@ angular.module('FrontModule.controllers').controller('SearchPageCtrl', function(
 		$scope.searching = true;
 		
 		$scope.mosaics = null;
+		$scope.waitings = null;
 		$scope.potentials = null;
 		$scope.missions = null;
 		
@@ -1968,6 +1970,16 @@ angular.module('FrontModule.controllers').controller('SearchPageCtrl', function(
 				mosaic.offset = new Array(temp);
 			}
 
+			$scope.waitings = response.waitings;
+			
+			$scope.waitings.sort(function(a, b) {
+				
+				if (a.mission_count > b.mission_count) return -1;
+				if (a.mission_count < b.mission_count) return 1;
+				
+				return 0;
+			});
+			
 			$scope.potentials = response.potentials;
 
 			$scope.potentials.sort(function(a, b) {
