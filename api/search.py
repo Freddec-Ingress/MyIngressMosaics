@@ -63,7 +63,7 @@ def search_mosaics(request):
 	
 	results = Waiting.objects.filter(Q(title__icontains=request.data['text']) | Q(city__name__icontains=request.data['text']))
 	for waiting_obj in results:
-		data['waiting'].append(waiting_obj.getOverviewData())
+		data['waitings'].append(waiting_obj.getOverviewData())
 	
 	# Potentials data
 	
