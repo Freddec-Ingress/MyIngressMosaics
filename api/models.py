@@ -791,7 +791,7 @@ class Waiting(models.Model):
 			'range':[],
 		}
 		
-		for i in range(self.mission_count):
+		for i in range(self.mission_count+1):
 			data['range'].append({ 'index':i, 'image':None });
 		
 		mission_ref_array = self.mission_refs.split('|')
