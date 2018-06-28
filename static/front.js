@@ -3602,6 +3602,8 @@ angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function
 		for (var mission of $scope.missions) {
 			API.sendRequest('/api/mission/reorder/', 'POST', {}, mission);
 		}
+		$scope.current_tab = 'details';
+		window.scrollTo(0, 0);
 	}
 	
 	/* Tab management */
@@ -3610,9 +3612,10 @@ angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function
     
 	/* Page init */
 	
-	$scope.init = function(waiting, missions) {
+	$scope.init = function(waiting, missions, creators) {
 
 		$scope.waiting = waiting;
+		$scope.creators = creators;
 		$scope.missions = missions;
 		
 		$scope.range = [];

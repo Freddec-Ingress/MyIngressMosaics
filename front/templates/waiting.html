@@ -24,7 +24,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="WaitingPageCtrl" ng-init="init({{waiting|jsonify}}, {{missions|jsonify}});">
+	<div id="content" ng-controller="WaitingPageCtrl" ng-init="init({{waiting|jsonify}}, {{missions|jsonify}}, {{creators|jsonify}});">
 	
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
