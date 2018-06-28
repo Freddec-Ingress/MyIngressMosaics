@@ -354,6 +354,8 @@ def waiting(request, ref):
 	context['waiting']['country_code'] = waiting_obj.country.code
 	context['waiting']['mission_count'] = waiting_obj.mission_count
 	
+	creator_name_list = []
+	
 	mission_ref_array = waiting_obj.mission_refs.split('|')
 	for mission_ref in mission_ref_array:
 		if mission_ref:
@@ -368,7 +370,8 @@ def waiting(request, ref):
 			}
 			context['missions'].append(mission_data)
 			
-			if mission_obj.creator not in context['creators']:
+			if mission_obj.creator not in creator_name_list:
+				creator_name_list.append(mission_obj.creator);
 				context['creators'].append({ 'name':mission_obj.creator, 'faction':mission_obj.faction })
 	
 	return render(request, 'waiting.html', context)
