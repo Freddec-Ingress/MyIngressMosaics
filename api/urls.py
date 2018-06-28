@@ -11,6 +11,7 @@ from .link import *
 from .notif import *
 from .search import *
 from .mosaic import *
+from .mission import *
 from .waiting import *
 from .comment import *
 from .location import *
@@ -68,6 +69,8 @@ urlpatterns = [
 	
 	url(r'^notif/create/', notif_create),
 	url(r'^notif/delete/', notif_delete),
+	
+	url(r'^mission/reorder/', mission_reorder),
 	
 	url(r'^im/city/', im_city),
 	url(r'^im/region/', im_region),

@@ -12,18 +12,18 @@ angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function
 	}
 	
 	$scope.detect_order = function(mission) {
-		mission.neworder = UtilsService.getOrderFromMissionName(mission.title);
+		mission.order = UtilsService.getOrderFromMissionName(mission.title);
 	}
 	
 	$scope.detect_order_all = function() {
 		for (var mission of $scope.missions) {
-			mission.neworder = UtilsService.getOrderFromMissionName(mission.title);
+			mission.order = UtilsService.getOrderFromMissionName(mission.title);
 		}
 	}
 	
 	$scope.reorder = function() {
 		for (var mission of $scope.missions) {
-			API.sendRequest('/api/mosaic/reorder/', 'POST', {}, mission);
+			API.sendRequest('/api/mission/reorder/', 'POST', {}, mission);
 		}
 	}
 	
