@@ -15,7 +15,7 @@ from .models import *
 @permission_classes((IsAuthenticated, ))
 def mission_reorder(request):
 	
-	mission_obj = Mission.objects.get(id=request.data['ref'])
+	mission_obj = Mission.objects.get(ref=request.data['ref'])
 	mission_obj.order = request.data['order']
 	mission_obj.save()
 	
