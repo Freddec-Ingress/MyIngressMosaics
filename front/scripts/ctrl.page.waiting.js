@@ -1,4 +1,4 @@
-angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function($scope) {
+angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function($scope, API, UtilsService) {
     
 	/* Waiting management */
 	
@@ -9,6 +9,22 @@ angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function
 			}
 		}
 		return null;
+	}
+	
+	$scope.detect_order = function(mission) {
+		mission.neworder = UtilsService.getOrderFromMissionName(mission.title);
+	}
+	
+	$scope.detect_order_all = function() {
+		for (var mission of $scope.missions) {
+			mission.neworder = UtilsService.getOrderFromMissionName(mission.title);
+		}
+	}
+	
+	$scope.reorder = function() {
+		for (var mission of $scope.missions) {
+			API.sendRequest('/api/mosaic/reorder/', 'POST', {}, mission);
+		}
 	}
 	
 	/* Tab management */
