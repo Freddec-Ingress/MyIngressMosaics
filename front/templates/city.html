@@ -80,15 +80,15 @@
 				
 				<div class="tab-row">
 				
-					<div ng-show="mosaic_count > 0" class="tab" ng-click="current_tab='mosaics'" ng-class="{'active':current_tab=='mosaics'}">
+					<div ng-show="{{mosaic_count}} > 0" class="tab" ng-click="current_tab='mosaics'" ng-class="{'active':current_tab=='mosaics'}">
 						{% trans "Mosaics" %}
 					</div>
 				
-					<div ng-show="waiting_count > 0" class="tab" ng-click="current_tab='waitings'" ng-class="{'active':current_tab=='waitings'}">
+					<div ng-show="{{waiting_count}} > 0" class="tab" ng-click="current_tab='waitings'" ng-class="{'active':current_tab=='waitings'}">
 						{% trans "Incompletes" %}
 					</div>
 				
-					<div ng-show="potential_count > 0" class="tab" ng-click="current_tab='potentials'" ng-class="{'active':current_tab=='potentials'}">
+					<div ng-show="{{potential_count}} > 0" class="tab" ng-click="current_tab='potentials'" ng-class="{'active':current_tab=='potentials'}">
 						{% trans "Potentials" %}
 					</div>
 					
@@ -228,6 +228,16 @@
 					
 				</div>
 			
+			</div>
+			
+			<div ng-show="current_tab=='waitings'">
+				
+				<div class="item">
+					<div class="flex wrap">
+						<waiting ng-repeat="waiting in waitings track by $index" waiting="waiting"></waiting>
+					</div>
+				</div>
+				
 			</div>
 			
 			<div ng-show="current_tab=='potentials'">

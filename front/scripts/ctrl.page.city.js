@@ -151,5 +151,9 @@ angular.module('FrontModule.controllers').controller('CityPageCtrl', function($s
 		$scope.sortMosaicsByMissions();
 		
 		$scope.loaded = true;
+		
+		$scope.current_tab = 'mosaics';
+		if ($scope.mosaics.length < 1) $scope.current_tab = 'waitings';
+		if ($scope.waitings.length < 1) $scope.current_tab = 'potentials';
 	}
 });
