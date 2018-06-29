@@ -3071,8 +3071,8 @@ angular.module('FrontModule.controllers').controller('CityPageCtrl', function($s
 		$scope.loaded = true;
 		
 		$scope.current_tab = 'mosaics';
-		if ($scope.mosaics.length < 1) { $scope.current_tab = 'waitings'; }
-		else if ($scope.waitings.length < 1) { $scope.current_tab = 'potentials'; }
+		if ($scope.mosaics.length < 1 && $scope.waitings.length > 0) { $scope.current_tab = 'waitings'; }
+		if ($scope.mosaics.length < 1 && $scope.waitings.length < 1 && $scope.potentials.length > 0) { $scope.current_tab = 'potentials'; }
 	}
 });
 angular.module('FrontModule.controllers').controller('CreatorPageCtrl', function($scope, $window, API) {
