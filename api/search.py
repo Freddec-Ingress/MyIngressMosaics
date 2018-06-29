@@ -77,12 +77,6 @@ def search_mosaics(request):
 	for mission_obj in results:
 		data['missions'].append(mission_obj.getOverviewData())
 
-	# Empty search
-	
-	if not request.user.is_superuser and len(data['mosaics']) == 0 and len(data['potentials']) == 0 and len(data['missions']) == 0:
-		search = Search(name=request.data['text'])
-		search.save()
-			
 	return Response(data, status=status.HTTP_200_OK)
 	
 	
