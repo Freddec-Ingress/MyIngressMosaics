@@ -1460,6 +1460,7 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 	/* Tab management */
 	
 	$scope.current_step = 0;
+	$scope.current_tab = 'missions';
 	
 	$scope.open_step = function(id) {
 		
