@@ -1444,8 +1444,6 @@ angular.module('FrontModule.controllers').controller('MosaicPageCtrl', function(
 		
 		$scope.offset = new Array(temp);
 
-		$scope.initMap();
-		
 		$scope.loaded = true;
 	}
 });
