@@ -57,147 +57,176 @@
 			
 				<div class="section">
 					
-					<div class="item pb-none">
-						<span class="color-normal">{% trans "Search for registered missions" %}</span>
-					</div>
-					
-					<form class="flex">
+					<div class="tab-row">
 						
-						<div class="item grow">
-							<input class="control" placeholder="{% trans "Mission name, creator" %}" ng-model="searchText" />
+						<div class="tab" ng-click="current_tab='missions'" ng-class="{'active':current_tab=='missions'}">
+							{% trans "Missions" %}
+						</div>
+					
+						<div class="tab" ng-click="current_tab='potentials'" ng-class="{'active':current_tab=='potentials'}">
+							{% trans "Potentials" %}
+							<span class="ml-normal badge">{{potential_count}}</span>
 						</div>
 						
-						<div class="item">
-							<button class="btn" style="width:65px;" type="submit" ng-click="refreshMissions(searchText);">
-								<i class="fa fa-search"></i>
-							</button>
-						</div>
-						
-					</form>
-					
-					<div class="flex align-center" ng-if="refreshing">
-						<i class="item fa fa-spinner rotating"></i>
-						<span class="item">{% trans "Searching..." %}</span>
-					</div>
-					
-				</div>
-
-				<div ng-if="!refreshing && missions && missions.length < 1">
-					
-					<div class="item">
-						<span class="item color-dark">{% trans "No mission" %}</span>
-					</div>
-					
-				</div>
-					
-				<div class="section" ng-if="!refreshing && (!missions || missions.length < 1)">
-					
-					<div class="item pb-none">
-						<span class="color-normal">{% trans "To register missions" %}</span>
-					</div>
-					
-					<div class="flex wrap">
-						
-				    	<div class="item flex-col justify-center align-center">
-				    		<a class="btn flex align-center" href="https://www.myingressmosaics.com/static/mim-view.user.js" style="width:180px;">
-				    			<i class="item fa fa-plus-square"></i>
-				    			<span class="item">IITC MIM Plugin</span>
-				    		</a>
-				    	</div>
-						
-				    	<div class="item flex-col justify-center align-center">
-				    		<a class="btn flex align-center" href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank" style="width:180px;">
-				    			<i class="item fa fa-plus-square"></i>
-				    			<span class="item">MIM Hunting Tool</span>
-				    		</a>
-				    	</div>
-				    	
-					</div>
-					
-				</div>
-
-				<div class="section" ng-if="!refreshing && (!missions || missions.length < 1)">
-					
-					<div class="item flex-col">
-						<span class="color-normal mb-small">{% trans "Potential mosaics" %}</span>
-						<span class="color-dark">{% trans "Only potential mosaics validated by MIM team are displayed here." %}</span>
-						<span class="color-dark">{% trans "Feel free to register any mosaic you want." %}</span>
-						<span class="color-dark">{% trans "To register mosaic not listed here, just search missions with form above." %}</span>
-					</div>
-					
-					<div class="item flex-col" ng-if="!countries || countries.length < 1">
-						<span class="color-muted">{% trans "No potential mosaic for the moment. Please retry later ;)" %}</span>
-					</div>
-					
-					<div class="flex-col mb-normal" ng-repeat="country in countries">
-					
-						<div class="flex">
-							
-							<div class="item flex">
-								<a ng-show="!country.open" ng-click="country.open=true;"><i class="fa fa-plus-square text-small"></i></a>
-								<a ng-show="country.open" ng-click="country.open=false;"><i class="fa fa-minus-square text-small"></i></a>
-								<span class="ml-normal c-normal">[[country.name]]</span>
-								<span class="ml-normal badge">[[country.potentials.length]]</span>
-							</div>
-							
-						</div>
-						
-						<div class="flex wrap" ng-show="country.open">
-							<potential ng-repeat="potential in country.potentials track by $index" potential="potential"></potential>
+						<div class="tab" ng-click="current_tab='tools'" ng-class="{'active':current_tab=='tools'}">
+							{% trans "Tools" %}
 						</div>
 						
 					</div>
-
+					
 				</div>
 				
-				<div class="section" ng-if="!refreshing && missions && missions.length > 0" style="margin-bottom:55px;">
-					
-					<div class="item pb-none">
-						<span class="color-normal">[[missions.length]] {% trans "missions" %}</span>
-					</div>
-					
-					<div class="flex wrap">
-						<mission ng-repeat="mission in missions track by $index" mission="mission" ng-class="{'bgcolor-highlight':mission.selected}" ng-click="toggleSelectMission(mission);"></mission>
-					</div>
-
-					<div class="flex justify-center" style="position:fixed; bottom:0; left:0; right:0; background-color:#000000;">
-						<div class="item container active">
+				<div ng-show="current_tab=='missions'">
+			
+					<div class="item">
+						
+						<div class="item pb-none">
+							<span class="color-normal">{% trans "Search for registered missions" %}</span>
+						</div>
+						
+						<form class="flex">
 							
-							<div class="item">
-								<hr>
+							<div class="item grow">
+								<input class="control" placeholder="{% trans "Mission name, creator" %}" ng-model="searchText" />
 							</div>
 							
-							<div class="flex">
+							<div class="item">
+								<button class="btn" style="width:65px;" type="submit" ng-click="refreshMissions(searchText);">
+									<i class="fa fa-search"></i>
+								</button>
+							</div>
+							
+						</form>
+						
+						<div class="flex align-center" ng-if="refreshing">
+							<i class="item fa fa-spinner rotating"></i>
+							<span class="item">{% trans "Searching..." %}</span>
+						</div>
+						
+					</div>
+	
+					<div ng-if="!refreshing && missions && missions.length < 1">
+						
+						<div class="item">
+							<span class="item color-dark">{% trans "No mission" %}</span>
+						</div>
+						
+					</div>
+				
+					<div class="section" ng-if="!refreshing && missions && missions.length > 0" style="margin-bottom:55px;">
+						
+						<div class="item pb-none">
+							<span class="color-normal">[[missions.length]] {% trans "missions" %}</span>
+						</div>
+						
+						<div class="flex wrap">
+							<mission ng-repeat="mission in missions track by $index" mission="mission" ng-class="{'bgcolor-highlight':mission.selected}" ng-click="toggleSelectMission(mission);"></mission>
+						</div>
+	
+						<div class="flex justify-center" style="position:fixed; bottom:0; left:0; right:0; background-color:#000000;">
+							<div class="item container active">
+								
+								<div class="item">
+									<hr>
+								</div>
+								
+								<div class="flex">
+	
+									<div class="grow flex-col">
+										
+										<a class="item pb-none" ng-click="selectAll();">
+											{% trans "Select All" %}
+										</a>
+										
+										<a class="item" ng-click="unselectAll();">
+											{% trans "Unselect All" %}
+										</a>
+			
+									</div>
+									
+									<div class="item self-center">
+										<button class="btn" ng-class="{'disabled':selected.length < 3}" ng-click="open_step(2);" ng-disabled="selected.length < 3">
+											<div class="row">
+												{% trans "Next" %}
+												<span class="ml-small badge">[[selected.length]]</span>
+												<i class="ml-normal fa fa-angle-double-right"></i>
+											</div>
+										</button>
+									</div>
+									
+								</div>
+								
+							</div>
+						</div>	
+	
+					</div>
+				
+				</div>
+				
+				<div ng-show="current_tab=='tools'">
+					<div class="item">
+						
+						<div class="item pb-none">
+							<span class="color-normal">{% trans "To register missions" %}</span>
+						</div>
+						
+						<div class="flex wrap">
+							
+					    	<div class="item flex-col justify-center align-center">
+					    		<a class="btn flex align-center" href="https://www.myingressmosaics.com/static/mim-view.user.js" style="width:180px;">
+					    			<i class="item fa fa-plus-square"></i>
+					    			<span class="item">IITC MIM Plugin</span>
+					    		</a>
+					    	</div>
+							
+					    	<div class="item flex-col justify-center align-center">
+					    		<a class="btn flex align-center" href="https://chrome.google.com/webstore/detail/myingressmosaics-hunting/imafdiamhfamjabofbmkmbmncadhjfjk" target="_blank" style="width:180px;">
+					    			<i class="item fa fa-plus-square"></i>
+					    			<span class="item">MIM Hunting Tool</span>
+					    		</a>
+					    	</div>
+					    	
+						</div>
+						
+					</div>
+				</div>
 
-								<div class="grow flex-col">
-									
-									<a class="item pb-none" ng-click="selectAll();">
-										{% trans "Select All" %}
-									</a>
-									
-									<a class="item" ng-click="unselectAll();">
-										{% trans "Unselect All" %}
-									</a>
-		
+				<div ng-show="current_tab=='potentials'">
+					<div class="item">
+						
+						<div class="item flex-col">
+							<span class="color-normal mb-small">{% trans "Potential mosaics" %}</span>
+							<span class="color-dark">{% trans "Only potential mosaics validated by MIM team are displayed here." %}</span>
+							<span class="color-dark">{% trans "Feel free to register any mosaic you want." %}</span>
+							<span class="color-dark">{% trans "To register mosaic not listed here, just search missions with form above." %}</span>
+						</div>
+						
+						<div class="item flex-col" ng-if="!countries || countries.length < 1">
+							<span class="color-muted">{% trans "No potential mosaic for the moment. Please retry later ;)" %}</span>
+						</div>
+						
+						<div class="flex-col mb-normal" ng-repeat="country in countries">
+						
+							<div class="flex">
+								
+								<div class="item flex">
+									<a ng-show="!country.open" ng-click="country.open=true;"><i class="fa fa-plus-square text-small"></i></a>
+									<a ng-show="country.open" ng-click="country.open=false;"><i class="fa fa-minus-square text-small"></i></a>
+									<span class="ml-normal c-normal">[[country.name]]</span>
+									<span class="ml-normal badge">[[country.potentials.length]]</span>
 								</div>
 								
-								<div class="item self-center">
-									<button class="btn" ng-class="{'disabled':selected.length < 3}" ng-click="open_step(2);" ng-disabled="selected.length < 3">
-										<div class="row">
-											{% trans "Next" %}
-											<span class="ml-small badge">[[selected.length]]</span>
-											<i class="ml-normal fa fa-angle-double-right"></i>
-										</div>
-									</button>
-								</div>
-								
+							</div>
+							
+							<div class="flex wrap" ng-show="country.open">
+								<potential ng-repeat="potential in country.potentials track by $index" potential="potential"></potential>
 							</div>
 							
 						</div>
-					</div>	
-
+	
+					</div>
 				</div>
-
+				
 			</div>
 			
 			<div class="flex-col" ng-show="current_step == 2 && !creating">
