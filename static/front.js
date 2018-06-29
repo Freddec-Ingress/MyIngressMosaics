@@ -2639,7 +2639,7 @@ angular.module('FrontModule.controllers').controller('WorldPageCtrl', function($
 	
 	/* Tab management */
 
-	$scope.current_tab = 'cities';
+	$scope.current_tab = 'countries';
 	
 	/* Countries sorting */
 	
