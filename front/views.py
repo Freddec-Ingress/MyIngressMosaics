@@ -1054,6 +1054,7 @@ def world(request):
 	context = {
 		
 		'mosaic_count':0,
+		'potential_count':0,
 		
 		'country_count':[],
 		'countries':[],
@@ -1061,6 +1062,8 @@ def world(request):
 		'tags':[],
 		'inactive_tags':[],
 	}
+	
+	context['potential_count'] = Potential.objects.all().count()
 	
 	for country in Country.objects.all():
 
