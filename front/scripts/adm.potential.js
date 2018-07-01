@@ -97,6 +97,10 @@ angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', functio
 		    		if (addressType == 'administrative_area_level_2' && !$scope.region) $scope.region = place.address_components[i]['long_name'];
 		     		if (addressType == 'administrative_area_level_3' && !$scope.city) $scope.city = place.address_components[i]['long_name'];
 		   		}
+		   		
+		   		if (($scope.country == '' || !$scope.country) && $scope.city == 'Simferopol') {
+		   			$scope.country = 'Crimea';
+		   		}
 		
 				if ($scope.region == '' || !$scope.region) {
 					

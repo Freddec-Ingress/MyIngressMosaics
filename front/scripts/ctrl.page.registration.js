@@ -235,6 +235,10 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
      		if (addressType == 'administrative_area_level_3' && !$scope.city_name) $scope.city_name = place.address_components[i]['long_name'];
    		}
 
+   		if (($scope.country == '' || !$scope.country) && $scope.city == 'Simferopol') {
+   			$scope.country = 'Crimea';
+   		}
+   		
 		if ($scope.region_name == '' || !$scope.region_name) {
 			
 			$scope.region_name = $scope.city_name;

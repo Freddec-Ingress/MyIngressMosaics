@@ -1684,6 +1684,10 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
      		if (addressType == 'administrative_area_level_3' && !$scope.city_name) $scope.city_name = place.address_components[i]['long_name'];
    		}
 
+   		if (($scope.country == '' || !$scope.country) && $scope.city == 'Simferopol') {
+   			$scope.country = 'Crimea';
+   		}
+   		
 		if ($scope.region_name == '' || !$scope.region_name) {
 			
 			$scope.region_name = $scope.city_name;
@@ -2604,6 +2608,10 @@ angular.module('FrontModule.controllers').controller('WorldPageCtrl', function($
     		if (addressType == 'administrative_area_level_2' && !region_name) region_name = place.address_components[i]['long_name'];
     	}
     	
+   		if (($scope.country == '' || !$scope.country) && $scope.city == 'Simferopol') {
+   			$scope.country = 'Crimea';
+   		}
+   		
 		if (!region_name) region_name = city_name;
 		
     	if (!country_name || !region_name || !city_name) {
@@ -3823,6 +3831,10 @@ angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', functio
 		    		if (addressType == 'administrative_area_level_1') $scope.region = place.address_components[i]['long_name'];
 		    		if (addressType == 'administrative_area_level_2' && !$scope.region) $scope.region = place.address_components[i]['long_name'];
 		     		if (addressType == 'administrative_area_level_3' && !$scope.city) $scope.city = place.address_components[i]['long_name'];
+		   		}
+		   		
+		   		if (($scope.country == '' || !$scope.country) && $scope.city == 'Simferopol') {
+		   			$scope.country = 'Crimea';
 		   		}
 		
 				if ($scope.region == '' || !$scope.region) {
