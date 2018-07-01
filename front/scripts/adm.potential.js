@@ -87,6 +87,7 @@ angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', functio
 				$scope.country = '';
 		    	
 		    	var place = $scope.autocomplete.getPlace();
+		    	console.log(place);
 		    	for (var i = 0; i < place.address_components.length; i++) {
 		    		
 		    		var addressType = place.address_components[i].types[0];
