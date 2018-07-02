@@ -15,21 +15,21 @@ from .models import *
 @permission_classes((IsAuthenticated, ))
 def waiting_create(request):
 	
-	results = Country.objects.filter(name=request.data['country_name'])
+	results = Country.objects.filter(Q(name__iexact=request.data['country_name']) | Q(locale__iexact=request.data['country_name']))
 	if results.count() > 0:
 		country_obj = results[0]
 	else:
 		country_obj = Country(name=request.data['country_name'])
 		country_obj.save()
 		
-	results = Region.objects.filter(country=country_obj, name=request.data['region_name'])
+	results = Region.objects.filter(country=country_obj).filter(Q(name__iexact=request.data['region_name']) | Q(locale__iexact=request.data['region_name']))
 	if results.count() > 0:
 		region_obj = results[0]
 	else:
 		region_obj = Region(country=country_obj, name=request.data['region_name'])
 		region_obj.save()
 		
-	results = City.objects.filter(region=region_obj, name=request.data['city_name'])
+	results = City.objects.filter(region=region_obj).filter(Q(name__iexact=request.data['city_name']) | Q(locale__iexact=request.data['city_name']))
 	if results.count() > 0:
 		city_obj = results[0]
 	else:
