@@ -68,11 +68,21 @@ function wrapper(plugin_info) {
 
         username: null,
 
+        hide_registered_missions: true,
         auto_registration: true,
 
         missions_map: new Map(),
         displayed_missions_map: new Map(),
 
+        toggleRegisteredMissions: function() {
+
+            window.plugin.mim_view.hide_registered_missions = !window.plugin.mim_view.hide_registered_missions;
+            updateCookie('hide_registered_missions', this.hide_registered_missions);
+
+            if (window.plugin.mim_view.hide_registered_missions) document.getElementById('hide-registered-check').checked = true;
+            else document.getElementById('hide-registered-check').checked = false;
+        },
+        
         toggleAutoRegistration: function() {
 
             window.plugin.mim_view.auto_registration = !window.plugin.mim_view.auto_registration;
@@ -107,6 +117,11 @@ function wrapper(plugin_info) {
 
             updateCookie('auto_registration', window.plugin.mim_view.auto_registration);
 
+            var value = readCookie('hide_registered_missions');
+            if (value === 'false') window.plugin.mim_view.hide_registered_missions = false;
+            
+            updateCookie('hide_registered_missions', window.plugin.mim_view.hide_registered_missions);
+            
             $('#toolbox').append('<a tabindex="0" onclick="plugin.mim_view.open();">MIM View</a>');
 
             var css_string = '' +
@@ -289,9 +304,12 @@ function wrapper(plugin_info) {
             block1.className = 'flex-row align-center inner';
 
             var item_auto_register = block1.appendChild(document.createElement('div'));
-            item_auto_register.className = 'flex-row align-center inner grow';
+            item_auto_register.className = 'flex-col grow';
 
-            var m_check = item_auto_register.appendChild(document.createElement('input'));
+            var line1 = item_auto_register.appendChild(document.createElement('div'));
+            line1.className = 'flex-row align-center inner';
+            
+            var m_check = line1.appendChild(document.createElement('input'));
             m_check.id = 'auto-reg-check';
             m_check.type = 'checkbox';
             m_check.addEventListener('click', function() {window.plugin.mim_view.toggleAutoRegistration();});
@@ -299,10 +317,25 @@ function wrapper(plugin_info) {
             if (window.plugin.mim_view.auto_registration) m_check.checked = true;
             else m_check.checked = false;
 
-            var m_label = item_auto_register.appendChild(document.createElement('a'));
+            var m_label = line1.appendChild(document.createElement('a'));
             m_label.textContent = 'Auto-registration';
             m_label.addEventListener('click', function() {window.plugin.mim_view.toggleAutoRegistration();});
 
+            var line2 = item_auto_register.appendChild(document.createElement('div'));
+            line1.className = 'flex-row align-center inner';
+            
+            var m_check = line2.appendChild(document.createElement('input'));
+            m_check.id = 'hide-registered-check';
+            m_check.type = 'checkbox';
+            m_check.addEventListener('click', function() {window.plugin.mim_view.toggleRegisteredMissions();});
+
+            if (window.plugin.mim_view.hide_registered_missions) m_check.checked = true;
+            else m_check.checked = false;
+
+            var m_label = line1.appendChild(document.createElement('a'));
+            m_label.textContent = 'Hide registered';
+            m_label.addEventListener('click', function() {window.plugin.mim_view.toggleRegisteredMissions();});
+            
             var item_register_all = block1.appendChild(document.createElement('div'));
             item_register_all.className = 'inner';
 
@@ -329,6 +362,10 @@ function wrapper(plugin_info) {
         // Rendering mission function
         renderMission: function(mission) {
 
+            if (window.hide_registered_missions && mission.mim_status == 'Registered' ) {
+                return null;
+            }
+            
             var container = document.createElement('div');
             container.className = 'flex-row inner outer bg-dark b-radius';
 
@@ -400,7 +437,7 @@ function wrapper(plugin_info) {
                     m_link.textContent += 'MIM Link';
                     m_link.className = 'btn';
                     m_link.style.width = '57px';
-                    m_link.href = 'https://www.myingressmosaics.com/mosaic/' + mission.mosaic_ref;
+                    m_link.href = 'https://www.myingressmosaics.com/waiting/' + mission.mosaic_ref;
                     m_link.target = '_blank';
                     break;
             }
