@@ -1302,7 +1302,7 @@ def adm_missions(request):
 	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=True, validated=False).values('name', 'creator').annotate(num_name=Count('name')).order_by('-num_name', 'name')
 	for mission_obj in mission_results:
 		
-		if mission_obj['num_name'] > 2:
+		if mission_obj['num_name'] > 5:
 		
 			if not mission_obj['name']:
 				mission_obj['name'] = ''
@@ -1324,7 +1324,7 @@ def adm_missions(request):
 	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=False, validated=False).exclude(name__in=waiting_names).values('name', 'creator').annotate(num_name=Count('name')).order_by('-num_name', 'name')
 	for mission_obj in mission_results:
 		
-		if mission_obj['num_name'] > 2:
+		if mission_obj['num_name'] > 5:
 			
 			mission_data = {
 				
