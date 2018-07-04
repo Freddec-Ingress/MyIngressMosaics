@@ -1279,7 +1279,6 @@ def adm_missions(request):
 
 	context = {
 		'tobereviewed_missions':[],
-		'yetreviewed_missions':[],
 		'waitings':[],
 	}
 	
@@ -1323,17 +1322,7 @@ def adm_missions(request):
 	
 	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=False, validated=False).exclude(name__in=waiting_names).values('name', 'creator').annotate(num_name=Count('name')).order_by('-num_name', 'name')
 	for mission_obj in mission_results:
-		
-		if mission_obj['num_name'] > 5:
-			
-			mission_data = {
-				
-				'name':mission_obj['name'],
-				'creator':mission_obj['creator'],
-				'num_name':mission_obj['num_name'],
-			}
-			
-			context['yetreviewed_missions'].append(mission_data)
+		mission_obj.delete()
 	
 	return render(request, 'adm_missions.html', context)
 

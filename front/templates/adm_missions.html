@@ -34,11 +34,6 @@
 						<span class="ml-normal badge">{{tobereviewed_missions|length}}</span>
 					</div>
 				
-					<div class="tab" ng-click="current_tab='excluded'" ng-class="{'active':current_tab=='excluded'}">
-						Excluded
-						<span class="ml-normal badge">{{yetreviewed_missions|length}}</span>
-					</div>
-				
 					<div class="tab" ng-click="current_tab='waiting'" ng-class="{'active':current_tab=='waiting'}">
 						Waiting
 						<span class="ml-normal badge">{{waitings|length}}</span>
@@ -62,40 +57,6 @@
 									
 									<div class="item" ng-show="mission.adding">
 										<span class="color-success">Adding</span>
-									</div>
-									
-									<div class="item grow">
-										<span class="color-light">[[mission.name]]</span>
-									</div>
-									
-									<div class="item">
-										<span class="color-normal">[[mission.creator]]</span>
-									</div>
-									
-									<div class="item">
-										<a href="/adm/potential/[[mission.name]]"><i class="fa fa-external-link"></i></a>
-									</div>
-									
-								</div>
-							</div>
-						</div>
-					</div>
-					
-				</div>
-				
-			</div>
-			
-			<div ng-show="current_tab=='excluded'">
-				
-				<div class="item pt-none">
-	
-					<div class="item">
-						<div class="bg-block pr-small pl-small">
-							<div ng-repeat="mission in reviewed track by $index" style="border-bottom:1px solid #000;">
-								<div class="flex align-center text-small">
-									
-									<div class="item" style="width:30px;">
-										<span class="color-dark">[[mission.num_name]]</span>
 									</div>
 									
 									<div class="item grow">
