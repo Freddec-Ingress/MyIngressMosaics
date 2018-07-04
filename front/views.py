@@ -1321,7 +1321,8 @@ def adm_missions(request):
 			context['tobereviewed_missions'].append(mission_data)
 	
 	mission_results = Mission.objects.filter(mosaic__isnull=True, admin=False, validated=False).exclude(name__in=waiting_names)
-	mission_results.delete()
+	for mission_obj in mission_results:
+		mission_obj.delete()
 	
 	return render(request, 'adm_missions.html', context)
 
