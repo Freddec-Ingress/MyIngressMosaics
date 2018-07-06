@@ -3826,6 +3826,18 @@ angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function
 		API.sendRequest('/api/waiting/delete/', 'POST', {}, data);
 	}
 	
+	$scope.delete = function() {
+		
+		var data = { 'ref': $scope.waiting.ref, };
+		API.sendRequest('/api/waiting/delete/', 'POST', {}, data);
+	}
+	
+	$scope.deleteMissions = function() {
+		
+		var data = { 'ref': $scope.waiting.ref, };
+		API.sendRequest('/api/waiting/deleteall/', 'POST', {}, data);
+	}
+	
 	/* Tab management */
 	
 	$scope.current_tab = 'details';
