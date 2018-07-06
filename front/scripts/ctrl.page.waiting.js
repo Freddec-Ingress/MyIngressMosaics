@@ -112,6 +112,49 @@ angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function
 		});
 	}
 	
+	$scope.missions_to_add = [];
+	
+	$scope.add_mission = function(mission) {
+		
+		var mission_data = {
+			
+			'mission_id':mission.id,
+			'ref':$scope.mosaic.ref,
+			'title':mission.title,
+			'order':UtilsService.getOrderFromMissionName(mission.title),
+			'neworder':UtilsService.getOrderFromMissionName(mission.title),
+		}
+		
+		$scope.missions_to_add.push(mission_data);
+		
+		var index = $scope.search_results.indexOf(mission);
+		$scope.search_results.splice(index, 1);
+	}
+	
+	function processMissionAdding() {
+	
+		if ($scope.missions_to_add.length < 1) {
+			
+			$scope.updating = false;
+			return;
+		}
+		
+		API.sendRequest('/api/waiting/addmission/', 'POST', {}, $scope.missions_to_add[0]).then(function(response) {
+			
+			$scope.missions.push($scope.missions_to_add[0]);
+			
+			$scope.missions_to_add.splice(0, 1);
+			processMissionAdding();
+		});
+	}
+	
+	$scope.addmissions = function() {
+		
+		$scope.updating = true;
+		
+		processMissionAdding();
+	}
+	
 	/* Tab management */
 	
 	$scope.current_tab = 'details';
