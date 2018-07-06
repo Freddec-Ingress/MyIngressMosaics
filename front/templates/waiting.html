@@ -43,6 +43,10 @@
 						{% trans "Details" %}
 					</div>
 					
+					<div ng-show="authenticated" class="tab" ng-click="current_tab='management'" ng-class="{'active':current_tab=='management'}">
+						{% trans "Management" %}
+					</div>
+					
 					<div ng-show="authenticated" class="tab" ng-click="current_tab='missions'" ng-class="{'active':current_tab=='missions'}">
 						{% trans "Missions" %}
 					</div>
@@ -131,6 +135,34 @@
 			</div>
 		    
 		    </div>
+
+			<div ng-show="authenticated && current_tab=='management'">
+				
+				<div class="section">
+					<div class="flex-col">
+						
+						<div class="item pb-none">
+							<span class="mb-small color-normal">{% trans "Rename" %}</span>
+						</div>
+						
+						<div class="flex">
+							
+							<div class="item grow">
+								<input type="text" class="control" ng-model="waiting.title" />
+							</div>
+							
+							<div class="item">
+								<button class="btn" type="submit" ng-click="update();" ng-disabled="updating">
+									{% trans "Save" %}
+								</button>
+							</div>
+							
+						</div>
+						
+					</div>
+				</div>
+				
+			</div>
 		    
 			<div ng-show="authenticated && current_tab=='missions'">
 				
@@ -277,12 +309,14 @@
 					<div class="flex-col">
 						
 						<div class="item">
-							<span class="color-danger">{% trans "Delete a waiting is definitive. Mark it as obsolete could be an alternative to inform agents that it is not online anymore." %}</span>
+							<button class="btn btn-danger" type="submit" ng-click="delete();" ng-disabled="updating">
+								{% trans "Delete" %}
+							</button>
 						</div>
 						
 						<div class="item">
-							<button class="btn btn-danger" type="submit" ng-click="delete();" ng-disabled="updating">
-								{% trans "Delete" %}
+							<button class="btn btn-danger" type="submit" ng-click="deleteMissions();" ng-disabled="updating">
+								{% trans "Delete with missions" %}
 							</button>
 						</div>
 						
