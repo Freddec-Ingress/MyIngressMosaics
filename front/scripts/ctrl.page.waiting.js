@@ -119,7 +119,7 @@ angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function
 		var mission_data = {
 			
 			'mission_id':mission.id,
-			'ref':$scope.mosaic.ref,
+			'ref':$scope.waiting.ref,
 			'title':mission.title,
 			'order':UtilsService.getOrderFromMissionName(mission.title),
 			'neworder':UtilsService.getOrderFromMissionName(mission.title),
