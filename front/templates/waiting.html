@@ -46,6 +46,14 @@
 					<div ng-show="authenticated" class="tab" ng-click="current_tab='missions'" ng-class="{'active':current_tab=='missions'}">
 						{% trans "Missions" %}
 					</div>
+					
+					<div ng-show="authenticated" class="tab" ng-click="current_tab='adding'" ng-class="{'active':current_tab=='adding'}">
+						{% trans "Adding" %}
+					</div>
+					
+					<div ng-show="authenticated" class="tab" ng-click="current_tab='deleting'" ng-class="{'active':current_tab=='deleting'}">
+						{% trans "Deleting" %}
+					</div>
 
 				</div>
 				
@@ -172,6 +180,113 @@
 						
 					</div>
 				    
+				</div>
+				
+			</div>
+
+			<div ng-show="authenticated && current_tab=='adding'">
+				
+				<div class="section" ng-if="missions_to_add.length > 0">
+					<div class="flex-col">
+						
+						<div class="item">
+							<span class="color-normal">{% trans "Missions to add" %}</span>
+						</div>
+						
+						<div class="item">
+							<div class="bg-block">
+								<div class="flex align-center pl-small pr-small text-small" ng-repeat="mission in missions_to_add track by $index" style="border-bottom:1px solid #000;">
+									
+									<div class="item" style="max-width:50px;min-width:50px;">
+										<input type="text" class="control control-mini" ng-model="mission.order" />
+									</div>
+									
+									<div class="item grow">
+										<span class="color-normal">[[mission.title]]</span>
+									</div>
+									
+									<div class="item">
+										<a ng-click="remove_mission(mission);">
+											Remove
+										</a>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+						
+						<div class="item">
+							<button class="btn" type="submit" ng-click="addmissions();" ng-disabled="updating">
+								{% trans "Save" %}
+							</button>
+						</div>
+						
+					</div>
+				</div>
+				
+				<div class="section">
+					
+					<div class="item pb-none">
+						<span class="color-normal">{% trans "Search for missions to add" %}</span>
+					</div>
+					
+					<form class="self-stretch flex">
+						
+						<div class="item grow">
+							<input class="control" placeholder="{% trans "Mosaic name or creator" %}" ng-model="searchtext" />
+						</div>
+						
+						<div class="item">
+							<button class="btn" type="submit" ng-click="search(searchtext);">
+								<i class="fa fa-search"></i>
+							</button>
+						</div>
+						
+					</form>
+					
+					<div class="flex align-center" ng-show="searching">
+						<i class="item fa fa-spinner rotating"></i>
+						<span class="item">{% trans "Searching..." %}</span>
+					</div>
+					
+					<div class="item">
+						<div class="bg-block">
+							<div class="flex align-center pl-small pr-small text-small" ng-repeat="mission in search_results track by $index" style="border-bottom:1px solid #000;">
+								
+								<div class="item grow">
+									<span class="color-normal">[[mission.title]]</span>
+								</div>
+								
+								<div class="item">
+									<a ng-click="add_mission(mission);">
+										Add
+									</a>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+			<div ng-show="authenticated && current_tab=='deleting'">
+				
+				<div class="section">
+					<div class="flex-col">
+						
+						<div class="item">
+							<span class="color-danger">{% trans "Delete a waiting is definitive. Mark it as obsolete could be an alternative to inform agents that it is not online anymore." %}</span>
+						</div>
+						
+						<div class="item">
+							<button class="btn btn-danger" type="submit" ng-click="delete();" ng-disabled="updating">
+								{% trans "Delete" %}
+							</button>
+						</div>
+						
+					</div>
 				</div>
 				
 			</div>
