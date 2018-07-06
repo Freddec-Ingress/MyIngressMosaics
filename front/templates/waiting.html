@@ -54,10 +54,6 @@
 					<div ng-show="authenticated" class="tab" ng-click="current_tab='adding'" ng-class="{'active':current_tab=='adding'}">
 						{% trans "Adding" %}
 					</div>
-					
-					<div ng-show="authenticated" class="tab" ng-click="current_tab='deleting'" ng-class="{'active':current_tab=='deleting'}">
-						{% trans "Deleting" %}
-					</div>
 
 				</div>
 				
@@ -138,7 +134,7 @@
 
 			<div ng-show="authenticated && current_tab=='management'">
 				
-				<div class="section">
+				<div class="item">
 					<div class="flex-col">
 						
 						<div class="item pb-none">
@@ -161,7 +157,55 @@
 						
 					</div>
 				</div>
+					
+				<div class="section">
+					<div class="flex-col">
+						
+						<div class="item pb-none">
+							<span class="mb-small color-normal">{% trans "Change location" %}</span>
+						</div>
+						
+						<div class="flex">
+							
+							<div class="item grow">
+								<input id="city_input" type="text" class="control" value="{{waiting.city_name}}, {{waiting.region_name}}, {{waiting.country_name}}" />
+							</div>
+							
+							<div class="item">
+								<button class="btn" type="submit" ng-click="move();" ng-disabled="updating">
+									{% trans "Save" %}
+								</button>
+							</div>
+							
+						</div>
+						
+					</div>
+				</div>
 				
+				<div class="section">
+					<div class="flex-col">
+
+						<div class="item">
+							<button class="btn btn-danger" type="submit" ng-click="deleteMissions();" ng-disabled="updating">
+								{% trans "Delete with missions" %}
+							</button>
+						</div>
+						
+					</div>
+				</div>
+				
+				<div class="section">
+					<div class="flex-col">
+						
+						<div class="item">
+							<button class="btn btn-danger" type="submit" ng-click="delete();" ng-disabled="updating">
+								{% trans "Delete" %}
+							</button>
+						</div>
+
+					</div>
+				</div>
+			
 			</div>
 		    
 			<div ng-show="authenticated && current_tab=='missions'">
@@ -303,28 +347,6 @@
 				
 			</div>
 			
-			<div ng-show="authenticated && current_tab=='deleting'">
-				
-				<div class="section">
-					<div class="flex-col">
-						
-						<div class="item">
-							<button class="btn btn-danger" type="submit" ng-click="delete();" ng-disabled="updating">
-								{% trans "Delete" %}
-							</button>
-						</div>
-						
-						<div class="item">
-							<button class="btn btn-danger" type="submit" ng-click="deleteMissions();" ng-disabled="updating">
-								{% trans "Delete with missions" %}
-							</button>
-						</div>
-						
-					</div>
-				</div>
-				
-			</div>
-		    
 		</div>
 				
 	</div>
