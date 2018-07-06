@@ -85,7 +85,7 @@ angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function
 
 		$scope.updating = true;
 		
-		var data = { 'ref':$scope.waiting.ref, 'title':$scope.waiting.title, 'country_name':$scope.waiting.country_name, 'region_name':$scope.waiting.region_name, 'city_name':$scope.waiting.city_name, }
+		var data = { 'ref':$scope.waiting.ref, 'title':$scope.waiting.title, 'country_name':$scope.waiting.country_name, 'region_name':$scope.waiting.region_name, 'city_name':$scope.waiting.city_name, 'mission_count':$scope.waiting.mission_count, }
 		API.sendRequest('/api/waiting/update/', 'POST', {}, data).then(function(response) {
 
 			$scope.updating = false;
@@ -120,9 +120,7 @@ angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function
 			
 			'mission_id':mission.id,
 			'ref':$scope.waiting.ref,
-			'title':mission.title,
 			'order':UtilsService.getOrderFromMissionName(mission.title),
-			'neworder':UtilsService.getOrderFromMissionName(mission.title),
 		}
 		
 		$scope.missions_to_add.push(mission_data);
