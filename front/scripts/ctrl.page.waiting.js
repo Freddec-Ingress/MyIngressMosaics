@@ -2,6 +2,31 @@ angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function
  
 	$scope.authenticated = $auth.isAuthenticated();
    
+    var inputCity = document.getElementById('city_input');
+    var options = { types: ['(cities)'], };
+	
+    var autocomplete = new google.maps.places.Autocomplete(inputCity, options);
+        
+    autocomplete.addListener('place_changed', function() {
+    	
+    	var place = autocomplete.getPlace();
+    	for (var i = 0; i < place.address_components.length; i++) {
+    		
+    		var addressType = place.address_components[i].types[0];
+    		if (addressType == 'country') $scope.waiting.country_name = place.address_components[i]['long_name'];
+    		if (addressType == 'locality') $scope.waiting.city_name = place.address_components[i]['long_name'];
+    		if (addressType == 'administrative_area_level_1') $scope.waiting.region_name = place.address_components[i]['long_name'];
+    		if (addressType == 'administrative_area_level_2' && !$scope.waiting.region_name) $scope.waiting.region_name = place.address_components[i]['long_name'];
+     		if (addressType == 'administrative_area_level_3' && !$scope.waiting.city_name) $scope.waiting.city_name = place.address_components[i]['long_name'];
+   		}
+
+		if ($scope.waiting.region_name == '' || !$scope.waiting.region_name) {
+			$scope.waiting.region_name = $scope.waiting.city_name;
+		}
+		
+		$scope.$apply();
+	});
+	
 	/* Waiting management */
 	
 	$scope.getImage = function(index) {
@@ -54,6 +79,37 @@ angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function
 		
 		$scope.current_tab = 'details';
 		window.scrollTo(0, 0);
+	}
+	
+	$scope.update = function() {
+
+		$scope.updating = true;
+		
+		var data = { 'ref':$scope.waiting.ref, 'title':$scope.waiting.title, 'country_name':$scope.waiting.country_name, 'region_name':$scope.waiting.region_name, 'city_name':$scope.waiting.city_name, }
+		API.sendRequest('/api/waiting/update/', 'POST', {}, data).then(function(response) {
+
+			$scope.updating = false;
+		});
+	}
+	
+	$scope.search = function(text) {
+		
+		$scope.search_results = null;
+		
+		if (!text || text.length < 3) {
+			return;
+		}
+
+		$scope.searching = true;
+		
+		var data = { 'text':text };
+		API.sendRequest('/api/search/missions/', 'POST', {}, data).then(function(response) {
+			
+			$scope.search_results = response.missions;
+			if (!$scope.search_results) $scope.search_results = [];
+			
+			$scope.searching = false;
+		});
 	}
 	
 	/* Tab management */

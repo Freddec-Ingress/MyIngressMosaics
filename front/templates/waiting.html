@@ -172,7 +172,7 @@
 							</div>
 							
 							<div class="item">
-								<button class="btn" type="submit" ng-click="move();" ng-disabled="updating">
+								<button class="btn" type="submit" ng-click="update();" ng-disabled="updating">
 									{% trans "Save" %}
 								</button>
 							</div>
@@ -262,7 +262,7 @@
 
 			<div ng-show="authenticated && current_tab=='adding'">
 				
-				<div class="section" ng-if="missions_to_add.length > 0">
+				<div class="item" ng-if="missions_to_add.length > 0">
 					<div class="flex-col">
 						
 						<div class="item">
@@ -300,7 +300,7 @@
 					</div>
 				</div>
 				
-				<div class="section">
+				<div class="item">
 					
 					<div class="item pb-none">
 						<span class="color-normal">{% trans "Search for missions to add" %}</span>
