@@ -139,11 +139,12 @@ def waiting_update(request):
 @permission_classes((IsAuthenticated, ))
 def waiting_addmission(request):
 		
+	mission_obj = Mission.objects.get(id=request.data['mission_id'])
+	
 	waiting_obj = Waiting.objects.get(ref=request.data['ref'])
-	waiting_obj.mission_refs += '|' + request.data['mission_id']
+	waiting_obj.mission_refs += '|' + mission_obj.ref
 	waiting_obj.save()
 
-	mission_obj = Mission.objects.get(id=request.data['mission_id'])
 	mission_obj.admin = False
 	mission_obj.order = request.data['order']
 	mission_obj.name = waiting_obj.title
