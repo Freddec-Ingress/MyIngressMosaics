@@ -3750,8 +3750,12 @@ angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function
 		var data = { 'text':text };
 		API.sendRequest('/api/search/missions/', 'POST', {}, data).then(function(response) {
 			
-			$scope.search_results = response.missions;
-			if (!$scope.search_results) $scope.search_results = [];
+			$scope.search_results = []
+			for (var mission of response.missions) {
+				if ($scope.refs.indexOf(mission.ref) == -1) {
+					$scope.search_results.push(mission);
+				}
+			}
 			
 			$scope.searching = false;
 		});
@@ -3786,6 +3790,7 @@ angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function
 		API.sendRequest('/api/waiting/addmission/', 'POST', {}, $scope.missions_to_add[0]).then(function(response) {
 			
 			$scope.missions.push($scope.missions_to_add[0]);
+			$scope.refs.push($scope.missions_to_add[0]['ref']);
 			
 			$scope.missions_to_add.splice(0, 1);
 			processMissionAdding();
@@ -3833,6 +3838,11 @@ angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function
 		$scope.creators = creators;
 		$scope.missions = missions;
 		
+		$scope.refs = [];
+		for (var mission of $scope.missions) {
+			$scope.refs.push(mission.ref);
+		}
+
 		$scope.range = [];
 	    for (var i = 0; i < $scope.waiting.mission_count; i++) {
 	    	$scope.range.push(i);
