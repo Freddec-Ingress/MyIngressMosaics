@@ -120,6 +120,7 @@ angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function
 			
 			'mission_id':mission.id,
 			'ref':$scope.waiting.ref,
+			'title':mission.title,
 			'order':UtilsService.getOrderFromMissionName(mission.title),
 		}
 		
