@@ -124,6 +124,14 @@
 							</div>
 						</div>
 					
+						<div class="flex" ng-show="missions.length == waiting.mission_count">
+							<div class="item">
+								<button class="btn" type="submit" ng-click="publish();" ng-disabled="updating">
+									{% trans "Publish" %}
+								</button>
+							</div>
+						</div>
+						
     				</div>
     				
 				</div>

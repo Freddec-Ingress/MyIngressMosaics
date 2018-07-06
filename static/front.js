@@ -3799,6 +3799,28 @@ angular.module('FrontModule.controllers').controller('WaitingPageCtrl', function
 		processMissionAdding();
 	}
 	
+	$scope.publish = function() {
+
+		var data = {
+			'country': $scope.waiting.country_name,
+			'region': $scope.waiting.region_name,
+			'city': $scope.waiting.city_name,
+			'columns': 6,
+			'type': 'sequence',
+			'title': $scope.waiting.title,
+			'missions': $scope.missions,
+			'tags':null,
+		};
+		
+		API.sendRequest('/api/mosaic/create/', 'POST', {}, data);
+
+		var data = {
+			'ref': $scope.waiting.ref, 
+		};
+		
+		API.sendRequest('/api/waiting/delete/', 'POST', {}, data);
+	}
+	
 	/* Tab management */
 	
 	$scope.current_tab = 'details';
