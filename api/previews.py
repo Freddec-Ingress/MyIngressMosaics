@@ -22,7 +22,7 @@ def previews_cleaning_check(request):
 	mosaic_results = Mosaic.objects.filter(small_preview_url__isnull=False)
 	for mosaic_obj in mosaic_results:
 		
-		req = Request(mosaic_obj.big_preview_url, headers={'User-Agent': 'Mozilla/5.0'})
+		req = Request(mosaic_obj.small_preview_url, headers={'User-Agent': 'Mozilla/5.0'})
 		urllib.request.urlopen(req)
 	
 	return Response(data, status=status.HTTP_200_OK)
