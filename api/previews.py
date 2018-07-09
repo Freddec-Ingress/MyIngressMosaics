@@ -8,6 +8,8 @@ from rest_framework.permissions import IsAuthenticated
 
 from .models import *
 
+from urllib.request import Request
+
 
 
 #---------------------------------------------------------------------------------------------------
@@ -16,4 +18,11 @@ from .models import *
 def previews_cleaning_check(request):
 	
 	data = {}
+	
+	mosaic_results = Mosaic.objects.filter(small_preview_url__isnull=False)
+	for mosaic_obj in mosaic_results:
+		
+		req = Request(mosaic_obj.big_preview_url, headers={'User-Agent': 'Mozilla/5.0'})
+		urllib.request.urlopen(req)
+	
 	return Response(data, status=status.HTTP_200_OK)
