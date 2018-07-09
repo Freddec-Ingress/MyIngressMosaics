@@ -1367,5 +1367,18 @@ def adm_tag(request):
 def adm_previews(request):
 
 	context = { }
+		'countries':[],
+	}
+	
+	country_results = Country.objects.all().order_by('name')
+	for country_obj in country_results:
+		
+		country_data = {
+			
+			'id':country_obj.pk,
+			'name':country_obj.name,
+		}
+		
+		data['countries'].append(country_data)
 			
 	return render(request, 'adm_previews.html', context)

@@ -16,7 +16,7 @@
 
 {% block content %}
 
-	<div id="content" ng-controller="AdmPreviewsCtrl" ng-init="init();">
+	<div id="content" ng-controller="AdmPreviewsCtrl" ng-init="init({{countries}});">
 	
 		<div id="loading" ng-hide="loaded" class="section">
 			<div class="item flex justify-center align-center">
@@ -43,6 +43,18 @@
 
     				<div class="flex align-center">
     				    
+						<div class="item">
+							<select class="control" ng-model="cleaning_country_id" ng-change="cleaningSelectCountry(cleaning_country_id);">
+								<option ng-repeat="country in countries" value="[[country.id]]">[[country.name]]</option>
+							</select>
+						</div>
+    				    
+						<div class="item">
+							<select class="control" ng-model="cleaning_region_id" ng-change="cleaningSelectRegion(cleaning_region_id);">
+								<option ng-repeat="region in cleaning_regions" value="[[region.id]]">[[region.name]]</option>
+							</select>
+						</div>
+						
 						<div class="item">
 							<button class="btn" ng-click="checkCleaning();" ng-disabled="cleaning_chekcing">
 								{% trans "Check" %}

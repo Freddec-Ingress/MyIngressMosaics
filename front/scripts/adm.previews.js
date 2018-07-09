@@ -24,13 +24,49 @@ angular.module('FrontModule.controllers').controller('AdmPreviewsCtrl', function
 	
 	$scope.cleaning_chekcing = false;
 	$scope.to_be_cleaned = [];
+	$scope.cleaning_regions = [];
+	$scope.selected_country = null;
+	$scope.selected_region = null;
+	
+	$scope.cleaningSelectCountry = function(id) {
+	    
+	    $scope.cleaning_regions = [];
+	    
+    	$scope.selected_country = null;
+    	$scope.selected_region = null;
+	
+	    for (var country in $scope.countries) {
+	        if (country.id == id) {
+	            $scope.selected_country = country;
+	            break;
+	        }
+	    }
+	    
+		var data = { 'country_id':$scope.selected_country.id, };
+		API.sendRequest('/api/location/region/list/', 'POST', {}, data).then(function(response) {
+		    
+		    $scope.cleaning_regions = response.regions;
+		});
+	}
+	
+	$scope.cleaningSelectRegion = function(id) {
+	    
+    	$scope.selected_region = null;
+	
+	    for (var region in $scope.cleaning_regions) {
+	        if (region.id == id) {
+	            $scope.selected_region = region;
+	            break;
+	        }
+	    }
+	}
 	
 	$scope.checkCleaning = function() {
 	    
 	    $scope.cleaning_chekcing = true;
 	    $scope.to_be_cleaned = [];
 	    
-		var data = { };
+		var data = { 'country_id':$scope.selected_country.id, 'region_id':$scope.selected_region.id, };
 		API.sendRequest('/api/previews/cleaning/check/', 'POST', {}, data).then(function(response) {
 			
     	    $scope.to_be_cleaned = response.mosaics;
@@ -46,9 +82,13 @@ angular.module('FrontModule.controllers').controller('AdmPreviewsCtrl', function
 	
 	/* Page loading */
 	
-	$scope.init = function() {
+	$scope.countries = []
+	
+	$scope.init = function(countries) {
 		
     	$scope.current_tab = 'cleaning';
+    	
+    	$scope.countries = countries;
     	
 		$scope.loaded = true;
 	}
