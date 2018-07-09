@@ -145,7 +145,7 @@
 							
 							<div class="flex" style="width:100%;">
 								
-								<div class="flex wrap grow" ng-class="{'obsolete':mosaic.is_obsolete}" style="width:100%; padding-right:calc((6 - [[mosaic.column_count]]) * 16.666667%);">
+								<div ng-show="!mosaic.big_preview_url" class="flex wrap grow" ng-class="{'obsolete':mosaic.is_obsolete}" style="width:100%; padding-right:calc((6 - [[mosaic.column_count]]) * 16.666667%);">
 									
 						            <div ng-repeat="mission in offset track by $index" style="flex:0 0 calc(100% / [[mosaic.column_count]]);">
 						            </div>
@@ -156,6 +156,8 @@
 						            </div>
 
 					            </div>
+					            
+					            <img ng-show="mosaic.big_preview_url" src="[[mosaic.big_preview_url]]" width="100%" />
 								
 							</div>
 							

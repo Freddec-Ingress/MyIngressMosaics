@@ -186,6 +186,8 @@ def mosaic(request, ref):
 		'is_obsolete':mosaic_obj.obsolete,
 		'has_unavailable_portals':False,
 		
+		'big_preview_url':mosaic_obj.big_preview_url,
+		
 		'tags': [],
 		'creators': [],
 		
