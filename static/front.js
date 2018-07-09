@@ -4328,7 +4328,7 @@ angular.module('FrontModule.controllers').controller('AdmPreviewsCtrl', function
 		var data = { 'ref':to_generate[0].ref,  };
 		API.sendRequest('/api/mosaic/preview/generate/', 'POST', {}, data).then(function(response) {
 		    
-		    to_generate = to_generate.splice(0, 1);
+		    to_generate.splice(0, 1);
 		    generate();
 		});
 	}
