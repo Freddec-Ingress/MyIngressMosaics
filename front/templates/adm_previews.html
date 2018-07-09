@@ -61,6 +61,7 @@
  					</div>
           		
 					<div class="item" ng-show="!cleaning_chekcing && to_be_cleaned.length > 0">
+					    
 						<div class="bg-block pr-small pl-small">
 							<div ng-repeat="mosaic in to_be_cleaned track by $index" style="border-bottom:1px solid #000;">
 								<div class="flex align-center text-small">
@@ -72,6 +73,17 @@
 								</div>
 							</div>
 						</div>
+						
+        				<div class="flex align-center">
+        				    
+    						<div class="item">
+    							<button class="btn" ng-click="generateCleaning();" ng-disabled="cleaning_generating">
+    								{% trans "Generate all" %}
+    							</button>
+    						</div>
+						
+						</div>
+						
 					</div>
             		
         		</div>
