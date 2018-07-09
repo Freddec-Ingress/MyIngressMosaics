@@ -253,6 +253,9 @@ class Mosaic(models.Model):
 			'is_obsolete':self.obsolete,
 			'has_unavailable_portals':False,
 
+			'big_preview_url':self.big_preview_url,
+			'small_preview_url':self.small_preview_url,
+	
 			'tags':self.tags,
 
 			'images':[],
