@@ -15,7 +15,7 @@ angular.module('FrontModule.controllers').controller('AdmPreviewsCtrl', function
 	    $scope.to_be_cleaned = [];
 	    
 		var data = { };
-		API.sendRequest('/previews/cleaning/check', 'POST', {}, data).then(function(response) {
+		API.sendRequest('/api/previews/cleaning/check', 'POST', {}, data).then(function(response) {
 			
     	    $scope.to_be_cleaned = response;
     	    $scope.cleaning_chekcing = false;
