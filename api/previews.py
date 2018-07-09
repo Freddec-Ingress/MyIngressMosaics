@@ -18,7 +18,9 @@ from urllib.request import Request
 @permission_classes((IsAuthenticated, ))
 def previews_cleaning_check(request):
 	
-	data = {}
+	data = {
+		'mosaics':[],
+	}
 	
 	mosaic_results = Mosaic.objects.filter(small_preview_url__isnull=False)
 	for mosaic_obj in mosaic_results:
@@ -28,6 +30,6 @@ def previews_cleaning_check(request):
 			urllib.request.urlopen(req)
 	
 		except URLError:
-			data.append({'ref':mosaic_obj.ref, 'title':mosaic_obj.title, });
+			data['mosaics'].append({'ref':mosaic_obj.ref, 'title':mosaic_obj.title, });
 	
 	return Response(data, status=status.HTTP_200_OK)

@@ -4330,7 +4330,7 @@ angular.module('FrontModule.controllers').controller('AdmPreviewsCtrl', function
 		var data = { };
 		API.sendRequest('/api/previews/cleaning/check/', 'POST', {}, data).then(function(response) {
 			
-    	    $scope.to_be_cleaned = response;
+    	    $scope.to_be_cleaned = response.mosaics;
     	    $scope.cleaning_chekcing = false;
 		});
 	}
