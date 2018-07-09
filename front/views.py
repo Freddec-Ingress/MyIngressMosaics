@@ -1379,6 +1379,6 @@ def adm_previews(request):
 			'name':country_obj.name,
 		}
 		
-		data['countries'].append(country_data)
+		context['countries'].append(country_data)
 			
 	return render(request, 'adm_previews.html', context)
