@@ -25,6 +25,40 @@
 		</div>
 		
 		<div class="container" ng-class="{'active':loaded}">
+		
+			<div class="section">
+				<div class="tab-row">
+		    
+					<div class="tab" ng-click="current_tab='cleaning'" ng-class="{'active':current_tab=='cleaning'}">
+						{% trans "Cleaning" %}
+					</div>
+					
+        		</div>
+    		</div>
+			
+			<div ng-show="current_tab=='cleaning'">
+		    
+				<div class="section" style="margin:0;">
+
+    				<div class="flex">
+    				    
+						<div class="item">
+							<button class="btn" ng-click="checkCleaning();" ng-disabled="cleaning_chekcing">
+								{% trans "Check" %}
+							</button>
+						</div>
+						
+						<div class="item" ng-show="cleaning_chekcing">
+						    <i class="item fa fa-spinner rotating"></i>
+						    <span class="item">{% trans "Checking..." %}</span>
+						</div>
+						
+            		</div>
+				    
+        		</div>
+		    
+    		</div>
+		    
 		</div>
 		
 	</div>

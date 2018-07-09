@@ -17,6 +17,7 @@ from .comment import *
 from .location import *
 from .telegram import *
 from .potential import *
+from .previews import *
 
 
 
@@ -95,4 +96,6 @@ urlpatterns = [
 	url(r'^location/region/merge/', region_merge),
 	
 	url(r'^location/country/list/', country_list),
+	
+	url(r'^previews/cleaning/check/', previews_cleaning_check),
 ]
