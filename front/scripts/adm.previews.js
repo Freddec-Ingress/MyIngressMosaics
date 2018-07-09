@@ -36,7 +36,7 @@ angular.module('FrontModule.controllers').controller('AdmPreviewsCtrl', function
     	$scope.selected_region = null;
 	
 	    for (var country in $scope.countries) {
-	        if (country.id == id) {
+	        if (String(country.id) == String(id)) {
 	            $scope.selected_country = country;
 	            break;
 	        }
@@ -54,7 +54,7 @@ angular.module('FrontModule.controllers').controller('AdmPreviewsCtrl', function
     	$scope.selected_region = null;
 	
 	    for (var region in $scope.cleaning_regions) {
-	        if (region.id == id) {
+	        if (String(region.id) == String(id)) {
 	            $scope.selected_region = region;
 	            break;
 	        }
