@@ -25,11 +25,17 @@ def previews_cleaning_check(request):
 	mosaic_results = Mosaic.objects.filter(small_preview_url__isnull=False)
 	for mosaic_obj in mosaic_results:
 		
-		try:
-			req = Request(mosaic_obj.small_preview_url, headers={'User-Agent': 'Mozilla/5.0'})
-			urllib.request.urlopen(req)
-	
-		except URLError:
-			data['mosaics'].append({'ref':mosaic_obj.ref, 'title':mosaic_obj.title, });
+		if mosaic_obj.small_preview_url == '':
+			
+			mosaic_obj.small_preview_url = None
+			mosaic_obj.save()
+			
+		else:
+			try:
+				req = Request(mosaic_obj.small_preview_url, headers={'User-Agent': 'Mozilla/5.0'})
+				urllib.request.urlopen(req)
+		
+			except URLError:
+				data['mosaics'].append({'ref':mosaic_obj.ref, 'title':mosaic_obj.title, });
 	
 	return Response(data, status=status.HTTP_200_OK)

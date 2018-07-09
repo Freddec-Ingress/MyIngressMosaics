@@ -55,7 +55,25 @@
 						</div>
 						
             		</div>
-				    
+             		
+					<div class="item" ng-show="!cleaning_chekcing && to_be_cleaned.length < 1">
+					    <span class="color-dark">No mosaic</span>
+ 					</div>
+          		
+					<div class="item" ng-show="!cleaning_chekcing && to_be_cleaned.length > 0">
+						<div class="bg-block pr-small pl-small">
+							<div ng-repeat="mosaic in to_be_cleaned track by $index" style="border-bottom:1px solid #000;">
+								<div class="flex align-center text-small">
+
+									<div class="item grow">
+										<span class="color-light">[[mosaic.title]]</span>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+            		
         		</div>
 		    
     		</div>
