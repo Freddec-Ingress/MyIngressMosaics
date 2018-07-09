@@ -53,6 +53,7 @@ module.exports = function(grunt) {
 					'front/scripts/adm.im.js',
 					'front/scripts/adm.missions.js',
 					'front/scripts/adm.tag.js',
+					'front/scripts/adm.previews.js',
 					'front/scripts/module.js',
 				],
 				dest: 'static/front.js'

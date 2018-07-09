@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load jsonify %}
+
+{% block extra-head %}
+
+	<title>MIM - Administration</title>
+
+	<meta property="og:url" content="https://www.myingressmosaics.com">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="MyIngressMosaics">
+	<meta property="og:description" content="Ingress Mosaics, Banners and Mission series">
+
+{% endblock %}
+
+{% block content %}
+
+	<div id="content" ng-controller="AdmPreviewsCtrl" ng-init="init();">
+	
+		<div id="loading" ng-hide="loaded" class="section">
+			<div class="item flex justify-center align-center">
+				<i class="fa fa-spinner rotating"></i>
+				<span class="ml-small">Loading page...</span>
+			</div>
+		</div>
+		
+		<div class="container" ng-class="{'active':loaded}">
+		</div>
+		
+	</div>
+	
+{% endblock %}
+
+{% block script %}
+
+	<script src="/static/front.js"></script>
+	
+{% endblock %}
