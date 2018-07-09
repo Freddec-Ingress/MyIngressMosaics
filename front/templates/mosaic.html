@@ -72,6 +72,14 @@
 			</div>
 			
 			<div class="section">
+				<div class="item">
+					
+					<span class="text-big color-light">[[mosaic.title]]</span>
+				
+				</div>
+			</div>
+			
+			<div class="section">
 				
 				<div class="tab-row">
 				
@@ -101,34 +109,32 @@
 				<div class="item pt-none">
 					
 					<div class="item flex-col">
-					
-					<span class="text-big color-light">[[mosaic.title]]</span>
-
-					<div class="flex mt-normal">
-						<a href="/world/{{mosaic.country_name}}" class="flex">
-							<i class="fa fa-long-arrow-left mr-small" style="align-self:center;"></i>
-							<span class="mr-small flag-icon flag-icon-{{mosaic.country_code}}"></span>
-							{{mosaic.country_name}}
-						</a>
-					</div>
-					
-					<div class="flex mt-normal">
-						<a href="/world/{{mosaic.country_name}}/{{mosaic.region_name}}" class="flex">
-							<i class="fa fa-long-arrow-left mr-small" style="align-self:center;"></i>
-							<span class="mr-small flag-icon flag-icon-{{mosaic.country_code}}"></span>
-							{{mosaic.region_name}}
-						</a>
-					</div>
+	
+						<div class="flex mt-normal">
+							<a href="/world/{{mosaic.country_name}}" class="flex">
+								<i class="fa fa-long-arrow-left mr-small" style="align-self:center;"></i>
+								<span class="mr-small flag-icon flag-icon-{{mosaic.country_code}}"></span>
+								{{mosaic.country_name}}
+							</a>
+						</div>
 						
-					<div class="flex mt-normal">
-						<a href="/world/{{mosaic.country_name}}/{{mosaic.region_name}}/{{mosaic.city_name}}" class="flex">
-							<i class="fa fa-long-arrow-left mr-small" style="align-self:center;"></i>
-							<span class="mr-small flag-icon flag-icon-{{mosaic.country_code}}"></span>
-							{{mosaic.city_name}}
-						</a>
+						<div class="flex mt-normal">
+							<a href="/world/{{mosaic.country_name}}/{{mosaic.region_name}}" class="flex">
+								<i class="fa fa-long-arrow-left mr-small" style="align-self:center;"></i>
+								<span class="mr-small flag-icon flag-icon-{{mosaic.country_code}}"></span>
+								{{mosaic.region_name}}
+							</a>
+						</div>
+							
+						<div class="flex mt-normal">
+							<a href="/world/{{mosaic.country_name}}/{{mosaic.region_name}}/{{mosaic.city_name}}" class="flex">
+								<i class="fa fa-long-arrow-left mr-small" style="align-self:center;"></i>
+								<span class="mr-small flag-icon flag-icon-{{mosaic.country_code}}"></span>
+								{{mosaic.city_name}}
+							</a>
+						</div>
+						
 					</div>
-					
-				</div>
 					
 					<div class="flex align-center" ng-if="mosaic.owner_msg && mosaic.owner_msg!='None'">
 					<div class="item flex-col">
