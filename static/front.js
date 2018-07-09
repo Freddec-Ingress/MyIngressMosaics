@@ -4350,9 +4350,13 @@ angular.module('FrontModule.controllers').controller('AdmPreviewsCtrl', function
     	$scope.selected_country = null;
     	$scope.selected_region = null;
 	
-	    for (var country in $scope.countries) {
+	    console.log($scope.countries);
+	    for (var country of $scope.countries) {
+	        console.log(String(country.id));
+	        console.log(String(id));
 	        if (String(country.id) == String(id)) {
 	            $scope.selected_country = country;
+	            console.log($scope.selected_country);
 	            break;
 	        }
 	    }
@@ -4370,7 +4374,7 @@ angular.module('FrontModule.controllers').controller('AdmPreviewsCtrl', function
 	    
     	$scope.selected_region = null;
 	
-	    for (var region in $scope.cleaning_regions) {
+	    for (var region of $scope.cleaning_regions) {
 	        if (String(region.id) == String(id)) {
 	            $scope.selected_region = region;
 	            break;
