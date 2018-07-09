@@ -22,7 +22,7 @@ def previews_cleaning_check(request):
 		'mosaics':[],
 	}
 	
-	mosaic_results = Mosaic.objects.filter(small_preview_url__isnull=False, city__region__country__code='US')
+	mosaic_results = Mosaic.objects.filter(small_preview_url__isnull=False, city__region__country__code='us')
 	for mosaic_obj in mosaic_results:
 		
 		if mosaic_obj.small_preview_url == '':
