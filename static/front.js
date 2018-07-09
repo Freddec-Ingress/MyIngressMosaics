@@ -4343,6 +4343,8 @@ angular.module('FrontModule.controllers').controller('AdmPreviewsCtrl', function
 	
 	$scope.cleaningSelectCountry = function(id) {
 	    
+	    console.log(id);
+	    
 	    $scope.cleaning_regions = [];
 	    
     	$scope.selected_country = null;
@@ -4363,6 +4365,8 @@ angular.module('FrontModule.controllers').controller('AdmPreviewsCtrl', function
 	}
 	
 	$scope.cleaningSelectRegion = function(id) {
+	    
+	    console.log(id);
 	    
     	$scope.selected_region = null;
 	
