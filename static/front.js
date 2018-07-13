@@ -3898,9 +3898,12 @@ angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', functio
 			
 			for (var mission of $scope.missions) {
 				
-				var order = UtilsService.getOrderFromMissionName(mission.title);
-				if (order < 1) order = $scope.missions.indexOf(mission) + 1;
-				mission.order = order;
+				if (!mission.order) {
+				
+					var order = UtilsService.getOrderFromMissionName(mission.title);
+					if (order < 1) order = $scope.missions.indexOf(mission) + 1;
+					mission.order = order;
+				}
 			}
 			
 			$scope.missions.sort(UtilsService.sortMissionsByOrderTitleAsc);
