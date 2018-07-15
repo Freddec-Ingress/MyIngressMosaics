@@ -75,9 +75,12 @@ angular.module('FrontModule.controllers').controller('RegistrationPageCtrl', fun
 			
 			$scope.selected.push(mission);
 			
-			var order = UtilsService.getOrderFromMissionName(mission.title);
-			if (order < 1) order = $scope.selected.indexOf(mission) + 1;
-			mission.order = order.toString();
+			if (!mission.order) {
+				
+				var order = UtilsService.getOrderFromMissionName(mission.title);
+				if (order < 1) order = $scope.selected.indexOf(mission) + 1;
+				mission.order = order.toString();
+			}
 			
 			$scope.selected.sort(UtilsService.sortMissionsByOrderTitleAsc);
 			
