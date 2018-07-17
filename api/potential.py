@@ -73,10 +73,11 @@ def potential_create(request):
 	potential_obj = Potential(title=request.data['title'], mission_count=len(request.data['refs']), city=city_obj, country=country_obj)
 	potential_obj.save()
 	
-	results = Mission.objects.filter(ref__in=request.data['refs'])
-	for mission_obj in results:
+	for item in request.data['missions']:
 
+		mission_obj = Mission.objects.get(ref=item.ref)
 		mission_obj.name = request.data['title']
+		mission_obj.order = item.order
 		mission_obj.validated = True
 		mission_obj.save()
 	

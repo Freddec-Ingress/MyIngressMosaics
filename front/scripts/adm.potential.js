@@ -175,10 +175,10 @@ angular.module('FrontModule.controllers').controller('AdmPotentialCtrl', functio
 	
 	$scope.validate = function(new_name) {
 		
-		var refs = [];
-		for (var mission of $scope.missions) refs.push(mission.ref);
+		var missions = [];
+		for (var mission of $scope.missions) missions.push({'ref':mission.ref, 'order':mission.order});
 		
-		var data = { 'refs':refs, 'title':new_name, 'country':$scope.country, 'region':$scope.region, 'city':$scope.city };
+		var data = { 'missions':missions, 'title':new_name, 'country':$scope.country, 'region':$scope.region, 'city':$scope.city };
 		API.sendRequest('/api/potential/create/', 'POST', {}, data);
 			
 		$window.location.href = '/adm/potential';
