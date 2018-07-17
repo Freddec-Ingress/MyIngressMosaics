@@ -1236,7 +1236,7 @@ def adm_compare(request):
 	
 	data = { 'mosaics':[], }
 	
-	immosaic_results = IMMosaic.objects.all().exclude(registered=True).exclude(excluded=True).exclude(dead=True).order_by('country_name', 'region_name', 'city_name', '-count', 'name')
+	immosaic_results = IMMosaic.objects.all().exclude(registered=True).exclude(excluded=True).exclude(dead=True).order_by('-count', 'country_name', 'region_name', 'city_name', 'name')
 	for immosaic_obj in immosaic_results:
 		
 		#immosaic_obj.delete()
