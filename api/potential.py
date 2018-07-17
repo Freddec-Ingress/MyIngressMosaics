@@ -75,9 +75,9 @@ def potential_create(request):
 	
 	for item in request.data['missions']:
 
-		mission_obj = Mission.objects.get(ref=item.ref)
+		mission_obj = Mission.objects.get(ref=item['ref'])
 		mission_obj.name = request.data['title']
-		mission_obj.order = item.order
+		mission_obj.order = item['order']
 		mission_obj.validated = True
 		mission_obj.save()
 	
